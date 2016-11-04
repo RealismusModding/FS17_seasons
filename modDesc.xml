@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="32">
+    <author>theSeb</author>
+    <version>5.0.0.0</version>
+
+    <title>
+        <en>Fix Fruit</en>
+    </title>
+ 
+    <description>
+        <en>Fix Fruit</en>
+    </description>
+ 
+    <iconFilename>icon.dds</iconFilename>
+
+    <extraSourceFiles>
+        <sourceFile filename="fixFruit.lua" />
+    </extraSourceFiles>
+ 
+</modDesc>

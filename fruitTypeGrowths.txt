@@ -1,0 +1,110 @@
+table: 0x015e09b9f338 {
+  [sugarBeet] => table: 0x015e09b9f338 {
+                   [witheringNumGrowthStates] => 8
+                   [numGrowthStates] => 7
+                   [groundTypeChanged] => 0
+                   [groundTypeChangeGrowthState] => -1
+                   [resetsSpray] => true
+                   [name] => "sugarBeet"
+                   [growthStateTime] => 3600000
+                 }
+  [barley] => table: 0x015e09b9f338 {
+                [witheringNumGrowthStates] => 8
+                [numGrowthStates] => 7
+                [groundTypeChanged] => 0
+                [groundTypeChangeGrowthState] => -1
+                [resetsSpray] => true
+                [name] => "barley"
+                [growthStateTime] => 3600000
+              }
+  [wheat] => table: 0x015e09b9f338 {
+               [witheringNumGrowthStates] => 8
+               [numGrowthStates] => 7
+               [groundTypeChanged] => 0
+               [groundTypeChangeGrowthState] => -1
+               [resetsSpray] => true
+               [name] => "wheat"
+               [growthStateTime] => 3600000
+             }
+  [rape] => table: 0x015e09b9f338 {
+              [witheringNumGrowthStates] => 8
+              [numGrowthStates] => 7
+              [groundTypeChanged] => 0
+              [groundTypeChangeGrowthState] => -1
+              [resetsSpray] => true
+              [name] => "rape"
+              [growthStateTime] => 3600000
+            }
+  [sunflower] => table: 0x015e09b9f338 {
+                   [witheringNumGrowthStates] => 8
+                   [numGrowthStates] => 7
+                   [groundTypeChanged] => 0
+                   [groundTypeChangeGrowthState] => -1
+                   [resetsSpray] => true
+                   [name] => "sunflower"
+                   [growthStateTime] => 3600000
+                 }
+  [maize] => table: 0x015e09b9f338 {
+               [witheringNumGrowthStates] => 8
+               [numGrowthStates] => 7
+               [groundTypeChanged] => 0
+               [groundTypeChangeGrowthState] => -1
+               [resetsSpray] => true
+               [name] => "maize"
+               [growthStateTime] => 3600000
+             }
+  [oilseedRadish] => table: 0x015e09b9f338 {
+                       [witheringNumGrowthStates] => 2
+                       [numGrowthStates] => 2
+                       [groundTypeChanged] => 0
+                       [groundTypeChangeGrowthState] => -1
+                       [resetsSpray] => true
+                       [name] => "oilseedRadish"
+                       [growthStateTime] => 3600000
+                     }
+  [poplar] => table: 0x015e09b9f338 {
+                [witheringNumGrowthStates] => 5
+                [numGrowthStates] => 5
+                [groundTypeChanged] => 0
+                [groundTypeChangeGrowthState] => -1
+                [resetsSpray] => true
+                [name] => "poplar"
+                [growthStateTime] => 3600000
+              }
+  [grass] => table: 0x015e09b9f338 {
+               [witheringNumGrowthStates] => 4
+               [numGrowthStates] => 4
+               [groundTypeChanged] => 5
+               [groundTypeChangeGrowthState] => 1
+               [resetsSpray] => true
+               [name] => "grass"
+               [growthStateTime] => 36000000
+             }
+  [dryGrass] => table: 0x015e09b9f338 {
+                  [witheringNumGrowthStates] => 4
+                  [numGrowthStates] => 4
+                  [groundTypeChanged] => 0
+                  [groundTypeChangeGrowthState] => -1
+                  [resetsSpray] => true
+                  [name] => "dryGrass"
+                  [growthStateTime] => 36000000
+                }
+  [potato] => table: 0x015e09b9f338 {
+                [witheringNumGrowthStates] => 6
+                [numGrowthStates] => 6
+                [groundTypeChanged] => 0
+                [groundTypeChangeGrowthState] => -1
+                [resetsSpray] => true
+                [name] => "potato"
+                [growthStateTime] => 3600000
+              }
+  [soybean] => table: 0x015e09b9f338 {
+                 [witheringNumGrowthStates] => 8
+                 [numGrowthStates] => 7
+                 [groundTypeChanged] => 0
+                 [groundTypeChangeGrowthState] => -1
+                 [resetsSpray] => true
+                 [name] => "soybean"
+                 [growthStateTime] => 3600000
+               }
+}
