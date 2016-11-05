@@ -21,6 +21,22 @@ FixFruit.springWheatWindrowLiterPerSqm = 6; -- based on the assumption that spri
 -- error messages
 FixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be found. Additional swaths will not be installed."
 
+-- seasons data
+-- index 0 = autumn. 1 = winter and so forth
+
+FixFruit.seasons = {
+    [0]="autumn",
+    "winter",
+    "spring",
+    "summer",
+    
+
+}
+
+FixFruit.seasonsNum = 4;
+
+
+FixFruit.seasonLengthInDays = 10;
 
 --[[NOTE:   FixFruitStuff is a table bound by {}.  Within this table are additional tables, separated by a comma, for each fruit.
     Additional fruits may be added as shown by following the examples below, so long as each additional table added is separated by comma.
@@ -106,17 +122,65 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
         -- local path = getUserProfileAppPath();
         -- local file = path.."/g_currentMission2.txt";
         -- table_save(g_currentMission, file)
-        self:debugPrint("Current day: " .. g_currentMission.environment.currentDay);
+        -- prototyping
+        self:debugPrint("Actual current day: " .. g_currentMission.environment.currentDay);
+        local seasonNumber = self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)        
+        self:debugPrint("Season number: " .. seasonNumber);
+        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+
+        local currentDayTest = 2;
+        local seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)        
+        self:debugPrint("Season number: " .. seasonNumber);
+        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);       
+
+        currentDayTest = 12;
+        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+        self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
         
+        currentDayTest = 23;
+        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+        self:debugPrint("Current season should be spring. Actual: " .. self.seasons[seasonNumber]);
         
-        
+        currentDayTest = 39;
+        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+        self:debugPrint("Current season should be summer. Actual: " .. self.seasons[seasonNumber]);
+
+        currentDayTest = 41;
+        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+
+        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+
+        currentDayTest = 51;
+        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+
+        self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
+
     end;
 end;
+
 
 function FixFruit:update(dt)
 end;
 
 function FixFruit:draw() 
+end;
+
+
+function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
+    local seasonNumber = math.floor(dayNumber/self.seasonLengthInDays)
+    
+    --self:debugPrint("Day number: " .. dayNumber .. " Season number: " .. seasonNumber .. " Length of table " .. table.getn(self.seasons));
+    --table.getn does not work properly and has been deprecated in lua 5.1 onwards, so will not be using it. Will hard code the value instead. If we want to to increase seasons dynamically, then we can always write a function to count the number of seasons explicitly. 
+    -- if seasonNumber > table.getn(self.seasons)-1 then --why does getn return 3 instead of 4?
+    --         seasonNumber = seasonNumber - table.getn(self.seasons);
+    -- end;
+
+    if seasonNumber > self.seasonsNum-1 then 
+            seasonNumber = seasonNumber - self.seasonsNum;
+    end;
+
+    return seasonNumber;
+
 end;
 
 -- Seb:I have modified this to be a member of the FixFruit class hence FixFruit: in front. To call self:FixFruitTimes(). global functions are bad. not that it makes a huge difference in FS, but hey ho, let's stick to good practices. 
