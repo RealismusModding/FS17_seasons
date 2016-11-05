@@ -79,11 +79,13 @@ function FixFruit:loadMap(name)
     --  end;
     --end of new commented out code
 
-    self:AddSwathsToRapeAndSoybean();
+    -- add straw to OSR and soybean
+    self:AddStrawSwathsToRapeAndSoybean();
 
     --modify straw output for barley (winter barley)
     self:ModifyStrawSwathOutputForFruit(FruitUtil.fruitTypes["barley"].name,self.barleyWindrowLiterPerSqm)
-
+    --is this a better (safer) way to access a fruitype name? TODO: come back to this in the future. leave commented out now
+    --self:debugPrint("checking something: " .. FruitUtil.fruitIndexToDesc[FruitUtil.FRUITTYPE_BARLEY].name);
         
 end;
 
@@ -98,6 +100,7 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
         print_r(FruitUtil.fruitTypeGrowths); 
         print_r(FruitUtil.fruitTypes);
+        --print_r(HelperUtil); just checking out this table to see if there was a way to reduce worker wages through it
         --print_r(FruitUtil);
     end;
 end;
@@ -109,18 +112,18 @@ function FixFruit:draw()
 end;
 
 -- Seb:I have modified this to be a member of the FixFruit class hence FixFruit: in front. To call self:FixFruitTimes(). global functions are bad. not that it makes a huge difference in FS, but hey ho, let's stick to good practices. 
-function FixFruit:FixFruitTimes(fruitType, fruitTime)
+function FixFruit:FixFruitTimes(fruitTypeName, fruitTime)
     
       
     -- Test to ensure fruit exists, and that growth time is not less than or equal to zero.
     
-    if FruitUtil.fruitTypeGrowths[fruitType] == nil or fruitTime <=0 then
+    if FruitUtil.fruitTypeGrowths[fruitTypeName] == nil or fruitTime <=0 then
         return;
     end;
  
     local newTime = fruitTime * 60 * 60 * 1000 -- To convert from hours to milliseconds
-        FruitUtil.fruitTypeGrowths[fruitType]["growthStateTime"] = newTime
-         self:debugPrint("FruitGrowthStateTime changed for ".. fruitType .. " to " .. newTime); --changed , to .. as it does not include a new line so it's easier to read in the log
+        FruitUtil.fruitTypeGrowths[fruitTypeName]["growthStateTime"] = newTime
+         self:debugPrint("FruitGrowthStateTime changed for ".. fruitTypeName .. " to " .. newTime); --changed , to .. as it does not include a new line so it's easier to read in the log
 end;
 
     --Seb: Commenting this entire function out since I am not sure what the intention is here currently. 
@@ -154,7 +157,7 @@ end;
 
 --experimenting with adding a swath to rape and soybean
 --TODO: modify function to add swaths to any crop. 
-function FixFruit:AddSwathsToRapeAndSoybean()
+function FixFruit:AddStrawSwathsToRapeAndSoybean()
     
     --self:debugPrint("Looking up WIndrow fill type 30 expected. Actual: " .. FruitUtil.fruitTypeToWindrowFillType[FruitUtil.fruitTypes["wheat"].index]);
 
