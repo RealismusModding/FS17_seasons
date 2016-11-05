@@ -170,7 +170,7 @@ end;
 function FixFruit:draw() 
 
     -- TODO: absolutely awful implementation, but it's a start. 
-    -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with hud scaling setting. 
+    -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with the hud scaling setting. 
     setTextColor(1,1,1,1);
     --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
     --testing (Above code works)
@@ -269,6 +269,7 @@ function FixFruit:AddStrawSwathsToRapeAndSoybean()
     
 end;
 
+-- modify straw swath output for a given fruit to a new value. paramters fruitTypeName, newSwathouput in litres per sqm
 function FixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
     
     if FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm ~= nil then
@@ -285,7 +286,6 @@ function FixFruit:debugPrint(message)
         print(message)
     end;
 end;
-
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
 function FixFruit:errorPrint(message)
