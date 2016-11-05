@@ -25,10 +25,10 @@ FixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be f
 -- index 0 = autumn. 1 = winter and so forth
 
 FixFruit.seasons = {
-    [0]="autumn",
-    "winter",
-    "spring",
-    "summer",
+    [0]="Autumn",
+    "Winter",
+    "Spring",
+    "Summer",
     
 
 }
@@ -174,7 +174,8 @@ function FixFruit:draw()
     setTextColor(1,1,1,1);
     --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
     --testing (Above code works)
-    renderText(0.94, 0.98, 0.01, self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)]);
+    local textToDisplay = "Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay
+    renderText(0.9, 0.98, 0.01, textToDisplay);
 end;
 
 
