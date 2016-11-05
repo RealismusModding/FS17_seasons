@@ -10,6 +10,17 @@ FixFruit = {};
 --do not use print. use self:debugPrint() instead, unless we want the message to be displayed in a release version
 FixFruit.debugLevel = 1 -- 0 if you don't want to see debugging messages in the log file / console. 1 to switch on debug statements
 
+--TODO: these values should probably be added into the fixFruitData table in the future, but won't bother until the animation from the back of the harvester issue is fixed
+FixFruit.rapeWindrowLiterPerSqm = 4; -- based on the assumption that OSR produces about 0.5 of wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
+FixFruit.soybeanWindrowLiterPerSqm = 3; -- based on the assumption that soybean produces slightly less straw than OSR
+FixFruit.barleyWindrowLiterPerSqm = 6; -- based on the assumption that winter barley produces about 0.8 of winter wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
+FixFruit.springBarleyWindrowLiterPerSqm = 5; -- based on the assumption that spring barley will produce a bit less straw than winter barley. TODO:implement spring barley with shorter growth cycles
+FixFruit.springWheatWindrowLiterPerSqm = 6; -- based on the assumption that spring wheat will produce a bit less straw than winter wheat. TODO:implement spring wheat with shorter growth cycles
+
+
+-- error messages
+FixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be found. Additional swaths will not be installed."
+
 
 --[[NOTE:   FixFruitStuff is a table bound by {}.  Within this table are additional tables, separated by a comma, for each fruit.
     Additional fruits may be added as shown by following the examples below, so long as each additional table added is separated by comma.
@@ -32,20 +43,20 @@ FixFruit.debugLevel = 1 -- 0 if you don't want to see debugging messages in the 
 
 function FixFruit:loadMap(name) 
 
-    --Seb: changed variable name and appropriate camel case. variables should start with lower case letter
+    --Seb: changed variable name and appropriate camel case. variables should start with lower case letter. Changed all to 2 hours for the moment for easier debugging when checking if things are working
     local fixFruitData = {
-   {"sugarBeet",   growthStateTime=6.7, minHarvestingGrowthState=9,  minForageGrowthState=9},
-   {"barley",    growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=3},
-   {"wheat",    growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=3},
-   {"rape",    growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=4},
-   {"sunflower",   growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=4},
-   {"maize",    growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=3},
-   {"oilseedRadish",  growthStateTime=10,  minHarvestingGrowthState=2,  minForageGrowthState=2},
-   {"poplar",    growthStateTime=20,  minHarvestingGrowthState=4,  minForageGrowthState=4},
-   {"grass",    growthStateTime=10,  minHarvestingGrowthState=2,  minForageGrowthState=2},
-   {"dryGrass",   growthStateTime=10,  minHarvestingGrowthState=2,  minForageGrowthState=2},
-   {"potato",    growthStateTime=6.7, minHarvestingGrowthState=9,  minForageGrowthState=9},
-   {"soybean",   growthStateTime=6.7, minHarvestingGrowthState=4,  minForageGrowthState=4},
+   {"sugarBeet",   growthStateTime=2, minHarvestingGrowthState=9,  minForageGrowthState=9},
+   {"barley",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=3},
+   {"wheat",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=3},
+   {"rape",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=4},
+   {"sunflower",   growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=4},
+   {"maize",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=3},
+   {"oilseedRadish",  growthStateTime=2,  minHarvestingGrowthState=2,  minForageGrowthState=2},
+   {"poplar",    growthStateTime=2,  minHarvestingGrowthState=4,  minForageGrowthState=4},
+   {"grass",    growthStateTime=2,  minHarvestingGrowthState=2,  minForageGrowthState=2},
+   {"dryGrass",   growthStateTime=2,  minHarvestingGrowthState=2,  minForageGrowthState=2},
+   {"potato",    growthStateTime=2, minHarvestingGrowthState=9,  minForageGrowthState=9},
+   {"soybean",   growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=4},
      }
 
     -- To update FruitUtil tables for changes to fruit growth state times.
@@ -68,23 +79,12 @@ function FixFruit:loadMap(name)
     --  end;
     --end of new commented out code
 
-    --Old code to be removed later
-    -- To update FruitUtil tables for changes to fruit growth state times.
-    -- for i = 1, table.getn(FixFruitStuff) do
-    --     self:FixFruitTimes(FixFruitStuff[i][1], FixFruitStuff[i][2])
-    -- end;
-    
-    -- print("Fruittype",FruitUtil.fruitTypes["barley"].fruitType);
-    -- print("FruitType Index",FruitUtil.fruitTypes["barley"].index);
-    -- end of old code
+    self:AddSwathsToRapeAndSoybean();
 
-    --experimenting with adding a swath to rape
-    --TODO: fix magic values. 30 is the swath type for wheat. Need to get that out properly from FruitUtil. 6 is the ouput of swath 
-    -- or windrowLiterPerSqm as the game defines it. 7 is the default number for wheat and barley in the base game. I have set canola to 6
-    -- because it makes sense to have less, but will need to check these values with someone that knows more about farming
-    FruitUtil.setFruitTypeWindrow(FruitUtil.fruitTypes["rape"].index,30,6);
-    --Seb: not entirely sure if this is required or not, but I've noticed that barley uses wheat's straw type and it does have a forage conversion in a dump of FruitUtil.fruitTypes  
-    FruitUtil.registerFruitTypeWindrowForageWagonConversion(FruitUtil.fruitTypes["rape"].index,FruitUtil.fruitTypes["wheat"].index);
+    --modify straw output for barley (winter barley)
+    self:ModifyStrawSwathOutputForFruit(FruitUtil.fruitTypes["barley"].name,self.barleyWindrowLiterPerSqm)
+
+        
 end;
 
 function FixFruit:deleteMap() 
@@ -111,14 +111,7 @@ end;
 -- Seb:I have modified this to be a member of the FixFruit class hence FixFruit: in front. To call self:FixFruitTimes(). global functions are bad. not that it makes a huge difference in FS, but hey ho, let's stick to good practices. 
 function FixFruit:FixFruitTimes(fruitType, fruitTime)
     
-    -- old code
-    -- local name = fruitType
-    -- local newTime = fruitTime * 60 * 60 * 1000 -- To convert from hours to milliseconds
-    -- print("Old time for " .. name .. " : " .. FruitUtil.fruitTypeGrowths[name]["growthStateTime"]);
-    -- FruitUtil.fruitTypeGrowths[name]["growthStateTime"] = newTime
-    -- print("FruitGrowthStateTime changed for " .. name .. " to " .. newTime);
-    -- end of old code
-    
+      
     -- Test to ensure fruit exists, and that growth time is not less than or equal to zero.
     
     if FruitUtil.fruitTypeGrowths[fruitType] == nil or fruitTime <=0 then
@@ -159,11 +152,59 @@ end;
 --     end;
 -- end;
 
+--experimenting with adding a swath to rape and soybean
+--TODO: modify function to add swaths to any crop. 
+function FixFruit:AddSwathsToRapeAndSoybean()
+    
+    --self:debugPrint("Looking up WIndrow fill type 30 expected. Actual: " .. FruitUtil.fruitTypeToWindrowFillType[FruitUtil.fruitTypes["wheat"].index]);
+
+    --first we look up the windrow type for wheat
+    local wheatWindrowFillType = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_WHEAT]
+    self:debugPrint("Looking up windrow fill type 30 expected. Actual: " .. wheatWindrowFillType);
+    --BUG: This adds straw, but animation of the straw coming out from the back of the combine is missing. The straw swaths appear on the ground. Is this as simple as the fact that there is no appropriate texture/particle emitter for this in the game?
+    if wheatWindrowFillType ~= nil then 
+        --rape first
+        -- old code FruitUtil.setFruitTypeWindrow(FruitUtil.fruitTypes["rape"].index,wheatWindrowFillType,self.rapeWindrowLiterPerSqm);
+        FruitUtil.setFruitTypeWindrow(FruitUtil.FRUITTYPE_RAPE,wheatWindrowFillType,self.rapeWindrowLiterPerSqm);
+        --Seb: not entirely sure if this is required or not, but I've noticed that barley uses wheat's straw type and it does have a forage conversion in a dump of FruitUtil.fruitTypes  
+        --FruitUtil.registerFruitTypeWindrowForageWagonConversion(FruitUtil.fruitTypes["rape"].index,FruitUtil.fruitTypes["wheat"].index);
+        FruitUtil.registerFruitTypeWindrowForageWagonConversion(FruitUtil.FRUITTYPE_RAPE,FruitUtil.FRUITTYPE_WHEAT);
+
+        --now soybean
+        FruitUtil.setFruitTypeWindrow(FruitUtil.FRUITTYPE_SOYBEAN,wheatWindrowFillType,self.soybeanWindrowLiterPerSqm);
+        --Seb: not entirely sure if this is required or not, but I've noticed that barley uses wheat's straw type and it does have a forage conversion in a dump of FruitUtil.fruitTypes  
+        FruitUtil.registerFruitTypeWindrowForageWagonConversion(FruitUtil.FRUITTYPE_SOYBEAN,FruitUtil.FRUITTYPE_WHEAT);
+        self:debugPrint("Done adding swaths");
+    else
+        self:errorPrint(self.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND);
+    end;
+    
+end;
+
+function FixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
+    
+    if FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm ~= nil then
+        self:debugPrint(fruitTypeName .. "'s old swath value:  " .. FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm);
+        FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm = newSwathOutput;
+        self:debugPrint(fruitTypeName .. "'s swath value changed to: " .. newSwathOutput);
+    else
+        self:debugPrint("Trying to modify swath for a fruit that does not have a swath:" .. fruitTypeName);
+    end;
+end;
 
 function FixFruit:debugPrint(message)
     if self.debugLevel == 1 then
         print(message)
     end;
+end;
+
+
+--use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
+function FixFruit:errorPrint(message)
+    print("--------");
+    print("Seasons Mod error");
+    print(messsage);
+    print("--------");
 end;
 
 --debug print table function. will be removed later
