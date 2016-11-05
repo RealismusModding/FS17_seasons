@@ -35,6 +35,8 @@ FixFruit.seasons = {
 
 FixFruit.seasonsNum = 4;
 
+FixFruit.testDay = 2;
+
 
 FixFruit.seasonLengthInDays = 10;
 
@@ -155,6 +157,9 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
 
         self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
+        --testing the display
+        self.testDay = self.testDay + self.seasonLengthInDays;
+
     end;
 end;
 
@@ -163,6 +168,13 @@ function FixFruit:update(dt)
 end;
 
 function FixFruit:draw() 
+
+    -- TODO: absolutely awful implementation, but it's a start. 
+    -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with hud scaling setting. 
+    setTextColor(1,1,1,1);
+    --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
+    --testing (Above code works)
+    renderText(0.94, 0.98, 0.01, self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)]);
 end;
 
 
