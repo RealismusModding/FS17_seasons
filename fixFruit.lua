@@ -61,6 +61,9 @@ FixFruit.seasonLengthInDays = 10;
 
 function FixFruit:loadMap(name) 
 
+    --experimenting with getting mods to recognise each other
+    g_currentMission.FixFruit = self;
+    self.active = true;
     --Seb: changed variable name and appropriate camel case. variables should start with lower case letter. Changed all to 2 hours for the moment for easier debugging when checking if things are working
     local fixFruitData = {
    {"sugarBeet",   growthStateTime=2, minHarvestingGrowthState=9,  minForageGrowthState=9},
@@ -84,7 +87,7 @@ function FixFruit:loadMap(name)
         self:FixFruitTimes(fruitType[1], fruitType["growthStateTime"])
     end;
  
-    self:debugPrint("Changed growth")
+    self:debugPrint("FixFruit .. Changed growth")
 
     -- Seb:commeting this out for now until I understand the intentions for FixFruitData
     -- To update FruitUtil tables for changes to minHarvesting and minForage allowed growth states.
@@ -116,50 +119,53 @@ end;
 function FixFruit:keyEvent(unicode, sym, modifier, isDown)
     --this is to help with debugging. Pressing K will print the tables below to the log file / console. 
     if (unicode == 107) then
-        print_r(FruitUtil.fruitTypeGrowths); 
-        print_r(FruitUtil.fruitTypes);
-        --print_r(HelperUtil); just checking out this table to see if there was a way to reduce worker wages through it
-        --print_r(FruitUtil);
-        
-        -- local path = getUserProfileAppPath();
-        -- local file = path.."/g_currentMission2.txt";
-        -- table_save(g_currentMission, file)
-        -- prototyping
-        self:debugPrint("Actual current day: " .. g_currentMission.environment.currentDay);
-        local seasonNumber = self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)        
-        self:debugPrint("Season number: " .. seasonNumber);
-        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+        if(self.active == true) then
+            print_r(FruitUtil.fruitTypeGrowths); 
+            print_r(FruitUtil.fruitTypes);
+            --print_r(HelperUtil); just checking out this table to see if there was a way to reduce worker wages through it
+            --print_r(FruitUtil);
+            
+            -- local path = getUserProfileAppPath();
+            -- local file = path.."/g_currentMission2.txt";
+            -- table_save(g_currentMission, file)
+            -- prototyping
+            self:debugPrint("Actual current day: " .. g_currentMission.environment.currentDay);
+            local seasonNumber = self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)        
+            self:debugPrint("Season number: " .. seasonNumber);
+            self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
 
-        local currentDayTest = 2;
-        local seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)        
-        self:debugPrint("Season number: " .. seasonNumber);
-        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);       
+            local currentDayTest = 2;
+            local seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)        
+            self:debugPrint("Season number: " .. seasonNumber);
+            self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);       
 
-        currentDayTest = 12;
-        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-        self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
-        
-        currentDayTest = 23;
-        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-        self:debugPrint("Current season should be spring. Actual: " .. self.seasons[seasonNumber]);
-        
-        currentDayTest = 39;
-        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-        self:debugPrint("Current season should be summer. Actual: " .. self.seasons[seasonNumber]);
+            currentDayTest = 12;
+            seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+            self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
+            
+            currentDayTest = 23;
+            seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+            self:debugPrint("Current season should be spring. Actual: " .. self.seasons[seasonNumber]);
+            
+            currentDayTest = 39;
+            seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+            self:debugPrint("Current season should be summer. Actual: " .. self.seasons[seasonNumber]);
 
-        currentDayTest = 41;
-        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+            currentDayTest = 41;
+            seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
 
-        self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+            self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
 
-        currentDayTest = 51;
-        seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
+            currentDayTest = 51;
+            seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
 
-        self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
+            self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
-        --testing the display
-        self.testDay = self.testDay + self.seasonLengthInDays;
+            --testing the display
+            self.testDay = self.testDay + self.seasonLengthInDays;
 
+            self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
+        end;
     end;
 end;
 
