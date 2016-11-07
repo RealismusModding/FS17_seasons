@@ -1,0 +1,74 @@
+table: 0x024ea54633b8 {
+  [1] => table: 0x024ea54633b8 {
+           [startDay] => 4
+           [endDayTime] => 30262782.897949
+           [duration] => 10325364.074707
+           [rainTypeId] => "fog"
+           [startDayTime] => 19937418.823242
+           [endDay] => 4
+         }
+  [2] => table: 0x024ea54633b8 {
+           [startDay] => 7
+           [endDayTime] => 35847345.88623
+           [duration] => 10802419.73877
+           [rainTypeId] => "cloudy"
+           [startDayTime] => 25044926.147461
+           [endDay] => 7
+         }
+  [3] => table: 0x024ea54633b8 {
+           [startDay] => 8
+           [endDayTime] => 63895923.156738
+           [duration] => 14578984.680176
+           [rainTypeId] => "rain"
+           [startDayTime] => 49316938.476563
+           [endDay] => 8
+         }
+  [4] => table: 0x024ea54633b8 {
+           [startDay] => 11
+           [endDayTime] => 29556945.19043
+           [duration] => 9134943.2373047
+           [rainTypeId] => "fog"
+           [startDayTime] => 20422001.953125
+           [endDay] => 11
+         }
+  [5] => table: 0x024ea54633b8 {
+           [startDay] => 13
+           [endDayTime] => 47668985.595703
+           [duration] => 18359126.586914
+           [rainTypeId] => "cloudy"
+           [startDayTime] => 29309859.008789
+           [endDay] => 13
+         }
+  [6] => table: 0x024ea54633b8 {
+           [startDay] => 15
+           [endDayTime] => 56248309.936523
+           [duration] => 18457509.155273
+           [rainTypeId] => "rain"
+           [startDayTime] => 37790800.78125
+           [endDay] => 15
+         }
+  [7] => table: 0x024ea54633b8 {
+           [startDay] => 18
+           [endDayTime] => 39024954.528809
+           [duration] => 14456347.961426
+           [rainTypeId] => "cloudy"
+           [startDayTime] => 24568606.567383
+           [endDay] => 18
+         }
+  [8] => table: 0x024ea54633b8 {
+           [startDay] => 20
+           [endDayTime] => 30841452.026367
+           [duration] => 10704539.794922
+           [rainTypeId] => "fog"
+           [startDayTime] => 20136912.231445
+           [endDay] => 20
+         }
+  [9] => table: 0x024ea54633b8 {
+           [startDay] => 23
+           [endDayTime] => 54738418.579102
+           [duration] => 21955761.108398
+           [rainTypeId] => "hail"
+           [startDayTime] => 32782657.470703
+           [endDay] => 23
+         }
+}
