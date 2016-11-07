@@ -8,6 +8,7 @@
 WeatherForecast = {};
 WeatherForecast.debugLevel = 1;
 WeatherForecast.daysInWeek = 7;
+WeatherForecast.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
 
 function WeatherForecast:loadMap(name)
@@ -100,6 +101,12 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 
        dayNumToCheck = 15;
        self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+
+       dayNumToCheck = 21;
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+
+       dayNumToCheck = 22;
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
     end;
 end;
 
@@ -111,14 +118,17 @@ end;
 
 -- assumes that day 1 = monday
 function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
-    local dayOfWeek = math.floor(dayNumber/self.daysInWeek);
-      
-    if dayOfWeek > self.daysInWeek-1 then 
-            dayOfWeek = dayOfWeek - self.daysInWeek;
+    
+    local returnedDay = dayNumber; -- this will work for days 1 to 6
+
+    if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
+        returnedDay = 7; -- will always be sunday 
+    elseif (dayNumber > self.daysInWeek) then
+        local weekNumber = math.floor(dayNumber/self.daysInWeek);
+        returnedDay = dayNumber - (weekNumber * self.daysInWeek);
     end;
 
-    local weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-    return weekDays[dayOfWeek];
+    return self.weekDays[returnedDay];
 
 end;
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
