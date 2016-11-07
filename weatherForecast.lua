@@ -9,14 +9,13 @@ WeatherForecast = {};
 WeatherForecast.debugLevel = 1;
 WeatherForecast.daysInWeek = 7;
 WeatherForecast.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
+WeatherForecast.forecast = {}; --day of week, low temp, high temp, weather condition
+WeatherForecast.forecastLength = 7;
 
 function WeatherForecast:loadMap(name)
-    self:debugPrint("WeatherForecast mod loading")
-    -- g_currentMission.Seasons = Seasons;
-    -- g_currentMission.Seasons.WeatherForecast = self;
+    print("WeatherForecast mod loading")
     g_currentMission.WeatherForecast = self;
-    self.messageToOtherMod = "hello";
+
 end;
 
 function WeatherForecast:deleteMap() 
@@ -42,71 +41,74 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
         self:debugPrint("Looking up weather");
         print_r(g_currentMission.environment.weatherTemperaturesNight);
         print_r(g_currentMission.environment.weatherTemperaturesDay);
-        for index, nightTemp in pairs(g_currentMission.environment.weatherTemperaturesNight) do
+        for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
             self:debugPrint("Night Temp: " .. nightTemp);
         end;
         
-        for index, dayTemp in pairs(g_currentMission.environment.weatherTemperaturesDay) do
+        for index, dayTemp in ipairs(g_currentMission.environment.weatherTemperaturesDay) do
             self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
         end;
          
          print_r(g_currentMission.environment.rains);
 
-        for index, weatherPrediction in pairs(g_currentMission.environment.rains) do
+        for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
             self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
         end;
        
        -- print_r(g_currentMission.environment.rainTypes);
        local dayNumToCheck = 1;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 2;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 3;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 4;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 5;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 6;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 7;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 8;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 9;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 10;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 11;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 12;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 13;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 14;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 15;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 21;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
 
        dayNumToCheck = 22;
-       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck));
+       self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
+
+       self:BuildForecast();
+
     end;
 end;
 
@@ -119,16 +121,56 @@ end;
 -- assumes that day 1 = monday
 function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     
-    local returnedDay = dayNumber; -- this will work for days 1 to 6
+    local dayOfWeek = dayNumber; -- this will work for days 1 to 6
 
     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
-        returnedDay = 7; -- will always be sunday 
+        dayOfWeek = 7; -- will always be sunday 
     elseif (dayNumber > self.daysInWeek) then
         local weekNumber = math.floor(dayNumber/self.daysInWeek);
-        returnedDay = dayNumber - (weekNumber * self.daysInWeek);
+        dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
     end;
 
-    return self.weekDays[returnedDay];
+    return dayOfWeek;
+
+end;
+
+--might end up not using this function
+function WeatherForecast:ReturnNextDayNumber(currentDay)
+    if currentDay == 7 then
+        return 1;
+    else
+        return currentDay + 1;
+    end;
+end;
+
+function WeatherForecast:BuildForecast()
+    --day of week, low temp, high temp, weather condition
+    self:debugPrint("WeatherForecast:BuildForecast called")
+    local currentDayNum = 7; --g_currentMission.environment.currentDay 
+    local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
+    --TODO: rework the implementation so that the forecast is only built once per day
+
+    for n=1, self.forecastLength do
+        local oneDayForecast = {};
+        oneDayForecast.weekDay =  self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
+        oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
+        oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
+        oneDayForecast.weatherState = "sun";
+        table.insert(self.forecast,oneDayForecast);
+    end;
+
+    --now we check through the rains table to find bad weather
+    for index, rain in ipairs(g_currentMission.environment.rains) do
+        self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
+        if rain.startDay > self.forecastLength then
+            break;
+        end;
+        self.forecast[rain.startDay].weatherState = rain.rainTypeId;                         
+    end;
+
+    print_r(self.forecast);
+
+    self:debugPrint("WeatherForecast:BuildForecast finished")
 
 end;
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
