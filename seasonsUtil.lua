@@ -2,7 +2,7 @@
 -- SeasonsUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
--- Authors:  theSeb, Akuenzi
+-- Authors:  Akuenzi, ian898, Jarvixes, theSeb
 --
 
 SeasonsUtil = {};
@@ -36,11 +36,11 @@ end;
 
 --assumes that day 1 = monday
 function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
-    local dayOfWeek = dayNumber; -- this will work for days 1 to 6
+    local dayOfWeek;
 
     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
         dayOfWeek = 7; -- will always be sunday
-    elseif (dayNumber > self.daysInWeek) then
+    else
         local weekNumber = math.floor(dayNumber/self.daysInWeek);
         dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
     end;

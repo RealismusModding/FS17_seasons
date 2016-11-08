@@ -142,7 +142,7 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
-            self.testDay = self.testDay + g_currentMission.SeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
+            self.testDay = self.testDay + 1--g_currentMission.SeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
 
             -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;

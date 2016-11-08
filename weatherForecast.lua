@@ -44,8 +44,8 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 
         --looking up weather
     --     self:debugPrint("Looking up weather");
-        print_r(g_currentMission.environment.weatherTemperaturesNight);
-        print_r(g_currentMission.environment.weatherTemperaturesDay);
+        -- print_r(g_currentMission.environment.weatherTemperaturesNight);
+        -- print_r(g_currentMission.environment.weatherTemperaturesDay);
     --     for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
     --         self:debugPrint("Night Temp: " .. nightTemp);
     --     end;
@@ -54,7 +54,7 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
     --     end;
 
-         print_r(g_currentMission.environment.rains);
+        --  print_r(g_currentMission.environment.rains);
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
     --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
@@ -102,16 +102,16 @@ function WeatherForecast:BuildForecast()
 
     --now we check through the rains table to find bad weather
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
+        --self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
         if rain.startDay > self.forecastLength then
             break;
         end;
         self.forecast[rain.startDay].weatherState = rain.rainTypeId;
     end;
 
-    print_r(self.forecast);
+    -- print_r(self.forecast);
 
-    self:debugPrint("WeatherForecast:BuildForecast finished")
+    --self:debugPrint("WeatherForecast:BuildForecast finished")
 end;
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
