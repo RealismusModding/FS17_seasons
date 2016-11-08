@@ -33,9 +33,13 @@ FixFruit.seasons = {
 
 }
 
+--TODO:  common functions to work out the day of the week should either be moved into a common module that we can call, or we keep them in one module and call them other. This is just temporary
+FixFruit.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+FixFruit.daysInWeek = 7;
+
 FixFruit.seasonsNum = 4;
 
-FixFruit.testDay = 2;
+FixFruit.testDay = 1;
 
 
 FixFruit.seasonLengthInDays = 10;
@@ -161,8 +165,8 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
 
             -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
-            -- --testing the display
-            -- self.testDay = self.testDay + self.seasonLengthInDays;
+            --testing the display
+            self.testDay = self.testDay + self.seasonLengthInDays;
 
             -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
@@ -180,10 +184,26 @@ function FixFruit:draw()
     setTextColor(1,1,1,1);
     --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
     --testing (Above code works)
-    local textToDisplay = "Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay
-    renderText(0.9, 0.98, 0.01, textToDisplay);
+    local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
+    renderText(0.65, 0.98, 0.02, textToDisplay);
 end;
 
+
+-- assumes that day 1 = monday
+function FixFruit:CalculateDayofWeekBasedOnDayNumber(dayNumber)
+    
+    local dayOfWeek = dayNumber; -- this will work for days 1 to 6
+
+    if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
+        dayOfWeek = 7; -- will always be sunday 
+    elseif (dayNumber > self.daysInWeek) then
+        local weekNumber = math.floor(dayNumber/self.daysInWeek);
+        dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
+    end;
+
+    return dayOfWeek;
+
+end;
 
 function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
     local seasonNumber = math.floor(dayNumber/self.seasonLengthInDays)

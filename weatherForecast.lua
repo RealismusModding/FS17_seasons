@@ -144,7 +144,7 @@ function WeatherForecast:ReturnNextDayNumber(currentDay)
 end;
 
 function WeatherForecast:BuildForecast()
-    --day of week, low temp, high temp, weather condition
+   
     local currentDayNum = 7; --g_currentMission.environment.currentDay 
     local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
