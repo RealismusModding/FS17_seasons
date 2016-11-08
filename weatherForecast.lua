@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose: to forecast the weather  
+-- Purpose:  to forecast the weather
 -- Authors:  theSeb, Akuenzi
 --
 
@@ -13,10 +13,9 @@ WeatherForecast.forecastLength = 7;
 function WeatherForecast:loadMap(name)
     print("WeatherForecast mod loading")
     g_currentMission.WeatherForecast = self;
-
 end;
 
-function WeatherForecast:deleteMap() 
+function WeatherForecast:deleteMap()
 end;
 
 function WeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
@@ -42,44 +41,41 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --     for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
     --         self:debugPrint("Night Temp: " .. nightTemp);
     --     end;
-        
+
     --     for index, dayTemp in ipairs(g_currentMission.environment.weatherTemperaturesDay) do
     --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
     --     end;
-         
+
          print_r(g_currentMission.environment.rains);
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
     --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
     --     end;
-       
+
     --    -- print_r(g_currentMission.environment.rainTypes);
-    
+
         if (g_currentMission.DayOfWeekUtil == nil) then
             print("DayOfWeekUtil not found. Aborting")
             return;
         else
             self:BuildForecast();
         end;
-
-       
-
     end;
 end;
 
 function WeatherForecast:update(dt)
 end;
 
-function WeatherForecast:draw() 
+function WeatherForecast:draw()
 end;
 
 -- -- assumes that day 1 = monday
 -- function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
-    
+
 --     local dayOfWeek = dayNumber; -- this will work for days 1 to 6
 
 --     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
---         dayOfWeek = 7; -- will always be sunday 
+--         dayOfWeek = 7; -- will always be sunday
 --     elseif (dayNumber > self.daysInWeek) then
 --         local weekNumber = math.floor(dayNumber/self.daysInWeek);
 --         dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
@@ -89,11 +85,8 @@ end;
 
 -- end;
 
-
-
 function WeatherForecast:BuildForecast()
-   
-    local currentDayNum = 7; --g_currentMission.environment.currentDay 
+    local currentDayNum = 7; --g_currentMission.environment.currentDay
     --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
@@ -112,14 +105,14 @@ function WeatherForecast:BuildForecast()
         if rain.startDay > self.forecastLength then
             break;
         end;
-        self.forecast[rain.startDay].weatherState = rain.rainTypeId;                         
+        self.forecast[rain.startDay].weatherState = rain.rainTypeId;
     end;
 
     print_r(self.forecast);
 
     self:debugPrint("WeatherForecast:BuildForecast finished")
-
 end;
+
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
 function WeatherForecast:errorPrint(message)
     print("--------");
@@ -134,7 +127,7 @@ function WeatherForecast:debugPrint(message)
     end;
 end;
 
-function print_r ( t )  
+function print_r(t)
     local print_r_cache={}
     local function sub_print_r(t,indent)
         if (print_r_cache[tostring(t)]) then
@@ -169,4 +162,3 @@ function print_r ( t )
 end;
 
 addModEventListener(WeatherForecast);
-
