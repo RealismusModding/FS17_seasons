@@ -40,18 +40,9 @@ function SeasonsUtil:currentDayNumber()
 end;
 
 -- Get the day within the week
---assumes that day 1 = monday
+-- assumes that day 1 = monday
 function SeasonsUtil:dayOfWeek(dayNumber)
-    local dayOfWeek;
-
-    if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
-        dayOfWeek = 7; -- will always be sunday
-    else
-        local weekNumber = math.floor(dayNumber/self.daysInWeek);
-        dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
-    end;
-
-    return dayOfWeek;
+    return (dayNumber - 1) % self.daysInWeek;
 end;
 
 -- Get the season number.
