@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast the weather
--- Authors:  theSeb, Akuenzi
+-- Authors:  Authors:  Akuenzi, ian898, Jarvixes, theSeb
 --
 
 WeatherForecast = {};

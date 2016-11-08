@@ -2,7 +2,7 @@
 -- FIXFRUIT SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust fruit properties.
--- Authors:  Akuenzi, theSeb
+-- Authors:  Akuenzi, ian898, Jarvixes, theSeb
 --
 
 FixFruit = {};
