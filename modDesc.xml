@@ -17,5 +17,6 @@
         <sourceFile filename="seasonsUtil.lua" />
         <sourceFile filename="fixFruit.lua" />
         <sourceFile filename="weatherForecast.lua" />
+        <sourceFile filename="time.lua" />
     </extraSourceFiles>
 </modDesc>
