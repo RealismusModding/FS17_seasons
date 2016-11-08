@@ -13,7 +13,11 @@ WeatherForecast.forecastLength = 7;
 function WeatherForecast:loadMap(name)
     print("WeatherForecast mod loading")
     g_currentMission.WeatherForecast = self;
+    self.hud = {};
     self.hud.visible = false;
+    -- self.hud.overlay = createImageOverlay(Utils.getFilename("hud.png", self.modDirectory));
+    -- self.hud.posX = ;
+	-- self.hud.posY = ;
 
 end;
 
@@ -27,7 +31,7 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then --TODO: this will need to be changed to use a proper inputbinding. Seb: I still
                             --want to see if it's possible to get keyEvent working properly with an inputbinding
                             --to avoid having to check for key press every frame
-                            
+
         -- if g_currentMission.FixFruit ~= nil then
         --     self:debugPrint("FixFruit active: " .. tostring(g_currentMission.FixFruit.active));
         --     if g_currentMission.FixFruit.active == true then
@@ -86,13 +90,14 @@ function WeatherForecast:draw()
         return;
     end;
 
+    
 
 end;
 
 
 function WeatherForecast:BuildForecast()
    
-    local g_currentMission.environment.currentDay 
+    local currentDayNum = g_currentMission.environment.currentDay 
     --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
@@ -119,6 +124,7 @@ function WeatherForecast:BuildForecast()
     self:debugPrint("WeatherForecast:BuildForecast finished")
 
 end;
+
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
 function WeatherForecast:errorPrint(message)
     print("--------");
