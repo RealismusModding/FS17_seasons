@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose: to forecast the weather  
+-- Purpose:  to forecast the weather
 -- Authors:  theSeb, Akuenzi
 --
 
@@ -18,10 +18,9 @@ function WeatherForecast:loadMap(name)
     -- self.hud.overlay = createImageOverlay(Utils.getFilename("hud.png", self.modDirectory));
     -- self.hud.posX = ;
 	-- self.hud.posY = ;
-
 end;
 
-function WeatherForecast:deleteMap() 
+function WeatherForecast:deleteMap()
 end;
 
 function WeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
@@ -50,19 +49,19 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --     for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
     --         self:debugPrint("Night Temp: " .. nightTemp);
     --     end;
-        
+
     --     for index, dayTemp in ipairs(g_currentMission.environment.weatherTemperaturesDay) do
     --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
     --     end;
-         
+
          print_r(g_currentMission.environment.rains);
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
     --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
     --     end;
-       
+
     --    -- print_r(g_currentMission.environment.rainTypes);
-    
+
         if (g_currentMission.DayOfWeekUtil == nil) then
             print("DayOfWeekUtil not found. Aborting")
             return;
@@ -75,29 +74,20 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
         else
             self.hud.visible = false;
         end;
-
-       
-
     end;
 end;
 
 function WeatherForecast:update(dt)
 end;
 
-function WeatherForecast:draw() 
-
+function WeatherForecast:draw()
     if (self.hud.visible == false) then
         return;
     end;
-
-    
-
 end;
 
-
 function WeatherForecast:BuildForecast()
-   
-    local currentDayNum = g_currentMission.environment.currentDay 
+    local currentDayNum = g_currentMission.environment.currentDay
     --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
@@ -116,13 +106,12 @@ function WeatherForecast:BuildForecast()
         if rain.startDay > self.forecastLength then
             break;
         end;
-        self.forecast[rain.startDay].weatherState = rain.rainTypeId;                         
+        self.forecast[rain.startDay].weatherState = rain.rainTypeId;
     end;
 
     print_r(self.forecast);
 
     self:debugPrint("WeatherForecast:BuildForecast finished")
-
 end;
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
@@ -139,7 +128,7 @@ function WeatherForecast:debugPrint(message)
     end;
 end;
 
-function print_r ( t )  
+function print_r(t)
     local print_r_cache={}
     local function sub_print_r(t,indent)
         if (print_r_cache[tostring(t)]) then
@@ -174,4 +163,3 @@ function print_r ( t )
 end;
 
 addModEventListener(WeatherForecast);
-

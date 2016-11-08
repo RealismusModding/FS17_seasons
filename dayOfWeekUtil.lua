@@ -6,7 +6,7 @@
 -- Authors:  theSeb, Akuenzi
 --
 
---Seb:might end up renaming this as SeasonsCommonUtil or something along those lines because we can then use it for more common functions that are needed across the mod 
+--Seb:might end up renaming this as SeasonsCommonUtil or something along those lines because we can then use it for more common functions that are needed across the mod
 DayOfWeekUtil = {};
 
 DayOfWeekUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
