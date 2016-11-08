@@ -167,8 +167,8 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
     end;
 end;
 
-
 function FixFruit:update(dt)
+    g_currentMission:addExtraPrintText("Season '"..self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)].."', day "..self.testDay);
 end;
 
 function FixFruit:draw()
@@ -187,21 +187,8 @@ function FixFruit:draw()
     end;
 end;
 
-
 function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
-    local seasonNumber = math.floor(dayNumber/self.seasonLengthInDays)
-
-    --self:debugPrint("Day number: " .. dayNumber .. " Season number: " .. seasonNumber .. " Length of table " .. table.getn(self.seasons));
-    --table.getn does not work properly and has been deprecated in lua 5.1 onwards, so will not be using it. Will hard code the value instead. If we want to to increase seasons dynamically, then we can always write a function to count the number of seasons explicitly.
-    -- if seasonNumber > table.getn(self.seasons)-1 then --why does getn return 3 instead of 4?
-    --         seasonNumber = seasonNumber - table.getn(self.seasons);
-    -- end;
-
-    if seasonNumber > self.seasonsNum-1 then
-            seasonNumber = seasonNumber - self.seasonsNum;
-    end;
-
-    return seasonNumber;
+    return math.floor(dayNumber/self.seasonLengthInDays) % self.seasonsNum;
 end;
 
 function FixFruit:FixFruitTimes(fruitTypeName, fruitTime)
