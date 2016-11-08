@@ -9,6 +9,10 @@ SeasonsUtil = {};
 
 SeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 SeasonsUtil.daysInWeek = 7;
+SeasonsUtil.seasons = {[0]="Autumn", "Winter", "Spring", "Summer"};
+SeasonsUtil.seasonsInYear = 4;
+
+SeasonsUtil.daysInSeason = 10;
 
 function SeasonsUtil:loadMap(name)
      print("Loading SeasonsUtil");
@@ -42,6 +46,18 @@ function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     end;
 
     return dayOfWeek;
+end;
+
+function SeasonsUtil:seasonOfDayNumber(dayNumber)
+    return math.floor(dayNumber / self.daysInSeason) % self.seasonsInYear;
+end;
+
+function SeasonsUtil:seasonNameOfDayNumber(dayNumber)
+    return self.seasons[self:seasonOfDayNumber(dayNumber)];
+end;
+
+function SeasonsUtil:dayNameOfDayNumber(dayNumber)
+    return self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumber)];
 end;
 
 --might end up not using this function

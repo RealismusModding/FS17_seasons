@@ -18,5 +18,4 @@
         <sourceFile filename="fixFruit.lua" />
         <sourceFile filename="weatherForecast.lua" />
     </extraSourceFiles>
-
 </modDesc>

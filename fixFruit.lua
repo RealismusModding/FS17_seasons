@@ -20,25 +20,7 @@ FixFruit.springWheatWindrowLiterPerSqm = 6; -- based on the assumption that spri
 -- error messages
 FixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be found. Additional swaths will not be installed."
 
--- seasons data
--- index 0 = autumn. 1 = winter and so forth
-
-FixFruit.seasons = {
-    [0] = "Autumn",
-          "Winter",
-          "Spring",
-          "Summer",
-}
-
---TODO:  common functions to work out the day of the week should either be moved into a common module that we can call, or we keep them in one module and call them other. This is just temporary
--- FixFruit.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
--- FixFruit.daysInWeek = 7;
-
-FixFruit.seasonsNum = 4;
-
 FixFruit.testDay = 1;
-
-FixFruit.seasonLengthInDays = 10;
 
 --[[NOTE:   FixFruitStuff is a table bound by {}.  Within this table are additional tables, separated by a comma, for each fruit.
     Additional fruits may be added as shown by following the examples below, so long as each additional table added is separated by comma.
@@ -160,7 +142,7 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
-            self.testDay = self.testDay + self.seasonLengthInDays; -- just testing the display by incrementing to the next season
+            self.testDay = self.testDay + g_currentMission.SeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
 
             -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
@@ -168,7 +150,9 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
 end;
 
 function FixFruit:update(dt)
-    g_currentMission:addExtraPrintText("Season '"..self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)].."', day "..self.testDay);
+    if (g_currentMission.SeasonsUtil ~= nil) then
+        g_currentMission:addExtraPrintText("Season '"..g_currentMission.SeasonsUtil:seasonNameOfDayNumber(self.testDay).."', day "..self.testDay);
+    end;
 end;
 
 function FixFruit:draw()
@@ -182,13 +166,9 @@ function FixFruit:draw()
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
         --testing (Above code works)
-        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.SeasonsUtil:seasonNameOfDayNumber(self.testDay) .. " Day: " .. self.testDay .. " (" .. g_currentMission.SeasonsUtil:dayNameOfDayNumber(self.testDay) .. ")";
         renderText(0.65, 0.98, 0.02, textToDisplay);
     end;
-end;
-
-function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
-    return math.floor(dayNumber/self.seasonLengthInDays) % self.seasonsNum;
 end;
 
 function FixFruit:FixFruitTimes(fruitTypeName, fruitTime)
