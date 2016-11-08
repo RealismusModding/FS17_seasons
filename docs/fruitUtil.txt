@@ -1,0 +1,657 @@
+table: 0x01faa6d3ef00 {
+  [fruitTypeGrowths] => table: 0x01faa6d3ef00 {
+                          [sugarBeet] => table: 0x01faa6d3f2a8 {
+                                           [witheringNumGrowthStates] => 8
+                                           [numGrowthStates] => 7
+                                           [groundTypeChanged] => 0
+                                           [groundTypeChangeGrowthState] => -1
+                                           [resetsSpray] => true
+                                           [name] => "sugarBeet"
+                                           [growthStateTime] => 3600000
+                                         }
+                          [barley] => table: 0x01faa6d3f2a8 {
+                                        [witheringNumGrowthStates] => 8
+                                        [numGrowthStates] => 7
+                                        [groundTypeChanged] => 0
+                                        [groundTypeChangeGrowthState] => -1
+                                        [resetsSpray] => true
+                                        [name] => "barley"
+                                        [growthStateTime] => 3600000
+                                      }
+                          [wheat] => table: 0x01faa6d3f2a8 {
+                                       [witheringNumGrowthStates] => 8
+                                       [numGrowthStates] => 7
+                                       [groundTypeChanged] => 0
+                                       [groundTypeChangeGrowthState] => -1
+                                       [resetsSpray] => true
+                                       [name] => "wheat"
+                                       [growthStateTime] => 3600000
+                                     }
+                          [rape] => table: 0x01faa6d3f2a8 {
+                                      [witheringNumGrowthStates] => 8
+                                      [numGrowthStates] => 7
+                                      [groundTypeChanged] => 0
+                                      [groundTypeChangeGrowthState] => -1
+                                      [resetsSpray] => true
+                                      [name] => "rape"
+                                      [growthStateTime] => 3600000
+                                    }
+                          [sunflower] => table: 0x01faa6d3f2a8 {
+                                           [witheringNumGrowthStates] => 8
+                                           [numGrowthStates] => 7
+                                           [groundTypeChanged] => 0
+                                           [groundTypeChangeGrowthState] => -1
+                                           [resetsSpray] => true
+                                           [name] => "sunflower"
+                                           [growthStateTime] => 3600000
+                                         }
+                          [maize] => table: 0x01faa6d3f2a8 {
+                                       [witheringNumGrowthStates] => 8
+                                       [numGrowthStates] => 7
+                                       [groundTypeChanged] => 0
+                                       [groundTypeChangeGrowthState] => -1
+                                       [resetsSpray] => true
+                                       [name] => "maize"
+                                       [growthStateTime] => 3600000
+                                     }
+                          [oilseedRadish] => table: 0x01faa6d3f2a8 {
+                                               [witheringNumGrowthStates] => 2
+                                               [numGrowthStates] => 2
+                                               [groundTypeChanged] => 0
+                                               [groundTypeChangeGrowthState] => -1
+                                               [resetsSpray] => true
+                                               [name] => "oilseedRadish"
+                                               [growthStateTime] => 3600000
+                                             }
+                          [poplar] => table: 0x01faa6d3f2a8 {
+                                        [witheringNumGrowthStates] => 5
+                                        [numGrowthStates] => 5
+                                        [groundTypeChanged] => 0
+                                        [groundTypeChangeGrowthState] => -1
+                                        [resetsSpray] => true
+                                        [name] => "poplar"
+                                        [growthStateTime] => 3600000
+                                      }
+                          [grass] => table: 0x01faa6d3f2a8 {
+                                       [witheringNumGrowthStates] => 4
+                                       [numGrowthStates] => 4
+                                       [groundTypeChanged] => 5
+                                       [groundTypeChangeGrowthState] => 1
+                                       [resetsSpray] => true
+                                       [name] => "grass"
+                                       [growthStateTime] => 3600000
+                                     }
+                          [dryGrass] => table: 0x01faa6d3f2a8 {
+                                          [witheringNumGrowthStates] => 4
+                                          [numGrowthStates] => 4
+                                          [groundTypeChanged] => 0
+                                          [groundTypeChangeGrowthState] => -1
+                                          [resetsSpray] => true
+                                          [name] => "dryGrass"
+                                          [growthStateTime] => 3600000
+                                        }
+                          [potato] => table: 0x01faa6d3f2a8 {
+                                        [witheringNumGrowthStates] => 6
+                                        [numGrowthStates] => 6
+                                        [groundTypeChanged] => 0
+                                        [groundTypeChangeGrowthState] => -1
+                                        [resetsSpray] => true
+                                        [name] => "potato"
+                                        [growthStateTime] => 3600000
+                                      }
+                          [soybean] => table: 0x01faa6d3f2a8 {
+                                         [witheringNumGrowthStates] => 8
+                                         [numGrowthStates] => 7
+                                         [groundTypeChanged] => 0
+                                         [groundTypeChangeGrowthState] => -1
+                                         [resetsSpray] => true
+                                         [name] => "soybean"
+                                         [growthStateTime] => 3600000
+                                       }
+                        }
+  [FRUITTYPE_CATEGORY_PLANTER] => 7
+  [FRUITTYPE_POPLAR] => 10
+  [FRUITTYPE_OILSEEDRADISH] => 9
+  [FRUITTYPE_GRASS] => 11
+  [registerFruitTypePreparing] => function: 0x01faa6d3f380
+  [FRUITTYPE_DRYGRASS] => 12
+  [FRUITTYPE_SUGARBEET] => 8
+  [FRUITTYPE_POTATO] => 7
+  [FRUITTYPE_MAIZE] => 6
+  [registerFruitTypeWindrowForageWagonConversion] => function: 0x01faa6d3f3b0
+  [FRUITTYPE_SOYBEAN] => 5
+  [FRUITTYPE_CATEGORY_PICKUP] => 5
+  [converterNameToInt] => table: 0x01faa6d3ef00 {
+                            [forageHarvester] => 1
+                            [unkown] => 0
+                          }
+  [GROUND_TYPE_GRASS] => 5
+  [GROUND_TYPE_PLOUGH] => 2
+  [addFruitToFillTypeConversion] => function: 0x01faa6d3f628
+  [FRUITTYPE_WHEAT] => 1
+  [sendNumBits] => 6
+  [FRUITTYPE_RAPE] => 3
+  [getFruitTypesByNames] => function: 0x01faa6d3f5c8
+  [NUM_CONVERTERS] => 1
+  [getFruitTypeByCategoryName] => function: 0x01faa6d3f598
+  [FRUITTYPE_CONVERTER_UNKNOWN] => 0
+  [fruitIndexToDesc] => table: 0x01faa6d3ef00 {
+                          [1] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [windrowLiterPerSqm] => 7
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e6ac8 {
+                                                                       [2] => 2
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 3
+                                   [literPerSqm] => 0.89
+                                   [seedUsagePerSqm] => 0.05
+                                   [minPreparingGrowthState] => -1
+                                   [windrowName] => "straw"
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 1
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => true
+                                   [name] => "wheat"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [2] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [forageWagonConversionTarget] => 1
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e6d20 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 3
+                                   [literPerSqm] => 0.96
+                                   [windrowLiterPerSqm] => 7
+                                   [seedUsagePerSqm] => 0.05
+                                   [minPreparingGrowthState] => -1
+                                   [windrowName] => "straw"
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 2
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => true
+                                   [name] => "barley"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [3] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e7330 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 4
+                                   [literPerSqm] => 0.58
+                                   [seedUsagePerSqm] => 0.07
+                                   [minPreparingGrowthState] => -1
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 3
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "rape"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [4] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [alignsToSun] => true
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e6d68 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 4
+                                   [literPerSqm] => 0.52
+                                   [seedUsagePerSqm] => 0.03
+                                   [minPreparingGrowthState] => -1
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 4
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "sunflower"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [5] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e8060 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 4
+                                   [literPerSqm] => 0.45
+                                   [seedUsagePerSqm] => 0.03
+                                   [minPreparingGrowthState] => -1
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 5
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "soybean"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [6] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 6
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e8cb0 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 4
+                                   [minForageGrowthState] => 3
+                                   [literPerSqm] => 0.92
+                                   [seedUsagePerSqm] => 0.04
+                                   [minPreparingGrowthState] => -1
+                                   [useForFieldJob] => true
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 6
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "maize"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [7] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 9
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e8d88 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 1.5707963267949
+                                   [minHarvestingGrowthState] => 9
+                                   [minForageGrowthState] => 9
+                                   [literPerSqm] => 4.13
+                                   [seedUsagePerSqm] => 0.38
+                                   [minPreparingGrowthState] => 5
+                                   [useForFieldJob] => true
+                                   [preparingOutputName] => "potato_haulm"
+                                   [useSeedingWidth] => true
+                                   [preparedGrowthState] => 9
+                                   [index] => 7
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "potato"
+                                   [maxPreparingGrowthState] => 5
+                                 }
+                          [8] => table: 0x01faa6d3f030 {
+                                   [cutState] => 8
+                                   [maxHarvestingGrowthState] => 9
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e8e60 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 9
+                                   [minForageGrowthState] => 9
+                                   [literPerSqm] => 5.78
+                                   [seedUsagePerSqm] => 0.04
+                                   [minPreparingGrowthState] => 4
+                                   [useForFieldJob] => true
+                                   [preparingOutputName] => "sugarBeet_haulm"
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => 9
+                                   [index] => 8
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "sugarBeet"
+                                   [maxPreparingGrowthState] => 6
+                                 }
+                          [9] => table: 0x01faa6d3f030 {
+                                   [cutState] => 3
+                                   [maxHarvestingGrowthState] => 2
+                                   [alignsToSun] => false
+                                   [shownOnMap] => true
+                                   [forageWagonConversionSources] => table: 0x01faa86e8f38 {
+                                                                     }
+                                   [needsSeeding] => true
+                                   [directionSnapAngle] => 0
+                                   [minHarvestingGrowthState] => 2
+                                   [minForageGrowthState] => 2
+                                   [literPerSqm] => 0.99
+                                   [seedUsagePerSqm] => 0.01
+                                   [minPreparingGrowthState] => -1
+                                   [useForFieldJob] => false
+                                   [useSeedingWidth] => false
+                                   [preparedGrowthState] => -1
+                                   [index] => 9
+                                   [allowsPartialGrowthState] => false
+                                   [allowsSeeding] => true
+                                   [hasWindrow] => false
+                                   [name] => "oilseedRadish"
+                                   [maxPreparingGrowthState] => -1
+                                 }
+                          [10] => table: 0x01faa6d3f030 {
+                                    [cutState] => 5
+                                    [maxHarvestingGrowthState] => 4
+                                    [alignsToSun] => false
+                                    [shownOnMap] => true
+                                    [forageWagonConversionSources] => table: 0x01faa86e8698 {
+                                                                      }
+                                    [needsSeeding] => true
+                                    [directionSnapAngle] => 0
+                                    [minHarvestingGrowthState] => 4
+                                    [minForageGrowthState] => 4
+                                    [literPerSqm] => 8.95
+                                    [seedUsagePerSqm] => 0.9
+                                    [minPreparingGrowthState] => -1
+                                    [useForFieldJob] => false
+                                    [useSeedingWidth] => false
+                                    [preparedGrowthState] => -1
+                                    [index] => 10
+                                    [allowsPartialGrowthState] => false
+                                    [allowsSeeding] => true
+                                    [hasWindrow] => false
+                                    [name] => "poplar"
+                                    [maxPreparingGrowthState] => -1
+                                  }
+                          [11] => table: 0x01faa6d3f030 {
+                                    [cutState] => 1
+                                    [maxHarvestingGrowthState] => 3
+                                    [windrowLiterPerSqm] => 4.37
+                                    [alignsToSun] => false
+                                    [shownOnMap] => true
+                                    [forageWagonConversionSources] => table: 0x01faa86e7938 {
+                                                                      }
+                                    [needsSeeding] => false
+                                    [directionSnapAngle] => 0
+                                    [minHarvestingGrowthState] => 2
+                                    [minForageGrowthState] => 2
+                                    [literPerSqm] => 4.37
+                                    [seedUsagePerSqm] => 0.03
+                                    [minPreparingGrowthState] => -1
+                                    [windrowName] => "grass_windrow"
+                                    [useForFieldJob] => false
+                                    [useSeedingWidth] => false
+                                    [preparedGrowthState] => -1
+                                    [index] => 11
+                                    [allowsPartialGrowthState] => true
+                                    [allowsSeeding] => true
+                                    [hasWindrow] => true
+                                    [name] => "grass"
+                                    [maxPreparingGrowthState] => -1
+                                  }
+                          [12] => table: 0x01faa6d3f030 {
+                                    [cutState] => 1
+                                    [maxHarvestingGrowthState] => 3
+                                    [windrowLiterPerSqm] => 4.37
+                                    [alignsToSun] => false
+                                    [shownOnMap] => false
+                                    [forageWagonConversionSources] => table: 0x01faa86eae00 {
+                                                                      }
+                                    [needsSeeding] => false
+                                    [directionSnapAngle] => 0
+                                    [minHarvestingGrowthState] => 2
+                                    [minForageGrowthState] => 2
+                                    [literPerSqm] => 4.37
+                                    [seedUsagePerSqm] => 0.03
+                                    [minPreparingGrowthState] => -1
+                                    [windrowName] => "dryGrass_windrow"
+                                    [useForFieldJob] => false
+                                    [useSeedingWidth] => false
+                                    [preparedGrowthState] => -1
+                                    [index] => 12
+                                    [allowsPartialGrowthState] => false
+                                    [allowsSeeding] => false
+                                    [hasWindrow] => true
+                                    [name] => "dryGrass"
+                                    [maxPreparingGrowthState] => -1
+                                  }
+                        }
+  [FRUITTYPE_CATEGORY_MAIZEHEADER] => 2
+  [converterIntToName] => table: 0x01faa6d3ef00 {
+                            [0] => "unknown"
+                            [1] => "forageHarvester"
+                          }
+  [FRUITTYPE_CATEGORY_WEEDER] => 8
+  [FRUITTYPE_CATEGORY_SOWINGMACHINE] => 6
+  [NUM_CATEGORIES] => 8
+  [fillTypeIsWindrow] => table: 0x01faa6d3ef00 {
+                           [36] => true
+                           [30] => true
+                           [37] => true
+                         }
+  [fruitTypeCategoryNameToInt] => table: 0x01faa6d3ef00 {
+                                    [sowingMachine] => 6
+                                    [planter] => 7
+                                    [pickup] => 5
+                                    [unknown] => 0
+                                    [grainHeader] => 1
+                                    [directCutter] => 4
+                                    [maizeHeader] => 2
+                                    [weeder] => 8
+                                    [maizeCutter] => 3
+                                  }
+  [FRUITTYPE_CATEGORY_MAIZECUTTER] => 3
+  [FRUITTYPE_CONVERTER_FORAGEHARVESTER] => 1
+  [registerFruitTypeConverter] => function: 0x01faa6d3f5f8
+  [FRUITTYPE_CATEGORY_GRAINHEADER] => 1
+  [FRUITTYPE_BARLEY] => 2
+  [setFruitTypeWindrow] => function: 0x01faa6d3f350
+  [FRUITTYPE_CATEGORY_UNKNOWN] => 0
+  [registerFruitTypeCategory] => function: 0x01faa6d3f538
+  [FRUITTYPE_CATEGORY_DIRECTCUTTER] => 4
+  [FRUITTYPE_UNKNOWN] => 0
+  [FRUITTYPE_SUNFLOWER] => 4
+  [converterToFruitTypes] => table: 0x01faa6d3ef00 {
+                             }
+  [fillTypeToFruitType] => table: 0x01faa6d3ef00 {
+                             [1] => 1
+                             [2] => 2
+                             [3] => 3
+                             [4] => 4
+                             [5] => 5
+                             [6] => 6
+                             [7] => 7
+                             [8] => 8
+                             [9] => 9
+                             [10] => 10
+                             [11] => 11
+                             [12] => 12
+                             [30] => 2
+                             [36] => 11
+                             [37] => 12
+                           }
+  [GROUND_TYPE_SOWING] => 3
+  [getFillTypeLiterPerSqm] => function: 0x01faa6d3f508
+  [fruitTypeToFillType] => table: 0x01faa6d3ef00 {
+                             [1] => 1
+                             [2] => 2
+                             [3] => 3
+                             [4] => 4
+                             [5] => 5
+                             [6] => 6
+                             [7] => 7
+                             [8] => 8
+                             [9] => 9
+                             [10] => 10
+                             [11] => 11
+                             [12] => 12
+                           }
+  [fruitTypeToWindrowFillType] => table: 0x01faa6d3ef00 {
+                                    [1] => 30
+                                    [2] => 30
+                                    [11] => 36
+                                    [12] => 37
+                                  }
+  [categoryToFruitTypes] => table: 0x01faa6d3ef00 {
+                              [1] => table: 0x01faa6d3f0c0 {
+                                       [1] => true
+                                       [2] => true
+                                       [3] => true
+                                       [5] => true
+                                     }
+                              [2] => table: 0x01faa6d3f0c0 {
+                                       [4] => true
+                                       [6] => true
+                                     }
+                              [3] => table: 0x01faa6d3f0c0 {
+                                       [6] => true
+                                     }
+                              [4] => table: 0x01faa6d3f0c0 {
+                                       [1] => true
+                                       [2] => true
+                                       [3] => true
+                                       [5] => true
+                                       [11] => true
+                                     }
+                              [5] => table: 0x01faa6d3f0c0 {
+                                       [11] => true
+                                       [12] => true
+                                     }
+                              [6] => table: 0x01faa6d3f0c0 {
+                                       [1] => true
+                                       [2] => true
+                                       [3] => true
+                                       [5] => true
+                                       [9] => true
+                                       [11] => true
+                                     }
+                              [7] => table: 0x01faa6d3f0c0 {
+                                       [4] => true
+                                       [5] => true
+                                       [6] => true
+                                       [8] => true
+                                     }
+                              [8] => table: 0x01faa6d3f0c0 {
+                                       [11] => true
+                                       [9] => true
+                                     }
+                            }
+  [fruitTypes] => table: 0x01faa6d3ef00 {
+                    [potato] => table: 0x01faa6d3ef80 {
+                                  *table: 0x01faa86e8d88
+                                }
+                    [barley] => table: 0x01faa6d3ef80 {
+                                  *table: 0x01faa86e6d20
+                                }
+                    [wheat] => table: 0x01faa6d3ef80 {
+                                 *table: 0x01faa86e6ac8
+                               }
+                    [rape] => table: 0x01faa6d3ef80 {
+                                *table: 0x01faa86e7330
+                              }
+                    [sunflower] => table: 0x01faa6d3ef80 {
+                                     *table: 0x01faa86e6d68
+                                   }
+                    [maize] => table: 0x01faa6d3ef80 {
+                                 *table: 0x01faa86e8cb0
+                               }
+                    [dryGrass] => table: 0x01faa6d3ef80 {
+                                    *table: 0x01faa86eae00
+                                  }
+                    [grass] => table: 0x01faa6d3ef80 {
+                                 *table: 0x01faa86e7938
+                               }
+                    [oilseedRadish] => table: 0x01faa6d3ef80 {
+                                         *table: 0x01faa86e8f38
+                                       }
+                    [poplar] => table: 0x01faa6d3ef80 {
+                                  *table: 0x01faa86e8698
+                                }
+                    [sugarBeet] => table: 0x01faa6d3ef80 {
+                                     *table: 0x01faa86e8e60
+                                   }
+                    [soybean] => table: 0x01faa6d3ef80 {
+                                   *table: 0x01faa86e8060
+                                 }
+                  }
+  [registerFruitTypeWindrow] => function: 0x01faa6d3f320
+  [NUM_FRUITTYPES] => 12
+  [economyFruitTypes] => table: 0x01faa6d3ef00 {
+                         }
+  [fruitTypeCategoryIntToName] => table: 0x01faa6d3ef00 {
+                                    [0] => "unknown"
+                                    [1] => "grainHeader"
+                                    [2] => "maizeHeader"
+                                    [3] => "maizeCutter"
+                                    [4] => "directCutter"
+                                    [5] => "pickup"
+                                    [6] => "sowingMachine"
+                                    [7] => "planter"
+                                    [8] => "weeder"
+                                  }
+  [registerFruitTypeGrowth] => function: 0x01faa6d3f810
+  [GROUND_TYPE_CULTIVATOR] => 1
+  [converterToFillTypes] => table: 0x01faa6d3ef00 {
+                              [1] => table: 0x01faa6d3f478 {
+                                       [1] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 4
+                                                [fillTypeTarget] => 25
+                                                [windrowConversionFactor] => 1
+                                              }
+                                       [2] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 4
+                                                [fillTypeTarget] => 25
+                                                [windrowConversionFactor] => 1
+                                              }
+                                       [3] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 3
+                                                [fillTypeTarget] => 25
+                                              }
+                                       [4] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 3
+                                                [fillTypeTarget] => 25
+                                              }
+                                       [5] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 3
+                                                [fillTypeTarget] => 25
+                                              }
+                                       [6] => table: 0x01faa86e6998 {
+                                                [conversionFactor] => 7.8
+                                                [fillTypeTarget] => 25
+                                              }
+                                       [10] => table: 0x01faa86e6998 {
+                                                 [conversionFactor] => 1.2
+                                                 [fillTypeTarget] => 27
+                                               }
+                                       [11] => table: 0x01faa86e6998 {
+                                                 [conversionFactor] => 1
+                                                 [fillTypeTarget] => 36
+                                                 [windrowConversionFactor] => 1
+                                               }
+                                     }
+                            }
+  [GROUND_TYPE_SOWING_WIDTH] => 4
+  [addFruitTypeToCategory] => function: 0x01faa6d3f568
+  [registerFruitType] => function: 0x01faa6d3f2f0
+}

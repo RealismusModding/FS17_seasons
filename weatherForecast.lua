@@ -62,8 +62,8 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 
     --    -- print_r(g_currentMission.environment.rainTypes);
 
-        if (g_currentMission.DayOfWeekUtil == nil) then
-            print("DayOfWeekUtil not found. Aborting")
+        if (g_currentMission.SeasonsUtil == nil) then
+            print("SeasonsUtil not found. Aborting")
             return;
         else
             self:BuildForecast();
@@ -93,7 +93,7 @@ function WeatherForecast:BuildForecast()
 
     for n=1, self.forecastLength do
         local oneDayForecast = {};
-        oneDayForecast.weekDay =  g_currentMission.DayOfWeekUtil.weekDays[g_currentMission.DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
+        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
         oneDayForecast.weatherState = "sun";

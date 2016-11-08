@@ -6,17 +6,17 @@
     <title>
         <en>Seasons</en>
     </title>
- 
+
     <description>
         <en>Seasons</en>
     </description>
- 
+
     <iconFilename>icon.dds</iconFilename>
 
     <extraSourceFiles>
-        <sourceFile filename="dayOfWeekUtil.lua" />
+        <sourceFile filename="seasonsUtil.lua" />
         <sourceFile filename="fixFruit.lua" />
         <sourceFile filename="weatherForecast.lua" />
     </extraSourceFiles>
- 
+
 </modDesc>

@@ -1,39 +1,37 @@
-
 ---------------------------------------------------------------------------------------------------------
--- DAYOFWEEKUTIL SCRIPT
+-- SeasonsUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
 -- Authors:  theSeb, Akuenzi
 --
 
---Seb:might end up renaming this as SeasonsCommonUtil or something along those lines because we can then use it for more common functions that are needed across the mod
-DayOfWeekUtil = {};
+SeasonsUtil = {};
 
-DayOfWeekUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-DayOfWeekUtil.daysInWeek = 7;
+SeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+SeasonsUtil.daysInWeek = 7;
 
-function DayOfWeekUtil:loadMap(name)
-     print("Loading DayOfWeekUtil");
-     g_currentMission.DayOfWeekUtil = self;
+function SeasonsUtil:loadMap(name)
+     print("Loading SeasonsUtil");
+     g_currentMission.SeasonsUtil = self;
 end;
 
-function DayOfWeekUtil:deleteMap()
+function SeasonsUtil:deleteMap()
 end;
 
-function DayOfWeekUtil:mouseEvent(posX, posY, isDown, isUp, button)
+function SeasonsUtil:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
-function DayOfWeekUtil:keyEvent(unicode, sym, modifier, isDown)
+function SeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
 end;
 
-function DayOfWeekUtil:update(dt)
+function SeasonsUtil:update(dt)
 end;
 
-function DayOfWeekUtil:draw()
+function SeasonsUtil:draw()
 end;
 
 --assumes that day 1 = monday
-function DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
+function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     local dayOfWeek = dayNumber; -- this will work for days 1 to 6
 
     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
@@ -47,8 +45,8 @@ function DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
 end;
 
 --might end up not using this function
-function DayOfWeekUtil:ReturnNextDayNumber(currentDay)
+function SeasonsUtil:ReturnNextDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek;
 end;
 
-addModEventListener(DayOfWeekUtil);
+addModEventListener(SeasonsUtil);

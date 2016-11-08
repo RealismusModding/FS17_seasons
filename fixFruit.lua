@@ -176,13 +176,13 @@ function FixFruit:draw()
     -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with the hud scaling setting.
     setTextColor(1,1,1,1);
 
-    if (g_currentMission.DayOfWeekUtil == nil) then
-        print("DayOfWeekUtil not found. Aborting")
+    if (g_currentMission.SeasonsUtil == nil) then
+        print("SeasonsUtil not found. Aborting")
         return;
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
         --testing (Above code works)
-        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. g_currentMission.DayOfWeekUtil.weekDays[g_currentMission.DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
         renderText(0.65, 0.98, 0.02, textToDisplay);
     end;
 end;
