@@ -42,7 +42,7 @@ end;
 -- Get the day within the week
 -- assumes that day 1 = monday
 function SeasonsUtil:dayOfWeek(dayNumber)
-    return (dayNumber - 1) % self.daysInWeek;
+    return ((dayNumber - 1) % self.daysInWeek) + 1;
 end;
 
 -- Get the season number.
