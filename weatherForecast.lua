@@ -88,12 +88,12 @@ end;
 
 function WeatherForecast:BuildForecast()
     local currentDayNum = g_currentMission.environment.currentDay
-    --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
+    --local dayOfWeek = self:dayOfWeek(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
     for n=1, self.forecastLength do
         local oneDayForecast = {};
-        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
+        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:dayOfWeek(currentDayNum+n-1)];
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
         oneDayForecast.weatherState = "sun";

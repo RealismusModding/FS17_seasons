@@ -34,6 +34,12 @@ end;
 function SeasonsUtil:draw()
 end;
 
+-- Get the current day number
+function SeasonsUtil:currentDayNumber()
+    return 1;
+end;
+
+-- Get the day within the week
 --assumes that day 1 = monday
 function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     local dayOfWeek;
@@ -48,20 +54,29 @@ function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     return dayOfWeek;
 end;
 
-function SeasonsUtil:seasonOfDayNumber(dayNumber)
+-- Get the season number.
+-- If no day supplied, uses current day
+function SeasonsUtil:season(dayNumber)
+    if (dayNumber == nil) then
+        dayNumber = self:currentDayNumber();
+    end;
+
     return math.floor(dayNumber / self.daysInSeason) % self.seasonsInYear;
 end;
 
-function SeasonsUtil:seasonNameOfDayNumber(dayNumber)
-    return self.seasons[self:seasonOfDayNumber(dayNumber)];
+-- Get season name for given day number
+-- If no day number supplied, uses current day
+function SeasonsUtil:seasonName(dayNumber)
+    return self.seasons[self:season(dayNumber)];
 end;
 
-function SeasonsUtil:dayNameOfDayNumber(dayNumber)
-    return self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumber)];
+-- Get day name for given day number
+-- If no day number supplied, uses current day
+function SeasonsUtil:dayName(dayNumber)
+    return self.weekDays[self:dayOfWeek(dayNumber)];
 end;
 
---might end up not using this function
-function SeasonsUtil:ReturnNextDayNumber(currentDay)
+function SeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek;
 end;
 
