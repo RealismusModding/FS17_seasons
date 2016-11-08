@@ -34,8 +34,8 @@ FixFruit.seasons = {
 }
 
 --TODO:  common functions to work out the day of the week should either be moved into a common module that we can call, or we keep them in one module and call them other. This is just temporary
-FixFruit.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-FixFruit.daysInWeek = 7;
+-- FixFruit.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+-- FixFruit.daysInWeek = 7;
 
 FixFruit.seasonsNum = 4;
 
@@ -115,7 +115,7 @@ function FixFruit:loadMap(name)
 end;
 
 function FixFruit:deleteMap() 
-end
+end;
 
 function FixFruit:mouseEvent(posX, posY, isDown, isUp, button)
 end;
@@ -166,7 +166,7 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
-            self.testDay = self.testDay + self.seasonLengthInDays;
+            self.testDay = self.testDay + self.seasonLengthInDays; -- just testing the display by incrementing to the next season
 
             -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
@@ -182,28 +182,19 @@ function FixFruit:draw()
     -- TODO: absolutely awful implementation, but it's a start. 
     -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with the hud scaling setting. 
     setTextColor(1,1,1,1);
-    --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
-    --testing (Above code works)
-    local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
-    renderText(0.65, 0.98, 0.02, textToDisplay);
-end;
-
-
--- assumes that day 1 = monday
-function FixFruit:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     
-    local dayOfWeek = dayNumber; -- this will work for days 1 to 6
-
-    if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
-        dayOfWeek = 7; -- will always be sunday 
-    elseif (dayNumber > self.daysInWeek) then
-        local weekNumber = math.floor(dayNumber/self.daysInWeek);
-        dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
+    if (g_currentMission.DayOfWeekUtil == nil) then
+        print("DayOfWeekUtil not found. Aborting")
+        return;
+    else
+        --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
+        --testing (Above code works)
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. self.seasons[self:CalculateSeasonNumberBasedOn(self.testDay)] .. " Day: " .. self.testDay .. " (" .. g_currentMission.DayOfWeekUtil.weekDays[g_currentMission.DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(self.testDay)] .. ")";
+        renderText(0.65, 0.98, 0.02, textToDisplay);        
     end;
-
-    return dayOfWeek;
-
+    
 end;
+
 
 function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
     local seasonNumber = math.floor(dayNumber/self.seasonLengthInDays)
@@ -221,8 +212,7 @@ function FixFruit:CalculateSeasonNumberBasedOn(dayNumber)
     return seasonNumber;
 
 end;
-
--- Seb:I have modified this to be a member of the FixFruit class hence FixFruit: in front. To call self:FixFruitTimes(). global functions are bad. not that it makes a huge difference in FS, but hey ho, let's stick to good practices. 
+  
 function FixFruit:FixFruitTimes(fruitTypeName, fruitTime)
     
       

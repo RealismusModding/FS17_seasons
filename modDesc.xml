@@ -14,6 +14,7 @@
     <iconFilename>icon.dds</iconFilename>
 
     <extraSourceFiles>
+        <sourceFile filename="dayOfWeekUtil.lua" />
         <sourceFile filename="fixFruit.lua" />
         <sourceFile filename="weatherForecast.lua" />
     </extraSourceFiles>

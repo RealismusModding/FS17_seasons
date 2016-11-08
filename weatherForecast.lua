@@ -7,8 +7,6 @@
 
 WeatherForecast = {};
 WeatherForecast.debugLevel = 1;
-WeatherForecast.daysInWeek = 7;
-WeatherForecast.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 WeatherForecast.forecast = {}; --day of week, low temp, high temp, weather condition
 WeatherForecast.forecastLength = 7;
 
@@ -56,58 +54,15 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --     end;
        
     --    -- print_r(g_currentMission.environment.rainTypes);
-    --    local dayNumToCheck = 1;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
+    
+        if (g_currentMission.DayOfWeekUtil == nil) then
+            print("DayOfWeekUtil not found. Aborting")
+            return;
+        else
+            self:BuildForecast();
+        end;
 
-    --    dayNumToCheck = 2;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 3;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 4;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 5;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 6;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 7;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 8;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 9;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 10;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 11;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 12;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 13;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 14;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 15;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 21;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-    --    dayNumToCheck = 22;
-    --    self:debugPrint("Day " .. dayNumToCheck .. "Weekday: " .. self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(dayNumToCheck)]);
-
-       self:BuildForecast();
+       
 
     end;
 end;
@@ -118,40 +73,33 @@ end;
 function WeatherForecast:draw() 
 end;
 
--- assumes that day 1 = monday
-function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
+-- -- assumes that day 1 = monday
+-- function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
     
-    local dayOfWeek = dayNumber; -- this will work for days 1 to 6
+--     local dayOfWeek = dayNumber; -- this will work for days 1 to 6
 
-    if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
-        dayOfWeek = 7; -- will always be sunday 
-    elseif (dayNumber > self.daysInWeek) then
-        local weekNumber = math.floor(dayNumber/self.daysInWeek);
-        dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
-    end;
+--     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
+--         dayOfWeek = 7; -- will always be sunday 
+--     elseif (dayNumber > self.daysInWeek) then
+--         local weekNumber = math.floor(dayNumber/self.daysInWeek);
+--         dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
+--     end;
 
-    return dayOfWeek;
+--     return dayOfWeek;
 
-end;
+-- end;
 
---might end up not using this function
-function WeatherForecast:ReturnNextDayNumber(currentDay)
-    if currentDay == 7 then
-        return 1;
-    else
-        return currentDay + 1;
-    end;
-end;
+
 
 function WeatherForecast:BuildForecast()
    
     local currentDayNum = 7; --g_currentMission.environment.currentDay 
-    local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
+    --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
     for n=1, self.forecastLength do
         local oneDayForecast = {};
-        oneDayForecast.weekDay =  self.weekDays[self:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
+        oneDayForecast.weekDay =  g_currentMission.DayOfWeekUtil.weekDays[g_currentMission.DayOfWeekUtil:CalculateDayofWeekBasedOnDayNumber(currentDayNum+n-1)];
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
         oneDayForecast.weatherState = "sun";
