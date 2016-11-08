@@ -13,6 +13,7 @@ WeatherForecast.forecastLength = 7;
 function WeatherForecast:loadMap(name)
     print("WeatherForecast mod loading")
     g_currentMission.WeatherForecast = self;
+    self.hud.visible = false;
 
 end;
 
@@ -23,7 +24,10 @@ function WeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
 function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 107) then
+    if (unicode == 107) then --TODO: this will need to be changed to use a proper inputbinding. Seb: I still
+                            --want to see if it's possible to get keyEvent working properly with an inputbinding
+                            --to avoid having to check for key press every frame
+                            
         -- if g_currentMission.FixFruit ~= nil then
         --     self:debugPrint("FixFruit active: " .. tostring(g_currentMission.FixFruit.active));
         --     if g_currentMission.FixFruit.active == true then
@@ -62,6 +66,12 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
             self:BuildForecast();
         end;
 
+        if(self.hud.visible == false) then
+            self.hud.visible = true;
+        else
+            self.hud.visible = false;
+        end;
+
        
 
     end;
@@ -71,29 +81,18 @@ function WeatherForecast:update(dt)
 end;
 
 function WeatherForecast:draw() 
+
+    if (self.hud.visible == false) then
+        return;
+    end;
+
+
 end;
-
--- -- assumes that day 1 = monday
--- function WeatherForecast:CalculateDayofWeekBasedOnDayNumber(dayNumber)
-    
---     local dayOfWeek = dayNumber; -- this will work for days 1 to 6
-
---     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'
---         dayOfWeek = 7; -- will always be sunday 
---     elseif (dayNumber > self.daysInWeek) then
---         local weekNumber = math.floor(dayNumber/self.daysInWeek);
---         dayOfWeek = dayNumber - (weekNumber * self.daysInWeek);
---     end;
-
---     return dayOfWeek;
-
--- end;
-
 
 
 function WeatherForecast:BuildForecast()
    
-    local currentDayNum = 7; --g_currentMission.environment.currentDay 
+    local g_currentMission.environment.currentDay 
     --local dayOfWeek = self:CalculateDayofWeekBasedOnDayNumber(currentDayNum);
     --TODO: rework the implementation so that the forecast is only built once per day
 
