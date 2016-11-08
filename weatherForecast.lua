@@ -9,6 +9,7 @@ WeatherForecast = {};
 WeatherForecast.debugLevel = 1;
 WeatherForecast.forecast = {}; --day of week, low temp, high temp, weather condition
 WeatherForecast.forecastLength = 7;
+WeatherForecast.lastForecastPrediction = 0;
 
 function WeatherForecast:loadMap(name)
     print("WeatherForecast mod loading")
@@ -66,7 +67,7 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
             print("SeasonsUtil not found. Aborting")
             return;
         else
-            self:BuildForecast();
+            self:buildForecast();
         end;
 
         if(self.hud.visible == false) then
@@ -78,6 +79,14 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 end;
 
 function WeatherForecast:update(dt)
+    -- Predict the weather once a day, for a whole week
+    -- FIXME(jos): is this the best solution? How about weather over a long period of time, like, one season? Or a year?
+    local today = g_currentMission.SeasonsUtil:currentDayNumber();
+    if (self.lastForecastPrediction < today) then
+        self:buildForecast();
+        self.lastForecastPrediction = today;
+    end;
+
 end;
 
 function WeatherForecast:draw()
@@ -86,18 +95,24 @@ function WeatherForecast:draw()
     end;
 end;
 
-function WeatherForecast:BuildForecast()
-    local currentDayNum = g_currentMission.environment.currentDay
-    --local dayOfWeek = self:dayOfWeek(currentDayNum);
-    --TODO: rework the implementation so that the forecast is only built once per day
+function WeatherForecast:buildForecast()
+    local startDayNum = g_currentMission.SeasonsUtil:currentDayNumber() + 1;
 
-    for n=1, self.forecastLength do
+    -- Empty the table
+    self.forecast = {};
+
+    for n = 1, self.forecastLength do
         local oneDayForecast = {};
-        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:dayOfWeek(currentDayNum+n-1)];
+
+        oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
+        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:dayOfWeek(startDayNum + n - 1)];
+
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
+
         oneDayForecast.weatherState = "sun";
-        table.insert(self.forecast,oneDayForecast);
+
+        table.insert(self.forecast, oneDayForecast);
     end;
 
     --now we check through the rains table to find bad weather
@@ -109,9 +124,7 @@ function WeatherForecast:BuildForecast()
         self.forecast[rain.startDay].weatherState = rain.rainTypeId;
     end;
 
-    -- print_r(self.forecast);
-
-    --self:debugPrint("WeatherForecast:BuildForecast finished")
+    print_r(self.forecast);
 end;
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version

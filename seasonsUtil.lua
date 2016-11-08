@@ -36,12 +36,12 @@ end;
 
 -- Get the current day number
 function SeasonsUtil:currentDayNumber()
-    return 1;
+    return g_currentMission.environment.currentDay;
 end;
 
 -- Get the day within the week
 --assumes that day 1 = monday
-function SeasonsUtil:CalculateDayofWeekBasedOnDayNumber(dayNumber)
+function SeasonsUtil:dayOfWeek(dayNumber)
     local dayOfWeek;
 
     if (dayNumber % self.daysInWeek == 0) then -- if it's a perfect multiple of 7'

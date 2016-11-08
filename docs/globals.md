@@ -9,7 +9,7 @@ time // Current time since start of the game (so after you quit and re-open the 
 
 currentHour  // Hour in day (0-23)
 currentMinute // Minute in day (0-59)
-currentDay
+currentDay // Current gameday (1+)
 
 // Rain
 allowRain
