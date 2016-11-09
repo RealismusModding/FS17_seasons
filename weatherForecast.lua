@@ -79,9 +79,6 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 end;
 
 function WeatherForecast:update(dt)
-end;
-
-function WeatherForecast:updateTick(dt)
     -- Predict the weather once a day, for a whole week
     -- FIXME(jos): is this the best solution? How about weather over a long period of time, like, one season? Or a year?
     local today = g_currentMission.SeasonsUtil:currentDayNumber();

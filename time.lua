@@ -11,6 +11,12 @@ Time.lastUpdate = 0;
 function Time:loadMap(name)
     g_currentMission.Time = self;
 
+    -- Calculate some constants for the daytime calculator
+    local L = 51.9; -- FIXME(jos): Get from savegame
+    self.sunRad = L * math.pi / 180;
+    self.pNight = 6 * math.pi / 180; -- Suns inclination below the horizon for 'civil twilight'
+    self.pDay = -1 * math.pi / 180; -- Suns inclination above the horizon for 'daylight' assumed to be one degree above horizon
+
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime();
 
@@ -27,20 +33,20 @@ function Time:keyEvent(unicode, sym, modifier, isDown)
 end;
 
 function Time:update(dt)
-    g_currentMission:addExtraPrintText("Light timer '"..g_currentMission.environment.lightTimer..string.format(", sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)));
-
-    if (g_currentMission.SeasonsUtil ~= nil) then
-        g_currentMission:addExtraPrintText("Season '"..g_currentMission.SeasonsUtil:seasonName().."', day "..g_currentMission.SeasonsUtil:currentDayNumber());
-    end;
-end;
-
-function Time:updateTick(dt)
     -- Predict the weather once a day, for a whole week
     -- FIXME(jos): is this the best solution? How about weather over a long period of time, like, one season? Or a year?
     -- FIXME: What is g_currentMission.environment.dayChangeListeners? maybe we can use that
     local today = g_currentMission.SeasonsUtil:currentDayNumber();
     if (self.lastUpdate < today) then
-        -- self:adaptTime();
+        self:adaptTime();
+        self.lastUpdate = today;
+    end;
+
+    -- Visual
+    g_currentMission:addExtraPrintText("Light timer '"..g_currentMission.environment.lightTimer..string.format(", sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)));
+
+    if (g_currentMission.SeasonsUtil ~= nil) then
+        g_currentMission:addExtraPrintText("Season '"..g_currentMission.SeasonsUtil:seasonName().."', day "..g_currentMission.SeasonsUtil:currentDayNumber());
     end;
 end;
 
@@ -110,12 +116,53 @@ function Time:adaptTime()
     --     g_currentMission.environment.sunRotCurve.keyframes[i].v = 0;
     -- end;
 
+    local start, en = self:calculateStartEndOfDay(g_currentMission.SeasonsUtil:currentDayNumber());
+
+    print(string.format("day %f -> %f", start, en));
+
     print("------------------");
+end;
 
-    -- g_currentMission.environment.dayNightCycle = false;
-    -- g_currentMission.environment.water = 30000;
+function Time:calculateStartEndOfDay(dayNumber)
+    local dayStart, dayEnd, julianDay, theta, eta;
 
-    self.lastUpdate = today;
+    julianDay = g_currentMission.SeasonsUtil:julianDay(dayNumber);
+
+    -- Call radii for current day
+    theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)));
+    eta = math.asin(0.4 * math.cos(theta));
+
+    -- Calculate the day
+    dayStart, dayEnd = self:_calculateDay(self.pDay, eta, julianDay);
+
+    -- True blackness
+    -- nightStart, nightEnd = self:_calculateDay(self.pNight, eta, julianDay);
+
+    return dayStart, dayEnd;
+end;
+
+function Time:_calculateDay(p, eta, julianDay)
+    local timeStart, timeEnd;
+    local D = 0, offset, hasDST;
+    local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta));
+
+    -- Account for polar day and night
+    if gamma < -1 then
+        D = 0;
+    elseif gamma > 1 then
+        D = 24;
+    else
+        D = 24 - 24 / math.pi * math.acos(gamma);
+    end;
+
+    -- Daylight saving between 1 April and 31 October as an approcimation
+    local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)));
+    offset = hasDST and 1 or 0;
+
+    timeStart = 12 - D / 2 + offset;
+    timeEnd = 12 + D / 2 + offset;
+
+    return timeStart, timeEnd;
 end;
 
 function Time:draw()

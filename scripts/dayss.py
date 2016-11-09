@@ -35,7 +35,7 @@ p_night = 6*math.pi/180 #suns inclination below the horizon for 'civil twilight'
 p_day = -1*math.pi/180 #suns inclination above the horizon for "daylight" assumed to be one degree above horizon
 #####
 
-J = 170       #Julian day
+J = 1       #Julian day
 
 #### IN CALCULATE
 theta = 0.216+2*math.atan(0.967*math.tan(0.0086*(J-186)))
