@@ -150,9 +150,6 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
 end;
 
 function FixFruit:update(dt)
-    if (g_currentMission.SeasonsUtil ~= nil) then
-        g_currentMission:addExtraPrintText("Season '"..g_currentMission.SeasonsUtil:seasonName(self.testDay).."', day "..self.testDay);
-    end;
 end;
 
 function FixFruit:draw()
