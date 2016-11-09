@@ -8,6 +8,7 @@
 SeasonsUtil = {};
 
 SeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+SeasonsUtil.weekDaysShort = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 SeasonsUtil.daysInWeek = 7;
 SeasonsUtil.seasons = {[0]="Autumn", "Winter", "Spring", "Summer"};
 SeasonsUtil.seasonsInYear = 4;
@@ -65,6 +66,12 @@ end;
 -- If no day number supplied, uses current day
 function SeasonsUtil:dayName(dayNumber)
     return self.weekDays[self:dayOfWeek(dayNumber)];
+end;
+
+-- Get short day name for given day number
+-- If no day number supplied, uses current day
+function SeasonsUtil:dayNameShort(dayNumber)
+    return self.weekDaysShort[self:dayOfWeek(dayNumber)];
 end;
 
 function SeasonsUtil:nextWeekDayNumber(currentDay)
