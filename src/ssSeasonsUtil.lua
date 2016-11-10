@@ -1,62 +1,62 @@
 ---------------------------------------------------------------------------------------------------------
--- SeasonsUtil SCRIPT
+-- ssSeasonsUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
 -- Authors:  Akuenzi, ian898, Jarvixes, theSeb
 --
 
-SeasonsUtil = {};
+ssSeasonsUtil = {};
 
-SeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-SeasonsUtil.weekDaysShort = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-SeasonsUtil.daysInWeek = 7;
-SeasonsUtil.seasons = {[0]="Spring", "Summer", "Autumn", "Winter"};
-SeasonsUtil.seasonsInYear = 4;
+ssSeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+ssSeasonsUtil.weekDaysShort = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+ssSeasonsUtil.daysInWeek = 7;
+ssSeasonsUtil.seasons = {[0]="Spring", "Summer", "Autumn", "Winter"};
+ssSeasonsUtil.seasonsInYear = 4;
 
-SeasonsUtil.daysInSeason = 10;
+ssSeasonsUtil.daysInSeason = 10;
 
-function SeasonsUtil:loadMap(name)
-     print("Loading SeasonsUtil");
-     g_currentMission.SeasonsUtil = self;
+function ssSeasonsUtil:loadMap(name)
+     print("Loading ssSeasonsUtil");
+     g_currentMission.ssSeasonsUtil = self;
 
      -- FIXME(jos): load daysInSeason from savegame
      -- FIXME(jos): load weekdays, weekdayshsort and seasons from i18n
 end;
 
-function SeasonsUtil:deleteMap()
+function ssSeasonsUtil:deleteMap()
 end;
 
-function SeasonsUtil:mouseEvent(posX, posY, isDown, isUp, button)
+function ssSeasonsUtil:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
-function SeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
+function ssSeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
 end;
 
-function SeasonsUtil:update(dt)
+function ssSeasonsUtil:update(dt)
 end;
 
-function SeasonsUtil:draw()
+function ssSeasonsUtil:draw()
 end;
 
 -- Get the current day number
-function SeasonsUtil:currentDayNumber()
+function ssSeasonsUtil:currentDayNumber()
     return g_currentMission.environment.currentDay;
 end;
 
 -- Get the day within the week
 -- assumes that day 1 = monday
 -- If no day supplied, uses current day
-function SeasonsUtil:dayOfWeek(dayNumber)
+function ssSeasonsUtil:dayOfWeek(dayNumber)
     if (dayNumber == nil) then
         dayNumber = self:currentDayNumber();
     end;
-    
+
     return ((dayNumber - 1) % self.daysInWeek) + 1;
 end;
 
 -- Get the season number.
 -- If no day supplied, uses current day
-function SeasonsUtil:season(dayNumber)
+function ssSeasonsUtil:season(dayNumber)
     if (dayNumber == nil) then
         dayNumber = self:currentDayNumber();
     end;
@@ -71,7 +71,7 @@ end;
 -- Autumn: Sep (244) - Nov (305)
 -- Winter: Dec (335) - Feb (59)
 -- FIXME(jos): Of course, this changes on the southern hemisphere
-function SeasonsUtil:julianDay(dayNumber)
+function ssSeasonsUtil:julianDay(dayNumber)
     local season, partInSeason, dayInSeason;
     local starts = {[0] = 60, 152, 244, 335 };
 
@@ -82,7 +82,7 @@ function SeasonsUtil:julianDay(dayNumber)
     return math.floor(starts[season] + partInSeason * 30);
 end;
 
-function SeasonsUtil:julanDayToDayNumber(julianDay)
+function ssSeasonsUtil:julanDayToDayNumber(julianDay)
     local season, partInSeason, start;
 
     if julianDay < 60 then
@@ -106,24 +106,24 @@ end;
 
 -- Get season name for given day number
 -- If no day number supplied, uses current day
-function SeasonsUtil:seasonName(dayNumber)
+function ssSeasonsUtil:seasonName(dayNumber)
     return self.seasons[self:season(dayNumber)];
 end;
 
 -- Get day name for given day number
 -- If no day number supplied, uses current day
-function SeasonsUtil:dayName(dayNumber)
+function ssSeasonsUtil:dayName(dayNumber)
     return self.weekDays[self:dayOfWeek(dayNumber)];
 end;
 
 -- Get short day name for given day number
 -- If no day number supplied, uses current day
-function SeasonsUtil:dayNameShort(dayNumber)
+function ssSeasonsUtil:dayNameShort(dayNumber)
     return self.weekDaysShort[self:dayOfWeek(dayNumber)];
 end;
 
-function SeasonsUtil:nextWeekDayNumber(currentDay)
+function ssSeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek;
 end;
 
-addModEventListener(SeasonsUtil);
+addModEventListener(ssSeasonsUtil);

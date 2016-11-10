@@ -1,32 +1,32 @@
 ---------------------------------------------------------------------------------------------------------
--- FIXFRUIT SCRIPT
+-- ssFixFruit SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust fruit properties.
 -- Authors:  Akuenzi, ian898, Jarvixes, theSeb
 --
 
-FixFruit = {};
+ssFixFruit = {};
 
 --do not use print. use self:debugPrint() instead, unless we want the message to be displayed in a release version
-FixFruit.debugLevel = 1 -- 0 if you don't want to see debugging messages in the log file / console. 1 to switch on debug statements
+ssFixFruit.debugLevel = 1 -- 0 if you don't want to see debugging messages in the log file / console. 1 to switch on debug statements
 
---TODO: these values should probably be added into the fixFruitData table in the future, but won't bother until the animation from the back of the harvester issue is fixed
-FixFruit.rapeWindrowLiterPerSqm = 4; -- based on the assumption that OSR produces about 0.5 of wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
-FixFruit.soybeanWindrowLiterPerSqm = 3; -- based on the assumption that soybean produces slightly less straw than OSR
-FixFruit.barleyWindrowLiterPerSqm = 6; -- based on the assumption that winter barley produces about 0.8 of winter wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
-FixFruit.springBarleyWindrowLiterPerSqm = 5; -- based on the assumption that spring barley will produce a bit less straw than winter barley. TODO:implement spring barley with shorter growth cycles
-FixFruit.springWheatWindrowLiterPerSqm = 6; -- based on the assumption that spring wheat will produce a bit less straw than winter wheat. TODO:implement spring wheat with shorter growth cycles
+--TODO: these values should probably be added into the ssFixFruitData table in the future, but won't bother until the animation from the back of the harvester issue is fixed
+ssFixFruit.rapeWindrowLiterPerSqm = 4; -- based on the assumption that OSR produces about 0.5 of wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
+ssFixFruit.soybeanWindrowLiterPerSqm = 3; -- based on the assumption that soybean produces slightly less straw than OSR
+ssFixFruit.barleyWindrowLiterPerSqm = 6; -- based on the assumption that winter barley produces about 0.8 of winter wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
+ssFixFruit.springBarleyWindrowLiterPerSqm = 5; -- based on the assumption that spring barley will produce a bit less straw than winter barley. TODO:implement spring barley with shorter growth cycles
+ssFixFruit.springWheatWindrowLiterPerSqm = 6; -- based on the assumption that spring wheat will produce a bit less straw than winter wheat. TODO:implement spring wheat with shorter growth cycles
 
 -- error messages
-FixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be found. Additional swaths will not be installed."
+ssFixFruit.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND = "Wheat windrow index could not be found. Additional swaths will not be installed."
 
-FixFruit.testDay = 1;
+ssFixFruit.testDay = 1;
 
---[[NOTE:   FixFruitStuff is a table bound by {}.  Within this table are additional tables, separated by a comma, for each fruit.
+--[[NOTE:   ssFixFruitStuff is a table bound by {}.  Within this table are additional tables, separated by a comma, for each fruit.
     Additional fruits may be added as shown by following the examples below, so long as each additional table added is separated by comma.
    The game table variables to change for each fruit are shown in each respective fruit table.]]
 
--- local FixFruitStuff =   {
+-- local ssFixFruitStuff =   {
 --         {"sugarBeet", 1},
 --         {"barley", 1},
 --         {"wheat", 1},
@@ -41,12 +41,12 @@ FixFruit.testDay = 1;
 --         {"soybean", 1},
 --                         }
 
-function FixFruit:loadMap(name)
+function ssFixFruit:loadMap(name)
     --experimenting with getting mods to recognise each other
-    g_currentMission.FixFruit = self;
+    g_currentMission.ssFixFruit = self;
     self.active = true;
     --Seb: changed variable name and appropriate camel case. variables should start with lower case letter. Changed all to 2 hours for the moment for easier debugging when checking if things are working
-    local fixFruitData = {
+    local ssFixFruitData = {
         {"sugarBeet",   growthStateTime=2, minHarvestingGrowthState=9,  minForageGrowthState=9},
         {"barley",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=3},
         {"wheat",    growthStateTime=2, minHarvestingGrowthState=4,  minForageGrowthState=3},
@@ -64,16 +64,16 @@ function FixFruit:loadMap(name)
     -- To update FruitUtil tables for changes to fruit growth state times.
     self:debugPrint("Starting to change growth")
 
-    for _, fruitType in pairs(fixFruitData) do
-        self:FixFruitTimes(fruitType[1], fruitType["growthStateTime"])
+    for _, fruitType in pairs(ssFixFruitData) do
+        self:ssFixFruitTimes(fruitType[1], fruitType["growthStateTime"])
     end;
 
-    self:debugPrint("FixFruit .. Changed growth")
+    self:debugPrint("ssFixFruit .. Changed growth")
 
-    -- Seb:commeting this out for now until I understand the intentions for FixFruitData
+    -- Seb:commeting this out for now until I understand the intentions for ssFixFruitData
     -- To update FruitUtil tables for changes to minHarvesting and minForage allowed growth states.
 
-    --  for _, elem in pairs(fixFruitData) do
+    --  for _, elem in pairs(ssFixFruitData) do
     --   local fruitName = "FRUITTYPE_" .. string.upper(elem[1])
     --   local fruitNumber = FruitUtil[fruitName]
     --   ModifyFruitData(elem[1], fruitNumber, elem["minHarvestingGrowthState"], "minHarvestingGrowthState")
@@ -90,13 +90,13 @@ function FixFruit:loadMap(name)
     --self:debugPrint("checking something: " .. FruitUtil.fruitIndexToDesc[FruitUtil.FRUITTYPE_BARLEY].name);
 end;
 
-function FixFruit:deleteMap()
+function ssFixFruit:deleteMap()
 end;
 
-function FixFruit:mouseEvent(posX, posY, isDown, isUp, button)
+function ssFixFruit:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
-function FixFruit:keyEvent(unicode, sym, modifier, isDown)
+function ssFixFruit:keyEvent(unicode, sym, modifier, isDown)
     --this is to help with debugging. Pressing K will print the tables below to the log file / console.
     if (unicode == 107) then
         if(self.active == true) then
@@ -142,33 +142,33 @@ function FixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
-            self.testDay = self.testDay + 1--g_currentMission.SeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
+            self.testDay = self.testDay + 1--g_currentMission.ssSeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
 
             -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
     end;
 end;
 
-function FixFruit:update(dt)
+function ssFixFruit:update(dt)
 end;
 
-function FixFruit:draw()
+function ssFixFruit:draw()
     -- TODO: absolutely awful implementation, but it's a start.
     -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with the hud scaling setting.
     setTextColor(1,1,1,1);
 
-    if (g_currentMission.SeasonsUtil == nil) then
-        print("SeasonsUtil not found. Aborting")
+    if (g_currentMission.ssSeasonsUtil == nil) then
+        print("ssSeasonsUtil not found. Aborting")
         return;
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
         --testing (Above code works)
-        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.SeasonsUtil:seasonName() .. " Day: " .. g_currentMission.SeasonsUtil:currentDayNumber() .. " (" .. g_currentMission.SeasonsUtil:dayName() .. ")";
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.ssSeasonsUtil:seasonName() .. " Day: " .. g_currentMission.ssSeasonsUtil:currentDayNumber() .. " (" .. g_currentMission.ssSeasonsUtil:dayName() .. ")";
         renderText(0.65, 0.98, 0.02, textToDisplay);
     end;
 end;
 
-function FixFruit:FixFruitTimes(fruitTypeName, fruitTime)
+function ssFixFruit:ssFixFruitTimes(fruitTypeName, fruitTime)
     -- Test to ensure fruit exists, and that growth time is not less than or equal to zero.
 
     if FruitUtil.fruitTypeGrowths[fruitTypeName] == nil or fruitTime <=0 then
@@ -211,7 +211,7 @@ end;
 
 --experimenting with adding a swath to rape and soybean
 --TODO: modify function to add swaths to any crop.
-function FixFruit:AddStrawSwathsToRapeAndSoybean()
+function ssFixFruit:AddStrawSwathsToRapeAndSoybean()
     --self:debugPrint("Looking up WIndrow fill type 30 expected. Actual: " .. FruitUtil.fruitTypeToWindrowFillType[FruitUtil.fruitTypes["wheat"].index]);
 
     --first we look up the windrow type for wheat
@@ -237,7 +237,7 @@ function FixFruit:AddStrawSwathsToRapeAndSoybean()
 end;
 
 -- modify straw swath output for a given fruit to a new value. paramters fruitTypeName, newSwathouput in litres per sqm
-function FixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
+function ssFixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
     if FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm ~= nil then
         self:debugPrint(fruitTypeName .. "'s old swath value:  " .. FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm);
         FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm = newSwathOutput;
@@ -247,14 +247,14 @@ function FixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
     end;
 end;
 
-function FixFruit:debugPrint(message)
+function ssFixFruit:debugPrint(message)
     if self.debugLevel == 1 then
         print(message)
     end;
 end;
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
-function FixFruit:errorPrint(message)
+function ssFixFruit:errorPrint(message)
     print("--------");
     print("Seasons Mod error");
     print(messsage);
@@ -422,4 +422,4 @@ function table_save(tbl, filename)
     end
 end
 
-addModEventListener(FixFruit);
+addModEventListener(ssFixFruit);

@@ -13,10 +13,15 @@
 
     <iconFilename>icon.dds</iconFilename>
 
+    <!-- <multiplayer supported="true" /> -->
+
     <extraSourceFiles>
-        <sourceFile filename="seasonsUtil.lua" />
-        <sourceFile filename="fixFruit.lua" />
-        <sourceFile filename="weatherForecast.lua" />
-        <sourceFile filename="time.lua" />
+        <sourceFile filename="src/ssSeasonsMod.lua" />
     </extraSourceFiles>
+
+    <inputBindings>
+        <input name="SEASONS_SHOW_WF" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse="" />
+    </inputBindings>
+
+
 </modDesc>
