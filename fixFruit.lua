@@ -163,7 +163,7 @@ function FixFruit:draw()
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
         --testing (Above code works)
-        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.SeasonsUtil:seasonName(g_currentMission.SeasonsUtil:currentDayNumber()) .. " Day: " .. self.testDay .. " (" .. g_currentMission.SeasonsUtil:dayName(g_currentMission.SeasonsUtil:currentDayNumber()) .. ")";
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.SeasonsUtil:seasonName() .. " Day: " .. self.testDay .. " (" .. g_currentMission.SeasonsUtil:dayName() .. ")";
         renderText(0.65, 0.98, 0.02, textToDisplay);
     end;
 end;

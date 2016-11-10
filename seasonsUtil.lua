@@ -45,7 +45,12 @@ end;
 
 -- Get the day within the week
 -- assumes that day 1 = monday
+-- If no day supplied, uses current day
 function SeasonsUtil:dayOfWeek(dayNumber)
+    if (dayNumber == nil) then
+        dayNumber = self:currentDayNumber();
+    end;
+    
     return ((dayNumber - 1) % self.daysInWeek) + 1;
 end;
 
