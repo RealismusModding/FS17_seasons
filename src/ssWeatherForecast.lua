@@ -105,7 +105,7 @@ function ssWeatherForecast:draw()
 end;
 
 function ssWeatherForecast:buildForecast()
-    local startDayNum = g_currentMission.SeasonsUtil:currentDayNumber();
+    local startDayNum = g_currentMission.ssSeasonsUtil:currentDayNumber();
     self:debugPrint("Building forecast based on today day num: " .. startDayNum);
 
     -- Empty the table
@@ -140,7 +140,7 @@ end;
 
 -- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
 --perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
-function WeatherForecast:getWeatherStateForDay(dayNumber)
+function ssWeatherForecast:getWeatherStateForDay(dayNumber)
     local weatherState = "sun";
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
