@@ -3,11 +3,11 @@
 ssSeasonsMod = {}
 
 -- Put it in the global scope so it can be recognized by other mods
-getfenv(0)["modSeasonsMod"] = ssSeasonsMod;
+getfenv(0)["modSeasonsMod"] = ssSeasonsMod
 
-local modItem = ModsUtil.findModItemByModName(g_currentModName);
+local modItem = ModsUtil.findModItemByModName(g_currentModName)
 ssSeasonsMod.version = Utils.getNoNil(modItem.version ,"?.?.?.?")
-ssSeasonsMod.modDir = g_currentModDirectory;
+ssSeasonsMod.modDir = g_currentModDirectory
 ssSeasonsMod.verbose = true
 
 function log(...)
@@ -58,5 +58,22 @@ else
 end
 
 function ssSeasonsMod.loadMap(...)
-    log("Loading mod.loadMap()...")
+    log("Loading mod...")
 end
+
+function ssSeasonsMod:deleteMap()
+end
+
+function ssSeasonsMod:mouseEvent(posX, posY, isDown, isUp, button)
+end
+
+function ssSeasonsMod:keyEvent(unicode, sym, modifier, isDown)
+end
+
+function ssSeasonsMod:update(dt)
+end
+
+function ssSeasonsMod:draw()
+end
+
+addModEventListener(ssSeasonsMod)

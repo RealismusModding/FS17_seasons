@@ -60,13 +60,13 @@ function ssTime:adaptTime()
     -- g_currentMission.environment.skyDayTimeStart = (endTime + morningSkyAdj) * 60 * 1000 -- 3
     -- g_currentMission.environment.skyDayTimeEnd = (startTime + eveningSkyAdj) * 60 * 1000 --17
 
-    print("------------------")
+    log("------------------")
 
     -- All local values are in minutes
     local startTime, endTime = self:calculateStartEndOfDay(g_currentMission.ssSeasonsUtil:currentDayNumber())
     -- local startTime, endTime = self:calculateStartEndOfDay(35) -- 15 = midsummer, 35 = midwinter
 
-    print(string.format("day %f -> %f", startTime/60, endTime/60))
+    log(string.format("day %f -> %f", startTime/60, endTime/60))
 
     -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
     -- FIXME(jos): Maybe turn them on between the beginOfNight and fullNight?
@@ -79,7 +79,7 @@ function ssTime:adaptTime()
     -- g_currentMission.environment.sunRotCurve.keyframes = self:compressedNightKeyframes(self.sunRotOriginal, endTime, startTime)
     g_currentMission.environment.sunColorCurve.keyframes = self:compressedNightKeyframes(self.sunColorCurveOriginal, endTime, startTime)
 
-    print("------------------")
+    log("------------------")
 
     self.lastUpdate = g_currentMission.ssSeasonsUtil:currentDayNumber()
 end
@@ -165,7 +165,7 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
     end
     -- END OF FIXME
 
-    print("Found pivot at "..tostring(pivot).." with gap "..tostring(pivotGap))
+    log("Found pivot at "..tostring(pivot).." with gap "..tostring(pivotGap))
 
     -- Find old begin and end time of night
     oldNightEnd = keyframes[pivot].time -- in minutes (early)
@@ -175,7 +175,7 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
     local compressionEarly = endNight / oldNightEnd
     local compressionLate = (1440 - beginNight) / (1440 - oldNightBegin)
 
-    print("compression early "..tostring(compressionEarly)..", late "..tostring(compressionLate))
+    log("compression early "..tostring(compressionEarly)..", late "..tostring(compressionLate))
 
     -- Rewrite times for early and late
     for i = 1, numFrames do

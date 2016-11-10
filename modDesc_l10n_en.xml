@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        Jarvixes
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
+    </texts>
+</l10n>
