@@ -55,7 +55,8 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
     --     end;
 
-        --  print_r(g_currentMission.environment.rains);
+        -- self:debugPrint("Game Day : " .. g_currentMission.SeasonsUtil:currentDayNumber());
+        -- print_r(g_currentMission.environment.rains);
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
     --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
@@ -95,7 +96,7 @@ function WeatherForecast:draw()
 end;
 
 function WeatherForecast:buildForecast()
-    local startDayNum = g_currentMission.SeasonsUtil:currentDayNumber() + 1;
+    local startDayNum = g_currentMission.SeasonsUtil:currentDayNumber();
 
     -- Empty the table
     self.forecast = {};
@@ -123,7 +124,7 @@ function WeatherForecast:buildForecast()
         self.forecast[rain.startDay].weatherState = rain.rainTypeId;
     end;
 
-    print_r(self.forecast);
+    --print_r(self.forecast);
 end;
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
