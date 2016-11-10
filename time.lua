@@ -11,6 +11,8 @@ Time.lastUpdate = 0;
 function Time:loadMap(name)
     g_currentMission.Time = self;
 
+    self:copyDefaultKeyframes();
+
     -- Calculate some constants for the daytime calculator
     local L = 51.9; -- FIXME(jos): Get from savegame
     self.sunRad = L * math.pi / 180;
@@ -20,7 +22,7 @@ function Time:loadMap(name)
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime();
 
-    g_currentMission.missionInfo.timeScale = 2400;
+    g_currentMission.missionInfo.timeScale = 120*6;
 end;
 
 function Time:deleteMap()
@@ -30,6 +32,9 @@ function Time:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
 function Time:keyEvent(unicode, sym, modifier, isDown)
+end;
+
+function Time:draw()
 end;
 
 function Time:update(dt)
@@ -45,80 +50,35 @@ function Time:update(dt)
     -- Visual
     g_currentMission:addExtraPrintText("Light timer '"..g_currentMission.environment.lightTimer..string.format(", sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)));
 
-    if (g_currentMission.SeasonsUtil ~= nil) then
+    if g_currentMission.SeasonsUtil then
         g_currentMission:addExtraPrintText("Season '"..g_currentMission.SeasonsUtil:seasonName().."', day "..g_currentMission.SeasonsUtil:currentDayNumber());
     end;
 end;
 
 -- Change the night/day times according to season
--- There are two possible moments this function is called:
--- 1) At start of game, at any moment on the day (but at map load)
--- 2) At start of a new day
 function Time:adaptTime()
-    -- g_currentMission.environment.nightStart = 1260 | / 60 = 21 = 9PM
-    -- g_currentMission.environment.nightEnd = 330 |  / 60 = 5,5 = half past 5
-
-    -- Calculate the new end of night and start of night, for today and tomorrow
-
-    -- if NOW is after end of night and before night (in the night)
-    --   end of night = next day
-    -- else
-    --   end of night = today
-
-    -- if now > end of night and > start of night (in the night)
-    --   start of night = next day
-    -- else
-    --   start of night = today
-
-    print("------------------");
-
-    -- All local values are in minutes
-    local startTime = 17 * 60; -- 5PM (9PM)
-    local endTime = 8 * 60; -- 8AM (5.5AM)
-
-    local morningSkyAdj = g_currentMission.environment.skyDayTimeStart / 60 / 1000 - g_currentMission.environment.nightEnd;
-    local eveningSkyAdj = g_currentMission.environment.skyDayTimeEnd / 60 / 1000 - g_currentMission.environment.nightStart;
-    -- This is for the logical night. Not the visual one. Used for turning on lights in houses / streets
-    g_currentMission.environment.nightStart = startTime;
-    g_currentMission.environment.nightEnd = endTime;
-
     -- This is for showing the red-sky texture (I think). Jos: nope it does not
     -- g_currentMission.environment.skyDayTimeStart = (endTime + morningSkyAdj) * 60 * 1000; -- 3
     -- g_currentMission.environment.skyDayTimeEnd = (startTime + eveningSkyAdj) * 60 * 1000; --17
 
-    -- This makes the sky all black all the time. Not good, but something
-    -- The sky texture position. needs adjustment for longer/shorter nights
-    -- for i = 1, #g_currentMission.environment.skyCurve.keyframes do
-    --     g_currentMission.environment.skyCurve.keyframes[i].x = 0;
-    --     g_currentMission.environment.skyCurve.keyframes[i].y = 0;
-    --     g_currentMission.environment.skyCurve.keyframes[i].z = 0;
-    -- end;
+    print("------------------");
 
-    -- The light around. Setting it (1,1,1) actually causes an eternal day on the ground (sky still gets dark)
-    -- for i = 1, #g_currentMission.environment.sunColorCurve.keyframes do
-    --     g_currentMission.environment.sunColorCurve.keyframes[i].x = 1;
-    --     g_currentMission.environment.sunColorCurve.keyframes[i].y = 1;
-    --     g_currentMission.environment.sunColorCurve.keyframes[i].z = 1;
-    -- end;
+    -- All local values are in minutes
+    -- local startTime, endTime = self:calculateStartEndOfDay(g_currentMission.SeasonsUtil:currentDayNumber());
+    local startTime, endTime = self:calculateStartEndOfDay(15);
 
-    -- Ambient light, the amount of actual light. Needs adjustment for longer/shorter nights.
-    -- For this, the timestamps in the curve should be adjusted
-    -- Does very little, but important too.
-    -- for i = 1, #g_currentMission.environment.ambientCurve.keyframes do
-    --     g_currentMission.environment.ambientCurve.keyframes[i].x = 0;
-    --     g_currentMission.environment.ambientCurve.keyframes[i].y = 0;
-    --     g_currentMission.environment.ambientCurve.keyframes[i].z = 0;
-    -- end;
+    print(string.format("day %f -> %f", startTime/60, endTime/60));
 
-    -- Sun rotation is for the shadows. Might also need adjustment, but shadows also exist in the dark due to moon
-    -- In the night (23-4) the shadow is 'reversed' for the moon. I think this is fine and we may not change this.
-    -- for i = 1, #g_currentMission.environment.sunRotCurve.keyframes do
-    --     g_currentMission.environment.sunRotCurve.keyframes[i].v = 0;
-    -- end;
+    -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
+    -- FIXME(jos): Maybe turn them on between the beginOfNight and fullNight?
+    g_currentMission.environment.nightStart = startTime;
+    g_currentMission.environment.nightEnd = endTime;
 
-    local start, en = self:calculateStartEndOfDay(g_currentMission.SeasonsUtil:currentDayNumber());
-
-    print(string.format("day %f -> %f", start, en));
+    -- For the visual looks
+    g_currentMission.environment.skyCurve.keyframes = self:compressedNightKeyframes(self.skyCurveOriginal, endTime, startTime);
+    g_currentMission.environment.ambientCurve.keyframes = self:compressedNightKeyframes(self.ambientCurveOriginal, endTime, startTime);
+    g_currentMission.environment.sunRotCurve.keyframes = self:compressedNightKeyframes(self.sunRotOriginal, endTime, startTime);
+    g_currentMission.environment.sunColorCurve.keyframes = self:compressedNightKeyframes(self.sunColorCurveOriginal, endTime, startTime);
 
     print("------------------");
 end;
@@ -138,7 +98,7 @@ function Time:calculateStartEndOfDay(dayNumber)
     -- True blackness
     -- nightStart, nightEnd = self:_calculateDay(self.pNight, eta, julianDay);
 
-    return dayStart, dayEnd;
+    return dayStart * 60, dayEnd * 60;
 end;
 
 function Time:_calculateDay(p, eta, julianDay)
@@ -165,7 +125,91 @@ function Time:_calculateDay(p, eta, julianDay)
     return timeStart, timeEnd;
 end;
 
-function Time:draw()
+function Time:copyDefaultKeyframes()
+    self.skyCurveOriginal = deepCopy(g_currentMission.environment.skyCurve.keyframes);
+    self.ambientCurveOriginal = deepCopy(g_currentMission.environment.ambientCurve.keyframes);
+    self.sunRotOriginal = deepCopy(g_currentMission.environment.sunRotCurve.keyframes);
+    self.sunColorCurveOriginal = deepCopy(g_currentMission.environment.sunColorCurve.keyframes);
+end;
+
+function Time:compressedNightKeyframes(keyframes, beginNight, endNight)
+    local newFrames = deepCopy(keyframes);
+    local numFrames = arrayLength(keyframes);
+    local oldNightEnd, oldNightBegin;
+    local pivot, pivotGap = nil, 0;
+
+    -- Verify first frame = time 0, last = time 1440
+    -- FIXME: move this all to somewhere else, it all needs to be done just once.
+    if keyframes[1].time ~= 0 or keyframes[numFrames].time ~= 1440 then
+        -- Todo: make this a UTIL
+        print("[Seasons] Could not change keyframes due to unknown keyframes format");
+        return;
+    end;
+
+    -- Find the pivot (center) by looking between 5:00 and 21:00 for the biggest gap
+    for i = 1, numFrames do
+        if keyframes[i].time >= 5 * 60 and keyframes[i].time <= 21 * 60 then
+            local newGap = keyframes[i + 1].time - keyframes[i].time;
+
+            if newGap > pivotGap then
+                pivotGap = newGap;
+                pivot = i;
+            end;
+        end;
+    end;
+
+    if not pivot then
+        print("[Seasons] Could not find pivot");
+        return;
+    end;
+    -- END OF FIXME
+
+    -- Find old begin and end time of night
+    oldNightEnd = keyframes[pivot].time; -- in minutes (early)
+    oldNightBegin = keyframes[pivot + 1].time; -- in minutes (late)
+
+    -- Calculate compression rate for early and late
+    local compressionEarly = endNight / oldNightEnd;
+    local compressionLate = (1440 - beginNight) / (1440 - oldNightBegin);
+
+    -- print("compression early "..tostring(compressionEarly)..", late "..tostring(compressionLate));
+
+    -- Rewrite times for early and late
+    for i = 1, numFrames do
+        if i <= pivot then -- early
+            newFrames[i].time = keyframes[i].time * compressionEarly;
+        else -- late
+            newFrames[i].time = 1440 - ((1440 - keyframes[i].time) * compressionLate);
+        end;
+    end;
+
+    return newFrames;
+end;
+
+-- http://lua-users.org/wiki/CopyTable
+function deepCopy(obj, seen)
+    local orig_type = type(obj);
+
+    if orig_type ~= 'table' then return obj end;
+    if seen and seen[obj] then return seen[obj] end;
+
+    local s = seen or {}
+    local res = setmetatable({}, getmetatable(obj));
+    s[obj] = res;
+
+    for k, v in pairs(obj) do
+        res[deepCopy(k, s)] = deepCopy(v, s);
+    end;
+
+    return res;
+end;
+
+function arrayLength(arr)
+    local n = 0;
+    for i = 1, #arr do
+        n = n + 1;
+    end;
+    return n;
 end;
 
 addModEventListener(Time);
