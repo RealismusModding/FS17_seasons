@@ -45,8 +45,10 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 
         --looking up weather
     --     self:debugPrint("Looking up weather");
-        -- print_r(g_currentMission.environment.weatherTemperaturesNight);
-        -- print_r(g_currentMission.environment.weatherTemperaturesDay);
+         
+        --  self:debugPrint("Game Day : " .. g_currentMission.SeasonsUtil:currentDayNumber());
+        --  print_r(g_currentMission.environment.weatherTemperaturesNight);
+        --  print_r(g_currentMission.environment.weatherTemperaturesDay);
     --     for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
     --         self:debugPrint("Night Temp: " .. nightTemp);
     --     end;
@@ -55,21 +57,21 @@ function WeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index));
     --     end;
 
-        -- self:debugPrint("Game Day : " .. g_currentMission.SeasonsUtil:currentDayNumber());
-        -- print_r(g_currentMission.environment.rains);
+         
+        --  print_r(g_currentMission.environment.rains);
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
     --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index));
     --     end;
 
-    --    -- print_r(g_currentMission.environment.rainTypes);
+    --     print_r(g_currentMission.environment.rainTypes);
 
-        if (g_currentMission.SeasonsUtil == nil) then
-            print("SeasonsUtil not found. Aborting")
-            return;
-        else
-            self:buildForecast();
-        end;
+        -- if (g_currentMission.SeasonsUtil == nil) then
+        --     print("SeasonsUtil not found. Aborting")
+        --     return;
+        -- else
+        --     self:buildForecast();
+        -- end;
 
         if(self.hud.visible == false) then
             self.hud.visible = true;
@@ -90,6 +92,14 @@ function WeatherForecast:update(dt)
 end;
 
 function WeatherForecast:draw()
+    
+    local todaysWeather;
+
+    local tomorrowsWeather = self.forecast[1].weatherState .. " forecast tomorrow day num: " .. tostring(self.forecast[1].day);
+    
+    local textToDisplay = "Next day weather: " .. tomorrowsWeather ;
+    renderText(0.25, 0.98, 0.01, textToDisplay);
+
     if (self.hud.visible == false) then
         return;
     end;
@@ -97,7 +107,7 @@ end;
 
 function WeatherForecast:buildForecast()
     local startDayNum = g_currentMission.SeasonsUtil:currentDayNumber();
-
+    self:debugPrint("Building forecast based on today day num: " .. startDayNum);
     -- Empty the table
     self.forecast = {};
 
@@ -105,27 +115,49 @@ function WeatherForecast:buildForecast()
         local oneDayForecast = {};
 
         oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
-        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:dayOfWeek(startDayNum + n - 1)];
+        oneDayForecast.weekDay =  g_currentMission.SeasonsUtil.weekDays[g_currentMission.SeasonsUtil:dayOfWeek(startDayNum + n)];
 
-        oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n];
-        oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n];
+        oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n+1];
+        oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n+1];
 
-        oneDayForecast.weatherState = "sun";
+        oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n);
 
         table.insert(self.forecast, oneDayForecast);
     end;
 
     --now we check through the rains table to find bad weather
+    -- for index, rain in ipairs(g_currentMission.environment.rains) do
+    --     self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
+    --     if rain.startDay > self.forecastLength+1 then 
+    --         break;
+    --     end;
+    --     foreCastDayIndex = rain.startDay -1;  
+    --     self.forecast[foreCastDayIndex].weatherState = rain.rainTypeId;
+    -- end;
+
+    print_r(self.forecast);
+end;
+
+-- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
+--perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
+function WeatherForecast:getWeatherStateForDay(dayNumber)
+    local weatherState = "sun";
+
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        --self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
-        if rain.startDay > self.forecastLength then
+        self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
+        if rain.startDay > dayNumber then 
             break;
         end;
-        self.forecast[rain.startDay].weatherState = rain.rainTypeId;
+        if (rain.startDay == dayNumber) then
+            weatherState = rain.rainTypeId;
+        end;
+        
     end;
 
-    --print_r(self.forecast);
+    return weatherState;
+
 end;
+
 
 --use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
 function WeatherForecast:errorPrint(message)
