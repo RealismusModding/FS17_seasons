@@ -50,6 +50,7 @@ if modItem.isDirectory then
 else
     for i = 1, #srcFiles do
 
+        logInfo(string.format("Loading script: %s (v%s)", srcFiles[i], ssSeasonsMod.version))
 
         source(srcFolder..srcFiles[i])
     end
