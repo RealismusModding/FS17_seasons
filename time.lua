@@ -64,8 +64,8 @@ function Time:adaptTime()
     print("------------------");
 
     -- All local values are in minutes
-    -- local startTime, endTime = self:calculateStartEndOfDay(g_currentMission.SeasonsUtil:currentDayNumber());
-    local startTime, endTime = self:calculateStartEndOfDay(15);
+    local startTime, endTime = self:calculateStartEndOfDay(g_currentMission.SeasonsUtil:currentDayNumber());
+    -- local startTime, endTime = self:calculateStartEndOfDay(35); -- 15 = midsummer, 35 = midwinter
 
     print(string.format("day %f -> %f", startTime/60, endTime/60));
 
@@ -77,7 +77,7 @@ function Time:adaptTime()
     -- For the visual looks
     g_currentMission.environment.skyCurve.keyframes = self:compressedNightKeyframes(self.skyCurveOriginal, endTime, startTime);
     g_currentMission.environment.ambientCurve.keyframes = self:compressedNightKeyframes(self.ambientCurveOriginal, endTime, startTime);
-    g_currentMission.environment.sunRotCurve.keyframes = self:compressedNightKeyframes(self.sunRotOriginal, endTime, startTime);
+    -- g_currentMission.environment.sunRotCurve.keyframes = self:compressedNightKeyframes(self.sunRotOriginal, endTime, startTime);
     g_currentMission.environment.sunColorCurve.keyframes = self:compressedNightKeyframes(self.sunColorCurveOriginal, endTime, startTime);
 
     print("------------------");
@@ -164,6 +164,8 @@ function Time:compressedNightKeyframes(keyframes, beginNight, endNight)
     end;
     -- END OF FIXME
 
+    print("Found pivot at "..tostring(pivot).." with gap "..tostring(pivotGap));
+
     -- Find old begin and end time of night
     oldNightEnd = keyframes[pivot].time; -- in minutes (early)
     oldNightBegin = keyframes[pivot + 1].time; -- in minutes (late)
@@ -172,7 +174,7 @@ function Time:compressedNightKeyframes(keyframes, beginNight, endNight)
     local compressionEarly = endNight / oldNightEnd;
     local compressionLate = (1440 - beginNight) / (1440 - oldNightBegin);
 
-    -- print("compression early "..tostring(compressionEarly)..", late "..tostring(compressionLate));
+    print("compression early "..tostring(compressionEarly)..", late "..tostring(compressionLate));
 
     -- Rewrite times for early and late
     for i = 1, numFrames do
