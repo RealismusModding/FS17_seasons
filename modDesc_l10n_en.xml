@@ -6,6 +6,6 @@
 
     <texts>
         <!-- Control actions -->
-        <text name="SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
     </texts>
 </l10n>
