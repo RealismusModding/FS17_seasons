@@ -7,9 +7,6 @@
 
 ssFixFruit = {};
 
---do not use print. use self:debugPrint() instead, unless we want the message to be displayed in a release version
-ssFixFruit.debugLevel = 1 -- 0 if you don't want to see debugging messages in the log file / console. 1 to switch on debug statements
-
 --TODO: these values should probably be added into the ssFixFruitData table in the future, but won't bother until the animation from the back of the harvester issue is fixed
 ssFixFruit.rapeWindrowLiterPerSqm = 4; -- based on the assumption that OSR produces about 0.5 of wheat which is 7 in the game and then rounded up. Not sure if this value can be a float so rounded up
 ssFixFruit.soybeanWindrowLiterPerSqm = 3; -- based on the assumption that soybean produces slightly less straw than OSR
@@ -62,13 +59,13 @@ function ssFixFruit:loadMap(name)
      }
 
     -- To update FruitUtil tables for changes to fruit growth state times.
-    self:debugPrint("Starting to change growth")
+    log("Starting to change growth")
 
     for _, fruitType in pairs(ssFixFruitData) do
         self:ssFixFruitTimes(fruitType[1], fruitType["growthStateTime"])
     end;
 
-    self:debugPrint("ssFixFruit .. Changed growth")
+    log("ssFixFruit .. Changed growth")
 
     -- Seb:commeting this out for now until I understand the intentions for ssFixFruitData
     -- To update FruitUtil tables for changes to minHarvesting and minForage allowed growth states.
@@ -87,7 +84,7 @@ function ssFixFruit:loadMap(name)
     --modify straw output for barley (winter barley)
     self:ModifyStrawSwathOutputForFruit(FruitUtil.fruitTypes["barley"].name,self.barleyWindrowLiterPerSqm)
     --Seb: is this a better (safer) way to access a fruitype name? TODO: come back to this in the future. leave commented out now
-    --self:debugPrint("checking something: " .. FruitUtil.fruitIndexToDesc[FruitUtil.FRUITTYPE_BARLEY].name);
+    --log("checking something: " .. FruitUtil.fruitIndexToDesc[FruitUtil.FRUITTYPE_BARLEY].name);
 end;
 
 function ssFixFruit:deleteMap()
@@ -109,42 +106,42 @@ function ssFixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- local file = path.."/g_currentMission2.txt";
             -- table_save(g_currentMission, file)
             -- prototyping
-            -- self:debugPrint("Actual current day: " .. g_currentMission.environment.currentDay);
+            -- log("Actual current day: " .. g_currentMission.environment.currentDay);
             -- local seasonNumber = self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)
-            -- self:debugPrint("Season number: " .. seasonNumber);
-            -- self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Season number: " .. seasonNumber);
+            -- log("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
 
             -- local currentDayTest = 2;
             -- local seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-            -- self:debugPrint("Season number: " .. seasonNumber);
-            -- self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Season number: " .. seasonNumber);
+            -- log("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
 
             -- currentDayTest = 12;
             -- seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-            -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             -- currentDayTest = 23;
             -- seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-            -- self:debugPrint("Current season should be spring. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Current season should be spring. Actual: " .. self.seasons[seasonNumber]);
 
             -- currentDayTest = 39;
             -- seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
-            -- self:debugPrint("Current season should be summer. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Current season should be summer. Actual: " .. self.seasons[seasonNumber]);
 
             -- currentDayTest = 41;
             -- seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
 
-            -- self:debugPrint("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Current season should be autumn. Actual: " .. self.seasons[seasonNumber]);
 
             -- currentDayTest = 51;
             -- seasonNumber = self:CalculateSeasonNumberBasedOn(currentDayTest)
 
-            -- self:debugPrint("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
+            -- log("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
             self.testDay = self.testDay + 1--g_currentMission.ssSeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
 
-            -- self:debugPrint("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
+            -- log("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
     end;
 end;
@@ -158,7 +155,7 @@ function ssFixFruit:draw()
     setTextColor(1,1,1,1);
 
     if (g_currentMission.ssSeasonsUtil == nil) then
-        print("ssSeasonsUtil not found. Aborting")
+        logInfo("ssSeasonsUtil not found. Aborting")
         return;
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
@@ -177,7 +174,7 @@ function ssFixFruit:ssFixFruitTimes(fruitTypeName, fruitTime)
 
     local newTime = fruitTime * 60 * 60 * 1000 -- To convert from hours to milliseconds
         FruitUtil.fruitTypeGrowths[fruitTypeName]["growthStateTime"] = newTime
-         self:debugPrint("FruitGrowthStateTime changed for ".. fruitTypeName .. " to " .. newTime); --changed , to .. as it does not include a new line so it's easier to read in the log
+         log("FruitGrowthStateTime changed for ".. fruitTypeName .. " to " .. newTime); --changed , to .. as it does not include a new line so it's easier to read in the log
 end;
 
 --Seb: Commenting this entire function out since I am not sure what the intention is here currently.
@@ -192,7 +189,7 @@ end;
 -- end;
 
 -- FruitUtil.fruitIndexToDesc[fruitNumber][fruitAttribute] = fruitData
--- -- self:debugPrint("Fruit Attribute Changed: ", fruitAttribute, ", Hours: ", fruitData)
+-- -- log("Fruit Attribute Changed: ", fruitAttribute, ", Hours: ", fruitData)
 --     end;
 -- end;
 
@@ -212,11 +209,11 @@ end;
 --experimenting with adding a swath to rape and soybean
 --TODO: modify function to add swaths to any crop.
 function ssFixFruit:AddStrawSwathsToRapeAndSoybean()
-    --self:debugPrint("Looking up WIndrow fill type 30 expected. Actual: " .. FruitUtil.fruitTypeToWindrowFillType[FruitUtil.fruitTypes["wheat"].index]);
+    --log("Looking up WIndrow fill type 30 expected. Actual: " .. FruitUtil.fruitTypeToWindrowFillType[FruitUtil.fruitTypes["wheat"].index]);
 
     --first we look up the windrow type for wheat
     local wheatWindrowFillType = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_WHEAT]
-    self:debugPrint("Looking up windrow fill type 30 expected. Actual: " .. wheatWindrowFillType);
+    log("Looking up windrow fill type 30 expected. Actual: " .. wheatWindrowFillType);
     --BUG: This adds straw, but animation of the straw coming out from the back of the combine is missing. The straw swaths appear on the ground. Is this as simple as the fact that there is no appropriate texture/particle emitter for this in the game?
     if wheatWindrowFillType ~= nil then
         --rape first
@@ -230,35 +227,21 @@ function ssFixFruit:AddStrawSwathsToRapeAndSoybean()
         FruitUtil.setFruitTypeWindrow(FruitUtil.FRUITTYPE_SOYBEAN, wheatWindrowFillType, self.soybeanWindrowLiterPerSqm);
         --Seb: not entirely sure if this is required or not, but I've noticed that barley uses wheat's straw type and it does have a forage conversion in a dump of FruitUtil.fruitTypes
         FruitUtil.registerFruitTypeWindrowForageWagonConversion(FruitUtil.FRUITTYPE_SOYBEAN, FruitUtil.FRUITTYPE_WHEAT);
-        self:debugPrint("Done adding swaths");
+        log("Done adding swaths");
     else
-        self:errorPrint(self.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND);
+        log(self.MSG_ERROR_WHEAT_WINDROW_NOT_FOUND);
     end;
 end;
 
 -- modify straw swath output for a given fruit to a new value. paramters fruitTypeName, newSwathouput in litres per sqm
 function ssFixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
     if FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm ~= nil then
-        self:debugPrint(fruitTypeName .. "'s old swath value:  " .. FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm);
+        log(fruitTypeName .. "'s old swath value:  " .. FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm);
         FruitUtil.fruitTypes[fruitTypeName].windrowLiterPerSqm = newSwathOutput;
-        self:debugPrint(fruitTypeName .. "'s swath value changed to: " .. newSwathOutput);
+        log(fruitTypeName .. "'s swath value changed to: " .. newSwathOutput);
     else
-        self:debugPrint("Trying to modify swath for a fruit that does not have a swath:" .. fruitTypeName);
+        log("Trying to modify swath for a fruit that does not have a swath:" .. fruitTypeName);
     end;
-end;
-
-function ssFixFruit:debugPrint(message)
-    if self.debugLevel == 1 then
-        print(message)
-    end;
-end;
-
---use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
-function ssFixFruit:errorPrint(message)
-    print("--------");
-    print("Seasons Mod error");
-    print(messsage);
-    print("--------");
 end;
 
 --

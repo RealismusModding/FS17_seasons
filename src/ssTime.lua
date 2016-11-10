@@ -143,7 +143,7 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
     -- FIXME: move this all to somewhere else, it all needs to be done just once.
     if keyframes[1].time ~= 0 or keyframes[numFrames].time ~= 1440 then
         -- Todo: make this a UTIL
-        print("[Seasons] Could not change keyframes due to unknown keyframes format")
+        logInfo("Could not change keyframes due to unknown keyframes format")
         return
     end
 
@@ -160,7 +160,7 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
     end
 
     if not pivot then
-        print("[Seasons] Could not find pivot")
+        logInfo("Could not find pivot")
         return
     end
     -- END OF FIXME

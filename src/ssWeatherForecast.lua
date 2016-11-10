@@ -6,7 +6,6 @@
 --
 
 ssWeatherForecast = {}
-ssWeatherForecast.debugLevel = 1
 ssWeatherForecast.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherForecast.forecastLength = 7
 ssWeatherForecast.lastForecastPrediction = 0
@@ -33,36 +32,36 @@ function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
                             --to avoid having to check for key press every frame
 
         -- if g_currentMission.FixFruit ~= nil then
-        --     self:debugPrint("FixFruit active: " .. tostring(g_currentMission.FixFruit.active))
+        --     log("FixFruit active: " .. tostring(g_currentMission.FixFruit.active))
         --     if g_currentMission.FixFruit.active == true then
         --         g_currentMission.FixFruit.active = false
         --     else
         --         g_currentMission.FixFruit.active = true
         --     end
         -- else
-        --     self:debugPrint("Fixfruit not found")
+        --     log("Fixfruit not found")
         -- end
 
         --looking up weather
-    --     self:debugPrint("Looking up weather")
+    --     log("Looking up weather")
 
-        --  self:debugPrint("Game Day : " .. g_currentMission.SeasonsUtil:currentDayNumber())
+        --  log("Game Day : " .. g_currentMission.SeasonsUtil:currentDayNumber())
         --  print_r(g_currentMission.environment.weatherTemperaturesNight)
         --  print_r(g_currentMission.environment.weatherTemperaturesDay)
     --     for index, nightTemp in ipairs(g_currentMission.environment.weatherTemperaturesNight) do
-    --         self:debugPrint("Night Temp: " .. nightTemp)
+    --         log("Night Temp: " .. nightTemp)
     --     end
 
     --     for index, dayTemp in ipairs(g_currentMission.environment.weatherTemperaturesDay) do
-    --         self:debugPrint("Day Temp: " .. dayTemp .. " Index: " .. tostring(index))
+    --         log("Day Temp: " .. dayTemp .. " Index: " .. tostring(index))
     --     end
 
     --  print_r(g_currentMission.environment.rains)
-    -- self:debugPrint("Game Day : " .. g_currentMission.ssSeasonsUtil:currentDayNumber())
+    -- log("Game Day : " .. g_currentMission.ssSeasonsUtil:currentDayNumber())
     -- print_r(g_currentMission.environment.rains)
 
     --     for index, weatherPrediction in ipairs(g_currentMission.environment.rains) do
-    --         self:debugPrint("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index))
+    --         log("Bad weather predicted for day: " .. tostring(weatherPrediction.startDay) .. " weather type: " .. weatherPrediction.rainTypeId .. " index: " .. tostring(index))
     --     end
 
     --     print_r(g_currentMission.environment.rainTypes)
@@ -106,7 +105,7 @@ end
 
 function ssWeatherForecast:buildForecast()
     local startDayNum = g_currentMission.ssSeasonsUtil:currentDayNumber()
-    self:debugPrint("Building forecast based on today day num: " .. startDayNum)
+    log("Building forecast based on today day num: " .. startDayNum)
 
     -- Empty the table
     self.forecast = {}
@@ -127,7 +126,7 @@ function ssWeatherForecast:buildForecast()
 
     --now we check through the rains table to find bad weather
     -- for index, rain in ipairs(g_currentMission.environment.rains) do
-    --     self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+    --     log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
     --     if rain.startDay > self.forecastLength+1 then
     --         break
     --     end
@@ -144,7 +143,7 @@ function ssWeatherForecast:getWeatherStateForDay(dayNumber)
     local weatherState = "sun"
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        self:debugPrint("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
         if rain.startDay > dayNumber then
             break
         end
@@ -156,21 +155,6 @@ function ssWeatherForecast:getWeatherStateForDay(dayNumber)
 
     return weatherState
 
-end
-
-
---use to show errors in the log file. These are there to inform the user of issues, so will stay in a release version
-function ssWeatherForecast:errorPrint(message)
-    print("--------")
-    print("ssWeatherForecast Mod error")
-    print(messsage)
-    print("--------")
-end
-
-function ssWeatherForecast:debugPrint(message)
-    if self.debugLevel == 1 then
-        print(message)
-    end
 end
 
 function print_r(t)
