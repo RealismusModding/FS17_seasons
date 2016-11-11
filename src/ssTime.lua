@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------------------------------
--- FIXFRUIT SCRIPT
+-- TIME SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  To adjust fruit properties.
--- Authors:  Akuenzi, ian898, Jarvixes, theSeb
+-- Purpose:  To adjust the day/night system
+-- Authors:  Jarvixes
 --
 
 ssTime = {}
@@ -22,10 +22,13 @@ function ssTime:loadMap(name)
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()
 
+    g_currentMission.environment:addDayChangeListener(self);
+
     g_currentMission.missionInfo.timeScale = 120*6
 end
 
 function ssTime:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self);
 end
 
 function ssTime:mouseEvent(posX, posY, isDown, isUp, button)
@@ -38,14 +41,6 @@ function ssTime:draw()
 end
 
 function ssTime:update(dt)
-    -- Predict the weather once a day, for a whole week
-    -- FIXME(jos): is this the best solution? How about weather over a long period of time, like, one season? Or a year?
-    -- FIXME: What is g_currentMission.environment.dayChangeListeners? maybe we can use that
-    local today = g_currentMission.ssSeasonsUtil:currentDayNumber()
-    if (self.lastUpdate < today) then
-        self:adaptTime()
-    end
-
     -- Visual
     g_currentMission:addExtraPrintText("Light timer '"..g_currentMission.environment.lightTimer..string.format(", sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)))
 
@@ -189,30 +184,11 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
     return newFrames
 end
 
--- http://lua-users.org/wiki/CopyTable
-function deepCopy(obj, seen)
-    local orig_type = type(obj)
+function ssTime:dayChanged()
+    logInfo("Day CHANGED");
 
-    if orig_type ~= 'table' then return obj end
-    if seen and seen[obj] then return seen[obj] end
-
-    local s = seen or {}
-    local res = setmetatable({}, getmetatable(obj))
-    s[obj] = res
-
-    for k, v in pairs(obj) do
-        res[deepCopy(k, s)] = deepCopy(v, s)
-    end
-
-    return res
-end
-
-function arrayLength(arr)
-    local n = 0
-    for i = 1, #arr do
-        n = n + 1
-    end
-    return n
+    -- Update the time of the day
+    self:adaptTime();
 end
 
 addModEventListener(ssTime)
