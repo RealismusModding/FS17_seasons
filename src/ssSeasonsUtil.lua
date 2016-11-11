@@ -16,8 +16,6 @@ ssSeasonsUtil.seasonsInYear = 4
 ssSeasonsUtil.daysInSeason = 10
 
 function ssSeasonsUtil:loadMap(name)
-     g_currentMission.ssSeasonsUtil = self
-
      -- FIXME(jos): load daysInSeason from savegame
      -- FIXME(jos): load weekdays, weekdayshsort and seasons from i18n
 end

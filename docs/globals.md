@@ -77,3 +77,18 @@ timeScale // Timescale, 1 = realtime, 500 = fast
    27,
 }
 ```
+
+# Others (denv 0)
+
+g_savegamePath
+g_screenHeight
+g_colorBg
+g_gameSettings
+g_i18n
+g_screenWidth
+g_aspectScaleX
+g_gameVersion
+g_referenceScreenWidth
+g_uiDebugEnabled
+g_savegameXML
+g_gui

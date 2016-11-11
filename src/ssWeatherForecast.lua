@@ -11,10 +11,8 @@ ssWeatherForecast.forecastLength = 7;
 ssWeatherForecast.modDirectory = g_currentModDirectory;
 
 function ssWeatherForecast:loadMap(name)
-    print("ssWeatherForecast mod loading");
-    g_currentMission.ssWeatherForecast = self;
-
     g_currentMission.environment:addDayChangeListener(self);
+    self:buildForecast();
 
     self.hud = {};
     self.hud.visible = true;
@@ -51,7 +49,7 @@ function ssWeatherForecast:loadMap(name)
 
 end;
 
-function ssEconomy:deleteMap()
+function ssWeatherForecast:deleteMap()
 end
 
 function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
@@ -116,7 +114,7 @@ function ssWeatherForecast:draw()
 end;
 
 function ssWeatherForecast:buildForecast()
-    local startDayNum = g_currentMission.ssSeasonsUtil:currentDayNumber();
+    local startDayNum = ssSeasonsUtil:currentDayNumber();
     log("Building forecast based on today day num: " .. startDayNum);
 
     -- Empty the table
@@ -126,7 +124,7 @@ function ssWeatherForecast:buildForecast()
         local oneDayForecast = {};
 
         oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
-        oneDayForecast.weekDay =  g_currentMission.ssSeasonsUtil.weekDays[g_currentMission.ssSeasonsUtil:dayOfWeek(startDayNum + n)];
+        oneDayForecast.weekDay =  ssSeasonsUtil.weekDays[ssSeasonsUtil:dayOfWeek(startDayNum + n)];
 
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n+1];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n+1];
@@ -168,7 +166,7 @@ function ssWeatherForecast:getWeatherStateForDay(dayNumber)
     return weatherState;
 end
 
-function ssTime:dayChanged()
+function ssWeatherForecast:dayChanged()
     self:buildForecast();
 end
 

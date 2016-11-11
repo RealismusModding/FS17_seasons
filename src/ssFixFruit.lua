@@ -39,9 +39,8 @@ ssFixFruit.testDay = 1;
 --                         }
 
 function ssFixFruit:loadMap(name)
-    --experimenting with getting mods to recognise each other
-    g_currentMission.ssFixFruit = self;
     self.active = true;
+
     --Seb: changed variable name and appropriate camel case. variables should start with lower case letter. Changed all to 2 hours for the moment for easier debugging when checking if things are working
     local ssFixFruitData = {
         {"sugarBeet",   growthStateTime=2, minHarvestingGrowthState=9,  minForageGrowthState=9},
@@ -139,7 +138,7 @@ function ssFixFruit:keyEvent(unicode, sym, modifier, isDown)
             -- log("Current season should be winter. Actual: " .. self.seasons[seasonNumber]);
 
             --testing the display
-            self.testDay = self.testDay + 1--g_currentMission.ssSeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
+            self.testDay = self.testDay + 1--ssSeasonsUtil.daysInSeason; -- just testing the display by incrementing to the next season
 
             -- log("Message from weatherForecast: " .. g_currentMission.WeatherForecast.messageToOtherMod)
         end;
@@ -154,13 +153,13 @@ function ssFixFruit:draw()
     -- Ideally this should be implemented into the hud somehow, possibly with a pretty icon to show the season. It will need to scale along with the hud scaling setting.
     setTextColor(1,1,1,1);
 
-    if (g_currentMission.ssSeasonsUtil == nil) then
+    if (ssSeasonsUtil == nil) then
         logInfo("ssSeasonsUtil not found. Aborting")
         return;
     else
         --renderText(0.94, 0.98, 0.02, self.seasons[self:CalculateSeasonNumberBasedOn(g_currentMission.environment.currentDay)]);
         --testing (Above code works)
-        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. g_currentMission.ssSeasonsUtil:seasonName() .. " Day: " .. g_currentMission.ssSeasonsUtil:currentDayNumber() .. " (" .. g_currentMission.ssSeasonsUtil:dayName() .. ")";
+        local textToDisplay = "Seasons mod alpha v0.0.1 Season: " .. ssSeasonsUtil:seasonName() .. " Day: " .. ssSeasonsUtil:currentDayNumber() .. " (" .. ssSeasonsUtil:dayName() .. ")";
         renderText(0.65, 0.98, 0.02, textToDisplay);
     end;
 end;

@@ -6,11 +6,8 @@
 --
 
 ssTime = {}
-ssTime.lastUpdate = 0
 
 function ssTime:loadMap(name)
-    g_currentMission.ssTime = self
-
     self:copyDefaultKeyframes()
 
     -- Calculate some constants for the daytime calculator
@@ -25,6 +22,14 @@ function ssTime:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
 
     g_currentMission.missionInfo.timeScale = 120*6
+
+
+    -- local file = io.open(ssSeasonsMod.modDir .. "docs/g_currentMission.json", "w")
+    -- local json = jsonEncode(g_currentMission);
+    -- -- local json = jsonEncode(_G);
+    -- print("LENGTH " .. json:len())
+    -- file:write(json)
+    -- io.close(file)
 end
 
 function ssTime:deleteMap()
@@ -42,10 +47,10 @@ end
 
 function ssTime:update(dt)
     -- Visual
-    g_currentMission:addExtraPrintText("Light timer '"..g_currentMission.environment.lightTimer..string.format(", sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)))
+    g_currentMission:addExtraPrintText(string.format("sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)))
 
-    if g_currentMission.ssSeasonsUtil then
-        g_currentMission:addExtraPrintText("Season '"..g_currentMission.ssSeasonsUtil:seasonName().."', day "..g_currentMission.ssSeasonsUtil:currentDayNumber())
+    if ssSeasonsUtil then
+        g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
     end
 end
 
@@ -58,7 +63,7 @@ function ssTime:adaptTime()
     log("------------------")
 
     -- All local values are in minutes
-    local startTime, endTime = self:calculateStartEndOfDay(g_currentMission.ssSeasonsUtil:currentDayNumber())
+    local startTime, endTime = self:calculateStartEndOfDay(ssSeasonsUtil:currentDayNumber())
     -- local startTime, endTime = self:calculateStartEndOfDay(35) -- 15 = midsummer, 35 = midwinter
 
     log(string.format("day %f -> %f", startTime/60, endTime/60))
@@ -76,13 +81,13 @@ function ssTime:adaptTime()
 
     log("------------------")
 
-    self.lastUpdate = g_currentMission.ssSeasonsUtil:currentDayNumber()
+    self.lastUpdate = ssSeasonsUtil:currentDayNumber()
 end
 
 function ssTime:calculateStartEndOfDay(dayNumber)
     local dayStart, dayEnd, julianDay, theta, eta
 
-    julianDay = g_currentMission.ssSeasonsUtil:julianDay(dayNumber)
+    julianDay = ssSeasonsUtil:julianDay(dayNumber)
 
     -- Call radii for current day
     theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
