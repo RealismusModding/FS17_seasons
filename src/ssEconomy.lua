@@ -15,7 +15,6 @@ function ssEconomy:loadMap(name)
 end
 
 function ssEconomy:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self);
 end
 
 function ssEconomy:mouseEvent(posX, posY, isDown, isUp, button)

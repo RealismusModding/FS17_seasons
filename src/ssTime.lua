@@ -28,7 +28,7 @@ function ssTime:loadMap(name)
 end
 
 function ssTime:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self);
+    -- g_currentMission.environment:removeDayChangeListener(self);
 end
 
 function ssTime:mouseEvent(posX, posY, isDown, isUp, button)

@@ -52,7 +52,6 @@ function ssWeatherForecast:loadMap(name)
 end;
 
 function ssEconomy:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self);
 end
 
 function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
