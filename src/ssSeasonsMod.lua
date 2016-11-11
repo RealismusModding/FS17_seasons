@@ -35,7 +35,8 @@ local srcFiles = {
     "ssSeasonsUtil.lua",
     "ssTime.lua",
     "ssWeatherForecast.lua",
-    "ssFixFruit.lua"
+    "ssFixFruit.lua",
+    "ssEconomy.lua"
 }
 
 if modItem.isDirectory then

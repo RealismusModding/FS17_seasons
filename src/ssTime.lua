@@ -185,8 +185,6 @@ function ssTime:compressedNightKeyframes(keyframes, beginNight, endNight)
 end
 
 function ssTime:dayChanged()
-    logInfo("Day CHANGED");
-
     -- Update the time of the day
     self:adaptTime();
 end

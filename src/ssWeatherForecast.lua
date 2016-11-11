@@ -8,12 +8,13 @@
 ssWeatherForecast = {};
 ssWeatherForecast.forecast = {}; --day of week, low temp, high temp, weather condition
 ssWeatherForecast.forecastLength = 7;
-ssWeatherForecast.lastForecastPrediction = 0;
 ssWeatherForecast.modDirectory = g_currentModDirectory;
 
 function ssWeatherForecast:loadMap(name)
     print("ssWeatherForecast mod loading");
     g_currentMission.ssWeatherForecast = self;
+
+    g_currentMission.environment:addDayChangeListener(self);
 
     self.hud = {};
     self.hud.visible = true;
@@ -50,26 +51,20 @@ function ssWeatherForecast:loadMap(name)
 
 end;
 
-function ssWeatherForecast:deleteMap()
-end;
+function ssEconomy:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self);
+end
 
 function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
 end;
 
 function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
-
-    self.hud.visible = not self.hud.visible;
+        self.hud.visible = not self.hud.visible;
+    end
 end
 
 function ssWeatherForecast:update(dt)
-    -- Predict the weather once a day, for a whole week
-    -- FIXME(jos): is this the best solution? How about weather over a long period of time, like, one season? Or a year?
-    local today = g_currentMission.ssSeasonsUtil:currentDayNumber();
-    if (self.lastForecastPrediction < today) then
-        self:buildForecast();
-        self.lastForecastPrediction = today;
-    end
 end
 
 function ssWeatherForecast:draw()
@@ -152,27 +147,30 @@ function ssWeatherForecast:buildForecast()
     --     self.forecast[foreCastDayIndex].weatherState = rain.rainTypeId
     -- end
 
-    print_r(self.forecast)
+    print_r(self.forecast);
 end
 
 -- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
 --perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
 function ssWeatherForecast:getWeatherStateForDay(dayNumber)
-    local weatherState = "sun"
+    local weatherState = "sun";
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
         if rain.startDay > dayNumber then
-            break
+            break;
         end
         if (rain.startDay == dayNumber) then
-            weatherState = rain.rainTypeId
+            weatherState = rain.rainTypeId;
         end
 
     end
 
-    return weatherState
+    return weatherState;
+end
 
+function ssTime:dayChanged()
+    self:buildForecast();
 end
 
 addModEventListener(ssWeatherForecast)
