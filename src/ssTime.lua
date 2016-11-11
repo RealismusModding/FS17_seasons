@@ -22,14 +22,6 @@ function ssTime:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
 
     g_currentMission.missionInfo.timeScale = 120*6
-
-
-    -- local file = io.open(ssSeasonsMod.modDir .. "docs/g_currentMission.json", "w")
-    -- local json = jsonEncode(g_currentMission);
-    -- -- local json = jsonEncode(_G);
-    -- print("LENGTH " .. json:len())
-    -- file:write(json)
-    -- io.close(file)
 end
 
 function ssTime:deleteMap()
