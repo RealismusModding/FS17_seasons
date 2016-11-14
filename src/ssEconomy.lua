@@ -6,7 +6,7 @@
 --
 
 ssEconomy = {}
-ssEconomy.aiPricePerHour = 2000 * 60 * 60 * 1000;
+ssEconomy.aiPricePerHour = 2000;
 
 function ssEconomy:loadMap(name)
     g_currentMission.ssEconomy = self
