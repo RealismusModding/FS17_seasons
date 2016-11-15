@@ -80,6 +80,8 @@ function ssTime:adaptTime()
     env.ambientCurve = self:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.sunRotCurve = self:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.sunColorCurve = self:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
+    env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
+
 
     self.lastUpdate = ssSeasonsUtil:currentDayNumber()
 end
@@ -227,6 +229,35 @@ function ssTime:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
 end
 
 -- dustDensity
+
+function ssTime:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
+    local curve = AnimCurve:new(linearInterpolator4) -- degree 2
+
+    local ex = function(rgb)
+        return (rgb/255)^2.2
+    end
+
+    local morningStep = (dayStart - nightEnd) / 5
+    local eveningStep = (nightStart - dayEnd) / 5
+
+    -- Nothing at night (darkness)
+    -- When dawn, go red-ish. At 8AM go blue (compensate), at 9AM blue but less intense
+    -- Do reverse in the evening,
+    curve:addKeyframe({x = 0, y = 0, z = 0, w = 0.003, time = 0 * 60}) -- night
+    curve:addKeyframe({x = ex(010), y = ex(012), z = ex(015), w = 0.0008, time = (nightEnd + 1 * morningStep) * 60})
+    curve:addKeyframe({x = ex(085), y = ex(060), z = ex(055), w = 0.0006, time = (nightEnd + 2 * morningStep) * 60})
+    curve:addKeyframe({x = ex(085), y = ex(070), z = ex(065), w = 0.0005, time = (nightEnd + 3 * morningStep) * 60})
+    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0006, time = (nightEnd + 4 * morningStep) * 60})
+    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0003, time = dayStart * 60})
+
+    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0003, time = dayEnd * 60})
+    curve:addKeyframe({x = ex(070), y = ex(045), z = ex(030), w = 0.0004, time = (dayEnd + 2 * eveningStep) * 60})
+    curve:addKeyframe({x = ex(045), y = ex(040), z = ex(050), w = 0.0006, time = (dayEnd + 3 * eveningStep) * 60})
+    curve:addKeyframe({x = ex(020), y = ex(020), z = ex(030), w = 0.0008, time = (dayEnd + 4 * eveningStep) * 60})
+    curve:addKeyframe({x = 0, y = 0, z = 0, w = 0.003, time = nightStart * 60}) -- night
+
+    return curve
+end
 
 function ssTime:dayChanged()
     -- Update the time of the day
