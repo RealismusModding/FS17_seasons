@@ -54,8 +54,9 @@ function ssTime:adaptTime()
 
     -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
-    dayStart = math.min(dayStart, 11.99) -- dayStart < 12
-    dayEnd = math.max(dayEnd, 12.01) -- dayEnd > 12
+    if dayStart == dayEnd then
+        dayEnd = dayEnd + 0.01
+    end
     nightStart = math.min(nightStart, 22.99) -- nightStart < 23
 
     -- GIANTS values:
@@ -122,7 +123,7 @@ function ssTime:_calculateDay(p, eta, julianDay)
     -- Daylight saving between 1 April and 31 October as an approcimation
     -- local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
     -- offset = hasDST and 1 or 0
-    offset = 1 -- always keep winter time (no summer time)
+    offset = 1
 
     timeStart = 12 - D / 2 + offset
     timeEnd = 12 + D / 2 + offset
@@ -220,7 +221,13 @@ function ssTime:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     curve:addKeyframe({v = Utils.degToRad( 45), time = nightEnd * 60}) -- 15 per hour
     curve:addKeyframe({v = Utils.degToRad( 45), time = (nightEnd + 0.01) * 60})
     curve:addKeyframe({v = Utils.degToRad(-70), time = (nightEnd + 0.02) * 60}) -- switch to Sun
-    curve:addKeyframe({v = Utils.degToRad(  0), time = 12.00 * 60}) -- rotate over the day
+
+    if dayStart > 12.0 then
+        curve:addKeyframe({v = Utils.degToRad(0), time = dayStart * 60}) -- rotate over the day
+    else
+        curve:addKeyframe({v = Utils.degToRad(0), time = 12.00 * 60}) -- rotate over the day
+    end
+
     curve:addKeyframe({v = Utils.degToRad( 70), time = (nightStart + 0.01) * 60}) -- end rotation of sun
     curve:addKeyframe({v = Utils.degToRad(-35), time = (nightStart + 0.02) * 60}) -- switch to moon light
     curve:addKeyframe({v = Utils.degToRad(-15), time = 24.00 * 60}) -- 10 per hour
