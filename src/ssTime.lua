@@ -21,7 +21,7 @@ function ssTime:loadMap(name)
 
     g_currentMission.environment:addDayChangeListener(self);
 
-    g_currentMission.missionInfo.timeScale = 120*6
+    -- g_currentMission.missionInfo.timeScale = 120*6
 end
 
 function ssTime:deleteMap()

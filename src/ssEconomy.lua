@@ -9,11 +9,47 @@ ssEconomy = {}
 ssEconomy.aiPricePerHour = 2000;
 
 function ssEconomy:loadMap(name)
-    g_currentMission.ssEconomy = self
-
     g_currentMission.environment:addDayChangeListener(self);
 
     self:fixHiredWorkerWages();
+
+    -- logInfo("LIFETIME_OPERATINGTIME_RATIO " .. tostring(EconomyManager.LIFETIME_OPERATINGTIME_RATIO))
+    -- logInfo("MAX_DAILYUPKEEP_MULTIPLIER " .. tostring(EconomyManager.MAX_DAILYUPKEEP_MULTIPLIER))
+    --[[
+    CONFIG_CHANGE_PRICE
+    PRICE_MULTIPLIER
+    LIFETIME_OPERATINGTIME_RATIO
+    MAX_DAILYUPKEEP_MULTIPLIER
+    PRICE_DROP_MIN_PERCENT
+    PER_DAY_LEASING_FACTOR
+    DIRECT_SELL_MULTIPLIER
+    COST_MULTIPLIER
+    DEFAULT_LEASING_DEPOSIT_FACTOR
+    MAX_GREAT_DEMANDS
+
+    MONEY_TYPE_PROPERTY_INCOME
+    MONEY_TYPE_VEHICLE_RUNNING_COSTS
+    MONEY_TYPE_PROPERTY_MAINTENANCE
+    MONEY_TYPE_ANIMAL_UPKEEP
+    MONEY_TYPE_LOAN_INTEREST
+    MONEY_TYPE_LEASING_COSTS
+
+
+    getPricePerLiter
+    getPriceMultiplier
+    --]]
+
+    --[[for k in pairs(StoreItemsUtil) do
+        print(k)
+    end
+
+    for k,v in pairs(StoreItemsUtil.storeItems) do
+        print(k .. ": ")
+        print_r(v)
+    end
+    --]]
+    --getCosts
+    --local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
 end
 
 function ssEconomy:deleteMap()
