@@ -228,8 +228,6 @@ function ssTime:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
--- dustDensity
-
 function ssTime:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 

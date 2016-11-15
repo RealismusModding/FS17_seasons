@@ -76,7 +76,7 @@ function ssSeasonsUtil:julianDay(dayNumber)
     dayInSeason = dayNumber % self.daysInSeason
     partInSeason = dayInSeason / self.daysInSeason
 
-    return math.floor(starts[season] + partInSeason * 30)
+    return math.floor(starts[season] + partInSeason * 91) % 365
 end
 
 function ssSeasonsUtil:julanDayToDayNumber(julianDay)
