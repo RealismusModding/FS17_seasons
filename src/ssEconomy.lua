@@ -7,6 +7,18 @@
 
 ssEconomy = {}
 ssEconomy.aiPricePerHour = 2000;
+ssEconomy.settingsProperties = { "aiPricePerHour" }
+
+
+function ssEconomy.preSetup()
+    ssSettings.add("economy", ssEconomy)
+end
+
+function ssEconomy.setup()
+    ssSettings.load("economy", ssEconomy)
+
+    addModEventListener(ssEconomy)
+end
 
 function ssEconomy:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
@@ -90,6 +102,3 @@ end
 function ssEconomy:unfixHiredWorkerWages()
     getfenv(0)["getXMLFloat"] = self._origGetXMLFloat;
 end
-
-
-addModEventListener(ssEconomy)

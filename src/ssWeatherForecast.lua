@@ -10,6 +10,13 @@ ssWeatherForecast.forecast = {}; --day of week, low temp, high temp, weather con
 ssWeatherForecast.forecastLength = 7;
 ssWeatherForecast.modDirectory = g_currentModDirectory;
 
+function ssWeatherForecast.preSetup()
+end
+
+function ssWeatherForecast.setup()
+    addModEventListener(ssWeatherForecast)
+end
+
 function ssWeatherForecast:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
     self:buildForecast();
@@ -169,5 +176,3 @@ end
 function ssWeatherForecast:dayChanged()
     self:buildForecast();
 end
-
-addModEventListener(ssWeatherForecast)

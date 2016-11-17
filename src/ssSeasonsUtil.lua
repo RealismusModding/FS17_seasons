@@ -9,11 +9,23 @@ ssSeasonsUtil = {}
 
 ssSeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
 ssSeasonsUtil.weekDaysShort = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}
-ssSeasonsUtil.daysInWeek = 7
 ssSeasonsUtil.seasons = {[0]="Spring", "Summer", "Autumn", "Winter"}
-ssSeasonsUtil.seasonsInYear = 4
 
+ssSeasonsUtil.daysInWeek = 7
+ssSeasonsUtil.seasonsInYear = 4
 ssSeasonsUtil.daysInSeason = 10
+
+ssSeasonsUtil.settingsProperties = { "daysInWeek", "seasonsInYear", "daysInSeason" }
+
+function ssSeasonsUtil.preSetup()
+    ssSettings.add("seasons", ssSeasonsUtil)
+end
+
+function ssSeasonsUtil.setup()
+    ssSettings.load("seasons", ssSeasonsUtil)
+
+    addModEventListener(ssSeasonsUtil)
+end
 
 function ssSeasonsUtil:loadMap(name)
      -- FIXME(jos): load daysInSeason from savegame
@@ -122,5 +134,3 @@ end
 function ssSeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek
 end
-
-addModEventListener(ssSeasonsUtil)

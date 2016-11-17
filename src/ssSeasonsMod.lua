@@ -39,6 +39,7 @@ local srcFiles = {
     "ssEconomy.lua"
 }
 
+-- Load all scripts
 if modItem.isDirectory then
     for i = 1, #srcFiles do
         local srcFile = srcFolder .. srcFiles[i]
@@ -60,25 +61,53 @@ else
 end
 
 function ssSeasonsMod.loadMap(...)
-    log("Loading mod...")
+    log("ssSeasonsMod.loadMap()")
+
+    return ssSeasonsMod.origLoadMap(...)
 end
 
-function ssSeasonsMod:deleteMap()
+function ssSeasonsMod.loadMapFinished(...)
+    log("ssSeasonsMod.loadMapFinished()")
+
+    -- Before loading the savegame, allow classes to set their default values
+    -- and let the settings system know that they need values
+    ssSeasonsUtil.preSetup()
+    ssTime.preSetup()
+    ssEconomy.preSetup()
+    ssWeatherForecast.preSetup()
+    ssFixFruit.preSetup()
+
+    -- Load all requested values
+    ssSettings.loadFromSavegame()
+
+    -- Now read those values and set up the classes
+    ssSeasonsUtil.setup()
+    ssTime.setup()
+    ssEconomy.setup()
+    ssWeatherForecast.setup()
+    ssFixFruit.setup()
+
+
+    ssSeasonsMod.enabled = true
+
+
+    return ssSeasonsMod.origLoadMapFinished(...)
 end
 
-function ssSeasonsMod:mouseEvent(posX, posY, isDown, isUp, button)
+function ssSeasonsMod.delete(...)
+    log("ssSeasonsMod.delete()")
+
+    return ssSeasonsMod.origDelete(...)
 end
 
-function ssSeasonsMod:keyEvent(unicode, sym, modifier, isDown)
-end
+ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
+ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
+ssSeasonsMod.origDelete = FSBaseMission.delete
 
-function ssSeasonsMod:update(dt)
-end
+FSBaseMission.loadMap = ssSeasonsMod.loadMap
+FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
+FSBaseMission.delete = ssSeasonsMod.delete
 
-function ssSeasonsMod:draw()
-end
-
-addModEventListener(ssSeasonsMod)
 
 ------------- Useful global functions ---------------
 

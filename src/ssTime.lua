@@ -7,10 +7,22 @@
 
 ssTime = {}
 
+ssTime.latitude = 51.9
+ssTime.settingsProperties = { "latitude" }
+
+function ssTime.preSetup()
+    ssSettings.add("time", ssTime)
+end
+
+function ssTime.setup()
+    ssSettings.load("time", ssTime)
+
+    addModEventListener(ssTime)
+end
+
 function ssTime:loadMap(name)
     -- Calculate some constants for the daytime calculator
-    local L = 51.9 -- FIXME(jos): Get from savegame
-    self.sunRad = L * math.pi / 180
+    self.sunRad = ssTime.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
     self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for 'daylight' assumed to be one degree above horizon
 
@@ -268,5 +280,3 @@ function ssTime:dayChanged()
     -- Update the time of the day
     self:adaptTime();
 end
-
-addModEventListener(ssTime)

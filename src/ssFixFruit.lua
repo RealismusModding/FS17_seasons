@@ -38,6 +38,13 @@ ssFixFruit.testDay = 1;
 --         {"soybean", 1},
 --                         }
 
+function ssFixFruit.preSetup()
+end
+
+function ssFixFruit.setup()
+    addModEventListener(ssFixFruit);
+end
+
 function ssFixFruit:loadMap(name)
     self.active = true;
 
@@ -242,5 +249,3 @@ function ssFixFruit:ModifyStrawSwathOutputForFruit(fruitTypeName,newSwathOutput)
         log("Trying to modify swath for a fruit that does not have a swath:" .. fruitTypeName);
     end;
 end;
-
-addModEventListener(ssFixFruit);
