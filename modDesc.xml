@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="32">
-    <author>Akuenzi, theSeb, Jarvixes (Rahkiin), ian898</author>
+<modDesc descVersion="33">
+    <author>Realismus Modding</author>
+    <contributors>Akuenzi, theSeb, Jarvixes (Rahkiin), ian898, reallogger</contributors>
     <version>1.0.0.0</version>
 
     <title>
@@ -15,7 +16,11 @@
 
     <!-- <multiplayer supported="true" /> -->
 
-    <l10n filenamePrefix="modDesc_l10n" />
+    <l10n>
+        <text name="SEASONS_SHOW_WF">
+            <en>Seasons: Show weather forecast</en>
+        </text>
+    </l10n>
 
     <extraSourceFiles>
         <sourceFile filename="src/ssSeasonsMod.lua" />
