@@ -72,6 +72,13 @@ function ssRepairable:updateTick(dt)
 
         self.ssPlayerInRange = distance < 3.5
     end
+
+    -- Calculate cumulative dirt
+    if self.getDirtAmount ~= nil then
+        local factor = self:getIsOperating() and 1 or 0.1
+
+        self.ssCumulativeDirt = self.ssCumulativeDirt + self:getDirtAmount() * dt * factor
+    end
 end
 
 function ssRepairable:update(dt)
@@ -88,12 +95,6 @@ function ssRepairable:update(dt)
         else
             g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), ssSeasonsUtil.daysInSeason - daysSinceLastRepair))
         end
-    end
-
-    -- Calculate cumulative dirt
-    if self:getIsOperating() and self.getDirtAmount ~= nil then
-        -- self:getDirtAmount() is a value from 0-1, so cum, it can be 60*60*1000*24 max.
-        self.ssCumulativeDirt = self.ssCumulativeDirt + self:getDirtAmount() * dt
     end
 end
 
