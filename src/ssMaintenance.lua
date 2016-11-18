@@ -8,7 +8,7 @@
 ssMaintenance = {}
 ssMaintenance.LIFETIME_FACTOR = 5
 ssMaintenance.REPAIR_FACTOR = 1
-ssMaintenance.DIRT_FACTOR = 0.2 * 0.1 * (1 / 60 / 60 / 1000 / 24) -- Max value is 86400000. FIXME: do something
+ssMaintenance.DIRT_FACTOR = 0.2 * (1 / 60 / 60 / 1000 / 24) -- Max value is 86400000. FIXME: do something
 
 ssMaintenance.settingsProperties = {}
 
