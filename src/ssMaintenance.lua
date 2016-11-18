@@ -7,8 +7,9 @@
 
 ssMaintenance = {}
 ssMaintenance.LIFETIME_FACTOR = 5
-ssMaintenance.REPAIR_FACTOR = 1
-ssMaintenance.DIRT_FACTOR = 0.2 * (1 / 60 / 60 / 1000 / 24) -- Max value is 86400000. FIXME: do something
+ssMaintenance.REPAIR_NIGHT_FACTOR = 1
+ssMaintenance.REPAIR_SHOP_FACTOR = 0.5
+ssMaintenance.DIRT_FACTOR = 0.2
 
 ssMaintenance.settingsProperties = {}
 
@@ -95,15 +96,17 @@ function ssMaintenance:repairCost(vehicle, storeItem, operatingTime)
     end
 end
 
-function ssMaintenance:maintenanceCost(vehicle, storeItem)
+function ssMaintenance:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = vehicle.ssYesterdayOperatingTime / 1000 / 60 / 60
     local operatingTime = vehicle.operatingTime / 1000 / 60 / 60
     local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
+    local repairFactor = isRepair and ssMaintenance.REPAIR_SHOP_FACTOR or ssMaintenance.REPAIR_NIGHT_FACTOR
 
     -- Calculate the amount of dirt on the vehicle, on average
     local avgDirtAmount = 0
     if operatingTime ~= prevOperatingTime then
-        avgDirtAmount = vehicle.ssCumulativeDirt / math.min(operatingTime - prevOperatingTime, 24)
+        -- Cum dirt is per ms, while the operating times are in hours.
+        avgDirtAmount = (vehicle.ssCumulativeDirt / 1000 / 60 / 60) / math.min(operatingTime - prevOperatingTime, 24)
     end
 
     -- Calculate the repair costs
@@ -112,8 +115,8 @@ function ssMaintenance:maintenanceCost(vehicle, storeItem)
 
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
-    if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason then
-        maintenanceCost = (newRepairCost - prevRepairCost) * ssMaintenance.REPAIR_FACTOR * (0.8 + ssMaintenance.DIRT_FACTOR * avgDirtAmount ^ 2)
+    if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason or isRepair then
+        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssMaintenance.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
     return maintenanceCost
@@ -121,6 +124,29 @@ end
 
 function ssMaintenance.taxInterestCost(vehicle, storeItem)
     return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
+end
+
+-- Repair by resetting the last repair day and operating time
+function ssMaintenance:repair(vehicle, storeItem)
+    vehicle.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
+    vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
+
+    return true
+end
+
+function ssMaintenance:getRepairShopCost(vehicle, storeItem)
+    -- Can't repair twice on same day, that is silly
+    if vehicle.ssLastRepairDay == ssSeasonsUtil:currentDayNumber() then
+        return 0
+    end
+
+    if storeItem == nil then
+        storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+    end
+
+    local costs = ssMaintenance:maintenanceRepairCost(vehicle, storeItem, true)
+
+    return costs + 45 -- FIXME * difficulty mutliplier
 end
 
 function ssMaintenance:getDailyUpKeep(superFunc)
@@ -133,24 +159,26 @@ function ssMaintenance:getDailyUpKeep(superFunc)
 
     -- This is for visually in the display
     local costs = ssMaintenance:taxInterestCost(self, storeItem)
-    costs = costs + ssMaintenance:maintenanceCost(self, storeItem)
+    costs = costs + ssMaintenance:maintenanceRepairCost(self, storeItem, false)
 
     return costs
 end
 
--- function ssMaintenance:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
---     log("getSpecValueDailyUpKeep "..tostring(storeItem), tostring(realItem))
+--[[
+function ssMaintenance:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
+    log("getSpecValueDailyUpKeep "..tostring(storeItem), tostring(realItem))
 
---     local dailyUpkeep = storeItem.dailyUpkeep
+    local dailyUpkeep = storeItem.dailyUpkeep
 
---     if realItem ~= nil and realItem.getDailyUpKeep ~= nil then
---         dailyUpkeep = realItem:getDailyUpKeep(false)
---     end
+    if realItem ~= nil and realItem.getDailyUpKeep ~= nil then
+        dailyUpkeep = realItem:getDailyUpKeep(false)
+    end
 
---     dailyUpkeep = 54;
+    dailyUpkeep = 54;
 
---     return string.format(g_i18n:getText("shop_maintenanceValue"), g_i18n:formatMoney(dailyUpkeep, 2))
--- end
+    return string.format(g_i18n:getText("shop_maintenanceValue"), g_i18n:formatMoney(dailyUpkeep, 2))
+end
+]]
 
 -- Replace the age with the age since last repair, because actual age is useless
 function ssMaintenance:getSpecValueAge(superFunc, vehicle)

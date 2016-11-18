@@ -11,7 +11,7 @@ function ssRepairable:prerequisitesPresent(specializations)
 end
 
 function ssRepairable:load(savegame)
-    -- self.repairVehicle = SpecializationUtil.callSpecializationsFunction("repairVehicle")
+    self.repairUpdate = SpecializationUtil.callSpecializationsFunction("repairUpdate")
 
     self.ssPlayerInRange = false;
 
@@ -59,6 +59,9 @@ function ssRepairable:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.ssCumulativeDirt)
 end
 
+function ssRepairable:draw()
+end
+
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
     if g_currentMission.player ~= nil then
@@ -83,44 +86,47 @@ function ssRepairable:update(dt)
     end
 
     -- Calculate cumulative dirt
-    if self.getDirtAmount ~= nil then
+    if self:getIsOperating() and self.getDirtAmount ~= nil then
         -- self:getDirtAmount() is a value from 0-1, so cum, it can be 60*60*1000*24 max.
         self.ssCumulativeDirt = self.ssCumulativeDirt + self:getDirtAmount() * dt
     end
 
-    --[[
-    --if self.isServer then
-        if self.rvPIR then
-            local newOpTime
-            if self.rvLastOperatingTime ~= nil then
-                newOpTime = math.max(0, self.operatingTime - self.rvLastOperatingTime)
-            else
-                newOpTime = self.operatingTime
-            end
-            local costs = self:getPrice()*0.08*(newOpTime/100000000)
-            if costs > 5 then
-                local vehicleName = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()].brand .." ".. StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()].name
-                g_currentMission:addHelpButtonText(string.format(g_i18n:getText("REPAIR_VEHICLE_COST"), vehicleName, costs), InputBinding.REPAIR_VEHICLE)
-                if InputBinding.hasEvent(InputBinding.REPAIR_VEHICLE) then
-                    if g_currentMission:getTotalMoney() > costs then
-                        if g_currentMission:getIsServer() then
-                            g_currentMission:addSharedMoney(-costs, "other")
-                        else
-                            g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-costs))
-                        end
-                        g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, string.format(g_i18n:getText("VEHICLE_REPAIRED"), vehicleName, costs))
-                        self.rvLastOperatingTime = self.operatingTime
-                        g_client:getServerConnection():sendEvent(repairVehicleEvent:new(self, self.operatingTime))
-                        --repairVehicleEvent.sendEvent(self, self.operatingTime)
-                    else
-                        g_currentMission:showBlinkingWarning(g_i18n:getText("NOT_ENOUGH_MONEY"), 2000)
-                    end
-                end
-            end
-        end
-    --end
-    --]]
+    if self.ssPlayerInRange then
+        self:repairUpdate(dt)
+    end
 end
 
-function ssRepairable:draw()
+function ssRepairable:repairUpdate(dt)
+    local repairCost = ssMaintenance:getRepairShopCost(self)
+    log("Cost for repair "..tostring(repairCost))
+
+    if repairCost < 1 then return end
+
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+    local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+    -- Show repair button
+    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), vehicleName, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+
+    if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
+        if g_currentMission:getTotalMoney() >= repairCost then
+            -- Deduct
+            if g_currentMission:getIsServer() then
+                g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
+            else
+                g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
+            end
+
+            -- Repair
+            if ssMaintenance:repair(self, storeItem) then
+                -- Show that it was repaired
+                local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+                g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str);
+
+            --g_client:getServerConnection():sendEvent(repairVehicleEvent:new(self, self.operatingTime));
+            end
+        else
+            g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000);
+        end
+    end
 end

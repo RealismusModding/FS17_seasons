@@ -48,9 +48,6 @@ function ssTime:draw()
 end
 
 function ssTime:update(dt)
-    -- Visual
-    g_currentMission:addExtraPrintText(string.format("sun: %s, lights: %s", tostring(g_currentMission.environment.isSunOn), tostring(g_currentMission.environment.needsLights)))
-
     if ssSeasonsUtil then
         g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
     end
