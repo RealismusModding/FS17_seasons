@@ -21,6 +21,8 @@ function ssMaintenance.preSetup()
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssMaintenance.getDailyUpKeep)
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssMaintenance.getSpecValueAge)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssMaintenance.getSpecValueDailyUpKeep)
+
+    VehicleSellingPoint.determineCurrentVehicle = Utils.overwrittenFunction(VehicleSellingPoint.determineCurrentVehicle, ssMaintenance.determineCurrentWorkshopVehicle)
 end
 
 function ssMaintenance.setup()
@@ -32,7 +34,7 @@ end
 function ssMaintenance:loadMap(name)
     self:installRepairableSpecialization()
 
-    g_currentMission.environment:addDayChangeListener(self);
+    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssMaintenance:deleteMap()
@@ -72,7 +74,7 @@ function ssMaintenance:installRepairableSpecialization()
         end
 
         if hasWashable then
-            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"));
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
         end
     end
 end
@@ -126,6 +128,15 @@ function ssMaintenance.taxInterestCost(vehicle, storeItem)
     return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
 end
 
+function ssMaintenance:resetOperatingTimeAndDirt()
+    for i, vehicle in pairs(g_currentMission.vehicles) do
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+            vehicle.ssCumulativeDirt = 0
+            vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
+        end
+    end
+end
+
 -- Repair by resetting the last repair day and operating time
 function ssMaintenance:repair(vehicle, storeItem)
     vehicle.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
@@ -134,7 +145,7 @@ function ssMaintenance:repair(vehicle, storeItem)
     return true
 end
 
-function ssMaintenance:getRepairShopCost(vehicle, storeItem)
+function ssMaintenance:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
     if vehicle.ssLastRepairDay == ssSeasonsUtil:currentDayNumber() then
         return 0
@@ -145,8 +156,12 @@ function ssMaintenance:getRepairShopCost(vehicle, storeItem)
     end
 
     local costs = ssMaintenance:maintenanceRepairCost(vehicle, storeItem, true)
+    local dealerMultiplier = atDealer and 1.2 or 1
+    local difficultyMultiplier = 1 -- FIXME * difficulty mutliplier
 
-    return costs + 45 -- FIXME * difficulty mutliplier
+    log(tostring((costs + 45) * dealerMultiplier * difficultyMultiplier))
+
+    return (costs + 45) * dealerMultiplier * difficultyMultiplier
 end
 
 function ssMaintenance:getDailyUpKeep(superFunc)
@@ -174,7 +189,7 @@ function ssMaintenance:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
         dailyUpkeep = realItem:getDailyUpKeep(false)
     end
 
-    dailyUpkeep = 54;
+    dailyUpkeep = 54
 
     return string.format(g_i18n:getText("shop_maintenanceValue"), g_i18n:formatMoney(dailyUpkeep, 2))
 end
@@ -191,12 +206,25 @@ function ssMaintenance:getSpecValueAge(superFunc, vehicle)
     return nil
 end
 
-function ssMaintenance:resetOperatingTimeAndDirt()
-    for i, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
-            vehicle.ssCumulativeDirt = 0
-            vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
+function ssMaintenance:determineCurrentWorkshopVehicle(superFunc)
+    -- Remove inRange property
+    if self.currentVehicle ~= nil then
+        self.currentVehicle.ssInRangeOfWorkshop = nil
+        self.currentVehicle = nil
+    end
+
+    for vehicleId, inRange in pairs(self.vehicleInRange) do
+        if inRange ~= nil then
+            self.currentVehicle = g_currentMission.nodeToVehicle[vehicleId]
+
+            if self.currentVehicle ~= nil then
+                -- Add inRange property
+                self.currentVehicle.ssInRangeOfWorkshop = self
+                break
+            end
         end
+        -- invalid vehicle (not existing or left), remove from list
+        self.vehicleInRange[vehicleId] = nil
     end
 end
 

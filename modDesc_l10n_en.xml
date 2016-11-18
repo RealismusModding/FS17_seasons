@@ -37,5 +37,7 @@
         <text name="SS_NOT_ENOUGH_MONEY" text="You don't have enough money to repair this" />
         <text name="SS_VEHICLE_REPAIRED" text="%s was repaired for %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repair %s for %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Repair required" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Repair required in %d days" />
     </texts>
 </l10n>

@@ -13,7 +13,8 @@ end
 function ssRepairable:load(savegame)
     self.repairUpdate = SpecializationUtil.callSpecializationsFunction("repairUpdate")
 
-    self.ssPlayerInRange = false;
+    self.ssPlayerInRange = false
+    self.ssInRangeOfWorkshop = nil
 
     self.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
     self.ssYesterdayOperatingTime = self.operatingTime
@@ -69,7 +70,7 @@ function ssRepairable:updateTick(dt)
         local sx, sy, sz = getWorldTranslation(self.rootNode)
         local distance = Utils.vector3Length(sx-vx, sy-vy, sz-vz)
 
-        self.ssPlayerInRange = distance < 3.5
+        self.ssPlayerInRange = distance < 4.5
     end
 end
 
@@ -77,11 +78,15 @@ function ssRepairable:update(dt)
     local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - self.ssLastRepairDay
 
     -- Show a message about the repairing
-    if self.ssPlayerInRange then
+    if self.ssPlayerInRange and self.ssInRangeOfWorkshop ~= nil then
+        self:repairUpdate(dt)
+    end
+
+    if self.isEntered then
         if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason then
-            g_currentMission:addExtraPrintText("Repair required")
+            g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
         else
-            g_currentMission:addExtraPrintText(string.format("Repair required in %d days", ssSeasonsUtil.daysInSeason - daysSinceLastRepair))
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), ssSeasonsUtil.daysInSeason - daysSinceLastRepair))
         end
     end
 
@@ -90,15 +95,10 @@ function ssRepairable:update(dt)
         -- self:getDirtAmount() is a value from 0-1, so cum, it can be 60*60*1000*24 max.
         self.ssCumulativeDirt = self.ssCumulativeDirt + self:getDirtAmount() * dt
     end
-
-    if self.ssPlayerInRange then
-        self:repairUpdate(dt)
-    end
 end
 
 function ssRepairable:repairUpdate(dt)
-    local repairCost = ssMaintenance:getRepairShopCost(self)
-    log("Cost for repair "..tostring(repairCost))
+    local repairCost = ssMaintenance:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
     if repairCost < 1 then return end
 
@@ -121,12 +121,12 @@ function ssRepairable:repairUpdate(dt)
             if ssMaintenance:repair(self, storeItem) then
                 -- Show that it was repaired
                 local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
-                g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str);
+                g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
 
-            --g_client:getServerConnection():sendEvent(repairVehicleEvent:new(self, self.operatingTime));
+            --g_client:getServerConnection():sendEvent(repairVehicleEvent:new(self, self.operatingTime))
             end
         else
-            g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000);
+            g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
         end
     end
 end

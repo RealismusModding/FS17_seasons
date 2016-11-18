@@ -12,3 +12,4 @@ Maintenance
 - New maintenance algorithm with repair, maintenance and taxes
 - Keep your machine clean to lower daily maintenance costs
 - Machine not used? Pay less
+- You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
