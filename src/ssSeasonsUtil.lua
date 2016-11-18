@@ -7,9 +7,9 @@
 
 ssSeasonsUtil = {}
 
-ssSeasonsUtil.weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
-ssSeasonsUtil.weekDaysShort = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}
-ssSeasonsUtil.seasons = {[0]="Spring", "Summer", "Autumn", "Winter"}
+ssSeasonsUtil.weekDays = nil
+ssSeasonsUtil.weekDaysShort = nil
+ssSeasonsUtil.seasons = nil
 
 ssSeasonsUtil.daysInWeek = 7
 ssSeasonsUtil.seasonsInYear = 4
@@ -23,6 +23,33 @@ end
 
 function ssSeasonsUtil.setup()
     ssSettings.load("seasons", ssSeasonsUtil)
+
+    ssSeasonsUtil.weekDays = {
+        ssLang.getText("SS_WEEKDAY_MONDAY", "Monday"),
+        ssLang.getText("SS_WEEKDAY_TUESDAY", "Tuesday"),
+        ssLang.getText("SS_WEEKDAY_WEDNESDAY", "Wednesday"),
+        ssLang.getText("SS_WEEKDAY_THURSDAY", "Thursday"),
+        ssLang.getText("SS_WEEKDAY_FRIDAY", "Friday"),
+        ssLang.getText("SS_WEEKDAY_SATURDAY", "Saturday"),
+        ssLang.getText("SS_WEEKDAY_SUNDAY", "Sunday"),
+    }
+
+    ssSeasonsUtil.weekDaysShort = {
+        ssLang.getText("SS_WEEKDAY_MON", "Mon"),
+        ssLang.getText("SS_WEEKDAY_TUE", "Tue"),
+        ssLang.getText("SS_WEEKDAY_WED", "Wed"),
+        ssLang.getText("SS_WEEKDAY_THU", "Thu"),
+        ssLang.getText("SS_WEEKDAY_FRI", "Fri"),
+        ssLang.getText("SS_WEEKDAY_SAT", "Sat"),
+        ssLang.getText("SS_WEEKDAY_SUN", "Sun"),
+    }
+
+    ssSeasonsUtil.seasons = {
+        ssLang.getText("SS_SEASON_SPRING", "Spring"),
+        ssLang.getText("SS_SEASON_SUMMER", "Summer"),
+        ssLang.getText("SS_SEASON_AUTUMN", "Autumn"),
+        ssLang.getText("SS_SEASON_WINTER", "Winter"),
+    }
 
     addModEventListener(ssSeasonsUtil)
 end

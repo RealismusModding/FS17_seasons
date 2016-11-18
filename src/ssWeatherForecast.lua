@@ -131,7 +131,7 @@ function ssWeatherForecast:buildForecast()
         local oneDayForecast = {};
 
         oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
-        oneDayForecast.weekDay =  ssSeasonsUtil.weekDays[ssSeasonsUtil:dayOfWeek(startDayNum + n)];
+        oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + n);
 
         oneDayForecast.lowTemp = g_currentMission.environment.weatherTemperaturesNight[n+1];
         oneDayForecast.highTemp = g_currentMission.environment.weatherTemperaturesDay[n+1];

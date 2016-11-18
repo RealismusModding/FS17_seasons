@@ -31,12 +31,14 @@ end
 
 local srcFolder = g_currentModDirectory .. "src/"
 local srcFiles = {
+    "ssLang.lua",
     "ssSettings.lua",
     "ssSeasonsUtil.lua",
     "ssTime.lua",
     "ssWeatherForecast.lua",
     "ssFixFruit.lua",
-    "ssEconomy.lua"
+    "ssEconomy.lua",
+    "ssMaintenance.lua"
 }
 
 -- Load all scripts
@@ -76,6 +78,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssEconomy.preSetup()
     ssWeatherForecast.preSetup()
     ssFixFruit.preSetup()
+    ssMaintenance.preSetup()
 
     -- Load all requested values
     ssSettings.loadFromSavegame()
@@ -86,6 +89,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssEconomy.setup()
     ssWeatherForecast.setup()
     ssFixFruit.setup()
+    ssMaintenance.setup()
 
 
     ssSeasonsMod.enabled = true
@@ -146,6 +150,7 @@ function print_r(t)
             print_r_cache[tostring(t)]=true
             if (type(t)=="table") then
                 for pos,val in pairs(t) do
+                    pos = tostring(pos)
                     if (type(val)=="table") then
                         print(indent.."["..pos.."] => "..tostring(t).." {")
                         sub_print_r(val,indent..string.rep(" ",string.len(pos)+8))

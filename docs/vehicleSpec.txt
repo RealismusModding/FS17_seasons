@@ -1,0 +1,98 @@
+table: 0x0106ecac70 {
+  [brand] => "Case IH"
+  [dailyUpkeep] => 260
+  [id] => 12
+  [isBundleItem] => false
+  [xmlFilenameLower] => "data/vehicles/steerable/caseih/caseih1455.xml"
+  [isMod] => false
+  [species] => ""
+  [dlcTitle] => ""
+  [achievementsNeeded] => 0
+  [functions] => table: 0x0106ecac70 {
+                   [1] => "Tractors are required to pull trailers and tools."
+                   [2] => "This tractor can also attach a front loader."
+                 }
+  [ignoreVramUsage] => false
+  [imageBrand] => "data/store/brands/brand_caseIH.png"
+  [imageActive] => "data/store/store_caseIH1455.png"
+  [brandIndex] => 10
+  [xmlFilename] => "data/vehicles/steerable/caseIH/caseIH1455.xml"
+  [runningLeasingFactor] => 0.05
+  [sharedVramUsage] => 0
+  [canBeSold] => true
+  [perInstanceVramUsage] => 0
+  [incomePerHour] => table: 0x0106ecac70 {
+                       [1] => 0
+                       [2] => 0
+                       [3] => 0
+                     }
+  [fieldJobData] => table: 0x0106ecac70 {
+                      [sizeCategory] => 1
+                      [dependencies] => table: 0x0106ec9d60 {
+                                        }
+                      [hasFrontAndBackHydraulics] => false
+                      [typeCategory] => "tractor"
+                    }
+  [category] => "tractors"
+  [rotation] => 0
+  [configurations] => table: 0x0106ecac70 {
+                        [motor] => table: 0x0106eca2b8 {
+                                     [1] => table: 0x0106eca588 {
+                                              [desc] => ""
+                                              [price] => 0
+                                              [dailyUpkeep] => 0
+                                              [fuel] => 240
+                                              [name] => "Standard"
+                                              [icon] => ""
+                                            }
+                                   }
+                        [wheel] => table: 0x0106eca2b8 {
+                                     [1] => table: 0x0106eca748 {
+                                              [desc] => ""
+                                              [price] => 0
+                                              [dailyUpkeep] => 0
+                                              [name] => "Standard"
+                                              [icon] => ""
+                                            }
+                                     [2] => table: 0x0106eca748 {
+                                              [desc] => ""
+                                              [price] => 800
+                                              [dailyUpkeep] => 0
+                                              [name] => "Wide tires"
+                                              [icon] => "dataS2/menu/hud/configurations/config_wheel_broad.png"
+                                            }
+                                   }
+                        [frontloader] => table: 0x0106eca2b8 {
+                                           [1] => table: 0x0106eca390 {
+                                                    [desc] => ""
+                                                    [price] => 0
+                                                    [dailyUpkeep] => 0
+                                                    [name] => "No"
+                                                    [icon] => ""
+                                                  }
+                                           [2] => table: 0x0106eca390 {
+                                                    [desc] => ""
+                                                    [price] => 800
+                                                    [dailyUpkeep] => 0
+                                                    [name] => "Yes"
+                                                    [icon] => "dataS2/menu/hud/configurations/config_loader.png"
+                                                  }
+                                         }
+                      }
+  [lifetime] => 600
+  [price] => 102000
+  [name] => "1455 XL"
+  [specs] => table: 0x0106ecac70 {
+               [seedFillTypes] => table: 0x0106ec9ab0 {
+                                  }
+               [fillTypes] => table: 0x0106ec9ab0 {
+                                [useWindrowed] => false
+                              }
+               [power] => "145"
+               [capacity] => table: 0x0106ec9ab0 {
+                               [value] => 0
+                             }
+               [maxSpeed] => 40
+               [fuel] => 240
+             }
+}

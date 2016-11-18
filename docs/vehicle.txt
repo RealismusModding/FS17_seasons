@@ -1,0 +1,2265 @@
+table: 0x010b5b6c30 {
+  [getSteeringAxleBaseVehicle] => function: 0x0116e3f7e0
+  [aiLeftMarker] => 68671
+  [isActiveDirtyTimeOffset] => 0
+  [loadAttacherJointFromXML] => function: 0x010b44e448
+  [getAnimationDuration] => function: 0x010b4db808
+  [tourId] => "tourCultivator"
+  [onTurnLightStateChanged] => function: 0x0116fb3ba0
+  [sizeWidth] => 4
+  [dynamicallyLoadedWheels] => table: 0x010b5b6c30 {
+                               }
+  [onBrakeLightsVisibilityChanged] => function: 0x0116fb3c10
+  [getToggledFoldDirection] => function: 0x010b4284e0
+  [setObjectChangeValues] => function: 0x0116e93700
+  [aiProhibitedMaxGrowthState] => 0
+  [aiRequiredFruitType] => 0
+  [getToggledFoldMiddleDirection] => function: 0x010b4294d0
+  [getAnimationTime] => function: 0x010b4db3d8
+  [movingTools] => table: 0x010b5b6c30 {
+                   }
+  [lastMovedDistance] => 0
+  [setBrakeLightsVisibility] => function: 0x0116be0718
+  [updatePowerTakeoff] => function: 0x0116bce4c0
+  [wheelMinimumDirtAmount] => 0.6
+  [steeringAxleAngle] => 0
+  [typeName] => "cultivator"
+  [updateWheels] => true
+  [rootNode] => 68625
+  [numLightTypes] => 4
+  [washableWheelsDirtyFlag] => 32
+  [getIsFoldMiddleAllowed] => function: 0x01177dbf90
+  [interpolationDuration] => 80
+  [supportAnimation] => "moveSupport"
+  [aiProhibitedMinGrowthState] => 0
+  [getIsWorkAreaActive] => function: 0x01177cd198
+  [vehicleNodes] => table: 0x010b5b6c30 {
+                      [68625] => table: 0x0116ff8348 {
+                                   [component] => table: 0x011700f588 {
+                                                    [targetTranslation] => table: 0x0116ffaca0 {
+                                                                             [1] => 150.54368591309
+                                                                             [2] => 89.996070861816
+                                                                             [3] => -85.242279052734
+                                                                           }
+                                                    [node] => 68625
+                                                    [sentTranslation] => table: 0x0116ffaca0 {
+                                                                           [1] => 150.54368591309
+                                                                           [2] => 89.996070861816
+                                                                           [3] => -85.242279052734
+                                                                         }
+                                                    [collideWithAttachables] => false
+                                                    [curRotation] => table: 0x0116ffaca0 {
+                                                                       [1] => 2.8492604542407e-07
+                                                                       [2] => 0.68378698825836
+                                                                       [3] => 7.8758398558421e-07
+                                                                       [4] => 0.72968167066574
+                                                                     }
+                                                    [centerOfMass] => table: 0x0116ffaca0 {
+                                                                        [1] => 0
+                                                                        [2] => 0.1
+                                                                        [3] => 0.25
+                                                                      }
+                                                    [sentRotation] => table: 0x0116ffaca0 {
+                                                                        [1] => 2.2782867745264e-05
+                                                                        [2] => 1.5058799982071
+                                                                        [3] => 2.3494834749727e-05
+                                                                      }
+                                                    [originalRotation] => table: 0x0116ffaca0 {
+                                                                            [1] => 0
+                                                                            [2] => 0
+                                                                            [3] => 0
+                                                                          }
+                                                    [solverIterationCount] => 10
+                                                    [motorized] => true
+                                                    [targetRotation] => table: 0x0116ffaca0 {
+                                                                          [1] => 2.8492604542407e-07
+                                                                          [2] => 0.68378698825836
+                                                                          [3] => 7.8758398558421e-07
+                                                                          [4] => 0.72968167066574
+                                                                        }
+                                                    [curTranslation] => table: 0x0116ffaca0 {
+                                                                          [1] => 150.54368591309
+                                                                          [2] => 89.996070861816
+                                                                          [3] => -85.242279052734
+                                                                        }
+                                                    [lastRotation] => table: 0x0116ffaca0 {
+                                                                        [1] => 2.8492604542407e-07
+                                                                        [2] => 0.68378698825836
+                                                                        [3] => 7.8758398558421e-07
+                                                                        [4] => 0.72968167066574
+                                                                      }
+                                                    [lastTranslation] => table: 0x0116ffaca0 {
+                                                                           [1] => 150.54368591309
+                                                                           [2] => 89.996070861816
+                                                                           [3] => -85.242279052734
+                                                                         }
+                                                    [originalTranslation] => table: 0x0116ffaca0 {
+                                                                               [1] => 0
+                                                                               [2] => 0
+                                                                               [3] => 0
+                                                                             }
+                                                  }
+                                 }
+                    }
+  [groundParticleAnimations] => table: 0x010b5b6c30 {
+                                  [1] => table: 0x01172439d0 {
+                                           [mappings] => table: 0x01171da7b8 {
+                                                           [1] => table: 0x0117240ca8 {
+                                                                    [animNode] => 68676
+                                                                    [node] => 68676
+                                                                    [groundRefNode] => table: 0x0117209980 {
+                                                                                         [chargeValue] => 1
+                                                                                         [node] => 68625
+                                                                                         [threshold] => 0.10000000149012
+                                                                                         [movedDistance] => 0
+                                                                                         [depth] => 0
+                                                                                         [depthNode] => 68681
+                                                                                       }
+                                                                    [lastDepth] => 0
+                                                                    [maxWorkDepth] => -0.1
+                                                                    [speed] => 0
+                                                                  }
+                                                         }
+                                         }
+                                }
+  [attachableAddToolCameras] => function: 0x0116e78e48
+  [getWheelCurrentSink] => function: 0x0119459058
+  [loadGroundParticleMapping] => function: 0x0116c23920
+  [unmountDynamic] => function: 0x01169922c0
+  [negDirectionText] => "action_unfoldOBJECT"
+  [isClient] => true
+  [onDeactivateAttachmentsLights] => function: 0x01165fdb70
+  [loadWorkAreaFromXML] => function: 0x0116fb9298
+  [attachableRemoveToolCameras] => function: 0x0116e78eb8
+  [lowerAnimationDirectionOnDetach] => 0
+  [onDeactivateAttachmentsSounds] => function: 0x01165fdac0
+  [setLightsTypesMask] => function: 0x0116bd4040
+  [sampleHydraulic] => table: 0x010b5b6c30 {
+                       }
+  [nodesToMovingParts] => table: 0x010b5b6c30 {
+                          }
+  [isActive] => false
+  [nodesToMovingTools] => table: 0x010b5b6c30 {
+                          }
+  [loadGroundReferenceNodeFromXML] => function: 0x0116f9dcb0
+  [getConsumedPtoTorque] => function: 0x0116ab4e78
+  [getCanBeTurnedOn] => function: 0x0116e78f28
+  [maxNumRealLights] => 1
+  [toolCameras] => table: 0x010b5b6c30 {
+                   }
+  [setReverseLightsVisibility] => function: 0x0116fb3a40
+  [updateGroundReferenceNode] => function: 0x0116f9dc40
+  [loadMovingToolStatesMaxLimit] => 1
+  [beaconLights] => table: 0x010b5b6c30 {
+                    }
+  [requiredDriveMode] => 1
+  [lights] => table: 0x010b5b6c30 {
+                [high] => table: 0x01171198d0 {
+                            [1] => table: 0x011711d3b8 {
+                                     [excludedLightTypes] => table: 0x011713f430 {
+                                                             }
+                                     [brakeLight] => table: 0x011713f430 {
+                                                       [isActive] => false
+                                                       [backLight] => table: 0x01171622d8 {
+                                                                        *table: 0x011713f430
+                                                                      }
+                                                       [realLight] => 68640
+                                                       [defaultColor] => table: 0x01171622d8 {
+                                                                           [1] => 0.5
+                                                                           [2] => 0
+                                                                           [3] => 0
+                                                                         }
+                                                       [decoration] => 68660
+                                                     }
+                                     [isActive] => false
+                                     [lightTypes] => table: 0x011713f430 {
+                                                       [1] => 0
+                                                       [2] => 3
+                                                     }
+                                     [realLight] => 68640
+                                     [defaultColor] => table: 0x011713f430 {
+                                                         [1] => 0.5
+                                                         [2] => 0
+                                                         [3] => 0
+                                                       }
+                                     [decoration] => 68634
+                                   }
+                          }
+                [low] => table: 0x01171198d0 {
+                           [1] => table: 0x0116c42640 {
+                                    [excludedLightTypes] => table: 0x01171765d8 {
+                                                            }
+                                    [lightTypes] => table: 0x01171765d8 {
+                                                      [1] => 0
+                                                      [2] => 3
+                                                    }
+                                    [isActive] => false
+                                    [decoration] => 68634
+                                  }
+                         }
+              }
+  [onLowerAll] => function: 0x0116dc1f10
+  [specializationNames] => table: 0x010b5b6c30 {
+                             [1] => "attacherJoints"
+                             [2] => "lights"
+                             [3] => "workArea"
+                             [4] => "workParticles"
+                             [5] => "speedRotatingParts"
+                             [6] => "attachable"
+                             [7] => "powerConsumer"
+                             [8] => "animatedVehicle"
+                             [9] => "cylindered"
+                             [10] => "cultivator"
+                             [11] => "foldable"
+                             [12] => "washable"
+                             [13] => "mountable"
+                           }
+  [loadInputPowerTakeoff] => function: 0x0116ea7b70
+  [playDetachSound] => function: 0x010be88028
+  [groundManipulationSpeedThreshold] => 5
+  [activeAnimations] => table: 0x010b5b6c30 {
+                        }
+  [onActivateAttachments] => function: 0x010b4aef18
+  [detachingMaxLimit] => 1
+  [getPowerMultiplier] => function: 0x01172550f0
+  [getIsUnfolded] => function: 0x01178202d0
+  [turnOnFoldMaxLimit] => 1
+  [loadDynamicWheelDataFromXML] => function: 0x0116fd5d28
+  [hasTurnLights] => true
+  [groundParticles] => table: 0x010b5b6c30 {
+                         [1] => table: 0x011722ba20 {
+                                  [mappings] => table: 0x011722bac0 {
+                                                  [1] => table: 0x011722bb08 {
+                                                           [groundRefNode] => table: 0x01173ecb90 {
+                                                                                *table: 0x01172551e8
+                                                                              }
+                                                           [particleSystem] => table: 0x01173ecb90 {
+                                                                                 [emitterShape] => 68677
+                                                                                 [shape] => 68710
+                                                                                 [worldSpace] => false
+                                                                                 [forceFullLifespan] => false
+                                                                                 [geometry] => 68709
+                                                                                 [emitterShapeSize] => 7.4153690338135
+                                                                                 [emitCountScale] => 1
+                                                                                 [originalLifespan] => 500
+                                                                                 [isEmitting] => false
+                                                                                 [defaultEmitterShapeSize] => 1
+                                                                               }
+                                                           [node] => 68677
+                                                           [particleNode] => 68677
+                                                         }
+                                                  [2] => table: 0x011722bb08 {
+                                                           [groundRefNode] => table: 0x011721ec58 {
+                                                                                *table: 0x01172551e8
+                                                                              }
+                                                           [particleSystem] => table: 0x011721ec58 {
+                                                                                 [emitterShape] => 68678
+                                                                                 [shape] => 68712
+                                                                                 [worldSpace] => true
+                                                                                 [forceFullLifespan] => false
+                                                                                 [geometry] => 68711
+                                                                                 [emitterShapeSize] => 8.348461151123
+                                                                                 [emitCountScale] => 1
+                                                                                 [originalLifespan] => 1000
+                                                                                 [isEmitting] => false
+                                                                                 [defaultEmitterShapeSize] => 1
+                                                                               }
+                                                           [node] => 68678
+                                                           [particleNode] => 68678
+                                                         }
+                                                  [3] => table: 0x011722bb08 {
+                                                           [groundRefNode] => table: 0x01173418e0 {
+                                                                                *table: 0x01172551e8
+                                                                              }
+                                                           [particleSystem] => table: 0x01173418e0 {
+                                                                                 [emitterShape] => 68679
+                                                                                 [shape] => 68714
+                                                                                 [worldSpace] => false
+                                                                                 [forceFullLifespan] => false
+                                                                                 [geometry] => 68713
+                                                                                 [emitterShapeSize] => 6.8188571929932
+                                                                                 [emitCountScale] => 1
+                                                                                 [originalLifespan] => 1000
+                                                                                 [isEmitting] => false
+                                                                                 [defaultEmitterShapeSize] => 1
+                                                                               }
+                                                           [node] => 68679
+                                                           [particleNode] => 68679
+                                                         }
+                                                  [4] => table: 0x011722bb08 {
+                                                           [groundRefNode] => table: 0x0117323368 {
+                                                                                *table: 0x01172551e8
+                                                                              }
+                                                           [particleSystem] => table: 0x0117323368 {
+                                                                                 [emitterShape] => 68680
+                                                                                 [shape] => 68716
+                                                                                 [worldSpace] => false
+                                                                                 [forceFullLifespan] => false
+                                                                                 [geometry] => 68715
+                                                                                 [emitterShapeSize] => 6.8188571929932
+                                                                                 [emitCountScale] => 1
+                                                                                 [originalLifespan] => 1400
+                                                                                 [isEmitting] => false
+                                                                                 [defaultEmitterShapeSize] => 1
+                                                                               }
+                                                           [node] => 68680
+                                                           [particleNode] => 68680
+                                                         }
+                                                }
+                                }
+                       }
+  [isVehicleSaved] => true
+  [moveToMiddle] => false
+  [getRealAnimationTime] => function: 0x010b4db378
+  [powerConsumer] => table: 0x010b5b6c30 {
+                       [totalMass] => 1
+                       [forceDir] => 1
+                       [forceDirNode] => 68625
+                       [turnOnMotorNotStartedWarning] => "Please start the engine first!"
+                       [ptoRpm] => 0
+                       [forceFactor] => 1
+                       [forceNode] => 68625
+                       [turnOnNotAllowedWarning] => "Insufficient power available for the attached equipment."
+                       [neededPtoPower] => 0
+                       [maxForce] => 12
+                     }
+  [hasWheelGroundContact] => false
+  [maxRotTime] => 0
+  [setAnimationStopTime] => function: 0x01176fcef0
+  [getIsReadyToSpray] => function: 0x01176de798
+  [getIsTypedWorkAreaActive] => function: 0x0116aa6020
+  [minRotTime] => 0
+  [showDetachingNotAllowedTime] => 0
+  [foldingParts] => table: 0x010b5b6c30 {
+                      [1] => table: 0x0117763380 {
+                               [speedScale] => 1
+                               [animationName] => "folding"
+                               [animDuration] => 1500
+                               [animCharSet] => 0
+                               [anchorActor] => 0
+                             }
+                    }
+  [onSetLowered] => function: 0x0116dc1ea0
+  [foldMoveDirection] => 0
+  [boughtConfigurations] => table: 0x010b5b6c30 {
+                              [wheel] => table: 0x010bf1dae8 {
+                                           [1] => true
+                                         }
+                            }
+  [autoRotateBackSpeed] => 1
+  [destroyFruitArea] => function: 0x0119b9aac8
+  [attachTime] => 0
+  [propertyState] => 1
+  [onSelect] => function: 0x0116e05e98
+  [getDoGroundManipulation] => function: 0x01176b8b90
+  [setRealAnimationTime] => function: 0x01176fce10
+  [turnLights] => table: 0x010b5b6c30 {
+                    [right] => table: 0x011714e340 {
+                                 [1] => table: 0x011713f588 {
+                                          [defaultColor] => table: 0x01171539e8 {
+                                                              [1] => 0.31000000238419
+                                                              [2] => 0.14000000059605
+                                                              [3] => 0
+                                                            }
+                                          [decoration] => 68652
+                                          [realLight] => 68657
+                                          [isActive] => false
+                                        }
+                                 [2] => table: 0x011713f588 {
+                                          [defaultColor] => table: 0x01171b52b8 {
+                                                              [1] => 0.31000000238419
+                                                              [2] => 0.14000000059605
+                                                              [3] => 0
+                                                            }
+                                          [realLight] => 68658
+                                          [isActive] => false
+                                        }
+                               }
+                    [left] => table: 0x011714e340 {
+                                [1] => table: 0x011714e388 {
+                                         [defaultColor] => table: 0x0117176790 {
+                                                             [1] => 0.31000000238419
+                                                             [2] => 0.14000000059605
+                                                             [3] => 0
+                                                           }
+                                         [decoration] => 68644
+                                         [realLight] => 68649
+                                         [isActive] => false
+                                       }
+                                [2] => table: 0x011714e388 {
+                                         [defaultColor] => table: 0x011715e7a8 {
+                                                             [1] => 0.31000000238419
+                                                             [2] => 0.14000000059605
+                                                             [3] => 0
+                                                           }
+                                         [realLight] => 68650
+                                         [isActive] => false
+                                       }
+                              }
+                  }
+  [isCultivatorSpeedLimitActive] => false
+  [getIsPowerTakeoffActive] => function: 0x0116e3f680
+  [loadAttachmentFromNodes] => function: 0x010b4af078
+  [getIsSelectable] => function: 0x010be87ec8
+  [dynamicallyLoadedParts] => table: 0x010b5b6c30 {
+                              }
+  [aiSkipWorkAreaLengthOnTurn] => false
+  [onDeactivateLights] => function: 0x0116e6e3c0
+  [canToggleLight] => function: 0x0116bd3f90
+  [controlGroups] => table: 0x010b5b6c30 {
+                     }
+  [getIsAnimationPlaying] => function: 0x010b4db348
+  [steeringCenterNode] => 68700
+  [speedRotatingParts] => table: 0x010b5b6c30 {
+                            [1] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 3.4722223716938
+                                     [alignDirection] => false
+                                     [repr] => 68683
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68683
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 3.4722223716938
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [2] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68685
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68685
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [3] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68686
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68686
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [4] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68687
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68687
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [5] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68689
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68689
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [6] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68690
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68690
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [7] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68691
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68691
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [8] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68694
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68694
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                            [9] => table: 0x01172c93d8 {
+                                     [xDrive] => 0
+                                     [updateXDrive] => true
+                                     [steeringAngleSent] => 0
+                                     [groundRefNodeIndex] => 0
+                                     [wheelScaleBackup] => 4.4052863806274
+                                     [alignDirection] => false
+                                     [repr] => 68697
+                                     [versatileYRot] => false
+                                     [lastDir] => 1
+                                     [animOuterRange] => false
+                                     [animMaxLimit] => 1
+                                     [driveNode] => 68697
+                                     [onlyActiveWhenLowered] => false
+                                     [activationSpeed] => 1
+                                     [foldLimitedOuterRange] => false
+                                     [foldMinLimit] => 0
+                                     [animMinLimit] => 0
+                                     [foldMaxLimit] => 1
+                                     [wheelScale] => 4.4052863806274
+                                     [componentNode] => 68625
+                                     [lastSpeed] => 0
+                                     [fadeOutTime] => 3000
+                                     [useWheelReprTranslation] => true
+                                     [steeringAngle] => 0
+                                     [stopIfNotActive] => false
+                                   }
+                          }
+  [isServer] => true
+  [isRegistered] => true
+  [onlyFoldOnEmpty] => false
+  [specializations] => table: 0x010b5b6c30 {
+                         [1] => table: 0x010b5aa550 {
+                                  [setSelectedImplement] => function: 0x010b4f9798
+                                  [updateAttacherJointGraphics] => function: 0x010b4f9a10
+                                  [playDetachSound] => function: 0x010b4fa048
+                                  [loadAttacherJointFromXML] => function: 0x010b4f9a40
+                                  [createAttachmentJoint] => function: 0x010b4f9678
+                                  [onDeactivate] => function: 0x010b4fa168
+                                  [prerequisitesPresent] => function: 0x010b4f9160
+                                  [NUM_JOINTTYPES] => 16
+                                  [onDeactivateAttachments] => function: 0x010b4fa1f8
+                                  [setJointMoveDown] => function: 0x010b4fa2e8
+                                  [attachImplement] => function: 0x010b4f9648
+                                  [JOINTTYPE_TELEHANDLER] => 4
+                                  [postLoad] => function: 0x010b4f91f0
+                                  [preDelete] => function: 0x010b4f9220
+                                  [getImplementIndexByObject] => function: 0x010b4fa0d8
+                                  [getImplementByObject] => function: 0x010b4fa108
+                                  [JOINTTYPE_HOOKLIFT] => 15
+                                  [JOINTTYPE_ATTACHABLEFRONTLOADER] => 8
+                                  [JOINTTYPE_TRAILER] => 2
+                                  [registerJointType] => function: 0x010b4f8e08
+                                  [JOINTTYPE_MANUREBARREL] => 10
+                                  [JOINTTYPE_WHEELLOADER] => 9
+                                  [detachImplement] => function: 0x010b4f9738
+                                  [JOINTTYPE_CUTTERHARVESTER] => 12
+                                  [updateAttacherJointRotation] => function: 0x010b4f9618
+                                  [mouseEvent] => function: 0x010b4f98f0
+                                  [onActivate] => function: 0x010b4fa138
+                                  [load] => function: 0x010b4f91c0
+                                  [hardAttachImplement] => function: 0x010b4f96d8
+                                  [isLowered] => function: 0x010b4fa2b8
+                                  [getIsAChildSelectable] => function: 0x010b4f9828
+                                  [addToPhysics] => function: 0x010b4f96a8
+                                  [delete] => function: 0x010b4f9250
+                                  [JOINTTYPE_SEMITRAILER] => 6
+                                  [updateTick] => function: 0x010b4f99b0
+                                  [hardDetachImplement] => function: 0x010b4f9708
+                                  [onDeactivateAttachmentsLights] => function: 0x010b4fa288
+                                  [loadAttachmentFromNodes] => function: 0x010b4f9588
+                                  [getIsSelectable] => function: 0x010b4f97f8
+                                  [onDeactivateAttachmentsSounds] => function: 0x010b4fa258
+                                  [onDeactivateLights] => function: 0x010b4fa1c8
+                                  [validateAttacherJoint] => function: 0x010b4f9a70
+                                  [postUpdate] => function: 0x010b4f9980
+                                  [detachImplementByObject] => function: 0x010b4f9768
+                                  [JOINTTYPE_IMPLEMENT] => 1
+                                  [JOINTTYPE_TERRAVARIANT] => 16
+                                  [JOINTTYPE_TRAILERLOW] => 3
+                                  [updatePowerTakeoff] => function: 0x010b4f9ad0
+                                  [JOINTTYPE_CONVEYOR] => 14
+                                  [onDeactivateSounds] => function: 0x010b4fa198
+                                  [getIsHardAttachAllowed] => function: 0x010b4fa318
+                                  [JOINTTYPE_SEMITRAILERHOOK] => 7
+                                  [playAttachSound] => function: 0x010b4f9858
+                                  [update] => function: 0x010b4f9950
+                                  [preLoad] => function: 0x010b4f9190
+                                  [JOINTTYPE_SKIDSTEER] => 13
+                                  [JOINTTYPE_CUTTER] => 11
+                                  [readStream] => function: 0x010b4f9890
+                                  [calculateAttacherJointMoveUpperLowerAlpha] => function: 0x010b4f95e8
+                                  [selectNextSelectableImplement] => function: 0x010b4f97c8
+                                  [detachingIsPossible] => function: 0x010b4fa078
+                                  [jointTypeNameToInt] => table: 0x010b4f8d40 {
+                                                            [trailerLow] => 3
+                                                            [terraVariant] => 16
+                                                            [semitrailerHook] => 7
+                                                            [conveyor] => 14
+                                                            [hookLift] => 15
+                                                            [trailer] => 2
+                                                            [cutterHarvester] => 12
+                                                            [skidSteer] => 13
+                                                            [semitrailer] => 6
+                                                            [cutter] => 11
+                                                            [manureBarrel] => 10
+                                                            [telehandler] => 4
+                                                            [attachableFrontloader] => 8
+                                                            [wheelLoader] => 9
+                                                            [implement] => 1
+                                                            [frontloader] => 5
+                                                          }
+                                  [writeStream] => function: 0x010b4f98c0
+                                  [draw] => function: 0x010b4f99e0
+                                  [keyEvent] => function: 0x010b4f9920
+                                  [JOINTTYPE_FRONTLOADER] => 5
+                                  [loadPowerTakeoff] => function: 0x010b4f9aa0
+                                  [getAttachmentsSaveNodes] => function: 0x010b4f95b8
+                                  [onActivateAttachments] => function: 0x010b4fa228
+                                  [getImplementIndexByJointDescIndex] => function: 0x010b4fa0a8
+                                }
+                         [2] => table: 0x010b5aa550 {
+                                  [loadLights] => function: 0x011698e618
+                                  [readStream] => function: 0x0116709cf0
+                                  [onStartReverseDirectionChange] => function: 0x0116a6d710
+                                  [onEnter] => function: 0x0116a6c890
+                                  [onDeactivateLights] => function: 0x0116a6bb90
+                                  [onLeave] => function: 0x0116a6a758
+                                  [delete] => function: 0x0116709008
+                                  [draw] => function: 0x011670dd80
+                                  [getDeactivateLights] => function: 0x0116a693c8
+                                  [prerequisitesPresent] => function: 0x0116702ab0
+                                  [preLoad] => function: 0x011698dca8
+                                  [setBrakeLightsVisibility] => function: 0x0116a675b0
+                                  [update] => function: 0x011670d078
+                                  [setReverseLightsVisibility] => function: 0x0116a685d0
+                                  [setTurnLightState] => function: 0x0116a66438
+                                  [getIsActiveForLights] => function: 0x011670e898
+                                  [getUseHighProfile] => function: 0x01167105d0
+                                  [setBeaconLightsVisibility] => function: 0x0116a651a0
+                                  [mouseEvent] => function: 0x011670b738
+                                  [turnLightSendNumBits] => 2
+                                  [TURNLIGHT_HAZARD] => 3
+                                  [setLightsTypesMask] => function: 0x0116711f90
+                                  [writeStream] => function: 0x011670aa50
+                                  [load] => function: 0x011698fd18
+                                  [TURNLIGHT_OFF] => 0
+                                  [TURNLIGHT_LEFT] => 1
+                                  [loadLightSetup] => function: 0x011698f090
+                                  [canToggleLight] => function: 0x011670f8a0
+                                  [TURNLIGHT_RIGHT] => 2
+                                  [keyEvent] => function: 0x011670c450
+                                }
+                         [3] => table: 0x010b5aa550 {
+                                  [delete] => function: 0x0116a86c20
+                                  [areaTypeNameToInt] => table: 0x0116aca058 {
+                                                           [sowingMachine] => 18
+                                                           [tedderDrop] => 14
+                                                           [windrower] => 11
+                                                           [plough] => 3
+                                                           [tedder] => 13
+                                                           [roller] => 15
+                                                           [forageWagon] => 6
+                                                           [baler] => 7
+                                                           [mower] => 8
+                                                           [weeder] => 2
+                                                           [cultivator] => 16
+                                                           [windrowerDrop] => 12
+                                                           [sprayer] => 19
+                                                           [combine] => 17
+                                                           [ridgemarker] => 1
+                                                           [mowerDrop] => 9
+                                                           [fruitPreparer] => 5
+                                                           [cutter] => 4
+                                                           [default] => 10
+                                                         }
+                                  [AREATYPE_ROLLER] => 15
+                                  [prerequisitesPresent] => function: 0x01168f6e88
+                                  [updateTick] => function: 0x0116a89580
+                                  [getPowerMultiplier] => function: 0x0116a6f0f8
+                                  [update] => function: 0x0116a89550
+                                  [loadWorkAreaFromXML] => function: 0x010b3ec110
+                                  [AREATYPE_MOWER] => 8
+                                  [AREATYPE_SOWINGMACHINE] => 18
+                                  [getTypedWorkAreas] => function: 0x0116a7d730
+                                  [AREATYPE_BALER] => 7
+                                  [getIsSpeedRotatingPartActive] => function: 0x0116acb2d8
+                                  [loadGroundReferenceNodeFromXML] => function: 0x0116a86bf0
+                                  [AREATYPE_COMBINE] => 17
+                                  [AREATYPE_PLOUGH] => 3
+                                  [AREATYPE_SPRAYER] => 19
+                                  [AREATYPE_CULTIVATOR] => 16
+                                  [areaTypeIntToName] => table: 0x0116aca058 {
+                                                           [1] => "ridgemarker"
+                                                           [2] => "weeder"
+                                                           [3] => "plough"
+                                                           [4] => "cutter"
+                                                           [5] => "fruitPreparer"
+                                                           [6] => "forageWagon"
+                                                           [7] => "baler"
+                                                           [8] => "mower"
+                                                           [9] => "mowerDrop"
+                                                           [10] => "default"
+                                                           [11] => "windrower"
+                                                           [12] => "windrowerDrop"
+                                                           [13] => "tedder"
+                                                           [14] => "tedderDrop"
+                                                           [15] => "roller"
+                                                           [16] => "cultivator"
+                                                           [17] => "combine"
+                                                           [18] => "sowingMachine"
+                                                           [19] => "sprayer"
+                                                         }
+                                  [AREATYPE_WINDROWERDROP] => 12
+                                  [draw] => function: 0x0116ac7e48
+                                  [AREATYPE_RIDGEMARKER] => 1
+                                  [AREATYPE_TEDDER] => 13
+                                  [initSpecialization] => function: 0x0116aac180
+                                  [AREATYPE_CUTTER] => 4
+                                  [AREATYPE_WINDROWER] => 11
+                                  [getIsTypedWorkAreaActive] => function: 0x0116aa6020
+                                  [loadSpeedRotatingPartFromXML] => function: 0x0116acb2a8
+                                  [AREATYPE_DEFAULT] => 10
+                                  [AREATYPE_MOWERDROP] => 9
+                                  [preLoad] => function: 0x0116ac5be0
+                                  [mouseEvent] => function: 0x0116a87fa0
+                                  [AREATYPE_WEEDER] => 2
+                                  [updateGroundReferenceNode] => function: 0x0116aa6050
+                                  [AREATYPE_TEDDERDROP] => 14
+                                  [registerAreaType] => function: 0x010b39df98
+                                  [load] => function: 0x010b3ec0e0
+                                  [keyEvent] => function: 0x0116a87fd0
+                                  [getIsWorkAreaActive] => function: 0x0116ac7e78
+                                  [AREATYPE_FORAGEWAGON] => 6
+                                  [getTypedNetworkAreas] => function: 0x0116a7d700
+                                  [NUM_AREATYPES] => 19
+                                  [AREATYPE_FRUITPREPARER] => 5
+                                }
+                         [4] => table: 0x010b5aa550 {
+                                  [loadGroundReferenceNodeFromXML] => function: 0x0116a7d180
+                                  [delete] => function: 0x0116aaa1a0
+                                  [draw] => function: 0x0116abad08
+                                  [onDeactivate] => function: 0x0116706b60
+                                  [prerequisitesPresent] => function: 0x0116aa8f78
+                                  [preLoad] => function: 0x0116aaa1d8
+                                  [getDoGroundManipulation] => function: 0x0116706b90
+                                  [update] => function: 0x010b3eb880
+                                  [mouseEvent] => function: 0x0116710670
+                                  [updateGroundReferenceNode] => function: 0x0116a7d1b0
+                                  [load] => function: 0x0116710640
+                                  [loadGroundParticles] => function: 0x0116707ad8
+                                  [loadGroundAnimations] => function: 0x011698fa08
+                                  [loadGroundParticleMapping] => function: 0x0116707b08
+                                  [updateTick] => function: 0x0116abacd8
+                                  [keyEvent] => function: 0x010b3eb850
+                                  [loadGroundAnimationMapping] => function: 0x011698fa38
+                                }
+                         [5] => table: 0x010b5aa550 {
+                                  [loadSpeedRotatingPartFromXML] => function: 0x011670bdb8
+                                  [getSpeedRotatingPartDirection] => function: 0x011670d668
+                                  [getIsSpeedRotatingPartActive] => function: 0x011670caa0
+                                  [readStream] => function: 0x01166fbf30
+                                  [mouseEvent] => function: 0x011698f6e0
+                                  [draw] => function: 0x011670b0b8
+                                  [writeUpdateStream] => function: 0x011698e1a8
+                                  [readUpdateStream] => function: 0x01166ffbf8
+                                  [delete] => function: 0x01166f7c78
+                                  [load] => function: 0x01166fa8c0
+                                  [keyEvent] => function: 0x0116990348
+                                  [prerequisitesPresent] => function: 0x01166f6680
+                                  [preLoad] => function: 0x01166f91e8
+                                  [updateTick] => function: 0x011670a388
+                                  [update] => function: 0x0116709680
+                                  [writeStream] => function: 0x01166fe950
+                                }
+                         [6] => table: 0x010b5aa550 {
+                                  [getSteeringAxleBaseVehicle] => function: 0x010b4e78e8
+                                  [loadInputPowerTakeoff] => function: 0x010b4e70e8
+                                  [onAttach] => function: 0x010b4e72a8
+                                  [delete] => function: 0x010b4e7248
+                                  [onDeactivate] => function: 0x010b4e7338
+                                  [getIsInWorkPosition] => function: 0x010b4e7858
+                                  [getIsInputAttacherActive] => function: 0x010b4e78b8
+                                  [update] => function: 0x010b4e7430
+                                  [attachableRemoveToolCameras] => function: 0x010b4e74f0
+                                  [onReleaseBrake] => function: 0x010b4e73f8
+                                  [getIsPowerTakeoffActive] => function: 0x010b4e7918
+                                  [onDetached] => function: 0x010b4e7308
+                                  [postLoad] => function: 0x010b4e7050
+                                  [preDelete] => function: 0x010b4e7118
+                                  [getSaveAttributesAndNodes] => function: 0x010b4e71b0
+                                  [onDetach] => function: 0x010b4e72d8
+                                  [onAiRaise] => function: 0x010b4e7520
+                                  [readStream] => function: 0x010b4e7278
+                                  [draw] => function: 0x010b4e7460
+                                  [getIsAIReadyForWork] => function: 0x010b4e7580
+                                  [prerequisitesPresent] => function: 0x010b4e7020
+                                  [attachableAddToolCameras] => function: 0x010b4e7948
+                                  [onAttached] => function: 0x010b4e74c0
+                                  [onPreAttach] => function: 0x010b4e7490
+                                  [preLoad] => function: 0x010b4e7088
+                                  [mouseEvent] => function: 0x010b4e71e0
+                                  [loadInputAttacherJoint] => function: 0x010b4e7150
+                                  [isDetachAllowed] => function: 0x010b4e7888
+                                  [onSetLowered] => function: 0x010b4e77f8
+                                  [writeStream] => function: 0x010b4e7180
+                                  [load] => function: 0x010b4e70b8
+                                  [keyEvent] => function: 0x010b4e7210
+                                  [onSelect] => function: 0x010b4e7368
+                                  [onBrake] => function: 0x010b4e73c8
+                                  [onLowerAll] => function: 0x010b4e7828
+                                  [onDeselect] => function: 0x010b4e7398
+                                  [onAiLower] => function: 0x010b4e7550
+                                }
+                         [7] => table: 0x010b5aa550 {
+                                  [getMaxPtoRpm] => function: 0x0116ab6dc8
+                                  [getConsumedPtoTorque] => function: 0x0116ab4e78
+                                  [getTurnedOnNotAllowedWarning] => function: 0x0116ab8e68
+                                  [delete] => function: 0x0116aa79b0
+                                  [draw] => function: 0x0116ab0c38
+                                  [prerequisitesPresent] => function: 0x0116a6fa80
+                                  [preLoad] => function: 0x01168915a8
+                                  [getTotalConsumedPtoTorque] => function: 0x0116ab5eb0
+                                  [update] => function: 0x0116aafaf0
+                                  [getPtoRpm] => function: 0x0116ab1b60
+                                  [getDoConsumePtoPower] => function: 0x0116ab2c08
+                                  [mouseEvent] => function: 0x0116aab0d8
+                                  [getSpecValueNeededPower] => function: 0x0116abcc10
+                                  [loadSpecValueNeededPower] => function: 0x0116abae90
+                                  [writeStream] => function: 0x0116aaa380
+                                  [load] => function: 0x0116aa6e80
+                                  [keyEvent] => function: 0x0116aabcd8
+                                  [getIsTurnedOnAllowed] => function: 0x0116ab7e88
+                                  [getCanBeTurnedOn] => function: 0x0116aec770
+                                  [readStream] => function: 0x0116aa8dc0
+                                  [getPowerMultiplier] => function: 0x0116ab3bf8
+                                  [loadPowerSetup] => function: 0x0116aa63d0
+                                }
+                         [8] => table: 0x010b5aa550 {
+                                  [updateAnimation] => function: 0x010b4db740
+                                  [onLeave] => function: 0x010b4db4a0
+                                  [onDeactivate] => function: 0x010b4db4d0
+                                  [getAnimationDuration] => function: 0x010b4db808
+                                  [preLoad] => function: 0x010b4db098
+                                  [onDeactivateSounds] => function: 0x010b4db2b8
+                                  [update] => function: 0x010b4db1f0
+                                  [loadWorkAreaFromXML] => function: 0x010b4db958
+                                  [updateAnimations] => function: 0x010b4db6b0
+                                  [getAnimationTime] => function: 0x010b4db3d8
+                                  [updateAnimationCurrentTime] => function: 0x010b4db710
+                                  [updateAnimationByName] => function: 0x010b4db6e0
+                                  [getIsSpeedRotatingPartActive] => function: 0x010b4db928
+                                  [onDetach] => function: 0x010b4db470
+                                  [getIsAnimationPlaying] => function: 0x010b4db348
+                                  [getNextPartIsPlaying] => function: 0x010b4db680
+                                  [getRealAnimationTime] => function: 0x010b4db378
+                                  [readStream] => function: 0x010b4db0f8
+                                  [getDurationToEndOfPart] => function: 0x010b4db650
+                                  [setMovedLimitedValues4] => function: 0x010b4db5f0
+                                  [findCurrentPartIndex] => function: 0x010b4db620
+                                  [setMovedLimitedValues3] => function: 0x010b4db5c0
+                                  [getMovedLimitedValue] => function: 0x010b4db590
+                                  [draw] => function: 0x010b4db440
+                                  [animPartSorterReverse] => function: 0x010b4db560
+                                  [setAnimationTime] => function: 0x010b4db408
+                                  [setAnimationStopTime] => function: 0x010b4db868
+                                  [setRealAnimationTime] => function: 0x010b4db3a8
+                                  [resetAnimationValues] => function: 0x010b4db898
+                                  [delete] => function: 0x010b4db160
+                                  [loadSpeedRotatingPartFromXML] => function: 0x010b4db8f8
+                                  [playAnimation] => function: 0x010b4db2e8
+                                  [stopAnimation] => function: 0x010b4db318
+                                  [initializeParts] => function: 0x010b4db060
+                                  [mouseEvent] => function: 0x010b4db190
+                                  [writeStream] => function: 0x010b4db128
+                                  [writeUpdateStream] => function: 0x010b4db288
+                                  [readUpdateStream] => function: 0x010b4db258
+                                  [setAnimationSpeed] => function: 0x010b4db838
+                                  [load] => function: 0x010b4db0c8
+                                  [keyEvent] => function: 0x010b4db1c0
+                                  [getIsWorkAreaActive] => function: 0x010b4db500
+                                  [animPartSorter] => function: 0x010b4db530
+                                  [updateTick] => function: 0x010b4db220
+                                  [prerequisitesPresent] => function: 0x010b4dae58
+                                  [resetAnimationPartValues] => function: 0x010b4db8c8
+                                }
+                         [9] => table: 0x010b5aa550 {
+                                  [setToolTranslation] => function: 0x010b551160
+                                  [onAttach] => function: 0x010b551318
+                                  [delete] => function: 0x010b550f48
+                                  [loadDependentParts] => function: 0x010b550fa8
+                                  [prerequisitesPresent] => function: 0x010b550e18
+                                  [preLoad] => function: 0x010b550e80
+                                  [onDeactivateSounds] => function: 0x010b551348
+                                  [update] => function: 0x010b5510d0
+                                  [getIsControlGroupChangeAllowed] => function: 0x010b551408
+                                  [setDirty] => function: 0x010b551680
+                                  [setToolRotation] => function: 0x010b5511c0
+                                  [getMovingToolState] => function: 0x010b551620
+                                  [postLoad] => function: 0x010b550e48
+                                  [allowLoadMovingToolStates] => function: 0x010b551498
+                                  [getSaveAttributesAndNodes] => function: 0x010b551288
+                                  [loadDependentMovingTools] => function: 0x010b550f78
+                                  [readStream] => function: 0x010b550ee0
+                                  [loadTranslatingParts] => function: 0x010b551228
+                                  [setObjectChangeValues] => function: 0x010b551468
+                                  [updateWheels] => function: 0x010b5516b0
+                                  [draw] => function: 0x010b551130
+                                  [isDetachAllowed] => function: 0x010b551378
+                                  [getNextValidControlGroupIndex] => function: 0x010b5513d8
+                                  [updateMovingPart] => function: 0x010b5516e0
+                                  [setActiveControlGroup] => function: 0x010b5513a8
+                                  [setToolAnimation] => function: 0x010b5515f0
+                                  [loadObjectChangeValuesFromXML] => function: 0x010b551438
+                                  [updateCylinderedInitial] => function: 0x010b5512e8
+                                  [setMovingToolDirty] => function: 0x010b551650
+                                  [updateAttacherJoints] => function: 0x010b551740
+                                  [keyEvent] => function: 0x010b5510a0
+                                  [mouseEvent] => function: 0x010b5512b8
+                                  [loadCopyLocalDirectionParts] => function: 0x010b551258
+                                  [writeUpdateStream] => function: 0x010b551070
+                                  [readUpdateStream] => function: 0x010b551040
+                                  [writeStream] => function: 0x010b550f10
+                                  [load] => function: 0x010b550eb0
+                                  [updateComponentJoints] => function: 0x010b551710
+                                  [setDelayedNodeTranslation] => function: 0x010b551190
+                                  [updateTick] => function: 0x010b551100
+                                  [loadAttacherJoints] => function: 0x010b551008
+                                  [loadComponentJoints] => function: 0x010b550fd8
+                                  [setDelayedNodeRotation] => function: 0x010b5511f0
+                                }
+                         [10] => table: 0x010b5aa550 {
+                                   [onAiTurnOff] => function: 0x010b538fd8
+                                   [onEnter] => function: 0x010b539130
+                                   [onAttach] => function: 0x010b538ee0
+                                   [delete] => function: 0x010b538e20
+                                   [draw] => function: 0x010b538eb0
+                                   [onDeactivate] => function: 0x010b539190
+                                   [prerequisitesPresent] => function: 0x010b538d58
+                                   [preLoad] => function: 0x010b538d88
+                                   [onDeactivateSounds] => function: 0x010b538f78
+                                   [update] => function: 0x010b538e50
+                                   [loadWorkAreaFromXML] => function: 0x010b5390c8
+                                   [updateTick] => function: 0x010b538e80
+                                   [getDefaultSpeedLimit] => function: 0x010b5394c8
+                                   [getDirtMultiplier] => function: 0x010b539098
+                                   [getIsReadyToSpray] => function: 0x010b539068
+                                   [mouseEvent] => function: 0x010b538f18
+                                   [getDoGroundManipulation] => function: 0x010b539038
+                                   [writeUpdateStream] => function: 0x010b538de8
+                                   [readUpdateStream] => function: 0x010b538db8
+                                   [onActivate] => function: 0x010b539160
+                                   [load] => function: 0x010b538d20
+                                   [keyEvent] => function: 0x010b538f48
+                                   [doCheckSpeedLimit] => function: 0x010b539008
+                                   [onAiTurnOn] => function: 0x010b538fa8
+                                   [initSpecialization] => function: 0x010b538cf0
+                                   [processCultivatorAreas] => function: 0x010b5394f8
+                                   [onDetach] => function: 0x010b539100
+                                 }
+                         [11] => table: 0x010b5aa550 {
+                                   [setAnimTime] => function: 0x010b42b3c0
+                                   [getIsVersatileYRotActive] => function: 0x010b4c9630
+                                   [getTurnedOnNotAllowedWarning] => function: 0x010b430ee0
+                                   [delete] => function: 0x010b47de58
+                                   [onDeactivate] => function: 0x010b4510b8
+                                   [prerequisitesPresent] => function: 0x010b4ad448
+                                   [updateTick] => function: 0x010b433f18
+                                   [update] => function: 0x010b3d6278
+                                   [loadWorkAreaFromXML] => function: 0x010b42b698
+                                   [getToggledFoldDirection] => function: 0x010b4284e0
+                                   [loadDynamicWheelDataFromXML] => function: 0x010b413d80
+                                   [stopThreshing] => function: 0x010b453bb0
+                                   [getIsFoldAllowed] => function: 0x010b4265c0
+                                   [postLoad] => function: 0x010b4bf558
+                                   [allowLoadMovingToolStates] => function: 0x010b431e10
+                                   [getSaveAttributesAndNodes] => function: 0x010b4758c8
+                                   [setRelativePosition] => function: 0x010b453140
+                                   [getIsSpeedRotatingPartActive] => function: 0x010b40e780
+                                   [onAiTurnOff] => function: 0x010b480760
+                                   [onAiTurnOn] => function: 0x010b47b550
+                                   [readStream] => function: 0x010b478c48
+                                   [onLowerAll] => function: 0x010b42a490
+                                   [getIsToggleCoverAllowed] => function: 0x010b42e150
+                                   [getToggledFoldMiddleDirection] => function: 0x010b4294d0
+                                   [draw] => function: 0x010b3d2e28
+                                   [getIsFoldMiddleAllowed] => function: 0x010b4274f0
+                                   [onAiRaise] => function: 0x010b515948
+                                   [isDetachAllowed] => function: 0x010b4210c0
+                                   [getIsInWorkPosition] => function: 0x010b42ffb0
+                                   [getIsUnfolded] => function: 0x010b42f080
+                                   [getIsTurnedOnAllowed] => function: 0x010b42d220
+                                   [loadSpeedRotatingPartFromXML] => function: 0x010b46dd60
+                                   [writeUpdateStream] => function: 0x010b472fc0
+                                   [onAiLower] => function: 0x010b4e6fa8
+                                   [preLoad] => function: 0x010b4a8b40
+                                   [mouseEvent] => function: 0x010b44e528
+                                   [writeStream] => function: 0x010b46fc40
+                                   [setFoldDirection] => function: 0x010b46b530
+                                   [readUpdateStream] => function: 0x010b46d2f0
+                                   [getIsAIReadyForWork] => function: 0x010b518360
+                                   [load] => function: 0x010b4a9610
+                                   [keyEvent] => function: 0x010b44faf0
+                                   [getIsWorkAreaActive] => function: 0x010b42c2f0
+                                   [applyInitialAnimation] => function: 0x010b4c7cb0
+                                   [isLowered] => function: 0x010b422060
+                                   [setFoldState] => function: 0x010b46bed0
+                                   [startThreshing] => function: 0x010b439678
+                                 }
+                         [12] => table: 0x010b5aa550 {
+                                   [setDirtAmount] => function: 0x0116a9e298
+                                   [addWashableNode] => function: 0x0116a9ec70
+                                   [addWashingTrigger] => function: 0x0116aa0a30
+                                   [readStream] => function: 0x0116a9b7b8
+                                   [delete] => function: 0x0116a9a2b8
+                                   [draw] => function: 0x0116a9e268
+                                   [prerequisitesPresent] => function: 0x0116a97950
+                                   [updateTick] => function: 0x0116a9d830
+                                   [getIntervalMultiplier] => function: 0x0116aa45e0
+                                   [update] => function: 0x0116a9d800
+                                   [getDirtMultiplier] => function: 0x0116a9f670
+                                   [mouseEvent] => function: 0x0116a9c1f8
+                                   [removeWashingTrigger] => function: 0x0116aa45b0
+                                   [writeUpdateStream] => function: 0x0116a9a288
+                                   [readUpdateStream] => function: 0x0116a9b7e8
+                                   [writeStream] => function: 0x010b3b9a70
+                                   [load] => function: 0x0116a997b8
+                                   [postLoad] => function: 0x0116a97980
+                                   [getSaveAttributesAndNodes] => function: 0x0116aa0a00
+                                   [removeWashableNode] => function: 0x0116a9eca0
+                                   [getDirtAmount] => function: 0x0116a9f640
+                                   [keyEvent] => function: 0x0116a9c228
+                                   [preLoad] => function: 0x0116a99788
+                                 }
+                         [13] => table: 0x010b5aa550 {
+                                   [mountDynamic] => function: 0x0116983598
+                                   [onEnter] => function: 0x01169869f8
+                                   [mouseEvent] => function: 0x0116985630
+                                   [onDynamicMountJointBreak] => function: 0x01166f28f0
+                                   [getSupportsMountDynamic] => function: 0x0116992db0
+                                   [onAttach] => function: 0x0116984998
+                                   [delete] => function: 0x011698b8d8
+                                   [load] => function: 0x011698d550
+                                   [keyEvent] => function: 0x011698a5f8
+                                   [prerequisitesPresent] => function: 0x0116986080
+                                   [updateTick] => function: 0x01169891c0
+                                   [unmountDynamic] => function: 0x01169922c0
+                                   [update] => function: 0x0116989bc0
+                                   [draw] => function: 0x0116987e78
+                                 }
+                         [14] => table: 0x010b5aa550 {
+                                   [mouseEvent] => function: 0x0119baa690
+                                   [updateTick] => function: 0x0119b9a9f8
+                                   [delete] => function: 0x0119baa660
+                                   [load] => function: 0x0119ba3508
+                                   [keyEvent] => function: 0x0119ba3598
+                                   [prerequisitesPresent] => function: 0x0119baf428
+                                   [preLoad] => function: 0x0119ba34d8
+                                   [draw] => function: 0x0119b9aa28
+                                   [update] => function: 0x0119ba35c8
+                                   [destroyFruitArea] => function: 0x0119b9aac8
+                                 }
+                         [15] => table: 0x010b5aa550 {
+                                   [setDirtAmount] => function: 0x01199f3500
+                                   [readStream] => function: 0x01199f9b10
+                                   [delete] => function: 0x0119a0bf78
+                                   [draw] => function: 0x01199f34d0
+                                   [prerequisitesPresent] => function: 0x0119a417b8
+                                   [updateTick] => function: 0x01199f2de0
+                                   [update] => function: 0x01199f2db0
+                                   [mouseEvent] => function: 0x01199f9a40
+                                   [writeUpdateStream] => function: 0x01199f9c00
+                                   [readUpdateStream] => function: 0x01199f9bd0
+                                   [writeStream] => function: 0x01199f9b40
+                                   [load] => function: 0x0119a3b098
+                                   [keyEvent] => function: 0x01199f9a70
+                                   [wheelMinDirtDelta] => 0.0078740157480315
+                                   [getSaveAttributesAndNodes] => function: 0x0119a0bf48
+                                   [postLoad] => function: 0x0119a3b0c8
+                                   [sendNumBits] => 7
+                                 }
+                         [16] => table: 0x010b5aa550 {
+                                   [getWheelCurrentSink] => function: 0x0119459058
+                                   [delete] => function: 0x01195f3088
+                                   [draw] => function: 0x01194643c8
+                                   [prerequisitesPresent] => function: 0x01195f2fb8
+                                   [updateTick] => function: 0x0119463fd0
+                                   [updateWheelDirtPS] => function: 0x0119464000
+                                   [update] => function: 0x0119463f30
+                                   [updateWheelSink] => function: 0x01194643f8
+                                   [mouseEvent] => function: 0x01195f30b8
+                                   [writeUpdateStream] => function: 0x0119463f00
+                                   [loadParticleSystemsForWheel] => function: 0x01195f3178
+                                   [load] => function: 0x01195f2fe8
+                                   [updateWheelTireFriction] => function: 0x0119459088
+                                   [applyRandomForceToWheels] => function: 0x011940d758
+                                   [keyEvent] => function: 0x01195f6600
+                                   [postLoad] => function: 0x01195f3148
+                                   [readUpdateStream] => function: 0x01195f6630
+                                 }
+                       }
+  [brakeLights] => table: 0x010b5b6c30 {
+                     [1] => table: 0x0117162290 {
+                              *table: 0x01171622d8
+                            }
+                   }
+  [getDirtAmount] => function: 0x0116a9f640
+  [resetAnimationValues] => function: 0x010b4db898
+  [loadObjectChangeValuesFromXML] => function: 0x0116e93650
+  [onReverseLightsVisibilityChanged] => function: 0x0116e6e270
+  [setMovingToolDirty] => function: 0x01178ba5c0
+  [getDirtMultiplier] => function: 0x01176de6e8
+  [interpolationAlpha] => 0
+  [onlyFoldOnDetach] => false
+  [steeringAxleTargetAngle] => 0
+  [closeCoverOnFold] => false
+  [washingTriggers] => table: 0x010b5b6c30 {
+                       }
+  [getImplementIndexByJointDescIndex] => function: 0x0116b908f0
+  [lastSpeed] => 0
+  [attacherJoints] => table: 0x010b5b6c30 {
+                      }
+  [doGroundManipulation] => false
+  [aiProhibitedFruitType] => 0
+  [operatingTime] => 99468734.375
+  [getPtoRpm] => function: 0x0116ab1b60
+  [onDeactivateAttachments] => function: 0x010b4aefc8
+  [onReleaseBrake] => function: 0x0116dc1e30
+  [cultivatorLimitToField] => false
+  [fixFoldableAnim] => true
+  [allowLoadMovingToolStates] => function: 0x0117763280
+  [collisionPairs] => table: 0x010b5b6c30 {
+                      }
+  [isLowered] => function: 0x0117820430
+  [mapHotspot] => table: 0x010b5b6c30 {
+                    [width] => 0.0046874999650754
+                    [blinking] => false
+                    [y] => 0
+                    [persistent] => false
+                    [overlayBg] => table: 0x01178259e8 {
+                                     [filename] => "dataS2/menu/hud/mapHotspots_256.png"
+                                     [rotation] => 0
+                                     [rotationCenterY] => 0
+                                     [y] => 0
+                                     [rotationCenterX] => 0
+                                     [offsetX] => 0
+                                     [uvs] => table: 0x0118d86ff0 {
+                                                [1] => 0.7578125
+                                                [2] => 0.0078125
+                                                [3] => 0.7578125
+                                                [4] => 0.2421875
+                                                [5] => 0.9921875
+                                                [6] => 0.0078125
+                                                [7] => 0.9921875
+                                                [8] => 0.2421875
+                                              }
+                                     [r] => 0.0075
+                                     [alignmentVertical] => 1
+                                     [alignmentHorizontal] => 4
+                                     [offsetY] => 0
+                                     [visible] => true
+                                     [height] => 0.0083333333333333
+                                     [g] => 0.0075
+                                     [invertX] => false
+                                     [defaultHeight] => 0.0083333333333333
+                                     [width] => 0.0046874999650754
+                                     [defaultWidth] => 0.0046874999650754
+                                     [b] => 0.0075
+                                     [overlayId] => 68723
+                                     [a] => 1
+                                     [x] => 0
+                                   }
+                    [objectId] => 68625
+                    [showName] => false
+                    [category] => 7
+                    [renderLast] => false
+                    [name] => "Tool"
+                    [height] => 0.0083333333333333
+                    [xMapPos] => 150.54368591309
+                    [zoom] => 1
+                    [zMapPos] => -85.242279052734
+                    [imageUVs] => table: 0x01178259e8 {
+                                    [1] => 0.7578125
+                                    [2] => 0.0078125
+                                    [3] => 0.7578125
+                                    [4] => 0.2421875
+                                    [5] => 0.9921875
+                                    [6] => 0.0078125
+                                    [7] => 0.9921875
+                                    [8] => 0.2421875
+                                  }
+                    [textSize] => 0.0083333333333333
+                    [defaultTextSize] => 0.0083333333333333
+                    [visible] => true
+                    [x] => 0
+                    [textOffsetY] => 0.0013888888888889
+                    [textBold] => false
+                    [verticalAlignment] => 2
+                    [overlays] => table: 0x01178259e8 {
+                                    [1] => table: 0x0117825aa0 {
+                                             [filename] => "dataS2/menu/hud/mapHotspots_1024.png"
+                                             [rotation] => 0
+                                             [rotationCenterY] => 0
+                                             [y] => 0
+                                             [rotationCenterX] => 0
+                                             [offsetX] => 0
+                                             [uvs] => table: 0x011785b6d8 {
+                                                        *table: 0x01177eb8c8
+                                                      }
+                                             [r] => 0.9301
+                                             [alignmentVertical] => 1
+                                             [alignmentHorizontal] => 4
+                                             [offsetY] => 0
+                                             [visible] => true
+                                             [height] => 0.0083333333333333
+                                             [g] => 0.6404
+                                             [invertX] => false
+                                             [defaultHeight] => 0.0083333333333333
+                                             [width] => 0.0046874999650754
+                                             [defaultWidth] => 0.0046874999650754
+                                             [b] => 0.0439
+                                             [overlayId] => 68718
+                                             [a] => 1
+                                             [x] => 0
+                                           }
+                                    [2] => table: 0x0117825aa0 {
+                                             [filename] => "dataS2/menu/hud/mapHotspots_512.png"
+                                             [rotation] => 0
+                                             [rotationCenterY] => 0
+                                             [y] => 0
+                                             [rotationCenterX] => 0
+                                             [offsetX] => 0
+                                             [uvs] => table: 0x0117869450 {
+                                                        *table: 0x01177eb8c8
+                                                      }
+                                             [r] => 0.9301
+                                             [alignmentVertical] => 1
+                                             [alignmentHorizontal] => 4
+                                             [offsetY] => 0
+                                             [visible] => true
+                                             [height] => 0.0083333333333333
+                                             [g] => 0.6404
+                                             [invertX] => false
+                                             [defaultHeight] => 0.0083333333333333
+                                             [width] => 0.0046874999650754
+                                             [defaultWidth] => 0.0046874999650754
+                                             [b] => 0.0439
+                                             [overlayId] => 68719
+                                             [a] => 1
+                                             [x] => 0
+                                           }
+                                    [3] => table: 0x0117825aa0 {
+                                             [filename] => "dataS2/menu/hud/mapHotspots_256.png"
+                                             [rotation] => 0
+                                             [rotationCenterY] => 0
+                                             [y] => 0
+                                             [rotationCenterX] => 0
+                                             [offsetX] => 0
+                                             [uvs] => table: 0x0117869528 {
+                                                        *table: 0x01177eb8c8
+                                                      }
+                                             [r] => 0.9301
+                                             [alignmentVertical] => 1
+                                             [alignmentHorizontal] => 4
+                                             [offsetY] => 0
+                                             [visible] => true
+                                             [height] => 0.0083333333333333
+                                             [g] => 0.6404
+                                             [invertX] => false
+                                             [defaultHeight] => 0.0083333333333333
+                                             [width] => 0.0046874999650754
+                                             [defaultWidth] => 0.0046874999650754
+                                             [b] => 0.0439
+                                             [overlayId] => 68720
+                                             [a] => 1
+                                             [x] => 0
+                                           }
+                                    [4] => table: 0x0117825aa0 {
+                                             [filename] => "dataS2/menu/hud/mapHotspots_128.png"
+                                             [rotation] => 0
+                                             [rotationCenterY] => 0
+                                             [y] => 0
+                                             [rotationCenterX] => 0
+                                             [offsetX] => 0
+                                             [uvs] => table: 0x0118d96b50 {
+                                                        *table: 0x01177eb8c8
+                                                      }
+                                             [r] => 0.9301
+                                             [alignmentVertical] => 1
+                                             [alignmentHorizontal] => 4
+                                             [offsetY] => 0
+                                             [visible] => true
+                                             [height] => 0.0083333333333333
+                                             [g] => 0.6404
+                                             [invertX] => false
+                                             [defaultHeight] => 0.0083333333333333
+                                             [width] => 0.0046874999650754
+                                             [defaultWidth] => 0.0046874999650754
+                                             [b] => 0.0439
+                                             [overlayId] => 68721
+                                             [a] => 1
+                                             [x] => 0
+                                           }
+                                    [5] => table: 0x0117825aa0 {
+                                             [filename] => "dataS2/menu/hud/mapHotspots_64.png"
+                                             [rotation] => 0
+                                             [rotationCenterY] => 0
+                                             [y] => 0
+                                             [rotationCenterX] => 0
+                                             [offsetX] => 0
+                                             [uvs] => table: 0x0118d91330 {
+                                                        *table: 0x01177eb8c8
+                                                      }
+                                             [r] => 0.9301
+                                             [alignmentVertical] => 1
+                                             [alignmentHorizontal] => 4
+                                             [offsetY] => 0
+                                             [visible] => true
+                                             [height] => 0.0083333333333333
+                                             [g] => 0.6404
+                                             [invertX] => false
+                                             [defaultHeight] => 0.0083333333333333
+                                             [width] => 0.0046874999650754
+                                             [defaultWidth] => 0.0046874999650754
+                                             [b] => 0.0439
+                                             [overlayId] => 68722
+                                             [a] => 1
+                                             [x] => 0
+                                           }
+                                  }
+                    [baseColor] => table: 0x01178259e8 {
+                                     [1] => 0.9301
+                                     [2] => 0.6404
+                                     [3] => 0.0439
+                                     [4] => 1
+                                   }
+                    [iconScale] => 0.7
+                    [textColor] => table: 0x01178259e8 {
+                                     *table: 0x01177eb958
+                                   }
+                    [enabled] => true
+                    [fullViewName] => ""
+                    [showNameDefault] => false
+                  }
+  [speedLimit] => 17
+  [getImplementByObject] => function: 0x010bec3c88
+  [reverseLights] => table: 0x010b5b6c30 {
+                     }
+  [startAnimTime] => 0
+  [cultivatorDirectionNode] => 68625
+  [showFieldNotOwnedWarning] => false
+  [dirtParticleSystemDirtyFlag] => 64
+  [turnLightState] => 0
+  [updateWheelTireFriction] => function: 0x01177ef450
+  [unfoldWarning] => "You first need to unfold the tool (cultivator)!"
+  [updateWheelSink] => function: 0x01194643f8
+  [tipErrorMessage] => ""
+  [loadParticleSystemsForWheel] => function: 0x01195f3178
+  [components] => table: 0x010b5b6c30 {
+                    [1] => table: 0x0116ff8300 {
+                             *table: 0x0116ffaca0
+                           }
+                  }
+  [setActiveControlGroup] => function: 0x010b5513a8
+  [dynamicMountForceLimitScale] => 1
+  [mountDynamic] => function: 0x0116983598
+  [movingDirection] => 0
+  [updateAttacherJointRotation] => function: 0x010b481bb0
+  [steeringAxleAngleScaleStart] => 10
+  [conflictCheckedInputs] => table: 0x010b5b6c30 {
+                             }
+  [getDeactivateLights] => function: 0x0116bce570
+  [playAnimation] => function: 0x011721eb48
+  [configurations] => table: 0x010b5b6c30 {
+                        [wheel] => 1
+                      }
+  [sampleAttach] => table: 0x010b5b6c30 {
+                    }
+  [updateCylinderedInitial] => function: 0x01176ae778
+  [lastCultivatorArea] => 0
+  [isSelectable] => true
+  [vehicleMovingDirection] => 1
+  [lastSoundSpeed] => 0
+  [onDynamicMountJointBreak] => function: 0x01166f28f0
+  [workAreas] => table: 0x010b5b6c30 {
+                   [1] => table: 0x01172097b8 {
+                            [width] => 68668
+                            [refNode] => table: 0x0117209800 {
+                                           *table: 0x01172551e8
+                                         }
+                            [disableBackwards] => true
+                            [foldMinLimit] => 0
+                            [foldMaxLimit] => 1
+                            [animMaxLimit] => 1
+                            [height] => 68669
+                            [type] => 16
+                            [animMinLimit] => 0
+                            [start] => 68667
+                            [foldLimitedOuterRange] => false
+                          }
+                 }
+  [getIsVersatileYRotActive] => function: 0x01177dc0f0
+  [isHardAttached] => false
+  [brakePedal] => 0
+  [workMultiplier] => 20
+  [washDuration] => 60000
+  [cropDestruction] => table: 0x010b5b6c30 {
+                         [isActive] => true
+                       }
+  [typeDesc] => "cultivator"
+  [onAttach] => function: 0x0116ea7c20
+  [washableNodes] => table: 0x010b5b6c30 {
+                       [68699] => 68699
+                       [68629] => 68629
+                     }
+  [applyRandomForceToWheels] => function: 0x011940d758
+  [washableDirtyFlag] => 16
+  [sentDirtAmount] => 0.11339925229549
+  [maxFoldAnimDuration] => 1500
+  [foldAnimTime] => 0
+  [turnOffOnFold] => false
+  [loadMovingToolStatesMinLimit] => 0
+  [detachingMinLimit] => 0
+  [price] => 9400
+  [toggleCoverMinLimit] => 0
+  [toggleCoverMaxLimit] => 1
+  [wheels] => table: 0x010b5b6c30 {
+                [1] => table: 0x011705ec50 {
+                         [directionX] => 0
+                         [driveMode] => 0
+                         [node] => 68625
+                         [restLoad] => 0.40000000596046
+                         [axleX] => 1
+                         [repr] => 68627
+                         [axleY] => 0
+                         [axleZ] => 0
+                         [forceVersatility] => false
+                         [fenderRotMax] => 0
+                         [steeringNodeMaxRot] => 0
+                         [lastColor] => table: 0x011705ec98 {
+                                          [1] => 0
+                                          [2] => 0
+                                          [3] => 0
+                                          [4] => 0
+                                        }
+                         [rotationDamping] => 0
+                         [spring] => 210
+                         [steeringNodeMinRotY] => 0
+                         [width] => 0.6
+                         [maxLatStiffnessLoad] => 0.80000001192093
+                         [steeringAxleScale] => 0
+                         [linkNode] => 68627
+                         [xDriveOffset] => 0
+                         [steeringAxleRotMax] => 0
+                         [driveNode] => 68627
+                         [startPositionY] => 0.44111499190331
+                         [versatileFoldMaxLimit] => 1
+                         [directionZ] => 0
+                         [hasParticles] => false
+                         [washableDirtAmountSend] => 0
+                         [deltaY] => 0.035000000521541
+                         [tireTrackAtlasIndex] => 0
+                         [sinkLongStiffnessFactor] => 1
+                         [smoothGroundRadius] => 0.6
+                         [lastTerrainAttribute] => 0
+                         [tireType] => 1
+                         [showSteeringAngle] => true
+                         [tireGroundFrictionCoeff] => 1
+                         [maxLatStiffness] => 16.000000238419
+                         [sinkLatStiffnessFactor] => 1
+                         [hasHandbrake] => true
+                         [useReprDirection] => false
+                         [sinkFrictionScaleFactor] => 1
+                         [radiusOriginal] => 0.28000000119209
+                         [versatileFoldMinLimit] => 0
+                         [netInfo] => table: 0x011705ec98 {
+                                        [xDrive] => 0
+                                        [x] => 1
+                                        [suspensionLength] => 0.025000000372529
+                                        [y] => 0.47611499242485
+                                        [yMin] => 0.41611499153078
+                                        [z] => -1.5243799686432
+                                        [yRange] => 0.06000000089407
+                                      }
+                         [rotMax] => 0
+                         [oppositeWheelIndex] => 2
+                         [washableNodes] => table: 0x011705ec98 {
+                                            }
+                         [washableDirtAmount] => 0
+                         [steeringNodeMinRot] => -0
+                         [wheelShape] => 9
+                         [sink] => 0
+                         [xOffset] => 0
+                         [damperCompressionLowSpeedThreshold] => 0.1016
+                         [xmlIndex] => 0
+                         [hasGroundContact] => false
+                         [rotMin] => 0
+                         [rotSpeed] => 0
+                         [contact] => 0
+                         [fenderRotMin] => 0
+                         [startPositionX] => 1
+                         [steeringNodeMaxRotY] => 0
+                         [radius] => 0.28000000119209
+                         [positionY] => 0.44111499190331
+                         [suspTravel] => 0.050000000745058
+                         [isSynchronized] => false
+                         [tipOcclusionAreaGroupId] => 1
+                         [damperRelaxationHighSpeed] => 35
+                         [versatileYRot] => false
+                         [dirtAmount] => 0
+                         [maxLongStiffness] => 30
+                         [startPositionZ] => -1.5243799686432
+                         [damperCompressionHighSpeed] => 9
+                         [directionY] => -1
+                         [sinkTarget] => 0
+                         [damperRelaxationLowSpeed] => 50
+                         [brakeFactor] => 1
+                         [steeringCenterOffsetX] => 0
+                         [positionZ] => -1.5243799686432
+                         [steeringAxleRotMin] => -0
+                         [createTipOcclusionArea] => true
+                         [steeringCenterOffsetZ] => 0
+                         [damperCompressionLowSpeed] => 45
+                         [steeringCenterOffsetY] => 0
+                         [damperRelaxationLowSpeedThreshold] => 0.1524
+                         [forcePointRatio] => 0.20000000298023
+                         [steeringAngle] => 0
+                         [hasTireTracks] => false
+                         [ignoreDefaultRaycast] => false
+                         [mass] => 0.10000000149012
+                         [positionX] => 1
+                         [updateWheel] => false
+                         [frictionScale] => 1.5
+                       }
+                [2] => table: 0x011705ec50 {
+                         [directionX] => 0
+                         [driveMode] => 0
+                         [node] => 68625
+                         [restLoad] => 0.40000000596046
+                         [axleX] => 1
+                         [repr] => 68628
+                         [axleY] => 0
+                         [axleZ] => 0
+                         [forceVersatility] => false
+                         [fenderRotMax] => 0
+                         [steeringNodeMaxRot] => 0
+                         [lastColor] => table: 0x011723e250 {
+                                          [1] => 0
+                                          [2] => 0
+                                          [3] => 0
+                                          [4] => 0
+                                        }
+                         [rotationDamping] => 0
+                         [spring] => 210
+                         [steeringNodeMinRotY] => 0
+                         [width] => 0.6
+                         [maxLatStiffnessLoad] => 0.80000001192093
+                         [steeringAxleScale] => 0
+                         [linkNode] => 68628
+                         [xDriveOffset] => 0
+                         [steeringAxleRotMax] => 0
+                         [driveNode] => 68628
+                         [startPositionY] => 0.44111499190331
+                         [versatileFoldMaxLimit] => 1
+                         [directionZ] => 0
+                         [hasParticles] => false
+                         [washableDirtAmountSend] => 0
+                         [deltaY] => 0.035000000521541
+                         [tireTrackAtlasIndex] => 0
+                         [sinkLongStiffnessFactor] => 1
+                         [smoothGroundRadius] => 0.6
+                         [lastTerrainAttribute] => 0
+                         [tireType] => 1
+                         [showSteeringAngle] => true
+                         [tireGroundFrictionCoeff] => 1
+                         [maxLatStiffness] => 16.000000238419
+                         [sinkLatStiffnessFactor] => 1
+                         [hasHandbrake] => true
+                         [useReprDirection] => false
+                         [sinkFrictionScaleFactor] => 1
+                         [radiusOriginal] => 0.28000000119209
+                         [versatileFoldMinLimit] => 0
+                         [netInfo] => table: 0x011723e250 {
+                                        [xDrive] => 0
+                                        [x] => -1
+                                        [suspensionLength] => 0.025000000372529
+                                        [y] => 0.47611499242485
+                                        [yMin] => 0.41611499153078
+                                        [z] => -1.5243799686432
+                                        [yRange] => 0.06000000089407
+                                      }
+                         [rotMax] => 0
+                         [oppositeWheelIndex] => 1
+                         [washableNodes] => table: 0x011723e250 {
+                                            }
+                         [washableDirtAmount] => 0
+                         [steeringNodeMinRot] => -0
+                         [wheelShape] => 10
+                         [sink] => 0
+                         [xOffset] => 0
+                         [damperCompressionLowSpeedThreshold] => 0.1016
+                         [xmlIndex] => 1
+                         [hasGroundContact] => false
+                         [rotMin] => 0
+                         [rotSpeed] => 0
+                         [contact] => 0
+                         [fenderRotMin] => 0
+                         [startPositionX] => -1
+                         [steeringNodeMaxRotY] => 0
+                         [radius] => 0.28000000119209
+                         [positionY] => 0.44111499190331
+                         [suspTravel] => 0.050000000745058
+                         [isSynchronized] => false
+                         [tipOcclusionAreaGroupId] => 2
+                         [damperRelaxationHighSpeed] => 35
+                         [versatileYRot] => false
+                         [dirtAmount] => 0
+                         [maxLongStiffness] => 30
+                         [startPositionZ] => -1.5243799686432
+                         [damperCompressionHighSpeed] => 9
+                         [directionY] => -1
+                         [sinkTarget] => 0
+                         [damperRelaxationLowSpeed] => 50
+                         [brakeFactor] => 1
+                         [steeringCenterOffsetX] => 0
+                         [positionZ] => -1.5243799686432
+                         [steeringAxleRotMin] => -0
+                         [createTipOcclusionArea] => true
+                         [steeringCenterOffsetZ] => 0
+                         [damperCompressionLowSpeed] => 45
+                         [steeringCenterOffsetY] => 0
+                         [damperRelaxationLowSpeedThreshold] => 0.1524
+                         [forcePointRatio] => 0.20000000298023
+                         [steeringAngle] => 0
+                         [hasTireTracks] => false
+                         [ignoreDefaultRaycast] => false
+                         [mass] => 0.10000000149012
+                         [positionX] => -1
+                         [updateWheel] => false
+                         [frictionScale] => 1.5
+                       }
+              }
+  [turnOnFoldMinLimit] => 0
+  [animations] => table: 0x010b5b6c30 {
+                    [folding] => table: 0x011769a420 {
+                                   [parts] => table: 0x011769de80 {
+                                                [1] => table: 0x011769df00 {
+                                                         [startTime] => 0
+                                                         [node] => 68692
+                                                         [direction] => 0
+                                                         [startTrans] => table: 0x01176effb8 {
+                                                                           [1] => 1.248
+                                                                           [2] => 0.698
+                                                                           [3] => -0.551
+                                                                         }
+                                                         [duration] => 1500
+                                                         [endTrans] => table: 0x01176effb8 {
+                                                                         [1] => 0.962
+                                                                         [2] => 0.698
+                                                                         [3] => -0.551
+                                                                       }
+                                                       }
+                                                [2] => table: 0x011769df00 {
+                                                         [startTime] => 0
+                                                         [node] => 68695
+                                                         [direction] => 0
+                                                         [startTrans] => table: 0x01176f0048 {
+                                                                           [1] => -1.248
+                                                                           [2] => 0.698
+                                                                           [3] => -0.551
+                                                                         }
+                                                         [duration] => 1500
+                                                         [endTrans] => table: 0x01176f0048 {
+                                                                         [1] => -0.962
+                                                                         [2] => 0.698
+                                                                         [3] => -0.551
+                                                                       }
+                                                       }
+                                              }
+                                   [duration] => 1500
+                                   [currentPartIndex] => 1
+                                   [looping] => false
+                                   [partsReverse] => table: 0x011769de80 {
+                                                       [1] => table: 0x01178ba728 {
+                                                                *table: 0x01176effb8
+                                                              }
+                                                       [2] => table: 0x01178ba728 {
+                                                                *table: 0x01176f0048
+                                                              }
+                                                     }
+                                   [currentTime] => 0
+                                   [name] => "folding"
+                                   [currentSpeed] => 1
+                                 }
+                    [moveSupport] => table: 0x011769a420 {
+                                       [parts] => table: 0x011769a468 {
+                                                    [1] => table: 0x0117714c90 {
+                                                             [startTime] => 0
+                                                             [startTrans] => table: 0x01176cb2e8 {
+                                                                               [1] => 0
+                                                                               [2] => 0.3
+                                                                               [3] => 0
+                                                                             }
+                                                             [node] => 68698
+                                                             [speedTrans] => table: 0x01176cb2e8 {
+                                                                               [1] => 0
+                                                                               [2] => 0
+                                                                               [3] => 0
+                                                                             }
+                                                             [endTrans] => table: 0x01176cb2e8 {
+                                                                             [1] => 0
+                                                                             [2] => 0
+                                                                             [3] => 0
+                                                                           }
+                                                             [direction] => 0
+                                                             [duration] => 500
+                                                             [curTrans] => table: 0x01176cb2e8 {
+                                                                             [1] => 0
+                                                                             [2] => 0
+                                                                             [3] => 0
+                                                                           }
+                                                           }
+                                                  }
+                                       [duration] => 500
+                                       [currentPartIndex] => 1
+                                       [looping] => false
+                                       [partsReverse] => table: 0x011769a468 {
+                                                           [1] => table: 0x01176cb330 {
+                                                                    *table: 0x01176cb2e8
+                                                                  }
+                                                         }
+                                       [currentTime] => 500
+                                       [name] => "moveSupport"
+                                       [currentSpeed] => 1
+                                     }
+                  }
+  [isAddedToMission] => true
+  [foldMiddleDirection] => 1
+  [updateSteeringAxleAngle] => true
+  [foldMiddleInputButton] => 31
+  [foldInputButton] => 33
+  [age] => 56
+  [driveGroundParticleSystems] => table: 0x010b5b6c30 {
+                                  }
+  [turnOnFoldDirection] => -1
+  [checkSpeedLimit] => false
+  [addWashableNode] => function: 0x0116a9ec70
+  [middleNegDirectionText] => "action_lowerOBJECT"
+  [isAddedToPhysics] => true
+  [componentJoints] => table: 0x010b5b6c30 {
+                       }
+  [posDirectionText] => "action_foldOBJECT"
+  [steeringAxleUpdateBackwards] => false
+  [getIsToggleCoverAllowed] => function: 0x01177cd2f8
+  [getSupportsMountDynamic] => function: 0x0116992db0
+  [foldMiddleAIRaiseDirection] => 1
+  [movingParts] => table: 0x010b5b6c30 {
+                   }
+  [setFoldDirection] => function: 0x01176e2308
+  [cultivatorGroundContactFlag] => 8
+  [aiNeedsLowering] => true
+  [playAttachSound] => function: 0x010be87f78
+  [cultivatorForceLimitToField] => true
+  [cultivatorHasGroundContact] => false
+  [startActivationTime] => 0
+  [startActivationTimeout] => 2000
+  [stopAnimation] => function: 0x01176fcda0
+  [selectNextSelectableImplement] => function: 0x01165fda10
+  [onBrake] => function: 0x0116dc1dc0
+  [forcePtoUpdate] => true
+  [forceIsActive] => false
+  [baseDirectory] => ""
+  [loadGroundAnimationMapping] => function: 0x0116c23a80
+  [sampleCultivator] => table: 0x010b5b6c30 {
+                          [outdoorLowpassGain] => 1
+                          [sampleFilename] => "data/sounds/cultivatorSound.wav"
+                          [duration] => 10902.721679688
+                          [isPlaying] => false
+                          [sample] => 68717
+                          [lowpassGain] => 1
+                          [lowpassGainFactor] => 1
+                          [volumeFactor] => 1
+                          [pitchOffset] => 1
+                          [activeVolume] => 1
+                          [outdoorVolumeFactor] => 1
+                          [isDirty] => true
+                          [indoorLowpassGain] => 0.5
+                          [volume] => 1
+                          [activeLowpassGain] => 1
+                          [indoorVolumeFactor] => 0.55000001192093
+                        }
+  [removeWashableNode] => function: 0x0116a9eca0
+  [processCultivatorAreas] => function: 0x010b5394f8
+  [updateWheelsTime] => -134.65166664124
+  [doCheckSpeedLimit] => function: 0x01176de638
+  [setSelectedImplement] => function: 0x010be78520
+  [cylinderedDirtyFlag] => 4
+  [terrainDetailRequiredValueRanges] => table: 0x010b5b6c30 {
+                                          [1] => table: 0x01170cb270 {
+                                                   [1] => 2
+                                                   [2] => 2
+                                                   [3] => 0
+                                                   [4] => 3
+                                                 }
+                                          [2] => table: 0x01170cb270 {
+                                                   [1] => 3
+                                                   [2] => 3
+                                                   [3] => 0
+                                                   [4] => 3
+                                                 }
+                                          [3] => table: 0x01170cb270 {
+                                                   [1] => 4
+                                                   [2] => 4
+                                                   [3] => 0
+                                                   [4] => 3
+                                                 }
+                                          [4] => table: 0x01170cb270 {
+                                                   [1] => 5
+                                                   [2] => 5
+                                                   [3] => 0
+                                                   [4] => 3
+                                                 }
+                                        }
+  [configFileName] => "data/vehicles/tools/kuhn/kuhnCultimerL300.xml"
+  [numControlGroups] => 0
+  [updateAttacherJointGraphics] => function: 0x010b481c60
+  [activeControlGroupIndex] => 1
+  [getTurnedOnNotAllowedWarning] => function: 0x011780daa0
+  [aiUseWindrowFruitType] => false
+  [createAttachmentJoint] => function: 0x0118cb2310
+  [isActiveDirtyTime] => 1000
+  [setFoldState] => function: 0x01177411f8
+  [getIsInputAttacherActive] => function: 0x0116e3f730
+  [time] => 0
+  [activeDirtyMovingParts] => table: 0x010b5b6c30 {
+                              }
+  [sampleCylinderedHydraulic] => table: 0x010b5b6c30 {
+                                 }
+  [tipOcclusionAreas] => table: 0x010b5b6c30 {
+                           [1] => table: 0x01170e7d30 {
+                                    [width] => 68702
+                                    [start] => 68701
+                                    [height] => 68703
+                                  }
+                           [2] => table: 0x01170e7d30 {
+                                    [width] => 68705
+                                    [start] => 68704
+                                    [height] => 68706
+                                  }
+                         }
+  [onlyActiveWhenLowered] => true
+  [i3dFilename] => "data/vehicles/tools/kuhn/kuhnCultimerL300.i3d"
+  [getNextValidControlGroupIndex] => function: 0x010b5513d8
+  [dirtDurationWheels] => 2.2222222222222e-05
+  [onDetached] => function: 0x0116e05e28
+  [getTypedWorkAreas] => function: 0x0116a7d730
+  [getIsFoldAllowed] => function: 0x01176ed4e0
+  [nextDirtyFlag] => 128
+  [resetAnimationPartValues] => function: 0x010b4db8c8
+  [schemaOverlay] => table: 0x010b5b6c30 {
+                       [invisibleBorderLeft] => 0.05
+                       [x] => 0
+                       [y] => 0
+                       [overlaySelected] => table: 0x0117119888 {
+                                              [filename] => "dataS2/menu/schemas/implementSchemaSelected.png"
+                                              [rotation] => 0
+                                              [rotationCenterY] => 0
+                                              [y] => 0
+                                              [rotationCenterX] => 0
+                                              [offsetX] => 0
+                                              [uvs] => table: 0x0117193220 {
+                                                         [1] => 1
+                                                         [2] => 0
+                                                         [3] => 1
+                                                         [4] => 1
+                                                         [5] => 0
+                                                         [6] => 0
+                                                         [7] => 0
+                                                         [8] => 1
+                                                       }
+                                              [r] => 1
+                                              [alignmentVertical] => 1
+                                              [alignmentHorizontal] => 4
+                                              [offsetY] => 0
+                                              [visible] => true
+                                              [height] => 0.03125
+                                              [g] => 1
+                                              [invertX] => false
+                                              [defaultHeight] => 0.03125
+                                              [width] => 0.017578124869033
+                                              [defaultWidth] => 0.017578124869033
+                                              [b] => 1
+                                              [overlayId] => 68708
+                                              [a] => 1
+                                              [x] => 0
+                                            }
+                       [attacherJoints] => table: 0x0117119888 {
+                                           }
+                       [invisibleBorderRight] => 0.05
+                       [overlaySelectedTurnedOn] => table: 0x0117119888 {
+                                                      [filename] => "dataS2/menu/schemas/implementSchema.png"
+                                                      [rotation] => 0
+                                                      [rotationCenterY] => 0
+                                                      [y] => 0
+                                                      [rotationCenterX] => 0
+                                                      [offsetX] => 0
+                                                      [uvs] => table: 0x0117193148 {
+                                                                 [1] => 1
+                                                                 [2] => 0
+                                                                 [3] => 1
+                                                                 [4] => 1
+                                                                 [5] => 0
+                                                                 [6] => 0
+                                                                 [7] => 0
+                                                                 [8] => 1
+                                                               }
+                                                      [r] => 1
+                                                      [alignmentVertical] => 1
+                                                      [alignmentHorizontal] => 4
+                                                      [offsetY] => 0
+                                                      [visible] => true
+                                                      [height] => 0.03125
+                                                      [g] => 1
+                                                      [invertX] => false
+                                                      [defaultHeight] => 0.03125
+                                                      [width] => 0.017578124869033
+                                                      [defaultWidth] => 0.017578124869033
+                                                      [b] => 1
+                                                      [overlayId] => 68707
+                                                      [a] => 1
+                                                      [x] => 0
+                                                    }
+                       [baseY] => 0
+                       [overlayTurnedOn] => table: 0x0117119888 {
+                                              *table: 0x0117193148
+                                            }
+                       [overlay] => table: 0x0117119888 {
+                                      *table: 0x0117193148
+                                    }
+                       [baseX] => 0
+                     }
+  [getIsInWorkPosition] => function: 0x0117820380
+  [setAnimationTime] => function: 0x01176fce80
+  [getImplementIndexByObject] => function: 0x010b481b00
+  [onDetach] => function: 0x0116e05db8
+  [getSpeedRotatingPartDirection] => function: 0x0116ecd020
+  [onAttachImplement] => function: 0x0117061848
+  [removeWashingTrigger] => function: 0x0116aa45b0
+  [getIsHardAttachAllowed] => function: 0x010bc812a0
+  [lowerAnimationSpeed] => 1
+  [widthOffset] => 0
+  [brakeForce] => 0
+  [reverseLightsVisibility] => false
+  [steeringAxleAngleScaleEnd] => 30
+  [tipErrorMessageTime] => 0
+  [serverMass] => 0
+  [aiTurningRadiusLimiation] => table: 0x010b5b6c30 {
+                                }
+  [fieldMultiplier] => 2
+  [inputAttacherJoints] => table: 0x010b5b6c30 {
+                             [1] => table: 0x0117612968 {
+                                      [transLimitSpring] => table: 0x01176129b0 {
+                                                              [1] => 0
+                                                              [2] => 0
+                                                              [3] => 0
+                                                            }
+                                      [upperTransLimitScale] => table: 0x01176129b0 {
+                                                                  [1] => 0
+                                                                  [2] => 0
+                                                                  [3] => 0
+                                                                }
+                                      [node] => 68630
+                                      [jointType] => 1
+                                      [lowerDistanceToGround] => 0.55000001192093
+                                      [forceSelection] => true
+                                      [upperRotationOffset] => 0.13962634015955
+                                      [transLimitForceLimit] => table: 0x01176129b0 {
+                                                                  [1] => -1
+                                                                  [2] => -1
+                                                                  [3] => -1
+                                                                }
+                                      [useFoldingLoweredState] => false
+                                      [rootNodeBackup] => 68625
+                                      [rootNode] => 68625
+                                      [fixedRotation] => false
+                                      [isDefaultLowered] => false
+                                      [hardAttach] => false
+                                      [allowsLowering] => true
+                                      [needsLowering] => true
+                                      [lowerRotationOffset] => 0
+                                      [transLimitDamping] => table: 0x01176129b0 {
+                                                               [1] => 1
+                                                               [2] => 1
+                                                               [3] => 1
+                                                             }
+                                      [dependentAttacherJoints] => table: 0x01176129b0 {
+                                                                   }
+                                      [rotLimitDamping] => table: 0x01176129b0 {
+                                                             [1] => 1
+                                                             [2] => 1
+                                                             [3] => 1
+                                                           }
+                                      [allowsJointTransLimitMovement] => true
+                                      [jointOrigTrans] => table: 0x01176129b0 {
+                                                            [1] => 0.02470749989152
+                                                            [2] => 0.66561698913574
+                                                            [3] => 1.6854699850082
+                                                          }
+                                      [allowsJointRotLimitMovement] => true
+                                      [lowerRotLimitScale] => table: 0x01176129b0 {
+                                                                [1] => 0
+                                                                [2] => 0
+                                                                [3] => 1
+                                                              }
+                                      [rotLimitSpring] => table: 0x01176129b0 {
+                                                            [1] => 0
+                                                            [2] => 0
+                                                            [3] => 0
+                                                          }
+                                      [lowerTransLimitScale] => table: 0x01176129b0 {
+                                                                  [1] => 0
+                                                                  [2] => 1
+                                                                  [3] => 0
+                                                                }
+                                      [topReferenceNode] => 68631
+                                      [rotLimitForceLimit] => table: 0x01176129b0 {
+                                                                [1] => -1
+                                                                [2] => -1
+                                                                [3] => -1
+                                                              }
+                                      [upperDistanceToGround] => 1.7999999523163
+                                      [needsToolbar] => false
+                                      [upperRotLimitScale] => table: 0x01176129b0 {
+                                                                [1] => 0
+                                                                [2] => 0
+                                                                [3] => 0
+                                                              }
+                                    }
+                           }
+  [lightStates] => table: 0x010b5b6c30 {
+                   }
+  [lastSpeedReal] => 0
+  [groundReferenceNodes] => table: 0x010b5b6c30 {
+                              [1] => table: 0x01172551a0 {
+                                       *table: 0x01172551e8
+                                     }
+                            }
+  [addToPhysics] => function: 0x0116b90a50
+  [onPreAttach] => function: 0x0116e05d48
+  [aiSteeringSpeed] => 0.001
+  [washDurationWheels] => 1.6666666666667e-05
+  [dirtDuration] => 5.5555555555556e-07
+  [attachedImplements] => table: 0x010b5b6c30 {
+                          }
+  [beaconLightsActive] => false
+  [setAnimationSpeed] => function: 0x01176870a0
+  [speedRotatingPartsDirtyFlag] => 2
+  [getIsActiveForLights] => function: 0x0116be0668
+  [isDetachAllowed] => function: 0x011780db50
+  [positionIsDirty] => false
+  [lastMoveTime] => 16.617000579834
+  [steeringAxleAngleSpeed] => 0.001
+  [componentsVisibility] => true
+  [aiRightMarker] => 68672
+  [brakeLightsVisibility] => false
+  [addWashingTrigger] => function: 0x0116aa0a30
+  [steeringAxleUseSuperAttachable] => false
+  [lengthOffset] => 0
+  [isBroken] => false
+  [loadSpeedRotatingPartFromXML] => function: 0x0116fb91e8
+  [dirtAmount] => 0.11339925229549
+  [speedDisplayScale] => 1
+  [aiBackMarker] => 68673
+  [middlePosDirectionText] => "action_liftOBJECT"
+  [maximalAirConsumptionPerFullStop] => 0
+  [applyInitialAnimation] => function: 0x011780dc00
+  [hardDetachImplement] => function: 0x010b3a57a8
+  [steeringAxleNode] => 68625
+  [lightsTypesMask] => 0
+  [updateLoopIndex] => 699
+  [getDoConsumePtoPower] => function: 0x0116ab2c08
+  [hardAttachImplement] => function: 0x010b3a56f8
+  [getIsControlGroupChangeAllowed] => function: 0x010b551408
+  [terrainDetailProhibitValueRanges] => table: 0x010b5b6c30 {
+                                        }
+  [loadInputAttacherJoint] => function: 0x0116fac608
+  [detachingIsPossible] => function: 0x010be78470
+  [dirtyMask] => 0
+  [isSelected] => false
+  [workAreaByType] => table: 0x010b5b6c30 {
+                        [16] => table: 0x01171da888 {
+                                  [1] => table: 0x01171da8d0 {
+                                           *table: 0x0117209800
+                                         }
+                                }
+                      }
+  [getIsTurnedOnAllowed] => function: 0x01177cd248
+  [firstTimeRun] => true
+  [validateAttacherJoint] => function: 0x010bec3d38
+  [setTurnLightState] => function: 0x0116bd40f0
+  [getIsSpeedRotatingPartActive] => function: 0x01177dc040
+  [aiUseDensityHeightMap] => false
+  [lastSpeedAcceleration] => 0
+  [loadGroundParticles] => function: 0x0116f9dd60
+  [detachImplementByObject] => function: 0x010b44e398
+  [id] => 68
+  [rotatedTime] => 0
+  [getUseHighProfile] => function: 0x0116fb3af0
+  [attachImplement] => function: 0x010bc81180
+  [onLightsTypesMaskChanged] => function: 0x0116e6e2e0
+  [getTypedNetworkAreas] => function: 0x0116a7d700
+  [detachImplement] => function: 0x010b3a5858
+  [onDetachImplement] => function: 0x01170cb3d8
+  [speedDisplayDt] => 0
+  [setDirtAmount] => function: 0x01177ef300
+  [updateWheelDirtPS] => function: 0x0119464000
+  [setBeaconLightsVisibility] => function: 0x0116be07c8
+  [ikChains] => table: 0x010b5b6c30 {
+                }
+  [isDeleted] => false
+  [onAttached] => function: 0x0116ea7c90
+  [vehicleDirtyFlag] => 1
+  [onBeaconLightsVisibilityChanged] => function: 0x0116e6e350
+  [calculateAttacherJointMoveUpperLowerAlpha] => function: 0x0116b909a0
+  [setJointMoveDown] => function: 0x010be783c0
+  [sizeLength] => 3.5
+  [wasTooFast] => false
+  [aiForceTurnNoBackward] => false
+  [getIsAChildSelectable] => function: 0x010bec3de8
+  [numToolCameras] => 0
+  [loadGroundAnimations] => function: 0x0116c239d0
+  [loadPowerTakeoff] => function: 0x0116bce410
+  [getAttachmentsSaveNodes] => function: 0x010b44e2e8
+  [onDeselect] => function: 0x0116e05f08
+  [aiLookAheadSize] => 2
+}

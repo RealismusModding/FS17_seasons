@@ -20,6 +20,63 @@
         <text name="SEASONS_SHOW_WF">
             <en>Seasons: Show weather forecast</en>
         </text>
+
+        <text name="SS_WEEKDAY_MONDAY">
+            <en>Monday</en>
+        </text>
+        <text name="SS_WEEKDAY_TUESDAY">
+            <en>Tuesday</en>
+        </text>
+        <text name="SS_WEEKDAY_WEDNESDAY">
+            <en>Wednesday</en>
+        </text>
+        <text name="SS_WEEKDAY_THURSDAY">
+            <en>Thursday</en>
+        </text>
+        <text name="SS_WEEKDAY_FRIDAY">
+            <en>Friday</en>
+        </text>
+        <text name="SS_WEEKDAY_SATURDAY">
+            <en>Saturday</en>
+        </text>
+        <text name="SS_WEEKDAY_SUNDAY">
+            <en>Sunday</en>
+        </text>
+
+        <text name="SS_WEEKDAY_MON">
+            <en>Mont</en>
+        </text>
+        <text name="SS_WEEKDAY_TUE">
+            <en>Tue</en>
+        </text>
+        <text name="SS_WEEKDAY_WED">
+            <en>Wed</en>
+        </text>
+        <text name="SS_WEEKDAY_THU">
+            <en>Thu</en>
+        </text>
+        <text name="SS_WEEKDAY_FRI">
+            <en>Fri</en>
+        </text>
+        <text name="SS_WEEKDAY_SAT">
+            <en>Sat</en>
+        </text>
+        <text name="SS_WEEKDAY_SUN">
+            <en>Sun</en>
+        </text>
+
+        <text name="SS_SEASON_SPRING">
+            <en>Spring</en>
+        </text>
+        <text name="SS_SEASON_SUMMER">
+            <en>Summer</en>
+        </text>
+        <text name="SS_SEASON_AUTUMN">
+            <en>Autumn</en>
+        </text>
+        <text name="SS_SEASON_WINTER">
+            <en>Winter</en>
+        </text>
     </l10n>
 
     <extraSourceFiles>
