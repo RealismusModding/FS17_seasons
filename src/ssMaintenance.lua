@@ -200,8 +200,8 @@ if g_currentMission:getIsServer() then
 
         g_currentMission.missionStats:updateStats("expenses", totalTaxes + totalMaintenance)
 
-        g_currentMission:addMoneyChange(-totalTaxes, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang:getText("SS_VEHICLE_TAXES"))
-        g_currentMission:addMoneyChange(-totalMaintenance, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang:getText("SS_VEHICLE_MAINTENANCE"))
+        g_currentMission:addMoneyChange(-totalTaxes, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang.getText("SS_VEHICLE_TAXES"))
+        g_currentMission:addMoneyChange(-totalMaintenance, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang.getText("SS_VEHICLE_MAINTENANCE"))
     else
         g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalTaxes))
         g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalMaintenance))
