@@ -45,7 +45,7 @@ function ssSeasonsUtil.setup()
     }
 
     ssSeasonsUtil.seasons = {
-        ssLang.getText("SS_SEASON_SPRING", "Spring"),
+        [0] = ssLang.getText("SS_SEASON_SPRING", "Spring"),
         ssLang.getText("SS_SEASON_SUMMER", "Summer"),
         ssLang.getText("SS_SEASON_AUTUMN", "Autumn"),
         ssLang.getText("SS_SEASON_WINTER", "Winter"),
@@ -55,8 +55,6 @@ function ssSeasonsUtil.setup()
 end
 
 function ssSeasonsUtil:loadMap(name)
-     -- FIXME(jos): load daysInSeason from savegame
-     -- FIXME(jos): load weekdays, weekdayshsort and seasons from i18n
 end
 
 function ssSeasonsUtil:deleteMap()
@@ -97,7 +95,7 @@ function ssSeasonsUtil:season(dayNumber)
         dayNumber = self:currentDayNumber()
     end
 
-    return math.floor(dayNumber / self.daysInSeason) % self.seasonsInYear
+    return math.fmod(math.floor(dayNumber / self.daysInSeason), self.seasonsInYear)
 end
 
 -- This function calculates the real-ish daynumber from an ingame day number
@@ -115,7 +113,7 @@ function ssSeasonsUtil:julianDay(dayNumber)
     dayInSeason = dayNumber % self.daysInSeason
     partInSeason = dayInSeason / self.daysInSeason
 
-    return math.floor(starts[season] + partInSeason * 91) % 365
+    return math.fmod(math.floor(starts[season] + partInSeason * 91), 365)
 end
 
 function ssSeasonsUtil:julanDayToDayNumber(julianDay)
