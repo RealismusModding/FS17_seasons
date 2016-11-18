@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        Jarvixes
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
+
+        <text name="SS_WEEKDAY_MONDAY" text="Monday" />
+        <text name="SS_WEEKDAY_TUESDAY" text="Tuesday" />
+        <text name="SS_WEEKDAY_WEDNESDAY" text="Wednesday" />
+        <text name="SS_WEEKDAY_THURSDAY" text="Thursday" />
+        <text name="SS_WEEKDAY_FRIDAY" text="Friday" />
+        <text name="SS_WEEKDAY_SATURDAY" text="Saturday" />
+        <text name="SS_WEEKDAY_SUNDAY" text="Sunday" />
+
+        <text name="SS_WEEKDAY_MON" text="Mont" />
+        <text name="SS_WEEKDAY_TUE" text="Tue" />
+        <text name="SS_WEEKDAY_WED" text="Wed" />
+        <text name="SS_WEEKDAY_THU" text="Thu" />
+        <text name="SS_WEEKDAY_FRI" text="Fri" />
+        <text name="SS_WEEKDAY_SAT" text="Sat" />
+        <text name="SS_WEEKDAY_SUN" text="Sun" />
+
+        <text name="SS_SEASON_SPRING" text="Spring" />
+        <text name="SS_SEASON_SUMMER" text="Summer" />
+        <text name="SS_SEASON_AUTUMN" text="Autumn" />
+        <text name="SS_SEASON_WINTER" text="Winter" />
+
+        <text name="SS_VEHICLE_TAXES" text="Vehicle Taxes" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Vehicle Maintenance" />
+        <text name="SS_VEHICLE_REPAIRS" text="Vehicle Repairs" />
+    </texts>
+</l10n>
