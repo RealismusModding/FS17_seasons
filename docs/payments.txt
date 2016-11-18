@@ -1,0 +1,7 @@
+
+
+other
+wagePayment
+purchaseFuel
+soldWood
+vehicleRunningCost

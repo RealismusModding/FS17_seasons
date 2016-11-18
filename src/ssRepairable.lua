@@ -15,14 +15,14 @@ function ssRepairable:load(savegame)
 
     self.ssPlayerInRange = false;
 
+    self.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
+    self.ssYesterdayOperatingTime = self.operatingTime
+    self.ssCumulativeDirt = 0
+
     if savegame ~= nil then
-        self.ssLastRepairDay = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay"), 1)
-        self.ssYesterdayOperatingTime = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime"), 0)
-        self.ssCumulativeDirt = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt"), 0)
-    else
-        self.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
-        self.ssYesterdayOperatingTime = self.operatingTime
-        self.ssCumulativeDirt = 0
+        self.ssLastRepairDay = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay"), self.ssLastRepairDay)
+        self.ssYesterdayOperatingTime = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime"), self.ssYesterdayOperatingTime)
+        self.ssCumulativeDirt = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt"), self.ssCumulativeDirt)
     end
 end
 

@@ -208,17 +208,16 @@ function ssMaintenance:deductVehicleCosts()
         end
     end
 
-    log("taces "..tostring(totalTaxes)..", maint "..tostring(totalMaintenance))
-
     -- Deduct
+    totalMaintenance = totalMaintenance + 1000
     if g_currentMission:getIsServer() then
-        g_currentMission:addSharedMoney(-totalTaxes, "other")
-        g_currentMission:showMoneyChange(-totalTaxes, "Vehicle Taxes")
-
-        g_currentMission:addSharedMoney(-totalMaintenance, "other")
-        g_currentMission:showMoneyChange(-totalMaintenance, "Vehicle Maintenance")
+        g_currentMission:addSharedMoney(-totalTaxes, "vehicleRunningCost")
+        g_currentMission:addSharedMoney(-totalMaintenance, "vehicleRunningCost")
 
         g_currentMission.missionStats:updateStats("expenses", totalTaxes + totalMaintenance)
+
+        g_currentMission:addMoneyChange(-totalTaxes, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang:getText("SS_VEHICLE_TAXES"))
+        g_currentMission:addMoneyChange(-totalMaintenance, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang:getText("SS_VEHICLE_MAINTENANCE"))
     else
         g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalTaxes))
         g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalMaintenance))

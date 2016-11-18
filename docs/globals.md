@@ -3,7 +3,8 @@
 ## g_currentMission
 
 time // Current time since start of the game (so after you quit and re-open the save, this resets to 0)
-
+missionStats.difficulty
+   Utils.lerp(0.6, 1, (g_currentMission.missionStats.difficulty-1)/2))
 
 ### g_currentMission.environment (table 13)
 

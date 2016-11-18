@@ -77,6 +77,17 @@
         <text name="SS_SEASON_WINTER">
             <en>Winter</en>
         </text>
+
+
+        <text name="SS_VEHICLE_TAXES">
+            <en>Vehicle Taxes</en>
+        </text>
+        <text name="SS_VEHICLE_MAINTENANCE">
+            <en>Vehicle Maintenance</en>
+        </text>
+        <text name="SS_VEHICLE_REPAIRS">
+            <en>Vehicle Repairs</en>
+        </text>
     </l10n>
 
     <extraSourceFiles>
