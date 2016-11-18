@@ -156,12 +156,11 @@ function ssMaintenance:getRepairShopCost(vehicle, storeItem, atDealer)
     end
 
     local costs = ssMaintenance:maintenanceRepairCost(vehicle, storeItem, true)
-    local dealerMultiplier = atDealer and 1.2 or 1
+    local dealerMultiplier = atDealer and 1.1 or 1
     local difficultyMultiplier = 1 -- FIXME * difficulty mutliplier
+    local workCosts = atDealer and 45 or 35
 
-    log(tostring((costs + 45) * dealerMultiplier * difficultyMultiplier))
-
-    return (costs + 45) * dealerMultiplier * difficultyMultiplier
+    return (costs + workCosts) * dealerMultiplier * difficultyMultiplier
 end
 
 function ssMaintenance:getDailyUpKeep(superFunc)
