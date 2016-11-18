@@ -22,7 +22,7 @@ function ssMaintenance.preSetup()
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssMaintenance.getSpecValueAge)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssMaintenance.getSpecValueDailyUpKeep)
 
-    VehicleSellingPoint.determineCurrentVehicle = Utils.overwrittenFunction(VehicleSellingPoint.determineCurrentVehicle, ssMaintenance.determineCurrentWorkshopVehicle)
+    VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssMaintenance.sellAreaTriggerCallback)
 end
 
 function ssMaintenance.setup()
@@ -206,60 +206,29 @@ function ssMaintenance:getSpecValueAge(superFunc, vehicle)
     return nil
 end
 
-function ssMaintenance:determineCurrentWorkshopVehicle(superFunc)
-    -- Remove inRange property
-    if self.currentVehicle ~= nil then
-        self.currentVehicle.ssInRangeOfWorkshop = nil
-        self.currentVehicle = nil
-    end
+function ssMaintenance:sellAreaTriggerCallback(superFunc, triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+    if otherShapeId ~= nil and (onEnter or onLeave) then
+        if onEnter then
+            self.vehicleInRange[otherShapeId] = true
 
-    for vehicleId, inRange in pairs(self.vehicleInRange) do
-        if inRange ~= nil then
-            self.currentVehicle = g_currentMission.nodeToVehicle[vehicleId]
+            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+            if vehicle ~= nil then
+                vehicle.ssInRangeOfWorkshop = self
+            end
+        elseif onLeave then
+            self.vehicleInRange[otherShapeId] = nil
 
-            if self.currentVehicle ~= nil then
-                -- Add inRange property
-                self.currentVehicle.ssInRangeOfWorkshop = self
-                break
+            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+            if vehicle ~= nil then
+                vehicle.ssInRangeOfWorkshop = nil
             end
         end
-        -- invalid vehicle (not existing or left), remove from list
-        self.vehicleInRange[vehicleId] = nil
+
+        self:determineCurrentVehicle()
     end
 end
 
 --[[
-    print_r(storeItem)
 
-    storeItem.lifetime
-    storeItem.price
-    storeItem.specs.power
-    storeItem.dailyUpkeep
-    ]]
-
-    --getDirtAmount
-    --[[
-    log("Vehicle dirt "..tostring(self.getDirtAmount))
-    [id] => 68
-    operatingTime
-    speedLimit
     [typeDesc] => "cultivator"
-    [price] => 9400
-    [age] => 56
-    [configFileName] => "data/vehicles/tools/kuhn/kuhnCultimerL300.xml"
-    [lastMoveTime] => 16.617000579834
-    [dirtAmount] => 0.11339925229549 -- might only be available on "washable", dont use, use the function on the specification
-
-if g_currentMission:getIsServer() then
-        g_currentMission:addSharedMoney(-totalTaxes, "vehicleRunningCost")
-        g_currentMission:addSharedMoney(-totalMaintenance, "vehicleRunningCost")
-
-        g_currentMission.missionStats:updateStats("expenses", totalTaxes + totalMaintenance)
-
-        g_currentMission:addMoneyChange(-totalTaxes, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang.getText("SS_VEHICLE_TAXES"))
-        g_currentMission:addMoneyChange(-totalMaintenance, FSBaseMission.MONEY_TYPE_SINGLE, true, ssLang.getText("SS_VEHICLE_MAINTENANCE"))
-    else
-        g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalTaxes))
-        g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-totalMaintenance))
-    end
-]]
+ ]]

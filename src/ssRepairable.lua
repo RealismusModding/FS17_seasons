@@ -70,7 +70,7 @@ function ssRepairable:updateTick(dt)
         local sx, sy, sz = getWorldTranslation(self.rootNode)
         local distance = Utils.vector3Length(sx-vx, sy-vy, sz-vz)
 
-        self.ssPlayerInRange = distance < 4.5
+        self.ssPlayerInRange = distance < 3.5
     end
 end
 
