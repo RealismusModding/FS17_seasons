@@ -7,6 +7,7 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody" />
+            <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Poniedziałek" />
         <text name="SS_WEEKDAY_TUESDAY" text="Wtorek" />
@@ -32,5 +33,9 @@
         <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów" />  <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
+
+            <text name="SS_NOT_ENOUGH_MONEY" text="You don't have enough money to repair this" />
+            <text name="SS_VEHICLE_REPAIRED" text="%s was repaired for %s" />
+            <text name="SS_REPAIR_VEHICLE_COST" text="Repair %s for %s" />
     </texts>
 </l10n>

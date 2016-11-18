@@ -7,6 +7,7 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Maandag" />
         <text name="SS_WEEKDAY_TUESDAY" text="Dinsdag" />
@@ -32,5 +33,9 @@
         <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
         <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
     </texts>
 </l10n>
