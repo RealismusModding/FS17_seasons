@@ -8,7 +8,7 @@
 ssEconomy = {}
 ssEconomy.aiPricePerHour = 2000
 ssEconomy.loanMax = 5000000
-ssEconomy.baseLoadInterest = 6 -- For normal, % each season. *4 for yearly
+ssEconomy.baseLoadInterest = 5 -- For normal, % per year
 ssEconomy.settingsProperties = { "aiPricePerHour", "loanMax", "baseLoadInterest" }
 
 
@@ -55,11 +55,9 @@ end
 
 function ssEconomy:calculateLoanInterestRate()
     -- local stats = g_currentMission.missionStats
-    local seasonInterest = ssEconomy.baseLoadInterest * g_currentMission.missionInfo.difficulty
+    local yearInterest = ssEconomy.baseLoadInterest / 2 * g_currentMission.missionInfo.difficulty
 
-    local dailyInterest = (seasonInterest / 2) / ssSeasonsUtil.daysInSeason
-
-    g_currentMission.missionStats.loanAnnualInterestRate = dailyInterest * 357
+    g_currentMission.missionStats.loanAnnualInterestRate = yearInterest
 end
 
 function ssEconomy:dayChanged()
