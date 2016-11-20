@@ -7,7 +7,7 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody" />
-            <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Naprawa pojazdów" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Poniedziałek" />
         <text name="SS_WEEKDAY_TUESDAY" text="Wtorek" />
@@ -34,11 +34,11 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
 
-            <text name="SS_NOT_ENOUGH_MONEY" text="You don't have enough money to repair this" />
-            <text name="SS_VEHICLE_REPAIRED" text="%s was repaired for %s" />
-            <text name="SS_REPAIR_VEHICLE_COST" text="Repair %s for %s" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać naprawę" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s został naprawiony za %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Napraw %s za %s" />
 
-            <text name="SS_REPAIR_REQUIRED" text="Repair required" />
-            <text name="SS_REPAIR_REQUIRED_IN" text="Repair required in %d days" />
+        <text name="SS_REPAIR_REQUIRED" text="Naprawa wymagana" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Naprawa będzie wymagana za %d dni" />
     </texts>
 </l10n>
