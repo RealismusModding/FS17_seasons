@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast the weather
--- Authors:  Authors:  Akuenzi, ian898, Jarvixes, theSeb
+-- Authors:  ian898, Jarvixes, theSeb
 --
 
 ssWeatherForecast = {};
@@ -54,13 +54,13 @@ function ssWeatherForecast:loadMap(name)
     self.hud.overlays.weather_hail = g_currentMission.weatherForecastIconOverlays.hail;
     self.hud.overlays.weather_snow = Overlay:new("hud_snow", Utils.getFilename("huds/hud_snow.png", self.modDirectory), 0, 0, width, height);
 
-end;
+end
 
 function ssWeatherForecast:deleteMap()
 end
 
 function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
-end;
+end
 
 function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
@@ -111,14 +111,14 @@ function ssWeatherForecast:draw()
             -- Render Season Days
             renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(n));
 
-        end;
+        end
 
         -- Clean up after us, text render after this will be affected otherwise.
         setTextColor(1, 1, 1, 1);
 
-    end;
+    end
 
-end;
+end
 
 function ssWeatherForecast:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber();
