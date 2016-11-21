@@ -11,9 +11,11 @@ ssMaintenance.REPAIR_NIGHT_FACTOR = 1
 ssMaintenance.REPAIR_SHOP_FACTOR = 0.5
 ssMaintenance.DIRT_FACTOR = 0.2
 
+ssMaintenance.repairFactors = {}
+
 ssMaintenance.settingsProperties = {}
 
-SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_currentModDirectory .. "/src/ssRepairable.lua")
+SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "/src/ssRepairable.lua")
 
 function ssMaintenance.preSetup()
     ssSettings.add("maintenance", ssMaintenance)
@@ -33,6 +35,7 @@ end
 
 function ssMaintenance:loadMap(name)
     self:installRepairableSpecialization()
+    self:loadRepairFactors()
 
     g_currentMission.environment:addDayChangeListener(self)
 end
@@ -79,11 +82,58 @@ function ssMaintenance:installRepairableSpecialization()
     end
 end
 
-function ssMaintenance:repairCost(vehicle, storeItem, operatingTime)
-    RF1 = 0.007 -- FIXME: from file
-    RF2 = 2.0   -- FIXME: from file
+function ssMaintenance:loadRepairFactors()
+    -- Open file
+    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "/repairFactors.xml")
 
-    local lifetime = storeItem.lifetime
+    ssMaintenance.repairFactors = {}
+
+    local i = 0;
+    while true do
+        local key = string.format("factors.factor(%d)", i);
+        if not hasXMLProperty(file, key) then break end
+
+        local category = getXMLString(file, key .. "#category");
+        if category == nil then
+            logInfo("repairFactors.xml is invalid")
+            break
+        end
+
+        local RF1 = getXMLFloat(file, key .. ".RF1#value")
+        local RF2 = getXMLFloat(file, key .. ".RF2#value")
+        local lifetime = getXMLFloat(file, key .. ".ssLifeTime#value")
+
+        if RF1 == nil or RF2 == nil or lifetime == nil then
+            logInfo("repairFactors.xml is invalid")
+            break
+        end
+
+        local config = {
+            ["RF1"] = RF1,
+            ["RF2"] = RF2,
+            ["lifetime"] = lifetime
+        }
+
+        ssMaintenance.repairFactors[category] = config
+
+        i = i + 1
+    end
+
+    -- Close file
+    delete(file)
+end
+
+function ssMaintenance:repairCost(vehicle, storeItem, operatingTime)
+    local data = ssMaintenance.repairFactors[storeItem.category]
+
+    if data == nil then
+        data = ssMaintenance.repairFactors["other"]
+    end
+
+    local RF1 = data.RF1
+    local RF2 = data.RF2
+    local lifetime = data.lifetime
+
     local dailyUpkeep = storeItem.dailyUpkeep
 
     local powerMultiplier = 1
