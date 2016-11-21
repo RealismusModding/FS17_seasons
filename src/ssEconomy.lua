@@ -6,8 +6,8 @@
 --
 
 ssEconomy = {}
-ssEconomy.aiPricePerHourWork = 2000
-ssEconomy.aiPricePerHourOverwork = 3000
+ssEconomy.aiPricePerHourWork = 1650
+ssEconomy.aiPricePerHourOverwork = 2475 -- 1650 * 1.5
 ssEconomy.aiDayStart = 6
 ssEconomy.aiDayEnd = 18
 ssEconomy.loanMax = 5000000
