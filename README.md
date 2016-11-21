@@ -13,3 +13,9 @@ Maintenance
 - Keep your machine clean to lower daily maintenance costs
 - Machine not used? Pay less
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
+
+
+## Coding style
+
+- End your lines with \n (LF), not CRLF
+- Use spaces, not tabs
