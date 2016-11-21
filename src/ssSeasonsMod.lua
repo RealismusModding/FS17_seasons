@@ -38,7 +38,8 @@ local srcFiles = {
     "ssWeatherForecast.lua",
     "ssFixFruit.lua",
     "ssEconomy.lua",
-    "ssMaintenance.lua"
+    "ssMaintenance.lua",
+    "ssGrowthManager.lua"
 }
 
 -- Load all scripts
@@ -79,6 +80,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssWeatherForecast.preSetup()
     ssFixFruit.preSetup()
     ssMaintenance.preSetup()
+    ssGrowthManager.preSetup()
 
     -- Load all requested values
     ssSettings.loadFromSavegame()
@@ -90,6 +92,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssWeatherForecast.setup()
     ssFixFruit.setup()
     ssMaintenance.setup()
+    ssGrowthManager.setup()
 
 
     ssSeasonsMod.enabled = true
