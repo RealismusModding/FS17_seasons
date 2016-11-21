@@ -21,6 +21,7 @@ function ssMaintenance.preSetup()
     ssSettings.add("maintenance", ssMaintenance)
 
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssMaintenance.getDailyUpKeep)
+    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssMaintenance.getSellPrice)
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssMaintenance.getSpecValueAge)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssMaintenance.getSpecValueDailyUpKeep)
 
@@ -226,6 +227,21 @@ function ssMaintenance:getDailyUpKeep(superFunc)
     costs = costs + ssMaintenance:maintenanceRepairCost(self, storeItem, false)
 
     return costs
+end
+
+function ssMaintenance:getSellPrice(superFunc)
+    local priceMultiplier = 0.75
+    local maxVehicleAge = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()].lifetime;
+
+    if maxVehicleAge ~= nil and maxVehicleAge ~= 0 then
+        local ageMultiplier = 0.5 * math.min(self.age/maxVehicleAge, 1)
+        local operatingTime = self.operatingTime / (1000*60*60)
+        local operatingTimeMultiplier =  0.5 * math.min(operatingTime / (maxVehicleAge*EconomyManager.LIFETIME_OPERATINGTIME_RATIO), 1)
+        priceMultiplier = priceMultiplier * math.exp(-3.5 * (ageMultiplier+operatingTimeMultiplier))
+    end
+
+    -- return math.floor(self:getPrice() * math.max(priceMultiplier, 0.05));
+    return 1000
 end
 
 --[[
