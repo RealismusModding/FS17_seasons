@@ -2,7 +2,7 @@
 -- ECONOMY SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the economy
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin (Jarvixes), reallogger
 --
 
 ssEconomy = {}
