@@ -6,18 +6,26 @@
 --
 
 ssEconomy = {}
-ssEconomy.aiPricePerHour = 2000
+ssEconomy.aiPricePerHourWork = 2000
+ssEconomy.aiPricePerHourOverwork = 3000
+ssEconomy.aiDayStart = 6
+ssEconomy.aiDayEnd = 18
 ssEconomy.loanMax = 5000000
 ssEconomy.baseLoadInterest = 5 -- For normal, % per year
-ssEconomy.settingsProperties = { "aiPricePerHour", "loanMax", "baseLoadInterest" }
+ssEconomy.settingsProperties = { "aiPricePerHourWork", "aiPricePerHourOverwork", "aiDayStart", "aiDayEnd", "loanMax", "baseLoadInterest" }
 
 
 function ssEconomy.preSetup()
     ssSettings.add("economy", ssEconomy)
+
+    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
 end
 
 function ssEconomy.setup()
     ssSettings.load("economy", ssEconomy)
+
+    ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / 60 / 60 / 1000
+    ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / 60 / 60 / 1000
 
     addModEventListener(ssEconomy)
 end
@@ -25,14 +33,11 @@ end
 function ssEconomy:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
 
-    self:fixHiredWorkerWages();
-
     g_currentMission.missionStats.loanMax = ssEconomy.loanMax
     g_currentMission.missionStats.ssLoan = 0
 end
 
 function ssEconomy:deleteMap()
-    self:unfixHiredWorkerWages();
 end
 
 function ssEconomy:mouseEvent(posX, posY, isDown, isUp, button)
@@ -63,24 +68,19 @@ end
 function ssEconomy:dayChanged()
 end
 
-function ssEconomy:fixHiredWorkerWages()
-    -- Change hired worker costs by hacking the xml function
-    local origGetXMLFloat = getfenv(0)["getXMLFloat"];
-    self._origGetXMLFloat = origGetXMLFloat;
+function ssEconomy:aiUpdateTick(superFunc, dt)
+    if self:getIsActive() then
+        local hour = g_currentMission.environment.currentHour
+        local dow = ssSeasonsUtil:dayOfWeek()
 
-    local function newGetXMLFloat(file, prop)
-        if prop == "vehicle.ai.pricePerHour" then
-            return ssEconomy.aiPricePerHour;
+        if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
+            self.pricePerMS = ssEconomy.aiPricePerMSWork
+        else
+            self.pricePerMS = ssEconomy.aiPricePerMSOverWork
         end
-
-        return origGetXMLFloat(file, prop);
     end
 
-    getfenv(0)["getXMLFloat"] = newGetXMLFloat;
-end
-
-function ssEconomy:unfixHiredWorkerWages()
-    getfenv(0)["getXMLFloat"] = self._origGetXMLFloat;
+    return superFunc(self, dt)
 end
 
 
