@@ -35,6 +35,10 @@ weatherTemperaturesDay (table 232)
 timeScale // Timescale, 1 = realtime, 500 = fast
 
 
+### MISSIONS
+
+g_currentMission.fieldJobManager
+
 ### Night temperatures (table 227)
 14 values
 
