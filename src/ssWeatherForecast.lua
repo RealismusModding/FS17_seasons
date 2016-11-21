@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast the weather
--- Authors:  Authors:  Akuenzi, ian898, Jarvixes, theSeb, reallogger
+-- Authors:  Authors:  ian898, Jarvixes, theSeb, reallogger
 --
 
 ssWeatherForecast = {};
@@ -60,7 +60,7 @@ function ssWeatherForecast:loadMap(name)
 	-- g_currentMission.environment.rainFadeDuration.minRainDuration = 60000
 
 	
-end;
+end
 
 function ssWeatherForecast:deleteMap()
 end
@@ -119,14 +119,14 @@ function ssWeatherForecast:draw()
 			dayInSeason = self.forecast[n].day - math.floor(self.forecast[n].day / ssSeasonsUtil.daysInSeason) * ssSeasonsUtil.daysInSeason + 1
 			renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(dayInSeason));
 
-        end;
+        end
 
         -- Clean up after us, text render after this will be affected otherwise.
         setTextColor(1, 1, 1, 1);
 
-    end;
+    end
 
-end;
+end
 
 function ssWeatherForecast:buildFirstForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber();
