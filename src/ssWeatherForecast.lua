@@ -52,14 +52,14 @@ function ssWeatherForecast:loadMap(name)
     self.hud.overlays.fog = g_currentMission.weatherForecastIconOverlays.fog;
     self.hud.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain;
     self.hud.overlays.hail = g_currentMission.weatherForecastIconOverlays.hail;
-    
-	-- reallogger NOT USED YET
-	self.hud.overlays.weather_snow = Overlay:new("hud_snow", Utils.getFilename("huds/hud_snow.png", self.modDirectory), 0, 0, width, height);
 
-	-- g_currentMission.environment.rainFadeDuration = 0--0.5*60000
-	-- g_currentMission.environment.rainFadeDuration.minRainDuration = 60000
+    -- reallogger NOT USED YET
+    self.hud.overlays.weather_snow = Overlay:new("hud_snow", Utils.getFilename("huds/hud_snow.png", self.modDirectory), 0, 0, width, height);
 
-	
+    -- g_currentMission.environment.rainFadeDuration = 0--0.5*60000
+    -- g_currentMission.environment.rainFadeDuration.minRainDuration = 60000
+
+
 end
 
 function ssWeatherForecast:deleteMap()
@@ -99,7 +99,7 @@ function ssWeatherForecast:draw()
 
         -- Set firstDayPos
         local daysPosOffset = 0.0615;
-	
+
         for n = 1, self.forecastLength do
 
             -- Render Day of The Week
@@ -113,11 +113,11 @@ function ssWeatherForecast:draw()
 
             -- Render Hi/Lo Tempratures
             renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, tostring(math.floor(self.forecast[n].highTemp)) .. " / " .. tostring(math.floor(self.forecast[n].lowTemp)));
-			--renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, "22 / 12" );
+            --renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, "22 / 12" );
 
             -- Render Season Days
-			dayInSeason = self.forecast[n].day - math.floor(self.forecast[n].day / ssSeasonsUtil.daysInSeason) * ssSeasonsUtil.daysInSeason + 1
-			renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(dayInSeason));
+            dayInSeason = self.forecast[n].day - math.floor(self.forecast[n].day / ssSeasonsUtil.daysInSeason) * ssSeasonsUtil.daysInSeason + 1
+            renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(dayInSeason));
 
         end
 
@@ -131,36 +131,36 @@ end
 function ssWeatherForecast:buildFirstForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber();
     local ssTmax
-	log("Building forecast based on today day num: " .. startDayNum);
-		
-	self.forecast = {};
+    log("Building forecast based on today day num: " .. startDayNum);
+
+    self.forecast = {};
 
     for n = 1, self.forecastLength do
         local oneDayForecast = {};
 
-		oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
+        oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
         oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + n);
-		oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
-		
-		if n == 1 then
-			--Seasonal average for first day
-			ssTmax = self:ssTmax(oneDayForecast.season)
-			oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
-			
-		elseif self.forecast[n-1].season == oneDayForecast.season then
-			--Seasonal average for a day in the season
-			oneDayForecast.Tmaxmean = self.forecast[n-1].Tmaxmean
-			
-		elseif self.forecast[n-1].season ~= oneDayForecast.season then
-			--Seasonal average for a day in a new season
-			ssTmax = self:ssTmax(oneDayForecast.season)
-			oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
-			
-		end
-	
-		oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(oneDayForecast.Tmaxmean,2.5) 
-		oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * oneDayForecast.highTemp-5 
-		
+        oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
+
+        if n == 1 then
+            --Seasonal average for first day
+            ssTmax = self:ssTmax(oneDayForecast.season)
+            oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
+
+        elseif self.forecast[n-1].season == oneDayForecast.season then
+            --Seasonal average for a day in the season
+            oneDayForecast.Tmaxmean = self.forecast[n-1].Tmaxmean
+
+        elseif self.forecast[n-1].season ~= oneDayForecast.season then
+            --Seasonal average for a day in a new season
+            ssTmax = self:ssTmax(oneDayForecast.season)
+            oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
+
+        end
+
+        oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(oneDayForecast.Tmaxmean,2.5)
+        oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * oneDayForecast.highTemp-5
+
         oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n);
 
         table.insert(self.forecast, oneDayForecast);
@@ -182,27 +182,27 @@ function ssWeatherForecast:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber();
     log("Building forecast based on today day num: " .. startDayNum);
 
-	table.remove(self.forecast,1)
+    table.remove(self.forecast,1)
 
-    local oneDayForecast = {};	
-	oneDayForecast.day = startDayNum + self.forecastLength; -- To match forecast with actual game
+    local oneDayForecast = {};
+    oneDayForecast.day = startDayNum + self.forecastLength; -- To match forecast with actual game
     oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + self.forecastLength);
-	oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + self.forecastLength)
-	
-	if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
-		--Seasonal average for a day in the season
-		oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
-			
-	elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
-		--Seasonal average for a day in a new season
+    oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + self.forecastLength)
+
+    if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
+        --Seasonal average for a day in the season
+        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
+
+    elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
+        --Seasonal average for a day in a new season
         ssTmax = self:ssTmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
-		
+        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
+
     end
-		
-    oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(oneDayForecast.Tmaxmean,2.5) 
-    oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * oneDayForecast.highTemp-5 
-		
+
+    oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(oneDayForecast.Tmaxmean,2.5)
+    oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * oneDayForecast.highTemp-5
+
     oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum);
 
     table.insert(self.forecast, oneDayForecast);
@@ -224,9 +224,9 @@ end
 --perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
 function ssWeatherForecast:getWeatherStateForDay(dayNumber)
     local weatherState = "sun";
-	local ssTmax = {};
-	local Tmaxmean = {};
-	
+    local ssTmax = {};
+    local Tmaxmean = {};
+
     for index, rain in ipairs(g_currentMission.environment.rains) do
         log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
         if rain.startDay > dayNumber then
@@ -236,10 +236,10 @@ function ssWeatherForecast:getWeatherStateForDay(dayNumber)
             weatherState = rain.rainTypeId;
         end
     end
-	
-	--for k, v in pairs( g_currentMission.environment.rainFadeCurve ) do
-	--	log (k, v)
-	--end
+
+    --for k, v in pairs( g_currentMission.environment.rainFadeCurve ) do
+    --    log (k, v)
+    --end
 
     return weatherState;
 end
@@ -248,20 +248,20 @@ function ssWeatherForecast:dayChanged()
     self:buildForecast();
 end
 
-function ssWeatherForecast:ssTmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds. 
-	
-	if ss == 'Winter' then
-		return {5.0,8.6,10.7} --min, mode, max
-	
-	elseif ss == "Spring" then
-		return {12.1, 14.2, 17.9} --min, mode, max
-		
-	elseif ss == "Summer" then
-		return {19.4, 21.7, 26.0} --min, mode, max
-	
-	elseif ss == "Autumn" then
-		return {14.0, 15.6, 17.3} --min, mode, max		
-	end
+function ssWeatherForecast:ssTmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
+
+    if ss == 'Winter' then
+        return {5.0,8.6,10.7} --min, mode, max
+
+    elseif ss == "Spring" then
+        return {12.1, 14.2, 17.9} --min, mode, max
+
+    elseif ss == "Summer" then
+        return {19.4, 21.7, 26.0} --min, mode, max
+
+    elseif ss == "Autumn" then
+        return {14.0, 15.6, 17.3} --min, mode, max
+    end
 
 end
 

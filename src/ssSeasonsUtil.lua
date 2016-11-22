@@ -161,43 +161,43 @@ function ssSeasonsUtil:nextWeekDayNumber(currentDay)
 end
 
 --Outputs a random sample from a triangular distribution
-function ssSeasonsUtil:ssTriDist(m) 
-	
-	
-	local pmode = {};
-	local p = {};
-	
-	--math.randomseed( os.time() )
-	math.random()
-	
-	pmode = (m[2]-m[1])/(m[3]-m[1])
-	p = math.random()
-	if p < pmode then
-		return math.sqrt(p*(m[3]-m[1])*(m[2]-m[1]))+m[1]
-	else
-		return m[3]-math.sqrt((1-p)*(m[3]-m[1])*(m[3]-m[2]))
-	end
+function ssSeasonsUtil:ssTriDist(m)
+
+
+    local pmode = {};
+    local p = {};
+
+    --math.randomseed( os.time() )
+    math.random()
+
+    pmode = (m[2]-m[1])/(m[3]-m[1])
+    p = math.random()
+    if p < pmode then
+        return math.sqrt(p*(m[3]-m[1])*(m[2]-m[1]))+m[1]
+    else
+        return m[3]-math.sqrt((1-p)*(m[3]-m[1])*(m[3]-m[2]))
+    end
 end
 
 -- Approximation of the inverse CFD of a normal distribution
 -- Based on A&S formula 26.2.23 - thanks to John D. Cook
-function ssSeasonsUtil:RationalApproximation(t) 
-	
-	local c = {2.515517, 0.802853, 0.010328}
-	local d = {1.432788, 0.189269, 0.001308}
-	
-	return t - ((c[3]*t + c[2])*t + c[1]) / (((d[3]*t + d[2])*t + d[1])*t + 1.0)
-	
+function ssSeasonsUtil:RationalApproximation(t)
+
+    local c = {2.515517, 0.802853, 0.010328}
+    local d = {1.432788, 0.189269, 0.001308}
+
+    return t - ((c[3]*t + c[2])*t + c[1]) / (((d[3]*t + d[2])*t + d[1])*t + 1.0)
+
 end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
-function ssSeasonsUtil:ssNormDist(mu,sigma) 
-		
-	local p = math.random();
-	
-	if p < 0.5 then
-		return self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-sigma + mu
-	else
-		return self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))*sigma + mu
-	end
+function ssSeasonsUtil:ssNormDist(mu,sigma)
+
+    local p = math.random();
+
+    if p < 0.5 then
+        return self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-sigma + mu
+    else
+        return self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))*sigma + mu
+    end
 end

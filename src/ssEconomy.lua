@@ -24,8 +24,8 @@ end
 function ssEconomy.setup()
     ssSettings.load("economy", ssEconomy)
 
-    ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / 60 / 60 / 1000
-    ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / 60 / 60 / 1000
+    ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
+    ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
 
     addModEventListener(ssEconomy)
 end
@@ -76,13 +76,22 @@ function ssEconomy:aiUpdateTick(superFunc, dt)
         if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
             self.pricePerMS = ssEconomy.aiPricePerMSWork
         else
-            self.pricePerMS = ssEconomy.aiPricePerMSOverWork
+            self.pricePerMS = ssEconomy.aiPricePerMSOverwork
         end
     end
 
     return superFunc(self, dt)
 end
 
+--[[
+LEASING PRICING NOW
+
+storeItem.runningLeasingFactor
+
+baseLease = storeItem.runningLeasingFactor * price
+perHour = baseLease
+perDay = baseLease * 0.2
+]]
 
 -- logInfo("LIFETIME_OPERATINGTIME_RATIO " .. tostring(EconomyManager.LIFETIME_OPERATINGTIME_RATIO))
 -- logInfo("MAX_DAILYUPKEEP_MULTIPLIER " .. tostring(EconomyManager.MAX_DAILYUPKEEP_MULTIPLIER))

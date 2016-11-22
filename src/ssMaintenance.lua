@@ -230,18 +230,47 @@ function ssMaintenance:getDailyUpKeep(superFunc)
 end
 
 function ssMaintenance:getSellPrice(superFunc)
-    local priceMultiplier = 0.75
-    local maxVehicleAge = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()].lifetime;
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+    local price = storeItem.price
+    local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
+    local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear) -- year
+    local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
-    if maxVehicleAge ~= nil and maxVehicleAge ~= 0 then
-        local ageMultiplier = 0.5 * math.min(self.age/maxVehicleAge, 1)
-        local operatingTime = self.operatingTime / (1000*60*60)
-        local operatingTimeMultiplier =  0.5 * math.min(operatingTime / (maxVehicleAge*EconomyManager.LIFETIME_OPERATINGTIME_RATIO), 1)
-        priceMultiplier = priceMultiplier * math.exp(-3.5 * (ageMultiplier+operatingTimeMultiplier))
+    local factors = ssMaintenance.repairFactors[storeItem.category]
+    local lifetime = storeItem.lifetime
+    if factors ~= nil then
+        lifetime = Utils.getNoNil(factors.lifetime, lifetime)
     end
 
-    -- return math.floor(self:getPrice() * math.max(priceMultiplier, 0.05));
-    return 1000
+    local p1, p2, p3, p4
+
+    if category == "tractors" then
+        p1 = -0.015
+        p2 = 0.42
+        p3 = -4
+        p4 = 85
+    elseif category == "combines" then
+        p1 = -0.015
+        p2 = 0.42
+        p3 = -4
+        p4 = 85
+    else
+        p1 = -0.015
+        p2 = 0.42
+        p3 = -4
+        p4 = 85
+    end
+
+    local depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
+    local sellPrice
+
+    if age == 0 and operatingTime < 2 then
+        sellPrice = price
+    else
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.sqrt(power / storeItem.dailyUpkeep),1000) + ssSeasonsUtil:ssNormDist(-0.01 * price, 0.02 * price)
+    end
+
+    return sellPrice
 end
 
 --[[
