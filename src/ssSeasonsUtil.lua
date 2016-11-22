@@ -217,3 +217,18 @@ function ssSeasonsUtil:ssNormDist(mu,sigma)
         return self:RationalApproximation(math.sqrt(-2.0 * math.log(1 - p))) * sigma + mu
     end
 end
+
+-- Outputs a random sample from a lognormal distribution
+function ssSeasonsUtil:ssNormDist(beta, gamma) 
+		
+	local p = math.random();
+    local z
+	
+	if p < 0.5 then
+		z = self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
+	else
+		z = self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))
+	end
+
+    return gamma * math.exp ( z / beta )
+end
