@@ -42,7 +42,8 @@ local srcFiles = {
     "ssEconomy.lua",
     "ssVehicle.lua",
     "ssGrowthManager.lua",
-    "ssSnow.lua"
+    "ssSnow.lua",
+    "ssBank.lua"
 }
 
 -- Load all scripts
@@ -85,6 +86,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssVehicle.preSetup()
     ssGrowthManager.preSetup()
     ssSnow.preSetup()
+    ssBank.preSetup()
 
     -- Load all requested values
     ssSettings.loadFromSavegame()
@@ -98,6 +100,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssVehicle.setup()
     ssGrowthManager.setup()
     ssSnow.setup()
+    ssBank.setup()
 
     ssSeasonsMod.latestSeason = ssSeasonsUtil:season()
 
