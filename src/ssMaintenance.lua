@@ -267,7 +267,7 @@ function ssMaintenance:getSellPrice(superFunc)
     if age == 0 and operatingTime < 2 then
         sellPrice = price
     else
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.sqrt(power / storeItem.dailyUpkeep),1000) + ssSeasonsUtil:ssNormDist(-0.01 * price, 0.02 * price)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.sqrt(power / storeItem.dailyUpkeep),1000)
     end
 
     return sellPrice
