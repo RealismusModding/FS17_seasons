@@ -12,6 +12,7 @@ ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
 
 ssVehicle.repairFactors = {}
+ssVehicle.allowedInWinter = {}
 
 ssVehicle.settingsProperties = {}
 
@@ -39,10 +40,9 @@ end
 function ssVehicle:loadMap(name)
     self:installRepairableSpecialization()
     self:loadRepairFactors()
+    self:loadAllowedInWinter()
 
     g_currentMission.environment:addDayChangeListener(self)
-
-    print_r(WorkArea)
 end
 
 function ssVehicle:deleteMap()
@@ -126,6 +126,30 @@ function ssVehicle:loadRepairFactors()
 
     -- Close file
     delete(file)
+end
+
+function ssVehicle:loadAllowedInWinter()
+    ssVehicle.allowedInWinter = {
+        [WorkArea.AREATYPE_BALER] = false,
+        [WorkArea.AREATYPE_COMBINE] = false,
+        [WorkArea.AREATYPE_CULTIVATOR] = false,
+        [WorkArea.AREATYPE_CUTTER] = false,
+        [WorkArea.AREATYPE_DEFAULT] = false,
+        [WorkArea.AREATYPE_FORAGEWAGON] = false,
+        [WorkArea.AREATYPE_FRUITPREPARER] = false,
+        [WorkArea.AREATYPE_MOWER] = true,
+        [WorkArea.AREATYPE_MOWERDROP] = true,
+        [WorkArea.AREATYPE_PLOUGH] = false,
+        [WorkArea.AREATYPE_RIDGEMARKER] = false,
+        [WorkArea.AREATYPE_ROLLER] = true,
+        [WorkArea.AREATYPE_SOWINGMACHINE] = false,
+        [WorkArea.AREATYPE_SPRAYER] = false,
+        [WorkArea.AREATYPE_TEDDER] = false,
+        [WorkArea.AREATYPE_TEDDERDROP] = false,
+        [WorkArea.AREATYPE_WEEDER] = false,
+        [WorkArea.AREATYPE_WINDROWER] = false,
+        [WorkArea.AREATYPE_WINDROWERDROP] = false,
+    }
 end
 
 function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
@@ -342,7 +366,8 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
 
     -- Look at the work areas and if it is active (lowered)
     for _, area in pairs(self.workAreas) do
-        if self:getIsWorkAreaActive(area) then
+        if ssVehicle.allowedInWinter[area.type] == false
+            and self:getIsWorkAreaActive(area) then
             isLowered = true
         end
     end
