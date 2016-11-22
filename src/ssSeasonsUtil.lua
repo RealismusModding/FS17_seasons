@@ -55,6 +55,7 @@ function ssSeasonsUtil.setup()
 end
 
 function ssSeasonsUtil:loadMap(name)
+    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssSeasonsUtil:deleteMap()
@@ -163,6 +164,21 @@ end
 
 function ssSeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek
+end
+
+function ssSeasonsUtil:dayChanged()
+    if ssSeasonsMod.enabled then
+        local currentSeason = self:season()
+
+        if currentSeason ~= ssSeasonsMod.latestSeason then
+            ssSeasonsMod.latestSeason = currentSeason
+
+            for _, target in pairs(ssSeasonsMod.seasonListeners) do
+                -- No check here, let it crash if the function is missing
+                target.seasonChanged(target)
+            end
+        end
+    end
 end
 
 --Outputs a random sample from a triangular distribution
