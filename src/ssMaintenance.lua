@@ -321,8 +321,3 @@ function ssMaintenance:sellAreaTriggerCallback(superFunc, triggerId, otherId, on
         self:determineCurrentVehicle()
     end
 end
-
---[[
-
-    [typeDesc] => "cultivator"
- ]]
