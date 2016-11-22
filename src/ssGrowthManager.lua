@@ -17,7 +17,7 @@ end
 function ssGrowthManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
     log("Growth manager loading");
-   self:handleSeason(); 
+   self:handleSeasonChange(); 
 end
 
 function ssGrowthManager:deleteMap()
@@ -29,7 +29,7 @@ end
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
         log("Growth Manager debug");
-        self:handleSeason();
+        self:handleSeasonChange();
     end
 end
 
@@ -40,10 +40,10 @@ function ssGrowthManager:draw()
 end
 
 function ssGrowthManager:dayChanged()
-    self:handleSeason();    
+    self:handleSeasonChange();    
 end
 
-function ssGrowthManager:handleSeason()
+function ssGrowthManager:handleSeasonChange()
     local currentSeason = ssSeasonsUtil:seasonName();
     log("Today's season:" .. currentSeason);
     log("Today's season number:" .. ssSeasonsUtil:season());
