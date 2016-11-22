@@ -10,6 +10,9 @@ ssSeasonsMod.version = Utils.getNoNil(modItem.version, "?.?.?.?")
 ssSeasonsMod.modDir = g_currentModDirectory
 ssSeasonsMod.verbose = true
 
+ssSeasonsMod.seasonListeners = {}
+ssSeasonsMod.latestSeason = 1
+
 function log(...)
     if not ssSeasonsMod.verbose then return end
 
@@ -27,7 +30,6 @@ function logInfo(...)
     end
     print(str)
 end
-
 
 local srcFolder = g_currentModDirectory .. "src/"
 local srcFiles = {
@@ -97,9 +99,9 @@ function ssSeasonsMod.loadMapFinished(...)
     ssGrowthManager.setup()
     ssSnow.setup()
 
+    ssSeasonsMod.latestSeason = ssSeasonsUtil:season()
 
     ssSeasonsMod.enabled = true
-
 
     return ssSeasonsMod.origLoadMapFinished(...)
 end
@@ -110,6 +112,25 @@ function ssSeasonsMod.delete(...)
     return ssSeasonsMod.origDelete(...)
 end
 
+function ssSeasonsMod:addSeasonChangeListener(target)
+    if target ~= nil then
+        table.insert(ssSeasonsMod.seasonListeners, target)
+    end
+
+    print_r(ssSeasonsMod.seasonListeners)
+end
+
+function ssSeasonsMod:removeSeasonChangeListener(target)
+    if target ~= nil then
+        for i = 1, #ssSeasonsMod.seasonListeners do
+            if ssSeasonsMod.seasonListeners[i] == target then
+                table.remove(ssSeasonsMod.seasonListeners, i)
+                break
+            end
+        end
+    end
+end
+
 ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
 ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
 ssSeasonsMod.origDelete = FSBaseMission.delete
@@ -117,7 +138,6 @@ ssSeasonsMod.origDelete = FSBaseMission.delete
 FSBaseMission.loadMap = ssSeasonsMod.loadMap
 FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
-
 
 ------------- Useful global functions ---------------
 

@@ -20,7 +20,9 @@ function ssSnow:loadMap(name)
     TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/snow_normal.dds", ssSeasonsMod.modDir .. "resources/snowDistance_diffuse.dds");
 
     -- General initalization
-    g_currentMission.environment:addHourChangeListener(self);
+    g_currentMission.environment:addHourChangeListener(self)
+    ssSeasonsMod:addSeasonChangeListener(self)
+
     if g_currentMission.missionInfo.timeScale > 120 then
         self.mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
     else
@@ -31,9 +33,6 @@ function ssSnow:loadMap(name)
     self.currentX = 0; -- The row that we are currently updating
     self.currentZ = 0; -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false; -- Have we already added snow for the current snowfall?
-
-    DebugUtil.printTableRecursively(TipUtil, ".", 0, 5);
-
 end
 
 function ssSnow:deleteMap()
@@ -78,6 +77,10 @@ function ssSnow:update(dt)
 end
 
 function ssSnow:draw()
+end
+
+function ssSnow:seasonChanged()
+    log("Season changed into "..ssSeasonsUtil:seasonName())
 end
 
 function ssSnow:hourChanged()
