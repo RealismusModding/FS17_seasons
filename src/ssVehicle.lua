@@ -24,6 +24,7 @@ function ssVehicle.preSetup()
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
+    Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
@@ -347,17 +348,22 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     end
 
     if isLowered then
-        local newSpeed
-
-        if vanillaSpeed < 1000 then -- not infinite
-            newSpeed = math.max(0.25 * vanillaSpeed, 5)
-        else
-            newSpeed = 5
-        end
-
-        return newSpeed, recalc
+        self.ssNotAllowedInWinter = true
+        return 0, recalc
+    else
+        self.ssNotAllowedInWinter = false
     end
 
     return vanillaSpeed, recalc
+end
+
+function ssVehicle:vehicleDraw(superFunc, dt)
+    superFunc(self, dt)
+
+    if self.isClient then
+        if self.ssNotAllowedInWinter then
+            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000);
+        end
+    end
 end
 
