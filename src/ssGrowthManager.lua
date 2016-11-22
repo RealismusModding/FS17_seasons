@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- GROWTH MANAGER SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  to forecast the weather
+-- Purpose:  to manage growth as the season changes
 -- Authors:  theSeb
 -- Credits: Inspired by upsidedown's growth manager mod
 
