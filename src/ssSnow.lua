@@ -32,8 +32,6 @@ function ssSnow:loadMap(name)
     self.currentZ = 0; -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false; -- Have we already added snow for the current snowfall?
 
-    DebugUtil.printTableRecursively(TipUtil, ".", 0, 5);
-
 end
 
 function ssSnow:deleteMap()
