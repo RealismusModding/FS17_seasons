@@ -6,7 +6,7 @@ ssSeasonsMod = {}
 getfenv(0)["modSeasonsMod"] = ssSeasonsMod
 
 local modItem = ModsUtil.findModItemByModName(g_currentModName)
-ssSeasonsMod.version = Utils.getNoNil(modItem.version ,"?.?.?.?")
+ssSeasonsMod.version = Utils.getNoNil(modItem.version, "?.?.?.?")
 ssSeasonsMod.modDir = g_currentModDirectory
 ssSeasonsMod.verbose = true
 
@@ -39,10 +39,10 @@ local srcFiles = {
     "ssFixFruit.lua",
     "ssEconomy.lua",
     "ssVehicle.lua",
-    "ssGrowthManager.lua"
+    "ssGrowthManager.lua",
+    "ssSnow.lua"
 }
-    -- "ssSnow.lua"
-    
+
 -- Load all scripts
 if modItem.isDirectory then
     for i = 1, #srcFiles do
@@ -82,7 +82,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssFixFruit.preSetup()
     ssVehicle.preSetup()
     ssGrowthManager.preSetup()
-    -- ssSnow.preSetup()
+    ssSnow.preSetup()
 
     -- Load all requested values
     ssSettings.loadFromSavegame()
@@ -95,7 +95,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssFixFruit.setup()
     ssVehicle.setup()
     ssGrowthManager.setup()
-    -- ssSnow.setup()
+    ssSnow.setup()
 
 
     ssSeasonsMod.enabled = true
