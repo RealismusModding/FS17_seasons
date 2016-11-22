@@ -41,7 +41,8 @@ local srcFiles = {
     "ssVehicle.lua",
     "ssGrowthManager.lua"
 }
-
+    -- "ssSnow.lua"
+    
 -- Load all scripts
 if modItem.isDirectory then
     for i = 1, #srcFiles do
@@ -81,6 +82,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssFixFruit.preSetup()
     ssVehicle.preSetup()
     ssGrowthManager.preSetup()
+    -- ssSnow.preSetup()
 
     -- Load all requested values
     ssSettings.loadFromSavegame()
@@ -93,6 +95,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssFixFruit.setup()
     ssVehicle.setup()
     ssGrowthManager.setup()
+    -- ssSnow.setup()
 
 
     ssSeasonsMod.enabled = true
