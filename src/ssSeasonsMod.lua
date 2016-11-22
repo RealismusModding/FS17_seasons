@@ -38,7 +38,7 @@ local srcFiles = {
     "ssWeatherForecast.lua",
     "ssFixFruit.lua",
     "ssEconomy.lua",
-    "ssMaintenance.lua",
+    "ssVehicle.lua",
     "ssGrowthManager.lua"
 }
 
@@ -79,7 +79,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssEconomy.preSetup()
     ssWeatherForecast.preSetup()
     ssFixFruit.preSetup()
-    ssMaintenance.preSetup()
+    ssVehicle.preSetup()
     ssGrowthManager.preSetup()
 
     -- Load all requested values
@@ -91,7 +91,7 @@ function ssSeasonsMod.loadMapFinished(...)
     ssEconomy.setup()
     ssWeatherForecast.setup()
     ssFixFruit.setup()
-    ssMaintenance.setup()
+    ssVehicle.setup()
     ssGrowthManager.setup()
 
 

@@ -5,62 +5,65 @@
 -- Authors:  Jarvixes (Rahkiin), reallogger, Rival
 --
 
-ssMaintenance = {}
-ssMaintenance.LIFETIME_FACTOR = 5
-ssMaintenance.REPAIR_NIGHT_FACTOR = 1
-ssMaintenance.REPAIR_SHOP_FACTOR = 0.5
-ssMaintenance.DIRT_FACTOR = 0.2
+ssVehicle = {}
+ssVehicle.LIFETIME_FACTOR = 5
+ssVehicle.REPAIR_NIGHT_FACTOR = 1
+ssVehicle.REPAIR_SHOP_FACTOR = 0.5
+ssVehicle.DIRT_FACTOR = 0.2
 
-ssMaintenance.repairFactors = {}
+ssVehicle.repairFactors = {}
 
-ssMaintenance.settingsProperties = {}
+ssVehicle.settingsProperties = {}
 
 SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "/src/ssRepairable.lua")
 
-function ssMaintenance.preSetup()
-    ssSettings.add("maintenance", ssMaintenance)
+function ssVehicle.preSetup()
+    ssSettings.add("maintenance", ssVehicle)
 
-    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssMaintenance.getDailyUpKeep)
-    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssMaintenance.getSellPrice)
-    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssMaintenance.getSpecValueAge)
-    -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssMaintenance.getSpecValueDailyUpKeep)
+    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
+    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
+    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
+    Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
+    -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
-    VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssMaintenance.sellAreaTriggerCallback)
+    VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 end
 
-function ssMaintenance.setup()
-    ssSettings.load("maintenance", ssMaintenance)
+function ssVehicle.setup()
+    ssSettings.load("maintenance", ssVehicle)
 
-    addModEventListener(ssMaintenance)
+    addModEventListener(ssVehicle)
 end
 
-function ssMaintenance:loadMap(name)
+function ssVehicle:loadMap(name)
     self:installRepairableSpecialization()
     self:loadRepairFactors()
 
     g_currentMission.environment:addDayChangeListener(self)
+
+    print_r(WorkArea)
 end
 
-function ssMaintenance:deleteMap()
+function ssVehicle:deleteMap()
 end
 
-function ssMaintenance:mouseEvent(posX, posY, isDown, isUp, button)
+function ssVehicle:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
-function ssMaintenance:keyEvent(unicode, sym, modifier, isDown)
+function ssVehicle:keyEvent(unicode, sym, modifier, isDown)
 end
 
-function ssMaintenance:draw()
+function ssVehicle:draw()
 end
 
-function ssMaintenance:update(dt)
+function ssVehicle:update(dt)
 end
 
-function ssMaintenance:dayChanged()
+function ssVehicle:dayChanged()
     self:resetOperatingTimeAndDirt()
 end
 
-function ssMaintenance:installRepairableSpecialization()
+function ssVehicle:installRepairableSpecialization()
     local specWashable = SpecializationUtil.getSpecialization("washable")
 
     -- Go over all the vehicle types
@@ -83,11 +86,11 @@ function ssMaintenance:installRepairableSpecialization()
     end
 end
 
-function ssMaintenance:loadRepairFactors()
+function ssVehicle:loadRepairFactors()
     -- Open file
     local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "/repairFactors.xml")
 
-    ssMaintenance.repairFactors = {}
+    ssVehicle.repairFactors = {}
 
     local i = 0;
     while true do
@@ -115,7 +118,7 @@ function ssMaintenance:loadRepairFactors()
             ["lifetime"] = lifetime
         }
 
-        ssMaintenance.repairFactors[category] = config
+        ssVehicle.repairFactors[category] = config
 
         i = i + 1
     end
@@ -124,11 +127,11 @@ function ssMaintenance:loadRepairFactors()
     delete(file)
 end
 
-function ssMaintenance:repairCost(vehicle, storeItem, operatingTime)
-    local data = ssMaintenance.repairFactors[storeItem.category]
+function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
+    local data = ssVehicle.repairFactors[storeItem.category]
 
     if data == nil then
-        data = ssMaintenance.repairFactors["other"]
+        data = ssVehicle.repairFactors["other"]
     end
 
     local RF1 = data.RF1
@@ -142,18 +145,18 @@ function ssMaintenance:repairCost(vehicle, storeItem, operatingTime)
         powerMultiplier = dailyUpkeep / storeItem.specs.power
     end
 
-    if operatingTime < lifetime / ssMaintenance.LIFETIME_FACTOR then
+    if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
         return 0.025 * storeItem.price * (RF1 * (operatingTime / 5) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price * (RF1 * (operatingTime / (5 * ssMaintenance.LIFETIME_FACTOR)) ^ RF2) * (1 + (operatingTime - lifetime / ssMaintenance.LIFETIME_FACTOR) / (lifetime / 5) * 2) * powerMultiplier
+        return 0.025 * storeItem.price * (RF1 * (operatingTime / (5 * ssVehicle.LIFETIME_FACTOR)) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR) / (lifetime / 5) * 2) * powerMultiplier
     end
 end
 
-function ssMaintenance:maintenanceRepairCost(vehicle, storeItem, isRepair)
+function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = vehicle.ssYesterdayOperatingTime / 1000 / 60 / 60
     local operatingTime = vehicle.operatingTime / 1000 / 60 / 60
     local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
-    local repairFactor = isRepair and ssMaintenance.REPAIR_SHOP_FACTOR or ssMaintenance.REPAIR_NIGHT_FACTOR
+    local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
 
     -- Calculate the amount of dirt on the vehicle, on average
     local avgDirtAmount = 0
@@ -169,17 +172,17 @@ function ssMaintenance:maintenanceRepairCost(vehicle, storeItem, isRepair)
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
     if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason or isRepair then
-        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssMaintenance.DIRT_FACTOR * avgDirtAmount ^ 2)
+        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
     return maintenanceCost
 end
 
-function ssMaintenance.taxInterestCost(vehicle, storeItem)
+function ssVehicle.taxInterestCost(vehicle, storeItem)
     return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
 end
 
-function ssMaintenance:resetOperatingTimeAndDirt()
+function ssVehicle:resetOperatingTimeAndDirt()
     for i, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
             vehicle.ssCumulativeDirt = 0
@@ -189,14 +192,14 @@ function ssMaintenance:resetOperatingTimeAndDirt()
 end
 
 -- Repair by resetting the last repair day and operating time
-function ssMaintenance:repair(vehicle, storeItem)
+function ssVehicle:repair(vehicle, storeItem)
     vehicle.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
 
     return true
 end
 
-function ssMaintenance:getRepairShopCost(vehicle, storeItem, atDealer)
+function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
     if vehicle.ssLastRepairDay == ssSeasonsUtil:currentDayNumber() then
         return 0
@@ -206,7 +209,7 @@ function ssMaintenance:getRepairShopCost(vehicle, storeItem, atDealer)
         storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
     end
 
-    local costs = ssMaintenance:maintenanceRepairCost(vehicle, storeItem, true)
+    local costs = ssVehicle:maintenanceRepairCost(vehicle, storeItem, true)
     local dealerMultiplier = atDealer and 1.1 or 1
     local difficultyMultiplier = 1 -- FIXME * difficulty mutliplier
     local workCosts = atDealer and 45 or 35
@@ -214,7 +217,7 @@ function ssMaintenance:getRepairShopCost(vehicle, storeItem, atDealer)
     return (costs + workCosts) * dealerMultiplier * difficultyMultiplier
 end
 
-function ssMaintenance:getDailyUpKeep(superFunc)
+function ssVehicle:getDailyUpKeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
 
     -- If not repairable, show default amount
@@ -223,20 +226,20 @@ function ssMaintenance:getDailyUpKeep(superFunc)
     end
 
     -- This is for visually in the display
-    local costs = ssMaintenance:taxInterestCost(self, storeItem)
-    costs = costs + ssMaintenance:maintenanceRepairCost(self, storeItem, false)
+    local costs = ssVehicle:taxInterestCost(self, storeItem)
+    costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false)
 
     return costs
 end
 
-function ssMaintenance:getSellPrice(superFunc)
+function ssVehicle:getSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local price = storeItem.price
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
     local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear) -- year
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
-    local factors = ssMaintenance.repairFactors[storeItem.category]
+    local factors = ssVehicle.repairFactors[storeItem.category]
     local lifetime = storeItem.lifetime
     if factors ~= nil then
         lifetime = Utils.getNoNil(factors.lifetime, lifetime)
@@ -274,7 +277,7 @@ function ssMaintenance:getSellPrice(superFunc)
 end
 
 --[[
-function ssMaintenance:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
+function ssVehicle:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
     log("getSpecValueDailyUpKeep "..tostring(storeItem), tostring(realItem))
 
     local dailyUpkeep = storeItem.dailyUpkeep
@@ -290,7 +293,7 @@ end
 ]]
 
 -- Replace the age with the age since last repair, because actual age is useless
-function ssMaintenance:getSpecValueAge(superFunc, vehicle)
+function ssVehicle:getSpecValueAge(superFunc, vehicle)
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil then
         return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay)
     elseif vehicle ~= nil and vehicle.age ~= nil then
@@ -300,7 +303,9 @@ function ssMaintenance:getSpecValueAge(superFunc, vehicle)
     return nil
 end
 
-function ssMaintenance:sellAreaTriggerCallback(superFunc, triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+-- Tell a vehicle when it is in the area of a workshop. This information is
+-- then used in ssRepairable to show or hide the repair option
+function ssVehicle:sellAreaTriggerCallback(superFunc, triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
     if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
             self.vehicleInRange[otherShapeId] = true
@@ -321,3 +326,38 @@ function ssMaintenance:sellAreaTriggerCallback(superFunc, triggerId, otherId, on
         self:determineCurrentVehicle()
     end
 end
+
+-- Limit the speed of working implements and machine on land to 4kmh or 0.25 their normal speed.
+-- Only in the winter
+function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
+    local vanillaSpeed, recalc = superFunc(self, onlyIfWorking)
+
+    if not ssSeasonsUtil:isSeason(3)
+        or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
+       return vanillaSpeed, recalc
+    end
+
+    local isLowered = false
+
+    -- Look at the work areas and if it is active (lowered)
+    for _, area in pairs(self.workAreas) do
+        if self:getIsWorkAreaActive(area) then
+            isLowered = true
+        end
+    end
+
+    if isLowered then
+        local newSpeed
+
+        if vanillaSpeed < 1000 then -- not infinite
+            newSpeed = math.max(0.25 * vanillaSpeed, 5)
+        else
+            newSpeed = 5
+        end
+
+        return newSpeed, recalc
+    end
+
+    return vanillaSpeed, recalc
+end
+

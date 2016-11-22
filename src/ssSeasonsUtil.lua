@@ -144,6 +144,11 @@ function ssSeasonsUtil:seasonName(dayNumber)
     return self.seasons[self:season(dayNumber)]
 end
 
+-- 1 = spring, 3 = winter
+function ssSeasonsUtil:isSeason(seasonNumber)
+    return self:season() == seasonNumber
+end
+
 -- Get day name for given day number
 -- If no day number supplied, uses current day
 function ssSeasonsUtil:dayName(dayNumber)

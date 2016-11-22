@@ -97,3 +97,12 @@ g_referenceScreenWidth
 g_uiDebugEnabled
 g_savegameXML
 g_gui
+
+# Other stuff
+
+ShopScreen.onVehicleBought(self, ...) -- Called when a vehicle is bought.
+Vehicle:getSpeedLimit(onlyIfWorking)
+
+Vehicle.attachedImplements
+   get its speed limit
+   get min of currently found min and speed limit

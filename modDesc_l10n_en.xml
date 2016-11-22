@@ -17,7 +17,7 @@
         <text name="SS_WEEKDAY_SATURDAY" text="Saturday" />
         <text name="SS_WEEKDAY_SUNDAY" text="Sunday" />
 
-        <text name="SS_WEEKDAY_MON" text="Mont" />
+        <text name="SS_WEEKDAY_MON" text="Mon" />
         <text name="SS_WEEKDAY_TUE" text="Tue" />
         <text name="SS_WEEKDAY_WED" text="Wed" />
         <text name="SS_WEEKDAY_THU" text="Thu" />

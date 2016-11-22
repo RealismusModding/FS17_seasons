@@ -99,7 +99,7 @@ function ssRepairable:update(dt)
 end
 
 function ssRepairable:repairUpdate(dt)
-    local repairCost = ssMaintenance:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
+    local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
     if repairCost < 1 then return end
 
@@ -119,7 +119,7 @@ function ssRepairable:repairUpdate(dt)
             end
 
             -- Repair
-            if ssMaintenance:repair(self, storeItem) then
+            if ssVehicle:repair(self, storeItem) then
                 -- Show that it was repaired
                 local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
                 g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
