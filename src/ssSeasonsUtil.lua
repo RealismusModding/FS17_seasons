@@ -245,6 +245,7 @@ end
 -- Calling function should keep currentX and CurrentZ between calls to the function. 
 function ssSeasonsUtil:ssItterateOverTerrain( currentX, currentZ, func, ... )
 
+    local arg={...} -- Optional arguments to pass on to provided function.
     local moreIterations=true;
     local mapSegments = 16; -- Must be evenly dividable with mapsize.
     
@@ -259,12 +260,9 @@ function ssSeasonsUtil:ssItterateOverTerrain( currentX, currentZ, func, ... )
     local heightWorldX = startWorldX;
     local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
 
-    -- Extra arguments are optional
-    if arg == nil then
-        func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
-    else
-         func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg));
-    end;
+    -- Call provided function 
+    func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg));
+
     
     if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
         -- Next column
