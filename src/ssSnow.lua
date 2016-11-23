@@ -21,10 +21,13 @@ function ssSnow:loadMap(name)
 
     -- General initalization
     g_currentMission.environment:addHourChangeListener(self)
-    ssSeasonsMod:addSeasonChangeListener(self)
+    -- ssSeasonsMod:addSeasonChangeListener(self)
 
     self.doAddSnow = false; -- Should we currently be running a loop to add Snow on the map.
     self.doRemoveSnow = false;
+    self.snowLayersDelta = 0; -- Number of snow layers to add or remove.
+    self.appliedSnowDepth = 0; -- ChangeMe @Kuijpers  This variable should be persisted in the savegame.
+    
     self.currentX = 0; -- The row that we are currently updating
     self.currentZ = 0; -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false; -- Have we already added snow for the current snowfall?
@@ -48,21 +51,24 @@ end
 
 function ssSnow:hourChanged()
 
-    if g_currentMission.environment.currentRain ~= nil then
-        -- ChangeMe Change to Environment.RAINTYPE_HAIL when we get weathercontrol working. Rain is easier to provoke for testing.
-        if self.addedSnowForCurrentSnowfall == false and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_RAIN then
-            self.addedSnowForCurrentSnowfall = true;
-            self.doAddSnow = true;
-        end
-    else
-        self.addedSnowForCurrentSnowfall = false;
+    local targetSnowDepth = 0; -- Target snow depth in meters. Fetch from weatersystem.
+
+    local layerHeight = 0.06; -- Height of one snow layer.
+    
+    if targetSnowDepth - self.appliedSnowDepth > layerHeight then
+        self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / layerHeight);
+        self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * layerHeight;
+        self.doAddSnow = true;
+        print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" );
+    elseif self.appliedSnowDepth - targetSnowDepth > layerHeight then
+        self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / layerHeight);
+        self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * layerHeight;
         self.doRemoveSnow = true;
-    end
+    end;
 end
 
-
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
-local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     if g_currentMission.terrainDetailHeightId ~= nil then
 
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
@@ -107,8 +113,9 @@ end
 
 function ssSnow:update(dt)
     if self.doAddSnow == true then
-        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, addSnow, 10);
+        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, addSnow, self.snowLayersDelta);
     elseif self.doRemoveSnow == true then
-        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, removeSnow, 1);
+        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
+        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
     end
 end
