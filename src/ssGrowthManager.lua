@@ -19,7 +19,7 @@ function ssGrowthManager:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self);
 
     log("Growth manager loading");
-   self:handleSeasonChange();
+   self:seasonChanged();
 end
 
 function ssGrowthManager:deleteMap()
