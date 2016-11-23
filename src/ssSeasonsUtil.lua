@@ -232,3 +232,46 @@ function ssSeasonsUtil:ssNormDist(beta, gamma)
 
     return gamma * math.exp ( z / beta )
 end
+
+-- Does one iteration step of density layer update calling provided function for specified area.
+-- Returns values for next iteration. Extra arguments are passed on to the provided function.
+-- Calling function should keep currentX and CurrentZ between calls to the function. 
+function ssSeasonsUtil:ssItterateOverTerrain( currentX, currentZ, func, ... )
+
+    local moreIterations=true;
+    local mapSegments = 16; -- Must be evenly dividable with mapsize.
+    
+    if g_currentMission.missionInfo.timeScale > 120 then
+        mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
+    end;
+
+    local startWorldX =  currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2;
+    local startWorldZ =  currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2;
+    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
+    local widthWorldZ = startWorldZ;
+    local heightWorldX = startWorldX;
+    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
+
+    -- Extra arguments are optional
+    if arg == nil then
+        func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
+    else
+         func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg));
+    end;
+    
+    if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
+        -- Next column
+        currentZ = currentZ + 1;
+    elseif  currentX < mapSegments - 1 then -- Starting with row 0
+        -- Next row
+        currentX = currentX + 1;
+        currentZ = 0;
+    else
+        -- Done with the loop, set up for the next one.
+        currentX = 0;
+        currentZ = 0;
+        moreIterations = false;
+    end
+    
+    return currentX, currentZ, moreIterations
+end;

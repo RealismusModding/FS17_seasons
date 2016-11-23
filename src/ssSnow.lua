@@ -23,12 +23,6 @@ function ssSnow:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     ssSeasonsMod:addSeasonChangeListener(self)
 
-    if g_currentMission.missionInfo.timeScale > 120 then
-        self.mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
-    else
-        self.mapSegments = 16; -- Must be evenly dividable with mapsize.
-    end
-
     self.doAddSnow = false; -- Should we currently be running a loop to add Snow on the map.
     self.currentX = 0; -- The row that we are currently updating
     self.currentZ = 0; -- The column that we are currently updating
@@ -44,38 +38,6 @@ end
 function ssSnow:keyEvent(unicode, sym, modifier, isDown)
 end
 
-function ssSnow:update(dt)
-    if self.doAddSnow == true then
-
-        print("Updating snow for: " .. self.currentX .. ", " .. self.currentZ );
-
-        local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
-        local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
-        local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
-        local widthWorldZ = startWorldZ;
-        local heightWorldX = startWorldX;
-        local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
-
-        print("- " .. startWorldX .. ", " .. startWorldZ .. ", " .. widthWorldX .. ", " .. widthWorldZ .. ", " .. heightWorldX .. ", " .. heightWorldZ );
-
-        ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
-
-        if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-            -- Next column
-            self.currentZ = self.currentZ + 1;
-        elseif  self.currentX < self.mapSegments - 1 then -- Starting with row 0
-            -- Next row
-            self.currentX = self.currentX + 1;
-            self.currentZ = 0;
-        else
-            -- Done with the loop, set up for the next one.
-            self.currentX = 0;
-            self.currentZ = 0;
-            self.doAddSnow = false;
-        end
-    end
-end
-
 function ssSnow:draw()
 end
 
@@ -84,6 +46,7 @@ function ssSnow:seasonChanged()
 end
 
 function ssSnow:hourChanged()
+
     if g_currentMission.environment.currentRain ~= nil then
         -- ChangeMe Change to Environment.RAINTYPE_HAIL when we get weathercontrol working. Rain is easier to provoke for testing.
         if self.addedSnowForCurrentSnowfall == false and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_RAIN then
@@ -95,14 +58,17 @@ function ssSnow:hourChanged()
     end
 end
 
-function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+-- Must be defined before call to ssSeasonsUtil:ssItterateOverTerrain where it's used as an argument.
+local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     if g_currentMission.terrainDetailHeightId ~= nil then
+    
+        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
+        
         extraMaskid = g_currentMission.terrainDetailId; -- g_currentMission.terrainDetailId
         extraMaskFirstChannel = 0;
         extraMaskNumchannels = 1;
-
+        
         -- Set snow type where we have no other heaps or painted areas on the map.
-        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
         setDensityMaskParams(extraMaskid,"equals",0);
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals",0);
         setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, extraMaskid, extraMaskFirstChannel, extraMaskNumchannels, 21);
@@ -113,5 +79,11 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 21);
         addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 1);
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
+    end
+end
+
+function ssSnow:update(dt)
+    if self.doAddSnow == true then
+        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, addSnow);
     end
 end
