@@ -24,6 +24,7 @@ function ssSnow:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self)
 
     self.doAddSnow = false; -- Should we currently be running a loop to add Snow on the map.
+    self.doRemoveSnow = false;
     self.currentX = 0; -- The row that we are currently updating
     self.currentZ = 0; -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false; -- Have we already added snow for the current snowfall?
@@ -55,8 +56,10 @@ function ssSnow:hourChanged()
         end
     else
         self.addedSnowForCurrentSnowfall = false;
+        self.doRemoveSnow = true;
     end
 end
+
 
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
 local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
@@ -64,26 +67,48 @@ local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, hei
 
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
 
-        extraMaskid = g_currentMission.terrainDetailId; -- g_currentMission.terrainDetailId
+        extraMaskid = g_currentMission.terrainDetailId;
         extraMaskFirstChannel = 0;
         extraMaskNumchannels = 1;
 
         -- Set snow type where we have no other heaps or painted areas on the map.
-        setDensityMaskParams(extraMaskid,"equals",0);
+        setDensityMaskParams(extraMaskid,"greater",-1); -- noop until we use mask layers
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals",0);
-        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, extraMaskid, extraMaskFirstChannel, extraMaskNumchannels, 21);
+        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, extraMaskid, extraMaskFirstChannel, extraMaskNumchannels, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]);
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1);
 
         -- Add snow where type is snow.
-        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 21);
-        addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 1);
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]);
+        addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, layers);
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
+    end
+end
+
+local removeSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    if g_currentMission.terrainDetailHeightId ~= nil then
+
+        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
+
+        -- Remove snow where type is snow.
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]);
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0);
+        addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers);
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
+
+        -- Remove snow type where we have no snow.
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId,"equals",0);
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals",TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]);
+        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0);
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1);
     end
 end
 
 function ssSnow:update(dt)
     if self.doAddSnow == true then
-        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, addSnow);
+        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, addSnow, 10);
+    elseif self.doRemoveSnow == true then
+        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, removeSnow, 1);
     end
 end
