@@ -116,6 +116,5 @@ function ssSnow:update(dt)
         self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, addSnow, self.snowLayersDelta);
     elseif self.doRemoveSnow == true then
         self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
-        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
     end
 end
