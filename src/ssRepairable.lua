@@ -106,11 +106,9 @@ function ssRepairable:repairUpdate(dt)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
 
-    -- Show repair button
-    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), vehicleName, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
-
-    if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
-        if g_currentMission:getTotalMoney() >= repairCost then
+    -- Callback for the Yes No Dialog
+    function doRepairCallback(self, yesNo)
+        if yesNo then
             -- Deduct
             if g_currentMission:getIsServer() then
                 g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
@@ -126,6 +124,23 @@ function ssRepairable:repairUpdate(dt)
 
             --g_client:getServerConnection():sendEvent(repairVehicleEvent:new(self, self.operatingTime))
             end
+        end
+
+        g_gui:closeDialogByName("YesNoDialog")
+    end
+
+    -- Show repair button
+    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), vehicleName, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+
+    if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
+        if g_currentMission:getTotalMoney() >= repairCost then
+            log("Show Dialog")
+            local dialog = g_gui:showDialog("YesNoDialog")
+            local title = string.format("Do you want to repair the %s vehicle for %s?", vehicleName, g_i18n:formatMoney(repairCost, 0))
+
+            dialog.target:setCallback(doRepairCallback, self)
+            dialog.target:setTitle(title)
+
         else
             g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
         end
