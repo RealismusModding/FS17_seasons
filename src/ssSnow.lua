@@ -8,7 +8,11 @@
 ssSnow = {};
 ssSnow.LAYER_HEIGHT = 0.06
 
+ssSettings.set("weather", "snow#appliedSnowDepth")
+
 function ssSnow.preSetup()
+    -- Create the key
+    ssSettings.set("weather", "appliedSnowDepth", 0)
 end
 
 function ssSnow.setup()
@@ -27,8 +31,8 @@ function ssSnow:loadMap(name)
     self.doAddSnow = false; -- Should we currently be running a loop to add Snow on the map.
     self.doRemoveSnow = false;
     self.snowLayersDelta = 0; -- Number of snow layers to add or remove.
-    self.appliedSnowDepth = 0; -- ChangeMe @Kuijpers  This variable should be persisted in the savegame.
-    
+    self.appliedSnowDepth = ssSettings.get("weather", "appliedSnowDepth", 0);
+
     self.currentX = 0; -- The row that we are currently updating
     self.currentZ = 0; -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false; -- Have we already added snow for the current snowfall?
@@ -51,19 +55,21 @@ function ssSnow:seasonChanged()
 end
 
 function ssSnow:hourChanged()
+    local targetFromWater = 0.0 -- Fetch from weatersystem.
+    local targetSnowDepth = math.min(0.4, targetFromWater) -- Target snow depth in meters. Never higher than 0.4
 
-    local targetSnowDepth = 0; -- Target snow depth in meters. Fetch from weatersystem.
-    
-    if targetSnowDepth - self.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
+    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT then
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT);
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
         self.doAddSnow = true;
         print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" );
-    elseif self.appliedSnowDepth - targetSnowDepth > ssSnow.LAYER_HEIGHT then
+    elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT then
         self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT);
         self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
         self.doRemoveSnow = true;
-    end;
+    end
+
+    ssSettings.set("weather", "appliedSnowDepth", self.appliedSnowDepth)
 end
 
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
