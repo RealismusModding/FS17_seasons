@@ -6,7 +6,7 @@
 
     <texts>
         <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show Weather Forecast" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Monday" />
