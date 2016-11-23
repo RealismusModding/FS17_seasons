@@ -186,7 +186,7 @@ function ssSeasonsUtil:ssTriDist(m)
     local pmode = {}
     local p = {}
 
-    --math.randomseed( os.time() )
+    math.randomseed( g_currentMission.time )
     math.random()
 
     pmode = (m[2]-m[1])/(m[3]-m[1])
@@ -209,7 +209,11 @@ end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
 function ssSeasonsUtil:ssNormDist(mu,sigma)
+    math.randomseed( g_currentMission.time )
+    math.random()
+    
     local p = math.random()
+    log(p)
 
     if p < 0.5 then
         return self:RationalApproximation(math.sqrt(-2.0 * math.log(p))) * -sigma + mu
@@ -219,8 +223,11 @@ function ssSeasonsUtil:ssNormDist(mu,sigma)
 end
 
 -- Outputs a random sample from a lognormal distribution
-function ssSeasonsUtil:ssNormDist(beta, gamma) 
-		
+function ssSeasonsUtil:ssLognormDist(beta, gamma) 
+    math.randomseed( g_currentMission.time )
+    math.random()
+    
+
 	local p = math.random();
     local z
 	
