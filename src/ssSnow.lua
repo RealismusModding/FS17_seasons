@@ -61,13 +61,13 @@ end
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
 local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     if g_currentMission.terrainDetailHeightId ~= nil then
-    
+
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
-        
+
         extraMaskid = g_currentMission.terrainDetailId; -- g_currentMission.terrainDetailId
         extraMaskFirstChannel = 0;
         extraMaskNumchannels = 1;
-        
+
         -- Set snow type where we have no other heaps or painted areas on the map.
         setDensityMaskParams(extraMaskid,"equals",0);
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals",0);

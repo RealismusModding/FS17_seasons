@@ -211,7 +211,7 @@ end
 function ssSeasonsUtil:ssNormDist(mu,sigma)
     math.randomseed( g_currentMission.time )
     math.random()
-    
+
     local p = math.random()
     log(p)
 
@@ -223,32 +223,30 @@ function ssSeasonsUtil:ssNormDist(mu,sigma)
 end
 
 -- Outputs a random sample from a lognormal distribution
-function ssSeasonsUtil:ssLognormDist(beta, gamma) 
+function ssSeasonsUtil:ssLognormDist(beta, gamma)
     math.randomseed( g_currentMission.time )
     math.random()
-    
 
-	local p = math.random();
+    local p = math.random();
     local z
-	
-	if p < 0.5 then
-		z = self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
-	else
-		z = self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))
-	end
+
+    if p < 0.5 then
+        z = self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
+    else
+        z = self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))
+    end
 
     return gamma * math.exp ( z / beta )
 end
 
 -- Does one iteration step of density layer update calling provided function for specified area.
 -- Returns values for next iteration. Extra arguments are passed on to the provided function.
--- Calling function should keep currentX and CurrentZ between calls to the function. 
-function ssSeasonsUtil:ssIterateOverTerrain( currentX, currentZ, func, ... )
-
+-- Calling function should keep currentX and CurrentZ between calls to the function.
+function ssSeasonsUtil:ssIterateOverTerrain(currentX, currentZ, func, ...)
     local arg={...} -- Optional arguments to pass on to provided function.
     local moreIterations=true;
     local mapSegments = 16; -- Must be evenly dividable with mapsize.
-    
+
     if g_currentMission.missionInfo.timeScale > 120 then
         mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
     end;
@@ -260,10 +258,10 @@ function ssSeasonsUtil:ssIterateOverTerrain( currentX, currentZ, func, ... )
     local heightWorldX = startWorldX;
     local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
 
-    -- Call provided function 
+    -- Call provided function
     func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg));
 
-    
+
     if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
         -- Next column
         currentZ = currentZ + 1;
@@ -277,6 +275,6 @@ function ssSeasonsUtil:ssIterateOverTerrain( currentX, currentZ, func, ... )
         currentZ = 0;
         moreIterations = false;
     end
-    
+
     return currentX, currentZ, moreIterations
-end;
+end
