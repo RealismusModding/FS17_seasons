@@ -33,6 +33,11 @@ end
 function ssEconomy:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
 
+    -- Update leasing costs
+    EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
+    EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
+    EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
+
     g_currentMission.missionStats.loanMax = ssEconomy.loanMax
     g_currentMission.missionStats.ssLoan = 0
 end
@@ -84,49 +89,21 @@ function ssEconomy:aiUpdateTick(superFunc, dt)
 end
 
 --[[
-LEASING PRICING NOW
+FieldJobManager.startFieldJob(...)
+FieldJobMissionScreen.setStartCallback(...)
 
-storeItem.runningLeasingFactor
 
-baseLease = storeItem.runningLeasingFactor * price
-perHour = baseLease
-perDay = baseLease * 0.2
+EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR
+EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR
+
+Gui.showYesNoDialog(...)
+subclass YesNoDialog
+    onClickBack
+    onClickOk
+    onClose
+    onCreate
+    onOpen
+    setButtonTexts
+    setCallback
+    setTitle
 ]]
-
--- logInfo("LIFETIME_OPERATINGTIME_RATIO " .. tostring(EconomyManager.LIFETIME_OPERATINGTIME_RATIO))
--- logInfo("MAX_DAILYUPKEEP_MULTIPLIER " .. tostring(EconomyManager.MAX_DAILYUPKEEP_MULTIPLIER))
---[[
-CONFIG_CHANGE_PRICE
-PRICE_MULTIPLIER
-LIFETIME_OPERATINGTIME_RATIO
-MAX_DAILYUPKEEP_MULTIPLIER
-PRICE_DROP_MIN_PERCENT
-PER_DAY_LEASING_FACTOR
-DIRECT_SELL_MULTIPLIER
-COST_MULTIPLIER
-DEFAULT_LEASING_DEPOSIT_FACTOR
-MAX_GREAT_DEMANDS
-
-MONEY_TYPE_PROPERTY_INCOME
-MONEY_TYPE_VEHICLE_RUNNING_COSTS
-MONEY_TYPE_PROPERTY_MAINTENANCE
-MONEY_TYPE_ANIMAL_UPKEEP
-MONEY_TYPE_LOAN_INTEREST
-MONEY_TYPE_LEASING_COSTS
-
-
-getPricePerLiter
-getPriceMultiplier
---]]
-
---[[for k in pairs(StoreItemsUtil) do
-    print(k)
-end
-
-for k,v in pairs(StoreItemsUtil.storeItems) do
-    print(k .. ": ")
-    print_r(v)
-end
---]]
---getCosts
---local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]

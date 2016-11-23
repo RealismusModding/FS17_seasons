@@ -91,3 +91,9 @@ end
 function ssBank:getCap()
     return math.max(200000, ssBank.EQUITY_LOAN_RATIO * self:getEquity())
 end
+
+--[[
+
+EconomyManager.MONEY_TYPE_LOAN_INTEREST
+
+]]
