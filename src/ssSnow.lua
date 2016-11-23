@@ -6,6 +6,7 @@
 --
 
 ssSnow = {};
+ssSnow.LAYER_HEIGHT = 0.06
 
 function ssSnow.preSetup()
 end
@@ -52,17 +53,15 @@ end
 function ssSnow:hourChanged()
 
     local targetSnowDepth = 0; -- Target snow depth in meters. Fetch from weatersystem.
-
-    local layerHeight = 0.06; -- Height of one snow layer.
     
-    if targetSnowDepth - self.appliedSnowDepth > layerHeight then
-        self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / layerHeight);
-        self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * layerHeight;
+    if targetSnowDepth - self.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
+        self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT);
+        self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
         self.doAddSnow = true;
         print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" );
-    elseif self.appliedSnowDepth - targetSnowDepth > layerHeight then
-        self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / layerHeight);
-        self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * layerHeight;
+    elseif self.appliedSnowDepth - targetSnowDepth > ssSnow.LAYER_HEIGHT then
+        self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT);
+        self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
         self.doRemoveSnow = true;
     end;
 end
@@ -113,8 +112,8 @@ end
 
 function ssSnow:update(dt)
     if self.doAddSnow == true then
-        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, addSnow, self.snowLayersDelta);
+        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, addSnow, self.snowLayersDelta);
     elseif self.doRemoveSnow == true then
-        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
+        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, removeSnow, self.snowLayersDelta);
     end
 end
