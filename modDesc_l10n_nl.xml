@@ -39,6 +39,7 @@
         <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen" />
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="De aarde is bevroren. Je kan er niet op werken!" />
     </texts>

@@ -136,7 +136,7 @@ function ssRepairable:repairUpdate(dt)
         if g_currentMission:getTotalMoney() >= repairCost then
             log("Show Dialog")
             local dialog = g_gui:showDialog("YesNoDialog")
-            local title = string.format("Do you want to repair the %s vehicle for %s?", vehicleName, g_i18n:formatMoney(repairCost, 0))
+            local title = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
 
             dialog.target:setCallback(doRepairCallback, self)
             dialog.target:setTitle(title)

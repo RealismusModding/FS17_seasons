@@ -39,6 +39,7 @@
         <text name="SS_REPAIR_VEHICLE_COST" text="Repair %s for %s" />
         <text name="SS_REPAIR_REQUIRED" text="Repair required" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Repair required in %d days" />
+        <text name="SS_REPAIR_DIALOG" text="Do you want to repair the %s for %s?" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="The soil is frozen. You can't work on it!" />
     </texts>
