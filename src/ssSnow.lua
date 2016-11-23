@@ -58,7 +58,7 @@ function ssSnow:hourChanged()
     end
 end
 
--- Must be defined before call to ssSeasonsUtil:ssItterateOverTerrain where it's used as an argument.
+-- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
 local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     if g_currentMission.terrainDetailHeightId ~= nil then
     
@@ -84,6 +84,6 @@ end
 
 function ssSnow:update(dt)
     if self.doAddSnow == true then
-        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssItterateOverTerrain( self.currentX, self.currentZ, addSnow);
+        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain( self.currentX, self.currentZ, addSnow);
     end
 end

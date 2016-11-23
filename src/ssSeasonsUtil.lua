@@ -243,7 +243,7 @@ end
 -- Does one iteration step of density layer update calling provided function for specified area.
 -- Returns values for next iteration. Extra arguments are passed on to the provided function.
 -- Calling function should keep currentX and CurrentZ between calls to the function. 
-function ssSeasonsUtil:ssItterateOverTerrain( currentX, currentZ, func, ... )
+function ssSeasonsUtil:ssIterateOverTerrain( currentX, currentZ, func, ... )
 
     local arg={...} -- Optional arguments to pass on to provided function.
     local moreIterations=true;
