@@ -31,7 +31,7 @@ end
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
         log("Growth Manager debug");
-        self:handleSeasonChange();
+        self:seasonChanged();
     end
 end
 
@@ -42,7 +42,6 @@ function ssGrowthManager:draw()
 end
 
 function ssGrowthManager:dayChanged()
-    self:handleSeasonChange();
 end
 
 function ssGrowthManager:seasonChanged()
