@@ -323,3 +323,11 @@ TableElement.setSelection(...)
 ## SettingsScreen -> ScreenElement
 
 g_inGameMenu
+
+## Small in game message at botton
+```lua
+g_currentMission.inGameMessage:showMessage("TITle", "Some text", -1); --TourIcons
+-- g_currentMission.inGameMessage:showDialog("TITle", self); ??
+
+--if not g_currentMission.inGameMessage:getIsVisible() and not g_gui:getIsGuiVisible() then
+```
