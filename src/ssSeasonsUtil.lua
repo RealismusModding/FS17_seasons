@@ -240,7 +240,7 @@ function ssSeasonsUtil:ssTriDist(m)
     local pmode = {}
     local p = {}
 
-    math.randomseed( g_currentMission.time )
+    --math.randomseed( g_currentMission.time )
     math.random()
 
     pmode = (m[2]-m[1])/(m[3]-m[1])
@@ -263,7 +263,7 @@ end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
 function ssSeasonsUtil:ssNormDist(mu,sigma)
-    math.randomseed( g_currentMission.time )
+    --math.randomseed( g_currentMission.time )
     math.random()
 
     local p = math.random()
@@ -278,7 +278,7 @@ end
 
 -- Outputs a random sample from a lognormal distribution
 function ssSeasonsUtil:ssLognormDist(beta, gamma)
-    math.randomseed( g_currentMission.time )
+    --math.randomseed( g_currentMission.time )
     math.random()
 
     local p = math.random();
