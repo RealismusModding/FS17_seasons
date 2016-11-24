@@ -15,7 +15,10 @@ ssSeasonsUtil.daysInWeek = 7
 ssSeasonsUtil.seasonsInYear = 4
 ssSeasonsUtil.daysInSeason = 10
 
-ssSeasonsUtil.settingsProperties = { "daysInWeek", "seasonsInYear", "daysInSeason" }
+ssSeasonsUtil.latestSeason = 1
+ssSeasonsUtil.latestGrowthStage = 1
+
+ssSeasonsUtil.settingsProperties = { "daysInWeek", "seasonsInYear", "daysInSeason", "latestSeason", "latestGrowthStage" }
 
 function ssSeasonsUtil.preSetup()
     ssSettings.add("seasons", ssSeasonsUtil)
@@ -86,17 +89,27 @@ function ssSeasonsUtil:dayOfWeek(dayNumber)
         dayNumber = self:currentDayNumber()
     end
 
-    return ((dayNumber - 1) % self.daysInWeek) + 1
+    return math.fmod(dayNumber - 1, self.daysInWeek) + 1
 end
 
 -- Get the season number.
 -- If no day supplied, uses current day
+-- Starts with 0
 function ssSeasonsUtil:season(dayNumber)
     if (dayNumber == nil) then
         dayNumber = self:currentDayNumber()
     end
 
-    return math.fmod(math.floor(dayNumber / self.daysInSeason), self.seasonsInYear)
+    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.seasonsInYear)
+end
+
+-- Starts with 0
+function ssSeasonsUtil:year(dayNumber)
+    if (dayNumber == nil) then
+        dayNumber = self:currentDayNumber()
+    end
+
+    return math.floor((dayNumber - 1) / (self.daysInSeason * self.seasonsInYear))
 end
 
 -- This function calculates the real-ish daynumber from an ingame day number
@@ -166,16 +179,57 @@ function ssSeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % self.daysInWeek
 end
 
+-- Returns 1-daysInSeason
+function ssSeasonsUtil:dayInSeason(currentDay)
+    if (currentDay == nil) then
+        currentDay = self:currentDayNumber()
+    end
+
+    local season = self:season(currentDay) -- 0-3
+    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.seasonsInYear) + 1 -- 1+
+    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
+end
+
+function ssSeasonsUtil:currentGrowthStage(currentDay)
+    -- Length of a state
+    local l = self.daysInSeason / 3.0
+    local dayInSeason = self:dayInSeason(currentDay)
+
+    if dayInSeason >= mathRound(2 * l) + 1 then -- Turn 3
+        return 3
+    elseif dayInSeason >= mathRound(1 * l) + 1 then -- Turn 2
+        return 2
+    else
+        return 1
+    end
+
+    return nil
+end
+
+-- This is here, because ssSeasonsMod is never really loaded as a mod class..
+-- It is complicated, but installing a day change listener on it wont work
 function ssSeasonsUtil:dayChanged()
     if ssSeasonsMod.enabled then
         local currentSeason = self:season()
+        local currentGrowthStage = self:currentGrowthStage()
 
-        if currentSeason ~= ssSeasonsMod.latestSeason then
-            ssSeasonsMod.latestSeason = currentSeason
+        -- Call season change events
+        if currentSeason ~= ssSeasonsUtil.latestSeason then
+            ssSeasonsUtil.latestSeason = currentSeason
 
             for _, target in pairs(ssSeasonsMod.seasonListeners) do
                 -- No check here, let it crash if the function is missing
                 target.seasonChanged(target)
+            end
+        end
+
+        -- Call growth stage events
+        if currentGrowthStage ~= ssSeasonsUtil.latestGrowthStage then
+            ssSeasonsUtil.latestGrowthStage = currentGrowthStage
+
+            for _, target in pairs(ssSeasonsMod.growthStageListeners) do
+                -- No check here, let it crash if the function is missing
+                target.growthStageChanged(target, currentGrowthStage)
             end
         end
     end

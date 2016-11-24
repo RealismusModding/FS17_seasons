@@ -103,7 +103,7 @@ function ssWeatherForecast:draw()
         for n = 1, self.forecastLength do
 
             -- Render Day of The Week
-            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n-1));
+            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n));
 
             -- Render Season Icon
             renderOverlay(self.hud.overlays[self.forecast[n].season].overlayId, WeatherForecastPosX + 0.086 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.074, 0.0185, 0.0335);
@@ -116,8 +116,7 @@ function ssWeatherForecast:draw()
             --renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, "22 / 12" );
 
             -- Render Season Days
-            dayInSeason = self.forecast[n].day - math.floor(self.forecast[n].day / ssSeasonsUtil.daysInSeason) * ssSeasonsUtil.daysInSeason + 1
-            renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(dayInSeason));
+            renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(ssSeasonsUtil:dayInSeason(self.forecast[n].day)));
 
         end
 

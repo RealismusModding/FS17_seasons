@@ -11,7 +11,7 @@ ssSeasonsMod.modDir = g_currentModDirectory
 ssSeasonsMod.verbose = true
 
 ssSeasonsMod.seasonListeners = {}
-ssSeasonsMod.latestSeason = 1
+ssSeasonsMod.growthStageListeners = {}
 
 function log(...)
     if not ssSeasonsMod.verbose then return end
@@ -115,12 +115,11 @@ function ssSeasonsMod.delete(...)
     return ssSeasonsMod.origDelete(...)
 end
 
+-- Listeners for a change of season
 function ssSeasonsMod:addSeasonChangeListener(target)
     if target ~= nil then
         table.insert(ssSeasonsMod.seasonListeners, target)
     end
-
-    print_r(ssSeasonsMod.seasonListeners)
 end
 
 function ssSeasonsMod:removeSeasonChangeListener(target)
@@ -134,6 +133,24 @@ function ssSeasonsMod:removeSeasonChangeListener(target)
     end
 end
 
+-- Listeners for a change of growth stage
+function ssSeasonsMod:addGrowthStageChangeListener(target)
+    if target ~= nil then
+        table.insert(ssSeasonsMod.growthStageListeners, target)
+    end
+end
+
+function ssSeasonsMod:removeGrowthStageChangeListener(target)
+    if target ~= nil then
+        for i = 1, #ssSeasonsMod.growthStageListeners do
+            if ssSeasonsMod.growthStageListeners[i] == target then
+                table.remove(ssSeasonsMod.growthStageListeners, i)
+                break
+            end
+        end
+    end
+end
+
 ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
 ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
 ssSeasonsMod.origDelete = FSBaseMission.delete
@@ -141,6 +158,11 @@ ssSeasonsMod.origDelete = FSBaseMission.delete
 FSBaseMission.loadMap = ssSeasonsMod.loadMap
 FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
+
+function mathRound(value, idp)
+    local mult = 10^(idp or 0)
+    return math.floor(value * mult + 0.5) / mult
+end
 
 ------------- Useful global functions ---------------
 
