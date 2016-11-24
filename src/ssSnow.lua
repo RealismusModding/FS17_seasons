@@ -56,9 +56,14 @@ end
 
 function ssSnow:hourChanged()
     local targetFromWater = 0.0 -- Fetch from weatersystem.
+
     local targetSnowDepth = math.min(0.48, targetFromWater) -- Target snow depth in meters. Never higher than 0.4
 
-    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT then
+    if self.appliedSnowDepth < 0 and targetSnowDepth > 0 then
+        self.appliedSnowDepth = 0;
+    end
+    
+    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and targetSnowDepth > 0 then
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT);
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
         self.doAddSnow = true;
