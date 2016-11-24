@@ -50,7 +50,7 @@ function ssSeasonIntro:seasonChanged(season)
     dialog.target:setText(text)
     dialog.target:setDialogType(DialogElement.TYPE_INFO)
     dialog.target:setIsCloseAllowed(true)
-    dialog.target:setButtonTexts("OK", "Don't show again")
+    dialog.target:setButtonTexts(ssLang.getText("SS_BUTTON_OK"), ssLang.getText("SS_BUTTON_DONT_SHOW_AGAIN"))
 
     dialog.target:setCallback(function(yesNo)
         if not yesNo then

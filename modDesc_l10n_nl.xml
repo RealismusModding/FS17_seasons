@@ -48,5 +48,7 @@
             <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO" />
             <text name="SS_SEASON_INTRO_2" text="Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO" />
             <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
     </texts>
 </l10n>
