@@ -74,9 +74,8 @@ function ssSnow:hourChanged()
 end
 
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
-local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+local function addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     if g_currentMission.terrainDetailHeightId ~= nil then
-
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
 
         extraMaskid = g_currentMission.terrainDetailId;
@@ -84,8 +83,8 @@ local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, hei
         extraMaskNumchannels = 1;
 
         -- Set snow type where we have no other heaps or painted areas on the map.
-        setDensityMaskParams(extraMaskid,"greater",-1); -- noop until we use mask layers
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals",0);
+        setDensityMaskParams(extraMaskid, "greater", -1); -- noop until we use mask layers
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals", 0);
         setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, extraMaskid, extraMaskFirstChannel, extraMaskNumchannels, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]);
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1);
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1);
@@ -97,9 +96,8 @@ local addSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, hei
     end
 end
 
-local removeSnow = function(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+local function removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     if g_currentMission.terrainDetailHeightId ~= nil then
-
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
 
         -- Remove snow where type is snow.
