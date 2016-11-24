@@ -219,7 +219,7 @@ function ssSeasonsUtil:dayChanged()
 
             for _, target in pairs(ssSeasonsMod.seasonListeners) do
                 -- No check here, let it crash if the function is missing
-                target.seasonChanged(target)
+                target.seasonChanged(target, currentSeason)
             end
         end
 

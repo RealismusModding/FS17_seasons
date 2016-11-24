@@ -106,3 +106,220 @@ Vehicle:getSpeedLimit(onlyIfWorking)
 Vehicle.attachedImplements
    get its speed limit
    get min of currently found min and speed limit
+
+
+# GUI
+
+g_gui:closeDialogByName("YesNoDialog")
+
+## DialogElement -> ScreenElement
+
+To set the icon
+```lua
+dialog.target:setDialogType(type)
+DialogElement.TYPE_BENCHMARK
+DialogElement.TYPE_INFO
+DialogElement.TYPE_KEY
+DialogElement.TYPE_LOADING
+DialogElement.TYPE_QUESTION
+DialogElement.TYPE_WARNING
+```
+
+To make closeable with ESCape
+```lua
+dialog.target:setIsCloseAllowed(true)
+```
+
+## MessageDialog -> DialogElement
+```lua
+local dialog = g_gui:showDialog("MessageDialog")
+dialog.target:setText("Hello World A text!")
+-- resizeDialog()
+```
+
+Will show a non-closable dialog with waiting icon
+
+## InfoDialog -> MessageDialog
+
+A dialog with a button to close it.
+`dialog.target:setIsCloseAllowed(false)` has no effect. An icon is shown.
+
+`dialog.target:setButtonTexts("text")` to set the button text.
+
+Has a `setCallback(f)` as well.
+
+## YesNoDialog -> MessageDialog
+```lua
+local dialog = g_gui:showDialog("YesNoDialog")
+dialog.target:setText("Hello World A text!")
+dialog.target:setCallback(func(yesNo))
+dialog.target:setButtonTexts("Yes", "No")
+```
+
+## Gui
+
+new()
+showGui() -- with class name
+
+## GuiElement
+addCallback
+addElement
+applyProfile
+applyScreenAlignment()
+draw()
+getBorders
+getIsActive
+getIsSelected
+getIsVisible
+raiseCallback
+setAlpha
+setDisabled
+setId
+setOverlayState
+setPosition
+setSize
+setVisible
+unlinkElement
+update
+
+GuiElement.ORIGIN_BOTTOM
+GuiElement.ORIGIN_CENTER
+GuiElement.ORIGIN_LEFT
+GuiElement.ORIGIN_MIDDLE
+GuiElement.ORIGIN_RIGHT
+GuiElement.ORIGIN_TOP
+
+GuiElement.SCREEN_ALIGN_BOTTOM
+GuiElement.SCREEN_ALIGN_CENTER
+GuiElement.SCREEN_ALIGN_LEFT
+GuiElement.SCREEN_ALIGN_MIDDLE
+GuiElement.SCREEN_ALIGN_RIGHT
+GuiElement.SCREEN_ALIGN_TOP
+GuiElement.SCREEN_ALIGN_XNONE
+GuiElement.SCREEN_ALIGN_YNONE
+
+## MultiTextOptionElement -> GuiElement
+Probably scroll things like in the settings menu
+
+setTexts
+getState
+setState
+addText
+addElement
+
+## SliderElement -> GuiElement
+callOnChanged
+addElement
+SliderElement.DIRECTION_X
+SliderElement.DIRECTION_Y
+setAlpha
+setController
+setMaxValue
+setMinValue
+setSize
+setSliderSize
+setTexts
+setValue
+
+## TextElement -> GuiElement
+setText
+.. 2Color, 2SelectedColor, Color, SelectedColor, Size
+get ..
+
+## ButtonElement -> TextElement
+setDisabled
+setIconSize
+setImageFilename
+setSelected
+reset
+
+## TextInputElement -> ButtonElement
+
+## ToggleButtonElement -> GuiElement
+addElement
+setIsChecked
+
+## ToggleButtonElement2 -> MultiTextOptionElement
+addElement
+getIsChecked
+setIsChecked
+
+## BitmapElement -> GuiElement
+setAlpha
+setImageColor
+setImageFilename
+setImageUVs
+
+## BoxLayoutElement -> BitmapElement
+addElement
+
+BoxLayoutElement.ALIGN_BOTTOM
+BoxLayoutElement.ALIGN_CENTER
+BoxLayoutElement.ALIGN_LEFT
+BoxLayoutElement.ALIGN_MIDDLE
+BoxLayoutElement.ALIGN_RIGHT
+BoxLayoutElement.ALIGN_TOP
+
+getIsElementIncluded
+invalidateLayout
+removeElement
+
+## ListElement -> GuiElement
+addElement
+addElements
+getSelectedElement
+onSliderValueChanged
+removeElement
+scrollList
+scrollTo
+setSelectedRow
+setPreSelectedRow
+
+## ListItemElement -> BitmapElement
+
+getIsSelected
+getIsPreSelected
+setSelected
+setPreSelected
+reset
+
+## PagingElement -> GuiElement
+
+addElement
+addPage
+getCurrentPageId
+getIsPageDisabled
+getPageMappingIndex
+getPageTitles
+setPage
+setPageDisabled
+setPageIdDisabled
+updatePageMapping
+
+## TableElement -> GuiElement
+addElement
+deleteListItems
+TableElement.getItemNumberByRealRowColumn(...)
+TableElement.getItemNumberByRowColumn(...)
+TableElement.getNumRows(...)
+TableElement.getRealRowColumnByItemNumber(...)
+TableElement.getRowColumnByItemNumber(...)
+TableElement.getSelectedElement(...)
+TableElement.removeElement(...)
+TableElement.scrollList(...)
+TableElement.scrollTo(...)
+TableElement.scrollToItemNumber(...)
+TableElement.selectItemByNumber(...)
+TableElement.setPreSelectedRow(...)
+TableElement.setScrollToFirstVisibleItem(...)
+TableElement.setSelectedRow(...)
+TableElement.setSelection(...)
+
+## FlowLayoutElement -> BoxLayoutElement
+
+
+## ScreenElement -> GuiElement
+
+## SettingsScreen -> ScreenElement
+
+g_inGameMenu

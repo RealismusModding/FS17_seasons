@@ -40,7 +40,13 @@
         <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen" />
         <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="De aarde is bevroren. Je kan er niet op werken!" />
+
+            <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
+            <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO" />
+            <text name="SS_SEASON_INTRO_2" text="Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO" />
+            <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" /> <!-- winter -->
     </texts>
 </l10n>

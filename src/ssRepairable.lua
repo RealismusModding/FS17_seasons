@@ -136,10 +136,11 @@ function ssRepairable:repairUpdate(dt)
         if g_currentMission:getTotalMoney() >= repairCost then
             log("Show Dialog")
             local dialog = g_gui:showDialog("YesNoDialog")
-            local title = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+            local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
 
             dialog.target:setCallback(doRepairCallback, self)
-            dialog.target:setTitle(title)
+            dialog.target:setTitle(ssLang.getText("SS_REPAIR_DIALOG_TITLE"))
+            dialog.target:setText(text)
 
         else
             g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
