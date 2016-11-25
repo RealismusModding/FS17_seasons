@@ -6,12 +6,15 @@
 --
 
 ssEconomy = {}
+ssEconomy.EQUITY_LOAN_RATIO = 0.7
+
 ssEconomy.aiPricePerHourWork = 1650
 ssEconomy.aiPricePerHourOverwork = 2475 -- 1650 * 1.5
 ssEconomy.aiDayStart = 6
 ssEconomy.aiDayEnd = 18
 ssEconomy.loanMax = 5000000
-ssEconomy.baseLoadInterest = 5 -- For normal, % per year
+ssEconomy.baseLoanInterest = 5 -- For normal, % per year
+
 ssEconomy.settingsProperties = { "aiPricePerHourWork", "aiPricePerHourOverwork", "aiDayStart", "aiDayEnd", "loanMax", "baseLoadInterest" }
 
 
@@ -24,6 +27,7 @@ end
 function ssEconomy.setup()
     ssSettings.load("economy", ssEconomy)
 
+    -- Some calculations to make the code faster on the hotpath
     ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
 
@@ -38,7 +42,7 @@ function ssEconomy:loadMap(name)
     EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
-    g_currentMission.missionStats.loanMax = ssEconomy.loanMax
+    g_currentMission.missionStats.loanMax = self:getLoanCap()
     g_currentMission.missionStats.ssLoan = 0
 end
 
@@ -65,7 +69,7 @@ end
 
 function ssEconomy:calculateLoanInterestRate()
     -- local stats = g_currentMission.missionStats
-    local yearInterest = ssEconomy.baseLoadInterest / 2 * g_currentMission.missionInfo.difficulty
+    local yearInterest = ssEconomy.baseLoanInterest / 2 * g_currentMission.missionInfo.difficulty
 
     g_currentMission.missionStats.loanAnnualInterestRate = yearInterest
 end
@@ -88,22 +92,22 @@ function ssEconomy:aiUpdateTick(superFunc, dt)
     return superFunc(self, dt)
 end
 
---[[
-FieldJobManager.startFieldJob(...)
-FieldJobMissionScreen.setStartCallback(...)
+-- Calculate equity by summing all owned land. I know this is not
+-- economically correct but it is the best we got for a value that moves
+-- up as the game progresses
+function ssEconomy:getEquity()
+    local price = 0
 
+    for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+        if field.ownedByPlayer then
+            price = price + field.fieldPriceInitial
+        end
+    end
 
-EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR
-EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR
+    return price
+end
 
-Gui.showYesNoDialog(...)
-subclass YesNoDialog
-    onClickBack
-    onClickOk
-    onClose
-    onCreate
-    onOpen
-    setButtonTexts
-    setCallback
-    setTitle
-]]
+function ssEconomy:getLoanCap()
+    local roundedTo5000 = math.floor(ssEconomy.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
+    return Utils.clamp(roundedTo5000, 200000, ssEconomy.loanMax)
+end

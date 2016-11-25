@@ -36,6 +36,11 @@ end
 function ssRepairable:keyEvent(unicode, sym, modifier, isDown)
 end
 
+function ssRepairable:loadFromAttributesAndNodes(xmlFile, key)
+    log("ssRepairable:loadFromAttributesAndNodes(,"..tostring(key)..")")
+    return true
+end
+
 function ssRepairable:getSaveAttributesAndNodes(nodeIdent)
     local attributes = ""
 

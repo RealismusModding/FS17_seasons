@@ -107,6 +107,30 @@ Vehicle.attachedImplements
    get its speed limit
    get min of currently found min and speed limit
 
+# Animals
+
+AnimalScreen.TRANSPORTATION_FEE
+setAnimalDaytime(...)
+g_currentMission.husbandries
+
+g_currentMission.husbandries.sheep
+dailyUpkeep
+totalNumAnimals
+productivity
+animalDesc 3601
+   price                   sheep:4000, chicken:0, pig:3000, cow:5000
+   milkPerDay              sheep:0, chicken:0, pig:0, cow:714
+   liquidManurePerDay      sheep:0, chicken:0, pig:65, cow:250
+   dirtFillLevelPerDay     sheep:6, chicken:0, pig:16, cow:30
+   palletFillLevelPerDay   sheep:24, chicken:0, pig:0, cow:0
+   strawPerDay             sheep:0, chicken:0, pig:20, cow:70
+   birthRatePerDay         sheep:0.025, chicken:0, pig:0.16666666666667, cow:0.02
+   waterPerDay             sheep:15, chicken:0, pig:10, cow:35
+   foodPerDay              sheep:30, chicken:0, pig:90, cow:350
+   manurePerDay            sheep:0, chicken:0, pig:50, cow:200
+   pickUpObjectsPerDay     sheep:0, chicken:1, pig:0, cow:0
+   dailyUpkeep             sheep:20, chicken:0, pig:30, cow:40
+
 
 # GUI
 

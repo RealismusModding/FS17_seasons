@@ -43,7 +43,6 @@ local srcFiles = {
     "ssVehicle.lua",
     "ssGrowthManager.lua",
     "ssSnow.lua",
-    "ssBank.lua",
     "ssSeasonIntro.lua",
     "ssReplaceVisual.lua"
 }
@@ -88,7 +87,6 @@ function ssSeasonsMod.loadMapFinished(...)
     ssVehicle.preSetup()
     ssGrowthManager.preSetup()
     ssSnow.preSetup()
-    ssBank.preSetup()
     ssSeasonIntro.preSetup()
     ssReplaceVisual.preSetup()
 
@@ -104,7 +102,6 @@ function ssSeasonsMod.loadMapFinished(...)
     ssVehicle.setup()
     ssGrowthManager.setup()
     ssSnow.setup()
-    ssBank.setup()
     ssSeasonIntro.setup()
     ssReplaceVisual.setup()
 
