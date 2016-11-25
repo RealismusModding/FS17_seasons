@@ -268,3 +268,13 @@ function ssWeatherForecast:snowAccumulation()
     return math.ceil(self.snowDepth/6/10)
 
 end
+
+--- function for predicting when soil is not workable
+function ssWeatherForecast:isGroundWorkable()
+	local avgSoilTemp = (self.forecast[1].highTemp + self.forecast[1].lowTemp) / 2
+	if  avgSoilTemp < 5 then
+		return true
+	else
+		return false
+	end
+end
