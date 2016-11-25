@@ -32,92 +32,75 @@ function logInfo(...)
 end
 
 local srcFolder = g_currentModDirectory .. "src/"
-local srcFiles = {
-    "ssLang.lua",
-    "ssSettings.lua",
-    "ssSeasonsUtil.lua",
-    "ssTime.lua",
-    "ssWeatherForecast.lua",
-    "ssFixFruit.lua",
-    "ssEconomy.lua",
-    "ssVehicle.lua",
-    "ssGrowthManager.lua",
-    "ssSnow.lua",
-    "ssSeasonIntro.lua",
-    "ssReplaceVisual.lua",
-    "ssAnimals.lua"
+local classes = {
+    "ssLang",
+    "ssSettings",
+    "ssSeasonsUtil",
+    "ssTime",
+    "ssEconomy",
+    "ssWeatherForecast",
+    "ssFixFruit",
+    "ssVehicle",
+    "ssGrowthManager",
+    "ssSnow",
+    "ssSeasonIntro",
+    "ssReplaceVisual",
+    "ssAnimals"
 }
 
 -- Load all scripts
 if modItem.isDirectory then
-    for i = 1, #srcFiles do
-        local srcFile = srcFolder .. srcFiles[i]
+    for i = 1, #classes do
+        local srcFile = srcFolder .. classes[i] .. ".lua"
         local fileHash = tostring(getFileMD5(srcFile, ssSeasonsMod.modDir))
 
-        logInfo(string.format("Loading script: %s (v%s - %s)", srcFiles[i], ssSeasonsMod.version, fileHash))
+        logInfo(string.format("Loading script: %s (v%s - %s)", classes[i], ssSeasonsMod.version, fileHash))
 
         source(srcFile)
     end
 else
-    for i = 1, #srcFiles do
+    for i = 1, #classes do
+        logInfo(string.format("Loading script: %s (v%s)", classes[i], ssSeasonsMod.version))
 
-        logInfo(string.format("Loading script: %s (v%s)", srcFiles[i], ssSeasonsMod.version))
-
-        source(srcFolder..srcFiles[i])
+        source(srcFolder..classes[i] .. ".lua")
     end
 
     ssSeasonsMod.version = ssSeasonsMod.version .. " - " .. modItem.fileHash
 end
 
-function ssSeasonsMod.loadMap(...)
-    log("ssSeasonsMod.loadMap()")
+------------------------------------------
+-- base mission encapsulation functions
+------------------------------------------
 
+function ssSeasonsMod.loadMap(...)
     return ssSeasonsMod.origLoadMap(...)
 end
 
 function ssSeasonsMod.loadMapFinished(...)
-    log("ssSeasonsMod.loadMapFinished()")
-
     -- Before loading the savegame, allow classes to set their default values
     -- and let the settings system know that they need values
-    ssSeasonsUtil.preSetup()
-    ssTime.preSetup()
-    ssEconomy.preSetup()
-    ssWeatherForecast.preSetup()
-    ssFixFruit.preSetup()
-    ssVehicle.preSetup()
-    ssGrowthManager.preSetup()
-    ssSnow.preSetup()
-    ssSeasonIntro.preSetup()
-    ssReplaceVisual.preSetup()
-    ssAnimals.preSetup()
+    for _, k in pairs(classes) do
+        if _G[k].preSetup ~= nil then
+            _G[k].preSetup()
+        end
+    end
 
-    -- Load all requested values
-    ssSettings.loadFromSavegame()
+    ssSeasonsMod:loadFromXML()
 
     -- Now read those values and set up the classes
-    ssSeasonsUtil.setup()
-    ssTime.setup()
-    ssEconomy.setup()
-    ssWeatherForecast.setup()
-    ssFixFruit.setup()
-    ssVehicle.setup()
-    ssGrowthManager.setup()
-    ssSnow.setup()
-    ssSeasonIntro.setup()
-    ssReplaceVisual.setup()
-    ssAnimals.setup()
+    for _, k in pairs(classes) do
+        if _G[k].setup ~= nil then
+            _G[k].setup()
+        end
+    end
 
-    ssSeasonsMod.latestSeason = ssSeasonsUtil:season()
-
+    -- Enable the mod
     ssSeasonsMod.enabled = true
 
     return ssSeasonsMod.origLoadMapFinished(...)
 end
 
 function ssSeasonsMod.delete(...)
-    log("ssSeasonsMod.delete()")
-
     return ssSeasonsMod.origDelete(...)
 end
 
@@ -157,6 +140,25 @@ function ssSeasonsMod:removeGrowthStageChangeListener(target)
     end
 end
 
+function ssSeasonsMod:loadFromXML(...)
+    log("LOAD FROM XML!")
+
+    -- Load all requested setting values
+    ssSettings.loadFromSavegame()
+end
+
+function ssSeasonsMod:saveToXML(...)
+    log("SAVE THING!")
+
+    -- Open file
+
+    -- Call functons
+
+    -- Write
+
+    -- Done
+end
+
 ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
 ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
 ssSeasonsMod.origDelete = FSBaseMission.delete
@@ -165,12 +167,15 @@ FSBaseMission.loadMap = ssSeasonsMod.loadMap
 FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
+FSCareerMissionInfo.saveToXML = Utils.prependedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML);
+
+------------- Useful global functions ---------------
+
+-- Yep, LUA does not have a math.round. It's a first.
 function mathRound(value, idp)
     local mult = 10^(idp or 0)
     return math.floor(value * mult + 0.5) / mult
 end
-
-------------- Useful global functions ---------------
 
 -- http://lua-users.org/wiki/CopyTable
 function deepCopy(obj, seen)

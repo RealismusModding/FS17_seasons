@@ -24,7 +24,7 @@ function ssAnimals:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self);
 
 
-
+    --[[
     log("FILLLEVELS")
     print_r(g_currentMission.husbandries.cow.tipTriggersFillLevels)
     log("FILLTYPES")
@@ -38,7 +38,7 @@ function ssAnimals:loadMap(name)
     -- print_r(g_currentMission.husbandries.sheep.fillTypes)
     log("TUPTRIGGERS")
     print_r(g_currentMission.husbandries.cow.tipTriggers)
-
+    --]]
 
     -- self:disableFillType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
     -- self:disableFillType("cow", FillUtil.FILLTYPE_DRYGRASS_WINDROW)

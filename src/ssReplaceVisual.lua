@@ -21,7 +21,7 @@ function ssReplaceVisual:loadMap(name)
     -- General initalization
     -- g_currentMission.environment:addHourChangeListener(self)
     ssSeasonsMod:addSeasonChangeListener(self);
-    
+
     self.textureReplacements={};
     self.textureReplacements["Spring"]={};
     self.textureReplacements["Summer"]={};
@@ -53,7 +53,7 @@ function ssReplaceVisual:loadMap(name)
     self.textureReplacements["Winter"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring";
 
     local newRoot=loadI3DFile(modDir .. "resources/replacementTexturesMaterialHolder.i3d"); -- Loading materialHolder
-    
+
     ssReplaceVisual:loadTextureIdTable(getRootNode()); -- Built into map
     ssReplaceVisual:loadTextureIdTable(newRoot); -- Provided by game
     ssReplaceVisual:updateTextures(getRootNode());
@@ -99,7 +99,7 @@ end;
 
 -- Finds the Id for the replacement materials and adds it to self.textureReplacements.
 -- Searchbase is the root node of a loaded I3D file.
-function ssReplaceVisual:loadTextureIdTable(searchBase) 
+function ssReplaceVisual:loadTextureIdTable(searchBase)
     for seasonName,seasonTable in pairs(self.textureReplacements) do
         for shapeName,shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName,  secondaryNodeTable in pairs(shapeNameTable) do

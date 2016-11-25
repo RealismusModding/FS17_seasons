@@ -62,7 +62,7 @@ function ssSnow:hourChanged()
     if self.appliedSnowDepth < 0 and targetSnowDepth > 0 then
         self.appliedSnowDepth = 0;
     end
-    
+
     if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and targetSnowDepth > 0 then
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT);
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT;
