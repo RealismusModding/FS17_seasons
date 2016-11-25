@@ -26,11 +26,9 @@
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
 
 ### Finance
-- There is a new bank in town with three possible loans
-- Every loan is based on your current equity (sum of owned fields)
-- You pay both interest and downpay
-- You can pay off your debt at once
-- Much higher caps than in vanilla game
+- Loan cap is set to 70% of your total owned land value
+- New maximum loan is set to 5 million
+- The interest has been adjusted to the new year length.
 
 ### Helpers
 - Wages have been changed to fit the new economy.
