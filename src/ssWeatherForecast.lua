@@ -147,7 +147,7 @@ function ssWeatherForecast:buildForecast()
 		oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
 		
 		ssTmax = self:Tmax(oneDayForecast.season)
-        log('ssTmax = ',ssTmax[2])
+        --log('ssTmax = ',ssTmax[2])
 		oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5) 
 		oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
 		
@@ -155,26 +155,25 @@ function ssWeatherForecast:buildForecast()
 
         table.insert(self.forecast, oneDayForecast);
     end
-
-    
-    print_r(self.forecast)
+	
 	for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
              if (rain.startDay == fCast.day) then
-                log('fCast.day = ', fCast.day,'is equal to ', rain.startDay)
-                log('oneDayForecast = ',oneDayForecast)
-                log('rain.rainTypeId = ', rain.rainTypeId)
+                --log('fCast.day = ', fCast.day,'is equal to ', rain.startDay)
+                --log('oneDayForecast = ',oneDayForecast)
+                --log('rain.rainTypeId = ', rain.rainTypeId)
                 if fCast.lowTemp < -1 and rain.rainTypeId == 'rain' then
 				    g_currentMission.environment.rains[index].rainTypeId = 'hail'
-                    self.forecast[jndex].weatherState = self:getWeatherStateForDay(fCast.day);
+                    self.forecast[jndex].weatherState = 'hail'
 			    elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
 				    g_currentMission.environment.rains[index].rainTypeId = 'rain'
-                    --oneDayForecast.weatherState = self:getWeatherStateForDay(fCast.day);
+                    self.forecast[jndex].weatherState = 'rain'
 			    end
             end
         end
     end
-
+	
+	print_r(self.forecast)
     print_r(g_currentMission.environment.rains)
 
 end
