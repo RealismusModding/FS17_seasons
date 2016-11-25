@@ -6,14 +6,14 @@
 --
 
 ssEconomy = {}
-ssEconomy.EQUITY_LOAN_RATIO = 0.7
+ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 ssEconomy.aiPricePerHourWork = 1650
 ssEconomy.aiPricePerHourOverwork = 2475 -- 1650 * 1.5
 ssEconomy.aiDayStart = 6
 ssEconomy.aiDayEnd = 18
-ssEconomy.loanMax = 5000000
-ssEconomy.baseLoanInterest = 5 -- For normal, % per year
+ssEconomy.loanMax = 1000000
+ssEconomy.baseLoanInterest = 10
 
 ssEconomy.settingsProperties = { "aiPricePerHourWork", "aiPricePerHourOverwork", "aiDayStart", "aiDayEnd", "loanMax", "baseLoadInterest" }
 
