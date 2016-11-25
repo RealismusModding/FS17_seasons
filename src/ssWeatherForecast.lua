@@ -22,8 +22,8 @@ function ssWeatherForecast:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
     self:buildForecast(); -- Should be read from savegame
 
-	-- self.snowDepth = -- Enable read from savegame
-	
+    -- self.snowDepth = -- Enable read from savegame
+
     self.hud = {};
     self.hud.visible = true;
 
@@ -61,8 +61,6 @@ function ssWeatherForecast:loadMap(name)
 
     -- g_currentMission.environment.rainFadeDuration = 0--0.5*60000
     -- g_currentMission.environment.rainFadeDuration.minRainDuration = 60000
-
-
 end
 
 function ssWeatherForecast:deleteMap()
@@ -88,7 +86,6 @@ function ssWeatherForecast:draw()
     renderText(0.25, 0.98, 0.01, textToDisplay);
 
     if self.hud.visible then
-
         -- Set position WeatherForecast overlay.
         local WeatherForecastPosX = self.hud.posX;
         local WeatherForecastPosY = g_currentMission.moneyIconOverlay.y + self.hud.posY;
@@ -104,7 +101,6 @@ function ssWeatherForecast:draw()
         local daysPosOffset = 0.0615;
 
         for n = 1, self.forecastLength do
-
             -- Render Day of The Week
             renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n));
 
@@ -120,62 +116,58 @@ function ssWeatherForecast:draw()
 
             -- Render Season Days
             renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(ssSeasonsUtil:dayInSeason(self.forecast[n].day)));
-
         end
 
         -- Clean up after us, text render after this will be affected otherwise.
         setTextColor(1, 1, 1, 1);
-
     end
-
 end
 
 function ssWeatherForecast:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber();
     local ssTmax
-	log("Building forecast based on today day num: " .. startDayNum);
-		
-	self.forecast = {};
+    log("Building forecast based on today day num: " .. startDayNum);
+
+    self.forecast = {};
 
     for n = 1, self.forecastLength do
         local oneDayForecast = {};
-	    local ssTmax = {};
-	    local Tmaxmean = {};
+        local ssTmax = {};
+        local Tmaxmean = {};
 
-		oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
+        oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
         oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + n);
-		oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
-		
-		ssTmax = self:Tmax(oneDayForecast.season)
+        oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
+
+        ssTmax = self:Tmax(oneDayForecast.season)
         --log('ssTmax = ',ssTmax[2])
-		oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5) 
-		oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
-		
+        oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
+        oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
+
         oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n);
 
         table.insert(self.forecast, oneDayForecast);
     end
-	
-	for index, rain in ipairs(g_currentMission.environment.rains) do
+
+    for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
              if (rain.startDay == fCast.day) then
                 --log('fCast.day = ', fCast.day,'is equal to ', rain.startDay)
                 --log('oneDayForecast = ',oneDayForecast)
                 --log('rain.rainTypeId = ', rain.rainTypeId)
                 if fCast.lowTemp < -1 and rain.rainTypeId == 'rain' then
-				    g_currentMission.environment.rains[index].rainTypeId = 'hail'
+                    g_currentMission.environment.rains[index].rainTypeId = 'hail'
                     self.forecast[jndex].weatherState = 'hail'
-			    elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
-				    g_currentMission.environment.rains[index].rainTypeId = 'rain'
+                elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
+                    g_currentMission.environment.rains[index].rainTypeId = 'rain'
                     self.forecast[jndex].weatherState = 'rain'
-			    end
+                end
             end
         end
     end
-	
-	print_r(self.forecast)
-    print_r(g_currentMission.environment.rains)
 
+    print_r(self.forecast)
+    print_r(g_currentMission.environment.rains)
 end
 
 
@@ -208,7 +200,6 @@ function ssWeatherForecast:dayChanged()
 end
 
 function ssWeatherForecast:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
-
     if ss == 'Winter' then
         -- return {5.0,8.6,10.7} --min, mode, max Temps from the data
         return {0.0,3.6,5.7} --min, mode, max
@@ -222,12 +213,11 @@ function ssWeatherForecast:Tmax(ss) --sets the minimum, mode and maximum of the 
     elseif ss == "Autumn" then
         return {14.0, 15.6, 17.3} --min, mode, max
     end
-
 end
 
 -- function to output the temperature during the day and night
 function ssWeatherForecast:diurnalTemp(hour,minute)
-    -- need to have the high temp of the previous day    
+    -- need to have the high temp of the previous day
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
 
@@ -236,15 +226,14 @@ function ssWeatherForecast:diurnalTemp(hour,minute)
     local currentTime = hour*60 + minute
 
     if currentTime < 420 then
-	    currentTemp = ( math.cos(((currentTime + 540)/960)*math.pi/2) )^3 * (preDayTemp-self.forecast[1].lowTemp)+self.forecast[1].lowTemp
+        currentTemp = ( math.cos(((currentTime + 540)/960)*math.pi/2) )^3 * (preDayTemp-self.forecast[1].lowTemp)+self.forecast[1].lowTemp
     elseif currentTime > 900 then
-	    currentTemp = ( math.cos(((currentTime - 900)/960)*math.pi/2) )^3 * (self.forecast[1].highTemp-self.forecast[2].lowTemp)+self.forecast[1].lowTemp
+        currentTemp = ( math.cos(((currentTime - 900)/960)*math.pi/2) )^3 * (self.forecast[1].highTemp-self.forecast[2].lowTemp)+self.forecast[1].lowTemp
     else
-	    currentTemp = ( math.cos((1- (currentTime-420)/480)*math.pi/2 )^3) * (self.forecast[1].highTemp-self.forecast[1].lowTemp) + self.forecast[1].lowTemp   
+        currentTemp = ( math.cos((1- (currentTime-420)/480)*math.pi/2 )^3) * (self.forecast[1].highTemp-self.forecast[1].lowTemp) + self.forecast[1].lowTemp
     end
 
-	return currentTemp
-
+    return currentTemp
 end
 
 --- function to keep track of snow accumulation
@@ -269,15 +258,14 @@ function ssWeatherForecast:snowAccumulation()
     end
 
     return self.snowDepth
-
 end
 
 --- function for predicting when soil is not workable
 function ssWeatherForecast:isGroundWorkable()
-	local avgSoilTemp = (self.forecast[1].highTemp + self.forecast[1].lowTemp) / 2
-	if  avgSoilTemp < 5 then
-		return true
-	else
-		return false
-	end
+    local avgSoilTemp = (self.forecast[1].highTemp + self.forecast[1].lowTemp) / 2
+    if  avgSoilTemp < 5 then
+        return true
+    else
+        return false
+    end
 end
