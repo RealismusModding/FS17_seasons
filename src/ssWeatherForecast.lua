@@ -9,6 +9,7 @@ ssWeatherForecast = {};
 ssWeatherForecast.forecast = {}; --day of week, low temp, high temp, weather condition
 ssWeatherForecast.forecastLength = 7;
 ssWeatherForecast.modDirectory = g_currentModDirectory;
+ssWeatherForecast.snowDepth = 0;
 
 function ssWeatherForecast.preSetup()
 end
@@ -21,6 +22,8 @@ function ssWeatherForecast:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
     self:buildForecast(); -- Should be read from savegame
 
+	-- self.snowDepth = -- Enable read from savegame
+	
     self.hud = {};
     self.hud.visible = true;
 
@@ -241,31 +244,32 @@ function ssWeatherForecast:diurnalTemp(hour,minute)
 	    currentTemp = ( math.cos((1- (currentTime-420)/480)*math.pi/2 )^3) * (self.forecast[1].highTemp-self.forecast[1].lowTemp) + self.forecast[1].lowTemp   
     end
 
-return currentTemp
+	return currentTemp
 
 end
 
 --- function to keep track of snow accumulation
+--- snowDepth in meters
 function ssWeatherForecast:snowAccumulation()
     currentRain = g_currentMission.environment.currentRain
     currentTemp = ssWeatherForecast.diurnalTemp(g_currentMission.environment.currentHour,g_currentMission.environment.currentMinute)
 
     if currentRain == "sun" then
         if currentTemp > -1  then -- snow melts at -1 if the sun is shining
-            self.snowDepth = self.snowDepth - (-2*currentTemp+7.5)
+            self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0)/1000
         end
     elseif currentRain == "rain" then
-        -- snow melts twice as fast if it rains
-        self.snowDepth = self.snowDepth - (-2*currentTemp+7.5) * 2
+        -- assume snow melts three times as fast if it rains
+        self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0) * 3/1000
     elseif currentRain == "hail" then
         -- Initial value of 10 mm/hr accumulation rate
-        self.snowDepth = self.snowDepth + 10
+        self.snowDepth = self.snowDepth + 10/1000
     else
-        -- 30% melting when there is cloudy and fog
-        self.snowDepth = self.snowDepth - (-2*currentTemp+7.5)*0.3
+        -- 75% melting (compared to clear conditions) when there is cloudy and fog
+        self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0)*0.75/1000
     end
 
-    return math.ceil(self.snowDepth/6/10)
+    return self.snowDepth
 
 end
 
