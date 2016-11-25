@@ -169,7 +169,7 @@ function ssWeatherForecast:buildForecast()
                     self.forecast[jndex].weatherState = self:getWeatherStateForDay(fCast.day);
 			    elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
 				    g_currentMission.environment.rains[index].rainTypeId = 'rain'
-                    oneDayForecast.weatherState = self:getWeatherStateForDay(fCast.day);
+                    --oneDayForecast.weatherState = self:getWeatherStateForDay(fCast.day);
 			    end
             end
         end
