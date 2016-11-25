@@ -38,6 +38,7 @@ local classes = {
     "ssSeasonsUtil",
     "ssTime",
     "ssEconomy",
+    "ssWeatherManager",
     "ssWeatherForecast",
     "ssFixFruit",
     "ssVehicle",
