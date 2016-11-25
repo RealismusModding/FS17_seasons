@@ -7,54 +7,44 @@
 
 ssSeasonsUtil = {}
 
-ssSeasonsUtil.weekDays = nil
-ssSeasonsUtil.weekDaysShort = nil
-ssSeasonsUtil.seasons = nil
+ssSeasonsUtil.weekDays = {}
+ssSeasonsUtil.weekDaysShort = {}
+ssSeasonsUtil.seasons = {}
 
-ssSeasonsUtil.daysInWeek = 7
-ssSeasonsUtil.seasonsInYear = 4
-ssSeasonsUtil.daysInSeason = 10
+ssSeasonsUtil.daysInWeek = 7 -- FIXME should be in all caps
+ssSeasonsUtil.seasonsInYear = 4 -- FIXME should be in all caps
 
-ssSeasonsUtil.latestSeason = 1
-ssSeasonsUtil.latestGrowthStage = 1
+ssSeasonsUtil.weekDays = {
+    ssLang.getText("SS_WEEKDAY_MONDAY", "Monday"),
+    ssLang.getText("SS_WEEKDAY_TUESDAY", "Tuesday"),
+    ssLang.getText("SS_WEEKDAY_WEDNESDAY", "Wednesday"),
+    ssLang.getText("SS_WEEKDAY_THURSDAY", "Thursday"),
+    ssLang.getText("SS_WEEKDAY_FRIDAY", "Friday"),
+    ssLang.getText("SS_WEEKDAY_SATURDAY", "Saturday"),
+    ssLang.getText("SS_WEEKDAY_SUNDAY", "Sunday"),
+}
 
-ssSeasonsUtil.settingsProperties = { "daysInWeek", "seasonsInYear", "daysInSeason", "latestSeason", "latestGrowthStage" }
+ssSeasonsUtil.weekDaysShort = {
+    ssLang.getText("SS_WEEKDAY_MON", "Mon"),
+    ssLang.getText("SS_WEEKDAY_TUE", "Tue"),
+    ssLang.getText("SS_WEEKDAY_WED", "Wed"),
+    ssLang.getText("SS_WEEKDAY_THU", "Thu"),
+    ssLang.getText("SS_WEEKDAY_FRI", "Fri"),
+    ssLang.getText("SS_WEEKDAY_SAT", "Sat"),
+    ssLang.getText("SS_WEEKDAY_SUN", "Sun"),
+}
 
-function ssSeasonsUtil.preSetup()
-    ssSettings.add("seasons", ssSeasonsUtil)
-end
+ssSeasonsUtil.seasons = {
+    [0] = ssLang.getText("SS_SEASON_SPRING", "Spring"),
+    ssLang.getText("SS_SEASON_SUMMER", "Summer"),
+    ssLang.getText("SS_SEASON_AUTUMN", "Autumn"),
+    ssLang.getText("SS_SEASON_WINTER", "Winter"),
+}
 
-function ssSeasonsUtil.setup()
-    ssSettings.load("seasons", ssSeasonsUtil)
-
-    ssSeasonsUtil.weekDays = {
-        ssLang.getText("SS_WEEKDAY_MONDAY", "Monday"),
-        ssLang.getText("SS_WEEKDAY_TUESDAY", "Tuesday"),
-        ssLang.getText("SS_WEEKDAY_WEDNESDAY", "Wednesday"),
-        ssLang.getText("SS_WEEKDAY_THURSDAY", "Thursday"),
-        ssLang.getText("SS_WEEKDAY_FRIDAY", "Friday"),
-        ssLang.getText("SS_WEEKDAY_SATURDAY", "Saturday"),
-        ssLang.getText("SS_WEEKDAY_SUNDAY", "Sunday"),
-    }
-
-    ssSeasonsUtil.weekDaysShort = {
-        ssLang.getText("SS_WEEKDAY_MON", "Mon"),
-        ssLang.getText("SS_WEEKDAY_TUE", "Tue"),
-        ssLang.getText("SS_WEEKDAY_WED", "Wed"),
-        ssLang.getText("SS_WEEKDAY_THU", "Thu"),
-        ssLang.getText("SS_WEEKDAY_FRI", "Fri"),
-        ssLang.getText("SS_WEEKDAY_SAT", "Sat"),
-        ssLang.getText("SS_WEEKDAY_SUN", "Sun"),
-    }
-
-    ssSeasonsUtil.seasons = {
-        [0] = ssLang.getText("SS_SEASON_SPRING", "Spring"),
-        ssLang.getText("SS_SEASON_SUMMER", "Summer"),
-        ssLang.getText("SS_SEASON_AUTUMN", "Autumn"),
-        ssLang.getText("SS_SEASON_WINTER", "Winter"),
-    }
-
-    addModEventListener(ssSeasonsUtil)
+function ssSeasonsUtil:load(savegame, key)
+    self.daysInSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10)
+    self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", 1)
+    self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 1)
 end
 
 function ssSeasonsUtil:loadMap(name)

@@ -38,13 +38,6 @@ ssFixFruit.testDay = 1;
 --         {"soybean", 1},
 --                         }
 
-function ssFixFruit.preSetup()
-end
-
-function ssFixFruit.setup()
-    addModEventListener(ssFixFruit);
-end
-
 function ssFixFruit:loadMap(name)
     self.active = true;
 

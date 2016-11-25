@@ -7,22 +7,16 @@
 
 ssSeasonIntro = {}
 
-ssSeasonIntro.hideSeasonIntro = false
-ssSeasonIntro.settingsProperties = { "hideSeasonIntro" }
-
-
-function ssSeasonIntro.preSetup()
-    ssSettings.add("seasons", ssSeasonIntro)
+function ssSeasonIntro:load(savegame, key)
+    self.hideSeasonIntro = ssStorage.getXMLBool(savegame, key .. ".settings.hideSeasonIntro", false)
 end
 
-function ssSeasonIntro.setup()
-    ssSettings.load("seasons", ssSeasonIntro)
-
-    addModEventListener(ssSeasonIntro)
+function ssSeasonIntro:save(savegame, key)
+    ssStorage.setXMLBool(savegame, key .. ".settings.hideSeasonIntro", self.hideSeasonIntro)
 end
 
 function ssSeasonIntro:loadMap(name)
-    ssSeasonsMod:addSeasonChangeListener(self);
+    ssSeasonsMod:addSeasonChangeListener(self)
 end
 
 function ssSeasonIntro:deleteMap()

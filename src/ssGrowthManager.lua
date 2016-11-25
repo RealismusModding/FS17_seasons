@@ -7,13 +7,6 @@
 
 ssGrowthManager = {};
 
-function ssGrowthManager.preSetup()
-end
-
-function ssGrowthManager.setup()
-    addModEventListener(ssGrowthManager);
-end
-
 function ssGrowthManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
     ssSeasonsMod:addSeasonChangeListener(self);

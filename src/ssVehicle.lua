@@ -14,12 +14,10 @@ ssVehicle.DIRT_FACTOR = 0.2
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
-ssVehicle.settingsProperties = {}
-
 SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "/src/ssRepairable.lua")
 
-function ssVehicle.preSetup()
-    ssSettings.add("maintenance", ssVehicle)
+function ssVehicle:loadMap(name)
+    g_currentMission.environment:addDayChangeListener(self)
 
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
@@ -29,20 +27,10 @@ function ssVehicle.preSetup()
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
-end
 
-function ssVehicle.setup()
-    ssSettings.load("maintenance", ssVehicle)
-
-    addModEventListener(ssVehicle)
-end
-
-function ssVehicle:loadMap(name)
     self:installRepairableSpecialization()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
-
-    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssVehicle:deleteMap()

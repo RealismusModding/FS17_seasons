@@ -7,16 +7,6 @@
 
 ssReplaceVisual = {};
 
-local modDir = g_currentModDirectory;
-
-
-function ssReplaceVisual.preSetup()
-end
-
-function ssReplaceVisual.setup()
-    addModEventListener(ssReplaceVisual)
-end
-
 function ssReplaceVisual:loadMap(name)
     -- General initalization
     -- g_currentMission.environment:addHourChangeListener(self)
@@ -52,7 +42,7 @@ function ssReplaceVisual:loadMap(name)
     self.textureReplacements["Winter"]["pine_stage3"]["attachments"]={};
     self.textureReplacements["Winter"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring";
 
-    local newRoot=loadI3DFile(modDir .. "resources/replacementTexturesMaterialHolder.i3d"); -- Loading materialHolder
+    local newRoot=loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d"); -- Loading materialHolder
 
     ssReplaceVisual:loadTextureIdTable(getRootNode()); -- Built into map
     ssReplaceVisual:loadTextureIdTable(newRoot); -- Provided by game
@@ -134,7 +124,7 @@ end;
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     if getName(nodeId) == shapeName then
-        print("Setting texture for " .. getName(nodeId) .. " (" .. nodeId .. ") to " .. materialSrcId .. ".");
+        -- print("Setting texture for " .. getName(nodeId) .. " (" .. nodeId .. ") to " .. materialSrcId .. ".");
         setMaterial(nodeId, materialSrcId, 0);
     end;
     for i=0, getNumOfChildren(nodeId)-1 do

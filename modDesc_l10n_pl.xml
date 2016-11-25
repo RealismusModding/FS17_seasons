@@ -44,6 +44,7 @@
             <text name="SS_REPAIR_DIALOG_TITLE" text="Repairing" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
+            <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
             <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
             <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO" />

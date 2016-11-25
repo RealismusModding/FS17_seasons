@@ -7,13 +7,6 @@
 
 ssWeatherForecast = {};
 
-function ssWeatherForecast.preSetup()
-end
-
-function ssWeatherForecast.setup()
-    addModEventListener(ssWeatherForecast)
-end
-
 function ssWeatherForecast:loadMap(name)
     -- g_currentMission.environment:addDayChangeListener(self);
     self.forecast = ssWeatherManager.forecast

@@ -21,9 +21,9 @@ function ssRepairable:load(savegame)
     self.ssCumulativeDirt = 0
 
     if savegame ~= nil then
-        self.ssLastRepairDay = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay"), self.ssLastRepairDay)
-        self.ssYesterdayOperatingTime = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime"), self.ssYesterdayOperatingTime)
-        self.ssCumulativeDirt = Utils.getNoNil(getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt"), self.ssCumulativeDirt)
+        self.ssLastRepairDay = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
+        self.ssYesterdayOperatingTime = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssYesterdayOperatingTime)
+        self.ssCumulativeDirt = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
     end
 end
 
@@ -37,7 +37,6 @@ function ssRepairable:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssRepairable:loadFromAttributesAndNodes(xmlFile, key)
-    log("ssRepairable:loadFromAttributesAndNodes(,"..tostring(key)..")")
     return true
 end
 
@@ -139,7 +138,6 @@ function ssRepairable:repairUpdate(dt)
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
-            log("Show Dialog")
             local dialog = g_gui:showDialog("YesNoDialog")
             local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
 

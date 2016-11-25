@@ -7,17 +7,12 @@
 
 ssAnimals = {}
 
-ssAnimals.settingsProperties = {  }
-
-
-function ssAnimals.preSetup()
-    ssSettings.add("animals", ssAnimals)
+function ssAnimals:load(savegame, key)
+    -- self.appliedSnowDepth = ssStorage.getXMLFloat(savegame, key .. ".animals.appliedSnowDepth", 0)
 end
 
-function ssAnimals.setup()
-    ssSettings.load("animals", ssAnimals)
-
-    addModEventListener(ssAnimals)
+function ssAnimals:save(savegame, key)
+    -- ssStorage.setXMLFloat(savegame, key .. ".animals.appliedSnowDepth", self.appliedSnowDepth)
 end
 
 function ssAnimals:loadMap(name)

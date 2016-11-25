@@ -7,20 +7,17 @@
 
 ssTime = {}
 
-ssTime.latitude = 51.9
-ssTime.settingsProperties = { "latitude" }
-
-function ssTime.preSetup()
-    ssSettings.add("time", ssTime)
+function ssTime:load(savegame, key)
+    self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
 end
 
-function ssTime.setup()
-    ssSettings.load("time", ssTime)
-
-    addModEventListener(ssTime)
+function ssTime:save(savegame, key)
+    ssStorage.setXMLFloat(savegame, key .. ".weather.latitude", self.latitude)
 end
 
 function ssTime:loadMap(name)
+    g_currentMission.environment:addDayChangeListener(self);
+
     -- Calculate some constants for the daytime calculator
     self.sunRad = ssTime.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
@@ -28,8 +25,6 @@ function ssTime:loadMap(name)
 
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()
-
-    g_currentMission.environment:addDayChangeListener(self);
 
     g_currentMission.missionInfo.timeScale = 120*6*2
 end
@@ -48,9 +43,8 @@ function ssTime:draw()
 end
 
 function ssTime:update(dt)
-    if ssSeasonsUtil then
-        g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
-    end
+    -- FIXME: if isClient
+    g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
 end
 
 -- Change the night/day times according to season

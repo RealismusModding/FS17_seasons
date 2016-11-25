@@ -8,34 +8,32 @@
 ssEconomy = {}
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
-ssEconomy.aiPricePerHourWork = 1650
-ssEconomy.aiPricePerHourOverwork = 2475 -- 1650 * 1.5
-ssEconomy.aiDayStart = 6
-ssEconomy.aiDayEnd = 18
-ssEconomy.loanMax = 1000000
-ssEconomy.baseLoanInterest = 10
-
-ssEconomy.settingsProperties = { "aiPricePerHourWork", "aiPricePerHourOverwork", "aiDayStart", "aiDayEnd", "loanMax", "baseLoadInterest" }
-
-
-function ssEconomy.preSetup()
-    ssSettings.add("economy", ssEconomy)
-
-    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
-end
-
-function ssEconomy.setup()
-    ssSettings.load("economy", ssEconomy)
+function ssEconomy:load(savegame, key)
+    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
+    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
+    self.aiDayStart = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayStart", 6)
+    self.aiDayEnd = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
+    self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1000000)
+    self.baseLoanInterest = ssStorage.getXMLFloat(savegame, key .. ".settings.baseLoanInterest", 10)
 
     -- Some calculations to make the code faster on the hotpath
     ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
+end
 
-    addModEventListener(ssEconomy)
+function ssEconomy:save(savegame, key)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", self.aiPricePerHourWork)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", self.aiPricePerHourOverwork)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.aiDayStart", self.aiDayStart)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.aiDayEnd", self.aiDayEnd)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.loanMax", self.loanMax)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.baseLoanInterest", self.baseLoanInterest)
 end
 
 function ssEconomy:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
+
+    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
 
     -- Update leasing costs
     EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
