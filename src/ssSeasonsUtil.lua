@@ -47,6 +47,12 @@ function ssSeasonsUtil:load(savegame, key)
     self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 1)
 end
 
+function ssSeasonsUtil:save(savegame, key)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.latestSeason", self.latestSeason)
+    ssStorage.setXMLFloat(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
+end
+
 function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 end

@@ -18,6 +18,16 @@ end
 function ssAnimals:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self);
 
+    local oldF = setUpdateMaskFromInfoLayer
+
+    getfenv(0)["setUpdateMaskFromInfoLayer"] = function(...)
+        log("ARGUMENTS FOR setUpdateMaskFromInfoLayer")
+        print_r(arg)
+
+        return oldF(...)
+    end
+
+
 
     --[[
     log("FILLLEVELS")
