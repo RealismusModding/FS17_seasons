@@ -36,7 +36,7 @@ end
 function ssWeatherManager:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
-    log("Building forecast based on today day num: " .. startDayNum)
+    -- log("Building forecast based on today day num: " .. startDayNum)
 
     self.forecast = {}
 
@@ -72,13 +72,13 @@ function ssWeatherManager:buildForecast()
         end
     end
 
-    print_r(self.forecast)
-    print_r(g_currentMission.environment.rains)
+    -- print_r(self.forecast)
+    -- print_r(g_currentMission.environment.rains)
 end
 
 function ssWeatherManager:updateForecast()
     local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength;
-    log("Updating forecast based on today day num: " .. dayNum);
+    -- log("Updating forecast based on today day num: " .. dayNum);
 
     table.remove(self.forecast,1)
 
@@ -89,16 +89,16 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.weekDay =  ssSeasonsUtil:dayName(dayNum);
     oneDayForecast.season = ssSeasonsUtil:seasonName(dayNum)
 
-	if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
-		--Seasonal average for a day in the season
-		ssTmax = self:Tmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
-			
-	elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
-		--Seasonal average for a day in the next season
+    if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
+        --Seasonal average for a day in the season
         ssTmax = self:Tmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
-		
+        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
+
+    elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
+        --Seasonal average for a day in the next season
+        ssTmax = self:Tmax(oneDayForecast.season)
+        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
+
     end
 
     oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
@@ -122,8 +122,8 @@ function ssWeatherManager:updateForecast()
         end
     end
 
-    print_r(self.forecast)
-    print_r(g_currentMission.environment.rains)
+    -- print_r(self.forecast)
+    -- print_r(g_currentMission.environment.rains)
 end
 
 
@@ -135,7 +135,7 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
     local Tmaxmean = {}
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+        -- log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
         if rain.startDay > dayNumber then
             break
         end
