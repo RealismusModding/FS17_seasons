@@ -263,7 +263,6 @@ function ssSeasonsUtil:ssNormDist(mu,sigma)
     math.random()
 
     local p = math.random()
-    log(p)
 
     if p < 0.5 then
         return self:RationalApproximation(math.sqrt(-2.0 * math.log(p))) * -sigma + mu
