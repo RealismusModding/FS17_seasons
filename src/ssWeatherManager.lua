@@ -9,6 +9,7 @@ ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 7
 ssWeatherManager.snowDepth = 0
+ssWeatherManager.snowMelt = -10
 
 function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
@@ -36,7 +37,7 @@ end
 function ssWeatherManager:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
-    -- log("Building forecast based on today day num: " .. startDayNum)
+    log("Building forecast based on today day num: " .. startDayNum)
 
     self.forecast = {}
 
@@ -72,13 +73,13 @@ function ssWeatherManager:buildForecast()
         end
     end
 
-    -- print_r(self.forecast)
-    -- print_r(g_currentMission.environment.rains)
+    --print_r(self.forecast)
+    --print_r(g_currentMission.environment.rains)
 end
 
 function ssWeatherManager:updateForecast()
     local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength;
-    -- log("Updating forecast based on today day num: " .. dayNum);
+    log("Updating forecast based on today day num: " .. dayNum);
 
     table.remove(self.forecast,1)
 
@@ -89,16 +90,16 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.weekDay =  ssSeasonsUtil:dayName(dayNum);
     oneDayForecast.season = ssSeasonsUtil:seasonName(dayNum)
 
-    if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
-        --Seasonal average for a day in the season
-        ssTmax = self:Tmax(oneDayForecast.season)
+	if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
+		--Seasonal average for a day in the season
+		ssTmax = self:Tmax(oneDayForecast.season)
         oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
-
-    elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
-        --Seasonal average for a day in the next season
+			
+	elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
+		--Seasonal average for a day in the next season
         ssTmax = self:Tmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
-
+        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
+		
     end
 
     oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
@@ -122,8 +123,8 @@ function ssWeatherManager:updateForecast()
         end
     end
 
-    -- print_r(self.forecast)
-    -- print_r(g_currentMission.environment.rains)
+    --print_r(self.forecast)
+    --print_r(g_currentMission.environment.rains)
 end
 
 
@@ -135,7 +136,7 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
     local Tmaxmean = {}
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        -- log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
         if rain.startDay > dayNumber then
             break
         end
@@ -162,7 +163,7 @@ end
 function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
     if ss == 'Winter' then
         -- return {5.0,8.6,10.7} --min, mode, max Temps from the data
-        return {0.0,3.6,5.7} --min, mode, max
+        return {-2.0,1.6,3.7} --min, mode, max adjusted -7 deg C
 
     elseif ss == "Spring" then
         return {12.1, 14.2, 17.9} --min, mode, max
@@ -199,25 +200,61 @@ end
 --- function to keep track of snow accumulation
 --- snowDepth in meters
 function ssWeatherManager:calculateSnowAccumulation()
-    currentRain = g_currentMission.environment.currentRain
-    currentTemp = ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
+       
+    local currentRain = g_currentMission.environment.currentRain
+    local currentTemp = ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
+    local currentSnow = self.snowDepth
 
-    if currentRain == "sun" then
-        if currentTemp > -1  then -- snow melts at -1 if the sun is shining
-            self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0)/1000
+    if currentRain == nil then 
+        if currentTemp > -1 then
+        -- snow melts at -1 if the sun is shining
+        self.snowDepth,self.snowMelt = self:updateSnow(1,currentTemp)
         end
-    elseif currentRain == "rain" then
+
+    elseif currentRain.rainTypeId == "rain" and currentTemp > 0 then
         -- assume snow melts three times as fast if it rains
-        self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0) * 3/1000
-    elseif currentRain == "hail" then
+        self.snowDepth,self.snowMelt = self:updateSnow(3,currentTemp)
+
+    elseif currentRain.rainTypeId == "rain" and currentTemp <= 0 then
+        -- cold rain acts as hail
+        self.snowDepth,self.snowMelt = self:updateSnow(3,currentTemp)
+        --g_currentMission.environment.currentRain.rainTypeId = 'hail'
+        --currentRain.rainTypeId = 'rain'
+
+    elseif currentRain.rainTypeId == "hail" and currentTemp < 0 then
         -- Initial value of 10 mm/hr accumulation rate
         self.snowDepth = self.snowDepth + 10/1000
-    else
+
+    elseif currentRain.rainTypeId == "hail" and currentTemp >= 0 then
+        -- warm hail acts as rain
+        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+        --g_currentMission.environment.currentRain.rainTypeId = nil
+        --currentRain.rainTypeId = 'rain'
+
+    elseif currentRain.rainTypeId == "cloudy" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.snowDepth = self.snowDepth - math.min(-2*currentTemp+7.5,0)*0.75/1000
+        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+
+    elseif currentRain.rainTypeId == "fog" and currentTemp > 0 then
+        -- 75% melting (compared to clear conditions) when there is cloudy and fog
+        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+
     end
 
-    return self.snowDepth
+    --log('currentTemp = ', currentTemp," lowTemp = ",self.forecast[1].lowTemp,' highTemp = ',self.forecast[1].highTemp)
+    --log('self.snowDepth = ', self.snowDepth, ' self.snowMelt = ',self.snowMelt)
+    --print_r(currentRain)
+
+    return self.snowDepth,self.snowMelt
+end
+
+function ssWeatherManager:updateSnow(f,currentTemp)
+    --local currentMelt = math.max((2*currentTemp-7.5)*f/1000,0)
+    local currentMelt = math.max((currentTemp+1)*f/1000,0)
+    self.snowMelt = self.snowMelt - currentMelt
+    self.snowDepth = math.max(self.snowDepth - currentMelt,0)
+
+    return self.snowDepth,self.snowMelt
 end
 
 --- function for predicting when soil is not workable
@@ -230,6 +267,6 @@ function ssWeatherManager:isGroundWorkable()
     end
 end
 
-function ssWeatherManager:getSnowHeight()
-    return self.snowDepth
+function ssWeatherManager:getSnow()
+    return self.snowDepth,self.snowMelt
 end
