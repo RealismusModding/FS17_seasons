@@ -16,8 +16,6 @@ function ssEconomy:load(savegame, key)
     self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1000000)
     self.baseLoanInterest = ssStorage.getXMLFloat(savegame, key .. ".settings.baseLoanInterest", 10)
 
-    log("aiDayStart "..tostring(self.aiDayStart))
-
     -- Some calculations to make the code faster on the hotpath
     ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
