@@ -28,11 +28,27 @@ function ssSnow:loadMap(name)
     self.doAddSnow = false -- Should we currently be running a loop to add Snow on the map.
     self.doRemoveSnow = false
     self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
+    self.updateSnow = true
 
     self.currentX = 0 -- The row that we are currently updating
     self.currentZ = 0 -- The column that we are currently updating
     self.addedSnowForCurrentSnowfall = false -- Have we already added snow for the current snowfall?
-end
+    
+    --[[
+    self.testValue = 1
+    self.testValues={}
+    self.testValues[1]=0
+    self.testValues[2]=0.12
+    self.testValues[3]=0.06
+    self.testValues[4]=-0.18
+    self.testValues[5]=-0.06
+    self.testValues[6]=-0.12
+    self.testValues[7]=-0.12
+    self.testValues[8]=-0.12
+    self.testValues[9]=-0.12
+    self.testValues[10]=-20
+]]--
+    end
 
 function ssSnow:deleteMap()
 end
@@ -51,25 +67,51 @@ function ssSnow:seasonChanged()
 end
 
 function ssSnow:hourChanged()
-    local targetFromWater = 0.0 -- Fetch from weatersystem.
-
-    local targetSnowDepth = math.min(0.48, targetFromWater) -- Target snow depth in meters. Never higher than 0.4
+    --[[
+    -- Inject snow data.
+    if self.testValue == 10 then
+        self.testValue=1
+    else
+        self.testValue=self.testValue+1
+    end
+    local targetSnowDepth = self.testValues[self.testValue]
+    ]]--
+    
+    local targetFromweatherSystem = ssWeatherManager:getSnowHeight() -- Fetch from weatersystem.
+    local targetSnowDepth = math.min(0.48, targetFromweatherSystem) -- Target snow depth in meters. Never higher than 0.4
+    
+    -- print("-- Target Snowdept: " .. targetSnowDepth .. " Applied Snowdepth: " .. self.appliedSnowDepth);
 
     if self.appliedSnowDepth < 0 and targetSnowDepth > 0 then
         self.appliedSnowDepth = 0
     end
+    
+    -- Disable snow updates when unnecessary.
+    if targetSnowDepth < -8 and self.updateSnow == true then
+        -- print("--- Disabling snow updates ---")
+        self.snowLayersDelta=100
+        self.doRemoveSnow = true
+        self.updateSnow=false
+    elseif targetSnowDepth > 0 then
+        -- print("--- Enabling snow updates ---")
+        self.updateSnow=true
+    end
+    
 
-    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and targetSnowDepth > 0 then
+    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
+        if targetSnowDepth > 0 then
+            self.doAddSnow = true
+            print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+        end
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-        self.doAddSnow = true
-        print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-    elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT then
+    elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
         self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
         self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
         self.doRemoveSnow = true
         print("Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
     end
+    
 end
 
 -- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
