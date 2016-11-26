@@ -5,36 +5,28 @@
 -- Authors:  Authors:  ian898, Jarvixes, theSeb, reallogger
 --
 
-ssWeatherManager = {};
-ssWeatherManager.forecast = {}; --day of week, low temp, high temp, weather condition
-ssWeatherManager.forecastLength = 7;
-ssWeatherManager.snowDepth = 0;
-
-function ssWeatherManager.preSetup()
-end
-
-function ssWeatherManager.setup()
-    addModEventListener(ssWeatherManager)
-end
+ssWeatherManager = {}
+ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
+ssWeatherManager.forecastLength = 7
+ssWeatherManager.snowDepth = 0
 
 function ssWeatherManager:loadMap(name)
-    g_currentMission.environment:addDayChangeListener(self);
-    g_currentMission.environment:addHourChangeListener(self);
+    g_currentMission.environment:addDayChangeListener(self)
+    g_currentMission.environment:addHourChangeListener(self)
 
-    self:buildForecast(); -- Should be read from savegame
+    self:buildForecast() -- Should be read from savegame
     -- self.snowDepth = -- Enable read from savegame
-
 end
 
 function ssWeatherManager:deleteMap()
 end
 
 function ssWeatherManager:mouseEvent(posX, posY, isDown, isUp, button)
-end;
+end
 
 function ssWeatherManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
-        self.hud.visible = not self.hud.visible;
+        self.hud.visible = not self.hud.visible
     end
 end
 
@@ -42,23 +34,22 @@ function ssWeatherManager:update(dt)
 end
 
 function ssWeatherManager:draw()
-
 end
 
 function ssWeatherManager:buildForecast()
-    local startDayNum = ssSeasonsUtil:currentDayNumber();
+    local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
-    log("Building forecast based on today day num: " .. startDayNum);
+    log("Building forecast based on today day num: " .. startDayNum)
 
-    self.forecast = {};
+    self.forecast = {}
 
     for n = 1, self.forecastLength do
-        local oneDayForecast = {};
-        local ssTmax = {};
-        local Tmaxmean = {};
+        local oneDayForecast = {}
+        local ssTmax = {}
+        local Tmaxmean = {}
 
-        oneDayForecast.day = startDayNum + n; -- To match forecast with actual game
-        oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + n);
+        oneDayForecast.day = startDayNum + n -- To match forecast with actual game
+        oneDayForecast.weekDay =  ssSeasonsUtil:dayName(startDayNum + n)
         oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
 
         ssTmax = self:Tmax(oneDayForecast.season)
@@ -66,9 +57,9 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
         oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
 
-        oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n);
+        oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n)
 
-        table.insert(self.forecast, oneDayForecast);
+        table.insert(self.forecast, oneDayForecast)
     end
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
@@ -96,17 +87,17 @@ end
 -- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
 --perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
 function ssWeatherManager:getWeatherStateForDay(dayNumber)
-    local weatherState = "sun";
-    local ssTmax = {};
-    local Tmaxmean = {};
+    local weatherState = "sun"
+    local ssTmax = {}
+    local Tmaxmean = {}
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index));
+        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
         if rain.startDay > dayNumber then
-            break;
+            break
         end
         if (rain.startDay == dayNumber) then
-            weatherState = rain.rainTypeId;
+            weatherState = rain.rainTypeId
         end
     end
 
@@ -114,16 +105,16 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
     --    log (k, v)
     --end
 
-    return weatherState;
+    return weatherState
 end
 
 function ssWeatherManager:dayChanged()
-    self:buildForecast();
+    self:buildForecast()
     ssWeatherForecast:draw()
 end
 
 function ssWeatherManager:hourChanged()
-    self.snowAccumulation();
+    self.snowAccumulation()
 end
 
 function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
@@ -196,4 +187,3 @@ function ssWeatherManager:isGroundWorkable()
         return false
     end
 end
-
