@@ -19,7 +19,7 @@ function ssTime:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self);
 
     -- Calculate some constants for the daytime calculator
-    self.sunRad = ssTime.latitude * math.pi / 180
+    self.sunRad = self.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
     self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for 'daylight' assumed to be one degree above horizon
 

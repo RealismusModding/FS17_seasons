@@ -25,9 +25,6 @@ function ssWeatherManager:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
 function ssWeatherManager:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 107) then
-        self.hud.visible = not self.hud.visible
-    end
 end
 
 function ssWeatherManager:update(dt)
@@ -110,11 +107,10 @@ end
 
 function ssWeatherManager:dayChanged()
     self:buildForecast()
-    ssWeatherForecast:draw()
 end
 
 function ssWeatherManager:hourChanged()
-    self.snowAccumulation()
+    self:calculateSnowAccumulation()
 end
 
 function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
@@ -134,7 +130,7 @@ function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the s
 end
 
 -- function to output the temperature during the day and night
-function ssWeatherManager:diurnalTemp(hour,minute)
+function ssWeatherManager:diurnalTemp(hour, minute)
     -- need to have the high temp of the previous day
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
@@ -144,11 +140,11 @@ function ssWeatherManager:diurnalTemp(hour,minute)
     local currentTime = hour*60 + minute
 
     if currentTime < 420 then
-        currentTemp = ( math.cos(((currentTime + 540)/960)*math.pi/2) )^3 * (preDayTemp-self.forecast[1].lowTemp)+self.forecast[1].lowTemp
+        currentTemp = (math.cos(((currentTime + 540) / 960) * math.pi / 2)) ^ 3 * (prevDayTemp - self.forecast[1].lowTemp) + self.forecast[1].lowTemp
     elseif currentTime > 900 then
-        currentTemp = ( math.cos(((currentTime - 900)/960)*math.pi/2) )^3 * (self.forecast[1].highTemp-self.forecast[2].lowTemp)+self.forecast[1].lowTemp
+        currentTemp = (math.cos(((currentTime - 900) / 960) * math.pi / 2)) ^ 3 * (self.forecast[1].highTemp - self.forecast[2].lowTemp) + self.forecast[1].lowTemp
     else
-        currentTemp = ( math.cos((1- (currentTime-420)/480)*math.pi/2 )^3) * (self.forecast[1].highTemp-self.forecast[1].lowTemp) + self.forecast[1].lowTemp
+        currentTemp = (math.cos((1 - (currentTime -  420) / 480) * math.pi / 2) ^ 3) * (self.forecast[1].highTemp - self.forecast[1].lowTemp) + self.forecast[1].lowTemp
     end
 
     return currentTemp
@@ -156,9 +152,9 @@ end
 
 --- function to keep track of snow accumulation
 --- snowDepth in meters
-function ssWeatherManager:snowAccumulation()
+function ssWeatherManager:calculateSnowAccumulation()
     currentRain = g_currentMission.environment.currentRain
-    currentTemp = ssWeatherManager.diurnalTemp(g_currentMission.environment.currentHour,g_currentMission.environment.currentMinute)
+    currentTemp = ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
 
     if currentRain == "sun" then
         if currentTemp > -1  then -- snow melts at -1 if the sun is shining
@@ -186,4 +182,8 @@ function ssWeatherManager:isGroundWorkable()
     else
         return false
     end
+end
+
+function ssWeatherManager:getSnowHeight()
+    return self.snowDepth
 end

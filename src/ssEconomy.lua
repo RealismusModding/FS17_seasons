@@ -67,7 +67,7 @@ end
 
 function ssEconomy:calculateLoanInterestRate()
     -- local stats = g_currentMission.missionStats
-    local yearInterest = ssEconomy.baseLoanInterest / 2 * g_currentMission.missionInfo.difficulty
+    local yearInterest = self.baseLoanInterest / 2 * g_currentMission.missionInfo.difficulty
 
     -- Convert the interest to be made in a Seasons year to a vanilla year so that the daily interests are correct
     local seasonsYearInterest = yearInterest * (356 / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear))
@@ -83,10 +83,10 @@ function ssEconomy:aiUpdateTick(superFunc, dt)
         local hour = g_currentMission.environment.currentHour
         local dow = ssSeasonsUtil:dayOfWeek()
 
-        if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
-            self.pricePerMS = ssEconomy.aiPricePerMSWork
+        if hour >= self.aiDayStart and hour <= self.aiDayEnd and dow <= 5 then
+            self.pricePerMS = self.aiPricePerMSWork
         else
-            self.pricePerMS = ssEconomy.aiPricePerMSOverwork
+            self.pricePerMS = self.aiPricePerMSOverwork
         end
     end
 
