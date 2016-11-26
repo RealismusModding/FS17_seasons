@@ -50,7 +50,6 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.season = ssSeasonsUtil:seasonName(startDayNum + n)
 
         ssTmax = self:Tmax(oneDayForecast.season)
-        --log('ssTmax = ',ssTmax[2])
         oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
         oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
 
@@ -62,9 +61,56 @@ function ssWeatherManager:buildForecast()
     for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
              if (rain.startDay == fCast.day) then
-                --log('fCast.day = ', fCast.day,'is equal to ', rain.startDay)
-                --log('oneDayForecast = ',oneDayForecast)
-                --log('rain.rainTypeId = ', rain.rainTypeId)
+                if fCast.lowTemp < -1 and rain.rainTypeId == 'rain' then
+                    g_currentMission.environment.rains[index].rainTypeId = 'hail'
+                    self.forecast[jndex].weatherState = 'hail'
+                elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
+                    g_currentMission.environment.rains[index].rainTypeId = 'rain'
+                    self.forecast[jndex].weatherState = 'rain'
+                end
+            end
+        end
+    end
+
+    print_r(self.forecast)
+    print_r(g_currentMission.environment.rains)
+end
+
+function ssWeatherManager:updateForecast()
+    local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength;
+    log("Updating forecast based on today day num: " .. dayNum);
+
+    table.remove(self.forecast,1)
+
+    local oneDayForecast = {};
+    local ssTmax = {};
+
+    oneDayForecast.day = dayNum; -- To match forecast with actual game
+    oneDayForecast.weekDay =  ssSeasonsUtil:dayName(dayNum);
+    oneDayForecast.season = ssSeasonsUtil:seasonName(dayNum)
+
+	if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
+		--Seasonal average for a day in the season
+		ssTmax = self:Tmax(oneDayForecast.season)
+        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
+			
+	elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
+		--Seasonal average for a day in the next season
+        ssTmax = self:Tmax(oneDayForecast.season)
+        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
+		
+    end
+
+    oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
+    oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
+
+    oneDayForecast.weatherState = self:getWeatherStateForDay(dayNum);
+
+    table.insert(self.forecast, oneDayForecast);
+
+    for index, rain in ipairs(g_currentMission.environment.rains) do
+        for jndex, fCast in ipairs(self.forecast) do
+             if (rain.startDay == fCast.day) then
                 if fCast.lowTemp < -1 and rain.rainTypeId == 'rain' then
                     g_currentMission.environment.rains[index].rainTypeId = 'hail'
                     self.forecast[jndex].weatherState = 'hail'
@@ -106,7 +152,7 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
 end
 
 function ssWeatherManager:dayChanged()
-    self:buildForecast()
+    self:updateForecast()
 end
 
 function ssWeatherManager:hourChanged()
