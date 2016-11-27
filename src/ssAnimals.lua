@@ -75,6 +75,8 @@ function ssAnimals:seasonChanged()
         self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
         self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
     end
+
+    -- FIXME send event to clients that stuff has changed
 end
 
 -- animal: string, filltype: int
