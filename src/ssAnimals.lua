@@ -22,7 +22,7 @@ function ssAnimals:loadMap(name)
     self:loadFromXML()
 
     -- Initial setuo (it changed from nothing)
-    -- self:seasonChanged()
+    self:seasonChanged()
 end
 
 function ssAnimals:loadFromXML()
@@ -52,7 +52,8 @@ function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()
-    local types = ssSeasonsXML:getTypes(self.data, ssSeasonsUtil:season())
+    local season = ssSeasonsUtil:season()
+    local types = ssSeasonsXML:getTypes(self.data, season)
 
     for _, typ in pairs(types) do
         local desc = g_currentMission.husbandries[typ].animalDesc
