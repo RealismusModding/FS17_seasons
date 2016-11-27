@@ -25,8 +25,6 @@ function ssTime:loadMap(name)
 
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()
-
-    g_currentMission.missionInfo.timeScale = 120*6*2
 end
 
 function ssTime:deleteMap()
