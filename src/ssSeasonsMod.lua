@@ -35,6 +35,7 @@ local srcFolder = g_currentModDirectory .. "src/"
 local classes = {
     "ssLang",
     "ssStorage",
+    "ssSeasonsXML",
     "ssSeasonsUtil",
     "ssTime",
     "ssEconomy",

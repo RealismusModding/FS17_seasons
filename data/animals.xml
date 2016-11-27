@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<animals>
+    <seasons>
+        <spring>
+            <properties type="cow">
+                <straw>52.5</straw>
+                <food>315</food>
+                <water>35</water>
+                <birthRate>0</birthRate>
+                <milk>1071</milk>
+                <manure>180</manure>
+                <liquidManure>250</liquidManure>
+            </properties>
+            <properties type="sheep">
+                <food>27</food>
+                <water>15</water>
+                <birthRate>0.1</birthRate>
+                <wool>67.2</wool>
+            </properties>
+            <properties type="pig">
+                <straw>15</straw>
+                <food>81</food>
+                <water>10</water>
+                <birthRate>0.66666667</birthRate>
+                <manure>45</manure>
+                <liquidManure>65</liquidManure>
+            </properties>
+        </spring>
+
+        <summer>
+            <properties type="cow">
+                <straw>17.5</straw>
+                <food>315</food>
+                <water>52.5</water>
+                <birthRate>0.08</birthRate>
+                <milk>571.2</milk>
+                <manure>180</manure>
+                <liquidManure>300</liquidManure>
+            </properties>
+
+            <properties type="sheep">
+                <food>27</food>
+                <water>22.5</water>
+                <birthRate>0</birthRate>
+                <wool>28.8</wool>
+            </properties>
+
+            <properties type="pig">
+                <straw>5</straw>
+                <food>81</food>
+                <water>15</water>
+                <birthRate>0</birthRate>
+                <manure>45</manure>
+                <liquidManure>97.5</liquidManure>
+            </properties>
+        </summer>
+
+        <autumn>
+            <properties type="cow">
+                <straw>70</straw>
+                <food>350</food>
+                <water>26.25</water>
+                <birthRate>0</birthRate>
+                <milk>285.6</milk>
+                <manure>200</manure>
+                <liquidManure>200</liquidManure>
+            </properties>
+
+            <properties type="sheep">
+                <food>30</food>
+                <water>11.25</water>
+                <birthRate>0</birthRate>
+                <wool>0</wool>
+            </properties>
+
+            <properties type="pig">
+                <straw>20</straw>
+                <food>90</food>
+                <water>7.5</water>
+                <birthRate>0</birthRate>
+                <manure>50</manure>
+                <liquidManure>48.75</liquidManure>
+            </properties>
+        </autumn>
+
+        <winter>
+            <properties type="cow">
+                <straw>140</straw>
+                <food>420</food>
+                <water>26.25</water>
+                <birthRate>0</birthRate>
+                <milk>928.2</milk>
+                <manure>240</manure>
+                <liquidManure>250</liquidManure>
+            </properties>
+
+            <properties type="sheep">
+                <food>36</food>
+                <water>11.25</water>
+                <birthRate>0</birthRate>
+                <wool>0</wool>
+            </properties>
+
+            <properties type="pig">
+                <straw>40</straw>
+                <food>108</food>
+                <water>7.5</water>
+                <birthRate>0</birthRate>
+                <manure>60</manure>
+                <liquidManure>48.75</liquidManure>
+            </properties>
+        </winter>
+    </seasons>
+</animals>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<textures>
+    <seasons>
+        <spring>
+            <texture shapeName="" secondaryNodeName="" to="" />
+        </spring>
+    </seasons>
+</textures>

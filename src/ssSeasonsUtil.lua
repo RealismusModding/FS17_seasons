@@ -14,6 +14,11 @@ ssSeasonsUtil.seasons = {}
 ssSeasonsUtil.daysInWeek = 7 -- FIXME should be in all caps
 ssSeasonsUtil.seasonsInYear = 4 -- FIXME should be in all caps
 
+ssSeasonsUtil.SEASON_SPRING = 0
+ssSeasonsUtil.SEASON_SUMMER = 1
+ssSeasonsUtil.SEASON_AUTUMN = 2
+ssSeasonsUtil.SEASON_WINTER = 3
+
 ssSeasonsUtil.weekDays = {
     ssLang.getText("SS_WEEKDAY_MONDAY", "Monday"),
     ssLang.getText("SS_WEEKDAY_TUESDAY", "Tuesday"),

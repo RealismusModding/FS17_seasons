@@ -36,6 +36,24 @@ function ssAnimals:loadMap(name)
 
     -- self:disableFillType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
     -- self:disableFillType("cow", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
+
+    -- log(ssSeasonsXML:getFloat(y, ssSeasonsUtil.SEASON_SUMMER, "cow.birthRate", 1))
+    -- log(ssSeasonsXML:getInt(y, ssSeasonsUtil.SEASON_SPRING, "cow.liquidManure", 1))
+    -- print_r(ssSeasonsXML:getTypes(y, ssSeasonsUtil.SEASON_SUMMER))
+
+
+    self:loadFromXML()
+end
+
+function ssAnimals:loadFromXML()
+    local elements = {
+        ["seasons"] = {},
+        ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool"}
+    }
+
+    self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
+    -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
+    -- FIXME: find the location of the map
 end
 
 function ssAnimals:deleteMap()

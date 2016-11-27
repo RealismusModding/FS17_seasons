@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!-- Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter -->
+<!-- Life time divided by 20 -->
+
+<factors>
+    <factor category="tractors">
+        <RF1 value="0.007" />
+        <RF2 value="2" />
+        <ssLifeTime value="600" />
+    </factor>
+
+    <factor category="trucks">
+        <RF1 value="0.003" />
+        <RF2 value="2" />
+        <ssLifeTime value="1000" />
+    </factor>
+
+    <factor category="harvesters">
+        <RF1 value="0.04" />
+        <RF2 value="2.1" />
+        <ssLifeTime value="200" />
+    </factor>
+
+    <factor category="forageHarvesters">
+        <RF1 value="0.03" />
+        <RF2 value="2" />
+        <ssLifeTime value="200" />
+    </factor>
+
+    <factor category="potatoHarvesters">
+        <RF1 value="0.04" />
+        <RF2 value="2" />
+        <ssLifeTime value="150" />
+    </factor>
+
+    <factor category="beetHarvesters">
+        <RF1 value="0.04" />
+        <RF2 value="2" />
+        <ssLifeTime value="150" />
+    </factor>
+
+    <factor category="tippers">
+        <RF1 value="0.19" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="150" />
+    </factor>
+
+    <factor category="augerWagons">
+        <RF1 value="0.14" />
+        <RF2 value="1.6" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="plows">
+        <RF1 value="0.29" />
+        <RF2 value="1.8" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="cultivators">
+        <RF1 value="0.27" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="sowingMachines">
+        <RF1 value="0.32" />
+        <RF2 value="2.1" />
+        <ssLifeTime value="75" />
+    </factor>
+
+    <factor category="sprayers">
+        <RF1 value="0.41" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="75" />
+    </factor>
+
+    <factor category="fertilizerSpreaders">
+        <RF1 value="0.63" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="60" />
+    </factor>
+
+    <factor category="manureSpreaders">
+        <RF1 value="0.4" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="75" />
+    </factor>
+
+    <factor category="slurryTanks">
+        <RF1 value="0.4" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="75" />
+    </factor>
+
+    <factor category="weeders">
+        <RF1 value="0.2" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="mowers">
+        <RF1 value="0.44" />
+        <RF2 value="2" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="tedders">
+        <RF1 value="0.17" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="windrowers">
+        <RF1 value="0.17" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="125" />
+    </factor>
+
+    <factor category="loaderWagons">
+        <RF1 value="0.16" />
+        <RF2 value="1.6" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="baling">
+        <RF1 value="0.23" />
+        <RF2 value="1.8" />
+        <ssLifeTime value="150" />
+    </factor>
+
+    <factor category="wheelLoaders">
+        <RF1 value="0.004" />
+        <RF2 value="2" />
+        <ssLifeTime value="400" />
+    </factor>
+
+    <factor category="teleLoaders">
+        <RF1 value="0.005" />
+        <RF2 value="1.9" />
+        <ssLifeTime value="500" />
+    </factor>
+
+    <factor category="skidSteers">
+        <RF1 value="0.006" />
+        <RF2 value="1.8" />
+        <ssLifeTime value="400" />
+    </factor>
+
+    <factor category="loaderWagons">
+        <RF1 value="0.16" />
+        <RF2 value="1.6" />
+        <ssLifeTime value="100" />
+    </factor>
+
+    <factor category="lowloaders">
+        <RF1 value="0.15" />
+        <RF2 value="1.4" />
+        <ssLifeTime value="200" />
+    </factor>
+
+    <factor category="cutterTrailers">
+        <RF1 value="0.1" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="150" />
+    </factor>
+
+    <factor category="cars">
+        <RF1 value="0.02" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="1000" />
+    </factor>
+
+    <factor category="other">
+        <RF1 value="0.2" />
+        <RF2 value="1.7" />
+        <ssLifeTime value="150" />
+    </factor>
+</factors>

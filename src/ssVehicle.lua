@@ -77,7 +77,7 @@ end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "/repairFactors.xml")
+    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "/data/repairFactors.xml")
 
     ssVehicle.repairFactors = {}
 
