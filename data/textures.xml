@@ -3,7 +3,18 @@
 <textures>
     <seasons>
         <spring>
-            <texture shapeName="" secondaryNodeName="" to="" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_spring" />
         </spring>
+
+        <summer>
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="ssTr_pineBranch_spring" />
+        </summer>
+
+        <autumn>
+        </autumn>
+
+        <winter>
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="ssTr_pineBranch_spring" />
+        </winter>
     </seasons>
 </textures>

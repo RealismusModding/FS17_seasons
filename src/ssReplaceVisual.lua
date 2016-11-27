@@ -5,36 +5,36 @@
 -- Authors:  mrbear
 --
 
-ssReplaceVisual = {};
+ssReplaceVisual = {}
 
 function ssReplaceVisual:loadMap(name)
     -- General initalization
     -- g_currentMission.environment:addHourChangeListener(self)
-    ssSeasonsMod:addSeasonChangeListener(self);
+    ssSeasonsMod:addSeasonChangeListener(self)
 
-    self.textureReplacements={};
-    self.textureReplacements["Spring"]={};
-    self.textureReplacements["Summer"]={};
-    self.textureReplacements["Autumn"]={};
-    self.textureReplacements["Winter"]={};
-    self.textureReplacements["Default"]={};
-    self.textureReplacements["Spring"]["tree5m"]={};
-    self.textureReplacements["Spring"]["tree5m"]["tree5m"]={};
-    self.textureReplacements["Spring"]["tree5m"]["tree5m"]["replacementName"]="ssTr_treeBranch_spring";
+    self.textureReplacements={}
+    self.textureReplacements["Spring"]={}
+    self.textureReplacements["Summer"]={}
+    self.textureReplacements["Autumn"]={}
+    self.textureReplacements["Winter"]={}
+    self.textureReplacements["Default"]={}
+    self.textureReplacements["Spring"]["tree5m"]={}
+    self.textureReplacements["Spring"]["tree5m"]["tree5m"]={}
+    self.textureReplacements["Spring"]["tree5m"]["tree5m"]["replacementName"]="ssTr_treeBranch_spring"
 
-    self.textureReplacements["Summer"]["pine_stage3"]={};
-    self.textureReplacements["Summer"]["pine_stage3"]["attachments"]={};
-    self.textureReplacements["Summer"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring";
+    self.textureReplacements["Summer"]["pine_stage3"]={}
+    self.textureReplacements["Summer"]["pine_stage3"]["attachments"]={}
+    self.textureReplacements["Summer"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring"
 
-    self.textureReplacements["Winter"]["pine_stage3"]={};
-    self.textureReplacements["Winter"]["pine_stage3"]["attachments"]={};
-    self.textureReplacements["Winter"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring";
+    self.textureReplacements["Winter"]["pine_stage3"]={}
+    self.textureReplacements["Winter"]["pine_stage3"]["attachments"]={}
+    self.textureReplacements["Winter"]["pine_stage3"]["attachments"]["replacementName"]="ssTr_pineBranch_spring"
 
-    local newRoot=loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d"); -- Loading materialHolder
+    local modReplacements = loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
 
-    ssReplaceVisual:loadTextureIdTable(getRootNode()); -- Built into map
-    ssReplaceVisual:loadTextureIdTable(newRoot); -- Provided by mod
-    ssReplaceVisual:updateTextures(getRootNode());
+    ssReplaceVisual:loadTextureIdTable(getRootNode()) -- Built into map
+    ssReplaceVisual:loadTextureIdTable(modReplacements)
+    ssReplaceVisual:updateTextures(getRootNode())
 end
 
 function ssReplaceVisual:deleteMap()
@@ -51,7 +51,7 @@ end
 
 function ssReplaceVisual:seasonChanged()
     log("Season changed into "..ssSeasonsUtil:seasonName())
-    ssReplaceVisual:updateTextures(getRootNode());
+    ssReplaceVisual:updateTextures(getRootNode())
 end
 
 function ssReplaceVisual:hourChanged()
@@ -60,16 +60,16 @@ end
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function findNodeByName(nodeId, name)
     if getName(nodeId) == name then
-        return nodeId;
-    end;
+        return nodeId
+    end
     for i=0, getNumOfChildren(nodeId)-1 do
-        local tmp = findNodeByName(getChildAt(nodeId, i), name);
+        local tmp = findNodeByName(getChildAt(nodeId, i), name)
         if tmp ~= nil then
-            return tmp;
-        end;
-    end;
-    return nil;
-end;
+            return tmp
+        end
+    end
+    return nil
+end
 
 --
 -- Texture replacement
@@ -81,10 +81,10 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
     for seasonName,seasonTable in pairs(self.textureReplacements) do
         for shapeName,shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName,  secondaryNodeTable in pairs(shapeNameTable) do
-                local materialSrcId = findNodeByName(searchBase, secondaryNodeTable["replacementName"]);
+                local materialSrcId = findNodeByName(searchBase, secondaryNodeTable["replacementName"])
                 if materialSrcId ~= nil then -- Can be defined in an other I3D file.
-                    -- print("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonName .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId );
-                    self.textureReplacements[seasonName][shapeName][secondaryNodeName]["materialId"] = getMaterial(materialSrcId, 0);
+                    -- print("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonName .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
+                    self.textureReplacements[seasonName][shapeName][secondaryNodeName]["materialId"] = getMaterial(materialSrcId, 0)
                     if self.textureReplacements["Default"][shapeName] == nil then
                         self.textureReplacements["Default"][shapeName]={}
                     end
@@ -93,10 +93,10 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                     end
                     self.textureReplacements["Default"][shapeName][secondaryNodeName]["materialId"] = ssReplaceVisual:findOriginalMaterial(getRootNode(), shapeName, secondaryNodeName)
                 end
-            end;
-        end;
-    end;
-end;
+            end
+        end
+    end
+end
 
 -- Finds the material of the original Shape object
 function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNodeName)
@@ -104,7 +104,7 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
     local parentShapeId=findNodeByName(searchBase, shapeName)
     local childShapeId
     local materialId
-    -- print("DEBUG: " .. parentShapeId );
+    -- print("DEBUG: " .. parentShapeId )
     if parentShapeId ~= nil then
         childShapeId=(findNodeByName(parentShapeId, secondaryNodeName))
         if childShapeId ~= nil then
@@ -113,45 +113,45 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
         end
     end
     return materialId
-end;
+end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(nodeId)
-    local currentSeason=ssSeasonsUtil:seasonName();
+    local currentSeason=ssSeasonsUtil:seasonName()
     if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do
-            -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".");
-            ssReplaceVisual:updateTexturesSubNode(nodeId,secondaryNodeName,secondaryNodeTable["materialId"]);
-        end;
+            -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+            ssReplaceVisual:updateTexturesSubNode(nodeId,secondaryNodeName,secondaryNodeTable["materialId"])
+        end
     elseif self.textureReplacements["Default"][getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements["Default"][getName(nodeId)]) do
-            -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".");
-            ssReplaceVisual:updateTexturesSubNode(nodeId,secondaryNodeName,secondaryNodeTable["materialId"]);
-        end;
-    end;
+            -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+            ssReplaceVisual:updateTexturesSubNode(nodeId,secondaryNodeName,secondaryNodeTable["materialId"])
+        end
+    end
     for i=0, getNumOfChildren(nodeId)-1 do
-        local tmp = ssReplaceVisual:updateTextures(getChildAt(nodeId, i), name);
+        local tmp = ssReplaceVisual:updateTextures(getChildAt(nodeId, i), name)
         if tmp ~= nil then
-            return tmp;
-        end;
-    end;
-    return nil;
-end;
+            return tmp
+        end
+    end
+    return nil
+end
 
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     if getName(nodeId) == shapeName then
-        -- print("Setting texture for " .. getName(nodeId) .. " (" .. nodeId .. ") to " .. materialSrcId .. ".");
-        setMaterial(nodeId, materialSrcId, 0);
-    end;
+        -- print("Setting texture for " .. getName(nodeId) .. " (" .. nodeId .. ") to " .. materialSrcId .. ".")
+        setMaterial(nodeId, materialSrcId, 0)
+    end
     for i=0, getNumOfChildren(nodeId)-1 do
-        local tmp = ssReplaceVisual:updateTexturesSubNode(getChildAt(nodeId, i), shapeName, materialSrcId);
+        local tmp = ssReplaceVisual:updateTexturesSubNode(getChildAt(nodeId, i), shapeName, materialSrcId)
         if tmp ~= nil then
-            return tmp;
-        end;
-    end;
-    return nil;
-end;
+            return tmp
+        end
+    end
+    return nil
+end
 
 function ssReplaceVisual:update(dt)
 end
