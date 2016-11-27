@@ -8,7 +8,6 @@
 ssReplaceVisual = {}
 
 function ssReplaceVisual:loadMap(name)
-    -- General initalization
     -- g_currentMission.environment:addHourChangeListener(self)
     ssSeasonsMod:addSeasonChangeListener(self)
 
@@ -141,7 +140,7 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                     end
 
                     if self.textureReplacements.default[shapeName][secondaryNodeName] == nil then
-                        self.textureReplacements.default[shapeName][secondaryNodeName]  ={}
+                        self.textureReplacements.default[shapeName][secondaryNodeName] = {}
                     end
 
                     self.textureReplacements.default[shapeName][secondaryNodeName].materialId = ssReplaceVisual:findOriginalMaterial(getRootNode(), shapeName, secondaryNodeName)
