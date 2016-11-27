@@ -14,6 +14,7 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
     g_currentMission.environment:addHourChangeListener(self)
 
+    -- FIXME: should only be done on server
     self:buildForecast() -- Should be read from savegame
     -- self.snowDepth = -- Enable read from savegame
 end
@@ -89,16 +90,16 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.weekDay =  ssSeasonsUtil:dayName(dayNum);
     oneDayForecast.season = ssSeasonsUtil:seasonName(dayNum)
 
-	if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
-		--Seasonal average for a day in the season
-		ssTmax = self:Tmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
-			
-	elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
-		--Seasonal average for a day in the next season
+    if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
+        --Seasonal average for a day in the season
         ssTmax = self:Tmax(oneDayForecast.season)
-        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax) 
-		
+        oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
+
+    elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
+        --Seasonal average for a day in the next season
+        ssTmax = self:Tmax(oneDayForecast.season)
+        oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
+
     end
 
     oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
@@ -199,12 +200,12 @@ end
 --- function to keep track of snow accumulation
 --- snowDepth in meters
 function ssWeatherManager:calculateSnowAccumulation()
-       
+
     local currentRain = g_currentMission.environment.currentRain
     local currentTemp = ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
     local currentSnow = self.snowDepth
 
-    if currentRain == nil then 
+    if currentRain == nil then
         if currentTemp > -1 then
         -- snow melts at -1 if the sun is shining
         self.snowDepth = self.snowDepth - math.max((currentTemp+1)/1000,0)
@@ -220,7 +221,7 @@ function ssWeatherManager:calculateSnowAccumulation()
             self.snowDepth = 0
         end
         self.snowDepth = self.snowDepth + 10/1000
-        
+
     elseif currentRain.rainTypeId == "hail" and currentTemp < 0 then
         -- Initial value of 10 mm/hr accumulation rate
         if self.snowDepth < 0 then

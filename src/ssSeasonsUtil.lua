@@ -74,6 +74,18 @@ end
 function ssSeasonsUtil:update(dt)
 end
 
+function ssSeasonsUtil:readStream(streamId, connection)
+    self.daysInSeason = streamReadFloat32(streamId)
+    self.latestSeason = streamReadFloat32(streamId)
+    self.latestGrowthStage = streamReadFloat32(streamId)
+end
+
+function ssSeasonsUtil:writeStream(streamId, connection)
+    streamWriteFloat32(streamId, self.daysInSeason)
+    streamWriteFloat32(streamId, self.latestSeason)
+    streamWriteFloat32(streamId, self.latestGrowthStage)
+end
+
 function ssSeasonsUtil:draw()
 end
 
@@ -237,6 +249,51 @@ function ssSeasonsUtil:dayChanged()
     end
 end
 
+-- Does one iteration step of density layer update calling provided function for specified area.
+-- Returns values for next iteration. Extra arguments are passed on to the provided function.
+-- Calling function should keep currentX and CurrentZ between calls to the function.
+function ssSeasonsUtil:ssIterateOverTerrain(currentX, currentZ, func, ...)
+    local arg = {...} -- Optional arguments to pass on to provided function.
+    local moreIterations = true
+    local mapSegments = 16 -- Must be evenly dividable with mapsize.
+
+    if g_currentMission.missionInfo.timeScale > 120 then
+        mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
+    end
+
+    local startWorldX = currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
+    local startWorldZ = currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
+    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.1 -- -0.1 to avoid overlap.
+    local widthWorldZ = startWorldZ
+    local heightWorldX = startWorldX
+    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1 -- -0.1 to avoid overlap.
+
+    -- Call provided function
+    func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg))
+
+
+    if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
+        -- Next column
+        currentZ = currentZ + 1
+    elseif  currentX < mapSegments - 1 then -- Starting with row 0
+        -- Next row
+        currentX = currentX + 1
+        currentZ = 0
+    else
+        -- Done with the loop, set up for the next one.
+        currentX = 0
+        currentZ = 0
+        moreIterations = false
+    end
+
+    return currentX, currentZ, moreIterations
+end
+
+------------------------------------
+---- Server only
+------------------------------------
+
+
 --Outputs a random sample from a triangular distribution
 function ssSeasonsUtil:ssTriDist(m)
     local pmode = {}
@@ -282,7 +339,7 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
-    local p = math.random();
+    local p = math.random()
     local z
 
     if p < 0.5 then
@@ -292,44 +349,4 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     end
 
     return gamma * math.exp ( z / beta )
-end
-
--- Does one iteration step of density layer update calling provided function for specified area.
--- Returns values for next iteration. Extra arguments are passed on to the provided function.
--- Calling function should keep currentX and CurrentZ between calls to the function.
-function ssSeasonsUtil:ssIterateOverTerrain(currentX, currentZ, func, ...)
-    local arg={...} -- Optional arguments to pass on to provided function.
-    local moreIterations=true;
-    local mapSegments = 16; -- Must be evenly dividable with mapsize.
-
-    if g_currentMission.missionInfo.timeScale > 120 then
-        mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
-    end;
-
-    local startWorldX =  currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2;
-    local startWorldZ =  currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2;
-    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
-    local widthWorldZ = startWorldZ;
-    local heightWorldX = startWorldX;
-    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1; -- -0.1 to avoid overlap.
-
-    -- Call provided function
-    func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg));
-
-
-    if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-        -- Next column
-        currentZ = currentZ + 1;
-    elseif  currentX < mapSegments - 1 then -- Starting with row 0
-        -- Next row
-        currentX = currentX + 1;
-        currentZ = 0;
-    else
-        -- Done with the loop, set up for the next one.
-        currentX = 0;
-        currentZ = 0;
-        moreIterations = false;
-    end
-
-    return currentX, currentZ, moreIterations
 end

@@ -141,7 +141,7 @@ local function ssSeasonsModSaveToXML(self)
                 end
             end
         else
-            g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("SS_SAVE_FAILED"), 10000);
+            g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("SS_SAVE_FAILED"), 10000)
         end
     end
 end
@@ -190,7 +190,7 @@ FSBaseMission.loadMap = ssSeasonsMod.loadMap
 FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
-FSCareerMissionInfo.saveToXML = Utils.prependedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML);
+FSCareerMissionInfo.saveToXML = Utils.prependedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
 
 ------------- Useful global functions ---------------
 
@@ -283,10 +283,10 @@ local function isArray(table)
 end
 
 function jsonEncode(t, indent, cache)
-    if indent == nil then indent = ""; end
-    local newIndent = indent .. "  ";
+    if indent == nil then indent = "" end
+    local newIndent = indent .. "  "
 
-    if cache == nil then cache = {}; end
+    if cache == nil then cache = {} end
 
 
     if (type(t) == "table") then
@@ -294,49 +294,49 @@ function jsonEncode(t, indent, cache)
 
         for _, value in pairs(cache) do
             if value == t then
-                return "\"[Cyclic]\"";
+                return "\"[Cyclic]\""
             end
         end
-        table.insert(cache, 1, t);
+        table.insert(cache, 1, t)
 
         if isArray(t) then
-            local str = "[";
-            local first = true;
+            local str = "["
+            local first = true
 
             for pos, val in pairs(t) do
                 if not first then
-                    str = str .. ",";
+                    str = str .. ","
                 end
-                first = false;
+                first = false
 
-                str = str .. "\n" .. newIndent .. jsonEncode(val, newIndent, cache);
+                str = str .. "\n" .. newIndent .. jsonEncode(val, newIndent, cache)
             end
 
-            return str .. "\n" .. indent .. "]";
+            return str .. "\n" .. indent .. "]"
         else
-            local str = "{";
-            local first = true;
+            local str = "{"
+            local first = true
 
             for pos, val in pairs(t) do
                 if not first then
-                    str = str .. ",";
+                    str = str .. ","
                 end
-                first = false;
+                first = false
 
-                str = str .. "\n" .. newIndent .. jsonEncode(pos, newIndent, cache) .. ": " .. jsonEncode(val, newIndent, cache);
+                str = str .. "\n" .. newIndent .. jsonEncode(pos, newIndent, cache) .. ": " .. jsonEncode(val, newIndent, cache)
             end
 
-            return str .. "\n" .. indent .. "}";
+            return str .. "\n" .. indent .. "}"
         end
     elseif type(t) == "string" then
-        return "\"" .. t .. "\"";
+        return "\"" .. t .. "\""
     elseif type(t) == "function" then
-        return "\"Function(){}\"";
+        return "\"Function(){}\""
     else
-        return tostring(t);
+        return tostring(t)
     end
 
-    return nil;
+    return nil
 end
 
 function tprint(tbl, indent)
@@ -344,7 +344,7 @@ function tprint(tbl, indent)
     for k, v in pairs(tbl) do
         if k ~= nil then
             formatting = string.rep("  ", indent) .. tostring(k) .. ": "
-        end;
+        end
         if type(v) == "table" then
             print(formatting)
             tprint(v, indent+1)

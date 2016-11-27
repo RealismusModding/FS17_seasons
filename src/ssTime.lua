@@ -66,8 +66,6 @@ function ssTime:adaptTime()
     -- dayEnd: 17
     -- nightStart: 22
 
-    log(string.format("-- night --> %f -> %f -- day --> %f -> %f -- night -- >", nightEnd, dayStart, dayEnd, nightStart))
-
     -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
     -- FIXME(jos): Maybe turn them on between the beginOfNight and fullNight?
     env.nightStart = dayStart * 60

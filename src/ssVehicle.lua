@@ -144,7 +144,7 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     local data = ssVehicle.repairFactors[storeItem.category]
 
     if data == nil then
-        data = ssVehicle.repairFactors["other"]
+        data = ssVehicle.repairFactors.other
     end
 
     local RF1 = data.RF1
