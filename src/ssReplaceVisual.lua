@@ -7,6 +7,11 @@
 
 ssReplaceVisual = {}
 
+function updatePlacableOnCreation()
+    ssReplaceVisual:updateTextures(getRootNode()) -- Could not find a way to get the id of the placed Shape so update everything.
+end
+Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, updatePlacableOnCreation);
+
 function ssReplaceVisual:loadMap(name)
     -- g_currentMission.environment:addHourChangeListener(self)
     ssSeasonsMod:addSeasonChangeListener(self)
