@@ -9,6 +9,7 @@ local modItem = ModsUtil.findModItemByModName(g_currentModName)
 ssSeasonsMod.version = Utils.getNoNil(modItem.version, "?.?.?.?")
 ssSeasonsMod.modDir = g_currentModDirectory
 ssSeasonsMod.verbose = true
+ssSeasonsMod.debug = true
 
 ssSeasonsMod.seasonListeners = {}
 ssSeasonsMod.growthStageListeners = {}
@@ -49,6 +50,10 @@ local classes = {
     "ssReplaceVisual",
     "ssAnimals"
 }
+
+if ssSeasonsMod.debug then
+    table.insert(classes, "ssDebug")
+end
 
 -- Load all scripts
 if modItem.isDirectory then
