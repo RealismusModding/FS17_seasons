@@ -18,31 +18,11 @@ end
 function ssAnimals:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self);
 
-    --[[
-    log("FILLLEVELS")
-    print_r(g_currentMission.husbandries.cow.tipTriggersFillLevels)
-    log("FILLTYPES")
-    -- g_currentMission.husbandries.cow.tipTriggersFillLevels[FILLTYPE_DRYGRASS_WINDROW][n].tipTrigger.acceptedFillTypes
-    log("POWERRR" ..tostring(g_currentMission.husbandries.cow.tipTriggersFillLevels[FillUtil.FILLTYPE_POWERFOOD][1].tipTrigger))
-    print_r(g_currentMission.husbandries.sheep.tipTriggersFillLevels[FillUtil.FILLTYPE_DRYGRASS_WINDROW])
-    log("POWERRR" ..tostring(g_currentMission.husbandries.cow.tipTriggersFillLevels[FillUtil.FILLTYPE_POWERFOOD][1].tipTrigger.acceptedFillTypes))
-    -- print_r(g_currentMission.husbandries.cow.fillTypes)
-    -- print_r(g_currentMission.husbandries.chicken.fillTypes)
-    -- print_r(g_currentMission.husbandries.pig.fillTypes)
-    -- print_r(g_currentMission.husbandries.sheep.fillTypes)
-    log("TUPTRIGGERS")
-    print_r(g_currentMission.husbandries.cow.tipTriggers)
-    --]]
-
-    -- self:disableFillType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
-    -- self:disableFillType("cow", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
-
-    -- log(ssSeasonsXML:getFloat(y, ssSeasonsUtil.SEASON_SUMMER, "cow.birthRate", 1))
-    -- log(ssSeasonsXML:getInt(y, ssSeasonsUtil.SEASON_SPRING, "cow.liquidManure", 1))
-    -- print_r(ssSeasonsXML:getTypes(y, ssSeasonsUtil.SEASON_SUMMER))
-
-
+    -- Load parameters
     self:loadFromXML()
+
+    -- Initial setuo (it changed from nothing)
+    -- self:seasonChanged()
 end
 
 function ssAnimals:loadFromXML()
@@ -72,6 +52,28 @@ function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()
+    local types = ssSeasonsXML:getTypes(self.data, ssSeasonsUtil:season())
+
+    for _, typ in pairs(types) do
+        local desc = g_currentMission.husbandries[typ].animalDesc
+
+        desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
+        desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
+        desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
+        desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
+        desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
+        desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
+        desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
+        desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
+    end
+
+    if season == ssSeasonsUtil.SEASON_WINTER then
+        self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+    else
+        self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+    end
 end
 
 -- animal: string, filltype: int

@@ -212,6 +212,7 @@ end
 function ssSeasonsUtil:dayChanged()
     if ssSeasonsMod.enabled then
         local currentSeason = self:season()
+
         local currentGrowthStage = self:currentGrowthStage()
 
         -- Call season change events
@@ -220,7 +221,7 @@ function ssSeasonsUtil:dayChanged()
 
             for _, target in pairs(ssSeasonsMod.seasonListeners) do
                 -- No check here, let it crash if the function is missing
-                target.seasonChanged(target, currentSeason)
+                target.seasonChanged(target)
             end
         end
 
@@ -230,7 +231,7 @@ function ssSeasonsUtil:dayChanged()
 
             for _, target in pairs(ssSeasonsMod.growthStageListeners) do
                 -- No check here, let it crash if the function is missing
-                target.growthStageChanged(target, currentGrowthStage)
+                target.growthStageChanged(target)
             end
         end
     end

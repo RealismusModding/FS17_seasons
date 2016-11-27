@@ -34,10 +34,10 @@ end
 function ssSeasonIntro:update(dt)
 end
 
-function ssSeasonIntro:seasonChanged(season)
+function ssSeasonIntro:seasonChanged()
     if self.hideSeasonIntro then return end
 
-    local text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", season))
+    local text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", ssSeasonsUtil:season()))
     local dialog = g_gui:showDialog("YesNoDialog")
 
     dialog.target:setTitle(ssSeasonsUtil:seasonName())
