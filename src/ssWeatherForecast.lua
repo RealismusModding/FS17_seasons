@@ -27,7 +27,7 @@ function ssWeatherForecast:loadMap(name)
         -- Seasons "Color" Icons
         self.hud.overlays.Spring = Overlay:new("hud_spring", Utils.getFilename("huds/hud_Season_Color/hud_spring_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
         self.hud.overlays.Summer = Overlay:new("hud_summer", Utils.getFilename("huds/hud_Season_Color/hud_summer_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.Autumn = Overlay:new("hud_autum", Utils.getFilename("huds/hud_Season_Color/hud_autum_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays.Autumn = Overlay:new("hud_autumn", Utils.getFilename("huds/hud_Season_Color/hud_autumn_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
         self.hud.overlays.Winter = Overlay:new("hud_winter", Utils.getFilename("huds/hud_Season_Color/hud_winter_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
 
         -- Seasons Weather Icons
