@@ -34,6 +34,13 @@
 - Wages have been changed to fit the new economy.
 - Overtime, before 6AM and after 18AM or in the weekends, pays 150%
 
+### Animals
+- Animals have been adjusted to the seasons
+  - They drink more water in summer than in winter
+  - They need more straw in winter than in summer
+  - They only birth babies in spring (pigs and sheep) or summer (cows)
+  - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+
 ## Coding style
 
 - End your lines with \n (LF), not CRLF
