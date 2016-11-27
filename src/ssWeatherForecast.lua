@@ -56,8 +56,6 @@ function ssWeatherForecast:update(dt)
 end
 
 function ssWeatherForecast:draw()
-    if not g_currentMission:getIsClient() then return end
-
     local forecast = ssWeatherManager.forecast
 
     if self.hud.visible then
