@@ -9,7 +9,6 @@ ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 7
 ssWeatherManager.snowDepth = 0
-ssWeatherManager.snowMelt = -10
 
 function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
@@ -136,7 +135,7 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
     local Tmaxmean = {}
 
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
+        --log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
         if rain.startDay > dayNumber then
             break
         end
@@ -163,7 +162,7 @@ end
 function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
     if ss == 'Winter' then
         -- return {5.0,8.6,10.7} --min, mode, max Temps from the data
-        return {-2.0,1.6,3.7} --min, mode, max adjusted -7 deg C
+        return {-3.0,0.6,2.7} --min, mode, max adjusted -7 deg C
 
     elseif ss == "Spring" then
         return {12.1, 14.2, 17.9} --min, mode, max
@@ -208,53 +207,49 @@ function ssWeatherManager:calculateSnowAccumulation()
     if currentRain == nil then 
         if currentTemp > -1 then
         -- snow melts at -1 if the sun is shining
-        self.snowDepth,self.snowMelt = self:updateSnow(1,currentTemp)
+        self.snowDepth = self.snowDepth - math.max((currentTemp+1)/1000,0)
         end
 
     elseif currentRain.rainTypeId == "rain" and currentTemp > 0 then
         -- assume snow melts three times as fast if it rains
-        self.snowDepth,self.snowMelt = self:updateSnow(3,currentTemp)
+        self.snowDepth = self.snowDepth - math.max((currentTemp+1)*3/1000,0)
 
     elseif currentRain.rainTypeId == "rain" and currentTemp <= 0 then
         -- cold rain acts as hail
-        self.snowDepth,self.snowMelt = self:updateSnow(3,currentTemp)
-        --g_currentMission.environment.currentRain.rainTypeId = 'hail'
-        --currentRain.rainTypeId = 'rain'
-
+        if self.snowDepth < 0 then
+            self.snowDepth = 0
+        end
+        self.snowDepth = self.snowDepth + 10/1000
+        
     elseif currentRain.rainTypeId == "hail" and currentTemp < 0 then
         -- Initial value of 10 mm/hr accumulation rate
+        if self.snowDepth < 0 then
+            self.snowDepth = 0
+        end
         self.snowDepth = self.snowDepth + 10/1000
 
     elseif currentRain.rainTypeId == "hail" and currentTemp >= 0 then
         -- warm hail acts as rain
-        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+        self.snowDepth = self.snowDepth - math.max((currentTemp+1)*3/1000,0)
         --g_currentMission.environment.currentRain.rainTypeId = nil
         --currentRain.rainTypeId = 'rain'
 
     elseif currentRain.rainTypeId == "cloudy" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+        self.snowDepth = self.snowDepth - math.max((currentTemp+1)*0.75/1000,0)
 
     elseif currentRain.rainTypeId == "fog" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.snowDepth,self.snowMelt = self:updateSnow(0.75,currentTemp)
+        self.snowDepth = self.snowDepth - math.max((currentTemp+1)*0.75/1000,0)
 
     end
 
-    --log('currentTemp = ', currentTemp," lowTemp = ",self.forecast[1].lowTemp,' highTemp = ',self.forecast[1].highTemp)
-    --log('self.snowDepth = ', self.snowDepth, ' self.snowMelt = ',self.snowMelt)
-    --print_r(currentRain)
+    --log('currentTemp = ', currentTemp," lowTemp = ",self.forecast[1].lowTemp,' highTemp = ',self.forecast[1].highTemp,' snowDepth = ', self.snowDepth)
+    --if currentRail ~= nil then
+    --    print_r(currentRain)
+    --end
 
-    return self.snowDepth,self.snowMelt
-end
-
-function ssWeatherManager:updateSnow(f,currentTemp)
-    --local currentMelt = math.max((2*currentTemp-7.5)*f/1000,0)
-    local currentMelt = math.max((currentTemp+1)*f/1000,0)
-    self.snowMelt = self.snowMelt - currentMelt
-    self.snowDepth = math.max(self.snowDepth - currentMelt,0)
-
-    return self.snowDepth,self.snowMelt
+    return self.snowDepth
 end
 
 --- function for predicting when soil is not workable
@@ -267,6 +262,6 @@ function ssWeatherManager:isGroundWorkable()
     end
 end
 
-function ssWeatherManager:getSnow()
-    return self.snowDepth,self.snowMelt
+function ssWeatherManager:getSnowHeight()
+    return self.snowDepth
 end
