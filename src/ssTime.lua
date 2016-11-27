@@ -16,7 +16,7 @@ function ssTime:save(savegame, key)
 end
 
 function ssTime:loadMap(name)
-    g_currentMission.environment:addDayChangeListener(self);
+    g_currentMission.environment:addDayChangeListener(self)
 
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
@@ -28,7 +28,7 @@ function ssTime:loadMap(name)
 end
 
 function ssTime:deleteMap()
-    -- g_currentMission.environment:removeDayChangeListener(self);
+    -- g_currentMission.environment:removeDayChangeListener(self)
 end
 
 function ssTime:mouseEvent(posX, posY, isDown, isUp, button)
@@ -40,14 +40,23 @@ end
 function ssTime:draw()
 end
 
+function ssTime:readStream(streamId, connection)
+    self.latitude = streamReadFloat32(streamId)
+end
+
+function ssTime:writeStream(streamId, connection)
+    streamWriteFloat32(streamId, self.latitude)
+end
+
 function ssTime:update(dt)
-    -- FIXME: if isClient
-    g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
+    if g_currentMission:getIsClient() then
+        g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
+    end
 end
 
 -- Change the night/day times according to season
 function ssTime:adaptTime()
-    local env = g_currentMission.environment;
+    local env = g_currentMission.environment
 
     -- All local values are in minutes
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(ssSeasonsUtil:currentDayNumber())
@@ -154,7 +163,7 @@ function ssTime:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = (nightStart + 0.15 * eveningStep) * 60}) -- back to regular ambient settings
     curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = 24.00 * 60})
 
-    return curve;
+    return curve
 end
 
 function ssTime:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
@@ -265,5 +274,5 @@ end
 
 function ssTime:dayChanged()
     -- Update the time of the day
-    self:adaptTime();
+    self:adaptTime()
 end

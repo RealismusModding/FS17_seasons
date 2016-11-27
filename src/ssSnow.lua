@@ -21,19 +21,18 @@ function ssSnow:loadMap(name)
     FillUtil.registerFillType("snow",  g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0,  false,  "dataS2/menu/hud/fillTypes/hud_fill_straw.png", "dataS2/menu/hud/fillTypes/hud_fill_straw_sml.png", 0.0002* 0.5, math.rad(50))
     TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/snow_normal.dds", ssSeasonsMod.modDir .. "resources/snowDistance_diffuse.dds")
 
-    -- General initalization
-    g_currentMission.environment:addHourChangeListener(self)
-    -- ssSeasonsMod:addSeasonChangeListener(self)
+    if g_currentMission:getIsClient() then
+        g_currentMission.environment:addHourChangeListener(self)
 
-    self.doAddSnow = false -- Should we currently be running a loop to add Snow on the map.
-    self.doRemoveSnow = false
-    self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
-    self.updateSnow = true
+        self.doAddSnow = false -- Should we currently be running a loop to add Snow on the map.
+        self.doRemoveSnow = false
+        self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
+        self.updateSnow = true
 
-    self.currentX = 0 -- The row that we are currently updating
-    self.currentZ = 0 -- The column that we are currently updating
-    self.addedSnowForCurrentSnowfall = false -- Have we already added snow for the current snowfall?
-
+        self.currentX = 0 -- The row that we are currently updating
+        self.currentZ = 0 -- The column that we are currently updating
+        self.addedSnowForCurrentSnowfall = false -- Have we already added snow for the current snowfall?
+    end
     --[[
     self.testValue = 1
     self.testValues={}
@@ -48,7 +47,7 @@ function ssSnow:loadMap(name)
     self.testValues[9]=-0.12
     self.testValues[10]=-20
 ]]--
-    end
+end
 
 function ssSnow:deleteMap()
 end
@@ -60,10 +59,6 @@ function ssSnow:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssSnow:draw()
-end
-
-function ssSnow:seasonChanged()
-    log("Season changed into "..ssSeasonsUtil:seasonName())
 end
 
 function ssSnow:hourChanged()
@@ -157,9 +152,11 @@ local function removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, he
 end
 
 function ssSnow:update(dt)
-    if self.doAddSnow == true then
-        self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, addSnow, self.snowLayersDelta)
-    elseif self.doRemoveSnow == true then
-        self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, removeSnow, self.snowLayersDelta)
+    if g_currentMission:getIsClient() then
+        if self.doAddSnow == true then
+            self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, addSnow, self.snowLayersDelta)
+        elseif self.doRemoveSnow == true then
+            self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, removeSnow, self.snowLayersDelta)
+        end
     end
 end
