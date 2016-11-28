@@ -8,15 +8,26 @@
 ssReplaceVisual = {}
 
 function ssReplaceVisual:loadMap(name)
-    -- g_currentMission.environment:addHourChangeListener(self)
-    ssSeasonsMod:addSeasonChangeListener(self)
+    if g_currentMission:getIsClient() then
+        ssSeasonsMod:addSeasonChangeListener(self)
 
-    local modReplacements = loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
+        local modReplacements = loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
 
-    self:loadFromXML()
+        self:loadFromXML()
 
-    ssReplaceVisual:loadTextureIdTable(getRootNode()) -- Built into map
-    ssReplaceVisual:loadTextureIdTable(modReplacements)
+        ssReplaceVisual:loadTextureIdTable(getRootNode()) -- Built into map
+        ssReplaceVisual:loadTextureIdTable(modReplacements)
+
+        -- Only if this game does not need to wait for other modules to receive data,
+        -- update the textures. (singleplayer)
+        if g_currentMission:getIsServer() then
+            ssReplaceVisual:updateTextures(getRootNode())
+        end
+    end
+end
+
+function ssSeasonIntro:readStream(streamId, connection)
+    -- Load after data for seaonUtils is loaded
     ssReplaceVisual:updateTextures(getRootNode())
 end
 
@@ -101,9 +112,6 @@ end
 function ssReplaceVisual:seasonChanged()
     log("Season changed into "..ssSeasonsUtil:seasonName())
     ssReplaceVisual:updateTextures(getRootNode())
-end
-
-function ssReplaceVisual:hourChanged()
 end
 
 function ssReplaceVisual:updatePlacableOnCreation()

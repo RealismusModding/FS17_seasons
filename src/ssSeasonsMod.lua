@@ -48,7 +48,7 @@ g_modClasses = {
     -- "ssGrowthManager",
     -- "ssSnow",
     "ssSeasonIntro",
-    -- "ssReplaceVisual",
+    "ssReplaceVisual",
     -- "ssAnimals"
 }
 
