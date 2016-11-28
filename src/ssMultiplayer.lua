@@ -34,21 +34,6 @@ function ssMultiplayer:draw()
 end
 
 function ssMultiplayer:update(dt)
-    if not g_currentMission:getIsServer() then return end
-
-    if g_currentMission.missionDynamicInfo.isMultiplayer then
-        local numPlayers = table.getn(g_currentMission.users)
-
-        if numPlayers ~= self.numPlayers then
-            self.numPlayers = numPlayers
-
-            -- Figure out what player is missing
-            print_r(g_currentMission.users)
-
-            -- SEND EVENT
-            log("New Player Joined!")
-        end
-    end
 end
 
 function ssMultiplayer:readStream(streamId, connection)

@@ -15,10 +15,6 @@ function ssEconomy:load(savegame, key)
     self.aiDayEnd = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
     self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1000000)
     self.baseLoanInterest = ssStorage.getXMLFloat(savegame, key .. ".settings.baseLoanInterest", 10)
-
-    -- Some calculations to make the code faster on the hotpath
-    ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
-    ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
 end
 
 function ssEconomy:save(savegame, key)
@@ -36,17 +32,40 @@ function ssEconomy:loadMap(name)
     EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
+    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
+
     if g_currentMission:getIsServer() then
-        AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
-
-        -- Some calculations to make the code faster on the hotpath
-        ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
-        ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
-
-        g_currentMission.missionStats.loanMax = self:getLoanCap()
-        log("loan cap is "..g_currentMission.missionStats.loanMax)
-        g_currentMission.missionStats.ssLoan = 0
+        self:setup()
     end
+end
+
+function ssEconomy:setup()
+    -- Some calculations to make the code faster on the hotpath
+    ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
+    ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
+
+    g_currentMission.missionStats.loanMax = self:getLoanCap()
+    g_currentMission.missionStats.ssLoan = 0
+end
+
+function ssEconomy:readStream(streamId, connection)
+    self.aiPricePerHourWork = streamReadFloat32(streamId)
+    self.aiPricePerHourOverwork = streamReadFloat32(streamId)
+    self.aiDayStart = streamReadFloat32(streamId)
+    self.aiDayEnd = streamReadFloat32(streamId)
+    self.loanMax = streamReadFloat32(streamId)
+    self.baseLoanInterest = streamReadFloat32(streamId)
+
+    self:setup()
+end
+
+function ssEconomy:writeStream(streamId, connection)
+    streamWriteFloat32(streamId, self.aiPricePerHourWork)
+    streamWriteFloat32(streamId, self.aiPricePerHourOverwork)
+    streamWriteFloat32(streamId, self.aiDayStart)
+    streamWriteFloat32(streamId, self.aiDayEnd)
+    streamWriteFloat32(streamId, self.loanMax)
+    streamWriteFloat32(streamId, self.baseLoanInterest)
 end
 
 function ssEconomy:deleteMap()
@@ -62,11 +81,13 @@ function ssEconomy:draw()
 end
 
 function ssEconomy:update(dt)
-    local stats = g_currentMission.missionStats
+    if g_currentMission:getIsServer() then
+        local stats = g_currentMission.missionStats
 
-    if stats.ssLoan ~= stats.loan then
-        self:calculateLoanInterestRate()
-        stats.ssLoan = stats.loan
+        if stats.ssLoan ~= stats.loan then
+            self:calculateLoanInterestRate()
+            stats.ssLoan = stats.loan
+        end
     end
 end
 
@@ -106,7 +127,7 @@ function ssEconomy:getEquity()
             price = price + field.fieldPriceInitial
         end
     end
-    log("equity "..price)
+
     return price
 end
 

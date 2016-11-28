@@ -40,7 +40,7 @@ g_modClasses = {
     "ssMultiplayer",
     "ssSeasonsUtil",
     "ssTime",
-    -- "ssEconomy",
+    "ssEconomy",
     -- "ssWeatherManager",
     -- "ssWeatherForecast",
     -- "ssFixFruit",

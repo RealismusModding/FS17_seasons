@@ -72,7 +72,8 @@ function ssSnow:hourChanged()
     local targetSnowDepth = self.testValues[self.testValue]
     ]]--
 
-    local targetFromweatherSystem = ssWeatherManager:getSnowHeight() -- Fetch from weatersystem.
+    -- local targetFromweatherSystem = ssWeatherManager:getSnowHeight() -- Fetch from weatersystem.
+    local targetFromweatherSystem = 0.2 -- Fetch from weatersystem.
     local targetSnowDepth = math.min(0.48, targetFromweatherSystem) -- Target snow depth in meters. Never higher than 0.4
 
     -- print("-- Target Snowdept: " .. targetSnowDepth .. " Applied Snowdepth: " .. self.appliedSnowDepth);
