@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+echo "# Building mod package..."
 
 mkdir dist
 cp -r src dist/
@@ -15,3 +16,5 @@ zip -r ../FS17_seasons.zip .  -x "*.DS_Store"
 cd ..
 
 rm -Rf dist/
+
+echo "Done"

@@ -33,43 +33,44 @@ function logInfo(...)
 end
 
 local srcFolder = g_currentModDirectory .. "src/"
-local classes = {
+g_modClasses = {
     "ssLang",
     "ssStorage",
     "ssSeasonsXML",
+    "ssMultiplayer",
     "ssSeasonsUtil",
     "ssTime",
-    "ssEconomy",
+    -- "ssEconomy",
     -- "ssWeatherManager",
     -- "ssWeatherForecast",
     -- "ssFixFruit",
     -- "ssVehicle",
-    "ssGrowthManager",
+    -- "ssGrowthManager",
     -- "ssSnow",
     "ssSeasonIntro",
     -- "ssReplaceVisual",
-    "ssAnimals"
+    -- "ssAnimals"
 }
 
 if ssSeasonsMod.debug then
-    table.insert(classes, "ssDebug")
+    table.insert(g_modClasses, "ssDebug")
 end
 
 -- Load all scripts
 if modItem.isDirectory then
-    for i = 1, #classes do
-        local srcFile = srcFolder .. classes[i] .. ".lua"
+    for i = 1, #g_modClasses do
+        local srcFile = srcFolder .. g_modClasses[i] .. ".lua"
         local fileHash = tostring(getFileMD5(srcFile, ssSeasonsMod.modDir))
 
-        logInfo(string.format("Loading script: %s (v%s - %s)", classes[i], ssSeasonsMod.version, fileHash))
+        logInfo(string.format("Loading script: %s (v%s - %s)", g_modClasses[i], ssSeasonsMod.version, fileHash))
 
         source(srcFile)
     end
 else
-    for i = 1, #classes do
-        logInfo(string.format("Loading script: %s (v%s)", classes[i], ssSeasonsMod.version))
+    for i = 1, #g_modClasses do
+        logInfo(string.format("Loading script: %s (v%s)", g_modClasses[i], ssSeasonsMod.version))
 
-        source(srcFolder..classes[i] .. ".lua")
+        source(srcFolder..g_modClasses[i] .. ".lua")
     end
 
     ssSeasonsMod.version = ssSeasonsMod.version .. " - " .. modItem.fileHash
@@ -86,7 +87,7 @@ end
 function ssSeasonsMod.loadMapFinished(...)
     -- Before loading the savegame, allow classes to set their default values
     -- and let the settings system know that they need values
-    for _, k in pairs(classes) do
+    for _, k in pairs(g_modClasses) do
         if _G[k].loadMap ~= nil then
             addModEventListener(_G[k])
         end
@@ -114,7 +115,7 @@ function ssSeasonsMod:loadFromXML(...)
     end
     -- Empty, is solved by ssStorage. Useful for loading defaults
 
-    for _, k in pairs(classes) do
+    for _, k in pairs(g_modClasses) do
         if _G[k].load ~= nil then
             _G[k].load(_G[k], xmlFile, "careerSavegame.ssSeasons")
         end
@@ -128,7 +129,7 @@ end
 local function ssSeasonsModSaveToXML(self)
     if ssSeasonsMod.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
-            for _, k in pairs(classes) do
+            for _, k in pairs(g_modClasses) do
                 if _G[k].save ~= nil then
                     _G[k].save(_G[k], self.xmlFile, self.xmlKey .. ".ssSeasons")
                 end
