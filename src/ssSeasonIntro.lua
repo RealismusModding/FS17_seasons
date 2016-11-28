@@ -34,6 +34,17 @@ end
 function ssSeasonIntro:update(dt)
 end
 
+function ssSeasonIntro:readStream(streamId, connection)
+    log("read stream for intro")
+    self.hideSeasonIntro = streamReadBool(streamId)
+    log("read stream.")
+end
+
+function ssSeasonIntro:writeStream(streamId, connection)
+    log("write stream from intro")
+    streamWriteBool(streamId, self.hideSeasonIntro)
+end
+
 function ssSeasonIntro:seasonChanged()
     if self.hideSeasonIntro then return end
 

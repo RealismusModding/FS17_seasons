@@ -52,31 +52,34 @@ function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()
-    local season = ssSeasonsUtil:season()
-    local types = ssSeasonsXML:getTypes(self.data, season)
+    if g_currentMission:getIsServer() then
+        local season = ssSeasonsUtil:season()
+        local types = ssSeasonsXML:getTypes(self.data, season)
 
-    for _, typ in pairs(types) do
-        local desc = g_currentMission.husbandries[typ].animalDesc
+        for _, typ in pairs(types) do
+            local desc = g_currentMission.husbandries[typ].animalDesc
 
-        desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
-        desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
-        desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
-        desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
-        desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
-        desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
-        desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
-        desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
+            desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
+            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
+            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
+            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
+            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
+            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
+            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
+            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
+        end
+
+        if season == ssSeasonsUtil.SEASON_WINTER then
+            self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+            self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        else
+            self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+            self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        end
+
+        -- FIXME send event to clients that stuff has changed
+        -- broadcast event
     end
-
-    if season == ssSeasonsUtil.SEASON_WINTER then
-        self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
-    else
-        self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
-    end
-
-    -- FIXME send event to clients that stuff has changed
 end
 
 -- animal: string, filltype: int

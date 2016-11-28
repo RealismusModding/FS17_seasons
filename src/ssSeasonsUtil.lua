@@ -60,6 +60,7 @@ end
 
 function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
+    log("loadMap for Utils")
 end
 
 function ssSeasonsUtil:deleteMap()
@@ -75,12 +76,15 @@ function ssSeasonsUtil:update(dt)
 end
 
 function ssSeasonsUtil:readStream(streamId, connection)
+    log("read stream for utils")
     self.daysInSeason = streamReadFloat32(streamId)
     self.latestSeason = streamReadFloat32(streamId)
     self.latestGrowthStage = streamReadFloat32(streamId)
+    log("read stream. days: "..tostring(daysInSeason))
 end
 
 function ssSeasonsUtil:writeStream(streamId, connection)
+    log("write stream from utils")
     streamWriteFloat32(streamId, self.daysInSeason)
     streamWriteFloat32(streamId, self.latestSeason)
     streamWriteFloat32(streamId, self.latestGrowthStage)

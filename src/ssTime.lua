@@ -18,6 +18,12 @@ end
 function ssTime:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
+    if g_currentMission:getIsServer() then
+        self:setup()
+    end
+end
+
+function ssTime:setup()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
@@ -42,6 +48,8 @@ end
 
 function ssTime:readStream(streamId, connection)
     self.latitude = streamReadFloat32(streamId)
+
+    self:setup()
 end
 
 function ssTime:writeStream(streamId, connection)
@@ -77,8 +85,8 @@ function ssTime:adaptTime()
 
     -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
     -- FIXME(jos): Maybe turn them on between the beginOfNight and fullNight?
-    env.nightStart = dayStart * 60
-    env.nightEnd = dayEnd * 60
+    env.nightStart = dayEnd * 60
+    env.nightEnd = dayStart * 60
 
     -- FIXME what is this for?
     env.skyDayTimeStart = nightEnd * 60 * 60 * 1000

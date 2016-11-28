@@ -40,14 +40,14 @@ local classes = {
     "ssSeasonsUtil",
     "ssTime",
     "ssEconomy",
-    "ssWeatherManager",
-    "ssWeatherForecast",
-    "ssFixFruit",
-    "ssVehicle",
+    -- "ssWeatherManager",
+    -- "ssWeatherForecast",
+    -- "ssFixFruit",
+    -- "ssVehicle",
     "ssGrowthManager",
-    "ssSnow",
+    -- "ssSnow",
     "ssSeasonIntro",
-    "ssReplaceVisual",
+    -- "ssReplaceVisual",
     "ssAnimals"
 }
 
@@ -93,13 +93,6 @@ function ssSeasonsMod.loadMapFinished(...)
     end
 
     ssSeasonsMod:loadFromXML()
-
-    -- Now read those values and set up the classes
-    for _, k in pairs(classes) do
-        if _G[k].setup ~= nil then
-            _G[k].setup()
-        end
-    end
 
     -- Enable the mod
     ssSeasonsMod.enabled = true
@@ -190,7 +183,7 @@ FSBaseMission.loadMap = ssSeasonsMod.loadMap
 FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
-FSCareerMissionInfo.saveToXML = Utils.prependedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
+FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
 
 ------------- Useful global functions ---------------
 

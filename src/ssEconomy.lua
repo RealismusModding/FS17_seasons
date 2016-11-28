@@ -31,17 +31,22 @@ function ssEconomy:save(savegame, key)
 end
 
 function ssEconomy:loadMap(name)
-    g_currentMission.environment:addDayChangeListener(self);
-
-    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
-
     -- Update leasing costs
     EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
     EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
-    g_currentMission.missionStats.loanMax = self:getLoanCap()
-    g_currentMission.missionStats.ssLoan = 0
+    if g_currentMission:getIsServer() then
+        AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
+
+        -- Some calculations to make the code faster on the hotpath
+        ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
+        ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
+
+        g_currentMission.missionStats.loanMax = self:getLoanCap()
+        log("loan cap is "..g_currentMission.missionStats.loanMax)
+        g_currentMission.missionStats.ssLoan = 0
+    end
 end
 
 function ssEconomy:deleteMap()
@@ -75,9 +80,6 @@ function ssEconomy:calculateLoanInterestRate()
     g_currentMission.missionStats.loanAnnualInterestRate = seasonsYearInterest
 end
 
-function ssEconomy:dayChanged()
-end
-
 function ssEconomy:aiUpdateTick(superFunc, dt)
     if self:getIsActive() then
         local hour = g_currentMission.environment.currentHour
@@ -104,11 +106,11 @@ function ssEconomy:getEquity()
             price = price + field.fieldPriceInitial
         end
     end
-
+    log("equity "..price)
     return price
 end
 
 function ssEconomy:getLoanCap()
     local roundedTo5000 = math.floor(ssEconomy.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
-    return Utils.clamp(roundedTo5000, 200000, ssEconomy.loanMax)
+    return Utils.clamp(roundedTo5000, 300000, ssEconomy.loanMax)
 end

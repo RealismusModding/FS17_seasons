@@ -5,14 +5,17 @@
 -- Authors:  theSeb
 -- Credits: Inspired by upsidedown's growth manager mod
 
-ssGrowthManager = {};
+ssGrowthManager = {}
 
 function ssGrowthManager:loadMap(name)
-    g_currentMission.environment:addDayChangeListener(self);
-    ssSeasonsMod:addSeasonChangeListener(self);
+    g_currentMission.environment:addDayChangeListener(self)
+    ssSeasonsMod:addSeasonChangeListener(self)
 
-    log("Growth manager loading");
-   self:seasonChanged();
+    log("Growth manager loading")
+
+    if g_currentMission:getIsServer() then
+        self:seasonChanged()
+    end
 end
 
 function ssGrowthManager:deleteMap()
@@ -23,9 +26,13 @@ end
 
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
-        log("Growth Manager debug");
-        self:seasonChanged();
+        log("Growth Manager debug")
+        self:seasonChanged()
     end
+end
+
+function ssGrowthManager:readStream(streamId, connection)
+    self:seasonChanged()
 end
 
 function ssGrowthManager:update(dt)
@@ -38,9 +45,10 @@ function ssGrowthManager:dayChanged()
 end
 
 function ssGrowthManager:seasonChanged()
-    local currentSeason = ssSeasonsUtil:seasonName();
-    log("Today's season:" .. currentSeason);
-    log("Today's season number:" .. ssSeasonsUtil:season());
+    log("GM seasonChanged")
+    local currentSeason = ssSeasonsUtil:seasonName()
+    log("Today's season:" .. currentSeason)
+    log("Today's season number:" .. ssSeasonsUtil:season())
 
     local funcTable =
     {
@@ -50,31 +58,31 @@ function ssGrowthManager:seasonChanged()
         [3] = self.handleSummer,
     }
 
-    local func = funcTable[ssSeasonsUtil:season()];
+    local func = funcTable[ssSeasonsUtil:season()]
 
     if (func) then
-        func();
+        func()
     else
-        log("GrowthManager: Fatal error. Season not found");
+        log("GrowthManager: Fatal error. Season not found")
     end
 end
 
 function ssGrowthManager:scanWorld()
-    log("Scanning world");
+    log("Scanning world")
 end
 
 function ssGrowthManager:handleSpring()
-    log("Handling spring");
+    log("Handling spring")
 end
 
 function ssGrowthManager:handleAutumn()
-    log("Handling autumn");
+    log("Handling autumn")
 end
 
 function ssGrowthManager:handleWinter()
-    log("Handling winter");
+    log("Handling winter")
 end
 
 function ssGrowthManager:handleSummer()
-    log("Handling summer");
+    log("Handling summer")
 end

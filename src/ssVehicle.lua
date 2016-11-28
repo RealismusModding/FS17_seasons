@@ -14,10 +14,12 @@ ssVehicle.DIRT_FACTOR = 0.2
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
-SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "/src/ssRepairable.lua")
+SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "src/ssRepairable.lua")
 
-function ssVehicle:loadMap(name)
+function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
+
+    log("loadMap!")
 
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
@@ -77,7 +79,7 @@ end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "/data/repairFactors.xml")
+    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "data/repairFactors.xml")
 
     ssVehicle.repairFactors = {}
 
@@ -166,8 +168,8 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
 end
 
 function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
-    local prevOperatingTime = vehicle.ssYesterdayOperatingTime / 1000 / 60 / 60
-    local operatingTime = vehicle.operatingTime / 1000 / 60 / 60
+    local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
+    local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
     local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
     local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
 
@@ -175,7 +177,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local avgDirtAmount = 0
     if operatingTime ~= prevOperatingTime then
         -- Cum dirt is per ms, while the operating times are in hours.
-        avgDirtAmount = (vehicle.ssCumulativeDirt / 1000 / 60 / 60) / math.min(operatingTime - prevOperatingTime, 24)
+        avgDirtAmount = (vehicle.ssCumulativeDirt / 1000 / 60 / 60) / Utils.clamp(operatingTime - prevOperatingTime, 1, 24)
     end
 
     -- Calculate the repair costs

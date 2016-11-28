@@ -14,7 +14,7 @@
 
     <iconFilename>icon.dds</iconFilename>
 
-    <!-- <multiplayer supported="true" /> -->
+    <multiplayer supported="true" />
 
     <l10n filenamePrefix="modDesc_l10n" />
 

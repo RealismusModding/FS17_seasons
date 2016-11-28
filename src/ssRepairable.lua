@@ -44,9 +44,9 @@ function ssRepairable:getSaveAttributesAndNodes(nodeIdent)
     local attributes = ""
 
     if self.ssLastRepairDay ~= nil then
-        attributes = attributes .. "ssLastRepairDay=\"" .. self.ssLastRepairDay ..  "\""
-        attributes = attributes .. "ssYesterdayOperatingTime=\"" .. self.ssYesterdayOperatingTime ..  "\""
-        attributes = attributes .. "ssCumulativeDirt=\"" .. self.ssCumulativeDirt ..  "\""
+        attributes = attributes .. "ssLastRepairDay=\"" .. self.ssLastRepairDay ..  "\" "
+        attributes = attributes .. "ssYesterdayOperatingTime=\"" .. self.ssYesterdayOperatingTime ..  "\" "
+        attributes = attributes .. "ssCumulativeDirt=\"" .. self.ssCumulativeDirt ..  "\" "
     end
 
     return attributes, ""
