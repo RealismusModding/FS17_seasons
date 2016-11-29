@@ -7,12 +7,9 @@
 
 ssGrowthManager = {}
 
-
 MAX_GROWTH_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
 WITHER_STATE = 100;
 FIRST_LOAD_TRANSITION = 999;
-
-
 
 ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
@@ -143,9 +140,18 @@ ssGrowthManager.fakeDay = 1;
 ssGrowthManager.testGrowthTransitionPeriod = 1;
 --end of test stuff
 
-ssGrowthManager.firstTimeload = false; -- set this to true if you want to play around
 ssGrowthManager.currentGrowthTransitionPeriod = nil;
 ssGrowthManager.doGrowthTransition = false;
+
+function ssGrowthManager:load(savegame, key)
+    self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", false)
+end
+
+function ssGrowthManager:save(savegame, key)
+    ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth)
+end
+
+
 
 function ssGrowthManager.preSetup()
 end
@@ -156,34 +162,20 @@ end
 
 function ssGrowthManager:loadMap(name)
 
-    --ssSeasonsMod:addSeasonChangeListener(self);
     log("Growth Manager loading");
-    --ssSeasonsMod.addGrowthStageChangeListener(self);
-
+    --ssSeasonsMod.addGrowthStageChangeListener(self); TODO: implement this
    
    --lock changing the growth speed option and set growth rate to 1 (no growth)
    g_currentMission:setPlantGrowthRate(1,nil);
    g_currentMission:setPlantGrowthRateLocked(true);
 
     
-
-    -- TODO: handle first time map loading
-    --load firstTimeload from config then
-
-    if self.firstTimeload == true then -- only if it does not exist in the config
+    if not (self.hasResetGrowth) then 
         self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
         self.doGrowthTransition = true;
-        self.firstTimeload = false;
-        log("Growth Manager - First time load growth reset");
-        
-        --store firstTimeload in config
+        self.hasResetGrowth = true;
+        log("Growth Manager - First time growth reset - this will only happen once in a new savegame");
     end
-    -- end of first time map loading
-
-    --temp code
-    --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod;
-    --log("Growth Manager - current growth from seasonUtil: " .. ssSeasonsUtil:currentGrowthStage());
-
 
    if g_currentMission.missionInfo.timeScale > 120 then
         self.mapSegments = 1; -- Not enought time to do it section by section since it might be called every two hour as worst case.
@@ -257,8 +249,6 @@ function ssGrowthManager:update(dt)
         local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
         
         --local detailId = g_currentMission.terrainDetailId;
-        
-        
 
         for index,fruit in pairs(g_currentMission.fruits) do
             local desc = FruitUtil.fruitIndexToDesc[index];
@@ -363,3 +353,4 @@ end
 
 function ssGrowthManager:growthStageChanged()
 end;
+
