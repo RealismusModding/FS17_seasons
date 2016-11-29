@@ -251,11 +251,8 @@ function ssGrowthManager:readStream(streamId, connection)
 end
 
 function ssGrowthManager:update(dt)
-end
 
-function ssGrowthManager:draw()
-
-    if self.doGrowthTransition == true then
+if self.doGrowthTransition == true then
 
         --print("Updating  for: " .. self.currentX .. ", " .. self.currentZ );
 
@@ -286,7 +283,8 @@ function ssGrowthManager:draw()
                 local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
 
                 --setGrowthState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMinState ~= nil and self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
+                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMinState ~= nil 
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
                         --print("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMinState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState);
                         
                     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMinState;
@@ -303,7 +301,7 @@ function ssGrowthManager:draw()
                                                                     
                 end
 
-                --increment between normalGrowthState normalGrowthMaxState
+                --increment by 1 for crops between normalGrowthState  normalGrowthMaxState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
                     
                     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState;
@@ -327,11 +325,17 @@ function ssGrowthManager:draw()
                     end
 
                     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, 1)
-
                 end
 
+                --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil 
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil then
 
-            end
+                end
+                
+
+
+            end -- end of for loop
 
         end
 
@@ -385,6 +389,11 @@ function ssGrowthManager:draw()
             self.doGrowthTransition = false;
         end
     end
+end
+
+function ssGrowthManager:draw()
+
+    
 
 end
 
