@@ -10,7 +10,6 @@ ssGrowthManager = {}
 
 MAX_GROWTH_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
 WITHER_STATE = 100;
-
 FIRST_LOAD_TRANSITION = 999;
 
 
