@@ -248,7 +248,7 @@ end
 
 function ssGrowthManager:update(dt)
 
-if self.doGrowthTransition == true then
+    if self.doGrowthTransition == true then
 
         local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
         local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
@@ -339,9 +339,9 @@ if self.doGrowthTransition == true then
                     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, extraGrowthFactor )
                 end
 
-            end -- end of for index,fruit in pairs(g_currentMission.fruits) do
+            end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
 
-        end -- end of self.doGrowthTransition == true then
+        end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
 
         if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
             -- Next column
@@ -356,7 +356,7 @@ if self.doGrowthTransition == true then
             self.currentZ = 0;
             self.doGrowthTransition = false;
         end
-    end
+    end -- end of if self.doGrowthTransition == true then
 end
 
 function ssGrowthManager:draw()
