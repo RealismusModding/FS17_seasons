@@ -140,7 +140,7 @@ ssGrowthManager.fakeDay = 1;
 ssGrowthManager.testGrowthTransitionPeriod = 1;
 --end of test stuff
 
-ssGrowthManager.currentGrowthTransitionPeriod = nil;
+ssGrowthManager.currentGrowthTransitionPeriod = 1;
 ssGrowthManager.doGrowthTransition = false;
 
 function ssGrowthManager:load(savegame, key)
@@ -204,22 +204,28 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
         --     self. = true;
         -- end
 
-        -- self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason;
+        self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason;
+        local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
+        --log("Growth iteration: " .. tostring(growthTransition));
+
+        local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
+        log("CGS: " .. tostring(cGS));
+        
         -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) );
         --self:seasonChanged();
 
-        self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod;
-        log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod);
+        --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod;
+        --log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod);
         
-        self.doGrowthTransition = true;
+        -- self.doGrowthTransition = true;
         
         
-        if self.testGrowthTransitionPeriod < 12 then
-            self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1;
-        else
-            self.testGrowthTransitionPeriod = 1;
-        end
-
+        -- if self.testGrowthTransitionPeriod < 12 then
+        --     self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1;
+        -- else
+        --     self.testGrowthTransitionPeriod = 1;
+        -- end
+        
         
         -- log ("MAX_GROWTH_STATE " .. MAX_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION);
 
@@ -227,7 +233,7 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
 		-- 	print(line2.fruitName);
 		-- end
 
-        log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod);    
+        --log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod);    
 
        
     end
