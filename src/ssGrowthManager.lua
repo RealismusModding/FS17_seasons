@@ -9,9 +9,11 @@ ssGrowthManager = {}
 
 
 LAST_GROWTH_STATE = 99; -- needs to be set to the fruit's numGrowthStates-1
+FIRST_LOAD_TRANSITION = 999;
 
 
-growthData = { 	[1]={ 				
+
+ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthMinState=1, normalGrowthMaxState=3},
 						["wheat"]			={fruitName="wheat", normalGrowthMinState=1, normalGrowthMaxState=3},					
 						["rape"]			={fruitName="rape", normalGrowthState=1},
@@ -116,7 +118,22 @@ growthData = { 	[1]={
  				},
 				[10]={};
 				[11]={};
-				[12]={};			
+				[12]={};
+                [FIRST_LOAD_TRANSITION]={ 				
+						["barley"]			={fruitName="barley", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["wheat"]			={fruitName="wheat", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},					
+						["rape"]			={fruitName="rape", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["maize"]			={fruitName="maize", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["soybean"]			={fruitName="soybean", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["sunflower"]		={fruitName="sunflower", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["potato"]			={fruitName="potato", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["sugarBeet"]		={fruitName="sugarBeet", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["poplar"]			={fruitName="poplar", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						["grass"]			={fruitName="grass", setGrowthMinState=1, setGrowthMaxState=LAST_GROWTH_STATE,setGrowthState=1},
+						
+						
+				}, 
+
 };
 
 
@@ -191,6 +208,12 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
         else
             ssGrowthManager.testGrowthTransitionPeriod = 1;
         end
+
+        log ("LAST_GROWTH_STATE " .. LAST_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION);
+
+        for x, line2 in pairs(self.growthData[FIRST_LOAD_TRANSITION]) do
+			print(line2.fruitName);
+		end
 
         --log("Season change transition: " .. ssGrowthManager.testGrowthTransitionPeriod);    
 
