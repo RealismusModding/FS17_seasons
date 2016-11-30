@@ -75,23 +75,23 @@ function ssWeatherForecast:draw()
         -- Set firstDayPos
         local daysPosOffset = 0.0615
 
-        for n = 1, ssWeatherManager.forecastLength do
+        for n = 2, ssWeatherManager.forecastLength do
             -- Render Day of The Week
-            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n))
+            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n))
 
             -- Render Season Icon
-            renderOverlay(self.hud.overlays[forecast[n].season].overlayId, WeatherForecastPosX + 0.086 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.074, 0.0185, 0.0335)
+            renderOverlay(self.hud.overlays[forecast[n].season].overlayId, WeatherForecastPosX + 0.086 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.074, 0.0185, 0.0335)
 
             -- Render Weather Icon
-            renderOverlay(self.hud.overlays[forecast[n].weatherState].overlayId, WeatherForecastPosX + 0.053 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.026, 0.032, 0.058)
+            renderOverlay(self.hud.overlays[forecast[n].weatherState].overlayId, WeatherForecastPosX + 0.053 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.026, 0.032, 0.058)
 
             -- Render Hi/Lo Tempratures
             local tempString = tostring(math.floor(forecast[n].highTemp)) .. " / " .. tostring(math.floor(forecast[n].lowTemp))
-            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, tempString)
+            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.01, 0.018, tempString)
             --renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.01, 0.018, "22 / 12" )
 
             -- Render Season Days
-            renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 1)), WeatherForecastPosY + 0.045, 0.018, tostring(ssSeasonsUtil:dayInSeason(forecast[n].day)))
+            renderText(WeatherForecastPosX + 0.094 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.045, 0.018, tostring(ssSeasonsUtil:dayInSeason(forecast[n].day)))
         end
 
         -- Clean up after us, text render after this will be affected otherwise.

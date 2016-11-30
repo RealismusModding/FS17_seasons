@@ -3,18 +3,48 @@
 <textures>
     <seasons>
         <spring>
-            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_spring" />
         </spring>
 
         <summer>
-            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="ssTr_pineBranch_spring" />
         </summer>
 
         <autumn>
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_autumn" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_autumn" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_autumn" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_autumn" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="ssTr_bushes_autumn" />
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="ssTr_treeBranch_autumn" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_autumn" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="ssTr_treeBranch_autumn" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="ssTr_treeBranch_autumn" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="ssTr_birchBranch_autumn" />
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="ssTr_birch1LOD_autumn" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="ssTr_birch2LOD_autumn" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="ssTr_birch3LOD_autumn" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="ssTr_birch4LOD_autumn" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="ssTr_birch5LOD_autumn" />
+            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="ssTr_oakBranch_autumn" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="ssTr_oak4LOD_autumn" />
+            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_autumn" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_autumn" />
         </autumn>
 
         <winter>
-            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="ssTr_pineBranch_spring" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="ssTr_birchBranch_winter" />
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="ssTr_birchLOD_winter" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="ssTr_birch2LOD_winter" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="ssTr_birchLOD_winter" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="ssTr_birchLOD_winter" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="ssTr_birchLOD_winter" />
         </winter>
     </seasons>
 </textures>

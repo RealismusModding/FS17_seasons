@@ -204,6 +204,11 @@ function ssSeasonsUtil:dayInSeason(currentDay)
 end
 
 function ssSeasonsUtil:currentGrowthStage(currentDay)
+
+    if (currentDay == nil) then
+        currentDay = self:currentDayNumber()
+    end
+    
     -- Length of a state
     local l = self.daysInSeason / 3.0
     local dayInSeason = self:dayInSeason(currentDay)
