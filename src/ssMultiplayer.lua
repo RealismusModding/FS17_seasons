@@ -104,8 +104,6 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
 end
 
 function ssMultiplayerJoinEvent:sendObjects(superFunc, connection, x, y, z, viewDistanceCoeff)
-    log("Send Objects!")
-
     connection:sendEvent(ssMultiplayerJoinEvent:new());
 
     return superFunc(self, connection, x, y, z, viewDistanceCoeff);
