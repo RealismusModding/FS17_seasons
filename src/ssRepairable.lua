@@ -12,6 +12,8 @@ end
 
 function ssRepairable:load(savegame)
     self.repairUpdate = SpecializationUtil.callSpecializationsFunction("repairUpdate")
+    -- self.ss_getIsPlayerInRange = SpecializationUtil.callSpecializationsFunction("ss_getIsPlayerInRange")
+    -- self.ss_isInDistance = SpecializationUtil.callSpecializationsFunction("ss_isInDistance")
 
     self.ssPlayerInRange = false
     self.ssInRangeOfWorkshop = nil
@@ -67,14 +69,49 @@ end
 function ssRepairable:draw()
 end
 
+local function isInDistance(self, player, distance, refNode)
+    local vx, _, vz = getWorldTranslation(player.rootNode)
+    local sx, _, sz = getWorldTranslation(refNode)
+    local dx, dz = vx - sx, vz - sz
+
+    if dx * dx + dz * dz < distance * distance then
+        return true
+    end
+
+    return false
+end
+
+-- Jos: Don't ask me why, but putting them inside Repairable breaks all, even with
+-- callSpecializationsFunction...
+local function getIsPlayerInRange(self, distance, player)
+    if self.rootNode ~= 0 then
+        if player == nil then
+            -- log(table.getn(g_currentMission.players))
+            for _, player in pairs(g_currentMission.players) do
+                -- print_r(player)
+
+                if isInDistance(self, player, distance, self.rootNode) then
+                    return true, player
+                end
+            end
+        else
+            return isInDistance(self, player, distance, self.rootNode), player
+        end
+    end
+
+    return false, nil
+end
+
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
-    if g_currentMission.player ~= nil then
-        local vx, vy, vz = getWorldTranslation(g_currentMission.player.rootNode)
-        local sx, sy, sz = getWorldTranslation(self.rootNode)
-        local distance = Utils.vector3Length(sx-vx, sy-vy, sz-vz)
+    local isPlayerInRange, player = getIsPlayerInRange(self, 3.5) --, g_currentMission.player)
 
-        self.ssPlayerInRange = distance < 3.5
+    -- log("IsPlayerInRange "..tostring(isPlayerInRange))
+    if isPlayerInRange then
+        self.ssPlayerInRange = player
+        -- log("Player in range "..tostring(player).." Shop in range "..tostring(self.ssInRangeOfWorkshop))
+    else
+        self.ssPlayerInRange = nil
     end
 
     -- Calculate cumulative dirt
@@ -88,8 +125,10 @@ end
 function ssRepairable:update(dt)
     local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - self.ssLastRepairDay
 
+    -- log("player in range "..tostring(self.ssPlayerInRange).." inR "..tostring(self.ssInRangeOfWorkshop))
+
     -- Show a message about the repairing
-    if self.ssPlayerInRange and self.ssInRangeOfWorkshop ~= nil then
+    if self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
         self:repairUpdate(dt)
     end
 
@@ -116,6 +155,7 @@ function ssRepairable:repairUpdate(dt)
             -- Deduct
             if g_currentMission:getIsServer() then
                 g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
+                g_currentMission.missionStats:updateStats("expenses", repairCost)
             else
                 g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
             end

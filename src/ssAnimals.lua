@@ -21,8 +21,10 @@ function ssAnimals:loadMap(name)
     -- Load parameters
     self:loadFromXML()
 
-    -- Initial setuo (it changed from nothing)
-    self:seasonChanged()
+    if g_currentMission:getIsServer() then
+        -- Initial setuo (it changed from nothing)
+        self:seasonChanged()
+    end
 end
 
 function ssAnimals:loadFromXML()
@@ -34,6 +36,11 @@ function ssAnimals:loadFromXML()
     self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
     -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
     -- FIXME: find the location of the map
+end
+
+function ssAnimals:readStream(streamId, connection)
+    -- Load after data for seaonUtils is loaded
+    self:seasonChanged()
 end
 
 function ssAnimals:deleteMap()
@@ -52,34 +59,32 @@ function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()
-    if g_currentMission:getIsServer() then
-        local season = ssSeasonsUtil:season()
-        local types = ssSeasonsXML:getTypes(self.data, season)
+    local season = ssSeasonsUtil:season()
+    local types = ssSeasonsXML:getTypes(self.data, season)
 
-        for _, typ in pairs(types) do
-            local desc = g_currentMission.husbandries[typ].animalDesc
+    for _, typ in pairs(types) do
+        local desc = g_currentMission.husbandries[typ].animalDesc
 
-            desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
-            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
-            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
-            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
-            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
-            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
-            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
-            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
-        end
-
-        if season == ssSeasonsUtil.SEASON_WINTER then
-            self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-            self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
-        else
-            self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-            self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
-        end
-
-        -- FIXME send event to clients that stuff has changed
-        -- broadcast event
+        desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
+        desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
+        desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
+        desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
+        desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
+        desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
+        desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
+        desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
     end
+
+    if season == ssSeasonsUtil.SEASON_WINTER then
+        self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+    else
+        self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+    end
+
+    -- FIXME send event to clients that stuff has changed
+    -- broadcast event
 end
 
 -- animal: string, filltype: int

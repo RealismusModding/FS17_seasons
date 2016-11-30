@@ -1,0 +1,1477 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"play",
+				"ssPlayerInRange"
+			],
+			[
+				"ssMu",
+				"ssMultiplayerJoinEvent"
+			],
+			[
+				"ssM",
+				"ssMultiplayerJoinEvent"
+			],
+			[
+				"ss",
+				"ssMultiplayerJoinEvent"
+			],
+			[
+				"ssMult",
+				"ssMultiplayerJoinEvent"
+			],
+			[
+				"seas",
+				"seasonChanged"
+			],
+			[
+				"to",
+				"toTexture"
+			],
+			[
+				"seconda",
+				"secondaryNodeName"
+			],
+			[
+				"ssSe",
+				"ssSeasonsMod"
+			],
+			[
+				"loadTe",
+				"loadTextureReplacementsFromXMLFile"
+			],
+			[
+				"ssSeas",
+				"ssSeasonsUtil"
+			],
+			[
+				"minute",
+				"minuteCount"
+			],
+			[
+				"FILL",
+				"FILLTYPE_DRYGRASS_WINDROW"
+			],
+			[
+				"Fill",
+				"FillUtil"
+			],
+			[
+				"ssS",
+				"ssSeasonsUtil"
+			],
+			[
+				"rates",
+				"ratesKey"
+			],
+			[
+				"season",
+				"seasonKey"
+			],
+			[
+				"se",
+				"seasonKeyToId"
+			],
+			[
+				"Lay",
+				"LAYER_HEIGHT"
+			],
+			[
+				"lay",
+				"LAYER_HEIGHT"
+			],
+			[
+				"ssSea",
+				"ssSeasonsUtil"
+			],
+			[
+				"FILT",
+				"FILLTYPE_DRYGRASS_WINDROW"
+			],
+			[
+				"FILLTYPES",
+				"fillTypes"
+			],
+			[
+				"ssSeason",
+				"ssSeasonIntro"
+			],
+			[
+				"dayIn",
+				"dayInSeason"
+			],
+			[
+				"seaso",
+				"seasonsInYear"
+			],
+			[
+				"curre",
+				"currentDay"
+			],
+			[
+				"lates",
+				"latestGrowthStage"
+			],
+			[
+				"grow",
+				"growthStageListeners"
+			],
+			[
+				"LAY",
+				"LAYER_HEIGHT"
+			],
+			[
+				"LA",
+				"LAYER_HEIGHT"
+			],
+			[
+				"L",
+				"LAYER_HEIGHT"
+			],
+			[
+				"targe",
+				"targetSnowDepth"
+			],
+			[
+				"appl",
+				"appliedSnowDepth"
+			],
+			[
+				"target",
+				"targetFromWater"
+			],
+			[
+				"totalA",
+				"totalArea"
+			],
+			[
+				"sS",
+				"ssBank"
+			],
+			[
+				"current",
+				"currentSeason"
+			],
+			[
+				"remove",
+				"removeSeasonChangeListener"
+			],
+			[
+				"price",
+				"pricePerMS"
+			],
+			[
+				"operati",
+				"operatingTime"
+			],
+			[
+				"daily",
+				"dailyUpKeep"
+			],
+			[
+				"opera",
+				"operatingTime"
+			],
+			[
+				"aiDay",
+				"aiDayStart"
+			],
+			[
+				"repa",
+				"repairFactors"
+			],
+			[
+				"diff",
+				"difficultyMultiplier"
+			],
+			[
+				"curr",
+				"currentVehicle"
+			],
+			[
+				"Veh",
+				"VehicleSellingPoint"
+			],
+			[
+				"REPAIR",
+				"REPAIR_NIGHT_FACTOR"
+			],
+			[
+				"vehi",
+				"vehicleRunningCost"
+			],
+			[
+				"get",
+				"getText"
+			],
+			[
+				"g_curr",
+				"g_currentMission"
+			],
+			[
+				"total",
+				"totalMaintenance"
+			],
+			[
+				"toa",
+				"totalMaintenance"
+			],
+			[
+				"sspr",
+				"ssYesterdayOperatingTime"
+			],
+			[
+				"spec",
+				"specializations"
+			],
+			[
+				"c",
+				"cumulative"
+			],
+			[
+				"getSpec",
+				"getSpecValueAge"
+			],
+			[
+				"mainten",
+				"maintenanceCost"
+			],
+			[
+				"vehicle",
+				"vehicleType"
+			],
+			[
+				"veh",
+				"vehicleType"
+			],
+			[
+				"ve",
+				"vehicleType"
+			],
+			[
+				"Vehicle",
+				"VehicleTypeUtil"
+			],
+			[
+				"repair",
+				"repairFac"
+			],
+			[
+				"prev",
+				"prevRepairCost"
+			],
+			[
+				"main",
+				"maintenanceCost"
+			],
+			[
+				"repai",
+				"repairCost"
+			],
+			[
+				"pre",
+				"prevOperatingTime"
+			],
+			[
+				"lifeT",
+				"lifeTimeFactor"
+			],
+			[
+				"la",
+				"latitude"
+			],
+			[
+				"ori",
+				"origLoadMap"
+			],
+			[
+				"orig",
+				"origLoadMapFinished"
+			],
+			[
+				"generate",
+				"generateDistanceFogCurve"
+			],
+			[
+				"eve",
+				"eveningStep"
+			],
+			[
+				"sunro",
+				"sunRotCurve"
+			],
+			[
+				"amb",
+				"ambientCurve"
+			],
+			[
+				"env",
+				"environment"
+			],
+			[
+				"g_curre",
+				"g_currentModDirectory"
+			],
+			[
+				"compres",
+				"compressionEarly"
+			],
+			[
+				"compress",
+				"compressionEarly"
+			],
+			[
+				"compre",
+				"compressionLate"
+			],
+			[
+				"oldNi",
+				"oldNightBegin"
+			],
+			[
+				"pivo",
+				"pivotGap"
+			],
+			[
+				"skYCurve",
+				"skyCurveOriginal"
+			],
+			[
+				"oldN",
+				"oldNightBegin"
+			],
+			[
+				"comp",
+				"compressedNightKeyframes"
+			],
+			[
+				"last",
+				"lastUpdate"
+			],
+			[
+				"da",
+				"dayNumber"
+			],
+			[
+				"calc",
+				"calculateStartEndOfDay"
+			],
+			[
+				"time_end",
+				"time_endnight"
+			],
+			[
+				"time_sta",
+				"time_startnight〔variable〕"
+			],
+			[
+				"en",
+				"environment"
+			],
+			[
+				"bor",
+				"border-box"
+			],
+			[
+				"u",
+				"uppercase〔value〕"
+			],
+			[
+				"ban",
+				"bankrekeningid"
+			],
+			[
+				"ba",
+				"bankrekening"
+			],
+			[
+				"box-s",
+				"box-sizing"
+			],
+			[
+				"ws",
+				"wsdlOptions"
+			],
+			[
+				"wsd",
+				"wsdl_options"
+			],
+			[
+				"gebrui",
+				"gebruikerid"
+			],
+			[
+				"bet",
+				"betaaldatum"
+			],
+			[
+				"obet",
+				"obetaaldatum"
+			],
+			[
+				"obetl",
+				"obetaalmethode"
+			],
+			[
+				"fact",
+				"factuurid_ext"
+			],
+			[
+				"ofac",
+				"ofactuurid_ext"
+			],
+			[
+				"factuurid",
+				"factuurid_ext"
+			],
+			[
+				"bank",
+				"bankrekeningen"
+			],
+			[
+				"bankrekenin",
+				"bankrekeningid"
+			],
+			[
+				"new",
+				"newFactuurid"
+			],
+			[
+				"cred",
+				"Creditfactuur"
+			],
+			[
+				"newFac",
+				"newFactuurid_ext"
+			],
+			[
+				"credit",
+				"creditfactuurid"
+			],
+			[
+				"leerling",
+				"leerlingid_ext"
+			],
+			[
+				"fac",
+				"factuurdatum"
+			],
+			[
+				"bankreke",
+				"bankrekening"
+			],
+			[
+				"fi",
+				"financialParent\tlet"
+			],
+			[
+				"IMail",
+				"IMailDomainResource\tinterface"
+			],
+			[
+				"email",
+				"email_afzender"
+			],
+			[
+				"verzo",
+				"verzorgerid_ext"
+			],
+			[
+				"fa",
+				"factuurid"
+			],
+			[
+				"geb",
+				"gebruikerid"
+			],
+			[
+				"factuur",
+				"factuurid"
+			],
+			[
+				"ge",
+				"gebruikerid"
+			],
+			[
+				"ver",
+				"verzorgerid"
+			],
+			[
+				"bec",
+				"bericht_template"
+			],
+			[
+				"ihttp",
+				"IHttpPromise\tinterface"
+			],
+			[
+				"istatepar",
+				"IStateParamsService\tinterface"
+			],
+			[
+				"IState",
+				"IStateParams\tinterface"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/ssSeasonsMod.lua",
+			"settings":
+			{
+				"buffer_size": 13771,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/ssRepairable.lua",
+			"settings":
+			{
+				"buffer_size": 7370,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/joskuijpers/Library/Application Support/Sublime Text 3/Packages/User/FSMod.sublime-build",
+			"settings":
+			{
+				"buffer_size": 63,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "untitled.sublime-build"
+			}
+		},
+		{
+			"file": "src/ssReplaceVisual.lua",
+			"settings":
+			{
+				"buffer_size": 8693,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/ssSeasonIntro.lua",
+			"settings":
+			{
+				"buffer_size": 1978,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/ssSnow.lua",
+			"settings":
+			{
+				"buffer_size": 8372,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/ssMultiplayer.lua",
+			"settings":
+			{
+				"buffer_size": 3593,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 347.0,
+		"last_filter": "up",
+		"selected_items":
+		[
+			[
+				"up",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"updat",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"list pack",
+				"Package Control: List Packages"
+			],
+			[
+				"disable ",
+				"Package Control: Disable Package"
+			],
+			[
+				"format",
+				"TypeScript: Format Document"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"forma",
+				"TypeScript: Format Selection"
+			],
+			[
+				"format doc",
+				"TypeScript: Format Document"
+			],
+			[
+				"enab",
+				"Package Control: Enable Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"typescr",
+				"TypeScript: Signature Info"
+			],
+			[
+				"form",
+				"TypeScript: Format Document"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"package control",
+				"Package Control: List Packages"
+			],
+			[
+				"enable lin",
+				"SublimeLinter: Enable Linting"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"update",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"Package Control: disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"typescript",
+				"TypeScript: Overloads Panel"
+			],
+			[
+				"enabe",
+				"Package Control: Enable Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 434.0,
+		"history":
+		[
+			"print('hello')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/data",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/scripts",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src"
+	],
+	"file_history":
+	[
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/scripts/upload.sh",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssVehicle.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssAnimals.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/data/animals.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssStorage.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/scripts/build.sh",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssTime.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssSeasonIntro.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssEconomy.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssRepairable.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssGrowthManager.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssSeasonsUtil.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/scripts/test.sh",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssLang.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssMultiplayer.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/src/ssSeasonsMod.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/FS17_seasons/.gitignore",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssVehicle.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssTime.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssWeatherForecast.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSeasonsUtil.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSeasonsMod.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssLang.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssAnimals.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssRepairable.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/README.md",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssReplaceVisual.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssWeatherManager.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSeasonsXML.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/data/animals.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/globals.md",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/data/textures.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssDebug.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSeasonIntro.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSnow.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/Holland_landscape_2017/maps/seasons.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/g_currentMission2.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssStorage.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssEconomy.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssGrowthManager.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssFixFruit.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssSettings.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/modDesc_l10n_pl.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/modDesc_l10n_nl.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/modDesc_l10n_en.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/payments.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssBank.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/repairFactors.xml",
+		"/Users/joskuijpers/Downloads/ZZZ_fastForward/fastForward.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/ssMaintenance.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/superglobals.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/modDesc.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/vehicle.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/docs/vehicleSpec.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_ForRealModule02_TireDirt/TireDirt.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_ForRealModule02_TireDirt/register.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/scripts/maintenance2.py",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/scripts/maintenance.py",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/fixFruit.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/seasonsUtil.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/weatherForecast.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/weatherForecast.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/time.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/ssSettings.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/seasonsUtil.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/ssSeasonsMod.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/scripts/dayss.py",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/.gitignore",
+		"/Users/joskuijpers/Downloads/FS17_real_clock/RealClock.lua",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/g_currentMission2.txt",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/globals.md",
+		"/Users/joskuijpers/Downloads/MapAutosave_LS17/MapAutosave.lua",
+		"/Users/joskuijpers/Downloads/MapAutosave_LS17/modDesc.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/savegame1/careerSavegame.xml",
+		"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/savegame5/economy.xml",
+		"/Users/joskuijpers/Documents/data.csv",
+		"/Users/joskuijpers/Desktop/NiceColors.html",
+		"/Users/joskuijpers/Development/maja_kraan/server/config/environment/development.js",
+		"/Users/joskuijpers/Development/apex/app/package.json",
+		"/Users/joskuijpers/Development/apex/docker-compose.yml",
+		"/Users/joskuijpers/Development/apex/app/server/lib/KVS.js",
+		"/Users/joskuijpers/Development/apex/app/server/lib/senders/EmailSender.ts",
+		"/Users/joskuijpers/Development/apex/app/server/routes/api/email.ts",
+		"/Users/joskuijpers/Development/apex/app/server/lib/Workers.ts",
+		"/Users/joskuijpers/Development/apex/app/server/lib/Importer.ts",
+		"/Users/joskuijpers/Development/apex/app/server/typings/kue/kue.d.ts",
+		"/Users/joskuijpers/Library/Application Support/factorio/saves/Jarvix-Uitje2/level.dat",
+		"/Users/joskuijpers/Development/apex/app/server/lib/senders/EmailHook.ts",
+		"/Users/joskuijpers/Development/apex/app/server/typings/tsd.d.ts",
+		"/Users/joskuijpers/Desktop/mail.html",
+		"/Users/joskuijpers/Development/apex/app/server/lib/importers/SOMImporter.ts",
+		"/Users/joskuijpers/Development/apex/app/server/services/monitor.ts",
+		"/Users/joskuijpers/Development/apex/app/server/services/workerMonitor.ts",
+		"/Users/joskuijpers/Development/apex/app/server/routes/api/auth.ts",
+		"/Users/joskuijpers/Development/apex/app/server/routes/api/ideal.ts",
+		"/Users/joskuijpers/Development/apex/app/server/typings/node-dogstatsd/node-dogstatsd.d.ts",
+		"/Users/joskuijpers/Development/apex/run.sh",
+		"/Users/joskuijpers/Development/apex/app/server/services/logger.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/shared/resources/FactuurResource.ts",
+		"/Users/joskuijpers/Documents/payment_info_scala.sql",
+		"/Users/joskuijpers/Development/test/main.js",
+		"/Users/joskuijpers/Development/messageevents.json",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/verzorgers/view.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/ViewCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/view.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/MailCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/server/routes/api/facturen.ts",
+		"/Users/joskuijpers/Development/apex/docker-compose-production-usage.yml",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/leerlingen/view.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/mail.jade",
+		"/Users/joskuijpers/Development/apex/app/server/app.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/login/LoginCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/admin/lvs/LvsCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/server/services/postgres.ts",
+		"/Users/joskuijpers/Development/apex/app/server/routes/index.ts",
+		"/Users/joskuijpers/Development/apex/app/server/ApiError.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/ListCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/user/invoices/list.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/verzorgers/FactuurCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/verzorgers/verzorgers.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/verzorgers/factuur.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/shared/filters/BetaalmethodeFilter.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/verzorgers/ideal.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/verzorgers/IdealCtrl.ts",
+		"/Users/joskuijpers/Development/apex/app/client/components/secure/admin/lvs/lvs.jade",
+		"/Users/joskuijpers/Development/apex/app/client/components/public/about/about.jade",
+		"/Users/joskuijpers/Development/apex/app/server/lib/senders/EmailHook.js",
+		"/Users/joskuijpers/Development/apex/app/server/routes/api/benchmark.ts"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src",
+			"/Users/joskuijpers/Library/Application\\ Support/FarmingSimulator2017/mods/FS17_seasons/src/",
+			"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/src/*.lua",
+			"/Users/joskuijpers/Library/Application Support/FarmingSimulator2017/mods/FS17_seasons/sr",
+			"/Users/joskuijpers/Development/apex/app/server/",
+			"/Users/joskuijpers/Development/apex/app/",
+			"/Users/joskuijpers/Development/apex/app/client",
+			"/Users/joskuijpers/Development/apex/app/server",
+			"/Users/joskuijpers/Development/apex/db",
+			"/Users/joskuijpers/Development/apex/app/client/components",
+			"/Users/joskuijpers/Development/apex/app/client",
+			"/Users/joskuijpers/Development/apex/app",
+			"/Users/joskuijpers/Development/apex/app/server"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"{155}",
+			"placeables",
+			"tree",
+			"ss_getIsPlayerInRange",
+			"{44}",
+			"{56}",
+			"players",
+			"classes",
+			"ssSeasonIntro",
+			";",
+			"ssSeasonsModSaveToXML",
+			"REPAIR_NIGHT_FACTOR",
+			";",
+			"\\t",
+			";",
+			"ssAnimals",
+			"()\n",
+			"C:/",
+			"get.+map",
+			"map.+directory",
+			"directory",
+			"{80}",
+			"map01",
+			"rates",
+			"^/>",
+			"([a-zA-Z]+)=\"([0-9\\.]+)\" ",
+			"<pig",
+			"<sheep",
+			"<cow",
+			"effects",
+			"map01",
+			"\\t",
+			"print_r",
+			"log",
+			"snowAccumulation",
+			"appliedSnowDepth",
+			"latitude",
+			";",
+			"self.forecast",
+			";",
+			"log",
+			"modDir",
+			";",
+			"ssSett",
+			"g_currentModDirectory",
+			"overwritten",
+			"\\t",
+			"field",
+			"fields",
+			"milk",
+			"ssEconomy",
+			"barley",
+			"filltypes",
+			"fillTypes",
+			"{20}",
+			"fillType",
+			"{344}",
+			"\"cow\"",
+			"strawPerDay",
+			"{3601}",
+			"{341}",
+			"split",
+			"spli",
+			"{408}",
+			"{80}",
+			"{408}",
+			"split",
+			"ssBank",
+			"currentDayNumber",
+			"yes",
+			"iterate",
+			"IterateOverTerrain",
+			"ssIterateOverTerrain",
+			"\\t",
+			"{1368}",
+			"{2470}",
+			"{192}",
+			"{191}",
+			"{2740}",
+			"{192}",
+			"{191}",
+			"placeables",
+			"placeable",
+			"{155}",
+			"placeables",
+			"{3972}",
+			"{403}",
+			"{47469}",
+			"{403}",
+			"{78}",
+			"{402}",
+			"{3972}",
+			"{403}",
+			"field",
+			"{60}",
+			"field",
+			"log",
+			"ssEconomy",
+			"seasonListeners",
+			"log",
+			"([a-zA-Z])=(.)",
+			"end;",
+			"workArea",
+			"work",
+			"ssMaintenance",
+			";",
+			"\\t",
+			"daily",
+			"leas",
+			"log",
+			"</([a-z]+)>",
+			"<([a-z]+)>",
+			"{60}",
+			"\\t",
+			"%",
+			"log",
+			"getRepairShopCost",
+			"maintenanceRepairCost",
+			":repairCost",
+			"repairCost",
+			"print",
+			";",
+			"placeables",
+			"trigger",
+			"6961",
+			"VehicleSellingPoint",
+			"{3510}",
+			"{292}"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"g_modClasses",
+			"ssMultiplayer",
+			"",
+			"    ",
+			"",
+			"ssDebug",
+			"properties",
+			"",
+			"<\\1>\\2</\\1>\\n",
+			"<\\1>\\2></\\1>",
+			"<rates type=\"pig\"",
+			"<rates type=\"sheep\"",
+			"<rates type=\"cow\"",
+			"rates",
+			"    ",
+			"calculateSnowAccumulation",
+			"",
+			"forecast",
+			"",
+			"    ",
+			"ssAnimals",
+			"ssSeasonIntro",
+			"    ",
+			"ssBank",
+			"\\1 = \\2",
+			"end",
+			"ssVehicle",
+			"",
+			"    ",
+			"</factor>",
+			"<factor category=\"\\1\">",
+			"    ",
+			"",
+			" text=\"\\1\" />",
+			"\\1",
+			"Repairable",
+			"",
+			"ssRepairable",
+			"ssMaintenance",
+			"\\<text name=\\\"\\1\\\"\\>\\n            \\<en\\>\\2\\<\\/en\\>\\n        \\<\\/text\\>",
+			"\\<text name=\\\"\\1\\\"\\>\\n\\<en\\>\\2\\<\\/en\\>\\n\\<\\/text\\>$",
+			"get",
+			"set",
+			"log",
+			"",
+			" ssTime",
+			"Time",
+			"ssWeatherForecast",
+			"ssTime",
+			"ssFixFruit",
+			"ssSeasonsUtil",
+			"",
+			"Time",
+			"dayName",
+			"seasonName",
+			"season",
+			"seasonOfDayNumber",
+			"dayOfWeek",
+			"dayOfWeekOfDayNumber",
+			"SeasonsUtil",
+			"    ",
+			"apex.key.school",
+			"View",
+			"$scope.currentSchooljaar",
+			"Email",
+			"Template",
+			"><",
+			"",
+			"MailCandidate",
+			"\\1",
+			"JUI.",
+			"Ik",
+			"\"\\1\"",
+			"\\18",
+			"FactuurSelection",
+			": ITenant",
+			": IUser",
+			"IUser",
+			"statusCode",
+			"App\\.config\\(\\[\"$stateProvider\", \\1\\]\\);",
+			"Profiel",
+			"leerling",
+			"leerlingen",
+			"Leerling",
+			"Leerlingen",
+			"verzorger",
+			"verzorgers",
+			"Verzorger",
+			"Verzorgers",
+			"verzorgers",
+			"verzorger",
+			"Verzorgers",
+			"Leerlingen",
+			"Verzorgers",
+			"Leerlingen",
+			"Verzorger",
+			"Leerling",
+			"$locationSearch.get",
+			"$locationSearch.set",
+			"UserDefaultsService",
+			"$locationSearch.get",
+			"$locationSearch.set",
+			"gebruiker",
+			"Afzenders",
+			"Afzender",
+			"IdealBetalingPeriode",
+			"IdealBetaling",
+			"loadLabels",
+			"FactuurLabel",
+			"Bank",
+			"IdealBanken",
+			"\"",
+			"'",
+			"return error",
+			"data",
+			"\"",
+			"schema.columns",
+			"FactuurSchema",
+			"\"",
+			"text",
+			"New",
+			".col-sm",
+			"PublicFactuur",
+			"PublicVerzorger",
+			"Verzorger",
+			"Factuur",
+			"",
+			"View"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/ssSeasonsMod.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13771,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2210,
+								2210
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 998.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/ssRepairable.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7370,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3786,
+								3786
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1371.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/joskuijpers/Library/Application Support/Sublime Text 3/Packages/User/FSMod.sublime-build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JSON (JavaScriptNext).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/ssReplaceVisual.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1213,
+								1054
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 376.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/ssSeasonIntro.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1095,
+								1040
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/ssSnow.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8372,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2218,
+								2218
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 209.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/ssMultiplayer.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3593,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2317,
+								2317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 992.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/FSMod.sublime-build",
+	"project": "mod.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 260.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -44,12 +44,12 @@ g_modClasses = {
     -- "ssWeatherManager",
     -- "ssWeatherForecast",
     -- "ssFixFruit",
-    -- "ssVehicle",
+    "ssVehicle",
     -- "ssGrowthManager",
     -- "ssSnow",
     "ssSeasonIntro",
     "ssReplaceVisual",
-    -- "ssAnimals"
+    "ssAnimals"
 }
 
 if ssSeasonsMod.debug then

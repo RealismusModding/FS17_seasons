@@ -26,7 +26,7 @@ function ssReplaceVisual:loadMap(name)
     end
 end
 
-function ssSeasonIntro:readStream(streamId, connection)
+function ssReplaceVisual:readStream(streamId, connection)
     -- Load after data for seaonUtils is loaded
     ssReplaceVisual:updateTextures(getRootNode())
 end
@@ -110,7 +110,6 @@ function ssReplaceVisual:update(dt)
 end
 
 function ssReplaceVisual:seasonChanged()
-    log("Season changed into "..ssSeasonsUtil:seasonName())
     ssReplaceVisual:updateTextures(getRootNode())
 end
 

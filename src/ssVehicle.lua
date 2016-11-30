@@ -19,8 +19,6 @@ SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeason
 function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
 
-    log("loadMap!")
-
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
