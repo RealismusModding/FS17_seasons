@@ -8,7 +8,6 @@
 ssSeasonIntro = {}
 
 function ssSeasonIntro:load(savegame, key)
-    log("ssSeasonIntro:load()")
     self.hideSeasonIntro = ssStorage.getXMLBool(savegame, key .. ".settings.hideSeasonIntro", false)
 end
 

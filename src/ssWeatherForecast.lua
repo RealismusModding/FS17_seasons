@@ -25,10 +25,10 @@ function ssWeatherForecast:loadMap(name)
         local width, height = getNormalizedScreenValues(128, 128)
 
         -- Seasons "Color" Icons
-        self.hud.overlays.Spring = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.Summer = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.Autumn = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.Winter = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays[0] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays[1] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays[2] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays[3] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.png", ssSeasonsMod.modDir), 0, 0, width, height)
 
         -- Seasons Weather Icons
         self.hud.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
@@ -77,7 +77,7 @@ function ssWeatherForecast:draw()
 
         for n = 2, ssWeatherManager.forecastLength do
             -- Render Day of The Week
-            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n))
+            renderText(WeatherForecastPosX + 0.068 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.086, 0.02, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek() + n))
 
             -- Render Season Icon
             renderOverlay(self.hud.overlays[forecast[n].season].overlayId, WeatherForecastPosX + 0.086 + (daysPosOffset * (n - 2)), WeatherForecastPosY + 0.074, 0.0185, 0.0335)

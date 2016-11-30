@@ -345,7 +345,7 @@ end
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     local vanillaSpeed, recalc = superFunc(self, onlyIfWorking)
 
-    if not ssSeasonsUtil:isSeason(3)
+    if ssWeatherManager:isGroundWorkable()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
        return vanillaSpeed, recalc
     end
