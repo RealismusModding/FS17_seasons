@@ -88,15 +88,15 @@ function ssWeatherManager:buildForecast()
 
     end
 
-    log('The original raintable')
-    print_r(g_currentMission.environment.rains)
+    --log('The original raintable')
+    --print_r(g_currentMission.environment.rains)
 
     g_currentMission.environment.rains = {}
     self:switchRainHail()
     self:owRaintable()
 
-    print_r(self.forecast)
-    print_r(g_currentMission.environment.rains)
+    --print_r(self.forecast)
+    --print_r(g_currentMission.environment.rains)
 end
 
 function ssWeatherManager:updateForecast()
@@ -143,8 +143,8 @@ function ssWeatherManager:updateForecast()
     self:switchRainHail()
     self:owRaintable()
 
-    print_r(self.forecast)
-    print_r(g_currentMission.environment.rains)
+    --print_r(self.forecast)
+    --print_r(g_currentMission.environment.rains)
     table.remove(self.rains,1)
 end
 
@@ -396,8 +396,8 @@ function ssWeatherManager:_rainStartEnd(beta,gamma,p,endRainTime)
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime,82800) *1000+0.1
 
-    log("startDayTime ",oneRainEvent.startDayTime)
-    log("oneRainEvent.duration ",oneRainEvent.duration)
+    --log("startDayTime ",oneRainEvent.startDayTime)
+    --log("oneRainEvent.duration ",oneRainEvent.duration)
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
         oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration + 0.000001
