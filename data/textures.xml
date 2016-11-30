@@ -10,7 +10,7 @@
 
         <autumn>
             <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_autumn" />
-            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_treeBranch_autumn" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_autumn" />
             <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_autumn" />
             <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_autumn" />
             <texture shapeName="bush05" secondaryNodeName="bush05" to="ssTr_bushes_autumn" />
