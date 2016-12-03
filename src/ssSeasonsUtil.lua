@@ -272,10 +272,10 @@ function ssSeasonsUtil:ssIterateOverTerrain(currentX, currentZ, func, ...)
 
     local startWorldX = currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
     local startWorldZ = currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
-    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.1 -- -0.1 to avoid overlap.
+    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.5 -- -0.5 to avoid overlap.
     local widthWorldZ = startWorldZ
     local heightWorldX = startWorldX
-    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.1 -- -0.1 to avoid overlap.
+    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.5 -- -0.5 to avoid overlap.
 
     -- Call provided function
     func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg))
