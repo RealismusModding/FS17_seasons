@@ -72,7 +72,7 @@ function ssSnow:updatePlacablenOnDelete()
         setDensityParallelogram(snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 0)
     end
 end
-Placeable.deleteFinal = Utils.prependedFunction(Placeable.deleteFinal, ssSnow.updatePlacablenOnDelete);
+Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.updatePlacablenOnDelete);
 
 function ssSnow:deleteMap()
 end
