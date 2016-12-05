@@ -58,7 +58,7 @@ end
 Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
 
 function ssSnow:updatePlacablenOnDelete()
-    local snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME) -- 0 if no snow mask
+    local snowMaskId = getChild(g_currentMission.terrainRootNode, "SeasonSnowMask") -- 0 if no snow mask
     if snowMaskId == 0 then
         return
     end
