@@ -20,26 +20,6 @@ function ssSnow:save(savegame, key)
 end
 
 
-function ssSnow:loadMap(name)
-    -- Register Snow as a fill and Tip type
-    FillUtil.registerFillType("snow",  g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0,  false,  "dataS2/menu/hud/fillTypes/hud_fill_straw.png", "dataS2/menu/hud/fillTypes/hud_fill_straw_sml.png", 0.0002* 0.5, math.rad(50))
-    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/snow_normal.dds", ssSeasonsMod.modDir .. "resources/snowDistance_diffuse.dds")
-
-    if g_currentMission:getIsClient() then
-        g_currentMission.environment:addHourChangeListener(self)
-
-        self.doAddSnow = false -- Should we currently be running a loop to add Snow on the map.
-        self.doRemoveSnow = false
-        self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
-        self.updateSnow = true
-
-        self.currentX = 0 -- The row that we are currently updating
-        self.currentZ = 0 -- The column that we are currently updating
-        self.addedSnowForCurrentSnowfall = false -- Have we already added snow for the current snowfall?
-    end
-end
-
-
 function ssSnow:updatePlacableOnCreation()
     local snowMaskId = getChild(g_currentMission.terrainRootNode, "SeasonSnowMask") -- 0 if no snow mask
     if snowMaskId == 0 then
@@ -101,32 +81,31 @@ function ssSnow:hourChanged()
     if targetSnowDepth < -4 and self.updateSnow == true then
         -- print("--- Disabling snow updates ---")
         self.snowLayersDelta=100
-        self.doRemoveSnow = true
+        ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
         self.updateSnow=false
     elseif targetSnowDepth > 0 then
         -- print("--- Enabling snow updates ---")
         self.updateSnow=true
     end
 
-
     if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
         if targetSnowDepth > 0 then
-            self.doAddSnow = true
-            print("Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+            print("[Seasons] Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+            ssDensityMapScanner:queuJob("ssSnowAddSnow", self.snowLayersDelta)
         end
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT
     elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
         self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
         self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-        self.doRemoveSnow = true
-        print("Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+        print("[Seasons] Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+        ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
     end
-
 end
 
--- Must be defined before call to ssSeasonsUtil:ssIterateOverTerrain where it's used as an argument.
-local function addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+-- Must be defined before being registered with ssDensityMapScanner.
+local function addSnow(self, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    layers=tonumber(layers)
     local snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME) -- 0 if no snow mask, should realy be done externally before first update() and stored.
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
@@ -149,8 +128,9 @@ local function addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heigh
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 end
 
-local function removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
-
+-- Must be defined before being registered with ssDensityMapScanner.
+local function removeSnow(self, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    layers=tonumber(layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     -- Remove snow where type is snow.
@@ -174,12 +154,19 @@ function ssSnow:update(dt)
     if snowMaskId ~= 0 then
         setVisibility(snowMaskId, false)
     end
-    
+end
+
+function ssSnow:loadMap(name)
+    -- Register Snow as a fill and Tip type
+    FillUtil.registerFillType("snow",  g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0,  false,  "dataS2/menu/hud/fillTypes/hud_fill_straw.png", "dataS2/menu/hud/fillTypes/hud_fill_straw_sml.png", 0.0002* 0.5, math.rad(50))
+    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/snow_normal.dds", ssSeasonsMod.modDir .. "resources/snowDistance_diffuse.dds")
+
     if g_currentMission:getIsClient() then
-        if self.doAddSnow == true then
-            self.currentX, self.currentZ, self.doAddSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, addSnow, self.snowLayersDelta)
-        elseif self.doRemoveSnow == true then
-            self.currentX, self.currentZ, self.doRemoveSnow = ssSeasonsUtil:ssIterateOverTerrain(self.currentX, self.currentZ, removeSnow, self.snowLayersDelta)
-        end
+        g_currentMission.environment:addHourChangeListener(self)
+
+        self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
+        
+        ssDensityMapScanner:registerCallback("ssSnowAddSnow" ,self , addSnow)
+        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow" ,self , removeSnow)
     end
 end

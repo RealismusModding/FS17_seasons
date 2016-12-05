@@ -258,46 +258,6 @@ function ssSeasonsUtil:dayChanged()
     end
 end
 
--- Does one iteration step of density layer update calling provided function for specified area.
--- Returns values for next iteration. Extra arguments are passed on to the provided function.
--- Calling function should keep currentX and CurrentZ between calls to the function.
-function ssSeasonsUtil:ssIterateOverTerrain(currentX, currentZ, func, ...)
-    local arg = {...} -- Optional arguments to pass on to provided function.
-    local moreIterations = true
-    local mapSegments = 16 -- Must be evenly dividable with mapsize.
-
-    if g_currentMission.missionInfo.timeScale > 120 then
-        mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
-    end
-
-    local startWorldX = currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
-    local startWorldZ = currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
-    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.5 -- -0.5 to avoid overlap.
-    local widthWorldZ = startWorldZ
-    local heightWorldX = startWorldX
-    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.5 -- -0.5 to avoid overlap.
-
-    -- Call provided function
-    func(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, unpack(arg))
-
-
-    if currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-        -- Next column
-        currentZ = currentZ + 1
-    elseif  currentX < mapSegments - 1 then -- Starting with row 0
-        -- Next row
-        currentX = currentX + 1
-        currentZ = 0
-    else
-        -- Done with the loop, set up for the next one.
-        currentX = 0
-        currentZ = 0
-        moreIterations = false
-    end
-
-    return currentX, currentZ, moreIterations
-end
-
 ------------------------------------
 ---- Server only
 ------------------------------------
@@ -359,3 +319,45 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
 
     return gamma * math.exp ( z / beta )
 end
+
+--
+-- List implementation
+-- A fast implementation of queue(actually double queue) in Lua is done by the book Programming in Lua:
+-- http://www.lua.org/pil/11.4.html
+-- Reworked by MrBear
+--
+
+-- ssSeasonsUtil.List = {}
+function ssSeasonsUtil.listNew()
+  return {first = 0, last = -1}
+end
+
+    function ssSeasonsUtil.listPushLeft (list, value)
+      local first = list.first - 1
+      list.first = first
+      list[first] = value
+    end
+    
+    function ssSeasonsUtil.listPushRight (list, value)
+      local last = list.last + 1
+      list.last = last
+      list[last] = value
+    end
+    
+    function ssSeasonsUtil.listPopLeft (list)
+      local first = list.first
+      if first > list.last then return nil end
+      local value = list[first]
+      list[first] = nil        -- to allow garbage collection
+      list.first = first + 1
+      return value
+    end
+    
+    function ssSeasonsUtil.listPopRight (list)
+      local last = list.last
+      if list.first > last then return nil end
+      local value = list[last]
+      list[last] = nil         -- to allow garbage collection
+      list.last = last - 1
+      return value
+    end

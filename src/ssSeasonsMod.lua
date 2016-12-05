@@ -40,15 +40,16 @@ local classes = {
     "ssSeasonsUtil",
     "ssTime",
     "ssEconomy",
-    -- "ssWeatherManager",
-    -- "ssWeatherForecast",
+    "ssWeatherManager",
+    "ssWeatherForecast",
     -- "ssFixFruit",
     -- "ssVehicle",
     "ssGrowthManager",
-    -- "ssSnow",
+    "ssSnow",
     "ssSeasonIntro",
-    -- "ssReplaceVisual",
-    "ssAnimals"
+    "ssReplaceVisual",
+    "ssAnimals",
+    "ssDensityMapScanner"
 }
 
 if ssSeasonsMod.debug then
