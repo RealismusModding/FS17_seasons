@@ -65,9 +65,10 @@ end
 -- Change the night/day times according to season
 function ssTime:adaptTime()
     local env = g_currentMission.environment
+    julianDay = ssSeasonsUtil:julianDay(ssSeasonsUtil:currentDayNumber())
 
     -- All local values are in minutes
-    local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(ssSeasonsUtil:currentDayNumber())
+    local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
     -- local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(35) -- 15 = midsummer, 35 = midwinter
 
     -- Restrict the values to prevent errors
@@ -98,34 +99,30 @@ function ssTime:adaptTime()
     env.sunRotCurve = self:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.sunColorCurve = self:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
-
+    
+    g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 
     self.lastUpdate = ssSeasonsUtil:currentDayNumber()
 end
 
 -- Output in hours
-function ssTime:calculateStartEndOfDay(dayNumber)
-    local dayStart, dayEnd, julianDay, theta, eta
-
-    julianDay = ssSeasonsUtil:julianDay(dayNumber)
-
-    -- Call radii for current day
-    theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
-    eta = math.asin(0.4 * math.cos(theta))
-    g_currentMission.environment.sunHeightAngle = eta - (90 - self.latitude)*math.pi/180
+function ssTime:calculateStartEndOfDay(julianDay)
+    local dayStart, dayEnd, theta, eta
 
     -- Calculate the day
-    dayStart, dayEnd = self:_calculateDay(self.pDay, eta, julianDay)
+    dayStart, dayEnd = self:_calculateDay(self.pDay, julianDay)
 
     -- True blackness
-    nightStart, nightEnd = self:_calculateDay(self.pNight, eta, julianDay)
+    nightStart, nightEnd = self:_calculateDay(self.pNight, julianDay)
 
     return dayStart, dayEnd, nightStart, nightEnd
 end
 
-function ssTime:_calculateDay(p, eta, julianDay)
+function ssTime:_calculateDay(p, julianDay)
     local timeStart, timeEnd
     local D = 0, offset, hasDST
+    local eta = self:calculateSunDeclination(julianDay)
+
     local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta))
 
     -- Account for polar day and night
@@ -146,6 +143,21 @@ function ssTime:_calculateDay(p, eta, julianDay)
     timeEnd = 12 + D / 2 + offset
 
     return timeStart, timeEnd
+end
+
+function ssTime:calculateSunHeightAngle(julianDay)
+    -- Calculate the angle between the sun and the horizon
+    local sunHeightAngle = self:calculateSunDeclination(julianDay) - (90 - self.latitude)*math.pi/180
+    
+    return sunHeightAngle 
+end
+
+function ssTime:calculateSunDeclination(julianDay) 
+    -- Calculate the suns declination
+    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
+    local eta = math.asin(0.4 * math.cos(theta))
+
+    return eta
 end
 
 function ssTime:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
