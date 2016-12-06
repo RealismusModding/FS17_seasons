@@ -58,7 +58,7 @@ function ssDebug:setEnabled(enabled)
         g_currentMission.environment:addHourChangeListener(self)
 
         self.oldTimeScale = g_currentMission.missionInfo.timeScale
-        g_currentMission:setTimeScale(12000)
+        g_currentMission:setTimeScale(6000)
     else
         g_currentMission.environment:removeMinuteChangeListener(self)
         g_currentMission.environment:removeHourChangeListener(self)

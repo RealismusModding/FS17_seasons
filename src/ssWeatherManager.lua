@@ -102,9 +102,6 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment.autoRain = 'false'
 
     if g_currentMission:getIsServer() then
-        log("isServer")
-
-
         if table.getn(self.forecast) == 0 then
             self:buildForecast()
         end
@@ -290,8 +287,7 @@ function ssWeatherManager:updateForecast()
 
     table.remove(self.rains, 1)
 
-    log("Send event")
-    g_client:getServerConnection():sendEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+    g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
 end
 
 -- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
@@ -371,7 +367,7 @@ end
 function ssWeatherManager:calculateSnowAccumulation()
 
     local currentRain = g_currentMission.environment.currentRain
-    local currentTemp = ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
+    local currentTemp = self:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
     local currentSnow = self.snowDepth
 
     --- more radiation during spring
@@ -663,8 +659,6 @@ end
 
 -- Server: send to client
 function ssWeatherForecastEvent:writeStream(streamId, connection)
-    log("Write to client")
-
     streamWriteInt16(streamId, self.day.day)
     streamWriteString(streamId, self.day.weatherState)
     streamWriteFloat32(streamId, self.day.highTemp)
@@ -686,15 +680,15 @@ end
 
 -- Client: receive from server
 function ssWeatherForecastEvent:readStream(streamId, connection)
-    log("Read froms erver")
     local day = {}
 
     day.day = streamReadInt16(streamId)
+    day.season = ssSeasonsUtil:season(day.day)
     day.weatherState = streamReadString(streamId)
     day.highTemp = streamReadFloat32(streamId)
     day.lowTemp = streamReadFloat32(streamId)
 
-    self.day = day;
+    self.day = day
 
     if streamReadBool(streamId) then
         local rain = {}
@@ -713,7 +707,6 @@ function ssWeatherForecastEvent:readStream(streamId, connection)
 end
 
 function ssWeatherForecastEvent:run(connection)
-    log("Run the event")
     if connection:getIsServer() then
         table.remove(ssWeatherManager.forecast, 1)
         table.insert(ssWeatherManager.forecast, self.day)
