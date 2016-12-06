@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
         tobiasgo/Oekobauer
@@ -6,7 +7,7 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Jahreszeiten: zeige Wettervorhersage" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Jahreszeiten:Fahrzeug Reparieren" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Jahreszeiten: Fahrzeug Reparieren" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Montag" />
         <text name="SS_WEEKDAY_TUESDAY" text="Dienstag" />
@@ -49,6 +50,6 @@
         <text name="SS_SEASON_INTRO_2" text="TODO: Die Erntezeit ist gekommen. Bereiten Sie sich auf den Winter vor, Ihre Pflanzen werden den Winter nicht überstehen." />
         <text name="SS_SEASON_INTRO_3" text="TODO: Es ist kalt. Der Boden ist hart, möglicherweise gefroren. Pflanzen wachsen nicht oder sterben sogar." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="nicht nocheinmal zeigen" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht nocheinmal zeigen" />
     </texts>
 </l10n>
