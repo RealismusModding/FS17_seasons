@@ -112,6 +112,7 @@ function ssTime:calculateStartEndOfDay(dayNumber)
     -- Call radii for current day
     theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
     eta = math.asin(0.4 * math.cos(theta))
+    g_currentMission.environment.sunHeightAngle = eta - (90 - self.latitude)*math.pi/180
 
     -- Calculate the day
     dayStart, dayEnd = self:_calculateDay(self.pDay, eta, julianDay)
