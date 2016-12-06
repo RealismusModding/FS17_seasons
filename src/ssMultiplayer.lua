@@ -19,6 +19,14 @@ function ssMultiplayer:loadMap(name)
             table.insert(self.classes, className)
         end
     end
+
+    -- If a dedi
+    log("isServer: "..tostring(g_currentMission:getIsServer()))
+    log("isClient: "..tostring(g_currentMission:getIsClient()))
+    if g_currentMission:getIsServer() then
+        log("Is dedicated server")
+        -- g_currentMission.environment:addHourChangeListener(self)
+    end
 end
 
 function ssMultiplayer:deleteMap()
@@ -40,6 +48,18 @@ function ssMultiplayer:readStream(streamId, connection)
 end
 
 function ssMultiplayer:writeStream(streamId, connection)
+end
+
+function ssMultiplayer:hourChanged()
+    log("ssMultiplayer:hourChanged")
+    if g_currentMission.environment.g_currentMission == 0 then
+        for _, className in g_modClasses do
+            if _G[className].dayChanged ~= nil then
+                log("Call dayChanged for "..className)
+                _G[className].dayChanged(_G[className])
+            end
+        end
+    end
 end
 
 -- connection:sendEvent(ssMultiplayerJoinEvent:new())

@@ -319,7 +319,6 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
 end
 
 function ssWeatherManager:dayChanged()
-    log("update forecast")
     if g_currentMission:getIsServer() then
         self:updateForecast()
     end
@@ -656,7 +655,6 @@ end
 function ssWeatherForecastEvent:new(day, rain)
     local self = ssWeatherForecastEvent:emptyNew()
 
-    log("new Event")
     self.day = day
     self.rain = rain
 

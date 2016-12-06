@@ -60,6 +60,7 @@ end
 
 function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
+    g_currentMission.environment:addHourChangeListener(self)
 end
 
 function ssSeasonsUtil:deleteMap()
@@ -208,7 +209,7 @@ function ssSeasonsUtil:currentGrowthStage(currentDay)
     if (currentDay == nil) then
         currentDay = self:currentDayNumber()
     end
-    
+
     -- Length of a state
     local l = self.daysInSeason / 3.0
     local dayInSeason = self:dayInSeason(currentDay)
@@ -224,9 +225,15 @@ function ssSeasonsUtil:currentGrowthStage(currentDay)
     return nil
 end
 
+function ssSeasonsUtil:hourChanged()
+    log("ssSeasonsUtil:hourChanged()")
+end
+
 -- This is here, because ssSeasonsMod is never really loaded as a mod class..
 -- It is complicated, but installing a day change listener on it wont work
 function ssSeasonsUtil:dayChanged()
+    log("ssSeasonsUtil:dayChanged()")
+
     if ssSeasonsMod.enabled then
         local currentSeason = self:season()
 
