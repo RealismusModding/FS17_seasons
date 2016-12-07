@@ -29,8 +29,8 @@ function ssSnow:loadMap(name)
 
         self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
 
-        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, addSnow)
-        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, removeSnow)
+        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow)
+        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
     end
 end
 
@@ -83,7 +83,7 @@ function ssSnow:hourChanged()
 end
 
 -- Must be defined before being registered with ssDensityMapScanner.
-local function addSnow(self, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     layers=tonumber(layers)
     local snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME) -- 0 if no snow mask, should realy be done externally before first update() and stored.
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
@@ -108,7 +108,7 @@ local function addSnow(self, startWorldX, startWorldZ, widthWorldX, widthWorldZ,
 end
 
 -- Must be defined before being registered with ssDensityMapScanner.
-local function removeSnow(self, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+function ssSnow:removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     layers=tonumber(layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
