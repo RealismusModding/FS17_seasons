@@ -208,12 +208,13 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
         --     self. = true;
         -- end
 
-        self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason;
+        
         local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
         --log("Growth iteration: " .. tostring(growthTransition));
 
-        local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
-        log("CGS: " .. tostring(cGS));
+        self.fakeDay = self.fakeDay + 1;
+        --local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
+        log("Current Growth Transition: " .. tostring(growthTransition));
         
         -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) );
         --self:seasonChanged();
