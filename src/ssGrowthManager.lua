@@ -31,8 +31,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
                         ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						
-						
+						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},					
 				}, 
 				
 				[2]={ 	["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
@@ -46,7 +45,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
+						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},
 				},
 				
 				[3]={ 	["barley"]			={fruitName="barley", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -59,7 +58,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
+						["default"]			={fruitName="default", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},
 				
 				[4]={ 	["barley"]			={fruitName="barley",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -73,8 +72,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
-
+						["default"]			={fruitName="default",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},  
 				
 				[5]={ 	["barley"]			={fruitName="barley", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
@@ -87,7 +85,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
+						["default"]			={fruitName="default", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
 				}, 
 				
 				[6]={ 	["barley"]			={fruitName="barley",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -100,7 +98,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
+						["default"]			={fruitName="default",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},
 				
 				[7]={ 	["barley"]			={fruitName="barley",normalGrowthState=1},
@@ -114,7 +112,7 @@ ssGrowthManager.growthData = { 	[1]={
 						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
+						["default"]			={fruitName="default",normalGrowthState=1},
 				}, 	
 				
 				[8]={ 	["barley"]			={fruitName="barley",normalGrowthState=1, normalGrowthMaxState=2,setGrowthState=7,desiredGrowthState=WITHER_STATE},
@@ -127,17 +125,16 @@ ssGrowthManager.growthData = { 	[1]={
 						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        
-						
-							
- 				}, 	
+						["default"]			={fruitName="default",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
+ 				},
+
 				[9]={ 	["soybean"]			={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
 						["potato"]			={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
                         ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						
  				},
+
 				[10]={}; -- no growth
 				[11]={}; -- no growth
 				[12]={}; -- no growth
@@ -217,13 +214,13 @@ end
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index]
-            local fruitName = desc.name
-            if (self.defaultFruits[fruitName] == nil) then
-                log("Fruit not found in default table: " .. fruitName);
-            end
-        end
+        -- for index,fruit in pairs(g_currentMission.fruits) do
+        --     local desc = FruitUtil.fruitIndexToDesc[index]
+        --     local fruitName = desc.name
+        --     if (self.defaultFruits[fruitName] == nil) then
+        --         log("Fruit not found in default table: " .. fruitName);
+        --     end
+        -- end
         -- self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason
         -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) )
         --self:seasonChanged()
@@ -303,7 +300,12 @@ function ssGrowthManager:update(dt)
 
             local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then -- TODO: need to add default config to non-standard fruits
+            if (self.defaultFruits[fruitName] == nil) then
+                log("Fruit not found in default table: " .. fruitName);
+                fruitName = "default";
+            end
+
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
 
                 local fruitData = FruitUtil.fruitTypeGrowths[fruitName]
 
