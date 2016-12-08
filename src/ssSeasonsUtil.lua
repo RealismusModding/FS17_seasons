@@ -208,7 +208,7 @@ function ssSeasonsUtil:currentGrowthTransition(currentDay)
 
     local season = self:season(currentDay)--+1;
     local cGS = self:currentGrowthStage(currentDay);
-    print("Season: " .. season .. "CGS: " .. cGS .. "Day " .. currentDay)
+    --print("Season: " .. season .. "CGS: " .. cGS .. "Day " .. currentDay)
     return (cGS + (season*3)); 
 end
 
