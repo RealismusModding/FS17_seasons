@@ -170,14 +170,13 @@ function ssGrowthManager:loadMap(name)
         log("Growth Manager disabled");
         return
     end
-
-    log("Growth Manager loading");
+    
     ssSeasonsMod.addGrowthStageChangeListener(self);
  
     --lock changing the growth speed option and set growth rate to 1 (no growth)
     g_currentMission:setPlantGrowthRate(1,nil);
     g_currentMission:setPlantGrowthRateLocked(true);
-    log("Growth Manager enabled. Locking growth");
+    log("Growth Manager loading. Locking growth");
     ssSeasonsMod.addGrowthStageChangeListener(self);
   
     if not (self.hasResetGrowth) then 
@@ -376,5 +375,5 @@ function ssGrowthManager:growthStageChanged()
         self.currentGrowthTransitionPeriod = growthTransition;
         self.doGrowthTransition = true;
     end
-end;
+end
 
