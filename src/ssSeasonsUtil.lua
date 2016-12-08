@@ -204,6 +204,14 @@ function ssSeasonsUtil:dayInSeason(currentDay)
     return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
 end
 
+function ssSeasonsUtil:currentGrowthTransition(currentDay)
+
+    local season = self:season(currentDay)--+1;
+    local cGS = self:currentGrowthStage(currentDay);
+    print("Season: " .. season .. "CGS: " .. cGS .. "Day " .. currentDay)
+    return (cGS + (season*3)); 
+end
+
 function ssSeasonsUtil:currentGrowthStage(currentDay)
 
     if (currentDay == nil) then
