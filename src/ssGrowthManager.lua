@@ -166,11 +166,16 @@ end
 function ssGrowthManager:loadMap(name)
 
     log("Growth Manager loading");
-    --ssSeasonsMod.addGrowthStageChangeListener(self); TODO: implement this
+    ssSeasonsMod.addGrowthStageChangeListener(self);
    
    --lock changing the growth speed option and set growth rate to 1 (no growth)
-   g_currentMission:setPlantGrowthRate(1,nil);
-   g_currentMission:setPlantGrowthRateLocked(true);
+    if (self.growthManagerEnabled) then
+        g_currentMission:setPlantGrowthRate(1,nil);
+        g_currentMission:setPlantGrowthRateLocked(true);
+        log("Growth Manager enabled. Locking growth");
+        ssSeasonsMod.addGrowthStageChangeListener(self);
+    end;
+
 
     
     if not (self.hasResetGrowth) then 
@@ -209,12 +214,12 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
         -- end
 
         
-        local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
-        --log("Growth iteration: " .. tostring(growthTransition));
+        -- local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
+        -- --log("Growth iteration: " .. tostring(growthTransition));
 
-        self.fakeDay = self.fakeDay + 1;
-        --local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
-        log("Current Growth Transition: " .. tostring(growthTransition));
+        -- self.fakeDay = self.fakeDay + 1;
+        -- --local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
+        -- log("Current Growth Transition: " .. tostring(growthTransition));
         
         -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) );
         --self:seasonChanged();
@@ -363,8 +368,11 @@ function ssGrowthManager:draw()
 end
 
 function ssGrowthManager:growthStageChanged()
-    if (self.growthManagerEnabled == true) then
-        log("GrowthManager enabled - growthStateChanged");
+    if (self.growthManagerEnabled == true) then -- redundant but heyho
+        local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
+        log("GrowthManager enabled - growthStateChanged to: " .. growthTransition);
+        self.currentGrowthTransitionPeriod = growthTransition;
+        self.doGrowthTransition = true;
     end
 end;
 
