@@ -403,7 +403,7 @@ end
 function ssGrowthManager:growthStageChanged()
 
     if (self.growthManagerEnabled == true) then -- redundant but heyho
-        local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
+        local growthTransition = ssSeasonsUtil:currentGrowthTransition();
         log("GrowthManager enabled - growthStateChanged to: " .. growthTransition);
         self.currentGrowthTransitionPeriod = growthTransition;
         self.doGrowthTransition = true;
