@@ -143,12 +143,15 @@ ssGrowthManager.testGrowthTransitionPeriod = 1;
 ssGrowthManager.currentGrowthTransitionPeriod = 1;
 ssGrowthManager.doGrowthTransition = false;
 
+
 function ssGrowthManager:load(savegame, key)
-    self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", false)
+    self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", false);
+    self.growthManagerEnabled = ssStorage.getXMLBool(savegame,key .. ".settings.growthManagerEnabled", true);
 end
 
 function ssGrowthManager:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth)
+    ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth);
+    ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled);
 end
 
 
@@ -174,6 +177,7 @@ function ssGrowthManager:loadMap(name)
         self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
         self.doGrowthTransition = true;
         self.hasResetGrowth = true;
+        self.growthManagerEnabled = true;
         log("Growth Manager - First time growth reset - this will only happen once in a new savegame");
     end
 
@@ -358,5 +362,8 @@ function ssGrowthManager:draw()
 end
 
 function ssGrowthManager:growthStageChanged()
+    if (self.growthManagerEnabled == true) then
+        log("GrowthManager enabled - growthStateChanged");
+    end
 end;
 
