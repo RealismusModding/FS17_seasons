@@ -209,16 +209,16 @@ end
 
 
 function ssGrowthManager:loadFromXML()
-    local elements = {
-        ["defaultFruits"] = {}
-    }
-    local data1 = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
-    local data2 = ssSeasonsXML:getTypes(data1,"defaultFruits");
-    print_r(data2);
+    -- local elements = {
+    --     ["defaultFruits"] = {}
+    -- }
+    -- local data1 = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
+    -- local data2 = ssSeasonsXML:getTypes(data1,"defaultFruits");
+    -- print_r(data2);
 
-    self.defaultFruits = Set(data2);
-    print_r(self.defaultFruits);
-    log("GM: Loading data");
+    -- self.defaultFruits = Set(data2);
+    -- print_r(self.defaultFruits);
+    -- log("GM: Loading data");
 
     --self.data = 
     -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
