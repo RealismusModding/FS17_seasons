@@ -14,7 +14,7 @@ FIRST_LOAD_TRANSITION = 999;
 ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
 						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},					
-						["rape"]			={fruitName="rape", normalGrowthState=1},
+						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
 						["maize"]			={fruitName="maize", normalGrowthState=1},
 						["soybean"]			={fruitName="soybean", setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -28,7 +28,7 @@ ssGrowthManager.growthData = { 	[1]={
 				
 				[2]={ 	["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
 						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=2},
+						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
 						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=2},
 						["soybean"]			={fruitName="soybean", normalGrowthState=1},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=1},
@@ -41,7 +41,7 @@ ssGrowthManager.growthData = { 	[1]={
 				
 				[3]={ 	["barley"]			={fruitName="barley", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["rape"]			={fruitName="rape", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=3},
 						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=2},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=1, normalGrowthMaxState=2},
@@ -52,7 +52,7 @@ ssGrowthManager.growthData = { 	[1]={
 				
 				[4]={ 	["barley"]			={fruitName="barley",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["rape"]			={fruitName="rape", normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=3},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=2, normalGrowthMaxState=3,setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -65,7 +65,7 @@ ssGrowthManager.growthData = { 	[1]={
 				
 				[5]={ 	["barley"]			={fruitName="barley", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
 						["wheat"]			={fruitName="wheat", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-						["rape"]			={fruitName="rape", extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["rape"]			={fruitName="rape", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
 						["maize"]			={fruitName="maize", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["soybean"]			={fruitName="soybean", normalGrowthState=2, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=3, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -86,7 +86,8 @@ ssGrowthManager.growthData = { 	[1]={
 				},
 				
 				[7]={ 	["barley"]			={fruitName="barley",normalGrowthState=1},
-						["wheat"]			={fruitName="wheat",normalGrowthState=1},			 	
+						["wheat"]			={fruitName="wheat",normalGrowthState=1},
+                        ["rape"]			={fruitName="rape",normalGrowthState=1},			 	
 						["maize"]			={fruitName="maize", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},	
 						["soybean"]			={fruitName="soybean", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
@@ -98,7 +99,7 @@ ssGrowthManager.growthData = { 	[1]={
 				
 				[8]={ 	["barley"]			={fruitName="barley",normalGrowthState=1, normalGrowthMaxState=2,setGrowthState=7,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE}, 
+						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE}, 
 						["maize"]			={fruitName="maize", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
 						["soybean"]			={fruitName="soybean", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
@@ -165,19 +166,20 @@ end
 
 function ssGrowthManager:loadMap(name)
 
+    if (self.growthManagerEnabled == false) then
+        log("Growth Manager disabled");
+        return
+    end
+
     log("Growth Manager loading");
     ssSeasonsMod.addGrowthStageChangeListener(self);
-   
-   --lock changing the growth speed option and set growth rate to 1 (no growth)
-    if (self.growthManagerEnabled) then
-        g_currentMission:setPlantGrowthRate(1,nil);
-        g_currentMission:setPlantGrowthRateLocked(true);
-        log("Growth Manager enabled. Locking growth");
-        ssSeasonsMod.addGrowthStageChangeListener(self);
-    end;
-
-
-    
+ 
+    --lock changing the growth speed option and set growth rate to 1 (no growth)
+    g_currentMission:setPlantGrowthRate(1,nil);
+    g_currentMission:setPlantGrowthRateLocked(true);
+    log("Growth Manager enabled. Locking growth");
+    ssSeasonsMod.addGrowthStageChangeListener(self);
+  
     if not (self.hasResetGrowth) then 
         self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
         self.doGrowthTransition = true;
