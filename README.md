@@ -15,7 +15,7 @@
 - 7 day weather forecast
 
 ### Crops
-- Winter kills crops
+- Winter kills certain crops
 - Crop growth duration is much, much longer: often half a year
 
 ### Maintenance
