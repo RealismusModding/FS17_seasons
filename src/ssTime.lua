@@ -57,9 +57,6 @@ function ssTime:writeStream(streamId, connection)
 end
 
 function ssTime:update(dt)
-    if g_currentMission:getIsClient() then
-        g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
-    end
 end
 
 -- Change the night/day times according to season

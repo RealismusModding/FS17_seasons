@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="directionAndFrequency" target="directionAndFrequency"  type="float4" defaultValue = "0.06 0.0 0.0 1.2"/>
+        <Parameter name="speed"                 target="speed"                  type="float4" defaultValue = "1.0 0.0 0.0 0.0"/>
+    </Parameters>
+    <Textures>
+        <Texture name = "mMaskSampler"       defaultColorProfile = "linearRGB"   defaultFilename = "clouds_diffuse.png"/>
+    </Textures>
+    <Variations>
+        <Variation name = "FORCE_SECONDUV">
+<![CDATA[
+    #define FORCE_SECONDUV
+]]>
+        </Variation>
+        <Variation name = "FORCE_VERTEXCOLORS">
+<![CDATA[
+    #define FORCE_VERTEXCOLORS
+]]>
+        </Variation>
+        <Variation name = "WAVE_VERTEXCOLORS">
+<![CDATA[
+    #define WAVE_VERTEXCOLORS
+]]>
+        </Variation>
+    </Variations>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+uniform float4 directionAndFrequency;
+uniform float4 speed;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "SAMPLERS">
+<![CDATA[
+#if defined( FORCE_VERTEXCOLORS )
+sampler2D mMaskSampler;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+#if defined( FORCE_VERTEXCOLORS )
+    float4 gVertexColor;
+    float4 gMask;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_POSITION_VS">
+<![CDATA[
+    float4 mDirFreq = directionAndFrequency;
+    float  mSpeed   = speed.x;
+    float  mAtt = getDefaultTexCoords( In ).y;
+#if defined( FORCE_SECONDUV )
+    mAtt = convertDefaultTexCoords( In, In.texCoords1.xy ).y;
+#endif
+#if defined( FORCE_VERTEXCOLORS )
+    mAtt = In.color.r;
+#endif
+    float3 offset1;
+    float3 offset2;
+    float3 offset; 
+    mDirFreq.xyz *= 0.25;
+    mSpeed *= 0.25; 
+    offset1 = mDirFreq.xyz * sin( mSpeed * cTime_s + In.position.x*In.position.y * mDirFreq.w ) * mAtt;
+#if defined( WAVE_VERTEXCOLORS )
+    offset1 = mDirFreq.xyz * sin( ( mSpeed * cTime_s + 10 * In.color.r ) * mDirFreq.w );
+#endif
+    mDirFreq.xyz *= 8.0;
+    mSpeed *= 10.0;
+    offset2 = mDirFreq.xyz * sin( mSpeed * cTime_s + In.position.x*In.position.y * mDirFreq.w ) * mAtt;
+#if defined( WAVE_VERTEXCOLORS )
+    offset2 = mDirFreq.xyz * sin( ( mSpeed * cTime_s + 10 * In.color.r ) * mDirFreq.w );
+#endif
+    offset = lerp( offset1, offset2, cShared0 );    
+    return In.position.xyz + offset;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "START_FS">
+<![CDATA[
+#if defined( FORCE_VERTEXCOLORS )
+    globals.gVertexColor = float4( 0.0, 0.0, 0.0, 1.0 );
+    globals.gVertexColor = In.vs.vertexColor.rgba;
+    globals.gMask  = tex2D( mMaskSampler, 2 * In.vs.ALBEDOMAP_TEXCOORD ).rgba;
+    #undef VERTEX_COLOR
+#endif
+#if defined( WAVE_VERTEXCOLORS )
+    #undef VERTEX_COLOR
+#endif
+]]>
+            </CodeInjection>
+           <CodeInjection position="ALPHA_FS">
+<![CDATA[
+#if defined( FORCE_VERTEXCOLORS )
+    float mAlpha = saturate(lerp( globals.gMask.g*globals.gVertexColor.a, 1.0 , globals.gVertexColor.a) );
+    alpha *= mAlpha;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="FINAL_POS_FS">
+<![CDATA[
+#if defined( DEBUG_SHOW_PARALLAX )
+    oColor.rgb  = (float3)mAlpha;
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

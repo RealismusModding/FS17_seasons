@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="fillPlane_materialHolder" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="7.0.4"/>
+  </Asset>
+
+  <Files>
+    <File fileId="5" filename="HudFillSnow.dds" relativePath="true"/>
+    <File fileId="6" filename="fillIconShader.xml" relativePath="true"/>
+    <File fileId="4" filename="fillPlaneShader.xml" relativePath="true"/>
+    <File fileId="1" filename="snow_diffuse.dds" relativePath="true"/>
+    <File fileId="2" filename="snow_normal.dds" relativePath="true"/>
+    <File fileId="3" filename="snow_specular.dds" relativePath="true"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="hud_fill_snow_mat" materialId="7" ambientColor="1 1 1" alphaBlending="true" customShaderId="6">
+      <Texture fileId="5"/>
+      <CustomParameter name="iconColor" value="0 0 0 1"/>
+    </Material>
+    <Material name="snow_mat" materialId="9" ambientColor="1 1 1" cosPower="20" specularColor="1 1 1" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <CustomParameter name="uvScale" value="1 1 1 1"/>
+      <CustomParameter name="uvOffset" value="0 0 0 1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="snowMaterialHolder.i3d.shapes">
+  </Shapes>
+
+
+  <Dynamics>
+  </Dynamics>
+
+  <Scene>
+    <TransformGroup name="snow" clipDistance="10" nodeId="13">
+      <Shape shapeId="1" name="snow_materialHolder" clipDistance="10" nodeId="14" materialIds="9" castsShadows="true" receiveShadows="true"/>
+      <Shape shapeId="2" name="snow_icon_materialHolder" clipDistance="10" nodeId="15" materialIds="7" castsShadows="true" receiveShadows="true"/>
+    </TransformGroup>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="14">
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="FILLPLANE"/>
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+    </UserAttribute>
+    <UserAttribute nodeId="15">
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="ICON"/>
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+    </UserAttribute>
+  </UserAttributes>
+
+</i3D>

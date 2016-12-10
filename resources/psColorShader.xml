@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="psColor" target="psColor" type="float4" defaultValue = "1.0 1.0 1.0 1.0"/>
+    </Parameters>
+    <Variations>
+        <Variation name = "VELOCITY_ALIGNED">
+<![CDATA[
+    #define VELOCITY_ALIGNED 
+]]>
+        </Variation>
+        <Variation name = "DISABLE_BILLBOARD">
+<![CDATA[
+    #define DISABLE_BILLBOARD 
+]]>
+        </Variation>
+    </Variations>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+    uniform float4 psColor;
+]]>
+            </CodeInjection>
+            
+            <CodeInjection position="LIB_FUNCTION_FS">
+<![CDATA[
+float getDepthFade(FS_INPUT In, FS_GLOBALS globals, float fadeDistance)
+{
+    float screenDepth = In.vs.screenPosZ / In.vs.screenPosW * 0.5 + 0.5;
+    float screenDepthLinear = convertDepthToEyeZ(screenDepth);
+    float sceneDepthLinear = convertDepthToEyeZ(getSceneDepth(In, globals));
+    return saturate((sceneDepthLinear - screenDepthLinear)/fadeDistance);
+}
+]]>
+            </CodeInjection>            
+            
+            
+            <CodeInjection position = "CONFIG_DEFINES">
+<![CDATA[
+#if defined( VELOCITY_ALIGNED )
+    #define PARTICLE_SYSTEM_VELOCITY_ALIGNED
+#endif
+#if defined( DISABLE_BILLBOARD )
+    #undef PARTICLE_SYSTEM_BILLBOARD
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_LIGHTING_FS">
+<![CDATA[
+{
+    float NdotL = clamp(dot(lightDir, normal), 0.25, 1.0);
+    float3 lighting = atten*NdotL * (diffuseShading + specularShading) * lightColor;
+    return lighting;
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+    albedo.rgb *= psColor.rgb;
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+#if defined(PARTICLE_SYSTEM_BILLBOARD) && defined(ALPHA_BLENDED)
+    #if GPU_PROFILE >= GPU_PROFILE_HIGH
+        alpha *= getDepthFade(In, globals, 0.5);
+    #endif
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

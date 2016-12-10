@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="windScale" target="windScale" type="float" defaultValue="1" minValue="0" maxValue="1"/>
+    </Parameters>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+uniform float windScale;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_WORLD_POSE_VS">
+<![CDATA[
+float3 windDirection = float3(1,0,0);
+float windStrength = cShared0*windScale;
+if (windStrength > 0.0001) {
+    // Trunk animation
+    float3 treePos = float3(modelMatrix[0][3] + invViewMatrix[0][3],
+                            modelMatrix[1][3] + invViewMatrix[1][3],
+                            modelMatrix[2][3] + invViewMatrix[2][3]);
+    float3 windSideDirection = cross(float3(0,1,0), windDirection);
+
+    float treeVarSeed = treePos.x + treePos.y + treePos.z;
+
+    float3 trunkMoveDirection = windDirection;
+    trunkMoveDirection = normalize(trunkMoveDirection + windSideDirection*sin(0.9 * cTime_s + treeVarSeed + 0.1)*0.3);
+
+    float normalizedTreeY = In.position.y/30;
+    float trunkOffsetScale = (1*max(windStrength-0.1,0)/0.9 + sin( 1.5 * cTime_s + treeVarSeed)*0.7*windStrength)*normalizedTreeY*normalizedTreeY;
+    float3 trunkOffset = trunkMoveDirection * trunkOffsetScale;
+
+
+    // Branch animation
+    float branchVarSeed = (In.position.x+In.position.y)*1.2 + treeVarSeed;
+
+    float branchDistanceToTrunk = saturate(In.normal.w*100 / 3.0);
+
+    float3 branchMoveDirection = windDirection;
+    branchMoveDirection = normalize(branchMoveDirection + windSideDirection*sin(branchVarSeed)*0.3);
+
+    float branchMove1 = sin( 0.8 * cTime_s + branchVarSeed);
+    float branchMove2 = sin( 5 * cTime_s + branchVarSeed);
+
+    float branchMove = lerp(branchMove1, branchMove2, windStrength);
+    branchMove *= (windStrength * 0.8 +0.2) * 0.2;
+    branchMove *= branchDistanceToTrunk;
+
+    worldPosition += branchMoveDirection*branchMove + trunkOffset;
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_LIGHTING_FS">
+<![CDATA[
+{
+    float NdotL = dot(normal, lightDir);    
+    if (NdotL < 0) {
+        NdotL = -NdotL*0.35;
+    }
+    NdotL = min(NdotL, 1);
+    float3 lighting = atten*NdotL * (diffuseShading + specularShading) * lightColor;
+    return lighting;
+}
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

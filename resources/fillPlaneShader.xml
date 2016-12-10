@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="uvScale" target="uvScale" type="float3" defaultValue="0.5 0.5 0.5 1" />
+        <Parameter name="uvOffset" target="uvOffset" type="float3" defaultValue="0 0 0 1" />
+    </Parameters>
+    <Textures>
+    </Textures>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="CONFIG_DEFINES">
+<![CDATA[
+//#define ALBEDO_MAP
+//#define NORMAL_MAP
+//#define GLOSS_MAP
+#define ALPHA_TESTED
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+float2 defaultTexCoords1 : TEXCOORDn;
+float2 defaultTexCoords2 : TEXCOORDn;
+float4 blendNormal : TEXCOORDn;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "MATERIALINFO">
+<![CDATA[
+uniform float3 uvScale;
+uniform float3 uvOffset;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+Out.defaultTexCoords = (In.position.xz + uvOffset.xz) * uvScale.xz;
+Out.defaultTexCoords1 = (In.position.xy + uvOffset.xy) * uvScale.xy;
+Out.defaultTexCoords2 = (In.position.zy + uvOffset.zy) * uvScale.zy;
+Out.blendNormal.xyz = normalize(getNormal(In));
+Out.blendNormal.w = In.normal.w;
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_NORMAL_VS">
+<![CDATA[
+    // convert from ubyte to [-1,1] range
+    return In.normal.xyz-0.5;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+#ifdef ALBEDO_MAP
+{
+    float3 blendWeights = pow(abs(In.vs.blendNormal.xyz), 2.5);
+    blendWeights /= (blendWeights.x + blendWeights.y + blendWeights.z);
+
+    float3 albedo2 = tex2D(baseMap, In.vs.defaultTexCoords1).xyz;
+    float3 albedo3 = tex2D(baseMap, In.vs.defaultTexCoords2).xyz;
+
+    albedo.xyz = albedo.xyz*blendWeights.y + albedo2*blendWeights.z + albedo3*blendWeights.x;
+    albedo.w = 1.0;
+}
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+{
+    alpha = In.vs.blendNormal.w;
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="DO_ALPHA_TEST_FS">
+<![CDATA[
+#if !defined(DIFFUSE)
+    clip( alphaValue - 0.009);
+#endif
+    return;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GLOSS_COLOR_FS">
+<![CDATA[
+#ifdef GLOSS_MAP
+{
+    float3 blendWeights = pow(abs(In.vs.blendNormal.xyz), 2.5);
+    blendWeights /= (blendWeights.x + blendWeights.y + blendWeights.z);
+
+    float3 glossColor2 = tex2D(glossMap, In.vs.defaultTexCoords1).xyz;
+    float3 glossColor3 = tex2D(glossMap, In.vs.defaultTexCoords2).xyz;
+
+    glossColor = glossColor*blendWeights.y + glossColor2*blendWeights.z + glossColor3*blendWeights.x;
+}
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_NORMAL_FS">
+<![CDATA[
+// Our normal is always in world space
+#ifdef NORMAL_MAP
+{
+    float3 blendWeights = pow(abs(In.vs.blendNormal.xyz), 2.5);
+    blendWeights /= (blendWeights.x + blendWeights.y + blendWeights.z);
+
+    float3 normal1 = tex2D(normalMap, In.vs.defaultTexCoords).xyz - 0.5;
+    float3 normal2 = tex2D(normalMap, In.vs.defaultTexCoords1).xyz - 0.5;
+    float3 normal3 = tex2D(normalMap, In.vs.defaultTexCoords2).xyz - 0.5;
+
+    float3 signedNormalsZ = sign(In.vs.blendNormal.xyz)*float3(normal3.z, normal1.z, normal2.z);
+
+    normal1 = float3(normal1.x, signedNormalsZ.y, -signedNormalsZ.y*normal1.y);
+    normal2 = float3(normal2.x, -signedNormalsZ.z*normal2.y, signedNormalsZ.z);
+    normal3 = float3(signedNormalsZ.x, -signedNormalsZ.x*normal3.y, normal3.x);
+
+    float3 blendedNormal = normal1*blendWeights.y + normal2*blendWeights.z + normal3*blendWeights.x;
+    blendedNormal = mul((float3x3) modelMatrix, blendedNormal);
+
+    return normalize(blendedNormal);
+}
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="PARALLAX_MAPPING_FS">
+<![CDATA[
+#ifdef PARALLAX_MAP
+{
+    // TODO handle parallax mapping
+
+}
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="FINAL_POS_FS">
+<![CDATA[
+//oColor.xyz *= 0.001;
+//oColor.xyz += In.vs.blendNormal.w; //getNormal(In, globals);
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

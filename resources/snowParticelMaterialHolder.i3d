@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="particle_materialHolder" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="7.0.5"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="fx_snow4x1_diffuse.png" relativePath="true"/>
+    <File fileId="2" filename="fx_snow4x1_normal.png" relativePath="true"/>
+    <File fileId="3" filename="psColorShader.xml" relativePath="true"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="fx_snow_mat" materialId="8" ambientColor="1 1 1" customShaderId="3">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <CustomParameter name="psColor" value="1 1 1 1"/>
+    </Material>
+    <Material name="lambert1" materialId="6" diffuseColor="0.494118 0.494118 0.494118 1" ambientColor="1 1 1">
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="snowParticelMaterialHolder.i3d.shapes">
+  </Shapes>
+
+
+  <Dynamics>
+    <ParticleSystem name="snowEmitter" dynamicId="3" type="sprite" rate="0.1" lifespan="1200" maxCount="350" speed="0.013" speedRandom="0.005" tangentSpeed="0.1" normalSpeed="1" emitterShapeVelocityScale="0.2" damping="0.94" spriteScaleX="0.6" spriteScaleY="0.6" spriteScaleXGain="0.0005" spriteScaleYGain="0.0005" blendFactor="1" blendInFactor="0.05" blendOutFactor="0.8" randomInitRotation="true" deltaRotateMin="-0.0015708" deltaRotateMax="0.0015708" textureAtlasSizeX="4">
+      <Gravity force="0 -0.5 0"/>
+    </ParticleSystem>
+    <ParticleSystem name="snowEmitter" dynamicId="1" type="sprite" rate="0.25" lifespan="800" maxCount="350" speed="0.002" speedRandom="0" tangentSpeed="0.01" normalSpeed="1" emitterShapeVelocityScale="0.75" spriteScaleX="0.5" spriteScaleY="0.5" blendFactor="1" blendInFactor="0" blendOutFactor="1" randomInitRotation="true" deltaRotateMin="-0.0015708" deltaRotateMax="0.0015708" textureAtlasSizeX="4">
+      <Gravity force="0 -1.5 0"/>
+    </ParticleSystem>
+  </Dynamics>
+
+  <Scene>
+    <TransformGroup name="smokeParticleSystems" nodeId="16">
+      <TransformGroup name="snow" nodeId="17">
+        <Dynamic dynamicId="1" emitterShapeNodeId="20" name="snowEmitter" clipDistance="100" nodeId="19" materialIds="8" distanceBlending="false">
+          <Shape shapeId="2" name="emitShape" nodeId="20" materialIds="6" nonRenderable="true"/>
+        </Dynamic>
+      </TransformGroup>
+    </TransformGroup>
+    <TransformGroup name="strawParticleSystems" nodeId="21"/>
+    <TransformGroup name="chopperParticleSystems" nodeId="22"/>
+    <TransformGroup name="unloadingParticles" nodeId="23">
+      <TransformGroup name="snow" nodeId="24">
+        <Dynamic dynamicId="1" emitterShapeNodeId="27" name="snowEmitter" clipDistance="100" nodeId="26" materialIds="8" distanceBlending="false">
+          <Shape shapeId="2" name="emitShape" nodeId="27" materialIds="6" nonRenderable="true"/>
+        </Dynamic>
+      </TransformGroup>
+    </TransformGroup>
+    <TransformGroup name="spreaderParticles" nodeId="28">
+      <TransformGroup name="snow" nodeId="29">
+        <Dynamic dynamicId="3" emitterShapeNodeId="32" name="snowEmitter" clipDistance="100" nodeId="31" materialIds="8" distanceBlending="false">
+          <Shape shapeId="4" name="emitShape" scale="1 0.1 0.2" nodeId="32" materialIds="6" nonRenderable="true"/>
+        </Dynamic>
+      </TransformGroup>
+    </TransformGroup>
+    <TransformGroup name="cutterChopper" nodeId="33"/>
+    <TransformGroup name="soil" nodeId="34"/>
+    <TransformGroup name="windrower" nodeId="35"/>
+    <TransformGroup name="tedder" nodeId="36"/>
+    <TransformGroup name="weeder" nodeId="37"/>
+    <TransformGroup name="forestry" nodeId="38"/>
+    <TransformGroup name="harvesting" nodeId="39"/>
+    <TransformGroup name="washer" nodeId="40"/>
+    <TransformGroup name="pickup" nodeId="41"/>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="19">
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateParticleSystem"/>
+      <Attribute name="particleType" type="string" value="UNLOADING"/>
+    </UserAttribute>
+    <UserAttribute nodeId="26">
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateParticleSystem"/>
+      <Attribute name="particleType" type="string" value="UNLOADING"/>
+    </UserAttribute>
+    <UserAttribute nodeId="31">
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateParticleSystem"/>
+      <Attribute name="particleType" type="string" value="SPREADER"/>
+    </UserAttribute>
+  </UserAttributes>
+
+</i3D>

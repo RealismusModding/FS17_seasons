@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="VertxoffsetVertexdeformMotionUVscale" target="VertxoffsetVertexdeformMotionUVscale" type="float4" defaultValue = "-7.0 1.0 0.0 1.5" minValue = "-100.0 -1.0 -10.0 -10.0" maxValue = "100.0 1.0 10.0 10.0"/>
+    </Parameters>
+    <Variations>
+        <Variation name = "LEVELER">
+<![CDATA[
+    #define LEVELER
+]]>
+        </Variation>
+    </Variations>
+    <LodLevel startDistance = "0">
+        <CodeInjections>
+            <CodeInjection position="SAMPLERS">
+<![CDATA[
+    sampler2D Mask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+    uniform float4 VertxoffsetVertexdeformMotionUVscale;
+    /*
+        Vertxoffset  - scale vertexes into negative Y direction ( set by artist )
+        Vertexdeform - dynamic parameter ( 0 .. 1 ), 0 - minimum hight, 1 - maximum hight ( set by script )
+        Motion       - dynamic parameter, should be changed by time and speed of the vehicle ( set by script )
+        UVscale      - scale of the source texture ( set by artist )
+    */
+]]>
+            </CodeInjection>
+            <CodeInjection position="LIB_FUNCTION_FS">
+<![CDATA[
+float getDepthFade(FS_INPUT In, FS_GLOBALS globals, float fadeDistance)
+{
+    float screenDepth = In.vs.screenPosZ / In.vs.screenPosW * 0.5 + 0.5;
+    float screenDepthLinear = convertDepthToEyeZ(screenDepth);
+    float sceneDepthLinear = convertDepthToEyeZ(getSceneDepth(In, globals));
+    return saturate((sceneDepthLinear - screenDepthLinear)/fadeDistance);
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_POSITION_VS">
+<![CDATA[
+    // =================================
+    float mMotion = 0.25 * VertxoffsetVertexdeformMotionUVscale.z;
+    float mSpeedPos1 = ( In.position.y + In.position.z ) + 1.0 * mMotion;
+    float mSpeedPos2 = In.position.z - abs( In.position.y + In.position.x  ) + 2.0 * mMotion;
+    float4 mSinCos;
+    sincos( 16.24 * mSpeedPos1 + 13.5, mSinCos.x, mSinCos.y );
+    sincos(  6.50 * mSpeedPos2       , mSinCos.z, mSinCos.w );
+    float2 texCoord0 = In.texCoords0.xy;
+    float3 offset1 = 1.00 * In.normal.xyz * (  mSinCos.x + mSinCos.y ) * texCoord0.x * texCoord0.x;
+    float3 offset2 = 0.20 * In.normal.xyz * (  mSinCos.z + mSinCos.w ) * texCoord0.x ;
+    float3 mDeformedPosition1 = offset1 + offset2;
+#if defined( LEVELER )
+    mDeformedPosition1 *= 2;
+
+    float3 mDeformedPosition2 = In.position.xyz;
+    mDeformedPosition2.y = (In.position.y + 0.7)*lerp(1/(VertxoffsetVertexdeformMotionUVscale.x+0.7), 1, VertxoffsetVertexdeformMotionUVscale.y) - 0.7;
+    mDeformedPosition2.x = In.position.x * (VertxoffsetVertexdeformMotionUVscale.y*0.2 + 0.8);
+    mDeformedPosition2.z = In.position.z * (VertxoffsetVertexdeformMotionUVscale.y*0.3 + 0.7);
+    return mDeformedPosition1 + mDeformedPosition2;
+#else
+    // =================================
+    // FADEIN
+    float3 mDeformedPosition2 = lerp( VertxoffsetVertexdeformMotionUVscale.x * float3( 0, 1, 0 ) * texCoord0.x, float3( 0, 0, 0 ), VertxoffsetVertexdeformMotionUVscale.y );
+    return In.position.xyz + mDeformedPosition1 + mDeformedPosition2;
+#endif
+    // =================================
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+#if defined( LEVELER )
+    //Out.defaultTexCoords = (worldPosition.xz+float2(invViewMatrix[0][3], invViewMatrix[2][3]))*1.6;
+    Out.defaultTexCoords *= VertxoffsetVertexdeformMotionUVscale.w ;
+#else
+    float mSpeed    = 0.25 * VertxoffsetVertexdeformMotionUVscale.z ;
+    float mUVscale  = VertxoffsetVertexdeformMotionUVscale.w ;
+    Out.defaultTexCoords   = mUVscale.x * Out.defaultTexCoords  + float2( mSpeed * mUVscale, 0 );
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+    float4 gVertexColor;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "START_FS">
+<![CDATA[
+    globals.gVertexColor = float4( 1.0,1.0,1.0,1.0 );
+#if defined( LEVELER ) && defined( VERTEX_COLOR )
+    globals.gVertexColor = In.vs.vertexColor.rgba;
+    #undef VERTEX_COLOR
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+#if defined( LEVELER ) && defined( ALPHA_BLENDED )
+    #if GPU_PROFILE >= GPU_PROFILE_MEDIUM
+        float mDepthFade = getDepthFade(In, globals, 0.5);
+        alpha = lerp(alpha*mDepthFade,1.0,mDepthFade);
+        alpha = lerp(alpha, 1.0, globals.gVertexColor.a);
+    #else
+        alpha = 1.0;
+    #endif
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

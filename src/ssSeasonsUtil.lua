@@ -47,7 +47,8 @@ ssSeasonsUtil.seasons = {
 }
 
 function ssSeasonsUtil:load(savegame, key)
-    self.daysInSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10)
+    self.daysInSeason = math.floor(ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 12) / 3) * 3
+	self.daysInMonth = self.daysInSeason / 3;
     self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", 1)
     self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 1)
 end
@@ -126,6 +127,29 @@ function ssSeasonsUtil:year(dayNumber)
     return math.floor((dayNumber - 1) / (self.daysInSeason * self.seasonsInYear))
 end
 
+-- Get the InGame date in for seasons and InGame day
+function ssSeasonsUtil:getInGameDate(dayNumber)
+	if (dayNumber == nil) then
+		dayNumber = self:currentDayNumber() + (g_currentMission.environment.currentHour / 24) + (g_currentMission.environment.currentMinute / 60 / 24) - 1
+	end
+
+	local year, monthDec = math.modf(dayNumber / self.seasonsInYear / self.daysInSeason)
+	if monthDec > 0 then year = year + 1 end
+	local month, dayDec = math.modf(monthDec * 12)
+	if dayDec > 0 then month = month + 1 end
+	-- we have a month offset of 2, so the game beginns in spring (march, 3th month of year)
+	month = month + 2
+	if month > 12 then month = month - 12 end
+	local dayFactor = 31
+	if month == 2 then dayFactor = 28
+	elseif month == 4 or month == 6 or month == 9 or month == 11 then dayFactor = 30
+	end
+	local day, timeDec = math.modf(dayDec * dayFactor)
+	if timeDec > 0 then day = day + 1 end
+	-- log("SeasonUtil - getInGameDate "..tostring(year + 2015).."/"..tostring(month).."/"..tostring(day))
+	return (year + 2015), math.min(math.max(month,1),12), math.min(math.max(day,1),dayFactor)
+end
+
 -- This function calculates the real-ish daynumber from an ingame day number
 -- Used by function that calculate a realistic weather / etc
 -- Spring: Mar (60)  - May (151)
@@ -172,7 +196,7 @@ function ssSeasonsUtil:seasonName(dayNumber)
     return self.seasons[self:season(dayNumber)]
 end
 
--- 1 = spring, 3 = winter
+-- 0 = spring, 3 = winter
 function ssSeasonsUtil:isSeason(seasonNumber)
     return self:season() == seasonNumber
 end

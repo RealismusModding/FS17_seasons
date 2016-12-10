@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="fadeProgress"        target="fadeProgress"        type="float4" defaultValue = "1.0 1.0 0.0 0.0" minValue = "-1.0 -1.0 0.0 0.0"       maxValue = "1.0 1.0 1.0 1.0"/>
+        <Parameter name="uvScaleSpeedFreqAmp" target="uvScaleSpeedFreqAmp" type="float4" defaultValue = "1 1 5.0 0.05"     minValue = "-10.0 -10.0 -10.0 -10.0" maxValue = "10.0 10.0 10.0 10.0"/>
+        <Parameter name="shapeScaleSpread"    target="shapeScaleSpread"    type="float4" defaultValue = "0.4 0.2 0.0 0.0"/>
+        <Parameter name="controlPoint"        target="controlPoint"        type="float4" defaultValue = "10.0 0.25 1.0 0.0"/>
+        <Parameter name="alphaRemap"          target="alphaRemap"          type="float4" defaultValue = "0.0 1.0 0.0 0.0"/>
+    </Parameters>
+    <Textures>
+        <Texture name="fadeMask" defaultColorProfile = "linearRGB" defaultFilename = "fx_mask01_diffuse.png" defaultWrap="false"/>
+        <Texture name="Mask"     defaultColorProfile = "linearRGB" defaultFilename = "fx_clouds01_diffuse.png"/>
+    </Textures>
+    <LodLevel startDistance = "0" alphaForceMode = "use">
+        <CodeInjections>
+            <CodeInjection position="SAMPLERS">
+<![CDATA[
+    sampler2D fadeMask;
+    sampler2D Mask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+/*
+    fadeProgress.x - FadeIN:    start = -1.0 end = 1.0
+    fadeProgress.y - FadeOUT:   start = 1.0 end = -1.0
+*/
+    uniform float4 fadeProgress;
+/*
+    uvScaleSpeedFreqAmp.x - uvScale of the albedo and normal
+    uvScaleSpeedFreqAmp.y - speed of the albedo and normal uv scroll
+    uvScaleSpeedFreqAmp.z - frequence of the vertex deform sinus 
+    uvScaleSpeedFreqAmp.w - amplitude of the vertex deform sinus
+*/
+    uniform float4 uvScaleSpeedFreqAmp;
+/*
+    Initial shape parameters
+    shapeScaleSpread.x - width
+    shapeScaleSpread.y - hight
+    shapeScaleSpread.z - spread at the end
+*/
+    uniform float4 shapeScaleSpread;
+/*
+    controlPoint.x - distance to the point
+    controlPoint.y - bending in radians
+*/
+    uniform float4 controlPoint;
+    uniform float4 alphaRemap;
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+float2 defaultTexCoords2 : TEXCOORDn;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+    float uvProportionScaleFactor = 1.0;
+    float mControlPoint      = max( controlPoint.x, 0.001);
+    float mSpread            = shapeScaleSpread.z;
+    mSpread                  = max( 1, 1 + mSpread );  
+    Out.defaultTexCoords     = convertDefaultTexCoords( In, In.texCoords0.xy );
+    Out.defaultTexCoords2    = convertDefaultTexCoords( In, In.texCoords1.xy );
+    float mGrad              = Out.defaultTexCoords.x;
+    uvProportionScaleFactor  = mControlPoint;
+    Out.defaultTexCoords.x  *= uvProportionScaleFactor;
+    Out.defaultTexCoords2.x *= uvProportionScaleFactor;
+    uvProportionScaleFactor  = lerp( 1, mSpread, mGrad );
+    Out.defaultTexCoords.y  *= uvProportionScaleFactor;
+    Out.defaultTexCoords2.y *= uvProportionScaleFactor;
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_POSITION_VS">
+<![CDATA[
+    float4 mVertexColor      = In.color.rgba;
+    float2 mUV               = convertDefaultTexCoords( In, In.texCoords0.xy ); 
+    float  mGrad             = mUV.x;
+    //float  mGradSide         = abs(In.position.y) + 0.2;
+    float  mGradSide         = In.color.g;
+    float3 mDeformedPosition = In.position.xyz;
+    mDeformedPosition.z     /= 10; 
+    // =================================
+    // FADEIN FADEOUT DEFORM
+    float mFadeIn  = 0.5 * ( fadeProgress.x ) + 0.5;
+    float mFadeOut = 0.5 * ( fadeProgress.y ) + 0.5;
+    mDeformedPosition = lerp( -0.025 * In.normal.xyz, mDeformedPosition, mFadeIn  );
+    mDeformedPosition = lerp( -0.025 * In.normal.xyz, mDeformedPosition, mFadeOut );
+    // =================================
+    // INIT DEFORM
+    float mSpread         = shapeScaleSpread.z;
+    mSpread               = max( 1, 1 + mSpread );    
+    mDeformedPosition.xy  = lerp( mDeformedPosition.xy, mDeformedPosition.xy * mSpread, mGrad );
+    float2 mShapeScale    = max( shapeScaleSpread.xy, 0.001 );
+    mDeformedPosition.xy *= mShapeScale.xy;
+    // =================================
+    // OVER SIZE
+    float mControlPoint = max( controlPoint.x, 0.001);
+    mControlPoint -= 1.0;
+    mDeformedPosition.z += mControlPoint * mGrad;
+    // =================================
+    // ANIMATION
+    float mSpeed        = 5 * uvScaleSpeedFreqAmp.y * cTime_s;
+    float mFrequency    = mSpeed - mDeformedPosition.z * uvScaleSpeedFreqAmp.z;
+    float mAmplitude    = uvScaleSpeedFreqAmp.w * mGrad * mGradSide;
+    float mOffset       = ( 0.5 * sin( mFrequency ) + 0.5 ) * mAmplitude;
+    mDeformedPosition  += mOffset * In.normal.xyz;
+    // =================================
+    // ROTATION
+    float3 newPos   = mDeformedPosition;
+    float mAngle    = controlPoint.y;
+    float mPowGrad  = max( controlPoint.z, 0.01 );
+    //mGrad = pow(mGrad,mPowGrad);
+    mGrad = clamp( sin( 1.5 * mGrad),0,1);
+    //mGrad           = mGrad * mGrad;
+    float mCos      = cos(mAngle);
+    float mSin      = sin(mAngle);
+    float3 v1       = float3(0.0, 0.0, 0.0);
+    float3 v2       = float3(0.0, 0.0, 0.0);
+    v1.y = mCos; v1.z = -mSin;
+    v2.y = mSin; v2.z = mCos;
+    newPos.y = dot( mDeformedPosition, v1 );
+    newPos.z = dot( mDeformedPosition, v2 );
+    mDeformedPosition = lerp( mDeformedPosition, newPos, mGrad );
+    // =================================
+    return mDeformedPosition;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+    float4 gUV;
+    float4 gVertexColor;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "START_FS">
+<![CDATA[
+    globals.gVertexColor = float4( 1.0,1.0,1.0,1.0 );
+#if defined( VERTEX_COLOR )
+    globals.gVertexColor = In.vs.vertexColor.rgba;
+    #undef VERTEX_COLOR
+#endif
+    float mSpeed     = - uvScaleSpeedFreqAmp.y * cTime_s;
+    float mUVscale   = uvScaleSpeedFreqAmp.x ;
+    globals.gUV.rg   = mUVscale * In.vs.defaultTexCoords  + float2( mSpeed * mUVscale, 0.00 );
+    globals.gUV.ba   = mUVscale * In.vs.defaultTexCoords2 + float2( mSpeed * mUVscale, 0.15 );
+]]>
+            </CodeInjection>
+            <CodeInjection position = "GET_UNNORMALIZED_TANGENT_SPACE_NORMAL_FS">
+<![CDATA[
+ #if defined( NORMAL_MAP )
+    float3 mNormalA      = tex2D( normalMap, globals.gUV.rg ).xyz;
+    float3 mNormalB      = tex2D( normalMap, globals.gUV.ba ).xyz;
+    float3 mResultNormal = lerp( mNormalB, mNormalA, globals.gVertexColor.b ) - 0.5;
+    return mResultNormal;
+ #endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+#if defined( ALBEDO_MAP )
+    float4 mResultColor = albedo.rgba;
+    float4 mA           = tex2D( baseMap, globals.gUV.rg ).rgba;
+    float4 mB           = tex2D( baseMap, globals.gUV.ba ).rgba;
+    mResultColor        = lerp( mB, mA, globals.gVertexColor.b );
+    albedo.rgb          = mResultColor.rgb;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GLOSS_COLOR_FS">
+<![CDATA[
+#if defined( SPECULAR ) && defined( ALPHA_BLENDED )
+    #undef SPECULAR // Disable specular color
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+    float2 mUV1         = In.vs.defaultTexCoords;
+    float2 mUV2         = In.vs.defaultTexCoords2;
+    float mControlPoint = max( controlPoint.x, 0.001);
+    float mEnd1         = tex2D( Mask, 0.5 * ( mUV1 - float2( -0.8, 0.05 ) * mSpeed  ) ).b * tex2D( Mask, 0.76 * ( mUV1 - float2( -1.2, 0.02 ) * mSpeed  ) ).b ;
+    float mEnd2         = tex2D( Mask, 0.5 * ( mUV2 - float2( -0.8, 0.05 ) * mSpeed  ) ).b * tex2D( Mask, 0.76 * ( mUV2 - float2( -1.2, 0.02 ) * mSpeed  ) ).b ;
+    float mEnd3         = lerp( mEnd2, mEnd1, globals.gVertexColor.b );
+    mUV1.x             /= mControlPoint; 
+    mUV2.x             /= mControlPoint;
+    float mEndAlpha     = 1 - mUV1.x * mEnd3 * mEnd3  + 0.25 * ( 1 - mUV1.x );
+    mEndAlpha          *= globals.gVertexColor.a * mResultColor.a;
+    // =================================
+    float mFadeIN       = 1.0;
+    float mFadeOUT      = 1.0;
+    // -1.0 ==>  1.0
+    mFadeIN             = tex2D( fadeMask, float2( fadeProgress.x, 0 ) + ( 1 - mUV1 ) ).r;
+    //  1.0 ==> -1.0
+    mFadeOUT            = tex2D( fadeMask, float2( fadeProgress.y, 0 ) + mUV1  ).r; 
+    // =================================
+    float mAlphaValue = mEndAlpha * mFadeIN * mFadeOUT;    
+    alpha             = lerp( alphaRemap.x, alphaRemap.y, saturate(mAlphaValue) );
+]]>
+            </CodeInjection>
+            <CodeInjection position = "NUM_TEXCOORDS">
+<![CDATA[
+#if GPU_PROFILE < GPU_PROFILE_MEDIUM
+    #if defined( REFLECTION_MAP_CUBE )
+        #undef REFLECTION_MAP_CUBE
+    #endif
+    #if defined( NORMAL_MAP )
+        #undef NORMAL_MAP
+    #endif
+    #if defined( SPECULAR )
+        #undef SPECULAR
+    #endif
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FINAL_POS_FS">
+<![CDATA[
+#if defined(DEBUG_SHOW_PARALLAX)
+    oColor.xyz *= 0.0001;
+    oColor.xyz += mEndAlpha;
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>
