@@ -178,7 +178,7 @@ function ssGrowthManager:loadMap(name)
         return
     end
     
-    if g_currentMission:getIsServer() then
+    --if g_currentMission:getIsServer() then
         ssSeasonsMod.addGrowthStageChangeListener(self)
 
        --lock changing the growth speed option and set growth rate to 1 (no growth)
@@ -202,7 +202,7 @@ function ssGrowthManager:loadMap(name)
 
         self.currentX = 0 -- The row that we are currently updating
         self.currentZ = 0 -- The column that we are currently updating
-    end
+    --end
 end
 
 function ssGrowthManager:deleteMap()
