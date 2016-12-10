@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<!--MAX_GROWTH_STATE = 99; 
+WITHER_STATE = 100;
+FIRST_LOAD_TRANSITION = 999;-->
+
+<growthManager>
+    <defaultFruits>
+        <barley/> 
+        <wheat/> 
+        <rape/> 
+        <maize/> 
+        <soybean/> 
+        <sunflower/> 
+        <potato/> 
+        <sugarBeet/> 
+        <poplar/> 
+        <grass/> 
+        <oilseedRadish/> 
+        <dryGrass/>
+    </defaultFruits>
+    <!--<growthTransitions>
+        <1> 
+            <barley fruitName="barley" normalGrowthState=1 normalGrowthMaxState=3/>
+			<wheat fruitName="wheat" normalGrowthState=1 normalGrowthMaxState=3/>					
+			<rape fruitName="rape" normalGrowthState=1 normalGrowthMaxState=3/>
+			<maize fruitName="maize" normalGrowthState=1/>
+			<soybean fruitName="soybean" setGrowthState=1 desiredGrowthState=100/>
+			<sunflower fruitName="sunflower" setGrowthState=1 desiredGrowthState=100/>
+			<potato fruitName="potato" normalGrowthState=1/>
+            <sugarBeet fruitName="sugarBeet", normalGrowthState=1/>
+            <poplar fruitName="poplar" normalGrowthState=1 normalGrowthMaxState=99/>
+            <grass	fruitName="grass" normalGrowthState=1 normalGrowthMaxState=99/>
+            <oilseedRadish>	fruitName="oilseedRadish" normalGrowthState=1 normalGrowthMaxState=99/>
+            <default> fruitName="default" normalGrowthState=1 normalGrowthMaxState=3>      
+        </1>
+        <2> </2>
+        <3> </3>
+        <4> </4>
+        <5> </5>
+        <6> </6>
+        <7> </7>
+        <8> </8>
+        <9> </9>
+        <10> </10>
+        <11> </11>
+        <12> </12>
+    </growthTransitions>    -->
+</growthManager>

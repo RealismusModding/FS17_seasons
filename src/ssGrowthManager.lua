@@ -17,7 +17,7 @@ function Set (list)
   return set
 end
 
-ssGrowthManager.defaultFruits = Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
+ssGrowthManager.defaultFruits = nil;--Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
 
 ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
@@ -186,6 +186,8 @@ function ssGrowthManager:loadMap(name)
        g_currentMission:setPlantGrowthRateLocked(true);
        log("Growth Manager loading. Locking growth");
 
+       self:loadFromXML();
+
         if not (self.hasResetGrowth) then 
             self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
             self.doGrowthTransition = true;
@@ -205,6 +207,24 @@ function ssGrowthManager:loadMap(name)
     --end
 end
 
+
+function ssGrowthManager:loadFromXML()
+    -- local elements = {
+    --     ["defaultFruits"] = {}
+    -- }
+    -- local data1 = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
+    -- local data2 = ssSeasonsXML:getTypes(data1,"defaultFruits");
+    -- print_r(data2);
+
+    -- self.defaultFruits = Set(data2);
+    -- print_r(self.defaultFruits);
+    -- log("GM: Loading data");
+
+    --self.data = 
+    -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
+    -- FIXME: find the location of the map
+end
+
 function ssGrowthManager:deleteMap()
 end
 
@@ -214,13 +234,17 @@ end
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
 
-        -- for index,fruit in pairs(g_currentMission.fruits) do
-        --     local desc = FruitUtil.fruitIndexToDesc[index]
-        --     local fruitName = desc.name
-        --     if (self.defaultFruits[fruitName] == nil) then
-        --         log("Fruit not found in default table: " .. fruitName);
-        --     end
-        -- end
+        for index,fruit in pairs(g_currentMission.fruits) do
+            local desc = FruitUtil.fruitIndexToDesc[index]
+            local fruitName = desc.name
+            if (self.defaultFruits[fruitName] == nil) then
+                log("GM: Fruit not found in default table: " .. fruitName);
+            else
+                log("GM: Fruit " .. fruitName .. " found");
+            end
+
+        end
+
         -- self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason
         -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) )
         --self:seasonChanged()
@@ -346,12 +370,7 @@ function ssGrowthManager:update(dt)
 
                     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
 
-
                         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState
-
-                        -- print("Fruit: " .. fruitName)
-                        -- print("MinState: " .. minState)
-                        -- print("Maxstate: " .. maxState)
 
                         if maxState == MAX_GROWTH_STATE then
                             maxState = fruitData.numGrowthStates-1
