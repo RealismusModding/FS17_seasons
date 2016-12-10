@@ -15,7 +15,8 @@
 - 7 day weather forecast
 
 ### Crops
-- Winter kills crops
+- Winter kills certain crops
+- Grass is knocked back to stage 1 in the winter
 - Crop growth duration is much, much longer: often half a year
 
 ### Maintenance

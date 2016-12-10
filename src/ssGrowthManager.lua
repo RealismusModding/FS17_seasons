@@ -204,7 +204,9 @@ function ssGrowthManager:loadMap(name)
 
         self.currentX = 0 -- The row that we are currently updating
         self.currentZ = 0 -- The column that we are currently updating
-   -- end
+
+    --end
+
 end
 
 
