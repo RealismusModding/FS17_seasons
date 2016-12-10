@@ -2,8 +2,7 @@
 
 ## Pull Requests
 
-Please read the wiki page regarding pull requests
-https://github.com/RealismusModding/FS17_seasons/wiki/Pull-Requests
+Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected.
 
 ## Features
 
