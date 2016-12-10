@@ -178,7 +178,7 @@ function ssGrowthManager:loadMap(name)
         return
     end
     
-    if g_currentMission:getIsServer() then
+    --if g_currentMission:getIsServer() then
         ssSeasonsMod.addGrowthStageChangeListener(self)
 
        --lock changing the growth speed option and set growth rate to 1 (no growth)
@@ -204,7 +204,7 @@ function ssGrowthManager:loadMap(name)
 
         self.currentX = 0 -- The row that we are currently updating
         self.currentZ = 0 -- The column that we are currently updating
-    end
+   -- end
 end
 
 
@@ -223,6 +223,27 @@ function ssGrowthManager:loadFromXML()
     --self.data = 
     -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
     -- FIXME: find the location of the map
+
+--     function loadFromXML()
+--   self.data = {}
+--   self:loadFile(ssSeasonsMod.modDir.."data/growth.xml")
+--   if file exists mapFolder.."seasons_growth.xml" then
+-- 	  self:loadFile(mapFolder.."seasons_growth.xml")
+--   end
+-- end
+
+-- function loadFile(path)
+
+--  for each possible stage
+--    if self.data[stage] == nil then
+--      self.data[stage] = {}
+--    end
+
+--    for each value thing....
+--    end
+--   end
+-- end
+
 end
 
 function ssGrowthManager:deleteMap()
