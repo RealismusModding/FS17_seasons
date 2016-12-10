@@ -131,7 +131,7 @@ function ssVehicle:loadAllowedInWinter()
         [WorkArea.AREATYPE_RIDGEMARKER] = false,
         [WorkArea.AREATYPE_ROLLER] = true,
         [WorkArea.AREATYPE_SOWINGMACHINE] = false,
-        [WorkArea.AREATYPE_SPRAYER] = false,
+        [WorkArea.AREATYPE_SPRAYER] = true,
         [WorkArea.AREATYPE_TEDDER] = false,
         [WorkArea.AREATYPE_TEDDERDROP] = false,
         [WorkArea.AREATYPE_WEEDER] = false,

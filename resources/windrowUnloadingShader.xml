@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="fadeProgress" target="fadeProgress" type="float4" defaultValue = "1.0 1.0 0.0 0.0"  minValue = "-1.0 -1.0 0.0 0.0" maxValue = "1.0 1.0 1.0 1.0"/>
+        <Parameter name="UVScaleSpeed" target="UVScaleSpeed" type="float4" defaultValue = "4 -2.0 0.0 0.0"   minValue = "-10.0 -10.0 -10.0 -10.0" maxValue = "10.0 10.0 10.0 10.0"/>
+        <Parameter name="MaskChannels" target="MaskChannels" type="float4" defaultValue = "0.5 1.0 0.25 0.0" minValue = "0.0 0.0 0.0 0.0" maxValue = "1.0 1.0 1.0 1.0"/>
+        <Parameter name="ColorAlpha"   target="ColorAlpha"   type="float4" defaultValue = "1.0 1.0 1.0 1.0" minValue = "0.0 0.0 0.0 0.0"  maxValue = "2.0 2.0 2.0 5.0" />
+        <Parameter name="alphaRemap"   target="alphaRemap"   type="float4" defaultValue = "0.0 1.0 0.0 0.0"/>
+    </Parameters>
+    <Textures>
+        <Texture name="fadeMask" defaultColorProfile = "linearRGB" defaultFilename = "fx_mask01_diffuse.png" defaultWrap="false"/>
+        <Texture name="Mask"     defaultColorProfile = "linearRGB" defaultFilename = "fx_clouds01_diffuse.png"/>
+    </Textures>
+    <Variations>
+        <Variation name = "WINDROW_CENTER">
+<![CDATA[
+    #define WINDROW_CENTER
+]]>
+        </Variation>
+        <Variation name = "WINDROW_SIDE">
+<![CDATA[
+    #define WINDROW_SIDE
+]]>
+        </Variation>
+        <Variation name = "WINDROW_SIDE_DIFFUSE">
+<![CDATA[
+    #define WINDROW_SIDE_DIFFUSE
+]]>
+        </Variation>
+        <Variation name = "FERTILIZER">
+<![CDATA[
+    #define FERTILIZER
+]]>
+        </Variation>
+        <Variation name = "WATER">
+<![CDATA[
+    #define WATER
+]]>
+        </Variation>
+    </Variations>
+    <LodLevel startDistance="0" alphaForceMode = "use">
+        <CodeInjections>
+            <CodeInjection position="SAMPLERS">
+<![CDATA[
+    sampler2D fadeMask;
+    sampler2D Mask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+    /*
+    fadeProgress.x - FadeIN:    start = -1.0 end = 1.0
+    fadeProgress.y - FadeOUT:   start = 1.0 end = -1.0
+
+    Fully Visible       fadeProgress.x = 1.0        "1.0 1.0 0.0 0.0"
+                        fadeProgress.y = 1.0
+    Fully Invisible     fadeProgress.x = -1.0       "-1.0 -1.0 0.0 0.0"
+                        fadeProgress.y = -1.0
+
+    In.vs.vertexColor.rgb  - not used yet
+    In.vs.vertexColor.a    - transparency
+    In.texCoords0.x        - transparency
+    In.texCoords1.x        - sin amplitude and frequency offset for vertex shader animation
+    */
+    uniform float4 fadeProgress;
+    uniform float4 UVScaleSpeed;
+    uniform float4 MaskChannels;
+    uniform float4 ColorAlpha;
+    uniform float4 alphaRemap;
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+float2 defaultTexCoords2 : TEXCOORDn;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+    Out.defaultTexCoords2    = convertDefaultTexCoords( In, In.texCoords1.xy );
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_POSITION_VS">
+<![CDATA[
+    float3 mResultPosition = In.position.xyz;
+    float  mSpeed;
+    float3 mSpeedPos;
+    float3 mDeformedPosition = float3(0.0,0.0,0.0);
+#if defined( WINDROW_CENTER )
+    // =================================
+    mSpeed = 1.0 + 3.0 * cTime_s;
+    mSpeedPos = In.position.xyz + mSpeed;
+    // compute sin and cos for this angle
+    float4 mSinCos;
+    sincos( 9.24 * mSpeedPos.z + 13.5, mSinCos.x, mSinCos.y );
+    sincos( 3.50 * mSpeedPos.z       , mSinCos.z, mSinCos.w );
+    float3 offset1 = 6.5 * float3( 0.0, 0.5, -0.5 ) * (  mSinCos.z * mSinCos.y  ) * In.texCoords1.x * In.texCoords1.x;
+    float3 offset2 = 2.5 * float3( 1.0, 0.0, 0.0  ) * (  mSinCos.x * mSinCos.w  ) * In.texCoords1.x * In.texCoords1.x;
+    mDeformedPosition = offset1 + offset2;
+    // =================================
+#endif
+#if defined( WINDROW_SIDE ) || defined( WINDROW_SIDE_DIFFUSE ) || defined( FERTILIZER ) || defined( WATER )
+    // =================================
+    mSpeed =  - 1.0 * cTime_s;
+    mSpeedPos = In.texCoords1.x + mSpeed; // TODO conversion needed?
+    // compute sin and cos for this angle
+    float3 offset = 14.1 * float3( -0.114, 0.163, -0.453 ) * (  sin( 9.24 * mSpeedPos.z + 13.5 ) * cos( 13.50 * mSpeedPos.z  )  ) * In.texCoords1.x * In.texCoords1.x;
+    mDeformedPosition = offset;
+    // =================================
+#endif
+    mResultPosition += mDeformedPosition;
+    return mResultPosition;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+    float  gSpeed;
+    float  gUVscale;
+    float4 gUV;
+    float4 gVertexColor;
+    float  gMask;
+    float  gAlpha;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "START_FS">
+<![CDATA[
+    globals.gVertexColor = float4( 1.0,1.0,1.0,1.0 );
+#if defined( VERTEX_COLOR )
+    globals.gVertexColor = In.vs.vertexColor.rgba;
+    #undef VERTEX_COLOR
+#endif
+    globals.gSpeed   = UVScaleSpeed.y * cTime_s;
+    globals.gUVscale = UVScaleSpeed.x ;
+    globals.gUV.rg   =        globals.gUVscale.x * In.vs.ALBEDOMAP_TEXCOORD + globals.gSpeed * globals.gUVscale.x * float2( 1.0 , -0.05 );
+    globals.gUV.ba   = 1.25 * globals.gUVscale.x * In.vs.ALBEDOMAP_TEXCOORD + globals.gSpeed * globals.gUVscale.x * float2( 1.0 ,  0.15 );
+    globals.gMask    = clamp( dot( MaskChannels.rgba, tex2D( Mask, ( 1 / globals.gUVscale ) * globals.gUV.rg ).rgba ), 0.0, 1.0 );
+    globals.gAlpha   = 1.0;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "GET_UNNORMALIZED_TANGENT_SPACE_NORMAL_FS">
+<![CDATA[
+ #if defined( NORMAL_MAP )
+    float3 mNormal1  = tex2D( normalMap, globals.gUV.rg ).xyz;
+    float3 mNormal2  = tex2D( normalMap, globals.gUV.ba ).xyz;
+    return lerp( mNormal1, mNormal2, globals.gMask ) - 0.5;
+ #endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+    float  mResultAlpha  = 1.0;
+#if defined( ALBEDO_MAP )
+    float4 mResultColor = float4( 1.0, 1.0, 1.0, 1.0 );
+
+    #if defined( WINDROW_CENTER )
+        float4 mA = tex2D( baseMap, globals.gUV.rg ).rgba;
+        float4 mB = tex2D( baseMap, globals.gUV.ba ).rgba;
+        mResultColor.rgb = lerp( mA.rgb, mB.rgb, globals.gMask );
+        mResultAlpha = mA.a + globals.gMask * mB.a;
+    #endif
+    #if defined( WINDROW_SIDE )
+        float4 mRes1        = float4( 1.0, 1.0, 1.0, 1.0 );
+        float4 mRes2        = float4( 1.0, 1.0, 1.0, 1.0 );
+
+        float4 mWindrowA = tex2D( baseMap, globals.gUV.rg ).rgba;
+        float4 mWindrowB = tex2D( baseMap, globals.gUV.ba ).rgba;
+
+        float4 mSmokeA = tex2D( Mask, globals.gUV.gr ).a;
+        float4 mSmokeB = tex2D( Mask, globals.gUV.ab ).a;
+
+        mRes1.rgb = lerp( mWindrowA.rgb, mWindrowB.rgb, globals.gMask );
+        mRes2.rgb = float3( 0.9028, 0.7835, 0.5771 ) * mSmokeA.rgb * mSmokeB.rgb;
+
+        mResultColor.rgb = clamp( 0.5 * mRes1.rgb + 1.0 * mRes2.rgb, 0.0, 1.0 );
+
+        // desaturated RGB
+        mResultAlpha = dot( mResultColor.rgb, float3( 0.30, 0.59,0.11 ) );
+    #endif
+    #if defined( WINDROW_SIDE_DIFFUSE )
+        float4 mA = tex2D( baseMap, globals.gUV.rg ).rgba;
+        float4 mB = tex2D( baseMap, globals.gUV.ba ).rgba;
+        float mSmokeA = tex2D( Mask, globals.gUV.gr ).b;
+        float mSmokeB = tex2D( Mask, globals.gUV.ab ).b;
+
+        mResultColor.rgb = lerp( mA.rgb, mB.rgb, globals.gMask );
+        mResultAlpha = mA.a + globals.gMask * mB.a;
+        mResultAlpha *= lerp( mSmokeA * mSmokeB, 0.0, In.vs.ALBEDOMAP_TEXCOORD );
+    #endif
+    #if defined( FERTILIZER )
+        float mFertA = tex2D( baseMap, globals.gUV.rg ).g;
+        float mFertB = tex2D( baseMap, globals.gUV.ba ).g;
+
+        float mFertR = lerp( mFertA, mFertB, globals.gMask );
+        float mWave = tex2D( Mask, float2( 1.0, 0.1 ) * globals.gUV.rg ).r;
+        mResultAlpha = mFertR * mWave;
+    #endif
+    #if defined( WATER )
+        float mWaterA = tex2D( Mask, UVScaleSpeed.zw * globals.gUV.rg ).g;
+        float mWaterB = tex2D( Mask, UVScaleSpeed.zw * globals.gUV.ba ).g;
+
+        mResultAlpha = lerp( mWaterA, mWaterB, globals.gMask );
+        mResultAlpha = lerp( mResultAlpha, 0, tex2D( Mask, ( 1 / globals.gUVscale ) * globals.gUV.rg ).b );
+    #endif
+
+    mResultAlpha = ColorAlpha.a * mResultAlpha;
+    albedo.rgb   = ColorAlpha.rgb * mResultColor.rgb;
+#endif
+
+    float2 mUV = In.vs.defaultTexCoords2;
+    float mEndAlpha = 1.0;
+#if defined( WINDROW_CENTER )
+    mEndAlpha = pow( mUV.x, 32 );
+    mEndAlpha = clamp( 1 - mEndAlpha, 0.0, 1.0 );
+    mResultAlpha *= mEndAlpha;
+#endif
+#if defined( WINDROW_SIDE ) || defined( FERTILIZER ) || defined( WATER )
+    mEndAlpha = mUV.x * mUV.x * mUV.x;
+    mResultAlpha = saturate( mResultAlpha );
+    mResultAlpha -= mEndAlpha;
+#endif
+    // =================================
+    float mFadeIN  = 1.0;
+    float mFadeOUT = 1.0;
+    // -1.0 ==>  1.0
+    mFadeIN   = tex2D( fadeMask, float2( fadeProgress.x, 0 ) + ( 1 - mUV ) ).r;
+    //  1.0 ==> -1.0
+    mFadeOUT  = tex2D( fadeMask, float2( fadeProgress.y, 0 ) + mUV  ).r;
+    // =================================
+    mResultAlpha *= mFadeIN * mFadeOUT;
+    mResultAlpha *= globals.gVertexColor.a ;
+    globals.gAlpha = lerp( alphaRemap.x, alphaRemap.y, saturate(mResultAlpha) );;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GLOSS_COLOR_FS">
+<![CDATA[
+#if defined( SPECULAR ) && defined( ALPHA_BLENDED )
+    #undef SPECULAR // Disable specular color
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_REFLECTION_COLOR_FS">
+<![CDATA[
+#if defined( REFLECTION_MAP_CUBE )
+    float3 mRes = oColor.xyz;
+    // =============== Reflection Color ========================
+    float3 mReflectionColor = ColorAlpha.rgb;
+    // =========================================================
+    mRes = oColor.xyz + globals.gAlpha * mReflectionColor * getReflectionColorTex( In, globals, normal, tangentSpaceNormal, viewDir ).xyz;
+    return mRes;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+    alpha = globals.gAlpha;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "NUM_TEXCOORDS">
+<![CDATA[
+#if GPU_PROFILE < GPU_PROFILE_MEDIUM
+    #if defined( REFLECTION_MAP_CUBE )
+        #undef REFLECTION_MAP_CUBE
+    #endif
+    #if defined( NORMAL_MAP )
+        #undef NORMAL_MAP
+    #endif
+    #if defined( SPECULAR )
+        #undef SPECULAR
+    #endif
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

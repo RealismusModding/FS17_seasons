@@ -19,139 +19,137 @@ end
 
 ssGrowthManager.defaultFruits = Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
 
-ssGrowthManager.growthData = { 	[1]={ 				
-						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
+-- NOTE: we start with month MARCH, this is the [1], last is [12] == FEBRUARY !!!!
+-- WHY? We start with season spring, and this season starts not in januray, the start is march !
+ssGrowthManager.growthData = { [1]={ 				
+						["barley"]		={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
 						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},					
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
+						["rape"]			={fruitName="rape", normalGrowthState=1},
 						["maize"]			={fruitName="maize", normalGrowthState=1},
-						["soybean"]			={fruitName="soybean", setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["soybean"]		={fruitName="soybean", setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=1},
+						["potato"]		={fruitName="potato", normalGrowthState=1},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=1},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},					
-				}, 
-				
-				[2]={ 	["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
-						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
-						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=2},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=1},
-						["potato"]			={fruitName="potato", normalGrowthState=1, normalGrowthMaxState=2},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=1, normalGrowthMaxState=2},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["poplar"]		={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},
+						["default"]		={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},					
+				}, 
+				
+				[2]={ 	["barley"]		={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
+						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},
+						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=2},
+						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=2},
+						["soybean"]		={fruitName="soybean", normalGrowthState=1},
+						["sunflower"]		={fruitName="sunflower", normalGrowthState=1},
+						["potato"]		={fruitName="potato", normalGrowthState=1, normalGrowthMaxState=2},
+						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=1, normalGrowthMaxState=2},
+						["poplar"]		={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["default"]		={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},
 				},
 				
-				[3]={ 	["barley"]			={fruitName="barley", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+				[3]={ 	["barley"]		={fruitName="barley", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["rape"]			={fruitName="rape", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=3},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=2},
+						["soybean"]		={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=2},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=1, normalGrowthMaxState=2},
-						["potato"]			={fruitName="potato", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["default"]		={fruitName="default", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},
 				
-				[4]={ 	["barley"]			={fruitName="barley",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+				[4]={ 	["barley"]		={fruitName="barley",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["rape"]			={fruitName="rape", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=3},
+						["soybean"]		={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=3},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=2, normalGrowthMaxState=3,setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["poplar"]		={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["default"]		={fruitName="default",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},  
 				
-				[5]={ 	["barley"]			={fruitName="barley", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
+				[5]={ 	["barley"]		={fruitName="barley", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
 						["wheat"]			={fruitName="wheat", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-						["rape"]			={fruitName="rape", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
+						["rape"]			={fruitName="rape", extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=2, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["soybean"]		={fruitName="soybean", normalGrowthState=2, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=3, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
+						["default"]		={fruitName="default", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
 				}, 
 				
-				[6]={ 	["barley"]			={fruitName="barley",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+				[6]={ 	["barley"]		={fruitName="barley",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["rape"]			={fruitName="rape", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["maize"]			={fruitName="maize", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["soybean"]		={fruitName="soybean", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=5, normalGrowthMaxState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", normalGrowthState=5, normalGrowthMaxState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["default"]		={fruitName="default",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 				},
 				
-				[7]={ 	["barley"]			={fruitName="barley",normalGrowthState=1},
-						["wheat"]			={fruitName="wheat",normalGrowthState=1},
-                        ["rape"]			={fruitName="rape",normalGrowthState=1},			 	
+				[7]={ 	["barley"]		={fruitName="barley",normalGrowthState=1},
+						["wheat"]			={fruitName="wheat",normalGrowthState=1},			 	
 						["maize"]			={fruitName="maize", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},	
-						["soybean"]			={fruitName="soybean", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["soybean"]		={fruitName="soybean", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", normalGrowthState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["poplar"]		={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=1},
+						["default"]		={fruitName="default",normalGrowthState=1},
 				}, 	
 				
-				[8]={ 	["barley"]			={fruitName="barley",normalGrowthState=1, normalGrowthMaxState=2,setGrowthState=7,desiredGrowthState=WITHER_STATE},
+				[8]={ 	["barley"]		={fruitName="barley",normalGrowthState=1, normalGrowthMaxState=2,setGrowthState=7,desiredGrowthState=WITHER_STATE},
 						["wheat"]			={fruitName="wheat",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE}, 
+						["rape"]			={fruitName="rape", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE}, 
 						["maize"]			={fruitName="maize", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["soybean"]		={fruitName="soybean", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sunflower"]		={fruitName="sunflower", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", setGrowthState=1,desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1,desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
 						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
- 				},
-
-				[9]={ 	["soybean"]			={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
+						["default"]		={fruitName="default",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
+ 				}, 	
+				[9]={ 	["soybean"]		={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
+						["potato"]		={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
 						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
 						["grass"]			={fruitName="grass", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
+						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
  				},
-
 				[10]={}; -- no growth
 				[11]={}; -- no growth
 				[12]={}; -- no growth
-                [FIRST_LOAD_TRANSITION]={ 				
-						["barley"]			={fruitName="barley", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
+                [FIRST_LOAD_TRANSITION]={
+						["barley"]		={fruitName="barley", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
 						["wheat"]			={fruitName="wheat", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},					
 						["rape"]			={fruitName="rape", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
 						["maize"]			={fruitName="maize", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["soybean"]			={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
+						["soybean"]		={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
 						["sunflower"]		={fruitName="sunflower", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["potato"]			={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
+						["potato"]		={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
 						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["poplar"]			={fruitName="poplar", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["grass"]			={fruitName="grass", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						
-						
+						["poplar"]		={fruitName="poplar", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
+						["grass"]			={fruitName="grass", setGrowthState=2, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=2},
+						["oilseedRadish"]	={fruitName="oilseedRadish", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
+						["default"]		={fruitName="default", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=1},
 				}, 
 
 };
@@ -178,13 +176,14 @@ function ssGrowthManager:loadMap(name)
         return
     end
     
+    --lock changing the growth speed option and set growth rate to 1 (no growth)
+    --we need this on the clients too because on dedicated servers the admin otherwise can change the settings
+    g_currentMission:setPlantGrowthRate(1,nil);
+    g_currentMission:setPlantGrowthRateLocked(true);
+    log("Growth Manager loading. Locking growth");
+
     if g_currentMission:getIsServer() then
         ssSeasonsMod.addGrowthStageChangeListener(self)
-
-       --lock changing the growth speed option and set growth rate to 1 (no growth)
-       g_currentMission:setPlantGrowthRate(1,nil);
-       g_currentMission:setPlantGrowthRateLocked(true);
-       log("Growth Manager loading. Locking growth");
 
         if not (self.hasResetGrowth) then 
             self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
@@ -199,6 +198,9 @@ function ssGrowthManager:loadMap(name)
         else
             self.mapSegments = 16 -- Must be evenly dividable with mapsize.
         end
+
+        -- we want do the fruit check more performance friendly so we need a counter for the growth change
+        self.currentCheckedFruit = 0;
 
         self.currentX = 0 -- The row that we are currently updating
         self.currentZ = 0 -- The column that we are currently updating
@@ -284,6 +286,9 @@ end
 function ssGrowthManager:update(dt)
 
     if self.doGrowthTransition == true then
+        if self.currentCheckedFruit == 0 then
+            self.currentCheckedFruit = FruitUtil.NUM_FRUITTYPES;
+        end
 
         local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
         local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
@@ -294,8 +299,11 @@ function ssGrowthManager:update(dt)
 
         --local detailId = g_currentMission.terrainDetailId
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index]
+        -- for index,fruit in pairs(g_currentMission.fruits) do
+        if self.currentCheckedFruit > 0 then
+            local index = self.currentCheckedFruit;
+            local desc = FruitUtil.fruitIndexToDesc[index];
+            local fruit = g_currentMission.fruits[index]
             local fruitName = desc.name
 
             local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
@@ -381,6 +389,7 @@ function ssGrowthManager:update(dt)
 
         end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
 
+        self.currentCheck = self.currentCheck + 1;
         if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
             -- Next column
             self.currentZ = self.currentZ + 1
@@ -392,7 +401,15 @@ function ssGrowthManager:update(dt)
             -- Done with the loop, set up for the next one.
             self.currentX = 0
             self.currentZ = 0
-            self.doGrowthTransition = false
+            -- self.doGrowthTransition = false;
+            if self.currentCheckedFruit > 1 then
+                self.currentCheckedFruit = self.currentCheckedFruit - 1;
+            else
+                self.currentCheckedFruit = 0;
+                self.doGrowthTransition = false;
+                log("GrowthManager - growth state transition ending for period "..self.currentGrowthTransitionPeriod)
+                self.currentGrowthTransitionPeriod = 100
+            end
         end
     end -- end of if self.doGrowthTransition == true then
 end

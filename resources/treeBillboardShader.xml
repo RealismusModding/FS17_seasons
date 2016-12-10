@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="windScale" target="windScale" type="float" defaultValue="1" minValue="0" maxValue="1"/>
+    </Parameters>
+    <Variations>
+        <Variation name = "billboard180">
+<![CDATA[
+    #define BILLBOARD_180
+]]>
+        </Variation>
+    </Variations>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+uniform float windScale;
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    float2 texCoords2: TEXCOORDn;
+    float texCoords2Weight: TEXCOORDn;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_POSE_VS">
+<![CDATA[
+float3 upVector     = float3(modelMatrix[0][1], modelMatrix[1][1], modelMatrix[2][1]);
+float3 camToPos     = float3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
+
+
+#if defined(BILLBOARD_180)
+    float mUVShift;
+    float mUVShift2;
+    {
+        float3 mProjectCamToPos      = normalize(camToPos -upVector*dot(upVector,camToPos));
+        float3 mProjectedWorldNormal = normalize(worldNormal -upVector*dot(upVector,worldNormal));
+
+        float3 camCross     = cross( mProjectCamToPos, mProjectedWorldNormal );
+        float mEyeAngle     = acos(clamp(-dot( mProjectCamToPos, mProjectedWorldNormal), -1.0, 1.0));
+        float mUVShiftTileF = 8.0 * 0.5 * mEyeAngle / 3.1415926535897932384626433832795;
+        if ( camCross.y > 0 ){
+            mUVShiftTileF *= -1;
+        }
+        float mUVShiftTile1 = floor(mUVShiftTileF);
+        mUVShift            = mUVShiftTile1/8.0;
+        Out.texCoords2Weight = floor(saturate(2*(mUVShiftTileF-mUVShiftTile1) - 0.5)*4);
+        mUVShift2           = mUVShift + 1.0/8.0;
+    }
+#endif
+
+float3 sideVector   = normalize(cross(camToPos, upVector));
+
+
+// Wind animation
+float windXMovement = 0;
+float3 windDirection = float3(1,0,0);
+float windStrength = cShared0*windScale;
+if (windStrength > 0.0001) {
+    float3 treePos = float3(modelMatrix[0][3] + invViewMatrix[0][3],
+                            modelMatrix[1][3] + invViewMatrix[1][3],
+                            modelMatrix[2][3] + invViewMatrix[2][3]);
+    float3 windSideDirection = cross(float3(0,1,0), windDirection);
+    float treeVarSeed = treePos.x + treePos.y + treePos.z;
+
+    float3 trunkMoveDirection = windDirection;
+    trunkMoveDirection = normalize(trunkMoveDirection + windSideDirection*sin(0.9 * cTime_s + treeVarSeed + 0.1)*0.3);
+
+    float normalizedTreeY = In.position.y/30;
+    float trunkOffsetScale = (1*max(windStrength-0.1,0)/0.9 + sin( 1.5 * cTime_s + treeVarSeed)*0.7*windStrength)*normalizedTreeY*normalizedTreeY;
+    float3 trunkOffset = trunkMoveDirection.xyz * trunkOffsetScale;
+
+    windXMovement = dot(trunkOffset, sideVector);
+}
+
+// Allow scaling
+sideVector         *= length(float3(modelMatrix[0][0], modelMatrix[1][0], modelMatrix[2][0]));
+// The "-camCenter" already applies translation of invViewMatrix^-1
+float3 pos          = camToPos + sideVector*(In.position.x+windXMovement) + upVector*In.position.y;
+
+// Update the projected position used in the shader
+projPosition = mul(projMatrix, float4(mul(pos, (float3x3)invViewMatrix), 1.0));
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_NORMALS_VS">
+<![CDATA[
+{
+    float3 tangent      = getTangent(In);
+    float tangentSide   = In.tangent.w;
+    float3 bitangent    = getBitangent(In);
+    float3 normal       = getNormal(In);
+
+    normal      = float3(0,0,1);
+    tangent     = float3(1,0,0);
+    tangentSide = 1;
+
+    worldNormal.xyz  = float3(invViewMatrix[0][2], 0, invViewMatrix[2][2]);
+    worldNormal     = normalize(worldNormal);
+
+    worldTangent.xyz = float3(invViewMatrix[0][0], 0, invViewMatrix[2][0]);
+    worldTangent    = normalize(worldTangent);
+
+    worldBitangent  = normalize(cross(worldNormal.xyz, worldTangent.xyz)*tangentSide);
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    Out.texCoords2 = Out.defaultTexCoords;
+    Out.texCoords2.x += mUVShift2;
+    Out.defaultTexCoords.x += mUVShift;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    float blendScale;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="START_FS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    {
+        float2 pixelPosFloor = floor(viewportSize.xy * (In.vs.screenPos.xy/In.vs.screenPosW + 0.5));
+        float2 blockPixelPos = fmod(pixelPosFloor, 2);
+        // This will in 2x2 pixel block indices:
+        // 1 2
+        // 3 0
+        float pixelIndex = fmod(blockPixelPos.x + 2*blockPixelPos.y + 1, 4);
+        // texCoords2Weight: 0-4 means blending out 0: all visible, 4: nothing visible
+        globals.blendScale = pixelIndex < In.vs.texCoords2Weight;
+    }
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    #if defined(ALBEDO_MAP)
+        albedo = lerp(albedo, tex2D(baseMap, In.vs.texCoords2), globals.blendScale);
+    #endif
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "GET_UNNORMALIZED_TANGENT_SPACE_NORMAL_FS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    #if defined( NORMAL_MAP )
+        return lerp(tex2D(normalMap, In.vs.NORMALMAP_TEXCOORD).xyz, tex2D(normalMap, In.vs.texCoords2).xyz, globals.blendScale) - 0.5;
+    #endif
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position = "GET_TANGENT_SPACE_NORMAL_FS">
+<![CDATA[
+#if defined(BILLBOARD_180)
+    #if defined( NORMAL_MAP )
+        return normalize(getUnnormalizedTangentSpaceNormal(In, globals));
+    #endif
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GET_LIGHTING_FS">
+<![CDATA[
+{
+    float NdotL = dot(normal, lightDir);    
+    if (NdotL < 0) {
+        NdotL = -NdotL*0.35;
+    }
+    NdotL = min(NdotL, 1);
+    float3 lighting = atten*NdotL * (diffuseShading + specularShading) * lightColor;
+    return lighting;
+}
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

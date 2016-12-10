@@ -43,7 +43,7 @@ g_modClasses = {
     "ssEconomy",
     "ssWeatherManager",
     "ssWeatherForecast",
-    -- "ssFixFruit",
+    "ssFixFruit",
     "ssVehicle",
     "ssGrowthManager",
     "ssSnow",

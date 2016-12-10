@@ -155,6 +155,10 @@ function ssWeatherManager:readStream(streamId, connection)
 
         table.insert(self.rains, rain)
     end
+
+    -- we need to synch this, we have an error log entry on dedicated server otherwise
+    -- for now i do it here, it's not elegant but at the moment it work
+    ssSnow.appliedSnowDepth = streamReadFloat32(streamId)
 end
 
 function ssWeatherManager:writeStream(streamId, connection)
@@ -178,6 +182,10 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteString(streamId, rain.rainTypeId)
         streamWriteFloat32(streamId, rain.duration)
     end
+
+    -- we need to synch this, we have an error log entry on dedicated server otherwise
+    -- for now i do it here, it's not elegant but at the moment it work
+    streamWriteFloat32(streamId, ssSnow.appliedSnowDepth)
 end
 
 function ssWeatherManager:update(dt)
@@ -287,7 +295,7 @@ function ssWeatherManager:updateForecast()
 
     table.remove(self.rains, 1)
 
-    g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+    g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain, ssSnow.appliedSnowDepth))
 end
 
 -- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
@@ -648,11 +656,12 @@ function ssWeatherForecastEvent:emptyNew()
     return self
 end
 
-function ssWeatherForecastEvent:new(day, rain)
+function ssWeatherForecastEvent:new(day, rain, appliedSnowDepth)
     local self = ssWeatherForecastEvent:emptyNew()
 
     self.day = day
     self.rain = rain
+    self.appliedSnowDepth = appliedSnowDepth
 
     return self
 end
@@ -676,6 +685,7 @@ function ssWeatherForecastEvent:writeStream(streamId, connection)
     else
         streamWriteBool(streamId, false)
     end
+    streamWriteFloat32(streamId, self.appliedSnowDepth)
 end
 
 -- Client: receive from server
@@ -702,6 +712,7 @@ function ssWeatherForecastEvent:readStream(streamId, connection)
 
         self.rain = rain
     end
+    self.appliedSnowDepth = streamReadFloat32(streamId)
 
     self:run(connection)
 end
@@ -716,6 +727,7 @@ function ssWeatherForecastEvent:run(connection)
 
         ssWeatherManager:switchRainHail()
         ssWeatherManager:owRaintable()
+        ssSnow.appliedSnowDepth = self.appliedSnowDepth
 
         table.remove(ssWeatherManager.rains, 1)
     end

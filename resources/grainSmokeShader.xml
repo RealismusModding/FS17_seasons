@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="3">
+    <Parameters>
+        <Parameter name="fadeProgress" target="fadeProgress" type="float4" defaultValue = "1.0 1.0 0.0 0.0" minValue = "-1.0 -1.0 0.0 0.0" maxValue = "1.0 1.0 1.0 1.0"/>
+        <Parameter name="UVScaleSpeed" target="UVScaleSpeed" type="float4" defaultValue = "0.75 0.1 -0.3 0.0" minValue = "-10.0 -10.0 -10.0 -10.0" maxValue = "10.0 10.0 10.0 10.0"/>
+        <Parameter name="ColorAlpha" target="ColorAlpha" type="float4" defaultValue = "1.0 1.0 1.0 2.5" minValue = "0.0 0.0 0.0 0.0" maxValue = "1.0 1.0 1.0 5.0"/>
+    </Parameters>
+    <Textures>
+        <Texture name="Mask"     defaultColorProfile = "linearRGB" defaultFilename = "fx_clouds01_diffuse.png"/>
+    </Textures>
+    <LodLevel startDistance = "0" alphaForceMode = "use">
+        <CodeInjections>
+            <CodeInjection position="SAMPLERS">
+<![CDATA[
+    sampler2D Mask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="MATERIALINFO">
+<![CDATA[
+    /*
+    fadeProgress.x - FadeIN:    start = -1.0 end = 1.0
+    fadeProgress.y - FadeOUT:   start = 1.0 end = -1.0
+
+    Fully Visible       fadeProgress.x = 1.0        "1.0 1.0 0.0 0.0"
+                        fadeProgress.y = 1.0
+    Fully Invisible     fadeProgress.x = -1.0       "-1.0 -1.0 0.0 0.0"
+                        fadeProgress.y = -1.0
+    */
+    uniform float4 fadeProgress;
+    uniform float4 UVScaleSpeed;
+    uniform float4 ColorAlpha;
+]]>
+            </CodeInjection>
+            <CodeInjection position="LIB_FUNCTION_FS">
+<![CDATA[
+float getDepthFade(FS_INPUT In, FS_GLOBALS globals, float fadeDistance)
+{
+    float screenDepth = In.vs.screenPosZ / In.vs.screenPosW * 0.5 + 0.5;
+    float screenDepthLinear = convertDepthToEyeZ(screenDepth);
+    float sceneDepthLinear = convertDepthToEyeZ(getSceneDepth(In, globals));
+    return saturate((sceneDepthLinear - screenDepthLinear)/fadeDistance);
+}
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+float2 defaultTexCoords2 : TEXCOORDn;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+    // Pass second UVSet to the Pixel Shader
+    Out.defaultTexCoords2 = convertDefaultTexCoords(In, In.texCoords1.xy);
+    // =================================
+]]>
+            </CodeInjection>
+            <CodeInjection position="GET_POSITION_VS">
+<![CDATA[
+    float mSpeed = 3.0 * cTime_s;
+    float mFrequency = 60.0;
+    // Do not use Invert !! ( 1 - x ) strange behavior
+    float texCoords1 = convertDefaultTexCoords(In, In.texCoords1.xy);
+    float mAmplitude = 2.5 * In.texCoords1.y;
+    float offset1 = ( 0.5 * sin( mSpeed - ( In.texCoords1.x + In.texCoords1.y ) * mFrequency ) + 0.5 ) * mAmplitude;
+    float3 mDeformedPosition = offset1 * In.normal.xyz;
+    // =================================
+    return In.position.xyz + mDeformedPosition;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "FS_GLOBALS">
+<![CDATA[
+    float gAlpha;
+]]>
+            </CodeInjection>
+            <CodeInjection position = "START_FS">
+<![CDATA[
+    float2 mSpeed   = UVScaleSpeed.yz * cTime_s;
+    float  mUVscale = UVScaleSpeed.x ;
+
+    float2 mA = tex2D( Mask, (        mUVscale * In.vs.ALBEDOMAP_TEXCOORD ) + mSpeed * mUVscale ).ba;
+    float2 mB = tex2D( Mask, ( 1.33 * mUVscale * In.vs.ALBEDOMAP_TEXCOORD ) + mSpeed * mUVscale ).ba;
+    globals.gAlpha = mA.x * mB.x * mA.y * mB.y;
+    globals.gAlpha = clamp( ColorAlpha.a * globals.gAlpha, 0.0 , 1.0 );
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_ALBEDO_FS">
+<![CDATA[
+    albedo.rgb = ColorAlpha.rgb;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_GLOSS_COLOR_FS">
+<![CDATA[
+#if defined( SPECULAR ) && defined( ALPHA_BLENDED )
+    #undef SPECULAR // Disable specular color
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+#if defined( ALPHA_BLENDED )
+    float mAlphaFresnel = 1.0;
+    float mAlphaGrad = 1.0;
+    float2 mUV = In.vs.defaultTexCoords2;
+    // =================================
+    float mFadeIN  = 1.0;
+    float mFadeOUT = 1.0;
+    // -1.0 ==>  1.0
+    mFadeIN   = 0.5 * fadeProgress.x + 0.5;
+    //  1.0 ==> -1.0
+    mFadeOUT  = 0.5 * fadeProgress.y + 0.5;
+    // =================================
+    float4 mUVmega = float4( mUV.x, mUV.y, 1 - mUV.x, 1 - mUV.y );
+    mUVmega = 1 - mUVmega;
+    mUVmega *= mUVmega * mUVmega;
+    mUVmega = 1 - mUVmega;
+    mAlphaGrad = mUVmega.x * mUVmega.z * mUVmega.y * mUVmega.w;
+    mAlphaFresnel = pow( 1 - facing, 4 );
+    alpha = mAlphaFresnel * mAlphaGrad * globals.gAlpha * mFadeIN * mFadeOUT;
+#endif
+#if GPU_PROFILE >= GPU_PROFILE_HIGH
+    alpha *= getDepthFade(In, globals, 0.5);
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>
