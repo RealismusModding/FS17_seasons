@@ -1,5 +1,10 @@
 # FS17 Seasons
 
+## Pull Requests
+
+Please read the wiki page regarding pull requests
+https://github.com/RealismusModding/FS17_seasons/wiki/Pull-Requests
+
 ## Features
 
 ### Seasons
