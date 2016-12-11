@@ -1,5 +1,7 @@
 # FS17 Seasons
 
+This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux. 
+
 ## Pull Requests
 
 Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected.
