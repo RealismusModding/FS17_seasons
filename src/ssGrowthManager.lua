@@ -179,7 +179,7 @@ function ssGrowthManager:loadMap(name)
     end
     
     --if g_currentMission:getIsServer() then
-        ssSeasonsMod.addGrowthStageChangeListener(self)
+        ssSeasonsMod:addGrowthStageChangeListener(self)
 
        --lock changing the growth speed option and set growth rate to 1 (no growth)
        g_currentMission:setPlantGrowthRate(1,nil);
