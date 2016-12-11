@@ -17,7 +17,7 @@ function Set (list)
   return set
 end
 
-ssGrowthManager.defaultFruits = nil;--Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
+ssGrowthManager.defaultFruits = Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
 
 ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
