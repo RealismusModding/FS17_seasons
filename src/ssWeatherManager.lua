@@ -432,9 +432,9 @@ end
 function ssWeatherManager:isGroundWorkable()
     local avgSoilTemp = (self.forecast[1].highTemp + self.forecast[1].lowTemp) / 2
     if  avgSoilTemp < 5 then
-        return true
-    else
         return false
+    else
+        return true
     end
 end
 
