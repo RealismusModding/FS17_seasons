@@ -10,11 +10,11 @@
 ssWeatherForecast = {}
 local screenAspectRatio = g_screenAspectRatio / (16 / 9)
 
-function ssTime:load(savegame, key)
+function ssWeatherForecast:load(savegame, key)
 	self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.forecastHudVisible", true)
 end
 
-function ssTime:save(savegame, key)
+function ssWeatherForecast:save(savegame, key)
 	ssStorage.setXMLBool(savegame, key .. ".settings.forecastHudVisible", self.hud.visible)
 end
 
