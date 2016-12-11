@@ -172,8 +172,8 @@ function ssGrowthManager:save(savegame, key)
 end
 
 function ssGrowthManager:loadMap(name)
-    
-     if (self.growthManagerEnabled == false) then
+
+    if (self.growthManagerEnabled == false) then
         log("Growth Manager disabled");
         return
     end
