@@ -8,3 +8,4 @@ Translations
 Polish - Dzi4d3k 
 German - oekobauer 
 Italian - fcelsa
+French - thierry62
