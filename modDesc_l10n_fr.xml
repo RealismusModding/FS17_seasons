@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        thierry62
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Affiché la Météo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule " />
+
+        <text name="SS_WEEKDAY_MONDAY" text="Lundi" />
+        <text name="SS_WEEKDAY_TUESDAY" text="Mardi" />
+        <text name="SS_WEEKDAY_WEDNESDAY" text="Mercredi" />
+        <text name="SS_WEEKDAY_THURSDAY" text="Jeudi" />
+        <text name="SS_WEEKDAY_FRIDAY" text="Vendredi" />
+        <text name="SS_WEEKDAY_SATURDAY" text="Samedi" />
+        <text name="SS_WEEKDAY_SUNDAY" text="Dimanche" />
+
+        <text name="SS_WEEKDAY_MON" text="Lun" />
+        <text name="SS_WEEKDAY_TUE" text="Mar" />
+        <text name="SS_WEEKDAY_WED" text="Mer" />
+        <text name="SS_WEEKDAY_THU" text="Jeu" />
+        <text name="SS_WEEKDAY_FRI" text="Ven" />
+        <text name="SS_WEEKDAY_SAT" text="Sam" />
+        <text name="SS_WEEKDAY_SUN" text="Dim" />
+
+        <text name="SS_SEASON_SPRING" text="Primtemps" />
+        <text name="SS_SEASON_SUMMER" text="Ete" />
+        <text name="SS_SEASON_AUTUMN" text="Automne" />
+        <text name="SS_SEASON_WINTER" text="Hiver" />
+
+        <text name="SS_VEHICLE_TAXES" text="Taxe Vehicule" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Maintenance Vehicule" />
+        <text name="SS_VEHICLE_REPAIRS" text="Les Réparation Vehicule" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Vous Disposé pas d'assé d'argent pour réparé" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s was repaired for %s" /> <!-- fixme: waiting for translation from Thierry -->
+        <text name="SS_REPAIR_VEHICLE_COST" text="Reparation %s effectué %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
+        <text name="SS_REPAIR_DIALOG" text="Do you want to repair the %s for %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
+
+        <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas y travailler!" />
+        <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencé!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé. TODO" /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même . TODO" /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
+    </texts>
+</l10n>
