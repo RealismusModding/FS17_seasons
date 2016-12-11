@@ -45,10 +45,10 @@
         <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas y travailler!" />
         <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencé!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé. TODO" /> <!-- printemps -->
-        <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit. TODO" />
-        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid. TODO" />
-        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même . TODO" /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé." /> <!-- printemps -->
+        <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit." />
+        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid." />
+        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
     </texts>
