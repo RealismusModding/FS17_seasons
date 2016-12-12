@@ -111,7 +111,7 @@ function ssWeatherForecast:draw()
         setTextColor(1, 1, 1, 1)
     end
 
-    -- Set position clock overlay    
+    -- Set position clock overlay
     local clockPosX = g_currentMission.timeBgOverlay.x + 0.01*uiScale
     local clockPosY = g_currentMission.timeBgOverlay.y + 0.01*uiScale
 
@@ -119,23 +119,22 @@ function ssWeatherForecast:draw()
     renderOverlay(self.hud.overlays.clock_overlay.overlayId, clockPosX , clockPosY, 0.07*uiScale, 0.04*uiScale)
 
     -- Render clock
-    renderText(clockPosX+0.03*uiScale,clockPosY+0.024*uiScale,0.018*uiScale,string.format("%02d:%02d",g_currentMission.environment.currentHour,g_currentMission.environment.currentMinute))
-    renderOverlay(self.hud.overlays.clock_symbol.overlayId, clockPosX + 0.002*uiScale, clockPosY + 0.021*uiScale, 0.01125*uiScale, 0.02*uiScale)
-    renderText(clockPosX+0.03*uiScale,clockPosY,0.018*uiScale,string.format("%02d/%s/%d",ssSeasonsUtil:dayInSeason(forecast[1].day),ssSeasonsUtil.seasons[forecast[1].season],ssSeasonsUtil:year()+2017))
+    renderText(clockPosX + 0.03 * uiScale,clockPosY + 0.024 * uiScale, 0.018 * uiScale, string.format("%02d:%02d", g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute))
+    renderOverlay(self.hud.overlays.clock_symbol.overlayId, clockPosX + 0.002 * uiScale, clockPosY + 0.021 * uiScale, 0.01125 * uiScale, 0.02 * uiScale)
+    renderText(clockPosX + 0.03 * uiScale,clockPosY, 0.018 * uiScale, string.format("%02d/%s/%d", ssSeasonsUtil:dayInSeason(forecast[1].day), ssSeasonsUtil.seasons[forecast[1].season], ssSeasonsUtil:year() + 2017))
 
-    -- Set position day overlay    
-    local dayPosX = g_currentMission.infoBarBgOverlay.x - 0.037*uiScale
+    -- Set position day overlay
+    local dayPosX = g_currentMission.infoBarBgOverlay.x - 0.037 * uiScale
     local dayPosY = g_currentMission.infoBarBgOverlay.y
- 
+
     -- Render Background
-    renderOverlay(self.hud.overlays.day_hud.overlayId, dayPosX , dayPosY, g_currentMission.infoBarBgOverlay.height/2, g_currentMission.infoBarBgOverlay.height)
+    renderOverlay(self.hud.overlays.day_hud.overlayId, dayPosX, dayPosY, g_currentMission.infoBarBgOverlay.height / 2, g_currentMission.infoBarBgOverlay.height)
 
     -- Render Season Icon
-    renderOverlay(self.hud.overlays[ssSeasonsUtil.seasons[forecast[1].season]].overlayId, dayPosX + 0.009*uiScale, dayPosY + 0.033*uiScale, 0.0185*uiScale, 0.0335*uiScale)
+    renderOverlay(self.hud.overlays[ssSeasonsUtil.seasons[forecast[1].season]].overlayId, dayPosX + 0.009 * uiScale, dayPosY + 0.033 * uiScale, 0.0185 * uiScale, 0.0335 * uiScale)
 
     -- Render current Temperatures
-    local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute),0)
+    local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
     setTextAlignment(RenderText.ALIGN_RIGHT)
-    renderText(dayPosX + 0.03*uiScale, dayPosY + 0.01*uiScale, 0.018*uiScale, tostring(currentTemp ..' C'))
-    renderText(dayPosX + 0.024*uiScale, dayPosY + 0.018*uiScale, 0.01*uiScale, 'o')
+    renderText(dayPosX + 0.03 * uiScale, dayPosY + 0.01 * uiScale, 0.018 * uiScale, tostring(currentTemp .. " ºC"))
 end
