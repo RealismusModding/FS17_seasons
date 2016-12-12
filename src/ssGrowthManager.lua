@@ -17,6 +17,7 @@ function Set (list)
   return set
 end
 
+
 ssGrowthManager.defaultFruits = {};
 ssGrowthManager.growthData = {};
 ssGrowthManager.currentGrowthTransitionPeriod = nil;
