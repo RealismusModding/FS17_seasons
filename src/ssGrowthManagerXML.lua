@@ -20,7 +20,7 @@ function ssGrowthManagerXML:loadFile(path, rootKey, elements)--parentData, optio
         return nil;
     end
 
-    local defaultFruits = self:getDefaultFruitsData(file);
+    local defaultFruits = self:getDefaultFruitsData(rootKey,file);
     --todo check if nil
 
     -- log("Debug 3");
@@ -58,7 +58,7 @@ function ssGrowthManagerXML:loadFile(path, rootKey, elements)--parentData, optio
 
 end
 
-function ssGrowthManagerXML:getDefaultFruitsData(file)
+function ssGrowthManagerXML:getDefaultFruitsData(rootKey, file)
 
     local defaultFruits = {};
 
