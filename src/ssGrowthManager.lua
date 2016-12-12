@@ -211,6 +211,20 @@ end
 
 
 function ssGrowthManager:loadFromXML()
+    
+    local elements = {"defaultFruits"};
+    local defaultFruitsXML = ssGrowthManagerXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
+
+    print_r(data1);
+
+    if defaultFruitsXML ~= nil then
+        self.defaultFruits = Set(defaultFruitsXML)
+        log("GM: setting default fruits from xml");
+    else
+        log("GM: xml default fruits data not found. using default");
+    end
+    
+
     -- local elements = {
     --     ["defaultFruits"] = {}
     -- }
