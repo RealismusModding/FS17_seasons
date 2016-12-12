@@ -188,7 +188,7 @@ function ssGrowthManager:loadMap(name)
 
        self:loadFromXML();
        --TODO: check if loaded. if not, then do not add the listener
-       
+
         if not (self.hasResetGrowth) then 
             self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
             self.doGrowthTransition = true;
@@ -214,7 +214,7 @@ end
 function ssGrowthManager:loadFromXML()
     
     local elements = {"defaultFruits"};
-    local defaultFruitsXML = ssGrowthManagerXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
+    local defaultFruitsXML,growthData = ssGrowthManagerXML:loadXMLData();
 
    -- print_r(data1);
 
