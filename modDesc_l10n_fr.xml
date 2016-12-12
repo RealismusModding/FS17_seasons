@@ -35,7 +35,7 @@
         <text name="SS_VEHICLE_REPAIRS" text="Les Réparation Vehicule" />
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Vous Disposé pas d'assé d'argent pour réparé" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s réparé %s" /> 
+        <text name="SS_VEHICLE_REPAIRED" text="%s réparé %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="réparé %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
