@@ -34,16 +34,15 @@ function ssAnimals:loadFromXML()
     }
 
     self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
-    -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
-    -- FIXME: find the location of the map
+
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then
-  	    ssSeasonsXML:loadFile(modPath, "animals", elements,self.data,true)    
+  	    self.data = ssSeasonsXML:loadFile(modPath, "modules.animals", elements, self.data, true)    
     end
 end
 
 function ssAnimals:readStream(streamId, connection)
-    -- Load after data for seaonUtils is loaded
+    -- Load after data for seasonUtils is loaded
     self:seasonChanged()
 end
 

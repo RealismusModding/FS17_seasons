@@ -76,8 +76,7 @@ end
 
 
 function ssGrowthManager:getGrowthData()
-    
-    local elements = {"defaultFruits"};
+   
     local defaultFruits,growthData = ssGrowthManagerData:loadAllData();
    
     if defaultFruits ~= nil then
