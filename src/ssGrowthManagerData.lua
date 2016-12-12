@@ -88,10 +88,28 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
 
                 log("GMXML: fruit: " .. fruitName .. " transition: " .. i+1)
                 
-                
+                local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState");
+                if normalGrowthState ~= nil then 
+                    log("GMXML: normalGrowthState: " .. normalGrowthState);
+                end
 
-            end
-        end
+                local normalGrowthMaxState =  getXMLInt(file,fruitKey .. "#normalGrowthMaxState");
+                if normalGrowthMaxState ~= nil then 
+                    log("GMXML: normalGrowthMaxState: " .. normalGrowthMaxState);
+                end
+
+                local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState");
+                if setGrowthState ~= nil then 
+                    log("GMXML: setGrowthState: " .. setGrowthState);
+                end
+
+                local desiredGrowthState =  getXMLInt(file,fruitKey .. "#desiredGrowthState");
+                if desiredGrowthState ~= nil then 
+                    log("GMXML: desiredGrowthState: " .. desiredGrowthState);
+                end
+
+            end -- for fruit=0,fruitsNum-1 do
+        end -- for i=0, transitionsNum-1 do
 
 
         
