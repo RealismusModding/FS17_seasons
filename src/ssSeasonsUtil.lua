@@ -331,6 +331,14 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     return gamma * math.exp ( z / beta )
 end
 
+function ssSeasonsUtil:getMapDataFilesPath
+    if g_currentMission.missionInfo.map.isModMap == true then
+        return g_currentMission.missionInfo.map.baseDirectory;
+    else
+        return nil;
+    end
+
+end
 --
 -- List implementation
 -- A fast implementation of queue(actually double queue) in Lua is done by the book Programming in Lua:

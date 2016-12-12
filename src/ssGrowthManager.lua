@@ -49,6 +49,11 @@ function ssGrowthManager:loadMap(name)
         return;
     end
 
+    -- print("isModMap: " .. tostring(g_currentMission.missionInfo.map.isModMap))
+    -- print("id: " .. tostring(g_currentMission.missionInfo.map.id))
+    -- print("base directory: " .. tostring(g_currentMission.missionInfo.map.baseDirectory))
+    -- print("title: " .. tostring(g_currentMission.missionInfo.map.title))
+    -- print("map dir: " .. tostring(g_currentMission.mapDir))
     logInfo("ssGrowthManager - data loaded. Locking growth");
     --lock changing the growth speed option and set growth rate to 1 (no growth)
     g_currentMission:setPlantGrowthRate(1,nil);
