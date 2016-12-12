@@ -7,27 +7,7 @@
 -- add your own versions of seasons_animals.xml and seasons_growth.xml into the root folder of your map 
 -- so that the seasons mod to be able to read them
 
-mapDir = {};
 
-addModEventListener(mapDir);
+g_currentMission.mapDir = g_currentModDirectory;
 
-
-function mapDir:loadMap(name)
-    g_currentMission.mapDir = g_currentModDirectory;
-end
-
-function mapDir:deleteMap()
-end
-
-function mapDir:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function mapDir:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function mapDir:update(dt)	
-end
-
-function mapDir:draw()
-end
 
