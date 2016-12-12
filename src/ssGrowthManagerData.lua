@@ -30,6 +30,10 @@ function ssGrowthManagerData:loadAllData()
     end
 
     local growthData = self:getGrowthData(rootKey, file);
+    if growthData == nil then
+        logInfo("ssGrowthManagerData: Failed to load XML growth data file (growthTransitions) " .. path);
+        return nil,nil;
+    end
 
     
     return defaultFruits, growthData; 
@@ -46,7 +50,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
 
         local transitionsNum = getXMLInt(file,growthTransitionsKey .. "#transitionsNum");
         if transitionsNum == nil then
-            log("GMXML growthData: could not load transitionsNum");
+            logInfo("ssGrowthManagerData: getGrowthData: could not load transitionsNum");
         end
         
         log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
@@ -55,13 +59,17 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
         for i=0, transitionsNum-1 do
             local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
             log("GMXML growthData growthTransitionKey:", growthTransitionKey);
+            
 
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum"
             local growthTransitionNum = getXMLInt(file,growthTransitionNumKey);
             if growthTransitionNum == nil then
-                logInfo("ssGrowthManagerData: XML loading failed " .. growthTransitionNumKey);  
+                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionNumKey);  
                 return nil; 
             end
+            
+            --insert growth transition into datatable
+            table.insert( growthData, growthTransitionNum, {});
 
             log("GMXML growthData growthTransitionNum:", growthTransitionNum);
             
@@ -70,11 +78,11 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             
             local fruitsNum =  getXMLInt(file,fruitsNumKey);
             if fruitsNum == nil then
-                logInfo("ssGrowthManagerData: XML loading failed " .. fruitsNumKey);  
+                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitsNumKey);  
                 return nil;     
             end
 
-            log("GMXML growthData fruitsNum:", fruitsNum);
+            --log("GMXML growthData fruitsNum:", fruitsNum);
 
             --load each fruit
 
@@ -82,44 +90,71 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
                 local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, fruit);
                 local fruitName = getXMLString(file,fruitKey .. "#fruitName")
                 if fruitName == nil then
-                    logInfo("ssGrowthManagerData: XML loading failed " .. fruitKey); 
+                    logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitKey); 
                     return nil;
                 end
 
-                log("GMXML: fruit: " .. fruitName .. " transition: " .. i+1)
+                growthData[growthTransitionNum][fruitName] = {};
+                growthData[growthTransitionNum][fruitName].fruitName = fruitName;
+                
+                --log("GMXML: fruit: " .. fruitName .. " transition: " .. i+1)
                 
                 local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState");
                 if normalGrowthState ~= nil then 
-                    log("GMXML: normalGrowthState: " .. normalGrowthState);
+                    --log("GMXML: normalGrowthState: " .. normalGrowthState);
+                    growthData[growthTransitionNum][fruitName].normalGrowthState = normalGrowthState;
                 end
 
                 local normalGrowthMaxState =  getXMLInt(file,fruitKey .. "#normalGrowthMaxState");
                 if normalGrowthMaxState ~= nil then 
-                    log("GMXML: normalGrowthMaxState: " .. normalGrowthMaxState);
+                    --log("GMXML: normalGrowthMaxState: " .. normalGrowthMaxState);
+                    growthData[growthTransitionNum][fruitName].normalGrowthMaxState = normalGrowthMaxState;
                 end
 
                 local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState");
                 if setGrowthState ~= nil then 
-                    log("GMXML: setGrowthState: " .. setGrowthState);
+                    --log("GMXML: setGrowthState: " .. setGrowthState);
+                    growthData[growthTransitionNum][fruitName].setGrowthState = setGrowthState;
+                end
+
+                local setGrowthMaxState =  getXMLInt(file,fruitKey .. "#setGrowthMaxState");
+                if setGrowthMaxState ~= nil then 
+                    --log("GMXML: setGrowthMaxState: " .. setGrowthMaxState);
+                    growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
                 end
 
                 local desiredGrowthState =  getXMLInt(file,fruitKey .. "#desiredGrowthState");
                 if desiredGrowthState ~= nil then 
-                    log("GMXML: desiredGrowthState: " .. desiredGrowthState);
+                    --log("GMXML: desiredGrowthState: " .. desiredGrowthState);
+                    growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
+                end
+
+                local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState");
+                if extraGrowthMinState ~= nil then 
+                    --log("GMXML: extraGrowthMinState: " .. extraGrowthMinState);
+                    growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
+                end 
+
+                local extraGrowthMaxState = getXMLInt(file,fruitKey .. "#extraGrowthMaxState");
+                if extraGrowthMaxState ~= nil then 
+                    --log("GMXML: extraGrowthMaxState: " .. extraGrowthMinState);
+                    growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
+                end
+
+                local extraGrowthFactor = getXMLInt(file,fruitKey .. "#extraGrowthFactor");
+                if extraGrowthFactor ~= nil then 
+                    --log("GMXML: extraGrowthMaxState: " .. extraGrowthFactor);
+                    growthData[growthTransitionNum][fruitName].extraGrowthFactor = extraGrowthFactor;
                 end
 
             end -- for fruit=0,fruitsNum-1 do
         end -- for i=0, transitionsNum-1 do
-
-
-        
-
-
     else
-        log("GMXML: " .. growthTransitionsKey .. " NOT FOUND");
+        logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionsKey .. " not found");
         return nil;
     end
 
+    --print_r(growthData);
     return growthData;
 
 end
@@ -145,7 +180,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
                     --log("GMXML: " .. fruitName);
                     table.insert(defaultFruits,fruitName);
                 else
-                    logInfo("ssGrowthManagerData: XML loading failed. Is the growth data file malformed?");
+                    logInfo("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitKey );
                     return nil;
                 end
 
@@ -153,7 +188,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
             end
         end
     else
-        log("GMXML: " .. defaultFruitsKey .. " not found");
+        log("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found");
         return nil;
     end
 
