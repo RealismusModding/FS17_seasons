@@ -350,7 +350,6 @@ end
 function ssSeasonsUtil:getDefaultDataFile(defaultFileName)
     local file = nil;
     local path = ssSeasonsMod.modDir .. "data/" .. defaultFileName;
-    log("path:" ..  path);
     file = loadXMLFile("xml", path);
     return file;
 end

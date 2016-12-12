@@ -17,11 +17,10 @@ local seasonKeyToId = {
 -- Returns raw data
 function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
     
-    if g_currentMission.mapDir ~= nil then
-        path = g_currentMission.mapDir .. "seasons_animals.xml";
-    end
 
-    local file = loadXMLFile("xml", path)
+    local file = ssSeasonsUtil:getDataFile(path, "seasons_animals.xml"); 
+    
+    --loadXMLFile("xml", path)
     
     if file == nil then
         if optional == true then

@@ -25,7 +25,7 @@ function ssGrowthManagerData:loadAllData()
     -- end
 
     --loadXMLFile("xml", path);
-    local file = ssSeasonsUtil:getDataFile("data/growth.xml", "seasons_growth.xml"); 
+    local file = ssSeasonsUtil:getDataFile("growth.xml", "seasons_growth.xml"); 
     
     if (file == nil) then
         logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);
