@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- ssGrowthManagerData
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  For loading season parameters from mod, map or game
+-- Purpose:  For loading growth data
 -- Authors:  theSeb, based on ssSeasonsXML by Rahkiin (Jarvixes)
 --
 
@@ -25,7 +25,7 @@ function ssGrowthManagerData:loadAllData()
 
     local defaultFruits = self:getDefaultFruitsData(rootKey,file);
     if defaultFruits == nil then
-        logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);
+        logInfo("ssGrowthManagerData: Failed to load XML growth data file (defaultFruits) " .. path);
         return nil,nil;
     end
 
@@ -37,6 +37,18 @@ function ssGrowthManagerData:loadAllData()
 end
 
 function ssGrowthManagerData:getGrowthData(rootKey, file)
+    local growthData = {};
+
+    local growthTransitionsKey = rootKey .. ".growthTransitions";
+
+    if hasXMLProperty(file,growthTransitionsKey) then
+        log("GMXML: " .. growthTransitionsKey .. " found");    
+    else
+        log("GMXML: " .. growthTransitionsKey .. " NOT FOUND");
+        return nil;
+    end
+
+    return growthData;
 
 end
 
@@ -48,9 +60,9 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
     local defaultFruitsKey =  rootKey .. ".defaultFruits";
 
     if hasXMLProperty(file, defaultFruitsKey) then
-        log("GMXML: " .. defaultFruitsKey .. " found");
+       -- log("GMXML: " .. defaultFruitsKey .. " found");
         local fruitNum = getXMLInt(file, defaultFruitsKey .. "#fruitNum");
-        log("GMXML: fruitNum: " .. tostring(fruitNum));
+        --log("GMXML: fruitNum: " .. tostring(fruitNum));
 
         if fruitNum ~= nil then
             for i=0,fruitNum-1 do

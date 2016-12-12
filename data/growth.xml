@@ -21,6 +21,15 @@
                 <crop fruitName="barley" normalGrowthState="1" normalGrowthMaxState="3"/>
                 <crop fruitName="wheat" normalGrowthState="1" normalGrowthMaxState="3"/>
                 <crop fruitName="rape" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <crop fruitName="maize" normalGrowthState="1"/>
+                <crop fruitName="soybean" setGrowthState="1" desiredGrowthState="100"/>
+                <crop fruitName="sunflower" setGrowthState="1" desiredGrowthState="100"/>
+                <crop fruitName="potato" normalGrowthState="1"/>
+                <crop fruitName="sugarBeet", normalGrowthState="1"/>
+                <crop fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="99"/>
+                <crop fruitName="grass", normalGrowthState="1" normalGrowthMaxState="99"/>
+                <crop fruitName="oilseedRadish" normalGrowthState="1", normalGrowthMaxState="99"/>
+                <crop fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
             </crops>
         </gt>
         <!--<gt growthStageNum="2">
