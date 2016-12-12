@@ -22,7 +22,7 @@ function ssGrowthManagerXML:loadFile(path, rootKey, elements)--parentData, optio
 
     if hasXMLProperty(file, defaultFruitKey) then
         log("GMXML: " .. defaultFruitKey .. " found");
-        local fruitNum = tonumber(getXMLString(file, defaultFruitKey .. "#fruitNum"));
+        local fruitNum = getXMLInt(file, defaultFruitKey .. "#fruitNum");
         log("GMXML: fruitNum: " .. tostring(fruitNum));
 
         if fruitNum ~= nil then
