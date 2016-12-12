@@ -331,13 +331,30 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     return gamma * math.exp ( z / beta )
 end
 
-function ssSeasonsUtil:getMapDataFilesPath
+function ssSeasonsUtil:getDataFile(defaultFileName,modFileName)
+    local file = nil;
     if g_currentMission.missionInfo.map.isModMap == true then
-        return g_currentMission.missionInfo.map.baseDirectory;
+        local path = g_currentMission.missionInfo.map.baseDirectory .. modFileName;
+        file = loadXMLFile("xml", path);
+        if file == nil then
+            return self:getDefaultDataFile(defaultFileName);
+        end
     else
-        return nil;
+        return self:getDefaultDataFile(defaultFileName);
     end
+
+    return file;
 end
+
+--do not call this function from elsewhere. only used by getDataFile
+function ssSeasonsUtil:getDefaultDataFile(defaultFileName)
+    local file = nil;
+    local path = ssSeasonsMod.modDir .. "data/" .. defaultFileName;
+    log("path:" ..  path);
+    file = loadXMLFile("xml", path);
+    return file;
+end
+
 --
 -- List implementation
 -- A fast implementation of queue(actually double queue) in Lua is done by the book Programming in Lua:
