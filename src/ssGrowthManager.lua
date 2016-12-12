@@ -184,7 +184,7 @@ function ssGrowthManager:loadMap(name)
        --lock changing the growth speed option and set growth rate to 1 (no growth)
        g_currentMission:setPlantGrowthRate(1,nil);
        g_currentMission:setPlantGrowthRateLocked(true);
-       log("Growth Manager loading. Locking growth");
+       logInfo("ssGrowthManager loading. Locking growth");
 
        self:getGrowthData();
        --TODO: check if loaded. if not, then do not add the listener
@@ -194,7 +194,7 @@ function ssGrowthManager:loadMap(name)
             self.doGrowthTransition = true;
             self.hasResetGrowth = true;
             self.growthManagerEnabled = true;
-            log("Growth Manager - First time growth reset - this will only happen once in a new savegame");
+            logInfo("ssGrowthManager - First time growth reset - this will only happen once in a new savegame");
         end
 
        if g_currentMission.missionInfo.timeScale > 120 then

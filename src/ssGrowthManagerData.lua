@@ -9,7 +9,7 @@ ssGrowthManagerData = {};
 
  ssGrowthManagerData.DEFAULT_FILE_PATH = "data/growth.xml";
 
-function ssGrowthManagerData:loadData()
+function ssGrowthManagerData:loadAllData()
 
     
     local growthData = {};
