@@ -15,16 +15,7 @@ function ssGrowthManagerData:loadAllData()
     local growthData = {};
     local path = nil;
     local rootKey = "growthManager";
-    
 
-    -- if ssSeasonsUtil:getMapDataFilesPath ~= nil then
-        
-    --     path = g_currentMission.mapDir .. "seasons_growth.xml"; 
-    -- else 
-    --     path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
-    -- end
-
-    --
     local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml"); 
     if  modMapDataPath ~= nil then
         path = modMapDataPath;
