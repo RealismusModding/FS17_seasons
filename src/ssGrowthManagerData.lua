@@ -42,7 +42,32 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
     local growthTransitionsKey = rootKey .. ".growthTransitions";
 
     if hasXMLProperty(file,growthTransitionsKey) then
-        log("GMXML: " .. growthTransitionsKey .. " found");    
+        log("GMXML growthData: " .. growthTransitionsKey .. " found");    
+
+        local transitionsNum = getXMLInt(file,growthTransitionsKey .. "#transitionsNum");
+        if transitionsNum == nil then
+            log("GMXML growthData: could not load transitionsNum");
+        end
+
+        --load each transitions
+        for i=0, transitionsNum-1 do
+            local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
+            log("GMXML growthData growthTransitionKey:", growthTransitionKey);
+
+            local growthStageNum = getXMLInt(file,growthTransitionKey .. "#growthStageNum");
+            log("GMXML growthData growthStageNum:", growthStageNum);
+
+            local cropsNum =  getXMLInt(file,growthTransitionKey .. "#cropsNum");
+            log("GMXML growthData cropsNum:", cropsNum);
+            --number of crops in growth transitions
+             
+            --load each crop
+        end
+
+
+        log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
+
+
     else
         log("GMXML: " .. growthTransitionsKey .. " NOT FOUND");
         return nil;
@@ -67,10 +92,10 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
         if fruitNum ~= nil then
             for i=0,fruitNum-1 do
                 local defaultFruitKey = string.format("%s.defaultFruit(%i)#name", defaultFruitsKey, i);
-                log("GMXML propKey: " .. defaultFruitKey);
+                --log("GMXML propKey: " .. defaultFruitKey);
                 local fruitName = getXMLString(file, defaultFruitKey);
                 if fruitName ~= nil then 
-                    log("GMXML: " .. fruitName);
+                    --log("GMXML: " .. fruitName);
                     table.insert(defaultFruits,fruitName);
                 else
                     logInfo("ssGrowthManagerData: XML loading failed. Is the growth data file malformed?");
