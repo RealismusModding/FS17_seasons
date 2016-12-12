@@ -9,7 +9,7 @@ ssGrowthManagerData = {};
 
  ssGrowthManagerData.DEFAULT_FILE_PATH = "data/growth.xml";
 
-function ssGrowthManagerData:loadXMLData()
+function ssGrowthManagerData:loadData()
 
     
     local growthData = {};
@@ -61,7 +61,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
                     log("GMXML: " .. fruitName);
                     table.insert(defaultFruits,fruitName);
                 else
-                    logInfo("ssGrowthManager: XML loading failed. Is the growth data file malformed?");
+                    logInfo("ssGrowthManagerData: XML loading failed. Is the growth data file malformed?");
                     return nil;
                 end
 

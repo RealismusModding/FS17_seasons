@@ -186,7 +186,7 @@ function ssGrowthManager:loadMap(name)
        g_currentMission:setPlantGrowthRateLocked(true);
        log("Growth Manager loading. Locking growth");
 
-       self:loadFromXML();
+       self:getGrowthData();
        --TODO: check if loaded. if not, then do not add the listener
 
         if not (self.hasResetGrowth) then 
@@ -211,10 +211,10 @@ function ssGrowthManager:loadMap(name)
 end
 
 
-function ssGrowthManager:loadFromXML()
+function ssGrowthManager:getGrowthData()
     
     local elements = {"defaultFruits"};
-    local defaultFruitsXML,growthData = ssGrowthManagerData:loadXMLData();
+    local defaultFruitsXML,growthData = ssGrowthManagerData:loadAllData();
 
    -- print_r(data1);
 
