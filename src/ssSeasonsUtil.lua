@@ -338,13 +338,12 @@ function ssSeasonsUtil:getModMapDataPath(dataFileName)
         local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName;
         if fileExists(path) then
             return path;
-        else
-            return nil;
         end
-    else
-        return nil;
     end
+
+    return nil;
 end
+
 
 --
 -- List implementation
