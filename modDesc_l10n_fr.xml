@@ -7,11 +7,7 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Affiché la Météo" />
-<<<<<<< HEAD
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule " />
-=======
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
->>>>>>> master
 
         <text name="SS_WEEKDAY_MONDAY" text="Lundi" />
         <text name="SS_WEEKDAY_TUESDAY" text="Mardi" />
@@ -39,34 +35,16 @@
         <text name="SS_VEHICLE_REPAIRS" text="Les Réparation Vehicule" />
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Vous Disposé pas d'assé d'argent pour réparé" />
-<<<<<<< HEAD
-        <text name="SS_VEHICLE_REPAIRED" text="%s vous allez corrigé %s" /> 
-        <text name="SS_REPAIR_VEHICLE_COST" text="Reparation %s effectué %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
-        <text name="SS_REPAIR_DIALOG" text="Do you want to repair the %s for %s?" />
-=======
         <text name="SS_VEHICLE_REPAIRED" text="%s réparé %s" /> 
         <text name="SS_REPAIR_VEHICLE_COST" text="réparé %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
         <text name="SS_REPAIR_DIALOG" text="voulez vous réparé la %s pour %s?" />
->>>>>>> master
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas y travailler!" />
         <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencé!" />
 
-<<<<<<< HEAD
-        <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé. TODO" /> <!-- spring -->
-        <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit. TODO" />
-        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid. TODO" />
-        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même . TODO" /> <!-- winter -->
-        <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
-    </texts>
-</l10n>
-=======
         <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit." />
         <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid." />
@@ -75,4 +53,3 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
     </texts>
 </l10n>
->>>>>>> master
