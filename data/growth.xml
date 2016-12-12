@@ -5,7 +5,7 @@ WITHER_STATE = 100;
 FIRST_LOAD_TRANSITION = 999;-->
 
 <growthManager>
-    <defaultFruits>
+    <defaultFruits num=12>
         <barley/> 
         <wheat/> 
         <rape/> 
