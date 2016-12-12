@@ -15,6 +15,45 @@
         <defaultFruit name="oilseedRadish"/> 
         <defaultFruit name="dryGrass"/>
     </defaultFruits>
+    <growthTransitions>
+        <gt growthStageNum="1">
+        
+        </gt>
+        <gt growthStageNum="2">
+        
+        </gt>
+        <gt growthStageNum="3">
+        
+        </gt>
+        <gt growthStageNum="4">
+        
+        </gt>
+        <gt growthStageNum="5">
+        
+        </gt>
+        <gt growthStageNum="6">
+        
+        </gt>
+        <gt growthStageNum="7">
+        
+        </gt>
+        <gt growthStageNum="8">
+        
+        </gt>
+        <gt growthStageNum="9">
+        
+        </gt>
+        <gt growthStageNum="10">
+        
+        </gt>
+        <gt growthStageNum="11">
+        
+        </gt>
+        <gt growthStageNum="12">
+        
+        </gt>
+        <gt growthStageNum="999">
+    </growthTransitions>
 </growthManager>
 
 
