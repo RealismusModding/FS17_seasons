@@ -17,42 +17,60 @@
     </defaultFruits>
     <growthTransitions>
         <gt growthStageNum="1">
-        
+            <crops cropsNum="12">
+                <crop fruitName="barley" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <crop fruitName="wheat" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <crop fruitName="rape" normalGrowthState="1" normalGrowthMaxState="3"/>
+            </crops>
         </gt>
-        <gt growthStageNum="2">
-        
+        <!--<gt growthStageNum="2">
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="3">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="4">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="5">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="6">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="7">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="8">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="9">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="10">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="11">
-        
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="12">
+            <crops cropsNum="">
+            </crops>
         </gt>
         <gt growthStageNum="999">
-        </gt>
+            <crops cropsNum="">
+            </crops>
+        </gt>-->
     </growthTransitions>
 </growthManager>
 
