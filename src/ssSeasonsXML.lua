@@ -17,16 +17,13 @@ local seasonKeyToId = {
 -- Returns raw data
 function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
     
-
-    local file = ssSeasonsUtil:getDataFile(path, "seasons_animals.xml"); 
-    
-    --loadXMLFile("xml", path)
+    local file = loadXMLFile("xml", path)
     
     if file == nil then
         if optional == true then
             return parentData
         else
-            logInfo("Failed to load XML Seasons file " .. path)
+            logInfo("ssSeasonsXML: Failed to load XML Seasons file " .. path)
             return nil
         end
     end

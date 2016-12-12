@@ -33,7 +33,7 @@ function ssAnimals:loadFromXML()
         ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool"}
     }
 
-    self.data = ssSeasonsXML:loadFile("animals.xml", "animals", elements)
+    self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
     -- local mapData = ssSeasonsXML:loadFile(MAPDIR .. "Seasons.xml", "modules.animals", elements, modData, true)
     -- FIXME: find the location of the map
 end

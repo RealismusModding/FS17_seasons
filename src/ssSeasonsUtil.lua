@@ -334,10 +334,15 @@ end
 function ssSeasonsUtil:getDataFile(defaultFileName,modFileName)
     local file = nil;
     if g_currentMission.missionInfo.map.isModMap == true then
+        log("debug 1");
         local path = g_currentMission.missionInfo.map.baseDirectory .. modFileName;
         file = loadXMLFile("xml", path);
+        log("debug 2");
         if file == nil then
+            log("debug 3");
             return self:getDefaultDataFile(defaultFileName);
+        else
+            return file;
         end
     else
         return self:getDefaultDataFile(defaultFileName);
