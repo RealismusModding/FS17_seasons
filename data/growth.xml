@@ -16,67 +16,55 @@
         <defaultFruit name="dryGrass"/>
     </defaultFruits>
     <growthTransitions transitionsNum="1">
-        <gt growthStageNum="1" cropsNum="12">
-                <crop fruitName="barley" normalGrowthState="1" normalGrowthMaxState="3"/>
-                <crop fruitName="wheat" normalGrowthState="1" normalGrowthMaxState="3"/>
-                <crop fruitName="rape" normalGrowthState="1" normalGrowthMaxState="3"/>
-                <crop fruitName="maize" normalGrowthState="1"/>
-                <crop fruitName="soybean" setGrowthState="1" desiredGrowthState="100"/>
-                <crop fruitName="sunflower" setGrowthState="1" desiredGrowthState="100"/>
-                <crop fruitName="potato" normalGrowthState="1"/>
-                <crop fruitName="sugarBeet" normalGrowthState="1"/>
-                <crop fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="99"/>
-                <crop fruitName="grass" normalGrowthState="1" normalGrowthMaxState="99"/>
-                <crop fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="99"/>
-                <crop fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
+        <gt growthStageNum="1" fruitsNum="12">
+                <fruit fruitName="barley" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <fruit fruitName="wheat" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <fruit fruitName="rape" normalGrowthState="1" normalGrowthMaxState="3"/>
+                <fruit fruitName="maize" normalGrowthState="1"/>
+                <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="100"/>
+                <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="100"/>
+                <fruit fruitName="potato" normalGrowthState="1"/>
+                <fruit fruitName="sugarBeet" normalGrowthState="1"/>
+                <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="99"/>
+                <fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="99"/>
+                <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="99"/>
+                <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
         </gt>
         <!--<gt growthStageNum="2">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="3">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="4">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="5">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="6">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="7">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="8">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="9">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="10">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="11">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>
         <gt growthStageNum="12">
-            <crops cropsNum="">
-            </crops>
+           
         </gt>
         <gt growthStageNum="999">
-            <crops cropsNum="">
-            </crops>
+            
         </gt>-->
     </growthTransitions>
 </growthManager>

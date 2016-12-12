@@ -48,24 +48,53 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
         if transitionsNum == nil then
             log("GMXML growthData: could not load transitionsNum");
         end
+        
+        log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
 
         --load each transitions
         for i=0, transitionsNum-1 do
             local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
             log("GMXML growthData growthTransitionKey:", growthTransitionKey);
 
-            local growthStageNum = getXMLInt(file,growthTransitionKey .. "#growthStageNum");
-            log("GMXML growthData growthStageNum:", growthStageNum);
+            local growthStageNumKey = growthTransitionKey .. "#growthStageNum"
+            local growthStageNum = getXMLInt(file,growthStageNumKey);
+            if growthStageNum == nil then
+                logInfo("ssGrowthManagerData: XML loading failed " .. growthStageNumKey);  
+                return nil; 
+            end
 
-            local cropsNum =  getXMLInt(file,growthTransitionKey .. "#cropsNum");
-            log("GMXML growthData cropsNum:", cropsNum);
-            --number of crops in growth transitions
-             
-            --load each crop
+            log("GMXML growthData growthStageNum:", growthStageNum);
+            
+            --number of fruits in growth transitions
+            local fruitsNumKey = growthTransitionKey .. "#fruitsNum"
+            
+            local fruitsNum =  getXMLInt(file,fruitsNumKey);
+            if fruitsNum == nil then
+                logInfo("ssGrowthManagerData: XML loading failed " .. fruitsNumKey);  
+                return nil;     
+            end
+
+            log("GMXML growthData fruitsNum:", fruitsNum);
+
+            --load each fruit
+
+            for fruit=0,fruitsNum-1 do
+                local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, fruit);
+                local fruitName = getXMLString(file,fruitKey .. "#fruitName")
+                if fruitName == nil then
+                    logInfo("ssGrowthManagerData: XML loading failed " .. fruitKey); 
+                    return nil;
+                end
+
+                log("GMXML: fruit: " .. fruitName .. " transition: " .. i+1)
+                
+                
+
+            end
         end
 
 
-        log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
+        
 
 
     else
