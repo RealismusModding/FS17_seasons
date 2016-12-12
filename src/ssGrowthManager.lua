@@ -18,12 +18,9 @@ function Set (list)
 end
 
 ssGrowthManager.defaultFruits = {};
-
 ssGrowthManager.growthData = {};
-
-
-ssGrowthManager.currentGrowthTransitionPeriod = nil
-ssGrowthManager.doGrowthTransition = false
+ssGrowthManager.currentGrowthTransitionPeriod = nil;
+ssGrowthManager.doGrowthTransition = false;
 
 
 function ssGrowthManager:load(savegame, key)
@@ -41,14 +38,14 @@ function ssGrowthManager:loadMap(name)
 
     if (self.growthManagerEnabled == false) then
         log("ssGrowthManager: disabled");
-        return
+        return;
     end
     
     --if g_currentMission:getIsServer() then
       
     if self:getGrowthData() == false then
         logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled");
-        return
+        return;
     end
 
     logInfo("ssGrowthManager - data loaded. Locking growth");
@@ -62,7 +59,7 @@ function ssGrowthManager:loadMap(name)
         self.doGrowthTransition = true;
         self.hasResetGrowth = true;
         self.growthManagerEnabled = true;
-        logInfo("ssGrowthManager - First time growth reset - this will only happen once in a new savegame");
+        logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame");
     end
 
     if g_currentMission.missionInfo.timeScale > 120 then
@@ -81,12 +78,9 @@ function ssGrowthManager:getGrowthData()
     
     local elements = {"defaultFruits"};
     local defaultFruits,growthData = ssGrowthManagerData:loadAllData();
-
-   -- print_r(data1);
-
+   
     if defaultFruits ~= nil then
         self.defaultFruits = Set(defaultFruits);
-        --log("GM: setting default fruits from XML");
     else
         logInfo("ssGrowthManager: default fruits data not found");
         return false;
@@ -94,7 +88,6 @@ function ssGrowthManager:getGrowthData()
 
     if growthData ~= nil then
         self.growthData = growthData;
-        --log("GM: setting default growth data from XML");
     else
         logInfo("ssGrowthManager: default growth data not found");
         return false;
@@ -113,73 +106,15 @@ end
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 107) then
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index]
-            local fruitName = desc.name
-            if (self.defaultFruits[fruitName] == nil) then
-                log("GM: Fruit not found in default table: " .. fruitName);
-            else
-                log("GM: Fruit " .. fruitName .. " found");
-            end
-
-        end
-
-        -- self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason
-        -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) )
-        --self:seasonChanged()
-
-        --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod
-        --log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod)
-
-        --self.doGrowthTransition = true
-
-
-        --if self.testGrowthTransitionPeriod < 12 then
-            --self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1
-        --else
-            --self.testGrowthTransitionPeriod = 1
-        --end
-
-
-        -- log ("MAX_GROWTH_STATE " .. MAX_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION)
-
-        
-        -- local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
-        -- --log("Growth iteration: " .. tostring(growthTransition));
-
-        -- self.fakeDay = self.fakeDay + 1;
-        -- --local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
-        -- log("Current Growth Transition: " .. tostring(growthTransition));
-        
-        -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) );
-        --self:seasonChanged();
-
-        --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod;
-        --log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod);
-        
-        -- self.doGrowthTransition = true;
-        
-        
-        -- if self.testGrowthTransitionPeriod < 12 then
-        --     self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1;
-        -- else
-        --     self.testGrowthTransitionPeriod = 1;
+        -- for index,fruit in pairs(g_currentMission.fruits) do
+        --     local desc = FruitUtil.fruitIndexToDesc[index]
+        --     local fruitName = desc.name
+        --     if (self.defaultFruits[fruitName] == nil) then
+        --         log("GM: Fruit not found in default table: " .. fruitName);
+        --     else
+        --         log("GM: Fruit " .. fruitName .. " found");
+        --     end
         -- end
-        
-        
-        -- log ("MAX_GROWTH_STATE " .. MAX_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION);
-
-
-        -- for x, line2 in pairs(self.growthData[FIRST_LOAD_TRANSITION]) do
-        --     print(line2.fruitName)
-        -- end
-
-
-        --log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod)
-
-        --log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod);    
-
-
 
     end
 end
@@ -215,7 +150,7 @@ function ssGrowthManager:update(dt)
                 --setGrowthState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
                     and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
-                        --print("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
+                        --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
 
                     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState
                     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
@@ -230,9 +165,6 @@ function ssGrowthManager:update(dt)
                         if maxState == MAX_GROWTH_STATE then
                             maxState = fruitData.numGrowthStates
                         end
-                        -- print("Fruit: " .. fruitName)
-                        -- print("MinState: " .. minState)
-                        -- print("Maxstate: " .. maxState)
                         setDensityMaskParams(fruit.id, "between",minState,maxState)
                     else
                         setDensityMaskParams(fruit.id, "equals",minState)

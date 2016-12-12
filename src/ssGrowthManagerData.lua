@@ -46,20 +46,19 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
     local growthTransitionsKey = rootKey .. ".growthTransitions";
 
     if hasXMLProperty(file,growthTransitionsKey) then
-        log("GMXML growthData: " .. growthTransitionsKey .. " found");    
+        --log("GMXML growthData: " .. growthTransitionsKey .. " found");    
 
         local transitionsNum = getXMLInt(file,growthTransitionsKey .. "#transitionsNum");
         if transitionsNum == nil then
             logInfo("ssGrowthManagerData: getGrowthData: could not load transitionsNum");
         end
         
-        log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
+        --log("GMXML growthData: transitions num:" .. tostring(transitionsNum));
 
         --load each transitions
         for i=0, transitionsNum-1 do
             local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
-            log("GMXML growthData growthTransitionKey:", growthTransitionKey);
-            
+            --log("GMXML growthData growthTransitionKey:", growthTransitionKey);
 
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum"
             local growthTransitionNum = getXMLInt(file,growthTransitionNumKey);
@@ -67,12 +66,10 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
                 logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionNumKey);  
                 return nil; 
             end
-            
+
             --insert growth transition into datatable
             table.insert( growthData, growthTransitionNum, {});
-
-            log("GMXML growthData growthTransitionNum:", growthTransitionNum);
-            
+            --log("GMXML growthData growthTransitionNum:", growthTransitionNum);
             --number of fruits in growth transitions
             local fruitsNumKey = growthTransitionKey .. "#fruitsNum"
             
@@ -83,9 +80,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             end
 
             --log("GMXML growthData fruitsNum:", fruitsNum);
-
             --load each fruit
-
             for fruit=0,fruitsNum-1 do
                 local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, fruit);
                 local fruitName = getXMLString(file,fruitKey .. "#fruitName")
