@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <growthManager>
-    <defaultFruits fruitNum="12">
+    <defaultFruits fruitsNum="12">
         <defaultFruit name="barley"/> 
         <defaultFruit name="wheat"/> 
         <defaultFruit name="rape"/> 
