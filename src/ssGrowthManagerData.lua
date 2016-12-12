@@ -56,14 +56,14 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
             log("GMXML growthData growthTransitionKey:", growthTransitionKey);
 
-            local growthStageNumKey = growthTransitionKey .. "#growthStageNum"
-            local growthStageNum = getXMLInt(file,growthStageNumKey);
-            if growthStageNum == nil then
-                logInfo("ssGrowthManagerData: XML loading failed " .. growthStageNumKey);  
+            local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum"
+            local growthTransitionNum = getXMLInt(file,growthTransitionNumKey);
+            if growthTransitionNum == nil then
+                logInfo("ssGrowthManagerData: XML loading failed " .. growthTransitionNumKey);  
                 return nil; 
             end
 
-            log("GMXML growthData growthStageNum:", growthStageNum);
+            log("GMXML growthData growthTransitionNum:", growthTransitionNum);
             
             --number of fruits in growth transitions
             local fruitsNumKey = growthTransitionKey .. "#fruitsNum"
