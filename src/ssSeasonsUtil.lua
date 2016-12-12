@@ -2,7 +2,7 @@
 -- ssSeasonsUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
--- Authors:  Jarvixes, reallogger, theSeb
+-- Authors:  Jarvixes, mrbear, reallogger, theSeb
 --
 
 ssSeasonsUtil = {}
