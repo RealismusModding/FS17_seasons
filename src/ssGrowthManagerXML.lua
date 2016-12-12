@@ -15,28 +15,36 @@ function ssGrowthManagerXML:loadFile(path, rootKey, elements)--parentData, optio
     log("Debug 2");
     if (file == nil) then
         logInfo("Failed to load Growth XML data file " .. path);
+        return nil;
     end
 
     log("Debug 3");
-    local defaultFruitKey =  rootKey .. ".defaultFruits";
+    local defaultFruitsKey =  rootKey .. ".defaultFruits";
 
-    if hasXMLProperty(file, defaultFruitKey) then
-        log("GMXML: " .. defaultFruitKey .. " found");
-        local fruitNum = getXMLInt(file, defaultFruitKey .. "#fruitNum");
+    if hasXMLProperty(file, defaultFruitsKey) then
+        log("GMXML: " .. defaultFruitsKey .. " found");
+        local fruitNum = getXMLInt(file, defaultFruitsKey .. "#fruitNum");
         log("GMXML: fruitNum: " .. tostring(fruitNum));
 
         if fruitNum ~= nil then
             for i=0,fruitNum-1 do
-                local childKey = string.format("%s.defaultFruit(%i)#name", defaultFruitKey, i);
-                log("GMXML propKey: " .. childKey);
-                local fruitName = getXMLString(file, childKey);
-                log("GMXML: " .. fruitName);
-                table.insert(defaultFruits,fruitName);
+                local defaultFruitKey = string.format("%s.defaultFruit(%i)#name", defaultFruitsKey, i);
+                log("GMXML propKey: " .. defaultFruitKey);
+                local fruitName = getXMLString(file, defaultFruitKey);
+                if fruitName ~= nil then 
+                    log("GMXML: " .. fruitName);
+                    table.insert(defaultFruits,fruitName);
+                else
+                    logInfo("ssGrowthManager: XML loading failed. Is the growth data file malformed?");
+                    return nil;
+                end
+
 
             end
         end
     else
-        log("GMXML: " .. defaultFruitKey .. " not found");
+        log("GMXML: " .. defaultFruitsKey .. " not found");
+        return nil;
     end
 
     

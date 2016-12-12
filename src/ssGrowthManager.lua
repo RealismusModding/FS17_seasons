@@ -17,7 +17,7 @@ function Set (list)
   return set
 end
 
-ssGrowthManager.defaultFruits = Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
+ssGrowthManager.defaultFruits = {};--TODO: uncomment this Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
 
 ssGrowthManager.growthData = { 	[1]={ 				
 						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
@@ -215,15 +215,18 @@ function ssGrowthManager:loadFromXML()
     local elements = {"defaultFruits"};
     local defaultFruitsXML = ssGrowthManagerXML:loadFile(ssSeasonsMod.modDir .. "data/growth.xml", "growthManager", elements);
 
-    print_r(data1);
+   -- print_r(data1);
 
     if defaultFruitsXML ~= nil then
         self.defaultFruits = Set(defaultFruitsXML)
-        log("GM: setting default fruits from xml");
+        log("GM: setting default fruits from XML");
     else
-        log("GM: xml default fruits data not found. using default");
+        log("GM: XML default fruits data not found");
     end
+
     
+
+
 
     -- local elements = {
     --     ["defaultFruits"] = {}
