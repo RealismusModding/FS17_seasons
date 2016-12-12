@@ -15,7 +15,7 @@ function ssGrowthManagerData:loadAllData()
     local growthData = {};
     local path = nil;
     local rootKey = "growthManager";
-    local file = nil;
+    
 
     -- if ssSeasonsUtil:getMapDataFilesPath ~= nil then
         
@@ -24,8 +24,15 @@ function ssGrowthManagerData:loadAllData()
     --     path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
     -- end
 
-    --loadXMLFile("xml", path);
-    local file = ssSeasonsUtil:getDataFile("growth.xml", "seasons_growth.xml"); 
+    --
+    local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml"); 
+    if  modMapDataPath ~= nil then
+        path = modMapDataPath;
+    else
+        path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
+    end
+
+    local file = loadXMLFile("xml", path); 
     
     if (file == nil) then
         logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);

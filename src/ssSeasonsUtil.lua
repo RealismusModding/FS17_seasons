@@ -331,32 +331,19 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     return gamma * math.exp ( z / beta )
 end
 
-function ssSeasonsUtil:getDataFile(defaultFileName,modFileName)
-    local file = nil;
+function ssSeasonsUtil:getModMapDataPath(dataFileName)
+    
     if g_currentMission.missionInfo.map.isModMap == true then
-        log("debug 1");
-        local path = g_currentMission.missionInfo.map.baseDirectory .. modFileName;
-        file = loadXMLFile("xml", path);
-        log("debug 2");
-        if file == nil then
-            log("debug 3");
-            return self:getDefaultDataFile(defaultFileName);
+        
+        local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName;
+        if fileExists(path) then
+            return path;
         else
-            return file;
+            return nil;
         end
     else
-        return self:getDefaultDataFile(defaultFileName);
+        return nil;
     end
-
-    return file;
-end
-
---do not call this function from elsewhere. only used by getDataFile
-function ssSeasonsUtil:getDefaultDataFile(defaultFileName)
-    local file = nil;
-    local path = ssSeasonsMod.modDir .. "data/" .. defaultFileName;
-    file = loadXMLFile("xml", path);
-    return file;
 end
 
 --
