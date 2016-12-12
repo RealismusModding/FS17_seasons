@@ -104,19 +104,19 @@ function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 107) then
+    -- if (unicode == 107) then
 
-        -- for index,fruit in pairs(g_currentMission.fruits) do
-        --     local desc = FruitUtil.fruitIndexToDesc[index]
-        --     local fruitName = desc.name
-        --     if (self.defaultFruits[fruitName] == nil) then
-        --         log("GM: Fruit not found in default table: " .. fruitName);
-        --     else
-        --         log("GM: Fruit " .. fruitName .. " found");
-        --     end
-        -- end
+    --     -- for index,fruit in pairs(g_currentMission.fruits) do
+    --     --     local desc = FruitUtil.fruitIndexToDesc[index]
+    --     --     local fruitName = desc.name
+    --     --     if (self.defaultFruits[fruitName] == nil) then
+    --     --         log("GM: Fruit not found in default table: " .. fruitName);
+    --     --     else
+    --     --         log("GM: Fruit " .. fruitName .. " found");
+    --     --     end
+    --     -- end
 
-    end
+    -- end
 end
 
 function ssGrowthManager:update(dt)
@@ -129,8 +129,6 @@ function ssGrowthManager:update(dt)
         local widthWorldZ = startWorldZ
         local heightWorldX = startWorldX
         local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
-
-        --local detailId = g_currentMission.terrainDetailId
 
         for index,fruit in pairs(g_currentMission.fruits) do
             local desc = FruitUtil.fruitIndexToDesc[index]
