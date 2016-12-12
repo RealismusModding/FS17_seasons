@@ -2,7 +2,7 @@
 -- ANIMALS SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the animals
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin (Jarvixes), theSeb (added mapDir loading)
 --
 
 ssAnimals = {}
