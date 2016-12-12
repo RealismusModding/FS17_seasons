@@ -2,7 +2,7 @@
 -- SEASONS XML SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  For loading season parameters from mod, map or game
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin (Jarvixes), theSeb (added mapDir loading)
 --
 
 ssSeasonsXML = {}
