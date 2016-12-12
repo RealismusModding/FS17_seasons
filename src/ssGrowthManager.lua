@@ -187,7 +187,8 @@ function ssGrowthManager:loadMap(name)
        log("Growth Manager loading. Locking growth");
 
        self:loadFromXML();
-
+       --TODO: check if loaded. if not, then do not add the listener
+       
         if not (self.hasResetGrowth) then 
             self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
             self.doGrowthTransition = true;
