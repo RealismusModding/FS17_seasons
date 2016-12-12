@@ -337,7 +337,6 @@ function ssSeasonsUtil:getMapDataFilesPath
     else
         return nil;
     end
-
 end
 --
 -- List implementation
