@@ -7,7 +7,7 @@
 
 ssGrowthManagerXML = {};
 
-self.DEFAULT_FILE_PATH = "data/growth.xml";
+ ssGrowthManagerXML.DEFAULT_FILE_PATH = "data/growth.xml";
 
 function ssGrowthManagerXML:loadXMLData()
 
@@ -15,18 +15,21 @@ function ssGrowthManagerXML:loadXMLData()
     local growthData = {};
     local rootKey = "growthManager";
     local path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
-
-    log("Debug 1");
+    
     local file = loadXMLFile("xml", path);
-    log("Debug 2");
+    
     if (file == nil) then
         logInfo("ssGrowthManagerXML: Failed to load XML growth data file " .. path);
         return nil;
     end
 
     local defaultFruits = self:getDefaultFruitsData(rootKey,file);
+    if defaultFruits == nil then
+        logInfo("ssGrowthManagerXML: Failed to load XML growth data file " .. path);
+    end
+
     local growthData = self:getGrowthData(rootKey, file);
-    --todo check if nil
+
     
     return defaultFruits, growthData; 
 

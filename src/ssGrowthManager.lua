@@ -222,8 +222,11 @@ function ssGrowthManager:loadFromXML()
         self.defaultFruits = Set(defaultFruitsXML)
         log("GM: setting default fruits from XML");
     else
-        log("GM: XML default fruits data not found");
+        logInfo("ssGrowthManager: default fruits data not found");
+        return false;
     end
+
+    
 
     
 
