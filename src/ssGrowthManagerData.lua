@@ -1,15 +1,15 @@
 ---------------------------------------------------------------------------------------------------------
--- SEASONS XML SCRIPT
+-- ssGrowthManagerData
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  For loading season parameters from mod, map or game
 -- Authors:  theSeb, based on ssSeasonsXML by Rahkiin (Jarvixes)
 --
 
-ssGrowthManagerXML = {};
+ssGrowthManagerData = {};
 
- ssGrowthManagerXML.DEFAULT_FILE_PATH = "data/growth.xml";
+ ssGrowthManagerData.DEFAULT_FILE_PATH = "data/growth.xml";
 
-function ssGrowthManagerXML:loadXMLData()
+function ssGrowthManagerData:loadXMLData()
 
     
     local growthData = {};
@@ -19,13 +19,14 @@ function ssGrowthManagerXML:loadXMLData()
     local file = loadXMLFile("xml", path);
     
     if (file == nil) then
-        logInfo("ssGrowthManagerXML: Failed to load XML growth data file " .. path);
+        logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);
         return nil;
     end
 
     local defaultFruits = self:getDefaultFruitsData(rootKey,file);
     if defaultFruits == nil then
-        logInfo("ssGrowthManagerXML: Failed to load XML growth data file " .. path);
+        logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);
+        return nil,nil;
     end
 
     local growthData = self:getGrowthData(rootKey, file);
@@ -35,11 +36,11 @@ function ssGrowthManagerXML:loadXMLData()
 
 end
 
-function ssGrowthManagerXML:getGrowthData(rootKey, file)
+function ssGrowthManagerData:getGrowthData(rootKey, file)
 
 end
 
-function ssGrowthManagerXML:getDefaultFruitsData(rootKey, file)
+function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
 
     local defaultFruits = {};
 

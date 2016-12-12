@@ -214,7 +214,7 @@ end
 function ssGrowthManager:loadFromXML()
     
     local elements = {"defaultFruits"};
-    local defaultFruitsXML,growthData = ssGrowthManagerXML:loadXMLData();
+    local defaultFruitsXML,growthData = ssGrowthManagerData:loadXMLData();
 
    -- print_r(data1);
 
