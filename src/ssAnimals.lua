@@ -38,7 +38,7 @@ function ssAnimals:loadFromXML()
     -- FIXME: find the location of the map
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then
-  	    self.data = ssSeasonsXML:loadFile(modPath, "animals", elements,self.data,true)    
+  	    ssSeasonsXML:loadFile(modPath, "animals", elements,self.data,true)    
     end
 end
 
