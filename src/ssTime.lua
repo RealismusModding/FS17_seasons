@@ -57,9 +57,6 @@ function ssTime:writeStream(streamId, connection)
 end
 
 function ssTime:update(dt)
-    if g_currentMission:getIsClient() then
-        g_currentMission:addExtraPrintText("Season '"..ssSeasonsUtil:seasonName().."', day "..ssSeasonsUtil:currentDayNumber())
-    end
 end
 
 -- Change the night/day times according to season
@@ -99,7 +96,7 @@ function ssTime:adaptTime()
     env.sunRotCurve = self:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.sunColorCurve = self:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
-    
+
     g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 
     self.lastUpdate = ssSeasonsUtil:currentDayNumber()
@@ -148,11 +145,11 @@ end
 function ssTime:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
     local sunHeightAngle = self:calculateSunDeclination(julianDay) - (90 - self.latitude)*math.pi/180
-    
-    return sunHeightAngle 
+
+    return sunHeightAngle
 end
 
-function ssTime:calculateSunDeclination(julianDay) 
+function ssTime:calculateSunDeclination(julianDay)
     -- Calculate the suns declination
     local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
     local eta = math.asin(0.4 * math.cos(theta))
