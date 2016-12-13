@@ -47,7 +47,7 @@ ssSeasonsUtil.seasons = {
 }
 
 function ssSeasonsUtil:load(savegame, key)
-    self.daysInSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10)
+    self.daysInSeason = Utils.clamp(ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10), 3, 12)
     self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", 1)
     self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 1)
 end
@@ -209,7 +209,7 @@ function ssSeasonsUtil:currentGrowthTransition(currentDay)
     local season = self:season(currentDay);
     local cGS = self:currentGrowthStage(currentDay);
     --print("Season: " .. season .. "CGS: " .. cGS .. "Day " .. currentDay)
-    return (cGS + (season*3)); 
+    return (cGS + (season*3));
 end
 
 function ssSeasonsUtil:currentGrowthStage(currentDay)
@@ -332,9 +332,9 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
 end
 
 function ssSeasonsUtil:getModMapDataPath(dataFileName)
-    
+
     if g_currentMission.missionInfo.map.isModMap == true then
-        
+
         local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName;
         if fileExists(path) then
             return path;
@@ -362,13 +362,13 @@ end
       list.first = first
       list[first] = value
     end
-    
+
     function ssSeasonsUtil.listPushRight (list, value)
       local last = list.last + 1
       list.last = last
       list[last] = value
     end
-    
+
     function ssSeasonsUtil.listPopLeft (list)
       local first = list.first
       if first > list.last then return nil end
@@ -377,7 +377,7 @@ end
       list.first = first + 1
       return value
     end
-    
+
     function ssSeasonsUtil.listPopRight (list)
       local last = list.last
       if list.first > last then return nil end
