@@ -14,8 +14,6 @@ function ssWeatherForecast:loadMap(name)
         self.hud = {}
         self.hud.visible = true
 
-        log('screenAspectRatio = ',screenAspectRatio,' | g_screenAspectRatio = ', g_screenAspectRatio)
-
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"),1)
         self.hud.heigth = 0.1 * self.guiScale * screenAspectRatio
         self.hud.width = (0.1 * self.guiScale * 7) / g_screenAspectRatio * screenAspectRatio
@@ -28,8 +26,6 @@ function ssWeatherForecast:loadMap(name)
         self.hud.iconWidth = self.hud.iconHeigth / g_screenAspectRatio 
         self.hud.iconHeigthSmall = 0.0222 * self.guiScale * screenAspectRatio
         self.hud.iconWidthSmall = self.hud.iconHeigthSmall / g_screenAspectRatio
-        --self.hud.iconWidthCurrent = g_currentMission.weatherForecastIconSunOverlay.width
-        --self.hud.iconHeigthCurrent = g_currentMission.weatherForecastIconSunOverlay.height
         self.hud.textSize = g_currentMission.timeScaleTextSize * 1.5
 
         -- Set position clock overlay
@@ -67,6 +63,8 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
         self.hud.overlays.seasons[ssSeasonsUtil.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
         self.hud.overlays.seasons[ssSeasonsUtil.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
+
+        self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", ssSeasonsMod.modDir), 0, 0, width, height)
 
         -- Seasons Weather Icons
         self.hud.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
@@ -139,8 +137,6 @@ function ssWeatherForecast:draw()
             renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.heigth - posYOffset - self.hud.iconHeigthSmall/2, self.hud.textSize, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n-1))
         end
 
-        -- Clean up after us, text render after this will be affected otherwise.
-        setTextColor(1, 1, 1, 1)
     end
 
     self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.08 * self.guiScale / g_screenAspectRatio * screenAspectRatio
@@ -163,4 +159,11 @@ function ssWeatherForecast:draw()
     local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
     setTextAlignment(RenderText.ALIGN_RIGHT)
     renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.iconHeigthSmall*0.5, self.hud.textSize, tostring(currentTemp .. "ºC"))
+
+    if ssWeatherManager:isGroundWorkable() == false then
+        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight, self.hud.dayPosY, self.hud.dayHeight/g_screenAspectRatio, self.hud.dayHeight)
+    end
+
+    -- Clean up after us, text render after this will be affected otherwise.
+    setTextColor(1, 1, 1, 1)
 end
