@@ -150,7 +150,11 @@ function ssWeatherForecast:draw()
     renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize, string.format("%02d/%s/%d", ssSeasonsUtil:dayInSeason(forecast[1].day), ssSeasonsUtil.seasons[forecast[1].season], ssSeasonsUtil:year() + 2017))
 
     -- Render Background
-    renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX, self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
+    renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
+    
+    if ssWeatherManager:isGroundWorkable() == false then
+        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
+    end
 
     -- Render Season Icon
     renderOverlay(self.hud.overlays.seasons[forecast[1].season].overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.75, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeigthSmall*1.7, self.hud.iconWidthSmall*1.5, self.hud.iconHeigthSmall*1.5)
@@ -160,9 +164,7 @@ function ssWeatherForecast:draw()
     setTextAlignment(RenderText.ALIGN_RIGHT)
     renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.iconHeigthSmall*0.5, self.hud.textSize, tostring(currentTemp .. "ºC"))
 
-    if ssWeatherManager:isGroundWorkable() == false then
-        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight, self.hud.dayPosY, self.hud.dayHeight/g_screenAspectRatio, self.hud.dayHeight)
-    end
+
 
     -- Clean up after us, text render after this will be affected otherwise.
     setTextColor(1, 1, 1, 1)
