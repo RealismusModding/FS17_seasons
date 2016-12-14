@@ -22,15 +22,25 @@ ssGrowthManager.defaultFruits = {};
 ssGrowthManager.growthData = {};
 ssGrowthManager.currentGrowthTransitionPeriod = nil;
 ssGrowthManager.doGrowthTransition = false;
-
+ssGrowthManager.doResetGrowth = false;
 
 function ssGrowthManager:load(savegame, key)
-    self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", false);
+    
+
+    if (savegame == nil) then
+        self.doResetGrowth = true;
+    end
+
+    --self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", nil);
+    -- if self.hasResetGrowth == nil then
+    --     self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.doNotModify.hRG", false);
+    -- end
+
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame,key .. ".settings.growthManagerEnabled", true);
 end
 
 function ssGrowthManager:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth);
+    --ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth);
     ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled);
 end
 
@@ -55,10 +65,10 @@ function ssGrowthManager:loadMap(name)
     g_currentMission:setPlantGrowthRateLocked(true);
     ssSeasonsMod:addGrowthStageChangeListener(self)   
 
-    if not (self.hasResetGrowth) then 
+    if (self.doResetGrowth == true) then 
         self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
         self.doGrowthTransition = true;
-        self.hasResetGrowth = true;
+        --self.hasResetGrowth = true;
         self.growthManagerEnabled = true;
         logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame");
     end
