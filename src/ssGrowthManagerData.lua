@@ -78,7 +78,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
                 return nil    
             end
             
-            growthData = self:getFruitsTransitionStates(growthTransitionKey,file,fruitsNum,growthTransitionNum, growthData);
+            growthData = self:getFruitsTransitionStates(growthTransitionKey, file, fruitsNum, growthTransitionNum, growthData);
         end -- for i=0, transitionsNum-1 do
     else
         logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionsKey .. " not found");
@@ -88,7 +88,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
     return growthData;
 end
 
-function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey,file,fruitsNum,growthTransitionNum,parentData)
+function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file, fruitsNum, growthTransitionNum, parentData)
     local growthData = parentData;
     
     --load each fruit
