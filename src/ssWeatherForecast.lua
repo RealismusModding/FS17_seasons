@@ -76,8 +76,6 @@ function ssWeatherForecast:loadMap(name)
         g_currentMission.weatherForecastIconOverlays.hail = self.hud.overlays.snow
         self.hud.overlays.hail = self.hud.overlays.snow
 
-        print_r(g_currentMission.missionInfo)
-
     end
 
 end
