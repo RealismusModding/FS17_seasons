@@ -85,7 +85,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
         return nil
     end
 
-    return growthData;
+    return growthData
 end
 
 function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file, fruitsNum, growthTransitionNum, parentData)
@@ -145,7 +145,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         end
     end -- for fruit=0,fruitsNum-1 do
 
-    return growthData;
+    return growthData
 end
 
 function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)

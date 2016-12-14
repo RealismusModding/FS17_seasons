@@ -60,7 +60,6 @@ function ssGrowthManager:loadMap(name)
         if self.doResetGrowth == true then 
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION;
             self.doGrowthTransition = true;
-            --self.hasResetGrowth = true;
             self.growthManagerEnabled = true;
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame");
         end
@@ -132,73 +131,30 @@ function ssGrowthManager:update(dt)
             local desc = FruitUtil.fruitIndexToDesc[index];
             local fruitName = desc.name;
 
-            local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
+            local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
 
+            --handling new unknown fruits
             if self.defaultFruits[fruitName] == nil then
                 log("Fruit not found in default table: " .. fruitName);
                 fruitName = "default";
             end
 
             if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
-                local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
-
                 --setGrowthState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
                     and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
                         --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
-
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState;
-                    local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState;
-
-                    if desiredGrowthState == self.WITHER_STATE then
-                         desiredGrowthState = fruitData.witheringNumGrowthStates;
-                    end
-
-                    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
-
-                        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState;
-                        if maxState == self.MAX_GROWTH_STATE then
-                            maxState = fruitData.numGrowthStates;
-                        end
-                        setDensityMaskParams(fruit.id, "between",minState,maxState);
-                    else
-                        setDensityMaskParams(fruit.id, "equals",minState);
-                    end
-
-                    local sum = setDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ,0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, desiredGrowthState);
-
+                    self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
                 end
-
                 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState;
-
-                    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
-
-                        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState;
-
-                        if maxState == self.MAX_GROWTH_STATE then
-                            maxState = fruitData.numGrowthStates-1;
-                        end
-                        setDensityMaskParams(fruit.id, "between",minState,maxState);
-                    else
-                        setDensityMaskParams(fruit.id, "equals",minState);
-                    end
-
-                    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, 1);
+                    self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);  
                 end
-
                 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
                         and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
                         and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
-                    
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState;
-                    local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState;
-                    local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor;
-
-                    setDensityMaskParams(fruit.id, "between",minState,maxState);
-                    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, extraGrowthFactor);
+                    self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
                 end
             end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
         end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
@@ -230,4 +186,57 @@ function ssGrowthManager:growthStageChanged()
         self.currentGrowthTransitionPeriod = growthTransition;
         self.doGrowthTransition = true;
     end
+end
+
+function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState;
+    local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState;
+    local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
+
+    if desiredGrowthState == self.WITHER_STATE then
+            desiredGrowthState = fruitData.witheringNumGrowthStates;
+    end
+
+    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
+        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState;
+        
+        if maxState == self.MAX_GROWTH_STATE then
+            maxState = fruitData.numGrowthStates;
+        end
+        setDensityMaskParams(fruit.id, "between",minState,maxState);
+    else
+        setDensityMaskParams(fruit.id, "equals",minState);
+    end
+
+    local numChannels = g_currentMission.numFruitStateChannels;
+    local sum = setDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ,0, numChannels, fruit.id, 0, numChannels, desiredGrowthState);
+end
+
+function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState;
+
+    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
+        local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
+        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState;
+
+        if maxState == self.MAX_GROWTH_STATE then
+            maxState = fruitData.numGrowthStates-1;
+        end
+        setDensityMaskParams(fruit.id, "between",minState,maxState);
+    else
+        setDensityMaskParams(fruit.id, "equals",minState);
+    end
+
+    local numChannels = g_currentMission.numFruitStateChannels;
+    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, 1);
+end
+
+function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState;
+    local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState;
+    setDensityMaskParams(fruit.id, "between",minState,maxState);
+
+    local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor;
+    local numChannels = g_currentMission.numFruitStateChannels;
+    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor);
 end
