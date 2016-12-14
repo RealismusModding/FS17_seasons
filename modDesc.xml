@@ -16,7 +16,7 @@
 
     <multiplayer supported="true" />
 
-    <l10n filenamePrefix="translations/modDesc_l10n" />
+    <l10n filenamePrefix="translations/translation" />
 
     <extraSourceFiles>
         <sourceFile filename="src/ssSeasonsMod.lua" />
