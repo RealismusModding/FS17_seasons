@@ -124,14 +124,14 @@
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="99"/>
             <fruit fruitName="default" normalGrowthState="1"  normalGrowthMaxState="1" setGrowthState="7" desiredGrowthState="100"/>
         </gt>
-        <gt growthTransitionNum="9" fruitsNum="5">
+        <gt growthTransitionNum="9" fruitsNum="2">
             <fruit fruitName="soybean" setGrowthState="1"  setGrowthMaxState="99"  desiredGrowthState="100"/>
-            <fruit fruitName="potato" setGrowthState="1"  setGrowthMaxState="99"  desiredGrowthState="100"/>
-            <fruit fruitName="sugarBeet" setGrowthState="1"  setGrowthMaxState="99"  desiredGrowthState="100"/>
-            <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="99" desiredGrowthState="1"/>
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="99"/>    
         </gt>
-        <gt growthTransitionNum="10" fruitsNum="0"/>
+        <gt growthTransitionNum="10" fruitsNum="3"/>
+            <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="99" desiredGrowthState="1"/>
+            <fruit fruitName="potato" setGrowthState="1"  setGrowthMaxState="99"  desiredGrowthState="100"/>
+            <fruit fruitName="sugarBeet" setGrowthState="1"  setGrowthMaxState="99"  desiredGrowthState="100"/>
         <gt growthTransitionNum="11" fruitsNum="0"/>
         <gt growthTransitionNum="12" fruitsNum="0"/>
         <gt growthTransitionNum="999" fruitsNum="11">
