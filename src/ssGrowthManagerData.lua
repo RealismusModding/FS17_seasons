@@ -78,63 +78,72 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
                 return nil    
             end
             
-            --load each fruit TODO: refactor this into a separate function
-            for fruit=0,fruitsNum-1 do
-                local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, fruit);
-                local fruitName = getXMLString(file,fruitKey .. "#fruitName");
-                if fruitName == nil then
-                    logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitKey); 
-                    return nil
-                end
-
-                growthData[growthTransitionNum][fruitName] = {};
-                growthData[growthTransitionNum][fruitName].fruitName = fruitName;
-                
-                local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState");
-                if normalGrowthState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].normalGrowthState = normalGrowthState;
-                end
-
-                local normalGrowthMaxState =  getXMLInt(file,fruitKey .. "#normalGrowthMaxState");
-                if normalGrowthMaxState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].normalGrowthMaxState = normalGrowthMaxState;
-                end
-
-                local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState");
-                if setGrowthState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].setGrowthState = setGrowthState;
-                end
-
-                local setGrowthMaxState =  getXMLInt(file,fruitKey .. "#setGrowthMaxState");
-                if setGrowthMaxState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
-                end
-
-                local desiredGrowthState =  getXMLInt(file,fruitKey .. "#desiredGrowthState");
-                if desiredGrowthState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
-                end
-
-                local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState");
-                if extraGrowthMinState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
-                end 
-
-                local extraGrowthMaxState = getXMLInt(file,fruitKey .. "#extraGrowthMaxState");
-                if extraGrowthMaxState ~= nil then 
-                    growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
-                end
-
-                local extraGrowthFactor = getXMLInt(file,fruitKey .. "#extraGrowthFactor");
-                if extraGrowthFactor ~= nil then 
-                    growthData[growthTransitionNum][fruitName].extraGrowthFactor = extraGrowthFactor;
-                end
-            end -- for fruit=0,fruitsNum-1 do
+            growthData = self:getFruitsTransitionStates(growthTransitionKey,file,fruitsNum,growthTransitionNum, growthData);
         end -- for i=0, transitionsNum-1 do
     else
         logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionsKey .. " not found");
         return nil
     end
+
+    return growthData;
+end
+
+function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey,file,fruitsNum,growthTransitionNum,parentData)
+    local growthData = parentData;
+    
+    --load each fruit
+    for fruit=0,fruitsNum-1 do
+        local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, fruit);
+        
+        local fruitName = getXMLString(file,fruitKey .. "#fruitName");
+        if fruitName == nil then
+            logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitKey); 
+            return nil
+        end
+
+        growthData[growthTransitionNum][fruitName] = {};
+        growthData[growthTransitionNum][fruitName].fruitName = fruitName;
+        
+        local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState");
+        if normalGrowthState ~= nil then 
+            growthData[growthTransitionNum][fruitName].normalGrowthState = normalGrowthState;
+        end
+
+        local normalGrowthMaxState =  getXMLInt(file,fruitKey .. "#normalGrowthMaxState");
+        if normalGrowthMaxState ~= nil then 
+            growthData[growthTransitionNum][fruitName].normalGrowthMaxState = normalGrowthMaxState;
+        end
+
+        local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState");
+        if setGrowthState ~= nil then 
+            growthData[growthTransitionNum][fruitName].setGrowthState = setGrowthState;
+        end
+
+        local setGrowthMaxState =  getXMLInt(file,fruitKey .. "#setGrowthMaxState");
+        if setGrowthMaxState ~= nil then 
+            growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
+        end
+
+        local desiredGrowthState =  getXMLInt(file,fruitKey .. "#desiredGrowthState");
+        if desiredGrowthState ~= nil then 
+            growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
+        end
+
+        local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState");
+        if extraGrowthMinState ~= nil then 
+            growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
+        end 
+
+        local extraGrowthMaxState = getXMLInt(file,fruitKey .. "#extraGrowthMaxState");
+        if extraGrowthMaxState ~= nil then 
+            growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
+        end
+
+        local extraGrowthFactor = getXMLInt(file,fruitKey .. "#extraGrowthFactor");
+        if extraGrowthFactor ~= nil then 
+            growthData[growthTransitionNum][fruitName].extraGrowthFactor = extraGrowthFactor;
+        end
+    end -- for fruit=0,fruitsNum-1 do
 
     return growthData;
 end
