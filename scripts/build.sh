@@ -4,6 +4,7 @@ echo "# Building mod package..."
 
 mkdir dist
 cp -r src dist/
+cp -r translations dist/
 cp -r resources dist/
 cp -r data dist/
 cp icon.dds dist/
