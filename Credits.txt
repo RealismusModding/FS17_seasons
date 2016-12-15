@@ -6,7 +6,7 @@ Snow Weather and Season Huds -- FSModding_Gary
 
 Translations
 Polish - Dzi4d3k 
-German - oekobauer 
+German - tobiasgo/Oekobauer 
 Italian - fcelsa
 French - thierry62
 Russian - Gonimy-Vetrom
