@@ -11,6 +11,7 @@ ssGrowthManager.MAX_STATE = 99; -- needs to be set to the fruit's numGrowthState
 ssGrowthManager.WITHERED = 300;
 ssGrowthManager.CUT = 200;
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999;
+ssGrowthManager.debugView = true;
 
 function Set (list)
     local set = {}
@@ -105,8 +106,12 @@ function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    -- if (unicode == 107) then
-
+    if (unicode == 107) then
+        if self.debugView == false then
+            self.debugView = true;
+        else
+            self.debugView = false;
+        end
     --     -- for index,fruit in pairs(g_currentMission.fruits) do
     --     --     local desc = FruitUtil.fruitIndexToDesc[index]
     --     --     local fruitName = desc.name
@@ -117,7 +122,7 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     --     --     end
     --     -- end
 
-    -- end
+    end
 end
 
 function ssGrowthManager:update(dt)
@@ -179,8 +184,24 @@ function ssGrowthManager:update(dt)
     end
 end
 
+
 function ssGrowthManager:draw()
+    if self.debugView == true then
+        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(self.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(self.doGrowthTransition));
+        renderText(0.54, 0.96, 0.01, "Growth Transition: " .. tostring(ssSeasonsUtil:currentGrowthTransition()));
+        local cropsThatCanGrow = "";
+        
+        for index,fruit in pairs(g_currentMission.fruits) do
+            local desc = FruitUtil.fruitIndexToDesc[index];
+            local fruitName = desc.name;   
+            if self:canFruitGrow(fruitName, ssSeasonsUtil:currentGrowthTransition()+1) == true then
+                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " ";
+            end
+        end 
+        renderText(0.54, 0.94, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow);
+    end
 end
+
 
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then -- redundant but heyho
@@ -250,7 +271,12 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor);
 end
 
-function ssGrowthManager:canFruitGrow(fruitName,growthTransition)
+function ssGrowthManager:canFruitGrow(fruitName, growthTransition)
+    
+    if self.growthData[growthTransition][fruitName] == nil then
+        return false
+    end
+
     if self.growthData[growthTransition][fruitName].normalGrowthState == 1 then
         return true
     end
