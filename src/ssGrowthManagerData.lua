@@ -34,20 +34,16 @@ function ssGrowthManagerData:loadAllData()
     
     --additional modmap growthData
     local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml"); 
-    -- if  modMapDataPath ~= nil then
-        
-    -- end
-    --log("DEFAULT FRUITS IN ssGrowthManagerData");
-    --print_r(defaultFruits);
-
-    log("ssGrowthManagerData: TESTING addtionalData LOADING");
-    modMapDataPath = ssSeasonsMod.modDir .. "data/seasons_growth.xml"; --for testing
-    file = loadXMLFile("xml", modMapDataPath);
-    if file ~= nil then
-        defaultFruits = self:getDefaultFruitsData(rootKey .. ".additionalData", file, defaultFruits);
-        growthData = self:getGrowthData(rootKey .. ".additionalData", file, growthData, true);
-    else
-        log("ssGrowthManagerData: ERROR TESTING LOADING");
+    if  modMapDataPath ~= nil then
+        logInfo("ssGrowthManagerData: Additional growth data found - loading");
+        --modMapDataPath = ssSeasonsMod.modDir .. "data/seasons_growth.xml"; --for testing
+        file = loadXMLFile("xml", modMapDataPath);
+        if file ~= nil then
+            defaultFruits = self:getDefaultFruitsData(rootKey .. ".additionalData", file, defaultFruits);
+            growthData = self:getGrowthData(rootKey .. ".additionalData", file, growthData, true);
+        else
+            logInfo("ssGrowthManagerData: Additional growth data load failed");
+        end  
     end
 
     return defaultFruits, growthData 
