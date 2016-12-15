@@ -106,7 +106,8 @@ function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 107) then
+    --print(tostring(unicode));
+    if (unicode == 47) then
         if self.debugView == false then
             self.debugView = true;
         else
