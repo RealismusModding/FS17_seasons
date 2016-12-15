@@ -11,7 +11,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 ### Seasons
 - Plowable snow in the winter!
 - Soil is frozen in the winter, you can't work on it
-- Changed the weather prediction to fit the seasons
+- Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
   - Snow and hail in winter
