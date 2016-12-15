@@ -120,61 +120,62 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssGrowthManager:update(dt)
-    if self.doGrowthTransition == true then
-        local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
-        local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
-        local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
-        local widthWorldZ = startWorldZ;
-        local heightWorldX = startWorldX;
-        local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
+    if self.doGrowthTransition ~= true then
+        return
+    end
+        
+    local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
+    local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2;
+    local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
+    local widthWorldZ = startWorldZ;
+    local heightWorldX = startWorldX;
+    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1; -- -0.1 to avoid overlap.
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index];
-            local fruitName = desc.name;
+    for index,fruit in pairs(g_currentMission.fruits) do
+        local desc = FruitUtil.fruitIndexToDesc[index];
+        local fruitName = desc.name;
 
-            local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
+        local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ);
 
-            --handling new unknown fruits
-            if self.defaultFruits[fruitName] == nil then
-                log("Fruit not found in default table: " .. fruitName);
-                fruitName = "default";
-            end
-
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
-                --setGrowthState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
-                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
-                        --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
-                    self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
-                end
-                --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
-                    self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);  
-                end
-                --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
-                        and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
-                        and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
-                    self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
-                end
-            end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
-        end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
-
-        if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-            -- Next column
-            self.currentZ = self.currentZ + 1;
-        elseif  self.currentX < self.mapSegments - 1 then -- Starting with row 0
-            -- Next row
-            self.currentX = self.currentX + 1;
-            self.currentZ = 0;
-        else
-            -- Done with the loop, set up for the next one.
-            self.currentX = 0;
-            self.currentZ = 0;
-            self.doGrowthTransition = false;
+        --handling new unknown fruits
+        if self.defaultFruits[fruitName] == nil then
+            log("Fruit not found in default table: " .. fruitName);
+            fruitName = "default";
         end
-    end -- end of if self.doGrowthTransition == true then
 
+        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
+            --setGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
+                and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
+                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
+                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
+            end
+            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);  
+            end
+            --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
+                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+        end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+    end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+
+    if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
+        -- Next column
+        self.currentZ = self.currentZ + 1;
+    elseif  self.currentX < self.mapSegments - 1 then -- Starting with row 0
+        -- Next row
+        self.currentX = self.currentX + 1;
+        self.currentZ = 0;
+    else
+        -- Done with the loop, set up for the next one.
+        self.currentX = 0;
+        self.currentZ = 0;
+        self.doGrowthTransition = false;
+    end
 end
 
 function ssGrowthManager:draw()
