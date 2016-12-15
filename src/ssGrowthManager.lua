@@ -247,3 +247,10 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local numChannels = g_currentMission.numFruitStateChannels;
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor);
 end
+
+function ssGrowthManager:canFruitGrow(fruitName,growthTransition)
+    if self.growthData[growthTransition][fruitName].normalGrowthState == 1 then
+        return true
+    end
+    return false
+end
