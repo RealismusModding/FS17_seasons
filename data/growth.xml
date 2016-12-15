@@ -24,7 +24,6 @@
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
             <fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
             <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            
         </gt>
         <gt growthTransitionNum="2" fruitsNum="10">
             <fruit fruitName="barley"  normalGrowthState="1"  normalGrowthMaxState="3"/>
