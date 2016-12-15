@@ -62,7 +62,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum";
             local growthTransitionNum = getXMLString(file,growthTransitionNumKey);
             if growthTransitionNum == nil then
-                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionNumKey);  
+                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionNumKey:" .. growthTransitionNumKey);  
                 return nil
             elseif growthTransitionNum == "FIRST_LOAD_TRANSITION" then
                 growthTransitionNum = ssGrowthManager.FIRST_LOAD_TRANSITION;
@@ -78,14 +78,14 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             
             local fruitsNum =  getXMLInt(file,fruitsNumKey);
             if fruitsNum == nil then
-                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitsNumKey);  
+                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed fruitsNumKey: " .. fruitsNumKey);  
                 return nil    
             end
             
             growthData = self:getFruitsTransitionStates(growthTransitionKey, file, fruitsNum, growthTransitionNum, growthData);
         end -- for i=0, transitionsNum-1 do
     else
-        logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionsKey .. " not found");
+        logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionsKey" .. growthTransitionsKey .. " not found");
         return nil
     end
 
@@ -101,7 +101,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         
         local fruitName = getXMLString(file,fruitKey .. "#fruitName");
         if fruitName == nil then
-            logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. fruitKey); 
+            logInfo("ssGrowthManagerData: getFruitsTransitionStates: XML loading failed fruitKey: " .. fruitKey); 
             return nil
         end
 

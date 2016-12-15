@@ -130,18 +130,20 @@
             <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>    
         </gt>
-        <gt growthTransitionNum="10" fruitsNum="10"/>
+        <gt growthTransitionNum="10" fruitsNum="10">
             <fruit fruitName="barley"  setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <fruit fruitName="wheat"   setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <fruit fruitName="rape"    setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <fruit fruitName="default" setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <!--need to look at this again add cut state for 1 withered for others. possible? not sure about potato and sugarBeet-->
             <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT" normalGrowthState="7"/> 
+            
             <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
             <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
             <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
             <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
             <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
+        </gt>
         <gt growthTransitionNum="11" fruitsNum="0"/>
         <gt growthTransitionNum="12" fruitsNum="0"/>
         <gt growthTransitionNum="FIRST_LOAD_TRANSITION" fruitsNum="11">
