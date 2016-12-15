@@ -37,7 +37,7 @@ function ssAnimals:loadFromXML()
 
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then
-  	    self.data = ssSeasonsXML:loadFile(modPath, "modules.animals", elements, self.data, true)    
+  	    self.data = ssSeasonsXML:loadFile(modPath, "animals", elements, self.data, true)    
     end
 end
 
