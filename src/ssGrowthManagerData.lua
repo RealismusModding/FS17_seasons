@@ -40,10 +40,21 @@ function ssGrowthManagerData:loadAllData()
         
         file = loadXMLFile("xml", modMapDataPath);
         if file ~= nil then
-            defaultFruits = self:getDefaultFruitsData(rootKey .. ".additionalData", file, defaultFruits);
-            growthData = self:getGrowthData(rootKey .. ".additionalData", file, growthData, true);
+            local optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits);
+            if optionalDefaultFruits == nil then
+                logInfo("ssGrowthManagerData: Failed to load additional XML growth data file (defaultFruits) " .. path);
+            else
+                local optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true);
+                if optionalGrowthData == nil then
+                    logInfo("ssGrowthManagerData: Failed to load additional XML growth data file (growthTransitions) " .. path);
+                else
+                    defaultFruits = optionalDefaultFruits;
+                    growthData = optionalGrowthData;
+
+                end
+            end
         else
-            logInfo("ssGrowthManagerData: Additional growth data load failed");
+            logInfo("ssGrowthManagerData: Failed to load additional XML growth data file " .. modMapDataPath);
         end  
    -- end
 
