@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        Gonimy_Vetrom
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: прогноз погоды" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
+
+        <text name="SS_WEEKDAY_MONDAY" text="Понедельник" />
+        <text name="SS_WEEKDAY_TUESDAY" text="Вторник" />
+        <text name="SS_WEEKDAY_WEDNESDAY" text="Среда" />
+        <text name="SS_WEEKDAY_THURSDAY" text="Четверг" />
+        <text name="SS_WEEKDAY_FRIDAY" text="Пятница" />
+        <text name="SS_WEEKDAY_SATURDAY" text="Суббота" />
+        <text name="SS_WEEKDAY_SUNDAY" text="Воскресенье" />
+
+        <text name="SS_WEEKDAY_MON" text="Пн" />
+        <text name="SS_WEEKDAY_TUE" text="Вт" />
+        <text name="SS_WEEKDAY_WED" text="Ср" />
+        <text name="SS_WEEKDAY_THU" text="Чт" />
+        <text name="SS_WEEKDAY_FRI" text="Пт" />
+        <text name="SS_WEEKDAY_SAT" text="Сб" />
+        <text name="SS_WEEKDAY_SUN" text="Вс" />
+
+        <text name="SS_SEASON_SPRING" text="Весна" />
+        <text name="SS_SEASON_SUMMER" text="Лето" />
+        <text name="SS_SEASON_AUTUMN" text="Осень" />
+        <text name="SS_SEASON_WINTER" text="Зима" />
+
+        <text name="SS_VEHICLE_TAXES" text="Налоги на технику" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Обслуживание техники" />
+        <text name="SS_VEHICLE_REPAIRS" text="Ремонт техники" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Вам не хватает денег на ремонт" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s был отремонтирован за %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Отремонтировать %s за %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Нуждается в ремонте" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Потребуется ремонт на %d день" />
+        <text name="SS_REPAIR_DIALOG" text="Вы хотите починить %s за %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Ремонт" />
+
+        <text name="SS_WARN_NOTDURINGWINTER" text="Почва замёрзла. Вы не можете работать на ней!" />
+        <text name="SS_SAVE_FAILED" text="Не удалось сохранить сезоны в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. TODO" /> <!-- весна -->
+        <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="Наступил период уборки урожая. Готовимся к зиме, так как посевы могут не пережить холода. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. TODO" /> <!-- зима -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
+    </texts>
+</l10n>
