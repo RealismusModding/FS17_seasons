@@ -94,6 +94,7 @@ function ssGrowthManager:getGrowthData()
         return false
     end
     print_r(self.growthData);
+    print_r(self.defaultFruits);
     return true
 end
 

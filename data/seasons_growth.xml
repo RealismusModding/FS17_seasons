@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<growthManager>
+    <additionalData>
+        <defaultFruits fruitsNum="1">
+            <defaultFruit name="newFruit"/> 
+        </defaultFruits>
+        <growthTransitions transitionsNum="13">
+            <gt growthTransitionNum="1" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1" normalGrowthMaxState="3"/>
+            </gt>
+            <gt growthTransitionNum="2" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1"  normalGrowthMaxState="3"/>
+            </gt>
+            <gt growthTransitionNum="3" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1" normalGrowthMaxState="3"/>
+            </gt>
+            <gt growthTransitionNum="4" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1" normalGrowthMaxState="4"/>
+            </gt>
+            <gt growthTransitionNum="5" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/> 
+            </gt>
+            <gt growthTransitionNum="6" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
+            </gt>
+            <gt growthTransitionNum="7" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
+            </gt>
+            <gt growthTransitionNum="8" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1" normalGrowthMaxState="6"/>
+            </gt>
+            <gt growthTransitionNum="9" fruitsNum="1">
+                <fruit fruitName="newFruit"  normalGrowthState="1" normalGrowthMaxState="2"/>
+            </gt>
+            <gt growthTransitionNum="10" fruitsNum="1">
+                <fruit fruitName="newFruit"  setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
+            </gt>
+            <gt growthTransitionNum="11" fruitsNum="0"/>
+            <gt growthTransitionNum="12" fruitsNum="0"/>
+            <gt growthTransitionNum="FIRST_LOAD_TRANSITION" fruitsNum="1">
+                <fruit fruitName="newFruit" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
+            </gt>
+        </growthTransitions>
+    </additionalData>
+</growthManager>
+
+

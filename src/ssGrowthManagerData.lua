@@ -11,24 +11,16 @@ ssGrowthManagerData = {};
 
 function ssGrowthManagerData:loadAllData()
     local growthData = {};
-    local path = nil;
+    local path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
     local rootKey = "growthManager";
 
-    local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml"); 
-    if  modMapDataPath ~= nil then
-        path = modMapDataPath;
-    else
-        path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH;
-    end
-
     local file = loadXMLFile("xml", path); 
-    
     if file == nil then
         logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path);
         return nil,nil
     end
 
-    local defaultFruits = self:getDefaultFruitsData(rootKey,file);
+    local defaultFruits = self:getDefaultFruitsData(rootKey, file);
     if defaultFruits == nil then
         logInfo("ssGrowthManagerData: Failed to load XML growth data file (defaultFruits) " .. path);
         return nil,nil
@@ -39,12 +31,30 @@ function ssGrowthManagerData:loadAllData()
         logInfo("ssGrowthManagerData: Failed to load XML growth data file (growthTransitions) " .. path);
         return nil,nil
     end
-   
-    return defaultFruits, growthData 
-end
+    
+    --additional modmap growthData
+    local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml"); 
+    -- if  modMapDataPath ~= nil then
+        
+    -- end
+    --log("DEFAULT FRUITS IN ssGrowthManagerData");
+    --print_r(defaultFruits);
 
-function ssGrowthManagerData:getGrowthData(rootKey, file)
-    local growthData = {};
+    log("ssGrowthManagerData: TESTING addtionalData LOADING");
+    modMapDataPath = ssSeasonsMod.modDir .. "data/seasons_growth.xml"; --for testing
+    file = loadXMLFile("xml", modMapDataPath);
+    if file ~= nil then
+        defaultFruits = self:getDefaultFruitsData(rootKey .. ".additionalData", file, defaultFruits);
+        growthData = self:getGrowthData(rootKey .. ".additionalData", file, growthData, true);
+    else
+        log("ssGrowthManagerData: ERROR TESTING LOADING");
+    end
+
+    return defaultFruits, growthData 
+end 
+
+function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additionalData)
+    local growthData = parentData ~= nil and Utils.copyTable(parentData) or {}--{};
 
     local growthTransitionsKey = rootKey .. ".growthTransitions";
 
@@ -71,7 +81,9 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             end
 
             --insert growth transition into datatable
-            table.insert( growthData, growthTransitionNum, {});
+            if additionalData ~= true then
+                table.insert( growthData, growthTransitionNum, {});
+            end;
             
             --number of fruits in growth transitions
             local fruitsNumKey = growthTransitionKey .. "#fruitsNum"
@@ -168,8 +180,8 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
     return growthData
 end
 
-function ssGrowthManagerData:getDefaultFruitsData(rootKey, file)
-    local defaultFruits = {};
+function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
+    local defaultFruits = parentData ~= nil and Utils.copyTable(parentData) or {}--{};
     local defaultFruitsKey =  rootKey .. ".defaultFruits";
 
     if hasXMLProperty(file, defaultFruitsKey) then
