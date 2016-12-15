@@ -93,7 +93,7 @@ function ssGrowthManager:getGrowthData()
         logInfo("ssGrowthManager: default growth data not found");
         return false
     end
-
+    print_r(self.growthData);
     return true
 end
 
@@ -144,7 +144,7 @@ function ssGrowthManager:update(dt)
                 --setGrowthState
                 if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
                     and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
-                        --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
+                        log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
                     self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
                 end
                 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
