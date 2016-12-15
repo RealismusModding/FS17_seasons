@@ -27,7 +27,6 @@ function ssWeatherForecast:loadMap(name)
         self.hud.textSize = g_currentMission.timeScaleTextSize * 1.5
 
         -- Set position clock overlay
-        self.hud.clockPosX = g_currentMission.timeBgOverlay.x - 0.36 * self.guiScale / g_screenAspectRatio * screenAspectRatio
         self.hud.clockPosY = g_currentMission.timeBgOverlay.y + 0.005 * self.guiScale * screenAspectRatio
         self.hud.clockHeight = 0.04 * self.guiScale * screenAspectRatio
         self.hud.clockWidth = 0.12 * self.guiScale / g_screenAspectRatio * screenAspectRatio
@@ -147,7 +146,9 @@ function ssWeatherForecast:draw()
 
         end
 
+        -- x-position of overlays has to be dynamically defined
         self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.08 * self.guiScale / g_screenAspectRatio * screenAspectRatio
+        self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - 0.19 * self.guiScale / g_screenAspectRatio * screenAspectRatio
         -- Render clock background
         renderOverlay(self.hud.overlays.clock_overlay.overlayId, self.hud.clockPosX , self.hud.clockPosY, self.hud.clockWidth, self.hud.clockHeight)
 
