@@ -109,9 +109,14 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
             growthData[growthTransitionNum][fruitName].normalGrowthState = normalGrowthState;
         end
 
-        local normalGrowthMaxState =  getXMLInt(file,fruitKey .. "#normalGrowthMaxState");
+
+        local normalGrowthMaxState =  getXMLString(file,fruitKey .. "#normalGrowthMaxState");
         if normalGrowthMaxState ~= nil then 
-            growthData[growthTransitionNum][fruitName].normalGrowthMaxState = normalGrowthMaxState;
+            if normalGrowthState == "MAX_STATE" then
+                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = ssGrowthManager.MAX_GROWTH_STATE;
+            else
+                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = tonumber(normalGrowthMaxState);    
+            end
         end
 
         local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState");
@@ -121,12 +126,24 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
 
         local setGrowthMaxState =  getXMLInt(file,fruitKey .. "#setGrowthMaxState");
         if setGrowthMaxState ~= nil then 
-            growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
+            --growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
+            if setGrowthMaxState == "MAX_STATE" then
+                growthData[growthTransitionNum][fruitName].setGrowthMaxState = ssGrowthManager.MAX_GROWTH_STATE;
+            else
+                growthData[growthTransitionNum][fruitName].setGrowthMaxState = tonumber(setGrowthMaxState);    
+            end
         end
 
-        local desiredGrowthState =  getXMLInt(file,fruitKey .. "#desiredGrowthState");
+        local desiredGrowthState =  getXMLString(file,fruitKey .. "#desiredGrowthState");
         if desiredGrowthState ~= nil then 
-            growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
+            if desiredGrowthState == "CUT" then
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT_STATE;    
+            elseif desiredGrowthState == "WITHERED" then
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.WITHER_STATE;
+            else
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = tonumber(desiredGrowthState);
+            end
+            --growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
         end
 
         local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState");

@@ -198,6 +198,10 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
             desiredGrowthState = fruitData.witheringNumGrowthStates;
     end
 
+    if desiredGrowthState == self.CUT_STATE then
+        desiredGrowthState = fruitData.cutState;
+    end
+
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState;
         
