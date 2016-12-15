@@ -22,8 +22,8 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 
 ### Crops
 - Winter kills certain crops
-- Grass is knocked back to stage 1 in the winter
-- Crop growth duration is much, much longer: often half a year
+- Grass is knocked back to stage 2 in the winter
+- Crop growth duration is much, much longer: for some crops more than half a year
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
