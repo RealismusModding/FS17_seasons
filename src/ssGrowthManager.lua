@@ -8,8 +8,8 @@
 ssGrowthManager = {}
 
 ssGrowthManager.MAX_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
-ssGrowthManager.WITHERED = 100;
-ssGrowthManager.CUT = 101;
+ssGrowthManager.WITHERED = 300;
+ssGrowthManager.CUT = 200;
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999;
 
 function Set (list)

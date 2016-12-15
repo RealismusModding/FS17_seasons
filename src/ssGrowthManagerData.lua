@@ -156,7 +156,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
 
         local extraGrowthMaxState = getXMLInt(file,fruitKey .. "#extraGrowthMaxState");
         if extraGrowthMaxState ~= nil then 
-            growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState;
+            growthData[growthTransitionNum][fruitName].extraGrowthMaxState = extraGrowthMaxState;
         end
 
         local extraGrowthFactor = getXMLInt(file,fruitKey .. "#extraGrowthFactor");
