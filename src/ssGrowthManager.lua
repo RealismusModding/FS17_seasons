@@ -38,7 +38,7 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-    if g_currentMission.getIsServer() == true then
+    if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled);
     end
 end

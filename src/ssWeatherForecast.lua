@@ -12,8 +12,6 @@ ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
     if g_currentMission:getIsClient() then
-        
-        --self.hud.visible = true
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"),1)
         self.hud.heigth = 0.1 * self.guiScale * screenAspectRatio
         self.hud.width = (0.1 * self.guiScale * 7) / g_screenAspectRatio * screenAspectRatio
@@ -85,7 +83,7 @@ function ssWeatherForecast:load(savegame, key)
 end
 
 function ssWeatherForecast:save(savegame, key)
-    if g_currentMission.getIsServer() == true then
+    if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.WeatherForecastHudVisible", self.hud.visible)
     end
 end
@@ -100,7 +98,7 @@ function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssWeatherForecast:update(dt)
-    
+    g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF)
     if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
         self.hud.visible = not self.hud.visible
     end
