@@ -87,9 +87,6 @@ function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
 end
 
 function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
-    -- if (unicode == 107) then
-    --     self.hud.visible = not self.hud.visible
-    -- end
 end
 
 function ssWeatherForecast:update(dt)
