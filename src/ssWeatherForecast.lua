@@ -8,12 +8,12 @@
 
 ssWeatherForecast = {}
 local screenAspectRatio = g_screenAspectRatio / (16 / 9)
+ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
     if g_currentMission:getIsClient() then
-        self.hud = {}
-        self.hud.visible = true
-
+        
+        --self.hud.visible = true
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"),1)
         self.hud.heigth = 0.1 * self.guiScale * screenAspectRatio
         self.hud.width = (0.1 * self.guiScale * 7) / g_screenAspectRatio * screenAspectRatio
@@ -78,6 +78,16 @@ function ssWeatherForecast:loadMap(name)
 
     end
 
+end
+
+function ssWeatherForecast:load(savegame, key)
+    self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.WeatherForecastHudVisible", true)
+end
+
+function ssWeatherForecast:save(savegame, key)
+    if g_currentMission.getIsServer() == true then
+        ssStorage.setXMLBool(savegame, key .. ".settings.WeatherForecastHudVisible", self.hud.visible)
+    end
 end
 
 function ssWeatherForecast:deleteMap()

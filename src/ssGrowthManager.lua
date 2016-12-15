@@ -34,7 +34,7 @@ function ssGrowthManager:load(savegame, key)
         self.doResetGrowth = true;
     end
 
-    self.growthManagerEnabled = ssStorage.getXMLBool(savegame,key .. ".settings.growthManagerEnabled", true);
+    self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true);
 end
 
 function ssGrowthManager:save(savegame, key)
