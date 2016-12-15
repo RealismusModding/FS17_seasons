@@ -94,8 +94,8 @@ function ssGrowthManager:getGrowthData()
         logInfo("ssGrowthManager: default growth data not found");
         return false
     end
-    print_r(self.growthData);
-    print_r(self.defaultFruits);
+    --print_r(self.growthData);
+    --print_r(self.defaultFruits);
     return true
 end
 
