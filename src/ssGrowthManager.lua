@@ -7,9 +7,9 @@
 
 ssGrowthManager = {}
 
-ssGrowthManager.MAX_GROWTH_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
-ssGrowthManager.WITHER_STATE = 100;
-ssGrowthManager.CUT_STATE = 101;
+ssGrowthManager.MAX_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
+ssGrowthManager.WITHERED = 100;
+ssGrowthManager.CUT = 101;
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999;
 
 function Set (list)
@@ -194,18 +194,18 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState;
     local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
 
-    if desiredGrowthState == self.WITHER_STATE then
+    if desiredGrowthState == self.WITHERED then
             desiredGrowthState = fruitData.witheringNumGrowthStates;
     end
 
-    if desiredGrowthState == self.CUT_STATE then
+    if desiredGrowthState == self.CUT then
         desiredGrowthState = fruitData.cutState;
     end
 
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState;
         
-        if maxState == self.MAX_GROWTH_STATE then
+        if maxState == self.MAX_STATE then
             maxState = fruitData.numGrowthStates;
         end
         setDensityMaskParams(fruit.id, "between",minState,maxState);
@@ -225,7 +225,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         local fruitData = FruitUtil.fruitTypeGrowths[fruitName];
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState;
 
-        if maxState == self.MAX_GROWTH_STATE then
+        if maxState == self.MAX_STATE then
             maxState = fruitData.numGrowthStates-1;
         end
         setDensityMaskParams(fruit.id, "between",minState,maxState);

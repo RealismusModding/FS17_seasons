@@ -60,10 +60,14 @@ function ssGrowthManagerData:getGrowthData(rootKey, file)
             local growthTransitionKey = string.format("%s.gt(%i)", growthTransitionsKey, i);
             
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum";
-            local growthTransitionNum = getXMLInt(file,growthTransitionNumKey);
+            local growthTransitionNum = getXMLString(file,growthTransitionNumKey);
             if growthTransitionNum == nil then
                 logInfo("ssGrowthManagerData: getGrowthData: XML loading failed " .. growthTransitionNumKey);  
                 return nil
+            elseif growthTransitionNum == "FIRST_LOAD_TRANSITION" then
+                growthTransitionNum = ssGrowthManager.FIRST_LOAD_TRANSITION;
+            else
+                growthTransitionNum = tonumber(growthTransitionNum);
             end
 
             --insert growth transition into datatable
@@ -113,7 +117,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         local normalGrowthMaxState =  getXMLString(file,fruitKey .. "#normalGrowthMaxState");
         if normalGrowthMaxState ~= nil then 
             if normalGrowthState == "MAX_STATE" then
-                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = ssGrowthManager.MAX_GROWTH_STATE;
+                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = ssGrowthManager.MAX_STATE;
             else
                 growthData[growthTransitionNum][fruitName].normalGrowthMaxState = tonumber(normalGrowthMaxState);    
             end
@@ -128,7 +132,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         if setGrowthMaxState ~= nil then 
             --growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState;
             if setGrowthMaxState == "MAX_STATE" then
-                growthData[growthTransitionNum][fruitName].setGrowthMaxState = ssGrowthManager.MAX_GROWTH_STATE;
+                growthData[growthTransitionNum][fruitName].setGrowthMaxState = ssGrowthManager.MAX_STATE;
             else
                 growthData[growthTransitionNum][fruitName].setGrowthMaxState = tonumber(setGrowthMaxState);    
             end
@@ -137,13 +141,12 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         local desiredGrowthState =  getXMLString(file,fruitKey .. "#desiredGrowthState");
         if desiredGrowthState ~= nil then 
             if desiredGrowthState == "CUT" then
-                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT_STATE;    
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT;    
             elseif desiredGrowthState == "WITHERED" then
-                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.WITHER_STATE;
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.WITHERED;
             else
                 growthData[growthTransitionNum][fruitName].desiredGrowthState = tonumber(desiredGrowthState);
             end
-            --growthData[growthTransitionNum][fruitName].desiredGrowthState = desiredGrowthState;
         end
 
         local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState");
