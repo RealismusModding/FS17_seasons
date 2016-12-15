@@ -15,7 +15,7 @@
         <defaultFruit name="oilseedRadish"/> 
         <defaultFruit name="dryGrass"/>
     </defaultFruits>
-    <growthTransitions transitionsNum="13">
+    <growthTransitions>
         <gt growthTransitionNum="1">
             <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
