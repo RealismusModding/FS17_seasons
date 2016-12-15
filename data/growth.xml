@@ -143,8 +143,8 @@
             <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
             <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
         </gt>
-        <gt growthTransitionNum="11" fruitsNum="0"/>
-        <gt growthTransitionNum="12" fruitsNum="0"/>
+        <gt growthTransitionNum="11"/>
+        <gt growthTransitionNum="12"/>
         <gt growthTransitionNum="FIRST_LOAD_TRANSITION">
             <fruit fruitName="barley" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
             <fruit fruitName="wheat" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>					
