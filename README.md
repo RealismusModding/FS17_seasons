@@ -11,7 +11,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 ### Seasons
 - Plowable snow in the winter!
 - Soil is frozen in the winter, you can't work on it
-- Changed the weather prediction to fit the seasons
+- Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
   - Snow and hail in winter
@@ -22,8 +22,10 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 
 ### Crops
 - Winter kills certain crops
-- Grass is knocked back to stage 1 in the winter
-- Crop growth duration is much, much longer: often half a year
+- Grass is knocked back to stage 2 in the winter
+- Crop growth duration is much, much longer: for some crops more than half a year
+- Growth is adjust to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
+- Growth is configurable and can be changed by map makers to suit their map
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair

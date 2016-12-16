@@ -283,7 +283,7 @@ function ssVehicle:getSellPrice(superFunc)
     if age == 0 and operatingTime < 2 then
         sellPrice = price
     else
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.sqrt(power / storeItem.dailyUpkeep),1000)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.min(math.sqrt(power / storeItem.dailyUpkeep),1.1), 1000)
     end
 
     return sellPrice
@@ -305,7 +305,7 @@ function ssVehicle:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
 end
 ]]
 
--- Replace the age with the age since last repair, because actual age is useless
+-- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle:getSpecValueAge(superFunc, vehicle)
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil then
         return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay)
