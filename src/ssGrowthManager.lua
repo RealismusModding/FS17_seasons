@@ -99,8 +99,6 @@ function ssGrowthManager:getGrowthData()
         logInfo("ssGrowthManager: default growth data not found");
         return false
     end
-    --print_r(self.growthData);
-    --print_r(self.defaultFruits);
     return true
 end
 
@@ -118,16 +116,6 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
         else
             self.debugView = false;
         end
-    --     -- for index,fruit in pairs(g_currentMission.fruits) do
-    --     --     local desc = FruitUtil.fruitIndexToDesc[index]
-    --     --     local fruitName = desc.name
-    --     --     if (self.defaultFruits[fruitName] == nil) then
-    --     --         log("GM: Fruit not found in default table: " .. fruitName);
-    --     --     else
-    --     --         log("GM: Fruit " .. fruitName .. " found");
-    --     --     end
-    --     -- end
-
     end
 end
 
@@ -208,7 +196,7 @@ function ssGrowthManager:draw()
     end
 end
 
-
+--handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then -- redundant but heyho
         local growthTransition = ssSeasonsUtil:currentGrowthTransition();
@@ -307,20 +295,18 @@ function ssGrowthManager:buildCanPlantData()
                     local currentGrowthStage = 1;
                     local MAX_ALLOWABLE_GROWTH_PERIOD = 12; -- max growth for any fruit = 1 year
                     local maxAllowedCounter = 0;
-                    local transitionToCheck = plantedGrowthTransition + 1; -- need to check the next transition after the planted
-                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates;  --7; --numGrowthStates
+                    local transitionToCheck = plantedGrowthTransition + 1; -- need to start checking from the next transition after planted transition
+                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates;
 
                     while currentGrowthStage < fruitNumStates and maxAllowedCounter < MAX_ALLOWABLE_GROWTH_PERIOD do
                         if transitionToCheck > 12 then
                             transitionToCheck = 1;
                         end
-
-                        --if self.growthData[transitionToCheck][fruitName] ~= nil then
+                        
                         currentGrowthStage = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage);
                         if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
                             break
                         end
-                        --end
 
                         transitionToCheck = transitionToCheck + 1;
                         maxAllowedCounter = maxAllowedCounter + 1;
@@ -335,10 +321,11 @@ function ssGrowthManager:buildCanPlantData()
             self.canPlantData[fruitName] = transitionTable;
         end
     end
-    print_r(self.canPlantData);
+    --print_r(self.canPlantData);
 end
 
 
+--TODO: the 3 if statements should be refactored to 3 functions if possible. They are used in two places
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage;
     --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage);
@@ -377,8 +364,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
                 newGrowthState = newGrowthState + self.growthData[transitionToCheck][fruitName].extraGrowthFactor;
             end
         end
-    end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
-
-    --log("ssGrowthManager:canPlant newGrowthState: " .. newGrowthState);
+    end
+    
     return newGrowthState
 end
