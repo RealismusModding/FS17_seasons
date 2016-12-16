@@ -290,8 +290,6 @@ function ssWeatherManager:updateForecast()
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
 end
 
--- FIXME: not the best to be iterating within another loop, but since we are only doing this once a day, not a massive issue
---perhaps rewrite so that initial forecast is generated for 7 days and then next day only remove the first element and add the next day?
 function ssWeatherManager:getWeatherStateForDay(dayNumber)
     local weatherState = "sun"
     local ssTmax = {}
