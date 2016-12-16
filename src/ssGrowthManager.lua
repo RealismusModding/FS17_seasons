@@ -69,7 +69,7 @@ function ssGrowthManager:loadMap(name)
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame");
         end
         
-        self:buildCanFruitGrowTable();
+        self:buildCanPlantData();
 
         if g_currentMission.missionInfo.timeScale > 120 then
             self.mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
@@ -289,14 +289,12 @@ function ssGrowthManager:canFruitGrow(fruitName, growthTransition)
     return false
 end
 
-function ssGrowthManager:buildCanFruitGrowTable()
-    local canGrow = {};
-
-    log("buildCanFruitGrowTable: called");
+function ssGrowthManager:buildCanPlantData()
+    log("buildCanPlantData: called");
 
     for index, value in pairs(self.defaultFruits) do
-            local fruitName = index; 
-           
+        local fruitName = index; 
+        if fruitName ~= "dryGrass" then
             local transitionTable = {};
             for transition,v in pairs(self.growthData) do
                 if transition == self.FIRST_LOAD_TRANSITION then
@@ -305,74 +303,40 @@ function ssGrowthManager:buildCanFruitGrowTable()
                 
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
                     table.insert(transitionTable, transition , false);
-                    break
-                end
-
-                local plantedGrowthTransition =  transition;
-                local currentGrowthStage = 1;
-                local MAX_ALLOWABLE_GROWTH_PERIOD = 12; -- max growth for any fruit = 1 year
-                local maxAllowedCounter = 0;
-                local transitionToCheck = plantedGrowthTransition + 1; -- need to check the next transition after the planted
-                
-                local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates;  --7; --numGrowthStates
-
-                while currentGrowthStage < fruitNumStates and maxAllowedCounter < MAX_ALLOWABLE_GROWTH_PERIOD do
-                    if transitionToCheck > 12 then
-                        transitionToCheck = 1;
-                    end
-
-                    if self.growthData[transitionToCheck][fruitName] ~= nil then
-                        currentGrowthStage = self:canGrow(fruitName, transitionToCheck, currentGrowthStage);
-                        if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
-                            break
-                        end
-                    end
-
-                    transitionToCheck = transitionToCheck + 1;
-                    maxAllowedCounter = maxAllowedCounter + 1;
-                end
-                --log("Broke out fruitName: " .. fruitName .. " currentGrowthStage " .. currentGrowthStage .. " fruitNumStates " .. fruitNumStates);
-                if currentGrowthStage == fruitNumStates then
-                    table.insert(transitionTable, plantedGrowthTransition , true);
                 else
-                    table.insert(transitionTable, plantedGrowthTransition , false);
+                    local plantedGrowthTransition =  transition;
+                    local currentGrowthStage = 1;
+                    local MAX_ALLOWABLE_GROWTH_PERIOD = 12; -- max growth for any fruit = 1 year
+                    local maxAllowedCounter = 0;
+                    local transitionToCheck = plantedGrowthTransition + 1; -- need to check the next transition after the planted
+                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates;  --7; --numGrowthStates
+
+                    while currentGrowthStage < fruitNumStates and maxAllowedCounter < MAX_ALLOWABLE_GROWTH_PERIOD do
+                        if transitionToCheck > 12 then
+                            transitionToCheck = 1;
+                        end
+
+                        if self.growthData[transitionToCheck][fruitName] ~= nil then
+                            currentGrowthStage = self:canGrow(fruitName, transitionToCheck, currentGrowthStage);
+                            if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
+                                break
+                            end
+                        end
+
+                        transitionToCheck = transitionToCheck + 1;
+                        maxAllowedCounter = maxAllowedCounter + 1;
+                    end
+                    if currentGrowthStage == fruitNumStates then
+                        table.insert(transitionTable, plantedGrowthTransition , true);
+                    else
+                        table.insert(transitionTable, plantedGrowthTransition , false);
+                    end
                 end
-                --print_r(transitionTable);
             end
-            canGrow[fruitName] = transitionTable;
-            --table.insert(canGrow, fruitName, transitionTable);
+            self.canPlantData[fruitName] = transitionTable;
+        end
     end
-
-    print_r(canGrow);
-    --for each possible fruit
-    --for each transition (when it was planted)
-    -- for
-    --     log("ssGrowthManager: Building fruit can grow table")
-    --     local plantedGrowthTransition = 1; --part of for loop (when it was planted)
-    --     local currentGrowthStage = 1;
-    --     local fruitNumStates = 7; --numGrowthStates
-    --     local fruitName = "barley";
-    --     local MAX_ALLOWABLE_GROWTH_PERIOD = 12;
-    --     local transitionToCheck = plantedGrowthTransition + 1; -- need to check the next transition after the planted
-        
-    --     while currentGrowthStage < fruitNumStates do --TODO add break safety counter
-    --         if transitionToCheck > 12 then
-    --             transitionToCheck = 1;
-    --         end
-
-    --         if self.growthData[transitionToCheck][fruitName] ~= nil then
-    --             currentGrowthStage = self:canGrow(fruitName, transitionToCheck, currentGrowthStage);
-    --             if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
-    --                 break
-    --             end
-    --         end
-                    
-    --         transitionToCheck = transitionToCheck + 1;
-    --     end
-    --     --TODO add checks for currentGrowthStage if it's greater than fruitNumStates then it didn't grow
-
-    --     log("Fruitname: " .. fruitName .. " planted at: " .. plantedGrowthTransition .. " final stage: " .. currentGrowthStage .. " will be 7 at transition: " .. transitionToCheck);
-    -- end
+    print_r(self.canPlantData);
 end
 
 
