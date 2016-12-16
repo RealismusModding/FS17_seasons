@@ -67,6 +67,8 @@ function ssGrowthManager:loadMap(name)
             self.growthManagerEnabled = true;
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame");
         end
+        
+        self:buildCanFruitGrowTable();
 
         if g_currentMission.missionInfo.timeScale > 120 then
             self.mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
@@ -289,6 +291,7 @@ end
 function ssGrowthManager:buildCanFruitGrowTable()
     --for each possible fruit
     --for each transition (when it was planted)
+    log("ssGrowthManager: Building fruit can grow table")
     local plantedGrowthTransition = 1; --part of for loop (when it was planted)
     local currentGrowthStage = 1;
     local fruitNumStates = 7; --numGrowthStates
@@ -302,18 +305,63 @@ function ssGrowthManager:buildCanFruitGrowTable()
         end
 
         if self.growthData[transitionToCheck][fruitName] ~= nil then
-            local growth = self:canGrow(fruitName, transitionToCheck, currentGrowthStage)
-            if growth > 0 then
-                currentGrowthStage = currentGrowthStage + growth;
+            
+            currentGrowthStage = self:canGrow(fruitName, transitionToCheck, currentGrowthStage);
+            if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
+                break
             end
+            --end
         end
                 
         transitionToCheck = transitionToCheck + 1;
-        end
+    end
+    --TODO add checks for currentGrowthStage if it's greater than fruitNumStates then it didn't grow
+    log("Fruitname: " .. fruitName .. " planted at: " .. plantedGrowthTransition .. " final stage: " .. currentGrowthStage .. " will be 7 at transition: " .. transitionToCheck);
 end
 
 
-function ssGrowthManagerData:canGrow(transitionToCheck, fruitName, currentGrowthStage)
+function ssGrowthManager:canGrow(fruitName, transitionToCheck, currentGrowthStage)
+    local newGrowthState = currentGrowthStage;
+    log("ssGrowthManager:canGrow transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage);
+    
+    if self.growthData[transitionToCheck][fruitName] ~= nil then 
+            --setGrowthState
+        if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
+            and self.growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
+            if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
+                newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState;
+            end   
+            --self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
+        end
+        --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+        if self.growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
+            --self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
+            local normalGrowthState = self.growthData[transitionToCheck][fruitName].normalGrowthState
+            if self.growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
+                local normalGrowthMaxState = self.growthData[transitionToCheck][fruitName].normalGrowthMaxState;
+                if currentGrowthStage >= normalGrowthState and currentGrowthStage <= normalGrowthMaxState then
+                    newGrowthState = newGrowthState + 1;
+                end
+            else
+                if currentGrowthStage == normalGrowthState then
+                    newGrowthState = newGrowthState + 1;
+                end
+            end              
+        end
+        --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+        if self.growthData[transitionToCheck][fruitName].extraGrowthMinState ~= nil
+                and self.growthData[transitionToCheck][fruitName].extraGrowthMaxState ~= nil
+                and self.growthData[transitionToCheck][fruitName].extraGrowthFactor ~= nil then
+            local extraGrowthMinState = self.growthData[transitionToCheck][fruitName].extraGrowthMinState;
+            local extraGrowthMaxState = self.growthData[transitionToCheck][fruitName].extraGrowthMaxState;
+            
+            if currentGrowthStage >= extraGrowthMinState and currentGrowthStage <= extraGrowthMaxState then
+                newGrowthState = newGrowthState + self.growthData[transitionToCheck][fruitName].extraGrowthFactor;
+            end
+            --self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+        end
+    end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
 
-    return 0
+    log("ssGrowthManager:canGrow newGrowthState: " .. newGrowthState);
+    return newGrowthState
 end
