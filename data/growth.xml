@@ -31,6 +31,8 @@
             <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>    
             <fruit fruitName="maize" normalGrowthState="1"/>
+            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT"/> 
+            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT"/> 
             <fruit fruitName="potato"    normalGrowthState="1"/>
             <fruit fruitName="sugarBeet" normalGrowthState="1"/>
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
