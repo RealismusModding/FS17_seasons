@@ -285,3 +285,35 @@ function ssGrowthManager:canFruitGrow(fruitName, growthTransition)
     end
     return false
 end
+
+function ssGrowthManager:buildCanFruitGrowTable()
+    --for each possible fruit
+    --for each transition (when it was planted)
+    local plantedGrowthTransition = 1; --part of for loop (when it was planted)
+    local currentGrowthStage = 1;
+    local fruitNumStates = 7; --numGrowthStates
+    local fruitName = "barley";
+    local maxTransitionsToCheck = 12;
+    local transitionToCheck = plantedGrowthTransition + 1; -- need to check the next transition after the planted
+    
+    while currentGrowthStage < fruitNumStates do --TODO add break safety counter
+        if transitionToCheck > 12 then
+            transitionToCheck = 1;
+        end
+
+        if self.growthData[transitionToCheck][fruitName] ~= nil then
+            local growth = self:canGrow(fruitName, transitionToCheck, currentGrowthStage)
+            if growth > 0 then
+                currentGrowthStage = currentGrowthStage + growth;
+            end
+        end
+                
+        transitionToCheck = transitionToCheck + 1;
+        end
+end
+
+
+function ssGrowthManagerData:canGrow(transitionToCheck, fruitName, currentGrowthStage)
+
+    return 0
+end
