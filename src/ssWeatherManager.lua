@@ -9,6 +9,7 @@ ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
+ssWeatherManager.soilTemp = 0
 ssWeatherManager.rains = {};
 
 function ssWeatherManager:load(savegame, key)
@@ -16,6 +17,7 @@ function ssWeatherManager:load(savegame, key)
     local i
 
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
+    self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
 
     -- load forecast
     self.forecast = {}
@@ -64,6 +66,7 @@ function ssWeatherManager:save(savegame, key)
     local i = 0
 
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
+    ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -105,7 +108,7 @@ function ssWeatherManager:loadMap(name)
         if table.getn(self.forecast) == 0 then
             self:buildForecast()
         end
-        -- self.snowDepth = -- Enable read from savegame
+        --self.snowDepth = -- Enable read from savegame
         --self.rains = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
     end
 end
@@ -256,7 +259,7 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.season = ssSeasonsUtil:season(dayNum)
 
     if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
-        --Seasonal average for a day in the season
+        --Seasonal average for a day in the current season
         ssTmax = self:Tmax(oneDayForecast.season)
         oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
 
@@ -284,10 +287,12 @@ function ssWeatherManager:updateForecast()
 
     self:switchRainHail()
     self:owRaintable()
+    self:calculateSoilTemp()
 
     table.remove(self.rains, 1)
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+
 end
 
 function ssWeatherManager:getWeatherStateForDay(dayNumber)
@@ -426,10 +431,42 @@ function ssWeatherManager:calculateSnowAccumulation()
     return self.snowDepth
 end
 
---- function for predicting when soil is not workable
+--- function for calculating soil temperature
+--- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
+function ssWeatherManager:calculateSoilTemp()
+    local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
+    local deltaT = math.max(365 / ssSeasonsUtil.seasonsInYear / ssSeasonsUtil.daysInSeason / 2 ,1)
+    local soilTemp = self.soilTemp
+    local snowDamp = 1
+
+    -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
+    local facKT = 0.6 
+    -- average thermal conductivity of soil and ice C_S + C_ICE, unit: kW/m/deg C, typical values C_S=1-1.3, C_ICE=4-15   
+    local facCA = 10
+    -- empirical snow damping parameter, unit 1/m, typical values -2 - -7
+    local facfs = -5
+
+    -- dampening effect of snow cover
+    if self.snowDepth > 0 then
+        snowDamp = math.exp(facfs*self.snowDepth)
+    end
+ 
+    self.soilTemp = soilTemp + (deltaT * facKT / facCA * (avgAirTemp - soilTemp)) * snowDamp
+    --log('self.soilTemp=',self.soilTemp,' soilTemp=',soilTemp,' avgAirTemp=',avgAirTemp,' snowDamp=',snowDamp,' snowDepth=',snowDepth)
+end
+
+--- function for predicting when soil is too cold for crops for germinate
 function ssWeatherManager:isGroundWorkable()
-    local avgSoilTemp = (self.forecast[1].highTemp + self.forecast[1].lowTemp) / 2
-    if  avgSoilTemp < 5 then
+    if  self.soilTemp < 5 then
+        return false
+    else
+        return true
+    end
+end
+
+--- function for predicting when soil is frozen
+function ssWeatherManager:isGroundFrozen()
+    if  self.soilTemp < 0 then
         return false
     else
         return true
