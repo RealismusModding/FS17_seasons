@@ -161,7 +161,7 @@ function ssWeatherForecast:draw()
         -- Render Background
         renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
     
-        if ssWeatherManager:isGroundWorkable() == false then
+        if ssWeatherManager:isGroundFrozen() == false then
             renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
         end
 

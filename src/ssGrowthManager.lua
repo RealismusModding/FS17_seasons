@@ -113,13 +113,6 @@ end
 
 function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     --print(tostring(unicode))
-    if (unicode == 47) then
-        if self.debugView == false then
-            self.debugView = true
-        else
-            self.debugView = false
-        end
-    end
 end
 
 function ssGrowthManager:update(dt)
@@ -363,4 +356,5 @@ function ssGrowthManager:boolToGMBool(value)
         return self.TRUE
     else
         return self.FALSE
+    end
 end

@@ -16,7 +16,8 @@ function ssViewController:loadMap(name)
 
     self:growthStageChanged()
     self:dayChanged()
-    print_r(self.canPlantDisplayData)
+    --print_r(self.canPlantDisplayData)
+    --log("drygrass: " .. FruitUtil.fruitTypeGrowths["dryGrass"].name)
 end
 
 function ssViewController:deleteMap()
@@ -27,6 +28,13 @@ end
 
 function ssViewController:keyEvent(unicode, sym, modifier, isDown)
     --print(tostring(unicode))
+    if (unicode == 47) then
+        if self.debugView == false then
+            self.debugView = true
+        else
+            self.debugView = false
+        end
+    end
 end
 
 function ssViewController:update(dt)
@@ -36,17 +44,20 @@ end
 function ssViewController:draw()
     if self.debugView == true then
         renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
-        local growthTransition = tostring(ssSeasonsUtil:currentGrowthTransition()
-        renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition))
+        local growthTransition = tostring(ssSeasonsUtil:currentGrowthTransition())
+        renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition)
         local cropsThatCanGrow = ""
         
         for index,fruit in pairs(g_currentMission.fruits) do
             local fruitName = FruitUtil.fruitIndexToDesc[index].name   
-            if self:canPlantDisplayData[fruitName][growthTransition] == ssGrowthManager.TRUE then
-                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+            if self.canPlantDisplayData[fruitName] ~= nil then -- otherwise it crashes on dryGrass since it's not in the data table
+                if self.canPlantDisplayData[fruitName][growthTransition] == ssGrowthManager.TRUE then
+                    cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+                end
             end
         end 
         renderText(0.54, 0.94, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+        renderText(0.54, 0.92, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
     end
 end
 
@@ -60,7 +71,7 @@ function ssViewController:dayChanged()
     local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 	
 	if growthTransition == ssGrowthManager.FIRST_GROWTH_TRANSITION then  
-		self:updateData()
+        self:updateData()
 	end
 end
 
