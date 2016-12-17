@@ -172,7 +172,7 @@ function ssSeasonsUtil:seasonName(dayNumber)
     return self.seasons[self:season(dayNumber)]
 end
 
--- 1 = spring, 3 = winter
+-- 0 = spring, 3 = winter
 function ssSeasonsUtil:isSeason(seasonNumber)
     return self:season() == seasonNumber
 end
@@ -209,6 +209,17 @@ function ssSeasonsUtil:currentGrowthTransition(currentDay)
     local season = self:season(currentDay)
     local cGS = self:currentGrowthStage(currentDay)
     return (cGS + (season*3))
+end
+
+function ssSeasonsUtil:calcGrowthStageDays()
+    local l = self.daysInSeason / 3.0
+	local earlyStart = 1
+	local earlyEnd = mathRound(1 * l)
+	local midStart = mathRound(1 * l) + 1
+	local midEnd = mathRound(2 * l)
+	local lateStart = mathRound(2 * l)+1
+	local lateEnd = self.daysInSeason
+	return earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd
 end
 
 function ssSeasonsUtil:currentGrowthStage(currentDay)
