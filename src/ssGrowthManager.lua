@@ -326,7 +326,7 @@ function ssGrowthManager:buildCanPlantData()
             self.canPlantData[fruitName] = transitionTable;
         end
     end
-    print_r(self.canPlantData);
+    --print_r(self.canPlantData);
 end
 
 

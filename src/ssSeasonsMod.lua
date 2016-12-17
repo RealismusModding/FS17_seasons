@@ -51,7 +51,8 @@ g_modClasses = {
     "ssSeasonIntro",
     "ssReplaceVisual",
     "ssAnimals",
-    "ssDensityMapScanner"
+    "ssDensityMapScanner",
+    "ssViewController"
 }
 
 if ssSeasonsMod.debug then
