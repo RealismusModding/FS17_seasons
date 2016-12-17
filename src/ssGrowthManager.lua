@@ -12,7 +12,9 @@ ssGrowthManager.WITHERED = 300;
 ssGrowthManager.CUT = 200;
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999;
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1;
-ssGrowthManager.debugView = true;
+ssGrowthManager.TRUE = "true"
+ssGrowthManager.FALSE = "false"
+ssGrowthManager.MAYBE = "maybe"
 
 function Set (list)
     local set = {}
@@ -181,20 +183,6 @@ end
 
 
 function ssGrowthManager:draw()
-    if self.debugView == true then
-        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(self.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(self.doGrowthTransition));
-        renderText(0.54, 0.96, 0.01, "Growth Transition: " .. tostring(ssSeasonsUtil:currentGrowthTransition()));
-        local cropsThatCanGrow = "";
-        
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index];
-            local fruitName = desc.name;   
-            if self:canFruitGrow(fruitName, ssSeasonsUtil:currentGrowthTransition()) == true then
-                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " ";
-            end
-        end 
-        renderText(0.54, 0.94, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow);
-    end
 end
 
 --handle growthStageCHanged event
@@ -289,7 +277,7 @@ function ssGrowthManager:buildCanPlantData()
                 end
                 
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
-                    table.insert(transitionTable, transition , "false");
+                    table.insert(transitionTable, transition , self.FALSE);
                 else
                     local plantedGrowthTransition =  transition;
                     local currentGrowthStage = 1;
@@ -313,12 +301,12 @@ function ssGrowthManager:buildCanPlantData()
                     end
                     if currentGrowthStage == fruitNumStates then
                         if plantedGrowthTransition == 1 then
-                            table.insert(transitionTable, plantedGrowthTransition , "maybe");
+                            table.insert(transitionTable, plantedGrowthTransition , self.MAYBE);
                         else
-                            table.insert(transitionTable, plantedGrowthTransition , "true");
+                            table.insert(transitionTable, plantedGrowthTransition , self.TRUE);
                         end
                     else
-                        table.insert(transitionTable, plantedGrowthTransition , "false");
+                        table.insert(transitionTable, plantedGrowthTransition , self.FALSE);
                     end
                 end
             end
