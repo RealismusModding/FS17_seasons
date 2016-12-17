@@ -206,9 +206,9 @@ end
 
 function ssSeasonsUtil:currentGrowthTransition(currentDay)
 
-    local season = self:season(currentDay);
-    local cGS = self:currentGrowthStage(currentDay);
-    return (cGS + (season*3));
+    local season = self:season(currentDay)
+    local cGS = self:currentGrowthStage(currentDay)
+    return (cGS + (season*3))
 end
 
 function ssSeasonsUtil:currentGrowthStage(currentDay)
