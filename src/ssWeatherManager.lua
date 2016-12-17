@@ -9,7 +9,7 @@ ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
-ssWeatherManager.soilTemp = 0
+ssWeatherManager.soilTemp = 6
 ssWeatherManager.rains = {}
 
 function ssWeatherManager:load(savegame, key)

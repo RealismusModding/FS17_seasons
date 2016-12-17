@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<weather>
+    <temperature>
+        <1>
+            <min value="4.4" />
+            <mode value="8.2" />
+            <max value="10.6" />
+        </1>
+        <2>
+            <min value="11.1" />
+            <mode value="13.2" />
+            <max value="16.9" />
+        </2>
+        <3>
+            <min value="15.5" />
+            <mode value="16.9" />
+            <max value="18.8" />
+        </3>
+        <4>
+            <min value="17.7" />
+            <mode value="20.0" />
+            <max value="21.8" />
+        </4>
+        <5>
+            <min value="19.4" />
+            <mode value="21.7" />
+            <max value="26.0" />
+        </5>
+        <6>
+            <min value="19.6" />
+            <mode value="21.2" />
+            <max value="24.6" />
+        </6>
+        <7>
+            <min value="18.0" />
+            <mode value="19.4" />
+            <max value="21.6" />
+        </7>
+        <8>
+            <min value="13.0" />
+            <mode value="14.6" />
+            <max value="16.3" />
+        </8>        
+        <9>
+            <min value="7.6" />
+            <mode value="9.7" />
+            <max value="11.7" />
+        </9>
+        <10>
+            <min value="-1.5" />
+            <mode value="4.0" />
+            <max value="8.5" />
+        </10>
+        <11>
+            <min value="-3.0" />
+            <mode value="0.6" />
+            <max value="2.7" />
+        </11>
+        <12>
+            <min value="-0.2" />
+            <mode value="1.8" />
+            <max value="3.9" />
+        </12>
+    </temperature>
+    <rain>
+        <Spring>
+            <mu value="1.1" />
+            <sigma value="0.2" />
+            <probRain value="0.40" />
+            <probClouds value="0.55" />
+        </Spring>
+        <Summer>
+            <mu value="0.7" />
+            <sigma value="0.1" />
+            <probRain value="0.15" />
+            <probClouds value="0.30" />
+        </Summer>
+        <Autumn>
+            <mu value="1.2" />
+            <sigma value="0.25" />
+            <probRain value="0.50" />
+            <probClouds value="0.65" />
+        </Autumn>
+        <Winter>
+            <mu value="1.6" />
+            <sigma value="0.25" />
+            <probRain value="0.55" />
+            <probClouds value="0.70" />
+        </Winter>
+    </rain>
+</weather>
