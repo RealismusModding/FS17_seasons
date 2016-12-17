@@ -7,13 +7,14 @@
 
 ssViewController = {}
 
+ssViewController.canPlantDisplayData = {}
 
 function ssViewController:loadMap(name)
     ssSeasonsMod:addGrowthStageChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
-    self:hourChanged();
+    self:growthStageChanged();
     self:dayChanged();
-    print_r(ssGrowthManager.canPlantData)
+    print_r(self.canPlantDisplayData)
 end
 
 function ssViewController:deleteMap()
@@ -43,14 +44,20 @@ function ssViewController:dayChanged()
     local growthTransition = ssSeasonsUtil:currentGrowthTransition();
 	
 	if growthTransition == ssGrowthManager.FIRST_GROWTH_TRANSITION then  
-		if self:canSow() then
-			 ssGrowthManager.canPlantData[ssGrowthManager.FIRST_GROWTH_TRANSITION] = "true"
-		else
-			 ssGrowthManager.canPlantData[ssGrowthManager.FIRST_GROWTH_TRANSITION] = "false"
-		end	
+		self:updateData()
 	end
 end
 
+function ssViewController:updateData()
+    self.canPlantDisplayData = Utils.copyTable(ssGrowthManager.canPlantData)
+    for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
+        if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == "maybe" then
+            log("here")
+            self.canPlantDisplayData[fruitName][transition] = self:canSow()        
+        end
+    end
+
+end
 function ssViewController:canSow() -- dummy function until it's implemented in WM
-    return true
+    return "true"
 end

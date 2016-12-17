@@ -280,8 +280,7 @@ function ssGrowthManager:canFruitGrow(fruitName, growthTransition)
 end
 
 function ssGrowthManager:buildCanPlantData()
-    for index, value in pairs(self.defaultFruits) do
-        local fruitName = index; 
+    for fruitName, value in pairs(self.defaultFruits) do
         if fruitName ~= "dryGrass" then
             local transitionTable = {};
             for transition,v in pairs(self.growthData) do
