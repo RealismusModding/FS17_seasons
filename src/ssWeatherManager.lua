@@ -456,7 +456,7 @@ function ssWeatherManager:calculateSoilTemp()
 end
 
 --- function for predicting when soil is too cold for crops for germinate
-function ssWeatherManager:isGroundWorkable()
+function ssWeatherManager:canSow()
     if  self.soilTemp < 5 then
         return false
     else

@@ -13,6 +13,7 @@ ssViewController.debugView = true
 function ssViewController:loadMap(name)
     ssSeasonsMod:addGrowthStageChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+
     self:growthStageChanged()
     self:dayChanged()
     print_r(self.canPlantDisplayData)
