@@ -135,9 +135,7 @@ function ssGrowthManager:update(dt)
     local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
 
     for index,fruit in pairs(g_currentMission.fruits) do
-        local desc = FruitUtil.fruitIndexToDesc[index]
-        local fruitName = desc.name
-
+        local fruitName = FruitUtil.fruitIndexToDesc[index].name
         local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
         --handling new unknown fruits

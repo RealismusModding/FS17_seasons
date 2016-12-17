@@ -41,8 +41,7 @@ function ssViewController:draw()
         local cropsThatCanGrow = ""
         
         for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index]
-            local fruitName = desc.name   
+            local fruitName = FruitUtil.fruitIndexToDesc[index].name   
             if self:canPlantDisplayData[fruitName][growthTransition] == ssGrowthManager.TRUE then
                 cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
