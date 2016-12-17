@@ -11,6 +11,7 @@ ssGrowthManager.MAX_STATE = 99; -- needs to be set to the fruit's numGrowthState
 ssGrowthManager.WITHERED = 300;
 ssGrowthManager.CUT = 200;
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999;
+ssGrowthManager.FIRST_GROWTH_TRANSITION = 1;
 ssGrowthManager.debugView = true;
 
 function Set (list)
@@ -60,7 +61,7 @@ function ssGrowthManager:loadMap(name)
         --lock changing the growth speed option and set growth rate to 1 (no growth)
         g_currentMission:setPlantGrowthRate(1,nil);
         g_currentMission:setPlantGrowthRateLocked(true);
-        ssSeasonsMod:addGrowthStageChangeListener(self)   
+        ssSeasonsMod:addGrowthStageChangeListener(self);  
 
         if self.doResetGrowth == true then 
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION;
@@ -289,7 +290,7 @@ function ssGrowthManager:buildCanPlantData()
                 end
                 
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
-                    table.insert(transitionTable, transition , false);
+                    table.insert(transitionTable, transition , "false");
                 else
                     local plantedGrowthTransition =  transition;
                     local currentGrowthStage = 1;
@@ -312,16 +313,20 @@ function ssGrowthManager:buildCanPlantData()
                         maxAllowedCounter = maxAllowedCounter + 1;
                     end
                     if currentGrowthStage == fruitNumStates then
-                        table.insert(transitionTable, plantedGrowthTransition , true);
+                        if plantedGrowthTransition == 1 then
+                            table.insert(transitionTable, plantedGrowthTransition , "maybe");
+                        else
+                            table.insert(transitionTable, plantedGrowthTransition , "true");
+                        end
                     else
-                        table.insert(transitionTable, plantedGrowthTransition , false);
+                        table.insert(transitionTable, plantedGrowthTransition , "false");
                     end
                 end
             end
             self.canPlantData[fruitName] = transitionTable;
         end
     end
-    --print_r(self.canPlantData);
+    print_r(self.canPlantData);
 end
 
 
@@ -340,7 +345,6 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
         end
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
         if self.growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
-            --self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ);
             local normalGrowthState = self.growthData[transitionToCheck][fruitName].normalGrowthState
             if self.growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
                 local normalGrowthMaxState = self.growthData[transitionToCheck][fruitName].normalGrowthMaxState;
