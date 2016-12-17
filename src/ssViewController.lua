@@ -13,8 +13,8 @@ ssViewController.debugView = true
 function ssViewController:loadMap(name)
     ssSeasonsMod:addGrowthStageChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
-    self:growthStageChanged();
-    self:dayChanged();
+    self:growthStageChanged()
+    self:dayChanged()
     print_r(self.canPlantDisplayData)
 end
 
@@ -34,14 +34,14 @@ end
 
 function ssViewController:draw()
     if self.debugView == true then
-        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition));
+        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
         local growthTransition = tostring(ssSeasonsUtil:currentGrowthTransition()
         renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition))
         local cropsThatCanGrow = ""
         
         for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index];
-            local fruitName = desc.name;   
+            local desc = FruitUtil.fruitIndexToDesc[index]
+            local fruitName = desc.name   
             if self:canPlantDisplayData[fruitName][growthTransition] == ssGrowthManager.TRUE then
                 cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
@@ -57,7 +57,7 @@ end
 
 -- handle hourChanged event
 function ssViewController:dayChanged()
-    local growthTransition = ssSeasonsUtil:currentGrowthTransition();
+    local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 	
 	if growthTransition == ssGrowthManager.FIRST_GROWTH_TRANSITION then  
 		self:updateData()
