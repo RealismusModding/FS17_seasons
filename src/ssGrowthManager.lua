@@ -359,3 +359,10 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
     
     return newGrowthState
 end
+
+function ssGrowthManager:boolToCanPlant(value)
+    if value == true then
+        return self.TRUE
+    else
+        return self.FALSE
+end
