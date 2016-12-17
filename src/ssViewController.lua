@@ -53,7 +53,7 @@ function ssViewController:updateData()
     for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
         if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == "maybe" then
             log("here")
-            self.canPlantDisplayData[fruitName][transition] = self:canSow()        
+            self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = self:canSow()        
         end
     end
 
