@@ -16,7 +16,7 @@ function ssAnimals:save(savegame, key)
 end
 
 function ssAnimals:loadMap(name)
-    ssSeasonsMod:addSeasonChangeListener(self);
+    ssSeasonsMod:addSeasonChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()

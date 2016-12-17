@@ -10,7 +10,7 @@ ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condi
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 0
-ssWeatherManager.rains = {};
+ssWeatherManager.rains = {}
 
 function ssWeatherManager:load(savegame, key)
     if savegame == nil then return end
@@ -246,16 +246,16 @@ function ssWeatherManager:buildForecast()
 end
 
 function ssWeatherManager:updateForecast()
-    local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1;
-    --log("Updating forecast based on today day num: " .. dayNum);
+    local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1
+    --log("Updating forecast based on today day num: " .. dayNum)
     local oneDayRain = {}
 
     table.remove(self.forecast,1)
 
-    oneDayForecast = {};
-    local ssTmax = {};
+    oneDayForecast = {}
+    local ssTmax = {}
 
-    oneDayForecast.day = dayNum; -- To match forecast with actual game
+    oneDayForecast.day = dayNum -- To match forecast with actual game
     oneDayForecast.season = ssSeasonsUtil:season(dayNum)
 
     if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
@@ -272,7 +272,7 @@ function ssWeatherManager:updateForecast()
 
     oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
     oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
-    oneDayForecast.weatherState = self:getWeatherStateForDay(dayNum);
+    oneDayForecast.weatherState = self:getWeatherStateForDay(dayNum)
 
     if oneDayForecast.day == self.rains[self.forecastLength-1].endDay then
         oneDayRain = self:updateRain(oneDayForecast,self.rains[self.forecastLength-1].endDayTime)
@@ -502,7 +502,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
     local oneDayRain = {}
 
     --while noTime ~= 'true' do
-        local oneRainEvent = {};
+        local oneRainEvent = {}
 
         p = self:_randomRain()
         --log('p = ',p,' p_rain = ',rainFactors.probRain,' p_clouds = ',rainFactors.probClouds)
@@ -569,7 +569,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
 end
 
 function ssWeatherManager:_rainStartEnd(beta,gamma,p,endRainTime)
-    local oneRainEvent = {};
+    local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
     oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(beta,gamma,p))*60*60*1000
