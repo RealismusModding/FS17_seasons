@@ -14,7 +14,7 @@ function ssViewController:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
     self:growthStageChanged();
     self:dayChanged();
-    print_r(self.canPlantDisplayData)
+    --print_r(self.canPlantDisplayData)
 end
 
 function ssViewController:deleteMap()
