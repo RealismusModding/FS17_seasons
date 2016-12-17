@@ -69,10 +69,9 @@ function ssViewController:draw()
         
         for index,fruit in pairs(g_currentMission.fruits) do
             local fruitName = FruitUtil.fruitIndexToDesc[index].name   
-            if self.canPlantDisplayData[fruitName] ~= nil then -- otherwise it crashes on dryGrass since it's not in the data table
-                if self.canPlantDisplayData[fruitName][growthTransition] == ssGrowthManager.TRUE then
-                    cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-                end
+            
+            if ssGrowthManager:canFruitGrow(fruitName, growthTransition, self.canPlantDisplayData) == true then
+                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
         end 
         renderText(0.54, 0.94, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
