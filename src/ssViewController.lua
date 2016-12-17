@@ -69,7 +69,7 @@ function ssViewController:updateData()
     self.canPlantDisplayData = Utils.copyTable(ssGrowthManager.canPlantData)
     for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
         if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == ssGrowthManager.MAYBE then
-            self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = ssGrowthManager:boolToCanPlant(ssWeatherManager:canSow())
+            self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = ssGrowthManager:boolToGMBool(ssWeatherManager:canSow())
         end
     end
 

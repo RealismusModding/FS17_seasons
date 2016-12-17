@@ -360,7 +360,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
     return newGrowthState
 end
 
-function ssGrowthManager:boolToCanPlant(value)
+function ssGrowthManager:boolToGMBool(value)
     if value == true then
         return self.TRUE
     else
