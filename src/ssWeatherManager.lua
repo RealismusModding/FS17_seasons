@@ -435,7 +435,7 @@ end
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
 function ssWeatherManager:calculateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
-    local deltaT = math.max(365 / ssSeasonsUtil.seasonsInYear / ssSeasonsUtil.daysInSeason / 2 ,1)
+    local deltaT = math.max(365 / ssSeasonsUtil.SEASONS_IN_YEAR / ssSeasonsUtil.daysInSeason / 2 ,1)
     local soilTemp = self.soilTemp
     local snowDamp = 1
 

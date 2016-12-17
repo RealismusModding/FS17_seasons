@@ -96,7 +96,7 @@ function ssEconomy:calculateLoanInterestRate()
     local yearInterest = self.baseLoanInterest / 2 * g_currentMission.missionInfo.difficulty
 
     -- Convert the interest to be made in a Seasons year to a vanilla year so that the daily interests are correct
-    local seasonsYearInterest = yearInterest * (356 / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear))
+    local seasonsYearInterest = yearInterest * (356 / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.SEASONS_IN_YEAR))
 
     g_currentMission.missionStats.loanAnnualInterestRate = seasonsYearInterest
 end

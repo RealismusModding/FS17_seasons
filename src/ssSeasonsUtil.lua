@@ -11,8 +11,8 @@ ssSeasonsUtil.weekDays = {}
 ssSeasonsUtil.weekDaysShort = {}
 ssSeasonsUtil.seasons = {}
 
-ssSeasonsUtil.daysInWeek = 7 -- FIXME should be in all caps
-ssSeasonsUtil.seasonsInYear = 4 -- FIXME should be in all caps
+ssSeasonsUtil.DAYS_IN_WEEK = 7
+ssSeasonsUtil.SEASONS_IN_YEAR = 4
 
 ssSeasonsUtil.SEASON_SPRING = 0
 ssSeasonsUtil.SEASON_SUMMER = 1
@@ -103,7 +103,7 @@ function ssSeasonsUtil:dayOfWeek(dayNumber)
         dayNumber = self:currentDayNumber()
     end
 
-    return math.fmod(dayNumber - 1, self.daysInWeek) + 1
+    return math.fmod(dayNumber - 1, self.DAYS_IN_WEEK) + 1
 end
 
 -- Get the season number.
@@ -114,7 +114,7 @@ function ssSeasonsUtil:season(dayNumber)
         dayNumber = self:currentDayNumber()
     end
 
-    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.seasonsInYear)
+    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
 end
 
 -- Starts with 0
@@ -123,7 +123,7 @@ function ssSeasonsUtil:year(dayNumber)
         dayNumber = self:currentDayNumber()
     end
 
-    return math.floor((dayNumber - 1) / (self.daysInSeason * self.seasonsInYear))
+    return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
 end
 
 -- This function calculates the real-ish daynumber from an ingame day number
@@ -190,7 +190,7 @@ function ssSeasonsUtil:dayNameShort(dayNumber)
 end
 
 function ssSeasonsUtil:nextWeekDayNumber(currentDay)
-    return (currentDay + 1) % self.daysInWeek
+    return (currentDay + 1) % self.DAYS_IN_WEEK
 end
 
 -- Returns 1-daysInSeason
@@ -200,7 +200,7 @@ function ssSeasonsUtil:dayInSeason(currentDay)
     end
 
     local season = self:season(currentDay) -- 0-3
-    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.seasonsInYear) + 1 -- 1+
+    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1 -- 1+
     return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
 end
 
