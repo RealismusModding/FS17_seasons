@@ -43,14 +43,14 @@
             <max value="16.3" />
         </p>        
         <p period="9">
-            <min value="7.6" />
-            <mode value="9.7" />
-            <max value="11.7" />
+            <min value="6.6" />
+            <mode value="8.7" />
+            <max value="10.7" />
         </p>
         <p period="10">
             <min value="-1.5" />
-            <mode value="4.0" />
-            <max value="8.5" />
+            <mode value="3.0" />
+            <max value="6.5" />
         </p>
         <p period="11">
             <min value="-3.0" />
@@ -64,25 +64,25 @@
         </p>
     </temperature>
     <rain>
-        <s season="spring">
+        <s season="Spring">
             <mu value="1.1" />
             <sigma value="0.2" />
             <probRain value="0.40" />
             <probClouds value="0.55" />
         </s>
-        <s season="summer">
+        <s season="Summer">
             <mu value="0.7" />
             <sigma value="0.1" />
             <probRain value="0.15" />
             <probClouds value="0.30" />
         </s>
-        <s season="autumn">
+        <s season="Autumn">
             <mu value="1.2" />
             <sigma value="0.25" />
             <probRain value="0.50" />
             <probClouds value="0.65" />
         </s>
-        <s season="winter">
+        <s season="Winter">
             <mu value="1.6" />
             <sigma value="0.25" />
             <probRain value="0.55" />
