@@ -244,7 +244,7 @@ function ssSeasonsUtil:currentGrowthStage(currentDay)
 end
 
 function ssSeasonsUtil:hourChanged()
-    log("ssSeasonsUtil:hourChanged()")
+    --log("ssSeasonsUtil:hourChanged()")
 end
 
 -- This is here, because ssSeasonsMod is never really loaded as a mod class..
