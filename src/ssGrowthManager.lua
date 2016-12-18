@@ -252,7 +252,7 @@ function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
             return false
         end
 
-        if self.data[fruitName][growthTransition] == self.TRUE then
+        if data[fruitName][growthTransition] == self.TRUE then
             return true
         end
     end
