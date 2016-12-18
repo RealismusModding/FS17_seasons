@@ -245,13 +245,14 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
 end
 
-function ssGrowthManager:canFruitGrow(fruitName, growthTransition)
-    if self.canPlantData[fruitName] ~= nil then
-        if self.canPlantData[fruitName][growthTransition] == nil then
+--FIXME: change this function to use passed in data. maybe move to seasonsUtil
+function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
+    if data[fruitName] ~= nil then
+        if data[fruitName][growthTransition] == nil then
             return false
         end
 
-        if self.canPlantData[fruitName][growthTransition] == true then
+        if self.data[fruitName][growthTransition] == self.TRUE then
             return true
         end
     end

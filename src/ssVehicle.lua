@@ -249,7 +249,7 @@ function ssVehicle:getSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local price = storeItem.price
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
-    local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear) -- year
+    local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.SEASONS_IN_YEAR) -- year
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
