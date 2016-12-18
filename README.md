@@ -10,7 +10,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 
 ### Seasons
 - Plowable snow in the winter!
-- Soil is frozen in the winter, you can't work on it
+- Soil temperature is properly modelled using thermnodynamic equations and historical data which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
@@ -21,6 +21,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 - 7 day weather forecast
 
 ### Crops
+- Vanilla growth is completely disabled. The mod controls all growth of fruits, except for normal trees at this point in time
 - Winter kills certain crops
 - Grass is knocked back to stage 2 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
