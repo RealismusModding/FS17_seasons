@@ -33,11 +33,7 @@ function ssViewController:loadMap(name)
 
     self:growthStageChanged()
     self:dayChanged()
-    self:growthTransitionsDisplayData();
-    --print_r(self.growthTransitionIndexToName)
-    --print(self.growthTransitionIndexToName[1])
-    --print_r(self.canPlantDisplayData)
-    --log("drygrass: " .. FruitUtil.fruitTypeGrowths["dryGrass"].name)
+    --self:growthTransitionsDisplayData() --for testing only right now
 end
 
 function ssViewController:deleteMap()
@@ -80,7 +76,7 @@ function ssViewController:draw()
     end
 end
 
--- handle growthStageCHanged event
+-- handle growthStageChanged event
 function ssViewController:growthStageChanged()
     --self.currentIndicator = ssSeasonsUtil:currentGrowthTransition()
 end
@@ -111,7 +107,8 @@ end
 --early, mid, late and each entry then has the range of days in that growth transition
 --the itention is that this is the day which will be repeated across the top of the growth gui display below each season to show which days fall into
 --which transition. 
---FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5. Will think of a clever way to fix that without cheating
+--FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5. 
+--Will think of a clever way to fix that without cheating
 function ssViewController:growthTransitionsDisplayData()
 	local growthStagesDisplayData = {}
 	local data = ssSeasonsUtil:calcDaysPerTransition()

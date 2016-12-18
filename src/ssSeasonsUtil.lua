@@ -342,16 +342,15 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
 end
 
 function ssSeasonsUtil:getModMapDataPath(dataFileName)
-
     if g_currentMission.missionInfo.map.isModMap == true then
 
-        local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName;
+        local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName
         if fileExists(path) then
-            return path;
+            return path
         end
     end
 
-    return nil;
+    return nil
 end
 
 

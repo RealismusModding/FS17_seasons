@@ -116,7 +116,7 @@ end
 function ssReplaceVisual:updatePlacableOnCreation()
     ssReplaceVisual:updateTextures(self.nodeId)
 end
-Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.updatePlacableOnCreation);
+Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.updatePlacableOnCreation)
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function findNodeByName(nodeId, name)

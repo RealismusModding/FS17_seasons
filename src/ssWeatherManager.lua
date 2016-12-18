@@ -570,12 +570,12 @@ function ssWeatherManager:loadTemperature()
     -- Open file
     local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    local i = 0;
+    local i = 0
     while true do
-        local key = string.format("weather.temperature.p(%d)", i);
+        local key = string.format("weather.temperature.p(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local period = getXMLInt(file, key .. "#period");
+        local period = getXMLInt(file, key .. "#period")
         if period == nil then
             logInfo("Period in weather.xml is invalid")
             break
@@ -611,12 +611,12 @@ function ssWeatherManager:loadRain()
     -- Open file
     local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    local i = 0;
+    local i = 0
     while true do
-        local key = string.format("weather.rain.s(%d)", i);
+        local key = string.format("weather.rain.s(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local season = getXMLString(file, key .. "#season");
+        local season = getXMLString(file, key .. "#season")
         if season == nil then
             logInfo("Season in weather.xml is invalid")
             break

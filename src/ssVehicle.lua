@@ -81,12 +81,12 @@ function ssVehicle:loadRepairFactors()
 
     ssVehicle.repairFactors = {}
 
-    local i = 0;
+    local i = 0
     while true do
-        local key = string.format("factors.factor(%d)", i);
+        local key = string.format("factors.factor(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local category = getXMLString(file, key .. "#category");
+        local category = getXMLString(file, key .. "#category")
         if category == nil then
             logInfo("repairFactors.xml is invalid")
             break
@@ -375,7 +375,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 
     if self.isClient then
         if self.ssNotAllowedInWinter then
-            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000);
+            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000)
         end
     end
 end

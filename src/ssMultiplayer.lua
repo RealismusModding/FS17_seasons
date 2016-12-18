@@ -104,8 +104,8 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
 end
 
 function ssMultiplayerJoinEvent:sendObjects(superFunc, connection, x, y, z, viewDistanceCoeff)
-    connection:sendEvent(ssMultiplayerJoinEvent:new());
+    connection:sendEvent(ssMultiplayerJoinEvent:new())
 
-    return superFunc(self, connection, x, y, z, viewDistanceCoeff);
+    return superFunc(self, connection, x, y, z, viewDistanceCoeff)
 end
 Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)

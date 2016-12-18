@@ -211,10 +211,6 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     end
 
     local numChannels = g_currentMission.numFruitStateChannels
-    -- log("fruit:" ..fruitName)
-    -- log("numChannels:" .. g_currentMission.numFruitStateChannels)
-    -- log("desiredGrowthState:" .. desiredGrowthState)
-    --log("fruit:" ..fruitName)
     local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
 end
 
@@ -309,7 +305,6 @@ function ssGrowthManager:buildCanPlantData()
             self.canPlantData[fruitName] = transitionTable
         end
     end
-    --print_r(self.canPlantData)
 end
 
 
@@ -352,7 +347,6 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
             end
         end
     end
-    
     return newGrowthState
 end
 

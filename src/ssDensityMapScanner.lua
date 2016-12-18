@@ -8,11 +8,11 @@
 ssDensityMapScanner = {}
 ssDensityMapScanner.callBacks = {}
 
-ssDensityMapScanner.currentX=0;
-ssDensityMapScanner.currentZ=0;
+ssDensityMapScanner.currentX=0
+ssDensityMapScanner.currentZ=0
 ssDensityMapScanner.currentCallBackName=""
 ssDensityMapScanner.currentParameter=""
-ssDensityMapScanner.moreIterations=false;
+ssDensityMapScanner.moreIterations=false
 
 ssDensityMapScanner.workQ = ssSeasonsUtil.listNew()
 
