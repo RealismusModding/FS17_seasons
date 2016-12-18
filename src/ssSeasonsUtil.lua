@@ -281,12 +281,12 @@ function ssSeasonsUtil:ssTriDist(m)
     --math.randomseed( g_currentMission.time )
     math.random()
 
-    pmode = (m[2]-m[1])/(m[3]-m[1])
+    pmode = (m.mode-m.min)/(m.max-m.min)
     p = math.random()
     if p < pmode then
-        return math.sqrt(p*(m[3]-m[1])*(m[2]-m[1]))+m[1]
+        return math.sqrt(p*(m.max-m.min)*(m.mode-m.min))+m.min
     else
-        return m[3]-math.sqrt((1-p)*(m[3]-m[1])*(m[3]-m[2]))
+        return m.max-math.sqrt((1-p)*(m.max-m.min)*(m.max-m.mode))
     end
 end
 
