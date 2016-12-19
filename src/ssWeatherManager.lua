@@ -196,6 +196,7 @@ end
 function ssWeatherManager:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
+    --log("Building forecast based on today day num: " .. startDayNum)
 
     self.forecast = {}
 
@@ -208,37 +209,49 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.day = startDayNum + n - 1 -- To match forecast with actual game
         oneDayForecast.season = ssSeasonsUtil:season(startDayNum + n - 1)
 
-        ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(oneDayForecast.day)]
+        -- ssTmax = self:Tmax(oneDayForecast.season)
+        ssTmax = self.temperature[oneDayForecast.season]
     
-        oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
-        oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+        oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
+        oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
         --oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n)
 
         if n == 1 then
+            --log('First day and endDayTime = 0')
             oneDayRain = self:updateRain(oneDayForecast,0)
         else
             if oneDayForecast.day == self.rains[n-1].endDay then
+                --log('Day ',n,' and endDayTime = ',self.rains[n-1].endDayTime)
                 oneDayRain = self:updateRain(oneDayForecast,self.rains[n-1].endDayTime)
             else
+                --log('Day ',n,' and endDayTime = 0')
                 oneDayRain = self:updateRain(oneDayForecast,0)
             end
         end
-
         oneDayForecast.weatherState = oneDayRain.rainTypeId
 
         table.insert(self.forecast, oneDayForecast)
         table.insert(self.rains, oneDayRain)
 
+        --log'Here is the rains table'
+        --print_r(self.rains)
+
     end
+
+    --log('The original raintable')
+    --print_r(g_currentMission.environment.rains)
 
     g_currentMission.environment.rains = {}
     self:switchRainHail()
     self:owRaintable()
 
+    --print_r(self.forecast)
+    --print_r(g_currentMission.environment.rains)
 end
 
 function ssWeatherManager:updateForecast()
     local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1
+    --log("Updating forecast based on today day num: " .. dayNum)
     local oneDayRain = {}
 
     table.remove(self.forecast,1)
@@ -249,20 +262,22 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.day = dayNum -- To match forecast with actual game
     oneDayForecast.season = ssSeasonsUtil:season(dayNum)
 
-    ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(dayNum)]
-
+    ssTmax = self.temperature[oneDayForecast.season]
+    
     if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
         --Seasonal average for a day in the current season
+        --ssTmax = self:Tmax(oneDayForecast.season)
         oneDayForecast.Tmaxmean = self.forecast[self.forecastLength-1].Tmaxmean
 
     elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
         --Seasonal average for a day in the next season
+        --ssTmax = self:Tmax(oneDayForecast.season)
         oneDayForecast.Tmaxmean = ssSeasonsUtil:ssTriDist(ssTmax)
 
     end
 
-    oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
-    oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+    oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax[2],2.5)
+    oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax[2]-5
     oneDayForecast.weatherState = self:getWeatherStateForDay(dayNum)
 
     if oneDayForecast.day == self.rains[self.forecastLength-1].endDay then
@@ -301,6 +316,10 @@ function ssWeatherManager:getWeatherStateForDay(dayNumber)
         end
     end
 
+    --for k, v in pairs( g_currentMission.environment.rainFadeCurve ) do
+    --    log (k, v)
+    --end
+
     return weatherState
 end
 
@@ -313,6 +332,22 @@ end
 -- Jos note: no randomness here. Must run on client for snow.
 function ssWeatherManager:hourChanged()
     self:calculateSnowAccumulation()
+end
+
+function ssWeatherManager:Tmax(ss) --sets the minimum, mode and maximum of the seasonal average maximum temperature. Simplification due to unphysical bounds.
+    if ss == ssSeasonsUtil.SEASON_WINTER then
+        -- return {5.0,8.6,10.7} --min, mode, max Temps from the data
+        return {-3.0,0.6,2.7} --min, mode, max adjusted -7 deg C
+
+    elseif ss == ssSeasonsUtil.SEASON_SPRING then
+        return {12.1, 14.2, 17.9} --min, mode, max
+
+    elseif ss == ssSeasonsUtil.SEASON_SUMMER then
+        return {19.4, 21.7, 26.0} --min, mode, max
+
+    elseif ss == ssSeasonsUtil.SEASON_AUTUMN then
+        return {14.0, 15.6, 17.3} --min, mode, max
+    end
 end
 
 -- function to output the temperature during the day and night
@@ -391,6 +426,14 @@ function ssWeatherManager:calculateSnowAccumulation()
 
     end
 
+
+
+
+    --log('currentTemp = ', currentTemp," lowTemp = ",self.forecast[1].lowTemp,' highTemp = ',self.forecast[1].highTemp,' snowDepth = ', self.snowDepth)
+    --if currentRail ~= nil then
+    --    print_r(currentRain)
+    --end
+
     return self.snowDepth
 end
 
@@ -398,9 +441,7 @@ end
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
 function ssWeatherManager:calculateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
-
-    local deltaT = 365 / ssSeasonsUtil.SEASONS_IN_YEAR  / ssSeasonsUtil.daysInSeason / 2
-
+    local deltaT = math.max(365 / ssSeasonsUtil.seasonsInYear / ssSeasonsUtil.daysInSeason / 2 ,1)
     local soilTemp = self.soilTemp
     local snowDamp = 1
 
@@ -420,7 +461,7 @@ function ssWeatherManager:calculateSoilTemp()
     --log('self.soilTemp=',self.soilTemp,' soilTemp=',soilTemp,' avgAirTemp=',avgAirTemp,' snowDamp=',snowDamp,' snowDepth=',snowDepth)
 end
 
---- function for predicting when soil is too cold for crops for germinate
+--- function for predicting when soil is too cold for crops to germinate
 function ssWeatherManager:canSow()
     if  self.soilTemp < 5 then
         return false
@@ -459,24 +500,21 @@ function ssWeatherManager:switchRainHail()
 end
 
 function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
-    rainFactors = self.rainData[ssSeasonsUtil:seasonName(oneDayForecast.day)]
-
-    local mu = rainFactors.mu
-    local sigma = rainFactors.sigma
-    local cov = sigma/mu
-
-    rainFactors.beta = 1 / math.sqrt(math.log(1+cov*cov))
-    rainFactors.gamma = mu / math.sqrt(1+cov*cov)
-
+    -- rainFactors = self:_loadRainFactors(oneDayForecast.season)
+    rainFactors = self.rain[oneDayForecast.season]
+	
+    --log('This is the oneDayForecast')
+    --print_r(oneDayForecast)
     local noTime = 'false'
     local oneDayRain = {}
 
     local oneRainEvent = {}
 
-    p = self:_randomRain(oneDayForecast.day)
+    p = self:_randomRain()
+    --log('p = ',p,' p_rain = ',rainFactors.probRain,' p_clouds = ',rainFactors.probClouds)
 
     if p < rainFactors.probRain then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime)
+        oneRainEvent = self:_rainStartEnd(rainFactors.beta,rainFactors.gamma,p,endRainTime)
 
         if oneDayForecast.lowTemp < 1 then
             oneRainEvent.rainTypeId = "hail" -- forecast snow if temp < 1
@@ -485,7 +523,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         end
 
     elseif p > rainFactors.probRain and p < rainFactors.probClouds then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime)
+        oneRainEvent = self:_rainStartEnd(rainFactors.beta,rainFactors.gamma,p,endRainTime)
         oneRainEvent.rainTypeId = "cloudy"
     elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 2 and endRainTime < 10800000 then
         -- morning fog
@@ -511,14 +549,16 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
 
 end
 
-function ssWeatherManager:_rainStartEnd(p,endRainTime)
+function ssWeatherManager:_rainStartEnd(beta,gamma,p,endRainTime)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
-    oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p))*60*60*1000
+    oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(beta,gamma,p))*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime,82800) *1000+0.1
 
+    --log("startDayTime ",oneRainEvent.startDayTime)
+    --log("oneRainEvent.duration ",oneRainEvent.duration)
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
         oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration + 0.000001
@@ -530,19 +570,19 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime)
     return oneRainEvent
 end
 
-function ssWeatherManager:_randomRain(day)
+function ssWeatherManager:_randomRain()
     math.random() -- to initiate random number generator
 
-    ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(day)]
+    ssTmax = self:Tmax(oneDayForecast.season)
 
     if oneDayForecast.season == ssSeasonsUtil.SEASON_WINTER or oneDayForecast.season == ssSeasonsUtil.SEASON_AUTUMN then
-        if oneDayForecast.highTemp > ssTmax.mode then
+        if oneDayForecast.highTemp > ssTmax[2] then
             p = math.random()^1.5 --increasing probability for precipitation if the temp is high
         else
             p = math.random()^0.75 --decreasing probability for precipitation if the temp is high
         end
     elseif oneDayForecast.season == ssSeasonsUtil.SEASON_SPRING or oneDayForecast.season == ssSeasonsUtil.SEASON_SUMMER then
-        if oneDayForecast.highTemp < ssTmax.mode then
+        if oneDayForecast.highTemp < ssTmax[2] then
             p = math.random()^1.5 --increasing probability for precipitation if the temp is high
         else
             p = math.random()^0.75 --decreasing probability for precipitation if the temp is high
@@ -550,6 +590,46 @@ function ssWeatherManager:_randomRain(day)
     end
 
     return p
+end
+
+function ssWeatherManager:_loadRainFactors(ss)
+    -- maybe save factors in a file
+    local mu = {}
+    local sigma = {}
+    local cov = {}
+    local r = {}
+
+    if ss == ssSeasonsUtil.SEASON_WINTER then
+        mu = 1.6
+        sigma = 0.25
+        r.probRain = 0.55
+        r.probClouds = 0.70
+
+    elseif ss == ssSeasonsUtil.SEASON_SPRING then
+        mu = 1.1
+        sigma = 0.2
+        r.probRain = 0.4
+        r.probClouds = 0.55
+
+    elseif ss == ssSeasonsUtil.SEASON_SUMMER then
+        mu = 0.7
+        sigma = 0.1
+        r.probRain = 0.15
+        r.probClouds = 0.30
+
+    elseif ss == ssSeasonsUtil.SEASON_AUTUMN then
+        mu = 1.2
+        sigma = 0.25
+        r.probRain = 0.50
+        r.probClouds = 0.65
+    end
+
+    cov = (sigma/mu)
+
+    r.beta = 1 / math.sqrt(math.log(1+cov*cov))
+    r.gamma = mu / math.sqrt(1+cov*cov)
+
+    return r
 end
 
 function ssWeatherManager:owRaintable()
@@ -565,19 +645,19 @@ function ssWeatherManager:owRaintable()
 end
 
 function ssWeatherManager:loadTemperature()
-    self.temperatureData = {}
+-- Open file
+    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    ssWeatherManager.temperature = {}
 
-    local i = 0
+    local i = 0;
     while true do
-        local key = string.format("weather.temperature.p(%d)", i)
+        local key = string.format("weather.temperature.p(%d)", i);
         if not hasXMLProperty(file, key) then break end
 
-        local period = getXMLInt(file, key .. "#period")
+        local period = getXMLString(file, key .. "#period");
         if period == nil then
-            logInfo("Period in weather.xml is invalid")
+            logInfo("weather.xml is invalid")
             break
         end
 
@@ -586,17 +666,17 @@ function ssWeatherManager:loadTemperature()
         local max = getXMLFloat(file, key .. ".max#value")
 
         if min == nil or mode == nil or max == nil then
-            logInfo("Temperature data in weather.xml is invalid")
+            logInfo("weather.xml is invalid")
             break
         end
 
         local config = {
-            ["min"] = min,
+            ["min"] = max,
             ["mode"] = mode,
             ["max"] = max
         }
 
-        self.temperatureData[period] = config
+        ssWeatherManager.temperature[period] = config
 
         i = i + 1
     end
@@ -606,19 +686,19 @@ function ssWeatherManager:loadTemperature()
 end
 
 function ssWeatherManager:loadRain()
-    ssWeatherManager.rainData = {}
+-- Open file
+    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    ssWeatherManager.rain = {}
 
-    local i = 0
+    local i = 0;
     while true do
-        local key = string.format("weather.rain.s(%d)", i)
+        local key = string.format("weather.rain.s(%d)", i);
         if not hasXMLProperty(file, key) then break end
 
-        local season = getXMLString(file, key .. "#season")
+        local period = getXMLString(file, key .. "#season");
         if season == nil then
-            logInfo("Season in weather.xml is invalid")
+            logInfo("weather.xml is invalid")
             break
         end
 
@@ -628,7 +708,7 @@ function ssWeatherManager:loadRain()
         local probClouds = getXMLFloat(file, key .. ".probClouds#value")
 
         if mu == nil or sigma == nil or probRain == nil or probClouds == nil then
-            logInfo("Rain data in weather.xml is invalid")
+            logInfo("weather.xml is invalid")
             break
         end
 
@@ -639,7 +719,7 @@ function ssWeatherManager:loadRain()
             ["probClouds"] = probClouds
         }
 
-        self.rainData[season] = config
+        ssWeatherManager.rain[season] = config
 
         i = i + 1
     end
