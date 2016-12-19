@@ -398,7 +398,7 @@ end
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
 function ssWeatherManager:calculateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
-    local deltaT = 365 / ssSeasonsUtil.seasonsInYear / ssSeasonsUtil.daysInSeason / 2
+    local deltaT = 365 / ssSeasonsUtil.SEASONS_IN_YEAR / ssSeasonsUtil.daysInSeason / 2
     local soilTemp = self.soilTemp
     local snowDamp = 1
 
@@ -568,12 +568,12 @@ function ssWeatherManager:loadTemperature()
     -- Open file
     local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    local i = 0;
+    local i = 0
     while true do
-        local key = string.format("weather.temperature.p(%d)", i);
+        local key = string.format("weather.temperature.p(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local period = getXMLInt(file, key .. "#period");
+        local period = getXMLInt(file, key .. "#period")
         if period == nil then
             logInfo("Period in weather.xml is invalid")
             break
@@ -609,12 +609,12 @@ function ssWeatherManager:loadRain()
     -- Open file
     local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
 
-    local i = 0;
+    local i = 0
     while true do
-        local key = string.format("weather.rain.s(%d)", i);
+        local key = string.format("weather.rain.s(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local season = getXMLString(file, key .. "#season");
+        local season = getXMLString(file, key .. "#season")
         if season == nil then
             logInfo("Season in weather.xml is invalid")
             break
