@@ -209,7 +209,7 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.season = ssSeasonsUtil:season(startDayNum + n - 1)
 
         ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(oneDayForecast.day)]
-    
+
         oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
         oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
         --oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n)
@@ -403,8 +403,8 @@ function ssWeatherManager:calculateSoilTemp()
     local snowDamp = 1
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
-    local facKT = 0.6 
-    -- average thermal conductivity of soil and ice C_S + C_ICE, unit: kW/m/deg C, typical values C_S=1-1.3, C_ICE=4-15   
+    local facKT = 0.6
+    -- average thermal conductivity of soil and ice C_S + C_ICE, unit: kW/m/deg C, typical values C_S=1-1.3, C_ICE=4-15
     local facCA = 10
     -- empirical snow damping parameter, unit 1/m, typical values -2 - -7
     local facfs = -5
@@ -413,7 +413,7 @@ function ssWeatherManager:calculateSoilTemp()
     if self.snowDepth > 0 then
         snowDamp = math.exp(facfs*self.snowDepth)
     end
- 
+
     self.soilTemp = soilTemp + (deltaT * facKT / facCA * (avgAirTemp - soilTemp)) * snowDamp
     --log('self.soilTemp=',self.soilTemp,' soilTemp=',soilTemp,' avgAirTemp=',avgAirTemp,' snowDamp=',snowDamp,' snowDepth=',snowDepth)
 end
@@ -457,7 +457,7 @@ function ssWeatherManager:switchRainHail()
 end
 
 function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
-    local rainFactors = self.rainData[ssSeasonsUtil:seasonName(oneDayForecast.day)]
+    local rainFactors = self.rainData[ssSeasonsUtil:season(oneDayForecast.day)]
 
     local mu = rainFactors.mu
     local sigma = rainFactors.sigma
@@ -614,7 +614,7 @@ function ssWeatherManager:loadRain()
         local key = string.format("weather.rain.s(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
-        local season = getXMLString(file, key .. "#season")
+        local season = getXMLInt(file, key .. "#season")
         if season == nil then
             logInfo("Season in weather.xml is invalid")
             break
