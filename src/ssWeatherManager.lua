@@ -457,7 +457,7 @@ function ssWeatherManager:switchRainHail()
 end
 
 function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
-    rainFactors = self.rainData[ssSeasonsUtil:seasonName(oneDayForecast.day)]
+    local rainFactors = self.rainData[ssSeasonsUtil:seasonName(oneDayForecast.day)]
 
     local mu = rainFactors.mu
     local sigma = rainFactors.sigma
@@ -474,7 +474,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
     p = self:_randomRain(oneDayForecast.day)
 
     if p < rainFactors.probRain then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime)
+        oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
 
         if oneDayForecast.lowTemp < 1 then
             oneRainEvent.rainTypeId = "hail" -- forecast snow if temp < 1
@@ -483,7 +483,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         end
 
     elseif p > rainFactors.probRain and p < rainFactors.probClouds then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime)
+        oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
         oneRainEvent.rainTypeId = "cloudy"
     elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 2 and endRainTime < 10800000 then
         -- morning fog
@@ -509,7 +509,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
 
 end
 
-function ssWeatherManager:_rainStartEnd(p,endRainTime)
+function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
@@ -604,7 +604,7 @@ function ssWeatherManager:loadTemperature()
 end
 
 function ssWeatherManager:loadRain()
-    ssWeatherManager.rainData = {}
+    self.rainData = {}
 
     -- Open file
     local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
