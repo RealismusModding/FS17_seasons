@@ -33,6 +33,7 @@ function ssEconomy:loadMap(name)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
     AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
+    FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
 
     if g_currentMission:getIsServer() then
         self:setup()
@@ -101,7 +102,7 @@ function ssEconomy:calculateLoanInterestRate()
     g_currentMission.missionStats.loanAnnualInterestRate = seasonsYearInterest
 end
 
-function ssEconomy:aiUpdateTick(superFunc, dt)
+function ssEconomy.aiUpdateTick(self, superFunc, dt)
     if self:getIsActive() then
         local hour = g_currentMission.environment.currentHour
         local dow = ssSeasonsUtil:dayOfWeek()
@@ -135,3 +136,12 @@ function ssEconomy:getLoanCap()
     local roundedTo5000 = math.floor(ssEconomy.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
     return Utils.clamp(roundedTo5000, 300000, ssEconomy.loanMax)
 end
+
+function ssEconomy.setFieldOwnedByPlayer(self, superFunc, fieldDef, isOwned)
+    local ret = superFunc(self, fieldDef, isOwned)
+
+    g_currentMission.missionStats.loanMax = ssEconomy.getLoanCap(ssEconomy)
+
+    return ret
+end
+
