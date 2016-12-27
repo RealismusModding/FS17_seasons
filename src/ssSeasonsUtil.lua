@@ -48,8 +48,10 @@ ssSeasonsUtil.seasons = {
 
 function ssSeasonsUtil:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10), 3, 12)
-    self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", 1)
-    self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 1)
+    self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", -1)
+    self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 0)
+
+    self.isNewGame = savegame == nil
 end
 
 function ssSeasonsUtil:save(savegame, key)
@@ -60,7 +62,6 @@ end
 
 function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
-    g_currentMission.environment:addHourChangeListener(self)
 end
 
 function ssSeasonsUtil:deleteMap()
@@ -73,6 +74,10 @@ function ssSeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssSeasonsUtil:update(dt)
+    if self.isNewGame then
+        self.isNewGame = false
+        ssSeasonsUtil:dayChanged() -- trigger the stage change events.
+    end
 end
 
 function ssSeasonsUtil:readStream(streamId, connection)
@@ -223,7 +228,6 @@ function ssSeasonsUtil:calcDaysPerTransition()
 end
 
 function ssSeasonsUtil:currentGrowthStage(currentDay)
-
     if (currentDay == nil) then
         currentDay = self:currentDayNumber()
     end
@@ -243,15 +247,9 @@ function ssSeasonsUtil:currentGrowthStage(currentDay)
     return nil
 end
 
-function ssSeasonsUtil:hourChanged()
-    --log("ssSeasonsUtil:hourChanged()")
-end
-
 -- This is here, because ssSeasonsMod is never really loaded as a mod class..
 -- It is complicated, but installing a day change listener on it wont work
 function ssSeasonsUtil:dayChanged()
-    log("ssSeasonsUtil:dayChanged()")
-
     if ssSeasonsMod.enabled then
         local currentSeason = self:season()
 

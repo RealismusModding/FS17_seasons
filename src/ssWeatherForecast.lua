@@ -76,7 +76,7 @@ function ssWeatherForecast:loadMap(name)
 end
 
 function ssWeatherForecast:load(savegame, key)
-    self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.WeatherForecastHudVisible", true)
+    self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.WeatherForecastHudVisible", false)
 end
 
 function ssWeatherForecast:save(savegame, key)

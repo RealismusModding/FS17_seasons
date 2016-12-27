@@ -18,9 +18,9 @@ ssGrowthManager.MAYBE = "maybe"
 
 function Set (list)
     local set = {}
-    
-    for _, l in ipairs(list) do 
-        set[l] = true 
+
+    for _, l in ipairs(list) do
+        set[l] = true
     end
 
     return set
@@ -52,7 +52,7 @@ function ssGrowthManager:loadMap(name)
         log("ssGrowthManager: disabled")
         return
     end
-    
+
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
             logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
@@ -63,15 +63,15 @@ function ssGrowthManager:loadMap(name)
         --lock changing the growth speed option and set growth rate to 1 (no growth)
         g_currentMission:setPlantGrowthRate(1,nil)
         g_currentMission:setPlantGrowthRateLocked(true)
-        ssSeasonsMod:addGrowthStageChangeListener(self)  
+        ssSeasonsMod:addGrowthStageChangeListener(self)
 
-        if self.doResetGrowth == true then 
+        if self.doResetGrowth == true then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             self.doGrowthTransition = true
             self.growthManagerEnabled = true
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
         end
-        
+
         self:buildCanPlantData()
 
         if g_currentMission.missionInfo.timeScale > 120 then
@@ -88,7 +88,7 @@ end
 
 function ssGrowthManager:getGrowthData()
     local defaultFruits,growthData = ssGrowthManagerData:loadAllData()
-   
+
     if defaultFruits ~= nil then
         self.defaultFruits = Set(defaultFruits)
     else
@@ -119,7 +119,7 @@ function ssGrowthManager:update(dt)
     if self.doGrowthTransition ~= true then
         return
     end
-        
+
     local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
     local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
     local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
@@ -130,14 +130,14 @@ function ssGrowthManager:update(dt)
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
         local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
-        
+
         --handling new unknown fruits
         if self.defaultFruits[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
             fruitName = "default"
         end
 
-        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
+        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
             --setGrowthState
             if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
                 and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
@@ -146,7 +146,7 @@ function ssGrowthManager:update(dt)
             end
             --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
             if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
-                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)  
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
             end
             --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
             if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
@@ -201,7 +201,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
 
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
-        
+
         if maxState == self.MAX_STATE then
             maxState = fruitTypeGrowth.numGrowthStates
         end
@@ -267,7 +267,7 @@ function ssGrowthManager:buildCanPlantData()
                 if transition == self.FIRST_LOAD_TRANSITION then
                     break
                 end
-                
+
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
                     table.insert(transitionTable, transition , self.FALSE)
                 else
@@ -282,7 +282,7 @@ function ssGrowthManager:buildCanPlantData()
                         if transitionToCheck > 12 then
                             transitionToCheck = 1
                         end
-                        
+
                         currentGrowthStage = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
                         if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
                             break
@@ -312,14 +312,14 @@ end
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage
     --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage)
-    
-    if self.growthData[transitionToCheck][fruitName] ~= nil then 
+
+    if self.growthData[transitionToCheck][fruitName] ~= nil then
         --setGrowthState
         if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
             and self.growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
             if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
                 newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
-            end   
+            end
         end
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
         if self.growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
@@ -333,7 +333,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
                 if currentGrowthStage == normalGrowthState then
                     newGrowthState = newGrowthState + 1
                 end
-            end              
+            end
         end
         --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
         if self.growthData[transitionToCheck][fruitName].extraGrowthMinState ~= nil
@@ -341,7 +341,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
                 and self.growthData[transitionToCheck][fruitName].extraGrowthFactor ~= nil then
             local extraGrowthMinState = self.growthData[transitionToCheck][fruitName].extraGrowthMinState
             local extraGrowthMaxState = self.growthData[transitionToCheck][fruitName].extraGrowthMaxState
-            
+
             if currentGrowthStage >= extraGrowthMinState and currentGrowthStage <= extraGrowthMaxState then
                 newGrowthState = newGrowthState + self.growthData[transitionToCheck][fruitName].extraGrowthFactor
             end
