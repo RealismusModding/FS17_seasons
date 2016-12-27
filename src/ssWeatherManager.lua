@@ -316,17 +316,23 @@ function ssWeatherManager:hourChanged()
 end
 
 -- function to output the temperature during the day and night
-function ssWeatherManager:diurnalTemp(hour, minute)
+function ssWeatherManager:diurnalTemp(hour, minute,lowTemp,highTemp,lowTempNext)
     -- need to have the high temp of the previous day
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
 
-    prevDayTemp = self.forecast[1].highTemp -- not completely correct, but instead of storing the temp of the previous day
+    if lowTemp == nil or highTemp == nil or lowTempNext == nil then
+        local lowTemp = self.forecast[1].lowTemp
+        local highTemp = self.forecast[1].highTemp
+        local lowTempNext = self.forecast[2].lowTemp
+    end
+
+    highTempPrev = self.forecast[1].highTemp -- not completely correct, but instead of storing the temp of the previous day
 
     local currentTime = hour*60 + minute
 
     if currentTime < 420 then
-        currentTemp = (math.cos(((currentTime + 540) / 960) * math.pi / 2)) ^ 3 * (prevDayTemp - self.forecast[1].lowTemp) + self.forecast[1].lowTemp
+        currentTemp = (math.cos(((currentTime + 540) / 960) * math.pi / 2)) ^ 3 * (highTempPrev - self.forecast[1].lowTemp) + self.forecast[1].lowTemp
     elseif currentTime > 900 then
         currentTemp = (math.cos(((currentTime - 900) / 960) * math.pi / 2)) ^ 3 * (self.forecast[1].highTemp - self.forecast[2].lowTemp) + self.forecast[1].lowTemp
     else
@@ -444,10 +450,15 @@ function ssWeatherManager:switchRainHail()
     for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
              if (rain.startDay == fCast.day) then
-                if fCast.lowTemp < -1 and rain.rainTypeId == 'rain' then
+                local hour = math.floor(rain.startDayTime/60)
+                local minute = math.floor(rain.startDayTime-hour*60)
+
+                local tempStartRain = self:diurnalTemp(hour, minute, fCast.lowTemp,fCast.highTemp,fCast.lowTemp)
+
+                if tempStartRain < -1 and rain.rainTypeId == 'rain' then
                     g_currentMission.environment.rains[index].rainTypeId = 'hail'
                     self.forecast[jndex].weatherState = 'hail'
-                elseif fCast.lowTemp >= -1 and rain.rainTypeId == 'hail' then
+                elseif tempStartRain >= -1 and rain.rainTypeId == 'hail' then
                     g_currentMission.environment.rains[index].rainTypeId = 'rain'
                     self.forecast[jndex].weatherState = 'rain'
                 end
