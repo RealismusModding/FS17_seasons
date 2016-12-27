@@ -104,7 +104,7 @@ end
 
 function ssWeatherForecast:draw()
     if not g_currentMission.fieldJobManager:isFieldJobActive()
-        and g_currentMission.showWeatherForecast then
+        and g_currentMission.showHudEnv then
 
         -- Set text color and alignment
         setTextColor(1, 1, 1, .9)
