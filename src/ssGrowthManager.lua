@@ -65,12 +65,7 @@ function ssGrowthManager:loadMap(name)
         g_currentMission:setPlantGrowthRateLocked(true)
         ssSeasonsMod:addGrowthStageChangeListener(self)
 
-        if self.doResetGrowth == true then
-            self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-            self.doGrowthTransition = true
-            self.growthManagerEnabled = true
-            logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
-        end
+        
 
         self:buildCanPlantData()
 
@@ -180,9 +175,17 @@ end
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then -- redundant but heyho
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
-        log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
-        self.currentGrowthTransitionPeriod = growthTransition
-        self.doGrowthTransition = true
+
+        if self.doResetGrowth == true and growthTransition == 1 then
+            self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+            self.doGrowthTransition = true
+            self.growthManagerEnabled = true
+            logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
+        else
+            log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
+            self.currentGrowthTransitionPeriod = growthTransition
+            self.doGrowthTransition = true
+        end
     end
 end
 
