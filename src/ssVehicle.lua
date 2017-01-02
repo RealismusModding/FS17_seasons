@@ -258,32 +258,38 @@ function ssVehicle:getSellPrice(superFunc)
         lifetime = Utils.getNoNil(factors.lifetime, lifetime)
     end
 
-    local p1, p2, p3, p4
+    local p1, p2, p3, p4, depFac, brandFac
 
     if category == "tractors" then
         p1 = -0.015
         p2 = 0.42
         p3 = -4
         p4 = 85
+        depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
+        brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep),1.1)
+
     elseif category == "combines" then
-        p1 = -0.015
-        p2 = 0.42
-        p3 = -4
-        p4 = 85
+        p1 = 81
+        p2 = -0.105
+        depFac = (p1 * math.exp(p2 * age)) / 100
+        brandFac = 1
+
     else
         p1 = -0.015
         p2 = 0.42
         p3 = -4
         p4 = 85
+        depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
+        brandFac = 1
+
     end
 
-    local depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
     local sellPrice
 
     if age == 0 and operatingTime < 2 then
         sellPrice = price
     else
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * math.min(math.sqrt(power / storeItem.dailyUpkeep),1.1), 1000)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * brandFac, 1000)
     end
 
     return sellPrice
