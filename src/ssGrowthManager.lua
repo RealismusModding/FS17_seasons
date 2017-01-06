@@ -129,7 +129,7 @@ function ssGrowthManager:update(dt)
         --handling new unknown fruits
         if self.defaultFruits[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
-            fruitName = "default"
+            fruitName = "barley"
         end
 
         if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
