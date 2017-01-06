@@ -10,6 +10,7 @@ ssVehicle.LIFETIME_FACTOR = 5
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
+ssVehicle.SERVICE_INTERVAL = 30
 
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
@@ -49,7 +50,7 @@ function ssVehicle:update(dt)
 end
 
 function ssVehicle:dayChanged()
-    self:resetOperatingTimeAndDirt()
+    --self:resetOperatingTimeAndDirt()
 end
 
 function ssVehicle:installRepairableSpecialization()
@@ -184,7 +185,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
 
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
-    if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason or isRepair then
+    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or isRepair then
         maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
@@ -227,7 +228,9 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     local difficultyMultiplier = 1 -- FIXME * difficulty mutliplier
     local workCosts = atDealer and 45 or 35
 
-    return (costs + workCosts) * dealerMultiplier * difficultyMultiplier
+    local overdueFactor = self:calculateOverdueFactor(vehicle) ^ 2
+
+    return (costs + workCosts) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
 function ssVehicle:getDailyUpKeep(superFunc)
@@ -238,16 +241,33 @@ function ssVehicle:getDailyUpKeep(superFunc)
         return superFunc(self)
     end
 
+    local overdueFactor = ssVehicle:calculateOverdueFactor(self)
+
     -- This is for visually in the display
     local costs = ssVehicle:taxInterestCost(self, storeItem)
-    costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false)
+    costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false)) * overdueFactor
 
     return costs
+end
+
+function ssVehicle:calculateOverdueFactor(vehicle)
+    local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay  
+
+    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
+        overdueFactor = math.ceil(math.max(daysSinceLastRepair/(ssSeasonsUtil.daysInSeason * 2), math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
+    else
+        overdueFactor = 1
+    end
+
+    return overdueFactor
 end
 
 function ssVehicle:getSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local price = storeItem.price
+    local minSellPrice = storeItem.price * 0.03
+    local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
     local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.SEASONS_IN_YEAR) -- year
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
@@ -258,7 +278,7 @@ function ssVehicle:getSellPrice(superFunc)
         lifetime = Utils.getNoNil(factors.lifetime, lifetime)
     end
 
-    local p1, p2, p3, p4, depFac, brandFac, minSellPrice
+    local p1, p2, p3, p4, depFac, brandFac
 
     if storeItem.category == "tractors" or storeItem.category == "wheelLoaders" or storeItem.category == "teleLoaders" or storeItem.category == "skidSteers" then
         p1 = -0.015
@@ -267,14 +287,12 @@ function ssVehicle:getSellPrice(superFunc)
         p4 = 85
         depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
         brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep),1.1)
-        minSellPrice = 1000
 
     elseif storeItem.category == "harvesters" or storeItem.category == "forageHarvesters" or storeItem.category == "potatoHarvesters" or storeItem.category == "beetHarvesters" then
         p1 = 81
         p2 = -0.105
         depFac = (p1 * math.exp(p2 * age)) / 100
         brandFac = 1
-        minSellPrice = 5000
 
     else
         p1 = -0.0125
@@ -283,16 +301,14 @@ function ssVehicle:getSellPrice(superFunc)
         p4 = 65
         depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
         brandFac = 1
-        minSellPrice = price * 0.05
 
     end
-
-    local sellPrice
 
     if age == 0 and operatingTime < 2 then
         sellPrice = price
     else
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * brandFac, minSellPrice)
+        local overdueFactor = ssVehicle:calculateOverdueFactor(self)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * brandFac / (overdueFactor ^ 0.1), minSellPrice)
     end
 
     return sellPrice
@@ -317,7 +333,7 @@ end
 -- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle:getSpecValueAge(superFunc, vehicle)
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil then
-        return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay)
+        return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil.daysInSeason * 2 - (ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay))
     elseif vehicle ~= nil and vehicle.age ~= nil then
         return "-"
     end
@@ -387,5 +403,53 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000)
         end
     end
+
 end
 
+function ssVehicle:snowTracks(self,snowDepth)
+    local snowDepth = ssWeatherManager:getSnowHeight()
+    local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.4
+    local snowLayers = math.modf(targetSnowDepth/ ssSnow.LAYER_HEIGHT)
+
+    -- partly from Crop destruction mod
+    for _, wheel in pairs(self.wheels) do
+
+        local width = 0.35 * wheel.width;
+        local length = math.min(0.2, 0.35 * wheel.width);
+        local radius = wheel.radius
+
+        local x0,y0,z0;
+        local x1,y1,z1;
+        local x2,y2,z2;
+
+        local sinkage = 0.7 * targetSnowDepth
+
+        wheel.tireGroundFrictionCoeff = 0.1
+
+        if wheel.repr == wheel.driveNode then
+            x0,y0,z0 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ - length);
+            x1,y1,z1 = localToWorld(wheel.node, wheel.positionX - width, wheel.positionY, wheel.positionZ - length);
+            x2,y2,z2 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ + length);
+        else
+            local x,_,z = localToLocal(wheel.driveNode, wheel.repr, 0,0,0);
+            x0,y0,z0 = localToWorld(wheel.repr, x + width, 0, z - length);
+            x1,y1,z1 = localToWorld(wheel.repr, x - width, 0, z - length);
+            x2,y2,z2 = localToWorld(wheel.repr, x + width, 0, z + length);
+        end
+
+        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+        local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
+        local underTireSnowLayers = density / area
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+
+        if (targetSnowDepth - sinkage) > ssSnow.LAYER_HEIGHT and snowLayers == underTireSnowLayers then
+            newSnowDepth = math.modf(sinkage / ssSnow.LAYER_HEIGHT)
+            ssSnow:removeSnow(x0,z0, x1,z1, x2,z2, newSnowDepth)
+        end
+
+     end
+
+end

@@ -133,12 +133,29 @@ function ssRepairable:update(dt)
     end
 
     if self.isEntered then
-        if daysSinceLastRepair >= ssSeasonsUtil.daysInSeason then
+        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
             g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
         else
-            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), ssSeasonsUtil.daysInSeason - daysSinceLastRepair))
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceInterval, ssSeasonsUtil.daysInSeason * 2 - daysSinceLastRepair))
         end
     end
+    
+    --math.random()
+    --local overdueFactor = ssVehicle:calculateOverdueFactor(self) 
+    --local p = 2 - overdueFactor
+
+    --if math.random() < p then
+    --    self:stopMotor()
+    --    g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_REPAIR"),2000)
+    --end
+
+    local snowDepth = ssWeatherManager:getSnowHeight()
+
+    if snowDepth > ssSnow.LAYER_HEIGHT then
+        ssVehicle:snowTracks(self)
+    end
+
 end
 
 function ssRepairable:repairUpdate(dt)
