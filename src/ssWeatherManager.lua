@@ -192,6 +192,21 @@ function ssWeatherManager:writeStream(streamId, connection)
 end
 
 function ssWeatherManager:update(dt)
+    local currentRain = g_currentMission.environment.currentRain
+  
+    if currentRain ~= nil then
+        local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
+
+        if currentTemp > 1 and currentRain.rainTypeId == 'hail' then
+            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, false)
+            g_currentMission.environment.currentRain.rainTypeId = 'rain'
+            setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
+        elseif currentTemp < 0 and currentRain.rainTypeId == 'rain' then
+            setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
+            g_currentMission.environment.currentRain.rainTypeId = 'hail'
+            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, true)
+        end
+    end
 end
 
 function ssWeatherManager:draw()

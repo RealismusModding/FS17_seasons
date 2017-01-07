@@ -84,7 +84,7 @@ end
 -- Jos: Don't ask me why, but putting them inside Repairable breaks all, even with
 -- callSpecializationsFunction...
 local function getIsPlayerInRange(self, distance, player)
-    if self.rootNode ~= 0 then
+    if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         if player == nil then
             -- log(table.getn(g_currentMission.players))
             for _, player in pairs(g_currentMission.players) do
@@ -141,14 +141,19 @@ function ssRepairable:update(dt)
         end
     end
     
-    --math.random()
-    --local overdueFactor = ssVehicle:calculateOverdueFactor(self) 
-    --local p = 2 - overdueFactor
+    if self.isMotorStarted then
+        math.random()
+        local overdueFactor = ssVehicle:calculateOverdueFactor(self) 
+        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)  --never less than 20% chance every minute for a breakdown
 
-    --if math.random() < p then
-    --    self:stopMotor()
-    --    g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_REPAIR"),2000)
-    --end
+        if math.random() > p then
+            self:stopMotor()
+
+            if self.isEntered then
+                g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_REPAIR"),2000)
+            end
+        end
+    end
 
     local snowDepth = ssWeatherManager:getSnowHeight()
 
