@@ -68,7 +68,12 @@ function ssAnimals:seasonChanged()
     for _, typ in pairs(types) do
         local desc = g_currentMission.husbandries[typ].animalDesc
 
-        desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0)
+        local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / ssSeasonsUtil.daysInSeason
+        if birthRatePerDay ~= 0 then
+            desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*ssSeasonsUtil.daysInSeason))
+        else
+            desc.birthRatePerDay = birthRatePerDay 
+        end
         desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
         desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
         desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
