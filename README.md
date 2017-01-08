@@ -2,8 +2,18 @@
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux. 
 
-## Pull Requests
+## Publishing
+Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site. 
+The code is open for your own use, but give credit where due.
+Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
+This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
 
+## Forking the code
+You are allowed to fork this repository, apply changes and use those for private use. 
+You are not allowed to distribute these changes yourself. 
+Please open a pull request to allow for merging back your adjustments. (See also 'Publishing')
+
+## Pull Requests
 Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations. 
 
 ## Features
@@ -35,6 +45,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 - Keep your machine clean to lower daily maintenance costs
 - Machine not used? Pay less
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
+- If you don't maintain your vehicle it may break down
 
 ### Finance
 - Loan cap is set to 70% of your total owned land value
@@ -53,6 +64,5 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
 
 ## Coding style
-
 - End your lines with \n (LF), not CRLF
 - Use spaces, not tabs
