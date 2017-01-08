@@ -1,20 +1,20 @@
 # FS17 Seasons
 
-This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux. 
+This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
 ## Publishing
-Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site. 
+Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
 The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
 
 ## Forking the code
-You are allowed to fork this repository, apply changes and use those for private use. 
-You are not allowed to distribute these changes yourself. 
+You are allowed to fork this repository, apply changes and use those for private use.
+You are not allowed to distribute these changes yourself.
 Please open a pull request to allow for merging back your adjustments. (See also 'Publishing')
 
 ## Pull Requests
-Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations. 
+Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
 
 ## Features
 
@@ -26,6 +26,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
   - Sunny in summer
   - Snow and hail in winter
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
+- Pedestrians do not spawn in the Winter.
 
 ### Weather forecast
 - 7 day weather forecast
@@ -36,7 +37,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 - Grass is knocked back to stage 2 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
 - Growth is adjust to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
-- Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year. 
+- Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
 
 ### Maintenance
