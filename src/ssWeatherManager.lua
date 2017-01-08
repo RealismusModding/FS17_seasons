@@ -61,16 +61,6 @@ function ssWeatherManager:load(savegame, key)
         i = i + 1
     end
 
-    if g_currentMission:getIsServer() then
-        if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_currentMission.environment.currentDay then
-            self:loadTemperature()
-            self:loadRain()
-            self:buildForecast()
-        end
-    end    
-    
-    self:owRaintable()
-
 end
 
 function ssWeatherManager:save(savegame, key)
@@ -120,13 +110,16 @@ function ssWeatherManager:loadMap(name)
     self:loadTemperature()
     self:loadRain()
 
-    if g_currentMission:getIsServer() then
+    if g_currentMission:getIsServer() or self.forecast[1].day ~= g_currentMission.environment.currentDay then
         if table.getn(self.forecast) == 0 then
             self:buildForecast()
         end
         --self.snowDepth = -- Enable read from savegame
         --self.rains = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
     end
+
+    self:owRaintable()
+
 end
 
 function ssWeatherManager:deleteMap()

@@ -10,9 +10,6 @@ ssTime = {}
 function ssTime:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
 
-    if g_currentMission:getIsServer() then
-        self:setup()
-    end
 end
 
 function ssTime:save(savegame, key)
@@ -22,9 +19,9 @@ end
 function ssTime:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
-    --if g_currentMission:getIsServer() then
-    --    self:setup()
-    --end
+    if g_currentMission:getIsServer() then
+        self:setup()
+    end
 end
 
 function ssTime:setup()
