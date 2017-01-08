@@ -22,7 +22,7 @@ end
 function ssSnow:loadMap(name)
     -- Register Snow as a fill and Tip type
     FillUtil.registerFillType("snow",  g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0,  false,  "dataS2/menu/hud/fillTypes/hud_fill_straw.png", "dataS2/menu/hud/fillTypes/hud_fill_straw_sml.png", 0.0002* 0.5, math.rad(50))
-    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/snow_normal.dds", ssSeasonsMod.modDir .. "resources/snowDistance_diffuse.dds")
+    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, ssSeasonsMod.modDir .. "resources/environment/snow_diffuse.dds", ssSeasonsMod.modDir .. "resources/environment/snow_normal.dds", ssSeasonsMod.modDir .. "resources/environment/snowDistance_diffuse.dds")
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addHourChangeListener(self)

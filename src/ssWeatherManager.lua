@@ -105,7 +105,11 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment.maxRainInterval = 1
     g_currentMission.environment.maxRainDuration = 30 * 60 * 60 * 1000
     g_currentMission.environment.rainForecastDays = self.forecastLength
-    g_currentMission.environment.autoRain = 'false'
+    g_currentMission.environment.autoRain = false
+
+    -- Load a new rain
+    g_currentMission.environment.RAINTYPE_SNOW = "snow"
+    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, ssSeasonsMod.modDir .. "resources/environment/snow.i3d", false, 3, 7);
 
     self:loadTemperature()
     self:loadRain()
@@ -194,7 +198,7 @@ end
 
 function ssWeatherManager:update(dt)
     local currentRain = g_currentMission.environment.currentRain
-  
+
     if currentRain ~= nil then
         local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
 
@@ -303,7 +307,7 @@ function ssWeatherManager:updateForecast()
 
     self:owRaintable()
     self:switchRainHail()
-    
+
     self:calculateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
@@ -470,7 +474,7 @@ function ssWeatherManager:getSnowHeight()
     return self.snowDepth
 end
 
-function ssWeatherManager:switchRainHail()  
+function ssWeatherManager:switchRainHail()
     for index, rain in ipairs(g_currentMission.environment.rains) do
         --log('--- New day in g_currentMission.environment.rains table ---')
         for jndex, fCast in ipairs(self.forecast) do
