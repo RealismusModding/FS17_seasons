@@ -61,6 +61,14 @@ function ssWeatherManager:load(savegame, key)
         i = i + 1
     end
 
+    if g_currentMission:getIsServer() then
+        if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_currentMission.environment.currentDay then
+            self:loadTemperature()
+            self:loadRain()
+            self:buildForecast()
+        end
+    end    
+    
     self:owRaintable()
 
 end
