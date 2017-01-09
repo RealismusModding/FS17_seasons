@@ -70,12 +70,16 @@ if modItem.isDirectory then
 
         source(srcFile)
     end
+
+    source(srcFolder .. "ssSeasonsMenu.lua")
 else
     for i = 1, #g_modClasses do
         logInfo(string.format("Loading script: %s (v%s)", g_modClasses[i], ssSeasonsMod.version))
 
         source(srcFolder..g_modClasses[i] .. ".lua")
     end
+
+    source(srcFolder .. "ssSeasonsMenu.lua")
 
     ssSeasonsMod.version = ssSeasonsMod.version .. " - " .. modItem.fileHash
 end
@@ -98,6 +102,10 @@ function ssSeasonsMod.loadMapFinished(...)
     end
 
     ssSeasonsMod:loadFromXML()
+
+    -- Load the GUI
+    g_seasonsMenu = ssSeasonsMenu:new()
+    g_gui:loadGui(ssSeasonsMod.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", g_seasonsMenu)
 
     -- Enable the mod
     ssSeasonsMod.enabled = true
@@ -278,63 +286,6 @@ local function isArray(table)
     end
 
     return true, max
-end
-
-function jsonEncode(t, indent, cache)
-    if indent == nil then indent = "" end
-    local newIndent = indent .. "  "
-
-    if cache == nil then cache = {} end
-
-
-    if (type(t) == "table") then
-        -- Assume everything is an object (will change later, see if it is an arrya)
-
-        for _, value in pairs(cache) do
-            if value == t then
-                return "\"[Cyclic]\""
-            end
-        end
-        table.insert(cache, 1, t)
-
-        if isArray(t) then
-            local str = "["
-            local first = true
-
-            for pos, val in pairs(t) do
-                if not first then
-                    str = str .. ","
-                end
-                first = false
-
-                str = str .. "\n" .. newIndent .. jsonEncode(val, newIndent, cache)
-            end
-
-            return str .. "\n" .. indent .. "]"
-        else
-            local str = "{"
-            local first = true
-
-            for pos, val in pairs(t) do
-                if not first then
-                    str = str .. ","
-                end
-                first = false
-
-                str = str .. "\n" .. newIndent .. jsonEncode(pos, newIndent, cache) .. ": " .. jsonEncode(val, newIndent, cache)
-            end
-
-            return str .. "\n" .. indent .. "}"
-        end
-    elseif type(t) == "string" then
-        return "\"" .. t .. "\""
-    elseif type(t) == "function" then
-        return "\"Function(){}\""
-    else
-        return tostring(t)
-    end
-
-    return nil
 end
 
 function tprint(tbl, indent)

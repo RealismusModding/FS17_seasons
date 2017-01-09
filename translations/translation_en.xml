@@ -52,5 +52,19 @@
         <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
+
+        <text name="ui_pageOverview" text="Overview" />
+        <text name="ui_pageSettings" text="Settings" />
+        <text name="ui_pageHelp" text="Help" />
+
+        <text name="ui_helpCategory_1" text="Seasons" />
+        <text name="ui_helpCategory_2" text="Snow" />
+        <text name="ui_helpCategory_3" text="Crops" />
+        <text name="ui_helpCategory_4" text="Animals" />
+
+        <text name="ui_helpTitle_1_1" text="1.1" />
+        <text name="ui_helpTitle_2_1" text="2.1" />
+        <text name="ui_helpTitle_3_1" text="3.1" />
+        <text name="ui_helpTitle_4_1" text="4.1" />
     </texts>
 </l10n>

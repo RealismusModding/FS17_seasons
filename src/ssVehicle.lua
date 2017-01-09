@@ -27,6 +27,8 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
+    InGameMenu.onCreateGarageVehicleAge = Utils.overwrittenFunction(InGameMenu.onCreateGarageVehicleAge, ssVehicle.inGameMenuOnCreateGarageVehicleAge)
+
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
     self:installRepairableSpecialization()
@@ -261,7 +263,7 @@ end
 
 function ssVehicle:calculateOverdueFactor(vehicle)
     local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay  
+    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
 
     if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
         overdueFactor = math.ceil(math.max(daysSinceLastRepair/(ssSeasonsUtil.daysInSeason * 2), math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
@@ -460,7 +462,14 @@ function ssVehicle:snowTracks(self,snowDepth)
             newSnowDepth = math.modf(sinkage / ssSnow.LAYER_HEIGHT)
             ssSnow:removeSnow(x0,z0, x1,z1, x2,z2, newSnowDepth)
         end
-
      end
+end
 
+function ssVehicle.inGameMenuOnCreateGarageVehicleAge(self, element)
+    if self.currentVehicle ~= nil then
+        element:setText("Halo")--Vehicle.getSpecValueAge(nil, self.currentVehicle))
+        -- if self.currentVehicle:getSellPrice() < self.currentVehicle.price*0.3 then
+            element:applyProfile(element.profile.."Negative")
+        -- end
+    end
 end
