@@ -180,13 +180,13 @@ function ssSeasonsMenu:onFocusSettingsBox(element)
 end
 
 function ssSeasonsMenu:setTooltipText(text)
-    self.ssMenuTooltipBox:setText(text)
+    self.ssMenuTooltipBoxText:setText(text)
     self:updateTooltipBox(self.currentPageId)
 end
 
 -- Update whether the tooltip box is visible
 function ssSeasonsMenu:updateTooltipBox(pageId)
-    self.ssMenuTooltipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuHelpBoxText.text ~= "")
+    self.ssMenuTooltipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuTooltipBoxText.text ~= "")
 end
 
 ------------------------------------------
