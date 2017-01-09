@@ -26,7 +26,7 @@ function ssSnowTracks:update(dt)
     local snowDepth = ssWeatherManager:getSnowHeight()
 --self.lastSpeedReal ~= 0 and
     if  snowDepth > ssSnow.LAYER_HEIGHT then
-        snowTracks(self,dt)
+        self:tracks(self,dt)
     else
         for _, wheel in pairs(self.wheels) do
             setLinearDamping(wheel.node,0)
@@ -40,7 +40,7 @@ end
 function ssSnowTracks:draw()
 end
 
-local function snowTracks(self,dt)
+local function ssSnowTracks:tracks(self,dt)
     local snowDepth = ssWeatherManager:getSnowHeight()
     local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.4
     local snowLayers = math.modf(targetSnowDepth/ ssSnow.LAYER_HEIGHT)
