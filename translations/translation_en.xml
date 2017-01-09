@@ -53,9 +53,12 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
+        <!-- GUI -->
         <text name="ui_pageOverview" text="Overview" />
         <text name="ui_pageSettings" text="Settings" />
         <text name="ui_pageHelp" text="Help" />
+
+        <text name="tooltip_seasonLength" text="Set the season length" />
 
         <text name="ui_helpCategory_1" text="Seasons" />
         <text name="ui_helpCategory_2" text="Snow" />

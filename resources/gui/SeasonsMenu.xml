@@ -38,7 +38,7 @@
                 <!-- Server settings -->
                 <GuiElement type="empty" profile="page" name="ssMenuServerSettings" onCreate="onCreatePageServerSettings">
                     <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickAutoHelp" onCreate="onCreateAutoHelp" toolTip="$l10n_toolTip_autoHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="600" focusChangeTop="1" focusChangeBottom="601">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickAutoHelp" onCreate="onCreateAutoHelp" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="600" focusChangeTop="1" focusChangeBottom="601">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -94,9 +94,9 @@
             </GuiElement>
 
             <!-- Tool tips -->
-            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ssMenuTooltipBox" visible="false">
+            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ssMenuToolTipBox" visible="false">
                 <GuiElement type="bitmap" profile="ingameMenuHelpRowIcon" />
-                <GuiElement type="text" profile="ingameMenuHelpRowText" id="ssMenuTooltipBoxText" text=""/>
+                <GuiElement type="text" profile="ingameMenuHelpRowText" id="ssMenuToolTipBoxText" text=""/>
             </GuiElement>
 
             <GuiElement type="flowLayout" profile="ingameMenuPageStateBg" id="pageStateBox">

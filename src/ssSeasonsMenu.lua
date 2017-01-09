@@ -122,7 +122,7 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     end
     ]]
 
-    self:updateTooltipBox(self.currentPageId)
+    self:updateToolTipBox(self.currentPageId)
 end
 
 -- Update the tiny balls at the bottom to indicate the current page
@@ -170,23 +170,23 @@ end
 
 -- Focus removed: clear the tooltip
 function ssSeasonsMenu:onLeaveSettingsBox(element)
-    self:setTooltipText("")
+    self:setToolTipText("")
 end
 
 function ssSeasonsMenu:onFocusSettingsBox(element)
     if element.toolTip ~= nil then
-        self:setTooltipText(element.toolTip)
+        self:setToolTipText(element.toolTip)
     end
 end
 
-function ssSeasonsMenu:setTooltipText(text)
-    self.ssMenuTooltipBoxText:setText(text)
-    self:updateTooltipBox(self.currentPageId)
+function ssSeasonsMenu:setToolTipText(text)
+    self.ssMenuToolTipBoxText:setText(ssLang.getText(text, text))
+    self:updateToolTipBox(self.currentPageId)
 end
 
 -- Update whether the tooltip box is visible
-function ssSeasonsMenu:updateTooltipBox(pageId)
-    self.ssMenuTooltipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuTooltipBoxText.text ~= "")
+function ssSeasonsMenu:updateToolTipBox(pageId)
+    self.ssMenuToolTipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuToolTipBoxText.text ~= "")
 end
 
 ------------------------------------------
