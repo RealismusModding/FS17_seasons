@@ -122,7 +122,7 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     end
     ]]
 
-    self:updateMenuHelpBox(self.currentPageId)
+    self:updateTooltipBox(self.currentPageId)
 end
 
 -- Update the tiny balls at the bottom to indicate the current page
@@ -164,24 +164,29 @@ function ssSeasonsMenu:update(dt)
     self.alreadyClosed = false
 end
 
+------------------------------------------
+-- TOOLTIP
+------------------------------------------
+
+-- Focus removed: clear the tooltip
 function ssSeasonsMenu:onLeaveSettingsBox(element)
-    self:setHelpBoxText("HELLO WORLD")
+    self:setTooltipText("")
 end
 
 function ssSeasonsMenu:onFocusSettingsBox(element)
-    self:setHelpBoxText("HELLO WORLD2")
-    -- if element.toolTip ~= nil then
-    --     self:setHelpBoxText(element.toolTip)
-    -- end
+    if element.toolTip ~= nil then
+        self:setTooltipText(element.toolTip)
+    end
 end
 
-function ssSeasonsMenu:setHelpBoxText(text)
-    self.ssMenuHelpBoxText:setText(text)
-    self:updateMenuHelpBox(self.currentPageId)
+function ssSeasonsMenu:setTooltipText(text)
+    self.ssMenuTooltipBox:setText(text)
+    self:updateTooltipBox(self.currentPageId)
 end
 
-function ssSeasonsMenu:updateMenuHelpBox(pageId)
-    self.ssMenuHelpBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuHelpBoxText.text ~= "")
+-- Update whether the tooltip box is visible
+function ssSeasonsMenu:updateTooltipBox(pageId)
+    self.ssMenuTooltipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuHelpBoxText.text ~= "")
 end
 
 ------------------------------------------

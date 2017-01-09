@@ -94,7 +94,7 @@
             </GuiElement>
 
             <!-- Tool tips -->
-            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ssMenuHelpBox" visible="false">
+            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ssMenuTooltipBox" visible="false">
                 <GuiElement type="bitmap" profile="ingameMenuHelpRowIcon" />
                 <GuiElement type="text" profile="ingameMenuHelpRowText" id="ssMenuHelpBoxText" text=""/>
             </GuiElement>
