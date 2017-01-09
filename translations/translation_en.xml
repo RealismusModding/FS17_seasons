@@ -57,8 +57,17 @@
         <text name="ui_pageOverview" text="Overview" />
         <text name="ui_pageSettings" text="Settings" />
         <text name="ui_pageHelp" text="Help" />
+        <text name="ui_buttonSave" text="Apply Settings" />
 
-        <text name="tooltip_seasonLength" text="Set the season length" />
+        <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons." />
+        <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season." />
+        <text name="tooltip_snow" text="Snow will fall in cold winters and block roads." />
+        <text name="tooltip_gm" text="Crops will grow with an advanced seasonal growth system. Warning: disabling might give unexpected results." />
+
+        <text name="setting_seasonIntros" text="Season introductions" />
+        <text name="setting_seasonLength" text="Season length" />
+        <text name="setting_snow" text="Snow" />
+        <text name="setting_gm" text="Seasonal growth" />
 
         <text name="ui_helpCategory_1" text="Seasons" />
         <text name="ui_helpCategory_2" text="Snow" />

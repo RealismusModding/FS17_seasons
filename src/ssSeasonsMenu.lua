@@ -6,8 +6,6 @@
 
 ssSeasonsMenu = {}
 
-ssSeasonsMenu.PAGE_NEXT_ID = 0
-
 local ssSeasonsMenu_mt = Class(ssSeasonsMenu, ScreenElement)
 
 function ssSeasonsMenu:new(target, custom_mt)
@@ -18,6 +16,8 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.currentPageId = 1
     self.currentPageMappingIndex = 1
+
+    self.settingElements = {}
 
     ------
     self.testValue = 1
@@ -53,6 +53,10 @@ function ssSeasonsMenu:onOpen(element)
     -- settings
     self:updateGameSettings()
 
+    -- Todo: get these values from the XML file. This is messy
+    local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
+    self.pageSelector:setTexts(titles)
+
     self.pageSelector:setState(self.currentPageMappingIndex, true)
 end
 
@@ -82,45 +86,26 @@ end
 
 -- Update the visible pages
 function ssSeasonsMenu:updatePages()
-    if g_currentMission ~= nil then
-        -- Only needs MP login when this is a MP session, this is not the server and the user is not logged in
-        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser and g_currentMission.connectedToDedicatedServer
-
-        -- Has access to the server page if this is SP, or MP and this is server or master user
-        local hasServerAccess = not g_currentMission.missionDynamicInfo.isMultiplayer or (g_currentMission.missionDynamicInfo.isMultiplayer and (g_currentMission:getIsServer() or g_currentMission.isMasterUser))
-
-        self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_MULTIPLAYER_LOGIN, not needsMPLogin)
-        self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_SERVER_SETTINGS, not hasServerAccess)
-    end
 end
 
 -- Called when the current page has changed.
 -- In this code, the focus is updated for the newly visible page
 function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
-    -- if self.currentPageId == ssSeasonsMenu.PAGE_MULTIPLAYER_SETTINGS then
-    --     self:saveMpSettings()
-    -- end
-
     self.currentPageId = pageId
     self.currentPageMappingIndex = pageMappingIndex
     self:updatePageStates()
 
---[[
-    if pageId == ssSeasonsMenu.PAGE_MAP_OVERVIEW then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("10"), FocusManager:getElementById("41_1"))
-    elseif pageId == ssSeasonsMenu.PAGE_GAME_SETTINGS_GENERAL then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("600"), FocusManager:getElementById("616"))
-    elseif pageId == ssSeasonsMenu.PAGE_GAME_SETTINGS_GAME then
-    elseif pageId == ssSeasonsMenu.PAGE_HELP_LINE then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("800"), FocusManager:getElementById("800"))
-    elseif pageId == ssSeasonsMenu.PAGE_MULTIPLAYER_LOGIN then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("900"), FocusManager:getElementById("900"))
-    elseif pageId == ssSeasonsMenu.PAGE_MULTIPLAYER_SETTINGS then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("1000"), FocusManager:getElementById("1011"))
+    self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
+
+    if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
+        -- self:setNavButtonsFocusChange(FocusManager:getElementById("10"), FocusManager:getElementById("41_1"))
+    elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
+        self:setNavButtonsFocusChange(FocusManager:getElementById("200"), FocusManager:getElementById("221"))
+    elseif pageId == ssSeasonsMenu.PAGE_HELP then
+        -- self:setNavButtonsFocusChange(FocusManager:getElementById("800"), FocusManager:getElementById("800"))
     else
         self:setNavButtonsFocusChange(nil, nil)
     end
-    ]]
 
     self:updateToolTipBox(self.currentPageId)
 end
@@ -143,7 +128,7 @@ end
 
 -- Update the layout with titles
 function ssSeasonsMenu:setPageStates()
-    for i=#self.pageStateBox.elements, 1, -1 do
+    for i = #self.pageStateBox.elements, 1, -1 do
         self.pageStateBox.elements[i]:delete()
     end
 
@@ -162,6 +147,20 @@ function ssSeasonsMenu:update(dt)
     ssSeasonsMenu:superClass().update(self, dt)
 
     self.alreadyClosed = false
+end
+
+function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
+    if targetElementTop ~= nil and targetElementBottom ~= nil then
+        local buttonBack = FocusManager:getElementById("100")
+        local pageSelector = FocusManager:getElementById("1")
+        buttonBack.focusChangeData[FocusManager.TOP] = targetElementBottom.focusId
+        pageSelector.focusChangeData[FocusManager.BOTTOM] = targetElementTop.focusId
+    end
+
+    local focusElement = FocusManager:getFocusedElement()
+
+    FocusManager:unsetFocus(focusElement)
+    FocusManager:setFocus(focusElement)
 end
 
 ------------------------------------------
@@ -186,11 +185,11 @@ end
 
 -- Update whether the tooltip box is visible
 function ssSeasonsMenu:updateToolTipBox(pageId)
-    self.ssMenuToolTipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SERVER_SETTINGS or pageId == ssSeasonsMenu.PAGE_CLIENT_SETTINGS) and self.ssMenuToolTipBoxText.text ~= "")
+    self.ssMenuToolTipBox:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS and self.ssMenuToolTipBoxText.text ~= "")
 end
 
 ------------------------------------------
--- OVERVIEW
+-- OVERVIEW PAGE
 ------------------------------------------
 
 function ssSeasonsMenu:onCreatePageOverview(element)
@@ -198,11 +197,25 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 end
 
 ------------------------------------------
--- MULTIPLAYER LOGIN
+-- MULTIPLAYER LOGIN ELEMENT
 ------------------------------------------
 
-function ssSeasonsMenu:onCreatePageMultiplayerLogin(element)
-    ssSeasonsMenu.PAGE_MULTIPLAYER_LOGIN = self.pagingElement:getPageIdByElement(element)
+function ssSeasonsMenu:onCreateMultiplayerLogin(element)
+    self:updateServerSettingsVisibility()
+end
+
+function ssSeasonsMenu:updateServerSettingsVisibility()
+    if g_currentMission ~= nil then
+        -- Only needs MP login when this is a MP session, this is not the server and the user is not logged in
+        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser and g_currentMission.connectedToDedicatedServer
+
+        -- Has access to the server page if this is SP, or MP and this is server or master user
+        local hasServerAccess = not g_currentMission.missionDynamicInfo.isMultiplayer or (g_currentMission.missionDynamicInfo.isMultiplayer and (g_currentMission:getIsServer() or g_currentMission.isMasterUser))
+
+        self.multiplayerLogin:setVisible(needsMPLogin)
+        self.settingsColumn2:setVisible(not needsMPLogin)
+        self.settingsColumn3:setVisible(not needsMPLogin)
+    end
 end
 
 function ssSeasonsMenu:onClickMultiplayerLogin(element)
@@ -214,42 +227,89 @@ function ssSeasonsMenu:onAdminPassword(password)
 end
 
 function ssSeasonsMenu:onAdminLoginSuccess()
-    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_MULTIPLAYER_LOGIN, true)
-    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_SERVER_SETTINGS, not g_currentMission.missionDynamicInfo.isMultiplayer)
-
-    -- Hide and show menu again, reloading the pages
-    g_gui:showGui("")
-    g_gui:showGui("ssSeasonsMenu")
+    self:updateServerSettingsVisibility()
 end
 
 ------------------------------------------
--- CLIENT SETTINGS
+-- SETTINGS PAGE
 ------------------------------------------
-function ssSeasonsMenu:onCreatePageClientSettings(element)
-    ssSeasonsMenu.PAGE_CLIENT_SETTINGS = self.pagingElement:getPageIdByElement(element)
+
+function ssSeasonsMenu:onCreatePageSettings(element)
+    ssSeasonsMenu.PAGE_SETTINGS = self.pagingElement:getPageIdByElement(element)
 end
 
-------------------------------------------
--- SERVER SETTINGS
-------------------------------------------
-function ssSeasonsMenu:onCreatePageServerSettings(element)
-    ssSeasonsMenu.PAGE_SERVER_SETTINGS = self.pagingElement:getPageIdByElement(element)
+function ssSeasonsMenu:onCreateSaveButton(element)
+    element:setText(ssLang.getText("ui_buttonSave"))
 end
-
-------------------------------------------
--- ANY SETTINGS
-------------------------------------------
 
 function ssSeasonsMenu:updateGameSettings()
     if g_currentMission == nil then
         return
     end
 
-    self.helpTextElement:setIsChecked(true)
+    -- TODO: load actual data
+    self.settingElements.seasonIntros:setIsChecked(true)
+    self.settingElements.seasonLength:setState(3) -- 9
+    self.settingElements.snow:setIsChecked(true)
+    self.settingElements.gm:setIsChecked(true)
+end
+
+function ssSeasonsMenu:onClickSaveSettings()
+    log("Save settings")
+end
+
+function ssSeasonsMenu:replaceTexts(element)
+    for _, el in pairs(element.elements) do
+        if el.text ~= nil then
+           el.text = ssLang.getText(el.text, el.text)
+        end
+    end
+end
+
+------- SEASON INTORS on/off -------
+function ssSeasonsMenu:onCreateSeasonIntros(element)
+    self.settingElements.seasonIntros = element
+    self:replaceTexts(element)
+end
+
+function ssSeasonsMenu:onClickSeasonIntros(state)
+    log("Set value for INTROS: " .. tostring(self.settingElements.seasonIntros:getIsChecked()))
+end
+
+------- SEASON LENGTH -------
+function ssSeasonsMenu:onCreateSeasonLength(element)
+    self.settingElements.seasonLength = element
+    self:replaceTexts(element)
+
+    element:setTexts({"3", "6", "9", "12"})
+end
+
+function ssSeasonsMenu:onClickSeasonLength(state)
+    -- log("Set value for SEASON LENGTH: " .. tostring(self.settingElements.seasonLength:getIsChecked()))
+end
+
+------- SNOW on/off -------
+function ssSeasonsMenu:onCreateSnow(element)
+    self.settingElements.snow = element
+    self:replaceTexts(element)
+end
+
+function ssSeasonsMenu:onClickSnow(state)
+    log("Set value for SNOW: " .. tostring(self.settingElements.snow:getIsChecked()))
+end
+
+------- GM on/off -------
+function ssSeasonsMenu:onCreateGrowthManager(element)
+    self.settingElements.gm = element
+    self:replaceTexts(element)
+end
+
+function ssSeasonsMenu:onClickGrowthManager(state)
+    log("Set value for GM: " .. tostring(self.settingElements.gm:getIsChecked()))
 end
 
 ------------------------------------------
--- HELP
+-- HELP PAGE
 ------------------------------------------
 
 function ssSeasonsMenu:onCreatePageHelp(element)
@@ -327,16 +387,8 @@ end
 ]]
 
 ------------------------------------------
--- OTHERS
+-- OLD
 ------------------------------------------
-
-function ssSeasonsMenu:onCreateAutoHelp(element)
-    self.helpTextElement = element
-end
-
-function ssSeasonsMenu:onClickAutoHelp(state)
-    log("Set value for XX: " .. tostring(self.helpTextElement:getIsChecked()))
-end
 
 --[[function ssSeasonsMenu:onCreateMoneyUnit(element)
     self.moneyUnitElement = element

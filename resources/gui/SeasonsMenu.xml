@@ -14,51 +14,65 @@
 
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
                 <!-- Forecast + crop data -->
-                <GuiElement type="empty" profile="page" name="ssMenuOverview" onCreate="onCreatePageOverview">
+                <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
                 </GuiElement>
 
-                <!-- Client settings -->
-                <!--
-                    Turn on client tips
-                -->
-                <GuiElement type="empty" profile="page" name="ssMenuClientSettings" onCreate="onCreatePageClientSettings">
+                <!-- Settings -->
+                <GuiElement type="empty" profile="page" name="pageSettings" onCreate="onCreatePageSettings">
+                    <!-- Column 1 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
-                    </GuiElement>
-                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px">
-                    </GuiElement>
-                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px">
-                    </GuiElement>
-                 </GuiElement>
-
-                <!-- Multiplayer admin login -->
-                <GuiElement type="empty" profile="page" name="ssMenuMultiplayerLogin" onCreate="onCreatePageMultiplayerLogin">
-                    <GuiElement type="button" profile="multiplayerLogin" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="900" focusChangeTop="1" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1"/>
-                </GuiElement>
-
-                <!-- Server settings -->
-                <GuiElement type="empty" profile="page" name="ssMenuServerSettings" onCreate="onCreatePageServerSettings">
-                    <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickAutoHelp" onCreate="onCreateAutoHelp" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="600" focusChangeTop="1" focusChangeBottom="601">
+                        <!-- Season intros on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickSeasonIntros" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="220">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
-                            <GuiElement type="text"   profile="multiTextOptionTitle" text="$l10n_setting_helpWindow"/>
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_seasonIntros"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>
-                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px">
-                    </GuiElement>
-                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px">
-                    </GuiElement>
-                 </GuiElement>
 
-                <!--
-                    length of a season
-                    snow on/off
-                -->
+                    <!-- Column 2 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
+                        <!-- Season length -->
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onClick="onClickSeasonLength" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="200" focusChangeBottom="221">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_seasonLength"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Snow on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickSnow" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snow"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Growth manager on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickGrowthManager" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_gm"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+                    </GuiElement>
+
+                    <!-- Column 3 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" id="settingsColumn3">
+                    </GuiElement>
+
+                    <!-- Login column -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" onCreate="onCreateMultiplayerLogin" id="multiplayerLogin">
+                        <GuiElement type="button" profile="pcButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" position="0px 10.5px" iconUVs="585px 8px 29px 22px" iconSize="0px 0px" size="305px 36px" />
+                    </GuiElement>
+                </GuiElement>
 
                 <!-- Seasons Help -->
-                <GuiElement type="empty" profile="page" name="ssMenuHelp" onCreate="onCreatePageHelp">
+                <GuiElement type="empty" profile="page" name="pageHelp" onCreate="onCreatePageHelp">
                     <!-- Help categories -->
                     <GuiElement type="multiTextOption" profile="multiTextOption" position="2px 522px" size="346px 36px" onClick="onClickHelpLineCategorySelector" onCreate="onCreateHelpLineCategorySelector" focusId="800" focusChangeTop="1" focusChangeBottom="801" >
                         <GuiElement type="button" profile="multiTextOptionLeft" />
@@ -105,6 +119,7 @@
 
             <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
                 <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="101" focusChangeRight="101" focusInit="onOpen"/>
+                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="101" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
             </GuiElement>
         </GuiElement>
     </GuiElement>
