@@ -105,6 +105,7 @@ function ssSeasonsMod.loadMapFinished(...)
 
     -- Load the GUI
     g_seasonsMenu = ssSeasonsMenu:new()
+    g_gui:loadProfiles(ssSeasonsMod.modDir .. "resources/gui/profiles.xml")
     g_gui:loadGui(ssSeasonsMod.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", g_seasonsMenu)
 
     -- Enable the mod

@@ -53,6 +53,8 @@ function ssSeasonsMenu:onOpen(element)
     -- settings
     self:updateGameSettings()
 
+    self:updateDebugValues()
+
     -- Todo: get these values from the XML file. This is messy
     local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
     if ssSeasonsMod.debug then
@@ -189,7 +191,7 @@ end
 
 -- Update whether the tooltip box is visible
 function ssSeasonsMenu:updateToolTipBox(pageId)
-    self.ssMenuToolTipBox:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS and self.ssMenuToolTipBoxText.text ~= "")
+    self.ssMenuToolTipBox:setVisible((pageId == ssSeasonsMenu.PAGE_SETTINGS or pageId == ssSeasonsMenu.PAGE_DEBUG) and self.ssMenuToolTipBoxText.text ~= "")
 end
 
 ------------------------------------------
@@ -398,6 +400,38 @@ end
 
 function ssSeasonsMenu:onCreatePageDebug(element)
     ssSeasonsMenu.PAGE_DEBUG = self.pagingElement:getPageIdByElement(element)
+end
+
+function ssSeasonsMenu:updateDebugValues()
+    self.autoSnowToggle:setIsChecked(ssSnow.autoSnow)
+
+    self:updateSnowStatus()
+end
+
+function ssSeasonsMenu:updateSnowStatus()
+    self.debugSnowDepth:setText(string.format("Snow height: %0.2f (%i layers)", ssSnow.appliedSnowDepth, ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT))
+end
+
+function ssSeasonsMenu:onClickDebugAutoSnow(state)
+    ssSnow.autoSnow = self.autoSnowToggle:getIsChecked()
+end
+
+function ssSeasonsMenu:onClickDebugAddSnow(state)
+    ssSnow:applySnow(math.max(ssSnow.appliedSnowDepth + ssSnow.LAYER_HEIGHT, ssSnow.LAYER_HEIGHT))
+
+    self:updateSnowStatus()
+end
+
+function ssSeasonsMenu:onClickDebugRemoveSnow(state)
+    ssSnow:applySnow(ssSnow.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
+
+    self:updateSnowStatus()
+end
+
+function ssSeasonsMenu:onClickDebugClearSnow(state)
+    ssSnow:applySnow(0)
+
+    self:updateSnowStatus()
 end
 
 ------------------------------------------

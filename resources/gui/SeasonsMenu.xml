@@ -110,19 +110,34 @@
                 <GuiElement type="empty" profile="page" name="pageDebug" onCreate="onCreatePageDebug">
                     <!-- Column 1 (Snow) -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
-                        <!-- Auto snow -->
+                        <!-- Auto snow on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAutoSnow" toolTip="Automatic add and remove snow based on the weather" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="410" focusChangeTop="1" focusChangeBottom="411" id="autoSnowToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="Auto snow"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
                         <!-- Add layer -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugAddSnow" text="Add layer" focusId="411" focusChangeTop="410" focusChangeBottom="412" toolTip="Add one layer of snow" />
+
                         <!-- Remove layer -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugRemoveSnow" text="Remove layer" focusId="412" focusChangeTop="411" focusChangeBottom="413" toolTip="Remove one layer of snow" />
+
                         <!-- Clear -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugClearSnow" text="Clear snow" focusId="413" focusChangeTop="412" focusChangeBottom="100" toolTip="Clear all snow" />
+
                         <!-- Current height -->
+                        <GuiElement type="text" profile="ssSettingsText" text="Hello World!" id="debugSnowDepth" />
                     </GuiElement>
 
                     <!-- Column 2 -->
-                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
+                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px">
                     </GuiElement>
 
                     <!-- Column 3 -->
-                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" id="settingsColumn3">
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px">
                     </GuiElement>
                 </GuiElement>
             </GuiElement>
