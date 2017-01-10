@@ -140,6 +140,14 @@ end
 function ssGrowthManager:draw()
 end
 
+function ssGrowthManager:resetGrowth()
+    if self.growthManagerEnabled == true then
+        self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+    end
+
+end
+
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then
