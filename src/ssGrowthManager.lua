@@ -29,7 +29,7 @@ end
 ssGrowthManager.defaultFruits = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.currentGrowthTransitionPeriod = nil
-ssGrowthManager.doGrowthTransition = false
+--ssGrowthManager.doGrowthTransition = false
 ssGrowthManager.doResetGrowth = false
 ssGrowthManager.canPlantData = {}
 
@@ -64,19 +64,9 @@ function ssGrowthManager:loadMap(name)
         g_currentMission:setPlantGrowthRate(1,nil)
         g_currentMission:setPlantGrowthRateLocked(true)
         ssSeasonsMod:addGrowthStageChangeListener(self)
-
-        
-
+        ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
         self:buildCanPlantData()
-
-        if g_currentMission.missionInfo.timeScale > 120 then
-            self.mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
-        else
-            self.mapSegments = 16 -- Must be evenly dividable with mapsize.
-        end
-
-        self.currentX = 0 -- The row that we are currently updating
-        self.currentZ = 0 -- The column that we are currently updating
+        
     end
 end
 
@@ -110,18 +100,7 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     --print(tostring(unicode))
 end
 
-function ssGrowthManager:update(dt)
-    if self.doGrowthTransition ~= true then
-        return
-    end
-
-    local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
-    local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
-    local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
-    local widthWorldZ = startWorldZ
-    local heightWorldX = startWorldX
-    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
-
+function ssGrowthManager:handleGrowth(x, z, widthX, widthZ, heightX, heightZ, layers)
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
         local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
@@ -151,20 +130,10 @@ function ssGrowthManager:update(dt)
             end
         end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
     end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+end
 
-    if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-        -- Next column
-        self.currentZ = self.currentZ + 1
-    elseif  self.currentX < self.mapSegments - 1 then -- Starting with row 0
-        -- Next row
-        self.currentX = self.currentX + 1
-        self.currentZ = 0
-    else
-        -- Done with the loop, set up for the next one.
-        self.currentX = 0
-        self.currentZ = 0
-        self.doGrowthTransition = false
-    end
+function ssGrowthManager:update(dt)
+    
 end
 
 
@@ -173,19 +142,20 @@ end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
-    if self.growthManagerEnabled == true then -- redundant but heyho
+    if self.growthManagerEnabled == true then
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
         if self.doResetGrowth == true and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-            self.doGrowthTransition = true
-            self.growthManagerEnabled = true
+            --self.doGrowthTransition = true
+            self.growthManagerEnabled = true -- i can't remember why I did this. TODO: test if works without this 
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
         else
             log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
             self.currentGrowthTransitionPeriod = growthTransition
-            self.doGrowthTransition = true
+            --self.doGrowthTransition = true
         end
+        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
     end
 end
 
