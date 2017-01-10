@@ -278,7 +278,8 @@ end
 
 function ssSeasonsMenu:onClickSaveSettings()
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
-       or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled then
+       or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
+       or self.settingElements.snow:getState() ~= ssSnow.mode then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
     else
