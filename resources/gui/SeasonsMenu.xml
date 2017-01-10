@@ -22,11 +22,20 @@
                     <!-- Column 1 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
                         <!-- Season intros on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="211" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
                             <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_seasonIntros"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Season intros on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateWFHelp" toolTip="tooltip_wfHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_wfHelp"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>

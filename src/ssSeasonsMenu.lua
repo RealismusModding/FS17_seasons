@@ -255,14 +255,17 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
     self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
     self.settingElements.snow:setState(2) -- if MP: 1, if no snow mask: 1
-    self.settingElements.gm:setIsChecked(true)
+    self.settingElements.gm:setIsChecked(ssGrowthManager.growthManagerEnabled)
+    self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
 end
 
 function ssSeasonsMenu:updateApplySettingsButton()
     local hasChanges = false
 
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
-        or self.settingElements.seasonIntros:getIsChecked() ~= ssSeasonIntro.hideSeasonIntro then
+        or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
+        or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
+        or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible then
         -- or  then -- snow
         hasChanges = true
     end
@@ -271,8 +274,13 @@ function ssSeasonsMenu:updateApplySettingsButton()
 end
 
 function ssSeasonsMenu:onClickSaveSettings()
-    local text = ssLang.getText("dialog_applySettings")
-    g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
+    if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
+       or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled then
+        local text = ssLang.getText("dialog_applySettings")
+        g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
+    else
+        self:onYesNoSaveSettings(true)
+    end
 end
 
 function ssSeasonsMenu:onYesNoSaveSettings(yes)
@@ -280,10 +288,12 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
         local newLength = self.settingElements.seasonLength:getState() * 3
 
         ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
+        ssWeatherForecast.keyTextVisible = self.settingElements.wfHelp:getIsChecked()
 
         if g_currentMission:getIsServer() then
             log("Set value for SNOW: " .. tostring(self.settingElements.snow:getState()))
 
+            ssGrowthManager.growthManagerEnabled = self.settingElements.gm:getIsChecked()
             ssSeasonsUtil:changeDaysInSeason(newLength)
 
             self:updateApplySettingsButton()
@@ -306,6 +316,12 @@ end
 ------- SEASON INTORS on/off -------
 function ssSeasonsMenu:onCreateSeasonIntros(element)
     self.settingElements.seasonIntros = element
+    self:replaceTexts(element)
+end
+
+-------- WF HELP on/off -------
+function ssSeasonsMenu:onCreateWFHelp(element)
+    self.settingElements.wfHelp = element
     self:replaceTexts(element)
 end
 
@@ -336,10 +352,6 @@ end
 function ssSeasonsMenu:onCreateGrowthManager(element)
     self.settingElements.gm = element
     self:replaceTexts(element)
-end
-
-function ssSeasonsMenu:onClickGrowthManager(state)
-    log("Set value for GM: " .. tostring(self.settingElements.gm:getIsChecked()))
 end
 
 ------------------------------------------
