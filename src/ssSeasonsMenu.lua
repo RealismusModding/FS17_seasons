@@ -257,6 +257,7 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.snow:setState(2) -- if MP: 1, if no snow mask: 1
     self.settingElements.gm:setIsChecked(ssGrowthManager.growthManagerEnabled)
     self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
+    self.settingElements.snowTracks:setIsChecked(true)
 end
 
 function ssSeasonsMenu:updateApplySettingsButton()
@@ -354,6 +355,12 @@ function ssSeasonsMenu:onCreateGrowthManager(element)
     self:replaceTexts(element)
 end
 
+------- Snow Tracks on/off -------
+function ssSeasonsMenu:onCreateSnowTracksToggle(element)
+    self.settingElements.snowTracks = element
+    self:replaceTexts(element)
+end
+
 ------------------------------------------
 -- HELP PAGE
 ------------------------------------------
@@ -414,4 +421,8 @@ end
 
 function ssSeasonsMenu:onClickDebugVehicleRendering(state)
     AIVehicle.aiDebugRendering = self.debugAIRenderingToggle:getIsChecked()
+end
+
+function ssSeasonsMenu:onClickDebugResetGM()
+
 end

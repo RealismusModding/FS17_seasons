@@ -60,8 +60,17 @@
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
 
+                        <!-- Snow tracks -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="223" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snowTracks"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
                         <!-- Growth manager on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="100" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -153,7 +162,7 @@
                         </GuiElement>
 
                         <!-- Debug AI rendering on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAIRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="421" focusChangeTop="420" focusChangeBottom="100" id="debugAIRenderingToggle">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAIRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="421" focusChangeTop="420" focusChangeBottom="430" id="debugAIRenderingToggle">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -164,6 +173,8 @@
 
                     <!-- Column 3 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px">
+                        <!-- Reset GM -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugResetGM" text="Reset growth" focusId="430" focusChangeTop="412" focusChangeBottom="100" toolTip="Reset the growth to beginning of spring" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
                     </GuiElement>
                 </GuiElement>
             </GuiElement>
