@@ -99,9 +99,7 @@ function ssViewController:updateData()
     end
 
 end
-function ssViewController:canSow() -- dummy function until it's implemented in WM
-    return ssGrowthManager.TRUE
-end
+
 
 --this function currently has no real purpose. It's testing the calculation of growth transition days in a season and generates a table with 3 entries
 --early, mid, late and each entry then has the range of days in that growth transition
