@@ -254,9 +254,10 @@ function ssSeasonsMenu:updateGameSettings()
     -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
     self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
-    self.settingElements.snow:setState(2) -- if MP: 1, if no snow mask: 1
     self.settingElements.gm:setIsChecked(ssGrowthManager.growthManagerEnabled)
     self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
+    self.settingElements.snow:setState(ssSnow.mode)
+
     self.settingElements.snowTracks:setIsChecked(true)
 end
 
@@ -266,7 +267,8 @@ function ssSeasonsMenu:updateApplySettingsButton()
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
-        or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible then
+        or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible
+        or self.settingElements.snow:getState() ~= ssSnow.mode then
         -- or  then -- snow
         hasChanges = true
     end
@@ -292,7 +294,8 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
         ssWeatherForecast.keyTextVisible = self.settingElements.wfHelp:getIsChecked()
 
         if g_currentMission:getIsServer() then
-            log("Set value for SNOW: " .. tostring(self.settingElements.snow:getState()))
+            ssSnow:setMode(self.settingElements.snow:getState())
+            self:updateSnowStatus()
 
             ssGrowthManager.growthManagerEnabled = self.settingElements.gm:getIsChecked()
             ssSeasonsUtil:changeDaysInSeason(newLength)
@@ -419,7 +422,7 @@ function ssSeasonsMenu:onClickDebugVehicleRendering(state)
     Vehicle.debugRendering = self.debugVehicleRenderingToggle:getIsChecked()
 end
 
-function ssSeasonsMenu:onClickDebugVehicleRendering(state)
+function ssSeasonsMenu:onClickDebugAIRendering(state)
     AIVehicle.aiDebugRendering = self.debugAIRenderingToggle:getIsChecked()
 end
 

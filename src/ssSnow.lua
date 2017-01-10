@@ -12,8 +12,13 @@ ssSnow.SNOW_MASK_NAME = "SeasonsSnowMask"
 ssSnow.SNOW_MASK_FIRST_CHANNEL = 0
 ssSnow.SNOW_MASK_NUM_CHANNELS = 1
 
+ssSnow.MODE_OFF = 1
+ssSnow.MODE_ONE_LAYER = 2
+ssSnow.MODE_ON = 3
+
 function ssSnow:load(savegame, key)
     self.appliedSnowDepth = ssStorage.getXMLInt(savegame, key .. ".weather.appliedSnowDepth", 0) * self.LAYER_HEIGHT
+    self.mode = ssStorage.getXMLInt(savegame, key .. ".weather.mode", ssSnow.MODE_ON)
 
     -- Automatic snow using the weather. Can be disabled for debugging
     self.autoSnow = true
@@ -21,6 +26,7 @@ end
 
 function ssSnow:save(savegame, key)
     ssStorage.setXMLInt(savegame, key .. ".weather.appliedSnowDepth", self.appliedSnowDepth / self.LAYER_HEIGHT)
+    ssStorage.setXMLInt(savegame, key .. ".weather.mode", self.mode)
 end
 
 function ssSnow:loadMap(name)
@@ -54,15 +60,28 @@ end
 function ssSnow:draw()
 end
 
-function ssSnow:applySnow(targetSnowDepth)
-    targetSnowDepth = math.min(self.MAX_HEIGHT, targetSnowDepth) -- Target snow depth in meters. Never higher than 0.4
+function ssSnow:setMode(mode)
+    if mode == self.mode then return end
+    if mode < 1 or mode > 3 then return end
 
-    -- Limit snow height to 1 layer on non-snow masked maps
-    if self.snowMaskId == nil and self.autoSnow then -- only do with autosnow: is debug mode
-        targetSnowDepth = math.min(ssSnow.LAYER_HEIGHT, targetSnowDepth)
+    self.mode = mode
+
+    if self.mode == self.MODE_OFF then
+        self:applySnow(0)
+    elseif self.mode == self.MODE_ONE_LAYER and self.appliedSnowDepth > self.LAYER_HEIGHT then
+        self:applySnow(self.LAYER_HEIGHT)
     end
+end
 
-    -- print("-- Target Snowdept: " .. targetSnowDepth .. " Applied Snowdepth: " .. self.appliedSnowDepth)
+function ssSnow:applySnow(targetSnowDepth)
+    if self.mode == self.MODE_ONE_LAYER then
+        targetSnowDepth = math.min(self.LAYER_HEIGHT, targetSnowDepth)
+    elseif self.mode == self.MODE_OFF then
+        targetSnowDepth = 0
+    else
+        -- Target snow depth in meters. Never higher than 0.4
+        targetSnowDepth = math.min(self.MAX_HEIGHT, targetSnowDepth)
+    end
 
     if self.appliedSnowDepth < 0 and targetSnowDepth > 0 then
         self.appliedSnowDepth = 0
@@ -150,6 +169,11 @@ function ssSnow:update(dt)
         self.snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME)
         if self.snowMaskId == 0 then
             self.snowMaskId = nil
+        end
+
+        -- When no mask is available, limit to one layer
+        if self.snowMaskId == nil then
+            self.mode = self.MODE_ONE_LAYER
         end
     end
 end
