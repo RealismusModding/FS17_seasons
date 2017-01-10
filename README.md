@@ -1,6 +1,8 @@
-# FS17 Seasons
+# FS17 Seasons (Not yet released, work in progress)
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
+
+*WARNING*: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://realismus.joskuijpers.nl) and post any issues you find!
 
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
@@ -15,6 +17,9 @@ Please open a pull request to allow for merging back your adjustments. (See also
 
 ## Pull Requests
 Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
+
+## For map makers
+For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://realismus.joskuijpers.nl).
 
 ## Features
 
