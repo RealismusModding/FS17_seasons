@@ -350,7 +350,18 @@ function ssSeasonsMenu:onCreateSnow(element)
     element:setTexts({ssLang.getText("ui_off"), ssLang.getText("ui_snowOneLayer"), ssLang.getText("ui_on")})
 end
 
-function ssSeasonsMenu:onClickSnow(state)
+function ssSeasonsMenu:onClickSnowToggle(state)
+    local tracks = self.settingElements.snowTracks
+
+    if state == ssSnow.MODE_ON then
+        tracks:setDisabled(true)
+        tracks:setIsChecked(false)
+    else
+        tracks:setDisabled(false)
+        tracks:setIsChecked(true) -- TODO
+    end
+
+    self:updateApplySettingsButton()
 end
 
 ------- GM on/off -------

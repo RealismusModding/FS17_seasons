@@ -52,7 +52,7 @@
                         </GuiElement>
 
                         <!-- Snow -->
-                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222" onClick="updateApplySettingsButton">
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222" onClick="onClickSnowToggle">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
