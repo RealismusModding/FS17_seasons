@@ -67,7 +67,7 @@
 
                     <!-- Login column -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" onCreate="onCreateMultiplayerLogin" id="multiplayerLogin">
-                        <GuiElement type="button" profile="pcButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" position="0px 10.5px" iconUVs="585px 8px 29px 22px" iconSize="0px 0px" size="305px 36px" />
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" />
                     </GuiElement>
                 </GuiElement>
 
@@ -132,8 +132,25 @@
                         <GuiElement type="text" profile="ssSettingsText" text="Hello World!" id="debugSnowDepth" />
                     </GuiElement>
 
-                    <!-- Column 2 -->
+                    <!-- Column 2 (rendering) -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px">
+                        <!-- Debug vehicle rendering on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugVehicleRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="420" focusChangeTop="412" focusChangeBottom="421" id="debugVehicleRenderingToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="Vehicle debug rendering"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Debug AI rendering on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAIRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="421" focusChangeTop="420" focusChangeBottom="100" id="debugAIRenderingToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="AI debug rendering"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
                     </GuiElement>
 
                     <!-- Column 3 -->

@@ -215,9 +215,6 @@ function ssSeasonsMenu:updateServerSettingsVisibility()
         -- Only needs MP login when this is a MP session, this is not the server and the user is not logged in
         local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser and g_currentMission.connectedToDedicatedServer
 
-        -- Has access to the server page if this is SP, or MP and this is server or master user
-        local hasServerAccess = not g_currentMission.missionDynamicInfo.isMultiplayer or (g_currentMission.missionDynamicInfo.isMultiplayer and (g_currentMission:getIsServer() or g_currentMission.isMasterUser))
-
         self.multiplayerLogin:setVisible(needsMPLogin)
         self.settingsColumn2:setVisible(not needsMPLogin)
         self.settingsColumn3:setVisible(not needsMPLogin)
@@ -328,72 +325,6 @@ function ssSeasonsMenu:onCreatePageHelp(element)
     end
 end
 
---[[
-function ssSeasonsMenu:onCreateHelpLineImage(element)
-    if self.helpLineImageElement == nil then
-        self.helpLineImageElement = element
-    end
-end
-
-function ssSeasonsMenu:onCreateHelpLineCategorySelector(element)
-    self.helpLineCategorySelectorElement = element
-end
-
-function ssSeasonsMenu:onClickHelpLineCategorySelector(state)
-    self:setupHelpLine()
-end
-
-function ssSeasonsMenu:setupHelpLine()
-    self.helpLineList:deleteListItems()
-
-    local categoryIndex = self.helpLineCategorySelectorElement:getState()
-
-    if categoryIndex > 0 and self.helpLineCategories[categoryIndex] ~= nil then
-        local category = self.helpLineCategories[categoryIndex]
-        for _, helpItem in pairs(category.helpLines) do
-            if self.helpLineListItemTemplate ~= nil then
-                local new = self.helpLineListItemTemplate:clone(self.helpLineList)
-                new.elements[1]:setText(g_i18n:getText(helpItem.title))
-                new:updateAbsolutePosition()
-            end
-        end
-        self.helpLineList:setSelectedRow(1)
-        self:onHelpLineListSelectionChanged(1)
-    end
-end
-
-function ssSeasonsMenu:onHelpLineListSelectionChanged(rowIndex)
-    for i=#self.helpLineContentBox.elements, 1, -1 do
-        self.helpLineContentBox.elements[i]:delete()
-    end
-    local categoryIndex = self.helpLineCategorySelectorElement:getState()
-    if categoryIndex > 0 and self.helpLineCategories[categoryIndex] ~= nil then
-        local category = self.helpLineCategories[categoryIndex]
-        local helpLineItem = category.helpLines[rowIndex]
-        if helpLineItem ~= nil then
-            local text, _ = string.gsub(g_i18n:getText(helpLineItem.title), "$CURRENCY_SYMBOL", g_i18n:getCurrencySymbol(true))
-            self.helpLineTitleElement:setText(text)
-            for _, item in pairs(helpLineItem.items) do
-
-                if item.type == "text" then
-                    local textElem = self.helpLineTextElement:clone(self.helpLineContentBox)
-                    local text, _ = string.gsub(g_i18n:getText(item.value), "$CURRENCY_SYMBOL", g_i18n:getCurrencySymbol(true))
-                    textElem:setText(text)
-                    local height = textElem:getTextHeight()
-                    textElem.margin[4] = self.helpLineTextElement.margin[4] + height - textElem.textSize
-                elseif item.type == "image" then
-                    local imageElem = self.helpLineImageElement:clone(self.helpLineContentBox)
-                    imageElem:setSize(nil, self.helpLineImageElement.size[2]*item.heightScale)
-                    imageElem:setImageFilename(item.value)
-                end
-            end
-
-            self.helpLineContentBox:invalidateLayout(true)
-        end
-    end
-end
-]]
-
 ------------------------------------------
 -- DEBUG PAGE
 ------------------------------------------
@@ -404,6 +335,8 @@ end
 
 function ssSeasonsMenu:updateDebugValues()
     self.autoSnowToggle:setIsChecked(ssSnow.autoSnow)
+    self.debugVehicleRenderingToggle:setIsChecked(Vehicle.debugRendering)
+    self.debugAIRenderingToggle:setIsChecked(AIVehicle.aiDebugRendering)
 
     self:updateSnowStatus()
 end
@@ -434,25 +367,10 @@ function ssSeasonsMenu:onClickDebugClearSnow(state)
     self:updateSnowStatus()
 end
 
-------------------------------------------
--- OLD
-------------------------------------------
-
---[[function ssSeasonsMenu:onCreateMoneyUnit(element)
-    self.moneyUnitElement = element
-    local texts = {g_i18n:getText("unit_euro"), g_i18n:getText("unit_dollar"), g_i18n:getText("unit_pound")}
-    element:setTexts(texts)
+function ssSeasonsMenu:onClickDebugVehicleRendering(state)
+    Vehicle.debugRendering = self.debugVehicleRenderingToggle:getIsChecked()
 end
 
-function ssSeasonsMenu:onClickMoneyUnit(state)
-    g_currentMission:setMoneyUnit(state)
-
-    local borrowText,_ = string.gsub(self.financesBorrowText, "$CURRENCY_SYMBOL", g_i18n:getCurrencySymbol(true))
-    self.financesBorrowElement:setText(borrowText)
-    local repayText,_ = string.gsub(self.financesRepayText, "$CURRENCY_SYMBOL", g_i18n:getCurrencySymbol(true))
-    self.financesRepayElement:setText(repayText)
-
-    self:updateGarage()
+function ssSeasonsMenu:onClickDebugVehicleRendering(state)
+    AIVehicle.aiDebugRendering = self.debugAIRenderingToggle:getIsChecked()
 end
-]]
-
