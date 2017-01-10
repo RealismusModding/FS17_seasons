@@ -7,7 +7,7 @@
 
 ssSnow = {}
 ssSnow.LAYER_HEIGHT = 0.06
-ssSnow.SNOW_MASK_NAME="SeasonSnowMask"
+ssSnow.SNOW_MASK_NAME = "SeasonsSnowMask"
 ssSnow.SNOW_MASK_FIRST_CHANNEL = 0
 ssSnow.SNOW_MASK_NUM_CHANNELS = 1
 
@@ -29,6 +29,12 @@ function ssSnow:loadMap(name)
 
         self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
 
+        self.snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME)
+
+        if self.snowMaskId ~= 0 then
+            setVisibility(self.snowMaskId, false)
+        end
+
         ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
     end
@@ -49,6 +55,11 @@ end
 function ssSnow:hourChanged()
     local targetFromweatherSystem = ssWeatherManager:getSnowHeight() -- Fetch from weathersystem.
     local targetSnowDepth = math.min(0.48, targetFromweatherSystem) -- Target snow depth in meters. Never higher than 0.4
+
+    -- Limit snow height to 1 layer on non-snow masked maps
+    if not self.snowMaskId == 0 then
+        targetSnowDepth = math.min(ssSnow.LAYER_HEIGHT, targetSnowDepth)
+    end
 
     -- print("-- Target Snowdept: " .. targetSnowDepth .. " Applied Snowdepth: " .. self.appliedSnowDepth)
 
@@ -85,14 +96,13 @@ end
 -- Must be defined before being registered with ssDensityMapScanner.
 function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     layers=tonumber(layers)
-    local snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME) -- 0 if no snow mask, should realy be done externally before first update() and stored.
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-    if snowMaskId ~= 0 then
+    if self.snowMaskId ~= nil then
         -- Set snow type where we have no other heaps or masked areas on the map.
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, self.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     else
@@ -128,43 +138,34 @@ function ssSnow:removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, h
 end
 
 function ssSnow:update(dt)
-    -- This should be done ones at startup. Just before the first update when everything is loaded.
-    local snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME) -- 0 if no snow mask, should realy be done externally before first update() and stored.
-    if snowMaskId ~= 0 then
-        setVisibility(snowMaskId, false)
-    end
 end
 
 function ssSnow:updatePlacableOnCreation()
-    local snowMaskId = getChild(g_currentMission.terrainRootNode, "SeasonSnowMask") -- 0 if no snow mask
-    if snowMaskId == 0 then
-        return
-    end
+    if self.snowMaskId == 0 then return end
+
     local numAreas = table.getn(self.clearAreas)
     for i=1, numAreas do
         local x,_,z = getWorldTranslation(self.clearAreas[i].start)
         local x1,_,z1 = getWorldTranslation(self.clearAreas[i].width)
         local x2,_,z2 = getWorldTranslation(self.clearAreas[i].height)
-        local startX,startZ, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(snowMaskId, x, z, x1, z1, x2, z2)
+        local startX,startZ, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
         -- Remove area from snowMask
-        setDensityParallelogram(snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 1)
+        setDensityParallelogram(self.snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 1)
     end
 end
 Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
 
 function ssSnow:updatePlacablenOnDelete()
-    local snowMaskId = getChild(g_currentMission.terrainRootNode, "SeasonSnowMask") -- 0 if no snow mask
-    if snowMaskId == 0 then
-        return
-    end
+    if self.snowMaskId == 0 then return end
+
     local numAreas = table.getn(self.clearAreas)
     for i=1, numAreas do
         local x,_,z = getWorldTranslation(self.clearAreas[i].start)
         local x1,_,z1 = getWorldTranslation(self.clearAreas[i].width)
         local x2,_,z2 = getWorldTranslation(self.clearAreas[i].height)
-        local startX,startZ, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(snowMaskId, x, z, x1, z1, x2, z2)
+        local startX,startZ, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
         -- Add area to snowMask
-        setDensityParallelogram(snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 0)
+        setDensityParallelogram(self.snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 0)
     end
 end
 Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.updatePlacablenOnDelete)
