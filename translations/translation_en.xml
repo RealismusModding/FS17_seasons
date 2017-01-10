@@ -73,7 +73,7 @@
 
         <text name="setting_seasonIntros" text="Season introductions" />
         <text name="setting_seasonLength" text="Season length" />
-        <text name="setting_snow" text="Snow" />
+        <text name="setting_snow" text="Snow mode" />
         <text name="setting_gm" text="Seasonal growth" />
         <text name="setting_wfHelp" text="Forecast key in help menu" />
         <text name="setting_snowTracks" text="Snow tracks" />
