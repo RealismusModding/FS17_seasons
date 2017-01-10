@@ -171,6 +171,10 @@ end
 function ssGrowthManager:draw()
 end
 
+function ssGrowthManager:resetGrowth()
+    logInfo("ssGrowthManager: Growth reset")    
+end
+
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then -- redundant but heyho
