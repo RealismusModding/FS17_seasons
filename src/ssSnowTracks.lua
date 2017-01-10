@@ -85,19 +85,19 @@ local function tracks(self,dt)
 		    
             if underTireSnowDepth <= radius then
 			    local alpha = math.asin(sinkage / radius)
-                log('alpha1 = ', alpha)
+                --log('alpha1 = ', alpha)
 			    arcLength = alpha * radius
                 snowForce = 15 * (200 * arcLength * wheel.width)^1.3
 
             elseif underTireSnowDepth > radius and underTireSnowDepth <= 2 * radius then
 			    local alpha = math.sin((radius - sinkage) / radius)
-                log('alpha2 = ', alpha)
+                --log('alpha2 = ', alpha)
 			    arcLength = alpha * radius + math.pi/2
                 snowForce = 15 * (200 * arcLength * wheel.width)^1.3 + 10000 * (sinkage - radius)
                 
             elseif underTireSnowDepth > 2 * radius then
 			    arcLength = math.pi * radius
-                log('alpha3 = ')
+                --log('alpha3 = ')
                 snowForce = 15 * (200 * arcLength * wheel.width)^1.3 + 15000 * (sinkage - radius)
             end
 
