@@ -18,6 +18,9 @@ Please open a pull request to allow for merging back your adjustments. (See also
 ## Pull Requests
 Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
 
+## For map makers
+For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://realismus.joskuijpers.nl).
+
 ## Features
 
 ### Seasons
