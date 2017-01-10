@@ -37,7 +37,7 @@ function ssAnimals:loadFromXML()
 
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then
-  	    self.data = ssSeasonsXML:loadFile(modPath, "animals", elements, self.data, true)    
+  	    self.data = ssSeasonsXML:loadFile(modPath, "animals", elements, self.data, true)
     end
 end
 
@@ -72,7 +72,7 @@ function ssAnimals:seasonChanged()
         if birthRatePerDay ~= 0 then
             desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*ssSeasonsUtil.daysInSeason))
         else
-            desc.birthRatePerDay = birthRatePerDay 
+            desc.birthRatePerDay = birthRatePerDay
         end
         desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
         desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)

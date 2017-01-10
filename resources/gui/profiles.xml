@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUIProfiles>
+    <Presets>
+    </Presets>
+
+    <Profile name="ssSettingsText" parent="textDefault">
+        <Value name="margin" value="0px 25px 0px 14px" />
+        <Value name="size" value="305px 36px" />
+        <Value name="textAlignment" value="center" />
+        <Value name="textSize" value="16px" />
+        <Value name="textMaxWidth" value="280px" />
+    </Profile>
+
+    <Profile name="ssSettingsButton" parent="pcButton">
+        <Value name="iconSize" value="0px 0px" />
+        <Value name="size" value="305px 36px" />
+        <Value name="margin" value="0px 25px 0px 14px" />
+    </Profile>
+</GUIProfiles>

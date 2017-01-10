@@ -47,17 +47,19 @@ ssSeasonsUtil.seasons = {
 }
 
 function ssSeasonsUtil:load(savegame, key)
-    self.daysInSeason = Utils.clamp(ssStorage.getXMLFloat(savegame, key .. ".settings.daysInSeason", 10), 3, 12)
-    self.latestSeason = ssStorage.getXMLFloat(savegame, key .. ".settings.latestSeason", -1)
-    self.latestGrowthStage = ssStorage.getXMLFloat(savegame, key .. ".settings.latestGrowthStage", 0)
+    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
+    self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".settings.latestSeason", -1)
+    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".settings.latestGrowthStage", 0)
+    self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", 0)
 
     self.isNewGame = savegame == nil
 end
 
 function ssSeasonsUtil:save(savegame, key)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.latestSeason", self.latestSeason)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
+    ssStorage.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
+    ssStorage.setXMLInt(savegame, key .. ".settings.latestSeason", self.latestSeason)
+    ssStorage.setXMLInt(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
+    ssStorage.setXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
 function ssSeasonsUtil:loadMap(name)
@@ -78,6 +80,11 @@ function ssSeasonsUtil:update(dt)
         self.isNewGame = false
         ssSeasonsUtil:dayChanged() -- trigger the stage change events.
     end
+
+    -- TODO: This does not belong here, but in the main seasons class (g_seasons ?)
+    if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_MENU) then
+        g_gui:showGui("SeasonsMenu")
+    end
 end
 
 function ssSeasonsUtil:readStream(streamId, connection)
@@ -95,9 +102,11 @@ end
 function ssSeasonsUtil:draw()
 end
 
--- Get the current day number
+-- Get the current day number.
+-- Always use this function when working with seasons, because it uses the offset
+-- for keeping in the correct season when changing season length
 function ssSeasonsUtil:currentDayNumber()
-    return g_currentMission.environment.currentDay
+    return g_currentMission.environment.currentDay + self.currentDayOffset
 end
 
 -- Get the day within the week
@@ -275,6 +284,36 @@ function ssSeasonsUtil:dayChanged()
             end
         end
     end
+end
+
+function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
+    local oldSeasonLength = self.daysInSeason -- 6 ELIM
+    local actualCurrentDay = self:currentDayNumber() -- 9
+
+    local year = self:year(actualCurrentDay) -- 11 ELIM
+    local season = self:season(actualCurrentDay) -- 12, 18
+    local dayInSeason = self:dayInSeason(actualCurrentDay) -- 13 ELIM
+
+    local seasonThatWouldBe = math.fmod(math.floor((actualCurrentDay - 1) / newSeasonLength), self.SEASONS_IN_YEAR) -- 16
+
+    local dayThatNeedsToBe = math.floor((dayInSeason - 1) / oldSeasonLength * newSeasonLength) + 1 -- 19
+
+    local realDifferenceInSeason = season - seasonThatWouldBe -- 21 ELIM
+
+    local relativeYearThatNeedsTobe = realDifferenceInSeason < 0 and 1 or 0 -- 23
+
+    local resultingDayNumber = ((year + relativeYearThatNeedsTobe) * self.SEASONS_IN_YEAR + season) * newSeasonLength + dayThatNeedsToBe -- 26
+    local resultingOffset = resultingDayNumber - actualCurrentDay -- 27
+    local newOffset = math.fmod(self.currentDayOffset + resultingOffset, self.SEASONS_IN_YEAR * newSeasonLength) -- 28
+
+    self.daysInSeason = newSeasonLength
+    self.currentDayOffset = newOffset
+
+    -- Re-do time
+    ssTime:adaptTime()
+
+    -- Redo weather manager
+    ssWeatherManager:buildForecast()
 end
 
 ------------------------------------
