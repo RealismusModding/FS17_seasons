@@ -154,13 +154,6 @@ function ssRepairable:update(dt)
             end
         end
     end
-
-    local snowDepth = ssWeatherManager:getSnowHeight()
-
-    if snowDepth > ssSnow.LAYER_HEIGHT then
-        ssVehicle:snowTracks(self)
-    end
-
 end
 
 function ssRepairable:repairUpdate(dt)

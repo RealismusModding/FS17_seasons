@@ -16,6 +16,7 @@ ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
 SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "src/ssRepairable.lua")
+--SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", ssSeasonsMod.modDir .. "src/ssSnowTracks.lua")
 
 function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
@@ -76,6 +77,7 @@ function ssVehicle:installRepairableSpecialization()
 
         if hasWashable then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
+            --table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
         end
     end
 end
@@ -414,53 +416,5 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000)
         end
     end
-
-end
-
-function ssVehicle:snowTracks(self,snowDepth)
-    local snowDepth = ssWeatherManager:getSnowHeight()
-    local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.4
-    local snowLayers = math.modf(targetSnowDepth/ ssSnow.LAYER_HEIGHT)
-
-    -- partly from Crop destruction mod
-    for _, wheel in pairs(self.wheels) do
-
-        local width = 0.35 * wheel.width;
-        local length = math.min(0.2, 0.35 * wheel.width);
-        local radius = wheel.radius
-
-        local x0,y0,z0;
-        local x1,y1,z1;
-        local x2,y2,z2;
-
-        local sinkage = 0.7 * targetSnowDepth
-
-        wheel.tireGroundFrictionCoeff = 0.1
-
-        if wheel.repr == wheel.driveNode then
-            x0,y0,z0 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ - length);
-            x1,y1,z1 = localToWorld(wheel.node, wheel.positionX - width, wheel.positionY, wheel.positionZ - length);
-            x2,y2,z2 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ + length);
-        else
-            local x,_,z = localToLocal(wheel.driveNode, wheel.repr, 0,0,0);
-            x0,y0,z0 = localToWorld(wheel.repr, x + width, 0, z - length);
-            x1,y1,z1 = localToWorld(wheel.repr, x - width, 0, z - length);
-            x2,y2,z2 = localToWorld(wheel.repr, x + width, 0, z + length);
-        end
-
-        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
-
-        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
-        local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
-        local underTireSnowLayers = density / area
-        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-
-        if (targetSnowDepth - sinkage) > ssSnow.LAYER_HEIGHT and snowLayers == underTireSnowLayers then
-            newSnowDepth = math.modf(sinkage / ssSnow.LAYER_HEIGHT)
-            ssSnow:removeSnow(x0,z0, x1,z1, x2,z2, newSnowDepth)
-        end
-
-     end
 
 end

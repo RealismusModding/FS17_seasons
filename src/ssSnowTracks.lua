@@ -22,25 +22,7 @@ end
 function ssSnowTracks:keyEvent(unicode, sym, modifier, isDown)
 end
 
-function ssSnowTracks:update(dt)
-    local snowDepth = ssWeatherManager:getSnowHeight()
---self.lastSpeedReal ~= 0 and
-    if  snowDepth > ssSnow.LAYER_HEIGHT then
-        self:tracks(self,dt)
-    else
-        for _, wheel in pairs(self.wheels) do
-            setLinearDamping(wheel.node,0)
-        end
-    end
-end
-
-function ssSnowTracks:updateTick(dt)
-end
-
-function ssSnowTracks:draw()
-end
-
-local function ssSnowTracks:tracks(self,dt)
+local function tracks(self,dt)
     local snowDepth = ssWeatherManager:getSnowHeight()
     local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.4
     local snowLayers = math.modf(targetSnowDepth/ ssSnow.LAYER_HEIGHT)
@@ -50,7 +32,7 @@ local function ssSnowTracks:tracks(self,dt)
     -- partly from Crop destruction mod
     for _, wheel in pairs(self.wheels) do
 
-        local width = 0.35 * wheel.width;
+        local width = 0.5 * wheel.width;
         local length = math.min(0.2, 0.35 * wheel.width);
         local radius = wheel.radius
 
@@ -87,6 +69,7 @@ local function ssSnowTracks:tracks(self,dt)
 
         local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
         local underTireSnowLayers = density / area
+        log(underTireSnowLayers)        
         local underTireSnowDepth = underTireSnowLayers / ssSnow.LAYER_HEIGHT
 
         if (targetSnowDepth - sinkage) > ssSnow.LAYER_HEIGHT and snowLayers == underTireSnowLayers then
@@ -112,15 +95,32 @@ local function ssSnowTracks:tracks(self,dt)
 			    arcLength = math.pi * radius
                 log('alpha3 = ')
                 snowForce = 15 * (200 * arcLength * wheel.width)^1.3 + 15000 * (sinkage - radius)
-
             end
 
-            log('sizeWidth = ',sizeWidth, ' | sinkage = ', sinkage,' | radius = ',radius,' | arcLength = ',arcLength,' | snowForce = ',snowForce)
-            setLinearDamping(wheel.node,snowForce/10)
-        else
-            setLinearDamping(wheel.node,0)
+            --log('sizeWidth = ',sizeWidth, ' | sinkage = ', sinkage,' | radius = ',radius,' | arcLength = ',arcLength,' | snowForce = ',snowForce)
+            setLinearDamping(wheel.node,snowForce/7.5)
+        elseif underTireSnowLayers == 0 then
+            setLinearDamping(wheel.node,snowForce/7.5)
         end
 
      end
-
 end
+
+function ssSnowTracks:update(dt)
+    local snowDepth = ssWeatherManager:getSnowHeight()
+
+    if self.lastSpeedReal ~= 0 and snowDepth > ssSnow.LAYER_HEIGHT then
+        tracks(self,dt)
+    else
+        for _, wheel in pairs(self.wheels) do
+            setLinearDamping(wheel.node,0)
+        end
+    end
+end
+
+function ssSnowTracks:updateTick(dt)
+end
+
+function ssSnowTracks:draw()
+end
+
