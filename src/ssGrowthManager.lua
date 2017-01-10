@@ -66,6 +66,7 @@ function ssGrowthManager:loadMap(name)
         ssSeasonsMod:addGrowthStageChangeListener(self)
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
         self:buildCanPlantData()
+        addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
         
     end
 end
@@ -138,6 +139,12 @@ end
 
 
 function ssGrowthManager:draw()
+end
+
+function ssGrowthManager:consoleCommandResetGrowth()
+    if g_currentMission:getIsServer() then
+        self:resetGrowth()
+    end
 end
 
 function ssGrowthManager:resetGrowth()
