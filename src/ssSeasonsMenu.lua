@@ -439,5 +439,5 @@ function ssSeasonsMenu:onClickDebugAIRendering(state)
 end
 
 function ssSeasonsMenu:onClickDebugResetGM()
-
+    ssGrowthManager:resetGrowth()
 end
