@@ -67,9 +67,13 @@ local function tracks(self,dt)
 
         local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
 
+
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
         local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
         local underTireSnowLayers = density / area
-        log(underTireSnowLayers)        
+        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+        --log(underTireSnowLayers)        
         local underTireSnowDepth = underTireSnowLayers / ssSnow.LAYER_HEIGHT
 
         if (targetSnowDepth - sinkage) > ssSnow.LAYER_HEIGHT and snowLayers == underTireSnowLayers then
@@ -98,9 +102,9 @@ local function tracks(self,dt)
             end
 
             --log('sizeWidth = ',sizeWidth, ' | sinkage = ', sinkage,' | radius = ',radius,' | arcLength = ',arcLength,' | snowForce = ',snowForce)
-            setLinearDamping(wheel.node,snowForce/7.5)
+            --setLinearDamping(wheel.node,snowForce/7.5)
         elseif underTireSnowLayers == 0 then
-            setLinearDamping(wheel.node,snowForce/7.5)
+            --setLinearDamping(wheel.node,snowForce/7.5)
         end
 
      end
