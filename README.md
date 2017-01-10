@@ -1,4 +1,4 @@
-# FS17 Seasons
+# FS17 Seasons (Not yet released, work in progress)
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
