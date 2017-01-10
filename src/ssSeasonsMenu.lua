@@ -52,6 +52,7 @@ function ssSeasonsMenu:onOpen(element)
 
     -- settings
     self:updateGameSettings()
+    self:updateApplySettingsButton()
 
     self:updateDebugValues()
 
@@ -251,14 +252,47 @@ function ssSeasonsMenu:updateGameSettings()
     end
 
     -- TODO: load actual data
-    self.settingElements.seasonIntros:setIsChecked(true)
-    self.settingElements.seasonLength:setState(3) -- 9
+    self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
+    self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
     self.settingElements.snow:setState(2) -- if MP: 1, if no snow mask: 1
     self.settingElements.gm:setIsChecked(true)
 end
 
+function ssSeasonsMenu:updateApplySettingsButton()
+    local hasChanges = false
+
+    if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
+        or self.settingElements.seasonIntros:getIsChecked() ~= ssSeasonIntro.hideSeasonIntro then
+        -- or  then -- snow
+        hasChanges = true
+    end
+
+    self.saveButton:setDisabled(not hasChanges)
+end
+
 function ssSeasonsMenu:onClickSaveSettings()
-    log("Save settings")
+    local text = ssLang.getText("dialog_applySettings")
+    g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
+end
+
+function ssSeasonsMenu:onYesNoSaveSettings(yes)
+    if yes then
+        local newLength = self.settingElements.seasonLength:getState() * 3
+
+        ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
+
+        if g_currentMission:getIsServer() then
+            log("Set value for SNOW: " .. tostring(self.settingElements.snow:getState()))
+
+            ssSeasonsUtil:changeDaysInSeason(newLength)
+
+            self:updateApplySettingsButton()
+        else
+            -- TODO: in MP, we need to send this to the server
+            -- Then the server makes the changes, and needs to update everything to the client
+            -- g_client:getServerConnection():sendEvent(ssApplySettingsEvent:new())
+        end
+    end
 end
 
 function ssSeasonsMenu:replaceTexts(element)
@@ -275,20 +309,16 @@ function ssSeasonsMenu:onCreateSeasonIntros(element)
     self:replaceTexts(element)
 end
 
-function ssSeasonsMenu:onClickSeasonIntros(state)
-    log("Set value for INTROS: " .. tostring(self.settingElements.seasonIntros:getIsChecked()))
-end
-
 ------- SEASON LENGTH -------
 function ssSeasonsMenu:onCreateSeasonLength(element)
     self.settingElements.seasonLength = element
     self:replaceTexts(element)
 
-    element:setTexts({"3", "6", "9", "12"})
-end
-
-function ssSeasonsMenu:onClickSeasonLength(state)
-    -- log("Set value for SEASON LENGTH: " .. tostring(self.settingElements.seasonLength:getIsChecked()))
+    local texts = {}
+    for i = 1, 4 do
+        table.insert(texts, string.format(ssLang.getText("ui_days"), i * 3))
+    end
+    element:setTexts(texts)
 end
 
 ------- SNOW on/off -------
@@ -300,7 +330,6 @@ function ssSeasonsMenu:onCreateSnow(element)
 end
 
 function ssSeasonsMenu:onClickSnow(state)
-    log("Set value for SNOW: " .. tostring(self.settingElements.snow:getIsChecked()))
 end
 
 ------- GM on/off -------

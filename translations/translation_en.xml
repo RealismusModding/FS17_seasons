@@ -8,6 +8,7 @@
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Show Weather Forecast" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Show Menu" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Monday" />
         <text name="SS_WEEKDAY_TUESDAY" text="Tuesday" />
@@ -61,6 +62,7 @@
 
         <text name="ui_buttonSave" text="Apply Settings" />
         <text name="ui_snowOneLayer" text="1 layer only" />
+        <text name="ui_days" text="%i days" />
 
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons." />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season." />
@@ -81,5 +83,7 @@
         <text name="ui_helpTitle_2_1" text="2.1" />
         <text name="ui_helpTitle_3_1" text="3.1" />
         <text name="ui_helpTitle_4_1" text="4.1" />
+
+        <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length and growth can result in fields that will only repair after one game-year." />
     </texts>
 </l10n>

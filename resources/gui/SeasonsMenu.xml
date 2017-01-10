@@ -22,7 +22,7 @@
                     <!-- Column 1 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
                         <!-- Season intros on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickSeasonIntros" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="220">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="220" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -34,7 +34,7 @@
                     <!-- Column 2 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
                         <!-- Season length -->
-                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onClick="onClickSeasonLength" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="200" focusChangeBottom="221">
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="200" focusChangeBottom="221" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -43,7 +43,7 @@
                         </GuiElement>
 
                         <!-- Snow -->
-                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onClick="onClickSnow" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222">
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -52,7 +52,7 @@
                         </GuiElement>
 
                         <!-- Growth manager on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickGrowthManager" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -120,13 +120,13 @@
                         </GuiElement>
 
                         <!-- Add layer -->
-                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugAddSnow" text="Add layer" focusId="411" focusChangeTop="410" focusChangeBottom="412" toolTip="Add one layer of snow" />
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugAddSnow" text="Add layer" focusId="411" focusChangeTop="410" focusChangeBottom="412" toolTip="Add one layer of snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
 
                         <!-- Remove layer -->
-                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugRemoveSnow" text="Remove layer" focusId="412" focusChangeTop="411" focusChangeBottom="413" toolTip="Remove one layer of snow" />
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugRemoveSnow" text="Remove layer" focusId="412" focusChangeTop="411" focusChangeBottom="413" toolTip="Remove one layer of snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
 
                         <!-- Clear -->
-                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugClearSnow" text="Clear snow" focusId="413" focusChangeTop="412" focusChangeBottom="100" toolTip="Clear all snow" />
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugClearSnow" text="Clear snow" focusId="413" focusChangeTop="412" focusChangeBottom="100" toolTip="Clear all snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
 
                         <!-- Current height -->
                         <GuiElement type="text" profile="ssSettingsText" text="Hello World!" id="debugSnowDepth" />

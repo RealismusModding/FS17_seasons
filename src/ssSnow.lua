@@ -55,8 +55,6 @@ function ssSnow:draw()
 end
 
 function ssSnow:applySnow(targetSnowDepth)
-    log("Apply snow for "..tostring(targetSnowDepth))
-
     targetSnowDepth = math.min(self.MAX_HEIGHT, targetSnowDepth) -- Target snow depth in meters. Never higher than 0.4
 
     -- Limit snow height to 1 layer on non-snow masked maps
