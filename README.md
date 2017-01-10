@@ -2,7 +2,7 @@
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
-*WARNING*: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on Slack and post any issues you find!
+*WARNING*: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://realismus.joskuijpers.nl) and post any issues you find!
 
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
