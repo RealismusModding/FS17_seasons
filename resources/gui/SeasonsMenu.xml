@@ -42,8 +42,8 @@
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
 
-                        <!-- Snow on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickSnow" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222">
+                        <!-- Snow -->
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onClick="onClickSnow" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -103,6 +103,26 @@
                     <GuiElement type="boxLayout" profile="helpLineContentBox" id="helpLineContentBox">
                         <GuiElement type="text"   profile="helpLineText"  onCreate="onCreateHelpLineText" />
                         <GuiElement type="bitmap" profile="helpLineImage" onCreate="onCreateHelpLineImage" />
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- Debug -->
+                <GuiElement type="empty" profile="page" name="pageDebug" onCreate="onCreatePageDebug">
+                    <!-- Column 1 (Snow) -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
+                        <!-- Auto snow -->
+                        <!-- Add layer -->
+                        <!-- Remove layer -->
+                        <!-- Clear -->
+                        <!-- Current height -->
+                    </GuiElement>
+
+                    <!-- Column 2 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
+                    </GuiElement>
+
+                    <!-- Column 3 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" id="settingsColumn3">
                     </GuiElement>
                 </GuiElement>
             </GuiElement>

@@ -55,6 +55,9 @@ function ssSeasonsMenu:onOpen(element)
 
     -- Todo: get these values from the XML file. This is messy
     local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
+    if ssSeasonsMod.debug then
+        table.insert(titles, ssLang.getText("ui_pageDebug"))
+    end
     self.pageSelector:setTexts(titles)
 
     self.pageSelector:setState(self.currentPageMappingIndex, true)
@@ -86,6 +89,7 @@ end
 
 -- Update the visible pages
 function ssSeasonsMenu:updatePages()
+    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_DEBUG, not ssSeasonsMod.debug)
 end
 
 -- Called when the current page has changed.
@@ -250,7 +254,7 @@ function ssSeasonsMenu:updateGameSettings()
     -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(true)
     self.settingElements.seasonLength:setState(3) -- 9
-    self.settingElements.snow:setIsChecked(true)
+    self.settingElements.snow:setState(2) -- if MP: 1, if no snow mask: 1
     self.settingElements.gm:setIsChecked(true)
 end
 
@@ -292,6 +296,8 @@ end
 function ssSeasonsMenu:onCreateSnow(element)
     self.settingElements.snow = element
     self:replaceTexts(element)
+
+    element:setTexts({ssLang.getText("ui_off"), ssLang.getText("ui_snowOneLayer"), ssLang.getText("ui_on")})
 end
 
 function ssSeasonsMenu:onClickSnow(state)
@@ -385,6 +391,14 @@ function ssSeasonsMenu:onHelpLineListSelectionChanged(rowIndex)
     end
 end
 ]]
+
+------------------------------------------
+-- DEBUG PAGE
+------------------------------------------
+
+function ssSeasonsMenu:onCreatePageDebug(element)
+    ssSeasonsMenu.PAGE_DEBUG = self.pagingElement:getPageIdByElement(element)
+end
 
 ------------------------------------------
 -- OLD
