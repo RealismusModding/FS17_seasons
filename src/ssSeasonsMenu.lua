@@ -257,8 +257,16 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.gm:setIsChecked(ssGrowthManager.growthManagerEnabled)
     self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
     self.settingElements.snow:setState(ssSnow.mode)
+    self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
 
-    self.settingElements.snowTracks:setIsChecked(true)
+    -- Make sure the GUI is consistent
+    if ssSnow.mode == ssSnow.MODE_ON then
+        tracks:setDisabled(true)
+        tracks:setIsChecked(false)
+    else
+        tracks:setDisabled(false)
+        tracks:setIsChecked(ssVehicle.snowTracksEnabled)
+    end
 end
 
 function ssSeasonsMenu:updateApplySettingsButton()
@@ -268,6 +276,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
         or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible
+        or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode then
         -- or  then -- snow
         hasChanges = true
@@ -298,8 +307,10 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
             ssSnow:setMode(self.settingElements.snow:getState())
             self:updateSnowStatus()
 
-            ssGrowthManager.growthManagerEnabled = self.settingElements.gm:getIsChecked()
             ssSeasonsUtil:changeDaysInSeason(newLength)
+
+            ssGrowthManager.growthManagerEnabled = self.settingElements.gm:getIsChecked()
+            ssVehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
 
             self:updateApplySettingsButton()
         else
@@ -358,7 +369,7 @@ function ssSeasonsMenu:onClickSnowToggle(state)
         tracks:setIsChecked(false)
     else
         tracks:setDisabled(false)
-        tracks:setIsChecked(true) -- TODO
+        tracks:setIsChecked(ssVehicle.snowTracksEnabled)
     end
 
     self:updateApplySettingsButton()

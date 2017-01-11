@@ -18,7 +18,14 @@ ssSnow.MODE_ON = 3
 
 function ssSnow:load(savegame, key)
     self.appliedSnowDepth = ssStorage.getXMLInt(savegame, key .. ".weather.appliedSnowDepth", 0) * self.LAYER_HEIGHT
-    self.mode = ssStorage.getXMLInt(savegame, key .. ".weather.mode", ssSnow.MODE_ON)
+
+    local saveMode = ssStorage.getXMLInt(savegame, key .. ".weather.snowMode", nil)
+    if saveMode == nil then
+        self.mode = ssSnow.MODE_ON
+    else
+        self.mode = saveMode
+        self.modeIsFromSave = true
+    end
 
     -- Automatic snow using the weather. Can be disabled for debugging
     self.autoSnow = true
@@ -26,7 +33,7 @@ end
 
 function ssSnow:save(savegame, key)
     ssStorage.setXMLInt(savegame, key .. ".weather.appliedSnowDepth", self.appliedSnowDepth / self.LAYER_HEIGHT)
-    ssStorage.setXMLInt(savegame, key .. ".weather.mode", self.mode)
+    ssStorage.setXMLInt(savegame, key .. ".weather.snowMode", self.mode)
 end
 
 function ssSnow:loadMap(name)
@@ -172,7 +179,7 @@ function ssSnow:update(dt)
         end
 
         -- When no mask is available, limit to one layer
-        if self.snowMaskId == nil then
+        if self.snowMaskId == nil and not self.modeIsFromSave then
             self.mode = self.MODE_ONE_LAYER
         end
     end
