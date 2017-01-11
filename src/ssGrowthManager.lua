@@ -172,12 +172,16 @@ function ssGrowthManager:draw()
 end
 
 function ssGrowthManager:resetGrowth()
-    logInfo("ssGrowthManager: Growth reset")    
+    if self.growthManagerEnabled == true then
+        self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+        self.doGrowthTransition = true
+        logInfo("ssGrowthManager: Growth reset") 
+    end
 end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
-    if self.growthManagerEnabled == true then -- redundant but heyho
+    if self.growthManagerEnabled == true then 
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
         if self.doResetGrowth == true and growthTransition == 1 then
