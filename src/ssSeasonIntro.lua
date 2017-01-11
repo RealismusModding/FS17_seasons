@@ -21,18 +21,6 @@ function ssSeasonIntro:loadMap(name)
     self.showSeasonChanged = false
 end
 
-function ssSeasonIntro:deleteMap()
-end
-
-function ssSeasonIntro:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssSeasonIntro:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssSeasonIntro:draw()
-end
-
 function ssSeasonIntro:update(dt)
     if self.showSeasonChanged == true and g_gui.currentGui == nil then
         self.showSeasonChanged = false

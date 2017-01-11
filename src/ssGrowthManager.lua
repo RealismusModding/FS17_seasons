@@ -65,7 +65,7 @@ function ssGrowthManager:loadMap(name)
         g_currentMission:setPlantGrowthRateLocked(true)
         ssSeasonsMod:addGrowthStageChangeListener(self)
 
-        
+
 
         self:buildCanPlantData()
 
@@ -98,16 +98,6 @@ function ssGrowthManager:getGrowthData()
         return false
     end
     return true
-end
-
-function ssGrowthManager:deleteMap()
-end
-
-function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    --print(tostring(unicode))
 end
 
 function ssGrowthManager:update(dt)
@@ -167,21 +157,17 @@ function ssGrowthManager:update(dt)
     end
 end
 
-
-function ssGrowthManager:draw()
-end
-
 function ssGrowthManager:resetGrowth()
     if self.growthManagerEnabled == true then
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
         self.doGrowthTransition = true
-        logInfo("ssGrowthManager: Growth reset") 
+        logInfo("ssGrowthManager: Growth reset")
     end
 end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
-    if self.growthManagerEnabled == true then 
+    if self.growthManagerEnabled == true then
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
         if self.doResetGrowth == true and growthTransition == 1 then
@@ -317,7 +303,6 @@ function ssGrowthManager:buildCanPlantData()
         end
     end
 end
-
 
 --TODO: the 3 if statements should be refactored to 3 functions if possible. They are used in two places
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)

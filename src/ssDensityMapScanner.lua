@@ -57,7 +57,7 @@ function ssDensityMapScanner:load(savegame, key)
     self.currentCallBackName = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentCallBackName", "")
     self.currentParameter = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentParameter", "")
     self.moreIterations = ssStorage.getXMLBool(savegame, key .. ".densityMapScanner.moreIterations", false)
-    
+
     local items = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.workQ#count", 0)
     if items > 0 then
         for count=1, items do
@@ -68,22 +68,6 @@ function ssDensityMapScanner:load(savegame, key)
             print("[Seasons] DensityMapScanner, loaded jobb: " .. callBackName .. " with parameter " .. parameter)
         end
     end
-end
-
-function ssDensityMapScanner:loadMap(name)
-    -- ssDensityMapScanner:queuJob("test1", "test2", "ParameteR")
-end
-
-function ssDensityMapScanner:deleteMap()
-end
-
-function ssDensityMapScanner:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssDensityMapScanner:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssDensityMapScanner:draw()
 end
 
 function ssDensityMapScanner:update(dt)
@@ -135,5 +119,4 @@ function ssDensityMapScanner:ssIterateOverTerrain()
         self.currentZ = 0
         self.moreIterations = false
     end
-
 end

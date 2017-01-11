@@ -36,12 +36,6 @@ function ssViewController:loadMap(name)
     --self:growthTransitionsDisplayData() --for testing only right now
 end
 
-function ssViewController:deleteMap()
-end
-
-function ssViewController:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
 function ssViewController:keyEvent(unicode, sym, modifier, isDown)
     --print(tostring(unicode))
     if (unicode == 47) then
@@ -51,9 +45,6 @@ function ssViewController:keyEvent(unicode, sym, modifier, isDown)
             self.debugView = false
         end
     end
-end
-
-function ssViewController:update(dt)
 end
 
 function ssViewController:draw()

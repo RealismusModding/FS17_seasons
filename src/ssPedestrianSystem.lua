@@ -23,21 +23,6 @@ function ssPedestrianSystem:readStream(streamId, connection)
     self:seasonChanged()
 end
 
-function ssPedestrianSystem:deleteMap()
-end
-
-function ssPedestrianSystem:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssPedestrianSystem:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssPedestrianSystem:draw()
-end
-
-function ssPedestrianSystem:update(dt)
-end
-
 function ssPedestrianSystem:seasonChanged()
     local season = ssSeasonsUtil:season()
 

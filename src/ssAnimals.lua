@@ -7,14 +7,6 @@
 
 ssAnimals = {}
 
-function ssAnimals:load(savegame, key)
-    -- self.appliedSnowDepth = ssStorage.getXMLFloat(savegame, key .. ".animals.appliedSnowDepth", 0)
-end
-
-function ssAnimals:save(savegame, key)
-    -- ssStorage.setXMLFloat(savegame, key .. ".animals.appliedSnowDepth", self.appliedSnowDepth)
-end
-
 function ssAnimals:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self)
 
@@ -44,21 +36,6 @@ end
 function ssAnimals:readStream(streamId, connection)
     -- Load after data for seasonUtils is loaded
     self:seasonChanged()
-end
-
-function ssAnimals:deleteMap()
-end
-
-function ssAnimals:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssAnimals:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssAnimals:draw()
-end
-
-function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()

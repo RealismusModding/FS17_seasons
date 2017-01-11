@@ -21,27 +21,6 @@ function ssMultiplayer:loadMap(name)
     end
 end
 
-function ssMultiplayer:deleteMap()
-end
-
-function ssMultiplayer:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssMultiplayer:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssMultiplayer:draw()
-end
-
-function ssMultiplayer:update(dt)
-end
-
-function ssMultiplayer:readStream(streamId, connection)
-end
-
-function ssMultiplayer:writeStream(streamId, connection)
-end
-
 -- connection:sendEvent(ssMultiplayerJoinEvent:new())
 
 ssMultiplayerJoinEvent = {}

@@ -39,7 +39,6 @@ g_modClasses = {
     "ssSeasonsXML",
     "ssMultiplayer",
     "ssSeasonsUtil",
-    "ssSettings",
     "ssTime",
     "ssEconomy",
     "ssWeatherManager",
@@ -53,7 +52,8 @@ g_modClasses = {
     "ssAnimals",
     "ssDensityMapScanner",
     "ssViewController",
-    "ssPedestrianSystem"
+    "ssPedestrianSystem",
+    "ssMain"
 }
 
 if ssSeasonsMod.debug then
@@ -92,11 +92,22 @@ function ssSeasonsMod.loadMap(...)
     return ssSeasonsMod.origLoadMap(...)
 end
 
+function noopFunction() end
+
 function ssSeasonsMod.loadMapFinished(...)
+    local requiredMethods = { "deleteMap", "mouseEvent", "keyEvent", "draw", "update" }
+
     -- Before loading the savegame, allow classes to set their default values
     -- and let the settings system know that they need values
     for _, k in pairs(g_modClasses) do
         if _G[k].loadMap ~= nil then
+            -- Set any missing functions with dummies. This is because it makes code in classes cleaner
+            for _, method in pairs(requiredMethods) do
+                if _G[k][method] == nil then
+                    _G[k][method] = noopFunction
+                end
+            end
+
             addModEventListener(_G[k])
         end
     end

@@ -11,22 +11,10 @@ function ssDebug:loadMap(name)
     self.enabled = false
 end
 
-function ssDebug:deleteMap()
-end
-
-function ssDebug:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
 function ssDebug:keyEvent(unicode, sym, modifier, isDown)
     if not isDown and sym == Input.KEY_d and modifier == Input.MOD_LALT then
         self:setEnabled(not self.enabled)
     end
-end
-
-function ssDebug:draw()
-end
-
-function ssDebug:update(dt)
 end
 
 function ssDebug:hourChanged()

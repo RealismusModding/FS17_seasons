@@ -126,15 +126,6 @@ function ssWeatherManager:loadMap(name)
 
 end
 
-function ssWeatherManager:deleteMap()
-end
-
-function ssWeatherManager:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssWeatherManager:keyEvent(unicode, sym, modifier, isDown)
-end
-
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     local numDays = streamReadUInt8(streamId)
@@ -212,9 +203,6 @@ function ssWeatherManager:update(dt)
             setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, true)
         end
     end
-end
-
-function ssWeatherManager:draw()
 end
 
 -- Only run this the very first time

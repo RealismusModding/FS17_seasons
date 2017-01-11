@@ -46,21 +46,6 @@ function ssVehicle:loadMap()
     self:loadAllowedInWinter()
 end
 
-function ssVehicle:deleteMap()
-end
-
-function ssVehicle:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssVehicle:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssVehicle:draw()
-end
-
-function ssVehicle:update(dt)
-end
-
 function ssVehicle:dayChanged()
     for i, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then

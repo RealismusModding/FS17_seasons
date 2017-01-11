@@ -94,21 +94,6 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     delete(file)
 end
 
-function ssReplaceVisual:deleteMap()
-end
-
-function ssReplaceVisual:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssReplaceVisual:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssReplaceVisual:draw()
-end
-
-function ssReplaceVisual:update(dt)
-end
-
 function ssReplaceVisual:seasonChanged()
     ssReplaceVisual:updateTextures(getRootNode())
 end

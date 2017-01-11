@@ -69,18 +69,6 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.baseLoanInterest)
 end
 
-function ssEconomy:deleteMap()
-end
-
-function ssEconomy:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssEconomy:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssEconomy:draw()
-end
-
 function ssEconomy:update(dt)
     if g_currentMission:getIsServer() then
         local stats = g_currentMission.missionStats

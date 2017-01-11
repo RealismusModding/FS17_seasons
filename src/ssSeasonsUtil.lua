@@ -66,15 +66,6 @@ function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 end
 
-function ssSeasonsUtil:deleteMap()
-end
-
-function ssSeasonsUtil:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssSeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
-end
-
 function ssSeasonsUtil:update(dt)
     if self.isNewGame then
         self.isNewGame = false
@@ -97,9 +88,6 @@ function ssSeasonsUtil:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.daysInSeason)
     streamWriteFloat32(streamId, self.latestSeason)
     streamWriteFloat32(streamId, self.latestGrowthStage)
-end
-
-function ssSeasonsUtil:draw()
 end
 
 -- Get the current day number.

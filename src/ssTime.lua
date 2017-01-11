@@ -34,19 +34,6 @@ function ssTime:setup()
     self:adaptTime()
 end
 
-function ssTime:deleteMap()
-    -- g_currentMission.environment:removeDayChangeListener(self)
-end
-
-function ssTime:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssTime:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssTime:draw()
-end
-
 function ssTime:readStream(streamId, connection)
     self.latitude = streamReadFloat32(streamId)
 
@@ -55,9 +42,6 @@ end
 
 function ssTime:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.latitude)
-end
-
-function ssTime:update(dt)
 end
 
 -- Change the night/day times according to season

@@ -87,15 +87,6 @@ function ssWeatherForecast:save(savegame, key)
     end
 end
 
-function ssWeatherForecast:deleteMap()
-end
-
-function ssWeatherForecast:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssWeatherForecast:keyEvent(unicode, sym, modifier, isDown)
-end
-
 function ssWeatherForecast:update(dt)
     if self.keyTextVisible then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF)
