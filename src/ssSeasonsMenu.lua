@@ -260,6 +260,7 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
 
     -- Make sure the GUI is consistent
+    local tracks = self.settingElements.snowTracks
     if ssSnow.mode == ssSnow.MODE_ON then
         tracks:setDisabled(true)
         tracks:setIsChecked(false)
