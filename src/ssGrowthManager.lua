@@ -150,6 +150,7 @@ function ssGrowthManager:resetGrowth()
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
         ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
     end
+end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
