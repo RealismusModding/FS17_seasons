@@ -349,7 +349,7 @@ function ssSeasonsMenu:onCreateSeasonLength(element)
 
     local texts = {}
     for i = 1, 4 do
-        table.insert(texts, string.format(ssLang.getText("ui_days"), i * 3))
+        table.insert(texts, string.format(ssLang.getText("ui_days", "%i days"), i * 3))
     end
     element:setTexts(texts)
 end
