@@ -104,7 +104,6 @@ end
 function ssGrowthManager:handleGrowth(x, z, widthX, widthZ, heightX, heightZ, layers)
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
-        local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
         --handling new unknown fruits
         if self.defaultFruits[fruitName] == nil then
@@ -159,13 +158,10 @@ function ssGrowthManager:growthStageChanged()
 
         if self.doResetGrowth == true and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-            --self.doGrowthTransition = true
-            self.growthManagerEnabled = true -- i can't remember why I did this. TODO: test if works without this 
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
         else
             log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
             self.currentGrowthTransitionPeriod = growthTransition
-            --self.doGrowthTransition = true
         end
         ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
     end
