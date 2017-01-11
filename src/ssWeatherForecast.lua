@@ -77,18 +77,16 @@ end
 
 function ssWeatherForecast:load(savegame, key)
     self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
-    self.keyTextVisible = ssStorage.getXMLBool(savegame, key .. ".settings.weatherForecastHelpVisible", true)
 end
 
 function ssWeatherForecast:save(savegame, key)
     if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", self.hud.visible)
-        ssStorage.setXMLBool(savegame, key .. ".settings.weatherForecastHelpVisible", self.keyTextVisible)
     end
 end
 
 function ssWeatherForecast:update(dt)
-    if self.keyTextVisible then
+    if g_seasons.showControlsInHelpScreen then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF)
     end
 

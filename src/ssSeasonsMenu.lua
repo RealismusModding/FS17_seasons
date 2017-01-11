@@ -254,7 +254,7 @@ function ssSeasonsMenu:updateGameSettings()
     -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
     self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
-    self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
+    self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
     self.settingElements.snow:setState(ssSnow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
 
@@ -274,7 +274,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
 
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
-        or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible
+        or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode then
         -- or  then -- snow
@@ -299,7 +299,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
         local newLength = self.settingElements.seasonLength:getState() * 3
 
         ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
-        ssWeatherForecast.keyTextVisible = self.settingElements.wfHelp:getIsChecked()
+        g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
 
         if g_currentMission:getIsServer() then
             ssSnow:setMode(self.settingElements.snow:getState())
@@ -332,9 +332,9 @@ function ssSeasonsMenu:onCreateSeasonIntros(element)
     self:replaceTexts(element)
 end
 
--------- WF HELP on/off -------
-function ssSeasonsMenu:onCreateWFHelp(element)
-    self.settingElements.wfHelp = element
+-------- CONTROLS HELP on/off -------
+function ssSeasonsMenu:onCreateControlsHelp(element)
+    self.settingElements.controlsHelp = element
     self:replaceTexts(element)
 end
 

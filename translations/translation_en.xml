@@ -67,13 +67,13 @@
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons." />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season." />
         <text name="tooltip_snow" text="Snow will fall in cold winters and block roads." />
-        <text name="tooltip_wfHelp" text="Show the forecast key in the help menu. Turn off if you don't have space enough." />
+        <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu." />
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it." />
 
         <text name="setting_seasonIntros" text="Season introductions" />
         <text name="setting_seasonLength" text="Season length" />
         <text name="setting_snow" text="Snow mode" />
-        <text name="setting_wfHelp" text="Forecast key in help menu" />
+        <text name="setting_controlsHelp" text="Keys in help menu" />
         <text name="setting_snowTracks" text="Snow tracks" />
 
         <text name="ui_helpCategory_1" text="Seasons" />

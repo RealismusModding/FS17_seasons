@@ -71,11 +71,6 @@ function ssSeasonsUtil:update(dt)
         self.isNewGame = false
         ssSeasonsUtil:dayChanged() -- trigger the stage change events.
     end
-
-    -- TODO: This does not belong here, but in the main seasons class (g_seasons ?)
-    if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_MENU) then
-        g_gui:showGui("SeasonsMenu")
-    end
 end
 
 function ssSeasonsUtil:readStream(streamId, connection)
