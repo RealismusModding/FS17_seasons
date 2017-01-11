@@ -134,9 +134,7 @@ function ssGrowthManager:handleGrowth(x, z, widthX, widthZ, heightX, heightZ, la
 end
 
 function ssGrowthManager:update(dt)
-    
 end
-
 
 function ssGrowthManager:draw()
 end
@@ -152,7 +150,6 @@ function ssGrowthManager:resetGrowth()
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
         ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
     end
-end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
@@ -232,7 +229,6 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
 end
 
---FIXME: change this function to use passed in data (done). maybe move to seasonsUtil
 function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
     if data[fruitName] ~= nil then
         if data[fruitName][growthTransition] == nil then

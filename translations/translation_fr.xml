@@ -8,6 +8,7 @@
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Affiché la Météo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: affiché le menu" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Lundi" />
         <text name="SS_WEEKDAY_TUESDAY" text="Mardi" />
@@ -39,8 +40,9 @@
         <text name="SS_REPAIR_VEHICLE_COST" text="réparé %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
-        <text name="SS_REPAIR_DIALOG" text="voulez vous réparé la %s pour %s?" />
+        <text name="SS_REPAIR_DIALOG" text="voulez vous réparé %s pour %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
+        <text name="SS_WARN_REPAIR" text="moteur en panne. veuillez réparé votre machine!" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas y travailler!" />
         <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencé!" />
@@ -51,5 +53,41 @@
         <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
+
+		<!-- GUI -->
+        <text name="ui_pageOverview" text="montré" />
+        <text name="ui_pageSettings" text="parametres" />
+        <text name="ui_pageHelp" text="aide" />
+        <text name="ui_pageDebug" text="outils de débogage" />
+
+        <text name="ui_buttonSave" text="Appliquer les paramètres" />
+        <text name="ui_snowOneLayer" text="une couche de neige" />
+        <text name="ui_days" text="%i jour" />
+
+        <text name="tooltip_seasonLength" text="La longueur d'une saison jours. Une année est quatre saisons." />
+        <text name="tooltip_seasonIntros" text="Montrez une introduction de saison au début d'une saison." />
+        <text name="tooltip_snow" text="La neige tombera(chutera) dans des hivers froids et bloquera des routes." />
+        <text name="tooltip_gm" text="La récolte grandira avec un système de croissance saisonnier avancé.Avertissement:la mise hors de service pourrait donner des résultats inattendus" />
+        <text name="tooltip_wfHelp" text="Montrez la clé(touche) de prévision dans le menu d'aide. Éteignez-vous si vous n'avez pas d'assez espace" />
+        <text name="tooltip_snowTracks" text="Les véhicules compriment la neige en y conduisant" />
+
+        <text name="setting_seasonIntros" text="Introductions de saison" />
+        <text name="setting_seasonLength" text="durée de la saison" />
+        <text name="setting_snow" text="mod neige" />
+        <text name="setting_gm" text="saison de croissance" />
+        <text name="setting_wfHelp" text="Touche de prévision dans menu d'aide" />
+        <text name="setting_snowTracks" text="Traces de neige" />
+
+        <text name="ui_helpCategory_1" text="saisons" />
+        <text name="ui_helpCategory_2" text="neige" />
+        <text name="ui_helpCategory_3" text="culture" />
+        <text name="ui_helpCategory_4" text="animaux" />
+
+        <text name="ui_helpTitle_1_1" text="1.1" />
+        <text name="ui_helpTitle_2_1" text="2.1" />
+        <text name="ui_helpTitle_3_1" text="3.1" />
+        <text name="ui_helpTitle_4_1" text="4.1" />
+
+        <text name="dialog_applySettings" text="Êtes-vous sûrs que vous voulez changer les fixations de Saisons ? Change à la longueur de saison et la croissance peut aboutir aux champs(domaines) qui répareront seulement après un ans de jeu." />
     </texts>
 </l10n>

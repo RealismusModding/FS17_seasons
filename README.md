@@ -2,6 +2,10 @@
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
+***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-now-support-adding-the-seasons-mod-to-an-existing-savegame)
+
+***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://realismus.joskuijpers.nl) and post any issues you find!
+
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
 The code is open for your own use, but give credit where due.
@@ -15,6 +19,9 @@ Please open a pull request to allow for merging back your adjustments. (See also
 
 ## Pull Requests
 Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
+
+## For map makers
+For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://realismus.joskuijpers.nl).
 
 ## Features
 
@@ -61,7 +68,7 @@ Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any change
 - Animals have been adjusted to the seasons
   - They drink more water in summer than in winter
   - They need more straw in winter than in summer
-  - They only birth babies in spring (pigs and sheep) or summer (cows)
+  - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
 
 ## Coding style

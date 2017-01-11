@@ -16,7 +16,16 @@ ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
 SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "src/ssRepairable.lua")
---SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", ssSeasonsMod.modDir .. "src/ssSnowTracks.lua")
+SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", ssSeasonsMod.modDir .. "src/ssSnowTracks.lua")
+
+
+function ssVehicle:load(savegame, key)
+    self.snowTracksEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.snowTracks", true)
+end
+
+function ssVehicle:save(savegame, key)
+    ssStorage.setXMLBool(savegame, key .. ".settings.snowTracks", self.snowTracksEnabled)
+end
 
 function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
@@ -28,9 +37,11 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
+    InGameMenu.onCreateGarageVehicleAge = Utils.overwrittenFunction(InGameMenu.onCreateGarageVehicleAge, ssVehicle.inGameMenuOnCreateGarageVehicleAge)
+
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
-    self:installRepairableSpecialization()
+    self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
 end
@@ -58,7 +69,7 @@ function ssVehicle:dayChanged()
     end
 end
 
-function ssVehicle:installRepairableSpecialization()
+function ssVehicle:installVehicleSpecializations()
     local specWashable = SpecializationUtil.getSpecialization("washable")
 
     -- Go over all the vehicle types
@@ -77,7 +88,7 @@ function ssVehicle:installRepairableSpecialization()
 
         if hasWashable then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
-            --table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
         end
     end
 end
@@ -263,7 +274,7 @@ end
 
 function ssVehicle:calculateOverdueFactor(vehicle)
     local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay  
+    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
 
     if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
         overdueFactor = math.ceil(math.max(daysSinceLastRepair/(ssSeasonsUtil.daysInSeason * 2), math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
