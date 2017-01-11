@@ -68,7 +68,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Animals have been adjusted to the seasons
   - They drink more water in summer than in winter
   - They need more straw in winter than in summer
-  - They only birth babies in spring (pigs and sheep) or summer (cows)
+  - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
 
 ## Coding style
