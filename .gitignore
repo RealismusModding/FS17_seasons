@@ -3,4 +3,5 @@ build.bat
 .DS_STORE
 FS17_seasons.zip
 *.sublime-workspace
+*.sublime-project
 dist/

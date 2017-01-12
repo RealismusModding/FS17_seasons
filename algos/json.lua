@@ -1,3 +1,5 @@
+-- By Rahkiin
+
 -- returns: isArray, size (if size is 0 can also be object)
 local function isArray(table)
     local max = 0
