@@ -9,5 +9,5 @@ __pycache__
 # Build system
 dist/
 .buildrc
-FS17_seasons.zip
+FS17_seasons*.zip
 node_modules/

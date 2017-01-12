@@ -7,17 +7,12 @@ const zip = require("gulp-zip");
 const size = require("gulp-size");
 const template = require("gulp-template");
 const xmlpoke = require("gulp-xmlpoke");
-const merge = require("merge-stream")
+const merge = require("merge-stream");
+const git = require("git-rev-sync");
 
 const _defaults = require("lodash.defaultsdeep")
 const _has = require("lodash.has")
 const _get = require("lodash.get")
-
-
-const c_outZipName = "FS17_seasons.zip";
-const c_version = "1.0.0.0" // TODO: make this the package.json version + some number
-const c_descVersion = "33"
-
 
 /////////////////////////////////////////////////////
 /// Functions
@@ -30,10 +25,10 @@ const c_descVersion = "33"
 function fillModDesc() {
     const replacements = [{
         xpath: "/modDesc/version",
-        value: c_version
+        value: packageVersion
     }, {
         xpath: "/modDesc/@descVersion",
-        value: c_descVersion
+        value: package.fs.modDescRev
     }];
 
     return gulp
@@ -57,6 +52,28 @@ function templatedLua() {
     return gulp
         .src("src/*.lua", { base: "." })
         .pipe(template(replacements, options));
+}
+
+function createVersionName() {
+    const short = git.short();
+    const branch = git.branch();
+    const tag = git.tag();
+
+    let versionName = "";
+    if (tag !== git.long()) {
+        versionName = tag;
+    } else {
+        versionName = branch + "_" + short;
+    }
+
+    // to check if dirty: if so, echos *, otherwise exit -1
+    // [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"
+
+    if (false) {
+        versionName += "_wd";
+    }
+
+    return versionName;
 }
 
 /**
@@ -102,9 +119,15 @@ class BuildConfig {
 /////////////////////////////////////////////////////
 
 var buildConfig = new BuildConfig();
+var package = JSON.parse(fs.readFileSync("package.json"));
+var packageVersion = package.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
+var outputZipName = "FS17_seasons_" + createVersionName() + ".zip";
+
+console.log("packageVersion",packageVersion,"output",outputZipName)
+
 
 gulp.task("clean:zip", () => {
-    return del(c_outZipName);
+    return del("FS17_seasons*.zip");
 });
 
 // Build the mod zipfile
@@ -121,7 +144,7 @@ gulp.task("build", () => {
 
     return merge(sourceStream, fillModDesc(), templatedLua())
         .pipe(size())
-        .pipe(zip(c_outZipName))
+        .pipe(zip(outputZipName))
         .pipe(size())
         .pipe(gulp.dest("."));
 });
@@ -129,7 +152,7 @@ gulp.task("build", () => {
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build"], () => {
     return gulp
-        .src(c_outZipName, { base: "." })
+        .src(outputZipName, { base: "." })
         .pipe(gulp.dest(buildConfig.get("modsFolder")));
 });
 

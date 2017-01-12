@@ -14,7 +14,7 @@ This is not required when using the only official published mod by Realismis Mod
 
 ## Making videos
 Because this mod is WIP and not yet released we have a couple of rules regarding videos. You are allowed to make videos with Seasons, under a couple of simple conditions:
-- Do not share the GitHub link. 
+- Do not share the GitHub link.
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
 - Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow),
@@ -70,8 +70,7 @@ For a better game experience, custom maps should add two new density layers: one
 - If you don't maintain your vehicle it may break down
 
 ### Finance
-- Loan cap is set to 70% of your total owned land value
-- New maximum loan is set to 5 million
+- Loan cap is set to 30% of your total owned land value with a minimum of 300,000
 - The interest has been adjusted to the new year length.
 
 ### Helpers
