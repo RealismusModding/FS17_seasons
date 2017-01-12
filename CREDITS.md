@@ -1,12 +1,13 @@
 SEASONS MOD CREDITS
+===================
 
 Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 
 Snow Weather and Season Huds -- FSModding_Gary
 
-Translations
-Polish - Dzi4d3k 
-German - tobiasgo/Oekobauer 
+## Translations
+Polish - Dzi4d3k
+German - tobiasgo/Oekobauer
 Italian - fcelsa
 French - thierry62
 Russian - Gonimy-Vetrom
