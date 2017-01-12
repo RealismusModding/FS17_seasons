@@ -8,8 +8,10 @@
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: прогноз погоды" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
-
-        <text name="SS_WEEKDAY_MONDAY" text="Понедельник" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
+<text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды" />
+       
+ <text name="SS_WEEKDAY_MONDAY" text="Понедельник" />
         <text name="SS_WEEKDAY_TUESDAY" text="Вторник" />
         <text name="SS_WEEKDAY_WEDNESDAY" text="Среда" />
         <text name="SS_WEEKDAY_THURSDAY" text="Четверг" />
@@ -52,5 +54,39 @@
         <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно тодохнуть или заняться лесом." /> <!-- зима -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
+
+        <!-- GUI -->
+        <text name="ui_pageOverview" text="Обзор" />
+        <text name="ui_pageSettings" text="Настройки" />
+        <text name="ui_pageHelp" text="Справка" />
+        <text name="ui_pageDebug" text="Инструменты отладки" />
+
+        <text name="ui_buttonSave" text="Применить" />
+        <text name="ui_snowOneLayer" text="Только 1 слой" />
+        <text name="ui_days" text="%i дн." />
+
+        <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов." />
+        <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
+        <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
+        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш (Alt+F) для прогноза погоды и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
+        <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему." />
+
+        <text name="setting_seasonIntros" text="Напоминание о сезонах" />
+        <text name="setting_seasonLength" text="Длинна сезона" />
+        <text name="setting_snow" text="Режим снега" />
+        <text name="setting_controlsHelp" text="Горячие калавиши" />
+        <text name="setting_snowTracks" text="Следы на снегу" />
+
+        <text name="ui_helpCategory_1" text="Сезоны" />
+        <text name="ui_helpCategory_2" text="Снег" />
+        <text name="ui_helpCategory_3" text="Культуры" />
+        <text name="ui_helpCategory_4" text="Животные" />
+
+        <text name="ui_helpTitle_1_1" text="1.1" />
+        <text name="ui_helpTitle_2_1" text="2.1" />
+        <text name="ui_helpTitle_3_1" text="3.1" />
+        <text name="ui_helpTitle_4_1" text="4.1" />
+
+        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения длины сезона и настроек роста можно применить к полям, только по прошествии одного игрового года." />
     </texts>
 </l10n>
