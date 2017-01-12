@@ -30,7 +30,6 @@ function ssMain:update(dt)
     end
 end
 
-
 -- Withering of the game is not actually used. To not cause any confusion, the withering toggle element
 -- is disabled.
 local function disableWitherOption(self)
@@ -38,3 +37,12 @@ local function disableWitherOption(self)
     self.plantWitheringElement:setIsChecked(true)
 end
 InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, disableWitherOption)
+
+-- Disable the tutorial by clearing the onCreate function that is called by vanilla maps
+-- This has to be here so it is loaded early before the map is loaded. Otherwise the method
+-- is already called.
+function TourIcons.onCreate = function (self, id)
+    local tourIcons = TourIcons:new(id)
+    tourIcons.visible = false
+end
+
