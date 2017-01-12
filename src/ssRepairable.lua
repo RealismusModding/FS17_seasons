@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- REPAIRABLE SPECIALIZATION
 ---------------------------------------------------------------------------------------------------------
--- Authors:  Jarvixes (Rahkiin), reallogger, Rival
+-- Authors:  Rahkiin, reallogger, Rival
 --
 
 ssRepairable = {}
@@ -140,10 +140,10 @@ function ssRepairable:update(dt)
             g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceInterval, ssSeasonsUtil.daysInSeason * 2 - daysSinceLastRepair))
         end
     end
-    
+
     if self.isMotorStarted then
         math.random()
-        local overdueFactor = ssVehicle:calculateOverdueFactor(self) 
+        local overdueFactor = ssVehicle:calculateOverdueFactor(self)
         local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)  --never less than 20% chance every minute for a breakdown
 
         if math.random() > p then

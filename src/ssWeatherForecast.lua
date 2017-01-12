@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast and display the weather
--- Authors:  Authors:  ian898, Jarvixes, theSeb, reallogger
+-- Authors:  Authors:  ian898, Rahkiin, theSeb, reallogger
 --
 -- Credits: Blacky_BPG for scaling the hud
 

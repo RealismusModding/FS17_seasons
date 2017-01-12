@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="33">
     <author>Realismus Modding</author>
-    <contributors>theSeb, Jarvixes (Rahkiin), reallogger, mrbear</contributors>
+    <contributors>theSeb, Rahkiin, reallogger, mrbear</contributors>
     <version>1.0.0.0</version>
 
     <title>
@@ -19,7 +19,7 @@
     <l10n filenamePrefix="translations/translation" />
 
     <extraSourceFiles>
-        <sourceFile filename="src/ssSeasonsMod.lua" />
+        <sourceFile filename="src/loader.lua" />
     </extraSourceFiles>
 
     <inputBindings>

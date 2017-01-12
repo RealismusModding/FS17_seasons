@@ -2,7 +2,7 @@
 -- TIME SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the day/night system
--- Authors:  Jarvixes, reallogger
+-- Authors:  Rahkiin, reallogger
 --
 
 ssTime = {}

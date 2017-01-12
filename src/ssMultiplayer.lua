@@ -2,7 +2,7 @@
 -- SEASON INTRO SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  A small display that shows information on the season at season start
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 --
 
 ssMultiplayer = {}

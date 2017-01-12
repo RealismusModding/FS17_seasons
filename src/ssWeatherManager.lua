@@ -2,7 +2,7 @@
 -- WEATHER MANAGER SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to create and manage the weather
--- Authors:  Authors:  ian898, Jarvixes, theSeb, reallogger
+-- Authors:  ian898, Rahkiin, theSeb, reallogger
 --
 
 ssWeatherManager = {}

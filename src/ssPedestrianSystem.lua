@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------------------------------
--- ANIMALS SCRIPT
+-- PEDESTRIAN SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  To adjust the animals
--- Authors:  Rahkiin (Jarvixes), theSeb (added mapDir loading)
+-- Purpose:  To disable pedestrian spawning in winter
+-- Authors:  Rahkiin
 --
 
 ssPedestrianSystem = {}

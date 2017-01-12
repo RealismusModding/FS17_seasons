@@ -2,7 +2,7 @@
 -- SEASONS MENU SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  GUI
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 
 ssSeasonsMenu = {}
 

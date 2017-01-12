@@ -2,8 +2,7 @@
 -- DEBUG SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Debug tools
--- Authors:  Rahkiin (Jarvixes)
---
+-- Authors:  Rahkiin
 
 ssDebug = {}
 

@@ -2,7 +2,7 @@
 -- MAINTENANCE SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the maintenance system
--- Authors:  Jarvixes (Rahkiin), reallogger, Rival
+-- Authors:  Rahkiin, reallogger, Rival
 --
 
 ssVehicle = {}

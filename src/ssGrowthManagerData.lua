@@ -2,7 +2,7 @@
 -- ssGrowthManagerData
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  For loading growth data
--- Authors:  theSeb, based on ssSeasonsXML by Rahkiin (Jarvixes)
+-- Authors:  theSeb, based on ssSeasonsXML by Rahkiin
 --
 
 ssGrowthManagerData = {}

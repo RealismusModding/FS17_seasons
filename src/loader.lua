@@ -2,7 +2,7 @@
 -- LOADER SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Loads the mod
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 
 ssSeasonsMod = {}
 
