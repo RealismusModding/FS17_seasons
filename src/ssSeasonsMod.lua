@@ -51,9 +51,9 @@ g_modClasses = {
     "ssPedestrianSystem"
 }
 
-if g_seasons.debug then
-    table.insert(g_modClasses, "ssDebug")
-end
+--{{if debug}}
+table.insert(g_modClasses, "ssDebug")
+--{{end}}
 
 logInfo("Loading Seasons...")
 
