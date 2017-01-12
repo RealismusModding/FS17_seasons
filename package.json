@@ -1,0 +1,16 @@
+{
+  "name": "FS17_seasons",
+  "version": "1.0.0",
+  "description": "Farming Simulator 2017 mod adding Seasons",
+  "main": "src/loader.lua",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealismusModding/FS17_seasons.git"
+  },
+  "author": "Realismus Modding",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/RealismusModding/FS17_seasons/issues"
+  },
+  "homepage": "https://github.com/RealismusModding/FS17_seasons#readme"
+}
