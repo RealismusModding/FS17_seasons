@@ -9,6 +9,7 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Affiché la Météo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: affiché le menu" />
+		<text name="SEASONS_HIDE_WF" text="Seasons: Les prévisions météorologiques" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Lundi" />
         <text name="SS_WEEKDAY_TUESDAY" text="Mardi" />
@@ -67,6 +68,7 @@
         <text name="tooltip_seasonLength" text="La longueur d'une saison jours. Une année est quatre saisons." />
         <text name="tooltip_seasonIntros" text="Montrez une introduction de saison au début d'une saison." />
         <text name="tooltip_snow" text="La neige tombera(chutera) dans des hivers froids et bloquera des routes." />
+		<text name="tooltip_controlsHelp" text="Montrez la prévision et la prévision de menu dans le menu d'aide." />
         <text name="tooltip_snowTracks" text="Les véhicules compriment la neige en y conduisant" />
 
         <text name="setting_seasonIntros" text="Introductions de saison" />
