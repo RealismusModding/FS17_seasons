@@ -12,6 +12,17 @@ The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
 
+## Making videos
+Because this mod is WIP and not yet released we have a couple of rules regarding videos. You are allowed to make videos with Seasons, under a couple of simple conditions:
+- Do not share the GitHub link. Point to the FS-UK [topic](http://fs-uk.com/forum/index.php?topic=187664.0) instead.
+- Make very clear to your viewers that this mod is a Work In Progress and is not yet released
+- Do not explain how to install this mod. (This might also change at any moment, making your video outdated)
+- Give credit to 'Realismus Modding', and link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow).
+- Join us on [Slack](http://realismus.joskuijpers.nl) and tell us all about your awesome video.
+
+Videos that are not holding to the rules will get a request for removal.
+If you have any questions about this policy you can ask them on Slack.
+
 ## Forking the code
 You are allowed to fork this repository, apply changes and use those for private use.
 You are not allowed to distribute these changes yourself.
