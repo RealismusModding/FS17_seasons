@@ -1,7 +1,13 @@
+# System stuff
 __pycache__
-build.bat
 .DS_STORE
-FS17_seasons.zip
+
+# Editors
 *.sublime-workspace
 *.sublime-project
+
+# Build system
 dist/
+.buildrc
+FS17_seasons.zip
+node_modules/
