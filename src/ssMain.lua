@@ -8,6 +8,9 @@
 ssMain = {}
 getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 
+function ssMain:preLoad()
+end
+
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
 end
@@ -41,7 +44,7 @@ InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSett
 -- Disable the tutorial by clearing the onCreate function that is called by vanilla maps
 -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
 -- is already called.
-function TourIcons.onCreate = function (self, id)
+TourIcons.onCreate = function (self, id)
     local tourIcons = TourIcons:new(id)
     tourIcons.visible = false
 end

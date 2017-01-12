@@ -1,9 +1,10 @@
--- https://github.com/DeckerMMIV/FarmSim_Mod_SoilMod/blob/master/SoilManagement/soilMod/fmcSoilMod.lua
+---------------------------------------------------------------------------------------------------------
+-- LOADER SCRIPT
+---------------------------------------------------------------------------------------------------------
+-- Purpose:  Loads the mod
+-- Authors:  Rahkiin (Jarvixes)
 
 ssSeasonsMod = {}
-
--- Put it in the global scope so it can be recognized by other mods
-getfenv(0)["modSeasonsMod"] = ssSeasonsMod
 
 local modItem = ModsUtil.findModItemByModName(g_currentModName)
 ssSeasonsMod.version = Utils.getNoNil(modItem.version, "?.?.?.?")
@@ -34,6 +35,7 @@ end
 
 local srcFolder = g_currentModDirectory .. "src/"
 g_modClasses = {
+    "ssMain",
     "ssLang",
     "ssStorage",
     "ssSeasonsXML",
@@ -52,37 +54,29 @@ g_modClasses = {
     "ssAnimals",
     "ssDensityMapScanner",
     "ssViewController",
-    "ssPedestrianSystem",
-    "ssMain"
+    "ssPedestrianSystem"
 }
 
 if ssSeasonsMod.debug then
     table.insert(g_modClasses, "ssDebug")
 end
 
+logInfo("Loading Seasons...")
+
 -- Load all scripts
-if modItem.isDirectory then
-    for i = 1, #g_modClasses do
-        local srcFile = srcFolder .. g_modClasses[i] .. ".lua"
-        local fileHash = tostring(getFileMD5(srcFile, ssSeasonsMod.modDir))
+for _, class in pairs(g_modClasses) do
+    source(srcFolder .. class .. ".lua")
 
-        logInfo(string.format("Loading script: %s (v%s - %s)", g_modClasses[i], ssSeasonsMod.version, fileHash))
-
-        source(srcFile)
+    if _G[class].preLoad ~= nil then
+        _G[class]:preLoad()
     end
-
-    source(srcFolder .. "ssSeasonsMenu.lua")
-else
-    for i = 1, #g_modClasses do
-        logInfo(string.format("Loading script: %s (v%s)", g_modClasses[i], ssSeasonsMod.version))
-
-        source(srcFolder..g_modClasses[i] .. ".lua")
-    end
-
-    source(srcFolder .. "ssSeasonsMenu.lua")
-
-    ssSeasonsMod.version = ssSeasonsMod.version .. " - " .. modItem.fileHash
 end
+
+-- The menu is not a proper class.
+source(srcFolder .. "ssSeasonsMenu.lua")
+
+ssSeasonsMod.version = ssSeasonsMod.version .. " - " .. tostring(modItem.fileHash)
+
 
 ------------------------------------------
 -- base mission encapsulation functions

@@ -6,9 +6,10 @@
 
     <texts>
         <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show Weather Forecast" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Show Menu" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Monday" />
         <text name="SS_WEEKDAY_TUESDAY" text="Tuesday" />
