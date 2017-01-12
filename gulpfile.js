@@ -5,7 +5,6 @@ const gutil = require("gulp-util");
 const ftp = require("gulp-ftp");
 const zip = require("gulp-zip");
 const size = require("gulp-size");
-const clean = require("gulp-clean");
 const template = require("gulp-template");
 const xmlpoke = require("gulp-xmlpoke");
 const merge = require("merge-stream")
@@ -13,7 +12,6 @@ const merge = require("merge-stream")
 const _defaults = require("lodash.defaultsdeep")
 const _has = require("lodash.has")
 const _get = require("lodash.get")
-const _ = require("lodash")
 
 
 const c_outZipName = "FS17_seasons.zip";
