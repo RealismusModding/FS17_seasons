@@ -6,17 +6,11 @@
 
 ssSeasonsMod = {}
 
-local modItem = ModsUtil.findModItemByModName(g_currentModName)
-ssSeasonsMod.version = Utils.getNoNil(modItem.version, "?.?.?.?")
-ssSeasonsMod.modDir = g_currentModDirectory
-ssSeasonsMod.verbose = true
-ssSeasonsMod.debug = true
-
 ssSeasonsMod.seasonListeners = {}
 ssSeasonsMod.growthStageListeners = {}
 
 function log(...)
-    if not ssSeasonsMod.verbose then return end
+    if not g_seasons.verbose then return end
 
     local str = "[Seasons] "
     for i = 1, select("#", ...) do
@@ -57,7 +51,7 @@ g_modClasses = {
     "ssPedestrianSystem"
 }
 
-if ssSeasonsMod.debug then
+if g_seasons.debug then
     table.insert(g_modClasses, "ssDebug")
 end
 
@@ -107,7 +101,6 @@ function ssSeasonsMod.loadMapFinished(...)
     ssSeasonsMod:loadFromXML()
 
     -- Enable the mod
-    ssSeasonsMod.enabled = true -- TODO: legacy
     g_seasons.enabled = true
 
     return ssSeasonsMod.origLoadMapFinished(...)

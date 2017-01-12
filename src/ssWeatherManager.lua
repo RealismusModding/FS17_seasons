@@ -109,7 +109,7 @@ function ssWeatherManager:loadMap(name)
 
     -- Load a new rain
     g_currentMission.environment.RAINTYPE_SNOW = "snow"
-    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, ssSeasonsMod.modDir .. "resources/environment/snow.i3d", false, 3, 7);
+    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 3, 7);
 
     self:loadTemperature()
     self:loadRain()
@@ -611,7 +611,7 @@ function ssWeatherManager:loadTemperature()
     self.temperatureData = {}
 
     -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
 
     local i = 0
     while true do
@@ -652,7 +652,7 @@ function ssWeatherManager:loadRain()
     self.rainData = {}
 
     -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
 
     local i = 0
     while true do

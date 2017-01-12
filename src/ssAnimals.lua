@@ -25,7 +25,7 @@ function ssAnimals:loadFromXML()
         ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool"}
     }
 
-    self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
+    self.data = ssSeasonsXML:loadFile(g_seasons.modDir .. "data/animals.xml", "animals", elements)
 
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then

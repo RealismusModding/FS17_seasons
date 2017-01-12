@@ -242,7 +242,7 @@ end
 -- This is here, because ssSeasonsMod is never really loaded as a mod class..
 -- It is complicated, but installing a day change listener on it wont work
 function ssSeasonsUtil:dayChanged()
-    if ssSeasonsMod.enabled then
+    if g_seasons.enabled then
         local currentSeason = self:season()
 
         local currentGrowthStage = self:currentGrowthStage()

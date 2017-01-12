@@ -40,35 +40,35 @@ function ssWeatherForecast:loadMap(name)
 
         -- Forecast hud
         local width, height = getNormalizedScreenValues(1024, 128)
-        self.hud.overlays.forecast_hud = Overlay:new("hud_forecast", Utils.getFilename("resources/huds/hud_forecast.dds", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays.forecast_hud = Overlay:new("hud_forecast", Utils.getFilename("resources/huds/hud_forecast.dds", g_seasons.modDir), 0, 0, width, height)
 
         -- Current day hud
         local width, height = getNormalizedScreenValues(128, 128)
-        self.hud.overlays.day_hud = Overlay:new("hud_day",  Utils.getFilename("resources/huds/hud_day.dds", ssSeasonsMod.modDir), 0, 0, height, height)
+        self.hud.overlays.day_hud = Overlay:new("hud_day",  Utils.getFilename("resources/huds/hud_day.dds", g_seasons.modDir), 0, 0, height, height)
 
         -- clock overlay
         local width, height = getNormalizedScreenValues(64, 64)
-        self.hud.overlays.clock_overlay = Overlay:new("clock_overlay",  Utils.getFilename("resources/huds/clock_overlay.dds", ssSeasonsMod.modDir), 0, 0, height, height)
-        self.hud.overlays.clock_symbol = Overlay:new("clock_symbol",  Utils.getFilename("resources/huds/clock_symbol.dds", ssSeasonsMod.modDir), 0, 0, height, height)
+        self.hud.overlays.clock_overlay = Overlay:new("clock_overlay",  Utils.getFilename("resources/huds/clock_overlay.dds", g_seasons.modDir), 0, 0, height, height)
+        self.hud.overlays.clock_symbol = Overlay:new("clock_symbol",  Utils.getFilename("resources/huds/clock_symbol.dds", g_seasons.modDir), 0, 0, height, height)
 
         -- Seasons "White" Icons
         local width, height = getNormalizedScreenValues(128, 128)
 
         -- Seasons "Color" Icons
         self.hud.overlays.seasons = {}
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", g_seasons.modDir), 0, 0, width, height)
 
-        self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", g_seasons.modDir), 0, 0, width, height)
 
         -- Seasons Weather Icons
         self.hud.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
         self.hud.overlays.cloudy = g_currentMission.weatherForecastIconOverlays.cloudy
         self.hud.overlays.fog = g_currentMission.weatherForecastIconOverlays.fog
         self.hud.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
-        self.hud.overlays.snow = Overlay:new("hud_snow", Utils.getFilename("resources/huds/hud_snow.dds", ssSeasonsMod.modDir), 0, 0, width, height)
+        self.hud.overlays.snow = Overlay:new("hud_snow", Utils.getFilename("resources/huds/hud_snow.dds", g_seasons.modDir), 0, 0, width, height)
 
         g_currentMission.weatherForecastIconOverlays.hail = self.hud.overlays.snow
         self.hud.overlays.hail = self.hud.overlays.snow

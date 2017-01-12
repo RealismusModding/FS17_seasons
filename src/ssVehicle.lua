@@ -15,8 +15,8 @@ ssVehicle.SERVICE_INTERVAL = 30
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
-SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "src/ssRepairable.lua")
-SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", ssSeasonsMod.modDir .. "src/ssSnowTracks.lua")
+SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/ssRepairable.lua")
+SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/ssSnowTracks.lua")
 
 
 function ssVehicle:load(savegame, key)
@@ -80,7 +80,7 @@ end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "data/repairFactors.xml")
+    local file = loadXMLFile("factors", g_seasons.modDir .. "data/repairFactors.xml")
 
     ssVehicle.repairFactors = {}
 

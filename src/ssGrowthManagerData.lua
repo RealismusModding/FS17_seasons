@@ -11,7 +11,7 @@ ssGrowthManagerData = {}
 
 function ssGrowthManagerData:loadAllData()
     local growthData = {}
-    local path = ssSeasonsMod.modDir .. self.DEFAULT_FILE_PATH
+    local path = g_seasons.modDir .. self.DEFAULT_FILE_PATH
     local rootKey = "growthManager"
 
     local file = loadXMLFile("xml", path)
@@ -31,10 +31,10 @@ function ssGrowthManagerData:loadAllData()
         logInfo("ssGrowthManagerData: Failed to load XML growth data file (growthTransitions) " .. path)
         return nil,nil
     end
-    
+
     --additional modmap growthData
-    local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml") 
-    --modMapDataPath = ssSeasonsMod.modDir .. "data/seasons_growth.xml" --for testing
+    local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml")
+    --modMapDataPath = g_seasons.modDir .. "data/seasons_growth.xml" --for testing
 
     if  modMapDataPath ~= nil then
         logInfo("ssGrowthManagerData: Additional growth data found - loading")
@@ -54,11 +54,11 @@ function ssGrowthManagerData:loadAllData()
             end
         else
             logInfo("ssGrowthManagerData: Failed to load additional XML growth data file " .. modMapDataPath)
-        end  
+        end
     end
 
-    return defaultFruits, growthData 
-end 
+    return defaultFruits, growthData
+end
 
 function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additionalData)
     local growthData = parentData ~= nil and Utils.copyTable(parentData) or {}--{}
@@ -74,11 +74,11 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
             if not hasXMLProperty(file, growthTransitionKey) then
                 break
             end
-            
+
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum"
             local growthTransitionNum = getXMLString(file,growthTransitionNumKey)
             if growthTransitionNum == nil then
-                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionNumKey:" .. growthTransitionNumKey)  
+                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionNumKey:" .. growthTransitionNumKey)
                 return nil
             elseif growthTransitionNum == "FIRST_LOAD_TRANSITION" then
                 growthTransitionNum = ssGrowthManager.FIRST_LOAD_TRANSITION
@@ -112,7 +112,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         if not hasXMLProperty(file, fruitKey) then
             break
         end
-        
+
         local fruitName = getXMLString(file,fruitKey .. "#fruitName")
         if fruitName == nil then
             logInfo("ssGrowthManagerData: getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
@@ -124,38 +124,38 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         growthData[growthTransitionNum][fruitName].fruitName = fruitName
 
         local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState")
-        if normalGrowthState ~= nil then 
+        if normalGrowthState ~= nil then
             growthData[growthTransitionNum][fruitName].normalGrowthState = normalGrowthState
         end
 
         local normalGrowthMaxState =  getXMLString(file,fruitKey .. "#normalGrowthMaxState")
-        if normalGrowthMaxState ~= nil then 
+        if normalGrowthMaxState ~= nil then
             if normalGrowthMaxState == "MAX_STATE" then
                 growthData[growthTransitionNum][fruitName].normalGrowthMaxState = ssGrowthManager.MAX_STATE
             else
-                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = tonumber(normalGrowthMaxState)    
+                growthData[growthTransitionNum][fruitName].normalGrowthMaxState = tonumber(normalGrowthMaxState)
             end
         end
 
         local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState")
-        if setGrowthState ~= nil then 
+        if setGrowthState ~= nil then
             growthData[growthTransitionNum][fruitName].setGrowthState = setGrowthState
         end
 
         local setGrowthMaxState =  getXMLString(file,fruitKey .. "#setGrowthMaxState")
-        if setGrowthMaxState ~= nil then 
+        if setGrowthMaxState ~= nil then
             --growthData[growthTransitionNum][fruitName].setGrowthMaxState = setGrowthMaxState
             if setGrowthMaxState == "MAX_STATE" then
                 growthData[growthTransitionNum][fruitName].setGrowthMaxState = ssGrowthManager.MAX_STATE
             else
-                growthData[growthTransitionNum][fruitName].setGrowthMaxState = tonumber(setGrowthMaxState)    
+                growthData[growthTransitionNum][fruitName].setGrowthMaxState = tonumber(setGrowthMaxState)
             end
         end
 
         local desiredGrowthState =  getXMLString(file,fruitKey .. "#desiredGrowthState")
-        if desiredGrowthState ~= nil then 
+        if desiredGrowthState ~= nil then
             if desiredGrowthState == "CUT" then
-                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT    
+                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT
             elseif desiredGrowthState == "WITHERED" then
                 growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.WITHERED
             else
@@ -164,17 +164,17 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         end
 
         local extraGrowthMinState = getXMLInt(file,fruitKey .. "#extraGrowthMinState")
-        if extraGrowthMinState ~= nil then 
+        if extraGrowthMinState ~= nil then
             growthData[growthTransitionNum][fruitName].extraGrowthMinState = extraGrowthMinState
-        end 
+        end
 
         local extraGrowthMaxState = getXMLInt(file,fruitKey .. "#extraGrowthMaxState")
-        if extraGrowthMaxState ~= nil then 
+        if extraGrowthMaxState ~= nil then
             growthData[growthTransitionNum][fruitName].extraGrowthMaxState = extraGrowthMaxState
         end
 
         local extraGrowthFactor = getXMLInt(file,fruitKey .. "#extraGrowthFactor")
-        if extraGrowthFactor ~= nil then 
+        if extraGrowthFactor ~= nil then
             growthData[growthTransitionNum][fruitName].extraGrowthFactor = extraGrowthFactor
         end
         i = i + 1
@@ -188,16 +188,16 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
     local defaultFruitsKey =  rootKey .. ".defaultFruits"
 
     if hasXMLProperty(file, defaultFruitsKey) then
-        
+
         local i = 0
         while true do
             local defaultFruitKey = string.format("%s.defaultFruit(%i)#name", defaultFruitsKey, i)
             if not hasXMLProperty(file, defaultFruitKey) then
                 break
             end
-   
+
             local fruitName = getXMLString(file, defaultFruitKey)
-            if fruitName ~= nil then 
+            if fruitName ~= nil then
                 table.insert(defaultFruits,fruitName)
             else
                 logInfo("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitKey )
@@ -209,6 +209,6 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
         log("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found")
         return nil
     end
-    
-    return defaultFruits 
+
+    return defaultFruits
 end

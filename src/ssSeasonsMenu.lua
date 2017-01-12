@@ -58,7 +58,7 @@ function ssSeasonsMenu:onOpen(element)
 
     -- Todo: get these values from the XML file. This is messy
     local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
-    if ssSeasonsMod.debug then
+    if g_seasons.debug then
         table.insert(titles, ssLang.getText("ui_pageDebug"))
     end
     self.pageSelector:setTexts(titles)
@@ -92,7 +92,7 @@ end
 
 -- Update the visible pages
 function ssSeasonsMenu:updatePages()
-    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_DEBUG, not ssSeasonsMod.debug)
+    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_DEBUG, not g_seasons.debug)
 end
 
 -- Called when the current page has changed.

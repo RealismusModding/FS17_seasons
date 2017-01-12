@@ -11,7 +11,7 @@ function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
         ssSeasonsMod:addSeasonChangeListener(self)
 
-        local modReplacements = loadI3DFile(ssSeasonsMod.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
+        local modReplacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
 
         self:loadFromXML()
 
@@ -35,7 +35,7 @@ function ssReplaceVisual:loadFromXML()
     self.textureReplacements = {}
     self.textureReplacements.default = {}
 
-    self:loadTextureReplacementsFromXMLFile(ssSeasonsMod.modDir .. "data/textures.xml")
+    self:loadTextureReplacementsFromXMLFile(g_seasons.modDir .. "data/textures.xml")
 end
 
 function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
