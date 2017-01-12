@@ -8,8 +8,29 @@
 ssMain = {}
 getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 
+----------------------------
+-- Installing injections and globals
+----------------------------
+
 function ssMain:preLoad()
+    local modItem = ModsUtil.findModItemByModName(g_currentModName)
+    g_seasons.modDir = g_currentModDirectory
+    g_seasons.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. " - " .. tostring(modItem.fileHash)
+
+    -- Set global settings
+    g_seasons.verbose = true
+    g_seasons.debug = true
+    g_seasons.enabled = false -- will be enabled later in the loading process
+
+
+    -- Do injections
+    InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableWitherOption)
+    TourIcons.onCreate = self.inj_disableTourIcons
 end
+
+----------------------------
+-- Savegame
+----------------------------
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
@@ -19,7 +40,19 @@ function ssMain:save(savegame, key)
     ssStorage.setXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", self.showControlsInHelpScreen)
 end
 
+----------------------------
+-- Global controls, GUI
+----------------------------
+
 function ssMain:loadMap()
+    -- Create the GUI
+    g_seasons.mainMenu = ssSeasonsMenu:new()
+
+    -- Load additional GUI profiles
+    g_gui:loadProfiles(g_seasons.modDir .. "resources/gui/profiles.xml")
+
+    -- Load the GUI configurations
+    g_gui:loadGui(g_seasons.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", g_seasons.mainMenu)
 end
 
 function ssMain:update(dt)
@@ -33,19 +66,25 @@ function ssMain:update(dt)
     end
 end
 
+----------------------------
+-- Injection functions
+----------------------------
+
 -- Withering of the game is not actually used. To not cause any confusion, the withering toggle element
 -- is disabled.
-local function disableWitherOption(self)
+function ssMain.inj_disableWitherOption(self)
     self.plantWitheringElement:setDisabled(true)
     self.plantWitheringElement:setIsChecked(true)
 end
-InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, disableWitherOption)
 
 -- Disable the tutorial by clearing the onCreate function that is called by vanilla maps
 -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
 -- is already called.
-TourIcons.onCreate = function (self, id)
+function ssMain.inj_disableTourIcons(self, id)
     local tourIcons = TourIcons:new(id)
     tourIcons.visible = false
 end
 
+----------------------------
+-- Important data
+----------------------------

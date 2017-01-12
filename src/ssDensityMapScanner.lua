@@ -70,6 +70,9 @@ function ssDensityMapScanner:load(savegame, key)
     end
 end
 
+function ssDensityMapScanner:loadMap(name)
+end
+
 function ssDensityMapScanner:update(dt)
     if self.moreIterations == false then
         local jobb = ssSeasonsUtil.listPopLeft(self.workQ)
@@ -85,7 +88,6 @@ function ssDensityMapScanner:update(dt)
         ssDensityMapScanner:ssIterateOverTerrain()
     end
 end
-
 
 function ssDensityMapScanner:ssIterateOverTerrain()
     -- print("- Scanning: " .. self.currentX .. ", " .. self.currentZ)
