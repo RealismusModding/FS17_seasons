@@ -25,7 +25,7 @@ ssViewController.growthTransitionIndexToName =
 }
 
 ssViewController.canPlantDisplayData = {}
-ssViewController.debugView = true
+ssViewController.debugView = false
 
 function ssViewController:loadMap(name)
     ssSeasonsMod:addGrowthStageChangeListener(self)
