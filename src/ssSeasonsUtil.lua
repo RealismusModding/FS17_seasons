@@ -293,7 +293,7 @@ function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
     self.currentDayOffset = newOffset
 
     -- Re-do time
-    ssTime:adaptTime()
+    ssEnvironment:adaptTime()
 
     -- Redo weather manager
     ssWeatherManager:buildForecast()

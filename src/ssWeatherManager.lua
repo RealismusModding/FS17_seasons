@@ -525,7 +525,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         -- morning fog
         oneRainEvent.startDay = oneDayForecast.day
         oneRainEvent.endDay = oneDayForecast.day
-        local dayStart, dayEnd, nightEnd, nightStart = ssTime:calculateStartEndOfDay(oneDayForecast.day)
+        local dayStart, dayEnd, nightEnd, nightStart = ssEnvironment:calculateStartEndOfDay(oneDayForecast.day)
 
         oneRainEvent.startDayTime = nightEnd*60*60*1000
         oneRainEvent.endDayTime = (dayStart+1)*60*60*1000+0.000001
