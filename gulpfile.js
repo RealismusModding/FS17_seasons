@@ -1,4 +1,5 @@
 const fs = require("fs")
+const path = require("path")
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
@@ -102,7 +103,8 @@ class BuildConfig {
     }
 
     isValid() {
-        return _has(this.data, "modsFolder");
+        // return _has(this.data, "modsFolder");
+        return true;
     }
 
     get(path, defaultValue) {
@@ -130,6 +132,10 @@ gulp.task("clean:zip", () => {
     return del("FS17_seasons*.zip");
 });
 
+gulp.task("clean:mods", () => {
+    return del(path.join(buildConfig.get("modsFolder"), "FS17_seasons*.zip"));
+});
+
 // Build the mod zipfile
 gulp.task("build", () => {
     const sources = [
@@ -150,7 +156,7 @@ gulp.task("build", () => {
 });
 
 // Install locally in the mods folder of the developer
-gulp.task("install", ["build"], () => {
+gulp.task("install", ["build", "clean:mods"], () => {
     return gulp
         .src(outputZipName, { base: "." })
         .pipe(gulp.dest(buildConfig.get("modsFolder")));
