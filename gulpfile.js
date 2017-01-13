@@ -3,13 +3,16 @@ const path = require("path")
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
-const ftp = require("gulp-ftp");
+const ftp = require("vinyl-ftp");
 const zip = require("gulp-zip");
+const rename = require("gulp-rename");
 const size = require("gulp-size");
 const template = require("gulp-template");
 const xmlpoke = require("gulp-xmlpoke");
 const merge = require("merge-stream");
 const git = require("git-rev-sync");
+const run = require("gulp-run");
+const del = require("del");
 
 const _defaults = require("lodash.defaultsdeep")
 const _has = require("lodash.has")
@@ -18,6 +21,10 @@ const _get = require("lodash.get")
 /////////////////////////////////////////////////////
 /// Functions
 /////////////////////////////////////////////////////
+
+function toLuaString(value) {
+    return `"${value.toString()}"`;
+}
 
 /**
  * Add updated values to the modDesc
@@ -45,9 +52,9 @@ function templatedLua() {
     };
 
     const replacements = {
-        debug: "true",
-        verbose: "false",
-        buildnumber: "\"037fsh\""
+        debug: buildConfig.get("options.debug", false).toString(),
+        verbose: buildConfig.get("options.verbose", false).toString(),
+        buildnumber: toLuaString(versionName)
     };
 
     return gulp
@@ -75,6 +82,26 @@ function createVersionName() {
     }
 
     return versionName;
+}
+
+function dediUrl() {
+    return `http://${buildConfig.get("server.web.host")}:${buildConfig.get("server.web.port")}/`;
+}
+
+function dediStop() {
+    const url = dediUrl();
+    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html > /dev/null`;
+
+    return run(command, { silent: true }).exec()
+        .pipe(gutil.noop());
+}
+
+function dediStart() {
+    const url = dediUrl();
+    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html > /dev/null`;
+
+    return run(command, { silent: true }).exec()
+        .pipe(gutil.noop());
 }
 
 /**
@@ -123,7 +150,8 @@ class BuildConfig {
 var buildConfig = new BuildConfig();
 var package = JSON.parse(fs.readFileSync("package.json"));
 var packageVersion = package.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
-var outputZipName = "FS17_seasons_" + createVersionName() + ".zip";
+const versionName = createVersionName()
+var outputZipName = `FS17_seasons_${versionName}.zip`;
 
 console.log("packageVersion",packageVersion,"output",outputZipName)
 
@@ -133,7 +161,7 @@ gulp.task("clean:zip", () => {
 });
 
 gulp.task("clean:mods", () => {
-    return del(path.join(buildConfig.get("modsFolder"), "FS17_seasons*.zip"));
+    return del(path.join(buildConfig.get("modsFolder"), "FS17_seasons*.zip"), { force: true });
 });
 
 // Build the mod zipfile
@@ -143,7 +171,7 @@ gulp.task("build", () => {
         "data/**/*",
         "resources/**/*",
         "icon.dds",
-        "CREDITS.md"
+        "CREDITS.txt"
     ];
 
     let sourceStream = gulp.src(sources, { base: "." });
@@ -159,21 +187,68 @@ gulp.task("build", () => {
 gulp.task("install", ["build", "clean:mods"], () => {
     return gulp
         .src(outputZipName, { base: "." })
+        .pipe(rename("FS17_seasons.zip"))
         .pipe(gulp.dest(buildConfig.get("modsFolder")));
 });
 
-// Install on the remote server. Hashes must be the same so also install locally
-gulp.task("installRemote", ["install"], () => {
+/**
+ * Stop the dedicated server.
+ */
+gulp.task("server:stop", dediStop);
+
+/**
+ * Start the dedicated server.
+ */
+gulp.task("server:start", dediStart);
+
+gulp.task("server:log", () => {
+    const url = dediUrl();
+    const command = `curl -X GET -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" -H "Origin: ${url}" ${url}logs.html?lang=en`;
+
+    return run(command, { silent: true }).exec()
+        .pipe(gulp.dest("log"));
 });
+
+/**
+ * First step in installing on a dedicated server: stopping the server.
+ * A requirement for dedis is that the server mod is the same as the client mod,
+ * that is why the mod is rebuild and installed to the client as well.
+ */
+gulp.task("ir:1", ["install"], dediStop);
+
+/**
+ * Second step is uploading the mod. The server had to be shut down because otherwise
+ * the old version is busy and can't be changed.
+ */
+gulp.task("ir:2", ["ir:1"], () => {
+    const conn = new ftp({
+        host: buildConfig.get("server.ftp.host"),
+        port: buildConfig.get("server.ftp.port", 21),
+        user: buildConfig.get("server.ftp.user"),
+        pass: buildConfig.get("server.ftp.password")
+    });
+
+    return gulp
+        .src(outputZipName, { buffer: false })
+        .pipe(rename("FS17_seasons.zip"))
+        .pipe(conn.dest(buildConfig.get("server.ftp.path")))
+        .pipe(gutil.noop());
+});
+
+/**
+ * Install the mod locally and on a remote dedicated server.
+ *
+ * Using dependencies for serial async steps. Final step is
+ * starting the server again.
+ */
+gulp.task("server:install", ["ir:2"], dediStart);
 
 gulp.task("default", ["build"]);
 
 /*
 
-rm -f ../mods/FS17_seasons.zip
 
-echo "Copying new mod..."
-cp FS17_seasons.zip ../mods/
+curl -T FS17_seasons.zip ftp://$FTPUSER:$FTPPASS@ftp-3.verygames.net/games/FarmingSimulator17/mods/
 
 
 
@@ -181,26 +256,7 @@ translationsMissing
 translationBloat
 style -> luacheck
 
-install
 installRemote
 watch/develop
-
- */
-
-
-/*
-
-gulp.task('default', function () {
-    return gulp.src('src/*')
-        .pipe(ftp({
-            host: 'website.com',
-            user: 'johndoe',
-            pass: '1234'
-        }))
-        // you need to have some kind of stream after gulp-ftp to make sure it's flushed
-        // this can be a gulp plugin, gulp.dest, or any kind of stream
-        // here we use a passthrough stream
-        .pipe(gutil.noop());
-});
 
  */

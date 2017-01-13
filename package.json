@@ -17,7 +17,8 @@
     "del": "^2.2.2",
     "git-rev-sync": "^1.8.0",
     "gulp": "^3.9.1",
-    "gulp-ftp": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-run": "^1.7.1",
     "gulp-size": "^2.1.0",
     "gulp-template": "^4.0.0",
     "gulp-util": "^3.0.8",
@@ -26,7 +27,8 @@
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
-    "merge-stream": "^1.0.1"
+    "merge-stream": "^1.0.1",
+    "vinyl-ftp": "^0.5.0"
   },
   "fs": {
     "modDescRev": "33"
