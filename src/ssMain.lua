@@ -157,7 +157,7 @@ end
 ----------------------------
 
 function ssMain:callListeners()
-    if g_seasons.enabled then
+    if self.enabled then
         local currentSeason = self:season()
 
         local currentGrowthStage = self:currentGrowthStage()
