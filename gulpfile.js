@@ -294,5 +294,4 @@ gulp.task("default", ["build"]);
 /*
 translationsMissing
 translationBloat
-style -> luacheck
  */
