@@ -66,13 +66,21 @@ local function applyTracks(self, dt)
             end
 
             local reduceSnow = false 
-            if snowLayers <= fwdTireSnowLayers and (snowLayers + 3) > fwdTireSnowLayers and wheel.inSnow then
+            if snowLayers == fwdTireSnowLayers then --and (snowLayers + 3) > fwdTireSnowLayers and wheel.inSnow then
                 reduceSnow = true
             end
 
             if (targetSnowDepth - sinkage) > ssSnow.LAYER_HEIGHT and reduceSnow then
+                --local x,_,_ = getWheelShapeContactPoint(wheel.node, wheel.wheelShape)
+                --local distanceLayers = math.max(math.modf(x* ssSnow.LAYER_HEIGHT,2))
+                --print(distanceLayers)
+                
+                --if distanceLayers > underTireSnowLayers then
                 sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT),fwdTireSnowLayers)
                 ssSnow:removeSnow(x0,z0, x1,z1, x2,z2, sinkageLayers)
+                --end
+
+                
 
                 if fwdTireSnowDepth <= radius then
 		    	    setLinearDamping(wheel.node,0.3)
@@ -81,17 +89,17 @@ local function applyTracks(self, dt)
 	    		    setLinearDamping(wheel.node,0.5)
 
                 elseif fwdTireSnowDepth > 2 * radius then
-	    		    setLinearDamping(wheel.node,1)
+	    		    setLinearDamping(wheel.node,0.95)
                     
                 end
 
                 --log('sizeWidth = ',sizeWidth, ' | sinkage = ', sinkage,' | radius = ',radius,' | arcLength = ',arcLength,' | snowForce = ',snowForce)
 
             elseif fwdTireSnowDepth > 2 * radius then
-                setLinearDamping(wheel.node,1)
+                setLinearDamping(wheel.node,0.95)
 
             else
-                setLinearDamping(wheel.node,0)
+                setLinearDamping(wheel.node,0.2)
             
             end
             
