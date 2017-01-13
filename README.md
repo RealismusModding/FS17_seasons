@@ -71,8 +71,7 @@ For a better game experience, custom maps should add two new density layers: one
 - If you don't maintain your vehicle it may break down
 
 ### Finance
-- Loan cap is set to 70% of your total owned land value
-- New maximum loan is set to 5 million
+- Loan cap is set to 30% of your total owned land value with a minimum of 300,000
 - The interest has been adjusted to the new year length.
 
 ### Helpers

@@ -15,13 +15,16 @@ getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 function ssMain:preLoad()
     local modItem = ModsUtil.findModItemByModName(g_currentModName)
     g_seasons.modDir = g_currentModDirectory
-    g_seasons.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. " - " .. tostring(modItem.fileHash)
+
+    local buildnumber = --<%=buildnumber %>
+    g_seasons.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. buildnumber .. " - " .. tostring(modItem.fileHash)
 
     -- Set global settings
-    g_seasons.verbose = true
-    g_seasons.debug = true
+    g_seasons.verbose = --<%=verbose %>
+    g_seasons.debug = --<%=debug %>
     g_seasons.enabled = false -- will be enabled later in the loading process
 
+    logInfo("Loading Seasons " .. g_seasons.version);
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableWitherOption)
