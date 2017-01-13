@@ -13,13 +13,14 @@ Thus, when building your own version of Seasons, give a credit notice to Realism
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
 
 ## Making videos
-Because this mod is WIP and not yet released we have a couple of rules regarding videos. You are allowed to make videos with Seasons, under a couple of simple conditions:
+Because this mod is WIP and not yet released we have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
 - Do not share the GitHub link. 
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
 - Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow),
   and link to the FS-UK WIP [topic](http://fs-uk.com/forum/index.php?topic=187664.0).
 - Make very clear to your viewers that this mod is a Work In Progress and is not yet released
+- You do _not_ need to put the mod name in the video title, but you can if you want.
 
 - Join us on [Slack](http://realismus.joskuijpers.nl) and tell us all about your awesome video.
 
