@@ -299,7 +299,7 @@ function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
     ssWeatherManager:buildForecast()
 
     -- Change repair interval
-    ssVehicle.repairInterval = newSeasonLength * 2 
+    ssVehicle.repairInterval = newSeasonLength * 2
 end
 
 ------------------------------------
@@ -419,6 +419,16 @@ function ssSeasonsUtil.listPopRight (list)
     return value
 end
 
+function Set(list)
+    local set = {}
+
+    for _, l in ipairs(list) do
+        set[l] = true
+    end
+
+    return set
+end
+
 ------------- Useful global functions ---------------
 
 -- Yep, LUA does not have a math.round. It's a first.
@@ -445,6 +455,7 @@ function deepCopy(obj, seen)
     return res
 end
 
+-- TODO replace with table.getn()
 function arrayLength(arr)
     local n = 0
     for i = 1, #arr do
@@ -487,148 +498,3 @@ function print_r(t)
     end
     print()
 end
-
--- returns: isArray, size (if size is 0 can also be object)
-local function isArray(table)
-    local max = 0
-    local count = 0
-
-    for k, v in pairs(table) do
-        if type(k) == "number" then
-            if k > max then max = k end
-            count = count + 1
-        else
-            return false, nil
-        end
-    end
-
-    if max > count * 2 then
-        return false, nil
-    end
-
-    return true, max
-end
-
-function tprint(tbl, indent)
-    if not indent then indent = 0 end
-    for k, v in pairs(tbl) do
-        if k ~= nil then
-            formatting = string.rep("  ", indent) .. tostring(k) .. ": "
-        end
-        if type(v) == "table" then
-            print(formatting)
-            tprint(v, indent+1)
-        elseif type(v) == 'boolean' then
-            print(formatting .. tostring(v))
-        else
-            print(formatting .. tostring(v))
-        end
-    end
-end
-
-function exportstring(s)
-    s = string.format( "%q",s )
-    -- to replace
-    s = string.gsub( s,"\\\n","\\n" )
-    s = string.gsub( s,"\r","\\r" )
-    s = string.gsub( s,string.char(26),"\"..string.char(26)..\"" )
-    return s
-end
-
-function table_save(tbl, filename)
-    local charS,charE = "   ","\n"
-    local file,err
-
-    -- create a pseudo file that writes to a string and return the string
-    if not filename then
-        file =  { write = function( self,newstr ) self.str = self.str..newstr end, str = "" }
-        charS,charE = "",""
-    -- write table to tmpfile
-    elseif filename == true or filename == 1 then
-        charS,charE,file = "","",io.tmpfile()
-    -- write table to file
-    -- use io.open here rather than io.output, since in windows when clicking on a file opened with io.output will create an error
-    else
-        file,err = io.open( filename, "w" )
-        if err then return _,err end
-    end
-
-    -- initiate variables for save procedure
-    local tables,lookup = { tbl },{ [tbl] = 1 }
-    file:write( "return {"..charE )
-    for idx,t in ipairs( tables ) do
-        if filename and filename ~= true and filename ~= 1 then
-            file:write( "-- Table: {"..idx.."}"..charE .. tostring(tables) )
-        end
-        file:write( "{"..charE )
-        local thandled = {}
-        for i,v in ipairs( t ) do
-            thandled[i] = true
-            -- escape functions and userdata
-            if type( v ) ~= "userdata" then
-                -- only handle value
-                if type( v ) == "table" then
-                    if not lookup[v] then
-                        table.insert( tables, v )
-                        lookup[v] = #tables
-                    end
-                    file:write( charS.."{"..lookup[v].."},"..charE )
-                elseif type( v ) == "function" then
-                    file:write( charS.."loadstring("..exportstring(string.dump( v )).."),"..charE )
-                else
-                    local value =  ( type( v ) == "string" and exportstring( v ) ) or tostring( v )
-                    file:write(  charS..value..","..charE )
-                end
-            end
-        end
-        for i,v in pairs( t ) do
-            -- escape functions and userdata
-            if (not thandled[i]) and type( v ) ~= "userdata" then
-                -- handle index
-                if type( i ) == "table" then
-                    if not lookup[i] then
-                        table.insert( tables,i )
-                        lookup[i] = #tables
-                    end
-                    file:write( charS.."[{"..lookup[i].."}]=" )
-                else
-                    local index = ( type( i ) == "string" and "["..exportstring( i ).."]" ) or string.format( "[%d]",i )
-                    file:write( charS..index.."=" )
-                end
-                -- handle value
-                if type( v ) == "table" then
-                    if not lookup[v] then
-                        table.insert( tables,v )
-                        lookup[v] = #tables
-                    end
-                    file:write( "{"..lookup[v].."},"..charE )
-                elseif type( v ) == "function" then
-                    file:write( "loadstring("..exportstring(string.dump( v )).."),"..charE )
-                else
-                    local value =  ( type( v ) == "string" and exportstring( v ) ) or tostring( v )
-                    file:write( value..","..charE )
-                end
-            end
-        end
-        file:write( "},"..charE )
-    end
-    file:write( "}" )
-
-    -- Return Values
-    -- return stringtable from string
-    if not filename then
-        -- set marker for stringtable
-        return file.str.."--|"
-    -- return stringttable from file
-    elseif filename == true or filename == 1 then
-        file:seek ( "set" )
-        -- no need to close file, it gets closed and removed automatically
-        -- set marker for stringtable
-        return file:read( "*a" ).."--|"
-    -- close file and return 1
-    else
-        file:close()
-        return 1
-    end
-end
-

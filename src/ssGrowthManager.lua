@@ -16,26 +16,15 @@ ssGrowthManager.TRUE = "true"
 ssGrowthManager.FALSE = "false"
 ssGrowthManager.MAYBE = "maybe"
 
-function Set (list)
-    local set = {}
-
-    for _, l in ipairs(list) do
-        set[l] = true
-    end
-
-    return set
-end
-
 ssGrowthManager.defaultFruits = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doGrowthTransition = false
-ssGrowthManager.doResetGrowth = false
 ssGrowthManager.canPlantData = {}
 
 function ssGrowthManager:load(savegame, key)
     if savegame == nil then
-        self.doResetGrowth = true
+        self.isNewSavegame = true
     end
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
@@ -55,16 +44,15 @@ function ssGrowthManager:loadMap(name)
 
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
-            logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
+            log("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
             return
         end
 
-        logInfo("ssGrowthManager: Data loaded. Locking growth")
         --lock changing the growth speed option and set growth rate to 1 (no growth)
         g_currentMission:setPlantGrowthRate(1,nil)
         g_currentMission:setPlantGrowthRateLocked(true)
-        ssSeasonsMod:addGrowthStageChangeListener(self)
 
+        ssSeasonsMod:addGrowthStageChangeListener(self)
 
 
         self:buildCanPlantData()
@@ -170,7 +158,7 @@ function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
-        if self.doResetGrowth == true and growthTransition == 1 then
+        if self.isNewSavegame == true and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             self.doGrowthTransition = true
             self.growthManagerEnabled = true
