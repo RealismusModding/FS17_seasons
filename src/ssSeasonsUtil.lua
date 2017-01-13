@@ -7,63 +7,7 @@
 
 ssSeasonsUtil = {}
 
-ssSeasonsUtil.weekDays = {}
-ssSeasonsUtil.weekDaysShort = {}
-ssSeasonsUtil.seasons = {}
-
-ssSeasonsUtil.DAYS_IN_WEEK = 7
-ssSeasonsUtil.SEASONS_IN_YEAR = 4
-
-ssSeasonsUtil.SEASON_SPRING = 0
-ssSeasonsUtil.SEASON_SUMMER = 1
-ssSeasonsUtil.SEASON_AUTUMN = 2
-ssSeasonsUtil.SEASON_WINTER = 3
-
-ssSeasonsUtil.weekDays = {
-    ssLang.getText("SS_WEEKDAY_MONDAY", "Monday"),
-    ssLang.getText("SS_WEEKDAY_TUESDAY", "Tuesday"),
-    ssLang.getText("SS_WEEKDAY_WEDNESDAY", "Wednesday"),
-    ssLang.getText("SS_WEEKDAY_THURSDAY", "Thursday"),
-    ssLang.getText("SS_WEEKDAY_FRIDAY", "Friday"),
-    ssLang.getText("SS_WEEKDAY_SATURDAY", "Saturday"),
-    ssLang.getText("SS_WEEKDAY_SUNDAY", "Sunday"),
-}
-
-ssSeasonsUtil.weekDaysShort = {
-    ssLang.getText("SS_WEEKDAY_MON", "Mon"),
-    ssLang.getText("SS_WEEKDAY_TUE", "Tue"),
-    ssLang.getText("SS_WEEKDAY_WED", "Wed"),
-    ssLang.getText("SS_WEEKDAY_THU", "Thu"),
-    ssLang.getText("SS_WEEKDAY_FRI", "Fri"),
-    ssLang.getText("SS_WEEKDAY_SAT", "Sat"),
-    ssLang.getText("SS_WEEKDAY_SUN", "Sun"),
-}
-
-ssSeasonsUtil.seasons = {
-    [0] = ssLang.getText("SS_SEASON_SPRING", "Spring"),
-    ssLang.getText("SS_SEASON_SUMMER", "Summer"),
-    ssLang.getText("SS_SEASON_AUTUMN", "Autumn"),
-    ssLang.getText("SS_SEASON_WINTER", "Winter"),
-}
-
-function ssSeasonsUtil:load(savegame, key)
-    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
-    self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".settings.latestSeason", -1)
-    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".settings.latestGrowthStage", 0)
-    self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", 0)
-
-    self.isNewGame = savegame == nil
-end
-
-function ssSeasonsUtil:save(savegame, key)
-    ssStorage.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
-    ssStorage.setXMLInt(savegame, key .. ".settings.latestSeason", self.latestSeason)
-    ssStorage.setXMLInt(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
-    ssStorage.setXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
-end
-
 function ssSeasonsUtil:loadMap(name)
-    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssSeasonsUtil:update(dt)
@@ -71,18 +15,6 @@ function ssSeasonsUtil:update(dt)
         self.isNewGame = false
         ssSeasonsUtil:dayChanged() -- trigger the stage change events.
     end
-end
-
-function ssSeasonsUtil:readStream(streamId, connection)
-    self.daysInSeason = streamReadFloat32(streamId)
-    self.latestSeason = streamReadFloat32(streamId)
-    self.latestGrowthStage = streamReadFloat32(streamId)
-end
-
-function ssSeasonsUtil:writeStream(streamId, connection)
-    streamWriteFloat32(streamId, self.daysInSeason)
-    streamWriteFloat32(streamId, self.latestSeason)
-    streamWriteFloat32(streamId, self.latestGrowthStage)
 end
 
 -- Get the current day number.
@@ -169,11 +101,6 @@ function ssSeasonsUtil:seasonName(dayNumber)
     return self.seasons[self:season(dayNumber)]
 end
 
--- 0 = spring, 3 = winter
-function ssSeasonsUtil:isSeason(seasonNumber)
-    return self:season() == seasonNumber
-end
-
 -- Get day name for given day number
 -- If no day number supplied, uses current day
 function ssSeasonsUtil:dayName(dayNumber)
@@ -239,35 +166,6 @@ function ssSeasonsUtil:currentGrowthStage(currentDay)
     return nil
 end
 
--- This is here, because ssSeasonsMod is never really loaded as a mod class..
--- It is complicated, but installing a day change listener on it wont work
-function ssSeasonsUtil:dayChanged()
-    if g_seasons.enabled then
-        local currentSeason = self:season()
-
-        local currentGrowthStage = self:currentGrowthStage()
-
-        -- Call season change events
-        if currentSeason ~= ssSeasonsUtil.latestSeason then
-            ssSeasonsUtil.latestSeason = currentSeason
-
-            for _, target in pairs(ssSeasonsMod.seasonListeners) do
-                -- No check here, let it crash if the function is missing
-                target.seasonChanged(target)
-            end
-        end
-
-        -- Call growth stage events
-        if currentGrowthStage ~= ssSeasonsUtil.latestGrowthStage then
-            ssSeasonsUtil.latestGrowthStage = currentGrowthStage
-
-            for _, target in pairs(ssSeasonsMod.growthStageListeners) do
-                -- No check here, let it crash if the function is missing
-                target.growthStageChanged(target)
-            end
-        end
-    end
-end
 
 function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
     local oldSeasonLength = self.daysInSeason -- 6 ELIM

@@ -6,9 +6,6 @@
 
 ssSeasonsMod = {}
 
-ssSeasonsMod.seasonListeners = {}
-ssSeasonsMod.growthStageListeners = {}
-
 function log(...)
     if not g_seasons.verbose then return end
 
@@ -142,42 +139,6 @@ local function ssSeasonsModSaveToXML(self)
             end
         else
             g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("SS_SAVE_FAILED"), 10000)
-        end
-    end
-end
-
--- Listeners for a change of season
-function ssSeasonsMod:addSeasonChangeListener(target)
-    if target ~= nil then
-        table.insert(ssSeasonsMod.seasonListeners, target)
-    end
-end
-
-function ssSeasonsMod:removeSeasonChangeListener(target)
-    if target ~= nil then
-        for i = 1, #ssSeasonsMod.seasonListeners do
-            if ssSeasonsMod.seasonListeners[i] == target then
-                table.remove(ssSeasonsMod.seasonListeners, i)
-                break
-            end
-        end
-    end
-end
-
--- Listeners for a change of growth stage
-function ssSeasonsMod:addGrowthStageChangeListener(target)
-    if target ~= nil then
-        table.insert(ssSeasonsMod.growthStageListeners, target)
-    end
-end
-
-function ssSeasonsMod:removeGrowthStageChangeListener(target)
-    if target ~= nil then
-        for i = 1, #ssSeasonsMod.growthStageListeners do
-            if ssSeasonsMod.growthStageListeners[i] == target then
-                table.remove(ssSeasonsMod.growthStageListeners, i)
-                break
-            end
         end
     end
 end
