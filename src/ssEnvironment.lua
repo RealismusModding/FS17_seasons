@@ -9,7 +9,6 @@ ssEnvironment = {}
 
 function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
-
 end
 
 function ssEnvironment:save(savegame, key)
