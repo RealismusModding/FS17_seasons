@@ -133,7 +133,7 @@ function ssSeasonsMod:loadFromXML(...)
 end
 
 local function ssSeasonsModSaveToXML(self)
-    if ssSeasonsMod.enabled and self.isValid and self.xmlKey ~= nil then
+    if g_seasons.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
             for _, k in pairs(g_modClasses) do
                 if _G[k].save ~= nil then
