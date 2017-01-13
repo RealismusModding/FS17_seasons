@@ -41,12 +41,12 @@ For a better game experience, custom maps should add two new density layers: one
 ## Features
 
 ### Seasons
-- Plowable snow in the winter!
+- Plowable snow in the winter! Reduced tire friction when driving in snow.
 - Soil temperature is properly modelled using thermnodynamic equations and historical data which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
-  - Snow and hail in winter
+  - Snow and hail in winter. 
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
 - Pedestrians do not spawn in the Winter.
 

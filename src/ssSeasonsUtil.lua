@@ -297,6 +297,9 @@ function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
 
     -- Redo weather manager
     ssWeatherManager:buildForecast()
+
+    -- Change repair interval
+    ssVehicle.repairInterval = newSeasonLength * 2 
 end
 
 ------------------------------------

@@ -43,6 +43,8 @@ function ssVehicle:loadMap()
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
+    ssVehicle.repairInterval = ssSeasonsUtil.daysInSeason * 2
+
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
@@ -53,6 +55,9 @@ function ssVehicle:dayChanged()
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
             self:repair(vehicle,storeItem)
         end
+
+        vehicle.ssDaysSinceLastRepair = g_currentMission.currentDay - vehicle.ssLastRepairDay
+
     end
 end
 
@@ -173,7 +178,6 @@ end
 function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
     local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
     local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
 
     -- Calculate the amount of dirt on the vehicle, on average
@@ -189,7 +193,8 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
 
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
-    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or isRepair then
+
+    if vehicle.ssDaysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
         maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
@@ -211,16 +216,18 @@ end
 
 -- Repair by resetting the last repair day and operating time
 function ssVehicle:repair(vehicle, storeItem)
-    vehicle.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
+    --compared to game day since ssSeasonsUtil:currentDayNumber() is shifted when changing season length
+    vehicle.ssLastRepairDay = g_currentMission.currentDay 
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
+    vehicle.ssDaysSinceLastRepair = 0
 
     return true
 end
 
 function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
-    if vehicle.ssLastRepairDay == ssSeasonsUtil:currentDayNumber() then
+    if vehicle.ssLastRepairDay == g_currentMission.currentDay then
         return 0
     end
 
@@ -261,15 +268,24 @@ end
 
 function ssVehicle:calculateOverdueFactor(vehicle)
     local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
 
-    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
-        overdueFactor = math.ceil(math.max(daysSinceLastRepair/(ssSeasonsUtil.daysInSeason * 2), math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
+    if vehicle.ssDaysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
+        overdueFactor = math.ceil(math.max(vehicle.ssDaysSinceLastRepair/ssVehicle.repairInterval, math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
     else
         overdueFactor = 1
     end
 
     return overdueFactor
+end
+
+function ssVehicle:updateDaysSinceRepair()
+
+    for i, vehicle in pairs(g_currentMission.vehicles) do
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
+            vehicle.ssDaysSinceLastRepair = g_currentMission.currentDay - vehicle.ssLastRepairDay
+        end
+    end
+
 end
 
 function ssVehicle:getSellPrice(superFunc)

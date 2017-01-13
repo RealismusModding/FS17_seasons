@@ -27,6 +27,9 @@ function ssRepairable:load(savegame)
         self.ssYesterdayOperatingTime = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssYesterdayOperatingTime)
         self.ssCumulativeDirt = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
     end
+    
+    self.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
+
 end
 
 function ssRepairable:delete()
@@ -123,28 +126,29 @@ function ssRepairable:updateTick(dt)
 end
 
 function ssRepairable:update(dt)
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - self.ssLastRepairDay
 
     -- log("player in range "..tostring(self.ssPlayerInRange).." inR "..tostring(self.ssInRangeOfWorkshop))
 
     -- Show a message about the repairing
     if self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
         self:repairUpdate(dt)
+
     end
 
     if self.isEntered then
-        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-        if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
+        
+        local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        if self.ssDaysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
             g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
         else
-            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceInterval, ssSeasonsUtil.daysInSeason * 2 - daysSinceLastRepair))
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceHours, ssVehicle.repairInterval - self.ssDaysSinceLastRepair))
         end
     end
 
     if self.isMotorStarted then
         math.random()
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)  --never less than 20% chance every minute for a breakdown
+        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5) 
 
         if math.random() > p then
             self:stopMotor()
