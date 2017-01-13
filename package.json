@@ -17,6 +17,8 @@
     "del": "^2.2.2",
     "git-rev-sync": "^1.8.0",
     "gulp": "^3.9.1",
+    "gulp-buffer": "0.0.2",
+    "gulp-dom": "^0.9.17",
     "gulp-rename": "^1.2.2",
     "gulp-run": "^1.7.1",
     "gulp-size": "^2.1.0",

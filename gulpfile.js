@@ -13,6 +13,8 @@ const merge = require("merge-stream");
 const git = require("git-rev-sync");
 const run = require("gulp-run");
 const del = require("del");
+const dom = require("gulp-dom")
+const buffer = require("gulp-buffer")
 
 const _defaults = require("lodash.defaultsdeep")
 const _has = require("lodash.has")
@@ -54,7 +56,7 @@ function templatedLua() {
     const replacements = {
         debug: buildConfig.get("options.debug", false).toString(),
         verbose: buildConfig.get("options.verbose", false).toString(),
-        buildnumber: toLuaString(versionName)
+        buildnumber: toLuaString(createVersionName())
     };
 
     return gulp
@@ -90,7 +92,7 @@ function dediUrl() {
 
 function dediStop() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html > /dev/null`;
+    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
@@ -98,10 +100,26 @@ function dediStop() {
 
 function dediStart() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html > /dev/null`;
+    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
+}
+
+function developTask(tasks) {
+    let sources = [...zipSources, "modDesc.xml", "src/**/*.lua", "package.json"];
+
+    const watcher = gulp.watch(sources, tasks);
+    watcher.on("change", (event) => {
+        console.log(`File ${event.path} was ${event.type}`);
+
+        // Reload package info
+        const filename = path.basename(event.path);
+        if (filename === "package.json") {
+            package = JSON.parse(fs.readFileSync("package.json"));
+            packageVersion = package.version + ".0";
+        }
+    });
 }
 
 /**
@@ -150,11 +168,14 @@ class BuildConfig {
 var buildConfig = new BuildConfig();
 var package = JSON.parse(fs.readFileSync("package.json"));
 var packageVersion = package.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
-const versionName = createVersionName()
-var outputZipName = `FS17_seasons_${versionName}.zip`;
 
-console.log("packageVersion",packageVersion,"output",outputZipName)
-
+const zipSources = [
+    "translations/translation_*.xml",
+    "data/**/*",
+    "resources/**/*",
+    "icon.dds",
+    "CREDITS.txt"
+];
 
 gulp.task("clean:zip", () => {
     return del("FS17_seasons*.zip");
@@ -166,15 +187,8 @@ gulp.task("clean:mods", () => {
 
 // Build the mod zipfile
 gulp.task("build", () => {
-    const sources = [
-        "translations/translation_*.xml",
-        "data/**/*",
-        "resources/**/*",
-        "icon.dds",
-        "CREDITS.txt"
-    ];
-
-    let sourceStream = gulp.src(sources, { base: "." });
+    const sourceStream = gulp.src(zipSources, { base: "." });
+    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
 
     return merge(sourceStream, fillModDesc(), templatedLua())
         .pipe(size())
@@ -185,6 +199,8 @@ gulp.task("build", () => {
 
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build", "clean:mods"], () => {
+    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
+
     return gulp
         .src(outputZipName, { base: "." })
         .pipe(rename("FS17_seasons.zip"))
@@ -201,12 +217,28 @@ gulp.task("server:stop", dediStop);
  */
 gulp.task("server:start", dediStart);
 
+/**
+ * Download the server log.
+ */
 gulp.task("server:log", () => {
     const url = dediUrl();
-    const command = `curl -X GET -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" -H "Origin: ${url}" ${url}logs.html?lang=en`;
+    const command = `curl -X GET -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" -H "Origin: ${url}" ${url}logs.html?lang=en 2> /dev/null`;
 
-    return run(command, { silent: true }).exec()
-        .pipe(gulp.dest("log"));
+    const task = run(command, { silent: true }).exec()
+        .pipe(buffer())
+        .pipe(dom(function () { // must be function for 'this'
+            return this.getElementById("textarea_log").innerHTML;
+        }));
+
+    task.on("data", function (chunk) {
+        var contents = chunk.contents.toString().trim();
+        var bufLength = process.stdout.columns;
+        var hr = '\n\n' + Array(bufLength).join("_") + '\n\n'
+        if (contents.length > 1) {
+            process.stdout.write(chunk.path + '\n' + contents + '\n');
+            process.stdout.write(chunk.path + hr);
+        }
+    })
 });
 
 /**
@@ -221,6 +253,7 @@ gulp.task("ir:1", ["install"], dediStop);
  * the old version is busy and can't be changed.
  */
 gulp.task("ir:2", ["ir:1"], () => {
+    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
     const conn = new ftp({
         host: buildConfig.get("server.ftp.host"),
         port: buildConfig.get("server.ftp.port", 21),
@@ -243,20 +276,23 @@ gulp.task("ir:2", ["ir:1"], () => {
  */
 gulp.task("server:install", ["ir:2"], dediStart);
 
+/**
+ * Development task: watches file changes and auto builds and installs.
+ */
+gulp.task("develop", () => developTask(["install"]));
+
+/**
+ * Development task: watches file changes and auto builds and installs locally and remotely.
+ */
+gulp.task("server:develop", () => developTask(["server:install"]));
+
+/**
+ * Default task, just build.
+ */
 gulp.task("default", ["build"]);
 
 /*
-
-
-curl -T FS17_seasons.zip ftp://$FTPUSER:$FTPPASS@ftp-3.verygames.net/games/FarmingSimulator17/mods/
-
-
-
 translationsMissing
 translationBloat
 style -> luacheck
-
-installRemote
-watch/develop
-
  */

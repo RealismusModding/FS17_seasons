@@ -24,6 +24,8 @@ function ssMain:preLoad()
     g_seasons.debug = --<%=debug %>
     g_seasons.enabled = false -- will be enabled later in the loading process
 
+    logInfo("Loading Seasons " .. g_seasons.version);
+
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableWitherOption)
     TourIcons.onCreate = self.inj_disableTourIcons
