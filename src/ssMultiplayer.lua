@@ -7,6 +7,10 @@
 
 ssMultiplayer = {}
 
+function ssMultiplayer:preLoad()
+    Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)
+end
+
 function ssMultiplayer:loadMap(name)
     self.players = {}
     self.numPlayers = 0
@@ -87,4 +91,3 @@ function ssMultiplayerJoinEvent:sendObjects(superFunc, connection, x, y, z, view
 
     return superFunc(self, connection, x, y, z, viewDistanceCoeff)
 end
-Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)
