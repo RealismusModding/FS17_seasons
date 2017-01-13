@@ -35,6 +35,8 @@ function ssVehicle:loadMap()
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
+    Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
+    Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.getGroundType)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     InGameMenu.onCreateGarageVehicleAge = Utils.overwrittenFunction(InGameMenu.onCreateGarageVehicleAge, ssVehicle.inGameMenuOnCreateGarageVehicleAge)
@@ -413,4 +415,22 @@ function ssVehicle:vehicleDraw(superFunc, dt)
         end
     end
 
+end
+
+function ssVehicle:updateWheelTireFriction(superFunc,wheel)
+    
+    if self.isServer and self.isAddedToPhysics then
+        if wheel.inSnow then
+            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
+        else
+            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+        end
+	end
+end
+
+function ssVehicle:getGroundType(superFunc,wheel)
+
+    if wheel.inSnow then
+        return WheelsUtil.GROUND_SOFT_TERRAIN
+    end
 end
