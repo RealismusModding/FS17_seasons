@@ -100,7 +100,7 @@ function ssWeatherForecast:update(dt)
 end
 
 function ssWeatherForecast:draw()
-    if not g_currentMission.fieldJobManager:isFieldJobActive()
+    if (g_currentMission.fieldJobManager == nil or g_currentMission.fieldJobManager:isFieldJobActive())
         and g_currentMission.showHudEnv then
 
         -- Set text color and alignment

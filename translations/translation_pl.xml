@@ -7,7 +7,9 @@
     <texts>
         <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Naprawa pojazdów" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Napraw pojazd" />
+        <text name="input_SEASONS_SHOW_MENU" text="Sezony: Otwórz menu" />
+        <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Poniedziałek" />
         <text name="SS_WEEKDAY_TUESDAY" text="Wtorek" />
@@ -34,23 +36,57 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać naprawę" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s został naprawiony za %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Napraw %s za %s" />
-
-        <text name="SS_REPAIR_REQUIRED" text="Naprawa wymagana" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Naprawa będzie wymagana za %d dni" />
-        <text name="SS_REPAIR_DIALOG" text="Czy chcesz naprawić %s za %s?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Naprawianie" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać przegląd" />
+        <text name="SS_VEHICLE_REPAIRED" text="Przegląd %s kosztował %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Wykonaj przegląd %s za %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Wymagany jest przegląd" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
+        <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
+		<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
 
         <text name="SS_WARN_NOTDURINGWINTER" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
 
-            <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." /> <!-- spring -->
-            <text name="SS_SEASON_INTRO_1" text="Słońce jest wysoko, zboża rosną." />
-            <text name="SS_SEASON_INTRO_2" text="Nadszedł czas żniw. Przygotuj się do zimy, ponieważ zboża mogą jej nie przetrwać." />
-            <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." /> <!-- winter -->
-            <text name="SS_BUTTON_OK" text="OK" />
-            <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
+        <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="Słońce jest wysoko, zboża rosną." />
+        <text name="SS_SEASON_INTRO_2" text="Nadszedł czas żniw. Przygotuj się do zimy, ponieważ zboża mogą jej nie przetrwać." />
+        <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
+        
+        <!-- GUI -->
+        <text name="ui_pageOverview" text="Opis" />
+        <text name="ui_pageSettings" text="Ustawienia" />
+        <text name="ui_pageHelp" text="Pomoc" />
+        <text name="ui_pageDebug" text="Narzędzia debugowania" />
+
+        <text name="ui_buttonSave" text="Zapisz ustawienia" />
+        <text name="ui_snowOneLayer" text="tylko 1 warstwa" />
+        <text name="ui_days" text="%i dni" />
+
+        <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony." />
+        <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu." />
+        <text name="tooltip_snow" text="Śnieg będzie padał w czasie morźnej zimy i zasypie drogi." />
+        <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy." />
+        <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdząc po nim." />
+
+        <text name="setting_seasonIntros" text="Wstępy do sezonów" />
+        <text name="setting_seasonLength" text="Długość sezonów" />
+        <text name="setting_snow" text="Tryb śniegu" />
+        <text name="setting_controlsHelp" text="Skróty klawiszowe w oknie pomocy" />
+        <text name="setting_snowTracks" text="Ślady na śniegu" />
+
+        <text name="ui_helpCategory_1" text="Sezony" />
+        <text name="ui_helpCategory_2" text="Śnieg" />
+        <text name="ui_helpCategory_3" text="Uprawy" />
+        <text name="ui_helpCategory_4" text="Zwierzęta" />
+
+        <text name="ui_helpTitle_1_1" text="1.1" />
+        <text name="ui_helpTitle_2_1" text="2.1" />
+        <text name="ui_helpTitle_3_1" text="3.1" />
+        <text name="ui_helpTitle_4_1" text="4.1" />
+
+        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Sezonów? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
     </texts>
 </l10n>

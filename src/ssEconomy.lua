@@ -111,9 +111,11 @@ end
 function ssEconomy:getEquity()
     local price = 0
 
-    for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
-        if field.ownedByPlayer then
-            price = price + field.fieldPriceInitial
+    if g_currentMission.fieldDefinitionBase ~= nil then -- can be nil on WIP maps
+        for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+            if field.ownedByPlayer then
+                price = price + field.fieldPriceInitial
+            end
         end
     end
 

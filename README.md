@@ -13,13 +13,14 @@ Thus, when building your own version of Seasons, give a credit notice to Realism
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
 
 ## Making videos
-Because this mod is WIP and not yet released we have a couple of rules regarding videos. You are allowed to make videos with Seasons, under a couple of simple conditions:
-- Do not share the GitHub link.
+Because this mod is WIP and not yet released we have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
+- Do not share the GitHub link. 
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
 - Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow),
   and link to the FS-UK WIP [topic](http://fs-uk.com/forum/index.php?topic=187664.0).
 - Make very clear to your viewers that this mod is a Work In Progress and is not yet released
+- You do _not_ need to put the mod name in the video title, but you can if you want.
 
 - Join us on [Slack](http://realismus.joskuijpers.nl) and tell us all about your awesome video.
 
@@ -40,12 +41,12 @@ For a better game experience, custom maps should add two new density layers: one
 ## Features
 
 ### Seasons
-- Plowable snow in the winter!
+- Plowable snow in the winter! Reduced tire friction when driving in snow.
 - Soil temperature is properly modelled using thermnodynamic equations and historical data which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
-  - Snow and hail in winter
+  - Snow and hail in winter. 
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
 - Pedestrians do not spawn in the Winter.
 
