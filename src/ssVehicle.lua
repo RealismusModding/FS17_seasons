@@ -56,7 +56,7 @@ function ssVehicle:dayChanged()
             self:repair(vehicle,storeItem)
         end
 
-        vehicle.ssDaysSinceLastRepair = g_currentMission.currentDay - vehicle.ssLastRepairDay
+        vehicle.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
     end
 end
@@ -217,7 +217,7 @@ end
 -- Repair by resetting the last repair day and operating time
 function ssVehicle:repair(vehicle, storeItem)
     --compared to game day since ssSeasonsUtil:currentDayNumber() is shifted when changing season length
-    vehicle.ssLastRepairDay = g_currentMission.currentDay 
+    vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
     vehicle.ssDaysSinceLastRepair = 0
@@ -227,7 +227,7 @@ end
 
 function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
-    if vehicle.ssLastRepairDay == g_currentMission.currentDay then
+    if vehicle.ssLastRepairDay == g_currentMission.environment.currentDay then
         return 0
     end
 
@@ -282,7 +282,7 @@ function ssVehicle:updateDaysSinceRepair()
 
     for i, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            vehicle.ssDaysSinceLastRepair = g_currentMission.currentDay - vehicle.ssLastRepairDay
+            vehicle.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
         end
     end
 
@@ -434,7 +434,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 end
 
 function ssVehicle:updateWheelTireFriction(superFunc,wheel)
-    
+
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
