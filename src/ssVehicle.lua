@@ -55,9 +55,6 @@ function ssVehicle:dayChanged()
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
             self:repair(vehicle,storeItem)
         end
-
-        vehicle.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
-
     end
 end
 
@@ -179,6 +176,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
     local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
     local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
+    local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
     -- Calculate the amount of dirt on the vehicle, on average
     local avgDirtAmount = 0
@@ -194,7 +192,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
 
-    if vehicle.ssDaysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
+    if daysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
         maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
@@ -220,7 +218,6 @@ function ssVehicle:repair(vehicle, storeItem)
     vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
-    vehicle.ssDaysSinceLastRepair = 0
 
     return true
 end
@@ -268,9 +265,10 @@ end
 
 function ssVehicle:calculateOverdueFactor(vehicle)
     local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+    local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
-    if vehicle.ssDaysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
-        overdueFactor = math.ceil(math.max(vehicle.ssDaysSinceLastRepair/ssVehicle.repairInterval, math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
+    if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
+        overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval, math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
     else
         overdueFactor = 1
     end
@@ -279,13 +277,6 @@ function ssVehicle:calculateOverdueFactor(vehicle)
 end
 
 function ssVehicle:updateDaysSinceRepair()
-
-    for i, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            vehicle.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
-        end
-    end
-
 end
 
 function ssVehicle:getSellPrice(superFunc)
@@ -434,7 +425,6 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 end
 
 function ssVehicle:updateWheelTireFriction(superFunc,wheel)
-
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
@@ -445,7 +435,6 @@ function ssVehicle:updateWheelTireFriction(superFunc,wheel)
 end
 
 function ssVehicle:getGroundType(superFunc,wheel)
-
     if wheel.inSnow then
         return WheelsUtil.GROUND_SOFT_TERRAIN
     end
