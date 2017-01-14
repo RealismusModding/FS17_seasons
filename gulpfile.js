@@ -48,7 +48,7 @@ function fillModDesc() {
 
 function templatedLua() {
     const options = {
-        interpolate: /\-\-<%=([\s\S]+?)%>/g,
+        interpolate: /false\-\-<%=([\s\S]+?)%>/g,
         evaluate: undefined,
         escape: undefined
     };

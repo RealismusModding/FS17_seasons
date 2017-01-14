@@ -16,12 +16,12 @@ function ssMain:preLoad()
     local modItem = ModsUtil.findModItemByModName(g_currentModName)
     g_seasons.modDir = g_currentModDirectory
 
-    local buildnumber = --<%=buildnumber %>
-    g_seasons.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. buildnumber .. " - " .. tostring(modItem.fileHash)
+    local buildnumber = false--<%=buildnumber %>
+    g_seasons.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
     -- Set global settings
-    g_seasons.verbose = --<%=verbose %>
-    g_seasons.debug = --<%=debug %>
+    g_seasons.verbose = false--<%=verbose %>
+    g_seasons.debug = false--<%=debug %>
     g_seasons.enabled = false -- will be enabled later in the loading process
 
     logInfo("Loading Seasons " .. g_seasons.version);

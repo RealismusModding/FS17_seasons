@@ -51,7 +51,7 @@ g_modClasses = {
     "ssPedestrianSystem"
 }
 
-local isDebug = --<%=debug %>
+local isDebug = false--<%=debug %>
 if isDebug then
     table.insert(g_modClasses, "ssDebug")
 end
