@@ -177,7 +177,7 @@ function ssWeatherForecast:drawToday(forecast)
 
     -- Render Season, cloud and ground icon
     renderOverlay(self.hud.overlays.seasons[forecast[1].season].overlayId, self.hud.dayPosX + self.hud.iconWidthSmall*0.2, self.hud.dayPosY + self.hud.dayHeight/2 - self.hud.iconHeigthSmall/2*1.5, self.hud.iconWidthSmall*1.5, self.hud.iconHeigthSmall*1.5)
-    renderOverlay(self.hud.overlays.cloud_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.7, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeigthSmall*1.8, self.hud.iconWidthSmall, self.hud.iconHeigthSmall)
+    renderOverlay(self.hud.overlays.cloud_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.7, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeigthSmall*1.5, self.hud.iconWidthSmall, self.hud.iconHeigthSmall)
     renderOverlay(self.hud.overlays.ground_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.7, self.hud.dayPosY + self.hud.iconHeigthSmall*0.5, self.hud.iconWidthSmall, self.hud.iconHeigthSmall)
 
     -- Render current air temperature

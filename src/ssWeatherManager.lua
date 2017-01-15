@@ -9,7 +9,7 @@ ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
-ssWeatherManager.soilTemp = 6
+ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.rains = {}
 
 function ssWeatherManager:load(savegame, key)
@@ -18,6 +18,7 @@ function ssWeatherManager:load(savegame, key)
 
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
+    self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
 
     -- load forecast
     self.forecast = {}
@@ -70,6 +71,7 @@ function ssWeatherManager:save(savegame, key)
 
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
+    ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -210,6 +212,7 @@ function ssWeatherManager:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
 
+    self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter. May not be correct if rebuilding forecast.
     self.forecast = {}
 
     for n = 1, self.forecastLength do
@@ -256,6 +259,8 @@ function ssWeatherManager:updateForecast()
     local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1
     local oneDayRain = {}
 
+    self.prevHighTemp = self.forecast[1].highTemp  -- updating prev high temp before updating forecast table
+
     table.remove(self.forecast,1)
 
     oneDayForecast = {}
@@ -300,6 +305,8 @@ function ssWeatherManager:updateForecast()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
 
+    
+
 end
 
 --function ssWeatherManager:getWeatherStateForDay(dayNumber)
@@ -337,22 +344,23 @@ function ssWeatherManager:diurnalTemp(hour, minute,lowTemp,highTemp,lowTempNext)
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
 
-    if lowTemp == nil or highTemp == nil or lowTempNext == nil then
+    if lowTemp == nil and highTemp == nil and lowTempNext == nil then
         lowTemp = self.forecast[1].lowTemp
         highTemp = self.forecast[1].highTemp
         lowTempNext = self.forecast[2].lowTemp
+        highTempPrev = self.prevHighTemp
+    else
+        highTempPrev = highTemp
     end
 
-    highTempPrev = self.forecast[1].highTemp -- not completely correct, but instead of storing the temp of the previous day
+    local currentTime = hour + minute/60
 
-    local currentTime = hour*60 + minute
-
-    if currentTime < 420 then
-        currentTemp = (math.cos(((currentTime + 540) / 960) * math.pi / 2)) ^ 3 * (highTempPrev - lowTemp) + lowTemp
-    elseif currentTime > 900 then
-        currentTemp = (math.cos(((currentTime - 900) / 960) * math.pi / 2)) ^ 3 * (highTemp - lowTempNext) + lowTemp
+    if currentTime < 7 then
+        currentTemp = (math.cos(((currentTime + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
+    elseif currentTime > 15 then
+        currentTemp = (math.cos(((currentTime - 15) / 16) * math.pi / 2)) ^ 2 * (highTemp - lowTempNext) + lowTempNext
     else
-        currentTemp = (math.cos((1 - (currentTime -  420) / 480) * math.pi / 2) ^ 3) * (highTemp - lowTemp) + lowTemp
+        currentTemp = (math.cos((1 - (currentTime -  7) / 8) * math.pi / 2) ^ 2) * (highTemp - lowTemp) + lowTemp
     end
 
     return currentTemp
