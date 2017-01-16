@@ -128,14 +128,14 @@ end
 
 function ssEnvironment:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local sunHeightAngle = self:calculateSunDeclination(julianDay) - (90 - self.latitude)*math.pi/180
+    local sunHeightAngle = self:calculateSunDeclination(julianDay-176) - (90 - self.latitude)*math.pi/180
 
     return sunHeightAngle
 end
 
 function ssEnvironment:calculateSunDeclination(julianDay)
     -- Calculate the suns declination
-    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
+    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay + 186)))
     local eta = math.asin(0.4 * math.cos(theta))
 
     return eta
