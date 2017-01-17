@@ -65,8 +65,6 @@ function ssWeatherManager:load(savegame, key)
 end
 
 function ssWeatherManager:save(savegame, key)
-    --log('g_currentMission rains table before saving')
-    --print_r(g_currentMission.environment.rains)
     local i = 0
 
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
@@ -248,11 +246,8 @@ function ssWeatherManager:buildForecast()
     end
 
     self:owRaintable()
-    --print_r(g_currentMission.environment.rains)
     self:switchRainHail()
     --self:owRaintable() -- since there is no rains table in g_currentMission.environment before first day change it is run twice
-    --print_r(g_currentMission.environment.rains)
-
 end
 
 function ssWeatherManager:updateForecast()
@@ -304,9 +299,6 @@ function ssWeatherManager:updateForecast()
     self:calculateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
-
-    
-
 end
 
 --function ssWeatherManager:getWeatherStateForDay(dayNumber)
@@ -472,31 +464,22 @@ end
 
 function ssWeatherManager:switchRainHail()
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        --log('--- New day in g_currentMission.environment.rains table ---')
         for jndex, fCast in ipairs(self.forecast) do
-             --log('rain.startDay = ',rain.startDay,' | fCast.day = ',fCast.day)
              if rain.startDay == fCast.day then
                 local hour = math.floor(rain.startDayTime/60/60/1000)
                 local minute = math.floor(rain.startDayTime/60/1000)-hour*60
 
                 local tempStartRain = self:diurnalTemp(hour, minute, fCast.lowTemp,fCast.highTemp,fCast.lowTemp)
-                --log('startDayTime = ',rain.startDayTime,' | hour:minute = ',hour,':',minute,' | lowTemp = ',fCast.lowTemp,' | highTemp = ',fCast.highTemp)
-                --log('temperature = ',tempStartRain,' rainTypeId = ',rain.rainTypeId)
 
                 if tempStartRain < -1 and rain.rainTypeId == 'rain' then
-                    --log('Switching from rain to hail')
                     g_currentMission.environment.rains[index].rainTypeId = 'hail'
                     self.forecast[jndex].weatherState = 'hail'
                 elseif tempStartRain >= -1 and rain.rainTypeId == 'hail' then
-                    --log('Switching from hail to rain')
-                    --print_r(g_currentMission.environment.rains)
                     g_currentMission.environment.rains[index].rainTypeId = 'rain'
                     self.forecast[jndex].weatherState = 'rain'
-                    --print_r(g_currentMission.environment.rains)
                 end
             end
         end
-        --log('------------------------------------')
     end
 end
 
@@ -597,8 +580,6 @@ end
 
 function ssWeatherManager:owRaintable()
     g_currentMission.environment.rains = {}
-    --log('HERE IS THE RAINS TABLE BEFORE OW')
-    --print_r(g_currentMission.environment.rains)
     local rain = {}
 
     for index = 1, self.forecastLength do
@@ -607,12 +588,8 @@ function ssWeatherManager:owRaintable()
         end
     end
 
-    --log('HERE IS THE RAIN TABLE | length = ',table.getn(rain))
-    --print_r(rain)
     g_currentMission.environment.numRains = table.getn(rain)
     g_currentMission.environment.rains = rain
-    --log('HERE IS THE RAINS TABLE AFTER OW')
-    --print_r(g_currentMission.environment.rains)
 end
 
 function ssWeatherManager:loadTemperature()
