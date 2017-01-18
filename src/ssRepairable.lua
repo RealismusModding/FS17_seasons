@@ -27,9 +27,6 @@ function ssRepairable:load(savegame)
         self.ssYesterdayOperatingTime = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssYesterdayOperatingTime)
         self.ssCumulativeDirt = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
     end
-
-    self.ssDaysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
-
 end
 
 function ssRepairable:delete()
@@ -129,15 +126,16 @@ function ssRepairable:update(dt)
 
     if self.isEntered then
         local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-        if self.ssDaysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
+        local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
+
+        if daysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
             g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
         else
-            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceHours, ssVehicle.repairInterval - self.ssDaysSinceLastRepair))
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceHours, ssVehicle.repairInterval - daysSinceLastRepair))
         end
     end
 
     if self.isMotorStarted then
-        math.random()
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
         local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)
 
