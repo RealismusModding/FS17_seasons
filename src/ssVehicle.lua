@@ -330,22 +330,6 @@ function ssVehicle:getSellPrice(superFunc)
     return sellPrice
 end
 
---[[
-function ssVehicle:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
-    log("getSpecValueDailyUpKeep "..tostring(storeItem), tostring(realItem))
-
-    local dailyUpkeep = storeItem.dailyUpkeep
-
-    if realItem ~= nil and realItem.getDailyUpKeep ~= nil then
-        dailyUpkeep = realItem:getDailyUpKeep(false)
-    end
-
-    dailyUpkeep = 54
-
-    return string.format(g_i18n:getText("shop_maintenanceValue"), g_i18n:formatMoney(dailyUpkeep, 2))
-end
-]]
-
 -- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle:getSpecValueAge(superFunc, vehicle)
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
@@ -353,7 +337,7 @@ function ssVehicle:getSpecValueAge(superFunc, vehicle)
     elseif vehicle ~= nil and vehicle.age ~= nil then
         return "-"
     elseif not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-        return "at midnight"
+        return ssLang.getText("SS_REPAIR_AT_MIDNIGHT", "at midnight")
     end
 
     return nil
@@ -424,7 +408,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 
 end
 
-function ssVehicle:updateWheelTireFriction(superFunc,wheel)
+function ssVehicle:updateWheelTireFriction(superFunc, wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
