@@ -59,23 +59,8 @@ function ssVehicle:dayChanged()
 end
 
 function ssVehicle:installVehicleSpecializations()
-    local specWashable = SpecializationUtil.getSpecialization("washable")
-
-    -- Go over all the vehicle types
-    for k, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
-        -- Lua can have nil in its tables
-        if vehicleType == nil then break end
-
-        -- If it is washable, we will add our own specialization
-        local hasWashable = false
-        for i, vs in pairs(vehicleType.specializations) do
-            if vs == specWashable then
-                hasWashable = true
-                break
-            end
-        end
-
-        if hasWashable then
+    for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
+        if vehicleType ~= nil and SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
         end
@@ -147,6 +132,7 @@ function ssVehicle:loadAllowedInWinter()
     }
 end
 
+-- all
 function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     local data = ssVehicle.repairFactors[storeItem.category]
 
@@ -172,6 +158,7 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     end
 end
 
+-- repairable
 function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
     local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
@@ -199,6 +186,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     return maintenanceCost
 end
 
+-- all
 function ssVehicle.taxInterestCost(vehicle, storeItem)
     return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
 end
@@ -212,6 +200,7 @@ end
 --    end
 --end
 
+-- repairable
 -- Repair by resetting the last repair day and operating time
 function ssVehicle:repair(vehicle, storeItem)
     --compared to game day since ssSeasonsUtil:currentDayNumber() is shifted when changing season length
@@ -222,6 +211,7 @@ function ssVehicle:repair(vehicle, storeItem)
     return true
 end
 
+-- repairable
 function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
     if vehicle.ssLastRepairDay == g_currentMission.environment.currentDay then
@@ -242,6 +232,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     return (costs + workCosts) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
+-- all (guard)
 function ssVehicle:getDailyUpKeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
 
@@ -263,20 +254,20 @@ function ssVehicle:getDailyUpKeep(superFunc)
     return costs
 end
 
+-- all
 function ssVehicle:calculateOverdueFactor(vehicle)
-    local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-    local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
+    local overdueFactor = 1
 
-    if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
-        overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval, math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
-    else
-        overdueFactor = 1
+    if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
+
+        if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
+            overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval, math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
+        end
     end
 
     return overdueFactor
-end
-
-function ssVehicle:updateDaysSinceRepair()
 end
 
 function ssVehicle:getSellPrice(superFunc)
@@ -331,7 +322,7 @@ function ssVehicle:getSellPrice(superFunc)
 end
 
 -- Replace the visual age with the age since last repair, because actual age is useless
-function ssVehicle:getSpecValueAge(superFunc, vehicle)
+function ssVehicle:getSpecValueAge(superFunc, vehicle) -- storeItem, realItem
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
         return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil.daysInSeason * 2 - (ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay))
     elseif vehicle ~= nil and vehicle.age ~= nil then

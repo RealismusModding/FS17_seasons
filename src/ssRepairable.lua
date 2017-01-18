@@ -128,7 +128,6 @@ function ssRepairable:update(dt)
     end
 
     if self.isEntered then
-
         local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
         if self.ssDaysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
             g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
