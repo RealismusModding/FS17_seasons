@@ -363,7 +363,8 @@ end
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     local vanillaSpeed, recalc = superFunc(self, onlyIfWorking)
 
-    if ssWeatherManager:isGroundFrozen()
+    -- only limit it if it works the ground and the ground is not frozen
+    if not ssWeatherManager:isGroundFrozen()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
        return vanillaSpeed, recalc
     end
@@ -379,10 +380,10 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     end
 
     if isLowered then
-        self.ssNotAllowedInWinter = true
+        self.ssNotAllowedSoilFrozen = true
         return 0, recalc
     else
-        self.ssNotAllowedInWinter = false
+        self.ssNotAllowedSoilFrozen = false
     end
 
     return vanillaSpeed, recalc
@@ -392,8 +393,8 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     superFunc(self, dt)
 
     if self.isClient then
-        if self.ssNotAllowedInWinter then
-            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000)
+        if self.ssNotAllowedSoilFrozen then
+            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_SOILFROZEN"), 2000)
         end
     end
 

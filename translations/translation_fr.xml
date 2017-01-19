@@ -46,7 +46,7 @@
         <text name="SS_WARN_REPAIR" text="moteur en panne. veuillez réparer votre machine!" />
 		<text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas travailler!" />
+        <text name="SS_WARN_SOILFROZEN" text="Le sol est gelé. Vous ne pouvez pas travailler!" />
         <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencer!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé." /> <!-- spring -->

@@ -45,7 +45,7 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
 	<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
+        <text name="SS_WARN_SOILFROZEN" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." /> <!-- spring -->
@@ -54,7 +54,7 @@
         <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
-        
+
         <!-- GUI -->
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
