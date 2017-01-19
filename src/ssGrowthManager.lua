@@ -234,8 +234,6 @@ end
 -- FIXME(jos): dont move to Util. But don't require data. Use self.canPlantData instead. Also, default
 -- to the current transition state.
 function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
-    log(string.format("Can grow %s, %s", fruitName, tostring(growthTransition)))
-    print_r(data)
     if data[fruitName] ~= nil then
         if data[fruitName][growthTransition] == nil then
             return false
