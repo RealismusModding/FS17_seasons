@@ -40,7 +40,7 @@
         <text name="SS_VEHICLE_REPAIRED" text="%s réparer votre véhicule %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="%s Le coût de réparation au véhicule %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.la réparation sera exiger %dans quelque jour" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.la réparation sera exiger %d ans quelque jour" />
         <text name="SS_REPAIR_DIALOG" text="%s voulez vous réparer %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
         <text name="SS_WARN_REPAIR" text="moteur en panne. veuillez réparer votre machine!" />
