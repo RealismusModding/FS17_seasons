@@ -75,15 +75,15 @@ end
 function ssViewController:dayChanged()
     local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
-    if growthTransition == ssGrowthManager.FIRST_GROWTH_TRANSITION then
-        self:updateData()
-    end
+    -- FIXME(jos): no clue why this is needed. Why cant the GM just hold growth data?
+    self:updateData()
 end
 
 function ssViewController:updateData()
     self.canPlantDisplayData = Utils.copyTable(ssGrowthManager.canPlantData)
     for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
         if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == ssGrowthManager.MAYBE then
+            -- FIXME(jos): Why not handle this in the GM?
             self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = ssGrowthManager:boolToGMBool(ssWeatherManager:canSow())
         end
     end

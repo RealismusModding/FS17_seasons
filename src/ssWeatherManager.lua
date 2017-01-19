@@ -444,20 +444,12 @@ end
 
 --- function for predicting when soil is too cold for crops to germinate
 function ssWeatherManager:canSow()
-    if  self.soilTemp < 5 then
-        return false
-    else
-        return true
-    end
+    return self.soilTemp >= 5
 end
 
 --- function for predicting when soil is frozen
 function ssWeatherManager:isGroundFrozen()
-    if  self.soilTemp < 0 then
-        return false
-    else
-        return true
-    end
+    return self.soilTemp < 0
 end
 
 function ssWeatherManager:getSnowHeight()
