@@ -13,10 +13,6 @@ ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.rains = {}
 
 function ssWeatherManager:preLoad()
-    -- Load a new rain before anything else: the game expects all raintypes to exist when it attempts to load the savegame.
-    -- Thus our loadMap function would be too late.
-    g_currentMission.environment.RAINTYPE_SNOW = "snow"
-    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 3, 7);
 end
 
 function ssWeatherManager:load(savegame, key)
@@ -106,6 +102,9 @@ end
 function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+
+    g_currentMission.environment.RAINTYPE_SNOW = "snow"
+    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 3, 7);
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 30 * 60 * 60 * 1000 -- 30 hours
