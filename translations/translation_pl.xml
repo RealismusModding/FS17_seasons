@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Dzi4d3k
+        Dzi4d3k, KITT3000
     </translationContributors>
 
     <texts>
@@ -44,6 +44,7 @@
         <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
 	<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
+	<text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
         <text name="SS_WARN_SOILFROZEN" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
