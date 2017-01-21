@@ -513,7 +513,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         local dayStart, dayEnd, nightEnd, nightStart = ssEnvironment:calculateStartEndOfDay(oneDayForecast.day)
 
         oneRainEvent.startDayTime = nightEnd*60*60*1000
-        oneRainEvent.endDayTime = (dayStart+1)*60*60*1000+0.000001
+        oneRainEvent.endDayTime = (dayStart+1)*60*60*1000
         oneRainEvent.duration = oneRainEvent.endDayTime - oneRainEvent.startDayTime
         oneRainEvent.rainTypeId = "fog"
     else
@@ -536,15 +536,15 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     oneRainEvent.startDay = oneDayForecast.day
     oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p))*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
-    oneRainEvent.startDayTime = math.random(3600 + endRainTime,82800) *1000+0.1
+    oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
     --log('Start time for rain = ', oneRainEvent.startDayTime)
 
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
-        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration + 0.000001
+        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration
     else
         oneRainEvent.endDay = oneRainEvent.startDay + 1
-        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration - 86400000 + 0.000001
+        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration - 86400000
     end
 
     return oneRainEvent
