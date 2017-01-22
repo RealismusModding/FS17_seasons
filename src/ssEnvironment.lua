@@ -12,7 +12,8 @@ function ssEnvironment:preLoad()
         local self = superFunc(self, xmlFilename)
 
         Environment.RAINTYPE_SNOW = "snow"
-        self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0);
+        self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0)
+        self.rainFogColor[Environment.RAINTYPE_SNOW] = {0.07074, 0.07074, 0.07074, 0.01}
 
         return self
     end)
