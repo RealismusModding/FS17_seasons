@@ -247,14 +247,8 @@ function ssWeatherManager:buildForecast()
 
     end
 
-    print_r(self.weather)
-    local tmpWeather = self.weather
     self:owRaintable()
-    self.weather = tmpWeather -- Cannot figure out why self.weather is changed within the owRaintable function
-    print_r(self.weather)
-
     self:switchRainHail()
-    print_r(self.weather)
 
 end
 
@@ -559,7 +553,6 @@ function ssWeatherManager:_randomRain(day)
 end
 
 function ssWeatherManager:owRaintable()
-    --log('offset = ',ssSeasonsUtil.currentDayOffset)
     local env = g_currentMission.environment
     g_currentMission.environment.rains = {}
     local tmpWeather = {}
