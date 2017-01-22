@@ -7,6 +7,17 @@
 
 ssEnvironment = {}
 
+function ssEnvironment:preLoad()
+    Environment.new = Utils.overwrittenFunction(Environment.new, function (self, superFunc, xmlFilename)
+        local self = superFunc(self, xmlFilename)
+
+        Environment.RAINTYPE_SNOW = "snow"
+        self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0);
+
+        return self
+    end)
+end
+
 function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
 end

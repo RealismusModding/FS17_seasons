@@ -103,9 +103,6 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
 
-    g_currentMission.environment.RAINTYPE_SNOW = "snow"
-    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 3, 7);
-
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 30 * 60 * 60 * 1000 -- 30 hours
     g_currentMission.environment.maxRainInterval = 1
@@ -568,7 +565,7 @@ function ssWeatherManager:owRaintable()
     g_currentMission.environment.rains = tmpWeather
 
     if ssSeasonsUtil.currentDayOffset ~= nil then
-        for index = 1, env.numRains do 
+        for index = 1, env.numRains do
             local newStartDay = env.rains[index].startDay - ssSeasonsUtil.currentDayOffset
             local newEndDay = env.rains[index].endDay - ssSeasonsUtil.currentDayOffset
             g_currentMission.environment.rains[index].startDay = newStartDay
