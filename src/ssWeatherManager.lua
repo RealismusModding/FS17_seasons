@@ -192,14 +192,14 @@ function ssWeatherManager:update(dt)
     if currentRain ~= nil then
         local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
 
-        if currentTemp > 1 and currentRain.rainTypeId == 'hail' then
-            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, false)
+        if currentTemp > 1 and currentRain.rainTypeId == 'snow' then
+            setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
             g_currentMission.environment.currentRain.rainTypeId = 'rain'
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
         elseif currentTemp < 0 and currentRain.rainTypeId == 'rain' then
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = 'hail'
-            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, true)
+            g_currentMission.environment.currentRain.rainTypeId = 'snow'
+            setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
 end
@@ -370,14 +370,14 @@ function ssWeatherManager:calculateSnowAccumulation()
         end
         self.snowDepth = self.snowDepth + 10/1000
 
-    elseif currentRain.rainTypeId == "hail" and currentTemp < 0 then
+    elseif currentRain.rainTypeId == "snow" and currentTemp < 0 then
         -- Initial value of 10 mm/hr accumulation rate
         if self.snowDepth < 0 then
             self.snowDepth = 0
         end
         self.snowDepth = self.snowDepth + 10/1000
 
-    elseif currentRain.rainTypeId == "hail" and currentTemp >= 0 then
+    elseif currentRain.rainTypeId == "snow" and currentTemp >= 0 then
         -- warm hail acts as rain
         self.snowDepth = self.snowDepth - math.max((currentTemp+1)*3/1000,0)*meltFactor
         --g_currentMission.environment.currentRain.rainTypeId = nil
@@ -444,10 +444,10 @@ function ssWeatherManager:switchRainHail()
                 local tempStartRain = self:diurnalTemp(hour, minute, fCast.lowTemp,fCast.highTemp,fCast.lowTemp)
 
                 if tempStartRain < -1 and rain.rainTypeId == 'rain' then
-                    g_currentMission.environment.rains[index].rainTypeId = 'hail'
-                    self.forecast[jndex].weatherState = 'hail'
+                    g_currentMission.environment.rains[index].rainTypeId = 'snow'
+                    self.forecast[jndex].weatherState = 'snow'
 
-                elseif tempStartRain >= -1 and rain.rainTypeId == 'hail' then
+                elseif tempStartRain >= -1 and rain.rainTypeId == 'snow' then
                     g_currentMission.environment.rains[index].rainTypeId = 'rain'
                     self.forecast[jndex].weatherState = 'rain'
                 end
@@ -477,7 +477,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
 
         if oneDayForecast.lowTemp < 1 then
-            oneRainEvent.rainTypeId = "hail" -- forecast snow if temp < 1
+            oneRainEvent.rainTypeId = "snow" -- forecast snow if temp < 1
         else
             oneRainEvent.rainTypeId = "rain"
         end
@@ -513,7 +513,7 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
-    oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p))*60*60*1000
+    oneRainEvent.duration = math.min(math.max(math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
     --log('Start time for rain = ', oneRainEvent.startDayTime)
