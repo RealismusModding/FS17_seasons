@@ -74,7 +74,7 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
         self.hud.overlays.snow = Overlay:new("hud_snow", Utils.getFilename("resources/huds/hud_snow.dds", g_seasons.modDir), 0, 0, width, height)
 
-        g_currentMission.weatherForecastIconOverlays.hail = self.hud.overlays.snow
+        g_currentMission.weatherForecastIconOverlays.snow = self.hud.overlays.snow
         self.hud.overlays.hail = self.hud.overlays.snow
     end
 end
