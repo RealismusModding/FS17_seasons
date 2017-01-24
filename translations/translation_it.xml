@@ -42,7 +42,7 @@
         <text name="SS_REPAIR_DIALOG" text="Vuoi riparare %s per %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Il terreno è gelato. Non è possibile lavorarlo!" />
+        <text name="SS_WARN_SOILFROZEN" text="Il terreno è gelato. Non è possibile lavorarlo!" />
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare le stagioni nel savegame. Riprova!" />
 
         <text name="SS_SEASON_INTRO_0" text="Un nuovo anno, un nuovo perido di semina. TODO" /> <!-- spring -->

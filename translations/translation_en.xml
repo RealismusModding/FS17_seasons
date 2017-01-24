@@ -44,8 +44,9 @@
         <text name="SS_REPAIR_DIALOG" text="Do you want to perform maintenance on the %s for %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Maintenance" />
 		<text name="SS_WARN_REPAIR" text="Engine breakdown. Repair your machinery!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="The soil is frozen. You can't work on it!" />
+        <text name="SS_WARN_SOILFROZEN" text="The soil is frozen. You can't work on it!" />
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
         <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->

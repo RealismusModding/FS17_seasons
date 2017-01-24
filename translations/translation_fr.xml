@@ -34,26 +34,27 @@
 
         <text name="SS_VEHICLE_TAXES" text="Taxe Vehicule" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Maintenance Vehicule" />
-        <text name="SS_VEHICLE_REPAIRS" text="Les Réparation Vehicule" />
+        <text name="SS_VEHICLE_REPAIRS" text="Les Réparations Vehicule" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Vous Disposé pas d'assé d'argent pour réparé" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s réparé %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="réparé %s pour %s" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="solde insuffisant pour réparer!!!!!" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s réparer votre véhicule %s" />
+		<text name="SS_REPAIR_VEHICLE_COST" text="maintenance %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparation demandé" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparation exigée dans %d jour" />
-        <text name="SS_REPAIR_DIALOG" text="voulez vous réparé %s pour %s?" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="la réparation sera a faire dans %d jours" />
+        <text name="SS_REPAIR_DIALOG" text="%s voulez vous réparer %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
-        <text name="SS_WARN_REPAIR" text="moteur en panne. veuillez réparé votre machine!" />
+        <text name="SS_WARN_REPAIR" text="moteur en panne. veuillez réparer votre machine!" />
+		<text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Le sol est gelé. Vous ne pouvez pas y travailler!" />
-        <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencé!" />
+        <text name="SS_WARN_SOILFROZEN" text="Le sol est gelé. Vous ne pouvez pas travailler!" />
+        <text name="SS_SAVE_FAILED" text="Echec de l'enregistrement de votre partie veuillez recommencer!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nouvel année pour semé." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit." />
-        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver comme les récoltes ne pourraient pas réchapper du froid." />
-        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas ou meurt même." /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver les récoltes ne pourraient pas résister au froid." />
+        <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est durement, probablement gelé. La récolte ne grandit pas" /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne montrez pas de nouveau" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="ne pas montré a nouveau" />
 
 		<!-- GUI -->
         <text name="ui_pageOverview" text="montré" />
@@ -65,9 +66,9 @@
         <text name="ui_snowOneLayer" text="une couche de neige" />
         <text name="ui_days" text="%i jour" />
 
-        <text name="tooltip_seasonLength" text="La longueur d'une saison jours. Une année est quatre saisons." />
+        <text name="tooltip_seasonLength" text="La longueur d'une saison est Une année est quatre saisons." />
         <text name="tooltip_seasonIntros" text="Montrez une introduction de saison au début d'une saison." />
-        <text name="tooltip_snow" text="La neige tombera(chutera) dans des hivers froids et bloquera des routes." />
+        <text name="tooltip_snow" text="La neige chutera dans des hivers froids et bloquera des routes." />
 		<text name="tooltip_controlsHelp" text="Montrez la prévision et la prévision de menu dans le menu d'aide." />
         <text name="tooltip_snowTracks" text="Les véhicules compriment la neige en y conduisant" />
 

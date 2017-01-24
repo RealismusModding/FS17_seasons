@@ -37,7 +37,6 @@ function ssViewController:loadMap(name)
 end
 
 function ssViewController:keyEvent(unicode, sym, modifier, isDown)
-    --print(tostring(unicode))
     if (unicode == 47) then
         if self.debugView == false then
             self.debugView = true
@@ -76,15 +75,15 @@ end
 function ssViewController:dayChanged()
     local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
-	if growthTransition == ssGrowthManager.FIRST_GROWTH_TRANSITION then
-        self:updateData()
-	end
+    -- FIXME(jos): no clue why this is needed. Why cant the GM just hold growth data?
+    self:updateData()
 end
 
 function ssViewController:updateData()
     self.canPlantDisplayData = Utils.copyTable(ssGrowthManager.canPlantData)
     for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
         if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == ssGrowthManager.MAYBE then
+            -- FIXME(jos): Why not handle this in the GM?
             self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = ssGrowthManager:boolToGMBool(ssWeatherManager:canSow())
         end
     end
@@ -101,19 +100,18 @@ end
 --FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5.
 --Will think of a clever way to fix that without cheating
 function ssViewController:growthTransitionsDisplayData()
-	local growthStagesDisplayData = {}
-	local data = ssSeasonsUtil:calcDaysPerTransition()
+    local growthStagesDisplayData = {}
+    local data = ssSeasonsUtil:calcDaysPerTransition()
 
-	for index,value in pairs(data) do
-		if index % 2 == 1 then
-			if value == data[index+1] then
-				growthStagesDisplayData[index] = tostring(value)
-			else
-				growthStagesDisplayData[index] = value .. "-" .. data[index+1]
-			end
-		end
-	end
+    for index,value in pairs(data) do
+        if index % 2 == 1 then
+            if value == data[index+1] then
+                growthStagesDisplayData[index] = tostring(value)
+            else
+                growthStagesDisplayData[index] = value .. "-" .. data[index+1]
+            end
+        end
+    end
 
-	print_r(growthStagesDisplayData)
-	return growthStagesDisplayData
+    return growthStagesDisplayData
 end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Dzi4d3k
+        Dzi4d3k, KITT3000
     </translationContributors>
 
     <texts>
@@ -23,7 +23,7 @@
         <text name="SS_WEEKDAY_TUE" text="Wto" />
         <text name="SS_WEEKDAY_WED" text="Śro" />
         <text name="SS_WEEKDAY_THU" text="Czw" />
-        <text name="SS_WEEKDAY_FRI" text="Pia" />
+        <text name="SS_WEEKDAY_FRI" text="Pią" />
         <text name="SS_WEEKDAY_SAT" text="Sob" />
         <text name="SS_WEEKDAY_SUN" text="Nie" />
 
@@ -43,9 +43,10 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
         <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
-		<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
+	<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
+	<text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
+        <text name="SS_WARN_SOILFROZEN" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." /> <!-- spring -->
@@ -54,7 +55,7 @@
         <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
-        
+
         <!-- GUI -->
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
@@ -67,9 +68,9 @@
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony." />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu." />
-        <text name="tooltip_snow" text="Śnieg będzie padał w czasie morźnej zimy i zasypie drogi." />
+        <text name="tooltip_snow" text="Śnieg będzie padał w czasie mroźnej zimy i zasypie drogi." />
         <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy." />
-        <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdząc po nim." />
+        <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim." />
 
         <text name="setting_seasonIntros" text="Wstępy do sezonów" />
         <text name="setting_seasonLength" text="Długość sezonów" />

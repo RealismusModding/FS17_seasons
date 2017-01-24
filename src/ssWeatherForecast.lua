@@ -32,9 +32,11 @@ function ssWeatherForecast:loadMap(name)
         self.hud.clockWidth = 0.12 * self.guiScale / g_screenAspectRatio * screenAspectRatio
 
         -- Set position day overlay
+        --self.hud.dayPosX = self.hud.posX + self.hud.width*(1-0.915)
         self.hud.dayPosY = g_currentMission.infoBarBgOverlay.y
         self.hud.dayHeight = g_currentMission.infoBarBgOverlay.height
-        self.hud.dayWidth = g_currentMission.infoBarBgOverlay.height / g_screenAspectRatio * screenAspectRatio
+        --self.hud.dayWidth = g_currentMission.infoBarBgOverlay.height / g_screenAspectRatio * screenAspectRatio
+        self.hud.dayWidth = self.hud.width / 7
 
         self.hud.overlays = {}
 
@@ -43,13 +45,15 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.forecast_hud = Overlay:new("hud_forecast", Utils.getFilename("resources/huds/hud_forecast.dds", g_seasons.modDir), 0, 0, width, height)
 
         -- Current day hud
-        local width, height = getNormalizedScreenValues(128, 128)
+        local width, height = getNormalizedScreenValues(256, 128)
         self.hud.overlays.day_hud = Overlay:new("hud_day",  Utils.getFilename("resources/huds/hud_day.dds", g_seasons.modDir), 0, 0, height, height)
 
-        -- clock overlay
+        -- clock overlay and cloud and ground for day hud
         local width, height = getNormalizedScreenValues(64, 64)
         self.hud.overlays.clock_overlay = Overlay:new("clock_overlay",  Utils.getFilename("resources/huds/clock_overlay.dds", g_seasons.modDir), 0, 0, height, height)
         self.hud.overlays.clock_symbol = Overlay:new("clock_symbol",  Utils.getFilename("resources/huds/clock_symbol.dds", g_seasons.modDir), 0, 0, height, height)
+        self.hud.overlays.ground_symbol = Overlay:new("ground_symbol",  Utils.getFilename("resources/huds/ground_symbol.dds", g_seasons.modDir), 0, 0, height, height)
+        self.hud.overlays.cloud_symbol = Overlay:new("cloud_symbol",  Utils.getFilename("resources/huds/cloud_symbol.dds", g_seasons.modDir), 0, 0, height, height)
 
         -- Seasons "White" Icons
         local width, height = getNormalizedScreenValues(128, 128)
@@ -70,7 +74,7 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
         self.hud.overlays.snow = Overlay:new("hud_snow", Utils.getFilename("resources/huds/hud_snow.dds", g_seasons.modDir), 0, 0, width, height)
 
-        g_currentMission.weatherForecastIconOverlays.hail = self.hud.overlays.snow
+        g_currentMission.weatherForecastIconOverlays.snow = self.hud.overlays.snow
         self.hud.overlays.hail = self.hud.overlays.snow
     end
 end
@@ -153,7 +157,7 @@ end
 
 function ssWeatherForecast:drawToday(forecast)
     -- x-position of overlays has to be dynamically defined
-    self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.08 * self.guiScale / g_screenAspectRatio * screenAspectRatio
+    self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.12 * self.guiScale / g_screenAspectRatio * screenAspectRatio
     self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - 0.19 * self.guiScale / g_screenAspectRatio * screenAspectRatio
     -- Render clock background
     renderOverlay(self.hud.overlays.clock_overlay.overlayId, self.hud.clockPosX , self.hud.clockPosY, self.hud.clockWidth, self.hud.clockHeight)
@@ -167,15 +171,23 @@ function ssWeatherForecast:drawToday(forecast)
     -- Render Background
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
 
-    if ssWeatherManager:isGroundFrozen() == false then
+    if ssWeatherManager:isGroundFrozen() then
         renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
     end
 
-    -- Render Season Icon
-    renderOverlay(self.hud.overlays.seasons[forecast[1].season].overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.75, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeigthSmall*1.7, self.hud.iconWidthSmall*1.5, self.hud.iconHeigthSmall*1.5)
+    -- Render Season, cloud and ground icon
+    renderOverlay(self.hud.overlays.seasons[forecast[1].season].overlayId, self.hud.dayPosX + self.hud.iconWidthSmall*0.2, self.hud.dayPosY + self.hud.dayHeight/2 - self.hud.iconHeigthSmall/2*1.5, self.hud.iconWidthSmall*1.5, self.hud.iconHeigthSmall*1.5)
+    renderOverlay(self.hud.overlays.cloud_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.7, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeigthSmall*1.5, self.hud.iconWidthSmall, self.hud.iconHeigthSmall)
+    renderOverlay(self.hud.overlays.ground_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth/2 - self.hud.iconWidthSmall*0.7, self.hud.dayPosY + self.hud.iconHeigthSmall*0.5, self.hud.iconWidthSmall, self.hud.iconHeigthSmall)
 
-    -- Render current Temperatures
-    local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
+    -- Render current air temperature
+    local airTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
     setTextAlignment(RenderText.ALIGN_RIGHT)
-    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.iconHeigthSmall*0.5, self.hud.textSize, tostring(currentTemp .. "ºC"))
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*0.85, tostring(airTemp .. "ºC"))
+
+    -- Render current soil temperature
+    local soilTemp = math.floor(ssWeatherManager.soilTemp, 0)
+    setTextAlignment(RenderText.ALIGN_RIGHT)
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.2, self.hud.textSize*0.85, tostring(soilTemp .. "ºC"))
+
 end

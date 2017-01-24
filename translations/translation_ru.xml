@@ -10,7 +10,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
 <text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды" />
-       
+
  <text name="SS_WEEKDAY_MONDAY" text="Понедельник" />
         <text name="SS_WEEKDAY_TUESDAY" text="Вторник" />
         <text name="SS_WEEKDAY_WEDNESDAY" text="Среда" />
@@ -45,7 +45,7 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
 		<text name="SS_WARN_REPAIR" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="Почва замёрзла. Вы не можете работать на ней!" />
+        <text name="SS_WARN_SOILFROZEN" text="Почва замёрзла. Вы не можете работать на ней!" />
         <text name="SS_SAVE_FAILED" text="Не удалось сохранить сезоны в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
 
         <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." /> <!-- весна -->

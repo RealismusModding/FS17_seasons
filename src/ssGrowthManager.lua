@@ -231,12 +231,15 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
 end
 
 --FIXME: change this function to use passed in data (done). maybe move to seasonsUtil
+-- FIXME(jos): dont move to Util. But don't require data. Use self.canPlantData instead. Also, default
+-- to the current transition state.
 function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
     if data[fruitName] ~= nil then
         if data[fruitName][growthTransition] == nil then
             return false
         end
 
+        log(data[fruitName][growthTransition])
         if data[fruitName][growthTransition] == self.TRUE then
             return true
         end
