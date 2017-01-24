@@ -8,7 +8,7 @@
 ssPedestrianSystem = {}
 
 function ssPedestrianSystem:loadMap(name)
-    ssSeasonsMod:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonChangeListener(self)
 
     PedestrianSystem.update = Utils.overwrittenFunction(PedestrianSystem.update, ssPedestrianSystem.originalUpdate)
 
@@ -24,9 +24,9 @@ function ssPedestrianSystem:readStream(streamId, connection)
 end
 
 function ssPedestrianSystem:seasonChanged()
-    local season = ssSeasonsUtil:season()
+    local season = g_seasons.environment:currentSeason()
 
-    self.showPedestrians = not (season == ssSeasonsUtil.SEASON_WINTER)
+    self.showPedestrians = not (season == g_seasons.environment.SEASON_WINTER)
 end
 
 function ssPedestrianSystem.originalUpdate(pedestrianSystem, dt)

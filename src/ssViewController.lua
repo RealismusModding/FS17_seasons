@@ -28,7 +28,7 @@ ssViewController.canPlantDisplayData = {}
 ssViewController.debugView = false
 
 function ssViewController:loadMap(name)
-    ssSeasonsMod:addGrowthStageChangeListener(self)
+    g_seasons.environment:addGrowthStageChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
 
     self:growthStageChanged()
@@ -49,7 +49,7 @@ end
 function ssViewController:draw()
     if self.debugView == true then
         renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
-        local growthTransition = ssSeasonsUtil:currentGrowthTransition()
+        local growthTransition = g_seasons.environment:currentGrowthTransition()
 
         renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
         local cropsThatCanGrow = ""
@@ -68,12 +68,12 @@ end
 
 -- handle growthStageChanged event
 function ssViewController:growthStageChanged()
-    --self.currentIndicator = ssSeasonsUtil:currentGrowthTransition()
+    --self.currentIndicator = g_seasons.environment:currentGrowthTransition()
 end
 
 -- handle hourChanged event
 function ssViewController:dayChanged()
-    local growthTransition = ssSeasonsUtil:currentGrowthTransition()
+    local growthTransition = g_seasons.environment:currentGrowthTransition()
 
     -- FIXME(jos): no clue why this is needed. Why cant the GM just hold growth data?
     self:updateData()

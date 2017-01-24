@@ -16,7 +16,7 @@ function ssSeasonIntro:save(savegame, key)
 end
 
 function ssSeasonIntro:loadMap(name)
-    ssSeasonsMod:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonChangeListener(self)
 
     self.showSeasonChanged = false
 end
@@ -25,7 +25,7 @@ function ssSeasonIntro:update(dt)
     if self.showSeasonChanged == true and g_gui.currentGui == nil then
         self.showSeasonChanged = false
 
-        self:showIntro(ssSeasonsUtil:season())
+        self:showIntro(g_seasons.environment:currentSeason())
     end
 end
 
@@ -33,7 +33,7 @@ function ssSeasonIntro:showIntro(season)
     local text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", season))
     local dialog = g_gui:showDialog("YesNoDialog")
 
-    dialog.target:setTitle(ssSeasonsUtil:seasonName())
+    dialog.target:setTitle(ssSeasonsUtil:seasonName(g_seasons.environment.currentSeason()))
     dialog.target:setText(text)
     dialog.target:setDialogType(DialogElement.TYPE_INFO)
     dialog.target:setIsCloseAllowed(true)

@@ -9,26 +9,26 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
 
-        <text name="SS_WEEKDAY_MONDAY" text="Lunedì" />
-        <text name="SS_WEEKDAY_TUESDAY" text="Martedì" />
-        <text name="SS_WEEKDAY_WEDNESDAY" text="Mercoledì" />
-        <text name="SS_WEEKDAY_THURSDAY" text="Giovedì" />
-        <text name="SS_WEEKDAY_FRIDAY" text="Venerdì" />
-        <text name="SS_WEEKDAY_SATURDAY" text="Sabato" />
-        <text name="SS_WEEKDAY_SUNDAY" text="Domenica" />
+        <text name="SS_WEEKDAY_1" text="Lunedì" />
+        <text name="SS_WEEKDAY_2" text="Martedì" />
+        <text name="SS_WEEKDAY_3" text="Mercoledì" />
+        <text name="SS_WEEKDAY_4" text="Giovedì" />
+        <text name="SS_WEEKDAY_5" text="Venerdì" />
+        <text name="SS_WEEKDAY_6" text="Sabato" />
+        <text name="SS_WEEKDAY_7" text="Domenica" />
 
-        <text name="SS_WEEKDAY_MON" text="Lun" />
-        <text name="SS_WEEKDAY_TUE" text="Mar" />
-        <text name="SS_WEEKDAY_WED" text="Mer" />
-        <text name="SS_WEEKDAY_THU" text="Gio" />
-        <text name="SS_WEEKDAY_FRI" text="Ven" />
-        <text name="SS_WEEKDAY_SAT" text="Sab" />
-        <text name="SS_WEEKDAY_SUN" text="Dom" />
+        <text name="SS_WEEKDAY_SHORT_1" text="Lun" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Mar" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Mer" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Gio" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Ven" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Sab" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Dom" />
 
-        <text name="SS_SEASON_SPRING" text="Primavera" />
-        <text name="SS_SEASON_SUMMER" text="Estate" />
-        <text name="SS_SEASON_AUTUMN" text="Autunno" />
-        <text name="SS_SEASON_WINTER" text="Inverno" />
+        <text name="SS_SEASON_0" text="Primavera" />
+        <text name="SS_SEASON_1" text="Estate" />
+        <text name="SS_SEASON_2" text="Autunno" />
+        <text name="SS_SEASON_3" text="Inverno" />
 
         <text name="SS_VEHICLE_TAXES" text="Costi Veicoli" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Manutenzione Veicoli" />

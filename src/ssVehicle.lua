@@ -43,7 +43,7 @@ function ssVehicle:loadMap()
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
-    ssVehicle.repairInterval = ssSeasonsUtil.daysInSeason * 2
+    ssVehicle.repairInterval = g_seasons.environment.daysInSeason * 2
 
     self:installVehicleSpecializations()
     self:loadRepairFactors()
@@ -188,7 +188,7 @@ end
 
 -- all
 function ssVehicle.taxInterestCost(vehicle, storeItem)
-    return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
+    return 0.03 * storeItem.price / (4 * g_seasons.environment.daysInSeason)
 end
 
 --function ssVehicle:resetOperatingTimeAndDirt()
@@ -203,7 +203,7 @@ end
 -- repairable
 -- Repair by resetting the last repair day and operating time
 function ssVehicle:repair(vehicle, storeItem)
-    --compared to game day since ssSeasonsUtil:currentDayNumber() is shifted when changing season length
+    --compared to game day since g_seasons.environment:currentDay() is shifted when changing season length
     vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
@@ -276,7 +276,7 @@ function ssVehicle:getSellPrice(superFunc)
     local minSellPrice = storeItem.price * 0.03
     local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
-    local age = self.age / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.SEASONS_IN_YEAR) -- year
+    local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR) -- year
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
@@ -324,7 +324,7 @@ end
 -- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle:getSpecValueAge(superFunc, vehicle) -- storeItem, realItem
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-        return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil.daysInSeason * 2 - (ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay))
+        return string.format(g_i18n:getText("shop_age"), g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - vehicle.ssLastRepairDay))
     elseif vehicle ~= nil and vehicle.age ~= nil then
         return "-"
     elseif not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then

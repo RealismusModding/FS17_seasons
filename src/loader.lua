@@ -4,7 +4,7 @@
 -- Purpose:  Loads the mod
 -- Authors:  Rahkiin
 
-ssSeasonsMod = {}
+local ssSeasonsMod = {}
 
 function log(...)
     if not g_seasons.verbose then return end
@@ -26,13 +26,15 @@ end
 
 local srcFolder = g_currentModDirectory .. "src/"
 g_modClasses = {
-    "ssMain",
     "ssLang",
     "ssStorage",
     "ssSeasonsXML",
     "ssMultiplayer",
+
+    "ssMain",
     "ssSeasonsUtil",
     "ssEnvironment",
+
     "ssEconomy",
     "ssWeatherManager",
     "ssWeatherForecast",

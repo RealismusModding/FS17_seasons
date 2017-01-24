@@ -34,7 +34,7 @@ function ssWeatherManager:load(savegame, key)
         local day = {}
 
         day.day = getXMLInt(savegame, dayKey .. "#day")
-        day.season = ssSeasonsUtil:season(day.day)
+        day.season = g_seasons.environment:seasonAtDay(day.day)
 
         day.weatherState = getXMLString(savegame, dayKey .. "#weatherState")
         day.highTemp = getXMLFloat(savegame, dayKey .. "#highTemp")
@@ -137,7 +137,7 @@ function ssWeatherManager:readStream(streamId, connection)
         local day = {}
 
         day.day = streamReadInt16(streamId)
-        day.season = ssSeasonsUtil:season(day.day)
+        day.season = g_seasons.environment:seasonAtDay(day.day)
 
         day.weatherState = streamReadString(streamId)
         day.highTemp = streamReadFloat32(streamId)
@@ -206,7 +206,7 @@ end
 
 -- Only run this the very first time or if season length changes
 function ssWeatherManager:buildForecast()
-    local startDayNum = ssSeasonsUtil:currentDayNumber()
+    local startDayNum = g_seasons.environment:currentDay()
     local ssTmax
 
     self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter. May not be correct if rebuilding forecast.
@@ -220,9 +220,9 @@ function ssWeatherManager:buildForecast()
         local Tmaxmean = {}
 
         oneDayForecast.day = startDayNum + n - 1 -- To match forecast with actual game
-        oneDayForecast.season = ssSeasonsUtil:season(startDayNum + n - 1)
+        oneDayForecast.season = g_seasons.environment:seasonAtDay(startDayNum + n - 1)
 
-        ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(oneDayForecast.day)]
+        ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(oneDayForecast.day)]
 
         oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
         oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
@@ -250,7 +250,7 @@ function ssWeatherManager:buildForecast()
 end
 
 function ssWeatherManager:updateForecast()
-    local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1
+    local dayNum = g_seasons.environment:currentDay() + self.forecastLength-1
     local oneDayRain = {}
 
     self.prevHighTemp = self.forecast[1].highTemp  -- updating prev high temp before updating forecast table
@@ -261,9 +261,9 @@ function ssWeatherManager:updateForecast()
     local ssTmax = {}
 
     oneDayForecast.day = dayNum -- To match forecast with actual game
-    oneDayForecast.season = ssSeasonsUtil:season(dayNum)
+    oneDayForecast.season = g_seasons.environment:seasonAtDay(dayNum)
 
-    ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(dayNum)]
+    ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(dayNum)]
 
     if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
         --Seasonal average for a day in the current season
@@ -348,7 +348,7 @@ function ssWeatherManager:calculateSnowAccumulation()
 
     --- more radiation during spring
     local meltFactor = 1
-    if self.forecast[1].season ~= ssSeasonsUtil.SEASON_WINTER then
+    if self.forecast[1].season ~= g_seasons.environment.SEASON_WINTER then
         meltFactor = 5
     end
 
@@ -400,7 +400,7 @@ end
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
 function ssWeatherManager:calculateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
-    local deltaT = 365 / ssSeasonsUtil.SEASONS_IN_YEAR / ssSeasonsUtil.daysInSeason / 2
+    local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
     local soilTemp = self.soilTemp
     local snowDamp = 1
 
@@ -457,7 +457,7 @@ function ssWeatherManager:switchRainHail()
 end
 
 function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
-    local rainFactors = self.rainData[ssSeasonsUtil:season(oneDayForecast.day)]
+    local rainFactors = self.rainData[g_seasons.environment:seasonAtDay(oneDayForecast.day)]
 
     local mu = rainFactors.mu
     local sigma = rainFactors.sigma
@@ -530,15 +530,15 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
 end
 
 function ssWeatherManager:_randomRain(day)
-    ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(day)]
+    ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(day)]
 
-    if oneDayForecast.season == ssSeasonsUtil.SEASON_WINTER or oneDayForecast.season == ssSeasonsUtil.SEASON_AUTUMN then
+    if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
         if oneDayForecast.highTemp > ssTmax.mode then
             p = math.random()^1.5 --increasing probability for precipitation if the temp is high
         else
             p = math.random()^0.75 --decreasing probability for precipitation if the temp is high
         end
-    elseif oneDayForecast.season == ssSeasonsUtil.SEASON_SPRING or oneDayForecast.season == ssSeasonsUtil.SEASON_SUMMER then
+    elseif oneDayForecast.season == g_seasons.environment.SEASON_SPRING or oneDayForecast.season == g_seasons.environment.SEASON_SUMMER then
         if oneDayForecast.highTemp < ssTmax.mode then
             p = math.random()^1.5 --increasing probability for precipitation if the temp is high
         else
@@ -564,10 +564,10 @@ function ssWeatherManager:owRaintable()
     g_currentMission.environment.numRains = table.getn(tmpWeather)
     g_currentMission.environment.rains = tmpWeather
 
-    if ssSeasonsUtil.currentDayOffset ~= nil then
+    if g_seasons.environment.currentDayOffset ~= nil then
         for index = 1, env.numRains do
-            local newStartDay = env.rains[index].startDay - ssSeasonsUtil.currentDayOffset
-            local newEndDay = env.rains[index].endDay - ssSeasonsUtil.currentDayOffset
+            local newStartDay = env.rains[index].startDay - g_seasons.environment.currentDayOffset
+            local newEndDay = env.rains[index].endDay - g_seasons.environment.currentDayOffset
             g_currentMission.environment.rains[index].startDay = newStartDay
             g_currentMission.environment.rains[index].endDay = newEndDay
         end
@@ -712,7 +712,7 @@ function ssWeatherForecastEvent:readStream(streamId, connection)
     local day = {}
 
     day.day = streamReadInt16(streamId)
-    day.season = ssSeasonsUtil:season(day.day)
+    day.season = g_seasons.environment:seasonAtDay(day.day)
     day.weatherState = streamReadString(streamId)
     day.highTemp = streamReadFloat32(streamId)
     day.lowTemp = streamReadFloat32(streamId)

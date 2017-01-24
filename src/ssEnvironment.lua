@@ -6,8 +6,24 @@
 --
 
 ssEnvironment = {}
+g_seasons.environment = ssEnvironment
+
+----------------------------
+-- Constants
+----------------------------
+
+ssEnvironment.DAYS_IN_WEEK = 7
+ssEnvironment.SEASONS_IN_YEAR = 4
+
+ssEnvironment.SEASON_SPRING = 0 -- important to start at 0, not 1
+ssEnvironment.SEASON_SUMMER = 1
+ssEnvironment.SEASON_AUTUMN = 2
+ssEnvironment.SEASON_WINTER = 3
 
 function ssEnvironment:preLoad()
+    -- Install the snow raintype. This needs to be just after the vanilla
+    -- environment did it, because in here (preLoad) it is too early, and
+    -- in loadMap it is too late. (both crash)
     Environment.new = Utils.overwrittenFunction(Environment.new, function (self, superFunc, xmlFilename)
         local self = superFunc(self, xmlFilename)
 
@@ -21,21 +37,126 @@ end
 
 function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
+
+    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
+    self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".settings.latestSeason", -1)
+    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".settings.latestGrowthStage", 0)
+    self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", 0)
 end
 
 function ssEnvironment:save(savegame, key)
     ssStorage.setXMLFloat(savegame, key .. ".weather.latitude", self.latitude)
+
+    ssStorage.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
+    ssStorage.setXMLInt(savegame, key .. ".settings.latestSeason", self.latestSeason)
+    ssStorage.setXMLInt(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
+    ssStorage.setXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
 function ssEnvironment:loadMap(name)
+    self.seasonChangeListeners = {}
+    self.growthStageChangeListeners = {}
+
+    -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
 
+
     if g_currentMission:getIsServer() then
-        self:setup()
+        -- if server, do it here. Otherwise do it in :load
+        self:setupDayNight()
     end
 end
 
-function ssEnvironment:setup()
+function ssEnvironment:readStream(streamId, connection)
+    self.latitude = streamReadFloat32(streamId)
+
+    self.daysInSeason = streamReadInt32(streamId)
+    self.latestSeason = streamReadInt32(streamId)
+    self.latestGrowthStage = streamReadInt32(streamId)
+    self.currentDayOffset = streamReadInt32(streamId)
+
+    self:setupDayNight()
+end
+
+function ssEnvironment:writeStream(streamId, connection)
+    streamWriteFloat32(streamId, self.latitude)
+
+    streamWriteInt32(streamId, self.daysInSeason)
+    streamWriteInt32(streamId, self.latestSeason)
+    streamWriteInt32(streamId, self.latestGrowthStage)
+    streamWriteInt32(streamId, self.currentDayOffset)
+end
+
+function ssEnvironment:update(dt)
+    -- The first day has already started with a new savegame
+    -- Call all the event handlers to update growth, time and anything else
+    if g_savegameXML == nil and not self._doneInitalDayEvent then
+        ssSeasonsUtil:dayChanged()
+        self:callListeners()
+        self._doneInitalDayEvent = true
+    end
+end
+
+----------------------------
+-- Seasons events
+----------------------------
+
+function ssEnvironment:callListeners()
+    if not g_seasons.enabled then return end
+
+    local currentSeason = self:currentSeason()
+    local currentGrowthStage = self:currentGrowthStage()
+
+    -- Call season change events
+    if currentSeason ~= self.latestSeason then
+        self.latestSeason = currentSeason
+
+        for _, listener in pairs(self.seasonChangeListeners) do
+            listener:seasonChanged()
+        end
+    end
+
+    -- Call growth stage events
+    if currentGrowthStage ~= self.latestGrowthStage then
+        self.latestGrowthStage = currentGrowthStage
+
+        for _, listener in pairs(self.growthStageChangeListeners) do
+            listener:growthStageChanged()
+        end
+    end
+end
+
+-- Listeners for a change of season
+function ssEnvironment:addSeasonChangeListener(listener)
+    if listener ~= nil then
+        self.seasonChangeListeners[listener] = listener
+    end
+end
+
+function ssEnvironment:removeSeasonChangeListener(listener)
+    if listener ~= nil then
+        self.seasonChangeListeners[listener] = nil
+    end
+end
+
+-- Listeners for a change of growth stage
+function ssEnvironment:addGrowthStageChangeListener(listener)
+    if listener ~= nil then
+        self.growthStageChangeListeners[listener] = listener
+    end
+end
+
+function ssEnvironment:removeGrowthStageChangeListener(listener)
+    if listener ~= nil then
+        self.growthStageChangeListeners[listener] = nil
+    end
+end
+
+----------------------------
+-- New day night system based on season
+----------------------------
+
+function ssEnvironment:setupDayNight()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
@@ -45,20 +166,10 @@ function ssEnvironment:setup()
     self:adaptTime()
 end
 
-function ssEnvironment:readStream(streamId, connection)
-    self.latitude = streamReadFloat32(streamId)
-
-    self:setup()
-end
-
-function ssEnvironment:writeStream(streamId, connection)
-    streamWriteFloat32(streamId, self.latitude)
-end
-
 -- Change the night/day times according to season
 function ssEnvironment:adaptTime()
     local env = g_currentMission.environment
-    julianDay = ssSeasonsUtil:julianDay(ssSeasonsUtil:currentDayNumber())
+    julianDay = ssSeasonsUtil:julianDay(self:currentDay())
 
     -- All local values are in minutes
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
@@ -95,7 +206,7 @@ function ssEnvironment:adaptTime()
 
     g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 
-    self.lastUpdate = ssSeasonsUtil:currentDayNumber()
+    self.lastUpdate = self:currentDay()
 end
 
 -- Output in hours
@@ -286,7 +397,118 @@ function ssEnvironment:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nigh
     return curve
 end
 
+----------------------------
+-- Events
+----------------------------
+
 function ssEnvironment:dayChanged()
     -- Update the time of the day
     self:adaptTime()
+
+    self:callListeners()
 end
+
+----------------------------
+-- Tools
+----------------------------
+
+-- Get the current day number.
+-- Always use this function when working with seasons, because it uses the offset
+-- for keeping in the correct season when changing season length
+function ssEnvironment:currentDay()
+    return g_currentMission.environment.currentDay + self.currentDayOffset
+end
+
+-- Starts with 0
+function ssEnvironment:currentSeason()
+    return self:seasonAtDay(self:currentDay())
+end
+
+-- Starts with 0
+function ssEnvironment:seasonAtDay(dayNumber)
+    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
+end
+
+-- Returns 1-daysInSeason
+function ssEnvironment:dayInSeason(currentDay)
+    if (currentDay == nil) then
+        currentDay = self:currentDay()
+    end
+
+    local season = self:seasonAtDay(currentDay) -- 0-3
+    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1 -- 1+
+    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
+end
+
+-- Starts with 0
+function ssEnvironment:currentYear()
+    return self:yearAtDay(self:currentDay())
+end
+
+-- Starts with 0
+function ssEnvironment:yearAtDay(dayNumber)
+    return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
+end
+
+function ssEnvironment:currentGrowthTransition()
+    local currentDay = self:currentDay()
+    local season = self:currentSeason(currentDay)
+    local cGS = self:currentGrowthStage(currentDay)
+    return (cGS + (season*3))
+end
+
+function ssEnvironment:currentGrowthStage(currentDay)
+    if (currentDay == nil) then
+        currentDay = self:currentDay()
+    end
+
+    -- Length of a state
+    local l = self.daysInSeason / 3.0
+    local dayInSeason = self:dayInSeason(currentDay)
+
+    if dayInSeason >= mathRound(2 * l) + 1 then -- Turn 3
+        return 3
+    elseif dayInSeason >= mathRound(1 * l) + 1 then -- Turn 2
+        return 2
+    else
+        return 1
+    end
+
+    return nil
+end
+
+-- Called when the number of days in a season needs to be changed.
+-- A complex algorithm
+function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
+    local oldSeasonLength = self.daysInSeason -- 6 ELIM
+    local actualCurrentDay = self:currentDay() -- 9
+
+    local year = self:currentYear(actualCurrentDay) -- 11 ELIM
+    local season = self:currentSeason(actualCurrentDay) -- 12, 18
+    local dayInSeason = self:dayInSeason(actualCurrentDay) -- 13 ELIM
+
+    local seasonThatWouldBe = math.fmod(math.floor((actualCurrentDay - 1) / newSeasonLength), self.SEASONS_IN_YEAR) -- 16
+
+    local dayThatNeedsToBe = math.floor((dayInSeason - 1) / oldSeasonLength * newSeasonLength) + 1 -- 19
+
+    local realDifferenceInSeason = season - seasonThatWouldBe -- 21 ELIM
+
+    local relativeYearThatNeedsTobe = realDifferenceInSeason < 0 and 1 or 0 -- 23
+
+    local resultingDayNumber = ((year + relativeYearThatNeedsTobe) * self.SEASONS_IN_YEAR + season) * newSeasonLength + dayThatNeedsToBe -- 26
+    local resultingOffset = resultingDayNumber - actualCurrentDay -- 27
+    local newOffset = math.fmod(self.currentDayOffset + resultingOffset, self.SEASONS_IN_YEAR * newSeasonLength) -- 28
+
+    self.daysInSeason = newSeasonLength
+    self.currentDayOffset = newOffset
+
+    -- Re-do time
+    self:adaptTime()
+
+    -- Redo weather manager
+    ssWeatherManager:buildForecast()
+
+    -- Change repair interval
+    ssVehicle.repairInterval = newSeasonLength * 2
+end
+

@@ -6,53 +6,12 @@
 --
 
 ssSeasonsUtil = {}
-
-function ssSeasonsUtil:loadMap(name)
-end
-
-function ssSeasonsUtil:update(dt)
-    if self.isNewGame then
-        self.isNewGame = false
-        ssSeasonsUtil:dayChanged() -- trigger the stage change events.
-    end
-end
-
--- Get the current day number.
--- Always use this function when working with seasons, because it uses the offset
--- for keeping in the correct season when changing season length
-function ssSeasonsUtil:currentDayNumber()
-    return g_currentMission.environment.currentDay + self.currentDayOffset
-end
+g_seasons.util = ssSeasonsUtil
 
 -- Get the day within the week
 -- assumes that day 1 = monday
--- If no day supplied, uses current day
 function ssSeasonsUtil:dayOfWeek(dayNumber)
-    if (dayNumber == nil) then
-        dayNumber = self:currentDayNumber()
-    end
-
-    return math.fmod(dayNumber - 1, self.DAYS_IN_WEEK) + 1
-end
-
--- Get the season number.
--- If no day supplied, uses current day
--- Starts with 0
-function ssSeasonsUtil:season(dayNumber)
-    if (dayNumber == nil) then
-        dayNumber = self:currentDayNumber()
-    end
-
-    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
-end
-
--- Starts with 0
-function ssSeasonsUtil:year(dayNumber)
-    if (dayNumber == nil) then
-        dayNumber = self:currentDayNumber()
-    end
-
-    return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
+    return math.fmod(dayNumber - 1, g_seasons.environment.DAYS_IN_WEEK) + 1
 end
 
 -- This function calculates the real-ish daynumber from an ingame day number
@@ -61,14 +20,14 @@ end
 -- Summer: Jun (152) - Aug (243)
 -- Autumn: Sep (244) - Nov (305)
 -- Winter: Dec (335) - Feb (59)
--- FIXME(jos): Of course, this changes on the southern hemisphere
+-- FIXME(jos): This changes on the southern hemisphere
 function ssSeasonsUtil:julianDay(dayNumber)
     local season, partInSeason, dayInSeason
     local starts = {[0] = 60, 152, 244, 335 }
 
-    season = self:season(dayNumber)
-    dayInSeason = dayNumber % self.daysInSeason
-    partInSeason = dayInSeason / self.daysInSeason
+    season = g_seasons.environment:seasonAtDay(dayNumber)
+    dayInSeason = dayNumber % g_seasons.environment.daysInSeason
+    partInSeason = dayInSeason / g_seasons.environment.daysInSeason
 
     return math.fmod(math.floor(starts[season] + partInSeason * 91), 365)
 end
@@ -92,118 +51,41 @@ function ssSeasonsUtil:julanDayToDayNumber(julianDay)
 
     partInSeason = (julianDay - start) / 61.5
 
-    return season * self.daysInSeason + math.floor(partInSeason * self.daysInSeason)
+    return season * g_seasons.environment.daysInSeason + math.floor(partInSeason * g_seasons.environment.daysInSeason)
 end
 
 -- Get season name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:seasonName(dayNumber)
-    return self.seasons[self:season(dayNumber)]
+function ssSeasonsUtil:seasonName(season)
+    return ssLang.getText("SS_SEASON_" .. tostring(season), "???")
 end
 
 -- Get day name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:dayName(dayNumber)
-    return self.weekDays[self:dayOfWeek(dayNumber)]
+function ssSeasonsUtil:dayName(dayOfWeek)
+    return ssLang.getText("SS_WEEKDAY_" .. tostring(dayOfWeek), "???")
 end
 
 -- Get short day name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:dayNameShort(dayNumber)
-    return self.weekDaysShort[self:dayOfWeek(dayNumber)]
+function ssSeasonsUtil:dayNameShort(dayOfWeek)
+    return ssLang.getText("SS_WEEKDAY_SHORT_" .. tostring(dayOfWeek), "???")
 end
 
 function ssSeasonsUtil:nextWeekDayNumber(currentDay)
-    return (currentDay + 1) % self.DAYS_IN_WEEK
-end
-
--- Returns 1-daysInSeason
-function ssSeasonsUtil:dayInSeason(currentDay)
-    if (currentDay == nil) then
-        currentDay = self:currentDayNumber()
-    end
-
-    local season = self:season(currentDay) -- 0-3
-    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1 -- 1+
-    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
-end
-
-function ssSeasonsUtil:currentGrowthTransition(currentDay)
-
-    local season = self:season(currentDay)
-    local cGS = self:currentGrowthStage(currentDay)
-    return (cGS + (season*3))
+    return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
 
 function ssSeasonsUtil:calcDaysPerTransition()
-    local l = self.daysInSeason / 3.0
+    local l = g_seasons.environment.daysInSeason / 3.0
 	local earlyStart = 1
 	local earlyEnd = mathRound(1 * l)
 	local midStart = mathRound(1 * l) + 1
 	local midEnd = mathRound(2 * l)
 	local lateStart = mathRound(2 * l)+1
-	local lateEnd = self.daysInSeason
+	local lateEnd = g_seasons.environment.daysInSeason
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
 end
-
-function ssSeasonsUtil:currentGrowthStage(currentDay)
-    if (currentDay == nil) then
-        currentDay = self:currentDayNumber()
-    end
-
-    -- Length of a state
-    local l = self.daysInSeason / 3.0
-    local dayInSeason = self:dayInSeason(currentDay)
-
-    if dayInSeason >= mathRound(2 * l) + 1 then -- Turn 3
-        return 3
-    elseif dayInSeason >= mathRound(1 * l) + 1 then -- Turn 2
-        return 2
-    else
-        return 1
-    end
-
-    return nil
-end
-
-
-function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
-    local oldSeasonLength = self.daysInSeason -- 6 ELIM
-    local actualCurrentDay = self:currentDayNumber() -- 9
-
-    local year = self:year(actualCurrentDay) -- 11 ELIM
-    local season = self:season(actualCurrentDay) -- 12, 18
-    local dayInSeason = self:dayInSeason(actualCurrentDay) -- 13 ELIM
-
-    local seasonThatWouldBe = math.fmod(math.floor((actualCurrentDay - 1) / newSeasonLength), self.SEASONS_IN_YEAR) -- 16
-
-    local dayThatNeedsToBe = math.floor((dayInSeason - 1) / oldSeasonLength * newSeasonLength) + 1 -- 19
-
-    local realDifferenceInSeason = season - seasonThatWouldBe -- 21 ELIM
-
-    local relativeYearThatNeedsTobe = realDifferenceInSeason < 0 and 1 or 0 -- 23
-
-    local resultingDayNumber = ((year + relativeYearThatNeedsTobe) * self.SEASONS_IN_YEAR + season) * newSeasonLength + dayThatNeedsToBe -- 26
-    local resultingOffset = resultingDayNumber - actualCurrentDay -- 27
-    local newOffset = math.fmod(self.currentDayOffset + resultingOffset, self.SEASONS_IN_YEAR * newSeasonLength) -- 28
-
-    self.daysInSeason = newSeasonLength
-    self.currentDayOffset = newOffset
-
-    -- Re-do time
-    ssEnvironment:adaptTime()
-
-    -- Redo weather manager
-    ssWeatherManager:buildForecast()
-
-    -- Change repair interval
-    ssVehicle.repairInterval = newSeasonLength * 2
-end
-
-------------------------------------
----- Server only
-------------------------------------
-
 
 --Outputs a random sample from a triangular distribution
 function ssSeasonsUtil:ssTriDist(m)

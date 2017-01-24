@@ -8,7 +8,7 @@
 ssAnimals = {}
 
 function ssAnimals:loadMap(name)
-    ssSeasonsMod:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()
@@ -39,15 +39,15 @@ function ssAnimals:readStream(streamId, connection)
 end
 
 function ssAnimals:seasonChanged()
-    local season = ssSeasonsUtil:season()
+    local season = g_seasons.environment:currentSeason()
     local types = ssSeasonsXML:getTypes(self.data, season)
 
     for _, typ in pairs(types) do
         local desc = g_currentMission.husbandries[typ].animalDesc
 
-        local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / ssSeasonsUtil.daysInSeason
+        local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / g_seasons.environment.daysInSeason
         if birthRatePerDay ~= 0 then
-            desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*ssSeasonsUtil.daysInSeason))
+            desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*g_seasons.environment.daysInSeason))
         else
             desc.birthRatePerDay = birthRatePerDay
         end
@@ -60,7 +60,7 @@ function ssAnimals:seasonChanged()
         desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
     end
 
-    if season == ssSeasonsUtil.SEASON_WINTER then
+    if season == g_seasons.environment.SEASON_WINTER then
         self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
         self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
     else

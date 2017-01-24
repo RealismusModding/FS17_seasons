@@ -9,7 +9,7 @@ ssReplaceVisual = {}
 
 function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
-        ssSeasonsMod:addSeasonChangeListener(self)
+        g_seasons.environment:addSeasonChangeListener(self)
 
         local modReplacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
 
@@ -168,7 +168,7 @@ end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(nodeId)
-    local currentSeason = ssSeasonsUtil:season()
+    local currentSeason = g_seasons.environment:currentSeason()
 
     if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do

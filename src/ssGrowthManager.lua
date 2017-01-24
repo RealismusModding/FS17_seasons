@@ -52,7 +52,7 @@ function ssGrowthManager:loadMap(name)
         g_currentMission:setPlantGrowthRate(1,nil)
         g_currentMission:setPlantGrowthRateLocked(true)
 
-        ssSeasonsMod:addGrowthStageChangeListener(self)
+        g_seasons.environment:addGrowthStageChangeListener(self)
 
 
         self:buildCanPlantData()
@@ -156,7 +156,7 @@ end
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then
-        local growthTransition = ssSeasonsUtil:currentGrowthTransition()
+        local growthTransition = g_seasons.environment:currentGrowthTransition()
 
         if self.isNewSavegame == true and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION

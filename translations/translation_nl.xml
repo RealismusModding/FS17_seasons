@@ -9,26 +9,26 @@
         <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
 
-        <text name="SS_WEEKDAY_MONDAY" text="Maandag" />
-        <text name="SS_WEEKDAY_TUESDAY" text="Dinsdag" />
-        <text name="SS_WEEKDAY_WEDNESDAY" text="Woensdag" />
-        <text name="SS_WEEKDAY_THURSDAY" text="Donderdag" />
-        <text name="SS_WEEKDAY_FRIDAY" text="Vrijdag" />
-        <text name="SS_WEEKDAY_SATURDAY" text="Zaterdag" />
-        <text name="SS_WEEKDAY_SUNDAY" text="Zondag" />
+        <text name="SS_WEEKDAY_1" text="Maandag" />
+        <text name="SS_WEEKDAY_2" text="Dinsdag" />
+        <text name="SS_WEEKDAY_3" text="Woensdag" />
+        <text name="SS_WEEKDAY_4" text="Donderdag" />
+        <text name="SS_WEEKDAY_5" text="Vrijdag" />
+        <text name="SS_WEEKDAY_6" text="Zaterdag" />
+        <text name="SS_WEEKDAY_7" text="Zondag" />
 
-        <text name="SS_WEEKDAY_MON" text="Maa" />
-        <text name="SS_WEEKDAY_TUE" text="Din" />
-        <text name="SS_WEEKDAY_WED" text="Woe" />
-        <text name="SS_WEEKDAY_THU" text="Don" />
-        <text name="SS_WEEKDAY_FRI" text="Vri" />
-        <text name="SS_WEEKDAY_SAT" text="Zat" />
-        <text name="SS_WEEKDAY_SUN" text="Zon" />
+        <text name="SS_WEEKDAY_SHORT_1" text="Maa" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Din" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Woe" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Don" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Vri" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Zat" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Zon" />
 
-        <text name="SS_SEASON_SPRING" text="Lente" />
-        <text name="SS_SEASON_SUMMER" text="Zomer" />
-        <text name="SS_SEASON_AUTUMN" text="Herfst" />
-        <text name="SS_SEASON_WINTER" text="Winter" />
+        <text name="SS_SEASON_0" text="Lente" />
+        <text name="SS_SEASON_1" text="Zomer" />
+        <text name="SS_SEASON_2" text="Herfst" />
+        <text name="SS_SEASON_3" text="Winter" />
 
         <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />

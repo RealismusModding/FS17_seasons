@@ -18,7 +18,7 @@ function ssRepairable:load(savegame)
     self.ssPlayerInRange = false
     self.ssInRangeOfWorkshop = nil
 
-    self.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
+    self.ssLastRepairDay = g_seasons.environment:currentDay()
     self.ssYesterdayOperatingTime = self.operatingTime
     self.ssCumulativeDirt = 0
 

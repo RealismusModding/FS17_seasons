@@ -253,7 +253,7 @@ function ssSeasonsMenu:updateGameSettings()
 
     -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
-    self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
+    self.settingElements.seasonLength:setState(math.floor(g_seasons.environment.daysInSeason / 3))
     self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
     self.settingElements.snow:setState(ssSnow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
@@ -272,7 +272,7 @@ end
 function ssSeasonsMenu:updateApplySettingsButton()
     local hasChanges = false
 
-    if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
+    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
@@ -285,7 +285,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
 end
 
 function ssSeasonsMenu:onClickSaveSettings()
-    if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
+    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
        or self.settingElements.snow:getState() ~= ssSnow.mode then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
@@ -305,7 +305,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
             ssSnow:setMode(self.settingElements.snow:getState())
             self:updateSnowStatus()
 
-            ssSeasonsUtil:changeDaysInSeason(newLength)
+            g_seasons.environment:changeDaysInSeason(newLength)
 
             ssVehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
 

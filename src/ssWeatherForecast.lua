@@ -60,10 +60,10 @@ function ssWeatherForecast:loadMap(name)
 
         -- Seasons "Color" Icons
         self.hud.overlays.seasons = {}
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssSeasonsUtil.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", g_seasons.modDir), 0, 0, width, height)
 
         self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", g_seasons.modDir), 0, 0, width, height)
 
@@ -143,7 +143,7 @@ function ssWeatherForecast:drawForecast(forecast)
 
         -- Render Season Days
         setTextAlignment(RenderText.ALIGN_CENTER)
-        renderText(self.hud.posX + posXOffset + self.hud.iconWidth + self.hud.iconWidthSmall*3/4 + dayOffset, self.hud.posY + self.hud.heigth - posYOffset - self.hud.iconHeigth, self.hud.textSize, tostring(ssSeasonsUtil:dayInSeason(forecast[n].day)))
+        renderText(self.hud.posX + posXOffset + self.hud.iconWidth + self.hud.iconWidthSmall*3/4 + dayOffset, self.hud.posY + self.hud.heigth - posYOffset - self.hud.iconHeigth, self.hud.textSize, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
 
         -- Render Hi/Lo Temperatures
         local tempString = tostring(math.floor(forecast[n].highTemp)) .. " / " .. tostring(math.floor(forecast[n].lowTemp))
@@ -151,7 +151,7 @@ function ssWeatherForecast:drawForecast(forecast)
         renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + posYOffset, self.hud.textSize, tempString)
 
         -- Render Day of The Week
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.heigth - posYOffset - self.hud.iconHeigthSmall/2, self.hud.textSize, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek()+n-1))
+        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.heigth - posYOffset - self.hud.iconHeigthSmall/2, self.hud.textSize, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek(g_seasons.environment:currentDay()+n-1)))
     end
 end
 
@@ -166,7 +166,7 @@ function ssWeatherForecast:drawToday(forecast)
     setTextAlignment(RenderText.ALIGN_CENTER)
     renderText(self.hud.clockPosX + self.hud.clockWidth/2 + self.hud.iconWidthSmall/2,self.hud.clockPosY + self.hud.clockHeight - self.hud.textSize, self.hud.textSize*1.5, string.format("%02d:%02d", g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute))
     renderOverlay(self.hud.overlays.clock_symbol.overlayId, self.hud.clockPosX, self.hud.clockPosY + self.hud.clockHeight - self.hud.textSize*1.3, self.hud.iconWidthSmall*1.2, self.hud.iconHeigthSmall*1.2)
-    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize, string.format("%02d/%s/%d", ssSeasonsUtil:dayInSeason(forecast[1].day), ssSeasonsUtil.seasons[forecast[1].season], ssSeasonsUtil:year() + 2017))
+    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize, string.format("%02d/%s/%d", g_seasons.environment:dayInSeason(forecast[1].day), ssSeasonsUtil:seasonName(forecast[1].season), g_seasons.environment:currentYear() + 2017))
 
     -- Render Background
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
