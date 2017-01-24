@@ -101,10 +101,11 @@ function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
     --print(tostring(unicode))
 end
 
-function ssGrowthManager:handleGrowth(x, z, widthX, widthZ, heightX, heightZ, layers)
+function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
-
+        
         --handling new unknown fruits
         if self.defaultFruits[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
