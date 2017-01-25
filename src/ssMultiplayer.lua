@@ -2,10 +2,14 @@
 -- SEASON INTRO SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  A small display that shows information on the season at season start
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 --
 
 ssMultiplayer = {}
+
+function ssMultiplayer:preLoad()
+    Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)
+end
 
 function ssMultiplayer:loadMap(name)
     self.players = {}
@@ -19,27 +23,6 @@ function ssMultiplayer:loadMap(name)
             table.insert(self.classes, className)
         end
     end
-end
-
-function ssMultiplayer:deleteMap()
-end
-
-function ssMultiplayer:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssMultiplayer:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssMultiplayer:draw()
-end
-
-function ssMultiplayer:update(dt)
-end
-
-function ssMultiplayer:readStream(streamId, connection)
-end
-
-function ssMultiplayer:writeStream(streamId, connection)
 end
 
 -- connection:sendEvent(ssMultiplayerJoinEvent:new())
@@ -108,4 +91,3 @@ function ssMultiplayerJoinEvent:sendObjects(superFunc, connection, x, y, z, view
 
     return superFunc(self, connection, x, y, z, viewDistanceCoeff)
 end
-Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)

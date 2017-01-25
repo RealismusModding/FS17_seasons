@@ -2,7 +2,7 @@
 -- SEASON INTRO SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  A small display that shows information on the season at season start
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 --
 
 ssSeasonIntro = {}
@@ -19,18 +19,6 @@ function ssSeasonIntro:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self)
 
     self.showSeasonChanged = false
-end
-
-function ssSeasonIntro:deleteMap()
-end
-
-function ssSeasonIntro:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssSeasonIntro:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssSeasonIntro:draw()
 end
 
 function ssSeasonIntro:update(dt)

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<i3D name="rain" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+<i3D name="snow" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
   <Asset>
     <Export program="GIANTS Editor - DEBUG 64bit" version="7.0.0"/>
   </Asset>
 
   <Files>
-    <File fileId="2" filename="data/sky/mist.png" relativePath="false"/>
-    <File fileId="1" filename="snow.png" relativePath="true"/>
+    <File fileId="1" filename="snowFlakes.png" relativePath="true"/>
+    <File fileId="2" filename="snowMist.png" relativePath="true"/>
   </Files>
 
 
@@ -15,18 +15,18 @@
     <Material name="snowMaterial" materialId="1" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
       <Emissivemap fileId="1"/>
     </Material>
-    <Material name="snowMistMaterial" materialId="2" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
+    <Material name="rainMistMaterial" materialId="2" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
       <Emissivemap fileId="2"/>
     </Material>
-      <Material materialId="3" name="snowSplashMaterial" diffuseColor="0 0 0 1" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
+    <Material materialId="3" name="snowSplashMaterial" diffuseColor="0 0 0 1" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
       <Emissivemap fileId="1"/>
     </Material>
   </Materials>
 
 
   <Shapes>
-    <Precipitation shapeId="1" name="snowGeom" maxNumDrops="1000" dropMaterialId="1" boundsWidth="50.0" boundsHeight="50.0" dropWidth="0.75" dropHeight="0.75" dropAtlasSize="16" dropMinVelocity="0.03" dropMaxVelocity="0.06" dropMinMass="0.5" dropMaxMass="2" splashMaterialId="3" generateSplashes="false" splashWidth="1.0" splashHeight="1.0" splashAtlasSize="1" windVelocity="0.01 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
-    <Precipitation shapeId="2" name="snowMistGeom" maxNumDrops="100" dropMaterialId="2" boundsWidth="80.0" boundsHeight="80.0" dropWidth="10.0" dropHeight="10.0" dropAtlasSize="16" dropMinVelocity="0.003" dropMaxVelocity="0.006" dropMinMass="0.1" dropMaxMass="3" windVelocity="0.01 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
+   <Precipitation shapeId="1" name="snowGeom" maxNumDrops="2000" dropMaterialId="1" boundsWidth="50.0" boundsHeight="50.0" dropWidth="0.45" dropHeight="0.45" dropAtlasSize="16" dropMinVelocity="0.004" dropMaxVelocity="0.007" dropMinMass="0.5" dropMaxMass="2" splashMaterialId="3" generateSplashes="false" splashWidth="1.0" splashHeight="1.0" splashAtlasSize="1" windVelocity="0.005 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
+   <Precipitation shapeId="2" name="snowMistGeom" maxNumDrops="100" dropMaterialId="2" boundsWidth="80.0" boundsHeight="80.0" dropWidth="10.0" dropHeight="10.0" dropAtlasSize="16" dropMinVelocity="0.0003" dropMaxVelocity="0.0006" dropMinMass="0.1" dropMaxMass="3" windVelocity="0.005 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
   </Shapes>
 
 
@@ -34,8 +34,8 @@
   </Dynamics>
 
   <Scene>
-    <Shape shapeId="1" name="snow" nodeId="421"/>
-    <Shape shapeId="2" name="mist" nodeId="422"/>
+    <Shape shapeId="1" name="snow"/>
+    <Shape shapeId="2" name="mist"/>
   </Scene>
 
 </i3D>

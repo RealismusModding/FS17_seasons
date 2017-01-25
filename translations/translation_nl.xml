@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Jarvixes
+        Rahkiin
     </translationContributors>
 
     <texts>
@@ -42,7 +42,7 @@
         <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="De aarde is bevroren. Je kan er niet op werken!" />
+        <text name="SS_WARN_SOILFROZEN" text="De aarde is bevroren. Je kan er niet op werken!" />
             <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
             <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->

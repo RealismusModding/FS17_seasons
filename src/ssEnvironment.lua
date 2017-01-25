@@ -2,21 +2,32 @@
 -- TIME SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the day/night system
--- Authors:  Jarvixes, reallogger
+-- Authors:  Rahkiin, reallogger
 --
 
-ssTime = {}
+ssEnvironment = {}
 
-function ssTime:load(savegame, key)
-    self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
+function ssEnvironment:preLoad()
+    Environment.new = Utils.overwrittenFunction(Environment.new, function (self, superFunc, xmlFilename)
+        local self = superFunc(self, xmlFilename)
 
+        Environment.RAINTYPE_SNOW = "snow"
+        self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0)
+        self.rainFogColor[Environment.RAINTYPE_SNOW] = {0.07074, 0.07074, 0.07074, 0.01}
+
+        return self
+    end)
 end
 
-function ssTime:save(savegame, key)
+function ssEnvironment:load(savegame, key)
+    self.latitude = ssStorage.getXMLFloat(savegame, key .. ".weather.latitude", 51.9)
+end
+
+function ssEnvironment:save(savegame, key)
     ssStorage.setXMLFloat(savegame, key .. ".weather.latitude", self.latitude)
 end
 
-function ssTime:loadMap(name)
+function ssEnvironment:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
     if g_currentMission:getIsServer() then
@@ -24,7 +35,7 @@ function ssTime:loadMap(name)
     end
 end
 
-function ssTime:setup()
+function ssEnvironment:setup()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
@@ -34,34 +45,18 @@ function ssTime:setup()
     self:adaptTime()
 end
 
-function ssTime:deleteMap()
-    -- g_currentMission.environment:removeDayChangeListener(self)
-end
-
-function ssTime:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssTime:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssTime:draw()
-end
-
-function ssTime:readStream(streamId, connection)
+function ssEnvironment:readStream(streamId, connection)
     self.latitude = streamReadFloat32(streamId)
 
     self:setup()
 end
 
-function ssTime:writeStream(streamId, connection)
+function ssEnvironment:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.latitude)
 end
 
-function ssTime:update(dt)
-end
-
 -- Change the night/day times according to season
-function ssTime:adaptTime()
+function ssEnvironment:adaptTime()
     local env = g_currentMission.environment
     julianDay = ssSeasonsUtil:julianDay(ssSeasonsUtil:currentDayNumber())
 
@@ -104,7 +99,7 @@ function ssTime:adaptTime()
 end
 
 -- Output in hours
-function ssTime:calculateStartEndOfDay(julianDay)
+function ssEnvironment:calculateStartEndOfDay(julianDay)
     local dayStart, dayEnd, theta, eta
 
     -- Calculate the day
@@ -116,7 +111,7 @@ function ssTime:calculateStartEndOfDay(julianDay)
     return dayStart, dayEnd, nightStart, nightEnd
 end
 
-function ssTime:_calculateDay(p, julianDay)
+function ssEnvironment:_calculateDay(p, julianDay)
     local timeStart, timeEnd
     local D = 0, offset, hasDST
     local eta = self:calculateSunDeclination(julianDay)
@@ -143,22 +138,22 @@ function ssTime:_calculateDay(p, julianDay)
     return timeStart, timeEnd
 end
 
-function ssTime:calculateSunHeightAngle(julianDay)
+function ssEnvironment:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local sunHeightAngle = self:calculateSunDeclination(julianDay) - (90 - self.latitude)*math.pi/180
+    local sunHeightAngle = self:calculateSunDeclination(julianDay-176) - (90 - self.latitude)*math.pi/180
 
     return sunHeightAngle
 end
 
-function ssTime:calculateSunDeclination(julianDay)
+function ssEnvironment:calculateSunDeclination(julianDay)
     -- Calculate the suns declination
-    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
+    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay + 186)))
     local eta = math.asin(0.4 * math.cos(theta))
 
     return eta
 end
 
-function ssTime:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssEnvironment:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator3) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 5
@@ -185,7 +180,7 @@ function ssTime:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssTime:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssEnvironment:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator3) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 5
@@ -214,7 +209,7 @@ function ssTime:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssTime:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssEnvironment:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 10
@@ -240,7 +235,7 @@ function ssTime:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssTime:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssEnvironment:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator1) -- degree 2
 
     curve:addKeyframe({v = Utils.degToRad(-15), time = 0.00 * 60}) -- start (moon)
@@ -262,7 +257,7 @@ function ssTime:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssTime:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssEnvironment:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local ex = function(rgb)
@@ -291,7 +286,7 @@ function ssTime:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssTime:dayChanged()
+function ssEnvironment:dayChanged()
     -- Update the time of the day
     self:adaptTime()
 end

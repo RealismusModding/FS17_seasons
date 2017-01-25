@@ -2,18 +2,10 @@
 -- ANIMALS SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the animals
--- Authors:  Rahkiin (Jarvixes), theSeb (added mapDir loading)
+-- Authors:  Rahkiin, theSeb (added mapDir loading)
 --
 
 ssAnimals = {}
-
-function ssAnimals:load(savegame, key)
-    -- self.appliedSnowDepth = ssStorage.getXMLFloat(savegame, key .. ".animals.appliedSnowDepth", 0)
-end
-
-function ssAnimals:save(savegame, key)
-    -- ssStorage.setXMLFloat(savegame, key .. ".animals.appliedSnowDepth", self.appliedSnowDepth)
-end
 
 function ssAnimals:loadMap(name)
     ssSeasonsMod:addSeasonChangeListener(self)
@@ -33,7 +25,7 @@ function ssAnimals:loadFromXML()
         ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool"}
     }
 
-    self.data = ssSeasonsXML:loadFile(ssSeasonsMod.modDir .. "data/animals.xml", "animals", elements)
+    self.data = ssSeasonsXML:loadFile(g_seasons.modDir .. "data/animals.xml", "animals", elements)
 
     local modPath = ssSeasonsUtil:getModMapDataPath("seasons_animals.xml")
     if modPath ~= nil then
@@ -44,21 +36,6 @@ end
 function ssAnimals:readStream(streamId, connection)
     -- Load after data for seasonUtils is loaded
     self:seasonChanged()
-end
-
-function ssAnimals:deleteMap()
-end
-
-function ssAnimals:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssAnimals:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssAnimals:draw()
-end
-
-function ssAnimals:update(dt)
 end
 
 function ssAnimals:seasonChanged()

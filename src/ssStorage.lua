@@ -2,7 +2,7 @@
 -- STORAGE SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  For easy storage of savegame stuff
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 --
 
 ssStorage = {}

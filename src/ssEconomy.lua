@@ -2,7 +2,7 @@
 -- ECONOMY SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the economy
--- Authors:  Rahkiin (Jarvixes), reallogger
+-- Authors:  Rahkiin, reallogger
 --
 
 ssEconomy = {}
@@ -69,18 +69,6 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.baseLoanInterest)
 end
 
-function ssEconomy:deleteMap()
-end
-
-function ssEconomy:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssEconomy:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssEconomy:draw()
-end
-
 function ssEconomy:update(dt)
     if g_currentMission:getIsServer() then
         local stats = g_currentMission.missionStats
@@ -123,9 +111,11 @@ end
 function ssEconomy:getEquity()
     local price = 0
 
-    for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
-        if field.ownedByPlayer then
-            price = price + field.fieldPriceInitial
+    if g_currentMission.fieldDefinitionBase ~= nil then -- can be nil on WIP maps
+        for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+            if field.ownedByPlayer then
+                price = price + field.fieldPriceInitial
+            end
         end
     end
 

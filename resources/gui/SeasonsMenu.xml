@@ -31,11 +31,11 @@
                         </GuiElement>
 
                         <!-- Season intros on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateWFHelp" toolTip="tooltip_wfHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsHelp" toolTip="tooltip_controlsHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="220" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
-                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_wfHelp"/>
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_controlsHelp"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>
@@ -61,20 +61,11 @@
                         </GuiElement>
 
                         <!-- Snow tracks -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="223" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
                             <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snowTracks"/>
-                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
-                        </GuiElement>
-
-                        <!-- Growth manager on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateGrowthManager" toolTip="tooltip_gm" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="100" onClick="updateApplySettingsButton">
-                            <GuiElement type="button" profile="multiTextOptionLeft" />
-                            <GuiElement type="button" profile="multiTextOptionRight"/>
-                            <GuiElement type="text"   profile="multiTextOptionText" />
-                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_gm"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>

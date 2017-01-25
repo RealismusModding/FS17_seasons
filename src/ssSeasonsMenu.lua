@@ -2,7 +2,7 @@
 -- SEASONS MENU SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  GUI
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 
 ssSeasonsMenu = {}
 
@@ -58,7 +58,7 @@ function ssSeasonsMenu:onOpen(element)
 
     -- Todo: get these values from the XML file. This is messy
     local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
-    if ssSeasonsMod.debug then
+    if g_seasons.debug then
         table.insert(titles, ssLang.getText("ui_pageDebug"))
     end
     self.pageSelector:setTexts(titles)
@@ -92,7 +92,7 @@ end
 
 -- Update the visible pages
 function ssSeasonsMenu:updatePages()
-    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_DEBUG, not ssSeasonsMod.debug)
+    self.pagingElement:setPageIdDisabled(ssSeasonsMenu.PAGE_DEBUG, not g_seasons.debug)
 end
 
 -- Called when the current page has changed.
@@ -254,8 +254,7 @@ function ssSeasonsMenu:updateGameSettings()
     -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
     self.settingElements.seasonLength:setState(math.floor(ssSeasonsUtil.daysInSeason / 3))
-    self.settingElements.gm:setIsChecked(ssGrowthManager.growthManagerEnabled)
-    self.settingElements.wfHelp:setIsChecked(ssWeatherForecast.keyTextVisible)
+    self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
     self.settingElements.snow:setState(ssSnow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
 
@@ -275,8 +274,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
 
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
-        or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
-        or self.settingElements.wfHelp:getIsChecked() ~= ssWeatherForecast.keyTextVisible
+        or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode then
         -- or  then -- snow
@@ -288,7 +286,6 @@ end
 
 function ssSeasonsMenu:onClickSaveSettings()
     if self.settingElements.seasonLength:getState() * 3 ~= ssSeasonsUtil.daysInSeason
-       or self.settingElements.gm:getIsChecked() ~= ssGrowthManager.growthManagerEnabled
        or self.settingElements.snow:getState() ~= ssSnow.mode then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
@@ -302,7 +299,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
         local newLength = self.settingElements.seasonLength:getState() * 3
 
         ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
-        ssWeatherForecast.keyTextVisible = self.settingElements.wfHelp:getIsChecked()
+        g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
 
         if g_currentMission:getIsServer() then
             ssSnow:setMode(self.settingElements.snow:getState())
@@ -310,7 +307,6 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
 
             ssSeasonsUtil:changeDaysInSeason(newLength)
 
-            ssGrowthManager.growthManagerEnabled = self.settingElements.gm:getIsChecked()
             ssVehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
 
             self:updateApplySettingsButton()
@@ -336,9 +332,9 @@ function ssSeasonsMenu:onCreateSeasonIntros(element)
     self:replaceTexts(element)
 end
 
--------- WF HELP on/off -------
-function ssSeasonsMenu:onCreateWFHelp(element)
-    self.settingElements.wfHelp = element
+-------- CONTROLS HELP on/off -------
+function ssSeasonsMenu:onCreateControlsHelp(element)
+    self.settingElements.controlsHelp = element
     self:replaceTexts(element)
 end
 
@@ -374,12 +370,6 @@ function ssSeasonsMenu:onClickSnowToggle(state)
     end
 
     self:updateApplySettingsButton()
-end
-
-------- GM on/off -------
-function ssSeasonsMenu:onCreateGrowthManager(element)
-    self.settingElements.gm = element
-    self:replaceTexts(element)
 end
 
 ------- Snow Tracks on/off -------

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Jarvixes
+        Rahkiin
     </translationContributors>
 
     <texts>
         <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show Weather Forecast" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Show Menu" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_MONDAY" text="Monday" />
         <text name="SS_WEEKDAY_TUESDAY" text="Tuesday" />
@@ -43,8 +44,9 @@
         <text name="SS_REPAIR_DIALOG" text="Do you want to perform maintenance on the %s for %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Maintenance" />
 		<text name="SS_WARN_REPAIR" text="Engine breakdown. Repair your machinery!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
-        <text name="SS_WARN_NOTDURINGWINTER" text="The soil is frozen. You can't work on it!" />
+        <text name="SS_WARN_SOILFROZEN" text="The soil is frozen. You can't work on it!" />
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
         <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
@@ -67,15 +69,13 @@
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons." />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season." />
         <text name="tooltip_snow" text="Snow will fall in cold winters and block roads." />
-        <text name="tooltip_gm" text="Crops will grow with an advanced seasonal growth system. Warning: disabling might give unexpected results." />
-        <text name="tooltip_wfHelp" text="Show the forecast key in the help menu. Turn off if you don't have space enough." />
+        <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu." />
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it." />
 
         <text name="setting_seasonIntros" text="Season introductions" />
         <text name="setting_seasonLength" text="Season length" />
         <text name="setting_snow" text="Snow mode" />
-        <text name="setting_gm" text="Seasonal growth" />
-        <text name="setting_wfHelp" text="Forecast key in help menu" />
+        <text name="setting_controlsHelp" text="Keys in help menu" />
         <text name="setting_snowTracks" text="Snow tracks" />
 
         <text name="ui_helpCategory_1" text="Seasons" />

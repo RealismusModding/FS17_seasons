@@ -2,7 +2,7 @@
 -- ssSeasonsUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
--- Authors:  Jarvixes, mrbear, reallogger, theSeb
+-- Authors:  Rahkiin, mrbear, reallogger, theSeb
 --
 
 ssSeasonsUtil = {}
@@ -66,24 +66,10 @@ function ssSeasonsUtil:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 end
 
-function ssSeasonsUtil:deleteMap()
-end
-
-function ssSeasonsUtil:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssSeasonsUtil:keyEvent(unicode, sym, modifier, isDown)
-end
-
 function ssSeasonsUtil:update(dt)
     if self.isNewGame then
         self.isNewGame = false
         ssSeasonsUtil:dayChanged() -- trigger the stage change events.
-    end
-
-    -- TODO: This does not belong here, but in the main seasons class (g_seasons ?)
-    if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_MENU) then
-        g_gui:showGui("SeasonsMenu")
     end
 end
 
@@ -97,9 +83,6 @@ function ssSeasonsUtil:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.daysInSeason)
     streamWriteFloat32(streamId, self.latestSeason)
     streamWriteFloat32(streamId, self.latestGrowthStage)
-end
-
-function ssSeasonsUtil:draw()
 end
 
 -- Get the current day number.
@@ -259,7 +242,7 @@ end
 -- This is here, because ssSeasonsMod is never really loaded as a mod class..
 -- It is complicated, but installing a day change listener on it wont work
 function ssSeasonsUtil:dayChanged()
-    if ssSeasonsMod.enabled then
+    if g_seasons.enabled then
         local currentSeason = self:season()
 
         local currentGrowthStage = self:currentGrowthStage()
@@ -310,10 +293,13 @@ function ssSeasonsUtil:changeDaysInSeason(newSeasonLength) --15
     self.currentDayOffset = newOffset
 
     -- Re-do time
-    ssTime:adaptTime()
+    ssEnvironment:adaptTime()
 
     -- Redo weather manager
     ssWeatherManager:buildForecast()
+
+    -- Change repair interval
+    ssVehicle.repairInterval = newSeasonLength * 2
 end
 
 ------------------------------------
@@ -400,35 +386,115 @@ end
 
 -- ssSeasonsUtil.List = {}
 function ssSeasonsUtil.listNew()
-  return {first = 0, last = -1}
+    return {first = 0, last = -1}
 end
 
-    function ssSeasonsUtil.listPushLeft (list, value)
-      local first = list.first - 1
-      list.first = first
-      list[first] = value
+function ssSeasonsUtil.listPushLeft (list, value)
+    local first = list.first - 1
+    list.first = first
+    list[first] = value
+end
+
+function ssSeasonsUtil.listPushRight (list, value)
+    local last = list.last + 1
+    list.last = last
+    list[last] = value
+end
+
+function ssSeasonsUtil.listPopLeft (list)
+    local first = list.first
+    if first > list.last then return nil end
+    local value = list[first]
+    list[first] = nil        -- to allow garbage collection
+    list.first = first + 1
+    return value
+end
+
+function ssSeasonsUtil.listPopRight (list)
+    local last = list.last
+    if list.first > last then return nil end
+    local value = list[last]
+    list[last] = nil         -- to allow garbage collection
+    list.last = last - 1
+    return value
+end
+
+function Set(list)
+    local set = {}
+
+    for _, l in ipairs(list) do
+        set[l] = true
     end
 
-    function ssSeasonsUtil.listPushRight (list, value)
-      local last = list.last + 1
-      list.last = last
-      list[last] = value
+    return set
+end
+
+------------- Useful global functions ---------------
+
+-- Yep, LUA does not have a math.round. It's a first.
+function mathRound(value, idp)
+    local mult = 10^(idp or 0)
+    return math.floor(value * mult + 0.5) / mult
+end
+
+-- http://lua-users.org/wiki/CopyTable
+function deepCopy(obj, seen)
+    local orig_type = type(obj)
+
+    if orig_type ~= 'table' then return obj end
+    if seen and seen[obj] then return seen[obj] end
+
+    local s = seen or {}
+    local res = setmetatable({}, getmetatable(obj))
+    s[obj] = res
+
+    for k, v in pairs(obj) do
+        res[deepCopy(k, s)] = deepCopy(v, s)
     end
 
-    function ssSeasonsUtil.listPopLeft (list)
-      local first = list.first
-      if first > list.last then return nil end
-      local value = list[first]
-      list[first] = nil        -- to allow garbage collection
-      list.first = first + 1
-      return value
-    end
+    return res
+end
 
-    function ssSeasonsUtil.listPopRight (list)
-      local last = list.last
-      if list.first > last then return nil end
-      local value = list[last]
-      list[last] = nil         -- to allow garbage collection
-      list.last = last - 1
-      return value
+-- TODO replace with table.getn()
+function arrayLength(arr)
+    local n = 0
+    for i = 1, #arr do
+        n = n + 1
     end
+    return n
+end
+
+function print_r(t)
+    local print_r_cache={}
+    local function sub_print_r(t,indent)
+        if (print_r_cache[tostring(t)]) then
+            print(indent.."*"..tostring(t))
+        else
+            print_r_cache[tostring(t)]=true
+            if (type(t)=="table") then
+                for pos,val in pairs(t) do
+                    pos = tostring(pos)
+                    if (type(val)=="table") then
+                        print(indent.."["..pos.."] => "..tostring(t).." {")
+                        sub_print_r(val,indent..string.rep(" ",string.len(pos)+8))
+                        print(indent..string.rep(" ",string.len(pos)+6).."}")
+                    elseif (type(val)=="string") then
+                        print(indent.."["..pos..'] => "'..val..'"')
+                    else
+                        print(indent.."["..pos.."] => "..tostring(val))
+                    end
+                end
+            else
+                print(indent..tostring(t))
+            end
+        end
+    end
+    if (type(t)=="table") then
+        print(tostring(t).." {")
+        sub_print_r(t,"  ")
+        print("}")
+    else
+        sub_print_r(t,"  ")
+    end
+    print()
+end

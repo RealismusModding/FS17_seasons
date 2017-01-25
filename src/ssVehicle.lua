@@ -2,7 +2,7 @@
 -- MAINTENANCE SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the maintenance system
--- Authors:  Jarvixes (Rahkiin), reallogger, Rival
+-- Authors:  Rahkiin, reallogger, Rival
 --
 
 ssVehicle = {}
@@ -15,8 +15,8 @@ ssVehicle.SERVICE_INTERVAL = 30
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
-SpecializationUtil.registerSpecialization("repairable", "ssRepairable", ssSeasonsMod.modDir .. "src/ssRepairable.lua")
-SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", ssSeasonsMod.modDir .. "src/ssSnowTracks.lua")
+SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/ssRepairable.lua")
+SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/ssSnowTracks.lua")
 
 
 function ssVehicle:load(savegame, key)
@@ -35,30 +35,19 @@ function ssVehicle:loadMap()
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
+    Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
+    Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.getGroundType)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     InGameMenu.onCreateGarageVehicleAge = Utils.overwrittenFunction(InGameMenu.onCreateGarageVehicleAge, ssVehicle.inGameMenuOnCreateGarageVehicleAge)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
+    ssVehicle.repairInterval = ssSeasonsUtil.daysInSeason * 2
+
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
-end
-
-function ssVehicle:deleteMap()
-end
-
-function ssVehicle:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssVehicle:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssVehicle:draw()
-end
-
-function ssVehicle:update(dt)
 end
 
 function ssVehicle:dayChanged()
@@ -70,23 +59,8 @@ function ssVehicle:dayChanged()
 end
 
 function ssVehicle:installVehicleSpecializations()
-    local specWashable = SpecializationUtil.getSpecialization("washable")
-
-    -- Go over all the vehicle types
-    for k, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
-        -- Lua can have nil in its tables
-        if vehicleType == nil then break end
-
-        -- If it is washable, we will add our own specialization
-        local hasWashable = false
-        for i, vs in pairs(vehicleType.specializations) do
-            if vs == specWashable then
-                hasWashable = true
-                break
-            end
-        end
-
-        if hasWashable then
+    for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
+        if vehicleType ~= nil and SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
         end
@@ -95,7 +69,7 @@ end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", ssSeasonsMod.modDir .. "data/repairFactors.xml")
+    local file = loadXMLFile("factors", g_seasons.modDir .. "data/repairFactors.xml")
 
     ssVehicle.repairFactors = {}
 
@@ -158,6 +132,7 @@ function ssVehicle:loadAllowedInWinter()
     }
 end
 
+-- all
 function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     local data = ssVehicle.repairFactors[storeItem.category]
 
@@ -183,11 +158,12 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     end
 end
 
+-- repairable
 function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
     local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
     local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
+    local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
     -- Calculate the amount of dirt on the vehicle, on average
     local avgDirtAmount = 0
@@ -202,13 +178,15 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
 
     -- Calculate the final maintenance costs
     local maintenanceCost = 0
-    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or isRepair then
+
+    if daysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
         maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
     return maintenanceCost
 end
 
+-- all
 function ssVehicle.taxInterestCost(vehicle, storeItem)
     return 0.03 * storeItem.price / (4 * ssSeasonsUtil.daysInSeason)
 end
@@ -222,18 +200,21 @@ end
 --    end
 --end
 
+-- repairable
 -- Repair by resetting the last repair day and operating time
 function ssVehicle:repair(vehicle, storeItem)
-    vehicle.ssLastRepairDay = ssSeasonsUtil:currentDayNumber()
+    --compared to game day since ssSeasonsUtil:currentDayNumber() is shifted when changing season length
+    vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
 
     return true
 end
 
+-- repairable
 function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     -- Can't repair twice on same day, that is silly
-    if vehicle.ssLastRepairDay == ssSeasonsUtil:currentDayNumber() then
+    if vehicle.ssLastRepairDay == g_currentMission.environment.currentDay then
         return 0
     end
 
@@ -251,6 +232,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
     return (costs + workCosts) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
+-- all (guard)
 function ssVehicle:getDailyUpKeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
 
@@ -272,14 +254,17 @@ function ssVehicle:getDailyUpKeep(superFunc)
     return costs
 end
 
+-- all
 function ssVehicle:calculateOverdueFactor(vehicle)
-    local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay
+    local overdueFactor = 1
 
-    if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
-        overdueFactor = math.ceil(math.max(daysSinceLastRepair/(ssSeasonsUtil.daysInSeason * 2), math.abs(serviceInterval/ssVehicle.SERVICE_INTERVAL)))
-    else
-        overdueFactor = 1
+    if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
+
+        if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
+            overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval, math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
+        end
     end
 
     return overdueFactor
@@ -336,30 +321,14 @@ function ssVehicle:getSellPrice(superFunc)
     return sellPrice
 end
 
---[[
-function ssVehicle:getSpecValueDailyUpKeep(superFunc, storeItem, realItem)
-    log("getSpecValueDailyUpKeep "..tostring(storeItem), tostring(realItem))
-
-    local dailyUpkeep = storeItem.dailyUpkeep
-
-    if realItem ~= nil and realItem.getDailyUpKeep ~= nil then
-        dailyUpkeep = realItem:getDailyUpKeep(false)
-    end
-
-    dailyUpkeep = 54
-
-    return string.format(g_i18n:getText("shop_maintenanceValue"), g_i18n:formatMoney(dailyUpkeep, 2))
-end
-]]
-
 -- Replace the visual age with the age since last repair, because actual age is useless
-function ssVehicle:getSpecValueAge(superFunc, vehicle)
+function ssVehicle:getSpecValueAge(superFunc, vehicle) -- storeItem, realItem
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
         return string.format(g_i18n:getText("shop_age"), ssSeasonsUtil.daysInSeason * 2 - (ssSeasonsUtil:currentDayNumber() - vehicle.ssLastRepairDay))
     elseif vehicle ~= nil and vehicle.age ~= nil then
         return "-"
     elseif not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-        return "at midnight"
+        return ssLang.getText("SS_REPAIR_AT_MIDNIGHT", "at midnight")
     end
 
     return nil
@@ -394,7 +363,8 @@ end
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     local vanillaSpeed, recalc = superFunc(self, onlyIfWorking)
 
-    if ssWeatherManager:isGroundFrozen()
+    -- only limit it if it works the ground and the ground is not frozen
+    if not ssWeatherManager:isGroundFrozen()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
        return vanillaSpeed, recalc
     end
@@ -410,10 +380,10 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     end
 
     if isLowered then
-        self.ssNotAllowedInWinter = true
+        self.ssNotAllowedSoilFrozen = true
         return 0, recalc
     else
-        self.ssNotAllowedInWinter = false
+        self.ssNotAllowedSoilFrozen = false
     end
 
     return vanillaSpeed, recalc
@@ -423,9 +393,25 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     superFunc(self, dt)
 
     if self.isClient then
-        if self.ssNotAllowedInWinter then
-            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_NOTDURINGWINTER"), 2000)
+        if self.ssNotAllowedSoilFrozen then
+            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_SOILFROZEN"), 2000)
         end
     end
 
+end
+
+function ssVehicle:updateWheelTireFriction(superFunc, wheel)
+    if self.isServer and self.isAddedToPhysics then
+        if wheel.inSnow then
+            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
+        else
+            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+        end
+	end
+end
+
+function ssVehicle:getGroundType(superFunc,wheel)
+    if wheel.inSnow then
+        return WheelsUtil.GROUND_SOFT_TERRAIN
+    end
 end

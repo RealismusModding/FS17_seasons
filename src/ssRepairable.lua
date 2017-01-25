@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- REPAIRABLE SPECIALIZATION
 ---------------------------------------------------------------------------------------------------------
--- Authors:  Jarvixes (Rahkiin), reallogger, Rival
+-- Authors:  Rahkiin, reallogger, Rival
 --
 
 ssRepairable = {}
@@ -86,10 +86,7 @@ end
 local function getIsPlayerInRange(self, distance, player)
     if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         if player == nil then
-            -- log(table.getn(g_currentMission.players))
             for _, player in pairs(g_currentMission.players) do
-                -- print_r(player)
-
                 if isInDistance(self, player, distance, self.rootNode) then
                     return true, player
                 end
@@ -106,10 +103,8 @@ function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
     local isPlayerInRange, player = getIsPlayerInRange(self, 3.5) --, g_currentMission.player)
 
-    -- log("IsPlayerInRange "..tostring(isPlayerInRange))
     if isPlayerInRange then
         self.ssPlayerInRange = player
-        -- log("Player in range "..tostring(player).." Shop in range "..tostring(self.ssInRangeOfWorkshop))
     else
         self.ssPlayerInRange = nil
     end
@@ -123,28 +118,26 @@ function ssRepairable:updateTick(dt)
 end
 
 function ssRepairable:update(dt)
-    local daysSinceLastRepair = ssSeasonsUtil:currentDayNumber() - self.ssLastRepairDay
-
-    -- log("player in range "..tostring(self.ssPlayerInRange).." inR "..tostring(self.ssInRangeOfWorkshop))
-
     -- Show a message about the repairing
     if self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
         self:repairUpdate(dt)
+
     end
 
     if self.isEntered then
-        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
-        if daysSinceLastRepair >= (ssSeasonsUtil.daysInSeason * 2) or serviceInterval < 0 then
+        local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
+
+        if daysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
             g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
         else
-            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceInterval, ssSeasonsUtil.daysInSeason * 2 - daysSinceLastRepair))
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceHours, ssVehicle.repairInterval - daysSinceLastRepair))
         end
     end
-    
+
     if self.isMotorStarted then
-        math.random()
-        local overdueFactor = ssVehicle:calculateOverdueFactor(self) 
-        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)  --never less than 20% chance every minute for a breakdown
+        local overdueFactor = ssVehicle:calculateOverdueFactor(self)
+        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)
 
         if math.random() > p then
             self:stopMotor()

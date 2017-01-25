@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------------------------------
--- ANIMALS SCRIPT
+-- PEDESTRIAN SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  To adjust the animals
--- Authors:  Rahkiin (Jarvixes), theSeb (added mapDir loading)
+-- Purpose:  To disable pedestrian spawning in winter
+-- Authors:  Rahkiin
 --
 
 ssPedestrianSystem = {}
@@ -21,21 +21,6 @@ end
 function ssPedestrianSystem:readStream(streamId, connection)
     -- Load after data for seasonUtils is loaded
     self:seasonChanged()
-end
-
-function ssPedestrianSystem:deleteMap()
-end
-
-function ssPedestrianSystem:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssPedestrianSystem:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssPedestrianSystem:draw()
-end
-
-function ssPedestrianSystem:update(dt)
 end
 
 function ssPedestrianSystem:seasonChanged()

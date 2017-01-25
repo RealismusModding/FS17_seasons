@@ -2,15 +2,19 @@
 -- WEATHER MANAGER SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to create and manage the weather
--- Authors:  Authors:  ian898, Jarvixes, theSeb, reallogger
+-- Authors:  ian898, Rahkiin, reallogger, theSeb
 --
 
 ssWeatherManager = {}
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
-ssWeatherManager.soilTemp = 6
-ssWeatherManager.rains = {}
+ssWeatherManager.soilTemp = 4.9
+ssWeatherManager.weather = {}
+ssWeatherManager.degree = 'Celsius'
+
+function ssWeatherManager:preLoad()
+end
 
 function ssWeatherManager:load(savegame, key)
     if savegame == nil then return end
@@ -18,6 +22,8 @@ function ssWeatherManager:load(savegame, key)
 
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
+    self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
+    self.degree = ssStorage.getXMLString(savegame, key .. ".weather.degree", 'Celsius')
 
     -- load forecast
     self.forecast = {}
@@ -41,7 +47,7 @@ function ssWeatherManager:load(savegame, key)
     end
 
     -- load rains
-    self.rains = {}
+    self.weather = {}
 
     i = 0
     while true do
@@ -57,19 +63,18 @@ function ssWeatherManager:load(savegame, key)
         rain.rainTypeId = getXMLString(savegame, rainKey .. "#rainTypeId")
         rain.duration = getXMLFloat(savegame, rainKey .. "#duration")
 
-        table.insert(self.rains, rain)
+        table.insert(self.weather, rain)
         i = i + 1
     end
-
 end
 
 function ssWeatherManager:save(savegame, key)
-    --log('g_currentMission rains table before saving')
-    --print_r(g_currentMission.environment.rains)
     local i = 0
 
+    ssStorage.setXMLString(savegame, key .. ".weather.degree", self.degree)
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
+    ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -82,10 +87,10 @@ function ssWeatherManager:save(savegame, key)
         setXMLFloat(savegame, dayKey .. "#lowTemp", day.lowTemp)
     end
 
-    for i = 0, table.getn(self.rains) - 1 do
+    for i = 0, table.getn(self.weather) - 1 do
         local rainKey = string.format("%s.weather.forecast.rain(%i)", key, i)
 
-        local rain = self.rains[i + 1]
+        local rain = self.weather[i + 1]
 
         setXMLInt(savegame, rainKey .. "#startDay", rain.startDay)
         setXMLFloat(savegame, rainKey .. "#endDayTime", rain.endDayTime)
@@ -101,15 +106,11 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
-    g_currentMission.environment.minRainDuration = 30 * 60 * 60 * 1000 -- 30 hours
+    g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
     g_currentMission.environment.maxRainInterval = 1
-    g_currentMission.environment.maxRainDuration = 30 * 60 * 60 * 1000
+    g_currentMission.environment.maxRainDuration = 24 * 60 * 60 * 1000
     g_currentMission.environment.rainForecastDays = self.forecastLength
     g_currentMission.environment.autoRain = false
-
-    -- Load a new rain
-    g_currentMission.environment.RAINTYPE_SNOW = "snow"
-    g_currentMission.environment:loadRainType(g_currentMission.environment.RAINTYPE_SNOW, 1, ssSeasonsMod.modDir .. "resources/environment/snow.i3d", false, 3, 7);
 
     self:loadTemperature()
     self:loadRain()
@@ -119,20 +120,11 @@ function ssWeatherManager:loadMap(name)
             self:buildForecast()
         end
         --self.snowDepth = -- Enable read from savegame
-        --self.rains = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
+        --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
     end
 
     self:owRaintable()
 
-end
-
-function ssWeatherManager:deleteMap()
-end
-
-function ssWeatherManager:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssWeatherManager:keyEvent(unicode, sym, modifier, isDown)
 end
 
 function ssWeatherManager:readStream(streamId, connection)
@@ -157,7 +149,7 @@ function ssWeatherManager:readStream(streamId, connection)
     end
 
     -- load rains
-    self.rains = {}
+    self.weather = {}
 
     for i = 1, numRains do
         local rain = {}
@@ -169,7 +161,7 @@ function ssWeatherManager:readStream(streamId, connection)
         rain.rainTypeId = streamReadString(streamId)
         rain.duration = streamReadFloat32(streamId)
 
-        table.insert(self.rains, rain)
+        table.insert(self.weather, rain)
     end
 end
 
@@ -177,7 +169,7 @@ function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
 
     streamWriteUInt8(streamId, table.getn(self.forecast))
-    streamWriteUInt8(streamId, table.getn(self.rains))
+    streamWriteUInt8(streamId, table.getn(self.weather))
 
     for _, day in pairs(self.forecast) do
         streamWriteInt16(streamId, day.day)
@@ -186,7 +178,7 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteFloat32(streamId, day.lowTemp)
     end
 
-    for _, rain in pairs(self.rains) do
+    for _, rain in pairs(self.weather) do
         streamWriteInt16(streamId, rain.startDay)
         streamWriteFloat32(streamId, rain.endDayTime)
         streamWriteFloat32(streamId, rain.startDayTime)
@@ -202,27 +194,26 @@ function ssWeatherManager:update(dt)
     if currentRain ~= nil then
         local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
 
-        if currentTemp > 1 and currentRain.rainTypeId == 'hail' then
-            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, false)
+        if currentTemp > 1 and currentRain.rainTypeId == 'snow' then
+            setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
             g_currentMission.environment.currentRain.rainTypeId = 'rain'
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
         elseif currentTemp < 0 and currentRain.rainTypeId == 'rain' then
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = 'hail'
-            setVisibility(g_currentMission.environment.rainTypeIdToType.hail.rootNode, true)
+            g_currentMission.environment.currentRain.rainTypeId = 'snow'
+            setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
 end
 
-function ssWeatherManager:draw()
-end
-
--- Only run this the very first time
+-- Only run this the very first time or if season length changes
 function ssWeatherManager:buildForecast()
     local startDayNum = ssSeasonsUtil:currentDayNumber()
     local ssTmax
 
+    self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter. May not be correct if rebuilding forecast.
     self.forecast = {}
+    self.weather = {}
 
     for n = 1, self.forecastLength do
         oneDayForecast = {}
@@ -237,13 +228,12 @@ function ssWeatherManager:buildForecast()
 
         oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
         oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
-        --oneDayForecast.weatherState = self:getWeatherStateForDay(startDayNum + n)
 
         if n == 1 then
             oneDayRain = self:updateRain(oneDayForecast,0)
         else
-            if oneDayForecast.day == self.rains[n-1].endDay then
-                oneDayRain = self:updateRain(oneDayForecast,self.rains[n-1].endDayTime)
+            if oneDayForecast.day == self.weather[n-1].endDay then
+                oneDayRain = self:updateRain(oneDayForecast,self.weather[n-1].endDayTime)
             else
                 oneDayRain = self:updateRain(oneDayForecast,0)
             end
@@ -252,21 +242,20 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.weatherState = oneDayRain.rainTypeId
 
         table.insert(self.forecast, oneDayForecast)
-        table.insert(self.rains, oneDayRain)
+        table.insert(self.weather, oneDayRain)
 
     end
 
     self:owRaintable()
-    --print_r(g_currentMission.environment.rains)
     self:switchRainHail()
-    --self:owRaintable() -- since there is no rains table in g_currentMission.environment before first day change it is run twice
-    --print_r(g_currentMission.environment.rains)
 
 end
 
 function ssWeatherManager:updateForecast()
     local dayNum = ssSeasonsUtil:currentDayNumber() + self.forecastLength-1
     local oneDayRain = {}
+
+    self.prevHighTemp = self.forecast[1].highTemp  -- updating prev high temp before updating forecast table
 
     table.remove(self.forecast,1)
 
@@ -290,10 +279,9 @@ function ssWeatherManager:updateForecast()
 
     oneDayForecast.highTemp = ssSeasonsUtil:ssNormDist(ssTmax.mode,2.5)
     oneDayForecast.lowTemp = ssSeasonsUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
-    --oneDayForecast.weatherState = self:getWeatherStateForDay(dayNum)
 
-    if oneDayForecast.day == self.rains[self.forecastLength-1].endDay then
-        oneDayRain = self:updateRain(oneDayForecast,self.rains[self.forecastLength-1].endDayTime)
+    if oneDayForecast.day == self.weather[self.forecastLength-1].endDay then
+        oneDayRain = self:updateRain(oneDayForecast,self.weather[self.forecastLength-1].endDayTime)
     else
         oneDayRain = self:updateRain(oneDayForecast,0)
     end
@@ -301,9 +289,9 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.weatherState = oneDayRain.rainTypeId
 
     table.insert(self.forecast, oneDayForecast)
-    table.insert(self.rains, oneDayRain)
+    table.insert(self.weather, oneDayRain)
 
-    table.remove(self.rains, 1)
+    table.remove(self.weather, 1)
 
     self:owRaintable()
     self:switchRainHail()
@@ -311,26 +299,7 @@ function ssWeatherManager:updateForecast()
     self:calculateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
-
 end
-
---function ssWeatherManager:getWeatherStateForDay(dayNumber)
---    local weatherState = "sun"
---    local ssTmax = {}
---    local Tmaxmean = {}
-
---    for index, rain in ipairs(g_currentMission.environment.rains) do
---        --log("Bad weather predicted for day: " .. tostring(rain.startDay) .. " weather type: " .. rain.rainTypeId .. " index: " .. tostring(index))
---        if rain.startDay > dayNumber then
---            break
---        end
---        if (rain.startDay == dayNumber) then
---            weatherState = rain.rainTypeId
---        end
---    end
-
---    return weatherState
---end
 
 function ssWeatherManager:dayChanged()
     if g_currentMission:getIsServer() then
@@ -349,22 +318,23 @@ function ssWeatherManager:diurnalTemp(hour, minute,lowTemp,highTemp,lowTempNext)
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
 
-    if lowTemp == nil or highTemp == nil or lowTempNext == nil then
+    if lowTemp == nil and highTemp == nil and lowTempNext == nil then
         lowTemp = self.forecast[1].lowTemp
         highTemp = self.forecast[1].highTemp
         lowTempNext = self.forecast[2].lowTemp
+        highTempPrev = self.prevHighTemp
+    else
+        highTempPrev = highTemp
     end
 
-    highTempPrev = self.forecast[1].highTemp -- not completely correct, but instead of storing the temp of the previous day
+    local currentTime = hour + minute/60
 
-    local currentTime = hour*60 + minute
-
-    if currentTime < 420 then
-        currentTemp = (math.cos(((currentTime + 540) / 960) * math.pi / 2)) ^ 3 * (highTempPrev - lowTemp) + lowTemp
-    elseif currentTime > 900 then
-        currentTemp = (math.cos(((currentTime - 900) / 960) * math.pi / 2)) ^ 3 * (highTemp - lowTempNext) + lowTemp
+    if currentTime < 7 then
+        currentTemp = (math.cos(((currentTime + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
+    elseif currentTime > 15 then
+        currentTemp = (math.cos(((currentTime - 15) / 16) * math.pi / 2)) ^ 2 * (highTemp - lowTempNext) + lowTempNext
     else
-        currentTemp = (math.cos((1 - (currentTime -  420) / 480) * math.pi / 2) ^ 3) * (highTemp - lowTemp) + lowTemp
+        currentTemp = (math.cos((1 - (currentTime -  7) / 8) * math.pi / 2) ^ 2) * (highTemp - lowTemp) + lowTemp
     end
 
     return currentTemp
@@ -402,14 +372,17 @@ function ssWeatherManager:calculateSnowAccumulation()
         end
         self.snowDepth = self.snowDepth + 10/1000
 
-    elseif currentRain.rainTypeId == "hail" and currentTemp < 0 then
-        -- Initial value of 10 mm/hr accumulation rate
+    elseif currentRain.rainTypeId == "snow" and currentTemp < 0 then
+        -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
         if self.snowDepth < 0 then
             self.snowDepth = 0
+        elseif self.snowDepth > 0.06 then
+            self.snowDepth = self.snowDepth + 10/1000
+        else
+            self.snowDepth = self.snowDepth + 30/1000
         end
-        self.snowDepth = self.snowDepth + 10/1000
 
-    elseif currentRain.rainTypeId == "hail" and currentTemp >= 0 then
+    elseif currentRain.rainTypeId == "snow" and currentTemp >= 0 then
         -- warm hail acts as rain
         self.snowDepth = self.snowDepth - math.max((currentTemp+1)*3/1000,0)*meltFactor
         --g_currentMission.environment.currentRain.rainTypeId = nil
@@ -454,20 +427,12 @@ end
 
 --- function for predicting when soil is too cold for crops to germinate
 function ssWeatherManager:canSow()
-    if  self.soilTemp < 5 then
-        return false
-    else
-        return true
-    end
+    return self.soilTemp >= 5
 end
 
 --- function for predicting when soil is frozen
 function ssWeatherManager:isGroundFrozen()
-    if  self.soilTemp < 0 then
-        return false
-    else
-        return true
-    end
+    return self.soilTemp < 0
 end
 
 function ssWeatherManager:getSnowHeight()
@@ -476,31 +441,23 @@ end
 
 function ssWeatherManager:switchRainHail()
     for index, rain in ipairs(g_currentMission.environment.rains) do
-        --log('--- New day in g_currentMission.environment.rains table ---')
         for jndex, fCast in ipairs(self.forecast) do
-             --log('rain.startDay = ',rain.startDay,' | fCast.day = ',fCast.day)
              if rain.startDay == fCast.day then
                 local hour = math.floor(rain.startDayTime/60/60/1000)
                 local minute = math.floor(rain.startDayTime/60/1000)-hour*60
 
                 local tempStartRain = self:diurnalTemp(hour, minute, fCast.lowTemp,fCast.highTemp,fCast.lowTemp)
-                --log('startDayTime = ',rain.startDayTime,' | hour:minute = ',hour,':',minute,' | lowTemp = ',fCast.lowTemp,' | highTemp = ',fCast.highTemp)
-                --log('temperature = ',tempStartRain,' rainTypeId = ',rain.rainTypeId)
 
                 if tempStartRain < -1 and rain.rainTypeId == 'rain' then
-                    --log('Switching from rain to hail')
-                    g_currentMission.environment.rains[index].rainTypeId = 'hail'
-                    self.forecast[jndex].weatherState = 'hail'
-                elseif tempStartRain >= -1 and rain.rainTypeId == 'hail' then
-                    --log('Switching from hail to rain')
-                    --print_r(g_currentMission.environment.rains)
+                    g_currentMission.environment.rains[index].rainTypeId = 'snow'
+                    self.forecast[jndex].weatherState = 'snow'
+
+                elseif tempStartRain >= -1 and rain.rainTypeId == 'snow' then
                     g_currentMission.environment.rains[index].rainTypeId = 'rain'
                     self.forecast[jndex].weatherState = 'rain'
-                    --print_r(g_currentMission.environment.rains)
                 end
             end
         end
-        --log('------------------------------------')
     end
 end
 
@@ -525,7 +482,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
 
         if oneDayForecast.lowTemp < 1 then
-            oneRainEvent.rainTypeId = "hail" -- forecast snow if temp < 1
+            oneRainEvent.rainTypeId = "snow" -- forecast snow if temp < 1
         else
             oneRainEvent.rainTypeId = "rain"
         end
@@ -537,10 +494,10 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         -- morning fog
         oneRainEvent.startDay = oneDayForecast.day
         oneRainEvent.endDay = oneDayForecast.day
-        local dayStart, dayEnd, nightEnd, nightStart = ssTime:calculateStartEndOfDay(oneDayForecast.day)
+        local dayStart, dayEnd, nightEnd, nightStart = ssEnvironment:calculateStartEndOfDay(oneDayForecast.day)
 
         oneRainEvent.startDayTime = nightEnd*60*60*1000
-        oneRainEvent.endDayTime = (dayStart+1)*60*60*1000+0.000001
+        oneRainEvent.endDayTime = (dayStart+1)*60*60*1000
         oneRainEvent.duration = oneRainEvent.endDayTime - oneRainEvent.startDayTime
         oneRainEvent.rainTypeId = "fog"
     else
@@ -561,25 +518,23 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
-    oneRainEvent.duration = math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p))*60*60*1000
+    oneRainEvent.duration = math.min(math.max(math.exp(ssSeasonsUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
-    oneRainEvent.startDayTime = math.random(3600 + endRainTime,82800) *1000+0.1
+    oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
     --log('Start time for rain = ', oneRainEvent.startDayTime)
 
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
-        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration + 0.000001
+        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration
     else
         oneRainEvent.endDay = oneRainEvent.startDay + 1
-        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration - 86400000 + 0.000001
+        oneRainEvent.endDayTime =  oneRainEvent.startDayTime + oneRainEvent.duration - 86400000
     end
 
     return oneRainEvent
 end
 
 function ssWeatherManager:_randomRain(day)
-    math.random() -- to initiate random number generator
-
     ssTmax = self.temperatureData[ssSeasonsUtil:currentGrowthTransition(day)]
 
     if oneDayForecast.season == ssSeasonsUtil.SEASON_WINTER or oneDayForecast.season == ssSeasonsUtil.SEASON_AUTUMN then
@@ -600,30 +555,35 @@ function ssWeatherManager:_randomRain(day)
 end
 
 function ssWeatherManager:owRaintable()
+    local env = g_currentMission.environment
     g_currentMission.environment.rains = {}
-    --log('HERE IS THE RAINS TABLE BEFORE OW')
-    --print_r(g_currentMission.environment.rains)
-    local rain = {}
+    local tmpWeather = {}
 
     for index = 1, self.forecastLength do
-        if self.rains[index].rainTypeId ~= "sun" then
-            table.insert(rain, self.rains[index])
+        if self.weather[index].rainTypeId ~= "sun" then
+            local tmpSingleWeather = deepCopy(self.weather[index])
+            table.insert(tmpWeather, tmpSingleWeather)
         end
     end
 
-    --log('HERE IS THE RAIN TABLE | length = ',table.getn(rain))
-    --print_r(rain)
-    g_currentMission.environment.numRains = table.getn(rain)
-    g_currentMission.environment.rains = rain
-    --log('HERE IS THE RAINS TABLE AFTER OW')
-    --print_r(g_currentMission.environment.rains)
+    g_currentMission.environment.numRains = table.getn(tmpWeather)
+    g_currentMission.environment.rains = tmpWeather
+
+    if ssSeasonsUtil.currentDayOffset ~= nil then
+        for index = 1, env.numRains do
+            local newStartDay = env.rains[index].startDay - ssSeasonsUtil.currentDayOffset
+            local newEndDay = env.rains[index].endDay - ssSeasonsUtil.currentDayOffset
+            g_currentMission.environment.rains[index].startDay = newStartDay
+            g_currentMission.environment.rains[index].endDay = newEndDay
+        end
+    end
 end
 
 function ssWeatherManager:loadTemperature()
     self.temperatureData = {}
 
     -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
 
     local i = 0
     while true do
@@ -664,7 +624,7 @@ function ssWeatherManager:loadRain()
     self.rainData = {}
 
     -- Open file
-    local file = loadXMLFile("weather", ssSeasonsMod.modDir .. "data/weather.xml")
+    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
 
     local i = 0
     while true do
@@ -793,4 +753,10 @@ function ssWeatherForecastEvent:run(connection)
 
         table.remove(ssWeatherManager.rains, 1)
     end
+end
+
+--- function to convert from Celsius to Fahrenheit
+function ssWeatherManager:convertTemp(tempInput)
+    return mathRound(tempInput * 1.8 + 32,0)
+
 end

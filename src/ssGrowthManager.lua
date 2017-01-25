@@ -16,26 +16,16 @@ ssGrowthManager.TRUE = "true"
 ssGrowthManager.FALSE = "false"
 ssGrowthManager.MAYBE = "maybe"
 
-function Set (list)
-    local set = {}
-
-    for _, l in ipairs(list) do
-        set[l] = true
-    end
-
-    return set
-end
-
 ssGrowthManager.defaultFruits = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.currentGrowthTransitionPeriod = nil
---ssGrowthManager.doGrowthTransition = false
 ssGrowthManager.doResetGrowth = false
+
 ssGrowthManager.canPlantData = {}
 
 function ssGrowthManager:load(savegame, key)
     if savegame == nil then
-        self.doResetGrowth = true
+        self.isNewSavegame = true
     end
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
@@ -55,16 +45,18 @@ function ssGrowthManager:loadMap(name)
 
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
-            logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
+            log("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
             return
         end
 
-        logInfo("ssGrowthManager: Data loaded. Locking growth")
         --lock changing the growth speed option and set growth rate to 1 (no growth)
         g_currentMission:setPlantGrowthRate(1,nil)
         g_currentMission:setPlantGrowthRateLocked(true)
+
         ssSeasonsMod:addGrowthStageChangeListener(self)
+
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
+
         self:buildCanPlantData()
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
         
@@ -91,18 +83,10 @@ function ssGrowthManager:getGrowthData()
     return true
 end
 
-function ssGrowthManager:deleteMap()
-end
-
-function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    --print(tostring(unicode))
-end
 
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
         
@@ -133,12 +117,6 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
     end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
 end
 
-function ssGrowthManager:update(dt)
-end
-
-function ssGrowthManager:draw()
-end
-
 function ssGrowthManager:consoleCommandResetGrowth()
     if g_currentMission:getIsServer() then
         self:resetGrowth()
@@ -149,6 +127,7 @@ function ssGrowthManager:resetGrowth()
     if self.growthManagerEnabled == true then
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
         ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+        logInfo("ssGrowthManager: Growth reset")
     end
 end
 
@@ -157,7 +136,7 @@ function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled == true then
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
-        if self.doResetGrowth == true and growthTransition == 1 then
+        if self.isNewSavegame == true and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
         else
@@ -227,12 +206,16 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
 end
 
+
+-- FIXME: dont move to Util. But don't require data. Use self.canPlantData instead. Also, default
+-- to the current transition state. Also need to update fruitData
 function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
     if data[fruitName] ~= nil then
         if data[fruitName][growthTransition] == nil then
             return false
         end
 
+        --log(data[fruitName][growthTransition])
         if data[fruitName][growthTransition] == self.TRUE then
             return true
         end
@@ -287,7 +270,6 @@ function ssGrowthManager:buildCanPlantData()
         end
     end
 end
-
 
 --TODO: the 3 if statements should be refactored to 3 functions if possible. They are used in two places
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
