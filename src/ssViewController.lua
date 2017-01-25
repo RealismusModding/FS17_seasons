@@ -48,7 +48,7 @@ end
 
 function ssViewController:draw()
     if self.debugView == true then
-        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
+        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) )
         local growthTransition = ssSeasonsUtil:currentGrowthTransition()
 
         renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
