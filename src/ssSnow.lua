@@ -2,7 +2,7 @@
 -- SCRIPT TO ADD PHYSICAL SNOW LAYERS
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to create plowable snow on the ground
--- Authors:  mrbear
+-- Authors:  mrbear, reallogger (only removing snow under objects)
 --
 
 ssSnow = {}
@@ -53,6 +53,7 @@ function ssSnow:loadMap(name)
         ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
     end
+
 end
 
 function ssSnow:deleteMap()
@@ -148,6 +149,8 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, layers)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+
+    self:removeSnowUnderObjects()
 end
 
 -- Must be defined before being registered with ssDensityMapScanner.
@@ -215,4 +218,95 @@ function ssSnow:updatePlacablenOnDelete()
     end
 end
 
-Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.updatePlacablenOnDelete)
+function ssSnow:removeSnowUnderObjects()
+
+    local dim = {}
+
+    for _,object in pairs(g_currentMission.itemsToSave) do
+        dim.width = 0
+        dim.length = 0
+
+        if object.className == "Bale" then
+            if object.item.baleDiameter ~= nil then
+                dim.width = object.item.baleWidth
+                dim.length = object.item.baleDiameter
+                
+                -- change dimension if bale is lying down
+                if object.item.sendRotX > 1.5 then
+                    dim.width = object.item.baleDiameter
+                end
+            elseif object.item.baleLength ~= nil then
+                dim.width = object.item.baleWidth
+                dim.length = object.item.baleLength
+            end
+            self:removeSnowLayer(object.item,dim)
+
+        elseif object.className == 'FillablePallet' then
+            dim.width = 1
+            dim.length = 1
+            self:removeSnowLayer(object.item,dim)
+
+        end
+    end
+
+    for _, singleVehicle in pairs(g_currentMission.vehicles) do
+        
+        if singleVehicle.wheels ~= nil then
+
+            for _, wheel in pairs(singleVehicle.wheels) do
+
+                    local width = 0.5 * wheel.width;
+                    local length = math.min(0.2, 0.35 * wheel.width);
+                    local radius = wheel.radius
+                
+                    local x0,z0, x1,z1, x2,z2 = self:getWheelCoord(wheel,width,length)
+
+                    self:removeSnow(x0,z0, x1,z1, x2,z2, 1)                    
+            end
+        end
+    end
+end
+
+function ssSnow:removeSnowLayer(objectInSnow,dim)
+    local scale = 0.65
+
+    local x0 = objectInSnow.sendPosX + dim.width * scale
+    local x1 = objectInSnow.sendPosX - dim.width * scale
+    local x2 = objectInSnow.sendPosX + dim.width * scale
+    local z0 = objectInSnow.sendPosZ - dim.length * scale
+    local z1 = objectInSnow.sendPosZ - dim.length * scale
+    local z2 = objectInSnow.sendPosZ + dim.length * scale
+
+    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+    local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
+    local snowLayers = density / area
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+
+    if snowLayers > 1 then
+        self:removeSnow(x0,z0, x1,z1, x2,z2, 1)
+    end
+end
+
+function ssSnow:getWheelCoord(wheel,width,length)
+
+    local x0,y0,z0
+    local x1,y1,z1
+    local x2,y2,z2
+
+    if wheel.repr == wheel.driveNode then
+        x0,y0,z0 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ - length)
+        x1,y1,z1 = localToWorld(wheel.node, wheel.positionX - width, wheel.positionY, wheel.positionZ - length)
+        x2,y2,z2 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ + length)
+    else
+        local x,_,z = localToLocal(wheel.driveNode, wheel.repr, 0,0,0)
+        x0,y0,z0 = localToWorld(wheel.repr, x + width, 0, z - length)
+        x1,y1,z1 = localToWorld(wheel.repr, x - width, 0, z - length)
+        x2,y2,z2 = localToWorld(wheel.repr, x + width, 0, z + length)
+    end
+
+    return x0,z0, x1,z1, x2,z2
+
+end
