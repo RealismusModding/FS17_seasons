@@ -31,6 +31,7 @@ function ssGrowthManagerData:loadAllData()
         logInfo("ssGrowthManagerData: Failed to load XML growth data file (growthTransitions) " .. path)
         return nil,nil
     end
+    delete(file)
 
     --additional modmap growthData
     local modMapDataPath = ssSeasonsUtil:getModMapDataPath("seasons_growth.xml")
@@ -52,6 +53,7 @@ function ssGrowthManagerData:loadAllData()
                     growthData = optionalGrowthData
                 end
             end
+            delete(file)
         else
             logInfo("ssGrowthManagerData: Failed to load additional XML growth data file " .. modMapDataPath)
         end

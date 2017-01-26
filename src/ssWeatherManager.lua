@@ -11,6 +11,7 @@ ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.weather = {}
+ssWeatherManager.degree = 'Celsius'
 
 function ssWeatherManager:preLoad()
 end
@@ -22,6 +23,7 @@ function ssWeatherManager:load(savegame, key)
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
+    self.degree = ssStorage.getXMLString(savegame, key .. ".weather.degree", 'Celsius')
 
     -- load forecast
     self.forecast = {}
@@ -64,12 +66,12 @@ function ssWeatherManager:load(savegame, key)
         table.insert(self.weather, rain)
         i = i + 1
     end
-
 end
 
 function ssWeatherManager:save(savegame, key)
     local i = 0
 
+    ssStorage.setXMLString(savegame, key .. ".weather.degree", self.degree)
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
@@ -104,9 +106,9 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
-    g_currentMission.environment.minRainDuration = 30 * 60 * 60 * 1000 -- 30 hours
+    g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
     g_currentMission.environment.maxRainInterval = 1
-    g_currentMission.environment.maxRainDuration = 30 * 60 * 60 * 1000
+    g_currentMission.environment.maxRainDuration = 24 * 60 * 60 * 1000
     g_currentMission.environment.rainForecastDays = self.forecastLength
     g_currentMission.environment.autoRain = false
 
@@ -371,11 +373,14 @@ function ssWeatherManager:calculateSnowAccumulation()
         self.snowDepth = self.snowDepth + 10/1000
 
     elseif currentRain.rainTypeId == "snow" and currentTemp < 0 then
-        -- Initial value of 10 mm/hr accumulation rate
+        -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
         if self.snowDepth < 0 then
             self.snowDepth = 0
+        elseif self.snowDepth > 0.06 then
+            self.snowDepth = self.snowDepth + 10/1000
+        else
+            self.snowDepth = self.snowDepth + 30/1000
         end
-        self.snowDepth = self.snowDepth + 10/1000
 
     elseif currentRain.rainTypeId == "snow" and currentTemp >= 0 then
         -- warm hail acts as rain
@@ -748,4 +753,10 @@ function ssWeatherForecastEvent:run(connection)
 
         table.remove(ssWeatherManager.rains, 1)
     end
+end
+
+--- function to convert from Celsius to Fahrenheit
+function ssWeatherManager:convertTemp(tempInput)
+    return mathRound(tempInput * 1.8 + 32,0)
+
 end
