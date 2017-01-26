@@ -57,7 +57,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne pas montrer à nouveau" />
 
 		<!-- GUI -->
-        <text name="ui_pageOverview" text="Apperçu" />
+        <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageHelp" text="Aide" />
         <text name="ui_pageDebug" text="Outils de débogage" />
@@ -88,6 +88,6 @@
         <text name="ui_helpTitle_3_1" text="3.1" />
         <text name="ui_helpTitle_4_1" text="4.1" />
 
-        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu)" />
+        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
     </texts>
 </l10n>
