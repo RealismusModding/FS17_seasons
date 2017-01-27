@@ -33,7 +33,7 @@ function ssSeasonIntro:showIntro(season)
     local text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", season))
     local dialog = g_gui:showDialog("YesNoDialog")
 
-    dialog.target:setTitle(ssSeasonsUtil:seasonName(g_seasons.environment.currentSeason()))
+    dialog.target:setTitle(ssSeasonsUtil:seasonName(g_seasons.environment:currentSeason()))
     dialog.target:setText(text)
     dialog.target:setDialogType(DialogElement.TYPE_INFO)
     dialog.target:setIsCloseAllowed(true)

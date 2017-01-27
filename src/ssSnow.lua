@@ -218,6 +218,8 @@ function ssSnow:updatePlacablenOnDelete()
     end
 end
 
+Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
+
 function ssSnow:removeSnowUnderObjects()
 
     local dim = {}
