@@ -113,6 +113,7 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment.autoRain = false
 
     self:loadTemperature()
+    self:loadGerminateTemperature()
     self:loadRain()
 
     if g_currentMission:getIsServer() or self.forecast[1].day ~= g_currentMission.environment.currentDay then
@@ -425,11 +426,6 @@ function ssWeatherManager:calculateSoilTemp()
     --log('self.soilTemp=',self.soilTemp,' soilTemp=',soilTemp,' avgAirTemp=',avgAirTemp,' snowDamp=',snowDamp,' snowDepth=',snowDepth)
 end
 
---- function for predicting when soil is too cold for crops to germinate
-function ssWeatherManager:canSow()
-    return self.soilTemp >= 5
-end
-
 --- function for predicting when soil is frozen
 function ssWeatherManager:isGroundFrozen()
     return self.soilTemp < 0
@@ -577,6 +573,63 @@ function ssWeatherManager:owRaintable()
             g_currentMission.environment.rains[index].endDay = newEndDay
         end
     end
+end
+
+--- function for predicting when soil is too cold for crops to germinate
+function ssWeatherManager:canSow(fruit)
+    local gTemp = 5
+
+    local fruitInfo = self.germinateTemp[fruit]
+
+    if fruitInfo ~= nil then
+        gTemp = self.germinateTemp[fruit].gTemp
+    else
+        gTemp = self.germinateTemp['default'].gTemp
+    end
+
+    if self.soilTemp >= gTemp then
+        return true
+    else
+        return false
+    end
+
+end
+
+function ssWeatherManager:loadGerminateTemperature()
+    self.germinateTemp = {}
+
+    -- Open file
+    local file = loadXMLFile("germinate", g_seasons.modDir .. "data/germinate.xml")
+    local i = 0
+    while true do
+        local key = string.format("germinate.fruit(%d)", i)
+        if not hasXMLProperty(file, key) then break end
+
+        local fruitName = getXMLString(file, key .. "#fruitName")
+        if fruitName == nil then
+            logInfo("Fruit in germinate.xml is invalid")
+            break
+        end
+
+        local gTemp = getXMLFloat(file, key .. ".gTemp#value")
+
+        if gTemp == nil then
+            logInfo("Temperature data in germinate.xml is invalid")
+            break
+        end
+
+        local config = {
+            ["gTemp"] = gTemp
+        }
+
+        self.germinateTemp[fruitName] = config
+
+        i = i + 1
+    end
+
+    -- Close file
+    delete(file)
+
 end
 
 function ssWeatherManager:loadTemperature()
