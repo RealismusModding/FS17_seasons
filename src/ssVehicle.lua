@@ -21,6 +21,7 @@ SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_season
 
 function ssVehicle:load(savegame, key)
     self.snowTracksEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.snowTracks", true)
+    self:winterWheels()
 end
 
 function ssVehicle:save(savegame, key)
@@ -403,7 +404,11 @@ end
 function ssVehicle:updateWheelTireFriction(superFunc, wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
-            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.3)
+            if wheel.tireType == WheelsUtil.getTireType('studded') or wheel.tireType == WheelsUtil.getTireType('chains') then
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+            else
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.15)
+            end
         else
             setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
         end
@@ -414,4 +419,35 @@ function ssVehicle:getGroundType(superFunc,wheel)
     if wheel.inSnow then
         return WheelsUtil.GROUND_SOFT_TERRAIN
     end
+end
+
+function ssVehicle:winterWheels()
+    local studdedFrictionCoeffs = {}
+    local studdedFrictionCoeffsWet = {}
+    local snowchainsFrictionCoeffs = {}
+    local snowchainsFrictionCoeffsWet = {}
+
+    studdedFrictionCoeffs[WheelsUtil.GROUND_FIELD] = 0.9
+    studdedFrictionCoeffs[WheelsUtil.GROUND_ROAD] = 0.95
+    studdedFrictionCoeffs[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.0
+    studdedFrictionCoeffs[WheelsUtil.GROUND_HARD_TERRAIN] = 1.1
+
+    studdedFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.75
+    studdedFrictionCoeffsWet[WheelsUtil.GROUND_ROAD] = 0.90
+    studdedFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 0.85
+    studdedFrictionCoeffsWet[WheelsUtil.GROUND_HARD_TERRAIN] = 1.0
+
+    snowchainsFrictionCoeffs[WheelsUtil.GROUND_FIELD] = 1.1
+    snowchainsFrictionCoeffs[WheelsUtil.GROUND_ROAD] = 0.85
+    snowchainsFrictionCoeffs[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.15
+    snowchainsFrictionCoeffs[WheelsUtil.GROUND_HARD_TERRAIN] = 1.0
+
+    snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.95    
+    snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_ROAD] = 0.8
+    snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.05
+    snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_HARD_TERRAIN] = 0.95
+
+    WheelsUtil.registerTireType("studded",studdedFrictionCoeffs,studdedFrictionCoeffsWet)
+    WheelsUtil.registerTireType("chains",snowchainsFrictionCoeffs,snowchainsFrictionCoeffsWet)
+
 end
