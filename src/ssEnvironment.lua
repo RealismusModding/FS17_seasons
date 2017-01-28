@@ -430,6 +430,14 @@ function ssEnvironment:seasonAtDay(dayNumber)
     return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
 end
 
+-- Retuns month number based on dayNumber
+function ssEnvironment:monthAtDay(dayNumber)
+    if (dayNumber == nil) then
+        dayNumber = self:currentDay()
+    end
+
+    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR*3)
+end
 -- Returns 1-daysInSeason
 function ssEnvironment:dayInSeason(currentDay)
     if (currentDay == nil) then

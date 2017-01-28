@@ -72,10 +72,20 @@ function ssSeasonsUtil:dayNameShort(dayOfWeek)
     return ssLang.getText("SS_WEEKDAY_SHORT_" .. tostring(dayOfWeek), "???")
 end
 
+-- Get short name of month for given month number
+function ssSeasonsUtil:monthNameShort(monthNumber)
+    return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
+end
+
 function ssSeasonsUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
 
+function ssSeasonsUtil:monthAtGrowthTransition(growthTransition)
+--TODO: implement
+end
+
+-- Calculate the split of days into ealy,mid and late season
 function ssSeasonsUtil:calcDaysPerTransition()
     local l = g_seasons.environment.daysInSeason / 3.0
 	local earlyStart = 1
