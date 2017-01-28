@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        fcelsa
+        fcelsa, theSeb
     </translationContributors>
 
     <texts>
@@ -29,6 +29,19 @@
         <text name="SS_SEASON_1" text="Estate" />
         <text name="SS_SEASON_2" text="Autunno" />
         <text name="SS_SEASON_3" text="Inverno" />
+
+        <text name="SS_MONTH_SHORT_1" text="genn" />
+        <text name="SS_MONTH_SHORT_2" text="febbr" />
+        <text name="SS_MONTH_SHORT_3" text="mar" />
+        <text name="SS_MONTH_SHORT_4" text="apr" />
+        <text name="SS_MONTH_SHORT_5" text="magg" />
+        <text name="SS_MONTH_SHORT_6" text="giugno" />
+        <text name="SS_MONTH_SHORT_7" text="luglio" />
+        <text name="SS_MONTH_SHORT_8" text="ag" />
+        <text name="SS_MONTH_SHORT_9" text="sett" />
+        <text name="SS_MONTH_SHORT_10" text="ott" />
+        <text name="SS_MONTH_SHORT_11" text="nov" />
+        <text name="SS_MONTH_SHORT_12" text="dic" />
 
         <text name="SS_VEHICLE_TAXES" text="Costi Veicoli" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Manutenzione Veicoli" />

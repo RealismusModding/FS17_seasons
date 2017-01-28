@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Gonimy_Vetrom
+        Gonimy_Vetrom, theSeb
     </translationContributors>
 
     <texts>
@@ -31,6 +31,19 @@
         <text name="SS_SEASON_1" text="Лето" />
         <text name="SS_SEASON_2" text="Осень" />
         <text name="SS_SEASON_3" text="Зима" />
+
+        <text name="SS_MONTH_SHORT_1" text="янв" />
+        <text name="SS_MONTH_SHORT_2" text="февр" />
+        <text name="SS_MONTH_SHORT_3" text="март" />
+        <text name="SS_MONTH_SHORT_4" text="апр" />
+        <text name="SS_MONTH_SHORT_5" text="май" />
+        <text name="SS_MONTH_SHORT_6" text="июнь" />
+        <text name="SS_MONTH_SHORT_7" text="июль" />
+        <text name="SS_MONTH_SHORT_8" text="авг" />
+        <text name="SS_MONTH_SHORT_9" text="сент" />
+        <text name="SS_MONTH_SHORT_10" text="окт" />
+        <text name="SS_MONTH_SHORT_11" text="ноябрь" />
+        <text name="SS_MONTH_SHORT_12" text="дек" />
 
         <text name="SS_VEHICLE_TAXES" text="Налоги на технику" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Обслуживание техники" />

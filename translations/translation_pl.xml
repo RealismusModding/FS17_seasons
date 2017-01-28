@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Dzi4d3k, KITT3000
+        Dzi4d3k, KITT3000, theSeb
     </translationContributors>
 
     <texts>
@@ -31,6 +31,19 @@
         <text name="SS_SEASON_1" text="Lato" />
         <text name="SS_SEASON_2" text="Jesień" />
         <text name="SS_SEASON_3" text="Zima" />
+
+        <text name="SS_MONTH_SHORT_1" text="stycz" />
+        <text name="SS_MONTH_SHORT_2" text="luty" />
+        <text name="SS_MONTH_SHORT_3" text="mar" />
+        <text name="SS_MONTH_SHORT_4" text="kwiec" />
+        <text name="SS_MONTH_SHORT_5" text="maj" />
+        <text name="SS_MONTH_SHORT_6" text="czerw" />
+        <text name="SS_MONTH_SHORT_7" text="lip" />
+        <text name="SS_MONTH_SHORT_8" text="sierp" />
+        <text name="SS_MONTH_SHORT_9" text="wrzes" />
+        <text name="SS_MONTH_SHORT_10" text="pazdz" />
+        <text name="SS_MONTH_SHORT_11" text="listop" />
+        <text name="SS_MONTH_SHORT_12" text="grudz" />
 
         <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów" />  <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" /> <!-- Yet need to see in game menu context to make translation really acurate -->

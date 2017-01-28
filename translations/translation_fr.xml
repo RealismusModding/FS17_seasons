@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        thierry62, Marxtai
+        thierry62, Marxtai, theSeb
     </translationContributors>
 
     <texts>
@@ -31,6 +31,19 @@
         <text name="SS_SEASON_1" text="Été" />
         <text name="SS_SEASON_2" text="Automne" />
         <text name="SS_SEASON_3" text="Hiver" />
+
+        <text name="SS_MONTH_SHORT_1" text="janv" />
+        <text name="SS_MONTH_SHORT_2" text="févr" />
+        <text name="SS_MONTH_SHORT_3" text="mars" />
+        <text name="SS_MONTH_SHORT_4" text="avril" />
+        <text name="SS_MONTH_SHORT_5" text="mai" />
+        <text name="SS_MONTH_SHORT_6" text="juin" />
+        <text name="SS_MONTH_SHORT_7" text="juil" />
+        <text name="SS_MONTH_SHORT_8" text="août" />
+        <text name="SS_MONTH_SHORT_9" text="sept" />
+        <text name="SS_MONTH_SHORT_10" text="oct" />
+        <text name="SS_MONTH_SHORT_11" text="nov" />
+        <text name="SS_MONTH_SHORT_12" text="déc" />
 
         <text name="SS_VEHICLE_TAXES" text="Taxes des véhicules" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Maintenance des véhicules" />
