@@ -1,8 +1,9 @@
 ---------------------------------------------------------------------------------------------------------
--- TIME SCRIPT
+-- ssEnvironment
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  To adjust the day/night system
--- Authors:  Rahkiin, reallogger
+-- Purpose:  Adjust day/night system and implement seasons
+--           Definition of a season and growth stage
+-- Authors:  Rahkiin, reallogger, theSeb
 --
 
 ssEnvironment = {}
