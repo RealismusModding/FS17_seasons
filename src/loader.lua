@@ -36,6 +36,7 @@ g_modClasses = {
     "ssEnvironment",
 
     "ssEconomy",
+    "ssSwathManager",
     "ssWeatherManager",
     "ssWeatherForecast",
     "ssVehicle",
