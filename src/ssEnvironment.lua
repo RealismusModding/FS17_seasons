@@ -43,6 +43,8 @@ function ssEnvironment:load(savegame, key)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".settings.latestSeason", -1)
     self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".settings.latestGrowthStage", 0)
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", 0)
+
+    self._doInitalDayEvent = savegame == nil
 end
 
 function ssEnvironment:save(savegame, key)
@@ -91,10 +93,9 @@ end
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
-    if g_savegameXML == nil and not self._doneInitalDayEvent then
-        ssSeasonsUtil:dayChanged()
+    if self._doInitalDayEvent then
         self:callListeners()
-        self._doneInitalDayEvent = true
+        self._doInitalDayEvent = false
     end
 end
 
