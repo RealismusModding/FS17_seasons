@@ -7,7 +7,7 @@
 
 ssViewController = {}
 
---currently for debug view only. this should probably go into ssSeasonsUtil and will need translations if we use it for the gui
+--currently for debug view only. this should probably go into ssUtil and will need translations if we use it for the gui
 ssViewController.growthTransitionIndexToName =
 {
     [1] = "Early Spring",
@@ -100,7 +100,7 @@ end
 --Will think of a clever way to fix that without cheating
 function ssViewController:growthTransitionsDisplayData()
     local growthStagesDisplayData = {}
-    local data = ssSeasonsUtil:calcDaysPerTransition()
+    local data = ssUtil:calcDaysPerTransition()
 
     for index,value in pairs(data) do
         if index % 2 == 1 then

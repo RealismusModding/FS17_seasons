@@ -32,7 +32,7 @@ g_modClasses = {
     "ssMultiplayer",
 
     "ssMain",
-    "ssSeasonsUtil",
+    "ssUtil",
     "ssEnvironment",
 
     "ssEconomy",

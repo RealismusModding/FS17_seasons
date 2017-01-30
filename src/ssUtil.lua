@@ -1,16 +1,16 @@
 ---------------------------------------------------------------------------------------------------------
--- ssSeasonsUtil SCRIPT
+-- ssUtil SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
 -- Authors:  Rahkiin, mrbear, reallogger, theSeb
 --
 
-ssSeasonsUtil = {}
-g_seasons.util = ssSeasonsUtil
+ssUtil = {}
+g_seasons.util = ssUtil
 
 -- Get the day within the week
 -- assumes that day 1 = monday
-function ssSeasonsUtil:dayOfWeek(dayNumber)
+function ssUtil:dayOfWeek(dayNumber)
     return math.fmod(dayNumber - 1, g_seasons.environment.DAYS_IN_WEEK) + 1
 end
 
@@ -21,7 +21,7 @@ end
 -- Autumn: Sep (244) - Nov (305)
 -- Winter: Dec (335) - Feb (59)
 -- FIXME(jos): This changes on the southern hemisphere
-function ssSeasonsUtil:julianDay(dayNumber)
+function ssUtil:julianDay(dayNumber)
     local season, partInSeason, dayInSeason
     local starts = {[0] = 60, 152, 244, 335 }
 
@@ -32,7 +32,7 @@ function ssSeasonsUtil:julianDay(dayNumber)
     return math.fmod(math.floor(starts[season] + partInSeason * 91), 365)
 end
 
-function ssSeasonsUtil:julanDayToDayNumber(julianDay)
+function ssUtil:julanDayToDayNumber(julianDay)
     local season, partInSeason, start
 
     if julianDay < 60 then
@@ -56,27 +56,27 @@ end
 
 -- Get season name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:seasonName(season)
+function ssUtil:seasonName(season)
     return ssLang.getText("SS_SEASON_" .. tostring(season), "???")
 end
 
 -- Get day name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:dayName(dayOfWeek)
+function ssUtil:dayName(dayOfWeek)
     return ssLang.getText("SS_WEEKDAY_" .. tostring(dayOfWeek), "???")
 end
 
 -- Get short day name for given day number
 -- If no day number supplied, uses current day
-function ssSeasonsUtil:dayNameShort(dayOfWeek)
+function ssUtil:dayNameShort(dayOfWeek)
     return ssLang.getText("SS_WEEKDAY_SHORT_" .. tostring(dayOfWeek), "???")
 end
 
-function ssSeasonsUtil:nextWeekDayNumber(currentDay)
+function ssUtil:nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
 
-function ssSeasonsUtil:calcDaysPerTransition()
+function ssUtil:calcDaysPerTransition()
     local l = g_seasons.environment.daysInSeason / 3.0
 	local earlyStart = 1
 	local earlyEnd = mathRound(1 * l)
@@ -88,7 +88,7 @@ function ssSeasonsUtil:calcDaysPerTransition()
 end
 
 --Outputs a random sample from a triangular distribution
-function ssSeasonsUtil:ssTriDist(m)
+function ssUtil:ssTriDist(m)
     local pmode = {}
     local p = {}
 
@@ -106,7 +106,7 @@ end
 
 -- Approximation of the inverse CFD of a normal distribution
 -- Based on A&S formula 26.2.23 - thanks to John D. Cook
-function ssSeasonsUtil:RationalApproximation(t)
+function ssUtil:RationalApproximation(t)
     local c = {2.515517, 0.802853, 0.010328}
     local d = {1.432788, 0.189269, 0.001308}
 
@@ -114,7 +114,7 @@ function ssSeasonsUtil:RationalApproximation(t)
 end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
-function ssSeasonsUtil:ssNormDist(mu,sigma)
+function ssUtil:ssNormDist(mu,sigma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
@@ -128,7 +128,7 @@ function ssSeasonsUtil:ssNormDist(mu,sigma)
 end
 
 -- Outputs a random sample from a lognormal distribution
-function ssSeasonsUtil:ssLognormDist(beta, gamma)
+function ssUtil:ssLognormDist(beta, gamma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
@@ -144,7 +144,7 @@ function ssSeasonsUtil:ssLognormDist(beta, gamma)
     return gamma * math.exp ( z / beta )
 end
 
-function ssSeasonsUtil:getModMapDataPath(dataFileName)
+function ssUtil:getModMapDataPath(dataFileName)
     if g_currentMission.missionInfo.map.isModMap == true then
 
         local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName
@@ -164,24 +164,24 @@ end
 -- Reworked by MrBear
 --
 
--- ssSeasonsUtil.List = {}
-function ssSeasonsUtil.listNew()
+-- ssUtil.List = {}
+function ssUtil.listNew()
     return {first = 0, last = -1}
 end
 
-function ssSeasonsUtil.listPushLeft (list, value)
+function ssUtil.listPushLeft (list, value)
     local first = list.first - 1
     list.first = first
     list[first] = value
 end
 
-function ssSeasonsUtil.listPushRight (list, value)
+function ssUtil.listPushRight (list, value)
     local last = list.last + 1
     list.last = last
     list[last] = value
 end
 
-function ssSeasonsUtil.listPopLeft (list)
+function ssUtil.listPopLeft (list)
     local first = list.first
     if first > list.last then return nil end
     local value = list[first]
@@ -190,7 +190,7 @@ function ssSeasonsUtil.listPopLeft (list)
     return value
 end
 
-function ssSeasonsUtil.listPopRight (list)
+function ssUtil.listPopRight (list)
     local last = list.last
     if list.first > last then return nil end
     local value = list[last]

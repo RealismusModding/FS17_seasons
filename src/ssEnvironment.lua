@@ -92,7 +92,7 @@ function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
     if g_savegameXML == nil and not self._doneInitalDayEvent then
-        ssSeasonsUtil:dayChanged()
+        ssUtil:dayChanged()
         self:callListeners()
         self._doneInitalDayEvent = true
     end
@@ -170,7 +170,7 @@ end
 -- Change the night/day times according to season
 function ssEnvironment:adaptTime()
     local env = g_currentMission.environment
-    julianDay = ssSeasonsUtil:julianDay(self:currentDay())
+    julianDay = ssUtil:julianDay(self:currentDay())
 
     -- All local values are in minutes
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)

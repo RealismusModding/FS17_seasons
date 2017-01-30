@@ -14,11 +14,11 @@ ssDensityMapScanner.currentCallBackName=""
 ssDensityMapScanner.currentParameter=""
 ssDensityMapScanner.moreIterations=false
 
-ssDensityMapScanner.workQ = ssSeasonsUtil.listNew()
+ssDensityMapScanner.workQ = ssUtil.listNew()
 
 function ssDensityMapScanner:queuJob(callBackName, parameter)
     print("[Seasons] DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
-    ssSeasonsUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
+    ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
 end
 
 function ssDensityMapScanner:registerCallback(callBackName ,callbackSelf , callbackFunction)
@@ -36,7 +36,7 @@ function ssDensityMapScanner:save(savegame, key)
     local count=0
     while true do
         print("Saving jobb: " .. count)
-        local jobb = ssSeasonsUtil.listPopLeft(self.workQ)
+        local jobb = ssUtil.listPopLeft(self.workQ)
         if jobb ~= nil then
             count = count + 1
             local namei = string.format(".densityMapScanner.workQ.jobb%d", count)
@@ -64,7 +64,7 @@ function ssDensityMapScanner:load(savegame, key)
             local namei = string.format(".densityMapScanner.workQ.jobb%d", count)
             local callBackName = ssStorage.getXMLString(savegame, key .. namei .. "#callBackName")
             local parameter = ssStorage.getXMLString(savegame, key .. namei .. "#parameter")
-            ssSeasonsUtil.listPushRight( self.workQ, { callBackName = callBackName, parameter=parameter })
+            ssUtil.listPushRight( self.workQ, { callBackName = callBackName, parameter=parameter })
             print("[Seasons] DensityMapScanner, loaded jobb: " .. callBackName .. " with parameter " .. parameter)
         end
     end
@@ -75,7 +75,7 @@ end
 
 function ssDensityMapScanner:update(dt)
     if self.moreIterations == false then
-        local jobb = ssSeasonsUtil.listPopLeft(self.workQ)
+        local jobb = ssUtil.listPopLeft(self.workQ)
         if jobb ~= nil then
             print("[Seasons] DensityMapScanner, dequed job: " .. jobb.callBackName .. "(" .. jobb.parameter .. ")")
             self.currentCallBackName = jobb.callBackName

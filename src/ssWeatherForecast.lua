@@ -155,7 +155,7 @@ function ssWeatherForecast:drawForecast(forecast)
         renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + posYOffset, self.hud.textSize*1.2, tempString)
 
         -- Render Day of The Week
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall/2, self.hud.textSize*1.2, ssSeasonsUtil:dayNameShort(ssSeasonsUtil:dayOfWeek(g_seasons.environment:currentDay()+n-1)))
+        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall/2, self.hud.textSize*1.2, ssUtil:dayNameShort(ssUtil:dayOfWeek(g_seasons.environment:currentDay()+n-1)))
     end
 end
 
@@ -170,7 +170,7 @@ function ssWeatherForecast:drawToday(forecast)
     setTextAlignment(RenderText.ALIGN_CENTER)
     renderText(self.hud.clockPosX + self.hud.clockWidth/2 + self.hud.iconWidthSmall/2,self.hud.clockPosY + self.hud.clockHeight/2, self.hud.textSize*2.3, string.format("%02d:%02d", g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute))
     renderOverlay(self.hud.overlays.clock_symbol.overlayId, self.hud.clockPosX + self.hud.iconWidthSmall/2, self.hud.clockPosY + self.hud.clockHeight/2.6, self.hud.iconWidthSmall*1.5, self.hud.iconHeightSmall*1.5)
-    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s/%d", g_seasons.environment:dayInSeason(forecast[1].day), ssSeasonsUtil:seasonName(forecast[1].season), g_seasons.environment:currentYear() + 2017))
+    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s/%d", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil:seasonName(forecast[1].season), g_seasons.environment:currentYear() + 2017))
 
     -- Render Background
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
