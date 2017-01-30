@@ -27,17 +27,11 @@ function ssSwathManager:reduceSwaths(startWorldX, startWorldZ, widthWorldX, widt
     layers = tonumber(layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-    if layers == 2 then
-        layers = 1
-    end
-
     -- Remove grass swaths
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_GRASS_WINDROW]["index"])
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-
-    layers = 1
 
     -- Mask areas that are covered by the snow mask. If no snow mask is supplied straw and drygrass will be kept
     if ssSnow.snowMaskId ~= nil then
@@ -62,12 +56,7 @@ function ssSwathManager:reduceSwaths(startWorldX, startWorldZ, widthWorldX, widt
 end
 
 function ssSwathManager:dayChanged()
-    local layers = 1
-    if ssWeatherManager.weather[1].rainTypeId ~= "sun" then
-        layers = 2
-    end
-    
-    ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", layers)
+    ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 1)
 end
 
 function ssSwathManager:growthStageChanged()
