@@ -6,6 +6,7 @@
 --
 
 ssAnimals = {}
+g_seasons.animals = ssAnimals
 
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)

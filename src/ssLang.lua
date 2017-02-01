@@ -5,6 +5,7 @@
 --
 
 ssLang = {}
+g_seasons.lang = ssLang
 
 function ssLang.getText(key, default)
     if g_i18n:hasText(key) then

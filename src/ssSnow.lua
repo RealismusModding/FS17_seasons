@@ -6,6 +6,8 @@
 --
 
 ssSnow = {}
+g_seasons.snow = ssSnow
+
 ssSnow.LAYER_HEIGHT = 0.06
 ssSnow.MAX_HEIGHT = 0.48
 ssSnow.SNOW_MASK_NAME = "SeasonsSnowMask"
@@ -232,7 +234,7 @@ function ssSnow:removeSnowUnderObjects()
             if object.item.baleDiameter ~= nil then
                 dim.width = object.item.baleWidth
                 dim.length = object.item.baleDiameter
-                
+
                 -- change dimension if bale is lying down
                 if object.item.sendRotX > 1.5 then
                     dim.width = object.item.baleDiameter
@@ -252,7 +254,7 @@ function ssSnow:removeSnowUnderObjects()
     end
 
     for _, singleVehicle in pairs(g_currentMission.vehicles) do
-        
+
         if singleVehicle.wheels ~= nil then
 
             for _, wheel in pairs(singleVehicle.wheels) do
@@ -260,10 +262,10 @@ function ssSnow:removeSnowUnderObjects()
                     local width = 0.5 * wheel.width;
                     local length = math.min(0.2, 0.35 * wheel.width);
                     local radius = wheel.radius
-                
+
                     local x0,z0, x1,z1, x2,z2 = self:getWheelCoord(wheel,width,length)
 
-                    self:removeSnow(x0,z0, x1,z1, x2,z2, 1)                    
+                    self:removeSnow(x0,z0, x1,z1, x2,z2, 1)
             end
         end
     end

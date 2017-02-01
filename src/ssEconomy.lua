@@ -6,6 +6,8 @@
 --
 
 ssEconomy = {}
+g_seasons.economy = ssEconomy
+
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)

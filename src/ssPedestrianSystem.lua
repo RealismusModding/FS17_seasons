@@ -6,6 +6,7 @@
 --
 
 ssPedestrianSystem = {}
+g_seasons.pedestrianSystem = ssPedestrianSystem
 
 function ssPedestrianSystem:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)

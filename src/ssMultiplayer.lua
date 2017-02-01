@@ -6,6 +6,7 @@
 --
 
 ssMultiplayer = {}
+g_seasons.multiplayer = ssMultiplayer
 
 function ssMultiplayer:preLoad()
     Server.sendObjects = Utils.overwrittenFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)

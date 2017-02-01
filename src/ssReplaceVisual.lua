@@ -6,6 +6,7 @@
 --
 
 ssReplaceVisual = {}
+g_seasons.replaceVisual = ssReplaceVisual
 
 function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then

@@ -6,6 +6,7 @@
 -- Credits: Inspired by upsidedown's growth manager mod
 
 ssGrowthManager = {}
+g_seasons.growthManager = ssGrowthManager
 
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
 ssGrowthManager.WITHERED = 300
@@ -59,7 +60,7 @@ function ssGrowthManager:loadMap(name)
 
         self:buildCanPlantData()
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
-        
+
     end
 end
 
@@ -89,7 +90,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
 
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
-        
+
         --handling new unknown fruits
         if self.defaultFruits[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
