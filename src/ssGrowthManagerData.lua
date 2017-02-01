@@ -34,7 +34,7 @@ function ssGrowthManagerData:loadAllData()
     delete(file)
 
     --additional modmap growthData
-    local modMapDataPath = ssUtil:getModMapDataPath("seasons_growth.xml")
+    local modMapDataPath = ssUtil.getModMapDataPath("seasons_growth.xml")
     --modMapDataPath = g_seasons.modDir .. "data/seasons_growth.xml" --for testing
 
     if  modMapDataPath ~= nil then

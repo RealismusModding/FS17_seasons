@@ -100,7 +100,7 @@ end
 --Will think of a clever way to fix that without cheating
 function ssViewController:growthTransitionsDisplayData()
     local growthStagesDisplayData = {}
-    local data = ssUtil:calcDaysPerTransition()
+    local data = ssUtil.calcDaysPerTransition()
 
     for index,value in pairs(data) do
         if index % 2 == 1 then

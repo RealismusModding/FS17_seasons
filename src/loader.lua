@@ -55,8 +55,6 @@ if isDebug then
     table.insert(g_modClasses, "ssDebug")
 end
 
-logInfo("Loading Seasons...")
-
 -- Load all scripts
 for _, class in pairs(g_modClasses) do
     source(srcFolder .. class .. ".lua")

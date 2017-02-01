@@ -227,8 +227,8 @@ function ssWeatherManager:buildForecast()
 
         ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(oneDayForecast.day)]
 
-        oneDayForecast.highTemp = ssUtil:ssNormDist(ssTmax.mode,2.5)
-        oneDayForecast.lowTemp = ssUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+        oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
+        oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
 
         if n == 1 then
             oneDayRain = self:updateRain(oneDayForecast,0)
@@ -274,12 +274,12 @@ function ssWeatherManager:updateForecast()
 
     elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
         --Seasonal average for a day in the next season
-        oneDayForecast.Tmaxmean = ssUtil:ssTriDist(ssTmax)
+        oneDayForecast.Tmaxmean = ssUtil.triDist(ssTmax)
 
     end
 
-    oneDayForecast.highTemp = ssUtil:ssNormDist(ssTmax.mode,2.5)
-    oneDayForecast.lowTemp = ssUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+    oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
+    oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
 
     if oneDayForecast.day == self.weather[self.forecastLength-1].endDay then
         oneDayRain = self:updateRain(oneDayForecast,self.weather[self.forecastLength-1].endDayTime)
@@ -518,7 +518,7 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
-    oneRainEvent.duration = math.min(math.max(math.exp(ssUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
+    oneRainEvent.duration = math.min(math.max(math.exp(ssUtil.lognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
     --log('Start time for rain = ', oneRainEvent.startDayTime)

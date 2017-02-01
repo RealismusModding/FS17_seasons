@@ -185,7 +185,7 @@ end
 -- Change the night/day times according to season
 function ssEnvironment:adaptTime()
     local env = g_currentMission.environment
-    julianDay = ssUtil:julianDay(self:currentDay())
+    julianDay = ssUtil.julianDay(self:currentDay())
 
     -- All local values are in minutes
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
