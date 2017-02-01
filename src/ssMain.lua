@@ -23,6 +23,9 @@ function ssMain:preLoad()
     local buildnumber = false--<%=buildnumber %>
     self.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
+    -- Simple version number for comparing minimum required version of seasons
+    self.simpleVersion = false--<%=simpleVersion %>
+
     -- Set global settings
     self.verbose = false--<%=verbose %>
     self.debug = false--<%=debug %>
