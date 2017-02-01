@@ -73,14 +73,14 @@
         <text name="tooltip_snow" text="Snow will fall in cold winters and block roads." />
         <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu." />
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it." />
-        <text name="tooltip_controlsTemperature" text="Set the temperature unit used in the game" />
+        <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
 
         <text name="setting_seasonIntros" text="Season introductions" />
         <text name="setting_seasonLength" text="Season length" />
         <text name="setting_snow" text="Snow mode" />
         <text name="setting_controlsHelp" text="Keys in help menu" />
         <text name="setting_snowTracks" text="Snow tracks" />
-        <text name="setting_controlsTemperature" text="Temperature unit" />
+        <text name="setting_controlsTemperature" text="Temperature scale" />
 
         <text name="ui_helpCategory_1" text="Seasons" />
         <text name="ui_helpCategory_2" text="Snow" />
