@@ -302,7 +302,7 @@ function ssWeatherManager:updateForecast()
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
 end
 
-function ssVehicle:seasonLengthChanged()
+function ssWeatherManager:seasonLengthChanged()
     self:buildForecast()
 end
 

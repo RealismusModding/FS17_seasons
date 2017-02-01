@@ -158,13 +158,13 @@ end
 -- Listeners for a change of season length
 function ssEnvironment:addSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        self.seasonChangeListeners[listener] = listener
+        self.seasonLengthChangeListeners[listener] = listener
     end
 end
 
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        self.seasonChangeListeners[listener] = nil
+        self.seasonLengthChangeListeners[listener] = nil
     end
 end
 
