@@ -6,12 +6,13 @@
 --
 
 ssWeatherManager = {}
+g_seasons.weatherManager = ssWeatherManager
+
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.weather = {}
-ssWeatherManager.degree = 'Celsius'
 
 function ssWeatherManager:preLoad()
 end
@@ -23,7 +24,6 @@ function ssWeatherManager:load(savegame, key)
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
-    self.degree = ssStorage.getXMLString(savegame, key .. ".weather.degree", 'Celsius')
 
     -- load forecast
     self.forecast = {}
@@ -71,7 +71,6 @@ end
 function ssWeatherManager:save(savegame, key)
     local i = 0
 
-    ssStorage.setXMLString(savegame, key .. ".weather.degree", self.degree)
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
@@ -806,10 +805,4 @@ function ssWeatherForecastEvent:run(connection)
 
         table.remove(ssWeatherManager.rains, 1)
     end
-end
-
---- function to convert from Celsius to Fahrenheit
-function ssWeatherManager:convertTemp(tempInput)
-    return mathRound(tempInput * 1.8 + 32,0)
-
 end
