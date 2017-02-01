@@ -5,7 +5,6 @@
 -- Authors:  Rahkiin
 
 ssSeasonsMenu = {}
-g_seasons.menu = ssSeasonsMenu
 
 local ssSeasonsMenu_mt = Class(ssSeasonsMenu, ScreenElement)
 
