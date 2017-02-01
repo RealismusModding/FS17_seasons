@@ -59,6 +59,7 @@ end
 function ssEnvironment:loadMap(name)
     self.seasonChangeListeners = {}
     self.growthStageChangeListeners = {}
+    self.seasonLengthChangeListeners = {}
 
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
@@ -151,6 +152,19 @@ end
 function ssEnvironment:removeGrowthStageChangeListener(listener)
     if listener ~= nil then
         self.growthStageChangeListeners[listener] = nil
+    end
+end
+
+-- Listeners for a change of season length
+function ssEnvironment:addSeasonLengthChangeListener(listener)
+    if listener ~= nil then
+        self.seasonChangeListeners[listener] = listener
+    end
+end
+
+function ssEnvironment:removeSeasonLengthChangeListener(listener)
+    if listener ~= nil then
+        self.seasonChangeListeners[listener] = nil
     end
 end
 
@@ -507,10 +521,9 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     -- Re-do time
     self:adaptTime()
 
-    -- Redo weather manager
-    ssWeatherManager:buildForecast()
-
-    -- Change repair interval
-    ssVehicle.repairInterval = newSeasonLength * 2
+    -- Call season length changed listeners
+    for _, listener in pairs(self.seasonLengthChangeListeners) do
+        listener:seasonLengthChanged()
+    end
 end
 

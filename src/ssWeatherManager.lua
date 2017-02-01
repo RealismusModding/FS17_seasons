@@ -103,6 +103,7 @@ end
 function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
@@ -299,6 +300,10 @@ function ssWeatherManager:updateForecast()
     self:calculateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+end
+
+function ssVehicle:seasonLengthChanged()
+    self:buildForecast()
 end
 
 function ssWeatherManager:dayChanged()
