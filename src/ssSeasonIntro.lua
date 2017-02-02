@@ -36,7 +36,7 @@ function ssSeasonIntro:showIntro(season)
             self.hideSeasonIntro = true
         end
 
-        g_gui:closeDialogByName("YesNoDialog")
+        g_gui:showGui("")
     end
 
     g_gui:showYesNoDialog({

@@ -23,21 +23,21 @@ function ssSnowAdmirer:new(id)
 
     self:updateVisibility()
 
-    g_seasons.environment:addSeasonChangeListener(self)
+    g_currentMission.environment:addWeatherChangeListener(self)
 
     return self
 end
 
 function ssSnowAdmirer:delete()
-    if g_seasons and g_seasons.environment then
-        g_seasons.environment:removeSeasonChangeListener(self)
+    if g_currentMission.environment ~= nil then
+        g_currentMission.environment:removeWeatherChangeListener(self)
     end
 end
 
 function ssSnowAdmirer:updateVisibility()
-    setVisibility(self.id, g_seasons.weatherManager.snowDepth > 0)
+    setVisibility(self.id, g_seasons.weatherManager:getSnowHeight() > 0)
 end
 
-function ssSnowAdmirer:seasonChanged()
+function ssSnowAdmirer:weatherChanged()
     self:updateVisibility()
 end

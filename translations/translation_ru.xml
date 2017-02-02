@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
     <translationContributors>
-        Gonimy_Vetrom, theSeb
+        Vasil'ko, theSeb
     </translationContributors>
 
     <texts>
@@ -19,13 +19,13 @@
         <text name="SS_WEEKDAY_6" text="Суббота" />
         <text name="SS_WEEKDAY_7" text="Воскресенье" />
 
-        <text name="SS_WEEKDAY_1" text="Пн" />
-        <text name="SS_WEEKDAY_2" text="Вт" />
-        <text name="SS_WEEKDAY_3" text="Ср" />
-        <text name="SS_WEEKDAY_4" text="Чт" />
-        <text name="SS_WEEKDAY_5" text="Пт" />
-        <text name="SS_WEEKDAY_6" text="Сб" />
-        <text name="SS_WEEKDAY_7" text="Вс" />
+        <text name="SS_WEEKDAY_SHORT_1" text="Пн" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Вт" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Ср" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Чт" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Пт" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Сб" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Вс" />
 
         <text name="SS_SEASON_0" text="Весна" />
         <text name="SS_SEASON_1" text="Лето" />
@@ -65,7 +65,7 @@
         <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." /> <!-- весна -->
         <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. Можно уделить больше внимания животным." />
         <text name="SS_SEASON_INTRO_2" text="Наступил период уборки урожая. Готовимся к зиме, так как посевы могут не пережить холода. За работу." />
-        <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно тодохнуть или заняться лесом." /> <!-- зима -->
+        <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно отдохнуть или заняться лесом." /> <!-- зима -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
 
@@ -78,18 +78,22 @@
         <text name="ui_buttonSave" text="Применить" />
         <text name="ui_snowOneLayer" text="Только 1 слой" />
         <text name="ui_days" text="%i дн." />
+        <text name="ui_temperatureFahrenheit" text="Фаренгейт" />
+        <text name="ui_temperatureCelcius" text="Цельсий" />
 
         <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов." />
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
         <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
         <text name="tooltip_controlsHelp" text="Показать сочетание клавиш (Alt+F) для прогноза погоды и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
         <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему." />
+        <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре." />
 
         <text name="setting_seasonIntros" text="Напоминание о сезонах" />
-        <text name="setting_seasonLength" text="Длинна сезона" />
+        <text name="setting_seasonLength" text="Продолжительность сезона" />
         <text name="setting_snow" text="Режим снега" />
-        <text name="setting_controlsHelp" text="Горячие калавиши" />
+        <text name="setting_controlsHelp" text="Горячие клавиши" />
         <text name="setting_snowTracks" text="Следы на снегу" />
+        <text name="setting_controlsTemperature" text="Шкала температуры" />
 
         <text name="ui_helpCategory_1" text="Сезоны" />
         <text name="ui_helpCategory_2" text="Снег" />
@@ -102,5 +106,10 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения длины сезона и настроек роста можно применить к полям, только по прошествии одного игрового года." />
+    
+        <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
+        <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур" />
+        <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
+        <text name="dialog_resetGrowth_yes" text="Сбросить" />
     </texts>
 </l10n>

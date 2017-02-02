@@ -96,13 +96,13 @@ function ssMain:update(dt)
         g_gui:showGui("SeasonsMenu")
     end
 
-    if not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning then
+    if not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning and g_gui.currentGui == nil then
         function resetAction(self, yesNo)
             if yesNo then
                 ssGrowthManager:resetGrowth()
             end
 
-            g_gui:closeDialogByName("YesNoDialog")
+            g_gui:showGui("")
         end
 
         g_gui:showYesNoDialog({
