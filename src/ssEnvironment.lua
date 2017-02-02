@@ -526,4 +526,3 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
         listener:seasonLengthChanged()
     end
 end
-

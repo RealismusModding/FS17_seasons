@@ -308,13 +308,31 @@ end
 
 function ssWeatherManager:dayChanged()
     if g_currentMission:getIsServer() then
+        local isFrozen = self:isGroundFrozen()
+
         self:updateForecast()
+
+        if isFrozen ~= self:isGroundFrozen() then
+            -- Call a weather change
+            for _, listener in pairs(g_seasons.environment.weatherChangeListeners) do
+                listener:weatherChanged()
+            end
+        end
     end
 end
 
 -- Jos note: no randomness here. Must run on client for snow.
 function ssWeatherManager:hourChanged()
+    local oldSnow = self.snowDepth
+
     self:calculateSnowAccumulation()
+
+    if math.abs(oldSnow - self.snowDepth) > 0.01 then
+        -- Call a weather change
+        for _, listener in pairs(g_seasons.environment.weatherChangeListeners) do
+            listener:weatherChanged()
+        end
+    end
 end
 
 -- function to output the temperature during the day and night

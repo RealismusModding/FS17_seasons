@@ -47,7 +47,11 @@ g_modClasses = {
     "ssAnimals",
     "ssDensityMapScanner",
     "ssViewController",
-    "ssPedestrianSystem"
+    "ssPedestrianSystem",
+
+    "ssSnowAdmirer",
+    "ssSeasonAdmirer",
+    "ssIcePlane"
 }
 
 local isDebug = false--<%=debug %>
