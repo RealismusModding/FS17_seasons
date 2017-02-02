@@ -8,6 +8,11 @@
 ssMain = {}
 getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 
+g_seasons.lang = ssLang
+g_seasons.storage = ssStorage
+g_seasons.multiplayer = ssMultiplayer
+g_seasons.xml = ssSeasonsXML
+
 ----------------------------
 -- Constants
 ----------------------------

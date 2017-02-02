@@ -19,10 +19,6 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.settingElements = {}
 
-    ------
-    self.testValue = 1
-    ------
-
     return self
 end
 

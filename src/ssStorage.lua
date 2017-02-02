@@ -6,7 +6,6 @@
 --
 
 ssStorage = {}
-g_seasons.storage = ssStorage
 
 function ssStorage.getXMLFloat(xmlFile, key, defaultValue)
     -- log("getXMLFloat("..tostring(xmlFile)..", "..tostring(key)..", "..tostring(defaultValue)..")")

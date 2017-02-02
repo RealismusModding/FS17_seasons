@@ -6,7 +6,6 @@
 --
 
 ssSeasonsXML = {}
-g_seasons.xml = ssSeasonsXML
 
 local seasonKeyToId = {
     ["spring"] = 0,
