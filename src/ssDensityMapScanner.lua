@@ -6,6 +6,8 @@
 --
 
 ssDensityMapScanner = {}
+g_seasons.dms = ssDensityMapScanner
+
 ssDensityMapScanner.callBacks = {}
 
 ssDensityMapScanner.currentX=0

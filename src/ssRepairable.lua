@@ -11,9 +11,8 @@ function ssRepairable:prerequisitesPresent(specializations)
 end
 
 function ssRepairable:load(savegame)
-    self.repairUpdate = SpecializationUtil.callSpecializationsFunction("repairUpdate")
-    -- self.ss_getIsPlayerInRange = SpecializationUtil.callSpecializationsFunction("ss_getIsPlayerInRange")
-    -- self.ss_isInDistance = SpecializationUtil.callSpecializationsFunction("ss_isInDistance")
+    self.ssRepairUpdate = SpecializationUtil.callSpecializationsFunction("ssRepairUpdate")
+    self.ssRepair = SpecializationUtil.callSpecializationsFunction("ssRepair")
 
     self.ssPlayerInRange = false
     self.ssInRangeOfWorkshop = nil
@@ -120,8 +119,7 @@ end
 function ssRepairable:update(dt)
     -- Show a message about the repairing
     if self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
-        self:repairUpdate(dt)
-
+        self:ssRepairUpdate(dt)
     end
 
     if self.isEntered then
@@ -149,7 +147,7 @@ function ssRepairable:update(dt)
     end
 end
 
-function ssRepairable:repairUpdate(dt)
+function ssRepairable:ssRepairUpdate(dt)
     local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
     if repairCost < 1 then return end
@@ -157,45 +155,67 @@ function ssRepairable:repairUpdate(dt)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
 
-    -- Callback for the Yes No Dialog
-    function doRepairCallback(self, yesNo)
-        if yesNo then
-            -- Deduct
-            if g_currentMission:getIsServer() then
-                g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
-                g_currentMission.missionStats:updateStats("expenses", repairCost)
-            else
-                g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
-            end
-
-            -- Repair
-            if ssVehicle:repair(self, storeItem) then
-                -- Show that it was repaired
-                local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
-                g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
-
-                g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(self))
-            end
-        end
-
-        g_gui:closeDialogByName("YesNoDialog")
-    end
-
     -- Show repair button
     g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), vehicleName, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
-            local dialog = g_gui:showDialog("YesNoDialog")
-            local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
-
-            dialog.target:setCallback(doRepairCallback, self)
-            dialog.target:setTitle(ssLang.getText("SS_REPAIR_DIALOG_TITLE"))
-            dialog.target:setText(text)
-
+            self:ssRepair(true, repairCost)
         else
             g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
         end
+    end
+end
+
+-- Do a repair.
+-- @param showDialog True if you want a confirmation dialog shown
+-- @param cost Different cost. Keep nil for auto cost calculations
+-- @note This must only be called from an Update function.
+function ssRepairable:ssRepair(showDialog, cost)
+    local repairCost = cost
+    if cost == nil then
+        cost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
+    end
+
+    if repairCost < 1 then return end
+
+    function performRepair(self)
+        -- Deduct
+        if g_currentMission:getIsServer() then
+            g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
+            g_currentMission.missionStats:updateStats("expenses", repairCost)
+        else
+            g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
+        end
+
+        -- Repair
+        if ssVehicle:repair(self, storeItem) then
+            -- Show that it was repaired
+            local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
+
+            g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(self))
+        end
+    end
+
+    -- Callback for the Yes No Dialog
+    function doRepairCallback(self, yesNo)
+        if yesNo then
+            performRepair(self)
+        end
+
+        g_gui:closeDialogByName("YesNoDialog")
+    end
+
+    if showDialog then
+        local dialog = g_gui:showDialog("YesNoDialog")
+        local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+
+        dialog.target:setCallback(doRepairCallback, self)
+        dialog.target:setTitle(ssLang.getText("SS_REPAIR_DIALOG_TITLE"))
+        dialog.target:setText(text)
+    else
+        performRepair(self)
     end
 end
 

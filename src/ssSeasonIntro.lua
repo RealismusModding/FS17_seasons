@@ -6,6 +6,7 @@
 --
 
 ssSeasonIntro = {}
+g_seasons.seasonIntro = ssSeasonIntro
 
 function ssSeasonIntro:load(savegame, key)
     self.hideSeasonIntro = ssStorage.getXMLBool(savegame, key .. ".settings.hideSeasonIntro", false)
@@ -30,22 +31,23 @@ function ssSeasonIntro:update(dt)
 end
 
 function ssSeasonIntro:showIntro(season)
-    local text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", season))
-    local dialog = g_gui:showDialog("YesNoDialog")
-
-    dialog.target:setTitle(ssUtil:seasonName(g_seasons.environment:currentSeason()))
-    dialog.target:setText(text)
-    dialog.target:setDialogType(DialogElement.TYPE_INFO)
-    dialog.target:setIsCloseAllowed(true)
-    dialog.target:setButtonTexts(ssLang.getText("SS_BUTTON_OK"), ssLang.getText("SS_BUTTON_DONT_SHOW_AGAIN"))
-
-    dialog.target:setCallback(function(yesNo)
+    function cb(self, yesNo)
         if not yesNo then
             self.hideSeasonIntro = true
         end
 
         g_gui:closeDialogByName("YesNoDialog")
-    end)
+    end
+
+    g_gui:showYesNoDialog({
+        text = ssLang.getText(string.format("SS_SEASON_INTRO_%i", season)),
+        title = ssUtil.seasonName(g_seasons.environment:currentSeason()),
+        dialogType = DialogElement.TYPE_INFO,
+        callback = cb,
+        target = self,
+        yesText = ssLang.getText("SS_BUTTON_OK"),
+        noText = ssLang.getText("SS_BUTTON_DONT_SHOW_AGAIN")
+    })
 end
 
 function ssSeasonIntro:readStream(streamId, connection)

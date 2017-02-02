@@ -56,7 +56,8 @@ function templatedLua() {
     const replacements = {
         debug: buildConfig.get("options.debug", false).toString(),
         verbose: buildConfig.get("options.verbose", false).toString(),
-        buildnumber: toLuaString(createVersionName())
+        buildnumber: toLuaString(createVersionName()),
+        simpleVersion: package.fs.simpleVersion
     };
 
     return gulp

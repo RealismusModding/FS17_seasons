@@ -6,6 +6,8 @@
 --
 
 ssEconomy = {}
+g_seasons.economy = ssEconomy
+
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)
@@ -93,7 +95,7 @@ end
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
     if self:getIsActive() then
         local hour = g_currentMission.environment.currentHour
-        local dow = ssUtil:dayOfWeek(g_seasons.environment:currentDay())
+        local dow = ssUtil.dayOfWeek(g_seasons.environment:currentDay())
 
         if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
             self.pricePerMS = ssEconomy.aiPricePerMSWork

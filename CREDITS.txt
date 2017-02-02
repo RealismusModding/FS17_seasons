@@ -4,10 +4,11 @@ SEASONS MOD CREDITS
 Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 
 Snow Weather and Season Huds and logo -- FSModding_Gary
+Snow mask files -- Vasylko
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
 German - tobiasgo, Oekobauer, ItZzShady
 Italian - fcelsa
 French - thierry62, Marxtai
-Russian - Gonimy-Vetrom
+Russian - Vasylko

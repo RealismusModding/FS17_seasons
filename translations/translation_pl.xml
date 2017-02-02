@@ -78,18 +78,22 @@
         <text name="ui_buttonSave" text="Zapisz ustawienia" />
         <text name="ui_snowOneLayer" text="tylko 1 warstwa" />
         <text name="ui_days" text="%i dni" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheita" />
+        <text name="ui_temperatureCelcius" text="Celsjusza" />
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony." />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu." />
         <text name="tooltip_snow" text="Śnieg będzie padał w czasie mroźnej zimy i zasypie drogi." />
         <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy." />
         <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim." />
+        <text name="tooltip_controlsTemperature" text="Ustaw skalę temperatury używaną przez grę" />
 
         <text name="setting_seasonIntros" text="Wstępy do sezonów" />
         <text name="setting_seasonLength" text="Długość sezonów" />
         <text name="setting_snow" text="Tryb śniegu" />
         <text name="setting_controlsHelp" text="Skróty klawiszowe w oknie pomocy" />
         <text name="setting_snowTracks" text="Ślady na śniegu" />
+        <text name="setting_controlsTemperature" text="Skala temperatury" />
 
         <text name="ui_helpCategory_1" text="Sezony" />
         <text name="ui_helpCategory_2" text="Śnieg" />

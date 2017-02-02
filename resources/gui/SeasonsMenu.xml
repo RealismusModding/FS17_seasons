@@ -31,11 +31,20 @@
                         </GuiElement>
 
                         <!-- Season intros on/off -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsHelp" toolTip="tooltip_controlsHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsHelp" toolTip="tooltip_controlsHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="212" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
                             <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_controlsHelp"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Fahrenheit -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsTemperature" toolTip="tooltip_controlsTemperature" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="212" focusChangeTop="211" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_controlsTemperature"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>

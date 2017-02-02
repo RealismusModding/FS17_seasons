@@ -6,12 +6,13 @@
 --
 
 ssWeatherManager = {}
+g_seasons.weatherManager = ssWeatherManager
+
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.weather = {}
-ssWeatherManager.degree = 'Celsius'
 
 function ssWeatherManager:preLoad()
 end
@@ -23,7 +24,6 @@ function ssWeatherManager:load(savegame, key)
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
-    self.degree = ssStorage.getXMLString(savegame, key .. ".weather.degree", 'Celsius')
 
     -- load forecast
     self.forecast = {}
@@ -71,7 +71,6 @@ end
 function ssWeatherManager:save(savegame, key)
     local i = 0
 
-    ssStorage.setXMLString(savegame, key .. ".weather.degree", self.degree)
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
@@ -104,6 +103,7 @@ end
 function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
@@ -227,8 +227,8 @@ function ssWeatherManager:buildForecast()
 
         ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(oneDayForecast.day)]
 
-        oneDayForecast.highTemp = ssUtil:ssNormDist(ssTmax.mode,2.5)
-        oneDayForecast.lowTemp = ssUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+        oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
+        oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
 
         if n == 1 then
             oneDayRain = self:updateRain(oneDayForecast,0)
@@ -274,12 +274,12 @@ function ssWeatherManager:updateForecast()
 
     elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
         --Seasonal average for a day in the next season
-        oneDayForecast.Tmaxmean = ssUtil:ssTriDist(ssTmax)
+        oneDayForecast.Tmaxmean = ssUtil.triDist(ssTmax)
 
     end
 
-    oneDayForecast.highTemp = ssUtil:ssNormDist(ssTmax.mode,2.5)
-    oneDayForecast.lowTemp = ssUtil:ssNormDist(0,2) + 0.75 * ssTmax.mode-5
+    oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
+    oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
 
     if oneDayForecast.day == self.weather[self.forecastLength-1].endDay then
         oneDayRain = self:updateRain(oneDayForecast,self.weather[self.forecastLength-1].endDayTime)
@@ -300,6 +300,10 @@ function ssWeatherManager:updateForecast()
     self:calculateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+end
+
+function ssWeatherManager:seasonLengthChanged()
+    self:buildForecast()
 end
 
 function ssWeatherManager:dayChanged()
@@ -514,7 +518,7 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
-    oneRainEvent.duration = math.min(math.max(math.exp(ssUtil:ssLognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
+    oneRainEvent.duration = math.min(math.max(math.exp(ssUtil.lognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
     --log('Start time for rain = ', oneRainEvent.startDayTime)
@@ -806,10 +810,4 @@ function ssWeatherForecastEvent:run(connection)
 
         table.remove(ssWeatherManager.rains, 1)
     end
-end
-
---- function to convert from Celsius to Fahrenheit
-function ssWeatherManager:convertTemp(tempInput)
-    return mathRound(tempInput * 1.8 + 32,0)
-
 end

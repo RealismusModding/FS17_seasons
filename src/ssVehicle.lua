@@ -6,6 +6,8 @@
 --
 
 ssVehicle = {}
+g_seasons.vehicle = ssVehicle
+
 ssVehicle.LIFETIME_FACTOR = 5
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
@@ -32,6 +34,7 @@ end
 
 function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
@@ -59,6 +62,10 @@ function ssVehicle:dayChanged()
             self:repair(vehicle,storeItem)
         end
     end
+end
+
+function ssVehicle:seasonLengthChanged()
+    self.repairInterval = g_seasons.environment.daysInSeason * 2
 end
 
 function ssVehicle:installVehicleSpecializations()
@@ -440,7 +447,7 @@ function ssVehicle:registerWheelTypes()
     studdedFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.75
 
     snowchainsFrictionCoeffs[WheelsUtil.GROUND_ROAD] = 0.85
-    snowchainsFrictionCoeffs[WheelsUtil.GROUND_HARD_TERRAIN] = 1.0    
+    snowchainsFrictionCoeffs[WheelsUtil.GROUND_HARD_TERRAIN] = 1.0
     snowchainsFrictionCoeffs[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.15
     snowchainsFrictionCoeffs[WheelsUtil.GROUND_FIELD] = 1.1
 

@@ -19,10 +19,6 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.settingElements = {}
 
-    ------
-    self.testValue = 1
-    ------
-
     return self
 end
 
@@ -251,10 +247,10 @@ function ssSeasonsMenu:updateGameSettings()
         return
     end
 
-    -- TODO: load actual data
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
     self.settingElements.seasonLength:setState(math.floor(g_seasons.environment.daysInSeason / 3))
     self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
+    self.settingElements.controlsTemperature:setIsChecked(ssWeatherForecast.degreeFahrenheit)
     self.settingElements.snow:setState(ssSnow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
 
@@ -275,6 +271,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
     if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
+        or self.settingElements.controlsTemperature:getIsChecked() ~= ssWeatherForecast.degreeFahrenheit
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode then
         -- or  then -- snow
@@ -300,6 +297,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
 
         ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
         g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
+        ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
 
         if g_currentMission:getIsServer() then
             ssSnow:setMode(self.settingElements.snow:getState())
@@ -336,6 +334,13 @@ end
 function ssSeasonsMenu:onCreateControlsHelp(element)
     self.settingElements.controlsHelp = element
     self:replaceTexts(element)
+end
+
+function ssSeasonsMenu:onCreateControlsTemperature(element)
+    self.settingElements.controlsTemperature = element
+    self:replaceTexts(element)
+
+    element:setTexts({ssLang.getText("ui_temperatureCelcius"), ssLang.getText("ui_temperatureFahrenheit")})
 end
 
 ------- SEASON LENGTH -------

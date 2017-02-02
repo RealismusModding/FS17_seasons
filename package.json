@@ -33,6 +33,7 @@
     "vinyl-ftp": "^0.5.0"
   },
   "fs": {
-    "modDescRev": "33"
+    "modDescRev": "33",
+    "simpleVersion": 1
   }
 }

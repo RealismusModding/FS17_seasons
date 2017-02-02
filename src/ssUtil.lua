@@ -10,7 +10,7 @@ g_seasons.util = ssUtil
 
 -- Get the day within the week
 -- assumes that day 1 = monday
-function ssUtil:dayOfWeek(dayNumber)
+function ssUtil.dayOfWeek(dayNumber)
     return math.fmod(dayNumber - 1, g_seasons.environment.DAYS_IN_WEEK) + 1
 end
 
@@ -21,7 +21,7 @@ end
 -- Autumn: Sep (244) - Nov (305)
 -- Winter: Dec (335) - Feb (59)
 -- FIXME(jos): This changes on the southern hemisphere
-function ssUtil:julianDay(dayNumber)
+function ssUtil.julianDay(dayNumber)
     local season, partInSeason, dayInSeason
     local starts = {[0] = 60, 152, 244, 335 }
 
@@ -32,7 +32,7 @@ function ssUtil:julianDay(dayNumber)
     return math.fmod(math.floor(starts[season] + partInSeason * 91), 365)
 end
 
-function ssUtil:julanDayToDayNumber(julianDay)
+function ssUtil.julianDayToDayNumber(julianDay)
     local season, partInSeason, start
 
     if julianDay < 60 then
@@ -56,41 +56,38 @@ end
 
 -- Get season name for given day number
 -- If no day number supplied, uses current day
-function ssUtil:seasonName(season)
+function ssUtil.seasonName(season)
     return ssLang.getText("SS_SEASON_" .. tostring(season), "???")
 end
 
 -- Get day name for given day number
 -- If no day number supplied, uses current day
-function ssUtil:dayName(dayOfWeek)
+function ssUtil.dayName(dayOfWeek)
     return ssLang.getText("SS_WEEKDAY_" .. tostring(dayOfWeek), "???")
 end
 
 -- Get short day name for given day number
 -- If no day number supplied, uses current day
-function ssUtil:dayNameShort(dayOfWeek)
+function ssUtil.dayNameShort(dayOfWeek)
     return ssLang.getText("SS_WEEKDAY_SHORT_" .. tostring(dayOfWeek), "???")
 end
 
 -- Get short name of month for given month number
-function ssUtil:monthNameShort(monthNumber)
+function ssUtil.monthNameShort(monthNumber)
     return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
 end
 
-function ssSeasonsUtil:nextWeekDayNumber(currentDay)
-    return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
-end
-
-function ssSeasonsUtil:monthAtGrowthTransition(growthTransition)
+function ssUtil.monthAtGrowthTransition(growthTransition)
 --TODO: implement
 end
 
-function ssUtil:nextWeekDayNumber(currentDay)
+function ssUtil.nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
 
 -- Calculate the split of days into ealy,mid and late season
-function ssUtil:calcDaysPerTransition()
+function ssUtil.calcDaysPerTransition()
+
     local l = g_seasons.environment.daysInSeason / 3.0
 	local earlyStart = 1
 	local earlyEnd = mathRound(1 * l)
@@ -98,11 +95,12 @@ function ssUtil:calcDaysPerTransition()
 	local midEnd = mathRound(2 * l)
 	local lateStart = mathRound(2 * l)+1
 	local lateEnd = g_seasons.environment.daysInSeason
+    
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
 end
 
 --Outputs a random sample from a triangular distribution
-function ssUtil:ssTriDist(m)
+function ssUtil.triDist(m)
     local pmode = {}
     local p = {}
 
@@ -120,7 +118,7 @@ end
 
 -- Approximation of the inverse CFD of a normal distribution
 -- Based on A&S formula 26.2.23 - thanks to John D. Cook
-function ssUtil:RationalApproximation(t)
+function ssUtil.rationalApproximation(t)
     local c = {2.515517, 0.802853, 0.010328}
     local d = {1.432788, 0.189269, 0.001308}
 
@@ -128,21 +126,21 @@ function ssUtil:RationalApproximation(t)
 end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
-function ssUtil:ssNormDist(mu,sigma)
+function ssUtil.normDist(mu,sigma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
     local p = math.random()
 
     if p < 0.5 then
-        return self:RationalApproximation(math.sqrt(-2.0 * math.log(p))) * -sigma + mu
+        return ssUtil.rationalApproximation(math.sqrt(-2.0 * math.log(p))) * -sigma + mu
     else
-        return self:RationalApproximation(math.sqrt(-2.0 * math.log(1 - p))) * sigma + mu
+        return ssUtil.rationalApproximation(math.sqrt(-2.0 * math.log(1 - p))) * sigma + mu
     end
 end
 
 -- Outputs a random sample from a lognormal distribution
-function ssUtil:ssLognormDist(beta, gamma)
+function ssUtil.lognormDist(beta, gamma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
@@ -150,17 +148,16 @@ function ssUtil:ssLognormDist(beta, gamma)
     local z
 
     if p < 0.5 then
-        z = self:RationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
+        z = ssUtil.rationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
     else
-        z = self:RationalApproximation( math.sqrt(-2.0*math.log(1-p)))
+        z = ssUtil.rationalApproximation( math.sqrt(-2.0*math.log(1-p)))
     end
 
     return gamma * math.exp ( z / beta )
 end
 
-function ssUtil:getModMapDataPath(dataFileName)
+function ssUtil.getModMapDataPath(dataFileName)
     if g_currentMission.missionInfo.map.isModMap == true then
-
         local path = g_currentMission.missionInfo.map.baseDirectory .. dataFileName
         if fileExists(path) then
             return path

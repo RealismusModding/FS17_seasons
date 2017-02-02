@@ -7,6 +7,8 @@
 -- Credits: Blacky_BPG for scaling the hud
 
 ssWeatherForecast = {}
+g_seasons.forecast = ssWeatherForecast
+
 local screenAspectRatio = g_screenAspectRatio / (16 / 9)
 ssWeatherForecast.hud = {}
 
@@ -79,11 +81,13 @@ end
 
 function ssWeatherForecast:load(savegame, key)
     self.hud.visible = ssStorage.getXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
+    self.degreeFahrenheit = ssStorage.getXMLBool(savegame, key .. ".weather.fahrenheit", false)
 end
 
 function ssWeatherForecast:save(savegame, key)
     if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", self.hud.visible)
+        ssStorage.setXMLBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
     end
 end
 
@@ -143,20 +147,26 @@ function ssWeatherForecast:drawForecast(forecast)
         renderText(self.hud.posX + posXOffset + self.hud.iconWidth + self.hud.iconWidthSmall*3/4 + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeight, self.hud.textSize*1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
 
         -- Render Hi/Lo Temperatures
-        local highTemp = math.floor(forecast[n].highTemp)
-        local lowTemp = math.floor(forecast[n].lowTemp)
-        if ssWeatherManager.degree == 'Fahrenheit' then
-            highTemp = math.floor(ssWeatherManager:convertTemp(forecast[n].highTemp))
-            lowTemp = math.floor(ssWeatherManager:convertTemp(forecast[n].lowTemp))
-        end
+        local tempString = self:getTemperatureHighLowString(forecast[n])
 
-        local tempString = tostring(highTemp) .. " / " .. tostring(lowTemp)
         setTextAlignment(RenderText.ALIGN_LEFT)
         renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + posYOffset, self.hud.textSize*1.2, tempString)
 
         -- Render Day of The Week
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall/2, self.hud.textSize*1.2, ssUtil:dayNameShort(ssUtil:dayOfWeek(g_seasons.environment:currentDay()+n-1)))
+        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall/2, self.hud.textSize*1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay()+n-1)))
     end
+end
+
+function ssWeatherForecast:getTemperatureHighLowString(data)
+    local highTemp = math.floor(data.highTemp)
+    local lowTemp = math.floor(data.lowTemp)
+
+    if self.degreeFahrenheit then
+        highTemp = math.floor(ssLang.convertTempToFahrenheit(data.highTemp))
+        lowTemp = math.floor(ssLang.convertTempToFahrenheit(data.lowTemp))
+    end
+
+    return tostring(highTemp) .. " / " .. tostring(lowTemp)
 end
 
 function ssWeatherForecast:drawToday(forecast)
@@ -170,7 +180,7 @@ function ssWeatherForecast:drawToday(forecast)
     setTextAlignment(RenderText.ALIGN_CENTER)
     renderText(self.hud.clockPosX + self.hud.clockWidth/2 + self.hud.iconWidthSmall/2,self.hud.clockPosY + self.hud.clockHeight/2, self.hud.textSize*2.3, string.format("%02d:%02d", g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute))
     renderOverlay(self.hud.overlays.clock_symbol.overlayId, self.hud.clockPosX + self.hud.iconWidthSmall/2, self.hud.clockPosY + self.hud.clockHeight/2.6, self.hud.iconWidthSmall*1.5, self.hud.iconHeightSmall*1.5)
-    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s/%d", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil:seasonName(forecast[1].season), g_seasons.environment:currentYear() + 2017))
+    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s/%d", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.seasonName(forecast[1].season), g_seasons.environment:currentYear() + 2017))
 
     -- Render Background
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
@@ -187,20 +197,10 @@ function ssWeatherForecast:drawToday(forecast)
     -- Render current air temperature
     setTextAlignment(RenderText.ALIGN_RIGHT)
     local airTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
-    if ssWeatherManager.degree == 'Fahrenheit' then
-        local airTempFahrenheit = ssWeatherManager:convertTemp(airTemp)
-        renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, tostring(airTempFahrenheit .. "ºF"))
-    else
-        renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, tostring(airTemp .. "ºC"))
-    end
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, ssLang.formatTemperature(airTemp))
 
     -- Render current soil temperature
     setTextAlignment(RenderText.ALIGN_RIGHT)
     local soilTemp = math.floor(ssWeatherManager.soilTemp, 0)
-    if ssWeatherManager.degree == 'Fahrenheit' then
-        local soilTempFahrenheit = ssWeatherManager:convertTemp(soilTemp)
-        renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.25, self.hud.textSize*1.1, tostring(soilTempFahrenheit .. "ºF"))
-    else
-        renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.25, self.hud.textSize*1.1, tostring(soilTemp .. "ºC"))
-    end
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.25, self.hud.textSize*1.1, ssLang.formatTemperature(soilTemp))
 end
