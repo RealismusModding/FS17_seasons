@@ -314,7 +314,7 @@ function ssWeatherManager:dayChanged()
 
         if isFrozen ~= self:isGroundFrozen() then
             -- Call a weather change
-            for _, listener in pairs(g_seasons.environment.weatherChangeListeners) do
+            for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
                 listener:weatherChanged()
             end
         end
@@ -329,7 +329,7 @@ function ssWeatherManager:hourChanged()
 
     if math.abs(oldSnow - self.snowDepth) > 0.01 then
         -- Call a weather change
-        for _, listener in pairs(g_seasons.environment.weatherChangeListeners) do
+        for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
             listener:weatherChanged()
         end
     end

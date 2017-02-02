@@ -219,6 +219,7 @@ function ssEnvironment:adaptTime()
     env.sunRotCurve = self:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.sunColorCurve = self:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
+    env.rainFadeCurve = self:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
 
     g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 
@@ -358,6 +359,23 @@ function ssEnvironment:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
     curve:addKeyframe({x = 0.0, y = 1.0, z = 0.0, w = 0.0, time = (dayEnd + 3 * eveningStep) * 60}) -- evening
     curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = nightStart * 60}) -- night
     curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 24.0 * 60}) -- night
+
+    return curve
+end
+
+function ssEnvironment:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
+    local curve = AnimCurve:new(linearInterpolator4) -- degree 2
+
+    local morningStep = (dayStart - nightEnd) / 10
+    local eveningStep = (nightStart - dayEnd) / 5
+
+    -- light scale, rain sky scale, rain scale, distance fog scale
+    curve:addKeyframe({x = 1.00, y = 0.0, z = 0.0, w = 0.00, time = 0})
+    -- 1, 0.6, 0.55, 0.55, 0.55
+    curve:addKeyframe({x = 0.50, y = 0.5, z = 0.0, w = 0.35, time = 10})
+    curve:addKeyframe({x = 0.40, y = 1.0, z = 0.0, w = 0.70, time = 20})
+    curve:addKeyframe({x = 0.30, y = 1.0, z = 0.5, w = 1.00, time = 25})
+    curve:addKeyframe({x = 0.30, y = 1.0, z = 1.0, w = 1.00, time = 30})
 
     return curve
 end
