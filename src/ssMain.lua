@@ -101,6 +101,8 @@ function ssMain:update(dt)
             if yesNo then
                 ssGrowthManager:resetGrowth()
             end
+
+            g_gui:closeDialogByName("YesNoDialog")
         end
 
         g_gui:showYesNoDialog({
