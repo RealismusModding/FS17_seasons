@@ -49,6 +49,9 @@ end
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
+
+    self.isNewSaveGame = savegame == nil
+    self.isOldSaveGame = not hasXMLProperty(savegame, key) -- old game, no seasons
 end
 
 function ssMain:save(savegame, key)
@@ -91,6 +94,26 @@ function ssMain:update(dt)
     -- Open the menu
     if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_MENU) then
         g_gui:showGui("SeasonsMenu")
+    end
+
+    if not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning then
+        function resetAction(self, yesNo)
+            if yesNo then
+                ssGrowthManager:resetGrowth()
+            end
+        end
+
+        g_gui:showYesNoDialog({
+            text = ssLang.getText("dialog_resetGrowth"),
+            title = ssLang.getText("dialog_resetGrowth_title"),
+            dialogType = DialogElement.TYPE_WARNING,
+            callback = resetAction,
+            target = self,
+            yesText = ssLang.getText("dialog_resetGrowth_yes"),
+            noText = ssLang.getText("dialog_resetGrowth_no")
+        })
+
+        self.showedResetWarning = true
     end
 end
 

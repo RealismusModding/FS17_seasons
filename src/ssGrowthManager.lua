@@ -25,9 +25,7 @@ ssGrowthManager.doResetGrowth = false
 ssGrowthManager.canPlantData = {}
 
 function ssGrowthManager:load(savegame, key)
-    if savegame == nil then
-        self.isNewSavegame = true
-    end
+    self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
 end
@@ -134,10 +132,10 @@ end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
-    if self.growthManagerEnabled == true then
+    if self.growthManagerEnabled then
         local growthTransition = g_seasons.environment:currentGrowthTransition()
 
-        if self.isNewSavegame == true and growthTransition == 1 then
+        if self.isNewSavegame and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
         else
