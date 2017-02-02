@@ -102,7 +102,7 @@ function ssMain:update(dt)
                 ssGrowthManager:resetGrowth()
             end
 
-            g_gui:closeDialogByName("YesNoDialog")
+            g_gui:showGui("")
         end
 
         g_gui:showYesNoDialog({
