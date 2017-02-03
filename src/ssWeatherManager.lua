@@ -635,14 +635,14 @@ function ssWeatherManager:loadGerminateTemperature(path)
             break
         end
 
-        local temp = getXMLFloat(file, key .. "#temp")
+        local soilTemp = getXMLFloat(file, key .. "#soilTemp")
 
-        if temp == nil then
+        if soilTemp == nil then
             logInfo("Temperature data in growth.xml:germination is invalid")
             break
         end
 
-        self.germinateTemp[fruitName] = temp
+        self.germinateTemp[fruitName] = soilTemp
 
         i = i + 1
     end
