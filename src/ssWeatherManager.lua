@@ -112,9 +112,25 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment.rainForecastDays = self.forecastLength
     g_currentMission.environment.autoRain = false
 
-    self:loadTemperature()
-    self:loadGerminateTemperature()
-    self:loadRain()
+    -- Load data from the mod and from a map
+    self.temperatureData = {}
+    self.rainData = {}
+    self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
+
+    local modPath = ssUtil.getModMapDataPath("seasons_weather.xml")
+    if modPath ~= nil then
+        self:loadFromXML(modPath)
+    end
+
+    -- Load germination temperatures
+    self.germinateTemp = {}
+    self:loadGerminateTemperature(g_seasons.modDir .. "data/growth.xml")
+
+    local modPath = ssUtil.getModMapDataPath("seasons_growth.xml")
+    if modPath ~= nil then
+        self:loadGerminateTemperature(modPath)
+    end
+
 
     if g_currentMission:getIsServer() or self.forecast[1].day ~= g_currentMission.environment.currentDay then
         if table.getn(self.forecast) == 0 then
@@ -125,7 +141,6 @@ function ssWeatherManager:loadMap(name)
     end
 
     self:owRaintable()
-
 end
 
 function ssWeatherManager:readStream(streamId, connection)
@@ -244,12 +259,10 @@ function ssWeatherManager:buildForecast()
 
         table.insert(self.forecast, oneDayForecast)
         table.insert(self.weather, oneDayRain)
-
     end
 
     self:owRaintable()
     self:switchRainHail()
-
 end
 
 function ssWeatherManager:updateForecast()
@@ -366,7 +379,6 @@ end
 --- function to keep track of snow accumulation
 --- snowDepth in meters
 function ssWeatherManager:calculateSnowAccumulation()
-
     local currentRain = g_currentMission.environment.currentRain
     local currentTemp = self:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
     local currentSnow = self.snowDepth
@@ -529,7 +541,6 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
 
     oneDayRain = oneRainEvent
     return oneDayRain
-
 end
 
 function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
@@ -598,68 +609,61 @@ function ssWeatherManager:owRaintable()
 end
 
 --- function for predicting when soil is too cold for crops to germinate
-function ssWeatherManager:canSow(fruit)
+function ssWeatherManager:germinationTemperature(fruit)
     local gTemp = 5
 
-    local fruitInfo = self.germinateTemp[fruit]
-
-    if fruitInfo ~= nil then
-        gTemp = self.germinateTemp[fruit].gTemp
+    if self.germinateTemp[fruit] ~= nil then
+        gTemp = self.germinateTemp[fruit]
     else
-        gTemp = self.germinateTemp['default'].gTemp
+        -- Default to barley for unknown crops
+        gTemp = self.germinateTemp["barley"]
     end
 
-    if self.soilTemp >= gTemp then
+    return gTemp
+end
+
+function ssWeatherManager:canSow(fruit)
+    if self.soilTemp >= self:germinationTemperature(fruit) then
         return true
     else
         return false
     end
-
 end
 
-function ssWeatherManager:loadGerminateTemperature()
-    self.germinateTemp = {}
+function ssWeatherManager:loadGerminateTemperature(path)
+    local file = loadXMLFile("germinate", path)
 
-    -- Open file
-    local file = loadXMLFile("germinate", g_seasons.modDir .. "data/germinate.xml")
     local i = 0
     while true do
-        local key = string.format("germinate.fruit(%d)", i)
+        local key = string.format("growth.germination.fruit(%d)", i)
         if not hasXMLProperty(file, key) then break end
 
         local fruitName = getXMLString(file, key .. "#fruitName")
         if fruitName == nil then
-            logInfo("Fruit in germinate.xml is invalid")
+            logInfo("Fruit in growth.xml:germination is invalid")
             break
         end
 
-        local gTemp = getXMLFloat(file, key .. ".gTemp#value")
+        local gTemp = getXMLFloat(file, key .. "#temp")
 
         if gTemp == nil then
-            logInfo("Temperature data in germinate.xml is invalid")
+            logInfo("Temperature data in growth.xml:germination is invalid")
             break
         end
 
-        local config = {
-            ["gTemp"] = gTemp
-        }
-
-        self.germinateTemp[fruitName] = config
+        self.germinateTemp[fruitName] = gTemp
 
         i = i + 1
     end
 
     -- Close file
     delete(file)
-
 end
 
-function ssWeatherManager:loadTemperature()
-    self.temperatureData = {}
+function ssWeatherManager:loadFromXML(path)
+    local file = loadXMLFile("weather", path)
 
-    -- Open file
-    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
-
+    -- Load temperature data
     local i = 0
     while true do
         local key = string.format("weather.temperature.p(%d)", i)
@@ -691,17 +695,8 @@ function ssWeatherManager:loadTemperature()
         i = i + 1
     end
 
-    -- Close file
-    delete(file)
-end
-
-function ssWeatherManager:loadRain()
-    self.rainData = {}
-
-    -- Open file
-    local file = loadXMLFile("weather", g_seasons.modDir .. "data/weather.xml")
-
-    local i = 0
+    -- Load rain data
+    i = 0
     while true do
         local key = string.format("weather.rain.s(%d)", i)
         if not hasXMLProperty(file, key) then break end
@@ -734,10 +729,8 @@ function ssWeatherManager:loadRain()
         i = i + 1
     end
 
-    -- Close file
     delete(file)
 end
-
 
 -- MP EVENT
 -- Server: Send a new day (with day number)

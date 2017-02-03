@@ -12,7 +12,7 @@ ssGrowthManagerData = {}
 function ssGrowthManagerData:loadAllData()
     local growthData = {}
     local path = g_seasons.modDir .. self.DEFAULT_FILE_PATH
-    local rootKey = "growthManager"
+    local rootKey = "growth"
 
     local file = loadXMLFile("xml", path)
     if file == nil then
@@ -193,7 +193,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
 
         local i = 0
         while true do
-            local defaultFruitKey = string.format("%s.defaultFruit(%i)#name", defaultFruitsKey, i)
+            local defaultFruitKey = string.format("%s.defaultFruit(%i)#fruitName", defaultFruitsKey, i)
             if not hasXMLProperty(file, defaultFruitKey) then
                 break
             end
