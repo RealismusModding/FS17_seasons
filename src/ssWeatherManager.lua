@@ -610,16 +610,7 @@ end
 
 --- function for predicting when soil is too cold for crops to germinate
 function ssWeatherManager:germinationTemperature(fruit)
-    local gTemp = 5
-
-    if self.germinateTemp[fruit] ~= nil then
-        gTemp = self.germinateTemp[fruit]
-    else
-        -- Default to barley for unknown crops
-        gTemp = self.germinateTemp["barley"]
-    end
-
-    return gTemp
+    return Utils.getNoNil(self.germinateTemp[fruit], self.germinateTemp["barley"])
 end
 
 function ssWeatherManager:canSow(fruit)
@@ -644,14 +635,14 @@ function ssWeatherManager:loadGerminateTemperature(path)
             break
         end
 
-        local gTemp = getXMLFloat(file, key .. "#temp")
+        local temp = getXMLFloat(file, key .. "#temp")
 
-        if gTemp == nil then
+        if temp == nil then
             logInfo("Temperature data in growth.xml:germination is invalid")
             break
         end
 
-        self.germinateTemp[fruitName] = gTemp
+        self.germinateTemp[fruitName] = temp
 
         i = i + 1
     end
