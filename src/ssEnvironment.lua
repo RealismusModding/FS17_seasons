@@ -40,9 +40,9 @@ function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".environment.latitude", 51.9)
 
     self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
-    self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".settings.latestSeason", -1)
-    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".settings.latestGrowthStage", 0)
-    self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", 0)
+    self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
+    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0)
+    self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
     self._doInitalDayEvent = savegame == nil
 end
@@ -51,9 +51,9 @@ function ssEnvironment:save(savegame, key)
     ssStorage.setXMLFloat(savegame, key .. ".environment.latitude", self.latitude)
 
     ssStorage.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
-    ssStorage.setXMLInt(savegame, key .. ".settings.latestSeason", self.latestSeason)
-    ssStorage.setXMLInt(savegame, key .. ".settings.latestGrowthStage", self.latestGrowthStage)
-    ssStorage.setXMLInt(savegame, key .. ".settings.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
+    ssStorage.setXMLInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
+    ssStorage.setXMLInt(savegame, key .. ".environment.latestGrowthStage", self.latestGrowthStage)
+    ssStorage.setXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
 function ssEnvironment:loadMap(name)
