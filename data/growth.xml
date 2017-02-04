@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
-<growthManager>
+<growth>
     <defaultFruits>
-        <defaultFruit name="barley"/> 
-        <defaultFruit name="wheat"/> 
-        <defaultFruit name="rape"/> 
-        <defaultFruit name="maize"/> 
-        <defaultFruit name="soybean"/> 
-        <defaultFruit name="sunflower"/> 
-        <defaultFruit name="potato"/> 
-        <defaultFruit name="sugarBeet"/> 
-        <defaultFruit name="poplar"/> 
-        <defaultFruit name="grass"/> 
-        <defaultFruit name="oilseedRadish"/> 
-        <defaultFruit name="dryGrass"/>
+        <defaultFruit fruitName="barley"/>
+        <defaultFruit fruitName="wheat"/>
+        <defaultFruit fruitName="rape"/>
+        <defaultFruit fruitName="maize"/>
+        <defaultFruit fruitName="soybean"/>
+        <defaultFruit fruitName="sunflower"/>
+        <defaultFruit fruitName="potato"/>
+        <defaultFruit fruitName="sugarBeet"/>
+        <defaultFruit fruitName="poplar"/>
+        <defaultFruit fruitName="grass"/>
+        <defaultFruit fruitName="oilseedRadish"/>
+        <defaultFruit fruitName="dryGrass"/>
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1">
@@ -29,10 +29,10 @@
             <fruit fruitName="barley"  normalGrowthState="1"  normalGrowthMaxState="3"/>
             <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>    
+            <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="maize" normalGrowthState="1"/>
-            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT"/> 
-            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT"/> 
+            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT"/>
+            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="1"/>
             <fruit fruitName="sugarBeet" normalGrowthState="1"/>
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
@@ -41,16 +41,16 @@
         </gt>
         <gt growthTransitionNum="3">
             <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="3"/>
-			<fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
-			<fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
-			<fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
+            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
+            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
+            <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="maize" normalGrowthState="1" normalGrowthMaxState="2"/>
             <fruit fruitName="soybean" normalGrowthState="1"/>
             <fruit fruitName="sunflower" normalGrowthState="1"/>
             <fruit fruitName="potato"    normalGrowthState="1" normalGrowthMaxState="2"/>
-			<fruit fruitName="sugarBeet" normalGrowthState="1" normalGrowthMaxState="2"/>
-			<fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-			<fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="sugarBeet" normalGrowthState="1" normalGrowthMaxState="2"/>
+            <fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="4">
             <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="4"/>
@@ -67,10 +67,10 @@
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="5">
-            <fruit fruitName="barley"  normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/> 
-            <fruit fruitName="wheat"   normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/> 
-            <fruit fruitName="rape"    normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/> 
-            <fruit fruitName="default" normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/> 
+            <fruit fruitName="barley"  normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="wheat"   normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="rape"    normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="default" normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="maize" normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="sunflower" normalGrowthState="2" normalGrowthMaxState="3" setGrowthState="1" desiredGrowthState="CUT"/>
@@ -81,7 +81,7 @@
         </gt>
         <gt growthTransitionNum="6">
             <fruit fruitName="barley"  normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="wheat"   normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/> 
+            <fruit fruitName="wheat"   normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="rape"    normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="default" normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="maize" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
@@ -97,7 +97,7 @@
             <fruit fruitName="wheat"   normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="rape"    normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="default" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="maize" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>	
+            <fruit fruitName="maize" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
@@ -130,7 +130,7 @@
             <fruit fruitName="potato"    normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>    
+            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="10">
             <fruit fruitName="barley"  setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
@@ -138,18 +138,18 @@
             <fruit fruitName="rape"    setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <fruit fruitName="default" setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
             <!--need to look at this again add cut state for 1 withered for others. possible? not sure about potato and sugarBeet-->
-            <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT" normalGrowthState="7"/> 
-            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
-            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
-            <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
-            <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/> 
+            <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT" normalGrowthState="7"/>
+            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
+            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
+            <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
+            <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
             <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
         </gt>
         <gt growthTransitionNum="11"/>
         <gt growthTransitionNum="12"/>
         <gt growthTransitionNum="FIRST_LOAD_TRANSITION">
             <fruit fruitName="barley" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
-            <fruit fruitName="wheat" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>					
+            <fruit fruitName="wheat" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
             <fruit fruitName="rape" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
             <fruit fruitName="maize" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
             <fruit fruitName="soybean" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
@@ -161,6 +161,18 @@
             <fruit fruitName="oilseedRadish" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
         </gt>
     </growthTransitions>
-</growthManager>
-
-
+    <germination>
+        <fruit fruitName="default" germinateTemp="5" />
+        <fruit fruitName="barley" germinateTemp="5" />
+        <fruit fruitName="wheat" germinateTemp="5" />
+        <fruit fruitName="rape" germinateTemp="5" />
+        <fruit fruitName="maize" germinateTemp="10" />
+        <fruit fruitName="soybean" germinateTemp="10" />
+        <fruit fruitName="sunflower" germinateTemp="7" />
+        <fruit fruitName="potato" germinateTemp="5" />
+        <fruit fruitName="sugarBeet" germinateTemp="5" />
+        <fruit fruitName="grass" germinateTemp="3" />
+        <fruit fruitName="oilseedRadish" germinateTemp="7" />
+        <fruit fruitName="poplar" germinateTemp="5" />
+    </germination>
+</growth>
