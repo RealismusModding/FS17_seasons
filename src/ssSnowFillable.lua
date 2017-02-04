@@ -28,7 +28,6 @@ end
 
 function ssSnowFillable:updateTick(dt)
     if self.isServer then
-        -- This check is not very sanitary but it is faster than using a specialization check
         local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
         local temp = g_seasons.weather:currentTemperature()
 
