@@ -19,6 +19,7 @@ ssVehicle.allowedInWinter = {}
 
 SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/ssRepairable.lua")
 SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/ssSnowTracks.lua")
+SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/ssSnowFillable.lua")
 
 function ssVehicle:preLoad()
     ssVehicle:registerWheelTypes()
@@ -73,6 +74,10 @@ function ssVehicle:installVehicleSpecializations()
         if vehicleType ~= nil and SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
+        end
+
+        if vehicleType ~= nil and SpecializationUtil.hasSpecialization(Fillable, vehicleType.specializations) then
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowfillable"))
         end
     end
 end
@@ -407,7 +412,6 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_SOILFROZEN"), 2000)
         end
     end
-
 end
 
 function ssVehicle:updateWheelTireFriction(superFunc, wheel)

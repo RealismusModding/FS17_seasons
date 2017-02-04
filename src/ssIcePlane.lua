@@ -32,7 +32,7 @@ function ssIcePlane:delete()
 end
 
 function ssIcePlane:updateVisibility()
-    setVisibility(self.id, g_seasons.weatherManager:isGroundFrozen())
+    setVisibility(self.id, g_seasons.weather:isGroundFrozen())
 end
 
 function ssIcePlane:weatherChanged()

@@ -35,7 +35,7 @@ function ssSnowAdmirer:delete()
 end
 
 function ssSnowAdmirer:updateVisibility()
-    setVisibility(self.id, g_seasons.weatherManager:getSnowHeight() > 0)
+    setVisibility(self.id, g_seasons.weather:getSnowHeight() > 0)
 end
 
 function ssSnowAdmirer:weatherChanged()

@@ -6,7 +6,7 @@
 --
 
 ssWeatherManager = {}
-g_seasons.weatherManager = ssWeatherManager
+g_seasons.weather = ssWeatherManager
 
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
@@ -208,7 +208,7 @@ function ssWeatherManager:update(dt)
     local currentRain = g_currentMission.environment.currentRain
 
     if currentRain ~= nil then
-        local currentTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
+        local currentTemp = mathRound(self:currentTemperature(), 0)
 
         if currentTemp > 1 and currentRain.rainTypeId == 'snow' then
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
@@ -380,7 +380,7 @@ end
 --- snowDepth in meters
 function ssWeatherManager:calculateSnowAccumulation()
     local currentRain = g_currentMission.environment.currentRain
-    local currentTemp = self:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute)
+    local currentTemp = self:currentTemperature()
     local currentSnow = self.snowDepth
 
     --- more radiation during spring
@@ -467,6 +467,20 @@ end
 
 function ssWeatherManager:getSnowHeight()
     return self.snowDepth
+end
+
+function ssWeatherManager:currentTemperature()
+    local curHour = g_currentMission.environment.currentHour
+    local curMin = g_currentMission.environment.currentMinute
+    if self.latestCurrentTempHour == curHour and self.latestCurrentTempMinute == curMin then
+        return self.latestCurrentTemp
+    end
+
+    self.latestCurrentTempHour = curHour
+    self.latestCurrentTempMinute = curMin
+    self.latestCurrentTemp = self:diurnalTemp(curHour, curMin)
+
+    return self.latestCurrentTemp
 end
 
 function ssWeatherManager:switchRainHail()
