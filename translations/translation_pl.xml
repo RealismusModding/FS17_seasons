@@ -93,5 +93,10 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Sezonów? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
+
+	<text name="dialog_resetGrowth" text="Uruchomiłeś Sezony na starym stanie gry. Mod Sezonów chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie." />
+        <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
+        <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
+        <text name="dialog_resetGrowth_yes" text="Zresetuj" />
     </texts>
 </l10n>
