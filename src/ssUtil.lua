@@ -77,16 +77,6 @@ function ssUtil.monthNameShort(monthNumber)
     return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
 end
 
-function ssUtil.monthAtGrowthTransitionNumber(growthTransitionNumber)
---TODO: brain gone  need to improve
-    local monthNumber = math.fmod( growthTransitionNumber,g_seasons.environment.MONTHS_IN_YEAR) + 2
-    if monthNumber > 12 then
-        monthNumber = 11
-    end
-    
-    return monthNumber
-end
-
 function ssUtil.nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end

@@ -49,9 +49,10 @@ end
 function ssViewController:draw()
     if self.debugView == true then
         renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
-        local growthTransition = g_seasons.environment:currentGrowthTransition()
+        local growthTransition = g_seasons.environment:growthTransitionAtDay()
 
         renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
+        renderText(0.54, 0.94, 0.01, "Month: " .. ssUtil.monthNameShort(g_seasons.environment:monthAtDay()))
         local cropsThatCanGrow = ""
 
         for index,fruit in pairs(g_currentMission.fruits) do
@@ -61,20 +62,20 @@ function ssViewController:draw()
                 cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
         end
-        renderText(0.54, 0.94, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
-        renderText(0.54, 0.92, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
+        renderText(0.54, 0.92, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+        renderText(0.54, 0.90, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
     end
 end
 
 -- handle growthStageChanged event
 function ssViewController:growthStageChanged()
-    --self.currentIndicator = g_seasons.environment:currentGrowthTransition()
+    --self.currentIndicator = g_seasons.environment:growthTransitionAtDay()
 end
 
 -- handle hourChanged event
 -- this is a hack for  the early spring transition to update the can plant data based on temperature
 function ssViewController:dayChanged()
-    local growthTransition = g_seasons.environment:currentGrowthTransition()
+    local growthTransition = g_seasons.environment:growthTransitionAtDay()
 
     -- FIXME(jos): no clue why this is needed. Why cant the GM just hold growth data?
     self:updateData()

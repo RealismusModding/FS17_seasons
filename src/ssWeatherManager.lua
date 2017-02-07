@@ -240,7 +240,7 @@ function ssWeatherManager:buildForecast()
         oneDayForecast.day = startDayNum + n - 1 -- To match forecast with actual game
         oneDayForecast.season = g_seasons.environment:seasonAtDay(startDayNum + n - 1)
 
-        ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(oneDayForecast.day)]
+        ssTmax = self.temperatureData[g_seasons.environment:growthTransitionAtDay(oneDayForecast.day)]
 
         oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
         oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
@@ -279,7 +279,7 @@ function ssWeatherManager:updateForecast()
     oneDayForecast.day = dayNum -- To match forecast with actual game
     oneDayForecast.season = g_seasons.environment:seasonAtDay(dayNum)
 
-    ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(dayNum)]
+    ssTmax = self.temperatureData[g_seasons.environment:growthTransitionAtDay(dayNum)]
 
     if self.forecast[self.forecastLength-1].season == oneDayForecast.season then
         --Seasonal average for a day in the current season
@@ -578,7 +578,7 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
 end
 
 function ssWeatherManager:_randomRain(day)
-    ssTmax = self.temperatureData[g_seasons.environment:currentGrowthTransition(day)]
+    ssTmax = self.temperatureData[g_seasons.environment:growthTransitionAtDay(day)]
 
     if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
         if oneDayForecast.highTemp > ssTmax.mode then

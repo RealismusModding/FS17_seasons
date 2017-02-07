@@ -40,7 +40,7 @@ end
 function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".environment.latitude", 51.9)
 
-    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
+    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 3), 3, 12)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
     self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0)
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
@@ -466,12 +466,18 @@ end
 
 -- Retuns month number based on dayNumber
 function ssEnvironment:monthAtDay(dayNumber)
-    if (dayNumber == nil) then
-        dayNumber = self:currentDay()
-    end
-
-    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR*3)
+    return self:monthAtGrowthTransitionNumber(self:growthTransitionAtDay(dayNumber))
 end
+
+function ssEnvironment:monthAtGrowthTransitionNumber(growthTransitionNumber)
+    local monthNumber = math.fmod( growthTransitionNumber,g_seasons.environment.MONTHS_IN_YEAR) + 2
+    if monthNumber > 12 then --because 11 becomes 13 TODO: brain gone  need to improve
+        monthNumber = 1
+    end
+    
+    return monthNumber
+end
+
 -- Returns 1-daysInSeason
 function ssEnvironment:dayInSeason(currentDay)
     if (currentDay == nil) then
@@ -493,12 +499,17 @@ function ssEnvironment:yearAtDay(dayNumber)
     return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
 end
 
-function ssEnvironment:currentGrowthTransition()
-    local currentDay = self:currentDay()
-    local season = self:currentSeason(currentDay)
-    local cGS = self:currentGrowthStage(currentDay)
+--uses currentDay if dayNumber not passed in
+function ssEnvironment:growthTransitionAtDay(dayNumber)
+    if (dayNumber == nil) then
+        dayNumber = self:currentDay()
+    end
+
+    local season = self:seasonAtDay(dayNumber)
+    local cGS = self:currentGrowthStage(dayNumber)
     return (cGS + (season*3))
 end
+
 
 function ssEnvironment:currentGrowthStage(currentDay)
     if (currentDay == nil) then
