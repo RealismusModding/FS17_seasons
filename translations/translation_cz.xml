@@ -26,6 +26,19 @@
         <text name="SS_WEEKDAY_SHORT_5" text="Pát" />
         <text name="SS_WEEKDAY_SHORT_6" text="Sob" />
         <text name="SS_WEEKDAY_SHORT_7" text="Ned" />
+        <!--TODO: ADD TRANSLATIONS-->
+        <text name="SS_MONTH_SHORT_1" text="Jan_CZ" />
+        <text name="SS_MONTH_SHORT_2" text="Feb_CZ" />
+        <text name="SS_MONTH_SHORT_3" text="Mar_CZ" />
+        <text name="SS_MONTH_SHORT_4" text="Apr_CZ" />
+        <text name="SS_MONTH_SHORT_5" text="May_CZ" />
+        <text name="SS_MONTH_SHORT_6" text="Jun_CZ" />
+        <text name="SS_MONTH_SHORT_7" text="Jul_CZ" />
+        <text name="SS_MONTH_SHORT_8" text="Aug_CZ" />
+        <text name="SS_MONTH_SHORT_9" text="Sep_CZ" />
+        <text name="SS_MONTH_SHORT_10" text="Oct_CZ" />
+        <text name="SS_MONTH_SHORT_11" text="Nov_CZ" />
+        <text name="SS_MONTH_SHORT_12" text="Dec_CZ" />
 
         <text name="SS_SEASON_0" text="Jaro" />
         <text name="SS_SEASON_1" text="Léto" />
