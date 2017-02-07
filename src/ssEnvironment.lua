@@ -15,6 +15,7 @@ g_seasons.environment = ssEnvironment
 
 ssEnvironment.DAYS_IN_WEEK = 7
 ssEnvironment.SEASONS_IN_YEAR = 4
+ssEnvironment.MONTHS_IN_YEAR = 12
 
 ssEnvironment.SEASON_SPRING = 0 -- important to start at 0, not 1
 ssEnvironment.SEASON_SUMMER = 1
