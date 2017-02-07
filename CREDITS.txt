@@ -12,3 +12,4 @@ German - tobiasgo, Oekobauer, ItZzShady
 Italian - fcelsa
 French - thierry62, Marxtai
 Russian - Vasylko
+Czech - gorgona
