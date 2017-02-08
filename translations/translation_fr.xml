@@ -78,18 +78,23 @@
         <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />
+		<text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celcius" />
 
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons." />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci." />
         <text name="tooltip_snow" text="La neige chutera dans les hivers froids et bloquera des routes." />
         <text name="tooltip_controlsHelp" text="Montrer la prévision et la bouton menu dans le menu d'aide." />
         <text name="tooltip_snowTracks" text="Les véhicules compressent la neige lorsqu'ils roulent dessus." />
+		<text name="tooltip_controlsTemperature" text="Controle de la temperature utilisé dans le jeux" />
+
 
         <text name="setting_seasonIntros" text="Introductions de saison" />
         <text name="setting_seasonLength" text="Durée de la saison" />
         <text name="setting_snow" text="Mode neige" />
         <text name="setting_controlsHelp" text="Boutons dans le menu d'aide" />
         <text name="setting_snowTracks" text="Traces de neige" />
+		<text name="setting_controlsTemperature" text="Unité de la temperature" />
 
         <text name="ui_helpCategory_1" text="Saisons" />
         <text name="ui_helpCategory_2" text="Neige" />
@@ -102,5 +107,10 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
+		
+		<text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvgarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
+        <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance" />
+        <text name="dialog_resetGrowth_no" text="maintenir la croissance" />
+        <text name="dialog_resetGrowth_yes" text="réinitialisation" />
     </texts>
 </l10n>
