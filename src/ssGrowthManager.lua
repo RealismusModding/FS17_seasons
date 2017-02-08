@@ -221,7 +221,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     end
 
     if desiredGrowthState == self.CUT then
-        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState
+        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
     end
 
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
