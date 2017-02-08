@@ -202,6 +202,7 @@ function ssGrowthManager:growthStageChanged()
         if self.isNewSavegame and growthTransition == 1 then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
+            self.isNewSavegame = false
         else
             log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
             self.currentGrowthTransitionPeriod = growthTransition
