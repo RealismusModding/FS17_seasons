@@ -52,7 +52,7 @@ function ssMain:load(savegame, key)
 
     self.isNewSaveGame = savegame == nil
     --self.isOldSaveGame = not hasXMLProperty(savegame, key) 
-    self.isOldSavegame = savegame ~= nil and not hasXMLPROPERTY(savegame, key) -- old game, no seasons
+    self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
 end
 
 function ssMain:save(savegame, key)
