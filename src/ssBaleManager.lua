@@ -105,7 +105,20 @@ function ssBaleManager:removeBale()
     for index,object in pairs(g_currentMission.itemsToSave) do
         if object.className == "Bale" then
             if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+                local volume = math.huge
 
+                -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
+                if object.item.baleDiameter ~= nil then
+                    local volume = math.pi()*(object.item.baleDiameter / 2 )^2 * object.item.baleWidth * 1000
+                else
+                    local volume = object.item.baleWidth * object.item.baleLength * object.item.baleHeight * 1000
+                end
+
+                if object.item.fillLevel < volume then
+                    self:delete(object.item)
+                end
+
+            -- when grass bale is more than 2 days old it will be deleted
             elseif object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
                 if object.item.age > 2 then
                     self:delete(object.item)
