@@ -109,9 +109,9 @@ function ssBaleManager:removeBale()
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
                 if object.item.baleDiameter ~= nil then
-                    local volume = math.pi()*(object.item.baleDiameter / 2 )^2 * object.item.baleWidth * 1000
+                    volume = math.pi()*(object.item.baleDiameter / 2 )^2 * object.item.baleWidth * 1000
                 else
-                    local volume = object.item.baleWidth * object.item.baleLength * object.item.baleHeight * 1000
+                    volume = object.item.baleWidth * object.item.baleLength * object.item.baleHeight * 1000
                 end
 
                 if object.item.fillLevel < volume then
