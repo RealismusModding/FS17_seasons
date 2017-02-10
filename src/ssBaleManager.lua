@@ -183,7 +183,7 @@ function ssBaleManager:getSaveAttributesAndNodes(oldFunc, nodeIdent)
 	local attributes, nodes = oldFunc(self, nodeIdent)
 		
 	if attributes ~= nil and self.age ~= nil then
-		attributes = attributes .. ' age="' .. self.age
+		attributes = attributes .. ' age="' .. self.age .. '"'
 	end
 		
 	return attributes, nodes
