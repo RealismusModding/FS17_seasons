@@ -60,7 +60,6 @@ function ssBaleManager:reduceFillLevel()
                         if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
                             local origFillLevel = object.item.fillLevel
                             local reductionFactor = self:calculateBaleReduction(object.item)
-                            log(reductionFactor)
                             object.item.fillLevel = origFillLevel * reductionFactor
                         end
                     end
@@ -68,7 +67,6 @@ function ssBaleManager:reduceFillLevel()
                     if object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
                         local origFillLevel = object.item.fillLevel
                         local reductionFactor = self:calculateBaleReduction(object.item)
-                        log(reductionFactor)
                         object.item.fillLevel = origFillLevel * reductionFactor
                     end
                 
@@ -90,6 +88,7 @@ end
 
 function ssBaleManager:dayChanged()
     self:incrementBaleAge()
+    self:removeBale()
 end
 
 function ssBaleManager:readStream(streamId, connection)
@@ -101,17 +100,44 @@ end
 function ssBaleManager:update(dt)
 end
 
+function ssBaleManager:removeBale()
+
+    for index,object in pairs(g_currentMission.itemsToSave) do
+        if object.className == "Bale" then
+            if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+
+            elseif object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                if object.item.age > 2 then
+                    self:delete(object.item)
+                end
+            end
+        end
+    end
+end
+
+
+function ssBaleManager:delete(singleBale)
+    -- from https://gdn.giants-software.com/documentation_scripting.php?version=script&category=65&class=2511#delete34583
+    if singleBale.i3dFilename ~= nil then
+        Utils.releaseSharedI3DFile(singleBale.i3dFilename, nil, true)
+    end
+    g_currentMission:removeLimitedObject(FSBaseMission.LIMITED_OBJECT_TYPE_BALE, singleBale)
+    unregisterObjectClassName(singleBale)
+    g_currentMission:removeItemToSave(singleBale)
+    Bale:superClass().delete(singleBale)
+end
+
 function ssBaleManager:incrementBaleAge()
 
     for index,object in pairs(g_currentMission.itemsToSave) do
 
         if object.className == "Bale" then
 
-            if object.item.baleAge ~= nil then
-                local yesterdayAge = object.item.baleAge
-                object.item.baleAge = yesterdayAge + 1
+            if object.item.age ~= nil then
+                local yesterdayAge = object.item.age
+                object.item.age = yesterdayAge + 1
             else
-                object.item.baleAge = 0
+                object.item.age = 0
             end
 
         end
@@ -126,15 +152,14 @@ function ssBaleManager:calculateBaleReduction(singleBale)
 	if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
 		reductionFactor = 0.99
 	
-    log(singleBale.baleAge)
 	elseif singleBale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
-        if singleBale.baleAge == nil then
-            singleBale.baleAge = 0
+        if singleBale.age == nil then
+            singleBale.age = 0
         end
 	
-    	local dayReductionFactor = 1 - ( ( 2.4 * singleBale.baleAge / daysInSeason + 1.2 )^5.75) / 100
+    	local dayReductionFactor = 1 - ( ( 2.4 * singleBale.age / daysInSeason + 1.2 )^5.75) / 100
 		reductionFactor = 1 - ( 1 - dayReductionFactor)/24
-	
+
 	end
 
     return reductionFactor
@@ -144,10 +169,10 @@ function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVe
     local state = oldFunc(self, xmlFile, key, resetVehicles)
 		
 	if state then
-	    local baleAgeLoad = getXMLString(xmlFile, key .. "#baleAge")
+	    local ageLoad = getXMLString(xmlFile, key .. "#age")
 			
-		if baleAge ~= nil then
-			self.baleAge = baleAgeLoad
+		if age ~= nil then
+			self.age = ageLoad
 		end
 	end
 		
@@ -157,8 +182,8 @@ end
 function ssBaleManager:getSaveAttributesAndNodes(oldFunc, nodeIdent)
 	local attributes, nodes = oldFunc(self, nodeIdent)
 		
-	if attributes ~= nil and self.baleAge ~= nil then
-		attributes = attributes .. ' baleAge="' .. self.baleAge
+	if attributes ~= nil and self.age ~= nil then
+		attributes = attributes .. ' age="' .. self.age
 	end
 		
 	return attributes, nodes
