@@ -14,18 +14,17 @@ function ssBaleManager:save(savegame, key)
 end
 
 function ssBaleManager:loadMap(name)
-    g_seasons.environment:addGrowthStageChangeListener(self)
+    g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
 
-    if g_currentMission:getIsServer() == true then
-        ssDensityMapScanner:registerCallback("ssBaleManagerReduceVolume", self, self.reduceVolume)
-    end
+    Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.loadFromAttributesAndNodes)
+    Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.getSaveAttributesAndNodes)
+
 end
 
-function ssBaleManager:reduceVolume(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, reductionFactor)
-    reductionFactor = tonumber(reductionFactor)
+function ssBaleManager:reduceFillLevel()
 
-    for _,object in pairs(g_currentMission.itemsToSave) do
+    for index,object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
         if object.className == "Bale" then
             
@@ -56,32 +55,41 @@ function ssBaleManager:reduceVolume(startWorldX, startWorldZ, widthWorldX, width
                     local density, _ , _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
 
                     -- check if the bale is outside and there has been rain during the day
-                    if density == 0 and g_currentMission.environment.timeSinceLastRain < 1440 then
-                        
-                        --if object.item.fillType == FillUtil:getFillTypesByNames("straw") or object.item.fillType == FillUtil:getFillTypesByNames("dryGrass") then
+                    if density == 0 and g_currentMission.environment.timeSinceLastRain < 60 then
+                    
+                        if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
                             local origFillLevel = object.item.fillLevel
+                            local reductionFactor = self:calculateBaleReduction(object.item)
+                            log(reductionFactor)
                             object.item.fillLevel = origFillLevel * reductionFactor
-                        --end
-                    --elseif object.item.fillType == FillUtil:getFillTypesByNames("grass") then
-                    --    local origFillLevel = object.item.fillLevel
-                    --    object.item.fillLevel = origFillLevel * reductionFactor
+                        end
+                    end
+
+                    if object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                        local origFillLevel = object.item.fillLevel
+                        local reductionFactor = self:calculateBaleReduction(object.item)
+                        log(reductionFactor)
+                        object.item.fillLevel = origFillLevel * reductionFactor
                     end
                 
                 -- without a snowmask reduce all unwrapped bales
                 else
                     local origFillLevel = object.item.fillLevel
+                    local reductionFactor = self:calculateBaleReduction(object.item)
                     object.item.fillLevel = origFillLevel * reductionFactor
                 end
+                
             end
         end
     end
 end
 
-function ssBaleManager:dayChanged()
-    ssDensityMapScanner:queuJob("ssBaleManagerReduceVolume", 0.75)
+function ssBaleManager:hourChanged()
+    self:reduceFillLevel()
 end
 
-function ssBaleManager:growthStageChanged()
+function ssBaleManager:dayChanged()
+    self:incrementBaleAge()
 end
 
 function ssBaleManager:readStream(streamId, connection)
@@ -93,3 +101,65 @@ end
 function ssBaleManager:update(dt)
 end
 
+function ssBaleManager:incrementBaleAge()
+
+    for index,object in pairs(g_currentMission.itemsToSave) do
+
+        if object.className == "Bale" then
+
+            if object.item.baleAge ~= nil then
+                local yesterdayAge = object.item.baleAge
+                object.item.baleAge = yesterdayAge + 1
+            else
+                object.item.baleAge = 0
+            end
+
+        end
+    end
+end
+
+function ssBaleManager:calculateBaleReduction(singleBale)
+
+	local reductionFactor = 1
+	local daysInSeason = g_seasons.environment.daysInSeason
+	
+	if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+		reductionFactor = 0.99
+	
+    log(singleBale.baleAge)
+	elseif singleBale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+        if singleBale.baleAge == nil then
+            singleBale.baleAge = 0
+        end
+	
+    	local dayReductionFactor = 1 - ( ( 2.4 * singleBale.baleAge / daysInSeason + 1.2 )^5.75) / 100
+		reductionFactor = 1 - ( 1 - dayReductionFactor)/24
+	
+	end
+
+    return reductionFactor
+end
+
+function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
+    local state = oldFunc(self, xmlFile, key, resetVehicles)
+		
+	if state then
+	    local baleAgeLoad = getXMLString(xmlFile, key .. "#baleAge")
+			
+		if baleAge ~= nil then
+			self.baleAge = baleAgeLoad
+		end
+	end
+		
+	return state
+end
+	
+function ssBaleManager:getSaveAttributesAndNodes(oldFunc, nodeIdent)
+	local attributes, nodes = oldFunc(self, nodeIdent)
+		
+	if attributes ~= nil and self.baleAge ~= nil then
+		attributes = attributes .. ' baleAge="' .. self.baleAge
+	end
+		
+	return attributes, nodes
+end
