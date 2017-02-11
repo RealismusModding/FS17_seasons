@@ -12,6 +12,7 @@ ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condi
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
+ssWeatherManager.cropMoistureContent = 20
 ssWeatherManager.weather = {}
 
 function ssWeatherManager:preLoad()
@@ -24,6 +25,7 @@ function ssWeatherManager:load(savegame, key)
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
+    self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 20.0)
 
     -- load forecast
     self.forecast = {}
@@ -74,6 +76,7 @@ function ssWeatherManager:save(savegame, key)
     ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
+    ssStorage.setXMLFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -346,6 +349,8 @@ function ssWeatherManager:hourChanged()
             listener:weatherChanged()
         end
     end
+
+    self:updateCropMoistureContent()
 end
 
 -- function to output the temperature during the day and night
@@ -735,6 +740,92 @@ function ssWeatherManager:loadFromXML(path)
     end
 
     delete(file)
+end
+
+-- function to calculate relative humidity
+function ssWeatherManager:calculateRelativeHumidity()
+   	-- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
+
+    local dewPointTemp = self.forecast[1].lowTemp - 2
+	local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
+	local relativeHumidity = 80
+    local currentTemp = self:currentTemperature()
+    local e = 6.1078 - math.exp(17.2669 * currentTemp / ( currentTemp + 237.3 ) )
+	
+    relativeHumidity = 100 * e / es
+	
+    if relativeHumidity < 5 then
+		relativeHumidity = 5
+    end
+	
+    if g_currentMission.environment.timeSinceLastRain == 0 then
+		relativeHumidity = 95
+    end
+
+	return relativeHumidity
+
+end
+
+-- function to calculate solar radiation
+function ssWeatherManager:calculateSolarRadiation()
+	-- http://swat.tamu.edu/media/1292/swat2005theory.pdf
+
+    local dayTime = g_currentMission.environment.dayTime/60/60/1000 --current time in hours
+
+    local julianDay = ssUtil.julianDay(ssEnvironment:currentDay())
+	local eta = ssEnvironment:calculateSunDeclination(julianDay)
+	local sunHeightAngle = ssEnvironment:calculateSunHeightAngle(julianDay)
+    local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
+
+	dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
+
+	local lengthDay = dayEnd - dayStart
+	local midDay = dayStart + lengthDay / 2
+	
+	local solarRadiation = 0
+	local Isc = 4.921 --MJ/(m2 * h) 
+	
+    if dayTime < dayStart or dayTime > dayEnd then
+        -- no radiation before sun rises
+		solarRadiation = 0
+	
+    else
+		solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
+	
+    end
+
+    -- lower solar radiation if it is overcast
+    if g_currentMission.environment.timeSinceLastRain == 0 then 
+		local tmpSolRad = solarRadiation
+        
+        solarRadiation = tmpSolRad * 0.05
+    end
+			
+	return solarRadiation
+
+end
+
+function ssWeatherManager:updateCropMoistureContent()
+
+    local dayTime = g_currentMission.environment.dayTime
+
+    local prevCropMoist = self.cropMoistureContent
+    local relativeHumidity = self:calculateRelativeHumidity()
+    local solarRadiation = self:calculateSolarRadiation()
+
+	local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
+	local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10)
+
+    --log(prevCropMoist,' | ',relativeHumidity,' | ',solarRadiation,' | ',tmpMoisture,' | ',deltaMoisture)
+    self.cropMoistureContent = tmpMoisture - deltaMoisture
+
+    -- increase crop Moisture in the first hour after rain has started 
+    if g_currentMission.environment.timeSinceLastRain == 0 and self.cropMoistureContent < 25 then
+        if dayTime > self.weather[1].startDayTime and (dayTime - 60) > self.weather[1].startDayTime then
+            self.cropMoistureContent = 25
+        end
+    end
+
 end
 
 -- MP EVENT
