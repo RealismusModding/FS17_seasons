@@ -66,6 +66,7 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", g_seasons.modDir), 0, 0, width, height)
 
         self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", g_seasons.modDir), 0, 0, width, height)
+        self.hud.overlays.wetcrop_hud = Overlay:new("hud_wetcrop", Utils.getFilename("resources/huds/wetcrop.dds", g_seasons.modDir), 0, 0, width, height)
 
         -- Seasons Weather Icons
         self.hud.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
@@ -187,6 +188,10 @@ function ssWeatherForecast:drawToday(forecast)
 
     if ssWeatherManager:isGroundFrozen() then
         renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
+    end
+
+    if not ssWeatherManager:isGroundFrozen() and ssWeatherManager:isCropWet() then
+        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
     end
 
     -- Render Season, cloud and ground icon
