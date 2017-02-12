@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        PromGames
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Muostrar predicción del tiempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Reparar vehículo" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Abrir menu" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Ocultar predicción tiempo" />
+
+        <text name="SS_WEEKDAY_1" text="Lunes" />
+        <text name="SS_WEEKDAY_2" text="Martes" />
+        <text name="SS_WEEKDAY_3" text="Miércoles" />
+        <text name="SS_WEEKDAY_4" text="Jueves" />
+        <text name="SS_WEEKDAY_5" text="Viernes" />
+        <text name="SS_WEEKDAY_6" text="Sábado" />
+        <text name="SS_WEEKDAY_7" text="Domingo" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Lun" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Mar" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Mie" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Jue" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Vie" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Sab" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Dom" />
+
+
+        <text name="SS_SEASON_0" text="Primavera" />
+        <text name="SS_SEASON_1" text="Verano" />
+        <text name="SS_SEASON_2" text="Otoño" />
+        <text name="SS_SEASON_3" text="Invierno" />
+
+
+        <text name="SS_MONTH_SHORT_1" text="Ene" />
+        <text name="SS_MONTH_SHORT_2" text="Feb" />
+        <text name="SS_MONTH_SHORT_3" text="Mar" />
+        <text name="SS_MONTH_SHORT_4" text="Abr" />
+        <text name="SS_MONTH_SHORT_5" text="May" />
+        <text name="SS_MONTH_SHORT_6" text="Jun" />
+        <text name="SS_MONTH_SHORT_7" text="Jul" />
+        <text name="SS_MONTH_SHORT_8" text="Ago" />
+        <text name="SS_MONTH_SHORT_9" text="Sep" />
+        <text name="SS_MONTH_SHORT_10" text="Oct" />
+        <text name="SS_MONTH_SHORT_11" text="Nov" />
+        <text name="SS_MONTH_SHORT_12" text="Dic" />
+
+
+
+        <text name="SS_VEHICLE_TAXES" text="Impuestos Vehículo" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Mantenimiento Vehículo" />
+        <text name="SS_VEHICLE_REPAIRS" text="Reparación Vehículo" />
+
+
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="No tienes suficiente para mantener esto" />
+        <text name="SS_VEHICLE_REPAIRED" text="Coste de mantenimiento para %s fue %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Mantenimiento %s para %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Mantenimiento necesario" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas o %d días hasta mantenimiento" />
+        <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento el %s por %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
+	     	<text name="SS_WARN_REPAIR" text="Motor roto. Repare su vehículo!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="a medianoche" />
+
+
+        <text name="SS_WARN_SOILFROZEN" text="El terreno está congelado. No puede trabajar en él!" />
+        <text name="SS_SAVE_FAILED" text="Error al guardar el Seaons savegame. Inténtelo de nuevo!" />
+
+
+
+        <text name="SS_SEASON_INTRO_0" text="Un nuevo año, nuevo periodo de siembra. TODO" /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="El sol está potente, sus cosechas crecen. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="La tempoprada de recolección ha llegado. Preparese para el invierno porque sus cosechas no sobrevivirán al frío. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Está helando. El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá. TODO" /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="No mostrar de nuevo" />
+
+
+
+        <!-- GUI -->
+        <text name="ui_pageOverview" text="General" />
+        <text name="ui_pageSettings" text="Configuración" />
+        <text name="ui_pageHelp" text="Ayuda" />
+        <text name="ui_pageDebug" text="Herramientas Debug" />
+
+
+
+        <text name="ui_buttonSave" text="Aplicar cambios" />
+        <text name="ui_snowOneLayer" text="1 capa sólo" />
+        <text name="ui_days" text="%i días" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celsius" />
+
+
+
+        <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones." />
+        <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación." />
+        <text name="tooltip_snow" text="Nevará en el frío invierno and se bloquearán las carreteras." />
+        <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en la ayuda." />
+        <text name="tooltip_snowTracks" text="Los vehículos comprimirán la nieve cuando pasen por encima." />
+        <text name="tooltip_controlsTemperature" text="Define la escala de temperatura en el juego" />
+
+
+        <text name="setting_seasonIntros" text="Introducciones estaciones" />
+        <text name="setting_seasonLength" text="Duración de la estación" />
+        <text name="setting_snow" text="Modo nevando" />
+        <text name="setting_controlsHelp" text="Teclas en menu de ayuda" />
+        <text name="setting_snowTracks" text="Cadenas para la nieve" />
+        <text name="setting_controlsTemperature" text="Escala de temperatura" />
+
+
+
+        <text name="ui_helpCategory_1" text="Estaciones" />
+        <text name="ui_helpCategory_2" text="Nieve" />
+        <text name="ui_helpCategory_3" text="Cosechas" />
+        <text name="ui_helpCategory_4" text="Animales" />
+
+
+        <text name="ui_helpTitle_1_1" text="1.1" />
+        <text name="ui_helpTitle_2_1" text="2.1" />
+        <text name="ui_helpTitle_3_1" text="3.1" />
+        <text name="ui_helpTitle_4_1" text="4.1" />
+
+
+
+        <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerá después de un año de juego." />
+
+
+        <text name="dialog_resetGrowth" text="Ha cargado un savegame antiguo. Seasons debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Seasons no funcionará como se espera." />
+        <text name="dialog_resetGrowth_title" text="Reset crecimiento" />
+        <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />
+        <text name="dialog_resetGrowth_yes" text="Reset" />
+
+    </texts>
+
+</l10n>
