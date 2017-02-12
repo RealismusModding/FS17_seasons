@@ -12,7 +12,7 @@ ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condi
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
-ssWeatherManager.cropMoistureContent = 20
+ssWeatherManager.cropMoistureContent = 15
 ssWeatherManager.weather = {}
 
 function ssWeatherManager:preLoad()
@@ -25,7 +25,7 @@ function ssWeatherManager:load(savegame, key)
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
-    self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 20.0)
+    self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
 
     -- load forecast
     self.forecast = {}
@@ -470,6 +470,10 @@ function ssWeatherManager:isGroundFrozen()
     return self.soilTemp < 0
 end
 
+function ssWeatherManager:isCropWet()
+    return self.cropMoistureContent > 20
+end
+
 function ssWeatherManager:getSnowHeight()
     return self.snowDepth
 end
@@ -755,7 +759,7 @@ function ssWeatherManager:calculateRelativeHumidity()
     relativeHumidity = 100 * e / es
 	
     if relativeHumidity < 5 then
-		relativeHumidity = 5
+        relativeHumidity = 5
     end
 	
     if g_currentMission.environment.timeSinceLastRain == 0 then
