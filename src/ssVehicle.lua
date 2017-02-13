@@ -44,6 +44,7 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
     Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.getGroundType)
+    Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     InGameMenu.onCreateGarageVehicleAge = Utils.overwrittenFunction(InGameMenu.onCreateGarageVehicleAge, ssVehicle.inGameMenuOnCreateGarageVehicleAge)
@@ -417,10 +418,14 @@ end
 function ssVehicle:updateWheelTireFriction(superFunc, wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
-            if wheel.tireType == WheelsUtil.getTireType('studded') or wheel.tireType == WheelsUtil.getTireType('chains') then
+            if wheel.tireType == WheelsUtil.getTireType('chains') then
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+            elseif wheel.tireType == WheelsUtil.getTireType('crawler') then
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.5)
+            elseif wheel.tireType == WheelsUtil.getTireType('studded') then
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.7)
             else
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.15)
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.1)
             end
         else
             setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
@@ -462,5 +467,20 @@ function ssVehicle:registerWheelTypes()
 
     WheelsUtil.registerTireType("studded",studdedFrictionCoeffs,studdedFrictionCoeffsWet)
     WheelsUtil.registerTireType("chains",snowchainsFrictionCoeffs,snowchainsFrictionCoeffsWet)
+
+end
+
+function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
+    superFunc(self,earlyWarning)
+
+    --if not moistureSystem then 
+    --    return superFunc(self, earlyWarning) 
+    --end 
+
+    if self.allowThreshingDuringRain then
+        return true
+    end
+
+    return not ssWeatherManager:isCropWet()
 
 end
