@@ -32,8 +32,8 @@ function ssMain:preLoad()
     self.simpleVersion = false--<%=simpleVersion %>
 
     -- Set global settings
-    self.verbose = true--<%=verbose %>
-    self.debug = true--<%=debug %>
+    self.verbose = false--<%=verbose %>
+    self.debug = false--<%=debug %>
     self.enabled = false -- will be enabled later in the loading process
 
     logInfo("Loading Seasons " .. self.version);
@@ -51,7 +51,7 @@ function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
 
     self.isNewSaveGame = savegame == nil
-    --self.isOldSaveGame = not hasXMLProperty(savegame, key) 
+    --self.isOldSaveGame = not hasXMLProperty(savegame, key)
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
 end
 
