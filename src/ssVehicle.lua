@@ -54,7 +54,7 @@ function ssVehicle:loadMap()
     ssVehicle.repairInterval = g_seasons.environment.daysInSeason * 2
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
-    g_i18n.texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
+    getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
 
     self:installVehicleSpecializations()
     self:loadRepairFactors()
