@@ -62,36 +62,25 @@ function ssAnimals:seasonChanged()
     end
 
     if season == g_seasons.environment.SEASON_WINTER then
-        self:disableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:disableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
+        self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
     else
-        self:enableFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:enableFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
+        self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
     end
 
     -- FIXME send event to clients that stuff has changed
     -- broadcast event
 end
 
--- animal: string, filltype: int
-function ssAnimals:disableFillType(animal, fillType)
-    local trough = g_currentMission.husbandries[animal].tipTriggersFillLevels[fillType]
-
-    for _, p in pairs(trough) do -- Jos: not sure what p actually is.
-        if p.tipTrigger.acceptedFillTypes[fillType] ~= nil then
-            p.tipTrigger.acceptedFillTypes[fillType] = false
-        end
-    end
-end
-
--- animal: string, filltype: int
+-- animal: string, filltype: int, enabled: bool
 -- Fill must be installed
-function ssAnimals:enableFillType(animal, fillType)
+function ssAnimals:toggleFillType(animal, fillType, enabled)
     local trough = g_currentMission.husbandries[animal].tipTriggersFillLevels[fillType]
 
     for _, p in pairs(trough) do -- Jos: not sure what p actually is.
         if p.tipTrigger.acceptedFillTypes[fillType] ~= nil then
-            p.tipTrigger.acceptedFillTypes[fillType] = true
+            p.tipTrigger.acceptedFillTypes[fillType] = enabled
         end
     end
 end
