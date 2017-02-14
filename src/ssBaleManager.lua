@@ -40,7 +40,7 @@ function ssBaleManager:reduceFillLevel()
                         dim.length = object.item.baleDiameter
                     else
                         dim.width = object.item.baleWidth
-                        dim.length = object.item.length
+                        dim.length = object.item.baleLength
                     end
                         
                     local x0 = object.item.sendPosX + dim.width
