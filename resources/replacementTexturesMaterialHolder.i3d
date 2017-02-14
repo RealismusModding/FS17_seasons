@@ -50,6 +50,23 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="33" filename="data/maps/trees/birch6LOD_normal.png" relativePath="false"/>
     <File fileId="34" filename="replacementTextures/winter/birch2LOD_diffuse.png" relativePath="true"/>
 
+    <File fileId="38" filename="replacementTextures/winter/pine2LODSnow_diffuse.png" relativePath="true"/> 	
+    <File fileId="39" filename="replacementTextures/winter/pine2LOD_normal.png" relativePath="true"/> 		
+    <File fileId="40" filename="replacementTextures/winter/pine3LODSnow_diffuse.png" relativePath="true"/>	
+    <File fileId="41" filename="replacementTextures/winter/pine3LOD_normal.png" relativePath="true"/>		
+    <File fileId="42" filename="replacementTextures/winter/pine4LODSnow_diffuse.png" relativePath="true"/>	
+    <File fileId="43" filename="replacementTextures/winter/pine4LOD_normal.png" relativePath="true"/>		
+    <File fileId="44" filename="replacementTextures/winter/pine5LODSnow_diffuse.png" relativePath="true"/>	
+    <File fileId="45" filename="replacementTextures/winter/pine5LOD_normal.png" relativePath="true"/>		
+    <File fileId="46" filename="replacementTextures/winter/pine6LOD_diffuse.png" relativePath="true"/>		
+    <File fileId="47" filename="replacementTextures/winter/pine6LOD_normal.png" relativePath="true"/>		
+    <File fileId="48" filename="replacementTextures/winter/pineBranch_diffuse.png" relativePath="true"/>	
+    <File fileId="49" filename="replacementTextures/winter/pineBranch_normal.png" relativePath="true"/>		
+    <File fileId="50" filename="replacementTextures/winter/pineTrunkDead_diffuse.png" relativePath="true"/>	
+    <File fileId="51" filename="replacementTextures/winter/pineTrunkDead_normal.png" relativePath="true"/>	
+    <File fileId="52" filename="replacementTextures/winter/pineTrunk_diffuse.png" relativePath="true"/>		
+    <File fileId="53" filename="replacementTextures/winter/pineTrunk_normal.png" relativePath="true"/>
+
     <File fileId="101" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
     <File fileId="102" filename="data/shaders/windShader.xml" relativePath="false"/>
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
@@ -139,7 +156,36 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="33"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-
+    <Material name="pineBranch_mat" materialId="216" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="48"/>
+      <Normalmap fileId="49"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="pine2LOD_mat" materialId="217" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="38"/>
+      <Normalmap fileId="39"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="pine3LOD_mat" materialId="218" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="40"/>
+      <Normalmap fileId="41"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="pine4LOD_mat" materialId="219" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="42"/>
+      <Normalmap fileId="43"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+      <Material name="pine5LOD_mat" materialId="220" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="44"/>
+      <Normalmap fileId="45"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="pine6LOD_mat" materialId="221" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="46"/>
+      <Normalmap fileId="47"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
   </Materials>
 
 
@@ -168,6 +214,12 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_birchBranch_winter" visibility="false" nodeId="313" materialIds="213" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_birchLOD_winter" visibility="false" nodeId="314" materialIds="214" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_birch2LOD_winter" visibility="false" nodeId="315" materialIds="215" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pineBranch_winter" visibility="false" nodeId="316" materialIds="216" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pine2LOD_winter" visibility="false" nodeId="317" materialIds="217" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pine3LOD_winter" visibility="false" nodeId="318" materialIds="218" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pine4LOD_winter" visibility="false" nodeId="319" materialIds="219" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pine5LOD_winter" visibility="false" nodeId="320" materialIds="220" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_pine6LOD_winter" visibility="false" nodeId="321" materialIds="221" distanceBlending="false" />
   </Scene>
 
 </i3D>
