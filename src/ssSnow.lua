@@ -240,35 +240,34 @@ function ssSnow:removeSnowUnderObjects()
                 dim.width = object.item.baleWidth
                 dim.length = object.item.baleLength
             end
+
             self:removeSnowLayer(object.item,dim)
 
-        elseif object.className == 'FillablePallet' then
+        elseif object.className == "FillablePallet" then
             dim.width = 1
             dim.length = 1
-            self:removeSnowLayer(object.item,dim)
 
+            self:removeSnowLayer(object.item,dim)
         end
     end
 
     for _, singleVehicle in pairs(g_currentMission.vehicles) do
-
         if singleVehicle.wheels ~= nil then
-
             for _, wheel in pairs(singleVehicle.wheels) do
 
-                    local width = 0.5 * wheel.width;
-                    local length = math.min(0.2, 0.35 * wheel.width);
-                    local radius = wheel.radius
+                local width = 0.5 * wheel.width;
+                local length = math.min(0.2, 0.35 * wheel.width);
+                local radius = wheel.radius
 
-                    local x0,z0, x1,z1, x2,z2 = self:getWheelCoord(wheel,width,length)
+                local x0,z0, x1,z1, x2,z2 = self:getWheelCoord(wheel,width,length)
 
-                    self:removeSnow(x0,z0, x1,z1, x2,z2, 1)
+                self:removeSnow(x0,z0, x1,z1, x2,z2, 1)
             end
         end
     end
 end
 
-function ssSnow:removeSnowLayer(objectInSnow,dim)
+function ssSnow:removeSnowLayer(objectInSnow, dim)
     local scale = 0.65
 
     local x0 = objectInSnow.sendPosX + dim.width * scale
