@@ -52,7 +52,7 @@ function ssSnow:loadMap(name)
             setVisibility(self.snowMaskId, false)
         end
 
-        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow)
+        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
     end
 
@@ -151,8 +151,6 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, layers)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-
-    self:removeSnowUnderObjects()
 end
 
 -- Must be defined before being registered with ssDensityMapScanner.
@@ -223,7 +221,6 @@ end
 Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
 
 function ssSnow:removeSnowUnderObjects()
-
     local dim = {}
 
     for _,object in pairs(g_currentMission.itemsToSave) do
@@ -295,7 +292,6 @@ function ssSnow:removeSnowLayer(objectInSnow,dim)
 end
 
 function ssSnow:getWheelCoord(wheel,width,length)
-
     local x0,y0,z0
     local x1,y1,z1
     local x2,y2,z2
@@ -312,5 +308,4 @@ function ssSnow:getWheelCoord(wheel,width,length)
     end
 
     return x0,z0, x1,z1, x2,z2
-
 end

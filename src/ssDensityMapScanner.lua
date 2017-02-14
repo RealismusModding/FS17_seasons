@@ -23,9 +23,13 @@ function ssDensityMapScanner:queuJob(callBackName, parameter)
     ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
 end
 
-function ssDensityMapScanner:registerCallback(callBackName ,callbackSelf , callbackFunction)
+function ssDensityMapScanner:registerCallback(callBackName, callbackSelf, callbackFunction, callbackFinalizeFunction)
     print("Registering callback: " .. callBackName)
-    self.callBacks[callBackName] = { callbackSelf = callbackSelf, callbackFunction = callbackFunction }
+    self.callBacks[callBackName] = {
+        callbackSelf = callbackSelf,
+        callbackFunction = callbackFunction,
+        callbackFinalizeFunction = callbackFinalizeFunction
+    }
 end
 
 function ssDensityMapScanner:save(savegame, key)
@@ -122,5 +126,9 @@ function ssDensityMapScanner:ssIterateOverTerrain()
         self.currentX = 0
         self.currentZ = 0
         self.moreIterations = false
+
+        if callback.callbackFinalizeFunction ~= nil then
+            callback.callbackFinalizeFunction(callback.callbackSelf, self.currentParameter)
+        end
     end
 end
