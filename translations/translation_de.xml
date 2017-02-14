@@ -55,7 +55,7 @@
         <text name="SS_REPAIR_DIALOG" text="Möchtest du das Fahrzeug %s für %s reparieren ?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Repariere" />
 
-        <text name="SS_WARN_SOILFROZEN" text="Der Boden ist gefroren, du kannst so nicht Arbeiten!" />
+        <text name="warning_soilIsFrozen" text="Der Boden ist gefroren, du kannst so nicht Arbeiten!" />
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
         <text name="SS_SEASON_INTRO_0" text="ToDo: Ein neues Jahr, eine neue Saatperiode." /> <!-- spring -->

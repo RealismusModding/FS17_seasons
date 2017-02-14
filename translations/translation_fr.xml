@@ -56,10 +56,10 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="La maintenance sera requise dans %d jours" />
         <text name="SS_REPAIR_DIALOG" text="Voulez-vous réparer %s le %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
-        <text name="SS_WARN_REPAIR" text="Panne de moteur. Veuillez réparer votre machine!" />
+        <text name="warning_repairBrokenMachine" text="Panne de moteur. Veuillez réparer votre machine!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
-        <text name="SS_WARN_SOILFROZEN" text="Le sol est gelé. Vous ne pouvez pas le travailler!" />
+        <text name="warning_soilIsFrozen" text="Le sol est gelé. Vous ne pouvez pas le travailler!" />
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nouvelle année pour semer." /> <!-- spring -->
@@ -107,7 +107,7 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
-		
+
 		<text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvgarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance" />
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />

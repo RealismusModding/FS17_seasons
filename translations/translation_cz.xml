@@ -56,10 +56,10 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="% .1f Motohodin nebo% d dní, dokud není nutná údržba" />
         <text name="SS_REPAIR_DIALOG" text="Chcete provádět údržbu %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
-		<text name="SS_WARN_REPAIR" text="porucha motoru. Opravit stroj!" />
+		<text name="warning_repairBrokenMachine" text="porucha motoru. Opravit stroj!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
 
-        <text name="SS_WARN_SOILFROZEN" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
+        <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nový rok, nové období setí. DĚLAT" /> <!-- spring -->
@@ -106,7 +106,7 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Jste si jisti, že chcete změnit nastavení Seasons? Změny v délce sezóny a růstu může vyústit v oblastech, které lze opravit pouze po jednom herním roku." />
-        
+
         <text name="dialog_resetGrowth" text="Vložili jste Seasons na staré savegame. Seasons chce obnovit všechna pole do jejich holé stavu synchronizovat s Gameday. Ztratíte všechny plodiny. Pokud nechcete obnovit růst, možná Seasons nemusí fungovat podle očekávání." />
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Zachovat růst" />

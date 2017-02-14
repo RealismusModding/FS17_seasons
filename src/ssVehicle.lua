@@ -53,6 +53,9 @@ function ssVehicle:loadMap()
 
     ssVehicle.repairInterval = g_seasons.environment.daysInSeason * 2
 
+    -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
+    g_i18n.texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
+
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
@@ -410,7 +413,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 
     if self.isClient then
         if self.ssNotAllowedSoilFrozen then
-            g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_SOILFROZEN"), 2000)
+            g_currentMission:showBlinkingWarning(ssLang.getText("warning_soilIsFrozen"), 2000)
         end
     end
 end
@@ -473,9 +476,9 @@ end
 function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
     superFunc(self,earlyWarning)
 
-    --if not moistureSystem then 
-    --    return superFunc(self, earlyWarning) 
-    --end 
+    --if not moistureSystem then
+    --    return superFunc(self, earlyWarning)
+    --end
 
     if self.allowThreshingDuringRain then
         return true

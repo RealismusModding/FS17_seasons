@@ -62,11 +62,11 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas o %d días hasta mantenimiento" />
         <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento el %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
-	     	<text name="SS_WARN_REPAIR" text="Motor roto. Repare su vehículo!" />
+	     	<text name="warning_repairBrokenMachine" text="Motor roto. Repare su vehículo!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="a medianoche" />
 
 
-        <text name="SS_WARN_SOILFROZEN" text="El terreno está congelado. No puede trabajar en él!" />
+        <text name="warning_soilIsFrozen" text="El terreno está congelado. No puede trabajar en él!" />
         <text name="SS_SAVE_FAILED" text="Error al guardar el Seaons savegame. Inténtelo de nuevo!" />
 
 

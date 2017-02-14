@@ -56,10 +56,10 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до технического обслуживания" />
         <text name="SS_REPAIR_DIALOG" text="Вы желаете провести тех. обслуживание %s за %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
-        <text name="SS_WARN_REPAIR" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
+        <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
 
-        <text name="SS_WARN_SOILFROZEN" text="Почва замёрзла. Вы не можете работать на ней!" />
+        <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!" />
         <text name="SS_SAVE_FAILED" text="Не удалось сохранить сезоны в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
 
         <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." /> <!-- весна -->
@@ -106,7 +106,7 @@
         <text name="ui_helpTitle_4_1" text="4.1" />
 
         <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения длины сезона и настроек роста можно применить к полям, только по прошествии одного игрового года." />
-    
+
         <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
         <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />

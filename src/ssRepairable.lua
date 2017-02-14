@@ -141,7 +141,7 @@ function ssRepairable:update(dt)
             self:stopMotor()
 
             if self.isEntered then
-                g_currentMission:showBlinkingWarning(ssLang.getText("SS_WARN_REPAIR"),2000)
+                g_currentMission:showBlinkingWarning(ssLang.getText("warning_repairBrokenMachine"),2000)
             end
         end
     end

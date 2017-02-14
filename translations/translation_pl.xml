@@ -56,10 +56,10 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
         <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
-	<text name="SS_WARN_REPAIR" text="Awaria silnika. Napraw pojazd!" />
+	<text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!" />
 	<text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
-        <text name="SS_WARN_SOILFROZEN" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
+        <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
 
         <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." /> <!-- spring -->
