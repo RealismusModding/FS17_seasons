@@ -32,18 +32,18 @@
         <text name="SS_SEASON_2" text="Осень" />
         <text name="SS_SEASON_3" text="Зима" />
 
-        <text name="SS_MONTH_SHORT_1" text="янв" />
-        <text name="SS_MONTH_SHORT_2" text="февр" />
+        <text name="SS_MONTH_SHORT_1" text="январь" /> <!-- Long names of months are normally displayed on the screen. -->
+        <text name="SS_MONTH_SHORT_2" text="февраль" />
         <text name="SS_MONTH_SHORT_3" text="март" />
-        <text name="SS_MONTH_SHORT_4" text="апр" />
+        <text name="SS_MONTH_SHORT_4" text="апрель" />
         <text name="SS_MONTH_SHORT_5" text="май" />
         <text name="SS_MONTH_SHORT_6" text="июнь" />
         <text name="SS_MONTH_SHORT_7" text="июль" />
-        <text name="SS_MONTH_SHORT_8" text="авг" />
-        <text name="SS_MONTH_SHORT_9" text="сент" />
-        <text name="SS_MONTH_SHORT_10" text="окт" />
+        <text name="SS_MONTH_SHORT_8" text="август" />
+        <text name="SS_MONTH_SHORT_9" text="сентябрь" />
+        <text name="SS_MONTH_SHORT_10" text="октябрь" />
         <text name="SS_MONTH_SHORT_11" text="ноябрь" />
-        <text name="SS_MONTH_SHORT_12" text="дек" />
+        <text name="SS_MONTH_SHORT_12" text="декабрь" />
 
         <text name="SS_VEHICLE_TAXES" text="Налоги на технику" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Обслуживание техники" />
@@ -53,14 +53,15 @@
         <text name="SS_VEHICLE_REPAIRED" text="Тех.обслуживание %s обошлось %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Провести ТО %s за %s" />
         <text name="SS_REPAIR_REQUIRED" text="Нуждается в тех.обслуживании" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до технического обслуживания" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до ТО" />
         <text name="SS_REPAIR_DIALOG" text="Вы желаете провести тех. обслуживание %s за %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
         <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
 
         <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!" />
-        <text name="SS_SAVE_FAILED" text="Не удалось сохранить сезоны в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
+		<text name="warning_doNotThreshWithMoisture" text="Нельзя молотить когда культуры слишком влажные!" />
+        <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seaons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
 
         <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." /> <!-- весна -->
         <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. Можно уделить больше внимания животным." />
@@ -68,6 +69,7 @@
         <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно отдохнуть или заняться лесом." /> <!-- зима -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
+		
 
         <!-- GUI -->
         <text name="ui_pageOverview" text="Обзор" />
@@ -105,11 +107,13 @@
         <text name="ui_helpTitle_3_1" text="3.1" />
         <text name="ui_helpTitle_4_1" text="4.1" />
 
-        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения длины сезона и настроек роста можно применить к полям, только по прошествии одного игрового года." />
-
+        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона и настроек роста можно применить к полям, только по прошествии одного игрового года." />
+    
         <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
         <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
         <text name="dialog_resetGrowth_yes" text="Сбросить" />
+		
+		<text name="fillType_snow" text="Снег" />
     </texts>
 </l10n>
