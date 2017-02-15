@@ -214,13 +214,13 @@ function ssWeatherManager:update(dt)
     if currentRain ~= nil then
         local currentTemp = mathRound(self:currentTemperature(), 0)
 
-        if currentTemp > 1 and currentRain.rainTypeId == 'snow' then
+        if currentTemp > 1 and currentRain.rainTypeId == "snow" then
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = 'rain'
+            g_currentMission.environment.currentRain.rainTypeId = "rain"
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
-        elseif currentTemp < 0 and currentRain.rainTypeId == 'rain' then
+        elseif currentTemp < 0 and currentRain.rainTypeId == "rain" then
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = 'snow'
+            g_currentMission.environment.currentRain.rainTypeId = "snow"
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
@@ -434,7 +434,7 @@ function ssWeatherManager:calculateSnowAccumulation()
         -- warm hail acts as rain
         self.snowDepth = self.snowDepth - math.max((currentTemp+1)*3/1000,0)*meltFactor
         --g_currentMission.environment.currentRain.rainTypeId = nil
-        --currentRain.rainTypeId = 'rain'
+        --currentRain.rainTypeId = "rain"
 
     elseif currentRain.rainTypeId == "cloudy" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
@@ -470,7 +470,7 @@ function ssWeatherManager:calculateSoilTemp()
     end
 
     self.soilTemp = soilTemp + (deltaT * facKT / facCA * (avgAirTemp - soilTemp)) * snowDamp
-    --log('self.soilTemp=',self.soilTemp,' soilTemp=',soilTemp,' avgAirTemp=',avgAirTemp,' snowDamp=',snowDamp,' snowDepth=',snowDepth)
+    --log("self.soilTemp=",self.soilTemp," soilTemp=",soilTemp," avgAirTemp=",avgAirTemp," snowDamp=",snowDamp," snowDepth=",snowDepth)
 end
 
 --- function for predicting when soil is frozen
@@ -509,13 +509,13 @@ function ssWeatherManager:switchRainHail()
 
                 local tempStartRain = self:diurnalTemp(hour, minute, fCast.lowTemp,fCast.highTemp,fCast.lowTemp)
 
-                if tempStartRain < -1 and rain.rainTypeId == 'rain' then
-                    g_currentMission.environment.rains[index].rainTypeId = 'snow'
-                    self.forecast[jndex].weatherState = 'snow'
+                if tempStartRain < -1 and rain.rainTypeId == "rain" then
+                    g_currentMission.environment.rains[index].rainTypeId = "snow"
+                    self.forecast[jndex].weatherState = "snow"
 
-                elseif tempStartRain >= -1 and rain.rainTypeId == 'snow' then
-                    g_currentMission.environment.rains[index].rainTypeId = 'rain'
-                    self.forecast[jndex].weatherState = 'rain'
+                elseif tempStartRain >= -1 and rain.rainTypeId == "snow" then
+                    g_currentMission.environment.rains[index].rainTypeId = "rain"
+                    self.forecast[jndex].weatherState = "rain"
                 end
             end
         end
@@ -532,7 +532,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
     rainFactors.beta = 1 / math.sqrt(math.log(1+cov*cov))
     rainFactors.gamma = mu / math.sqrt(1+cov*cov)
 
-    local noTime = 'false'
+    local noTime = "false"
     local oneDayRain = {}
 
     local oneRainEvent = {}
@@ -562,7 +562,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         oneRainEvent.duration = oneRainEvent.endDayTime - oneRainEvent.startDayTime
         oneRainEvent.rainTypeId = "fog"
     else
-        oneRainEvent.rainTypeId = 'sun'
+        oneRainEvent.rainTypeId = "sun"
         oneRainEvent.duration = 0
         oneRainEvent.startDayTime = 0
         oneRainEvent.endDayTime = 0
@@ -581,7 +581,7 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     oneRainEvent.duration = math.min(math.max(math.exp(ssUtil.lognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
-    --log('Start time for rain = ', oneRainEvent.startDayTime)
+    --log("Start time for rain = ", oneRainEvent.startDayTime)
 
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
@@ -826,7 +826,7 @@ function ssWeatherManager:updateCropMoistureContent()
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
     local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10)
 
-    --log(prevCropMoist,' | ',relativeHumidity,' | ',solarRadiation,' | ',tmpMoisture,' | ',deltaMoisture)
+    --log(prevCropMoist," | ",relativeHumidity," | ",solarRadiation," | ",tmpMoisture," | ",deltaMoisture)
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
     -- increase crop Moisture in the first hour after rain has started
