@@ -40,9 +40,11 @@ end
 
 local function vehicleInShed(vehicle)
     if ssSnow.snowMaskId ~= nil then
-        local width = vehicle.sizeWidth/3
+        local width = vehicle.sizeWidth/3 
         local length = vehicle.sizeLength/3
-        
+        -- divide by 3 to ensure vehicle is registered as inside the shed even if the mask is not accurate
+        -- and/or the vehicle is parked near the border of the mask
+
         local positionX,positionY,positionZ = getWorldTranslation(vehicle.rootNode)
 
         local x0 = positionX + width
