@@ -61,6 +61,9 @@ For a better game experience, custom maps should add two new density layers: one
 - Growth is adjust to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
 - Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
+- Swaths will reduce over time. Hay and straw can be stored inside a shed (if map is prepared with the snow mask) without any loss.
+- Grass bales will rot and disappear after two days. Hay and straw bales exposed to rain will start to rot so keep them inside.
+- Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur. 
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
