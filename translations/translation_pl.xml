@@ -89,6 +89,7 @@
         <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy." />
         <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim." />
         <text name="tooltip_controlsTemperature" text="Ustaw skalę temperatury używaną przez grę" />
+	<text name="tooltip_moisture" text="Nie zezwalaj na żniwa, gdy zboża są zbyt wilgotne" />
 
         <text name="setting_seasonIntros" text="Wstępy do sezonów" />
         <text name="setting_seasonLength" text="Długość sezonów" />
@@ -96,6 +97,7 @@
         <text name="setting_controlsHelp" text="Skróty klawiszowe w oknie pomocy" />
         <text name="setting_snowTracks" text="Ślady na śniegu" />
         <text name="setting_controlsTemperature" text="Skala temperatury" />
+	<text name="setting_moisture" text="Wilgotność zboża" />
 
         <text name="ui_helpCategory_1" text="Sezony" />
         <text name="ui_helpCategory_2" text="Śnieg" />
