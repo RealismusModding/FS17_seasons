@@ -373,10 +373,10 @@ function ssEnvironment:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightSt
     -- light scale, rain sky scale, rain scale, distance fog scale
     curve:addKeyframe({x = 1.00, y = 0.0, z = 0.0, w = 0.00, time = 0})
     -- 1, 0.6, 0.55, 0.55, 0.55
-    curve:addKeyframe({x = 0.50, y = 0.5, z = 0.0, w = 0.35, time = 10})
-    curve:addKeyframe({x = 0.40, y = 1.0, z = 0.0, w = 0.70, time = 20})
-    curve:addKeyframe({x = 0.30, y = 1.0, z = 0.5, w = 1.00, time = 25})
-    curve:addKeyframe({x = 0.30, y = 1.0, z = 1.0, w = 1.00, time = 30})
+    curve:addKeyframe({x = 0.60, y = 0.5, z = 0.0, w = 0.35, time = 10})
+    curve:addKeyframe({x = 0.55, y = 1.0, z = 0.0, w = 0.70, time = 20})
+    curve:addKeyframe({x = 0.55, y = 1.0, z = 0.5, w = 1.00, time = 25})
+    curve:addKeyframe({x = 0.55, y = 1.0, z = 1.0, w = 1.00, time = 30})
 
     return curve
 end
@@ -474,7 +474,7 @@ function ssEnvironment:monthAtGrowthTransitionNumber(growthTransitionNumber)
     if monthNumber > 12 then --because 11 becomes 13 TODO: brain gone  need to improve
         monthNumber = 1
     end
-    
+
     return monthNumber
 end
 
