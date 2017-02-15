@@ -2,7 +2,7 @@
 -- SWATH MANAGER SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To reduce swaths
--- Authors:  reallogger 
+-- Authors:  reallogger
 -- (very much based on ssSnow so thank you mrbear)
 --
 
@@ -41,7 +41,7 @@ function ssSwathManager:reduceSwaths(startWorldX, startWorldZ, widthWorldX, widt
         setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
         setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     end
-    
+
      -- Remove straw swaths that are outside (the mask)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_STRAW]["index"])
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
@@ -51,26 +51,20 @@ function ssSwathManager:reduceSwaths(startWorldX, startWorldZ, widthWorldX, widt
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_DRYGRASS_WINDROW]["index"])
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-
 end
 
 function ssSwathManager:dayChanged()
-    ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 1)
-end
-
-function ssSwathManager:growthStageChanged()
-    -- removing all swaths at beginning of winter
-    if g_seasons.environment:currentGrowthTransition() == 10 then
-        ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 64)
+    if g_currentMission:getIsServer() then
+        ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 1)
     end
 end
 
-function ssSwathManager:readStream(streamId, connection)
-end
-
-function ssSwathManager:writeStream(streamId, connection)
-end
-
-function ssSwathManager:update(dt)
+function ssSwathManager:growthStageChanged()
+    if g_currentMission:getIsServer() then
+        -- removing all swaths at beginning of winter
+        if g_seasons.environment:currentGrowthTransition() == 10 then
+            ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 64)
+        end
+    end
 end
 

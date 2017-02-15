@@ -49,7 +49,7 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Vehicle Maintenance" />
         <text name="SS_VEHICLE_REPAIRS" text="Vehicle Repairs" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="You don't have enough money to maintain this" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="You don't have enough money to maintain this vehicle" />
         <text name="SS_VEHICLE_REPAIRED" text="Maintenance cost for %s was %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Maintain %s for %s" />
         <text name="SS_REPAIR_REQUIRED" text="Maintenance required" />

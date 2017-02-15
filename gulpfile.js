@@ -61,7 +61,7 @@ function templatedLua() {
     };
 
     return gulp
-        .src("src/*.lua", { base: "." })
+        .src("src/**/*.lua", { base: "." })
         .pipe(template(replacements, options));
 }
 

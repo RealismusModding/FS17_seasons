@@ -15,8 +15,9 @@ ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.cropMoistureContent = 15
 ssWeatherManager.weather = {}
 
-function ssWeatherManager:preLoad()
-end
+-- Load events
+source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
+source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
 
 function ssWeatherManager:load(savegame, key)
     if savegame == nil then return end
@@ -149,8 +150,12 @@ end
 
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
+    self.soilTemp = streamReadFloat32(streamId)
+
     local numDays = streamReadUInt8(streamId)
     local numRains = streamReadUInt8(streamId)
+
+    self.prevHighTemp = streamReadFloat32(streamId)
 
     -- load forecast
     self.forecast = {}
@@ -187,9 +192,12 @@ end
 
 function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
+    streamWriteFloat32(streamId, self.soilTemp)
 
     streamWriteUInt8(streamId, table.getn(self.forecast))
     streamWriteUInt8(streamId, table.getn(self.weather))
+
+    streamWriteFloat32(streamId, self.prevHighTemp)
 
     for _, day in pairs(self.forecast) do
         streamWriteInt16(streamId, day.day)
@@ -314,9 +322,9 @@ function ssWeatherManager:updateForecast()
     self:owRaintable()
     self:switchRainHail()
 
-    self:calculateSoilTemp()
+    self:updateSoilTemp()
 
-    g_server:broadcastEvent(ssWeatherForecastEvent:new(oneDayForecast, oneDayRain))
+    g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, self.prevHighTemp, self.soilTemp))
 end
 
 function ssWeatherManager:seasonLengthChanged()
@@ -358,11 +366,14 @@ function ssWeatherManager:hourChanged()
 
         -- TODO send update event
         -- Also call the weather changed events on client side
+        g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth))
     end
 end
 
 -- function to output the temperature during the day and night
 function ssWeatherManager:diurnalTemp(hour, minute,lowTemp,highTemp,lowTempNext)
+    local highTempPrev = 0
+
     -- need to have the high temp of the previous day
     -- hour is hour in the day from 0 to 23
     -- minute is minutes from 0 to 59
@@ -451,7 +462,7 @@ end
 
 --- function for calculating soil temperature
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
-function ssWeatherManager:calculateSoilTemp()
+function ssWeatherManager:updateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp*8 + self.forecast[1].lowTemp*16) / 24
     local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
     local soilTemp = self.soilTemp
@@ -616,7 +627,6 @@ end
 
 function ssWeatherManager:owRaintable()
     local env = g_currentMission.environment
-    g_currentMission.environment.rains = {}
     local tmpWeather = {}
 
     for index = 1, self.forecastLength do
@@ -838,93 +848,3 @@ function ssWeatherManager:updateCropMoistureContent()
 
 end
 
--- MP EVENT
--- Server: Send a new day (with day number)
--- Client: remove first, add new at end
-
-
-ssWeatherForecastEvent = {}
-ssWeatherForecastEvent_mt = Class(ssWeatherForecastEvent, Event)
-InitEventClass(ssWeatherForecastEvent, "ssWeatherForecastEvent")
-
--- client -> server: hey! I repaired X
---> server -> everyone: hey! X got repaired!
-
-function ssWeatherForecastEvent:emptyNew()
-    local self = Event:new(ssWeatherForecastEvent_mt)
-    self.className = "ssWeatherForecastEvent"
-    return self
-end
-
-function ssWeatherForecastEvent:new(day, rain)
-    local self = ssWeatherForecastEvent:emptyNew()
-
-    self.day = day
-    self.rain = rain
-
-    return self
-end
-
--- Server: send to client
-function ssWeatherForecastEvent:writeStream(streamId, connection)
-    streamWriteInt16(streamId, self.day.day)
-    streamWriteString(streamId, self.day.weatherState)
-    streamWriteFloat32(streamId, self.day.highTemp)
-    streamWriteFloat32(streamId, self.day.lowTemp)
-
-    if self.rain ~= nil then
-        streamWriteBool(streamId, true)
-
-        streamWriteInt16(streamId, self.rain.startDay)
-        streamWriteFloat32(streamId, self.rain.endDayTime)
-        streamWriteFloat32(streamId, self.rain.startDayTime)
-        streamWriteInt16(streamId, self.rain.endDay)
-        streamWriteString(streamId, self.rain.rainTypeId)
-        streamWriteFloat32(streamId, self.rain.duration)
-    else
-        streamWriteBool(streamId, false)
-    end
-end
-
--- Client: receive from server
-function ssWeatherForecastEvent:readStream(streamId, connection)
-    local day = {}
-
-    day.day = streamReadInt16(streamId)
-    day.season = g_seasons.environment:seasonAtDay(day.day)
-    day.weatherState = streamReadString(streamId)
-    day.highTemp = streamReadFloat32(streamId)
-    day.lowTemp = streamReadFloat32(streamId)
-
-    self.day = day
-
-    if streamReadBool(streamId) then
-        local rain = {}
-
-        rain.startDay = streamReadInt16(streamId)
-        rain.endDayTime = streamReadFloat32(streamId)
-        rain.startDayTime = streamReadFloat32(streamId)
-        rain.endDay = streamReadInt16(streamId)
-        rain.rainTypeId = streamReadString(streamId)
-        rain.duration = streamReadFloat32(streamId)
-
-        self.rain = rain
-    end
-
-    self:run(connection)
-end
-
-function ssWeatherForecastEvent:run(connection)
-    if connection:getIsServer() then
-        table.remove(ssWeatherManager.forecast, 1)
-        table.insert(ssWeatherManager.forecast, self.day)
-
-
-        table.insert(ssWeatherManager.rains, self.rain)
-
-        ssWeatherManager:owRaintable()
-        ssWeatherManager:switchRainHail()
-
-        table.remove(ssWeatherManager.rains, 1)
-    end
-end
