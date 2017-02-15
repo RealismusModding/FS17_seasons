@@ -2,7 +2,7 @@
 -- SNOW FILLABLE SPECIALIZATION
 ---------------------------------------------------------------------------------------------------------
 -- Applied to every Fillable in order to drain snow when it melts
--- Author:  Rahkiin
+-- Authors:  Rahkiin, reallogger
 --
 
 ssSnowFillable = {}
@@ -40,23 +40,25 @@ end
 
 local function vehicleInShed(vehicle)
     if ssSnow.snowMaskId ~= nil then
+        local width = vehicle.sizeWidth/3
+        local length = vehicle.sizeLength/3
+        
+        local positionX,positionY,positionZ = getWorldTranslation(vehicle.rootNode)
+
+        local x0 = positionX + width
+        local x1 = positionX - width
+        local x2 = positionX + width
+        local z0 = positionZ - length
+        local z1 = positionZ - length
+        local z2 = positionZ + length
+
+        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+        local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
+
+        return density ~= 0
+    else
         return false
     end
---[[
-    -- TODO
-    local x0 = x + dim.width
-    local x1 = x - dim.width
-    local x2 = x + dim.width
-    local z0 = z - dim.length
-    local z1 = z - dim.length
-    local z2 = z + dim.length
-
-    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
-    local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
-
-    return density ~= 0
-]]
-    return false
 end
 
 function ssSnowFillable:updateTick(dt)
@@ -66,7 +68,7 @@ function ssSnowFillable:updateTick(dt)
         -- Empty the fillable of snow when it is warm
         if vehicleHasFillType(self, FillUtil.FILLTYPE_SNOW) and temp > 0 then
             local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
-            local diff = -1 * level * 0.0001 * (dt / 1000) -- To be made correctly by reallogger
+            local diff = -0.05 * self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) * temp
 
             -- Update each unit
             local units = self:getFillUnitsWithFillType(FillUtil.FILLTYPE_SNOW)
@@ -85,8 +87,7 @@ function ssSnowFillable:updateTick(dt)
               and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_SNOW then
 
             local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
-            local diff = 1 * (dt / 1000) -- To be made correctly by reallogger, something with 'size'
-            -- 0.01 * length * width * 1000 / 60 / 60
+            local diff = 0.05 * self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000)
 
             -- Use this, without force to not override current fills or not-snow fillables.
             self:setFillLevel(level + diff, FillUtil.FILLTYPE_SNOW)
