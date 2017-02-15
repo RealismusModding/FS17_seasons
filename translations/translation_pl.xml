@@ -32,18 +32,18 @@
         <text name="SS_SEASON_2" text="Jesień" />
         <text name="SS_SEASON_3" text="Zima" />
 
-        <text name="SS_MONTH_SHORT_1" text="stycz" />
-        <text name="SS_MONTH_SHORT_2" text="luty" />
+        <text name="SS_MONTH_SHORT_1" text="sty" />
+        <text name="SS_MONTH_SHORT_2" text="lut" />
         <text name="SS_MONTH_SHORT_3" text="mar" />
-        <text name="SS_MONTH_SHORT_4" text="kwiec" />
+        <text name="SS_MONTH_SHORT_4" text="kwi" />
         <text name="SS_MONTH_SHORT_5" text="maj" />
-        <text name="SS_MONTH_SHORT_6" text="czerw" />
+        <text name="SS_MONTH_SHORT_6" text="cze" />
         <text name="SS_MONTH_SHORT_7" text="lip" />
-        <text name="SS_MONTH_SHORT_8" text="sierp" />
-        <text name="SS_MONTH_SHORT_9" text="wrzes" />
-        <text name="SS_MONTH_SHORT_10" text="pazdz" />
-        <text name="SS_MONTH_SHORT_11" text="listop" />
-        <text name="SS_MONTH_SHORT_12" text="grudz" />
+        <text name="SS_MONTH_SHORT_8" text="sie" />
+        <text name="SS_MONTH_SHORT_9" text="wrz" />
+        <text name="SS_MONTH_SHORT_10" text="paź" />
+        <text name="SS_MONTH_SHORT_11" text="lis" />
+        <text name="SS_MONTH_SHORT_12" text="gru" />
 
         <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów" />  <!-- Yet need to see in game menu context to make translation really acurate -->
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" /> <!-- Yet need to see in game menu context to make translation really acurate -->
@@ -68,8 +68,10 @@
         <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
-
-        <!-- GUI -->
+        
+	<text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />   
+	
+	<!-- GUI -->
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
         <text name="ui_pageHelp" text="Pomoc" />
@@ -111,5 +113,7 @@
         <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
+	    
+	<text name="fillType_snow" text="Śnieg" />    
     </texts>
 </l10n>
