@@ -499,6 +499,11 @@ function ssEnvironment:yearAtDay(dayNumber)
     return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
 end
 
+-- adding this back in since I did not refactor ssSwathManager to use the new function (growthTransitionAtDay) because it wasn't part of the project when I refactored'
+function ssEnvironment:currentGrowthTransition()
+    return self:growthTransitionAtDay()
+end
+
 --uses currentDay if dayNumber not passed in
 function ssEnvironment:growthTransitionAtDay(dayNumber)
     if (dayNumber == nil) then
