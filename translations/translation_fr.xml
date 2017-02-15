@@ -68,6 +68,8 @@
         <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est dur, probablement gelé. La récolte ne grandit pas" /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne pas montrer à nouveau" />
+		
+		<text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
 
         <!-- GUI -->
         <text name="ui_pageOverview" text="Aperçu" />
@@ -87,6 +89,7 @@
         <text name="tooltip_controlsHelp" text="Montrer la prévision et la bouton menu dans le menu d'aide." />
         <text name="tooltip_snowTracks" text="Les véhicules compressent la neige lorsqu'ils roulent dessus." />
 		<text name="tooltip_controlsTemperature" text="Controle de la temperature utilisé dans le jeux" />
+		<text name="tooltip_moisture" text="Ne pas autoriser le battage lorsque les récoltes sont mouillées" />
 
 
         <text name="setting_seasonIntros" text="Introductions de saison" />
@@ -95,6 +98,7 @@
         <text name="setting_controlsHelp" text="Boutons dans le menu d'aide" />
         <text name="setting_snowTracks" text="Traces de neige" />
 		<text name="setting_controlsTemperature" text="Unité de la temperature" />
+		<text name="setting_moisture" text="L'humidité des cultures" />
 
         <text name="ui_helpCategory_1" text="Saisons" />
         <text name="ui_helpCategory_2" text="Neige" />
