@@ -470,7 +470,7 @@ function ssEnvironment:monthAtDay(dayNumber)
 end
 
 function ssEnvironment:monthAtGrowthTransitionNumber(growthTransitionNumber)
-    local monthNumber = math.fmod( growthTransitionNumber,g_seasons.environment.MONTHS_IN_YEAR) + 2
+    local monthNumber = math.fmod( growthTransitionNumber, self.MONTHS_IN_YEAR) + 2
     if monthNumber > 12 then --because 11 becomes 13 TODO: brain gone  need to improve
         monthNumber = 1
     end

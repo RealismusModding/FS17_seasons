@@ -55,7 +55,7 @@ function ssMultiplayerJoinEvent:writeStream(streamId, connection)
 
             -- Let the class write as well
             if _G[className].writeStream ~= nil then
-                _G[className].writeStream(_G[className], streamId, connection)
+                _G[className]:writeStream(streamId, connection)
             end
         end
     end
@@ -80,7 +80,7 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
             end
 
             if _G[className].readStream ~= nil then
-                _G[className].readStream(_G[className], streamId, connection)
+                _G[className]:readStream(streamId, connection)
             end
         end
     end

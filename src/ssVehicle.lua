@@ -51,7 +51,9 @@ function ssVehicle:loadMap()
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
-    ssVehicle.repairInterval = g_seasons.environment.daysInSeason * 2
+    if g_currentMission:getIsServer() then
+        self.repairInterval = g_seasons.environment.daysInSeason * 2
+    end
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -60,6 +62,13 @@ function ssVehicle:loadMap()
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
+end
+
+function ssVehicle:readStream(streamId, connection)
+    self.repairInterval = g_seasons.environment.daysInSeason * 2
+end
+
+function ssVehicle:writeStream(streamId, connection)
 end
 
 function ssVehicle:dayChanged()

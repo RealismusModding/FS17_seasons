@@ -137,15 +137,14 @@ function ssWeatherManager:loadMap(name)
     end
 
 
-    if g_currentMission:getIsServer() or self.forecast[1].day ~= g_currentMission.environment.currentDay then
-        if table.getn(self.forecast) == 0 then
+    if g_currentMission:getIsServer() then
+        if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_currentMission.environment.currentDay then
             self:buildForecast()
         end
-        --self.snowDepth = -- Enable read from savegame
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
-    end
 
-    self:owRaintable()
+        self:owRaintable()
+    end
 end
 
 function ssWeatherManager:readStream(streamId, connection)
@@ -321,7 +320,9 @@ function ssWeatherManager:updateForecast()
 end
 
 function ssWeatherManager:seasonLengthChanged()
-    self:buildForecast()
+    if g_currentMission:getIsServer() then
+        self:buildForecast()
+    end
 end
 
 function ssWeatherManager:dayChanged()
@@ -341,18 +342,23 @@ end
 
 -- Jos note: no randomness here. Must run on client for snow.
 function ssWeatherManager:hourChanged()
-    local oldSnow = self.snowDepth
+    if g_currentMission:getIsServer() then
+        local oldSnow = self.snowDepth
 
-    self:calculateSnowAccumulation()
+        self:calculateSnowAccumulation()
 
-    if math.abs(oldSnow - self.snowDepth) > 0.01 then
-        -- Call a weather change
-        for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
-            listener:weatherChanged()
+        if math.abs(oldSnow - self.snowDepth) > 0.01 then
+            -- Call a weather change
+            for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
+                listener:weatherChanged()
+            end
         end
-    end
 
-    self:updateCropMoistureContent()
+        self:updateCropMoistureContent()
+
+        -- TODO send update event
+        -- Also call the weather changed events on client side
+    end
 end
 
 -- function to output the temperature during the day and night
@@ -750,11 +756,11 @@ end
 
 -- function to calculate relative humidity
 function ssWeatherManager:calculateRelativeHumidity()
-   	-- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
+     -- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
 
     local dewPointTemp = self.forecast[1].lowTemp - 2
-	local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
-	local relativeHumidity = 80
+    local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
+    local relativeHumidity = 80
     local currentTemp = self:currentTemperature()
     local e = 6.1078 - math.exp(17.2669 * currentTemp / ( currentTemp + 237.3 ) )
 
@@ -765,62 +771,60 @@ function ssWeatherManager:calculateRelativeHumidity()
     end
 
     if g_currentMission.environment.timeSinceLastRain == 0 then
-		relativeHumidity = 95
+        relativeHumidity = 95
     end
 
-	return relativeHumidity
+    return relativeHumidity
 
 end
 
 -- function to calculate solar radiation
 function ssWeatherManager:calculateSolarRadiation()
-	-- http://swat.tamu.edu/media/1292/swat2005theory.pdf
+    -- http://swat.tamu.edu/media/1292/swat2005theory.pdf
+    local dayTime = g_currentMission.environment.dayTime / 60 / 60 / 1000 --current time in hours
 
-    local dayTime = g_currentMission.environment.dayTime/60/60/1000 --current time in hours
-
-    local julianDay = ssUtil.julianDay(ssEnvironment:currentDay())
-	local eta = ssEnvironment:calculateSunDeclination(julianDay)
-	local sunHeightAngle = ssEnvironment:calculateSunHeightAngle(julianDay)
+    local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
+    local eta = ssEnvironment:calculateSunDeclination(julianDay)
+    local sunHeightAngle = ssEnvironment:calculateSunHeightAngle(julianDay)
     local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
 
-	dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
+    dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
 
-	local lengthDay = dayEnd - dayStart
-	local midDay = dayStart + lengthDay / 2
+    local lengthDay = dayEnd - dayStart
+    local midDay = dayStart + lengthDay / 2
 
-	local solarRadiation = 0
-	local Isc = 4.921 --MJ/(m2 * h)
+    local solarRadiation = 0
+    local Isc = 4.921 --MJ/(m2 * h)
 
     if dayTime < dayStart or dayTime > dayEnd then
         -- no radiation before sun rises
-		solarRadiation = 0
+        solarRadiation = 0
 
     else
-		solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
+        solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
 
     end
 
     -- lower solar radiation if it is overcast
     if g_currentMission.environment.timeSinceLastRain == 0 then
-		local tmpSolRad = solarRadiation
+        local tmpSolRad = solarRadiation
 
         solarRadiation = tmpSolRad * 0.05
     end
 
-	return solarRadiation
+    return solarRadiation
 
 end
 
 function ssWeatherManager:updateCropMoistureContent()
-
     local dayTime = g_currentMission.environment.dayTime
 
     local prevCropMoist = self.cropMoistureContent
     local relativeHumidity = self:calculateRelativeHumidity()
     local solarRadiation = self:calculateSolarRadiation()
 
-	local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
-	local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10)
+    local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
+    local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10)
 
     --log(prevCropMoist,' | ',relativeHumidity,' | ',solarRadiation,' | ',tmpMoisture,' | ',deltaMoisture)
     self.cropMoistureContent = tmpMoisture - deltaMoisture

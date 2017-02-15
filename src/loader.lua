@@ -24,6 +24,12 @@ function logInfo(...)
     print(str)
 end
 
+function logStack()
+    if not g_seasons.debug then return end
+
+    print(debug.traceback())
+end
+
 local srcFolder = g_currentModDirectory .. "src/"
 g_modClasses = {
     "ssLang",
@@ -48,7 +54,7 @@ g_modClasses = {
     "ssReplaceVisual",
     "ssAnimals",
     "ssDensityMapScanner",
-    "ssViewController",
+    -- "ssViewController",
     "ssPedestrianSystem",
 
     "ssSnowAdmirer",
