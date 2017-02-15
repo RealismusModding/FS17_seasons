@@ -253,6 +253,7 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.controlsTemperature:setIsChecked(ssWeatherForecast.degreeFahrenheit)
     self.settingElements.snow:setState(ssSnow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
+    self.settingElements.moisture:setIsChecked(g_seasons.weather.moistureEnabled)
 
     -- Make sure the GUI is consistent
     local tracks = self.settingElements.snowTracks
@@ -273,7 +274,8 @@ function ssSeasonsMenu:updateApplySettingsButton()
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.controlsTemperature:getIsChecked() ~= ssWeatherForecast.degreeFahrenheit
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
-        or self.settingElements.snow:getState() ~= ssSnow.mode then
+        or self.settingElements.snow:getState() ~= ssSnow.mode
+        or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled then
         -- or  then -- snow
         hasChanges = true
     end
@@ -306,6 +308,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
             g_seasons.environment:changeDaysInSeason(newLength)
 
             ssVehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
+            g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
 
             self:updateApplySettingsButton()
         else
@@ -380,6 +383,11 @@ end
 ------- Snow Tracks on/off -------
 function ssSeasonsMenu:onCreateSnowTracksToggle(element)
     self.settingElements.snowTracks = element
+    self:replaceTexts(element)
+end
+
+function ssSeasonsMenu:onCreateMoistureToggle(element)
+    self.settingElements.moisture = element
     self:replaceTexts(element)
 end
 

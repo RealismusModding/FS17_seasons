@@ -26,6 +26,7 @@ function ssWeatherManager:load(savegame, key)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
     self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
+    self.moistureEnabled = ssStorage.getXMLBool(savegame, key .. ".weather.moistureEnabled", true)
 
     -- load forecast
     self.forecast = {}
@@ -77,6 +78,7 @@ function ssWeatherManager:save(savegame, key)
     ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
     ssStorage.setXMLFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
+    ssStorage.setXMLBool(savegame, key .. ".weather.moistureEnabled", self.moistureEnabled)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -755,13 +757,13 @@ function ssWeatherManager:calculateRelativeHumidity()
 	local relativeHumidity = 80
     local currentTemp = self:currentTemperature()
     local e = 6.1078 - math.exp(17.2669 * currentTemp / ( currentTemp + 237.3 ) )
-	
+
     relativeHumidity = 100 * e / es
-	
+
     if relativeHumidity < 5 then
         relativeHumidity = 5
     end
-	
+
     if g_currentMission.environment.timeSinceLastRain == 0 then
 		relativeHumidity = 95
     end
@@ -785,26 +787,26 @@ function ssWeatherManager:calculateSolarRadiation()
 
 	local lengthDay = dayEnd - dayStart
 	local midDay = dayStart + lengthDay / 2
-	
+
 	local solarRadiation = 0
-	local Isc = 4.921 --MJ/(m2 * h) 
-	
+	local Isc = 4.921 --MJ/(m2 * h)
+
     if dayTime < dayStart or dayTime > dayEnd then
         -- no radiation before sun rises
 		solarRadiation = 0
-	
+
     else
 		solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
-	
+
     end
 
     -- lower solar radiation if it is overcast
-    if g_currentMission.environment.timeSinceLastRain == 0 then 
+    if g_currentMission.environment.timeSinceLastRain == 0 then
 		local tmpSolRad = solarRadiation
-        
+
         solarRadiation = tmpSolRad * 0.05
     end
-			
+
 	return solarRadiation
 
 end
@@ -823,7 +825,7 @@ function ssWeatherManager:updateCropMoistureContent()
     --log(prevCropMoist,' | ',relativeHumidity,' | ',solarRadiation,' | ',tmpMoisture,' | ',deltaMoisture)
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
-    -- increase crop Moisture in the first hour after rain has started 
+    -- increase crop Moisture in the first hour after rain has started
     if g_currentMission.environment.timeSinceLastRain == 0 and self.cropMoistureContent < 25 then
         if dayTime > self.weather[1].startDayTime and (dayTime - 60) > self.weather[1].startDayTime then
             self.cropMoistureContent = 25

@@ -54,6 +54,7 @@ function ssVehicle:loadMap()
     ssVehicle.repairInterval = g_seasons.environment.daysInSeason * 2
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
+    -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
 
     self:installVehicleSpecializations()
@@ -442,6 +443,7 @@ function ssVehicle:getGroundType(superFunc,wheel)
     end
 end
 
+-- Add wheel types for special snow wheels that have more friction in snow but less on other surfaces (e.g. chains)
 function ssVehicle:registerWheelTypes()
     local studdedFrictionCoeffs = {}
     local studdedFrictionCoeffsWet = {}
@@ -470,20 +472,17 @@ function ssVehicle:registerWheelTypes()
 
     WheelsUtil.registerTireType("studded",studdedFrictionCoeffs,studdedFrictionCoeffsWet)
     WheelsUtil.registerTireType("chains",snowchainsFrictionCoeffs,snowchainsFrictionCoeffsWet)
-
 end
 
+-- Override the threshing for the moisture system
 function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
-    superFunc(self,earlyWarning)
-
-    --if not moistureSystem then
-    --    return superFunc(self, earlyWarning)
-    --end
+    if not g_seasons.weather.moistureEnabled then
+        return superFunc(self,earlyWarning)
+    end
 
     if self.allowThreshingDuringRain then
         return true
     end
 
-    return not ssWeatherManager:isCropWet()
-
+    return not g_seasons.weather:isCropWet()
 end

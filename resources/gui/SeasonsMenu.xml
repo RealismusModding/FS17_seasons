@@ -70,11 +70,20 @@
                         </GuiElement>
 
                         <!-- Snow tracks -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="223" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
                             <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snowTracks"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Moisture -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateMoistureToggle" toolTip="tooltip_moisture" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_moisture"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>
