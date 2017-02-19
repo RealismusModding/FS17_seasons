@@ -7,12 +7,6 @@
 
 ssBaleManager = {}
 
-function ssBaleManager:load(savegame, key)
-end
-
-function ssBaleManager:save(savegame, key)
-end
-
 function ssBaleManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)

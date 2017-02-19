@@ -58,7 +58,7 @@ function ssGrowthManager:loadMap(name)
 
         self:buildCanPlantData()
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
-        
+
         -- log("monthAtDay 1: " .. tostring(g_seasons.environment:monthAtDay(1)))
         -- log("monthAtDay 2: " .. tostring(g_seasons.environment:monthAtDay(2)))
         -- log("monthAtDay 3: " .. tostring(g_seasons.environment:monthAtDay(3)))
