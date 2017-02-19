@@ -40,7 +40,7 @@ end
 function ssEnvironment:load(savegame, key)
     self.latitude = ssStorage.getXMLFloat(savegame, key .. ".environment.latitude", 51.9)
 
-    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 3), 3, 12)
+    self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
     self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0)
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)

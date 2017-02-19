@@ -8,6 +8,10 @@
 ssReplaceVisual = {}
 g_seasons.replaceVisual = ssReplaceVisual
 
+function ssReplaceVisual:preLoad()
+    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.placeableUpdatePlacableOnCreation)
+end
+
 function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
         g_seasons.environment:addSeasonChangeListener(self)
@@ -16,20 +20,20 @@ function ssReplaceVisual:loadMap(name)
 
         self:loadFromXML()
 
-        ssReplaceVisual:loadTextureIdTable(getRootNode()) -- Built into map
-        ssReplaceVisual:loadTextureIdTable(modReplacements)
+        self:loadTextureIdTable(getRootNode()) -- Built into map
+        self:loadTextureIdTable(modReplacements)
 
         -- Only if this game does not need to wait for other modules to receive data,
         -- update the textures. (singleplayer)
         if g_currentMission:getIsServer() then
-            ssReplaceVisual:updateTextures(getRootNode())
+            self:updateTextures(getRootNode())
         end
     end
 end
 
 function ssReplaceVisual:readStream(streamId, connection)
     -- Load after data for seaonUtils is loaded
-    ssReplaceVisual:updateTextures(getRootNode())
+    self:updateTextures(getRootNode())
 end
 
 function ssReplaceVisual:loadFromXML()
@@ -96,13 +100,16 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
 end
 
 function ssReplaceVisual:seasonChanged()
-    ssReplaceVisual:updateTextures(getRootNode())
+    if g_currentMission:getIsClient() then
+        self:updateTextures(getRootNode())
+    end
 end
 
-function ssReplaceVisual:updatePlacableOnCreation()
-    ssReplaceVisual:updateTextures(self.nodeId)
+function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
+    if g_currentMission:getIsClient() then
+        ssReplaceVisual:updateTextures(self.nodeId)
+    end
 end
-Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.updatePlacableOnCreation)
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function findNodeByName(nodeId, name)
@@ -174,17 +181,17 @@ function ssReplaceVisual:updateTextures(nodeId)
     if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do
             -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
-            ssReplaceVisual:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
         end
     elseif self.textureReplacements.default[getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements.default[getName(nodeId)]) do
             -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
-            ssReplaceVisual:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
         end
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
-        local tmp = ssReplaceVisual:updateTextures(getChildAt(nodeId, i), name)
+        local tmp = self:updateTextures(getChildAt(nodeId, i), name)
 
         if tmp ~= nil then
             return tmp
@@ -202,7 +209,7 @@ function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
-        local tmp = ssReplaceVisual:updateTexturesSubNode(getChildAt(nodeId, i), shapeName, materialSrcId)
+        local tmp = self:updateTexturesSubNode(getChildAt(nodeId, i), shapeName, materialSrcId)
 
         if tmp ~= nil then
             return tmp

@@ -8,6 +8,8 @@ ssSeasonsMenu = {}
 
 local ssSeasonsMenu_mt = Class(ssSeasonsMenu, ScreenElement)
 
+source(g_currentModDirectory .. "src/events/ssSettingsEvent.lua")
+
 function ssSeasonsMenu:new(target, custom_mt)
     if custom_mt == nil then
         custom_mt = ssSeasonsMenu_mt
@@ -45,6 +47,8 @@ function ssSeasonsMenu:onOpen(element)
     -- layout
     self:setPageStates()
     self:updatePageStates()
+
+    self:updateServerSettingsVisibility()
 
     -- settings
     self:updateGameSettings()
@@ -152,6 +156,10 @@ function ssSeasonsMenu:update(dt)
     self.alreadyClosed = false
 end
 
+function ssSeasonsMenu:onAdminOK()
+    g_gui:closeAllDialogs()
+end
+
 function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
     if targetElementTop ~= nil and targetElementBottom ~= nil then
         local buttonBack = FocusManager:getElementById("100")
@@ -222,12 +230,22 @@ function ssSeasonsMenu:onClickMultiplayerLogin(element)
     g_gui:showPasswordDialog({text=g_i18n:getText("ui_enterAdminPassword"), callback=self.onAdminPassword, target=self, defaultPassword=""})
 end
 
-function ssSeasonsMenu:onAdminPassword(password)
-    g_client:getServerConnection():sendEvent(GetAdminEvent:new(password))
+function ssSeasonsMenu:onAdminPassword(password, login)
+    if login then
+        g_client:getServerConnection():sendEvent(GetAdminEvent:new(password))
+    else
+        g_gui:closeDialogByName("PasswordDialog")
+    end
 end
 
-function ssSeasonsMenu:onAdminLoginSuccess()
-    self:updateServerSettingsVisibility()
+function GetAdminAnswerEvent.onAnswerOk(args)
+    if args ~= nil and args[1] == true then
+        if g_gui.currentGuiName == "SeasonsMenu" then
+            g_seasons.mainMenu:updateServerSettingsVisibility()
+        else
+            g_inGameMenu:onAdminLoginSuccess()
+        end
+    end
 end
 
 ------------------------------------------
@@ -241,6 +259,7 @@ end
 function ssSeasonsMenu:onCreateSaveButton(element)
     element:setText(ssLang.getText("ui_buttonSave"))
 end
+
 
 function ssSeasonsMenu:updateGameSettings()
     if g_currentMission == nil then
@@ -295,26 +314,28 @@ end
 
 function ssSeasonsMenu:onYesNoSaveSettings(yes)
     if yes then
-        local newLength = self.settingElements.seasonLength:getState() * 3
-
         ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
         g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
         ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
 
         if g_currentMission:getIsServer() then
-            ssSnow:setMode(self.settingElements.snow:getState())
+            local newLength = self.settingElements.seasonLength:getState() * 3
+
+            g_seasons.snow:setMode(self.settingElements.snow:getState())
             self:updateSnowStatus()
 
             g_seasons.environment:changeDaysInSeason(newLength)
 
-            ssVehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
+            g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
             g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
 
             self:updateApplySettingsButton()
-        else
-            -- TODO: in MP, we need to send this to the server
-            -- Then the server makes the changes, and needs to update everything to the client
-            -- g_client:getServerConnection():sendEvent(ssApplySettingsEvent:new())
+
+            -- Sync new data to all the clients
+            ssSettingsEvent.sendEvent()
+        elseif g_currentMission.isMasterUser then
+            -- Sync to the server
+            ssSettingsEvent.sendEvent()
         end
     end
 end
@@ -420,29 +441,39 @@ function ssSeasonsMenu:updateDebugValues()
 end
 
 function ssSeasonsMenu:updateSnowStatus()
-    self.debugSnowDepth:setText(string.format("Snow height: %0.2f (%i layers)", ssSnow.appliedSnowDepth, ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT))
+    if g_currentMission:getIsServer() then
+        self.debugSnowDepth:setText(string.format("Snow height: %0.2f (%i layers)", ssSnow.appliedSnowDepth, ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT))
+    end
 end
 
 function ssSeasonsMenu:onClickDebugAutoSnow(state)
-    ssSnow.autoSnow = self.autoSnowToggle:getIsChecked()
+    if g_currentMission:getIsServer() then
+        ssSnow.autoSnow = self.autoSnowToggle:getIsChecked()
+    end
 end
 
 function ssSeasonsMenu:onClickDebugAddSnow(state)
-    ssSnow:applySnow(math.max(ssSnow.appliedSnowDepth + ssSnow.LAYER_HEIGHT, ssSnow.LAYER_HEIGHT))
+    if g_currentMission:getIsServer() then
+        ssSnow:applySnow(math.max(ssSnow.appliedSnowDepth + ssSnow.LAYER_HEIGHT, ssSnow.LAYER_HEIGHT))
 
-    self:updateSnowStatus()
+        self:updateSnowStatus()
+    end
 end
 
 function ssSeasonsMenu:onClickDebugRemoveSnow(state)
-    ssSnow:applySnow(ssSnow.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
+    if g_currentMission:getIsServer() then
+        ssSnow:applySnow(ssSnow.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
 
-    self:updateSnowStatus()
+        self:updateSnowStatus()
+    end
 end
 
 function ssSeasonsMenu:onClickDebugClearSnow(state)
-    ssSnow:applySnow(0)
+    if g_currentMission:getIsServer() then
+        ssSnow:applySnow(0)
 
-    self:updateSnowStatus()
+        self:updateSnowStatus()
+    end
 end
 
 function ssSeasonsMenu:onClickDebugVehicleRendering(state)
@@ -454,5 +485,7 @@ function ssSeasonsMenu:onClickDebugAIRendering(state)
 end
 
 function ssSeasonsMenu:onClickDebugResetGM()
-    ssGrowthManager:resetGrowth()
+    if g_currentMission:getIsServer() then
+        ssGrowthManager:resetGrowth()
+    end
 end

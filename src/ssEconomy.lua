@@ -132,7 +132,7 @@ end
 function ssEconomy.setFieldOwnedByPlayer(self, superFunc, fieldDef, isOwned)
     local ret = superFunc(self, fieldDef, isOwned)
 
-    g_currentMission.missionStats.loanMax = ssEconomy.getLoanCap(ssEconomy)
+    g_currentMission.missionStats.loanMax = g_seasons.economy:getLoanCap()
 
     return ret
 end
