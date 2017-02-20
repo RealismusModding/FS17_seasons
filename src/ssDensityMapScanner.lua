@@ -19,12 +19,14 @@ ssDensityMapScanner.moreIterations=false
 ssDensityMapScanner.workQ = ssUtil.listNew()
 
 function ssDensityMapScanner:queuJob(callBackName, parameter)
-    print("[Seasons] DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
+    log("DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
+
     ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
 end
 
 function ssDensityMapScanner:registerCallback(callBackName, callbackSelf, callbackFunction, callbackFinalizeFunction)
-    print("Registering callback: " .. callBackName)
+    log("Registering callback: " .. callBackName)
+
     self.callBacks[callBackName] = {
         callbackSelf = callbackSelf,
         callbackFunction = callbackFunction,
@@ -41,7 +43,8 @@ function ssDensityMapScanner:save(savegame, key)
 
     local count=0
     while true do
-        print("Saving jobb: " .. count)
+        log("Saving job: " .. count)
+
         local jobb = ssUtil.listPopLeft(self.workQ)
         if jobb ~= nil then
             count = count + 1
@@ -71,7 +74,8 @@ function ssDensityMapScanner:load(savegame, key)
             local callBackName = ssStorage.getXMLString(savegame, key .. namei .. "#callBackName")
             local parameter = ssStorage.getXMLString(savegame, key .. namei .. "#parameter")
             ssUtil.listPushRight( self.workQ, { callBackName = callBackName, parameter=parameter })
-            print("[Seasons] DensityMapScanner, loaded jobb: " .. callBackName .. " with parameter " .. parameter)
+
+            log("[Seasons] DensityMapScanner, loaded jobb: " .. callBackName .. " with parameter " .. parameter)
         end
     end
 end
@@ -83,7 +87,8 @@ function ssDensityMapScanner:update(dt)
     if self.moreIterations == false then
         local jobb = ssUtil.listPopLeft(self.workQ)
         if jobb ~= nil then
-            print("[Seasons] DensityMapScanner, dequed job: " .. jobb.callBackName .. "(" .. jobb.parameter .. ")")
+            log("DensityMapScanner, dequed job: " .. jobb.callBackName .. "(" .. jobb.parameter .. ")")
+
             self.currentCallBackName = jobb.callBackName
             self.currentParameter = jobb.parameter
             self.moreIterations = true
@@ -91,7 +96,7 @@ function ssDensityMapScanner:update(dt)
     end
 
     if self.moreIterations == true then
-        ssDensityMapScanner:ssIterateOverTerrain()
+        self:ssIterateOverTerrain()
     end
 end
 
@@ -99,7 +104,7 @@ function ssDensityMapScanner:ssIterateOverTerrain()
     -- print("- Scanning: " .. self.currentX .. ", " .. self.currentZ)
     local mapSegments = 16 -- Must be evenly dividable with mapsize.
 
-    if g_currentMission.missionInfo.timeScale > 120 then
+    if g_dedicatedServerInfo ~= nil or g_currentMission.missionInfo.timeScale > 120 then
         mapSegments = 1 -- Not enough time to do it section by section.
     end
 
