@@ -116,8 +116,10 @@ function findNodeByName(nodeId, name)
     if getName(nodeId) == name then
         return nodeId
     end
+
     for i=0, getNumOfChildren(nodeId)-1 do
         local tmp = findNodeByName(getChildAt(nodeId, i), name)
+
         if tmp ~= nil then
             return tmp
         end
@@ -181,20 +183,28 @@ function ssReplaceVisual:updateTextures(nodeId)
     if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do
             -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
-            self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            if secondaryNodeTable.materialId ~= nil then
+                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            end
         end
     elseif self.textureReplacements.default[getName(nodeId)] ~= nil then
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements.default[getName(nodeId)]) do
             -- print("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
-            self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            if secondaryNodeTable.materialId ~= nil then
+                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+            end
         end
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
-        local tmp = self:updateTextures(getChildAt(nodeId, i), name)
+        local childId = getChildAt(nodeId, i)
 
-        if tmp ~= nil then
-            return tmp
+        if childId ~= nil then
+            local tmp = self:updateTextures(childId, name)
+
+            if tmp ~= nil then
+                return tmp
+            end
         end
     end
 
@@ -204,15 +214,19 @@ end
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     if getName(nodeId) == shapeName then
-        -- print("Setting texture for " .. getName(nodeId) .. " (" .. nodeId .. ") to " .. materialSrcId .. ".")
+        -- print("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId) .. ".")
         setMaterial(nodeId, materialSrcId, 0)
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
-        local tmp = self:updateTexturesSubNode(getChildAt(nodeId, i), shapeName, materialSrcId)
+        local childId = getChildAt(nodeId, i)
 
-        if tmp ~= nil then
-            return tmp
+        if childId ~= nil then
+            local tmp = self:updateTexturesSubNode(childId, shapeName, materialSrcId)
+
+            if tmp ~= nil then
+                return tmp
+            end
         end
     end
 

@@ -19,9 +19,11 @@ ssDensityMapScanner.moreIterations=false
 ssDensityMapScanner.workQ = ssUtil.listNew()
 
 function ssDensityMapScanner:queuJob(callBackName, parameter)
-    log("DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
+    if g_currentMission:getIsServer() then
+        log("DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
 
-    ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
+        ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter=parameter })
+    end
 end
 
 function ssDensityMapScanner:registerCallback(callBackName, callbackSelf, callbackFunction, callbackFinalizeFunction)

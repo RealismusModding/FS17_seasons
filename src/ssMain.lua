@@ -97,7 +97,10 @@ function ssMain:update(dt)
         g_gui:showGui("SeasonsMenu")
     end
 
-    if not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning and g_gui.currentGui == nil then
+    -- A dedicated server must always reset growth
+    if g_currentMission:getIsServer() and g_dedicatedServerInfo ~= nil and not self.isNewSaveGame and self.isOldSaveGame then
+        ssGrowthManager:resetGrowth()
+    elseif not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning and g_gui.currentGui == nil then
         function resetAction(self, yesNo)
             if yesNo then
                 ssGrowthManager:resetGrowth()

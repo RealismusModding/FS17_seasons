@@ -48,10 +48,6 @@ function ssSnow:loadMap(name)
 
         self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
 
-        if self.snowMaskId ~= nil then
-            setVisibility(self.snowMaskId, false)
-        end
-
         ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
     end
@@ -179,6 +175,10 @@ function ssSnow:update(dt)
         self.snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME)
         if self.snowMaskId == 0 then
             self.snowMaskId = nil
+        end
+
+        if self.snowMaskId ~= nil then
+            setVisibility(self.snowMaskId, false)
         end
 
         -- When no mask is available, limit to one layer
