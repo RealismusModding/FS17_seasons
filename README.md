@@ -49,6 +49,8 @@ For a better game experience, custom maps should add two new density layers: one
   - Snow and hail in winter. 
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
 - Pedestrians do not spawn in the Winter.
+- When snow falls, tippers and shovels fill up. Put them in a shed (when the map has a snow mask) or activate the cover.
+- Snow will melt from tippers and shovels when it is not freezing outside.
 
 ### Weather forecast
 - 7 day weather forecast
@@ -87,6 +89,11 @@ For a better game experience, custom maps should add two new density layers: one
   - They need more straw in winter than in summer
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+
+### Warnings for gameplay
+- Do not fast forward faster than 6000x on singleplayer (preferable even slower)
+- Do not fast forward faster than 1200x on multiplayer (120x is even better)
+The game will get out of sync with the extra load of Seasons
 
 ## Coding style
 - End your lines with \n (LF), not CRLF
