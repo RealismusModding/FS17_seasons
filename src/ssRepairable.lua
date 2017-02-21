@@ -137,13 +137,13 @@ function ssRepairable:update(dt)
 
     if self.isMotorStarted then
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-        local p = math.max(2 - overdueFactor^0.001 , 0.2)^(1 / 60 / dt * overdueFactor^2.5)
+        local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 60 / dt * overdueFactor ^ 2.5)
 
         if math.random() > p then
             self:stopMotor()
 
             if self.isEntered then
-                g_currentMission:showBlinkingWarning(ssLang.getText("warning_repairBrokenMachine"),2000)
+                g_currentMission:showBlinkingWarning(ssLang.getText("warning_repairBrokenMachine"), 2000)
             end
         end
     end
@@ -152,6 +152,7 @@ end
 function ssRepairable:ssRepairUpdate(dt)
     local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
+    log("rc "..tostring(repairCost))
     if repairCost < 1 then return end
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
