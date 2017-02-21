@@ -122,6 +122,7 @@ function ssWeatherForecast:draw()
 
         -- Clean up after us, text render after this will be affected otherwise.
         setTextColor(1, 1, 1, 1)
+        setTextAlignment(RenderText.ALIGN_LEFT)
     end
 end
 

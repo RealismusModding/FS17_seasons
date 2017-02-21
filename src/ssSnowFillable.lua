@@ -40,7 +40,7 @@ end
 
 local function vehicleInShed(vehicle)
     if ssSnow.snowMaskId ~= nil then
-        local width = vehicle.sizeWidth/3 
+        local width = vehicle.sizeWidth/3
         local length = vehicle.sizeLength/3
         -- divide by 3 to ensure vehicle is registered as inside the shed even if the mask is not accurate
         -- and/or the vehicle is parked near the border of the mask
@@ -86,7 +86,8 @@ function ssSnowFillable:updateTick(dt)
         if self:getAllowFillFromAir() -- For cover
               and not vehicleInShed(self)
               and g_currentMission.environment.currentRain ~= nil
-              and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_SNOW then
+              and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_SNOW
+              and temp <= 0 then
 
             local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
             local diff = 0.05 * self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000)
