@@ -64,6 +64,7 @@ end
 ----------------------------
 
 function ssMain:readStream(streamId, connection)
+    self.showControlsInHelpScreen = true
 end
 
 function ssMain:writeStream(streamId, connection)
