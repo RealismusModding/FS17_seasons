@@ -19,7 +19,7 @@ function ssRepairable:load(savegame)
     self.ssPlayerInRange = false
     self.ssInRangeOfWorkshop = nil
 
-    self.ssLastRepairDay = g_seasons.environment:currentDay()
+    self.ssLastRepairDay = g_currentMission.environment.currentDay
     self.ssYesterdayOperatingTime = self.operatingTime
     self.ssCumulativeDirt = 0
 
@@ -124,7 +124,7 @@ function ssRepairable:update(dt)
         self:ssRepairUpdate(dt)
     end
 
-    if self.isEntered then
+    if self.isEntered and self.isClient then
         local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
         local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
 
@@ -152,7 +152,6 @@ end
 function ssRepairable:ssRepairUpdate(dt)
     local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
-    log("rc "..tostring(repairCost))
     if repairCost < 1 then return end
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
