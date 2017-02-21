@@ -72,14 +72,18 @@ function ssSnow:setMode(mode)
 
     self.mode = mode
 
-    if self.mode == self.MODE_OFF then
-        self:applySnow(0)
-    elseif self.mode == self.MODE_ONE_LAYER and self.appliedSnowDepth > self.LAYER_HEIGHT then
-        self:applySnow(self.LAYER_HEIGHT)
+    if g_currentMission:getIsServer() then
+        if self.mode == self.MODE_OFF then
+            self:applySnow(0)
+        elseif self.mode == self.MODE_ONE_LAYER and self.appliedSnowDepth > self.LAYER_HEIGHT then
+            self:applySnow(self.LAYER_HEIGHT)
+        end
     end
 end
 
 function ssSnow:applySnow(targetSnowDepth)
+    if not g_currentMission:getIsServer() then return end
+
     if self.mode == self.MODE_ONE_LAYER then
         targetSnowDepth = math.min(self.LAYER_HEIGHT, targetSnowDepth)
     elseif self.mode == self.MODE_OFF then

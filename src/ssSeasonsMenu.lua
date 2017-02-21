@@ -273,8 +273,13 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.moisture:setIsChecked(g_seasons.weather.moistureEnabled)
 
     -- Make sure the GUI is consistent
+    self:updateTracksDisablement()
+end
+
+function ssSeasonsMenu:updateTracksDisablement()
     local tracks = self.settingElements.snowTracks
-    if ssSnow.mode == ssSnow.MODE_ON then
+
+    if self.settingElements.snow:getState() == ssSnow.MODE_ON then
         -- Tracks only work with more than 1 layer of snow, so it doesnt make sense to have an
         -- option to turn them on when snow is off or max 1 layer
         tracks:setDisabled(false)
@@ -388,17 +393,7 @@ function ssSeasonsMenu:onCreateSnow(element)
 end
 
 function ssSeasonsMenu:onClickSnowToggle(state)
-    local tracks = self.settingElements.snowTracks
-
-    if ssSnow.mode == ssSnow.MODE_ON then
-        -- Tracks only work with more than 1 layer of snow, so it doesnt make sense to have an
-        -- option to turn them on when snow is off or max 1 layer
-        tracks:setDisabled(false)
-        tracks:setIsChecked(ssVehicle.snowTracksEnabled)
-    else
-        tracks:setDisabled(true)
-        tracks:setIsChecked(false)
-    end
+    self:updateTracksDisablement()
 
     self:updateApplySettingsButton()
 end
