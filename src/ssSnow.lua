@@ -54,6 +54,15 @@ function ssSnow:loadMap(name)
 
 end
 
+function ssSnow:readStream(streamId, connection)
+    -- Applied snow depth is not needed
+    self.mode = streamReadInt8(streamId)
+end
+
+function ssSnow:writeStream(streamId, connection)
+    streamWriteInt8(streamId, self.mode)
+end
+
 function ssSnow:deleteMap()
 end
 

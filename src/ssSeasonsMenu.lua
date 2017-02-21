@@ -268,7 +268,7 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.seasonLength:setState(math.floor(g_seasons.environment.daysInSeason / 3))
     self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
     self.settingElements.controlsTemperature:setIsChecked(ssWeatherForecast.degreeFahrenheit)
-    self.settingElements.snow:setState(ssSnow.mode)
+    self.settingElements.snow:setState(g_seasons.snow.mode)
     self.settingElements.snowTracks:setIsChecked(ssVehicle.snowTracksEnabled)
     self.settingElements.moisture:setIsChecked(g_seasons.weather.moistureEnabled)
 
