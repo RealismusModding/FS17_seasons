@@ -14,6 +14,7 @@ ssWeatherManager.snowDepth = 0
 ssWeatherManager.soilTemp = 4.9
 ssWeatherManager.cropMoistureContent = 15
 ssWeatherManager.weather = {}
+ssWeatherManager.moistureEnabled = true
 
 -- Load events
 source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
