@@ -145,7 +145,7 @@ function ssWeatherManager:loadMap(name)
         end
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
 
-        self:owRaintable()
+        self:overwriteRaintable()
     end
 end
 
@@ -189,6 +189,8 @@ function ssWeatherManager:readStream(streamId, connection)
 
         table.insert(self.weather, rain)
     end
+
+    self:overwriteRaintable()
 end
 
 function ssWeatherManager:writeStream(streamId, connection)
@@ -274,8 +276,7 @@ function ssWeatherManager:buildForecast()
         table.insert(self.weather, oneDayRain)
     end
 
-    self:owRaintable()
-    self:switchRainHail()
+    self:overwriteRaintable()
 end
 
 function ssWeatherManager:updateForecast()
@@ -320,8 +321,7 @@ function ssWeatherManager:updateForecast()
 
     table.remove(self.weather, 1)
 
-    self:owRaintable()
-    self:switchRainHail()
+    self:overwriteRaintable()
 
     self:updateSoilTemp()
 
@@ -512,6 +512,7 @@ function ssWeatherManager:currentTemperature()
     return self.latestCurrentTemp
 end
 
+-- Change rain into snow when it is freezing, and snow into rain if it is too hot
 function ssWeatherManager:switchRainHail()
     for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
@@ -626,7 +627,8 @@ function ssWeatherManager:_randomRain(day)
     return p
 end
 
-function ssWeatherManager:owRaintable()
+-- Overwrite the vanilla rains table using our own forecast
+function ssWeatherManager:overwriteRaintable()
     local env = g_currentMission.environment
     local tmpWeather = {}
 
@@ -648,6 +650,8 @@ function ssWeatherManager:owRaintable()
             g_currentMission.environment.rains[index].endDay = newEndDay
         end
     end
+
+    self:switchRainHail()
 end
 
 --- function for predicting when soil is too cold for crops to germinate
@@ -656,11 +660,7 @@ function ssWeatherManager:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:canSow(fruit)
-    if self.soilTemp >= self:germinationTemperature(fruit) then
-        return true
-    else
-        return false
-    end
+    return self.soilTemp >= self:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)
