@@ -392,12 +392,14 @@ end
 function ssSeasonsMenu:onClickSnowToggle(state)
     local tracks = self.settingElements.snowTracks
 
-    if state == ssSnow.MODE_ON then
-        tracks:setDisabled(true)
-        tracks:setIsChecked(false)
-    else
+    if ssSnow.mode == ssSnow.MODE_ON then
+        -- Tracks only work with more than 1 layer of snow, so it doesnt make sense to have an
+        -- option to turn them on when snow is off or max 1 layer
         tracks:setDisabled(false)
         tracks:setIsChecked(ssVehicle.snowTracksEnabled)
+    else
+        tracks:setDisabled(true)
+        tracks:setIsChecked(false)
     end
 
     self:updateApplySettingsButton()
