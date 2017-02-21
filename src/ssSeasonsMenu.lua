@@ -71,8 +71,6 @@ function ssSeasonsMenu:onClose(element)
 
     self.mouseDown = false
 
-    -- TODO: Save the settings
-
     if g_currentMission ~= nil then
         g_currentMission:setCurrentSoundState(false)
     end
