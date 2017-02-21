@@ -77,7 +77,7 @@
         <text name="ui_pageHelp" text="Pomoc" />
         <text name="ui_pageDebug" text="Narzędzia debugowania" />
 
-        <text name="ui_buttonSave" text="Zapisz ustawienia" />
+        <text name="ui_buttonSave" text="Zastosuj ustawienia" />
         <text name="ui_snowOneLayer" text="tylko 1 warstwa" />
         <text name="ui_days" text="%i dni" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheita" />
