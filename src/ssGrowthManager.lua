@@ -42,15 +42,15 @@ function ssGrowthManager:loadMap(name)
         return
     end
 
+    --lock changing the growth speed option and set growth rate to 1 (no growth)
+    g_currentMission:setPlantGrowthRate(1,nil)
+    g_currentMission:setPlantGrowthRateLocked(true)
+
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
             log("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
             return
         end
-
-        --lock changing the growth speed option and set growth rate to 1 (no growth)
-        g_currentMission:setPlantGrowthRate(1,nil)
-        g_currentMission:setPlantGrowthRateLocked(true)
 
         g_seasons.environment:addGrowthStageChangeListener(self)
 
