@@ -50,6 +50,10 @@ function ssSnow:loadMap(name)
 
         ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
+
+        addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self);
+        addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self);
+        addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self);
     end
 
 end
@@ -320,4 +324,16 @@ function ssSnow:getWheelCoord(wheel,width,length)
     end
 
     return x0,z0, x1,z1, x2,z2
+end
+
+function ssSnow:consoleCommandAddSnow()
+    self:applySnow(self.appliedSnowDepth + ssSnow.LAYER_HEIGHT)
+end
+
+function ssSnow:consoleCommandRemoveSnow()
+    self:applySnow(self.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
+end
+
+function ssSnow:consoleCommandResetSnow()
+    self:applySnow(0)
 end
