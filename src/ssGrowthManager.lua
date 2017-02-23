@@ -211,6 +211,13 @@ function ssGrowthManager:growthStageChanged()
     end
 end
 
+-- handle dayChangedEvent 
+-- check if canGerminate and setCanPlantData accordingly
+function ssGrowthManager:dayChanged()
+    --TODO: implement
+    
+end
+
 function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState
     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
