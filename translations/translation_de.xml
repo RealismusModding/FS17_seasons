@@ -30,9 +30,18 @@
         <text name="SS_SEASON_2" text="Herbst" />
         <text name="SS_SEASON_3" text="Winter" />
 
-        <text name="SS_SEASON_PREFIX_1" text="Early" />
-        <text name="SS_SEASON_PREFIX_2" text="Mid" />
-        <text name="SS_SEASON_PREFIX_3" text="Late" />
+        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter" />
         
         <text name="SS_MONTH_SHORT_1" text="Jän" />
         <text name="SS_MONTH_SHORT_2" text="Feb" />
