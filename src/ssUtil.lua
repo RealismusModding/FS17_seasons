@@ -77,8 +77,8 @@ function ssUtil.monthNameShort(monthNumber)
     return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
 end
 
-function ssUtil.seasonPrefixName(seasonPrefix)
-    return ssLang.getText("SS_SEASON_PREFIX_" .. tostring(seasonPrefix), "???")    
+function ssUtil.fullSeasonName(growthStage)
+    return ssLang.getText("SS_SEASON_FULL_NAME_" .. tostring(growthStage), "???")    
 end
 
 function ssUtil.nextWeekDayNumber(currentDay)

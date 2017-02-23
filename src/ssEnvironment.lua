@@ -464,13 +464,6 @@ function ssEnvironment:seasonAtDay(dayNumber)
     return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
 end
 
--- returns full season name with prefix like early spring
-function ssEnvironment:fullSeasonNameWithPrefixAt(dayNumber)
-    -- local preFix = ssUtil.seasonPrefixName(self:currentGrowthStage(dayNumber))
-    -- local suffix = ssUtil.seasonName(self:seasonAtDay(dayNumber))
-
-    return ssUtil.seasonPrefixName(self:currentGrowthStage(dayNumber)) .. " " .. ssUtil.seasonName(self:seasonAtDay(dayNumber))
-end
 -- Retuns month number based on dayNumber
 function ssEnvironment:monthAtDay(dayNumber)
     return self:monthAtGrowthTransitionNumber(self:growthTransitionAtDay(dayNumber))
