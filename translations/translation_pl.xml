@@ -32,18 +32,18 @@
         <text name="SS_SEASON_2" text="Jesień" />
         <text name="SS_SEASON_3" text="Zima" />
 
-        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring" />
-        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring" />
-        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring" />
-        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer" />
-        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer" />
-        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer" />
-        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn" />
-        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn" />
-        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn" />
-        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter" />
-        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter" />
-        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter" />
+        <text name="SS_SEASON_FULL_NAME_1" text="Wczesna wiosna" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Środek wiosny" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Późna wiosna" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Wczesne lato" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Środek lata" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Późne lato" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Wczesna jesień" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Środek jesieni" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Późna jesień" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Wczesna zima" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Środek zimy" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Późna zima" />
         
         <text name="SS_MONTH_SHORT_1" text="sty" />
         <text name="SS_MONTH_SHORT_2" text="lut" />
