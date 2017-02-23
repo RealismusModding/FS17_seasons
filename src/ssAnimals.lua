@@ -10,6 +10,7 @@ g_seasons.animals = ssAnimals
 
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()
@@ -51,8 +52,9 @@ function ssAnimals:seasonChanged()
             if birthRatePerDay ~= 0 then
                 desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*g_seasons.environment.daysInSeason))
             else
-                desc.birthRatePerDay = birthRatePerDay
+                desc.birthRatePerDay = 0
             end
+
             desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
             desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
             desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
@@ -73,6 +75,11 @@ function ssAnimals:seasonChanged()
 
     -- FIXME send event to clients that stuff has changed
     -- broadcast event
+end
+
+function ssAnimals:seasonLengthChanged()
+    -- Recalculate all values
+    self:seasonChanged()
 end
 
 -- animal: string, filltype: int, enabled: bool
