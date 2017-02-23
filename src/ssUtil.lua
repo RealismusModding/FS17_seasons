@@ -77,6 +77,10 @@ function ssUtil.monthNameShort(monthNumber)
     return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
 end
 
+function ssUtil.seasonPrefixName(seasonPrefix)
+    return ssLang.getText("SS_SEASON_PREFIX_" .. tostring(seasonPrefix), "???")    
+end
+
 function ssUtil.nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
