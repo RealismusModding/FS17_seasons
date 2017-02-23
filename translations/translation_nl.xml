@@ -30,6 +30,10 @@
         <text name="SS_SEASON_2" text="Herfst" />
         <text name="SS_SEASON_3" text="Winter" />
 
+        <text name="SS_SEASON_PREFIX_1" text="Early" />
+        <text name="SS_SEASON_PREFIX_2" text="Mid" />
+        <text name="SS_SEASON_PREFIX_3" text="Late" />
+        
         <text name="SS_MONTH_SHORT_1" text="jan" />
         <text name="SS_MONTH_SHORT_2" text="feb" />
         <text name="SS_MONTH_SHORT_3" text="maart" />

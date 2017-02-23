@@ -45,6 +45,10 @@
         <text name="SS_SEASON_2" text="Podzim" />
         <text name="SS_SEASON_3" text="Zima" />
 
+        <text name="SS_SEASON_PREFIX_1" text="Early" />
+        <text name="SS_SEASON_PREFIX_2" text="Mid" />
+        <text name="SS_SEASON_PREFIX_3" text="Late" />
+
         <text name="SS_VEHICLE_TAXES" text="Vozidlo cena" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Údržba vozidla" />
         <text name="SS_VEHICLE_REPAIRS" text="Opravy vozidel" />

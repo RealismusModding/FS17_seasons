@@ -33,6 +33,9 @@
         <text name="SS_SEASON_2" text="Otoño" />
         <text name="SS_SEASON_3" text="Invierno" />
 
+        <text name="SS_SEASON_PREFIX_1" text="Early" />
+        <text name="SS_SEASON_PREFIX_2" text="Mid" />
+        <text name="SS_SEASON_PREFIX_3" text="Late" />
 
         <text name="SS_MONTH_SHORT_1" text="Ene" />
         <text name="SS_MONTH_SHORT_2" text="Feb" />
