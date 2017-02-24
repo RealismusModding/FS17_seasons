@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        Rahkiin, theSeb
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
+
+        <text name="SS_WEEKDAY_1" text="Maandag" />
+        <text name="SS_WEEKDAY_2" text="Dinsdag" />
+        <text name="SS_WEEKDAY_3" text="Woensdag" />
+        <text name="SS_WEEKDAY_4" text="Donderdag" />
+        <text name="SS_WEEKDAY_5" text="Vrijdag" />
+        <text name="SS_WEEKDAY_6" text="Zaterdag" />
+        <text name="SS_WEEKDAY_7" text="Zondag" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Maa" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Din" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Woe" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Don" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Vri" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Zat" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Zon" />
+
+        <text name="SS_SEASON_0" text="Lente" />
+        <text name="SS_SEASON_1" text="Zomer" />
+        <text name="SS_SEASON_2" text="Herfst" />
+        <text name="SS_SEASON_3" text="Winter" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter" />
+        
+        <text name="SS_MONTH_SHORT_1" text="jan" />
+        <text name="SS_MONTH_SHORT_2" text="feb" />
+        <text name="SS_MONTH_SHORT_3" text="maart" />
+        <text name="SS_MONTH_SHORT_4" text="apr" />
+        <text name="SS_MONTH_SHORT_5" text="mei" />
+        <text name="SS_MONTH_SHORT_6" text="juni" />
+        <text name="SS_MONTH_SHORT_7" text="juli" />
+        <text name="SS_MONTH_SHORT_8" text="aug" />
+        <text name="SS_MONTH_SHORT_9" text="sept" />
+        <text name="SS_MONTH_SHORT_10" text="okt" />
+        <text name="SS_MONTH_SHORT_11" text="nov" />
+        <text name="SS_MONTH_SHORT_12" text="dec" />
+
+        <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
+        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen" />
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
+
+        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
+            <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
+
+            <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
+            <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO" />
+            <text name="SS_SEASON_INTRO_2" text="Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO" />
+            <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
+    </texts>
+</l10n>

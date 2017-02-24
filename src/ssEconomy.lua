@@ -2,10 +2,12 @@
 -- ECONOMY SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the economy
--- Authors:  Rahkiin (Jarvixes), reallogger
+-- Authors:  Rahkiin, reallogger
 --
 
 ssEconomy = {}
+g_seasons.economy = ssEconomy
+
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)
@@ -33,6 +35,7 @@ function ssEconomy:loadMap(name)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
     AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
+    FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
 
     if g_currentMission:getIsServer() then
         self:setup()
@@ -68,18 +71,6 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.baseLoanInterest)
 end
 
-function ssEconomy:deleteMap()
-end
-
-function ssEconomy:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssEconomy:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssEconomy:draw()
-end
-
 function ssEconomy:update(dt)
     if g_currentMission:getIsServer() then
         local stats = g_currentMission.missionStats
@@ -96,15 +87,15 @@ function ssEconomy:calculateLoanInterestRate()
     local yearInterest = self.baseLoanInterest / 2 * g_currentMission.missionInfo.difficulty
 
     -- Convert the interest to be made in a Seasons year to a vanilla year so that the daily interests are correct
-    local seasonsYearInterest = yearInterest * (356 / (ssSeasonsUtil.daysInSeason * ssSeasonsUtil.seasonsInYear))
+    local seasonsYearInterest = yearInterest * (356 / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR))
 
     g_currentMission.missionStats.loanAnnualInterestRate = seasonsYearInterest
 end
 
-function ssEconomy:aiUpdateTick(superFunc, dt)
+function ssEconomy.aiUpdateTick(self, superFunc, dt)
     if self:getIsActive() then
         local hour = g_currentMission.environment.currentHour
-        local dow = ssSeasonsUtil:dayOfWeek()
+        local dow = ssUtil.dayOfWeek(g_seasons.environment:currentDay())
 
         if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
             self.pricePerMS = ssEconomy.aiPricePerMSWork
@@ -122,9 +113,11 @@ end
 function ssEconomy:getEquity()
     local price = 0
 
-    for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
-        if field.ownedByPlayer then
-            price = price + field.fieldPriceInitial
+    if g_currentMission.fieldDefinitionBase ~= nil then -- can be nil on WIP maps
+        for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+            if field.ownedByPlayer then
+                price = price + field.fieldPriceInitial
+            end
         end
     end
 
@@ -135,3 +128,12 @@ function ssEconomy:getLoanCap()
     local roundedTo5000 = math.floor(ssEconomy.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
     return Utils.clamp(roundedTo5000, 300000, ssEconomy.loanMax)
 end
+
+function ssEconomy.setFieldOwnedByPlayer(self, superFunc, fieldDef, isOwned)
+    local ret = superFunc(self, fieldDef, isOwned)
+
+    g_currentMission.missionStats.loanMax = g_seasons.economy:getLoanCap()
+
+    return ret
+end
+

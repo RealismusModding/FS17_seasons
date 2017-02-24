@@ -6,406 +6,317 @@
 -- Credits: Inspired by upsidedown's growth manager mod
 
 ssGrowthManager = {}
+g_seasons.growthManager = ssGrowthManager
 
-MAX_GROWTH_STATE = 99; -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
-WITHER_STATE = 100;
-FIRST_LOAD_TRANSITION = 999;
+ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
+ssGrowthManager.WITHERED = 300
+ssGrowthManager.CUT = 200
+ssGrowthManager.FIRST_LOAD_TRANSITION = 999
+ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
+ssGrowthManager.TRUE = "true"
+ssGrowthManager.FALSE = "false"
+ssGrowthManager.MAYBE = "maybe"
 
-function Set (list)
-  local set = {}
-  for _, l in ipairs(list) do set[l] = true end
-  return set
-end
-
-ssGrowthManager.defaultFruits = Set {"barley","wheat","rape","maize","soybean","sunflower","potato","sugarBeet","poplar","grass","oilseedRadish","dryGrass"};
-
-ssGrowthManager.growthData = { 	[1]={ 				
-						["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
-						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},					
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
-						["maize"]			={fruitName="maize", normalGrowthState=1},
-						["soybean"]			={fruitName="soybean", setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sunflower"]		={fruitName="sunflower", setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=1},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=1},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},					
-				}, 
-				
-				[2]={ 	["barley"]			={fruitName="barley", normalGrowthState=1, normalGrowthMaxState=3},
-						["wheat"]			={fruitName="wheat", normalGrowthState=1, normalGrowthMaxState=3},
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=3},
-						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=2},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=1},
-						["potato"]			={fruitName="potato", normalGrowthState=1, normalGrowthMaxState=2},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=1, normalGrowthMaxState=2},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=1, normalGrowthMaxState=3},
-				},
-				
-				[3]={ 	["barley"]			={fruitName="barley", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["wheat"]			={fruitName="wheat", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["maize"]			={fruitName="maize", normalGrowthState=1, normalGrowthMaxState=3},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=2},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=1, normalGrowthMaxState=2},
-						["potato"]			={fruitName="potato", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=2, normalGrowthMaxState=3, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-				},
-				
-				[4]={ 	["barley"]			={fruitName="barley",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["wheat"]			={fruitName="wheat",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["maize"]			={fruitName="maize", normalGrowthState=2, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=1, normalGrowthMaxState=3},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=2, normalGrowthMaxState=3,setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=3, normalGrowthMaxState=4, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=3, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-				},  
-				
-				[5]={ 	["barley"]			={fruitName="barley", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-						["wheat"]			={fruitName="wheat", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-						["rape"]			={fruitName="rape", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-						["maize"]			={fruitName="maize", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=2, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=3, normalGrowthMaxState=4,setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=4, normalGrowthMaxState=5, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE, extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2},
-				}, 
-				
-				[6]={ 	["barley"]			={fruitName="barley",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["wheat"]			={fruitName="wheat",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["maize"]			={fruitName="maize", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", extraGrowthMinState=3, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sunflower"]		={fruitName="sunflower", extraGrowthMinState=4, extraGrowthMaxState=5, extraGrowthFactor=2, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=5, normalGrowthMaxState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=2, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-				},
-				
-				[7]={ 	["barley"]			={fruitName="barley",normalGrowthState=1},
-						["wheat"]			={fruitName="wheat",normalGrowthState=1},
-                        ["rape"]			={fruitName="rape",normalGrowthState=1},			 	
-						["maize"]			={fruitName="maize", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},	
-						["soybean"]			={fruitName="soybean", normalGrowthState=5, normalGrowthMaxState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sunflower"]		={fruitName="sunflower", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", normalGrowthState=MAX_GROWTH_STATE, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["poplar"]			={fruitName="poplar", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=1},
-				}, 	
-				
-				[8]={ 	["barley"]			={fruitName="barley",normalGrowthState=1, normalGrowthMaxState=2,setGrowthState=7,desiredGrowthState=WITHER_STATE},
-						["wheat"]			={fruitName="wheat",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
-						["rape"]			={fruitName="rape", normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE}, 
-						["maize"]			={fruitName="maize", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
-						["soybean"]			={fruitName="soybean", normalGrowthState=6, setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sunflower"]		={fruitName="sunflower", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1,desiredGrowthState=WITHER_STATE},
-						["grass"]			={fruitName="grass", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
-						["default"]			={fruitName="default",normalGrowthState=1, normalGrowthMaxState=1,setGrowthState=7,desiredGrowthState=WITHER_STATE},
- 				},
-
-				[9]={ 	["soybean"]			={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
-						["potato"]			={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
-						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE, desiredGrowthState=WITHER_STATE},
-						["grass"]			={fruitName="grass", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", normalGrowthState=1, normalGrowthMaxState=MAX_GROWTH_STATE},
- 				},
-
-				[10]={}; -- no growth
-				[11]={}; -- no growth
-				[12]={}; -- no growth
-                [FIRST_LOAD_TRANSITION]={ 				
-						["barley"]			={fruitName="barley", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["wheat"]			={fruitName="wheat", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},					
-						["rape"]			={fruitName="rape", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["maize"]			={fruitName="maize", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["soybean"]			={fruitName="soybean", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["sunflower"]		={fruitName="sunflower", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["potato"]			={fruitName="potato", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["sugarBeet"]		={fruitName="sugarBeet", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["poplar"]			={fruitName="poplar", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						["grass"]			={fruitName="grass", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-                        ["oilseedRadish"]	={fruitName="oilseedRadish", setGrowthState=1, setGrowthMaxState=MAX_GROWTH_STATE,desiredGrowthState=1},
-						
-						
-				}, 
-
-};
-
-
+ssGrowthManager.defaultFruits = {}
+ssGrowthManager.growthData = {}
 ssGrowthManager.currentGrowthTransitionPeriod = nil
-ssGrowthManager.doGrowthTransition = false
+ssGrowthManager.doResetGrowth = false
 
+ssGrowthManager.canPlantData = {}
 
 function ssGrowthManager:load(savegame, key)
-    self.hasResetGrowth = ssStorage.getXMLBool(savegame, key .. ".settings.hasResetGrowth", false);
-    self.growthManagerEnabled = ssStorage.getXMLBool(savegame,key .. ".settings.growthManagerEnabled", true);
+    self.isNewSavegame = savegame == nil
+
+    self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
 end
 
 function ssGrowthManager:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.hasResetGrowth", self.hasResetGrowth);
-    ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled);
+    if g_currentMission:getIsServer() == true then
+        ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
+    end
 end
 
 function ssGrowthManager:loadMap(name)
-    
-     if (self.growthManagerEnabled == false) then
-        log("Growth Manager disabled");
+    if self.growthManagerEnabled == false then
+        log("ssGrowthManager: disabled")
         return
     end
-    
-    if g_currentMission:getIsServer() then
-        ssSeasonsMod.addGrowthStageChangeListener(self)
 
-       --lock changing the growth speed option and set growth rate to 1 (no growth)
-       g_currentMission:setPlantGrowthRate(1,nil);
-       g_currentMission:setPlantGrowthRateLocked(true);
-       log("Growth Manager loading. Locking growth");
+    --lock changing the growth speed option and set growth rate to 1 (no growth)
+    g_currentMission:setPlantGrowthRate(1,nil)
+    g_currentMission:setPlantGrowthRateLocked(true)
 
-        if not (self.hasResetGrowth) then 
-            self.currentGrowthTransitionPeriod = FIRST_LOAD_TRANSITION;
-            self.doGrowthTransition = true;
-            self.hasResetGrowth = true;
-            self.growthManagerEnabled = true;
-            log("Growth Manager - First time growth reset - this will only happen once in a new savegame");
+    if g_currentMission:getIsServer() == true then
+       if self:getGrowthData() == false then
+            log("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
+            return
         end
 
-       if g_currentMission.missionInfo.timeScale > 120 then
-            self.mapSegments = 1 -- Not enought time to do it section by section since it might be called every two hour as worst case.
-        else
-            self.mapSegments = 16 -- Must be evenly dividable with mapsize.
-        end
+        g_seasons.environment:addGrowthStageChangeListener(self)
 
-        self.currentX = 0 -- The row that we are currently updating
-        self.currentZ = 0 -- The column that we are currently updating
-    end
-end
+        ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
-function ssGrowthManager:deleteMap()
-end
-
-function ssGrowthManager:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 107) then
-
-        -- for index,fruit in pairs(g_currentMission.fruits) do
-        --     local desc = FruitUtil.fruitIndexToDesc[index]
-        --     local fruitName = desc.name
-        --     if (self.defaultFruits[fruitName] == nil) then
-        --         log("Fruit not found in default table: " .. fruitName);
-        --     end
-        -- end
-        -- self.fakeDay = self.fakeDay + ssSeasonsUtil.daysInSeason
-        -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) )
-        --self:seasonChanged()
-
-        --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod
-        --log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod)
-
-        --self.doGrowthTransition = true
-
-
-        --if self.testGrowthTransitionPeriod < 12 then
-            --self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1
-        --else
-            --self.testGrowthTransitionPeriod = 1
-        --end
-
-
-        -- log ("MAX_GROWTH_STATE " .. MAX_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION)
-
-        
-        -- local growthTransition = ssSeasonsUtil:currentGrowthTransition(self.fakeDay)
-        -- --log("Growth iteration: " .. tostring(growthTransition));
-
-        -- self.fakeDay = self.fakeDay + 1;
-        -- --local cGS = ssSeasonsUtil:currentGrowthStage(self.fakeDay);
-        -- log("Current Growth Transition: " .. tostring(growthTransition));
-        
-        -- log("Season changed to " .. ssSeasonsUtil:seasonName(self.fakeDay) );
-        --self:seasonChanged();
-
-        --self.currentGrowthTransitionPeriod = self.testGrowthTransitionPeriod;
-        --log("Season change transition current : " .. ssGrowthManager.testGrowthTransitionPeriod);
-        
-        -- self.doGrowthTransition = true;
-        
-        
-        -- if self.testGrowthTransitionPeriod < 12 then
-        --     self.testGrowthTransitionPeriod = self.testGrowthTransitionPeriod + 1;
-        -- else
-        --     self.testGrowthTransitionPeriod = 1;
-        -- end
-        
-        
-        -- log ("MAX_GROWTH_STATE " .. MAX_GROWTH_STATE .. " FIRST_LOAD_TRANSITION .. " .. FIRST_LOAD_TRANSITION);
-
-
-        -- for x, line2 in pairs(self.growthData[FIRST_LOAD_TRANSITION]) do
-        --     print(line2.fruitName)
-        -- end
-
-
-        --log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod)
-
-        --log("Season change transition coming up: " .. ssGrowthManager.testGrowthTransitionPeriod);    
-
-
+        self:buildCanPlantData()
+        addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
 
     end
 end
 
-function ssGrowthManager:update(dt)
 
-    if self.doGrowthTransition == true then
+function ssGrowthManager:getGrowthData()
+    local defaultFruits,growthData = ssGrowthManagerData:loadAllData()
 
-        local startWorldX =  self.currentX * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
-        local startWorldZ =  self.currentZ * g_currentMission.terrainSize / self.mapSegments - g_currentMission.terrainSize / 2
-        local widthWorldX = startWorldX + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
-        local widthWorldZ = startWorldZ
-        local heightWorldX = startWorldX
-        local heightWorldZ = startWorldZ + g_currentMission.terrainSize / self.mapSegments - 0.1 -- -0.1 to avoid overlap.
+    if defaultFruits ~= nil then
+        self.defaultFruits = Set(defaultFruits)
+    else
+        logInfo("ssGrowthManager: default fruits data not found")
+        return false
+    end
 
-        --local detailId = g_currentMission.terrainDetailId
+    if growthData ~= nil then
+        self.growthData = growthData
+    else
+        logInfo("ssGrowthManager: default growth data not found")
+        return false
+    end
+    return true
+end
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local desc = FruitUtil.fruitIndexToDesc[index]
-            local fruitName = desc.name
 
-            local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-            if (self.defaultFruits[fruitName] == nil) then
-                log("Fruit not found in default table: " .. fruitName);
-                fruitName = "default";
+    for index,fruit in pairs(g_currentMission.fruits) do
+        local fruitName = FruitUtil.fruitIndexToDesc[index].name
+
+        --handling new unknown fruits
+        if self.defaultFruits[fruitName] == nil then
+            log("Fruit not found in default table: " .. fruitName)
+            fruitName = "barley"
+        end
+
+        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+            --setGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
+                and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
+                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
+                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
             end
-
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then 
-
-                local fruitData = FruitUtil.fruitTypeGrowths[fruitName]
-
-                --setGrowthState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
-                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
-                        --print("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
-
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState
-                    local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
-
-                    if desiredGrowthState == WITHER_STATE then
-                         desiredGrowthState = fruitData.witheringNumGrowthStates
-                    end
-
-                    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
-
-                        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
-                        if maxState == MAX_GROWTH_STATE then
-                            maxState = fruitData.numGrowthStates
-                        end
-                        -- print("Fruit: " .. fruitName)
-                        -- print("MinState: " .. minState)
-                        -- print("Maxstate: " .. maxState)
-                        setDensityMaskParams(fruit.id, "between",minState,maxState)
-                    else
-                        setDensityMaskParams(fruit.id, "equals",minState)
-                    end
-
-                    local sum = setDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ,0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, desiredGrowthState)
-
-                end
-
-                --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
-
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState
-
-                    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
-
-
-                        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState
-
-                        -- print("Fruit: " .. fruitName)
-                        -- print("MinState: " .. minState)
-                        -- print("Maxstate: " .. maxState)
-
-                        if maxState == MAX_GROWTH_STATE then
-                            maxState = fruitData.numGrowthStates-1
-                        end
-                        setDensityMaskParams(fruit.id, "between",minState,maxState)
-                    else
-                        setDensityMaskParams(fruit.id, "equals",minState)
-                    end
-
-                    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, 1)
-                end
-
-                --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-                if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
+            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+            --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
                     and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
                     and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
+                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+        end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+    end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+end
 
-                    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState
-                    local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState
-                    local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
+function ssGrowthManager:consoleCommandResetGrowth()
+    if g_currentMission:getIsServer() then
+        self:resetGrowth()
+    end
+end
 
-                    setDensityMaskParams(fruit.id, "between",minState,maxState)
-                    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, fruit.id, 0, g_currentMission.numFruitStateChannels, extraGrowthFactor )
+function ssGrowthManager:resetGrowth()
+    if self.growthManagerEnabled == true then
+        self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+        logInfo("ssGrowthManager: Growth reset")
+    end
+end
+
+--handle growthStageCHanged event
+function ssGrowthManager:growthStageChanged()
+    if self.growthManagerEnabled then
+        local growthTransition = g_seasons.environment:growthTransitionAtDay()
+
+        if self.isNewSavegame and growthTransition == 1 then
+            self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+            logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
+            self.isNewSavegame = false
+        else
+            log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
+            self.currentGrowthTransitionPeriod = growthTransition
+        end
+        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+    end
+end
+
+function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState
+    local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
+    local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
+
+    if desiredGrowthState == self.WITHERED then
+            desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
+    end
+
+    if desiredGrowthState == self.CUT then
+        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
+    end
+
+    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
+        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
+
+        if maxState == self.MAX_STATE then
+            maxState = fruitTypeGrowth.numGrowthStates
+        end
+        setDensityMaskParams(fruit.id, "between",minState,maxState)
+    else
+        setDensityMaskParams(fruit.id, "equals",minState)
+    end
+
+    local numChannels = g_currentMission.numFruitStateChannels
+    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
+end
+
+--increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState
+
+    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
+        local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
+        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState
+
+        if maxState == self.MAX_STATE then
+            maxState = fruitTypeGrowth.numGrowthStates-1
+        end
+        setDensityMaskParams(fruit.id, "between",minState,maxState)
+    else
+        setDensityMaskParams(fruit.id, "equals",minState)
+    end
+
+    local numChannels = g_currentMission.numFruitStateChannels
+    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, 1)
+end
+
+--increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+    local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState
+    local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState
+    setDensityMaskParams(fruit.id, "between",minState,maxState)
+
+    local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
+    local numChannels = g_currentMission.numFruitStateChannels
+    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
+end
+
+
+-- FIXME: dont move to Util. But don't require data. Use self.canPlantData instead. Also, default
+-- to the current transition state. Also need to update fruitData
+function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
+    if data[fruitName] ~= nil then
+        if data[fruitName][growthTransition] == nil then
+            return false
+        end
+
+        --log(data[fruitName][growthTransition])
+        if data[fruitName][growthTransition] == self.TRUE then
+            return true
+        end
+    end
+    return false
+end
+
+function ssGrowthManager:buildCanPlantData()
+    for fruitName, value in pairs(self.defaultFruits) do
+        if fruitName ~= "dryGrass" then
+            local transitionTable = {}
+            for transition,v in pairs(self.growthData) do
+                if transition == self.FIRST_LOAD_TRANSITION then
+                    break
                 end
 
-            end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+                if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
+                    table.insert(transitionTable, transition , self.FALSE)
+                else
+                    local plantedGrowthTransition =  transition
+                    local currentGrowthStage = 1
+                    local MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
+                    local maxAllowedCounter = 0
+                    local transitionToCheck = plantedGrowthTransition + 1 -- need to start checking from the next transition after planted transition
+                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
-        end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+                    while currentGrowthStage < fruitNumStates and maxAllowedCounter < MAX_ALLOWABLE_GROWTH_PERIOD do
+                        if transitionToCheck > 12 then
+                            transitionToCheck = 1
+                        end
 
-        if self.currentZ < self.mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
-            -- Next column
-            self.currentZ = self.currentZ + 1
-        elseif  self.currentX < self.mapSegments - 1 then -- Starting with row 0
-            -- Next row
-            self.currentX = self.currentX + 1
-            self.currentZ = 0
-        else
-            -- Done with the loop, set up for the next one.
-            self.currentX = 0
-            self.currentZ = 0
-            self.doGrowthTransition = false
+                        currentGrowthStage = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
+                        if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
+                            break
+                        end
+
+                        transitionToCheck = transitionToCheck + 1
+                        maxAllowedCounter = maxAllowedCounter + 1
+                    end
+                    if currentGrowthStage == fruitNumStates then
+                        if plantedGrowthTransition == 1 then
+                            table.insert(transitionTable, plantedGrowthTransition , self.MAYBE)
+                        else
+                            table.insert(transitionTable, plantedGrowthTransition , self.TRUE)
+                        end
+                    else
+                        table.insert(transitionTable, plantedGrowthTransition , self.FALSE)
+                    end
+                end
+            end
+            self.canPlantData[fruitName] = transitionTable
         end
-    end -- end of if self.doGrowthTransition == true then
+    end
 end
 
-function ssGrowthManager:draw()
+--TODO: the 3 if statements should be refactored to 3 functions if possible. They are used in two places
+function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
+    local newGrowthState = currentGrowthStage
+    --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage)
+
+    if self.growthData[transitionToCheck][fruitName] ~= nil then
+        --setGrowthState
+        if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
+            and self.growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
+            if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
+                newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
+            end
+        end
+        --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+        if self.growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
+            local normalGrowthState = self.growthData[transitionToCheck][fruitName].normalGrowthState
+            if self.growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
+                local normalGrowthMaxState = self.growthData[transitionToCheck][fruitName].normalGrowthMaxState
+                if currentGrowthStage >= normalGrowthState and currentGrowthStage <= normalGrowthMaxState then
+                    newGrowthState = newGrowthState + 1
+                end
+            else
+                if currentGrowthStage == normalGrowthState then
+                    newGrowthState = newGrowthState + 1
+                end
+            end
+        end
+        --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+        if self.growthData[transitionToCheck][fruitName].extraGrowthMinState ~= nil
+                and self.growthData[transitionToCheck][fruitName].extraGrowthMaxState ~= nil
+                and self.growthData[transitionToCheck][fruitName].extraGrowthFactor ~= nil then
+            local extraGrowthMinState = self.growthData[transitionToCheck][fruitName].extraGrowthMinState
+            local extraGrowthMaxState = self.growthData[transitionToCheck][fruitName].extraGrowthMaxState
+
+            if currentGrowthStage >= extraGrowthMinState and currentGrowthStage <= extraGrowthMaxState then
+                newGrowthState = newGrowthState + self.growthData[transitionToCheck][fruitName].extraGrowthFactor
+            end
+        end
+    end
+    return newGrowthState
 end
 
-function ssGrowthManager:growthStageChanged()
-
-    if (self.growthManagerEnabled == true) then -- redundant but heyho
-        local growthTransition = ssSeasonsUtil:currentGrowthTransition();
-        log("GrowthManager enabled - growthStateChanged to: " .. growthTransition);
-        self.currentGrowthTransitionPeriod = growthTransition;
-        self.doGrowthTransition = true;
+function ssGrowthManager:boolToGMBool(value)
+    if value == true then
+        return self.TRUE
+    else
+        return self.FALSE
     end
 end

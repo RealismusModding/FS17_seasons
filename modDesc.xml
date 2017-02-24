@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="33">
     <author>Realismus Modding</author>
-    <contributors>theSeb, Jarvixes (Rahkiin), reallogger, mrbear</contributors>
+    <contributors>theSeb, Rahkiin, reallogger, mrbear</contributors>
     <version>1.0.0.0</version>
 
     <title>
@@ -14,16 +14,17 @@
 
     <iconFilename>icon.dds</iconFilename>
 
-    <multiplayer supported="true" />
+    <multiplayer supported="true"/>
 
-    <l10n filenamePrefix="modDesc_l10n" />
+    <l10n filenamePrefix="translations/translation"/>
 
     <extraSourceFiles>
-        <sourceFile filename="src/ssSeasonsMod.lua" />
+        <sourceFile filename="src/loader.lua"/>
     </extraSourceFiles>
 
     <inputBindings>
-        <input name="SEASONS_SHOW_WF" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse="" />
-        <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse="" />
+        <input name="SEASONS_SHOW_WF" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse=""/>
+        <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse=""/>
+        <input name="SEASONS_SHOW_MENU" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse=""/>
     </inputBindings>
 </modDesc>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        fcelsa, theSeb
+    </translationContributors>
+
+    <texts>
+        <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
+
+        <text name="SS_WEEKDAY_1" text="Lunedì" />
+        <text name="SS_WEEKDAY_2" text="Martedì" />
+        <text name="SS_WEEKDAY_3" text="Mercoledì" />
+        <text name="SS_WEEKDAY_4" text="Giovedì" />
+        <text name="SS_WEEKDAY_5" text="Venerdì" />
+        <text name="SS_WEEKDAY_6" text="Sabato" />
+        <text name="SS_WEEKDAY_7" text="Domenica" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Lun" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Mar" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Mer" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Gio" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Ven" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Sab" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Dom" />
+
+        <text name="SS_SEASON_0" text="Primavera" />
+        <text name="SS_SEASON_1" text="Estate" />
+        <text name="SS_SEASON_2" text="Autunno" />
+        <text name="SS_SEASON_3" text="Inverno" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter" />
+        
+        <text name="SS_MONTH_SHORT_1" text="genn" />
+        <text name="SS_MONTH_SHORT_2" text="febbr" />
+        <text name="SS_MONTH_SHORT_3" text="mar" />
+        <text name="SS_MONTH_SHORT_4" text="apr" />
+        <text name="SS_MONTH_SHORT_5" text="magg" />
+        <text name="SS_MONTH_SHORT_6" text="giugno" />
+        <text name="SS_MONTH_SHORT_7" text="luglio" />
+        <text name="SS_MONTH_SHORT_8" text="ag" />
+        <text name="SS_MONTH_SHORT_9" text="sett" />
+        <text name="SS_MONTH_SHORT_10" text="ott" />
+        <text name="SS_MONTH_SHORT_11" text="nov" />
+        <text name="SS_MONTH_SHORT_12" text="dic" />
+
+        <text name="SS_VEHICLE_TAXES" text="Costi Veicoli" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Manutenzione Veicoli" />
+        <text name="SS_VEHICLE_REPAIRS" text="Riparazione Veicoli" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Non hai abbastanza soldi per ripararlo" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s riparato per %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Ripara %s per %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Riparazioni necessarie" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Riparazioni necessarie entro %d giorni" />
+        <text name="SS_REPAIR_DIALOG" text="Vuoi riparare %s per %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
+
+        <text name="warning_soilIsFrozen" text="Il terreno è gelato. Non è possibile lavorarlo!" />
+        <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare le stagioni nel savegame. Riprova!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Un nuovo anno, un nuovo perido di semina. TODO" /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="Il sole è alto, i prodotti crescono. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="Il momento della raccolta è arrivato. Prepararsi prima dell'inverno o le piante non sopravviveranno al freddo. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Fa freddo. il terreno è difficile, forse ghiacciato. I raccolti non crescono e possono anche appassire. TODO" /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
+    </texts>
+</l10n>

@@ -2,7 +2,7 @@
 -- SEASONS XML SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  For loading season parameters from mod, map or game
--- Authors:  Rahkiin (Jarvixes)
+-- Authors:  Rahkiin
 --
 
 ssSeasonsXML = {}
@@ -16,12 +16,14 @@ local seasonKeyToId = {
 
 -- Returns raw data
 function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
+
     local file = loadXMLFile("xml", path)
+
     if file == nil then
         if optional == true then
             return parentData
         else
-            logInfo("Failed to load XML Seasons file " .. path)
+            logInfo("ssSeasonsXML: Failed to load XML Seasons file " .. path)
             return nil
         end
     end

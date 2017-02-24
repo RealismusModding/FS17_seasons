@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D name="snow" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor - DEBUG 64bit" version="7.0.0"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="snowFlakes.png" relativePath="true"/>
+    <File fileId="2" filename="snowMist.png" relativePath="true"/>
+  </Files>
+
+  <Materials>
+    <Material name="snowMaterial" materialId="1" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
+      <Emissivemap fileId="1"/>
+    </Material>
+    <Material name="rainMistMaterial" materialId="2" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
+      <Emissivemap fileId="2"/>
+    </Material>
+    <Material materialId="3" name="snowSplashMaterial" diffuseColor="0 0 0 1" ambientColor="0 0 0" alphaBlending="true" allowSubsequentPasses="false">
+      <Emissivemap fileId="1"/>
+    </Material>
+  </Materials>
+
+  <Shapes>
+   <Precipitation shapeId="1" name="snowGeom" maxNumDrops="3500" dropMaterialId="1" boundsWidth="50.0" boundsHeight="50.0" dropWidth="0.30" dropHeight="0.30" dropAtlasSize="16" dropMinVelocity="0.004" dropMaxVelocity="0.007" dropMinMass="0.5" dropMaxMass="2" splashMaterialId="3" generateSplashes="false" splashWidth="1.0" splashHeight="1.0" splashAtlasSize="1" windVelocity="0.005 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
+   <Precipitation shapeId="2" name="snowMistGeom" maxNumDrops="100" dropMaterialId="2" boundsWidth="80.0" boundsHeight="80.0" dropWidth="10.0" dropHeight="10.0" dropAtlasSize="16" dropMinVelocity="0.0003" dropMaxVelocity="0.0006" dropMinMass="0.1" dropMaxMass="3" windVelocity="0.005 0 0" rotateWithCameraVelocity="true" useVelocityAlignedBillboards="true"/>
+  </Shapes>
+
+  <Dynamics>
+  </Dynamics>
+
+  <Scene>
+    <Shape shapeId="1" name="snow"/>
+    <Shape shapeId="2" name="mist"/>
+  </Scene>
+</i3D>

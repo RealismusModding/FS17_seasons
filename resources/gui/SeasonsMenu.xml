@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement type="bitmap" profile="backgroundImageIngame" />
+
+    <GuiElement type="bitmap" profile="uiElementBg">
+        <GuiElement type="bitmap" profile="uiElementMainBg">
+            <GuiElement type="bitmap" profile="uiElementBaseHeader">
+                <GuiElement type="multiTextOption" profile="headerBoxSelector" onClick="onClickPageSelection" id="pageSelector" focusId="1" focusChangeRight="2" focusChangeBottom="10" focusChangeTop="102">
+                    <GuiElement type="button" profile="headerBoxSelectorLeft" />
+                    <GuiElement type="button" profile="headerBoxSelectorRight"/>
+                    <GuiElement type="text" profile="headerText" text="Paging" />
+                </GuiElement>
+            </GuiElement>
+
+            <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
+                <!-- Forecast + crop data -->
+                <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
+                </GuiElement>
+
+                <!-- Settings -->
+                <GuiElement type="empty" profile="page" name="pageSettings" onCreate="onCreatePageSettings">
+                    <!-- Column 1 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
+                        <!-- Season intros on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSeasonIntros" toolTip="tooltip_seasonIntros" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="210" focusChangeTop="1" focusChangeBottom="211" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_seasonIntros"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Season intros on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsHelp" toolTip="tooltip_controlsHelp" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="211" focusChangeTop="210" focusChangeBottom="212" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_controlsHelp"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Fahrenheit -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateControlsTemperature" toolTip="tooltip_controlsTemperature" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="212" focusChangeTop="211" focusChangeBottom="220" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_controlsTemperature"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+                    </GuiElement>
+
+                    <!-- Column 2 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
+                        <!-- Season length -->
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="200" focusChangeBottom="221" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_seasonLength"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Snow -->
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSnow" toolTip="tooltip_snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="221" focusChangeTop="220" focusChangeBottom="222" onClick="onClickSnowToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snow"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Snow tracks -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSnowTracksToggle" toolTip="tooltip_snowTracks" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="222" focusChangeTop="221" focusChangeBottom="223" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_snowTracks"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Moisture -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateMoistureToggle" toolTip="tooltip_moisture" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_moisture"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+                    </GuiElement>
+
+                    <!-- Column 3 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" id="settingsColumn3">
+                    </GuiElement>
+
+                    <!-- Login column -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" onCreate="onCreateMultiplayerLogin" id="multiplayerLogin">
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" />
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- Seasons Help -->
+                <GuiElement type="empty" profile="page" name="pageHelp" onCreate="onCreatePageHelp">
+                    <!-- Help categories -->
+                    <GuiElement type="multiTextOption" profile="multiTextOption" position="2px 522px" size="346px 36px" onClick="onClickHelpLineCategorySelector" onCreate="onCreateHelpLineCategorySelector" focusId="800" focusChangeTop="1" focusChangeBottom="801" >
+                        <GuiElement type="button" profile="multiTextOptionLeft" />
+                        <GuiElement type="button" profile="multiTextOptionRight"/>
+                        <GuiElement type="text"   profile="multiTextOptionText" />
+                        <GuiElement type="bitmap" profile="multiTextOptionBg" size="272px 36px" />
+                    </GuiElement>
+
+                    <!-- A slider for the help content -->
+                    <GuiElement type="slider" profile="helpLineSlider">
+                        <GuiElement type="button" profile="sliderButtonUp"   focusId="sliderUpHelp"/>
+                        <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownHelp" />
+
+                        <GuiElement type="list" profile="helpLineList" onScroll="onHelpLineListScroll" onSelectionChanged="onHelpLineListSelectionChanged" onDoubleClick="onHelpLineDoubleClick" focusId="801" focusChangeTop="800" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1" id="helpLineList">
+                            <GuiElement type="listItem" profile="helpLineListItem" id="helpLineListItemTemplate" >
+                                <GuiElement type="text" profile="helpLineListItemText" text="Help Line Title" />
+                                <GuiElement type="bitmap" profile="helpLineListItemTick" />
+                            </GuiElement>
+                        </GuiElement>
+                    </GuiElement>
+
+                    <GuiElement type="text"   profile="helpLineTitle" id="helpLineTitleElement" />
+
+                    <!-- Separator between help items and the actual help -->
+                    <GuiElement type="bitmap" profile="helpLineSeparator" />
+
+                    <!-- The help info -->
+                    <GuiElement type="boxLayout" profile="helpLineContentBox" id="helpLineContentBox">
+                        <GuiElement type="text"   profile="helpLineText"  onCreate="onCreateHelpLineText" />
+                        <GuiElement type="bitmap" profile="helpLineImage" onCreate="onCreateHelpLineImage" />
+                    </GuiElement>
+                </GuiElement>
+
+                <!-- Debug -->
+                <GuiElement type="empty" profile="page" name="pageDebug" onCreate="onCreatePageDebug">
+                    <!-- Column 1 (Snow) -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="20px 536px" >
+                        <!-- Auto snow on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAutoSnow" toolTip="Automatic add and remove snow based on the weather" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="410" focusChangeTop="1" focusChangeBottom="411" id="autoSnowToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="Auto snow"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Add layer -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugAddSnow" text="Add layer" focusId="411" focusChangeTop="410" focusChangeBottom="412" toolTip="Add one layer of snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
+
+                        <!-- Remove layer -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugRemoveSnow" text="Remove layer" focusId="412" focusChangeTop="411" focusChangeBottom="413" toolTip="Remove one layer of snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
+
+                        <!-- Clear -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugClearSnow" text="Clear snow" focusId="413" focusChangeTop="412" focusChangeBottom="100" toolTip="Clear all snow" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
+
+                        <!-- Current height -->
+                        <GuiElement type="text" profile="ssSettingsText" text="Hello World!" id="debugSnowDepth" />
+                    </GuiElement>
+
+                    <!-- Column 2 (rendering) -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px">
+                        <!-- Debug vehicle rendering on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugVehicleRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="420" focusChangeTop="412" focusChangeBottom="421" id="debugVehicleRenderingToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="Vehicle debug rendering"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Debug AI rendering on/off -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onClick="onClickDebugAIRendering" toolTip="Render debug lines for vehicles" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="421" focusChangeTop="420" focusChangeBottom="430" id="debugAIRenderingToggle">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="AI debug rendering"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+                    </GuiElement>
+
+                    <!-- Column 3 -->
+                    <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px">
+                        <!-- Reset GM -->
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickDebugResetGM" text="Reset growth" focusId="430" focusChangeTop="412" focusChangeBottom="100" toolTip="Reset the growth to beginning of spring" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" />
+                    </GuiElement>
+                </GuiElement>
+            </GuiElement>
+
+            <!-- Tool tips -->
+            <GuiElement type="bitmap" profile="ingameMenuHelpRowBg" id="ssMenuToolTipBox" visible="false">
+                <GuiElement type="bitmap" profile="ingameMenuHelpRowIcon" />
+                <GuiElement type="text" profile="ingameMenuHelpRowText" id="ssMenuToolTipBoxText" text=""/>
+            </GuiElement>
+
+            <GuiElement type="flowLayout" profile="ingameMenuPageStateBg" id="pageStateBox">
+                <GuiElement type="bitmap" profile="ingameMenuPageState" onCreate="onCreatePageState" />
+            </GuiElement>
+
+            <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
+                <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="101" focusChangeRight="101" focusInit="onOpen"/>
+                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="101" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
+            </GuiElement>
+        </GuiElement>
+    </GuiElement>
+</GUI>
