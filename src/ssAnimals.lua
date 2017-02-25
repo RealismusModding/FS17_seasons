@@ -48,20 +48,25 @@ function ssAnimals:seasonChanged()
         if g_currentMission.husbandries[typ] ~= nil then
             local desc = g_currentMission.husbandries[typ].animalDesc
 
+            -- adjust animal values for varying season length
+            -- reference season length is 6 days
+            local seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
             local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / g_seasons.environment.daysInSeason
+            -- small adjustment so there will be atleast one birth during the season
             if birthRatePerDay ~= 0 then
-                desc.birthRatePerDay = math.max(birthRatePerDay,1/(2*g_seasons.environment.daysInSeason))
+                desc.birthRatePerDay = math.max(birthRatePerDay * seasonLengthfactor,1/(2*g_seasons.environment.daysInSeason))
             else
                 desc.birthRatePerDay = 0
             end
 
-            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0)
-            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0)
-            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0)
-            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0)
-            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0)
-            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0)
-            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0)
+            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0) * seasonLengthfactor
+            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0) * seasonLengthfactor
+            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0) * seasonLengthfactor
+            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0) * seasonLengthfactor
+            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0) * seasonLengthfactor
+            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0) * seasonLengthfactor
+            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0) * seasonLengthfactor
         end
     end
 
