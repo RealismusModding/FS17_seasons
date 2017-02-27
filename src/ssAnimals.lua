@@ -8,10 +8,6 @@
 ssAnimals = {}
 g_seasons.animals = ssAnimals
 
--- adjust animal values for varying season length
--- reference season length is 6 days
-ssAnimals.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
@@ -24,6 +20,10 @@ function ssAnimals:loadMap(name)
         -- Initial setuo (it changed from nothing)
         self:seasonChanged()
     end
+
+    -- adjust animal values for varying season length
+    -- reference season length is 6 days
+    ssAnimals.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 end
 
 function ssAnimals:loadFromXML()
