@@ -21,9 +21,13 @@ function ssAnimals:loadMap(name)
         self:seasonChanged()
     end
 
+end
+
+function ssAnimals:load()
     -- adjust animal values for varying season length
     -- reference season length is 6 days
-    ssAnimals.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+    log(self.seasonLengthfactor)
 end
 
 function ssAnimals:loadFromXML()
