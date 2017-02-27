@@ -2,15 +2,20 @@
 -- ANIMALS SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the animals
--- Authors:  Rahkiin, theSeb (added mapDir loading)
+-- Authors:  Rahkiin, reallogger, theSeb (added mapDir loading)
 --
 
 ssAnimals = {}
 g_seasons.animals = ssAnimals
 
+-- adjust animal values for varying season length
+-- reference season length is 6 days
+ssAnimals.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
+    g_currentMission.environment:addDayChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()
@@ -48,25 +53,21 @@ function ssAnimals:seasonChanged()
         if g_currentMission.husbandries[typ] ~= nil then
             local desc = g_currentMission.husbandries[typ].animalDesc
 
-            -- adjust animal values for varying season length
-            -- reference season length is 6 days
-            local seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
             local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / g_seasons.environment.daysInSeason
             -- small adjustment so there will be atleast one birth during the season
             if birthRatePerDay ~= 0 then
-                desc.birthRatePerDay = math.max(birthRatePerDay * seasonLengthfactor,1/(2*g_seasons.environment.daysInSeason))
+                desc.birthRatePerDay = math.max(birthRatePerDay * self.seasonLengthfactor,1/(2*g_seasons.environment.daysInSeason))
             else
                 desc.birthRatePerDay = 0
             end
 
-            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0) * seasonLengthfactor
-            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0) * seasonLengthfactor
-            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0) * seasonLengthfactor
-            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0) * seasonLengthfactor
-            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0) * seasonLengthfactor
-            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0) * seasonLengthfactor
-            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0) * seasonLengthfactor
+            desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0) * self.seasonLengthfactor
+            desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0) * self.seasonLengthfactor
+            desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0) * self.seasonLengthfactor
+            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0) * self.seasonLengthfactor
+            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0) * self.seasonLengthfactor
+            desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0) * self.seasonLengthfactor
+            desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0) * self.seasonLengthfactor
         end
     end
 
@@ -87,6 +88,16 @@ function ssAnimals:seasonLengthChanged()
     self:seasonChanged()
 end
 
+function ssAnimals:dayChanged()
+    -- percentages for base season length = 6 days
+    -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
+    self:killAnimals("cow",0.15 * self.seasonLengthfactor)
+    -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
+    self:killAnimals("sheep",0.1 * self.seasonLengthfactor)
+    -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
+    self:killAnimals("pig",0.25 * self.seasonLengthfactor)
+end
+
 -- animal: string, filltype: int, enabled: bool
 -- Fill must be installed
 function ssAnimals:toggleFillType(animal, fillType, enabled)
@@ -97,4 +108,17 @@ function ssAnimals:toggleFillType(animal, fillType, enabled)
             p.tipTrigger.acceptedFillTypes[fillType] = enabled
         end
     end
+end
+
+function ssAnimals:killAnimals(animal,p)
+    local tmpAnimal = g_currentMission.husbandries[animal]
+
+    -- productivity at 0-10% means that they are not fed, but might have straw
+    if tmpAnimal.productivity <= 0.1 then
+       local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
+       local tmpNumAnimals = tmpAnimal.totalNumAnimals
+       g_currentMission.husbandries[animal].totalNumAnimals = math.max(tmpNumAnimals - killedAnimals,0)
+       
+    end
+    
 end
