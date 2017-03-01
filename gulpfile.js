@@ -7,7 +7,6 @@ const ftp = require("vinyl-ftp");
 const zip = require("gulp-zip");
 const rename = require("gulp-rename");
 const size = require("gulp-size");
-const template = require("gulp-template");
 const xmlpoke = require("gulp-xmlpoke");
 const merge = require("merge-stream");
 const git = require("git-rev-sync");
