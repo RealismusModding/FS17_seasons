@@ -117,8 +117,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
             end
         end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
     end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
-    self.willGerminate = {} -- reset the data because a new will be built the next day and the data 
-                            -- for the last growth transition is no longer needed
+    self:rebuildWillGerminateData()
 end
 
 function ssGrowthManager:consoleCommandResetGrowth()
@@ -152,12 +151,18 @@ function ssGrowthManager:growthStageChanged()
     end
 end
 
+-- reset the data and rebuild it based on the current transition
+-- called just after growthStageChanged
+function ssGrowthManager:rebuildWillGerminateData()
+    self.willGerminate = {}
+    self:dayChanged()    
+end
+
 -- handle dayChanged event 
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
-        
-        if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
+        if self.canPlantData[fruitName][g_seasons.environment:nextGrowthTransition()] == true then
             self.willGerminate[fruitName] = ssWeatherManager:canSow(fruitName)
             --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end

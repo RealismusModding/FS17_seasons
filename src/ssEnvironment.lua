@@ -504,6 +504,14 @@ function ssEnvironment:currentGrowthTransition()
     return self:growthTransitionAtDay()
 end
 
+function ssEnvironment:nextGrowthTransition()
+    local cGT = self:growthTransitionAtDay()
+    if cGT == 12 then
+        return 1
+    else
+        return cGT+1
+end
+
 --uses currentDay if dayNumber not passed in
 function ssEnvironment:growthTransitionAtDay(dayNumber)
     if (dayNumber == nil) then
