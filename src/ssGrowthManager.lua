@@ -15,9 +15,6 @@ ssGrowthManager.CULTIVATED = 301
 
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
--- ssGrowthManager.TRUE = "true"
--- ssGrowthManager.FALSE = "false"
--- ssGrowthManager.MAYBE = "maybe"
 
 ssGrowthManager.defaultFruits = {}
 ssGrowthManager.growthData = {}
@@ -43,7 +40,7 @@ end
 
 function ssGrowthManager:loadMap(name)
     if self.growthManagerEnabled == false then
-        log("ssGrowthManager: disabled")
+        logInfo("ssGrowthManager: disabled")
         return
     end
 
@@ -53,7 +50,7 @@ function ssGrowthManager:loadMap(name)
 
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
-            log("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
+            logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
             return
         end
 
@@ -156,18 +153,17 @@ end
 -- handle dayChanged event 
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
-    --TODO: implement
     for fruitName, growthTransition in pairs(self.canPlantData) do
         
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminate[fruitName] = ssWeatherManager:canSow(fruitName)
-            log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
+            --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
     
-    print_r(self.canPlantData)
-    logInfo("Printing willGerminate")
-    print_r(self.willGerminate)
+    -- print_r(self.canPlantData)
+    -- logInfo("Printing willGerminate")
+    -- print_r(self.willGerminate)
     
 end
 
