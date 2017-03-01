@@ -11,3 +11,4 @@ dist/
 .buildrc
 FS17_seasons*.zip
 node_modules/
+.cookies

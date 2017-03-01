@@ -1,115 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>
-        gorgona
-    </translationContributors>
-
+    <translationContributors>gorgona</translationContributors>
     <texts>
-        <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Roční období: Zobrazit předpověď počasí" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Roční období: Oprava vozidla" />
-        <text name="input_SEASONS_SHOW_MENU" text="Roční období: Otevřít menu" />
-        <text name="SEASONS_HIDE_WF" text="Roční období: Skrýt předpověď počasí" />
-
-        <text name="SS_WEEKDAY_1" text="Pondělí" />
-        <text name="SS_WEEKDAY_2" text="Úterý" />
-        <text name="SS_WEEKDAY_3" text="Středa" />
-        <text name="SS_WEEKDAY_4" text="Čtvrtek" />
-        <text name="SS_WEEKDAY_5" text="Pátek" />
-        <text name="SS_WEEKDAY_6" text="Sobota" />
-        <text name="SS_WEEKDAY_7" text="Neděle" />
-
-        <text name="SS_WEEKDAY_SHORT_1" text="Pon" />
-        <text name="SS_WEEKDAY_SHORT_2" text="Úte" />
-        <text name="SS_WEEKDAY_SHORT_3" text="Stř" />
-        <text name="SS_WEEKDAY_SHORT_4" text="Čtv" />
-        <text name="SS_WEEKDAY_SHORT_5" text="Pát" />
-        <text name="SS_WEEKDAY_SHORT_6" text="Sob" />
-        <text name="SS_WEEKDAY_SHORT_7" text="Ned" />
-        <!--TODO: ADD TRANSLATIONS-->
-        <text name="SS_MONTH_SHORT_1" text="Jan_CZ" />
-        <text name="SS_MONTH_SHORT_2" text="Feb_CZ" />
-        <text name="SS_MONTH_SHORT_3" text="Mar_CZ" />
-        <text name="SS_MONTH_SHORT_4" text="Apr_CZ" />
-        <text name="SS_MONTH_SHORT_5" text="May_CZ" />
-        <text name="SS_MONTH_SHORT_6" text="Jun_CZ" />
-        <text name="SS_MONTH_SHORT_7" text="Jul_CZ" />
-        <text name="SS_MONTH_SHORT_8" text="Aug_CZ" />
-        <text name="SS_MONTH_SHORT_9" text="Sep_CZ" />
-        <text name="SS_MONTH_SHORT_10" text="Oct_CZ" />
-        <text name="SS_MONTH_SHORT_11" text="Nov_CZ" />
-        <text name="SS_MONTH_SHORT_12" text="Dec_CZ" />
-
-        <text name="SS_SEASON_0" text="Jaro" />
-        <text name="SS_SEASON_1" text="Léto" />
-        <text name="SS_SEASON_2" text="Podzim" />
-        <text name="SS_SEASON_3" text="Zima" />
-
-        <text name="SS_VEHICLE_TAXES" text="Vozidlo cena" />
-        <text name="SS_VEHICLE_MAINTENANCE" text="Údržba vozidla" />
-        <text name="SS_VEHICLE_REPAIRS" text="Opravy vozidel" />
-
-        <text name="SS_NOT_ENOUGH_MONEY" text="Nemáte dost peněz na zaplacení" />
-        <text name="SS_VEHICLE_REPAIRED" text="Náklady na údržbu %s byla %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Údržba %s za %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Je nutná údržba" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="% .1f Motohodin nebo% d dní, dokud není nutná údržba" />
-        <text name="SS_REPAIR_DIALOG" text="Chcete provádět údržbu %s za %s?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
-		<text name="warning_repairBrokenMachine" text="porucha motoru. Opravit stroj!" />
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
-
-        <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
-        <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
-
-        <text name="SS_SEASON_INTRO_0" text="Nový rok, nové období setí. DĚLAT" /> <!-- spring -->
-        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, pěstuj plodiny. DĚLEJ" />
-        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu protože plodiny nemusí přežít zimu. DĚLEJ" />
-        <text name="SS_SEASON_INTRO_3" text="Je chladno. Půda je tvrdá, případně ve zmrzlém stavu. Plodiny nerostou, nebo dokonce odumírají. DĚLEJ" /> <!-- winter -->
-        <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
-
-        <!-- GUI -->
-        <text name="ui_pageOverview" text="Přehled" />
-        <text name="ui_pageSettings" text="Nastavení" />
-        <text name="ui_pageHelp" text="Pomoc" />
-        <text name="ui_pageDebug" text="Ladicí nástroje" />
-
-        <text name="ui_buttonSave" text="Použít nastavení" />
-        <text name="ui_snowOneLayer" text="Pouze jedna vrstva" />
-        <text name="ui_days" text="% i dnů" />
-        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
-        <text name="ui_temperatureCelcius" text="Celzius" />
-
-        <text name="tooltip_seasonLength" text="Délka období ve dnech. Rok je čtyři roční období." />
-        <text name="tooltip_seasonIntros" text="Ukázat vstup na začátku sezóny." />
-        <text name="tooltip_snow" text="Sníh bude padat v chladné zimě a blokovat silnice." />
-        <text name="tooltip_controlsHelp" text="Zobrazit předpovědi a klávesové zkratky v okně nápovědy." />
-        <text name="tooltip_snowTracks" text="Vozidla stlačí sní při jízdě na něm." />
-        <text name="tooltip_controlsTemperature" text="Nastavit teplotní stupnici používanou ve hře" />
-
-        <text name="setting_seasonIntros" text="Úvody do sezón" />
-        <text name="setting_seasonLength" text="Délka sezóny" />
-        <text name="setting_snow" text="Sníh mód" />
-        <text name="setting_controlsHelp" text="Klávesy v help menu" />
-        <text name="setting_snowTracks" text="Stopy ve sněhu" />
-        <text name="setting_controlsTemperature" text="Teplotní stupnice" />
-
-        <text name="ui_helpCategory_1" text="Sezóna" />
-        <text name="ui_helpCategory_2" text="Sníh" />
-        <text name="ui_helpCategory_3" text="Plodiny" />
-        <text name="ui_helpCategory_4" text="Zvířata" />
-
-        <text name="ui_helpTitle_1_1" text="1.1" />
-        <text name="ui_helpTitle_2_1" text="2.1" />
-        <text name="ui_helpTitle_3_1" text="3.1" />
-        <text name="ui_helpTitle_4_1" text="4.1" />
-
-        <text name="dialog_applySettings" text="Jste si jisti, že chcete změnit nastavení Seasons? Změny v délce sezóny a růstu může vyústit v oblastech, které lze opravit pouze po jednom herním roku." />
-
-        <text name="dialog_resetGrowth" text="Vložili jste Seasons na staré savegame. Seasons chce obnovit všechna pole do jejich holé stavu synchronizovat s Gameday. Ztratíte všechny plodiny. Pokud nechcete obnovit růst, možná Seasons nemusí fungovat podle očekávání." />
-        <text name="dialog_resetGrowth_title" text="Resetování růstu" />
-        <text name="dialog_resetGrowth_no" text="Zachovat růst" />
-        <text name="dialog_resetGrowth_yes" text="Resetovat" />
+        <text name="input_SEASONS_SHOW_WF" text="Roční období: Zobrazit předpověď počasí"/>
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Roční období: Oprava vozidla"/>
+        <text name="input_SEASONS_SHOW_MENU" text="Roční období: Otevřít menu"/>
+        <text name="SEASONS_HIDE_WF" text="Roční období: Skrýt předpověď počasí"/>
+        <text name="SS_WEEKDAY_1" text="Pondělí"/>
+        <text name="SS_WEEKDAY_2" text="Úterý"/>
+        <text name="SS_WEEKDAY_3" text="Středa"/>
+        <text name="SS_WEEKDAY_4" text="Čtvrtek"/>
+        <text name="SS_WEEKDAY_5" text="Pátek"/>
+        <text name="SS_WEEKDAY_6" text="Sobota"/>
+        <text name="SS_WEEKDAY_7" text="Neděle"/>
+        <text name="SS_WEEKDAY_SHORT_1" text="Pon"/>
+        <text name="SS_WEEKDAY_SHORT_2" text="Úte"/>
+        <text name="SS_WEEKDAY_SHORT_3" text="Stř"/>
+        <text name="SS_WEEKDAY_SHORT_4" text="Čtv"/>
+        <text name="SS_WEEKDAY_SHORT_5" text="Pát"/>
+        <text name="SS_WEEKDAY_SHORT_6" text="Sob"/>
+        <text name="SS_WEEKDAY_SHORT_7" text="Ned"/>
+        <text name="SS_SEASON_0" text="Jaro"/>
+        <text name="SS_SEASON_1" text="Léto"/>
+        <text name="SS_SEASON_2" text="Podzim"/>
+        <text name="SS_SEASON_3" text="Zima"/>
+        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring"/>
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring"/>
+        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring"/>
+        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer"/>
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer"/>
+        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer"/>
+        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter"/>
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter"/>
+        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter"/>
+        <text name="SS_MONTH_SHORT_1" text="Jan_CZ"/>
+        <text name="SS_MONTH_SHORT_2" text="Feb_CZ"/>
+        <text name="SS_MONTH_SHORT_3" text="Mar_CZ"/>
+        <text name="SS_MONTH_SHORT_4" text="Apr_CZ"/>
+        <text name="SS_MONTH_SHORT_5" text="May_CZ"/>
+        <text name="SS_MONTH_SHORT_6" text="Jun_CZ"/>
+        <text name="SS_MONTH_SHORT_7" text="Jul_CZ"/>
+        <text name="SS_MONTH_SHORT_8" text="Aug_CZ"/>
+        <text name="SS_MONTH_SHORT_9" text="Sep_CZ"/>
+        <text name="SS_MONTH_SHORT_10" text="Oct_CZ"/>
+        <text name="SS_MONTH_SHORT_11" text="Nov_CZ"/>
+        <text name="SS_MONTH_SHORT_12" text="Dec_CZ"/>
+        <text name="SS_VEHICLE_TAXES" text="Vozidlo cena"/>
+        <text name="SS_VEHICLE_MAINTENANCE" text="Údržba vozidla"/>
+        <text name="SS_VEHICLE_REPAIRS" text="Opravy vozidel"/>
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nemáte dost peněz na zaplacení"/>
+        <text name="SS_VEHICLE_REPAIRED" text="Náklady na údržbu %s byla %s"/>
+        <text name="SS_REPAIR_VEHICLE_COST" text="Údržba %s za %s"/>
+        <text name="SS_REPAIR_REQUIRED" text="Je nutná údržba"/>
+        <text name="SS_REPAIR_REQUIRED_IN" text="% .1f Motohodin nebo% d dní, dokud není nutná údržba"/>
+        <text name="SS_REPAIR_DIALOG" text="Chcete provádět údržbu %s za %s?"/>
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba"/>
+        <text name="warning_repairBrokenMachine" text="porucha motoru. Opravit stroj!"/>
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci"/>
+        <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!"/>
+        <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!"/>
+        <text name="SS_SEASON_INTRO_0" text="Nový rok, nové období setí. DĚLAT"/>
+        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, pěstuj plodiny. DĚLEJ"/>
+        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu protože plodiny nemusí přežít zimu. DĚLEJ"/>
+        <text name="SS_SEASON_INTRO_3" text="Je chladno. Půda je tvrdá, případně ve zmrzlém stavu. Plodiny nerostou, nebo dokonce odumírají. DĚLEJ"/>
+        <text name="SS_BUTTON_OK" text="OK"/>
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat"/>
+        <!-- Missing translation of "Do not thresh when the crops are too wet!." -->
+        <text name="warning_doNotThreshWithMoisture" text=""/>
+        <text name="ui_pageOverview" text="Přehled"/>
+        <text name="ui_pageSettings" text="Nastavení"/>
+        <text name="ui_pageHelp" text="Pomoc"/>
+        <text name="ui_pageDebug" text="Ladicí nástroje"/>
+        <text name="ui_buttonSave" text="Použít nastavení"/>
+        <text name="ui_snowOneLayer" text="Pouze jedna vrstva"/>
+        <text name="ui_days" text="% i dnů"/>
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit"/>
+        <text name="ui_temperatureCelcius" text="Celzius"/>
+        <text name="tooltip_seasonLength" text="Délka období ve dnech. Rok je čtyři roční období."/>
+        <text name="tooltip_seasonIntros" text="Ukázat vstup na začátku sezóny."/>
+        <text name="tooltip_snow" text="Sníh bude padat v chladné zimě a blokovat silnice."/>
+        <text name="tooltip_controlsHelp" text="Zobrazit předpovědi a klávesové zkratky v okně nápovědy."/>
+        <text name="tooltip_snowTracks" text="Vozidla stlačí sní při jízdě na něm."/>
+        <text name="tooltip_controlsTemperature" text="Nastavit teplotní stupnici používanou ve hře"/>
+        <!-- Missing translation of "Disallow threshing when crops are wet of moisture." -->
+        <text name="tooltip_moisture" text=""/>
+        <text name="setting_seasonIntros" text="Úvody do sezón"/>
+        <text name="setting_seasonLength" text="Délka sezóny"/>
+        <text name="setting_snow" text="Sníh mód"/>
+        <text name="setting_controlsHelp" text="Klávesy v help menu"/>
+        <text name="setting_snowTracks" text="Stopy ve sněhu"/>
+        <text name="setting_controlsTemperature" text="Teplotní stupnice"/>
+        <!-- Missing translation of "Crop moisture." -->
+        <text name="setting_moisture" text=""/>
+        <text name="ui_helpCategory_1" text="Sezóna"/>
+        <text name="ui_helpCategory_2" text="Sníh"/>
+        <text name="ui_helpCategory_3" text="Plodiny"/>
+        <text name="ui_helpCategory_4" text="Zvířata"/>
+        <text name="ui_helpTitle_1_1" text="1.1"/>
+        <text name="ui_helpTitle_2_1" text="2.1"/>
+        <text name="ui_helpTitle_3_1" text="3.1"/>
+        <text name="ui_helpTitle_4_1" text="4.1"/>
+        <text name="dialog_applySettings" text="Jste si jisti, že chcete změnit nastavení Seasons? Změny v délce sezóny a růstu může vyústit v oblastech, které lze opravit pouze po jednom herním roku."/>
+        <text name="dialog_resetGrowth" text="Vložili jste Seasons na staré savegame. Seasons chce obnovit všechna pole do jejich holé stavu synchronizovat s Gameday. Ztratíte všechny plodiny. Pokud nechcete obnovit růst, možná Seasons nemusí fungovat podle očekávání."/>
+        <text name="dialog_resetGrowth_title" text="Resetování růstu"/>
+        <text name="dialog_resetGrowth_no" text="Zachovat růst"/>
+        <text name="dialog_resetGrowth_yes" text="Resetovat"/>
+        <!-- Missing translation of "Snow." -->
+        <text name="fillType_snow" text=""/>
     </texts>
 </l10n>

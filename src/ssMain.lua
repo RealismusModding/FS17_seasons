@@ -49,6 +49,7 @@ end
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
+    self.savegameVersion = ssStorage.getXMLInt(savegame, key .. ".version", 1)
 
     self.isNewSaveGame = savegame == nil
     --self.isOldSaveGame = not hasXMLProperty(savegame, key)
@@ -57,6 +58,7 @@ end
 
 function ssMain:save(savegame, key)
     ssStorage.setXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", self.showControlsInHelpScreen)
+    ssStorage.setXMLInt(savegame, key .. ".version", self.savegameVersion)
 end
 
 ----------------------------

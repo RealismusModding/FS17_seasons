@@ -1,5 +1,5 @@
-const fs = require("fs")
-const path = require("path")
+const fs = require("fs");
+const path = require("path");
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
@@ -7,18 +7,18 @@ const ftp = require("vinyl-ftp");
 const zip = require("gulp-zip");
 const rename = require("gulp-rename");
 const size = require("gulp-size");
-const template = require("gulp-template");
 const xmlpoke = require("gulp-xmlpoke");
 const merge = require("merge-stream");
 const git = require("git-rev-sync");
 const run = require("gulp-run");
 const del = require("del");
-const dom = require("gulp-dom")
-const buffer = require("gulp-buffer")
+const dom = require("gulp-dom");
+const buffer = require("gulp-buffer");
+const replace = require("gulp-replace");
 
-const _defaults = require("lodash.defaultsdeep")
-const _has = require("lodash.has")
-const _get = require("lodash.get")
+const _defaults = require("lodash.defaultsdeep");
+const _has = require("lodash.has");
+const _get = require("lodash.get");
 
 /////////////////////////////////////////////////////
 /// Functions
@@ -47,22 +47,12 @@ function fillModDesc() {
 }
 
 function templatedLua() {
-    const options = {
-        interpolate: /false\-\-<%=([\s\S]+?)%>/g,
-        evaluate: undefined,
-        escape: undefined
-    };
-
-    const replacements = {
-        debug: buildConfig.get("options.debug", false).toString(),
-        verbose: buildConfig.get("options.verbose", false).toString(),
-        buildnumber: toLuaString(createVersionName()),
-        simpleVersion: package.fs.simpleVersion
-    };
-
     return gulp
         .src("src/**/*.lua", { base: "." })
-        .pipe(template(replacements, options));
+        .pipe(replace(/false\-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
+        .pipe(replace(/false\-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
+        .pipe(replace(/false\-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
+        .pipe(replace(/false\-\-<%=simpleVersion %>/g, package.fs.simpleVersion));
 }
 
 function createVersionName() {
@@ -93,7 +83,7 @@ function dediUrl() {
 
 function dediStop() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+    const command = `curl -X POST -v -b .cookies --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
@@ -101,7 +91,15 @@ function dediStop() {
 
 function dediStart() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+    const command = `curl -X POST -v -b .cookies --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+
+    return run(command, { silent: true }).exec()
+        .pipe(gutil.noop());
+}
+
+function dediLogin() {
+    const url = dediUrl()
+    const command = `curl -X POST -v -c .cookies --data "username=${buildConfig.get("server.web.username")}&password=${buildConfig.get("server.web.password")}&login=Login" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
@@ -223,7 +221,7 @@ gulp.task("server:start", dediStart);
  */
 gulp.task("server:log", () => {
     const url = dediUrl();
-    const command = `curl -X GET -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" -H "Origin: ${url}" ${url}logs.html?lang=en 2> /dev/null`;
+    const command = `curl -X GET -v -b .cookies -H "Origin: ${url}" ${url}logs.html?lang=en 2> /dev/null`;
 
     const task = run(command, { silent: true }).exec()
         .pipe(buffer())
@@ -276,6 +274,8 @@ gulp.task("ir:2", ["ir:1"], () => {
  * starting the server again.
  */
 gulp.task("server:install", ["ir:2"], dediStart);
+
+gulp.task("server:login", dediLogin);
 
 /**
  * Development task: watches file changes and auto builds and installs.

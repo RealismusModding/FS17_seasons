@@ -1,68 +1,152 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>
-        Rahkiin, theSeb
-    </translationContributors>
-
+    <translationContributors>Rahkiin, theSeb</translationContributors>
     <texts>
-        <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
-
-        <text name="SS_WEEKDAY_1" text="Maandag" />
-        <text name="SS_WEEKDAY_2" text="Dinsdag" />
-        <text name="SS_WEEKDAY_3" text="Woensdag" />
-        <text name="SS_WEEKDAY_4" text="Donderdag" />
-        <text name="SS_WEEKDAY_5" text="Vrijdag" />
-        <text name="SS_WEEKDAY_6" text="Zaterdag" />
-        <text name="SS_WEEKDAY_7" text="Zondag" />
-
-        <text name="SS_WEEKDAY_SHORT_1" text="Maa" />
-        <text name="SS_WEEKDAY_SHORT_2" text="Din" />
-        <text name="SS_WEEKDAY_SHORT_3" text="Woe" />
-        <text name="SS_WEEKDAY_SHORT_4" text="Don" />
-        <text name="SS_WEEKDAY_SHORT_5" text="Vri" />
-        <text name="SS_WEEKDAY_SHORT_6" text="Zat" />
-        <text name="SS_WEEKDAY_SHORT_7" text="Zon" />
-
-        <text name="SS_SEASON_0" text="Lente" />
-        <text name="SS_SEASON_1" text="Zomer" />
-        <text name="SS_SEASON_2" text="Herfst" />
-        <text name="SS_SEASON_3" text="Winter" />
-
-        <text name="SS_MONTH_SHORT_1" text="jan" />
-        <text name="SS_MONTH_SHORT_2" text="feb" />
-        <text name="SS_MONTH_SHORT_3" text="maart" />
-        <text name="SS_MONTH_SHORT_4" text="apr" />
-        <text name="SS_MONTH_SHORT_5" text="mei" />
-        <text name="SS_MONTH_SHORT_6" text="juni" />
-        <text name="SS_MONTH_SHORT_7" text="juli" />
-        <text name="SS_MONTH_SHORT_8" text="aug" />
-        <text name="SS_MONTH_SHORT_9" text="sept" />
-        <text name="SS_MONTH_SHORT_10" text="okt" />
-        <text name="SS_MONTH_SHORT_11" text="nov" />
-        <text name="SS_MONTH_SHORT_12" text="dec" />
-
-        <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen" />
-        <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
-        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties" />
-
-        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen" />
-        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
-
-        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
-            <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
-
-            <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
-            <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO" />
-            <text name="SS_SEASON_INTRO_2" text="Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO" />
-            <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" /> <!-- winter -->
-        <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
+        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien"/>
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig"/>
+        <!-- Missing translation of "Seasons: Open menu." -->
+        <text name="input_SEASONS_SHOW_MENU" text=""/>
+        <!-- Missing translation of "Seasons: Hide weather forecast." -->
+        <text name="SEASONS_HIDE_WF" text=""/>
+        <text name="SS_WEEKDAY_1" text="Maandag"/>
+        <text name="SS_WEEKDAY_2" text="Dinsdag"/>
+        <text name="SS_WEEKDAY_3" text="Woensdag"/>
+        <text name="SS_WEEKDAY_4" text="Donderdag"/>
+        <text name="SS_WEEKDAY_5" text="Vrijdag"/>
+        <text name="SS_WEEKDAY_6" text="Zaterdag"/>
+        <text name="SS_WEEKDAY_7" text="Zondag"/>
+        <text name="SS_WEEKDAY_SHORT_1" text="Maa"/>
+        <text name="SS_WEEKDAY_SHORT_2" text="Din"/>
+        <text name="SS_WEEKDAY_SHORT_3" text="Woe"/>
+        <text name="SS_WEEKDAY_SHORT_4" text="Don"/>
+        <text name="SS_WEEKDAY_SHORT_5" text="Vri"/>
+        <text name="SS_WEEKDAY_SHORT_6" text="Zat"/>
+        <text name="SS_WEEKDAY_SHORT_7" text="Zon"/>
+        <text name="SS_SEASON_0" text="Lente"/>
+        <text name="SS_SEASON_1" text="Zomer"/>
+        <text name="SS_SEASON_2" text="Herfst"/>
+        <text name="SS_SEASON_3" text="Winter"/>
+        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring"/>
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring"/>
+        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring"/>
+        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer"/>
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer"/>
+        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer"/>
+        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn"/>
+        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter"/>
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter"/>
+        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter"/>
+        <text name="SS_MONTH_SHORT_1" text="jan"/>
+        <text name="SS_MONTH_SHORT_2" text="feb"/>
+        <text name="SS_MONTH_SHORT_3" text="maart"/>
+        <text name="SS_MONTH_SHORT_4" text="apr"/>
+        <text name="SS_MONTH_SHORT_5" text="mei"/>
+        <text name="SS_MONTH_SHORT_6" text="juni"/>
+        <text name="SS_MONTH_SHORT_7" text="juli"/>
+        <text name="SS_MONTH_SHORT_8" text="aug"/>
+        <text name="SS_MONTH_SHORT_9" text="sept"/>
+        <text name="SS_MONTH_SHORT_10" text="okt"/>
+        <text name="SS_MONTH_SHORT_11" text="nov"/>
+        <text name="SS_MONTH_SHORT_12" text="dec"/>
+        <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen"/>
+        <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud"/>
+        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties"/>
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen"/>
+        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s"/>
+        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s"/>
+        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist"/>
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen"/>
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?"/>
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren"/>
+        <!-- Missing translation of "Engine breakdown. Repair your machinery!." -->
+        <text name="warning_repairBrokenMachine" text=""/>
+        <!-- Missing translation of "at midnight." -->
+        <text name="SS_REPAIR_AT_MIDNIGHT" text=""/>
+        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!"/>
+        <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!"/>
+        <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO"/>
+        <text name="SS_SEASON_INTRO_1" text="The sun is high, crops grow. TODO"/>
+        <text name="SS_SEASON_INTRO_2" text="Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO"/>
+        <text name="SS_SEASON_INTRO_3" text="It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO"/>
+        <text name="SS_BUTTON_OK" text="OK"/>
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien"/>
+        <!-- Missing translation of "Do not thresh when the crops are too wet!." -->
+        <text name="warning_doNotThreshWithMoisture" text=""/>
+        <!-- Missing translation of "Overview." -->
+        <text name="ui_pageOverview" text=""/>
+        <!-- Missing translation of "Settings." -->
+        <text name="ui_pageSettings" text=""/>
+        <!-- Missing translation of "Help." -->
+        <text name="ui_pageHelp" text=""/>
+        <!-- Missing translation of "Debug Tools." -->
+        <text name="ui_pageDebug" text=""/>
+        <!-- Missing translation of "Apply Settings." -->
+        <text name="ui_buttonSave" text=""/>
+        <!-- Missing translation of "1 layer only." -->
+        <text name="ui_snowOneLayer" text=""/>
+        <!-- Missing translation of "%i days." -->
+        <text name="ui_days" text=""/>
+        <!-- Missing translation of "Fahrenheit." -->
+        <text name="ui_temperatureFahrenheit" text=""/>
+        <!-- Missing translation of "Celcius." -->
+        <text name="ui_temperatureCelcius" text=""/>
+        <!-- Missing translation of "The length of a season in days. A year is four seasons.." -->
+        <text name="tooltip_seasonLength" text=""/>
+        <!-- Missing translation of "Show a season introduction at the start of a season.." -->
+        <text name="tooltip_seasonIntros" text=""/>
+        <!-- Missing translation of "Snow will fall in cold winters and block roads.." -->
+        <text name="tooltip_snow" text=""/>
+        <!-- Missing translation of "Show the forecast and menu key in the help menu.." -->
+        <text name="tooltip_controlsHelp" text=""/>
+        <!-- Missing translation of "Vehicles compress snow when driving over it.." -->
+        <text name="tooltip_snowTracks" text=""/>
+        <!-- Missing translation of "Set the temperature scale used in the game." -->
+        <text name="tooltip_controlsTemperature" text=""/>
+        <!-- Missing translation of "Disallow threshing when crops are wet of moisture." -->
+        <text name="tooltip_moisture" text=""/>
+        <!-- Missing translation of "Season introductions." -->
+        <text name="setting_seasonIntros" text=""/>
+        <!-- Missing translation of "Season length." -->
+        <text name="setting_seasonLength" text=""/>
+        <!-- Missing translation of "Snow mode." -->
+        <text name="setting_snow" text=""/>
+        <!-- Missing translation of "Keys in help menu." -->
+        <text name="setting_controlsHelp" text=""/>
+        <!-- Missing translation of "Snow tracks." -->
+        <text name="setting_snowTracks" text=""/>
+        <!-- Missing translation of "Temperature scale." -->
+        <text name="setting_controlsTemperature" text=""/>
+        <!-- Missing translation of "Crop moisture." -->
+        <text name="setting_moisture" text=""/>
+        <!-- Missing translation of "Seasons." -->
+        <text name="ui_helpCategory_1" text=""/>
+        <!-- Missing translation of "Snow." -->
+        <text name="ui_helpCategory_2" text=""/>
+        <!-- Missing translation of "Crops." -->
+        <text name="ui_helpCategory_3" text=""/>
+        <!-- Missing translation of "Animals." -->
+        <text name="ui_helpCategory_4" text=""/>
+        <!-- Missing translation of "1.1." -->
+        <text name="ui_helpTitle_1_1" text=""/>
+        <!-- Missing translation of "2.1." -->
+        <text name="ui_helpTitle_2_1" text=""/>
+        <!-- Missing translation of "3.1." -->
+        <text name="ui_helpTitle_3_1" text=""/>
+        <!-- Missing translation of "4.1." -->
+        <text name="ui_helpTitle_4_1" text=""/>
+        <!-- Missing translation of "Are you sure you want to change the Seasons settings? Changes to season length and growth can result in fields that will only repair after one game-year.." -->
+        <text name="dialog_applySettings" text=""/>
+        <!-- Missing translation of "You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected.." -->
+        <text name="dialog_resetGrowth" text=""/>
+        <!-- Missing translation of "Growth reset." -->
+        <text name="dialog_resetGrowth_title" text=""/>
+        <!-- Missing translation of "Keep growth." -->
+        <text name="dialog_resetGrowth_no" text=""/>
+        <!-- Missing translation of "Reset." -->
+        <text name="dialog_resetGrowth_yes" text=""/>
+        <!-- Missing translation of "Snow." -->
+        <text name="fillType_snow" text=""/>
     </texts>
 </l10n>

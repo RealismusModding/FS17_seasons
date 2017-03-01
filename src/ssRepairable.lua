@@ -147,6 +147,11 @@ function ssRepairable:update(dt)
             end
         end
     end
+
+    -- stupid fix for setting ssYesterdayOperatingTime to operatingTime for a new savegame
+    if self.ssYesterdayOperatingTime == 0 then
+        self.ssYesterdayOperatingTime = self.operatingTime
+    end
 end
 
 function ssRepairable:ssRepairUpdate(dt)
