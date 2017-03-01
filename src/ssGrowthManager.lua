@@ -179,27 +179,31 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
-    if desiredGrowthState == self.WITHERED then
-            desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
-    end
-
-    if desiredGrowthState == self.CUT then
-        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
-    end
-
-    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then
-        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
-
-        if maxState == self.MAX_STATE then
-            maxState = fruitTypeGrowth.numGrowthStates
-        end
-        setDensityMaskParams(fruit.id, "between",minState,maxState)
+    --TODO: implement self.CULTIVATED
+    if desiredGrowthState == self.CULTIVATED then
+        log("ssGrowthManager: cultivating")
     else
-        setDensityMaskParams(fruit.id, "equals",minState)
-    end
+        if desiredGrowthState == self.WITHERED then
+            desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
+        elseif desiredGrowthState == self.CUT then
+            desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
+        end
 
-    local numChannels = g_currentMission.numFruitStateChannels
-    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
+        if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then --if maxState exists
+            local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
+
+            if maxState == self.MAX_STATE then
+                maxState = fruitTypeGrowth.numGrowthStates
+            end
+            
+            setDensityMaskParams(fruit.id, "between",minState,maxState)
+        else -- else only use minState
+            setDensityMaskParams(fruit.id, "equals",minState)
+        end
+
+        local numChannels = g_currentMission.numFruitStateChannels
+        local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)        
+    end
 end
 
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
