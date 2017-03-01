@@ -9,13 +9,15 @@ ssGrowthManager = {}
 g_seasons.growthManager = ssGrowthManager
 
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
-ssGrowthManager.WITHERED = 300
 ssGrowthManager.CUT = 200
+ssGrowthManager.WITHERED = 300
+ssGrowthManager.CULTIVATED = 301
+
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
-ssGrowthManager.TRUE = "true"
-ssGrowthManager.FALSE = "false"
-ssGrowthManager.MAYBE = "maybe"
+-- ssGrowthManager.TRUE = "true"
+-- ssGrowthManager.FALSE = "false"
+-- ssGrowthManager.MAYBE = "maybe"
 
 ssGrowthManager.defaultFruits = {}
 ssGrowthManager.growthData = {}
@@ -23,16 +25,19 @@ ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doResetGrowth = false
 
 ssGrowthManager.canPlantData = {}
+ssGrowthManager.willGerminate = {}
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
+    --TODO: implement self.willGerminte load
 end
 
 function ssGrowthManager:save(savegame, key)
     if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
+        --TODO: implement self.willGerminate save
     end
 end
 
@@ -53,12 +58,13 @@ function ssGrowthManager:loadMap(name)
         end
 
         g_seasons.environment:addGrowthStageChangeListener(self)
+        g_currentMission.environment:addDayChangeListener(self)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
         self:buildCanPlantData()
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
-
+        self:dayChanged()
     end
 end
 
@@ -147,10 +153,21 @@ function ssGrowthManager:growthStageChanged()
     end
 end
 
--- handle dayChangedEvent 
--- check if canGerminate and setCanPlantData accordingly
+-- handle dayChanged event 
+-- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
     --TODO: implement
+    for fruitName, growthTransition in pairs(self.canPlantData) do
+        
+        if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
+            self.willGerminate[fruitName] = ssWeatherManager:canSow(fruitName)
+            log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
+        end
+    end
+    
+    print_r(self.canPlantData)
+    logInfo("Printing willGerminate")
+    print_r(self.willGerminate)
     
 end
 
@@ -185,6 +202,9 @@ end
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState
+    if minState == 1 and self.willGerminate[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
+        return
+    end
 
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
         local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
@@ -213,9 +233,8 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
 end
 
-
--- FIXME: dont move to Util. But don't require data. Use self.canPlantData instead. Also, default
--- to the current transition state. Also need to update fruitData
+-- TODO: this may no longer be needed. Or it may need to be refactored to combine canPlantData and willGerminate into one data structure for the help screen
+-- depending on how the helpscreen gui is implemented
 function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
     if data[fruitName] ~= nil then
         if data[fruitName][growthTransition] == nil then
@@ -240,7 +259,7 @@ function ssGrowthManager:buildCanPlantData()
                 end
 
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
-                    table.insert(transitionTable, transition , self.FALSE)
+                    table.insert(transitionTable, transition , false)
                 else
                     local plantedGrowthTransition =  transition
                     local currentGrowthStage = 1
@@ -263,13 +282,9 @@ function ssGrowthManager:buildCanPlantData()
                         maxAllowedCounter = maxAllowedCounter + 1
                     end
                     if currentGrowthStage == fruitNumStates then
-                        if plantedGrowthTransition == 1 then
-                            table.insert(transitionTable, plantedGrowthTransition , self.MAYBE)
-                        else
-                            table.insert(transitionTable, plantedGrowthTransition , self.TRUE)
-                        end
+                        table.insert(transitionTable, plantedGrowthTransition , true)
                     else
-                        table.insert(transitionTable, plantedGrowthTransition , self.FALSE)
+                        table.insert(transitionTable, plantedGrowthTransition , false)
                     end
                 end
             end
@@ -278,7 +293,6 @@ function ssGrowthManager:buildCanPlantData()
     end
 end
 
---TODO: the 3 if statements should be refactored to 3 functions if possible. They are used in two places
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage
     --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage)
@@ -320,10 +334,3 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
     return newGrowthState
 end
 
-function ssGrowthManager:boolToGMBool(value)
-    if value == true then
-        return self.TRUE
-    else
-        return self.FALSE
-    end
-end
