@@ -93,7 +93,7 @@ function dediUrl() {
 
 function dediStop() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+    const command = `curl -X POST -v -b .cookies --data "stop_server=Stop" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
@@ -101,7 +101,15 @@ function dediStop() {
 
 function dediStart() {
     const url = dediUrl();
-    const command = `curl -X POST -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+    const command = `curl -X POST -v -b .cookies --data "game_name=${buildConfig.get("server.game.name")}&admin_password=${buildConfig.get("server.game.adminPassword")}&game_password=${buildConfig.get("server.game.password")}&savegame=${buildConfig.get("server.game.savegame")}&map_start=${buildConfig.get("server.game.mapStart")}&difficulty=2&dirt_interval=2&matchmaking_server=2&mp_language=en&auto_save_interval=180&stats_interval=360&pause_game_if_empty=on&start_server=Start" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
+
+    return run(command, { silent: true }).exec()
+        .pipe(gutil.noop());
+}
+
+function dediLogin() {
+    const url = dediUrl()
+    const command = `curl -X POST -v -c .cookies --data "username=${buildConfig.get("server.web.username")}&password=${buildConfig.get("server.web.password")}&login=Login" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
         .pipe(gutil.noop());
@@ -223,7 +231,7 @@ gulp.task("server:start", dediStart);
  */
 gulp.task("server:log", () => {
     const url = dediUrl();
-    const command = `curl -X GET -v --cookie "SessionID=${buildConfig.get("server.web.cookie")}" -H "Origin: ${url}" ${url}logs.html?lang=en 2> /dev/null`;
+    const command = `curl -X GET -v -b .cookies -H "Origin: ${url}" ${url}logs.html?lang=en 2> /dev/null`;
 
     const task = run(command, { silent: true }).exec()
         .pipe(buffer())
@@ -276,6 +284,8 @@ gulp.task("ir:2", ["ir:1"], () => {
  * starting the server again.
  */
 gulp.task("server:install", ["ir:2"], dediStart);
+
+gulp.task("server:login", dediLogin);
 
 /**
  * Development task: watches file changes and auto builds and installs.
