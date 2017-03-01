@@ -24,15 +24,9 @@ ssViewController.growthTransitionIndexToName =
     [12] = "Late Winter"
 }
 
-ssViewController.canPlantDisplayData = {}
 ssViewController.debugView = false
 
 function ssViewController:loadMap(name)
-    g_seasons.environment:addGrowthStageChangeListener(self)
-    g_currentMission.environment:addDayChangeListener(self)
-
-    self:growthStageChanged()
-    self:dayChanged()
     --self:growthTransitionsDisplayData() --for testing only right now
 end
 
@@ -48,51 +42,24 @@ end
 
 function ssViewController:draw()
     if self.debugView == true then
-        renderText(0.54, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
+        renderText(0.44, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
         local growthTransition = g_seasons.environment:growthTransitionAtDay()
 
-        renderText(0.54, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
-        renderText(0.54, 0.94, 0.01, "Month: " .. ssUtil.monthNameShort(g_seasons.environment:monthAtDay()))
+        renderText(0.44, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
+        
         local cropsThatCanGrow = ""
 
-        for index,fruit in pairs(g_currentMission.fruits) do
-            local fruitName = FruitUtil.fruitIndexToDesc[index].name
-
-            if ssGrowthManager:canFruitGrow(fruitName, growthTransition, self.canPlantDisplayData) == true then
+        for fruitName in pairs(ssGrowthManager.willGerminate) do
+            if ssGrowthManager.willGerminate[fruitName] == true then
                 cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
         end
-        renderText(0.54, 0.92, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
-        renderText(0.54, 0.90, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
-        renderText(0.54, 0.88, 0.01, "Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
+        
+        renderText(0.44, 0.92, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+        renderText(0.44, 0.90, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
+        renderText(0.44, 0.88, 0.01, "Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
     end
 end
-
--- handle growthStageChanged event
-function ssViewController:growthStageChanged()
-    --self.currentIndicator = g_seasons.environment:growthTransitionAtDay()
-end
-
--- handle hourChanged event
--- this is a hack for  the early spring transition to update the can plant data based on temperature
-function ssViewController:dayChanged()
-    local growthTransition = g_seasons.environment:growthTransitionAtDay()
-
-    -- FIXME(jos): no clue why this is needed. Why cant the GM just hold growth data?
-    self:updateData()
-end
-
-function ssViewController:updateData()
-    self.canPlantDisplayData = Utils.copyTable(ssGrowthManager.canPlantData)
-    for fruitName, transition in pairs(ssGrowthManager.canPlantData) do
-        if transition[ssGrowthManager.FIRST_GROWTH_TRANSITION] == ssGrowthManager.MAYBE then
-            -- FIXME(jos): Why not handle this in the GM?
-            self.canPlantDisplayData[fruitName][ssGrowthManager.FIRST_GROWTH_TRANSITION] = ssGrowthManager:boolToGMBool(ssWeatherManager:canSow())
-        end
-    end
-
-end
-
 
 --this function currently has no real purpose. It's testing the calculation of growth transition days in a season and generates a table with 3 entries
 --early, mid, late and each entry then has the range of days in that growth transition
