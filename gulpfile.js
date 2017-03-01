@@ -1,5 +1,5 @@
-const fs = require("fs")
-const path = require("path")
+const fs = require("fs");
+const path = require("path");
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
@@ -13,12 +13,13 @@ const merge = require("merge-stream");
 const git = require("git-rev-sync");
 const run = require("gulp-run");
 const del = require("del");
-const dom = require("gulp-dom")
-const buffer = require("gulp-buffer")
+const dom = require("gulp-dom");
+const buffer = require("gulp-buffer");
+const replace = require("gulp-replace");
 
-const _defaults = require("lodash.defaultsdeep")
-const _has = require("lodash.has")
-const _get = require("lodash.get")
+const _defaults = require("lodash.defaultsdeep");
+const _has = require("lodash.has");
+const _get = require("lodash.get");
 
 /////////////////////////////////////////////////////
 /// Functions
@@ -47,22 +48,12 @@ function fillModDesc() {
 }
 
 function templatedLua() {
-    const options = {
-        interpolate: /false\-\-<%=([\s\S]+?)%>/g,
-        evaluate: undefined,
-        escape: undefined
-    };
-
-    const replacements = {
-        debug: buildConfig.get("options.debug", false).toString(),
-        verbose: buildConfig.get("options.verbose", false).toString(),
-        buildnumber: toLuaString(createVersionName()),
-        simpleVersion: package.fs.simpleVersion
-    };
-
     return gulp
         .src("src/**/*.lua", { base: "." })
-        .pipe(template(replacements, options));
+        .pipe(replace(/false\-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
+        .pipe(replace(/false\-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
+        .pipe(replace(/false\-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
+        .pipe(replace(/false\-\-<%=simpleVersion %>/g, package.fs.simpleVersion));
 }
 
 function createVersionName() {
