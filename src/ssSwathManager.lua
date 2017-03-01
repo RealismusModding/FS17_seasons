@@ -75,7 +75,7 @@ end
 
 function ssSwathManager:dayChanged()
     if g_currentMission:getIsServer() then
-        ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 1)
+        ssDensityMapScanner:queueJob("ssSwathManagerReduceSwaths", 1)
     end
 end
 
@@ -83,7 +83,7 @@ function ssSwathManager:growthStageChanged()
     if g_currentMission:getIsServer() then
         -- removing all swaths at beginning of winter
         if g_seasons.environment:currentGrowthTransition() == 10 then
-            ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 64)
+            ssDensityMapScanner:queueJob("ssSwathManagerReduceSwaths", 64)
         end
     end
 end

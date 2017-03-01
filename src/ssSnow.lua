@@ -113,7 +113,7 @@ function ssSnow:applySnow(targetSnowDepth)
     -- Disable snow updates when unnecessary.
     if targetSnowDepth < -4 and self.updateSnow == true then
         self.snowLayersDelta = 100
-        ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
+        ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         self.updateSnow = false
     elseif targetSnowDepth > 0 then
         self.updateSnow = true
@@ -123,14 +123,14 @@ function ssSnow:applySnow(targetSnowDepth)
         self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
         if targetSnowDepth > 0 then
             log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-            ssDensityMapScanner:queuJob("ssSnowAddSnow", self.snowLayersDelta)
+            ssDensityMapScanner:queueJob("ssSnowAddSnow", self.snowLayersDelta)
         end
         self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT
     elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
         self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
         self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
         log("Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-        ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
+        ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
     end
 end
 

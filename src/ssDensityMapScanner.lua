@@ -18,7 +18,7 @@ ssDensityMapScanner.moreIterations=false
 
 ssDensityMapScanner.workQ = ssUtil.listNew()
 
-function ssDensityMapScanner:queuJob(callBackName, parameter)
+function ssDensityMapScanner:queueJob(callBackName, parameter)
     if g_currentMission:getIsServer() then
         log("DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
 

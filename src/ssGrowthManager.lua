@@ -54,9 +54,9 @@ function ssGrowthManager:loadMap(name)
             return
         end
 
-        g_seasons.environment:addGrowthStageChangeListener(self)
         g_currentMission.environment:addDayChangeListener(self)
-
+        g_seasons.environment:addGrowthStageChangeListener(self)
+        
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
         self:buildCanPlantData()
@@ -117,6 +117,8 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
             end
         end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
     end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+    self.willGerminate = {} -- reset the data because a new will be built the next day and the data 
+                            -- for the last growth transition is no longer needed
 end
 
 function ssGrowthManager:consoleCommandResetGrowth()
@@ -128,7 +130,7 @@ end
 function ssGrowthManager:resetGrowth()
     if self.growthManagerEnabled == true then
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
         logInfo("ssGrowthManager: Growth reset")
     end
 end
@@ -146,7 +148,7 @@ function ssGrowthManager:growthStageChanged()
             log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
             self.currentGrowthTransitionPeriod = growthTransition
         end
-        ssDensityMapScanner:queuJob("ssGrowthManagerHandleGrowth", 1)
+        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
     end
 end
 
