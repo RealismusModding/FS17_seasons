@@ -150,13 +150,6 @@ function main(args) {
         });
     }, {})
 
-    // Create and write XML
-    .then((data) => {
-        pp(data)
-
-        return data;
-    })
-
     .then((data) => Promise.map(languages, (language) => {
         if (language == "en") {
             return Promise.resolve();
@@ -164,7 +157,11 @@ function main(args) {
 
         const path = pathForTranslation(language);
 
-        return createXML(data, language).then((xml) => writeXML(xml, path));
+        return createXML(data, language).then((xml) => {
+            console.log(`Writing XML file for '${language}'`);
+
+            return writeXML(xml, path);
+        });
     }))
 
     .then(() => {
