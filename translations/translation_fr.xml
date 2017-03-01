@@ -105,7 +105,6 @@
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance"/>
         <text name="dialog_resetGrowth_no" text="maintenir la croissance"/>
         <text name="dialog_resetGrowth_yes" text="réinitialisation"/>
-        <!-- Missing translation of "Snow." -->
-        <text name="fillType_snow" text=""/>
+        <text name="fillType_snow" text="Neige"/>
     </texts>
 </l10n>
