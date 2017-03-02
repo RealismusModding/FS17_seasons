@@ -510,6 +510,7 @@ function ssEnvironment:nextGrowthTransition()
         return 1
     else
         return cGT+1
+    end
 end
 
 --uses currentDay if dayNumber not passed in
