@@ -43,6 +43,7 @@ g_modClasses = {
 
     --"ssSwathManager",
     --"ssBaleManager",
+	"ssTreeManager",
     "ssEconomy",
     "ssWeatherManager",
     "ssWeatherForecast",
@@ -62,7 +63,7 @@ g_modClasses = {
     "ssIcePlane"
 }
 
-local isDebug = false--<%=debug %>
+local isDebug = true--<%=debug %>
 if isDebug then
     table.insert(g_modClasses, "ssDebug")
 end
