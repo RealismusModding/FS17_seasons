@@ -71,9 +71,6 @@ end
 
 function ssSwathManager:dayChanged()
     if g_currentMission:getIsServer() then
-<<<<<<< HEAD
-        ssDensityMapScanner:queueJob("ssSwathManagerReduceSwaths", 1)
-=======
         --local reduceLayers = -1/3 * g_seasons.environment.daysInSeason + 5
         -- removing 1 layer each day
         self:reduceGrass(1)
@@ -86,24 +83,19 @@ function ssSwathManager:hourChanged()
             -- removing 1 layer if has been raining the last hour
             self:reduceStrawHay(1)
         end
->>>>>>> master
     end
 end
 
 function ssSwathManager:growthStageChanged()
     if g_currentMission:getIsServer() then
         -- removing all swaths at beginning of winter
-<<<<<<< HEAD
         if g_seasons.environment:growthTransitionAtDay() == 10 then
-            ssDensityMapScanner:queueJob("ssSwathManagerReduceSwaths", 64)
-=======
-        if g_seasons.environment:currentGrowthTransition() == 10 then
             self:reduceGrass(64)
             self:reduceStrawHay(64)
         else
             -- removing some every growth transition as it will rot if left too long on the ground
             self:reduceStrawHay(1)
->>>>>>> master
+
         end
     end
 end
