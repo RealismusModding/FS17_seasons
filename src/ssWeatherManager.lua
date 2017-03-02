@@ -152,8 +152,9 @@ end
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
+    self.cropMoistureContent = streamReadFloat32(streamId)
 
-    local numDays = streamReadUInt8(streamId)
+    self.forecastLength = streamReadUInt8(streamId)
     local numRains = streamReadUInt8(streamId)
 
     self.prevHighTemp = streamReadFloat32(streamId)
@@ -161,7 +162,7 @@ function ssWeatherManager:readStream(streamId, connection)
     -- load forecast
     self.forecast = {}
 
-    for i = 1, numDays do
+    for i = 1, self.forecastLength do
         local day = {}
 
         day.day = streamReadInt16(streamId)
@@ -196,8 +197,9 @@ end
 function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
+    streamWriteFloat32(streamId, self.cropMoistureContent)
 
-    streamWriteUInt8(streamId, table.getn(self.forecast))
+    streamWriteUInt8(streamId, self.forecastLength)
     streamWriteUInt8(streamId, table.getn(self.weather))
 
     streamWriteFloat32(streamId, self.prevHighTemp)
@@ -225,13 +227,14 @@ function ssWeatherManager:update(dt)
     if currentRain ~= nil then
         local currentTemp = mathRound(self:currentTemperature(), 0)
 
+        -- If temperature is 1 or higher and it would be snowing, rain instead. Same for other way around
         if currentTemp > 1 and currentRain.rainTypeId == "snow" then
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = "rain"
+            currentRain.rainTypeId = "rain"
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
         elseif currentTemp < 0 and currentRain.rainTypeId == "rain" then
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
-            g_currentMission.environment.currentRain.rainTypeId = "snow"
+            currentRain.rainTypeId = "snow"
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
@@ -330,7 +333,11 @@ end
 
 function ssWeatherManager:seasonLengthChanged()
     if g_currentMission:getIsServer() then
+        local isFrozen = self:isGroundFrozen()
+
         self:buildForecast()
+
+        -- TODO(Jos): possible bug, data not sent to client. Workaround: quit all clients and rejoin
     end
 end
 
@@ -639,15 +646,15 @@ function ssWeatherManager:overwriteRaintable()
         end
     end
 
-    g_currentMission.environment.numRains = table.getn(tmpWeather)
-    g_currentMission.environment.rains = tmpWeather
+    env.numRains = table.getn(tmpWeather)
+    env.rains = tmpWeather
 
-    if g_seasons.environment.currentDayOffset ~= nil then
+    if env.currentDayOffset ~= nil then
         for index = 1, env.numRains do
-            local newStartDay = env.rains[index].startDay - g_seasons.environment.currentDayOffset
-            local newEndDay = env.rains[index].endDay - g_seasons.environment.currentDayOffset
-            g_currentMission.environment.rains[index].startDay = newStartDay
-            g_currentMission.environment.rains[index].endDay = newEndDay
+            local newStartDay = env.rains[index].startDay - env.currentDayOffset
+            local newEndDay = env.rains[index].endDay - env.currentDayOffset
+            env.rains[index].startDay = newStartDay
+            env.rains[index].endDay = newEndDay
         end
     end
 
@@ -766,9 +773,8 @@ function ssWeatherManager:loadFromXML(path)
 end
 
 -- function to calculate relative humidity
+-- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
 function ssWeatherManager:calculateRelativeHumidity()
-     -- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
-
     local dewPointTemp = self.forecast[1].lowTemp - 2
     local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
     local relativeHumidity = 80
@@ -786,7 +792,6 @@ function ssWeatherManager:calculateRelativeHumidity()
     end
 
     return relativeHumidity
-
 end
 
 -- function to calculate solar radiation
@@ -824,7 +829,6 @@ function ssWeatherManager:calculateSolarRadiation()
     end
 
     return solarRadiation
-
 end
 
 function ssWeatherManager:updateCropMoistureContent()
@@ -846,6 +850,5 @@ function ssWeatherManager:updateCropMoistureContent()
             self.cropMoistureContent = 25
         end
     end
-
 end
 
