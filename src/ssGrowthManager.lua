@@ -27,13 +27,35 @@ function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
-    --TODO: implement self.willGerminte load
+    self.currentGrowthTransitionPeriod = ssStorage.getXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", 0)
+
+    local i = 0
+    while true do
+        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
+        if not hasXMLProperty(savegame, fruitKey) then break end
+
+        local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
+        self.willGerminate[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+        
+        i = i + 1
+    end
+    print_r(self.willGerminate)
 end
 
 function ssGrowthManager:save(savegame, key)
     if g_currentMission:getIsServer() == true then
         ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
-        --TODO: implement self.willGerminate save
+        ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
+        
+        local i = 0
+        for fruitName in pairs(self.willGerminate) do
+        
+            local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
+            log("fruitKey: " .. fruitKey)
+            setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
+            setXMLBool(savegame, fruitKey .. "#value", self.willGerminate[fruitName])
+            i = i+1
+        end
     end
 end
 
@@ -107,15 +129,18 @@ function ssGrowthManager:growthStageChanged()
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
             self.isNewSavegame = false
+             ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
         else
             log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
             self.currentGrowthTransitionPeriod = growthTransition
+            ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
+            self:rebuildWillGerminateData()
         end
-        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
+        
     end
 end
 
--- reset the data and rebuild it based on the current transition
+-- reset the willGerminate and rebuild it based on the current transition
 -- called just after growthStageChanged
 function ssGrowthManager:rebuildWillGerminateData()
     self.willGerminate = {}
@@ -126,14 +151,47 @@ end
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
-        if self.canPlantData[fruitName][g_seasons.environment:nextGrowthTransition()] == true then
+        if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminate[fruitName] = ssWeatherManager:canSow(fruitName)
             --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
-    -- print_r(self.canPlantData)
-    -- logInfo("Printing willGerminate")
-    -- print_r(self.willGerminate)
+    --print_r(self.canPlantData)
+    --log("Printing willGerminate")
+    --print_r(self.willGerminate)
+end
+
+function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
+    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+
+    for index,fruit in pairs(g_currentMission.fruits) do
+        local fruitName = FruitUtil.fruitIndexToDesc[index].name
+
+        --handling new unknown fruits
+        if self.defaultFruits[fruitName] == nil then
+            log("Fruit not found in default table: " .. fruitName)
+            fruitName = "barley"
+        end
+
+        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+            --setGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
+                and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
+                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
+                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+            --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
+                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
+                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
+            end
+        end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
+    end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
 end
 
 function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
@@ -196,22 +254,6 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
     local numChannels = g_currentMission.numFruitStateChannels
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
-end
-
--- TODO: this may no longer be needed. Or it may need to be refactored to combine canPlantData and willGerminate into one data structure for the help screen
--- depending on how the helpscreen gui is implemented
-function ssGrowthManager:canFruitGrow(fruitName, growthTransition, data)
-    if data[fruitName] ~= nil then
-        if data[fruitName][growthTransition] == nil then
-            return false
-        end
-
-        --log(data[fruitName][growthTransition])
-        if data[fruitName][growthTransition] == self.TRUE then
-            return true
-        end
-    end
-    return false
 end
 
 function ssGrowthManager:buildCanPlantData()
