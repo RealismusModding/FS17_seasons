@@ -90,10 +90,10 @@ function ssSwathManager:growthStageChanged()
     if g_currentMission:getIsServer() then
         -- removing all swaths at beginning of winter
         if g_seasons.environment:currentGrowthTransition() == 10 then
-            --ssDensityMapScanner:queuJob("ssSwathManagerReduceSwaths", 64)
             self:reduceGrass(64)
             self:reduceStrawHay(64)
         else
+            -- removing some every growth transition as it will rot if left too long on the ground
             self:reduceStrawHay(1)
         end
     end
