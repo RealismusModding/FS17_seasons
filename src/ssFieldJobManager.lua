@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------
 -- FieldJobManager SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  To disable the game's mission system'
+-- Purpose:  To disable the game's mission system
 -- Authors:  theSeb
 --
 
