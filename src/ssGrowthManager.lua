@@ -11,7 +11,6 @@ g_seasons.growthManager = ssGrowthManager
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
 ssGrowthManager.CUT = 200
 ssGrowthManager.WITHERED = 300
-ssGrowthManager.CULTIVATED = 301
 
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
@@ -179,31 +178,27 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
-    --TODO: implement self.CULTIVATED
-    if desiredGrowthState == self.CULTIVATED then
-        log("ssGrowthManager: cultivating")
-    else
-        if desiredGrowthState == self.WITHERED then
-            desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
-        elseif desiredGrowthState == self.CUT then
-            desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
-        end
-
-        if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then --if maxState exists
-            local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
-
-            if maxState == self.MAX_STATE then
-                maxState = fruitTypeGrowth.numGrowthStates
-            end
-            
-            setDensityMaskParams(fruit.id, "between",minState,maxState)
-        else -- else only use minState
-            setDensityMaskParams(fruit.id, "equals",minState)
-        end
-
-        local numChannels = g_currentMission.numFruitStateChannels
-        local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)        
+    if desiredGrowthState == self.WITHERED then
+        desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
+    elseif desiredGrowthState == self.CUT then
+        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
     end
+
+    if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState ~= nil then --if maxState exists
+        local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState
+
+        if maxState == self.MAX_STATE then
+            maxState = fruitTypeGrowth.numGrowthStates
+        end
+        
+        setDensityMaskParams(fruit.id, "between", minState, maxState)
+    else -- else only use minState
+        setDensityMaskParams(fruit.id, "equals", minState)
+    end
+
+    local numChannels = g_currentMission.numFruitStateChannels
+    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
+    
 end
 
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
@@ -220,9 +215,9 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         if maxState == self.MAX_STATE then
             maxState = fruitTypeGrowth.numGrowthStates-1
         end
-        setDensityMaskParams(fruit.id, "between",minState,maxState)
+        setDensityMaskParams(fruit.id, "between", minState, maxState)
     else
-        setDensityMaskParams(fruit.id, "equals",minState)
+        setDensityMaskParams(fruit.id, "equals", minState)
     end
 
     local numChannels = g_currentMission.numFruitStateChannels
@@ -233,7 +228,7 @@ end
 function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState
     local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState
-    setDensityMaskParams(fruit.id, "between",minState,maxState)
+    setDensityMaskParams(fruit.id, "between", minState, maxState)
 
     local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
     local numChannels = g_currentMission.numFruitStateChannels
