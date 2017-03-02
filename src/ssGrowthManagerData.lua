@@ -160,8 +160,6 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
                 growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CUT
             elseif desiredGrowthState == "WITHERED" then
                 growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.WITHERED
-            elseif desiredGrowthState == "CULTIVATED" then
-                growthData[growthTransitionNum][fruitName].desiredGrowthState = ssGrowthManager.CULTIVATED
             else
                 growthData[growthTransitionNum][fruitName].desiredGrowthState = tonumber(desiredGrowthState)
             end
