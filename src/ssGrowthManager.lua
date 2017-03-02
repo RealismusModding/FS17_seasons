@@ -84,41 +84,6 @@ function ssGrowthManager:getGrowthData()
     return true
 end
 
-
-function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
-    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
-
-    for index,fruit in pairs(g_currentMission.fruits) do
-        local fruitName = FruitUtil.fruitIndexToDesc[index].name
-
-        --handling new unknown fruits
-        if self.defaultFruits[fruitName] == nil then
-            log("Fruit not found in default table: " .. fruitName)
-            fruitName = "barley"
-        end
-
-        if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
-            --setGrowthState
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
-                and self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState ~= nil then
-                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. self.currentGrowthTransitionPeriod .. " between growth states " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState .. " and " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState)
-                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
-            end
-            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState ~= nil then
-                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
-            end
-            --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-            if self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState ~= nil
-                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState ~= nil
-                    and self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor ~= nil then
-                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
-            end
-        end  -- end of if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
-    end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
-    self:rebuildWillGerminateData()
-end
-
 function ssGrowthManager:consoleCommandResetGrowth()
     if g_currentMission:getIsServer() then
         self:resetGrowth()
@@ -166,11 +131,9 @@ function ssGrowthManager:dayChanged()
             --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
-    
     -- print_r(self.canPlantData)
     -- logInfo("Printing willGerminate")
     -- print_r(self.willGerminate)
-    
 end
 
 function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
