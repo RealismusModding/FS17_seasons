@@ -47,6 +47,7 @@ g_modClasses = {
     "ssWeatherManager",
     "ssWeatherForecast",
     "ssVehicle",
+    "ssFieldJobManager",
     "ssGrowthManagerData",
     "ssGrowthManager",
     "ssSnow",
