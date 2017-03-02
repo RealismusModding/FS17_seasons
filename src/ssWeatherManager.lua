@@ -191,17 +191,10 @@ function ssWeatherManager:readStream(streamId, connection)
         table.insert(self.weather, rain)
     end
 
-    log("Received weather from server:")
-    print_r(self.forecast)
-    print_r(self.weather)
-
     self:overwriteRaintable()
 end
 
 function ssWeatherManager:writeStream(streamId, connection)
-    log("Sending weather from server:")
-    print_r(self.forecast)
-
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
     streamWriteFloat32(streamId, self.cropMoistureContent)
