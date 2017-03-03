@@ -41,9 +41,6 @@ g_modClasses = {
     "ssUtil",
     "ssEnvironment",
 
-    "ssSwathManager",
-    "ssBaleManager",
-	"ssTreeManager",
     "ssEconomy",
     "ssWeatherManager",
     "ssWeatherForecast",
@@ -58,6 +55,10 @@ g_modClasses = {
     "ssDensityMapScanner",
     -- "ssViewController",
     "ssPedestrianSystem",
+    "ssSwathManager",
+    "ssBaleManager",
+    "ssTreeManager",
+    "ssBunkerSilo",
 
     "ssSnowAdmirer",
     "ssSeasonAdmirer",

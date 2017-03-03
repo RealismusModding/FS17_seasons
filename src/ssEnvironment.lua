@@ -222,9 +222,7 @@ function ssEnvironment:adaptTime()
     env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.rainFadeCurve = self:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
 
-    g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
-
-    self.lastUpdate = self:currentDay()
+    env.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 end
 
 -- Output in hours
