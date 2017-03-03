@@ -43,6 +43,36 @@ function ssAnimals:loadFromXML()
     end
 end
 
+function ssAnimals:readStream(streamId, connection)
+    for typ, husb in pairs(g_currentMission.husbandries) do
+        local desc = husb.animalDesc
+
+        desc.birthRatePerDay = streamReadFloat32(streamId)
+        desc.foodPerDay = streamReadFloat32(streamId)
+        desc.liquidManurePerDay = streamReadFloat32(streamId)
+        desc.manurePerDay = streamReadFloat32(streamId)
+        desc.milkPerDay = streamReadFloat32(streamId)
+        desc.palletFillLevelPerDay = streamReadFloat32(streamId)
+        desc.strawPerDay = streamReadFloat32(streamId)
+        desc.waterPerDay = streamReadFloat32(streamId)
+    end
+end
+
+function ssAnimals:writeStream(streamId, connection)
+    for typ, husb in pairs(g_currentMission.husbandries) do
+        local desc = husb.animalDesc
+
+        streamWriteFloat32(streamId, desc.birthRatePerDay)
+        streamWriteFloat32(streamId, desc.foodPerDay)
+        streamWriteFloat32(streamId, desc.liquidManurePerDay)
+        streamWriteFloat32(streamId, desc.manurePerDay)
+        streamWriteFloat32(streamId, desc.milkPerDay)
+        streamWriteFloat32(streamId, desc.palletFillLevelPerDay)
+        streamWriteFloat32(streamId, desc.strawPerDay)
+        streamWriteFloat32(streamId, desc.waterPerDay)
+    end
+end
+
 function ssAnimals:seasonChanged()
     self:updateTroughs()
 
