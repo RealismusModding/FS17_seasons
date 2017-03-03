@@ -26,7 +26,7 @@ function ssUtil.julianDay(dayNumber)
     local starts = {[0] = 60, 152, 244, 335 }
 
     season = g_seasons.environment:seasonAtDay(dayNumber)
-    dayInSeason = dayNumber % g_seasons.environment.daysInSeason
+    dayInSeason = (dayNumber - 1) % g_seasons.environment.daysInSeason
     partInSeason = dayInSeason / g_seasons.environment.daysInSeason
 
     return math.fmod(math.floor(starts[season] + partInSeason * 91), 365)
@@ -78,7 +78,7 @@ function ssUtil.monthNameShort(monthNumber)
 end
 
 function ssUtil.fullSeasonName(growthStage)
-    return ssLang.getText("SS_SEASON_FULL_NAME_" .. tostring(growthStage), "???")    
+    return ssLang.getText("SS_SEASON_FULL_NAME_" .. tostring(growthStage), "???")
 end
 
 function ssUtil.nextWeekDayNumber(currentDay)
@@ -95,7 +95,7 @@ function ssUtil.calcDaysPerTransition()
 	local midEnd = mathRound(2 * l)
 	local lateStart = mathRound(2 * l)+1
 	local lateEnd = g_seasons.environment.daysInSeason
-    
+
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
 end
 
