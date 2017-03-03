@@ -80,7 +80,7 @@ function ssGrowthManager:loadMap(name)
         
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
-        self:buildCanPlantData()
+        self:buildCanPlantData(self.defaultFruits)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
         self:dayChanged()
     end
@@ -256,8 +256,8 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
 end
 
-function ssGrowthManager:buildCanPlantData()
-    for fruitName, value in pairs(self.defaultFruits) do
+function ssGrowthManager:buildCanPlantData(fruitData)
+    for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
             for transition,v in pairs(self.growthData) do
