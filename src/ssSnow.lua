@@ -18,8 +18,14 @@ ssSnow.MODE_OFF = 1
 ssSnow.MODE_ONE_LAYER = 2
 ssSnow.MODE_ON = 3
 
+function ssSnow:preLoad()
+    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlaceableOnCreation)
+    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.updatePlaceablenOnDelete)
+end
+
 function ssSnow:load(savegame, key)
     self.appliedSnowDepth = ssStorage.getXMLInt(savegame, key .. ".weather.appliedSnowDepth", 0) * self.LAYER_HEIGHT
+    self.updateSnow = ssStorage.getXMLBool(savegame, key .. ".weather.updateSnow", false)
 
     local saveMode = ssStorage.getXMLInt(savegame, key .. ".weather.snowMode", nil)
     if saveMode == nil then
@@ -35,6 +41,7 @@ end
 
 function ssSnow:save(savegame, key)
     ssStorage.setXMLInt(savegame, key .. ".weather.appliedSnowDepth", self.appliedSnowDepth / self.LAYER_HEIGHT)
+    ssStorage.setXMLBool(savegame, key .. ".weather.updateSnow", self.updateSnow)
     ssStorage.setXMLInt(savegame, key .. ".weather.snowMode", self.mode)
 end
 
@@ -67,18 +74,6 @@ function ssSnow:writeStream(streamId, connection)
     streamWriteInt8(streamId, self.mode)
 end
 
-function ssSnow:deleteMap()
-end
-
-function ssSnow:mouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ssSnow:keyEvent(unicode, sym, modifier, isDown)
-end
-
-function ssSnow:draw()
-end
-
 function ssSnow:setMode(mode)
     if mode == self.mode then return end
     if mode < 1 or mode > 3 then return end
@@ -102,7 +97,7 @@ function ssSnow:applySnow(targetSnowDepth)
     elseif self.mode == self.MODE_OFF then
         targetSnowDepth = 0
     else
-        -- Target snow depth in meters. Never higher than 0.4
+        -- Target snow depth in meters. Never higher than 0.48
         targetSnowDepth = math.min(self.MAX_HEIGHT, targetSnowDepth)
     end
 
@@ -119,18 +114,24 @@ function ssSnow:applySnow(targetSnowDepth)
         self.updateSnow = true
     end
 
-    if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
-        self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
-        if targetSnowDepth > 0 then
-            log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-            ssDensityMapScanner:queuJob("ssSnowAddSnow", self.snowLayersDelta)
+    if self.updateSnow then
+        if targetSnowDepth - self.appliedSnowDepth >= ssSnow.LAYER_HEIGHT then
+            self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
+
+            if targetSnowDepth > 0 then
+                -- log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+                ssDensityMapScanner:queuJob("ssSnowAddSnow", self.snowLayersDelta)
+            end
+
+            self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT
+        elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT then
+            self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
+            self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
+
+            -- log("Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+
+            ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
         end
-        self.appliedSnowDepth = self.appliedSnowDepth + self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-    elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT and self.updateSnow == true then
-        self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
-        self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-        log("Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-        ssDensityMapScanner:queuJob("ssSnowRemoveSnow", self.snowLayersDelta)
     end
 end
 
@@ -205,7 +206,7 @@ function ssSnow:update(dt)
     end
 end
 
-function ssSnow:updatePlacableOnCreation()
+function ssSnow:updatePlaceableOnCreation()
     if self.snowMaskId == nil then return end
 
     local numAreas = table.getn(self.clearAreas)
@@ -219,9 +220,7 @@ function ssSnow:updatePlacableOnCreation()
     end
 end
 
-Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
-
-function ssSnow:updatePlacablenOnDelete()
+function ssSnow:updatePlaceablenOnDelete()
     if self.snowMaskId == nil then return end
 
     local numAreas = table.getn(self.clearAreas)
@@ -234,8 +233,6 @@ function ssSnow:updatePlacablenOnDelete()
         setDensityParallelogram(self.snowMaskId, startX,startZ, widthX,widthZ, heightX,heightZ, 0, 1, 0)
     end
 end
-
-Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlacableOnCreation)
 
 function ssSnow:removeSnowUnderObjects()
     local dim = {}
