@@ -8,27 +8,24 @@
 ssAnimals = {}
 g_seasons.animals = ssAnimals
 
+source(g_seasons.modDir .. "src/events/ssAnimalsDataEvent.lua")
+
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
-    g_seasons.environment:addSeasonLengthChangeListener(self)
-    g_currentMission.environment:addDayChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()
 
     if g_currentMission:getIsServer() then
+        g_seasons.environment:addSeasonLengthChangeListener(self)
+        g_currentMission.environment:addDayChangeListener(self)
+
         self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
         -- Initial setup (it changed from nothing)
         self:adjustAnimals()
     end
 
-end
-
-function ssAnimals:load()
-    -- adjust animal values for varying season length
-    -- reference season length is 6 days
-    --self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 end
 
 function ssAnimals:loadFromXML()
@@ -45,31 +42,33 @@ function ssAnimals:loadFromXML()
     end
 end
 
-function ssAnimals:readStream(streamId, connection)
-    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
-    -- Load after data for seasonUtils is loaded
-    self:adjustAnimals()
-end
-
 function ssAnimals:seasonChanged()
-    self:adjustAnimals()
+    self:updateTroughs()
+
+    if g_currentMission:getIsServer() then
+        self:adjustAnimals()
+    end
 end
 
 function ssAnimals:seasonLengthChanged()
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
     self:adjustAnimals()
 end
 
 function ssAnimals:dayChanged()
-    -- percentages for base season length = 6 days
-    -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-    self:killAnimals("cow", 0.15 * self.seasonLengthfactor)
-    -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-    self:killAnimals("sheep", 0.1 * self.seasonLengthfactor)
-    -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-    self:killAnimals("pig", 0.25 * self.seasonLengthfactor)
-end
+    if g_currentMission:getIsServer() then
+        -- percentages for base season length = 6 days
+        -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
+        self:killAnimals("cow", 0.15 * self.seasonLengthfactor)
+        -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
+        self:killAnimals("sheep", 0.1 * self.seasonLengthfactor)
+        -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
+        self:killAnimals("pig", 0.25 * self.seasonLengthfactor)
 
+        g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
+    end
+end
 
 function ssAnimals:adjustAnimals()
     local season = g_seasons.environment:currentSeason()
@@ -97,6 +96,12 @@ function ssAnimals:adjustAnimals()
         end
     end
 
+    self:updateTroughs()
+
+    g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
+end
+
+function ssAnimals:updateTroughs()
     if season == g_seasons.environment.SEASON_WINTER then
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
@@ -104,9 +109,6 @@ function ssAnimals:adjustAnimals()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
     end
-
-    -- FIXME send event to clients that stuff has changed?
-    -- broadcast event
 end
 
 -- animal: string, filltype: int, enabled: bool
