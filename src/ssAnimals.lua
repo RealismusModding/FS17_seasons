@@ -13,14 +13,15 @@ source(g_seasons.modDir .. "src/events/ssAnimalsDataEvent.lua")
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
 
-    -- Load parameters
-    self:loadFromXML()
-
     if g_currentMission:getIsServer() then
         g_seasons.environment:addSeasonLengthChangeListener(self)
         g_currentMission.environment:addDayChangeListener(self)
 
         self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
+
+        -- Load parameters
+        self:loadFromXML()
 
         -- Initial setup (it changed from nothing)
         self:adjustAnimals()
@@ -57,14 +58,14 @@ function ssAnimals:seasonLengthChanged()
 end
 
 function ssAnimals:dayChanged()
-    if g_currentMission:getIsServer() then
+    if g_currentMission:getIsServer() and g_currentMission.missionInfo.difficulty ~= 0 then
         -- percentages for base season length = 6 days
         -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-        self:killAnimals("cow", 0.15 * self.seasonLengthfactor)
+        self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
         -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-        self:killAnimals("sheep", 0.1 * self.seasonLengthfactor)
+        self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
         -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-        self:killAnimals("pig", 0.25 * self.seasonLengthfactor)
+        self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
 
         g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
     end
@@ -131,9 +132,11 @@ function ssAnimals:killAnimals(animal,p)
 
     -- productivity at 0-10% means that they are not fed, but might have straw
     if tmpAnimal.productivity <= 0.1 then
-       local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
-       local tmpNumAnimals = tmpAnimal.totalNumAnimals
+        local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
+        local tmpNumAnimals = tmpAnimal.totalNumAnimals
 
-       g_currentMission.husbandries[animal].totalNumAnimals = math.max(tmpNumAnimals - killedAnimals, 0)
+        if killedAnimals > 0 then
+            g_currentMission.husbandries[animal]:removeAnimals(killedAnimals, 0)
+        end
     end
 end

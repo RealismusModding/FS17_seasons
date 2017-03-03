@@ -93,6 +93,7 @@ For a better game experience, custom maps should add two new density layers: one
   - They need more straw in winter than in summer
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+- Animals die when they have no food. (Disabled on 'Easy')
 
 ### Warnings for gameplay
 - Do not fast forward faster than 6000x on singleplayer (preferable even slower)

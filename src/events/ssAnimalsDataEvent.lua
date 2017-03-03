@@ -33,8 +33,6 @@ function ssAnimalsDataEvent:writeStream(streamId, connection)
         streamWriteFloat32(streamId, desc.palletFillLevelPerDay)
         streamWriteFloat32(streamId, desc.strawPerDay)
         streamWriteFloat32(streamId, desc.waterPerDay)
-
-        streamWriteInt16(streamId, husb.totalNumAnimals)
     end
 end
 
@@ -50,8 +48,6 @@ function ssAnimalsDataEvent:readStream(streamId, connection)
         desc.palletFillLevelPerDay = streamReadFloat32(streamId)
         desc.strawPerDay = streamReadFloat32(streamId)
         desc.waterPerDay = streamReadFloat32(streamId)
-
-        husb.totalNumAnimals = streamReadInt16(streamId)
     end
 
     self:run(connection)
