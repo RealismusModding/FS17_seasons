@@ -167,3 +167,10 @@ FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
+
+------------------------------------------
+-- Fixes for Giants Vanilla game
+------------------------------------------
+
+-- Giants engine does not copy this unit to the mod g_i18n version
+g_i18n.moneyUnit = getfenv(0)["g_i18n"].moneyUnit
