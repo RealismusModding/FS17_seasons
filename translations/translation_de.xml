@@ -76,7 +76,6 @@
         <text name="warning_doNotThreshWithMoisture" text=""/>
         <text name="ui_pageOverview" text="Übersicht"/>
         <text name="ui_pageSettings" text="Einstellungen"/>
-        <text name="ui_pageHelp" text="Hilfe"/>
         <text name="ui_pageDebug" text="Entwickler"/>
         <text name="ui_buttonSave" text="Speichern"/>
         <text name="ui_snowOneLayer" text="Eine Schnee Schicht"/>
@@ -103,14 +102,6 @@
         <text name="setting_controlsTemperature" text=""/>
         <!-- Missing translation of "Crop moisture." -->
         <text name="setting_moisture" text=""/>
-        <text name="ui_helpCategory_1" text="Jahreszeit"/>
-        <text name="ui_helpCategory_2" text="Schnee"/>
-        <text name="ui_helpCategory_3" text="Pflanzen"/>
-        <text name="ui_helpCategory_4" text="Tiere"/>
-        <text name="ui_helpTitle_1_1" text="1.1"/>
-        <text name="ui_helpTitle_2_1" text="2.1"/>
-        <text name="ui_helpTitle_3_1" text="3.1"/>
-        <text name="ui_helpTitle_4_1" text="4.1"/>
         <text name="dialog_applySettings" text="Willst du wirklich die Jahreszeiten Einstellungen überschreiben? Änderungen an der Jahreszeiten dauer und am Wachstum können erst nach einem Ingame Jahr geändert werden."/>
         <!-- Missing translation of "You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected.." -->
         <text name="dialog_resetGrowth" text=""/>

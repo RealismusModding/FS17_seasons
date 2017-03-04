@@ -71,7 +71,6 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!"/>
         <text name="ui_pageOverview" text="Aperçu"/>
         <text name="ui_pageSettings" text="Paramètres"/>
-        <text name="ui_pageHelp" text="Aide"/>
         <text name="ui_pageDebug" text="Outils de débogage"/>
         <text name="ui_buttonSave" text="Sauvegarder les paramètres"/>
         <text name="ui_snowOneLayer" text="Une couche seulement"/>
@@ -92,14 +91,6 @@
         <text name="setting_snowTracks" text="Traces de neige"/>
         <text name="setting_controlsTemperature" text="Unité de la temperature"/>
         <text name="setting_moisture" text="L'humidité des cultures"/>
-        <text name="ui_helpCategory_1" text="Saisons"/>
-        <text name="ui_helpCategory_2" text="Neige"/>
-        <text name="ui_helpCategory_3" text="Cultures"/>
-        <text name="ui_helpCategory_4" text="Animaux"/>
-        <text name="ui_helpTitle_1_1" text="1.1"/>
-        <text name="ui_helpTitle_2_1" text="2.1"/>
-        <text name="ui_helpTitle_3_1" text="3.1"/>
-        <text name="ui_helpTitle_4_1" text="4.1"/>
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement."/>
         <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvgarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu."/>
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance"/>

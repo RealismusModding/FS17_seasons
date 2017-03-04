@@ -71,7 +71,6 @@
         <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!"/>
         <text name="ui_pageOverview" text="Generali"/>
         <text name="ui_pageSettings" text="Impostazioni"/>
-        <text name="ui_pageHelp" text="Aiuto"/>
         <text name="ui_pageDebug" text="Tool di Debug"/>
         <text name="ui_buttonSave" text="Applica Impostazioni"/>
         <text name="ui_snowOneLayer" text="1 solo layer"/>
@@ -92,14 +91,6 @@
         <text name="setting_snowTracks" text="Tracce neve"/>
         <text name="setting_controlsTemperature" text="Scala temperatura"/>
         <text name="setting_moisture" text="Umidità raccolto"/>
-        <text name="ui_helpCategory_1" text="Seasons"/>
-        <text name="ui_helpCategory_2" text="Neve"/>
-        <text name="ui_helpCategory_3" text="Raccolti"/>
-        <text name="ui_helpCategory_4" text="Animali"/>
-        <text name="ui_helpTitle_1_1" text="1.1"/>
-        <text name="ui_helpTitle_2_1" text="2.1"/>
-        <text name="ui_helpTitle_3_1" text="3.1"/>
-        <text name="ui_helpTitle_4_1" text="4.1"/>
         <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora i settaggi di Seasons ? Cambiamenti nella lunghezza delle stagioni e crescita possono determinare problemi che si riparano solo dopo un anno/gioco."/>
         <text name="dialog_resetGrowth" text="Hai attivato Seasons su un savegame esistente. Seasons farà il reset di tutti i campi al suo stato nudo senza colture, per la sincronizzazione con il giorno di gioco. Perderai tutti i tuoi raccolti. Senza un reset della crescita, Seasons non si comporterà correttamente."/>
         <text name="dialog_resetGrowth_title" text="Reset crescita"/>

@@ -71,7 +71,6 @@
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!"/>
         <text name="ui_pageOverview" text="Обзор"/>
         <text name="ui_pageSettings" text="Настройки"/>
-        <text name="ui_pageHelp" text="Справка"/>
         <text name="ui_pageDebug" text="Инструменты отладки"/>
         <text name="ui_buttonSave" text="Применить"/>
         <text name="ui_snowOneLayer" text="Только 1 слой"/>
@@ -92,14 +91,6 @@
         <text name="setting_snowTracks" text="Следы на снегу"/>
         <text name="setting_controlsTemperature" text="Шкала температуры"/>
         <text name="setting_moisture" text="Влажный урожай"/>
-        <text name="ui_helpCategory_1" text="Сезоны"/>
-        <text name="ui_helpCategory_2" text="Снег"/>
-        <text name="ui_helpCategory_3" text="Культуры"/>
-        <text name="ui_helpCategory_4" text="Животные"/>
-        <text name="ui_helpTitle_1_1" text="1.1"/>
-        <text name="ui_helpTitle_2_1" text="2.1"/>
-        <text name="ui_helpTitle_3_1" text="3.1"/>
-        <text name="ui_helpTitle_4_1" text="4.1"/>
         <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона и настроек роста можно применить к полям, только по прошествии одного игрового года."/>
         <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом."/>
         <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур"/>
