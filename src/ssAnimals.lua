@@ -68,8 +68,6 @@ function ssAnimals:dayChanged()
         self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
         -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
         self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
-
-        g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
     end
 end
 
