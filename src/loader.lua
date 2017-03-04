@@ -9,17 +9,17 @@ local ssSeasonsMod = {}
 function log(...)
     if not g_seasons.verbose then return end
 
-    local str = "[Seasons] "
+    local str = "[Seasons]"
     for i = 1, select("#", ...) do
-        str = str .. tostring(select(i, ...))
+        str = str .. " " .. tostring(select(i, ...))
     end
     print(str)
 end
 
 function logInfo(...)
-    local str = "[Seasons] "
+    local str = "[Seasons]"
     for i = 1, select("#", ...) do
-        str = str .. tostring(select(i, ...))
+        str = str .. " " .. tostring(select(i, ...))
     end
     print(str)
 end
@@ -65,7 +65,7 @@ g_modClasses = {
     "ssIcePlane"
 }
 
-local isDebug = true--<%=debug %>
+local isDebug = false--<%=debug %>
 if isDebug then
     table.insert(g_modClasses, "ssDebug")
 end
