@@ -8,25 +8,29 @@
 ssAnimals = {}
 g_seasons.animals = ssAnimals
 
-source(g_seasons.modDir .. "src/events/ssAnimalsDataEvent.lua")
-
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
+
+    -- Load parameters
+    self:loadFromXML()
 
     if g_currentMission:getIsServer() then
-        g_seasons.environment:addSeasonLengthChangeListener(self)
         g_currentMission.environment:addDayChangeListener(self)
 
         self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
-
-        -- Load parameters
-        self:loadFromXML()
 
         -- Initial setup (it changed from nothing)
         self:adjustAnimals()
     end
 
+end
+
+function ssAnimals:readStream()
+    -- Adjust the client as well.
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
+    self:adjustAnimals()
 end
 
 function ssAnimals:loadFromXML()
@@ -43,42 +47,10 @@ function ssAnimals:loadFromXML()
     end
 end
 
-function ssAnimals:readStream(streamId, connection)
-    for typ, husb in pairs(g_currentMission.husbandries) do
-        local desc = husb.animalDesc
-
-        desc.birthRatePerDay = streamReadFloat32(streamId)
-        desc.foodPerDay = streamReadFloat32(streamId)
-        desc.liquidManurePerDay = streamReadFloat32(streamId)
-        desc.manurePerDay = streamReadFloat32(streamId)
-        desc.milkPerDay = streamReadFloat32(streamId)
-        desc.palletFillLevelPerDay = streamReadFloat32(streamId)
-        desc.strawPerDay = streamReadFloat32(streamId)
-        desc.waterPerDay = streamReadFloat32(streamId)
-    end
-end
-
-function ssAnimals:writeStream(streamId, connection)
-    for typ, husb in pairs(g_currentMission.husbandries) do
-        local desc = husb.animalDesc
-
-        streamWriteFloat32(streamId, desc.birthRatePerDay)
-        streamWriteFloat32(streamId, desc.foodPerDay)
-        streamWriteFloat32(streamId, desc.liquidManurePerDay)
-        streamWriteFloat32(streamId, desc.manurePerDay)
-        streamWriteFloat32(streamId, desc.milkPerDay)
-        streamWriteFloat32(streamId, desc.palletFillLevelPerDay)
-        streamWriteFloat32(streamId, desc.strawPerDay)
-        streamWriteFloat32(streamId, desc.waterPerDay)
-    end
-end
-
 function ssAnimals:seasonChanged()
     self:updateTroughs()
 
-    if g_currentMission:getIsServer() then
-        self:adjustAnimals()
-    end
+    self:adjustAnimals()
 end
 
 function ssAnimals:seasonLengthChanged()
@@ -129,7 +101,7 @@ function ssAnimals:adjustAnimals()
 
     self:updateTroughs()
 
-    g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
+    -- g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
 end
 
 function ssAnimals:updateTroughs()
