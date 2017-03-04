@@ -53,7 +53,8 @@ g_modClasses = {
     "ssReplaceVisual",
     "ssAnimals",
     "ssDensityMapScanner",
-    -- "ssViewController",
+    "ssHelpLines",
+
     "ssPedestrianSystem",
     "ssSwathManager",
     "ssBaleManager",

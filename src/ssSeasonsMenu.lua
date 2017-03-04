@@ -57,7 +57,7 @@ function ssSeasonsMenu:onOpen(element)
     self:updateDebugValues()
 
     -- Todo: get these values from the XML file. This is messy
-    local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings"), ssLang.getText("ui_pageHelp")}
+    local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings")}
     if g_seasons.debug then
         table.insert(titles, ssLang.getText("ui_pageDebug"))
     end
@@ -106,8 +106,6 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
         -- self:setNavButtonsFocusChange(FocusManager:getElementById("10"), FocusManager:getElementById("41_1"))
     elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
         self:setNavButtonsFocusChange(FocusManager:getElementById("200"), FocusManager:getElementById("221"))
-    elseif pageId == ssSeasonsMenu.PAGE_HELP then
-        -- self:setNavButtonsFocusChange(FocusManager:getElementById("800"), FocusManager:getElementById("800"))
     else
         self:setNavButtonsFocusChange(nil, nil)
     end
@@ -407,18 +405,6 @@ end
 function ssSeasonsMenu:onCreateMoistureToggle(element)
     self.settingElements.moisture = element
     self:replaceTexts(element)
-end
-
-------------------------------------------
--- HELP PAGE
-------------------------------------------
-
-function ssSeasonsMenu:onCreatePageHelp(element)
-    ssSeasonsMenu.PAGE_HELP = self.pagingElement:getPageIdByElement(element)
-
-    if self.helpLineTextElement == nil then
-        self.helpLineTextElement = element
-    end
 end
 
 ------------------------------------------

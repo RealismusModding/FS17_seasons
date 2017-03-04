@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<helpLines>
+    <helpLineCategory title="helpCategory_01">
+        <helpLine title="helpTitle_02">
+            <item type="text" value="helpText_02_part01"/>
+            <item type="image" value="dataS2/menu/helpline/helplineItem02_01.png"/>
+            <item type="text" value="helpText_02_part02"/>
+            <item type="image" value="dataS2/menu/helpline/helplineItem02_02.png"/>
+        </helpLine>
+        <helpLine title="helpTitle_03">
+            <item type="text" value="helpText_03_part01"/>
+            <item type="image" value="dataS2/menu/helpline/helplineItem03_01.png"/>
+        </helpLine>
+    </helpLineCategory>
+</helpLines>
+
+<!-- <item type="text" value="helpText_02_part01"/> -->
+<!-- <item type="image" value="dataS2/menu/helpline/helplineItem08_01.png"/> -->
+
