@@ -43,19 +43,19 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-    if g_currentMission:getIsServer() == true then
-        ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
-        ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
-        
-        local i = 0
-        for fruitName in pairs(self.willGerminate) do
-        
-            local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
-            log("fruitKey: " .. fruitKey)
-            setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
-            setXMLBool(savegame, fruitKey .. "#value", self.willGerminate[fruitName])
-            i = i+1
-        end
+
+
+    ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
+    ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
+    
+    local i = 0
+    for fruitName in pairs(self.willGerminate) do
+    
+        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
+        log("fruitKey: " .. fruitKey)
+        setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
+        setXMLBool(savegame, fruitKey .. "#value", self.willGerminate[fruitName])
+        i = i+1
     end
 end
 

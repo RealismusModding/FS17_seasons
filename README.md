@@ -14,7 +14,7 @@ This is not required when using the only official published mod by Realismis Mod
 
 ## Making videos
 Because this mod is WIP and not yet released we have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
-- Do not share the GitHub link. 
+- Do not share the GitHub link.
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
 - Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow),
@@ -41,16 +41,18 @@ For a better game experience, custom maps should add two new density layers: one
 ## Features
 
 ### Seasons
+- Changeable season lengths. (For best results, restart the game / server after changing season length)
 - Plowable snow in the winter! Reduced tire friction when driving in snow.
 - Soil temperature is properly modelled using thermnodynamic equations and historical data which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
-  - Snow and hail in winter. 
+  - Snow and hail in winter.
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
 - Pedestrians do not spawn in the Winter.
 - When snow falls, tippers and shovels fill up. Put them in a shed (when the map has a snow mask) or activate the cover.
 - Snow will melt from tippers and shovels when it is not freezing outside.
+- Bunker Silo contents now take one third of a season to fermentate.
 
 ### Weather forecast
 - 7 day weather forecast
@@ -63,9 +65,11 @@ For a better game experience, custom maps should add two new density layers: one
 - Growth is adjust to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
 - Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
+- Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
 - Swaths will reduce over time. Hay and straw can be stored inside a shed (if map is prepared with the snow mask) without any loss.
 - Grass bales will rot and disappear after two days. Hay and straw bales exposed to rain will start to rot so keep them inside.
-- Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur. 
+- Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
+- Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
@@ -89,6 +93,7 @@ For a better game experience, custom maps should add two new density layers: one
   - They need more straw in winter than in summer
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+- Animals die when they have no food. (Disabled on 'Easy')
 
 ### Warnings for gameplay
 - Do not fast forward faster than 6000x on singleplayer (preferable even slower)

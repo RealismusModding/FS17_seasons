@@ -75,6 +75,7 @@ end
 function ssEnvironment:readStream(streamId, connection)
     self.latitude = streamReadFloat32(streamId)
 
+    g_currentMission.environment.currentDay = streamReadInt32(streamId)
     self.daysInSeason = streamReadInt32(streamId)
     self.latestSeason = streamReadInt32(streamId)
     self.latestGrowthStage = streamReadInt32(streamId)
@@ -86,6 +87,7 @@ end
 function ssEnvironment:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.latitude)
 
+    streamWriteInt32(streamId, g_currentMission.environment.currentDay)
     streamWriteInt32(streamId, self.daysInSeason)
     streamWriteInt32(streamId, self.latestSeason)
     streamWriteInt32(streamId, self.latestGrowthStage)
@@ -190,7 +192,6 @@ function ssEnvironment:adaptTime()
 
     -- All local values are in minutes
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
-    -- local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(35) -- 15 = midsummer, 35 = midwinter
 
     -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
@@ -222,9 +223,7 @@ function ssEnvironment:adaptTime()
     env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
     env.rainFadeCurve = self:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
 
-    g_currentMission.environment.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
-
-    self.lastUpdate = self:currentDay()
+    env.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 end
 
 -- Output in hours

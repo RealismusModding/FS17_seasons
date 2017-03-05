@@ -9,17 +9,17 @@ local ssSeasonsMod = {}
 function log(...)
     if not g_seasons.verbose then return end
 
-    local str = "[Seasons] "
+    local str = "[Seasons]"
     for i = 1, select("#", ...) do
-        str = str .. tostring(select(i, ...))
+        str = str .. " " .. tostring(select(i, ...))
     end
     print(str)
 end
 
 function logInfo(...)
-    local str = "[Seasons] "
+    local str = "[Seasons]"
     for i = 1, select("#", ...) do
-        str = str .. tostring(select(i, ...))
+        str = str .. " " .. tostring(select(i, ...))
     end
     print(str)
 end
@@ -41,9 +41,6 @@ g_modClasses = {
     "ssUtil",
     "ssEnvironment",
 
-    "ssSwathManager",
-    "ssBaleManager",
-	"ssTreeManager",
     "ssEconomy",
     "ssWeatherManager",
     "ssWeatherForecast",
@@ -56,15 +53,20 @@ g_modClasses = {
     "ssReplaceVisual",
     "ssAnimals",
     "ssDensityMapScanner",
-    -- "ssViewController",
+    "ssHelpLines",
+
     "ssPedestrianSystem",
+    "ssSwathManager",
+    "ssBaleManager",
+    "ssTreeManager",
+    "ssBunkerSilo",
 
     "ssSnowAdmirer",
     "ssSeasonAdmirer",
     "ssIcePlane"
 }
 
-local isDebug = true--<%=debug %>
+local isDebug = false--<%=debug %>
 if isDebug then
     table.insert(g_modClasses, "ssDebug")
 end
@@ -166,3 +168,10 @@ FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
+
+------------------------------------------
+-- Fixes for Giants Vanilla game
+------------------------------------------
+
+-- Giants engine does not copy this unit to the mod g_i18n version
+g_i18n.moneyUnit = getfenv(0)["g_i18n"].moneyUnit

@@ -11,12 +11,13 @@ g_seasons.animals = ssAnimals
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
-    g_currentMission.environment:addDayChangeListener(self)
 
     -- Load parameters
     self:loadFromXML()
 
     if g_currentMission:getIsServer() then
+        g_currentMission.environment:addDayChangeListener(self)
+
         self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
         -- Initial setup (it changed from nothing)
@@ -25,10 +26,11 @@ function ssAnimals:loadMap(name)
 
 end
 
-function ssAnimals:load()
-    -- adjust animal values for varying season length
-    -- reference season length is 6 days
-    --self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+function ssAnimals:readStream()
+    -- Adjust the client as well.
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
+    self:adjustAnimals()
 end
 
 function ssAnimals:loadFromXML()
@@ -45,31 +47,29 @@ function ssAnimals:loadFromXML()
     end
 end
 
-function ssAnimals:readStream(streamId, connection)
-    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
-    -- Load after data for seasonUtils is loaded
-    self:adjustAnimals()
-end
-
 function ssAnimals:seasonChanged()
+    self:updateTroughs()
+
     self:adjustAnimals()
 end
 
 function ssAnimals:seasonLengthChanged()
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
     self:adjustAnimals()
 end
 
 function ssAnimals:dayChanged()
-    -- percentages for base season length = 6 days
-    -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-    self:killAnimals("cow", 0.15 * self.seasonLengthfactor)
-    -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-    self:killAnimals("sheep", 0.1 * self.seasonLengthfactor)
-    -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-    self:killAnimals("pig", 0.25 * self.seasonLengthfactor)
+    if g_currentMission:getIsServer() and g_currentMission.missionInfo.difficulty ~= 0 then
+        -- percentages for base season length = 6 days
+        -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
+        self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
+        self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
+        self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+    end
 end
-
 
 function ssAnimals:adjustAnimals()
     local season = g_seasons.environment:currentSeason()
@@ -97,6 +97,12 @@ function ssAnimals:adjustAnimals()
         end
     end
 
+    self:updateTroughs()
+
+    -- g_server:broadcastEvent(ssAnimalsDataEvent:new(g_currentMission.husbandries))
+end
+
+function ssAnimals:updateTroughs()
     if season == g_seasons.environment.SEASON_WINTER then
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
@@ -104,9 +110,6 @@ function ssAnimals:adjustAnimals()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
     end
-
-    -- FIXME send event to clients that stuff has changed?
-    -- broadcast event
 end
 
 -- animal: string, filltype: int, enabled: bool
@@ -129,9 +132,11 @@ function ssAnimals:killAnimals(animal,p)
 
     -- productivity at 0-10% means that they are not fed, but might have straw
     if tmpAnimal.productivity <= 0.1 then
-       local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
-       local tmpNumAnimals = tmpAnimal.totalNumAnimals
+        local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
+        local tmpNumAnimals = tmpAnimal.totalNumAnimals
 
-       g_currentMission.husbandries[animal].totalNumAnimals = math.max(tmpNumAnimals - killedAnimals, 0)
+        if killedAnimals > 0 then
+            g_currentMission.husbandries[animal]:removeAnimals(killedAnimals, 0)
+        end
     end
 end

@@ -98,41 +98,6 @@
                     </GuiElement>
                 </GuiElement>
 
-                <!-- Seasons Help -->
-                <GuiElement type="empty" profile="page" name="pageHelp" onCreate="onCreatePageHelp">
-                    <!-- Help categories -->
-                    <GuiElement type="multiTextOption" profile="multiTextOption" position="2px 522px" size="346px 36px" onClick="onClickHelpLineCategorySelector" onCreate="onCreateHelpLineCategorySelector" focusId="800" focusChangeTop="1" focusChangeBottom="801" >
-                        <GuiElement type="button" profile="multiTextOptionLeft" />
-                        <GuiElement type="button" profile="multiTextOptionRight"/>
-                        <GuiElement type="text"   profile="multiTextOptionText" />
-                        <GuiElement type="bitmap" profile="multiTextOptionBg" size="272px 36px" />
-                    </GuiElement>
-
-                    <!-- A slider for the help content -->
-                    <GuiElement type="slider" profile="helpLineSlider">
-                        <GuiElement type="button" profile="sliderButtonUp"   focusId="sliderUpHelp"/>
-                        <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownHelp" />
-
-                        <GuiElement type="list" profile="helpLineList" onScroll="onHelpLineListScroll" onSelectionChanged="onHelpLineListSelectionChanged" onDoubleClick="onHelpLineDoubleClick" focusId="801" focusChangeTop="800" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1" id="helpLineList">
-                            <GuiElement type="listItem" profile="helpLineListItem" id="helpLineListItemTemplate" >
-                                <GuiElement type="text" profile="helpLineListItemText" text="Help Line Title" />
-                                <GuiElement type="bitmap" profile="helpLineListItemTick" />
-                            </GuiElement>
-                        </GuiElement>
-                    </GuiElement>
-
-                    <GuiElement type="text"   profile="helpLineTitle" id="helpLineTitleElement" />
-
-                    <!-- Separator between help items and the actual help -->
-                    <GuiElement type="bitmap" profile="helpLineSeparator" />
-
-                    <!-- The help info -->
-                    <GuiElement type="boxLayout" profile="helpLineContentBox" id="helpLineContentBox">
-                        <GuiElement type="text"   profile="helpLineText"  onCreate="onCreateHelpLineText" />
-                        <GuiElement type="bitmap" profile="helpLineImage" onCreate="onCreateHelpLineImage" />
-                    </GuiElement>
-                </GuiElement>
-
                 <!-- Debug -->
                 <GuiElement type="empty" profile="page" name="pageDebug" onCreate="onCreatePageDebug">
                     <!-- Column 1 (Snow) -->

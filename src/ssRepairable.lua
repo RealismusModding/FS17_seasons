@@ -167,7 +167,7 @@ function ssRepairable:ssRepairUpdate(dt)
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
-            self:ssRepair(true, repairCost)
+            self:ssRepair(true, repairCost, vehicleName)
         else
             g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
         end
@@ -178,7 +178,7 @@ end
 -- @param showDialog True if you want a confirmation dialog shown
 -- @param cost Different cost. Keep nil for auto cost calculations
 -- @note This must only be called from an Update function.
-function ssRepairable:ssRepair(showDialog, cost)
+function ssRepairable:ssRepair(showDialog, cost, vehicleName)
     local repairCost = cost
     if cost == nil then
         cost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)

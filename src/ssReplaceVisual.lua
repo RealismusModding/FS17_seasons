@@ -144,7 +144,7 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                 local materialSrcId = findNodeByName(searchBase, secondaryNodeTable.replacementName)
 
                 if materialSrcId ~= nil then -- Can be defined in an other I3D file.
-                    log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
+                    -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
                     self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialId = getMaterial(materialSrcId, 0)
 
                     if self.textureReplacements.default[shapeName] == nil then
@@ -174,7 +174,7 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
         childShapeId = (findNodeByName(parentShapeId, secondaryNodeName))
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
-            log("Found materialID: " .. materialId .. " for childobject " ..  childShapeId .. ".")
+            -- log("Found materialID: " .. materialId .. " for childobject " ..  childShapeId .. ".")
         end
     end
 
@@ -190,7 +190,7 @@ function ssReplaceVisual:updateTextures(nodeId)
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do
 
             if secondaryNodeTable.materialId ~= nil then
-                log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
             end
         end
@@ -199,7 +199,7 @@ function ssReplaceVisual:updateTextures(nodeId)
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements.default[getName(nodeId)]) do
             -- MATERIALID is NULL for birch
             if secondaryNodeTable.materialId ~= nil then
-                log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
             end
         end
@@ -218,7 +218,7 @@ end
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     if getName(nodeId) == shapeName then
-        log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId) .. ".")
+        -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId) .. ".")
         setMaterial(nodeId, materialSrcId, 0)
     end
 

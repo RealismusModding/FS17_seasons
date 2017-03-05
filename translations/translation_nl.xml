@@ -78,8 +78,6 @@
         <text name="ui_pageOverview" text=""/>
         <!-- Missing translation of "Settings." -->
         <text name="ui_pageSettings" text=""/>
-        <!-- Missing translation of "Help." -->
-        <text name="ui_pageHelp" text=""/>
         <!-- Missing translation of "Debug Tools." -->
         <text name="ui_pageDebug" text=""/>
         <!-- Missing translation of "Apply Settings." -->
@@ -120,22 +118,6 @@
         <text name="setting_controlsTemperature" text=""/>
         <!-- Missing translation of "Crop moisture." -->
         <text name="setting_moisture" text=""/>
-        <!-- Missing translation of "Seasons." -->
-        <text name="ui_helpCategory_1" text=""/>
-        <!-- Missing translation of "Snow." -->
-        <text name="ui_helpCategory_2" text=""/>
-        <!-- Missing translation of "Crops." -->
-        <text name="ui_helpCategory_3" text=""/>
-        <!-- Missing translation of "Animals." -->
-        <text name="ui_helpCategory_4" text=""/>
-        <!-- Missing translation of "1.1." -->
-        <text name="ui_helpTitle_1_1" text=""/>
-        <!-- Missing translation of "2.1." -->
-        <text name="ui_helpTitle_2_1" text=""/>
-        <!-- Missing translation of "3.1." -->
-        <text name="ui_helpTitle_3_1" text=""/>
-        <!-- Missing translation of "4.1." -->
-        <text name="ui_helpTitle_4_1" text=""/>
         <!-- Missing translation of "Are you sure you want to change the Seasons settings? Changes to season length and growth can result in fields that will only repair after one game-year.." -->
         <text name="dialog_applySettings" text=""/>
         <!-- Missing translation of "You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected.." -->

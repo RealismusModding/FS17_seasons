@@ -139,7 +139,7 @@ function writeXML(xml, path) {
 //////////////////////////////////////////
 
 function main(args) {
-    const languages = ["cz", "de", "en", "es", "fr", "it", "nl", "pl", "ru", "se", "no"];
+    const languages = ["cz", "de", "en", "es", "fr", "it", "nl", "pl", "ru"];
 
     // Reading XML
     Promise.reduce(languages, (result, language) => {
