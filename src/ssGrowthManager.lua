@@ -356,8 +356,8 @@ function ssGrowthManager:updateDefaultFruitsData(fruitName)
     log("ssGrowthManager:updateDefaultFruitsData(fruitName) before")
     print_r(self.defaultFruitsData)
 
-    --add fruit to default fruits
     table.insert(self.defaultFruitsData,fruitName)
+
     log("ssGrowthManager:updateDefaultFruitsData(fruitName) after")
     print_r(self.defaultFruitsData)
 end
@@ -365,24 +365,32 @@ end
 function ssGrowthManager:updateCanPlantData(fruitName)
     log("ssGrowthManager:updateCanPlantData(fruitName) before")
     print_r(self.canPlantData)
-    --copy barley values for index fruitName
+
     table.insert(self.canPlantData,self.canPlantData[self.fruitNameToCopyForUnknownFruits], fruitName)
+
     log("ssGrowthManager:updateCanPlantData(fruitName) after")
     print_r(self.canPlantData)
     
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
-    log("ssGrowthManager:updateGrowthData(fruitName)")
+    log("ssGrowthManager:updateGrowthData(fruitName) before")
     print_r(self.growthData)
-    --copy barley values for index fruitName
+
+    for growthTransition, fruit in pairs(self.growthData)
+        table.insert(self.growthData[growthTransition], self.growthTransition[growthTransition][self.fruitNameToCopyForUnknownFruits], fruitName)
+    end
+
+    log("ssGrowthManager:updateGrowthData(fruitName) after")
+    print_r(self.growthData)
 end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
     log("ssGrowthManager:updateWillGerminateData(fruitName) before")
     print_r(self.willGerminateData)
-    --copy barley values for index fruitName
+
     self.willGerminateData[fruitName] = self.willGerminate[self.fruitNameToCopyForUnknownFruits]
+    
     log("ssGrowthManager:updateWillGerminateData(fruitName) after")
     print_r(self.willGerminateData)
 end
