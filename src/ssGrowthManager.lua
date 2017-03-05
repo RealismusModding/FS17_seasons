@@ -378,7 +378,9 @@ function ssGrowthManager:updateGrowthData(fruitName)
     print_r(self.growthData)
 
     for growthTransition, fruit in pairs(self.growthData)
-        table.insert(self.growthData[growthTransition], self.growthTransition[growthTransition][self.fruitNameToCopyForUnknownFruits], fruitName)
+        if self.growthData[growthTransition][self.fruitNameToCopyForUnknownFruits] ~ nil then
+            table.insert(self.growthData[growthTransition], self.growthTransition[growthTransition][self.fruitNameToCopyForUnknownFruits], fruitName)
+        end
     end
 
     log("ssGrowthManager:updateGrowthData(fruitName) after")
@@ -390,7 +392,7 @@ function ssGrowthManager:updateWillGerminateData(fruitName)
     print_r(self.willGerminateData)
 
     self.willGerminateData[fruitName] = self.willGerminate[self.fruitNameToCopyForUnknownFruits]
-    
+
     log("ssGrowthManager:updateWillGerminateData(fruitName) after")
     print_r(self.willGerminateData)
 end
