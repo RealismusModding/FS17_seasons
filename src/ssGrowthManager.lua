@@ -363,9 +363,12 @@ function ssGrowthManager:updateDefaultFruitsData(fruitName)
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
-    log("ssGrowthManager:updateCanPlantData(fruitName)")
+    log("ssGrowthManager:updateCanPlantData(fruitName) before")
     print_r(self.canPlantData)
     --copy barley values for index fruitName
+    table.insert(self.canPlantData,self.canPlantData[self.fruitNameToCopyForUnknownFruits], fruitName)
+    log("ssGrowthManager:updateCanPlantData(fruitName) after")
+    print_r(self.canPlantData)
     
 end
 
