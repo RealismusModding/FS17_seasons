@@ -41,7 +41,6 @@ function ssGrowthManager:load(savegame, key)
         
         i = i + 1
     end
-    --print_r(self.willGerminate)
 end
 
 function ssGrowthManager:save(savegame, key)
@@ -173,6 +172,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         if self.defaultFruits[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
             fruitName = "barley"
+            self:unknownFruitFound(fruitName)
         end
 
         if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
@@ -341,5 +341,24 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
         end
     end
     return newGrowthState
+end
+
+function ssGrowthManager:unknownFruitFound(fruitName)
+    --update default fruits
+    --update canPlantData
+    --update growthData
+    --update willGerminate
+end
+
+function ssGrowthManager:updateDefaultFruits(fruitName)
+end
+
+function ssGrowthManager:updateCanPlantData(fruitName)
+end
+
+function ssGrowthManager:updateGrowthData(fruitName)
+end
+
+function ssGrowthManager:updateWillGerminateData(fruitName)
 end
 
