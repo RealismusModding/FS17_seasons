@@ -18,7 +18,7 @@ ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.canPlantData = {}
-ssGrowthManager.willGerminate = {}
+ssGrowthManager.willGerminateData = {}
 
 ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doResetGrowth = false
@@ -34,11 +34,11 @@ function ssGrowthManager:load(savegame, key)
     
     local i = 0
     while true do
-        local fruitKey = string.format("%s.growthManager.willGerminateData.fruit(%i)", key, i)
+        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
         if not hasXMLProperty(savegame, fruitKey) then break end
 
         local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
-        self.willGerminate[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+        self.willGerminateData[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
         
         i = i + 1
     end
@@ -368,6 +368,6 @@ end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
     log("ssGrowthManager:updateWillGerminateData(fruitName)")
-    print_r(self.willGerminate)
+    print_r(self.willGerminateData)
 end
 
