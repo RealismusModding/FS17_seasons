@@ -8,18 +8,20 @@
 ssGrowthManager = {}
 g_seasons.growthManager = ssGrowthManager
 
+-- constants
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
 ssGrowthManager.CUT = 200
 ssGrowthManager.WITHERED = 300
-
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
-
+ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
+-- data
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.canPlantData = {}
 ssGrowthManager.willGerminateData = {}
 
+-- properties 
 ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doResetGrowth = false
 
@@ -142,7 +144,7 @@ function ssGrowthManager:growthStageChanged()
     end
 end
 
--- reset the willGerminate and rebuild it based on the current transition
+-- reset the willGerminateData and rebuild it based on the current transition
 -- called just after growthStageChanged
 function ssGrowthManager:rebuildWillGerminateData()
     self.willGerminateData = {}
@@ -172,10 +174,9 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
-            fruitName = "barley"
-            self:unknownFruitFound(fruitName)
+            fruitName = self.fruitNameToCopyForUnknownFruits
         end
-
+        
         if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
             --setGrowthState
             if self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState ~= nil
@@ -345,29 +346,46 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
 end
 
 function ssGrowthManager:unknownFruitFound(fruitName)
-    self:updatedefaultFruitsData(fruitName)
-    self:updateCanPlantData(fruitName)
+    self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
+    self:updateCanPlantData(fruitName)
     self:updateWillGerminateData(fruitName)
 end
 
-function ssGrowthManager:updatedefaultFruitsData(fruitName)
-    log("ssGrowthManager:updatedefaultFruitsData(fruitName)")
-    print_r(self.defaultFruits)
+function ssGrowthManager:updateDefaultFruitsData(fruitName)
+    log("ssGrowthManager:updateDefaultFruitsData(fruitName) before")
+    print_r(self.defaultFruitsData)
+
+    --add fruit to default fruits
+    table.insert(self.defaultFruitsData,fruitName)
+    log("ssGrowthManager:updateDefaultFruitsData(fruitName) after")
+    print_r(self.defaultFruitsData)
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
     log("ssGrowthManager:updateCanPlantData(fruitName)")
     print_r(self.canPlantData)
+    --copy barley values for index fruitName
+    
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
     log("ssGrowthManager:updateGrowthData(fruitName)")
     print_r(self.growthData)
+    --copy barley values for index fruitName
 end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
-    log("ssGrowthManager:updateWillGerminateData(fruitName)")
+    log("ssGrowthManager:updateWillGerminateData(fruitName) before")
+    print_r(self.willGerminateData)
+    --copy barley values for index fruitName
+    self.willGerminateData[fruitName] = self.willGerminate[self.fruitNameToCopyForUnknownFruits]
+    log("ssGrowthManager:updateWillGerminateData(fruitName) after")
     print_r(self.willGerminateData)
 end
 
+function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
+    if (unicode == 47) then
+        self:unknownFruitFound("newFruitTest")
+    end
+end
