@@ -15,13 +15,14 @@ ssGrowthManager.WITHERED = 300
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 
-ssGrowthManager.defaultFruits = {}
+ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
+ssGrowthManager.canPlantData = {}
+ssGrowthManager.willGerminate = {}
+
 ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doResetGrowth = false
 
-ssGrowthManager.canPlantData = {}
-ssGrowthManager.willGerminate = {}
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
@@ -33,7 +34,7 @@ function ssGrowthManager:load(savegame, key)
     
     local i = 0
     while true do
-        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
+        local fruitKey = string.format("%s.growthManager.willGerminateData.fruit(%i)", key, i)
         if not hasXMLProperty(savegame, fruitKey) then break end
 
         local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
@@ -50,12 +51,12 @@ function ssGrowthManager:save(savegame, key)
     ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
     
     local i = 0
-    for fruitName in pairs(self.willGerminate) do
+    for fruitName in pairs(self.willGerminateData) do
     
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
         log("fruitKey: " .. fruitKey)
         setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
-        setXMLBool(savegame, fruitKey .. "#value", self.willGerminate[fruitName])
+        setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[fruitName])
         i = i+1
     end
 end
@@ -81,7 +82,7 @@ function ssGrowthManager:loadMap(name)
         
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
-        self:buildCanPlantData(self.defaultFruits)
+        self:buildCanPlantData(self.defaultFruitsData)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
         self:dayChanged()
     end
@@ -89,10 +90,10 @@ end
 
 
 function ssGrowthManager:getGrowthData()
-    local defaultFruits,growthData = ssGrowthManagerData:loadAllData()
+    local defaultFruitsData,growthData = ssGrowthManagerData:loadAllData()
 
-    if defaultFruits ~= nil then
-        self.defaultFruits = Set(defaultFruits)
+    if defaultFruitsData ~= nil then
+        self.defaultFruitsData = Set(defaultFruitsData)
     else
         logInfo("ssGrowthManager: default fruits data not found")
         return false
@@ -144,22 +145,22 @@ end
 -- reset the willGerminate and rebuild it based on the current transition
 -- called just after growthStageChanged
 function ssGrowthManager:rebuildWillGerminateData()
-    self.willGerminate = {}
+    self.willGerminateData = {}
     self:dayChanged()    
 end
 
 -- handle dayChanged event 
--- check if canSow and update willGerminate accordingly
+-- check if canSow and update willGerminateData accordingly
 function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
-            self.willGerminate[fruitName] = ssWeatherManager:canSow(fruitName)
+            self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
             --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
     --print_r(self.canPlantData)
-    --log("Printing willGerminate")
-    --print_r(self.willGerminate)
+    --log("Printing willGerminateData")
+    --print_r(self.willGerminateData)
 end
 
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
@@ -169,7 +170,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
 
         --handling new unknown fruits
-        if self.defaultFruits[fruitName] == nil then
+        if self.defaultFruitsData[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
             fruitName = "barley"
             self:unknownFruitFound(fruitName)
@@ -227,7 +228,7 @@ end
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthState
-    if minState == 1 and self.willGerminate[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
+    if minState == 1 and self.willGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
         return
     end
 
@@ -344,21 +345,29 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
 end
 
 function ssGrowthManager:unknownFruitFound(fruitName)
-    --update default fruits
-    --update canPlantData
-    --update growthData
-    --update willGerminate
+    self:updatedefaultFruitsData(fruitName)
+    self:updateCanPlantData(fruitName)
+    self:updateGrowthData(fruitName)
+    self:updateWillGerminateData(fruitName)
 end
 
-function ssGrowthManager:updateDefaultFruits(fruitName)
+function ssGrowthManager:updatedefaultFruitsData(fruitName)
+    log("ssGrowthManager:updatedefaultFruitsData(fruitName)")
+    print_r(self.defaultFruits)
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
+    log("ssGrowthManager:updateCanPlantData(fruitName)")
+    print_r(self.canPlantData)
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
+    log("ssGrowthManager:updateGrowthData(fruitName)")
+    print_r(self.growthData)
 end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
+    log("ssGrowthManager:updateWillGerminateData(fruitName)")
+    print_r(self.willGerminate)
 end
 
