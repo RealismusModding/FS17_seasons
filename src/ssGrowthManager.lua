@@ -39,7 +39,7 @@ function ssGrowthManager:load(savegame, key)
         
         i = i + 1
     end
-    print_r(self.willGerminate)
+    --print_r(self.willGerminate)
 end
 
 function ssGrowthManager:save(savegame, key)
