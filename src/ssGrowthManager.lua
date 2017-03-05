@@ -28,7 +28,9 @@ function ssGrowthManager:load(savegame, key)
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
     self.currentGrowthTransitionPeriod = ssStorage.getXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", 0)
-
+    
+    if savegame == nil then return end
+    
     local i = 0
     while true do
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
