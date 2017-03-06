@@ -6,6 +6,10 @@
 
 local ssSeasonsMod = {}
 
+------------------------------------------
+-- quickly needed utility functions
+------------------------------------------
+
 function log(...)
     if not g_seasons.verbose then return end
 
@@ -30,51 +34,8 @@ function logStack()
     print(debug.traceback())
 end
 
-local srcFolder = g_currentModDirectory .. "src/"
-local files = {
-    "utils/ssLang",
-    "utils/ssStorage",
-    "utils/ssSeasonsXML",
-    "ssMultiplayer",
-
-    "ssMain",
-    "utils/ssUtil",
-    "environment/ssEnvironment",
-
-    "misc/ssEconomy",
-    "environment/ssWeatherManager",
-    "environment/ssWeatherForecast",
-    "vehicles/ssVehicle",
-    "misc/ssFieldJobManager",
-    "growth/ssFruitManager",
-    "growth/ssGrowthManagerData",
-    "growth/ssGrowthManager",
-    "environment/ssSnow",
-    "gui/ssSeasonIntro",
-    "environment/ssReplaceVisual",
-    "misc/ssAnimals",
-    "utils/ssDensityMapScanner",
-    "gui/ssHelpLines",
-
-    "misc/ssPedestrianSystem",
-    "misc/ssSwathManager",
-    "misc/ssBaleManager",
-    "misc/ssTreeManager",
-
-    "objects/ssBunkerSilo",
-
-    "objects/ssSnowAdmirer",
-    "objects/ssSeasonAdmirer",
-    "objects/ssIcePlane"
-}
-
-local isDebug = false--<%=debug %>
-if isDebug then
-    table.insert(files, "utils/ssDebug")
-end
-
 -- http://lua-users.org/wiki/SplitJoin
-function split(str, pat)
+local function split(str, pat)
     local t = {}  -- NOTE: use {n = 0} in Lua-5.0
     local fpat = "(.-)" .. pat
     local last_end = 1
@@ -97,6 +58,63 @@ function split(str, pat)
     return t
 end
 
+------------------------------------------
+-- file loading
+------------------------------------------
+
+local srcFolder = g_currentModDirectory .. "src/"
+local files = {
+    -- Utilities
+    "utils/ssLang",
+    "utils/ssStorage",
+    "utils/ssSeasonsXML",
+
+    -- Main system
+    "ssMultiplayer",
+    "ssMain",
+
+    "utils/ssUtil",
+    "environment/ssEnvironment",
+
+    "misc/ssEconomy",
+    "environment/ssWeatherManager",
+    "environment/ssWeatherForecast",
+    "vehicles/ssVehicle",
+    "misc/ssFieldJobManager",
+    "growth/ssFruitManager",
+    "growth/ssGrowthManagerData",
+    "growth/ssGrowthManager",
+    "environment/ssSnow",
+    "gui/ssSeasonIntro",
+    "environment/ssReplaceVisual",
+    "misc/ssAnimals",
+    "utils/ssDensityMapScanner",
+
+    -- Adjustments to the game
+    "misc/ssPedestrianSystem",
+    "misc/ssSwathManager",
+    "misc/ssBaleManager",
+    "misc/ssTreeManager",
+
+    -- Adjusted objects
+    "objects/ssBunkerSilo",
+
+    -- New objects
+    "objects/ssSnowAdmirer",
+    "objects/ssSeasonAdmirer",
+    "objects/ssIcePlane",
+
+    -- GUI
+    "gui/ssHelpLines",
+    "gui/ssSeasonsMenu"
+}
+
+local isDebug = false--<%=debug %>
+if isDebug then
+    table.insert(files, "utils/ssDebug")
+end
+
+-- Classes used for automation of loading and multiplayer
 g_modClasses = {}
 for _, path in pairs(files) do
     local theSplit = split(path, "[\\/]+")
@@ -110,15 +128,10 @@ for i, path in pairs(files) do
 
     local class = g_modClasses[i]
 
-    if _G[class].preLoad ~= nil then
+    if _G[class] ~= nil and _G[class].preLoad ~= nil then
         _G[class]:preLoad()
     end
 end
-
--- The menu is not a proper class.
-source(srcFolder .. "gui/ssSeasonsMenu.lua")
-
-print_r(g_modClasses)
 
 ------------------------------------------
 -- base mission encapsulation functions
@@ -136,7 +149,7 @@ function ssSeasonsMod.loadMapFinished(...)
     -- Before loading the savegame, allow classes to set their default values
     -- and let the settings system know that they need values
     for _, k in pairs(g_modClasses) do
-        if _G[k].loadMap ~= nil then
+        if _G[k] ~= nil and _G[k].loadMap ~= nil then
             -- Set any missing functions with dummies. This is because it makes code in classes cleaner
             for _, method in pairs(requiredMethods) do
                 if _G[k][method] == nil then
@@ -171,7 +184,7 @@ function ssSeasonsMod:loadFromXML(...)
     -- Empty, is solved by ssStorage. Useful for loading defaults
 
     for _, k in pairs(g_modClasses) do
-        if _G[k].load ~= nil then
+        if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].load ~= nil then
             _G[k].load(_G[k], xmlFile, "careerSavegame.ssSeasons")
         end
     end
@@ -185,7 +198,7 @@ local function ssSeasonsModSaveToXML(self)
     if g_seasons.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
             for _, k in pairs(g_modClasses) do
-                if _G[k].save ~= nil then
+                if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].save ~= nil then
                     _G[k].save(_G[k], self.xmlFile, self.xmlKey .. ".ssSeasons")
                 end
             end
