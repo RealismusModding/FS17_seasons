@@ -133,6 +133,3 @@ not be able to publish this Mod anymore.
 If you lose your savegame or if your computer crashes due to our Mod, you can tell us and we will
 attempt to fix the mod but we will not be paying for a new computer nor getting your savegame back.
 (Make backups!)
-
-
-
