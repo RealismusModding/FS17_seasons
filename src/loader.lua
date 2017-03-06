@@ -31,50 +31,84 @@ function logStack()
 end
 
 local srcFolder = g_currentModDirectory .. "src/"
-g_modClasses = {
-    "ssLang",
-    "ssStorage",
-    "ssSeasonsXML",
+local files = {
+    "utils/ssLang",
+    "utils/ssStorage",
+    "utils/ssSeasonsXML",
     "ssMultiplayer",
 
     "ssMain",
-    "ssUtil",
-    "ssEnvironment",
+    "utils/ssUtil",
+    "environment/ssEnvironment",
 
-    "ssEconomy",
-    "ssWeatherManager",
-    "ssWeatherForecast",
-    "ssVehicle",
-    "ssFieldJobManager",
-    "ssFruitManager",
-    "ssGrowthManagerData",
-    "ssGrowthManager",
-    "ssSnow",
-    "ssSeasonIntro",
-    "ssReplaceVisual",
-    "ssAnimals",
-    "ssDensityMapScanner",
-    "ssHelpLines",
+    "misc/ssEconomy",
+    "environment/ssWeatherManager",
+    "environment/ssWeatherForecast",
+    "vehicles/ssVehicle",
+    "misc/ssFieldJobManager",
+    "growth/ssFruitManager",
+    "growth/ssGrowthManagerData",
+    "growth/ssGrowthManager",
+    "environment/ssSnow",
+    "gui/ssSeasonIntro",
+    "environment/ssReplaceVisual",
+    "misc/ssAnimals",
+    "utils/ssDensityMapScanner",
+    "gui/ssHelpLines",
 
-    "ssPedestrianSystem",
-    "ssSwathManager",
-    "ssBaleManager",
-    "ssTreeManager",
-    "ssBunkerSilo",
+    "misc/ssPedestrianSystem",
+    "misc/ssSwathManager",
+    "misc/ssBaleManager",
+    "misc/ssTreeManager",
 
-    "ssSnowAdmirer",
-    "ssSeasonAdmirer",
-    "ssIcePlane"
+    "objects/ssBunkerSilo",
+
+    "objects/ssSnowAdmirer",
+    "objects/ssSeasonAdmirer",
+    "objects/ssIcePlane"
 }
 
 local isDebug = false--<%=debug %>
 if isDebug then
-    table.insert(g_modClasses, "ssDebug")
+    table.insert(files, "utils/ssDebug")
+end
+
+-- http://lua-users.org/wiki/SplitJoin
+function split(str, pat)
+    local t = {}  -- NOTE: use {n = 0} in Lua-5.0
+    local fpat = "(.-)" .. pat
+    local last_end = 1
+    local s, e, cap = str:find(fpat, 1)
+
+    while s do
+        if s ~= 1 or cap ~= "" then
+            table.insert(t,cap)
+        end
+
+        last_end = e+1
+        s, e, cap = str:find(fpat, last_end)
+    end
+
+    if last_end <= #str then
+        cap = str:sub(last_end)
+        table.insert(t, cap)
+    end
+
+    return t
+end
+
+g_modClasses = {}
+for _, path in pairs(files) do
+    local theSplit = split(path, "[\\/]+")
+
+    table.insert(g_modClasses, theSplit[table.getn(theSplit)])
 end
 
 -- Load all scripts
-for _, class in pairs(g_modClasses) do
-    source(srcFolder .. class .. ".lua")
+for i, path in pairs(files) do
+    source(srcFolder .. path .. ".lua")
+
+    local class = g_modClasses[i]
 
     if _G[class].preLoad ~= nil then
         _G[class]:preLoad()
@@ -82,8 +116,9 @@ for _, class in pairs(g_modClasses) do
 end
 
 -- The menu is not a proper class.
-source(srcFolder .. "ssSeasonsMenu.lua")
+source(srcFolder .. "gui/ssSeasonsMenu.lua")
 
+print_r(g_modClasses)
 
 ------------------------------------------
 -- base mission encapsulation functions
