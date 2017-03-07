@@ -120,9 +120,9 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
             logInfo("ssGrowthManagerData: getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
         end
 
-        --if additionalData ~= true then TODO: check if fruit exists, overwrite, or create new table or leave it like this - it overwrites
-            growthData[growthTransitionNum][fruitName] = {}
-        --end
+        
+        growthData[growthTransitionNum][fruitName] = {}
+        
         growthData[growthTransitionNum][fruitName].fruitName = fruitName
 
         local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState")

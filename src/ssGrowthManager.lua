@@ -174,7 +174,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
             log("Fruit not found in default table: " .. fruitName)
-            fruitName = self.fruitNameToCopyForUnknownFruits
+            self:unknownFruitFound(fruitName)
         end
         
         if self.growthData[self.currentGrowthTransitionPeriod][fruitName] ~= nil then
@@ -353,52 +353,28 @@ function ssGrowthManager:unknownFruitFound(fruitName)
 end
 
 function ssGrowthManager:updateDefaultFruitsData(fruitName)
-    log("ssGrowthManager:updateDefaultFruitsData(fruitName) before")
-    print_r(self.defaultFruitsData)
-
-    table.insert(self.defaultFruitsData,fruitName)
-
-    log("ssGrowthManager:updateDefaultFruitsData(fruitName) after")
-    print_r(self.defaultFruitsData)
+    self.defaultFruitsData[fruitName] = true
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
-    log("ssGrowthManager:updateCanPlantData(fruitName) before")
-    print_r(self.canPlantData)
-
-    table.insert(self.canPlantData,self.canPlantData[self.fruitNameToCopyForUnknownFruits], fruitName)
-
-    log("ssGrowthManager:updateCanPlantData(fruitName) after")
-    print_r(self.canPlantData)
-    
+    self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.fruitNameToCopyForUnknownFruits])
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
-    log("ssGrowthManager:updateGrowthData(fruitName) before")
-    print_r(self.growthData)
-
-    for growthTransition, fruit in pairs(self.growthData)
-        if self.growthData[growthTransition][self.fruitNameToCopyForUnknownFruits] ~ nil then
-            table.insert(self.growthData[growthTransition], self.growthTransition[growthTransition][self.fruitNameToCopyForUnknownFruits], fruitName)
+    for growthTransition, fruit in pairs(self.growthData) do
+        if self.growthData[growthTransition][self.fruitNameToCopyForUnknownFruits] ~= nil then
+            self.growthData[growthTransition][fruitName] = Utils.copyTable(self.growthData[growthTransition][self.fruitNameToCopyForUnknownFruits])
+            self.growthData[growthTransition][fruitName].fruitName = fruitName
         end
     end
-
-    log("ssGrowthManager:updateGrowthData(fruitName) after")
-    print_r(self.growthData)
 end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
-    log("ssGrowthManager:updateWillGerminateData(fruitName) before")
-    print_r(self.willGerminateData)
-
-    self.willGerminateData[fruitName] = self.willGerminate[self.fruitNameToCopyForUnknownFruits]
-
-    log("ssGrowthManager:updateWillGerminateData(fruitName) after")
-    print_r(self.willGerminateData)
+    self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
 end
 
-function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 47) then
-        self:unknownFruitFound("newFruitTest")
-    end
-end
+-- function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
+--     if (unicode == 47) then
+--         self:unknownFruitFound("newFruitTest")
+--     end
+-- end
