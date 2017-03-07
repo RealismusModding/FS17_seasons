@@ -58,7 +58,7 @@ For a better game experience, custom maps should add two new density layers: one
 - 7 day weather forecast
 
 ### Crops
-- Vanilla growth is completely disabled. The mod controls all growth of fruits, except for normal trees at this point in time
+- Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
 - Grass is knocked back to stage 1 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
