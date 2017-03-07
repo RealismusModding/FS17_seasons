@@ -73,7 +73,8 @@ For a better game experience, custom maps should add two new density layers: one
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them 
-- Plants are only harvestable in the final growth stage
+- Plants are only harvestable in the final growth stage, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
+
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
