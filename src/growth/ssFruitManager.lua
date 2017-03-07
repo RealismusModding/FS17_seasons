@@ -8,19 +8,19 @@
 ssFruitManager = {}
 
 ssFruitManager.harvestStagesUpdated = false
+ssFruitManager.fruitsToExclude = {}
 
---blank function needed
 function ssFruitManager:loadMap(name)
-    self.fruitsToUpdate = {}
-    self.fruitsToUpdate[FruitUtil.FRUITTYPE_POPLAR] = true
-    self.fruitsToUpdate[FruitUtil.FRUITTYPE_OILSEEDRADISH] = true
-    self.fruitsToUpdate[FruitUtil.FRUITTYPE_DRYGRASS] = true
-    self.fruitsToUpdate[FruitUtil.FRUITTYPE_SUGARBEET] = true
-    self.fruitsToUpdate[FruitUtil.FRUITTYPE_POTATO] = true
+   
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_POPLAR] = true
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_OILSEEDRADISH] = true
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_DRYGRASS] = true
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_SUGARBEET] = true
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_POTATO] = true
 end
 
 function ssFruitManager:update(dt)
-    if not ssFruitManager.harvestStagesUpdated then
+    if ssFruitManager.harvestStagesUpdated == false then
         self:updateHarvestStages()
         self.harvestStagesUpdated = true
     end
@@ -30,7 +30,7 @@ function ssFruitManager:updateHarvestStages()
     for index,fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
 
-        if self:fruitShouldBeUpdated(index) then
+        if self:fruitShouldBeUpdated(index) == true then
             -- Minimize the time a crop can be harvested (1 stage, not ~3)
             FruitUtil.fruitIndexToDesc[index].minHarvestingGrowthState = FruitUtil.fruitIndexToDesc[index].maxHarvestingGrowthState
         end
@@ -38,5 +38,5 @@ function ssFruitManager:updateHarvestStages()
 end
 
 function ssFruitManager:fruitShouldBeUpdated(index)
-    return self.fruitsToUpdate[index] == true
+    return self.fruitsToExclude[index] ~= true
 end
