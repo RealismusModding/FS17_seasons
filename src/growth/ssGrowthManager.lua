@@ -15,6 +15,7 @@ ssGrowthManager.WITHERED = 300
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
+
 -- data
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
@@ -47,18 +48,16 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-
-
     ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
     ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
 
     local i = 0
-
     for fruitName in pairs(self.willGerminateData) do
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
-        log("fruitKey: " .. fruitKey)
+
         setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
         setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[fruitName])
+        
         i = i+1
     end
 end

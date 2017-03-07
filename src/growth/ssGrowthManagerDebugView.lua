@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------------
--- VIEW CONTROLLER SCRIPT
+-- ssGrowthManagerDebugView SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  to help debug growth
 -- Authors:  theSeb
@@ -28,10 +28,11 @@ ssGrowthManagerDebugView.debugView = false
 
 function ssGrowthManagerDebugView:loadMap(name)
     --self:growthTransitionsDisplayData() --for testing only right now
+    addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
 end
 
-function ssGrowthManagerDebugView:keyEvent(unicode, sym, modifier, isDown)
-    if (unicode == 47) then
+function ssGrowthDebugView:consoleCommandDebugView()
+    if g_currentMission:getIsServer() then
         if self.debugView == false then
             self.debugView = true
         else
