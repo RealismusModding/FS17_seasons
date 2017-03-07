@@ -18,7 +18,7 @@ end
 function ssBaleManager:reduceFillLevel()
     for index,object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
-        if object:isa(Bale) then
+        if object.className == "Bale" then
 
             -- wrapped bales are not affected
             if object.item.wrappingState ~= 1 then
@@ -89,7 +89,7 @@ end
 
 function ssBaleManager:removeBale()
     for index,object in pairs(g_currentMission.itemsToSave) do
-        if object:isa(Bale) then
+        if object.className == "Bale" then
             if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
                 local volume = math.huge
 
@@ -128,13 +128,15 @@ end
 function ssBaleManager:incrementBaleAge()
     for index,object in pairs(g_currentMission.itemsToSave) do
 
-        if object:isa(Bale) then
+        if object.className == "Bale" then
+
             if object.item.age ~= nil then
                 local yesterdayAge = object.item.age
                 object.item.age = yesterdayAge + 1
             else
                 object.item.age = 0
             end
+
         end
     end
 end
