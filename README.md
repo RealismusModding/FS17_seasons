@@ -69,7 +69,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Swaths will reduce over time.
 - Grass bales will rot and disappear after two days. 
 - Hay and straw bales exposed to rain will start to rot so keep them inside.
-- Silage bales needs time to ferment before turned into silage
+- Wrapped bales needs time to ferment before they are turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them 
