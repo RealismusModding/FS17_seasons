@@ -18,29 +18,30 @@ end
 function ssBaleManager:reduceFillLevel()
     for index,object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
-        if object.className == "Bale" then
+        if object.item:isa(Bale) then
+            local bale = object.item
 
             -- wrapped bales are not affected
-            if object.item.wrappingState ~= 1 then
+            if bale.wrappingState ~= 1 then
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
                 if ssSnow.snowMaskId ~= nil then
                     local dim = {}
 
-                    if object.item.baleDiameter ~= nil then
-                        dim.width = object.item.baleWidth
-                        dim.length = object.item.baleDiameter
+                    if bale.baleDiameter ~= nil then
+                        dim.width = bale.baleWidth
+                        dim.length = bale.baleDiameter
                     else
-                        dim.width = object.item.baleWidth
-                        dim.length = object.item.baleLength
+                        dim.width = bale.baleWidth
+                        dim.length = bale.baleLength
                     end
 
-                    local x0 = object.item.sendPosX + dim.width
-                    local x1 = object.item.sendPosX - dim.width
-                    local x2 = object.item.sendPosX + dim.width
-                    local z0 = object.item.sendPosZ - dim.length
-                    local z1 = object.item.sendPosZ - dim.length
-                    local z2 = object.item.sendPosZ + dim.length
+                    local x0 = bale.sendPosX + dim.width
+                    local x1 = bale.sendPosX - dim.width
+                    local x2 = bale.sendPosX + dim.width
+                    local z0 = bale.sendPosZ - dim.length
+                    local z1 = bale.sendPosZ - dim.length
+                    local z2 = bale.sendPosZ + dim.length
 
                     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
 
@@ -49,24 +50,24 @@ function ssBaleManager:reduceFillLevel()
                     -- check if the bale is outside and there has been rain during the day
                     if density == 0 and g_currentMission.environment.timeSinceLastRain < 60 then
 
-                        if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
-                            local origFillLevel = object.item.fillLevel
-                            local reductionFactor = self:calculateBaleReduction(object.item)
-                            object.item.fillLevel = origFillLevel * reductionFactor
+                        if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+                            local origFillLevel = bale.fillLevel
+                            local reductionFactor = self:calculateBaleReduction(bale)
+                            bale.fillLevel = origFillLevel * reductionFactor
                         end
                     end
 
-                    if object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
-                        local origFillLevel = object.item.fillLevel
-                        local reductionFactor = self:calculateBaleReduction(object.item)
-                        object.item.fillLevel = origFillLevel * reductionFactor
+                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                        local origFillLevel = bale.fillLevel
+                        local reductionFactor = self:calculateBaleReduction(bale)
+                        bale.fillLevel = origFillLevel * reductionFactor
                     end
 
                 -- without a snowmask reduce all unwrapped bales
                 else
-                    local origFillLevel = object.item.fillLevel
-                    local reductionFactor = self:calculateBaleReduction(object.item)
-                    object.item.fillLevel = origFillLevel * reductionFactor
+                    local origFillLevel = bale.fillLevel
+                    local reductionFactor = self:calculateBaleReduction(bale)
+                    bale.fillLevel = origFillLevel * reductionFactor
                 end
 
             end
@@ -89,25 +90,27 @@ end
 
 function ssBaleManager:removeBale()
     for index,object in pairs(g_currentMission.itemsToSave) do
-        if object.className == "Bale" then
-            if object.item.fillType == FillUtil.getFillTypesByNames("straw")[1] or object.item.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+        if object.item:isa(Bale) then
+            local bale = object.item
+
+            if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
                 local volume = math.huge
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
-                if object.item.baleDiameter ~= nil then
-                    volume = math.pi*(object.item.baleDiameter / 2 )^2 * object.item.baleWidth * 1000
+                if bale.baleDiameter ~= nil then
+                    volume = math.pi*(bale.baleDiameter / 2 )^2 * bale.baleWidth * 1000
                 else
-                    volume = object.item.baleWidth * object.item.baleLength * object.item.baleHeight * 1000
+                    volume = bale.baleWidth * bale.baleLength * bale.baleHeight * 1000
                 end
 
-                if object.item.fillLevel < volume then
-                    self:delete(object.item)
+                if bale.fillLevel < volume then
+                    self:delete(bale)
                 end
 
             -- when grass bale is more than 2 days old it will be deleted
-            elseif object.item.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
-                if object.item.age > 2 then
-                    self:delete(object.item)
+            elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                if bale.age > 2 then
+                    self:delete(bale)
                 end
             end
         end
@@ -128,13 +131,14 @@ end
 function ssBaleManager:incrementBaleAge()
     for index,object in pairs(g_currentMission.itemsToSave) do
 
-        if object.className == "Bale" then
+        if object.item:isa(Bale) then
+            local bale = object.item
 
-            if object.item.age ~= nil then
-                local yesterdayAge = object.item.age
-                object.item.age = yesterdayAge + 1
+            if bale.age ~= nil then
+                local yesterdayAge = bale.age
+                bale.age = yesterdayAge + 1
             else
-                object.item.age = 0
+                bale.age = 0
             end
 
         end

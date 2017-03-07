@@ -31,9 +31,9 @@ function ssGrowthManager:load(savegame, key)
 
     self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
     self.currentGrowthTransitionPeriod = ssStorage.getXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", 0)
-    
+
     if savegame == nil then return end
-    
+
     local i = 0
     while true do
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
@@ -41,7 +41,7 @@ function ssGrowthManager:load(savegame, key)
 
         local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
         self.willGerminateData[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
-        
+
         i = i + 1
     end
 end
@@ -51,10 +51,10 @@ function ssGrowthManager:save(savegame, key)
 
     ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
     ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
-    
+
     local i = 0
+
     for fruitName in pairs(self.willGerminateData) do
-    
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
         log("fruitKey: " .. fruitKey)
         setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
@@ -81,7 +81,7 @@ function ssGrowthManager:loadMap(name)
 
         g_currentMission.environment:addDayChangeListener(self)
         g_seasons.environment:addGrowthStageChangeListener(self)
-        
+
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
         self:buildCanPlantData(self.defaultFruitsData)
@@ -140,7 +140,7 @@ function ssGrowthManager:growthStageChanged()
             ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
             self:rebuildWillGerminateData()
         end
-        
+
     end
 end
 
@@ -151,8 +151,8 @@ function ssGrowthManager:rebuildWillGerminateData()
     self:dayChanged()    
 end
 
--- handle dayChanged event 
--- check if canSow and update willGerminateData accordingly
+-- handle dayChanged event
+-- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
@@ -215,7 +215,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
         if maxState == self.MAX_STATE then
             maxState = fruitTypeGrowth.numGrowthStates
         end
-        
+
         setDensityMaskParams(fruit.id, "between", minState, maxState)
     else -- else only use minState
         setDensityMaskParams(fruit.id, "equals", minState)
@@ -223,7 +223,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
 
     local numChannels = g_currentMission.numFruitStateChannels
     local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
-    
+
 end
 
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState

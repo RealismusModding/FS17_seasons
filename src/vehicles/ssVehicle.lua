@@ -17,9 +17,9 @@ ssVehicle.SERVICE_INTERVAL = 30
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
-SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/ssRepairable.lua")
-SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/ssSnowTracks.lua")
-SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/ssSnowFillable.lua")
+SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
+SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
+SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
 
 function ssVehicle:preLoad()
     ssVehicle:registerWheelTypes()
