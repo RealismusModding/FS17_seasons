@@ -1,14 +1,14 @@
 ---------------------------------------------------------------------------------------------------------
 -- VIEW CONTROLLER SCRIPT
 ---------------------------------------------------------------------------------------------------------
--- Purpose:  to manage info view
+-- Purpose:  to help debug growth
 -- Authors:  theSeb
 -- Credits:
 
-ssViewController = {}
+ssGrowthManagerDebugView = {}
 
 --currently for debug view only. this should probably go into ssUtil and will need translations if we use it for the gui
-ssViewController.growthTransitionIndexToName =
+ssGrowthManagerDebugView.growthTransitionIndexToName =
 {
     [1] = "Early Spring",
     [2] = "Mid Spring",
@@ -24,13 +24,13 @@ ssViewController.growthTransitionIndexToName =
     [12] = "Late Winter"
 }
 
-ssViewController.debugView = false
+ssGrowthManagerDebugView.debugView = false
 
-function ssViewController:loadMap(name)
+function ssGrowthManagerDebugView:loadMap(name)
     --self:growthTransitionsDisplayData() --for testing only right now
 end
 
-function ssViewController:keyEvent(unicode, sym, modifier, isDown)
+function ssGrowthManagerDebugView:keyEvent(unicode, sym, modifier, isDown)
     if (unicode == 47) then
         if self.debugView == false then
             self.debugView = true
@@ -40,7 +40,7 @@ function ssViewController:keyEvent(unicode, sym, modifier, isDown)
     end
 end
 
-function ssViewController:draw()
+function ssGrowthManagerDebugView:draw()
     if self.debugView == true then
         renderText(0.44, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
         local growthTransition = g_seasons.environment:growthTransitionAtDay()
@@ -67,7 +67,7 @@ end
 --which transition.
 --FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5.
 --Will think of a clever way to fix that without cheating
-function ssViewController:growthTransitionsDisplayData()
+function ssGrowthManagerDebugView:growthTransitionsDisplayData()
     local growthStagesDisplayData = {}
     local data = ssUtil.calcDaysPerTransition()
 
