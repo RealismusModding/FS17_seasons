@@ -52,24 +52,25 @@ For a better game experience, custom maps should add two new density layers: one
 - Pedestrians do not spawn in the Winter.
 - When snow falls, tippers and shovels fill up. Put them in a shed (when the map has a snow mask) or activate the cover.
 - Snow will melt from tippers and shovels when it is not freezing outside.
-- Bunker Silo contents now take one third of a season to fermentate.
+- Bunker Silo contents now take one third of a season to ferment.
 
 ### Weather forecast
 - 7 day weather forecast
 
 ### Crops
-- Vanilla growth is completely disabled. The mod controls all growth of fruits, except for normal trees at this point in time
+- Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
 - Grass is knocked back to stage 1 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
 - Growth is adjust to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
-- Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
+- Winter and spring crops are possible now. Some crops can be planted in autumn (barley, wheat and canola) and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
 - Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
 - Swaths will reduce over time. Hay and straw can be stored inside a shed (if map is prepared with the snow mask) without any loss.
 - Grass bales will rot and disappear after two days. Hay and straw bales exposed to rain will start to rot so keep them inside.
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
+- Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them  
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
