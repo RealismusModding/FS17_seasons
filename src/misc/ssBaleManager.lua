@@ -3,16 +3,22 @@
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To reduce fillLevel of bales
 -- Authors:  reallogger
---
+-- Credits:  fatov for fermenting bales
 
 ssBaleManager = {}
+
+source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 
 function ssBaleManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
 
+    self:setFermentationTime()
+
     Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.loadFromAttributesAndNodes)
     Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.getSaveAttributesAndNodes)
+    Bale.updateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.updateTick)
+    BaleWrapper.doStateChange = Utils.overwrittenFunction(BaleWrapper.doStateChange, ssBaleManager.doStateChange)
 end
 
 function ssBaleManager:reduceFillLevel()
@@ -57,7 +63,7 @@ function ssBaleManager:reduceFillLevel()
                         end
                     end
 
-                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] and bale.wrappingState ~= 1 then
                         local origFillLevel = bale.fillLevel
                         local reductionFactor = self:calculateBaleReduction(bale)
                         bale.fillLevel = origFillLevel * reductionFactor
@@ -108,7 +114,7 @@ function ssBaleManager:removeBale()
                 end
 
             -- when grass bale is more than 2 days old it will be deleted
-            elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+            elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] and bale.wrappingState ~= 1 then
                 if bale.age > 2 then
                     self:delete(bale)
                 end
@@ -165,15 +171,61 @@ function ssBaleManager:calculateBaleReduction(singleBale)
     return reductionFactor
 end
 
+function ssBaleManager:setFermentationTime()
+    -- fermentation time set to the equivalent of 4 weeks
+    self.fermentationTime = 3600 * 24 * g_seasons.environment.daysInSeason / 3
+end
+
+-- from fatov - balewrapper determines what bales to ferment
+function ssBaleManager:doStateChange(superFunc, id, nearestBaleServerId)
+	superFunc(self, id, nearestBaleServerId)
+
+    if self.isServer then 
+		if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
+		   if self.lastDroppedBale.fillType == FillUtil.FILLTYPE_SILAGE and self.lastDroppedBale.wrappingState >= 1 then
+				--initiate fermenting process
+				self.lastDroppedBale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+				self.lastDroppedBale.fermentingProcess = 0
+				ssBaleFermentEvent:sendEvent(self.lastDroppedBale)
+			end
+		end
+	end
+end
+
+-- from fatov - ferment bales
+function ssBaleManager:updateTick(superFunc, dt)
+	superFunc(self, dt)
+
+	if self.isServer then
+		if self.fermentingProcess ~= nil then
+			self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
+			if self.fermentingProcess >= 1 then 
+				--finish fermenting process
+				self.fillType = FillUtil.FILLTYPE_SILAGE
+				self.fermentingProcess = nil
+				ssBaleFermentEvent:sendEvent(self)
+			else
+                self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+            end
+		end
+	end
+end
+
 function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
     local state = oldFunc(self, xmlFile, key, resetVehicles)
 
     if state then
         local ageLoad = getXMLString(xmlFile, key .. "#age")
+        local fermentingProcessLoad = getXMLFloat(xmlFile,key.."#fermentingProcess")
 
-        if age ~= nil then
+        if ageLoad ~= nil then
             self.age = ageLoad
         end
+
+        if fermentingProcessLoad ~= nil then
+            self.fermentingProcess = fermentingProcessLoad
+        end
+
     end
 
     return state
@@ -185,6 +237,24 @@ function ssBaleManager:getSaveAttributesAndNodes(oldFunc, nodeIdent)
     if attributes ~= nil and self.age ~= nil then
         attributes = attributes .. ' age="' .. self.age .. '"'
     end
+    
+    if attributes ~= nil and self.fermentingProcess ~= nil then
+        attributes = attributes..' fermentingProcess="'..self.fermentingProcess..'"'
+    end
 
     return attributes, nodes
+end
+
+function ssBaleManager:writeStream(streamId, connection)
+
+	local isFermenting = self.fermentingProcess ~= nil and true or false
+	
+	streamWriteBool(streamId,isFermenting)
+end
+
+function ssBaleManager:readStream(streamId, connection)
+	
+	if streamReadBool(streamId,connection) then 
+		self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+	end
 end

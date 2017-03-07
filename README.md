@@ -66,8 +66,10 @@ For a better game experience, custom maps should add two new density layers: one
 - Winter and spring crops are possible now. Some crops can be planted in autumn and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
 - Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
-- Swaths will reduce over time. Hay and straw can be stored inside a shed (if map is prepared with the snow mask) without any loss.
-- Grass bales will rot and disappear after two days. Hay and straw bales exposed to rain will start to rot so keep them inside.
+- Swaths will reduce over time.
+- Grass bales will rot and disappear after two days. 
+- Hay and straw bales exposed to rain will start to rot so keep them inside.
+- Silage bales needs time to ferment before turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
 
