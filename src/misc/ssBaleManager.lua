@@ -9,16 +9,22 @@ ssBaleManager = {}
 
 source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 
+function ssBaleManager:preLoad()
+    Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
+    Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.baleGetSaveAttributesAndNodes)
+    Bale.baleUpdateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
+    BaleWrapper.doStateChange = Utils.overwrittenFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
+    Bale.readStream = Utils.overwrittenFunction(Bale.readStream, ssBaleManager.baleReadStream)
+    Bale.writeStream = Utils.overwrittenFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
+end
+
 function ssBaleManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
 
-    self:setFermentationTime()
-
-    Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.loadFromAttributesAndNodes)
-    Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.getSaveAttributesAndNodes)
-    Bale.updateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.updateTick)
-    BaleWrapper.doStateChange = Utils.overwrittenFunction(BaleWrapper.doStateChange, ssBaleManager.doStateChange)
+    if g_currentMission:getIsServer() then
+        self:setFermentationTime()
+    end
 end
 
 function ssBaleManager:reduceFillLevel()
@@ -128,6 +134,7 @@ function ssBaleManager:delete(singleBale)
     if singleBale.i3dFilename ~= nil then
         Utils.releaseSharedI3DFile(singleBale.i3dFilename, nil, true)
     end
+
     g_currentMission:removeLimitedObject(FSBaseMission.LIMITED_OBJECT_TYPE_BALE, singleBale)
     unregisterObjectClassName(singleBale)
     g_currentMission:removeItemToSave(singleBale)
@@ -176,11 +183,15 @@ function ssBaleManager:setFermentationTime()
     self.fermentationTime = 3600 * 24 * g_seasons.environment.daysInSeason / 3
 end
 
+--------------------------------------------------------
+-- Bale(Wrapper) overwrite functions for fermentation
+--------------------------------------------------------
+
 -- from fatov - balewrapper determines what bales to ferment
-function ssBaleManager:doStateChange(superFunc, id, nearestBaleServerId)
+function ssBaleManager:baleWrapperDoStateChange(superFunc, id, nearestBaleServerId)
     superFunc(self, id, nearestBaleServerId)
 
-    if self.isServer then 
+    if self.isServer then
         if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
            if self.lastDroppedBale.fillType == FillUtil.FILLTYPE_SILAGE and self.lastDroppedBale.wrappingState >= 1 then
                 --initiate fermenting process
@@ -193,13 +204,13 @@ function ssBaleManager:doStateChange(superFunc, id, nearestBaleServerId)
 end
 
 -- from fatov - ferment bales
-function ssBaleManager:updateTick(superFunc, dt)
+function ssBaleManager:baleUpdateTick(superFunc, dt)
     superFunc(self, dt)
 
     if self.isServer then
         if self.fermentingProcess ~= nil then
             self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
-            if self.fermentingProcess >= 1 then 
+            if self.fermentingProcess >= 1 then
                 --finish fermenting process
                 self.fillType = FillUtil.FILLTYPE_SILAGE
                 self.fermentingProcess = nil
@@ -211,7 +222,7 @@ function ssBaleManager:updateTick(superFunc, dt)
     end
 end
 
-function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
+function ssBaleManager:baleLoadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
     local state = oldFunc(self, xmlFile, key, resetVehicles)
 
     if state then
@@ -225,36 +236,37 @@ function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVe
         if fermentingProcessLoad ~= nil then
             self.fermentingProcess = fermentingProcessLoad
         end
-
     end
 
     return state
 end
 
-function ssBaleManager:getSaveAttributesAndNodes(oldFunc, nodeIdent)
-    local attributes, nodes = oldFunc(self, nodeIdent)
+function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
+    local attributes, nodes = superFunc(self, nodeIdent)
 
     if attributes ~= nil and self.age ~= nil then
         attributes = attributes .. ' age="' .. self.age .. '"'
     end
-    
+
     if attributes ~= nil and self.fermentingProcess ~= nil then
-        attributes = attributes..' fermentingProcess="'..self.fermentingProcess..'"'
+        attributes = attributes .. ' fermentingProcess="' .. self.fermentingProcess .. '"'
     end
 
     return attributes, nodes
 end
 
-function ssBaleManager:writeStream(streamId, connection)
+function ssBaleManager:baleWriteStream(superFunc, streamId, connection)
+    superFunc(streamId, connection)
 
     local isFermenting = self.fermentingProcess ~= nil and true or false
-    
+
     streamWriteBool(streamId,isFermenting)
 end
 
-function ssBaleManager:readStream(streamId, connection)
-    
-    if streamReadBool(streamId,connection) then 
+function ssBaleManager:baleReadStream(superFunc, streamId, connection)
+    superFunc(streamId, connection)
+
+    if streamReadBool(streamId,connection) then
         self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
     end
 end

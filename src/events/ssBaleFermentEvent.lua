@@ -5,38 +5,34 @@
 -- Authors:  reallogger (based on script by fatov)
 ---------------------------------------------------------------------------------------------------
 
---network event
 ssBaleFermentEvent = {}
 ssBaleFermentEvent_mt = Class(ssBaleFermentEvent,Event)
-
 InitEventClass(ssBaleFermentEvent, "ssBaleFermentEvent")
 
 function ssBaleFermentEvent:emptyNew()
     local self = Event:new(ssBaleFermentEvent_mt)
-    
-    self.className="ssBaleFermentEvent"
-    
+    self.className = "ssBaleFermentEvent"
     return self
 end
 
 function ssBaleFermentEvent:new(bale)
     local self = ssBaleFermentEvent:emptyNew()
-    
+
     self.bale = bale
     self.isFermenting = self.bale.fermentingProcess ~= nil and true or false
-    
+
     return self
 end
 
 function ssBaleFermentEvent:writeStream(streamId, connection)
     streamWriteInt32(streamId, networkGetObjectId(self.bale))
-    streamWriteBool    (streamId, self.isFermenting)
+    streamWriteBool(streamId, self.isFermenting)
 end
 
 function ssBaleFermentEvent:readStream(streamId, connection)
-    local object = streamReadInt32(streamId)
-    
-    self.bale = networkGetObject(object)
+    local objectId = streamReadInt32(streamId)
+
+    self.bale = networkGetObject(objectId)
     self.isFermenting = streamReadBool(streamId)
 
     self:run(connection)
