@@ -178,37 +178,37 @@ end
 
 -- from fatov - balewrapper determines what bales to ferment
 function ssBaleManager:doStateChange(superFunc, id, nearestBaleServerId)
-	superFunc(self, id, nearestBaleServerId)
+    superFunc(self, id, nearestBaleServerId)
 
     if self.isServer then 
-		if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
-		   if self.lastDroppedBale.fillType == FillUtil.FILLTYPE_SILAGE and self.lastDroppedBale.wrappingState >= 1 then
-				--initiate fermenting process
-				self.lastDroppedBale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-				self.lastDroppedBale.fermentingProcess = 0
-				ssBaleFermentEvent:sendEvent(self.lastDroppedBale)
-			end
-		end
-	end
+        if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
+           if self.lastDroppedBale.fillType == FillUtil.FILLTYPE_SILAGE and self.lastDroppedBale.wrappingState >= 1 then
+                --initiate fermenting process
+                self.lastDroppedBale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+                self.lastDroppedBale.fermentingProcess = 0
+                ssBaleFermentEvent:sendEvent(self.lastDroppedBale)
+            end
+        end
+    end
 end
 
 -- from fatov - ferment bales
 function ssBaleManager:updateTick(superFunc, dt)
-	superFunc(self, dt)
+    superFunc(self, dt)
 
-	if self.isServer then
-		if self.fermentingProcess ~= nil then
-			self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
-			if self.fermentingProcess >= 1 then 
-				--finish fermenting process
-				self.fillType = FillUtil.FILLTYPE_SILAGE
-				self.fermentingProcess = nil
-				ssBaleFermentEvent:sendEvent(self)
-			else
+    if self.isServer then
+        if self.fermentingProcess ~= nil then
+            self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
+            if self.fermentingProcess >= 1 then 
+                --finish fermenting process
+                self.fillType = FillUtil.FILLTYPE_SILAGE
+                self.fermentingProcess = nil
+                ssBaleFermentEvent:sendEvent(self)
+            else
                 self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
             end
-		end
-	end
+        end
+    end
 end
 
 function ssBaleManager:loadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
@@ -247,14 +247,14 @@ end
 
 function ssBaleManager:writeStream(streamId, connection)
 
-	local isFermenting = self.fermentingProcess ~= nil and true or false
-	
-	streamWriteBool(streamId,isFermenting)
+    local isFermenting = self.fermentingProcess ~= nil and true or false
+    
+    streamWriteBool(streamId,isFermenting)
 end
 
 function ssBaleManager:readStream(streamId, connection)
-	
-	if streamReadBool(streamId,connection) then 
-		self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-	end
+    
+    if streamReadBool(streamId,connection) then 
+        self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+    end
 end

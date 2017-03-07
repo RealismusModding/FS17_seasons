@@ -13,45 +13,45 @@ InitEventClass(ssBaleFermentEvent, "ssBaleFermentEvent")
 
 function ssBaleFermentEvent:emptyNew()
     local self = Event:new(ssBaleFermentEvent_mt)
-	
+    
     self.className="ssBaleFermentEvent"
-	
+    
     return self
-end;
+end
 
 function ssBaleFermentEvent:new(bale)
     local self = ssBaleFermentEvent:emptyNew()
-	
-    self.bale 			= bale
-	self.isFermenting 	= self.bale.fermentingProcess ~= nil and true or false
-	
+    
+    self.bale = bale
+    self.isFermenting = self.bale.fermentingProcess ~= nil and true or false
+    
     return self
 end
 
 function ssBaleFermentEvent:writeStream(streamId, connection)
     streamWriteInt32(streamId, networkGetObjectId(self.bale))
-	streamWriteBool	(streamId, self.isFermenting)
-end;
+    streamWriteBool    (streamId, self.isFermenting)
+end
 
 function ssBaleFermentEvent:readStream(streamId, connection)
     local object = streamReadInt32(streamId)
-	
-    self.bale 			= networkGetObject(object)
-	self.isFermenting 	= streamReadBool(streamId)
+    
+    self.bale = networkGetObject(object)
+    self.isFermenting = streamReadBool(streamId)
 
-	self:run(connection)
+    self:run(connection)
 end
 
 function ssBaleFermentEvent:run(connection)
-	if self.isFermenting then
-		self.bale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-	else
-		self.bale.fillType = FillUtil.FILLTYPE_SILAGE
-	end
+    if self.isFermenting then
+        self.bale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+    else
+        self.bale.fillType = FillUtil.FILLTYPE_SILAGE
+    end
 end
 
 function ssBaleFermentEvent:sendEvent(bale)
-	if g_server ~= nil then
-		g_server:broadcastEvent(ssBaleFermentEvent:new(bale), nil, nil, bale)
-	end
+    if g_server ~= nil then
+        g_server:broadcastEvent(ssBaleFermentEvent:new(bale), nil, nil, bale)
+    end
 end
