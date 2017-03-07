@@ -68,7 +68,6 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
     local growthTransitionsKey = rootKey .. ".growthTransitions"
 
     if hasXMLProperty(file,growthTransitionsKey) then
-
         --load each transition
         local i = 0
         while true do
@@ -90,10 +89,10 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
 
             --insert growth transition into datatable
             if additionalData ~= true then
-                table.insert( growthData, growthTransitionNum, {})
+                table.insert(growthData, growthTransitionNum, {})
             end
 
-            growthData = self:getFruitsTransitionStates(growthTransitionKey, file, growthTransitionNum, growthData,additionalData)
+            growthData = self:getFruitsTransitionStates(growthTransitionKey, file, growthTransitionNum, growthData)
             i = i + 1
         end
     else
@@ -104,10 +103,10 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
     return growthData
 end
 
-function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file, growthTransitionNum, parentData, additionalData)
+function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file, growthTransitionNum, parentData)
     local growthData = parentData
+    
     --load each fruit
-
     local i = 0
     while true do
         local fruitKey = string.format("%s.fruit(%i)", growthTransitionKey, i)
@@ -120,9 +119,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
             logInfo("ssGrowthManagerData: getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
         end
 
-        
         growthData[growthTransitionNum][fruitName] = {}
-        
         growthData[growthTransitionNum][fruitName].fruitName = fruitName
 
         local normalGrowthState = getXMLInt(file,fruitKey .. "#normalGrowthState")
@@ -208,7 +205,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
             i = i + 1
         end
     else
-        log("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found")
+        logInfo("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found")
         return nil
     end
 
