@@ -224,10 +224,10 @@ function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, r
     self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
     self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
 
-	if self.fermentingProcess ~= nil then
-		self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-	end
-	
+    if self.fermentingProcess ~= nil then
+        self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+    end
+
     return state
 end
 
@@ -241,7 +241,7 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
     if attributes ~= nil and self.fermentingProcess ~= nil then
         attributes = attributes .. ' fermentingProcess="' .. self.fermentingProcess .. '"'
     end
-	
+
     return attributes, nodes
 end
 
