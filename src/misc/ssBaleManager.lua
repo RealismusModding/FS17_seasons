@@ -253,15 +253,15 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
 end
 
 function ssBaleManager:baleWriteStream(superFunc, streamId, connection)
-    superFunc(streamId, connection)
+    superFunc(self, streamId, connection)
 
     local isFermenting = self.fermentingProcess ~= nil
 
-    streamWriteBool(streamId,isFermenting)
+    streamWriteBool(streamId, isFermenting)
 end
 
 function ssBaleManager:baleReadStream(superFunc, streamId, connection)
-    superFunc(streamId, connection)
+    superFunc(self, streamId, connection)
 
     if streamReadBool(streamId,connection) then
         self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
