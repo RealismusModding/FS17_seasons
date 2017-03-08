@@ -217,7 +217,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     end
 
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
-    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
+    local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
 
 end
 
@@ -265,7 +265,14 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
 
     local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
-    local sum = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
+    local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
+    
+    if growthResult ~= 0 then
+        local detailId = g_currentMission.terrainDetailId
+        if fruitTypeGrowth.resetsSpray then
+            local sprayResetResult = addDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
+        end
+    end
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
