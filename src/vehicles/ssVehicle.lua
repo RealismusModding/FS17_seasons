@@ -64,9 +64,12 @@ end
 
 function ssVehicle:readStream(streamId, connection)
     self.repairInterval = g_seasons.environment.daysInSeason * 2
+
+    self.snowTracksEnabled = streamReadBool(streamId)
 end
 
 function ssVehicle:writeStream(streamId, connection)
+    streamWriteBool(streamId, self.snowTracksEnabled)
 end
 
 function ssVehicle:dayChanged()
