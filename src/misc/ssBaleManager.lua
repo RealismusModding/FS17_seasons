@@ -69,14 +69,14 @@ function ssBaleManager:reduceFillLevel()
                         end
                     end
 
-                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] and bale.wrappingState ~= 1 then
+                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
                         local origFillLevel = bale.fillLevel
                         local reductionFactor = self:calculateBaleReduction(bale)
                         bale.fillLevel = origFillLevel * reductionFactor
                     end
 
-                -- without a snowmask reduce all unwrapped bales
-                else
+                -- without a snowmask reduce only unwrapped grass bales
+                elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
                     local origFillLevel = bale.fillLevel
                     local reductionFactor = self:calculateBaleReduction(bale)
                     bale.fillLevel = origFillLevel * reductionFactor
