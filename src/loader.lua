@@ -87,13 +87,10 @@ local files = {
     "environment/ssSnow",
     "gui/ssSeasonIntro",
     "environment/ssReplaceVisual",
-    "misc/ssAnimals",
     "utils/ssDensityMapScanner",
 
     -- Adjustments to the game
     "misc/ssPedestrianSystem",
-    "misc/ssSwathManager",
-    "misc/ssBaleManager",
     "misc/ssTreeManager",
 
     -- Adjusted objects
@@ -113,6 +110,15 @@ local files = {
 local isDebug = false--<%=debug %>
 if isDebug then
     table.insert(files, "utils/ssDebug")
+end
+
+if not g_modIsLoaded["FS17_RM_S01_Grass"] then
+    table.insert(files, "misc/ssSwathManager")
+    table.insert(files, "misc/ssBaleManager")
+end
+
+if not g_modIsLoaded["FS17_RM_S03_Animals"] then
+    table.insert(files, "misc/ssAnimals")
 end
 
 -- Classes used for automation of loading and multiplayer
