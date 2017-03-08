@@ -21,6 +21,7 @@ end
 function ssBaleManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 
     if g_currentMission:getIsServer() then
         self:setFermentationTime()
@@ -97,6 +98,12 @@ function ssBaleManager:dayChanged()
     if g_currentMission:getIsServer() then
         self:incrementBaleAge()
         self:removeBale()
+    end
+end
+
+function ssBaleManager:seasonLengthChanged()
+    if g_currentMission:getIsServer() then
+        self:setFermentationTime()
     end
 end
 
