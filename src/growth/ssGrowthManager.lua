@@ -229,8 +229,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     end
     
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
-    local detailId = g_currentMission.terrainDetailId
-
+    
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
        
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState
@@ -247,6 +246,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, 1)
     
     if growthResult ~= 0 then
+        local detailId = g_currentMission.terrainDetailId
         if fruitTypeGrowth.resetsSpray then
             local sprayResetResult = addDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
         end
