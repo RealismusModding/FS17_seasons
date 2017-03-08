@@ -156,12 +156,8 @@ function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
-            --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
-    --print_r(self.canPlantData)
-    --log("Printing willGerminateData")
-    --print_r(self.willGerminateData)
 end
 
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
@@ -265,13 +261,14 @@ end
 function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState
     local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState
-    setDensityMaskParams(fruit.id, "between", minState, maxState)
+    setDensityMaskParams(fruit.id, "between", minState, maxState) --because we always expect min and max with an incrementExtraGrowthState command
 
     local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
     local sum = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
 end
 
+--simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
@@ -356,6 +353,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
     return newGrowthState
 end
 
+-- update all GM data for a custom unknown fruit
 function ssGrowthManager:unknownFruitFound(fruitName)
     self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
