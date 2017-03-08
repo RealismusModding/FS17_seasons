@@ -253,6 +253,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         if fruitTypeGrowth.groundTypeChanged > 0 then --grass
             setDensityCompareParams(detailId, "greater", 0)
             local sum = setDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, fruit.id, fruitTypeGrowth.groundTypeChangeGrowthState, numFruitStateChannels, fruitTypeGrowth.groundTypeChanged)
+            setDensityCompareParams(detailId, "greater", -1)
         end
     end
 end
