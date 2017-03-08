@@ -12,7 +12,7 @@ source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 function ssBaleManager:preLoad()
     Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
     Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.baleGetSaveAttributesAndNodes)
-    Bale.baleUpdateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
+    Bale.updateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
     BaleWrapper.doStateChange = Utils.overwrittenFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
     Bale.readStream = Utils.overwrittenFunction(Bale.readStream, ssBaleManager.baleReadStream)
     Bale.writeStream = Utils.overwrittenFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
@@ -213,8 +213,6 @@ function ssBaleManager:baleUpdateTick(superFunc, dt)
                 self.fermentingProcess = nil
 
                 ssBaleFermentEvent:sendEvent(self)
-            else
-                self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
             end
         end
     end
@@ -226,6 +224,10 @@ function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, r
     self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
     self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
 
+	if self.fermentingProcess ~= nil then
+		self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+	end
+	
     return state
 end
 
@@ -239,7 +241,7 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
     if attributes ~= nil and self.fermentingProcess ~= nil then
         attributes = attributes .. ' fermentingProcess="' .. self.fermentingProcess .. '"'
     end
-
+	
     return attributes, nodes
 end
 
