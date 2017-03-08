@@ -15,6 +15,7 @@ ssGrowthManager.WITHERED = 300
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
+
 -- data
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
@@ -47,18 +48,16 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-
-
     ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
     ssStorage.setXMLInt(savegame, key .. ".growthManager.currentGrowthTransitionPeriod", self.currentGrowthTransitionPeriod)
 
     local i = 0
-
     for fruitName in pairs(self.willGerminateData) do
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
-        log("fruitKey: " .. fruitKey)
+
         setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
         setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[fruitName])
+
         i = i+1
     end
 end
@@ -129,7 +128,7 @@ function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled then
         local growthTransition = g_seasons.environment:growthTransitionAtDay()
 
-        if self.isNewSavegame and growthTransition == 1 then
+        if self.isNewSavegame and growthTransition == FIRST_GROWTH_TRANSITION then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
             self.isNewSavegame = false
@@ -157,12 +156,8 @@ function ssGrowthManager:dayChanged()
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
-            --log("fruitName: " .. fruitName .. "canSow: " .. tostring(ssWeatherManager:canSow(fruitName)))
         end
     end
-    --print_r(self.canPlantData)
-    --log("Printing willGerminateData")
-    --print_r(self.willGerminateData)
 end
 
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
@@ -221,8 +216,8 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
         setDensityMaskParams(fruit.id, "equals", minState)
     end
 
-    local numChannels = g_currentMission.numFruitStateChannels
-    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numChannels, fruit.id, 0, numChannels, desiredGrowthState)
+    local numFruitStateChannels = g_currentMission.numFruitStateChannels
+    local sum = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
 
 end
 
@@ -232,9 +227,11 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     if minState == 1 and self.willGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
         return
     end
-
+    
+    local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
+    
     if self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState ~= nil then
-        local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
+       
         local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].normalGrowthMaxState
 
         if maxState == self.MAX_STATE then
@@ -245,21 +242,33 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         setDensityMaskParams(fruit.id, "equals", minState)
     end
 
-    local numChannels = g_currentMission.numFruitStateChannels
-    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, 1)
+    local numFruitStateChannels = g_currentMission.numFruitStateChannels
+    local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, 1)
+    
+    if growthResult ~= 0 then
+        local detailId = g_currentMission.terrainDetailId
+        if fruitTypeGrowth.resetsSpray then
+            local sprayResetResult = addDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
+        end
+        if fruitTypeGrowth.groundTypeChanged > 0 then --grass
+            setDensityCompareParams(detailId, "greater", 0)
+            local sum = setDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, fruit.id, fruitTypeGrowth.groundTypeChangeGrowthState, numFruitStateChannels, fruitTypeGrowth.groundTypeChanged)
+        end
+    end
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
 function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMinState
     local maxState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthMaxState
-    setDensityMaskParams(fruit.id, "between", minState, maxState)
+    setDensityMaskParams(fruit.id, "between", minState, maxState) --because we always expect min and max with an incrementExtraGrowthState command
 
     local extraGrowthFactor = self.growthData[self.currentGrowthTransitionPeriod][fruitName].extraGrowthFactor
-    local numChannels = g_currentMission.numFruitStateChannels
-    local sum = addDensityMaskedParallelogram(fruit.id,x,z, widthX,widthZ, heightX,heightZ, 0, numChannels, fruit.id, 0, numChannels, extraGrowthFactor)
+    local numFruitStateChannels = g_currentMission.numFruitStateChannels
+    local sum = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
 end
 
+--simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
@@ -272,7 +281,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
                     table.insert(transitionTable, transition , false)
                 else
-                    local plantedGrowthTransition =  transition
+                    local plantedGrowthTransition = transition
                     local currentGrowthStage = 1
                     local MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
                     local maxAllowedCounter = 0
@@ -306,8 +315,7 @@ end
 
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage
-    --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage)
-
+    
     if self.growthData[transitionToCheck][fruitName] ~= nil then
         --setGrowthState
         if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
@@ -345,6 +353,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
     return newGrowthState
 end
 
+-- update all GM data for a custom unknown fruit
 function ssGrowthManager:unknownFruitFound(fruitName)
     self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
@@ -373,8 +382,3 @@ function ssGrowthManager:updateWillGerminateData(fruitName)
     self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
 end
 
--- function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
---     if (unicode == 47) then
---         self:unknownFruitFound("newFruitTest")
---     end
--- end
