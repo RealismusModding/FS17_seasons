@@ -128,7 +128,7 @@ function ssGrowthManager:growthStageChanged()
     if self.growthManagerEnabled then
         local growthTransition = g_seasons.environment:growthTransitionAtDay()
 
-        if self.isNewSavegame and growthTransition == 1 then
+        if self.isNewSavegame and growthTransition == FIRST_GROWTH_TRANSITION then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
             logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
             self.isNewSavegame = false
@@ -284,7 +284,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                 if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
                     table.insert(transitionTable, transition , false)
                 else
-                    local plantedGrowthTransition =  transition
+                    local plantedGrowthTransition = transition
                     local currentGrowthStage = 1
                     local MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
                     local maxAllowedCounter = 0
@@ -318,8 +318,7 @@ end
 
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage
-    --log("ssGrowthManager:canPlant transitionToCheck: " .. transitionToCheck .. " fruitName: " .. fruitName .. " currentGrowthStage: " .. currentGrowthStage)
-
+    
     if self.growthData[transitionToCheck][fruitName] ~= nil then
         --setGrowthState
         if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
@@ -385,8 +384,3 @@ function ssGrowthManager:updateWillGerminateData(fruitName)
     self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
 end
 
--- function ssGrowthManager:keyEvent(unicode, sym, modifier, isDown)
---     if (unicode == 47) then
---         self:unknownFruitFound("newFruitTest")
---     end
--- end
