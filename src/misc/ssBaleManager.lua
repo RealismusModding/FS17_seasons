@@ -143,17 +143,14 @@ end
 
 function ssBaleManager:incrementBaleAge()
     for index,object in pairs(g_currentMission.itemsToSave) do
-
         if object.item:isa(Bale) then
             local bale = object.item
 
             if bale.age ~= nil then
-                local yesterdayAge = bale.age
-                bale.age = yesterdayAge + 1
+                bale.age = bale.age + 1
             else
                 bale.age = 0
             end
-
         end
     end
 end
@@ -172,7 +169,6 @@ function ssBaleManager:calculateBaleReduction(singleBale)
 
         local dayReductionFactor = 1 - ( ( 2.4 * singleBale.age / daysInSeason + 1.2 )^5.75) / 100
         reductionFactor = 1 - ( 1 - dayReductionFactor)/24
-
     end
 
     return reductionFactor
@@ -210,10 +206,12 @@ function ssBaleManager:baleUpdateTick(superFunc, dt)
     if self.isServer then
         if self.fermentingProcess ~= nil then
             self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
+
             if self.fermentingProcess >= 1 then
                 --finish fermenting process
                 self.fillType = FillUtil.FILLTYPE_SILAGE
                 self.fermentingProcess = nil
+
                 ssBaleFermentEvent:sendEvent(self)
             else
                 self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
@@ -222,21 +220,11 @@ function ssBaleManager:baleUpdateTick(superFunc, dt)
     end
 end
 
-function ssBaleManager:baleLoadFromAttributesAndNodes(oldFunc, xmlFile, key, resetVehicles)
-    local state = oldFunc(self, xmlFile, key, resetVehicles)
+function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, resetVehicles)
+    local state = superFunc(self, xmlFile, key, resetVehicles)
 
-    if state then
-        local ageLoad = getXMLString(xmlFile, key .. "#age")
-        local fermentingProcessLoad = getXMLFloat(xmlFile,key.."#fermentingProcess")
-
-        if ageLoad ~= nil then
-            self.age = ageLoad
-        end
-
-        if fermentingProcessLoad ~= nil then
-            self.fermentingProcess = fermentingProcessLoad
-        end
-    end
+    self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
+    self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
 
     return state
 end
@@ -258,7 +246,7 @@ end
 function ssBaleManager:baleWriteStream(superFunc, streamId, connection)
     superFunc(streamId, connection)
 
-    local isFermenting = self.fermentingProcess ~= nil and true or false
+    local isFermenting = self.fermentingProcess ~= nil
 
     streamWriteBool(streamId,isFermenting)
 end
