@@ -2,7 +2,7 @@
 -- BUNKER SILO SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To change the duration of the bunker silo fermentation
--- Authors:  reallogger
+-- Authors:  Rahkiin
 --
 
 ssBunkerSilo = {}
@@ -21,3 +21,4 @@ function ssBunkerSilo:bunkerSiloLoadFromAttributesAndNodes(superFunc, xmlFile, k
 end
 
 -- FIXME: When season length changes this breaks
+-- Solution: append load() and delete(), and add/remove a seasonChangeListener
