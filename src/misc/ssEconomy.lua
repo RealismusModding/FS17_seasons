@@ -37,6 +37,9 @@ function ssEconomy:loadMap(name)
     AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
     FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
 
+    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssEconomy.placeableFinalizePlacement)
+    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssEconomy.placeablenOnSell)
+
     if g_currentMission:getIsServer() then
         self:setup()
     end
@@ -71,7 +74,7 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.baseLoanInterest)
 end
 
-function ssEconomy:update(dt)
+function ssEconomy:updateTick(dt)
     if g_currentMission:getIsServer() then
         local stats = g_currentMission.missionStats
 
@@ -111,17 +114,25 @@ end
 -- economically correct but it is the best we got for a value that moves
 -- up as the game progresses
 function ssEconomy:getEquity()
-    local price = 0
+    local equity = 0
 
     if g_currentMission.fieldDefinitionBase ~= nil then -- can be nil on WIP maps
         for _, field in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
             if field.ownedByPlayer then
-                price = price + field.fieldPriceInitial
+                equity = equity + field.fieldPriceInitial
             end
         end
     end
 
-    return price
+    for _, type in pairs(g_currentMission.ownedItems) do
+        if type.storeItem.species == "placeable" then
+            for _, placeable in pairs(type.items) do
+                equity = equity + placeable:getSellPrice()
+            end
+        end
+    end
+
+    return equity
 end
 
 function ssEconomy:getLoanCap()
@@ -129,11 +140,22 @@ function ssEconomy:getLoanCap()
     return Utils.clamp(roundedTo5000, 300000, ssEconomy.loanMax)
 end
 
-function ssEconomy.setFieldOwnedByPlayer(self, superFunc, fieldDef, isOwned)
+function ssEconomy:updateLoan()
+    g_currentMission.missionStats.loanMax = self:getLoanCap()
+end
+
+function ssEconomy:setFieldOwnedByPlayer(superFunc, fieldDef, isOwned)
     local ret = superFunc(self, fieldDef, isOwned)
 
-    g_currentMission.missionStats.loanMax = g_seasons.economy:getLoanCap()
+    g_seasons.economy:updateLoan()
 
     return ret
 end
 
+function ssEconomy:placeableFinalizePlacement()
+    g_seasons.economy:updateLoan()
+end
+
+function ssEconomy:placeablenOnSell()
+    g_seasons.economy:updateLoan()
+end
