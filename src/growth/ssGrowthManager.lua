@@ -268,6 +268,7 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
     
     if growthResult ~= 0 then
+        local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
         local detailId = g_currentMission.terrainDetailId
         if fruitTypeGrowth.resetsSpray then
             local sprayResetResult = addDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
