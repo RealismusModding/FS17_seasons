@@ -25,7 +25,7 @@ ssGrowthManager.willGerminateData = {}
 -- properties 
 ssGrowthManager.currentGrowthTransitionPeriod = nil
 ssGrowthManager.doResetGrowth = false
-
+ssGrowthManager.fakeGrowthTransitionNum = 1
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
@@ -85,10 +85,11 @@ function ssGrowthManager:loadMap(name)
 
         self:buildCanPlantData(self.defaultFruitsData)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self);
+        addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthStage", self);
+        addConsoleCommand("ssSetGrowth", "Sets growth for test purposes", "consoleCommandSetGrowthStage", self);
         self:dayChanged()
     end
 end
-
 
 function ssGrowthManager:getGrowthData()
     local defaultFruitsData,growthData = ssGrowthManagerData:loadAllData()
@@ -218,7 +219,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
 
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
     local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
-
+    setDensityMaskParams(fruit.id, "greater", -1) -- reset
 end
 
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
@@ -253,9 +254,10 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         if fruitTypeGrowth.groundTypeChanged > 0 then --grass
             setDensityCompareParams(detailId, "greater", 0)
             local sum = setDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, fruit.id, fruitTypeGrowth.groundTypeChangeGrowthState, numFruitStateChannels, fruitTypeGrowth.groundTypeChanged)
-            setDensityCompareParams(detailId, "greater", -1)
+            setDensityCompareParams(detailId, "greater", -1) -- reset
         end
     end
+    setDensityMaskParams(fruit.id, "greater", -1) -- reset
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
@@ -275,6 +277,7 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
             local sprayResetResult = addDensityMaskedParallelogram(detailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
         end
     end
+    setDensityMaskParams(fruit.id, "greater", -1) -- reset
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
@@ -391,3 +394,21 @@ function ssGrowthManager:updateWillGerminateData(fruitName)
     self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
 end
 
+-- debug console commands
+
+function ssGrowthManager:consoleCommandIncrementGrowthStage()
+    self.fakeGrowthTransitionNum = self.fakeGrowthTransitionNum + 1
+    if self.fakeGrowthTransitionNum > 12 then self.fakeGrowthTransitionNum = 1 end
+    logInfo("GrowthManager enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
+    self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
+    ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
+    self:rebuildWillGerminateData()
+end
+
+function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
+    self.fakeGrowthTransitionNum = tonumber(newGrowthStage)
+    logInfo("GrowthManager enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
+    self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
+    ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
+    self:rebuildWillGerminateData()
+end
