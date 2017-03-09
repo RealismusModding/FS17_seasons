@@ -406,7 +406,7 @@ function ssGrowthManager:consoleCommandIncrementGrowthStage()
 end
 
 function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
-    self.fakeGrowthTransitionNum = tonumber(newGrowthStage)
+    self.fakeGrowthTransitionNum = Utils.getNoNil(tonumber(newGrowthStage), 1)
     logInfo("GrowthManager enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
     self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
