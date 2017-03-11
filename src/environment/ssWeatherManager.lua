@@ -498,7 +498,11 @@ function ssWeatherManager:isGroundFrozen()
 end
 
 function ssWeatherManager:isCropWet()
-    return self.cropMoistureContent > 20
+    if self.cropMoistureContent > 20 or g_currentMission.environment.timeSinceLastRain == 0 then
+        return true
+    else
+        return false
+    end
 end
 
 function ssWeatherManager:getSnowHeight()
