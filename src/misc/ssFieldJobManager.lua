@@ -17,7 +17,7 @@ function ssFieldJobManager:save(savegame, key)
 end
 
 function ssFieldJobManager:loadMap(name)
-    if g_currentMission.fieldDefinitionBase == nil then return end
+   if not (fieldDefinitionBase ~= nil and fieldDefs ~= nil) then return end
 
     for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
         fieldDef.fieldJobUsageAllowed = not self.disableMissions and fieldDef.fieldJobUsageAllowed
