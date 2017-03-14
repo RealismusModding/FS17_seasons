@@ -649,10 +649,10 @@ function ssWeatherManager:overwriteRaintable()
     env.numRains = table.getn(tmpWeather)
     env.rains = tmpWeather
 
-    if env.currentDayOffset ~= nil then
+    if g_seasons.environment.currentDayOffset ~= nil then
         for index = 1, env.numRains do
-            local newStartDay = env.rains[index].startDay - env.currentDayOffset
-            local newEndDay = env.rains[index].endDay - env.currentDayOffset
+            local newStartDay = env.rains[index].startDay - g_seasons.environment.currentDayOffset
+            local newEndDay = env.rains[index].endDay - g_seasons.environment.currentDayOffset
             env.rains[index].startDay = newStartDay
             env.rains[index].endDay = newEndDay
         end
