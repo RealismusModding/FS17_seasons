@@ -58,6 +58,8 @@ For a better game experience, custom maps should add two new density layers: one
 - 7 day weather forecast
 
 ### Crops
+- At the beginning of a new game, the mod will reset all fields to the harvested stage. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest. 
+- Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation. 
 - Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
 - Grass is knocked back to stage 1 in the winter
