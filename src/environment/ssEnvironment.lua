@@ -207,12 +207,10 @@ function ssEnvironment:adaptTime()
     -- nightStart: 22
 
     -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
-    -- FIXME(jos): Maybe turn them on between the beginOfNight and fullNight?
     env.nightStart = dayEnd * 60
     env.nightEnd = dayStart * 60
 
-    -- FIXME what is this for?
-    env.skyDayTimeStart = nightEnd * 60 * 60 * 1000
+    env.skyDayTimeStart = dayStart * 60 * 60 * 1000
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000
 
     -- For the visual looks
