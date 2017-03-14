@@ -649,10 +649,10 @@ function ssWeatherManager:overwriteRaintable()
     env.numRains = table.getn(tmpWeather)
     env.rains = tmpWeather
 
-    if g_seasons.environment.currentDayOffset ~= nil then
+    if env.currentDayOffset ~= nil then
         for index = 1, env.numRains do
-            local newStartDay = env.rains[index].startDay - g_seasons.environment.currentDayOffset
-            local newEndDay = env.rains[index].endDay - g_seasons.environment.currentDayOffset
+            local newStartDay = env.rains[index].startDay - env.currentDayOffset
+            local newEndDay = env.rains[index].endDay - env.currentDayOffset
             env.rains[index].startDay = newStartDay
             env.rains[index].endDay = newEndDay
         end
@@ -839,7 +839,7 @@ function ssWeatherManager:updateCropMoistureContent()
     local solarRadiation = self:calculateSolarRadiation()
 
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
-    local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10)
+    local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt( 9 / g_seasons.environment.daysInSeason )
 
     --log(prevCropMoist," | ",relativeHumidity," | ",solarRadiation," | ",tmpMoisture," | ",deltaMoisture)
     self.cropMoistureContent = tmpMoisture - deltaMoisture
