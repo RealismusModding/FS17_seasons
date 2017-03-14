@@ -51,7 +51,7 @@ function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
     self.savegameVersion = ssStorage.getXMLInt(savegame, key .. ".version", 1)
 
-    self.isNewSaveGame = savegame == nil
+    self.isNewSavegame = savegame == nil
     --self.isOldSaveGame = not hasXMLProperty(savegame, key)
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
 end
@@ -103,7 +103,7 @@ function ssMain:update(dt)
     -- A dedicated server must always reset growth
     if g_currentMission:getIsServer() and g_dedicatedServerInfo ~= nil and not self.isNewSaveGame and self.isOldSaveGame then
         ssGrowthManager:resetGrowth()
-    elseif not self.isNewSaveGame and self.isOldSaveGame and not self.showedResetWarning and g_gui.currentGui == nil then
+    elseif not self.isNewSavegame and self.isOldSavegame and not self.showedResetWarning and g_gui.currentGui == nil then
         function resetAction(self, yesNo)
             if yesNo then
                 ssGrowthManager:resetGrowth()

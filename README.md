@@ -4,7 +4,7 @@ This mod is not complete and is actively being worked on. Nothing is guaranteed 
 
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-now-support-adding-the-seasons-mod-to-an-existing-savegame)
 
-***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://realismus.joskuijpers.nl) and post any issues you find!
+***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
@@ -22,7 +22,7 @@ Because this mod is WIP and not yet released we have a couple of rules regarding
 - Make very clear to your viewers that this mod is a Work In Progress and is not yet released
 - You do _not_ need to put the mod name in the video title, but you can if you want.
 
-- Join us on [Slack](http://realismus.joskuijpers.nl) and tell us all about your awesome video.
+- Join us on [Slack](http://slack.realismusmodding.com) and tell us all about your awesome video.
 
 Videos that are not holding to the rules will get a request for removal.
 If you have any questions about this policy you can ask them on Slack.
@@ -33,10 +33,10 @@ You are not allowed to distribute these changes yourself.
 Please open a pull request to allow for merging back your adjustments. (See also 'Publishing')
 
 ## Pull Requests
-Please join us on [Slack](http://realismus.joskuijpers.nl) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
+Please join us on [Slack](http://slack.realismusmodding.com) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
 
 ## For map makers
-For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://realismus.joskuijpers.nl).
+For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://slack.realismusmodding.com).
 
 ## Features
 
@@ -69,12 +69,12 @@ For a better game experience, custom maps should add two new density layers: one
 - Growth is configurable and can be changed by map makers to suit their map
 - Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
 - Swaths will reduce over time.
-- Grass bales will rot and disappear after two days. 
+- Grass bales will rot and disappear after two days.
 - Hay and straw bales exposed to rain will start to rot so keep them inside.
 - Wrapped bales needs time to ferment before they are turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
-- Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them 
+- Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth stage, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
 
 ### Maintenance
