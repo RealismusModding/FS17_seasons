@@ -124,7 +124,7 @@
             <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="2"/>
             <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="2"/>
             <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT"/>/>
+            <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
