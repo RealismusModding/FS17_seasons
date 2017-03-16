@@ -33,7 +33,6 @@ end
 function ssTedder:draw()
 end
 
--- not working atm
 function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaValues)
     local numAreas = table.getn(workAreas)
 
