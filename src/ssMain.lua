@@ -39,7 +39,7 @@ function ssMain:preLoad()
     logInfo("Loading Seasons " .. self.version);
 
     -- Do injections
-    InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableWitherOption)
+    InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
     TourIcons.onCreate = self.inj_disableTourIcons
 end
 
@@ -134,10 +134,15 @@ end
 ----------------------------
 
 -- Withering of the game is not actually used. To not cause any confusion, the withering toggle element
--- is disabled.
-function ssMain.inj_disableWitherOption(self)
+-- is disabled. Also, the new engine break system does not like the automatic engine start, so we disable
+-- it all together as well. It does not fit with Realism anyways.
+function ssMain.inj_disableMenuOptions(self)
     self.plantWitheringElement:setDisabled(true)
     self.plantWitheringElement:setIsChecked(true)
+
+    g_currentMission.missionInfo.automaticMotorStartEnabled = false
+    self.motorStartElement:setIsChecked(false)
+    self.motorStartElement:setDisabled(true)
 end
 
 -- Disable the tutorial by clearing the onCreate function that is called by vanilla maps
