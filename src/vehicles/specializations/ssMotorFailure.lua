@@ -136,7 +136,7 @@ function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
         end
 
         -- Only play stop sound if the motor has successfully started
-        if not broken and self.ssMotorStartTries == 0 then
+        if not broken and self.ssMotorStartTries <= 1 then
             if self:getIsActiveForSound() then
                 SoundUtil.playSample(self.sampleMotorStop, 1, 0, nil)
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)

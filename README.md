@@ -107,6 +107,10 @@ For a better game experience, custom maps should add two new density layers: one
 - Do not fast forward faster than 1200x on multiplayer (120x is even better)
 The game will get out of sync with the extra load of Seasons
 
+## Mod conflicts
+- Giants' Crop Destruction
+  - Use the one in our own cropDestruction repository until we heard from Giants if we can upload it
+
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
 Modding team so that we can publish this mod and change the code. Only we are allowed to publish Seasons.
