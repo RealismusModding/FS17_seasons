@@ -58,8 +58,8 @@ For a better game experience, custom maps should add two new density layers: one
 - 7 day weather forecast
 
 ### Crops
-- At the beginning of a new game, the mod will reset all fields to the harvested stage. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest. 
-- Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation. 
+- At the beginning of a new game, the mod will reset all fields to the harvested stage. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest.
+- Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation.
 - Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
 - Grass is knocked back to stage 1 in the winter
@@ -83,7 +83,8 @@ For a better game experience, custom maps should add two new density layers: one
 - Keep your machine clean to lower daily maintenance costs
 - Machine not used? Pay less
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
-- If you don't maintain your vehicle it may break down
+- If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may not start at all
+  - Currently there is no way to fix a completely broken vehicle: you can't drive it to a shop and resetting won't un-break it
 
 ### Finance
 - Loan cap is set to 30% of your total owned land value with a minimum of 300,000
