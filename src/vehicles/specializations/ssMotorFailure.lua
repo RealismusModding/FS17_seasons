@@ -20,6 +20,7 @@ function ssMotorFailure:load(savegame)
     self.ssMotorStartFailDuration = math.min(self.sampleMotorStart.duration / 2, 500)
     self.ssMotorStartTries = 0
     self.ssMotorStartSoundTime = 0
+    self.ssMotorStartMustFail = false
 end
 
 function ssMotorFailure:delete()
@@ -46,7 +47,7 @@ function ssMotorFailure:update(dt)
                     self.ssMotorStartTries = self.ssMotorStartTries - 1
                     self.ssMotorStartSoundTime = g_currentMission.time
                 elseif self.ssMotorStartTries == 1 and self.ssMotorStartMustFail then
-                    self:stopMotor(nil, true)
+                    self:stopMotor()
                 end
             end
         end
@@ -115,7 +116,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
-function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
+function ssMotorFailure:stopMotor(superFunc, noEventSend)
     if noEventSend == nil or noEventSend == false then
         if g_server ~= nil then
             g_server:broadcastEvent(SetMotorTurnedOnEvent:new(self, false), nil, nil, self)
@@ -136,7 +137,7 @@ function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
         end
 
         -- Only play stop sound if the motor has successfully started
-        if not broken and self.ssMotorStartTries <= 1 then
+        if not self.ssMotorStartMustFail and self.ssMotorStartTries <= 1 then
             if self:getIsActiveForSound() then
                 SoundUtil.playSample(self.sampleMotorStop, 1, 0, nil)
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
