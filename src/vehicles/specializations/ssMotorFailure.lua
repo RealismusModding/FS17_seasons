@@ -99,9 +99,12 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
 
+        local p = Utils.clamp((5 - overdueFactor) * 0.20 + 0.2, 0.2, 1)
+        local willStart = math.random() < p
+
         self.ssMotorStartTries = Utils.clamp(math.floor(overdueFactor), 1, 5)
         self.ssMotorStartSoundTime = g_currentMission.time
-        self.ssMotorStartMustFail = overdueFactor >= ssMotorFailure.BROKEN_OVERDUE_FACTOR
+        self.ssMotorStartMustFail = not willStart --overdueFactor >= ssMotorFailure.BROKEN_OVERDUE_FACTOR
 
         local hiccupTime = (self.ssMotorStartTries - 1) * self.ssMotorStartFailDuration * 3
         self.motorStartTime = g_currentMission.time + self.motorStartDuration + hiccupTime
