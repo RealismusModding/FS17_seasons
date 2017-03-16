@@ -10,12 +10,40 @@ ssPlaceable = {}
 function ssPlaceable:preLoad()
     Placeable.getDailyUpKeep = Utils.overwrittenFunction(Placeable.getDailyUpKeep, ssPlaceable.placeableGetDailyUpkeep)
     Placeable.getSellPrice = Utils.overwrittenFunction(Placeable.getSellPrice, ssPlaceable.placeableGetSellPrice)
+
+    Placeable.finalizePlacement = Utils.overwrittenFunction(Placeable.finalizePlacement, ssPlaceable.placeableFinalizePlacement)
+    Placeable.delete = Utils.overwrittenFunction(Placeable.delete, ssPlaceable.placeableDelete)
+    Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
 
 function ssPlaceable:loadMap()
 end
 
--- Currently: GIANTS Vanilla code
+-- When placing, add listener and update income value
+function ssPlaceable:placeableFinalizePlacement(superFunc)
+    local ret = superFunc(self)
+
+    self.ssOriginalIncomePerHour = self.incomePerHour
+
+    g_seasons.environment:addSeasonLengthChangeListener(self)
+    self:seasonLengthChanged()
+
+    return ret
+end
+
+-- When deleting, also remove listener
+function ssPlaceable:placeableDelete(superFunc)
+    superFunc(self)
+
+    if g_seasons ~= nil and g_seasons.environment ~= nil then
+        g_seasons.environment:removeSeasonLengthChangeListener(self)
+    end
+end
+
+function ssPlaceable:placeableSeasonLengthChanged()
+    self.incomePerHour = 6 / g_seasons.environment.daysInSeason * self.ssOriginalIncomePerHour
+end
+
 function ssPlaceable:placeableGetDailyUpkeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local multiplier = 1
@@ -26,7 +54,8 @@ function ssPlaceable:placeableGetDailyUpkeep(superFunc)
         multiplier = EconomyManager.MAX_DAILYUPKEEP_MULTIPLIER * ageMultiplier
     end
 
-    return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier
+    -- Add simple factor
+    return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (6 / g_seasons.environment.daysInSeason)
 end
 
 -- Currently: GIANTS Vanilla code
