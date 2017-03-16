@@ -12,6 +12,7 @@ function ssTedder:prerequisitesPresent(specializations)
 end
 
 function ssTedder:load(savegame)
+    self.processTedderAreas = Utils.overwrittenFunction(self.processTedderAreas, ssTedder.processTedderAreas)
 end
 
 function ssTedder:delete()
@@ -34,11 +35,9 @@ end
 
 -- not working atm
 function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaValues)
-    local retWorkAreas =  superFunc(self, workAreas, accumulatedWorkAreaValues)
-
     local numAreas = table.getn(workAreas)
 
-    --local retWorkAreas = {}
+    local retWorkAreas = {}
     for i = 1, numAreas do
         local x0 = workAreas[i][1]
         local z0 = workAreas[i][2]
@@ -75,7 +74,8 @@ function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaVa
         local fillType1 = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_GRASS]
         local liters1 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType1, sx,sy,sz, ex,ey,ez, hLength_2, nil, nil, false, nil)
 
-        local fillType2 = g_seasons.weather:isCropWet() and FruitUtil.FRUITTYPE_GRASS or FruitUtil.FRUITTYPE_DRYGRASS
+
+        local fillType2 = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_DRYGRASS]
         local liters2 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType2, sx,sy,sz, ex,ey,ez, hLength_2, nil, nil, false, nil)
 
         local liters = -liters1 - liters2
@@ -114,7 +114,7 @@ function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaVa
         if liters > remain then
             table.insert(retWorkAreas, workAreas[i])
         end
-
     end
+
     return retWorkAreas
 end

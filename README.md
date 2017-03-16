@@ -76,6 +76,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Missions have been disabled as the in-game growth system on fields not owned by the player was causing undesireable effects
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth stage, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
+- Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
