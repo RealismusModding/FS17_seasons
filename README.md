@@ -111,6 +111,8 @@ The game will get out of sync with the extra load of Seasons
 ## Mod conflicts
 - Giants' Crop Destruction
   - Use the one in our own cropDestruction repository until we heard from Giants if we can upload it
+- Any mod that manipulates the weather, e.g. Multi overlay hud
+- Any mod that manipulates growth
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
