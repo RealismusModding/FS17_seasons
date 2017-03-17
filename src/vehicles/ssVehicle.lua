@@ -54,6 +54,8 @@ function ssVehicle:loadMap()
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
+    g_currentMission.missionInfo.automaticMotorStartEnabled = false
+
     if g_currentMission:getIsServer() then
         self.repairInterval = g_seasons.environment.daysInSeason * 2
     end
