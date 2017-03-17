@@ -135,19 +135,6 @@ function ssRepairable:update(dt)
         end
     end
 
-    if self.isMotorStarted then
-        local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-        local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 60 / dt * overdueFactor ^ 2.5)
-
-        if math.random() > p then
-            self:stopMotor()
-
-            if self.isEntered then
-                g_currentMission:showBlinkingWarning(ssLang.getText("warning_repairBrokenMachine"), 2000)
-            end
-        end
-    end
-
     -- stupid fix for setting ssYesterdayOperatingTime to operatingTime for a new savegame
     if self.ssYesterdayOperatingTime == 0 then
         self.ssYesterdayOperatingTime = self.operatingTime

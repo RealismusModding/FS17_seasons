@@ -7,7 +7,7 @@
 
 ssMotorFailure = {}
 
-ssMotorFailure.BROKEN_OVERDUE_FACTOR = 4
+ssMotorFailure.BROKEN_OVERDUE_FACTOR = 5
 
 function ssMotorFailure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations)
@@ -34,10 +34,9 @@ end
 
 function ssMotorFailure:update(dt)
     -- Run a repetition sound by killing the engine sound before it finishes
-    if self:getIsMotorStarted() and self.isClient and self:getIsActiveForSound() then
-        if SoundUtil.isSamplePlaying(self.sampleMotorStart, 1.5 * dt) then
-
-            -- self.motorType == "vehicle" / "locomotive"
+    if self:getIsMotorStarted() and self.isClient then
+        -- Do the retry sound effects when starting an unmaintained motor
+        if self:getIsActiveForSound() and SoundUtil.isSamplePlaying(self.sampleMotorStart, 1.5 * dt) then
             if self.ssMotorStartSoundTime + self.ssMotorStartFailDuration < g_currentMission.time then
                 if self.ssMotorStartTries > 1 then
                     SoundUtil.stopSample(self.sampleMotorStart, false)
@@ -49,6 +48,14 @@ function ssMotorFailure:update(dt)
                 elseif self.ssMotorStartTries == 1 and self.ssMotorStartMustFail then
                     self:stopMotor()
                 end
+            end
+        elseif self.motorStartTime < g_currentMission.time then
+            -- A motor might die when it is unmaintained
+            local overdueFactor = ssVehicle:calculateOverdueFactor(self)
+            local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 60 / dt * overdueFactor ^ 2.5)
+
+            if math.random() > p then
+                self:stopMotor(nil, true)
             end
         end
     end
@@ -97,14 +104,14 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
             end
         end
 
-        local overdueFactor = ssVehicle:calculateOverdueFactor(self)
+        local overdueFactor = Utils.clamp(ssVehicle:calculateOverdueFactor(self), 1, ssMotorFailure.BROKEN_OVERDUE_FACTOR)
 
-        local p = Utils.clamp((5 - overdueFactor) * 0.20 + 0.2, 0.2, 1)
+        local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - overdueFactor) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
         local willStart = math.random() < p
 
-        self.ssMotorStartTries = Utils.clamp(math.floor(overdueFactor), 1, 5)
+        self.ssMotorStartTries = overdueFactor
         self.ssMotorStartSoundTime = g_currentMission.time
-        self.ssMotorStartMustFail = not willStart --overdueFactor >= ssMotorFailure.BROKEN_OVERDUE_FACTOR
+        self.ssMotorStartMustFail = not willStart
 
         local hiccupTime = (self.ssMotorStartTries - 1) * self.ssMotorStartFailDuration * 3
         self.motorStartTime = g_currentMission.time + self.motorStartDuration + hiccupTime
@@ -119,7 +126,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
-function ssMotorFailure:stopMotor(superFunc, noEventSend)
+function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
     if noEventSend == nil or noEventSend == false then
         if g_server ~= nil then
             g_server:broadcastEvent(SetMotorTurnedOnEvent:new(self, false), nil, nil, self)
@@ -140,7 +147,7 @@ function ssMotorFailure:stopMotor(superFunc, noEventSend)
         end
 
         -- Only play stop sound if the motor has successfully started
-        if not self.ssMotorStartMustFail and self.ssMotorStartTries <= 1 then
+        if not self.ssMotorStartMustFail and self.ssMotorStartTries <= 1 and broken ~= true then
             if self:getIsActiveForSound() then
                 SoundUtil.playSample(self.sampleMotorStop, 1, 0, nil)
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
