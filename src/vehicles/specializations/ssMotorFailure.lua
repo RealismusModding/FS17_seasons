@@ -17,7 +17,7 @@ function ssMotorFailure:load(savegame)
     self.startMotor = Utils.overwrittenFunction(self.startMotor, ssMotorFailure.startMotor)
     self.stopMotor = Utils.overwrittenFunction(self.stopMotor, ssMotorFailure.stopMotor)
 
-    self.ssMotorStartFailDuration = math.min(self.sampleMotorStart.duration / 2, 500)
+    self.ssMotorStartFailDuration = math.min(self.motorStartDuration / 2, 500)
     self.ssMotorStartTries = 0
     self.ssMotorStartSoundTime = 0
     self.ssMotorStartMustFail = false
