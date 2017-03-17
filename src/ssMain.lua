@@ -140,7 +140,6 @@ function ssMain.inj_disableMenuOptions(self)
     self.plantWitheringElement:setDisabled(true)
     self.plantWitheringElement:setIsChecked(true)
 
-    g_currentMission.missionInfo.automaticMotorStartEnabled = false
     self.motorStartElement:setIsChecked(false)
     self.motorStartElement:setDisabled(true)
 end
