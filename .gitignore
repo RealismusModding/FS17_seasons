@@ -12,3 +12,5 @@ dist/
 FS17_seasons*.zip
 node_modules/
 .cookies
+
+.vscode
