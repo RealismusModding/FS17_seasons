@@ -640,7 +640,7 @@ function ssWeatherManager:overwriteRaintable()
     local tmpWeather = {}
 
     for index = 1, self.forecastLength do
-        if self.weather[index].rainTypeId ~= "sun" then
+        if self.weather[index] ~= nil and self.weather[index].rainTypeId ~= "sun" then
             local tmpSingleWeather = deepCopy(self.weather[index])
             table.insert(tmpWeather, tmpSingleWeather)
         end
