@@ -34,9 +34,9 @@ end
 
 function ssMotorFailure:update(dt)
     -- Run a repetition sound by killing the engine sound before it finishes
-    if self:getIsMotorStarted() and self.isClient then
+    if self:getIsMotorStarted() then
         -- Do the retry sound effects when starting an unmaintained motor
-        if self:getIsActiveForSound() and SoundUtil.isSamplePlaying(self.sampleMotorStart, 1.5 * dt) then
+        if self.isClient and self:getIsActiveForSound() and SoundUtil.isSamplePlaying(self.sampleMotorStart, 1.5 * dt) then
             if self.ssMotorStartSoundTime + self.ssMotorStartFailDuration < g_currentMission.time then
                 if self.ssMotorStartTries > 1 then
                     SoundUtil.stopSample(self.sampleMotorStart, false)
@@ -49,7 +49,7 @@ function ssMotorFailure:update(dt)
                     self:stopMotor()
                 end
             end
-        elseif self.motorStartTime < g_currentMission.time then
+        elseif self.isServer and self.motorStartTime < g_currentMission.time then
             -- A motor might die when it is unmaintained
             local overdueFactor = ssVehicle:calculateOverdueFactor(self)
             local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 60 / dt * overdueFactor ^ 2.5)
