@@ -103,6 +103,7 @@ function ssAnimals:adjustAnimals()
 end
 
 function ssAnimals:updateTroughs()
+    local season = g_seasons.environment:currentSeason()
     if season == g_seasons.environment.SEASON_WINTER then
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
