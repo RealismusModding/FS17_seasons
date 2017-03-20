@@ -36,8 +36,7 @@ function ssVariableTreePlanter:getSaveAttributesAndNodes(nodeIdent)
     local attributes = ""
 
     if self.treePlanterMinDistance ~= nil then
-        attributes = attributes .. "ssPlantingDistance=\"" .. self.treePlanterMinDistance ..  "\" "
-
+        attributes = attributes .. 'ssPlantingDistance="' .. self.treePlanterMinDistance ..  '" '
     end
 
     return attributes, ""
@@ -60,14 +59,12 @@ function ssVariableTreePlanter:updateTick(dt)
 end
 
 function ssVariableTreePlanter:update(dt)
-
     if self:getIsActive() then
-
         if InputBinding.hasEvent(InputBinding.SEASONS_PLANTING_DISTANCE) then
             local currentDistance = self.treePlanterMinDistance
             local newDistance = 0
             local n = table.getn(ssVariableTreePlanter.plantingDistances)
-            
+
             for i,dist in pairs(ssVariableTreePlanter.plantingDistances) do
 
                 if dist == currentDistance and i ~= n then
@@ -79,7 +76,6 @@ function ssVariableTreePlanter:update(dt)
             end
 
             self.treePlanterMinDistance = newDistance
-
         end
     end
 end

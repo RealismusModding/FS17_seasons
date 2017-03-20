@@ -5,9 +5,9 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Afficher les prévisions"/>
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule"/>
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Afficher le menu"/>
-		<text name="input_SEASONS_PLANTING_DISTANCE" text="Seasons: Distance de Plantation" />
+		<text name="input_SEASONS_PLANTING_DISTANCE" text="Distance de Plantation" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Cacher les prévisions"/>
-		
+
         <text name="SS_WEEKDAY_1" text="Lundi"/>
         <text name="SS_WEEKDAY_2" text="Mardi"/>
         <text name="SS_WEEKDAY_3" text="Mercredi"/>
@@ -15,7 +15,7 @@
         <text name="SS_WEEKDAY_5" text="Vendredi"/>
         <text name="SS_WEEKDAY_6" text="Samedi"/>
         <text name="SS_WEEKDAY_7" text="Dimanche"/>
-		
+
         <text name="SS_WEEKDAY_SHORT_1" text="Lun"/>
         <text name="SS_WEEKDAY_SHORT_2" text="Mar"/>
         <text name="SS_WEEKDAY_SHORT_3" text="Mer"/>
@@ -23,12 +23,12 @@
         <text name="SS_WEEKDAY_SHORT_5" text="Ven"/>
         <text name="SS_WEEKDAY_SHORT_6" text="Sam"/>
         <text name="SS_WEEKDAY_SHORT_7" text="Dim"/>
-		
+
         <text name="SS_SEASON_0" text="Printemps"/>
         <text name="SS_SEASON_1" text="Été"/>
         <text name="SS_SEASON_2" text="Automne"/>
         <text name="SS_SEASON_3" text="Hiver"/>
-		
+
         <text name="SS_SEASON_FULL_NAME_1" text="Début du Printemp"/>
         <text name="SS_SEASON_FULL_NAME_2" text="Milieu du Printemp"/>
         <text name="SS_SEASON_FULL_NAME_3" text="Fin du Printemp"/>
@@ -41,7 +41,7 @@
         <text name="SS_SEASON_FULL_NAME_10" text="Début de L'hiver"/>
         <text name="SS_SEASON_FULL_NAME_11" text="Milieu de L'hiver"/>
         <text name="SS_SEASON_FULL_NAME_12" text="Fin de L'hiver"/>
-		
+
         <text name="SS_MONTH_SHORT_1" text="janv"/>
         <text name="SS_MONTH_SHORT_2" text="févr"/>
         <text name="SS_MONTH_SHORT_3" text="mars"/>
@@ -54,11 +54,11 @@
         <text name="SS_MONTH_SHORT_10" text="oct"/>
         <text name="SS_MONTH_SHORT_11" text="nov"/>
         <text name="SS_MONTH_SHORT_12" text="déc"/>
-		
+
         <text name="SS_VEHICLE_TAXES" text="Taxes des véhicules"/>
         <text name="SS_VEHICLE_MAINTENANCE" text="Maintenance des véhicules"/>
         <text name="SS_VEHICLE_REPAIRS" text="Réparations des véhicules"/>
-		
+
         <text name="SS_NOT_ENOUGH_MONEY" text="Solde insuffisant pour réparer!"/>
         <text name="SS_VEHICLE_REPAIRED" text="%s pour réparer le véhicule %s"/>
         <text name="SS_REPAIR_VEHICLE_COST" text="Réprarer %s pour %s"/>
@@ -68,30 +68,30 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation"/>
         <text name="warning_repairBrokenMachine" text="Panne de moteur. Veuillez réparer votre machine!"/>
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit"/>
-		
+
         <text name="warning_soilIsFrozen" text="Le sol est gelé. Vous ne pouvez pas le travailler!"/>
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!"/>
-		
+
         <text name="SS_SEASON_INTRO_0" text="Nouvelle année pour semer."/>
         <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit."/>
         <text name="SS_SEASON_INTRO_2" text="La période de récolte est arrivée. Préparez-vous pour l'hiver, les récoltes pourraient ne pas résister au froid."/>
         <text name="SS_SEASON_INTRO_3" text="Il fait froid. Le sol est dur, probablement gelé. La récolte ne grandit pas"/>
         <text name="SS_BUTTON_OK" text="OK"/>
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne pas montrer à nouveau"/>
-		
+
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!"/>
-		
+
 		<!-- GUI -->
         <text name="ui_pageOverview" text="Aperçu"/>
         <text name="ui_pageSettings" text="Paramètres"/>
         <text name="ui_pageDebug" text="Outils de débogage"/>
-		
+
         <text name="ui_buttonSave" text="Sauvegarder les paramètres"/>
         <text name="ui_snowOneLayer" text="Une couche seulement"/>
         <text name="ui_days" text="%i jours"/>
         <text name="ui_temperatureFahrenheit" text="Fahrenheit"/>
         <text name="ui_temperatureCelcius" text="Celcius"/>
-		
+
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons."/>
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci."/>
         <text name="tooltip_snow" text="La neige chutera dans les hivers froids et bloquera des routes."/>
@@ -99,7 +99,7 @@
         <text name="tooltip_snowTracks" text="Les véhicules compressent la neige lorsqu'ils roulent dessus."/>
         <text name="tooltip_controlsTemperature" text="Controle de la temperature utilisé dans le jeux"/>
         <text name="tooltip_moisture" text="Ne pas autoriser le battage lorsque les récoltes sont mouillées"/>
-		
+
         <text name="setting_seasonIntros" text="Introductions de saison"/>
         <text name="setting_seasonLength" text="Durée de la saison"/>
         <text name="setting_snow" text="Mode neige"/>
@@ -107,14 +107,14 @@
         <text name="setting_snowTracks" text="Traces de neige"/>
         <text name="setting_controlsTemperature" text="Unité de la temperature"/>
         <text name="setting_moisture" text="L'humidité des cultures"/>
-		
+
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement."/>
-		
+
         <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvgarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu."/>
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance"/>
         <text name="dialog_resetGrowth_no" text="maintenir la croissance"/>
         <text name="dialog_resetGrowth_yes" text="réinitialisation"/>
-		
+
         <text name="fillType_snow" text="Neige"/>
     </texts>
 </l10n>
