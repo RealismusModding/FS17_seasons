@@ -59,6 +59,32 @@ function ssMotorFailure:update(dt)
             end
         end
     end
+
+    if self.isClient and self:getIsActiveForSound() and not self:getIsMotorStarted() and self.ssIsBroken then
+
+        if self.sampleGearbox.sample ~= nil then
+            local speedFactor = Utils.clamp((self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumForwardSpeed()*3.6), 0, 1)
+            local pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundPitchMax, speedFactor^self.gearboxSoundPitchExponent)
+            local volumeGearbox = Utils.lerp(0.00001, self.gearboxSoundVolumeMax, speedFactor)
+
+            if self.reverserDirection ~= self.movingDirection then
+                speedFactor = Utils.clamp( (self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumBackwardSpeed()*3.6), 0, 1)
+                pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundReversePitchMax, speedFactor^self.gearboxSoundPitchExponent)
+                volumeGearbox = Utils.lerp(0, self.gearboxSoundReverseVolumeMax, speedFactor)
+            end
+
+            SoundUtil.setSamplePitch(self.sampleGearbox, pitchGearbox)
+            SoundUtil.setSampleVolume(self.sampleGearbox, volumeGearbox)
+        end
+
+        -- Stop all
+        if self:getLastSpeed() < 0.05 then --self.lastMoveTime + 1000 < g_currentMission.time then
+            SoundUtil.stopSample(sampleGearbox)
+
+            self.ssIsBroken = false
+        end
+    end
+
 end
 
 function ssMotorFailure:updateTick(dt)
@@ -79,6 +105,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 
     if not self.isMotorStarted then
         self.isMotorStarted = true
+        self.ssIsBroken = false
 
         if self.isClient then
             if self.exhaustParticleSystems ~= nil then
@@ -146,18 +173,25 @@ function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
             end
         end
 
-        -- Only play stop sound if the motor has successfully started
-        if not self.ssMotorStartMustFail and self.ssMotorStartTries <= 1 and broken ~= true then
-            if self:getIsActiveForSound() then
+        if self:getIsActiveForSound() then
+            -- Only play stop sound if the motor has successfully started
+            if self.ssMotorStartMustFail or self.ssMotorStartTries > 1 then -- never started
+                -- No sound
+            elseif broken then -- broken mid-drive
+                self.ssIsBroken = true -- client only
+
+                SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
+                SoundUtil.playSample(self.sampleGearbox, 0, 0, 0)
+            else -- Normal stop
                 SoundUtil.playSample(self.sampleMotorStop, 1, 0, nil)
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
             end
-
-            local airConsumption = self:getMaximalAirConsumptionPerFullStop()
-            self.brakeCompressor.fillLevel = math.max(0, self.brakeCompressor.fillLevel - airConsumption)
-            self.brakeCompressor.startSoundPlayed = false
-            self.brakeCompressor.runSoundActive = false
         end
+
+        local airConsumption = self:getMaximalAirConsumptionPerFullStop()
+        self.brakeCompressor.fillLevel = math.max(0, self.brakeCompressor.fillLevel - airConsumption)
+        self.brakeCompressor.startSoundPlayed = false
+        self.brakeCompressor.runSoundActive = false
 
         if self.exhaustEffects ~= nil then
             for _, effect in pairs(self.exhaustEffects) do
