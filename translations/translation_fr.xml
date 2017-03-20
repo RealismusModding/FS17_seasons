@@ -5,7 +5,7 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Afficher les prévisions"/>
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule"/>
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Afficher le menu"/>
-		<text name="input_SEASONS_PLANTING_DISTANCE" text="Distance de Plantation" />
+		<text name="input_SEASONS_PLANTING_DISTANCE" text="Distance de Plantation (%d m)" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Cacher les prévisions"/>
 
         <text name="SS_WEEKDAY_1" text="Lundi"/>
