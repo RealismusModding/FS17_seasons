@@ -54,11 +54,13 @@ function ssMotorFailure:update(dt)
             end
         elseif self.isServer and self.motorStartTime < g_currentMission.time then
             local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-            local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 10, 0, 5)
-            local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 6000 * dt * overdueFactor ^ (2.5 + breakdownLoadFactor))
-
+            local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 20, 0, 10)
+            local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 1000 * overdueFactor ^ (2.5 + breakdownLoadFactor))
             if math.random() > p then
                 self:stopMotor(nil, true)
+                if self:getIsHired() then
+                    self:stopAIVehicle(AIVehicle.STOP_REASON_USER)
+                end
             end
         end
     end
