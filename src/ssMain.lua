@@ -92,7 +92,7 @@ end
 
 function ssMain:update(dt)
     if self.showControlsInHelpScreen then
-        g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_MENU"), InputBinding.SEASONS_SHOW_MENU)
+        g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_MENU"), InputBinding.SEASONS_SHOW_MENU, nil, GS_PRIO_VERY_LOW)
     end
 
     -- Open the menu

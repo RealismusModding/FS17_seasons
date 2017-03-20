@@ -95,9 +95,9 @@ end
 function ssWeatherForecast:update(dt)
     if g_seasons.showControlsInHelpScreen then
         if not self.hud.visible then
-            g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF)
+            g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
         else
-            g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF)
+            g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
         end
     end
 
