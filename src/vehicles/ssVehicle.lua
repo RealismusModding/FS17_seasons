@@ -11,7 +11,7 @@ g_seasons.vehicle = ssVehicle
 ssVehicle.LIFETIME_FACTOR = 5
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
-ssVehicle.DIRT_FACTOR = 0.2
+ssVehicle.DIRT_FACTOR = 0.4
 ssVehicle.SERVICE_INTERVAL = 30
 
 ssVehicle.repairFactors = {}
@@ -233,7 +233,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local maintenanceCost = 0
 
     if daysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
-        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
+        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (1 + ssVehicle.DIRT_FACTOR * avgDirtAmount)
     end
 
     return maintenanceCost

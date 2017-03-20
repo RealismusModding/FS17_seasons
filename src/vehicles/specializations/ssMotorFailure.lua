@@ -21,6 +21,7 @@ function ssMotorFailure:load(savegame)
     self.ssMotorStartTries = 0
     self.ssMotorStartSoundTime = 0
     self.ssMotorStartMustFail = false
+    self.ssSmoothLoadPercentage = 0
 end
 
 function ssMotorFailure:delete()
@@ -35,6 +36,8 @@ end
 function ssMotorFailure:update(dt)
     -- Run a repetition sound by killing the engine sound before it finishes
     if self:getIsMotorStarted() then
+        self.ssSmoothLoadPercentage = (self.actualLoadPercentage - self.ssSmoothLoadPercentage) * dt / 5000 + self.ssSmoothLoadPercentage
+
         -- Do the retry sound effects when starting an unmaintained motor
         if self.isClient and self:getIsActiveForSound() and SoundUtil.isSamplePlaying(self.sampleMotorStart, 1.5 * dt) then
             if self.ssMotorStartSoundTime + self.ssMotorStartFailDuration < g_currentMission.time then
@@ -50,9 +53,9 @@ function ssMotorFailure:update(dt)
                 end
             end
         elseif self.isServer and self.motorStartTime < g_currentMission.time then
-            -- A motor might die when it is unmaintained
             local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-            local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 60 / dt * overdueFactor ^ 2.5)
+            local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 10, 0, 5)
+            local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 6000 * dt * overdueFactor ^ (2.5 + breakdownLoadFactor))
 
             if math.random() > p then
                 self:stopMotor(nil, true)
