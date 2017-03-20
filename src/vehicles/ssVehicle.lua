@@ -22,6 +22,7 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
     SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
     SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
+    SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
 
     if not g_modIsLoaded["FS17_RM_S01_Grass"] then
         SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
@@ -110,6 +111,11 @@ function ssVehicle:installVehicleSpecializations()
             if not g_modIsLoaded["FS17_RM_S01_Grass"] and SpecializationUtil.hasSpecialization(Tedder, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("ss_tedder"))
             end
+
+            if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
+            end
+
         end
     end
 end
@@ -276,7 +282,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local overdueFactor = self:calculateOverdueFactor(vehicle) ^ 2
 
-    return (costs + workCosts) * dealerMultiplier * difficultyMultiplier * overdueFactor
+    return (costs + workCosts + 200 * (overdueFactor -1 )) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
 -- all (guard)
