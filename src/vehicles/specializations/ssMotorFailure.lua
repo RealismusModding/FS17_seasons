@@ -7,7 +7,7 @@
 
 ssMotorFailure = {}
 
-ssMotorFailure.BROKEN_OVERDUE_FACTOR = 5
+ssMotorFailure.BROKEN_OVERDUE_FACTOR = 4
 
 function ssMotorFailure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations)
@@ -106,7 +106,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 
         local overdueFactor = Utils.clamp(ssVehicle:calculateOverdueFactor(self), 1, ssMotorFailure.BROKEN_OVERDUE_FACTOR)
 
-        local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - overdueFactor) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
+        local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - (overdueFactor - 1)) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
         local willStart = math.random() < p
 
         self.ssMotorStartTries = overdueFactor
