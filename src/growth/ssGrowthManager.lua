@@ -290,6 +290,7 @@ end
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
+        logInfo("buildCanPlantData: fruitname: " .. fruitName)
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
             for transition,v in pairs(self.growthData) do
