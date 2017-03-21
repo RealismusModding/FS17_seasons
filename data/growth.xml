@@ -2,18 +2,18 @@
 
 <growth>
     <defaultFruits>
-        <defaultFruit fruitName="barley"/>
-        <defaultFruit fruitName="wheat"/>
-        <defaultFruit fruitName="rape"/>
-        <defaultFruit fruitName="maize"/>
-        <defaultFruit fruitName="soybean"/>
-        <defaultFruit fruitName="sunflower"/>
-        <defaultFruit fruitName="potato"/>
-        <defaultFruit fruitName="sugarBeet"/>
-        <defaultFruit fruitName="poplar"/>
-        <defaultFruit fruitName="grass"/>
-        <defaultFruit fruitName="oilseedRadish"/>
-        <defaultFruit fruitName="dryGrass"/>
+        <defaultFruit fruitName="barley" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="wheat" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="rape" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="maize" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="soybean" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="sunflower" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="potato" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="sugarBeet" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="poplar" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="grass" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="oilseedRadish" />
+        <defaultFruit fruitName="dryGrass" />
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->
