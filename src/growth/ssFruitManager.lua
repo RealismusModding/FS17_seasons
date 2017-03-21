@@ -15,6 +15,7 @@ function ssFruitManager:loadMap(name)
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POPLAR] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_OILSEEDRADISH] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_DRYGRASS] = true
+    self.fruitsToExclude[FruitUtil.FRUITTYPE_GRASS] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_SUGARBEET] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POTATO] = true
 end

@@ -49,7 +49,7 @@
             <fruit fruitName="sunflower" normalGrowthState="1"/>
             <fruit fruitName="potato"    normalGrowthState="1" normalGrowthMaxState="2"/>
             <fruit fruitName="sugarBeet" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
+            <!--<fruit fruitName="grass" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>-->
             <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="4"> <!--late spring to early summer-->
@@ -76,7 +76,7 @@
             <fruit fruitName="sunflower" normalGrowthState="2" normalGrowthMaxState="3" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="grass" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
+            <!--<fruit fruitName="grass" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>-->
             <fruit fruitName="oilseedRadish" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="6"> <!--mid summer to late summer-->
@@ -116,7 +116,7 @@
             <fruit fruitName="sunflower" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
+            <!--<fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>-->
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="9"> <!--mid autumn to late autumn-->
