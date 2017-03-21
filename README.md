@@ -109,8 +109,6 @@ For a better game experience, custom maps should add two new density layers: one
 The game will get out of sync with the extra load of Seasons
 
 ## Mod conflicts
-- Giants' Crop Destruction
-  - Use the one in our own cropDestruction repository until we heard from Giants if we can upload it
 - Any mod that manipulates the weather, e.g. Multi overlay hud
 - Any mod that manipulates growth
 
