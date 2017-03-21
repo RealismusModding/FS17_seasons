@@ -5,6 +5,7 @@
 -- Authors:  theSeb
 -- Credits: Inspired by upsidedown's growth manager mod
 
+
 ssGrowthManager = {}
 g_seasons.growthManager = ssGrowthManager
 
