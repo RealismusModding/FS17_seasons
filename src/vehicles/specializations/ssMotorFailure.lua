@@ -57,8 +57,6 @@ function ssMotorFailure:update(dt)
             local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 20, 0, 10)
             local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 1000 * overdueFactor ^ (2.5 + breakdownLoadFactor))
 
-            p = 0.995
-
             if math.random() > p then
                 self.ssHasMotorBrokenDown = true
 
