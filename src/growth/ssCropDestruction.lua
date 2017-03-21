@@ -8,10 +8,12 @@
 ssCropDestruction = {}
 
 function ssCropDestruction:loadMap(name)
+    if not g_modIsLoaded["FS17_ForRealModule01_CropDestruction"] then return end
+
     local cdMod = getfenv(0)["FS17_ForRealModule01_CropDestruction"]
-    if cdMod ~= nil then
+    if cdMod ~= nil and cdMod.CropDestruction ~= nil then
         logInfo("ssCropDestruction: Crop Destruction mod found. Modifying...")
-        cdMod.CropDestruction.destroyFruitArea = Utils.overwrittenFunction(cdMod.CropDestruction.destroyFruitArea,self.seasonsDestroyFruitArea)
+        cdMod.CropDestruction.destroyFruitArea = Utils.overwrittenFunction(cdMod.CropDestruction.destroyFruitArea, self.seasonsDestroyFruitArea)
     end
 end
 
@@ -30,7 +32,7 @@ function ssCropDestruction:seasonsDestroyFruitArea(superFunc,x0,z0, x1,z1, x2,z2
                 setDensityMaskedParallelogram(entry.preparingOutputId, x,z, widthX,widthZ, heightX,heightZ, 0, 1, entry.id, 0, g_currentMission.numFruitStateChannels, 1);
                 setDensityCompareParams(entry.preparingOutputId, "greater", -1);
                 setDensityMaskParams(entry.id, "greater", 0);
-                
+
                 setDensityCompareParams(entry.id, "between", 2, desc.maxPreparingGrowthState+1);
                 setDensityParallelogram(entry.id, x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState+1);
                 setDensityCompareParams(entry.id, "greater", -1);
