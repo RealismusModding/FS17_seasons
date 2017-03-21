@@ -56,16 +56,22 @@ function ssMotorFailure:update(dt)
             local overdueFactor = ssVehicle:calculateOverdueFactor(self)
             local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 20, 0, 10)
             local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 1000 * overdueFactor ^ (2.5 + breakdownLoadFactor))
+
+            p = 0.995
+
             if math.random() > p then
-                self:stopMotor(nil, true)
+                self.ssHasMotorBrokenDown = true
+
                 if self:getIsHired() then
-                    self:stopAIVehicle(AIVehicle.STOP_REASON_USER)
+                    self:stopAIVehicle(AIVehicle.STOP_REASON_UNKNOWN)
+                else
+                    self:stopMotor()
                 end
             end
         end
     end
 
-    if self.isClient and self:getIsActiveForSound() and not self:getIsMotorStarted() and self.ssIsBroken then
+    if self.isClient and self:getIsActiveForSound() and not self:getIsMotorStarted() and self.ssHasMotorBrokenDown then
 
         if self.sampleGearbox.sample ~= nil then
             local speedFactor = Utils.clamp((self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumForwardSpeed()*3.6), 0, 1)
@@ -86,7 +92,7 @@ function ssMotorFailure:update(dt)
         if self:getLastSpeed() < 0.05 then --self.lastMoveTime + 1000 < g_currentMission.time then
             SoundUtil.stopSample(sampleGearbox)
 
-            self.ssIsBroken = false
+            self.ssHasMotorBrokenDown = false
         end
     end
 
@@ -110,7 +116,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 
     if not self.isMotorStarted then
         self.isMotorStarted = true
-        self.ssIsBroken = false
+        self.ssHasMotorBrokenDown = false
 
         if self.isClient then
             if self.exhaustParticleSystems ~= nil then
@@ -158,7 +164,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
-function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
+function ssMotorFailure:stopMotor(superFunc, noEventSend)
     if noEventSend == nil or noEventSend == false then
         if g_server ~= nil then
             g_server:broadcastEvent(SetMotorTurnedOnEvent:new(self, false), nil, nil, self)
@@ -182,9 +188,7 @@ function ssMotorFailure:stopMotor(superFunc, noEventSend, broken)
             -- Only play stop sound if the motor has successfully started
             if self.ssMotorStartMustFail or self.ssMotorStartTries > 1 then -- never started
                 -- No sound
-            elseif broken then -- broken mid-drive
-                self.ssIsBroken = true -- client only
-
+            elseif self.ssHasMotorBrokenDown then -- broken mid-drive
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
                 SoundUtil.playSample(self.sampleGearbox, 0, 0, 0)
             else -- Normal stop
