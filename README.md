@@ -126,6 +126,8 @@ Please follow the following code formatting rules:
 Copyright (c) 2016-2017 Realismus Modding
 All rights reserved.
 
+This copyright does not impugn any trademarks or copyrights owned by Giants
+
 *Warranty disclaimer*. You agree that you are using the software solely at your own risk.
 Realismus Modding provides the software “as is” and without warranty of any kind, and Realismus
 Modding for itself and its publishers and licensors hereby disclaims all express or implied
