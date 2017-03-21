@@ -5,11 +5,13 @@
 -- Authors:  theSeb
 --
 
+ssCropDestruction = {}
+
 function ssCropDestruction:loadMap(name)
     local cdMod = getfenv(0)["FS17_ForRealModule01_CropDestruction"]
     if cdMod ~= nil then
         logInfo("ssCropDestruction: Crop Destruction mod found. Modifying...")
-        cdMod.CropDestruction.destroyFruitArea = overwrittenFunction(cdMod.CropDestruction.destroyFruitArea,self.seasonsDestroyFruitArea)
+        cdMod.CropDestruction.destroyFruitArea = Utils.overwrittenFunction(cdMod.CropDestruction.destroyFruitArea,self.seasonsDestroyFruitArea)
     end
 end
 
