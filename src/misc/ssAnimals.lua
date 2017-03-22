@@ -108,7 +108,7 @@ function ssAnimals:updateTroughs()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
 
-        g_currentMission.husbandries["sheep"].dirtificationFillType = FillUtil.FILLTYPE_DRY_GRASS
+        g_currentMission.husbandries["sheep"].dirtificationFillType = FillUtil.FILLTYPE_DRYGRASS_WINDROW
         g_currentMission.husbandries["cow"].dirtificationFillType = FillUtil.FILLTYPE_FORAGE
     else
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
