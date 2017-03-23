@@ -60,10 +60,10 @@
         <text name="SS_VEHICLE_REPAIRS" text="Réparations des véhicules"/>
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Solde insuffisant pour réparer!"/>
-        <text name="SS_VEHICLE_REPAIRED" text="%s pour réparer le véhicule %s"/>
+        <text name="SS_VEHICLE_REPAIRED" text="%s Réparation effectué %s"/>
         <text name="SS_REPAIR_VEHICLE_COST" text="Réprarer %s pour %s"/>
         <text name="SS_REPAIR_REQUIRED" text="Reparation requise"/>
-        <text name="SS_REPAIR_REQUIRED_IN" text="La maintenance sera requise dans %d jours"/>
+        <text name="SS_REPAIR_REQUIRED_IN" text="Heures du moteur %.1f Heures L'entretien sera dans %d jours"/>
         <text name="SS_REPAIR_DIALOG" text="Voulez-vous réparer %s le %s?"/>
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation"/>
         <text name="warning_repairBrokenMachine" text="Panne de moteur. Veuillez réparer votre machine!"/>
