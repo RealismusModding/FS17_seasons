@@ -149,7 +149,6 @@ function ssAnimals:toggleFillType(animal, fillType, enabled)
 end
 
 -- animal health inspection
--- requre food OR water to pass, additional straw requirement in winter
 function ssAnimals:animalIsCaredFor(animal)
     local husbandry = g_currentMission.husbandries[animal]
     local season = g_seasons.environment:currentSeason()
@@ -180,7 +179,6 @@ function ssAnimals:killAnimals(animal, p)
     local husbandry = g_currentMission.husbandries[animal]
     if husbandry == nil then return end
 
-    -- productivity at 0-10% means that they are not fed, but might have straw
     if not self:animalIsCaredFor(animal) then
         local killedAnimals = math.ceil(p * husbandry.totalNumAnimals)
         local tmpNumAnimals = husbandry.totalNumAnimals
