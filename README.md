@@ -111,6 +111,7 @@ The game will get out of sync with the extra load of Seasons
 ## Mod conflicts
 - Any mod that manipulates the weather, e.g. Multi overlay hud
 - Any mod that manipulates growth
+- Any 'season manager' type mods
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
