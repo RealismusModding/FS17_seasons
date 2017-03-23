@@ -2,7 +2,7 @@
 -- ANIMALS SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the animals
--- Authors:  Rahkiin, reallogger, theSeb (added mapDir loading)
+-- Authors:  Rahkiin, reallogger, theSeb (added mapDir loading), baron
 --
 
 ssAnimals = {}
@@ -61,13 +61,20 @@ end
 
 function ssAnimals:dayChanged()
     if g_currentMission:getIsServer() and g_currentMission.missionInfo.difficulty ~= 0 then
+        local numKilled = 0
         -- percentages for base season length = 6 days
         -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-        self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        numKilled = numKilled + self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+
         -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-        self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        numKilled = numKilled + self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+
         -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-        self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        numKilled = numKilled + self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+
+        if numKilled > 0 then
+            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, string.format(ssLang.getText("warning_animalsKilled"), numKilled))
+        end
     end
 end
 
@@ -141,17 +148,54 @@ function ssAnimals:toggleFillType(animal, fillType, enabled)
     end
 end
 
-function ssAnimals:killAnimals(animal,p)
-    local tmpAnimal = g_currentMission.husbandries[animal]
-    if tmpAnimal == nil then return end
+-- animal health inspection
+-- requre food OR water to pass, additional straw requirement in winter
+function ssAnimals:animalIsCaredFor(animal)
+    local husbandry = g_currentMission.husbandries[animal]
+    local season = g_seasons.environment:currentSeason()
+    local hasWater, hasFood, hasStraw = false, false, false
+
+    for fillType, trigger in pairs(husbandry.tipTriggersFillLevels) do
+        for _, trough in pairs(trigger) do
+            if trough.fillLevel > 0 then
+                if fillType == FillUtil.FILLTYPE_WATER then
+                    hasWater = true
+                elseif fillType == FillUtil.FILLTYPE_STRAW then
+                    hasStraw = true
+                else -- not water nor straw, assume food
+                    hasFood = true
+                end
+            end
+        end
+    end
+
+    if not hasFood and not hasWater then
+        return false
+    end
+
+    -- If there is no bedding in winter and animal wants bedding, they might freeze to death
+    if husbandry.animalDesc.strawPerDay > 0 and not hasStraw and season == g_seasons.environment.SEASON_WINTER then
+        return false
+    end
+
+    return true
+end
+
+function ssAnimals:killAnimals(animal, p)
+    local husbandry = g_currentMission.husbandries[animal]
+    if husbandry == nil then return end
 
     -- productivity at 0-10% means that they are not fed, but might have straw
-    if tmpAnimal.productivity <= 0.1 then
-        local killedAnimals = math.ceil(p * tmpAnimal.totalNumAnimals)
-        local tmpNumAnimals = tmpAnimal.totalNumAnimals
+    if not self:animalIsCaredFor(animal) then
+        local killedAnimals = math.ceil(p * husbandry.totalNumAnimals)
+        local tmpNumAnimals = husbandry.totalNumAnimals
 
         if killedAnimals > 0 then
             g_currentMission.husbandries[animal]:removeAnimals(killedAnimals, 0)
+
+            return killedAnimals
         end
     end
+
+    return 0
 end
