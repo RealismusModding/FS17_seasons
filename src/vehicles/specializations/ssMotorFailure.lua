@@ -70,7 +70,6 @@ function ssMotorFailure:update(dt)
     end
 
     if self.isClient and self:getIsActiveForSound() and not self:getIsMotorStarted() and self.ssHasMotorBrokenDown then
-
         if self.sampleGearbox.sample ~= nil then
             local speedFactor = Utils.clamp((self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumForwardSpeed()*3.6), 0, 1)
             local pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundPitchMax, speedFactor^self.gearboxSoundPitchExponent)
@@ -93,7 +92,6 @@ function ssMotorFailure:update(dt)
             self.ssHasMotorBrokenDown = false
         end
     end
-
 end
 
 function ssMotorFailure:updateTick(dt)
