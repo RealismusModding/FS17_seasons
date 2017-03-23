@@ -108,14 +108,22 @@ function ssAnimals:updateTroughs()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
 
-        g_currentMission.husbandries["sheep"].dirtificationFillType = FillUtil.FILLTYPE_DRYGRASS_WINDROW
-        g_currentMission.husbandries["cow"].dirtificationFillType = FillUtil.FILLTYPE_FORAGE
+        self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
+        self:setDirtType("cow", FillUtil.FILLTYPE_FORAGE)
     else
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
 
-        g_currentMission.husbandries["sheep"].dirtificationFillType = FillUtil.FILLTYPE_GRASS_WINDROW
-        g_currentMission.husbandries["cow"].dirtificationFillType = FillUtil.FILLTYPE_GRASS_WINDROW
+        self:setDirtType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:setDirtType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+    end
+end
+
+function ssAnimals:setDirtType(animal, fillType)
+    local husbandry = g_currentMission.husbandries[animal]
+
+    if husbandry ~= nil then
+        husbandry.dirtificationFillType = fillType
     end
 end
 
