@@ -173,11 +173,6 @@ function ssAnimals:animalIsCaredFor(animal)
         return false
     end
 
-    -- If there is no bedding in winter and animal wants bedding, they might freeze to death
-    if husbandry.animalDesc.strawPerDay > 0 and not hasStraw and season == g_seasons.environment.SEASON_WINTER then
-        return false
-    end
-
     return true
 end
 
