@@ -96,7 +96,7 @@ For a better game experience, custom maps should add two new density layers: one
 
 ### Helpers
 - Wages have been changed to fit the new economy.
-- Overtime, before 6AM and after 18AM or in the weekends, pays 150%
+- Overtime, before 6AM and after 6PM or in the weekends, pays 150%
 
 ### Animals
 - Animals have been adjusted to the seasons
