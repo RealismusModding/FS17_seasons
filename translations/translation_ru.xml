@@ -70,6 +70,7 @@
         <text name="SS_BUTTON_OK" text="OK"/>
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать"/>
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!"/>
+        <text name="warning_animalsKilled" text="У Вас умерло животное (%d шт.)" />
         <text name="ui_pageOverview" text="Обзор"/>
         <text name="ui_pageSettings" text="Настройки"/>
         <text name="ui_pageDebug" text="Инструменты отладки"/>
