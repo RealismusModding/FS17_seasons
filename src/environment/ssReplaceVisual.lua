@@ -46,7 +46,7 @@ end
 function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     local file = loadXMLFile("xml", path)
     if file == nil then
-        logInfo("Failed to load texture replacements configuration form " .. path)
+        logInfo("Failed to load texture replacements configuration from " .. path)
         return
     end
 
