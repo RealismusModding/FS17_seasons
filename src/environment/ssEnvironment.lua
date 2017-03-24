@@ -202,13 +202,16 @@ function ssEnvironment:adaptTime()
 
     -- GIANTS values:
     -- nightEnd: 4
+    --  - nightEnd (sun): 5.5
     -- dayStart: 9
     -- dayEnd: 17
+    --  - nightStart (sun): 21
     -- nightStart: 22
 
-    -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
-    env.nightStart = dayEnd * 60
-    env.nightEnd = dayStart * 60
+    -- This is for the logical night. Used for turning on lights in houses / streets.
+    -- 0.3 and 0.8 determined using vanilla values
+    env.nightEnd = Utils.lerp(nightEnd, dayStart, 0.4) * 60
+    env.nightStart = Utils.lerp(dayEnd, nightStart, 0.55) * 60
 
     env.skyDayTimeStart = dayStart * 60 * 60 * 1000
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000
