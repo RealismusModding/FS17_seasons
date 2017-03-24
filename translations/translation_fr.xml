@@ -80,6 +80,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne pas montrer à nouveau"/>
 
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!"/>
+		<text name="warning_animalsKilled" text="%d Les animaux sont morts" />
 
 		<!-- GUI -->
         <text name="ui_pageOverview" text="Aperçu"/>
