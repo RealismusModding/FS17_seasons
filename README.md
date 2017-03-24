@@ -87,9 +87,12 @@ For a better game experience, custom maps should add two new density layers: one
 - If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may not start at all
   - Currently there is no way to fix a completely broken vehicle: you can't drive it to a shop and resetting won't un-break it
 
-### Finance
+### Economy
 - Loan cap is set to 30% of your total owned land value with a minimum of 300,000
 - The interest has been adjusted to the new year length.
+- Prices of almost everything changes during a year, realistically.
+- You can't sell grass/hay/straw in an unbaled form. (Price is 0)
+- You can't sell wet grass bales (price is 0)
 
 ### Helpers
 - Wages have been changed to fit the new economy.

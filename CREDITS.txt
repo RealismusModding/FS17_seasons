@@ -7,7 +7,7 @@ Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 Snow Weather, tree textures, Season Huds and logo -- FSModding_Gary
 Snow mask files -- Vasylko
 Weather forecast HUD -- ian898, blacky_BPG
-Bale fermentation -- fatov
+Bale fermentation -- fatov (baron)
 
 ## Translations
 Polish - Dzi4d3k, KITT3000

@@ -84,6 +84,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />
+        <text name="warning_animalsKilled" text="%d animals have died" />
 
         <!-- GUI -->
         <text name="ui_pageOverview" text="Overview" />
