@@ -84,6 +84,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie"/>
         
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!"/>
+        <text name="warning_animalsKilled" text="%d zwierząt padło"/>
         
         <!-- GUI -->
         <text name="ui_pageOverview" text="Opis"/>
