@@ -92,6 +92,7 @@ local files = {
 
     -- Adjustments to the game
     "misc/ssPedestrianSystem",
+    "misc/ssTrafficSystem",
     "misc/ssTreeManager",
 
     -- Adjusted objects

@@ -210,8 +210,8 @@ function ssEnvironment:adaptTime()
 
     -- This is for the logical night. Used for turning on lights in houses / streets.
     -- 0.3 and 0.8 determined using vanilla values
-    env.nightEnd = Utils.lerp(nightEnd, dayStart, 0.4) * 60
-    env.nightStart = Utils.lerp(dayEnd, nightStart, 0.55) * 60
+    env.nightEnd = Utils.lerp(nightEnd, dayStart, 0.35) * 60
+    env.nightStart = Utils.lerp(dayEnd, nightStart, 0.5) * 60
 
     env.skyDayTimeStart = dayStart * 60 * 60 * 1000
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000
