@@ -23,7 +23,7 @@ function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
         if optional == true then
             return parentData
         else
-            logInfo("ssSeasonsXML: Failed to load XML Seasons file " .. path)
+            logInfo("ssSeasonsXML:", "Failed to load XML Seasons file " .. path)
             return nil
         end
     end
@@ -60,7 +60,7 @@ function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
                     -- Read the type
                     local objType = getXMLString(file, propsKey .. "#type")
                     if objType == nil then
-                        logInfo("Invalid XML file (1)")
+                        logInfo("ssSeasonsXML:", "Invalid XML file (1)")
                         delete(file)
                         return
                     end

@@ -680,14 +680,14 @@ function ssWeatherManager:loadGerminateTemperature(path)
 
         local fruitName = getXMLString(file, key .. "#fruitName")
         if fruitName == nil then
-            logInfo("Fruit in growth.xml:germination is invalid")
+            logInfo("ssWeatherManager:", "Fruit in growth.xml:germination is invalid")
             break
         end
 
         local germinateTemp = getXMLFloat(file, key .. "#germinateTemp")
 
         if germinateTemp == nil then
-            logInfo("Temperature data in growth.xml:germination is invalid")
+            logInfo("ssWeatherManager:", "Temperature data in growth.xml:germination is invalid")
             break
         end
 
@@ -711,7 +711,7 @@ function ssWeatherManager:loadFromXML(path)
 
         local period = getXMLInt(file, key .. "#period")
         if period == nil then
-            logInfo("Period in weather.xml is invalid")
+            logInfo("ssWeatherManager:", "Period in weather.xml is invalid")
             break
         end
 
@@ -720,7 +720,7 @@ function ssWeatherManager:loadFromXML(path)
         local max = getXMLFloat(file, key .. ".max#value")
 
         if min == nil or mode == nil or max == nil then
-            logInfo("Temperature data in weather.xml is invalid")
+            logInfo("ssWeatherManager:", "Temperature data in weather.xml is invalid")
             break
         end
 
@@ -743,7 +743,7 @@ function ssWeatherManager:loadFromXML(path)
 
         local season = getXMLInt(file, key .. "#season")
         if season == nil then
-            logInfo("Season in weather.xml is invalid")
+            logInfo("ssWeatherManager:", "Season in weather.xml is invalid")
             break
         end
 
@@ -753,7 +753,7 @@ function ssWeatherManager:loadFromXML(path)
         local probClouds = getXMLFloat(file, key .. ".probClouds#value")
 
         if mu == nil or sigma == nil or probRain == nil or probClouds == nil then
-            logInfo("Rain data in weather.xml is invalid")
+            logInfo("ssWeatherManager:", "Rain data in weather.xml is invalid")
             break
         end
 

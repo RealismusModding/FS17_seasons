@@ -46,7 +46,7 @@ end
 function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     local file = loadXMLFile("xml", path)
     if file == nil then
-        logInfo("Failed to load texture replacements configuration from " .. path)
+        logInfo("ssReplaceVisual:", "Failed to load texture replacements configuration from " .. path)
         return
     end
 
@@ -78,7 +78,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
                 local toTexture = getXMLString(file, textureKey .. "#to")
 
                 if shapeName == nil or secondaryNodeName == nil or toTexture == nil then
-                    logInfo("Failed to load texture replacements configuration from " .. path .. ": invalid format")
+                    logInfo("ssReplaceVisual:", "Failed to load texture replacements configuration from " .. path .. ": invalid format")
                     return
                 end
 

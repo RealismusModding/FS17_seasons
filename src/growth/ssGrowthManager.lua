@@ -65,7 +65,7 @@ end
 
 function ssGrowthManager:loadMap(name)
     if self.growthManagerEnabled == false then
-        logInfo("ssGrowthManager: disabled")
+        logInfo("ssGrowthManager:", "disabled")
         return
     end
 
@@ -75,7 +75,7 @@ function ssGrowthManager:loadMap(name)
 
     if g_currentMission:getIsServer() == true then
        if self:getGrowthData() == false then
-            logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
+            logInfo("ssGrowthManager:" ,"required data not loaded. ssGrowthManager disabled")
             return
         end
 
@@ -99,14 +99,14 @@ function ssGrowthManager:getGrowthData()
     if defaultFruitsData ~= nil then
         self.defaultFruitsData = defaultFruitsData
     else
-        logInfo("ssGrowthManager: default fruits data not found")
+        logInfo("ssGrowthManager:", "default fruits data not found")
         return false
     end
 
     if growthData ~= nil then
         self.growthData = growthData
     else
-        logInfo("ssGrowthManager: default growth data not found")
+        logInfo("ssGrowthManager:", "default growth data not found")
         return false
     end
     return true
@@ -122,7 +122,7 @@ function ssGrowthManager:resetGrowth()
     if self.growthManagerEnabled == true then
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
-        logInfo("ssGrowthManager: Growth reset")
+        logInfo("ssGrowthManager:", "Growth reset")
     end
 end
 
@@ -133,7 +133,7 @@ function ssGrowthManager:growthStageChanged()
 
         if self.isNewSavegame and growthTransition == self.FIRST_GROWTH_TRANSITION then
             self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-            logInfo("ssGrowthManager: First time growth reset - this will only happen once in a new savegame")
+            logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
             self.isNewSavegame = false
              ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
         else
@@ -407,7 +407,7 @@ end
 function ssGrowthManager:consoleCommandIncrementGrowthStage()
     self.fakeGrowthTransitionNum = self.fakeGrowthTransitionNum + 1
     if self.fakeGrowthTransitionNum > 12 then self.fakeGrowthTransitionNum = 1 end
-    logInfo("GrowthManager enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
+    logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
     self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
     self:rebuildWillGerminateData()
@@ -415,7 +415,7 @@ end
 
 function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
     self.fakeGrowthTransitionNum = Utils.getNoNil(tonumber(newGrowthStage), 1)
-    logInfo("GrowthManager enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
+    logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
     self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
     self:rebuildWillGerminateData()
