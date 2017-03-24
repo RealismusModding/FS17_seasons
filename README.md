@@ -114,7 +114,11 @@ The game will get out of sync with the extra load of Seasons
 ## Mod conflicts
 - Any mod that manipulates the weather, e.g. Multi overlay hud
 - Any mod that manipulates growth
+- Any mod that changes animals
 - Any 'season manager' type mods
+
+Known:
+- Difficulties Improve by TyKonKet
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
