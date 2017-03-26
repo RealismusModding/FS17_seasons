@@ -9,8 +9,6 @@ ssTrafficSystem = {}
 g_seasons.trafficSystem = ssTrafficSystem
 
 function ssTrafficSystem:loadMap(name)
-    g_seasons.environment:addSeasonChangeListener(self)
-
     TrafficSystem.update = Utils.overwrittenFunction(TrafficSystem.update, ssTrafficSystem.tsUpdate)
 
     self.trafficLightOn = 21.00 * 60
