@@ -2,7 +2,7 @@
 -- PLACEABLE SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To change placeable properties
--- Authors:  Rahkiin
+-- Authors:  Rahkiin, reallogger
 --
 
 ssPlaceable = {}
@@ -41,31 +41,46 @@ function ssPlaceable:placeableDelete(superFunc)
 end
 
 function ssPlaceable:placeableSeasonLengthChanged()
-    self.incomePerHour = 6 / g_seasons.environment.daysInSeason * self.ssOriginalIncomePerHour
+    local difficultyFac = ( g_currentMission.missionInfo.difficulty - 2 ) * 0.1
+
+    self.incomePerHour = 6 / g_seasons.environment.daysInSeason * self.ssOriginalIncomePerHour * difficultyFac
 end
 
 function ssPlaceable:placeableGetDailyUpkeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-    local multiplier = 1
+    local multiplier = 1 + self.age / ( 4 * g_seasons.environment.daysInSeason ) * 2.5
 
-    if storeItem.lifetime ~= nil and storeItem.lifetime ~= 0 then
-        local ageMultiplier = math.min(self.age / storeItem.lifetime, 1)
-
-        multiplier = EconomyManager.MAX_DAILYUPKEEP_MULTIPLIER * ageMultiplier
+    if self.incomePerHour == 0 then
+        multiplier = 1 + self.age / ( 4 * g_seasons.environment.daysInSeason ) * 0.25
     end
-
-    -- Add simple factor
-    return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (6 / g_seasons.environment.daysInSeason)
+    
+    return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (12 / g_seasons.environment.daysInSeason )
 end
 
--- Currently: GIANTS Vanilla code
 function ssPlaceable:placeableGetSellPrice(superFunc)
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local priceMultiplier = 0.5
-    local maxVehicleAge = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()].lifetime
 
-    if maxVehicleAge ~= nil and maxVehicleAge ~= 0 then
-        priceMultiplier = priceMultiplier * math.exp(-3.5 * math.min(self.age / maxVehicleAge, 1))
+    if self.incomePerHour == 0 then
+        local ageFac = 0.5 - 0.05 * self.age / (4 * g_seasons.environment.daysInSeason)
+        
+        if ageFac > 0.1 then
+            priceMultiplier = ageFac
+        else
+            priceMultiplier = -0.05
+        end
+        
+    else
+        local annualCost = self:getDailyUpKeep() * 4 * g_seasons.environment.daysInSeason
+        local annualIncome = self.incomePerHour * 24 * 4 * g_seasons.environment.daysInSeason
+        local annualProfitPriceRatio = ( annualIncome - annualCost ) / self.price
+
+        if annualProfitPriceRatio > 0.1 then
+            priceMultiplier = annualProfitPriceRatio
+        else
+            priceMultiplier = -0.05
+        end
     end
 
-    return math.floor(self.price * math.max(priceMultiplier, 0.05))
+    return math.floor(self.price * priceMultiplier)
 end
