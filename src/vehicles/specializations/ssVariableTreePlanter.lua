@@ -55,7 +55,7 @@ function ssVariableTreePlanter:writeStream(streamId, connection)
 end
 
 function ssVariableTreePlanter:draw()
-    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_PLANTING_DISTANCE"), self.treePlanterMinDistance), InputBinding.IMPLEMENT_EXTRA3, nil, GS_PRIO_HIGH)
+    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_PLANTING_DISTANCE"), self.treePlanterMinDistance), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 end
 
 function ssVariableTreePlanter:updateTick(dt)
@@ -63,7 +63,7 @@ end
 
 function ssVariableTreePlanter:update(dt)
     if self:getIsActive() and self:getIsActiveForInput() then
-        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA3) then
+        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
             local currentDistance = self.treePlanterMinDistance
             local newDistance = 0
             local n = table.getn(ssVariableTreePlanter.plantingDistances)
