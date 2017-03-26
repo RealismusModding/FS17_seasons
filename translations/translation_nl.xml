@@ -1,102 +1,123 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>Rahkiin,TheSeb,JoshvZeyl</translationContributors>
+    <translationContributors>Rahkiin, TheSeb, JoshvZeyl</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien"/>
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig"/>
-        <text name="input_SEASONS_SHOW_MENU" text="Seizoenen: Open menu"/>
-        <text name="SEASONS_HIDE_WF" text="Verberg weervoorspelling"/>
-        <text name="SS_WEEKDAY_1" text="Maandag"/>
-        <text name="SS_WEEKDAY_2" text="Dinsdag"/>
-        <text name="SS_WEEKDAY_3" text="Woensdag"/>
-        <text name="SS_WEEKDAY_4" text="Donderdag"/>
-        <text name="SS_WEEKDAY_5" text="Vrijdag"/>
-        <text name="SS_WEEKDAY_6" text="Zaterdag"/>
-        <text name="SS_WEEKDAY_7" text="Zondag"/>
-        <text name="SS_WEEKDAY_SHORT_1" text="Maa"/>
-        <text name="SS_WEEKDAY_SHORT_2" text="Din"/>
-        <text name="SS_WEEKDAY_SHORT_3" text="Woe"/>
-        <text name="SS_WEEKDAY_SHORT_4" text="Don"/>
-        <text name="SS_WEEKDAY_SHORT_5" text="Vri"/>
-        <text name="SS_WEEKDAY_SHORT_6" text="Zat"/>
-        <text name="SS_WEEKDAY_SHORT_7" text="Zon"/>
-        <text name="SS_SEASON_0" text="Lente"/>
-        <text name="SS_SEASON_1" text="Zomer"/>
-        <text name="SS_SEASON_2" text="Herfst"/>
-        <text name="SS_SEASON_3" text="Winter"/>
-        <text name="SS_SEASON_FULL_NAME_1" text="Vroege lente"/>
-        <text name="SS_SEASON_FULL_NAME_2" text="Mid lente"/>
-        <text name="SS_SEASON_FULL_NAME_3" text="Late lente"/>
-        <text name="SS_SEASON_FULL_NAME_4" text="Vroege zomer"/>
-        <text name="SS_SEASON_FULL_NAME_5" text="Mid zomer"/>
-        <text name="SS_SEASON_FULL_NAME_6" text="Late zomer"/>
-        <text name="SS_SEASON_FULL_NAME_7" text="Vroege herfst"/>
-        <text name="SS_SEASON_FULL_NAME_8" text="Mid herfst"/>
-        <text name="SS_SEASON_FULL_NAME_9" text="Late herfst"/>
-        <text name="SS_SEASON_FULL_NAME_10" text="Vroege winter"/>
-        <text name="SS_SEASON_FULL_NAME_11" text="Mid winter"/>
-        <text name="SS_SEASON_FULL_NAME_12" text="Late winter"/>
-        <text name="SS_MONTH_SHORT_1" text="jan"/>
-        <text name="SS_MONTH_SHORT_2" text="feb"/>
-        <text name="SS_MONTH_SHORT_3" text="maart"/>
-        <text name="SS_MONTH_SHORT_4" text="apr"/>
-        <text name="SS_MONTH_SHORT_5" text="mei"/>
-        <text name="SS_MONTH_SHORT_6" text="juni"/>
-        <text name="SS_MONTH_SHORT_7" text="juli"/>
-        <text name="SS_MONTH_SHORT_8" text="aug"/>
-        <text name="SS_MONTH_SHORT_9" text="sept"/>
-        <text name="SS_MONTH_SHORT_10" text="okt"/>
-        <text name="SS_MONTH_SHORT_11" text="nov"/>
-        <text name="SS_MONTH_SHORT_12" text="dec"/>
-        <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen"/>
-        <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud"/>
-        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties"/>
-        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen"/>
-        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s"/>
-        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s"/>
-        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist"/>
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen"/>
-        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?"/>
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren"/>
-        <text name="warning_repairBrokenMachine" text="Motor storing. Repareer je machines"/>
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="Om middernacht"/>
-        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!"/>
-        <text name="SS_SAVE_FAILED" text="Mislukt om Seasons op te slaan in je save game. Probeer op nieuw!"/>
-        <text name="SS_SEASON_INTRO_0" text="Een nieuwjaar, een nieuwe zaai periode. TODO"/>
-        <text name="SS_SEASON_INTRO_1" text="De zon staat hoog, gewassen groeien. TODO"/>
-        <text name="SS_SEASON_INTRO_2" text="Oogst periode is aangebroken. Bereid voor op de winter als gewassen die mogelijk niet overleven. TODO"/>
-        <text name="SS_SEASON_INTRO_3" text="Het is Koud. De aarde is hard, mogelijk bevroren. Gewassen groeien niet en gaan misschien zelfs dood. TODO"/>
-        <text name="SS_BUTTON_OK" text="OK"/>
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien"/>
-        <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn"/>
-        <text name="ui_pageOverview" text="Overzicht"/>
-        <text name="ui_pageSettings" text="Instellingen"/>
-        <text name="ui_pageDebug" text="Debug"/>
-        <text name="ui_buttonSave" text="Toepassen instellingen"/>
-        <text name="ui_snowOneLayer" text="Alleen 1 laag"/>
-        <text name="ui_days" text="%d dagen"/>
-        <text name="ui_temperatureFahrenheit" text="Fahrenheit"/>
-        <text name="ui_temperatureCelcius" text="Celcius"/>
-        <text name="tooltip_seasonLength" text="De lengte van 1 seizoen in dagen. Een jaar heeft 4 seizoenen"/>
-        <text name="tooltip_seasonIntros" text="Laat een introductie zien bij de start van een seizoen"/>
-        <text name="tooltip_snow" text="Sneeuw zal vallen in koude winters en de weg blokkeren"/>
-        <text name="tooltip_controlsHelp" text="Laat de weersvoorspellingen en menu controls zien in het help menu"/>
-        <text name="tooltip_snowTracks" text="Voertuigen drukken sneeuw samen wanneer er overheen gereden word"/>
-        <text name="tooltip_controlsTemperature" text="Zet de temperatuur schaal die gebruikt zal worden in het spel"/>
-        <text name="tooltip_moisture" text="Weiger oogsten als de gewassen te nat of vochtig zijn"/>
-        <text name="setting_seasonIntros" text="Seizoen introductie"/>
-        <text name="setting_seasonLength" text="Seizoen lengte"/>
-      	<text name="setting_snow" text="Sneeuw instelling"/>
-        <text name="setting_controlsHelp" text="Hulpmenu controls"/>
-        <text name="setting_snowTracks" text="Sporen in de Sneeuw van voertuigen"/>
-       <text name="setting_controlsTemperature" text="Temperatuur schaal"/>
-        <text name="setting_moisture" text="Vochtigheid gewas"/>
-        <text name="dialog_applySettings" text="Weet je zeker dat je de seizoens instellingen wil veranderen? Veranderingen in seizoen lengte en groei, kan resulteren in velden die alleen gemaakt worden naar 1 spel jaar"/>
-        <text name="dialog_resetGrowth" text="Je hebt Seasons mod op even oude save game geladen. Seasons wil alle velden terugzetten naar hun naakte toestand terugzetten met de spel dag. Je zal alle gewassen verliezen. Als je de gewasgroei niet terug zet, zal seasons niet werken zoals verwacht"/>
-        <text name="dialog_resetGrowth_title" text="Reset gewasgroei"/>
-        <text name="dialog_resetGrowth_no" text="Houdt gewasgroei"/>
-        <text name="dialog_resetGrowth_yes" text="Reset"/>
-        <text name="fillType_snow" text="Sneeuw"/>
+        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seizoenen: Open menu" />
+        <!-- Missing translation of "Planting distance (%d m)" -->
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="" />
+        <text name="SEASONS_HIDE_WF" text="Verberg weervoorspelling" />
+
+        <text name="SS_WEEKDAY_1" text="Maandag" />
+        <text name="SS_WEEKDAY_2" text="Dinsdag" />
+        <text name="SS_WEEKDAY_3" text="Woensdag" />
+        <text name="SS_WEEKDAY_4" text="Donderdag" />
+        <text name="SS_WEEKDAY_5" text="Vrijdag" />
+        <text name="SS_WEEKDAY_6" text="Zaterdag" />
+        <text name="SS_WEEKDAY_7" text="Zondag" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Maa" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Din" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Woe" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Don" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Vri" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Zat" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Zon" />
+
+        <text name="SS_SEASON_0" text="Lente" />
+        <text name="SS_SEASON_1" text="Zomer" />
+        <text name="SS_SEASON_2" text="Herfst" />
+        <text name="SS_SEASON_3" text="Winter" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Vroege lente" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mid lente" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Late lente" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Vroege zomer" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Mid zomer" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Late zomer" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Vroege herfst" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Mid herfst" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Late herfst" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Vroege winter" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mid winter" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Late winter" />
+
+        <text name="SS_MONTH_SHORT_1" text="jan" />
+        <text name="SS_MONTH_SHORT_2" text="feb" />
+        <text name="SS_MONTH_SHORT_3" text="maart" />
+        <text name="SS_MONTH_SHORT_4" text="apr" />
+        <text name="SS_MONTH_SHORT_5" text="mei" />
+        <text name="SS_MONTH_SHORT_6" text="juni" />
+        <text name="SS_MONTH_SHORT_7" text="juli" />
+        <text name="SS_MONTH_SHORT_8" text="aug" />
+        <text name="SS_MONTH_SHORT_9" text="sept" />
+        <text name="SS_MONTH_SHORT_10" text="okt" />
+        <text name="SS_MONTH_SHORT_11" text="nov" />
+        <text name="SS_MONTH_SHORT_12" text="dec" />
+
+        <text name="SS_VEHICLE_TAXES" text="Voertuigbelastingen" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
+        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie vereist over %d dagen" />
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
+        <text name="warning_repairBrokenMachine" text="Motor storing. Repareer je machines" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="Om middernacht" />
+
+        <text name="SS_SAVE_FAILED" text="Mislukt om Seasons op te slaan in je save game. Probeer op nieuw!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Een nieuwjaar, een nieuwe zaai periode. TODO" />
+        <text name="SS_SEASON_INTRO_1" text="De zon staat hoog, gewassen groeien. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="Oogst periode is aangebroken. Bereid voor op de winter als gewassen die mogelijk niet overleven. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Het is Koud. De aarde is hard, mogelijk bevroren. Gewassen groeien niet en gaan misschien zelfs dood. TODO" />
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
+
+        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
+        <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn" />
+        <!-- Missing translation of "Animals died (%d)" -->
+        <text name="warning_animalsKilled" text="" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
+
+        <text name="ui_pageOverview" text="Overzicht" />
+        <text name="ui_pageSettings" text="Instellingen" />
+        <text name="ui_pageDebug" text="Debug" />
+
+        <text name="ui_buttonSave" text="Toepassen instellingen" />
+        <text name="ui_snowOneLayer" text="Alleen 1 laag" />
+        <text name="ui_days" text="%d dagen" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celcius" />
+
+        <text name="tooltip_seasonLength" text="De lengte van 1 seizoen in dagen. Een jaar heeft 4 seizoenen" />
+        <text name="tooltip_seasonIntros" text="Laat een introductie zien bij de start van een seizoen" />
+        <text name="tooltip_snow" text="Sneeuw zal vallen in koude winters en de weg blokkeren" />
+        <text name="tooltip_controlsHelp" text="Laat de weersvoorspellingen en menu controls zien in het help menu" />
+        <text name="tooltip_snowTracks" text="Voertuigen drukken sneeuw samen wanneer er overheen gereden word" />
+        <text name="tooltip_controlsTemperature" text="Zet de temperatuur schaal die gebruikt zal worden in het spel" />
+        <text name="tooltip_moisture" text="Weiger oogsten als de gewassen te nat of vochtig zijn" />
+
+        <text name="setting_seasonIntros" text="Seizoen introductie" />
+        <text name="setting_seasonLength" text="Seizoen lengte" />
+        <text name="setting_snow" text="Sneeuw instelling" />
+        <text name="setting_controlsHelp" text="Hulpmenu controls" />
+        <text name="setting_snowTracks" text="Sporen in de Sneeuw van voertuigen" />
+        <text name="setting_controlsTemperature" text="Temperatuur schaal" />
+        <text name="setting_moisture" text="Vochtigheid gewas" />
+
+        <text name="dialog_applySettings" text="Weet je zeker dat je de seizoens instellingen wil veranderen? Veranderingen in seizoen lengte en groei, kan resulteren in velden die alleen gemaakt worden naar 1 spel jaar" />
+
+        <text name="dialog_resetGrowth" text="Je hebt Seasons mod op even oude save game geladen. Seasons wil alle velden terugzetten naar hun naakte toestand terugzetten met de spel dag. Je zal alle gewassen verliezen. Als je de gewasgroei niet terug zet, zal seasons niet werken zoals verwacht" />
+        <text name="dialog_resetGrowth_title" text="Reset gewasgroei" />
+        <text name="dialog_resetGrowth_no" text="Houdt gewasgroei" />
+        <text name="dialog_resetGrowth_yes" text="Reset" />
+
+        <text name="fillType_snow" text="Sneeuw" />
     </texts>
 </l10n>
