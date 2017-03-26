@@ -21,7 +21,7 @@ function ssSwathManager:loadMap(name)
 
 end
 
-function ssSwathManager:reduceGrass(layers) 
+function ssSwathManager:reduceGrass(layers)
     layers = tonumber(layers)
 
     local startWorldX = 0
@@ -34,12 +34,13 @@ function ssSwathManager:reduceGrass(layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     -- Reduce grass swaths
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_GRASS_WINDROW]["index"])
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_GRASS_WINDROW].index)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
+
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-
 end
 
 function ssSwathManager:reduceStrawHay(layers)
@@ -54,19 +55,16 @@ function ssSwathManager:reduceStrawHay(layers)
 
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-    -- Reduce straw swaths
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_STRAW]["index"])
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+    -- Reduce swaths where the windrow is straw
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_STRAW].index)
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 
-    -- Reduce hay (dry grass) swaths
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_DRYGRASS_WINDROW]["index"])
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+    -- Reduce swaths where the windrow is hay
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_DRYGRASS_WINDROW].index)
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
+
+    -- Reset the params
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 end
 
 function ssSwathManager:dayChanged()
@@ -89,14 +87,12 @@ end
 function ssSwathManager:growthStageChanged()
     if g_currentMission:getIsServer() then
         -- removing all swaths at beginning of winter
-        if g_seasons.environment:growthTransitionAtDay() == 10 then
+        if g_seasons.environment:growthTransitionAtDay() == g_seasons.environment.TRANSITION_EARLY_WINTER then
             self:reduceGrass(64)
             self:reduceStrawHay(64)
         else
             -- removing some every growth transition as it will rot if left too long on the ground
             self:reduceStrawHay(1)
-
         end
     end
 end
-
