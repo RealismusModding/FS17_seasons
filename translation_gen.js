@@ -62,7 +62,7 @@ function createXML(data, language) {
     let text = root.end({
         pretty: true,
         indent: "    "
-    });
+    }) + "\n";
 
     // Re-add newlines from _en
     let newlines = data["en"].newlines;
