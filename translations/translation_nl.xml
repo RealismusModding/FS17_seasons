@@ -30,16 +30,16 @@
         <text name="SS_SEASON_3" text="Winter" />
 
         <text name="SS_SEASON_FULL_NAME_1" text="Vroege lente" />
-        <text name="SS_SEASON_FULL_NAME_2" text="Mid lente" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Midden lente" />
         <text name="SS_SEASON_FULL_NAME_3" text="Late lente" />
         <text name="SS_SEASON_FULL_NAME_4" text="Vroege zomer" />
-        <text name="SS_SEASON_FULL_NAME_5" text="Mid zomer" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Midden zomer" />
         <text name="SS_SEASON_FULL_NAME_6" text="Late zomer" />
         <text name="SS_SEASON_FULL_NAME_7" text="Vroege herfst" />
-        <text name="SS_SEASON_FULL_NAME_8" text="Mid herfst" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Midden herfst" />
         <text name="SS_SEASON_FULL_NAME_9" text="Late herfst" />
         <text name="SS_SEASON_FULL_NAME_10" text="Vroege winter" />
-        <text name="SS_SEASON_FULL_NAME_11" text="Mid winter" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Midden winter" />
         <text name="SS_SEASON_FULL_NAME_12" text="Late winter" />
 
         <text name="SS_MONTH_SHORT_1" text="jan" />
