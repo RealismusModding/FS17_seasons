@@ -22,6 +22,22 @@ ssEnvironment.SEASON_SUMMER = 1
 ssEnvironment.SEASON_AUTUMN = 2
 ssEnvironment.SEASON_WINTER = 3
 
+ssEnvironment.TRANSITION_EARLY_SPRING = 1
+ssEnvironment.TRANSITION_MID_SPRING = 2
+ssEnvironment.TRANSITION_LATE_SPRING = 3
+
+ssEnvironment.TRANSITION_EARLY_SUMMER = 4
+ssEnvironment.TRANSITION_MID_SUMMER = 5
+ssEnvironment.TRANSITION_LATE_SUMMER = 6
+
+ssEnvironment.TRANSITION_EARLY_AUTUMN = 7
+ssEnvironment.TRANSITION_MID_AUTUMN = 8
+ssEnvironment.TRANSITION_LATE_AUTUMN = 9
+
+ssEnvironment.TRANSITION_EARLY_WINTER = 10
+ssEnvironment.TRANSITION_MID_WINTER = 11
+ssEnvironment.TRANSITION_LATE_WINTER = 12
+
 function ssEnvironment:preLoad()
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and

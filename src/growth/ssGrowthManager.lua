@@ -17,22 +17,6 @@ ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
 
-ssGrowthManager.TRANSITION_EARLY_SPRING = 1
-ssGrowthManager.TRANSITION_MID_SPRING = 2
-ssGrowthManager.TRANSITION_LATE_SPRING = 3
-
-ssGrowthManager.TRANSITION_EARLY_SUMMER = 4
-ssGrowthManager.TRANSITION_MID_SUMMER = 5
-ssGrowthManager.TRANSITION_LATE_SUMMER = 6
-
-ssGrowthManager.TRANSITION_EARLY_AUTUMN = 7
-ssGrowthManager.TRANSITION_MID_AUTUMN = 8
-ssGrowthManager.TRANSITION_LATE_AUTUMN = 9
-
-ssGrowthManager.TRANSITION_EARLY_WINTER = 10
-ssGrowthManager.TRANSITION_MID_WINTER = 11
-ssGrowthManager.TRANSITION_LATE_WINTER = 12
-
 -- data
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
