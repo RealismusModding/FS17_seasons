@@ -97,5 +97,6 @@
         <text name="dialog_resetGrowth_no" text="Houdt gewasgroei"/>
         <text name="dialog_resetGrowth_yes" text="Reset"/>
         <text name="fillType_snow" text="Sneeuw"/>
+        <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
     </texts>
 </l10n>
