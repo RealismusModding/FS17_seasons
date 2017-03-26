@@ -11,7 +11,7 @@ g_seasons.vehicle = ssVehicle
 ssVehicle.LIFETIME_FACTOR = 5
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
-ssVehicle.DIRT_FACTOR = 0.4
+ssVehicle.DIRT_FACTOR = 0.2
 ssVehicle.SERVICE_INTERVAL = 30
 
 ssVehicle.repairFactors = {}
@@ -282,7 +282,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local overdueFactor = self:calculateOverdueFactor(vehicle) ^ 2
 
-    return (costs + workCosts + 200 * (overdueFactor -1 )) * dealerMultiplier * difficultyMultiplier * overdueFactor
+    return (costs + workCosts + 50 * (overdueFactor -1 )) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
 -- all (guard)
@@ -299,7 +299,7 @@ function ssVehicle:getDailyUpKeep(superFunc)
     -- This is for visually in the display
     local costs = ssVehicle:taxInterestCost(self, storeItem)
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
-        costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false)) * overdueFactor
+        costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false))
     else
         costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false) + ssVehicle:getRepairShopCost(self,storeItem,true)
     end
