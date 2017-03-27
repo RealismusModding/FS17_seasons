@@ -54,6 +54,10 @@ function ssSwathManager:reduceStrawHay(startWorldX, startWorldZ, widthWorldX, wi
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_DRYGRASS_WINDROW].index)
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
 
+    -- If height is 0, reset filltype
+    -- setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
+    -- setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0)
+
     -- Reset the params
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 end
@@ -100,7 +104,7 @@ function ssSwathManager:hourChanged()
     if g_currentMission:getIsServer() then
         if g_currentMission.environment.timeSinceLastRain < 60 then
             -- removing 1 layer if has been raining the last hour
-            g_seasons.dms:queueJob("ssRemoveSwaths", 1)
+            g_seasons.dms:queueJob("ssReduceStrawHay", 1)
         end
     end
 end

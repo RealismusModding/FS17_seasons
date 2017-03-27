@@ -81,11 +81,11 @@ function ssDensityMapScanner:update(dt)
             self.currentJob.x = 0
             self.currentJob.z = 0
 
-            -- Must be evenly dividable with mapsize.
-            self.currentJob.numSegments = 16
-
             if g_dedicatedServerInfo ~= nil or g_currentMission.missionInfo.timeScale > 120 then
                 self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
+            else
+                -- Must be evenly dividable with mapsize.
+                self.currentJob.numSegments = 16
             end
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
