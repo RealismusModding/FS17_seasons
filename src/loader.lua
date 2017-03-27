@@ -207,9 +207,12 @@ end
 local function ssSeasonsModSaveToXML(self)
     if g_seasons.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
+            local ssKey = self.xmlKey .. ".ssSeasons"
+            removeXMLProperty(savegame, ssKey)
+
             for _, k in pairs(g_modClasses) do
                 if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].save ~= nil then
-                    _G[k].save(_G[k], self.xmlFile, self.xmlKey .. ".ssSeasons")
+                    _G[k].save(_G[k], self.xmlFile, ssKey)
                 end
             end
         else
