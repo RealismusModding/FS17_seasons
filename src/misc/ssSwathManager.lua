@@ -37,6 +37,10 @@ function ssSwathManager:reduceGrass(startWorldX, startWorldZ, widthWorldX, width
 
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
 
+    -- If height is 0, reset filltype
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
+    setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0)
+
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 end
@@ -55,8 +59,8 @@ function ssSwathManager:reduceStrawHay(startWorldX, startWorldZ, widthWorldX, wi
     addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
 
     -- If height is 0, reset filltype
-    -- setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-    -- setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0)
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
+    setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0)
 
     -- Reset the params
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
