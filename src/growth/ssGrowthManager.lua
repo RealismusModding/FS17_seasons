@@ -88,7 +88,7 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthStage", self)
         addConsoleCommand("ssSetGrowthStage", "Sets growth for test purposes", "consoleCommandSetGrowthStage", self)
-        --addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
+        addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
         self:dayChanged()
     end
 end
@@ -128,21 +128,20 @@ end
 
 --handle growthStageCHanged event
 function ssGrowthManager:growthStageChanged()
-    if self.growthManagerEnabled then
-        local growthTransition = g_seasons.environment:growthTransitionAtDay()
+    if self.growthManagerEnabled == false then return end
 
-        if self.isNewSavegame and growthTransition == self.FIRST_GROWTH_TRANSITION then
-            self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
-            logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
-            self.isNewSavegame = false
-             ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
-        else
-            log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
-            self.currentGrowthTransitionPeriod = growthTransition
+    local growthTransition = g_seasons.environment:growthTransitionAtDay()
+
+    if self.isNewSavegame and growthTransition == self.FIRST_GROWTH_TRANSITION then
+        self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
+        logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
+        self.isNewSavegame = false
             ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
-            self:rebuildWillGerminateData()
-        end
-
+    else
+        log("GrowthManager enabled - growthStateChanged to: " .. growthTransition)
+        self.currentGrowthTransitionPeriod = growthTransition
+        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
+        self:rebuildWillGerminateData()
     end
 end
 
@@ -421,10 +420,9 @@ function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
     self:rebuildWillGerminateData()
 end
 
--- function ssGrowthManager:consoleCommandTestStuff()
---     -- test stuff in here
---     print_r(self.defaultFruitsData)
---     log("ssGrowthManager: update default fruits data")
---     self:updateDefaultFruitsData("newFruit")
---     print_r(self.defaultFruitsData)
--- end
+function ssGrowthManager:consoleCommandTestStuff()
+    logInfo("ssGrowthManager: canPlantData")
+    print_r(self.canPlantData)
+    logInfo("ssGrowthManager: willGerminateData")
+    print_r(self.willGerminateData)
+end
