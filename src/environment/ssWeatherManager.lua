@@ -488,7 +488,7 @@ function ssWeatherManager:updateSoilTemp()
         snowDamp = math.exp(facfs*self.snowDepth)
     end
 
-    self.soilTemp = soilTemp + (deltaT * facKT / facCA * (avgAirTemp - soilTemp)) * snowDamp
+    self.soilTemp = soilTemp + (deltaT * facKT / (0.81 * facCA) * (avgAirTemp - soilTemp)) * snowDamp
     --log("self.soilTemp=",self.soilTemp," soilTemp=",soilTemp," avgAirTemp=",avgAirTemp," snowDamp=",snowDamp," snowDepth=",snowDepth)
 end
 
