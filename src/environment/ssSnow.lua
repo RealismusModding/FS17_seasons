@@ -141,7 +141,7 @@ function ssSnow:applySnow(targetSnowDepth)
 end
 
 function ssSnow:hourChanged()
-    if not self.autoSnow then return end
+    if not self.autoSnow or self.mode == ssSnow.MODE_OFF then return end
 
     local targetFromweatherSystem = ssWeatherManager:getSnowHeight() -- Fetch from weathersystem.
 
