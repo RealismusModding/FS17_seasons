@@ -155,6 +155,8 @@ end
 -- handle dayChanged event
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
+    if self.growthManagerEnabled == false then return end
+    
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
