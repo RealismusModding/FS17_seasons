@@ -106,7 +106,7 @@ function ssTreeManager:calculateDistance(singleTree,cutTree)
 end
 
 -- This seems to be the function that is called when a tree is planted. If an existing savegame has planted trees, the function is called during loading as well.
-function ssTreeManager:plantTree()
+function ssTreeManager:plantTree(treesData, treeData, x, y, z, rx, ry, rz, growthState, growthStateI, isGrowing, splitShapeFileId)
     ssTreeManager.numGrowingTrees = table.getn(g_currentMission.plantedTrees.growingTrees)
 
     if ssTreeManager.numGrowingTrees > 0 then
