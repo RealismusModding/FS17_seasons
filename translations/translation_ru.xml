@@ -2,102 +2,120 @@
 <l10n>
     <translationContributors>Vasil'ko, theSeb</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Прогноз погоды"/>
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику"/>
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню"/>
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Прогноз погоды" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Расстояние посадки (%d м)" />
-        <text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды"/>
-        <text name="SS_WEEKDAY_1" text="Понедельник"/>
-        <text name="SS_WEEKDAY_2" text="Вторник"/>
-        <text name="SS_WEEKDAY_3" text="Среда"/>
-        <text name="SS_WEEKDAY_4" text="Четверг"/>
-        <text name="SS_WEEKDAY_5" text="Пятница"/>
-        <text name="SS_WEEKDAY_6" text="Суббота"/>
-        <text name="SS_WEEKDAY_7" text="Воскресенье"/>
-        <text name="SS_WEEKDAY_SHORT_1" text="Пн"/>
-        <text name="SS_WEEKDAY_SHORT_2" text="Вт"/>
-        <text name="SS_WEEKDAY_SHORT_3" text="Ср"/>
-        <text name="SS_WEEKDAY_SHORT_4" text="Чт"/>
-        <text name="SS_WEEKDAY_SHORT_5" text="Пт"/>
-        <text name="SS_WEEKDAY_SHORT_6" text="Сб"/>
-        <text name="SS_WEEKDAY_SHORT_7" text="Вс"/>
-        <text name="SS_SEASON_0" text="Весна"/>
-        <text name="SS_SEASON_1" text="Лето"/>
-        <text name="SS_SEASON_2" text="Осень"/>
-        <text name="SS_SEASON_3" text="Зима"/>
-        <text name="SS_SEASON_FULL_NAME_1" text="Ранняя весна"/>
-        <text name="SS_SEASON_FULL_NAME_2" text="Середина весны"/>
-        <text name="SS_SEASON_FULL_NAME_3" text="Поздняя весна"/>
-        <text name="SS_SEASON_FULL_NAME_4" text="Раннее лето"/>
-        <text name="SS_SEASON_FULL_NAME_5" text="Середина лета"/>
-        <text name="SS_SEASON_FULL_NAME_6" text="Позднее лето"/>
-        <text name="SS_SEASON_FULL_NAME_7" text="Ранняя осень"/>
-        <text name="SS_SEASON_FULL_NAME_8" text="Середина осени"/>
-        <text name="SS_SEASON_FULL_NAME_9" text="Поздняя осень"/>
-        <text name="SS_SEASON_FULL_NAME_10" text="Ранняя зима"/>
-        <text name="SS_SEASON_FULL_NAME_11" text="Середина зимы"/>
-        <text name="SS_SEASON_FULL_NAME_12" text="Поздняя зима"/>
-        <text name="SS_MONTH_SHORT_1" text="январь"/>
-        <text name="SS_MONTH_SHORT_2" text="февраль"/>
-        <text name="SS_MONTH_SHORT_3" text="март"/>
-        <text name="SS_MONTH_SHORT_4" text="апрель"/>
-        <text name="SS_MONTH_SHORT_5" text="май"/>
-        <text name="SS_MONTH_SHORT_6" text="июнь"/>
-        <text name="SS_MONTH_SHORT_7" text="июль"/>
-        <text name="SS_MONTH_SHORT_8" text="август"/>
-        <text name="SS_MONTH_SHORT_9" text="сентябрь"/>
-        <text name="SS_MONTH_SHORT_10" text="октябрь"/>
-        <text name="SS_MONTH_SHORT_11" text="ноябрь"/>
-        <text name="SS_MONTH_SHORT_12" text="декабрь"/>
-        <text name="SS_VEHICLE_TAXES" text="Налоги на технику"/>
-        <text name="SS_VEHICLE_MAINTENANCE" text="Обслуживание техники"/>
-        <text name="SS_VEHICLE_REPAIRS" text="Ремонт техники"/>
-        <text name="SS_NOT_ENOUGH_MONEY" text="Вам не хватает денег для тех.обслуживания"/>
-        <text name="SS_VEHICLE_REPAIRED" text="Тех.обслуживание %s обошлось %s"/>
-        <text name="SS_REPAIR_VEHICLE_COST" text="Провести ТО %s за %s"/>
-        <text name="SS_REPAIR_REQUIRED" text="Нуждается в тех.обслуживании"/>
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до ТО"/>
-        <text name="SS_REPAIR_DIALOG" text="Вы желаете провести тех. обслуживание %s за %s?"/>
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание"/>
-        <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!"/>
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь"/>
-        <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!"/>
-        <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seaons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!"/>
-        <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе."/>
-        <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. Можно уделить больше внимания животным."/>
-        <text name="SS_SEASON_INTRO_2" text="Наступил период уборки урожая. Готовимся к зиме, так как посевы могут не пережить холода. За работу."/>
-        <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно отдохнуть или заняться лесом."/>
-        <text name="SS_BUTTON_OK" text="OK"/>
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать"/>
-        <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!"/>
+        <text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды" />
+
+        <text name="SS_WEEKDAY_1" text="Понедельник" />
+        <text name="SS_WEEKDAY_2" text="Вторник" />
+        <text name="SS_WEEKDAY_3" text="Среда" />
+        <text name="SS_WEEKDAY_4" text="Четверг" />
+        <text name="SS_WEEKDAY_5" text="Пятница" />
+        <text name="SS_WEEKDAY_6" text="Суббота" />
+        <text name="SS_WEEKDAY_7" text="Воскресенье" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Пн" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Вт" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Ср" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Чт" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Пт" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Сб" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Вс" />
+
+        <text name="SS_SEASON_0" text="Весна" />
+        <text name="SS_SEASON_1" text="Лето" />
+        <text name="SS_SEASON_2" text="Осень" />
+        <text name="SS_SEASON_3" text="Зима" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Ранняя весна" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Середина весны" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Поздняя весна" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Раннее лето" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Середина лета" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Позднее лето" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Ранняя осень" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Середина осени" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Поздняя осень" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Ранняя зима" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Середина зимы" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Поздняя зима" />
+
+        <text name="SS_MONTH_SHORT_1" text="январь" />
+        <text name="SS_MONTH_SHORT_2" text="февраль" />
+        <text name="SS_MONTH_SHORT_3" text="март" />
+        <text name="SS_MONTH_SHORT_4" text="апрель" />
+        <text name="SS_MONTH_SHORT_5" text="май" />
+        <text name="SS_MONTH_SHORT_6" text="июнь" />
+        <text name="SS_MONTH_SHORT_7" text="июль" />
+        <text name="SS_MONTH_SHORT_8" text="август" />
+        <text name="SS_MONTH_SHORT_9" text="сентябрь" />
+        <text name="SS_MONTH_SHORT_10" text="октябрь" />
+        <text name="SS_MONTH_SHORT_11" text="ноябрь" />
+        <text name="SS_MONTH_SHORT_12" text="декабрь" />
+
+        <text name="SS_VEHICLE_TAXES" text="Налоги на технику" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Обслуживание техники" />
+        <text name="SS_VEHICLE_REPAIRS" text="Ремонт техники" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Вам не хватает денег для тех.обслуживания" />
+        <text name="SS_VEHICLE_REPAIRED" text="Тех.обслуживание %s обошлось %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Провести ТО %s за %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Нуждается в тех.обслуживании" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до ТО" />
+        <text name="SS_REPAIR_DIALOG" text="Вы желаете провести тех. обслуживание %s за %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
+        <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
+
+        <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seaons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." />
+        <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. Можно уделить больше внимания животным." />
+        <text name="SS_SEASON_INTRO_2" text="Наступил период уборки урожая. Готовимся к зиме, так как посевы могут не пережить холода. За работу." />
+        <text name="SS_SEASON_INTRO_3" text="Наступили холода. Почва твёрдая, возможно, в замороженном состоянии. Посевы не растут или даже погибают. Можно отдохнуть или заняться лесом." />
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
+
+        <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!" />
+        <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!" />
         <text name="warning_animalsKilled" text="У Вас умерло животное (%d шт.)" />
-        <text name="ui_pageOverview" text="Обзор"/>
-        <text name="ui_pageSettings" text="Настройки"/>
-        <text name="ui_pageDebug" text="Инструменты отладки"/>
-        <text name="ui_buttonSave" text="Применить"/>
-        <text name="ui_snowOneLayer" text="Только 1 слой"/>
-        <text name="ui_days" text="%i дн."/>
-        <text name="ui_temperatureFahrenheit" text="Фаренгейт"/>
-        <text name="ui_temperatureCelcius" text="Цельсий"/>
-        <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов."/>
-        <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона."/>
-        <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги."/>
-        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш (Alt+F) для прогноза погоды и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места."/>
-        <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему."/>
-        <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре."/>
-        <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые"/>
-        <text name="setting_seasonIntros" text="Напоминание о сезонах"/>
-        <text name="setting_seasonLength" text="Продолжительность сезона"/>
-        <text name="setting_snow" text="Режим снега"/>
-        <text name="setting_controlsHelp" text="Горячие клавиши"/>
-        <text name="setting_snowTracks" text="Следы на снегу"/>
-        <text name="setting_controlsTemperature" text="Шкала температуры"/>
-        <text name="setting_moisture" text="Влажный урожай"/>
-        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона и настроек роста можно применить к полям, только по прошествии одного игрового года."/>
-        <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом."/>
-        <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур"/>
-        <text name="dialog_resetGrowth_no" text="Не сбрасывать"/>
-        <text name="dialog_resetGrowth_yes" text="Сбросить"/>
-        <text name="fillType_snow" text="Снег"/>
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней." />
+
+        <text name="ui_pageOverview" text="Обзор" />
+        <text name="ui_pageSettings" text="Настройки" />
+        <text name="ui_pageDebug" text="Инструменты отладки" />
+
+        <text name="ui_buttonSave" text="Применить" />
+        <text name="ui_snowOneLayer" text="Только 1 слой" />
+        <text name="ui_days" text="%i дн." />
+        <text name="ui_temperatureFahrenheit" text="Фаренгейт" />
+        <text name="ui_temperatureCelcius" text="Цельсий" />
+
+        <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов." />
+        <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
+        <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
+        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш (Alt+F) для прогноза погоды и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
+        <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему." />
+        <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре." />
+        <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
+
+        <text name="setting_seasonIntros" text="Напоминание о сезонах" />
+        <text name="setting_seasonLength" text="Продолжительность сезона" />
+        <text name="setting_snow" text="Режим снега" />
+        <text name="setting_controlsHelp" text="Горячие клавиши" />
+        <text name="setting_snowTracks" text="Следы на снегу" />
+        <text name="setting_controlsTemperature" text="Шкала температуры" />
+        <text name="setting_moisture" text="Влажный урожай" />
+
+        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона можно будет применить к полям, только по прошествии одного игрового года." />
+
+        <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
+        <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур" />
+        <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
+        <text name="dialog_resetGrowth_yes" text="Сбросить" />
+
+        <text name="fillType_snow" text="Снег" />
     </texts>
 </l10n>

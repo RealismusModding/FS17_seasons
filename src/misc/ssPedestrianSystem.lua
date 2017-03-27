@@ -11,7 +11,7 @@ g_seasons.pedestrianSystem = ssPedestrianSystem
 function ssPedestrianSystem:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
 
-    PedestrianSystem.update = Utils.overwrittenFunction(PedestrianSystem.update, ssPedestrianSystem.originalUpdate)
+    PedestrianSystem.update = Utils.overwrittenFunction(PedestrianSystem.update, ssPedestrianSystem.psUpdate)
 
     if g_currentMission:getIsServer() then
         -- Initial setuo (it changed from nothing)
@@ -30,12 +30,12 @@ function ssPedestrianSystem:seasonChanged()
     self.showPedestrians = not (season == g_seasons.environment.SEASON_WINTER)
 end
 
-function ssPedestrianSystem.originalUpdate(pedestrianSystem, dt)
+function ssPedestrianSystem:psUpdate(superFunc, dt)
     local dayTime = g_currentMission.environment.dayTime
 
     if not ssPedestrianSystem.showPedestrians then
         dayTime = 0 -- midnight, do not spawn
     end
 
-    setPedestrianSystemDaytime(pedestrianSystem.pedestrianSystemId, dayTime);
+    setPedestrianSystemDaytime(self.pedestrianSystemId, dayTime);
 end

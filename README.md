@@ -105,6 +105,7 @@ For a better game experience, custom maps should add two new density layers: one
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
   - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
 - Animals die when they have no food. (Disabled on 'Easy')
+- Max feeding capacity is lowered to 3 days
 
 ### Warnings for gameplay
 - Do not fast forward faster than 6000x on singleplayer (preferable even slower)
@@ -114,7 +115,11 @@ The game will get out of sync with the extra load of Seasons
 ## Mod conflicts
 - Any mod that manipulates the weather, e.g. Multi overlay hud
 - Any mod that manipulates growth
+- Any mod that changes animals
 - Any 'season manager' type mods
+
+Known:
+- Difficulties Improve by TyKonKet
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus

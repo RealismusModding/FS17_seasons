@@ -28,7 +28,7 @@ function createXML(data, language) {
 
         if (language != "en" && !trValue) {
             result.push({
-                "#comment": `Missing translation of "${data["en"].translations[key]}."`
+                "#comment": `Missing translation of "${data["en"].translations[key]}"`
             });
         }
 
@@ -59,10 +59,24 @@ function createXML(data, language) {
     root.ele("translationContributors", {}, data[language].contributors.join(", "));
     root.ele("texts").ele(xmlTexts)
 
-    return Promise.resolve(root.end({
+    let text = root.end({
         pretty: true,
         indent: "    "
-    }));
+    }) + "\n";
+
+    // Re-add newlines from _en
+    let newlines = data["en"].newlines;
+    const searchReg = new RegExp(/^\s*<text\s+name=\"(.*)\"\s+text=\"(.*)\"\s*\/>$\n/, "igm");
+
+    text = text.replace(searchReg, (match, name, value, offset, string) => {
+        if (newlines.includes(name)) {
+            return "        <text name=\"" + name + "\" text=\"" + value + "\" />\n\n";
+        } else {
+            return "        <text name=\"" + name + "\" text=\"" + value + "\" />\n";
+        }
+    });
+
+    return Promise.resolve(text);
 }
 
 function pathForTranslation(language, test) {
@@ -98,7 +112,8 @@ function loadXML(language) {
 
         let data = {
             translations: {},
-            contributors: []
+            contributors: [],
+            newlines: [],
         }
 
         if (!xml.l10n) {
@@ -117,6 +132,17 @@ function loadXML(language) {
 
             return result;
         }, {})
+
+        // Find all extra newlines in the file
+        const fileText = fs.readFileSync(pathForTranslation(language), "utf8");
+        const reg = new RegExp(/^\s*<text\s+name=\"(.*)\"\s+text=\".*\"\s*\/>$\n\n/, "igm");
+
+        let match = reg.exec(fileText)
+        while (match !== null) {
+            data.newlines.push(match[1]);
+
+            match = reg.exec(fileText);
+        }
 
         return data;
     })

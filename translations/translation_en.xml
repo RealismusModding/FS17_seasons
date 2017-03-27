@@ -73,7 +73,6 @@
         <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
-        <text name="warning_soilIsFrozen" text="The soil is frozen. You can't work on it!" />
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
         <text name="SS_SEASON_INTRO_0" text="A new year, a new seeding period. TODO" /> <!-- spring -->
@@ -83,8 +82,10 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
+        <text name="warning_soilIsFrozen" text="The soil is frozen. You can't work on it!" />
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />
-        <text name="warning_animalsKilled" text="%d animals have died" />
+        <text name="warning_animalsKilled" text="Animals died (%d)" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="The maximum capacity of the feeding trough suffices to feed the animals for 3 days." />
 
         <!-- GUI -->
         <text name="ui_pageOverview" text="Overview" />
@@ -113,7 +114,7 @@
         <text name="setting_controlsTemperature" text="Temperature scale" />
         <text name="setting_moisture" text="Crop moisture" />
 
-        <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length and growth can result in fields that will only repair after one game-year." />
+        <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
 
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />
         <text name="dialog_resetGrowth_title" text="Growth reset" />

@@ -15,7 +15,7 @@ function ssTreeManager:loadMap()
         self:adjust()
     end
 
-    TreePlantUtil.plantTree = Utils.overwrittenFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
+    TreePlantUtil.plantTree = Utils.appendedFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
 end
 
 function ssTreeManager:adjust()
@@ -64,7 +64,6 @@ function ssTreeManager:hourChanged()
     if ssTreeManager.numGrowingTrees ~= table.getn(g_currentMission.plantedTrees.growingTrees) then
 
         for i, singleTree in pairs(g_currentMission.plantedTrees.growingTrees) do
-            --local singleTree = g_currentMission.plantedTrees.growingTrees[numTrees]
             g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree,0)
         end
 
@@ -107,10 +106,7 @@ function ssTreeManager:calculateDistance(singleTree,cutTree)
 end
 
 -- This seems to be the function that is called when a tree is planted. If an existing savegame has planted trees, the function is called during loading as well.
--- tried to use appendFunction, but did not work
-function ssTreeManager:plantTree(superFunc, treesData, treeData, x, y, z, rx, ry, rz, growthStateI, splitShapeFileId)
-    superFunc(self, treesData, treeData, x, y, z, rx, ry, rz, growthStateI, splitShapeFileId)
-
+function ssTreeManager:plantTree(treesData, treeData, x, y, z, rx, ry, rz, growthState, growthStateI, isGrowing, splitShapeFileId)
     ssTreeManager.numGrowingTrees = table.getn(g_currentMission.plantedTrees.growingTrees)
 
     if ssTreeManager.numGrowingTrees > 0 then

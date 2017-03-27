@@ -12,6 +12,13 @@ function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
+    AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
+    AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
+
+    -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
+    -- Show the same warning when the moisture system is disabled.
+    getfenv(0)["g_i18n"].texts["warning_inAdvanceFeedingLimitReached"] = ssLang.getText("warning_inAdvanceFeedingLimitReached3")
+
     -- Load parameters
     self:loadFromXML()
 
@@ -191,4 +198,25 @@ function ssAnimals:killAnimals(animal, p)
     end
 
     return 0
+end
+
+-- In vanilla, the trough can contain 6 days of food.
+-- This is calculated using the number of animals (min of 15) and the amount of food needed per day
+-- We want it to be 3 days only so we halve the food consumption, and the i18n text
+function ssAnimals:husbandryCapacityWrapper(superFunc, fillType, _)
+    local oldWater = self.animalDesc.waterPerDay
+    local oldFood = self.animalDesc.foodPerDay
+    local oldStraw = self.animalDesc.strawPerDay
+
+    self.animalDesc.waterPerDay = oldWater / 2
+    self.animalDesc.foodPerDay = oldFood / 2
+    self.animalDesc.strawPerDay = oldStraw / 2
+
+    local ret = superFunc(self, fillType, _)
+
+    self.animalDesc.waterPerDay = oldWater
+    self.animalDesc.foodPerDay = oldFood
+    self.animalDesc.strawPerDay = oldStraw
+
+    return ret
 end

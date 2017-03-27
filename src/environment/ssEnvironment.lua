@@ -22,6 +22,22 @@ ssEnvironment.SEASON_SUMMER = 1
 ssEnvironment.SEASON_AUTUMN = 2
 ssEnvironment.SEASON_WINTER = 3
 
+ssEnvironment.TRANSITION_EARLY_SPRING = 1
+ssEnvironment.TRANSITION_MID_SPRING = 2
+ssEnvironment.TRANSITION_LATE_SPRING = 3
+
+ssEnvironment.TRANSITION_EARLY_SUMMER = 4
+ssEnvironment.TRANSITION_MID_SUMMER = 5
+ssEnvironment.TRANSITION_LATE_SUMMER = 6
+
+ssEnvironment.TRANSITION_EARLY_AUTUMN = 7
+ssEnvironment.TRANSITION_MID_AUTUMN = 8
+ssEnvironment.TRANSITION_LATE_AUTUMN = 9
+
+ssEnvironment.TRANSITION_EARLY_WINTER = 10
+ssEnvironment.TRANSITION_MID_WINTER = 11
+ssEnvironment.TRANSITION_LATE_WINTER = 12
+
 function ssEnvironment:preLoad()
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and
@@ -202,13 +218,16 @@ function ssEnvironment:adaptTime()
 
     -- GIANTS values:
     -- nightEnd: 4
+    --  - nightEnd (sun): 5.5
     -- dayStart: 9
     -- dayEnd: 17
+    --  - nightStart (sun): 21
     -- nightStart: 22
 
-    -- This is for the logical night. Used for turning on lights in houses / streets. Might need some more adjustment.
-    env.nightStart = dayEnd * 60
-    env.nightEnd = dayStart * 60
+    -- This is for the logical night. Used for turning on lights in houses / streets.
+    -- 0.3 and 0.8 determined using vanilla values
+    env.nightEnd = Utils.lerp(nightEnd, dayStart, 0.35) * 60
+    env.nightStart = Utils.lerp(dayEnd, nightStart, 0.5) * 60
 
     env.skyDayTimeStart = dayStart * 60 * 60 * 1000
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000

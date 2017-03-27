@@ -1,125 +1,122 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>
-        Dzi4d3k, KITT3000, theSeb
-    </translationContributors>
-    
+    <translationContributors>Dzi4d3k, KITT3000, theSeb</translationContributors>
     <texts>
-        <!-- Control actions -->
-        <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody"/>
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Napraw pojazd"/>
-        <text name="input_SEASONS_SHOW_MENU" text="Sezony: Otwórz menu"/>
+        <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Napraw pojazd" />
+        <text name="input_SEASONS_SHOW_MENU" text="Sezony: Otwórz menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Odległość sadzenia (%d m)" />
-        <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody"/>
-        
-        <text name="SS_WEEKDAY_1" text="Poniedziałek"/>
-        <text name="SS_WEEKDAY_2" text="Wtorek"/>
-        <text name="SS_WEEKDAY_3" text="Środa"/>
-        <text name="SS_WEEKDAY_4" text="Czwartek"/>
-        <text name="SS_WEEKDAY_5" text="Piątek"/>
-        <text name="SS_WEEKDAY_6" text="Sobota"/>
-        <text name="SS_WEEKDAY_7" text="Niedziela"/>
-        
-        <text name="SS_WEEKDAY_SHORT_1" text="Pon"/>
-        <text name="SS_WEEKDAY_SHORT_2" text="Wto"/>
-        <text name="SS_WEEKDAY_SHORT_3" text="Śro"/>
-        <text name="SS_WEEKDAY_SHORT_4" text="Czw"/>
-        <text name="SS_WEEKDAY_SHORT_5" text="Pią"/>
-        <text name="SS_WEEKDAY_SHORT_6" text="Sob"/>
-        <text name="SS_WEEKDAY_SHORT_7" text="Nie"/>
-        
-        <text name="SS_SEASON_0" text="Wiosna"/>
-        <text name="SS_SEASON_1" text="Lato"/>
-        <text name="SS_SEASON_2" text="Jesień"/>
-        <text name="SS_SEASON_3" text="Zima"/>
-        
-        <text name="SS_SEASON_FULL_NAME_1" text="Wczesna wiosna"/>
-        <text name="SS_SEASON_FULL_NAME_2" text="Środek wiosny"/>
-        <text name="SS_SEASON_FULL_NAME_3" text="Późna wiosna"/>
-        <text name="SS_SEASON_FULL_NAME_4" text="Wczesne lato"/>
-        <text name="SS_SEASON_FULL_NAME_5" text="Środek lata"/>
-        <text name="SS_SEASON_FULL_NAME_6" text="Późne lato"/>
-        <text name="SS_SEASON_FULL_NAME_7" text="Wczesna jesień"/>
-        <text name="SS_SEASON_FULL_NAME_8" text="Środek jesieni"/>
-        <text name="SS_SEASON_FULL_NAME_9" text="Późna jesień"/>
-        <text name="SS_SEASON_FULL_NAME_10" text="Wczesna zima"/>
-        <text name="SS_SEASON_FULL_NAME_11" text="Środek zimy"/>
-        <text name="SS_SEASON_FULL_NAME_12" text="Późna zima"/>
-        
-        <text name="SS_MONTH_SHORT_1" text="sty"/>
-        <text name="SS_MONTH_SHORT_2" text="lut"/>
-        <text name="SS_MONTH_SHORT_3" text="mar"/>
-        <text name="SS_MONTH_SHORT_4" text="kwi"/>
-        <text name="SS_MONTH_SHORT_5" text="maj"/>
-        <text name="SS_MONTH_SHORT_6" text="cze"/>
-        <text name="SS_MONTH_SHORT_7" text="lip"/>
-        <text name="SS_MONTH_SHORT_8" text="sie"/>
-        <text name="SS_MONTH_SHORT_9" text="wrz"/>
-        <text name="SS_MONTH_SHORT_10" text="paź"/>
-        <text name="SS_MONTH_SHORT_11" text="lis"/>
-        <text name="SS_MONTH_SHORT_12" text="gru"/>
-        
-        <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów"/>
-        <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów"/>
-        <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów"/>
-        
-        <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać przegląd"/>
-        <text name="SS_VEHICLE_REPAIRED" text="Przegląd %s kosztował %s"/>
-        <text name="SS_REPAIR_VEHICLE_COST" text="Wykonaj przegląd %s za %s"/>
-        <text name="SS_REPAIR_REQUIRED" text="Wymagany jest przegląd"/>
-        <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni"/>
-        <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?"/>
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd"/>
-        <text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!"/>
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy"/>
-        
-        <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!"/>
-        <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!"/>
-        
-        <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów."/>
-        <text name="SS_SEASON_INTRO_1" text="Słońce jest wysoko, zboża rosną."/>
-        <text name="SS_SEASON_INTRO_2" text="Nadszedł czas żniw. Przygotuj się do zimy, ponieważ zboża mogą jej nie przetrwać."/>
-        <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone."/>
-        <text name="SS_BUTTON_OK" text="OK"/>
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie"/>
-        
-        <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!"/>
-        <text name="warning_animalsKilled" text="%d zwierząt padło"/>
-        
-        <!-- GUI -->
-        <text name="ui_pageOverview" text="Opis"/>
-        <text name="ui_pageSettings" text="Ustawienia"/>
-        <text name="ui_pageDebug" text="Narzędzia debugowania"/>
-        
-        <text name="ui_buttonSave" text="Zastosuj ustawienia"/>
-        <text name="ui_snowOneLayer" text="tylko 1 warstwa"/>
-        <text name="ui_days" text="%i dni"/>
-        <text name="ui_temperatureFahrenheit" text="Fahrenheita"/>
-        <text name="ui_temperatureCelcius" text="Celsjusza"/>
-        
-        <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony."/>
-        <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu."/>
-        <text name="tooltip_snow" text="Śnieg będzie padał w czasie mroźnej zimy i zasypie drogi."/>
-        <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy."/>
-        <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim."/>
-        <text name="tooltip_controlsTemperature" text="Ustaw skalę temperatury używaną przez grę"/>
-        <text name="tooltip_moisture" text="Nie zezwalaj na żniwa, gdy zboża są zbyt wilgotne"/>
-        
-        <text name="setting_seasonIntros" text="Wstępy do sezonów"/>
-        <text name="setting_seasonLength" text="Długość sezonów"/>
-        <text name="setting_snow" text="Tryb śniegu"/>
-        <text name="setting_controlsHelp" text="Skróty klawiszowe w oknie pomocy"/>
-        <text name="setting_snowTracks" text="Ślady na śniegu"/>
-        <text name="setting_controlsTemperature" text="Skala temperatury"/>
-        <text name="setting_moisture" text="Wilgotność zboża"/>
-        
-        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Sezonów? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze."/>
-        
-        <text name="dialog_resetGrowth" text="Uruchomiłeś Sezony na starym stanie gry. Mod Sezonów chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie."/>
-        <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw"/>
-        <text name="dialog_resetGrowth_no" text="Zachowaj uprawy"/>
-        <text name="dialog_resetGrowth_yes" text="Zresetuj"/>
-        
-        <text name="fillType_snow" text="Śnieg"/>
+        <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody" />
+
+        <text name="SS_WEEKDAY_1" text="Poniedziałek" />
+        <text name="SS_WEEKDAY_2" text="Wtorek" />
+        <text name="SS_WEEKDAY_3" text="Środa" />
+        <text name="SS_WEEKDAY_4" text="Czwartek" />
+        <text name="SS_WEEKDAY_5" text="Piątek" />
+        <text name="SS_WEEKDAY_6" text="Sobota" />
+        <text name="SS_WEEKDAY_7" text="Niedziela" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Pon" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Wto" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Śro" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Czw" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Pią" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Sob" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Nie" />
+
+        <text name="SS_SEASON_0" text="Wiosna" />
+        <text name="SS_SEASON_1" text="Lato" />
+        <text name="SS_SEASON_2" text="Jesień" />
+        <text name="SS_SEASON_3" text="Zima" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Wczesna wiosna" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Środek wiosny" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Późna wiosna" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Wczesne lato" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Środek lata" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Późne lato" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Wczesna jesień" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Środek jesieni" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Późna jesień" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Wczesna zima" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Środek zimy" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Późna zima" />
+
+        <text name="SS_MONTH_SHORT_1" text="sty" />
+        <text name="SS_MONTH_SHORT_2" text="lut" />
+        <text name="SS_MONTH_SHORT_3" text="mar" />
+        <text name="SS_MONTH_SHORT_4" text="kwi" />
+        <text name="SS_MONTH_SHORT_5" text="maj" />
+        <text name="SS_MONTH_SHORT_6" text="cze" />
+        <text name="SS_MONTH_SHORT_7" text="lip" />
+        <text name="SS_MONTH_SHORT_8" text="sie" />
+        <text name="SS_MONTH_SHORT_9" text="wrz" />
+        <text name="SS_MONTH_SHORT_10" text="paź" />
+        <text name="SS_MONTH_SHORT_11" text="lis" />
+        <text name="SS_MONTH_SHORT_12" text="gru" />
+
+        <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" />
+        <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać przegląd" />
+        <text name="SS_VEHICLE_REPAIRED" text="Przegląd %s kosztował %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Wykonaj przegląd %s za %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Wymagany jest przegląd" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
+        <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
+        <text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
+
+        <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." />
+        <text name="SS_SEASON_INTRO_1" text="Słońce jest wysoko, zboża rosną." />
+        <text name="SS_SEASON_INTRO_2" text="Nadszedł czas żniw. Przygotuj się do zimy, ponieważ zboża mogą jej nie przetrwać." />
+        <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." />
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
+
+        <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
+        <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
+        <text name="warning_animalsKilled" text="%d zwierząt padło" />
+        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
+        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+
+        <text name="ui_pageOverview" text="Opis" />
+        <text name="ui_pageSettings" text="Ustawienia" />
+        <text name="ui_pageDebug" text="Narzędzia debugowania" />
+
+        <text name="ui_buttonSave" text="Zastosuj ustawienia" />
+        <text name="ui_snowOneLayer" text="tylko 1 warstwa" />
+        <text name="ui_days" text="%i dni" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheita" />
+        <text name="ui_temperatureCelcius" text="Celsjusza" />
+
+        <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony." />
+        <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu." />
+        <text name="tooltip_snow" text="Śnieg będzie padał w czasie mroźnej zimy i zasypie drogi." />
+        <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy." />
+        <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim." />
+        <text name="tooltip_controlsTemperature" text="Ustaw skalę temperatury używaną przez grę" />
+        <text name="tooltip_moisture" text="Nie zezwalaj na żniwa, gdy zboża są zbyt wilgotne" />
+
+        <text name="setting_seasonIntros" text="Wstępy do sezonów" />
+        <text name="setting_seasonLength" text="Długość sezonów" />
+        <text name="setting_snow" text="Tryb śniegu" />
+        <text name="setting_controlsHelp" text="Skróty klawiszowe w oknie pomocy" />
+        <text name="setting_snowTracks" text="Ślady na śniegu" />
+        <text name="setting_controlsTemperature" text="Skala temperatury" />
+        <text name="setting_moisture" text="Wilgotność zboża" />
+
+        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Sezonów? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
+
+        <text name="dialog_resetGrowth" text="Uruchomiłeś Sezony na starym stanie gry. Mod Sezonów chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie." />
+        <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
+        <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
+        <text name="dialog_resetGrowth_yes" text="Zresetuj" />
+
+        <text name="fillType_snow" text="Śnieg" />
     </texts>
 </l10n>

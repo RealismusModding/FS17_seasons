@@ -13,10 +13,10 @@ function ssMotorFailure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations)
 end
 
-function ssMotorFailure:load(savegame)
-    self.startMotor = Utils.overwrittenFunction(self.startMotor, ssMotorFailure.startMotor)
-    self.stopMotor = Utils.overwrittenFunction(self.stopMotor, ssMotorFailure.stopMotor)
+Motorized.startMotor = ssMotorFailure.startMotor
+Motorized.stopMotor = ssMotorFailure.stopMotor
 
+function ssMotorFailure:load(savegame)
     self.ssMotorStartFailDuration = math.min(self.motorStartDuration / 2, 500)
     self.ssMotorStartTries = 0
     self.ssMotorStartSoundTime = 0
@@ -101,7 +101,7 @@ function ssMotorFailure:draw()
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
-function ssMotorFailure:startMotor(superFunc, noEventSend)
+function ssMotorFailure:startMotor(noEventSend)
     if noEventSend == nil or noEventSend == false then
         if g_server ~= nil then
             g_server:broadcastEvent(SetMotorTurnedOnEvent:new(self, true), nil, nil, self)
@@ -160,7 +160,7 @@ function ssMotorFailure:startMotor(superFunc, noEventSend)
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
-function ssMotorFailure:stopMotor(superFunc, noEventSend)
+function ssMotorFailure:stopMotor(noEventSend)
     if noEventSend == nil or noEventSend == false then
         if g_server ~= nil then
             g_server:broadcastEvent(SetMotorTurnedOnEvent:new(self, false), nil, nil, self)
