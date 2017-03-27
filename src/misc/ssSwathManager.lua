@@ -24,8 +24,8 @@ end
 function ssSwathManager:reduceGrass(layers)
     layers = tonumber(layers)
 
-    local startWorldX = 0
-    local startWorldZ = 0
+    local startWorldX = -g_currentMission.terrainSize * 0.5
+    local startWorldZ = -g_currentMission.terrainSize * 0.5
     local widthWorldX = g_currentMission.terrainSize
     local widthWorldZ = 0
     local heightWorldX = 0
@@ -46,8 +46,8 @@ end
 function ssSwathManager:reduceStrawHay(layers)
     layers = tonumber(layers)
 
-    local startWorldX = 0
-    local startWorldZ = 0
+    local startWorldX = -g_currentMission.terrainSize * 0.5
+    local startWorldZ = -g_currentMission.terrainSize * 0.5
     local widthWorldX = g_currentMission.terrainSize
     local widthWorldZ = 0
     local heightWorldX = 0
