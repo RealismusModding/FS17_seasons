@@ -14,7 +14,7 @@ function ssFieldJobManager:preLoad()
 end
 
 function ssFieldJobManager:load(savegame, key)
-    self.disableMissions = ssStorage.getXMLBool(savegame, key .. ".settings.disableMissions", true)
+    self.disableMissions = ssStorage.getXMLBool(savegame, key .. ".settings.disableMissions", false)
 end
 
 function ssFieldJobManager:save(savegame, key)
