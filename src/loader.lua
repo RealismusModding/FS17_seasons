@@ -68,6 +68,7 @@ local files = {
     "utils/ssLang",
     "utils/ssStorage",
     "utils/ssSeasonsXML",
+    "utils/ssQueue",
 
     -- Main system
     "ssMultiplayer",

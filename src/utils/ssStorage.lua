@@ -7,6 +7,14 @@
 
 ssStorage = {}
 
+function ssStorage.hasXMLProperty(xmlFile, key)
+    if xmlFile ~= nil then
+        return hasXMLProperty(xmlFile, key)
+    end
+
+    return false
+end
+
 function ssStorage.getXMLFloat(xmlFile, key, defaultValue)
     -- log("getXMLFloat("..tostring(xmlFile)..", "..tostring(key)..", "..tostring(defaultValue)..")")
     if xmlFile ~= nil then

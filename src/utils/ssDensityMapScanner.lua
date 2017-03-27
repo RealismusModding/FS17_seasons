@@ -2,142 +2,166 @@
 -- SCRIPT TO UPDATE DENSITY MAPS
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  Performs updates of density maps on behalf of other modules.
--- Authors:  mrbear
+-- Authors:  mrbear, Rahkiin
 --
 
 ssDensityMapScanner = {}
 g_seasons.dms = ssDensityMapScanner
 
-ssDensityMapScanner.callBacks = {}
+function ssDensityMapScanner:load(savegame, key)
+    if ssStorage.hasXMLProperty(savegame, key .. ".densityMapScanner.currentJob") then
+        local job = {}
 
-ssDensityMapScanner.currentX=0
-ssDensityMapScanner.currentZ=0
-ssDensityMapScanner.currentCallBackName=""
-ssDensityMapScanner.currentParameter=""
-ssDensityMapScanner.moreIterations=false
+        job.x = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", 0)
+        job.z = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", 0)
+        job.callbackId = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
+        job.parameter = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter")
+        job.numSegments = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
 
-ssDensityMapScanner.workQ = ssUtil.listNew()
-
-function ssDensityMapScanner:queueJob(callBackName, parameter)
-    if g_currentMission:getIsServer() then
-        log("DensityMapScanner, enqued job: " .. callBackName .. "(" .. parameter .. ")")
-
-        ssUtil.listPushRight(ssDensityMapScanner.workQ, { callBackName = callBackName, parameter = parameter })
+        self.currentJob = job
     end
-end
 
-function ssDensityMapScanner:registerCallback(callBackName, callbackSelf, callbackFunction, callbackFinalizeFunction)
-    log("Registering callback: " .. callBackName)
+    -- Read queue
+    self.queue = ssQueue:new()
 
-    self.callBacks[callBackName] = {
-        callbackSelf = callbackSelf,
-        callbackFunction = callbackFunction,
-        callbackFinalizeFunction = callbackFinalizeFunction
-    }
+    local i = 0
+    while true do
+        local ikey = string.format("%s.densityMapScanner.queue.job(%d)", key, i)
+        if not ssStorage.hasXMLProperty(savegame, ikey) then break end
+
+        local job = {}
+
+        job.callbackId = ssStorage.getXMLString(savegame, ikey .. "#callbackId")
+        job.parameter = ssStorage.getXMLString(savegame, ikey .. "#parameter")
+
+        self.queue:push(job)
+
+        log("[ssDensityMapScanner] Loaded job:", job.callbackId, "with parameter", job.parameter)
+
+        i = i + 1
+    end
 end
 
 function ssDensityMapScanner:save(savegame, key)
-    ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentX", self.currentX)
-    ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentZ", self.currentZ)
-    ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentCallBackName", self.currentCallBackName)
-    ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentParameter", tostring(self.currentParameter))
-    ssStorage.setXMLBool(savegame, key .. ".densityMapScanner.moreIterations", self.moreIterations)
+    removeXMLProperty(savegame, key .. ".densityMapScanner")
 
-    local count=0
-    while true do
-        log("Saving job: " .. count)
+    if self.currentJob ~= nil then
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", job.x)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", job.z)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", job.callbackId)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", job.parameter)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", job.numSegments)
+    end
 
-        local job = ssUtil.listPopLeft(self.workQ)
-        if job ~= nil then
-            count = count + 1
-            local namei = string.format(".densityMapScanner.workQ.jobb%d", count)
-            ssStorage.setXMLString(savegame, key .. namei .. "#callBackName", job.callBackName)
-            ssStorage.setXMLString(savegame, key .. namei .. "#parameter", tostring(job.parameter))
-        else
-            break
+    -- Save queue
+    self.queue:iteratePushOrder(function (job, i)
+        local ikey = string.format("%s.densityMapScanner.queue.job(%d)", key, i - 1)
+
+        ssStorage.setXMLString(savegame, ikey .. "#callbackId", job.callbackId)
+
+        if job.parameter ~= nil then
+            ssStorage.setXMLString(savegame, ikey .. "#parameter", tostring(job.parameter))
         end
-    end
-    if count > 0 then
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.workQ#count", count)
-    end
-end
-
-function ssDensityMapScanner:load(savegame, key)
-    self.currentX = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentX", 0)
-    self.currentZ = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentZ", 0)
-    self.currentCallBackName = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentCallBackName", "")
-    self.currentParameter = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentParameter", "")
-    self.moreIterations = ssStorage.getXMLBool(savegame, key .. ".densityMapScanner.moreIterations", false)
-
-    local items = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.workQ#count", 0)
-    if items > 0 then
-        for count=1, items do
-            local namei = string.format(".densityMapScanner.workQ.jobb%d", count)
-            local callBackName = ssStorage.getXMLString(savegame, key .. namei .. "#callBackName")
-            local parameter = ssStorage.getXMLString(savegame, key .. namei .. "#parameter")
-            ssUtil.listPushRight( self.workQ, { callBackName = callBackName, parameter=parameter })
-
-            log("[Seasons] DensityMapScanner, loaded job: " .. callBackName .. " with parameter " .. parameter)
-        end
-    end
+    end)
 end
 
 function ssDensityMapScanner:loadMap(name)
+    if g_currentMission:getIsServer() then
+        if self.queue == nil then
+            self.queue = ssQueue:new()
+        end
+    end
 end
 
 function ssDensityMapScanner:update(dt)
-    if not self.moreIterations then
-        local job = ssUtil.listPopLeft(self.workQ)
+    if self.currentJob == nil then
+        self.currentJob = self.queue:pop()
 
-        if job ~= nil then
-            log("DensityMapScanner, dequed job: " .. job.callBackName .. "(" .. job.parameter .. ")")
+        if self.currentJob then
+            self.currentJob.x = 0
+            self.currentJob.z = 0
 
-            self.currentJob = job
-            self.currentCallBackName = job.callBackName
-            self.currentParameter = job.parameter
-            self.moreIterations = true
+            -- Must be evenly dividable with mapsize.
+            self.currentJob.numSegments = 16
 
-            self:ssIterateOverTerrain()
+            if g_dedicatedServerInfo ~= nil or g_currentMission.missionInfo.timeScale > 120 then
+                self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
+            end
+
+            log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
-    else
-        self:ssIterateOverTerrain()
+    end
+
+    if self.currentJob ~= nil then
+        if not self:run(self.currentJob) then
+            self.currentJob = nil
+        end
     end
 end
 
-function ssDensityMapScanner:ssIterateOverTerrain()
-    -- print("- Scanning: " .. self.currentX .. ", " .. self.currentZ)
-    local mapSegments = 16 -- Must be evenly dividable with mapsize.
+function ssDensityMapScanner:queueJob(callbackId, parameter)
+    if g_currentMission:getIsServer() then
+        log("[ssDensityMapScanner] Enqued job:", callbackId, "(", parameter, ")")
 
-    if g_dedicatedServerInfo ~= nil or g_currentMission.missionInfo.timeScale > 120 then
-        mapSegments = 1 -- Not enough time to do it section by section.
+        self.queue:push({
+            callbackId = callbackId,
+            parameter = parameter
+        })
+    end
+end
+
+function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer)
+    log("[ssDensityMapScanner] Registering callback: " .. callbackId)
+
+    if self.callbacks == nil then
+        self.callbacks = {}
     end
 
-    local startWorldX = self.currentX * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
-    local startWorldZ = self.currentZ * g_currentMission.terrainSize / mapSegments - g_currentMission.terrainSize / 2
-    local widthWorldX = startWorldX + g_currentMission.terrainSize / mapSegments - 0.5 -- -0.5 to avoid overlap.
+    self.callbacks[callbackId] = {
+        target = target,
+        func = func,
+        finalizer = finalizer
+    }
+end
+
+-- Returns: true when new cycle needed. false when done
+function ssDensityMapScanner:run(job)
+    if job == nil then return end
+
+    local size = g_currentMission.terrainSize
+    local startWorldX = job.x * size / job.numSegments - size / 2
+    local startWorldZ = job.z * size / job.numSegments - size / 2
+    local widthWorldX = startWorldX + size / job.numSegments - 0.5 -- -0.5 to avoid overlap.
     local widthWorldZ = startWorldZ
     local heightWorldX = startWorldX
-    local heightWorldZ = startWorldZ + g_currentMission.terrainSize / mapSegments - 0.2 -- -0.2 to avoid overlap.
+    local heightWorldZ = startWorldZ + size / job.numSegments - 0.2 -- -0.2 to avoid overlap.
 
-    -- Call provided function
-    local callback = self.callBacks[self.currentCallBackName]
-    callback.callbackFunction(callback.callbackSelf, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, self.currentParameter)
+    -- Run the callback
+    local callback = self.callbacks[job.callbackId]
+    if callback == nil then
+        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId,"'")
 
-    if self.currentZ < mapSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
+        return false
+    end
+
+    callback.func(callback.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
+
+    -- Update current job
+    if job.z < job.numSegments - 1 then -- Starting with column 0 So index of last column is one less then the number of columns.
         -- Next column
-        self.currentZ = self.currentZ + 1
-    elseif  self.currentX < mapSegments - 1 then -- Starting with row 0
+        job.z = job.z + 1
+    elseif job.x < job.numSegments - 1 then -- Starting with row 0
         -- Next row
-        self.currentX = self.currentX + 1
-        self.currentZ = 0
+        job.x = job.x + 1
+        job.z = 0
     else
-        -- Done with the loop, set up for the next one.
-        self.currentX = 0
-        self.currentZ = 0
-        self.moreIterations = false
-
+        -- Done with the loop, call finalizer
         if callback.callbackFinalizeFunction ~= nil then
             callback.callbackFinalizeFunction(callback.callbackSelf, self.currentParameter)
         end
+
+        return false -- finished
     end
+
+    return true -- not finished
 end
