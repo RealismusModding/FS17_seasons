@@ -432,6 +432,8 @@ function ssSeasonsMenu:drawOverview(element)
     local textSpacingWidth, textSpacingHeight = getNormalizedScreenValues(5, 5)
 
     local fruitIconWidth, fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
+
+    local guideWidth, _ = getNormalizedScreenValues(2, 0)
     ----- END
 
     local topLeftX, topLeftY = getNormalizedScreenValues(50, 50)
@@ -496,6 +498,16 @@ function ssSeasonsMenu:drawOverview(element)
     end
 
     -- Print vertical line for our current day
+    local fruitsLeft = topLeftX + fruitNameWidth + fruitSpacerWidth + germinationWidth + fruitSpacerWidth
+    local fruitsRight = fruitsLeft + 12 * transitionWidth
+    local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
+    rect:render(
+        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * dayInYear,
+        topLeftY + headerHeight,
+        guideWidth,
+        table.getn(self.overviewData) * (fruitHeight + fruitSpacerHeight) - fruitSpacerHeight,
+        {1, 0, 0, 1}
+    )
 
 
 
