@@ -84,7 +84,6 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     -- Always allow fertilizing missions, unless rain
     if fieldJob == FieldJob.TYPE_FERTILIZING_GROWING or fieldJob == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJob == FieldJob.TYPE_FERTILIZING_SOWN then
         return g_currentMission.environment.timeSinceLastRain == 0
-    end
     -- Always allow user assigned missions to cultivate
     -- NPC only cultivates in early-mid spring
     elseif fieldJob == FieldJob.TYPE_PLOUGHING or fieldJob == FieldJob.TYPE_CULTIVATING then
