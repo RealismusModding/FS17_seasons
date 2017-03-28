@@ -86,8 +86,7 @@
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
-		
-        <!-- GUI -->
+
         <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />
