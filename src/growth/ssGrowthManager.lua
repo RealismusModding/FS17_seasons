@@ -409,9 +409,10 @@ end
 -- growth gui
 
 function ssGrowthManager:getCanPlantData(fruitName)
-
+    return self.canPlantData
 end
 
+--do not use
 function ssGrowthManager:getCanHarvestData(fruitName)
     local growthTransition = 1
     local startTransition
@@ -457,7 +458,5 @@ function ssGrowthManager:consoleCommandTestStuff()
     -- print_r(self.willGerminateData)
     logInfo("ssGrowthManager: canHarvestData")
     print_r(self.canHarvestData)
-    local min, max = self:getCanHarvestData("barley")
-    logInfo("min:" .. tostring(min))
-    logInfo("max:" .. tostring(max))
+   
 end
