@@ -15,6 +15,9 @@
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
                 <!-- Forecast + crop data -->
                 <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
+                    <GuiElement type="empty" profile="ssOverview" id="overview" onDraw="drawOverview">
+                        <GuiElement type="empty" profile="ssOverviewOverlay" id="overviewOverlay" onDraw="drawOverview"/>
+                    </GuiElement>
                 </GuiElement>
 
                 <!-- Settings -->

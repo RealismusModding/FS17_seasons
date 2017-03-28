@@ -21,11 +21,18 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.settingElements = {}
 
+
+    self.overview = {}
+    self.overview.blockColors = {
+        plantable = {0.662, 0.816, 0.557, 1},
+        -- plantable = {0.662, 0.816, 0.557, 1},
+        harvestable = {0.796, 0.601, 0.006, 1}
+    }
+
     return self
 end
 
 function ssSeasonsMenu:onCreate(gui)
-
 end
 
 function ssSeasonsMenu:onCreatePageState(element)
@@ -49,6 +56,9 @@ function ssSeasonsMenu:onOpen(element)
     self:updatePageStates()
 
     self:updateServerSettingsVisibility()
+
+    -- overview
+    self:updateOverview()
 
     -- settings
     self:updateGameSettings()
@@ -199,8 +209,302 @@ end
 -- OVERVIEW PAGE
 ------------------------------------------
 
+ssRectOverlay = {}
+local ssRectOverlay_mt = Class(ssRectOverlay)
+
+function ssRectOverlay:new(parentElement)
+    local self = {}
+    setmetatable(self, ssRectOverlay_mt)
+
+    self.parent = parentElement
+
+    if ssRectOverlay.g_overlay == nil then
+        local width, height = getNormalizedScreenValues(1, 1)
+        ssRectOverlay.g_overlay = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
+    end
+
+    return self
+end
+
+function ssRectOverlay:render(x, y, width, height, color)
+    if color ~= nil then
+        ssRectOverlay.g_overlay:setColor(unpack(color))
+    else
+        ssRectOverlay.g_overlay:setColor(1, 1, 1, 1)
+    end
+
+    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
+    x = x + self.parent.absPosition[1]
+    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
+
+    renderOverlay(ssRectOverlay.g_overlay.overlayId, x, y, width, height)
+end
+
+function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight)
+    local height = getTextHeight(fontSize, text)
+
+    if boxHeight ~= nil then
+        y = y + (boxHeight - height) / 2
+    end
+
+    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
+    x = x + self.parent.absPosition[1]
+    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
+
+    renderText(x, y, fontSize, text)
+end
+
+function ssRectOverlay:renderOverlay(overlay, x, y, width, height, boxHeight)
+    if boxHeight ~= nil then
+        y = y + (boxHeight - height) / 2
+    end
+
+    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
+    x = x + self.parent.absPosition[1]
+    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
+
+    renderOverlay(overlay.overlayId, x, y, width, height)
+end
+
+------------------------------------------
+
 function ssSeasonsMenu:onCreatePageOverview(element)
     ssSeasonsMenu.PAGE_OVERVIEW = self.pagingElement:getPageIdByElement(element)
+end
+
+function ssSeasonsMenu:updateOverview()
+    log("Update Overview DATA")
+
+    self.overviewData = {
+        [1] = {
+            name = "barley",
+            temperature = "5ºC",
+            blocks = {
+                [1] = {
+                    type = "plantable",
+                    s = "1",
+                    e = "3"
+                },
+                [2] = {
+                    type = "harvestable",
+                    s = "6",
+                    e = "9"
+                },
+                [3] = {
+                    type = "plantable",
+                    s = "7",
+                    e = "9"
+                }
+            }
+        },
+        [2] = {
+            name = "wheat",
+            temperature = "5ºC",
+            blocks = {
+                [1] = {
+                    type = "plantable",
+                    s = "1",
+                    e = "3"
+                },
+                [2] = {
+                    type = "harvestable",
+                    s = "6",
+                    e = "9"
+                },
+                [3] = {
+                    type = "plantable",
+                    s = "7",
+                    e = "9"
+                }
+            }
+        },
+        [3] = {
+            name = "rape",
+            temperature = "5ºC",
+            blocks = {
+                [1] = {
+                    type = "plantable",
+                    s = "1",
+                    e = "3"
+                },
+                [2] = {
+                    type = "harvestable",
+                    s = "6",
+                    e = "9"
+                },
+                [3] = {
+                    type = "plantable",
+                    s = "7",
+                    e = "9"
+                }
+            }
+        },
+        [4] = {
+            name = "maize",
+            temperature = "10ºC",
+            blocks = {}
+        },
+        [5] = {
+            name = "soybean",
+            temperature = "10ºC",
+            blocks = {}
+        },
+        [6] = {
+            name = "sunflower",
+            temperature = "7ºC",
+            blocks = {}
+        },
+        [7] = {
+            name = "potato",
+            temperature = "5ºC",
+            blocks = {}
+        },
+        [8] = {
+            name = "sugarBeet",
+            temperature = "5ºC",
+            blocks = {}
+        },
+        [9] = {
+            name = "grass",
+            temperature = "3ºC",
+            blocks = {
+                [1] = {
+                    type = "plantable",
+                    s = "1",
+                    e = "3"
+                },
+                [2] = {
+                    type = "harvestable",
+                    s = "3",
+                    e = "9"
+                },
+                [3] = {
+                    type = "plantable",
+                    s = "7",
+                    e = "9"
+                },
+                [4] = {
+                    type = "harvestable",
+                    s = "10",
+                    e = "12"
+                }
+            }
+        },
+        [10] = {
+            name = "poplar",
+            temperature = "5ºC",
+            blocks = {}
+        },
+        [11] = {
+            name = "oilseedRadish",
+            i18Name = ssLang.getText("fillType_oilRadish"), -- Different name from the others
+            temperature = "7ºC",
+            blocks = {}
+        }
+    }
+
+    for _, fruitData in ipairs(self.overviewData) do
+        if fruitData.i18Name == nil then
+            fruitData.i18Name = ssLang.getText("fillType_" .. fruitData.name)
+        end
+
+        fruitData.icon = Overlay:new("ss_fruit_" .. fruitData.name, FillUtil.fillTypeNameToDesc[fruitData.name].hudOverlayFilename, 0, 0, 40, 40)
+    end
+end
+
+function ssSeasonsMenu:drawOverview(element)
+    local o = self.overview
+
+    ----- MOVE TO self.overview in update
+    local rect = ssRectOverlay:new(element)
+
+    local fruitHeightPixels = 32
+
+    local transitionWidth, transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
+    local _, fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
+    local fruitSpacerWidth, fruitSpacerHeight = getNormalizedScreenValues(5, 5)
+    local fruitNameWidth, _ = getNormalizedScreenValues(230, 0)
+    local germinationWidth, _ = getNormalizedScreenValues(70, 0)
+
+    local _, headerHeight = getNormalizedScreenValues(0, 60)
+
+    local _, textSize = getNormalizedScreenValues(0, 14)
+    local textSpacingWidth, textSpacingHeight = getNormalizedScreenValues(5, 5)
+
+    local fruitIconWidth, fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
+    ----- END
+
+    local topLeftX, topLeftY = getNormalizedScreenValues(50, 50)
+    local totalWidth = fruitNameWidth + germinationWidth + 2*fruitSpacerWidth + 12*transitionWidth
+    topLeftX = (element.size[1] - totalWidth) / 2
+
+
+    -- Print header
+    setTextColor(1, 1, 1, 1)
+
+    -- Season icons
+    -- Transition names
+
+    -- Print all fruits' data
+    local iFruit = 0
+    for _, fruitData in ipairs(self.overviewData) do
+        local fruitY = topLeftY + headerHeight + iFruit * (fruitHeight + fruitSpacerHeight)
+        local fruitX = topLeftX
+
+
+
+        -- Print name of the fruit
+        setTextAlignment(RenderText.ALIGN_LEFT)
+        rect:render(
+            fruitX,
+            fruitY,
+            fruitNameWidth,
+            fruitHeight,
+            {0, 0, 0, 1}
+        )
+        rect:renderOverlay(fruitData.icon, fruitX + textSpacingWidth, fruitY, fruitIconWidth, fruitIconHeight, fruitHeight)
+        rect:renderText(fruitX + 2 * textSpacingWidth + fruitIconWidth, fruitY, textSize, fruitData.i18Name, fruitHeight)
+
+        -- Print germination temperature
+        fruitX = fruitX + fruitNameWidth + fruitSpacerWidth
+        rect:render(
+            fruitX,
+            fruitY,
+            germinationWidth,
+            fruitHeight,
+            {0, 0, 0, 1}
+        )
+        setTextAlignment(RenderText.ALIGN_CENTER)
+        rect:renderText(fruitX + germinationWidth / 2, fruitY, textSize, fruitData.temperature, fruitHeight)
+
+        fruitX = fruitX + germinationWidth + fruitSpacerWidth
+
+        -- Draw all blocks
+        for _, block in pairs(fruitData.blocks) do
+            local blockInY = block.type == "harvestable" and transitionHeight or 0
+
+            rect:render(
+                fruitX + (block.s - 1) * transitionWidth,
+                fruitY + blockInY,
+                transitionWidth * (block.e - block.s + 1),
+                transitionHeight,
+                self.overview.blockColors[block.type]
+            )
+        end
+
+        iFruit = iFruit + 1
+    end
+
+    -- Print vertical line for our current day
+
+
+
+    setTextColor(1, 1, 1, 1)
+    setTextAlignment(RenderText.ALIGN_LEFT)
+end
+
+function ssSeasonsMenu:deleteOverview()
+    self.overview.testOverlay:delete()
 end
 
 ------------------------------------------
