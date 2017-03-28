@@ -74,6 +74,8 @@ function ssDensityMapScanner:loadMap(name)
 end
 
 function ssDensityMapScanner:update(dt)
+    if not g_currentMission:getIsServer() then return end
+
     if self.currentJob == nil then
         self.currentJob = self.queue:pop()
 
