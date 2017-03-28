@@ -21,6 +21,7 @@ ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
 ssGrowthManager.defaultFruitsData = {}
 ssGrowthManager.growthData = {}
 ssGrowthManager.canPlantData = {}
+ssGrowthManager.canHarvestData = {}
 ssGrowthManager.willGerminateData = {}
 
 -- properties
@@ -294,6 +295,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
+            local harvestTable = {}
             for transition,v in pairs(self.growthData) do
                 if transition == self.FIRST_LOAD_TRANSITION then
                     break
@@ -324,12 +326,15 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     end
                     if currentGrowthStage == fruitNumStates then
                         table.insert(transitionTable, plantedGrowthTransition , true)
+                        table.insert(harvestTable, transitionToCheck, true)
                     else
                         table.insert(transitionTable, plantedGrowthTransition , false)
+                        table.insert(harvestTable, transitionToCheck, false)
                     end
                 end
             end
             self.canPlantData[fruitName] = transitionTable
+            self.canHarvestData[fruitName] = harvestTable
         end
     end
 end
@@ -379,15 +384,20 @@ function ssGrowthManager:unknownFruitFound(fruitName)
     self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
     self:updateCanPlantData(fruitName)
+    self:updateCanHarvestData(fruitName)
     self:updateWillGerminateData(fruitName)
 end
-
+--TODO: refactor these three into one function with an argument for data
 function ssGrowthManager:updateDefaultFruitsData(fruitName)
     self.defaultFruitsData[fruitName] = Utils.copyTable(self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits])
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
     self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.fruitNameToCopyForUnknownFruits])
+end
+
+function ssGrowthManager:updateCanHarvestData(fruitName)
+    self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[self.fruitNameToCopyForUnknownFruits])
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
