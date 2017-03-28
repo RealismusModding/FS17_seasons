@@ -24,9 +24,9 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.overview = {}
     self.overview.blockColors = {
-        plantable = {0.662, 0.816, 0.557, 1},
+        plantable = {0.2122, 0.5271, 0.0307, 1},
         -- plantable = {0.662, 0.816, 0.557, 1},
-        harvestable = {0.796, 0.601, 0.006, 1}
+        harvestable = {0.9301, 0.6404, 0.0439, 1}
     }
 
     return self
@@ -254,9 +254,13 @@ function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight)
     renderText(x, y, fontSize, text)
 end
 
-function ssRectOverlay:renderOverlay(overlay, x, y, width, height, boxHeight)
+function ssRectOverlay:renderOverlay(overlay, x, y, width, height, boxHeight, boxWidth)
     if boxHeight ~= nil then
         y = y + (boxHeight - height) / 2
+    end
+
+    if boxWidth ~= nil then
+        x = x + (boxWidth - width) / 2
     end
 
     -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
@@ -270,6 +274,41 @@ end
 
 function ssSeasonsMenu:onCreatePageOverview(element)
     ssSeasonsMenu.PAGE_OVERVIEW = self.pagingElement:getPageIdByElement(element)
+
+    local o = self.overview
+    local _ = nil
+
+    -- Pre-compute a lot of values
+    o.rect = ssRectOverlay:new(element)
+
+    local fruitHeightPixels = 32
+
+    o.transitionWidth, o.transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
+    _, o.fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
+    o.fruitSpacerWidth, o.fruitSpacerHeight = getNormalizedScreenValues(5, 5)
+    o.fruitNameWidth, _ = getNormalizedScreenValues(230, 0)
+    o.germinationWidth, _ = getNormalizedScreenValues(70, 0)
+
+    _, o.headerHeight = getNormalizedScreenValues(0, 50)
+
+    _, o.textSize = getNormalizedScreenValues(0, 14)
+    o.textSpacingWidth, o.textSpacingHeight = getNormalizedScreenValues(5, 5)
+
+    o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
+
+    o.guideWidth, _ = getNormalizedScreenValues(1, 0)
+    o.headerSeparatorWidth, _ = getNormalizedScreenValues(1, 0)
+
+    o.seasonIconWidth, o.seasonIconHeight = getNormalizedScreenValues(30, 30)
+
+    o.topLeftX, o.topLeftY = getNormalizedScreenValues(50, 20)
+    o.totalWidth = o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth + 12 * o.transitionWidth
+
+    o.seasons = {}
+    o.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_spring.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_summer.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_autumn.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_winter.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
 end
 
 function ssSeasonsMenu:updateOverview()
@@ -408,88 +447,107 @@ function ssSeasonsMenu:updateOverview()
             fruitData.i18Name = ssLang.getText("fillType_" .. fruitData.name)
         end
 
+        -- FIXME(Jos): we leak memory here.
         fruitData.icon = Overlay:new("ss_fruit_" .. fruitData.name, FillUtil.fillTypeNameToDesc[fruitData.name].hudOverlayFilename, 0, 0, 40, 40)
     end
 end
 
 function ssSeasonsMenu:drawOverview(element)
     local o = self.overview
-
-    ----- MOVE TO self.overview in update
-    local rect = ssRectOverlay:new(element)
-
-    local fruitHeightPixels = 32
-
-    local transitionWidth, transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
-    local _, fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
-    local fruitSpacerWidth, fruitSpacerHeight = getNormalizedScreenValues(5, 5)
-    local fruitNameWidth, _ = getNormalizedScreenValues(230, 0)
-    local germinationWidth, _ = getNormalizedScreenValues(70, 0)
-
-    local _, headerHeight = getNormalizedScreenValues(0, 60)
-
-    local _, textSize = getNormalizedScreenValues(0, 14)
-    local textSpacingWidth, textSpacingHeight = getNormalizedScreenValues(5, 5)
-
-    local fruitIconWidth, fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
-
-    local guideWidth, _ = getNormalizedScreenValues(2, 0)
-    ----- END
-
-    local topLeftX, topLeftY = getNormalizedScreenValues(50, 50)
-    local totalWidth = fruitNameWidth + germinationWidth + 2*fruitSpacerWidth + 12*transitionWidth
-    topLeftX = (element.size[1] - totalWidth) / 2
-
+    local topLeftX = (element.size[1] - o.totalWidth) / 2
+    local headerLeft = topLeftX + o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth
 
     -- Print header
     setTextColor(1, 1, 1, 1)
 
+    -- Background
+    o.rect:render(
+        headerLeft,
+        o.topLeftY,
+        o.transitionWidth * 12,
+        o.headerHeight - o.fruitSpacerHeight,
+        {0.013, 0.013, 0.013, 1}
+    )
+
     -- Season icons
+    for s = 0, 3 do
+        o.rect:renderOverlay(
+            self.overview.seasons[s],
+            headerLeft + s * o.transitionWidth * 3,
+            o.topLeftY,
+            o.seasonIconWidth,
+            o.seasonIconHeight,
+            nil, --headerHeight - fruitSpacerHeight,
+            o.transitionWidth * 3
+        )
+    end
+
+    -- Draw separator blocks in the header
+    for i = 1, 12 do
+        if i ~= 1 then
+            if i == 4 or i == 7 or i == 10 then
+                o.rect:render(
+                    headerLeft + (i - 1) * o.transitionWidth,
+                    o.topLeftY,
+                    o.headerSeparatorWidth,
+                    o.headerHeight - o.fruitSpacerHeight,
+                    {0.0284, 0.0284, 0.0284, 1} -- ????
+                )
+            else
+                o.rect:render(
+                    headerLeft + (i - 1) * o.transitionWidth,
+                    o.topLeftY + o.seasonIconHeight,
+                    o.headerSeparatorWidth,
+                    o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
+                    {0.0284, 0.0284, 0.0284, 1}
+                )
+            end
+        end
+    end
+
     -- Transition names
 
     -- Print all fruits' data
     local iFruit = 0
     for _, fruitData in ipairs(self.overviewData) do
-        local fruitY = topLeftY + headerHeight + iFruit * (fruitHeight + fruitSpacerHeight)
+        local fruitY = o.topLeftY + o.headerHeight + iFruit * (o.fruitHeight + o.fruitSpacerHeight)
         local fruitX = topLeftX
-
-
 
         -- Print name of the fruit
         setTextAlignment(RenderText.ALIGN_LEFT)
-        rect:render(
+        o.rect:render(
             fruitX,
             fruitY,
-            fruitNameWidth,
-            fruitHeight,
-            {0, 0, 0, 1}
+            o.fruitNameWidth,
+            o.fruitHeight,
+            {0.013, 0.013, 0.013, 1}
         )
-        rect:renderOverlay(fruitData.icon, fruitX + textSpacingWidth, fruitY, fruitIconWidth, fruitIconHeight, fruitHeight)
-        rect:renderText(fruitX + 2 * textSpacingWidth + fruitIconWidth, fruitY, textSize, fruitData.i18Name, fruitHeight)
+        o.rect:renderOverlay(fruitData.icon, fruitX + o.textSpacingWidth, fruitY, o.fruitIconWidth, o.fruitIconHeight, o.fruitHeight)
+        o.rect:renderText(fruitX + 2 * o.textSpacingWidth + o.fruitIconWidth, fruitY, o.textSize, fruitData.i18Name, o.fruitHeight)
 
         -- Print germination temperature
-        fruitX = fruitX + fruitNameWidth + fruitSpacerWidth
-        rect:render(
+        fruitX = fruitX + o.fruitNameWidth + o.fruitSpacerWidth
+        o.rect:render(
             fruitX,
             fruitY,
-            germinationWidth,
-            fruitHeight,
-            {0, 0, 0, 1}
+            o.germinationWidth,
+            o.fruitHeight,
+            {0.013, 0.013, 0.013, 1}
         )
         setTextAlignment(RenderText.ALIGN_CENTER)
-        rect:renderText(fruitX + germinationWidth / 2, fruitY, textSize, fruitData.temperature, fruitHeight)
+        o.rect:renderText(fruitX + o.germinationWidth / 2, fruitY, o.textSize, fruitData.temperature, o.fruitHeight)
 
-        fruitX = fruitX + germinationWidth + fruitSpacerWidth
+        fruitX = fruitX + o.germinationWidth + o.fruitSpacerWidth
 
         -- Draw all blocks
         for _, block in pairs(fruitData.blocks) do
-            local blockInY = block.type == "harvestable" and transitionHeight or 0
+            local blockInY = block.type == "harvestable" and o.transitionHeight or 0
 
-            rect:render(
-                fruitX + (block.s - 1) * transitionWidth,
+            o.rect:render(
+                fruitX + (block.s - 1) * o.transitionWidth,
                 fruitY + blockInY,
-                transitionWidth * (block.e - block.s + 1),
-                transitionHeight,
+                o.transitionWidth * (block.e - block.s + 1),
+                o.transitionHeight,
                 self.overview.blockColors[block.type]
             )
         end
@@ -498,18 +556,19 @@ function ssSeasonsMenu:drawOverview(element)
     end
 
     -- Print vertical line for our current day
-    local fruitsLeft = topLeftX + fruitNameWidth + fruitSpacerWidth + germinationWidth + fruitSpacerWidth
-    local fruitsRight = fruitsLeft + 12 * transitionWidth
+    local fruitsLeft = topLeftX + o.fruitNameWidth + o.fruitSpacerWidth + o.germinationWidth + o.fruitSpacerWidth
+    local fruitsRight = fruitsLeft + 12 * o.transitionWidth
     local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
-    rect:render(
+
+    o.rect:render(
         fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * dayInYear,
-        topLeftY + headerHeight,
-        guideWidth,
-        table.getn(self.overviewData) * (fruitHeight + fruitSpacerHeight) - fruitSpacerHeight,
-        {1, 0, 0, 1}
+        o.topLeftY + o.headerHeight,
+        o.guideWidth,
+        table.getn(self.overviewData) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight,
+        --{0.8069, 0.0097, 0.0097, 1}
+        -- {0.2832, 0.0091, 0.0091, 1}
+        {0.0742, 0.4341, 0.6939, 1}
     )
-
-
 
     setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
