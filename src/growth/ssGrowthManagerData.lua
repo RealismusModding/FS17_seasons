@@ -16,19 +16,19 @@ function ssGrowthManagerData:loadAllData()
 
     local file = loadXMLFile("xml", path)
     if file == nil then
-        logInfo("ssGrowthManagerData: Failed to load XML growth data file " .. path)
+        logInfo("ssGrowthManagerData:", "Failed to load XML growth data file " .. path)
         return nil, nil
     end
 
     local defaultFruits = self:getDefaultFruitsData(rootKey, file)
     if defaultFruits == nil then
-        logInfo("ssGrowthManagerData: Failed to load XML growth data file (defaultFruits) " .. path)
+        logInfo("ssGrowthManagerData:", "Failed to load XML growth data file (defaultFruits) " .. path)
         return nil, nil
     end
 
     local growthData = self:getGrowthData(rootKey, file)
     if growthData == nil then
-        logInfo("ssGrowthManagerData: Failed to load XML growth data file (growthTransitions) " .. path)
+        logInfo("ssGrowthManagerData:", "Failed to load XML growth data file (growthTransitions) " .. path)
         return nil, nil
     end
     delete(file)
@@ -38,16 +38,16 @@ function ssGrowthManagerData:loadAllData()
     --modMapDataPath = g_seasons.modDir .. "data/seasons_growth.xml" --for testing
 
     if  modMapDataPath ~= nil then
-        logInfo("ssGrowthManagerData: Additional growth data found - loading")
+        logInfo("ssGrowthManagerData:", "Additional growth data found - loading")
         file = loadXMLFile("xml", modMapDataPath)
         if file ~= nil then
             local optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits)
             if optionalDefaultFruits == nil then
-                logInfo("ssGrowthManagerData: Failed to load additional XML growth data file (defaultFruits) " .. path)
+                logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file (defaultFruits) " .. path)
             else
                 local optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
                 if optionalGrowthData == nil then
-                    logInfo("ssGrowthManagerData: Failed to load additional XML growth data file (growthTransitions) " .. path)
+                    logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file (growthTransitions) " .. path)
                 else
                     defaultFruits = optionalDefaultFruits
                     growthData = optionalGrowthData
@@ -55,7 +55,7 @@ function ssGrowthManagerData:loadAllData()
             end
             delete(file)
         else
-            logInfo("ssGrowthManagerData: Failed to load additional XML growth data file " .. modMapDataPath)
+            logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file " .. modMapDataPath)
         end
     end
 
@@ -79,7 +79,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
             local growthTransitionNumKey = growthTransitionKey .. "#growthTransitionNum"
             local growthTransitionNum = getXMLString(file,growthTransitionNumKey)
             if growthTransitionNum == nil then
-                logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionNumKey:" .. growthTransitionNumKey)
+                logInfo("ssGrowthManagerData:", "getGrowthData: XML loading failed growthTransitionNumKey:" .. growthTransitionNumKey)
                 return nil
             elseif growthTransitionNum == "FIRST_LOAD_TRANSITION" then
                 growthTransitionNum = ssGrowthManager.FIRST_LOAD_TRANSITION
@@ -96,7 +96,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
             i = i + 1
         end
     else
-        logInfo("ssGrowthManagerData: getGrowthData: XML loading failed growthTransitionsKey" .. growthTransitionsKey .. " not found")
+        logInfo("ssGrowthManagerData:", "getGrowthData: XML loading failed growthTransitionsKey" .. growthTransitionsKey .. " not found")
         return nil
     end
 
@@ -116,7 +116,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
 
         local fruitName = getXMLString(file, fruitKey .. "#fruitName")
         if fruitName == nil then
-            logInfo("ssGrowthManagerData: getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
+            logInfo("ssGrowthManagerData:", "getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
         end
 
         growthData[growthTransitionNum][fruitName] = {}
@@ -205,13 +205,13 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
                     defaultFruits[fruitName].maxSprayGrowthStage = 0
                 end
             else
-                logInfo("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitKey )
+                logInfo("ssGrowthManagerData:", "getDefaultFruitsData: XML loading failed " .. defaultFruitKey )
                 return nil
             end
             i = i + 1
         end
     else
-        logInfo("ssGrowthManagerData: getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found")
+        logInfo("ssGrowthManagerData:", "getDefaultFruitsData: XML loading failed " .. defaultFruitsKey .. " not found")
         return nil
     end
 

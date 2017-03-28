@@ -16,4 +16,14 @@
         <Value name="size" value="305px 36px" />
         <Value name="margin" value="0px 25px 0px 14px" />
     </Profile>
+
+    <Profile name="ssOverview" parent="baseReference">
+        <Value name="size" value="1000px 530px" /> <!-- 1000, 560    915?? -->
+        <Value name="position" value="0px 30px" />
+    </Profile>
+
+    <Profile name="ssOverviewOverlay" parent="baseReference">
+        <Value name="size" value="1000px 530px" /> <!-- 1000, 560    915?? -->
+        <Value name="position" value="0px 0px" />
+    </Profile>
 </GUIProfiles>

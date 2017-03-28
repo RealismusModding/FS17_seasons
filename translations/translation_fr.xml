@@ -80,14 +80,14 @@
 
         <text name="warning_soilIsFrozen" text="Le sol est gelé. Vous ne pouvez pas le travailler!" />
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
-        <text name="warning_animalsKilled" text="%d Les animaux sont morts" />
-        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
-        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+        <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture et suffisante pour 3 jours." />
 
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
-
+		
+        <!-- GUI -->
         <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />

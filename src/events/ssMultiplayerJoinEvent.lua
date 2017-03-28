@@ -46,14 +46,14 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
 
         local num = streamReadInt32(streamId)
         if num ~= table.getn(ssMultiplayer.classes) then
-            logInfo("Something totally wrong happened: client and server mod are different (1)")
+            logInfo("ssMultiplayerJoinEvent:", "Something totally wrong happened: client and server mod are different (1)")
             return
         end
 
         for _, className in pairs(ssMultiplayer.classes) do
             local className2 = streamReadString(streamId)
             if className ~= className2 then
-                logInfo("Something totally wrong happened: client and server mod are different (2)")
+                logInfo("ssMultiplayerJoinEvent:", "Something totally wrong happened: client and server mod are different (2)")
                 return
             end
 

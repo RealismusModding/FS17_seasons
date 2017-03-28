@@ -133,7 +133,7 @@ function ssVehicle:loadRepairFactors()
 
         local category = getXMLString(file, key .. "#category")
         if category == nil then
-            logInfo("repairFactors.xml is invalid")
+            logInfo("ssVehicle:", "repairFactors.xml is invalid")
             break
         end
 
@@ -142,7 +142,7 @@ function ssVehicle:loadRepairFactors()
         local lifetime = getXMLFloat(file, key .. ".ssLifeTime#value")
 
         if RF1 == nil or RF2 == nil or lifetime == nil then
-            logInfo("repairFactors.xml is invalid")
+            logInfo("ssVehicle:", "repairFactors.xml is invalid")
             break
         end
 

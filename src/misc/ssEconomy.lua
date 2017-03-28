@@ -92,7 +92,7 @@ function ssEconomy:loadFactorsFromXML(file, key)
     end
 
     if table.getn(factors) ~= 12 then
-        logInfo("Problem in economy data: not all stages are configured in " .. key)
+        logInfo("ssEconomy:", "Problem in economy data: not all stages are configured in " .. key)
     end
 
     return factors
@@ -113,7 +113,7 @@ function ssEconomy:loadFromXML(path)
 
         local name = getXMLString(file, key .. "#name")
         if name == nil then
-            logInfo("Name of fill unknown")
+            logInfo("ssEconomy:", "Name of fill unknown")
             break
         end
 
@@ -137,7 +137,7 @@ function ssEconomy:loadFromXML(path)
 
         local type = getXMLString(file, key .. "#type")
         if type == nil then
-            logInfo("Type of bale unknown")
+            logInfo("ssEconomy:", "Type of bale unknown")
             break
         end
 
@@ -161,7 +161,7 @@ function ssEconomy:loadFromXML(path)
 
         local name = getXMLString(file, key .. "#name")
         if name == nil then
-            logInfo("Type of animal unknown")
+            logInfo("ssEconomy:", "Type of animal unknown")
             break
         end
 
