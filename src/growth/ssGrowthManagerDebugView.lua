@@ -48,15 +48,15 @@ function ssGrowthManagerDebugView:draw()
 
         renderText(0.44, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
         
-        -- local cropsThatCanGrow = ""
+        local cropsThatCanGrow = ""
 
-        -- for fruitName in pairs(ssGrowthManager.willGerminate) do
-        --     if ssGrowthManager.willGerminate[fruitName] == true then
-        --         cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-        --     end
-        -- end
+        for fruitName in pairs(ssGrowthManager.willGerminate) do
+            if ssGrowthManager.willGerminateData[fruitName] == true then
+                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+            end
+        end
         
-        --renderText(0.44, 0.92, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+        renderText(0.44, 0.92, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
         renderText(0.44, 0.90, 0.01, "Soil temp: " .. tostring(ssWeatherManager.soilTemp))
         renderText(0.44, 0.88, 0.01, "Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
     end
