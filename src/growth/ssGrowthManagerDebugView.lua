@@ -31,7 +31,7 @@ function ssGrowthManagerDebugView:loadMap(name)
     addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
 end
 
-function ssGrowthDebugView:consoleCommandDebugView()
+function ssGrowthManagerDebugView:consoleCommandDebugView()
     if g_currentMission:getIsServer() then
         if self.debugView == false then
             self.debugView = true
