@@ -413,23 +413,24 @@ function ssGrowthManager:getCanPlantData(fruitName)
 end
 
 --do not use
+--TODO need to build canHarvestData properly
 function ssGrowthManager:getCanHarvestData(fruitName)
-    local growthTransition = 1
-    local startTransition
-    local endTransition
-    local startFound = false
+    -- local growthTransition = 1
+    -- local startTransition
+    -- local endTransition
+    -- local startFound = false
 
-    while growthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
-        if self.canHarvestData[fruitName][growthTransition] == true and startFound == false then
-            startFound = true
-            startTransition = growthTransition
-        elseif self.canHarvestData[fruitName][growthTransition] == true and startFound == true then
-            endTransition = growthTransition
-        end
-        growthTransition = growthTransition + 1
-    end
+    -- while growthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
+    --     if self.canHarvestData[fruitName][growthTransition] == true and startFound == false then
+    --         startFound = true
+    --         startTransition = growthTransition
+    --     elseif self.canHarvestData[fruitName][growthTransition] == true and startFound == true then
+    --         endTransition = growthTransition
+    --     end
+    --     growthTransition = growthTransition + 1
+    -- end
 
-    return startTransition, endTransition
+    -- return startTransition, endTransition
 end
 
 -- debug console commands
