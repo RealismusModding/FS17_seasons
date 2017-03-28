@@ -85,7 +85,6 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     if fieldJob == FieldJob.TYPE_FERTILIZING_GROWING or fieldJob == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJob == FieldJob.TYPE_FERTILIZING_SOWN then
         return g_currentMission.environment.timeSinceLastRain == 0
     end
-
     -- Always allow user assigned missions to cultivate
     -- NPC only cultivates in early-mid spring
     elseif fieldJob == FieldJob.TYPE_PLOUGHING or fieldJob == FieldJob.TYPE_CULTIVATING then
@@ -94,8 +93,6 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
         else
             return true
         end
-    end
-
     -- Never allow harvesting wet crop
     -- NPC only harvests in mid autumn - early winter
     -- Always allow user assigned missions to harvest
@@ -109,8 +106,6 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
         else
             return true
         end
-    end
-
     -- Only allow seeding in spring - early summer
     -- NPC only seeds in late spring
     elseif fieldJob == FieldJob.TYPE_SOWING then
