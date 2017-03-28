@@ -381,23 +381,15 @@ end
 
 -- update all GM data for a custom unknown fruit
 function ssGrowthManager:unknownFruitFound(fruitName)
-    self:updateDefaultFruitsData(fruitName)
+    self:copyDataTable(fruitName, self.defaultFruitsData)
     self:updateGrowthData(fruitName)
-    self:updateCanPlantData(fruitName)
-    self:updateCanHarvestData(fruitName)
+    self:copyDataTable(fruitName, self.canPlantData)
+    self:copyDataTable(fruitName, self.canHarvestData)
     self:updateWillGerminateData(fruitName)
 end
---TODO: refactor these three into one function with an argument for data
-function ssGrowthManager:updateDefaultFruitsData(fruitName)
-    self.defaultFruitsData[fruitName] = Utils.copyTable(self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits])
-end
 
-function ssGrowthManager:updateCanPlantData(fruitName)
-    self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.fruitNameToCopyForUnknownFruits])
-end
-
-function ssGrowthManager:updateCanHarvestData(fruitName)
-    self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[self.fruitNameToCopyForUnknownFruits])
+function ssGrowthManager:copyDataTable(fruitname, data)
+    data[fruitName] = Utils.copyTable(data[self.fruitNameToCopyForUnknownFruits])
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
@@ -412,6 +404,9 @@ end
 function ssGrowthManager:updateWillGerminateData(fruitName)
     self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
 end
+
+-- growth gui
+
 
 -- debug console commands
 
