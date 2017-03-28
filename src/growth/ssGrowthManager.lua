@@ -16,6 +16,7 @@ ssGrowthManager.WITHERED = 300
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.FIRST_GROWTH_TRANSITION = 1
 ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
+ssGrowthManager.MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
 
 -- data
 ssGrowthManager.defaultFruitsData = {}
@@ -306,12 +307,12 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                 else
                     local plantedGrowthTransition = transition
                     local currentGrowthStage = 1
-                    local MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
+                    
                     local maxAllowedCounter = 0
                     local transitionToCheck = plantedGrowthTransition + 1 -- need to start checking from the next transition after planted transition
                     local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
-                    while currentGrowthStage < fruitNumStates and maxAllowedCounter < MAX_ALLOWABLE_GROWTH_PERIOD do
+                    while currentGrowthStage < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
                         if transitionToCheck > 12 then
                             transitionToCheck = 1
                         end
@@ -407,6 +408,28 @@ end
 
 -- growth gui
 
+function ssGrowthManager:getCanPlantData(fruitName)
+
+end
+
+function ssGrowthManager:getCanHarvestData(fruitName)
+    local growthTransition = 1
+    local startTransition
+    local endTransition
+    local startFound = false
+
+    while growthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
+        if self.canHarvestData[fruitName][growthTransition] == true and startFound == false then
+            startFound = true
+            startTransition = growthTransition
+        elseif self.canHarvestData[fruitName][growthTransition] == true and startFound == true then
+            endTransition = growthTransition
+        end
+        growthTransition = growthTransition + 1
+    end
+
+    return startTransition, endTransition
+end
 
 -- debug console commands
 
@@ -428,8 +451,13 @@ function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
 end
 
 function ssGrowthManager:consoleCommandTestStuff()
-    logInfo("ssGrowthManager: canPlantData")
-    print_r(self.canPlantData)
-    logInfo("ssGrowthManager: willGerminateData")
-    print_r(self.willGerminateData)
+    -- logInfo("ssGrowthManager: canPlantData")
+    -- print_r(self.canPlantData)
+    -- logInfo("ssGrowthManager: willGerminateData")
+    -- print_r(self.willGerminateData)
+    logInfo("ssGrowthManager: canHarvestData")
+    print_r(self.canHarvestData)
+    local min, max = self:getCanHarvestData("barley")
+    logInfo("min:" .. tostring(min))
+    logInfo("max:" .. tostring(max))
 end
