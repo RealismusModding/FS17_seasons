@@ -124,9 +124,9 @@ function ssWeatherManager:loadMap(name)
     self.rainData = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
 
-    local modPath = ssUtil.getModMapDataPath("seasons_weather.xml")
-    if modPath ~= nil then
-        self:loadFromXML(modPath)
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("weather")) do
+        self:loadFromXML(path)
     end
 
     -- Load germination temperatures

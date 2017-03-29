@@ -50,9 +50,8 @@ function ssEconomy:loadMap(name)
     self.repricing = {}
     self:loadFromXML(g_seasons.modDir .. "data/economy.xml")
 
-    local modPath = ssUtil.getModMapDataPath("seasons_economy.xml")
-    if modPath ~= nil then
-        self:loadFromXML(modPath)
+    for _, path in ipairs(g_seasons:getModPaths("economy")) do
+        self:loadFromXML(path)
     end
 
     -- Change info every day
