@@ -31,9 +31,12 @@ end
 
 --filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
-    if self.coverCounter == nil or self.currentFieldPartitionIndex ~= nil then
-        superFunc(self, dt)
-
+    if self.coverCounter == nil then self.coverCounter = 0 end; --FIXME: maybe when ssFieldJobManager initializes?
+    
+    if self.coverCounter > 500 or self.currentFieldPartitionIndex ~= nil or self:isFieldJobActive() then
+        superFunc(self, dt + self.coverCounter)
+        self.coverCounter = 0
+        
         --check if field job was started by NPC, terminate if not appropriate for current season
         if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
             local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
@@ -47,17 +50,11 @@ function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
                                 [FieldJobManager.FIELDSTATE_GROWING] = FieldJob.TYPE_SOWING}
 
             if not g_seasons.fieldJobManager.isFieldJobAllowed(stateToJob[paramSetState], true) then
-                self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update
+                self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update 
             end
-        end
-
-        self.coverCounter = 0
+        end    
     else -- Use cover counter to prevent the FieldJobManager to initiate a job on every update
         self.coverCounter = self.coverCounter + dt
-
-        if self.coverCounter > 500 then
-            self.coverCounter = nil
-        end
     end
 end
 
@@ -83,7 +80,7 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
 
     -- Always allow fertilizing missions, unless rain
     if fieldJob == FieldJob.TYPE_FERTILIZING_GROWING or fieldJob == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJob == FieldJob.TYPE_FERTILIZING_SOWN then
-        return g_currentMission.environment.timeSinceLastRain == 0
+        return not (g_currentMission.environment.timeSinceLastRain == 0)
     -- Always allow user assigned missions to cultivate
     -- NPC only cultivates in early-mid spring
     elseif fieldJob == FieldJob.TYPE_PLOUGHING or fieldJob == FieldJob.TYPE_CULTIVATING then
