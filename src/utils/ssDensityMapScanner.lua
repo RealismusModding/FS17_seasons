@@ -46,11 +46,11 @@ function ssDensityMapScanner:save(savegame, key)
     removeXMLProperty(savegame, key .. ".densityMapScanner")
 
     if self.currentJob ~= nil then
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", job.x)
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", job.z)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", job.callbackId)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", job.parameter)
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", job.numSegments)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", self.currentJob.parameter)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
     end
 
     -- Save queue
