@@ -36,7 +36,9 @@ function ssMain:preLoad()
     self.debug = false--<%=debug %>
     self.enabled = false -- will be enabled later in the loading process
 
-    logInfo("Loading Seasons " .. self.version);
+    logInfo("Loading Seasons " .. self.version)
+
+    ssMain.xmlDirectories = {}
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
@@ -77,6 +79,17 @@ end
 ----------------------------
 
 function ssMain:loadMap()
+    -- Call upon all 4th party mod functions
+    for modName, isLoaded in pairs(g_modIsLoaded) do
+        if isLoaded then
+            local modEnv = getfenv(0)[modName]
+
+            if modEnv ~= nil and modEnv.g_rm_seasons_load ~= nil then
+                modEnv.g_rm_seasons_load(self)
+            end
+        end
+    end
+
     -- Create the GUI
     self.mainMenu = ssSeasonsMenu:new()
 
@@ -85,9 +98,6 @@ function ssMain:loadMap()
 
     -- Load the GUI configurations
     g_gui:loadGui(self.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", self.mainMenu)
-
-    -- Add day change listener for Season events
-    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssMain:update(dt)
@@ -126,7 +136,45 @@ function ssMain:update(dt)
     end
 end
 
-function ssMain:dayChanged()
+----------------------------
+-- Registering other mods
+----------------------------
+
+function ssMain:registerXMLDirectory(id, path)
+    if id == nil or id == "" or path == nil or path == "" then
+        logInfo("Invalid parameters to :registerXMLDirectory")
+        return
+    end
+
+    if self.xmlDirectories[id] ~= nil then
+        logInfo("Error: XML directory for id '" .. tostring(id) .. "' already registered")
+        return
+    end
+
+    self.xmlDirectories[id] = path
+end
+
+function ssMain:getModPaths(name)
+    local ret = {}
+
+    -- Map first
+    if g_currentMission.missionInfo.map.isModMap then
+        local mapPath = g_currentMission.missionInfo.map.baseDirectory .. "seasons_" .. name .. ".xml"
+        if fileExists(mapPath) then
+            table.insert(ret, path)
+        end
+    end
+
+    -- Then all mods, in order
+    for id, prefix in pairs(self.xmlDirectories) do
+        local path = prefix .. "seasons_" .. name .. ".xml"
+
+        if fileExists(path) then
+            table.insert(ret, path)
+        end
+    end
+
+    return ret
 end
 
 ----------------------------

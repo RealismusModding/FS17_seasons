@@ -16,12 +16,12 @@ function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
         g_seasons.environment:addSeasonChangeListener(self)
 
-        local modReplacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d") -- Loading materialHolder
-
         self:loadFromXML()
 
         self:loadTextureIdTable(getRootNode()) -- Built into map
-        self:loadTextureIdTable(modReplacements)
+        for _, replacements in ipairs(self.modReplacements) do
+            self:loadTextureIdTable(replacements)
+        end
 
         -- Only if this game does not need to wait for other modules to receive data,
         -- update the textures. (singleplayer)
@@ -39,8 +39,15 @@ end
 function ssReplaceVisual:loadFromXML()
     self.textureReplacements = {}
     self.textureReplacements.default = {}
+    self.modReplacements = {}
 
+    -- Default
     self:loadTextureReplacementsFromXMLFile(g_seasons.modDir .. "data/textures.xml")
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("textures")) do
+        self:loadTextureReplacementsFromXMLFile(path)
+    end
 end
 
 function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
@@ -57,6 +64,20 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         ["winter"] = 3
     }
 
+    -- Load properties
+    if Utils.getNoNil(getXMLBool(file, "textures#overwrite"), false) then
+        self.textureReplacements = {}
+        self.textureReplacements.default = {}
+    end
+
+    -- If there is a material holder, load that first
+    local matHolder = getXMLString(file, "textures#materialHolder")
+    if matHolder ~= nil then
+        local replacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d")
+        table.insert(self.modReplacements, replacements)
+    end
+
+    -- Load seasons replacements
     for seasonName, seasonId in pairs(seasonKeyToId) do
         -- Create the season if it does not exist
         if self.textureReplacements[seasonId] == nil then
