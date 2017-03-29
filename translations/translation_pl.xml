@@ -81,8 +81,7 @@
         <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
-        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
-        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni." />
 
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
