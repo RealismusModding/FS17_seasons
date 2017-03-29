@@ -175,11 +175,11 @@ function ssAnimals:animalIsCaredFor(animal)
         end
     end
 
-    if not hasFood and not hasWater then
-        return false
+    if hasFood and hasWater then
+        return true
     end
 
-    return true
+    return false
 end
 
 function ssAnimals:killAnimals(animal, p)
