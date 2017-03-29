@@ -296,7 +296,6 @@ function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
-            local harvestTable = {}
             for transition,v in pairs(self.growthData) do
                 if transition == self.FIRST_LOAD_TRANSITION then
                     break
@@ -327,16 +326,50 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     end
                     if currentGrowthStage == fruitNumStates then
                         table.insert(transitionTable, plantedGrowthTransition , true)
-                        table.insert(harvestTable, transitionToCheck, true)
                     else
                         table.insert(transitionTable, plantedGrowthTransition , false)
-                        table.insert(harvestTable, transitionToCheck, false)
                     end
                 end
             end
             self.canPlantData[fruitName] = transitionTable
-            self.canHarvestData[fruitName] = harvestTable
         end
+    end
+end
+
+--TODO: fix this. account for grass (harvest is not max)
+--fix winter fruits
+function ssGrowthManager:buildCanHarvestData()
+    for fruitName, transition in pairs(self.canPlantData) do
+        local transitionTable = {}
+        log(fruitName)
+        local plantedGrowthTransition = 1
+        local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
+
+
+        while plantedGrowthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
+            if self.canPlantData[fruitName][plantedGrowthTransition] == true then
+                --if self.canPlantData[fruitName][plantedGrowthTransition] == false then break end
+                local growthStage = 1
+                local transitionToCheck = plantedGrowthTransition + 1
+                if plantedGrowthTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
+                    transitionToCheck = 1
+                end
+
+                while growthStage < fruitNumStates do
+                    growthStage = self:simulateGrowth(fruitName, transitionToCheck, growthStage)
+                    log("plantedGrowthTransition: " .. plantedGrowthTransition  .. " fruitname: " .. fruitName .. " transitionToCheck: " .. transitionToCheck .. " growthStage: " .. growthStage .. " fruitNumStates" .. fruitNumStates)
+                    transitionToCheck = transitionToCheck + 1
+                    if transitionToCheck > 12 then transitionToCheck = 1 end
+                end
+                if growthStage == fruitNumStates then
+                    table.insert(transitionTable, transitionToCheck-1, true )
+                end
+                
+            end
+            plantedGrowthTransition = plantedGrowthTransition + 1
+        end
+        self.canHarvestData[fruitName] = transitionTable
+        
     end
 end
 
@@ -347,8 +380,14 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
         --setGrowthState
         if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
             and self.growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
-            if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
-                newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
+            if self.growthData[transitionToCheck][fruitName].setGrowthMaxState ~= nil then
+                if currentGrowthStage >= self.growthData[transitionToCheck][fruitName].setGrowthState and currentGrowthStage <= self.growthData[transitionToCheck][fruitName].setGrowthMaxState then
+                    newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
+                end
+            else
+                if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
+                    newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
+                end
             end
         end
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
@@ -431,6 +470,7 @@ function ssGrowthManager:getCanHarvestData(fruitName)
     -- end
 
     -- return startTransition, endTransition
+    return nil
 end
 
 -- debug console commands
@@ -453,10 +493,11 @@ function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
 end
 
 function ssGrowthManager:consoleCommandTestStuff()
-    -- logInfo("ssGrowthManager: canPlantData")
-    -- print_r(self.canPlantData)
+    logInfo("ssGrowthManager: canPlantData")
+    print_r(self.canPlantData)
     -- logInfo("ssGrowthManager: willGerminateData")
     -- print_r(self.willGerminateData)
+    self:buildCanHarvestData()
     logInfo("ssGrowthManager: canHarvestData")
     print_r(self.canHarvestData)
    
