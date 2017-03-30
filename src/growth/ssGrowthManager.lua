@@ -364,6 +364,8 @@ function ssGrowthManager:buildCanHarvestData()
                     if transitionToCheck > 12 then transitionToCheck = 1 end
                 end
                 if growthStage == fruitNumStates then
+                    logInfo("Inserting table for transition: " .. tostring(transitionToCheck-1))
+                    print_r(transitionTable)
                     table.insert(transitionTable, transitionToCheck-1, true )
                 end
                 
@@ -449,8 +451,12 @@ end
 
 -- growth gui
 
-function ssGrowthManager:getCanPlantData(fruitName)
+function ssGrowthManager:getCanPlantData()
     return self.canPlantData
+end
+
+function ssGrowthManager:getCanHarvestData()
+    return self.canHarvestData
 end
 
 --do not use
