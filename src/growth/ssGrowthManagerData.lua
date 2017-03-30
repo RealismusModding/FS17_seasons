@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- ssGrowthManagerData
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  For loading growth data
 -- Authors:  theSeb, based on ssSeasonsXML by Rahkiin
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssGrowthManagerData = {}
 
@@ -105,7 +107,7 @@ end
 
 function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file, growthTransitionNum, parentData)
     local growthData = parentData
-    
+
     --load each fruit
     local i = 0
     while true do

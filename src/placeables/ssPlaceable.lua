@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- PLACEABLE SCRIPT
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  To change placeable properties
 -- Authors:  Rahkiin, reallogger
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssPlaceable = {}
 
@@ -53,7 +55,7 @@ function ssPlaceable:placeableGetDailyUpkeep(superFunc)
     if self.incomePerHour == 0 then
         multiplier = 1 + self.age / ( 4 * g_seasons.environment.daysInSeason ) * 0.25
     end
-    
+
     return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (12 / g_seasons.environment.daysInSeason )
 end
 
@@ -63,13 +65,13 @@ function ssPlaceable:placeableGetSellPrice(superFunc)
 
     if self.incomePerHour == 0 then
         local ageFac = 0.5 - 0.05 * self.age / (4 * g_seasons.environment.daysInSeason)
-        
+
         if ageFac > 0.1 then
             priceMultiplier = ageFac
         else
             priceMultiplier = -0.05
         end
-        
+
     else
         local annualCost = self:getDailyUpKeep() * 4 * g_seasons.environment.daysInSeason
         local annualIncome = self.incomePerHour * 24 * 4 * g_seasons.environment.daysInSeason
