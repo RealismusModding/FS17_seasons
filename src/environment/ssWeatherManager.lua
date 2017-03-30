@@ -323,11 +323,10 @@ function ssWeatherManager:updateForecast()
 
     table.insert(self.forecast, oneDayForecast)
     table.insert(self.weather, oneDayRain)
-
     table.remove(self.weather, 1)
 
+    self:updateHail()
     self:overwriteRaintable()
-
     self:updateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, self.prevHighTemp, self.soilTemp))
@@ -418,11 +417,13 @@ function ssWeatherManager:calculateSnowAccumulation()
     local currentSnow = self.snowDepth
 
     --- more radiation during spring
-    local meltFactor = 1
-    if self.forecast[1].season ~= g_seasons.environment.SEASON_WINTER then
-        meltFactor = 5
-    end
+    --local meltFactor = 1
+    --if self.forecast[1].season ~= g_seasons.environment.SEASON_WINTER then
+    --    meltFactor = 5
+    --end
 
+    -- calculating snow melt as a function of radiation
+    local meltFactor = self:calculateSolarRadiation()
 
     if currentRain == nil then
         if currentTemp > -1 then
@@ -522,7 +523,7 @@ function ssWeatherManager:currentTemperature()
 end
 
 -- Change rain into snow when it is freezing, and snow into rain if it is too hot
-function ssWeatherManager:switchRainHail()
+function ssWeatherManager:switchRainSnow()
     for index, rain in ipairs(g_currentMission.environment.rains) do
         for jndex, fCast in ipairs(self.forecast) do
              if rain.startDay == fCast.day then
@@ -573,14 +574,20 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
     elseif p > rainFactors.probRain and p < rainFactors.probClouds then
         oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
         oneRainEvent.rainTypeId = "cloudy"
-    elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 2 and endRainTime < 10800000 then
+    elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 4 and endRainTime < 10800000 then
         -- morning fog
         oneRainEvent.startDay = oneDayForecast.day
         oneRainEvent.endDay = oneDayForecast.day
         local dayStart, dayEnd, nightEnd, nightStart = ssEnvironment:calculateStartEndOfDay(oneDayForecast.day)
 
-        oneRainEvent.startDayTime = nightEnd*60*60*1000
-        oneRainEvent.endDayTime = (dayStart+1)*60*60*1000
+        -- longer fog in winter and autumn
+        if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
+            oneRainEvent.startDayTime = nightEnd*60*60*1000
+            oneRainEvent.endDayTime = (dayStart+4)*60*60*1000
+        else
+            oneRainEvent.startDayTime = nightEnd*60*60*1000
+            oneRainEvent.endDayTime = (dayStart+1)*60*60*1000
+        end
         oneRainEvent.duration = oneRainEvent.endDayTime - oneRainEvent.startDayTime
         oneRainEvent.rainTypeId = "fog"
     else
@@ -603,7 +610,6 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     oneRainEvent.duration = math.min(math.max(math.exp(ssUtil.lognormDist(rainFactors.beta,rainFactors.gamma,p)),2),24)*60*60*1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
     oneRainEvent.startDayTime = math.random(3600 + endRainTime/1000,82800) *1000
-    --log("Start time for rain = ", oneRainEvent.startDayTime)
 
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay
@@ -660,7 +666,7 @@ function ssWeatherManager:overwriteRaintable()
         end
     end
 
-    self:switchRainHail()
+    self:switchRainSnow()
 end
 
 --- function for predicting when soil is too cold for crops to germinate
@@ -753,8 +759,9 @@ function ssWeatherManager:loadFromXML(path)
         local sigma = getXMLFloat(file, key .. ".sigma#value")
         local probRain = getXMLFloat(file, key .. ".probRain#value")
         local probClouds = getXMLFloat(file, key .. ".probClouds#value")
+        local probHail = getXMLFloat(file, key .. ".probHail#value")
 
-        if mu == nil or sigma == nil or probRain == nil or probClouds == nil then
+        if mu == nil or sigma == nil or probRain == nil or probClouds == nil or probHail == nil then
             logInfo("ssWeatherManager:", "Rain data in weather.xml is invalid")
             break
         end
@@ -763,7 +770,8 @@ function ssWeatherManager:loadFromXML(path)
             ["mu"] = mu,
             ["sigma"] = sigma,
             ["probRain"] = probRain,
-            ["probClouds"] = probClouds
+            ["probClouds"] = probClouds,
+            ["probHail"] = probHail
         }
 
         self.rainData[season] = config
@@ -843,7 +851,6 @@ function ssWeatherManager:updateCropMoistureContent()
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
     local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt( 9 / g_seasons.environment.daysInSeason )
 
-    --log(prevCropMoist," | ",relativeHumidity," | ",solarRadiation," | ",tmpMoisture," | ",deltaMoisture)
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
     -- increase crop Moisture in the first hour after rain has started
@@ -854,3 +861,21 @@ function ssWeatherManager:updateCropMoistureContent()
     end
 end
 
+-- inserting a hail event
+function ssWeatherManager:updateHail(day)
+
+    local rainFactors = self.rainData[self.forecast[1].season]
+    local p = math.random()
+        
+    if p < rainFactors.probHail and self.forecast[1].weatherState == 'sun' then
+        local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
+        dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
+
+        self.weather[1].rainTypeId = "hail"
+        self.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart,["mode"] = dayStart + 4 ,["max"] = dayEnd}) * 60 * 60 * 1000
+        self.weather[1].endDayTime = self.weather[1].startDayTime + self.weather[1].duration
+        self.weather[1].duration = ssUtil.triDist({["min"] = 1,["mode"] = 2,["max"] = 3}) * 60 * 60 * 1000
+        self.weather[1].startDay = self.forecast[1].day
+        self.weather[1].endDay = self.forecast[1].day
+    end
+end
