@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- ssUtil SCRIPT
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
 -- Authors:  Rahkiin, mrbear, reallogger, theSeb
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssUtil = {}
 g_seasons.util = ssUtil
@@ -87,14 +89,13 @@ end
 
 -- Calculate the split of days into ealy,mid and late season
 function ssUtil.calcDaysPerTransition()
-
     local l = g_seasons.environment.daysInSeason / 3.0
-	local earlyStart = 1
-	local earlyEnd = mathRound(1 * l)
-	local midStart = mathRound(1 * l) + 1
-	local midEnd = mathRound(2 * l)
-	local lateStart = mathRound(2 * l)+1
-	local lateEnd = g_seasons.environment.daysInSeason
+    local earlyStart = 1
+    local earlyEnd = mathRound(1 * l)
+    local midStart = mathRound(1 * l) + 1
+    local midEnd = mathRound(2 * l)
+    local lateStart = mathRound(2 * l)+1
+    local lateEnd = g_seasons.environment.daysInSeason
 
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
 end

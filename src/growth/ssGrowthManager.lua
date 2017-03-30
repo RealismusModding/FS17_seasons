@@ -1,10 +1,12 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- GROWTH MANAGER SCRIPT
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  to manage growth as the season changes
 -- Authors:  theSeb
--- Credits: Inspired by upsidedown's growth manager mod
-
+-- Credits:  Inspired by upsidedown's growth manager mod
+--
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssGrowthManager = {}
 g_seasons.growthManager = ssGrowthManager
@@ -158,7 +160,7 @@ end
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
     if self.growthManagerEnabled == false then return end
-    
+
     for fruitName, growthTransition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:growthTransitionAtDay()] == true then
             self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)

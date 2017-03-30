@@ -143,7 +143,7 @@
             <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
             <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
             <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
-            <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="1"/>
+            <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="2"/>
         </gt>
         <gt growthTransitionNum="11"/> <!--early winter to mid winter-->
         <gt growthTransitionNum="12"/> <!--mid winter to late winter-->

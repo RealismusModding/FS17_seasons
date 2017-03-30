@@ -1,8 +1,10 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- SNOW TRACKS SPECIALIZATION
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Author:  reallogger
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssSnowTracks = {}
 
@@ -131,6 +133,7 @@ function ssSnowTracks:getSnowLayers(wheel,width,length,radius,delta0,delta2)
     local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
     local snowLayers = density / area
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 
     return x0,z0, x1,z1, x2,z2,snowLayers
 

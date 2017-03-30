@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- SCRIPT TO UPDATE DENSITY MAPS
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  Performs updates of density maps on behalf of other modules.
 -- Authors:  mrbear, Rahkiin
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssDensityMapScanner = {}
 g_seasons.dms = ssDensityMapScanner
@@ -46,11 +48,11 @@ function ssDensityMapScanner:save(savegame, key)
     removeXMLProperty(savegame, key .. ".densityMapScanner")
 
     if self.currentJob ~= nil then
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", job.x)
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", job.z)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", job.callbackId)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", job.parameter)
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", job.numSegments)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", self.currentJob.parameter)
+        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
     end
 
     -- Save queue
@@ -74,6 +76,8 @@ function ssDensityMapScanner:loadMap(name)
 end
 
 function ssDensityMapScanner:update(dt)
+    if not g_currentMission:getIsServer() then return end
+
     if self.currentJob == nil then
         self.currentJob = self.queue:pop()
 
