@@ -1,8 +1,10 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- REPAIRABLE SPECIALIZATION
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Authors:  Rahkiin, reallogger, Rival
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssRepairable = {}
 
@@ -20,12 +22,12 @@ function ssRepairable:load(savegame)
     self.ssInRangeOfWorkshop = nil
 
     self.ssLastRepairDay = g_currentMission.environment.currentDay
-    self.ssYesterdayOperatingTime = self.operatingTime
+    self.ssLastRepairOperatingTime = self.operatingTime
     self.ssCumulativeDirt = 0
 
     if savegame ~= nil then
         self.ssLastRepairDay = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
-        self.ssYesterdayOperatingTime = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssYesterdayOperatingTime)
+        self.ssLastRepairOperatingTime = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssLastRepairOperatingTime)
         self.ssCumulativeDirt = ssStorage.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
     end
 end
@@ -48,7 +50,7 @@ function ssRepairable:getSaveAttributesAndNodes(nodeIdent)
 
     if self.ssLastRepairDay ~= nil then
         attributes = attributes .. "ssLastRepairDay=\"" .. self.ssLastRepairDay ..  "\" "
-        attributes = attributes .. "ssYesterdayOperatingTime=\"" .. self.ssYesterdayOperatingTime ..  "\" "
+        attributes = attributes .. "ssYesterdayOperatingTime=\"" .. self.ssLastRepairOperatingTime ..  "\" "
         attributes = attributes .. "ssCumulativeDirt=\"" .. self.ssCumulativeDirt ..  "\" "
     end
 
@@ -57,13 +59,13 @@ end
 
 function ssRepairable:readStream(streamId, connection)
     self.ssLastRepairDay = streamReadFloat32(streamId)
-    self.ssYesterdayOperatingTime = streamReadFloat32(streamId)
+    self.ssLastRepairOperatingTime = streamReadFloat32(streamId)
     self.ssCumulativeDirt = streamReadFloat32(streamId)
 end
 
 function ssRepairable:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.ssLastRepairDay)
-    streamWriteFloat32(streamId, self.ssYesterdayOperatingTime)
+    streamWriteFloat32(streamId, self.ssLastRepairOperatingTime)
     streamWriteFloat32(streamId, self.ssCumulativeDirt)
 end
 
@@ -125,7 +127,7 @@ function ssRepairable:update(dt)
     end
 
     if self.isEntered and self.isClient then
-        local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssLastRepairOperatingTime)) / 1000 / 60 / 60
         local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
 
         if daysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
@@ -135,9 +137,9 @@ function ssRepairable:update(dt)
         end
     end
 
-    -- stupid fix for setting ssYesterdayOperatingTime to operatingTime for a new savegame
-    if self.ssYesterdayOperatingTime == 0 then
-        self.ssYesterdayOperatingTime = self.operatingTime
+    -- stupid fix for setting ssLastRepairOperatingTime to operatingTime for a new savegame
+    if self.ssLastRepairOperatingTime == 0 then
+        self.ssLastRepairOperatingTime = self.operatingTime
     end
 end
 

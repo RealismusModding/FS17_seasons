@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Fruit Manager
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust fruit properties
 -- Authors:  theSeb
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssFruitManager = {}
 
@@ -11,7 +13,6 @@ ssFruitManager.harvestStagesUpdated = false
 ssFruitManager.fruitsToExclude = {}
 
 function ssFruitManager:loadMap(name)
-   
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POPLAR] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_OILSEEDRADISH] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_DRYGRASS] = true

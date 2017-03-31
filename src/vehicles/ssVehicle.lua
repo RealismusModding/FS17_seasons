@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- MAINTENANCE SCRIPT
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the maintenance system
 -- Authors:  Rahkiin, reallogger, Rival
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssVehicle = {}
 g_seasons.vehicle = ssVehicle
@@ -213,7 +215,7 @@ end
 
 -- repairable
 function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
-    local prevOperatingTime = math.floor(vehicle.ssYesterdayOperatingTime) / 1000 / 60 / 60
+    local prevOperatingTime = math.floor(vehicle.ssLastRepairOperatingTime) / 1000 / 60 / 60
     local operatingTime = math.floor(vehicle.operatingTime) / 1000 / 60 / 60
     local repairFactor = isRepair and ssVehicle.REPAIR_SHOP_FACTOR or ssVehicle.REPAIR_NIGHT_FACTOR
     local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
@@ -248,7 +250,7 @@ end
 --    for i, vehicle in pairs(g_currentMission.vehicles) do
 --        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
 --            vehicle.ssCumulativeDirt = 0
---            vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
+--            vehicle.ssLastRepairOperatingTime = vehicle.operatingTime
 --        end
 --    end
 --end
@@ -258,7 +260,7 @@ end
 function ssVehicle:repair(vehicle, storeItem)
     --compared to game day since g_seasons.environment:currentDay() is shifted when changing season length
     vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
-    vehicle.ssYesterdayOperatingTime = vehicle.operatingTime
+    vehicle.ssLastRepairOperatingTime = vehicle.operatingTime
     vehicle.ssCumulativeDirt = 0
 
     return true
@@ -312,7 +314,7 @@ function ssVehicle:calculateOverdueFactor(vehicle)
     local overdueFactor = 1
 
     if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
-        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssYesterdayOperatingTime)) / 1000 / 60 / 60
+        local serviceInterval = ssVehicle.SERVICE_INTERVAL - math.floor((vehicle.operatingTime - vehicle.ssLastRepairOperatingTime)) / 1000 / 60 / 60
         local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
         if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then

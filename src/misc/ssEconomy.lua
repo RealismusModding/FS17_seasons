@@ -1,9 +1,11 @@
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- ECONOMY SCRIPT
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the economy
 -- Authors:  Rahkiin, reallogger
 --
+-- Copyright (c) Realismus Modding, 2017
+----------------------------------------------------------------------------------------------------
 
 ssEconomy = {}
 g_seasons.economy = ssEconomy
@@ -50,9 +52,8 @@ function ssEconomy:loadMap(name)
     self.repricing = {}
     self:loadFromXML(g_seasons.modDir .. "data/economy.xml")
 
-    local modPath = ssUtil.getModMapDataPath("seasons_economy.xml")
-    if modPath ~= nil then
-        self:loadFromXML(modPath)
+    for _, path in ipairs(g_seasons:getModPaths("economy")) do
+        self:loadFromXML(path)
     end
 
     -- Change info every day
@@ -242,7 +243,7 @@ function ssEconomy.aiUpdateTick(self, superFunc, dt)
     return superFunc(self, dt)
 end
 
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Loan cap
 
 -- Calculate equity by summing all owned land. I know this is not
@@ -295,7 +296,7 @@ function ssEconomy:placeablenOnSell()
     g_seasons.economy:updateLoan()
 end
 
----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 -- Pricing
 
 function ssEconomy:dayChanged()
