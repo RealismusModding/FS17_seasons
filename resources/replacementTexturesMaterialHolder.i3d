@@ -570,8 +570,8 @@ It references textures in the game directory that the editor will not find and t
     <!--Shape shapeId="1" name="ssTr_shrub01_lod1_winter" visibility="false" nodeId="612" materialIds="312" distanceBlending="false" /-->
     <Shape shapeId="1" name="ssTr_poplarBranch_winter" visibility="false" nodeId="613" materialIds="313" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_winter" visibility="false" nodeId="614" materialIds="314" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_treeBranch_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="616" materialIds="316" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_treeBranch_winter" visibility="false" nodeId="616" materialIds="316" distanceBlending="false" />
     
     <!-- Spring -->
     <Shape shapeId="1" name="ssTr_treeBranch_spring" visibility="false" nodeId="701" materialIds="401" distanceBlending="false" />
