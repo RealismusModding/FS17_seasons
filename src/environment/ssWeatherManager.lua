@@ -447,7 +447,7 @@ function ssWeatherManager:calculateSnowAccumulation()
         if self.snowDepth < 0 then
             self.snowDepth = 0
         elseif self.snowDepth > 0.06 then
-            self.snowDepth = self.snowDepth + 10/1000
+            self.snowDepth = self.snowDepth + 10/1000 * math.max(9 / g_seasons.environment.daysInSeason,1)
         else
             self.snowDepth = self.snowDepth + 30/1000
         end
