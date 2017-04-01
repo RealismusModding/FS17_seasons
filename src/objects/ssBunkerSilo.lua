@@ -34,6 +34,6 @@ function ssBunkerSilo:bunkerSiloDelete(superFunc)
     g_seasons.environment:removeSeasonLengthChangeListener(self)
 end
 
-function ssBunkerSilo:bunkerSoloSeasonChanged()
+function ssBunkerSilo:bunkerSiloSeasonChanged()
     self.fermentingDuration = g_seasons.environment.daysInSeason / 3 * 24 * 60 * 60 -- '4 weeks'
 end
