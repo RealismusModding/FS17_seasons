@@ -14,7 +14,7 @@ function ssBunkerSilo:preLoad()
 
     BunkerSilo.delete = Utils.overwrittenFunction(BunkerSilo.delete, ssBunkerSilo.bunkerSiloDelete)
 
-    BunkerSilo.seasonChanged = ssBunkerSilo.bunkerSiloSeasonChanged
+    BunkerSilo.seasonLengthChanged = ssBunkerSilo.bunkerSiloSeasonLengthChanged
 end
 
 function ssBunkerSilo:loadMap()
@@ -34,6 +34,6 @@ function ssBunkerSilo:bunkerSiloDelete(superFunc)
     g_seasons.environment:removeSeasonLengthChangeListener(self)
 end
 
-function ssBunkerSilo:bunkerSiloSeasonChanged()
+function ssBunkerSilo:bunkerSiloSeasonLengthChanged()
     self.fermentingDuration = g_seasons.environment.daysInSeason / 3 * 24 * 60 * 60 -- '4 weeks'
 end
