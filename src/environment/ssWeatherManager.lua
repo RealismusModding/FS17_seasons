@@ -21,6 +21,7 @@ ssWeatherManager.moistureEnabled = true
 -- Load events
 source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
 source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
+source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
 
 function ssWeatherManager:load(savegame, key)
     if savegame == nil then return end
@@ -863,11 +864,10 @@ end
 
 -- inserting a hail event
 function ssWeatherManager:updateHail(day)
-
     local rainFactors = self.rainData[self.forecast[1].season]
     local p = math.random()
-        
-    if p < rainFactors.probHail and self.forecast[1].weatherState == 'sun' then
+
+    if p < rainFactors.probHail and self.forecast[1].weatherState == "sun" then
         local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
         dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
 
@@ -877,5 +877,7 @@ function ssWeatherManager:updateHail(day)
         self.weather[1].duration = ssUtil.triDist({["min"] = 1,["mode"] = 2,["max"] = 3}) * 60 * 60 * 1000
         self.weather[1].startDay = self.forecast[1].day
         self.weather[1].endDay = self.forecast[1].day
+
+        g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(self.weather[1]))
     end
 end

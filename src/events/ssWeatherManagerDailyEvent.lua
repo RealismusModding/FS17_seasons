@@ -11,9 +11,6 @@ ssWeatherManagerDailyEvent = {}
 ssWeatherManagerDailyEvent_mt = Class(ssWeatherManagerDailyEvent, Event)
 InitEventClass(ssWeatherManagerDailyEvent, "ssWeatherManagerDailyEvent")
 
--- client -> server: hey! I repaired X
---> server -> everyone: hey! X got repaired!
-
 function ssWeatherManagerDailyEvent:emptyNew()
     local self = Event:new(ssWeatherManagerDailyEvent_mt)
     self.className = "ssWeatherManagerDailyEvent"
@@ -31,7 +28,6 @@ function ssWeatherManagerDailyEvent:new(day, rain, prevHighTemp, soilTemp)
     return self
 end
 
--- Server: send to client
 function ssWeatherManagerDailyEvent:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.prevHighTemp)
     streamWriteFloat32(streamId, self.soilTemp)
@@ -42,23 +38,17 @@ function ssWeatherManagerDailyEvent:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.day.lowTemp)
     streamWriteFloat32(streamId, self.soilTemp)
 
-    if self.rain ~= nil then
-        streamWriteBool(streamId, true)
-
-        streamWriteInt16(streamId, self.rain.startDay)
-        streamWriteFloat32(streamId, self.rain.endDayTime)
-        streamWriteFloat32(streamId, self.rain.startDayTime)
-        streamWriteInt16(streamId, self.rain.endDay)
-        streamWriteString(streamId, self.rain.rainTypeId)
-        streamWriteFloat32(streamId, self.rain.duration)
-    else
-        streamWriteBool(streamId, false)
-    end
+    streamWriteInt16(streamId, self.rain.startDay)
+    streamWriteFloat32(streamId, self.rain.endDayTime)
+    streamWriteFloat32(streamId, self.rain.startDayTime)
+    streamWriteInt16(streamId, self.rain.endDay)
+    streamWriteString(streamId, self.rain.rainTypeId)
+    streamWriteFloat32(streamId, self.rain.duration)
 end
 
--- Client: receive from server
 function ssWeatherManagerDailyEvent:readStream(streamId, connection)
     local day = {}
+    local rain = {}
 
     self.prevHighTemp = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
@@ -69,20 +59,15 @@ function ssWeatherManagerDailyEvent:readStream(streamId, connection)
     day.highTemp = streamReadFloat32(streamId)
     day.lowTemp = streamReadFloat32(streamId)
 
+    rain.startDay = streamReadInt16(streamId)
+    rain.endDayTime = streamReadFloat32(streamId)
+    rain.startDayTime = streamReadFloat32(streamId)
+    rain.endDay = streamReadInt16(streamId)
+    rain.rainTypeId = streamReadString(streamId)
+    rain.duration = streamReadFloat32(streamId)
+
+    self.rain = rain
     self.day = day
-
-    if streamReadBool(streamId) then
-        local rain = {}
-
-        rain.startDay = streamReadInt16(streamId)
-        rain.endDayTime = streamReadFloat32(streamId)
-        rain.startDayTime = streamReadFloat32(streamId)
-        rain.endDay = streamReadInt16(streamId)
-        rain.rainTypeId = streamReadString(streamId)
-        rain.duration = streamReadFloat32(streamId)
-
-        self.rain = rain
-    end
 
     self:run(connection)
 end
@@ -107,11 +92,8 @@ function ssWeatherManagerDailyEvent:run(connection)
         table.remove(ssWeatherManager.forecast, 1)
         table.insert(ssWeatherManager.forecast, self.day)
 
-
         table.insert(ssWeatherManager.weather, self.rain)
-
         ssWeatherManager:overwriteRaintable()
-
         table.remove(ssWeatherManager.weather, 1)
     end
 end
