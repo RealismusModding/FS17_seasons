@@ -850,7 +850,7 @@ function ssWeatherManager:updateCropMoistureContent()
     local solarRadiation = self:calculateSolarRadiation()
 
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
-    local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt( 9 / g_seasons.environment.daysInSeason )
+    local deltaMoisture = solarRadiation / 40 * (tmpMoisture - 10) * 9 / g_seasons.environment.daysInSeason 
 
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
