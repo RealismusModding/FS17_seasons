@@ -308,7 +308,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                 else
                     local plantedGrowthTransition = transition
                     local currentGrowthStage = 1
-                    
+
                     local maxAllowedCounter = 0
                     local transitionToCheck = plantedGrowthTransition + 1 -- need to start checking from the next transition after planted transition
                     local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
@@ -368,12 +368,12 @@ function ssGrowthManager:buildCanHarvestData()
                     print_r(transitionTable)
                     table.insert(transitionTable, transitionToCheck-1, true )
                 end
-                
+
             end
             plantedGrowthTransition = plantedGrowthTransition + 1
         end
         self.canHarvestData[fruitName] = transitionTable
-        
+
     end
 end
 
@@ -508,5 +508,5 @@ function ssGrowthManager:consoleCommandTestStuff()
     self:buildCanHarvestData()
     logInfo("ssGrowthManager: canHarvestData")
     print_r(self.canHarvestData)
-   
+
 end
