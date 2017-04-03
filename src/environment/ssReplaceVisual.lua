@@ -28,14 +28,16 @@ function ssReplaceVisual:loadMap(name)
         -- Only if this game does not need to wait for other modules to receive data,
         -- update the textures. (singleplayer)
         if g_currentMission:getIsServer() then
-            self:updateTextures(getRootNode())
+            self:updateTextures()
+
+            addConsoleCommand("ssSetVisuals", "Set visuals", "consoleCommandSetVisuals", self)
         end
     end
 end
 
 function ssReplaceVisual:readStream(streamId, connection)
     -- Load after data for seaonUtils is loaded
-    self:updateTextures(getRootNode())
+    self:updateTextures()
 end
 
 function ssReplaceVisual:loadFromXML()
@@ -124,7 +126,7 @@ end
 
 function ssReplaceVisual:seasonChanged()
     if g_currentMission:getIsClient() then
-        self:updateTextures(getRootNode())
+        self:updateTextures()
     end
 end
 
@@ -206,6 +208,10 @@ end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(nodeId)
+    if nodeId == nil then
+        nodeId = getRootNode()
+    end
+
     local currentSeason = g_seasons.environment:currentSeason()
 
     if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
@@ -258,4 +264,29 @@ function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     end
 
     return nil
+end
+
+function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
+    local season = g_seasons.environment.SEASON_SPRING
+    if seasonName == "summer" then
+        season = g_seasons.environment.SEASON_SUMMER
+    elseif seasonName == "autumn" then
+        season = g_seasons.environment.SEASON_AUTUMN
+    elseif seasonName == "winter" then
+        season = g_seasons.environment.SEASON_WINTER
+    end
+
+    -- Overwrite getter
+    local oldCurrentSeason = g_seasons.environment.currentSeason
+    g_seasons.environment.currentSeason = function (self)
+        return season
+    end
+
+    -- Update
+    self:updateTextures()
+
+    -- Fix getter
+    g_seasons.environment.currentSeason = oldCurrentSeason
+
+    return "Updated textures to " .. tostring(season)
 end
