@@ -182,8 +182,8 @@ function ssEconomy:setup()
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
 
     g_currentMission.missionStats.loanMax = self:getLoanCap()
-    g_currentMission.missionStats.ssLoan = 0
 
+    self:calculateLoanInterestRate()
     self:updateAnimals()
 end
 
@@ -205,17 +205,6 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.aiDayEnd)
     streamWriteFloat32(streamId, self.loanMax)
     streamWriteFloat32(streamId, self.baseLoanInterest)
-end
-
-function ssEconomy:updateTick(dt)
-    if g_currentMission:getIsServer() then
-        local stats = g_currentMission.missionStats
-
-        if stats.ssLoan ~= stats.loan then
-            self:calculateLoanInterestRate()
-            stats.ssLoan = stats.loan
-        end
-    end
 end
 
 function ssEconomy:calculateLoanInterestRate()
@@ -305,6 +294,7 @@ end
 
 function ssEconomy:seasonLengthChanged()
     self:updateAnimals()
+    self:calculateLoanInterestRate()
 end
 
 function ssEconomy:getStageAndAlpha()
