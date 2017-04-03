@@ -36,7 +36,7 @@
 
         <!-- FIXME  temporary added summer textures to ensure replace at season change -->
         <summer>
-            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_summer" />
+<!--            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_summer" />
             <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_summer" />
             <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_summer" />
             <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_summer" />
@@ -62,7 +62,7 @@
             <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_summer" />
             <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_summer" />
             <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_summer" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_summer" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_summer" />-->
             <!--texture shapeName="shrubLong9m_LOD" secondaryNodeName="shrubLong9m_lod0" to="ssTr_shrub01Branch_summer" /-->
             <!--texture shapeName="shrubLong9m_LOD" secondaryNodeName="shrubLong9m_lod1" to="ssTr_shrub01_lod1_summer" /-->
         </summer>

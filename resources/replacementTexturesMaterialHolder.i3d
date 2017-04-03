@@ -56,7 +56,7 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="32" filename="replacementTextures/winter/poplarBranch_normal.png" relativePath="true"/>
     <File fileId="33" filename="replacementTextures/winter/poplar5LOD_diffuse.png" relativePath="true"/>
     <File fileId="34" filename="replacementTextures/winter/poplar5LOD_normal.png" relativePath="true"/>
-    
+
     <File fileId="35" filename="replacementTextures/winter/mapleBranch_diffuse.png" relativePath="true"/>
     <File fileId="36" filename="replacementTextures/winter/mapleBranch_normal.png" relativePath="true"/>
     <File fileId="37" filename="replacementTextures/winter/maple5LOD_diffuse.png" relativePath="true"/>
@@ -124,7 +124,7 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="92" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
 
     <!-- Summer -->
-    <File fileId="163" filename="data/maps/textures/goldcrestValley/treeBranch_diffuse.dds" relativePath="false"/>
+    <!--<File fileId="163" filename="data/maps/textures/goldcrestValley/treeBranch_diffuse.dds" relativePath="false"/>
     <File fileId="164" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
     <File fileId="165" filename="data/maps/trees/birchBranch_diffuse.png" relativePath="false"/>
     <File fileId="166" filename="data/maps/trees/birchBranch_normal.png" relativePath="false"/>
@@ -150,15 +150,15 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="183" filename="data/maps/trees/mapleBranch_diffuse.png" relativePath="false"/>
     <File fileId="184" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
     <File fileId="185" filename="data/maps/trees/maple5LOD_diffuse.png" relativePath="false"/>
-    <File fileId="186" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
+    <File fileId="186" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>--.
 
     <!--File fileId="187" filename="replacementTextures/summer/shrub01_diffuse.png" relativePath="true"/-->
     <!--File fileId="188" filename="replacementTextures/summer/shrub01_LOD.png" relativePath="true"/-->
 
-    <File fileId="189" filename="data/maps/trees/poplarBranch_diffuse.png" relativePath="false"/>
+    <!--<File fileId="189" filename="data/maps/trees/poplarBranch_diffuse.png" relativePath="false"/>
     <File fileId="190" filename="data/maps/trees/poplarBranch_normal.png" relativePath="false"/>
     <File fileId="191" filename="data/maps/trees/poplar5LOD_diffuse.png" relativePath="false"/>
-    <File fileId="192" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
+    <File fileId="192" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>-->
 
     <File fileId="101" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
     <File fileId="102" filename="data/shaders/windShader.xml" relativePath="false"/>
@@ -554,7 +554,7 @@ It references textures in the game directory that the editor will not find and t
     <!--Shape shapeId="1" name="ssTr_shrub01_lod1_autumn" visibility="false" nodeId="514" materialIds="214" distanceBlending="false" /-->
     <Shape shapeId="1" name="ssTr_poplarBranch_autumn" visibility="false" nodeId="515" materialIds="215" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_autumn" visibility="false" nodeId="516" materialIds="216" distanceBlending="false" />
-    
+
     <!-- Winter -->
     <Shape shapeId="1" name="ssTr_birchBranch_winter" visibility="false" nodeId="601" materialIds="301" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_birchLOD_winter" visibility="false" nodeId="602" materialIds="302" distanceBlending="false" />
@@ -572,7 +572,7 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_poplar5LOD_winter" visibility="false" nodeId="614" materialIds="314" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_treeBranch_winter" visibility="false" nodeId="616" materialIds="316" distanceBlending="false" />
-    
+
     <!-- Spring -->
     <Shape shapeId="1" name="ssTr_treeBranch_spring" visibility="false" nodeId="701" materialIds="401" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_birchBranch_spring" visibility="false" nodeId="702" materialIds="402" distanceBlending="false" />
