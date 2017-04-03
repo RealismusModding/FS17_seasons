@@ -43,33 +43,92 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="23" filename="replacementTextures/autumn/maple5LOD_diffuse.png" relativePath="true"/>
     <File fileId="24" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
 
-    <!-- Winter  -->
-    <File fileId="30" filename="replacementTextures/winter/birchBranch_diffuse.png" relativePath="true"/>
-    <File fileId="31" filename="replacementTextures/winter/birchBranch_normal.png" relativePath="true"/>
-    <File fileId="32" filename="replacementTextures/winter/birchLOD_diffuse.png" relativePath="true"/>
-    <File fileId="33" filename="data/maps/trees/birch6LOD_normal.png" relativePath="false"/>
-    <File fileId="34" filename="replacementTextures/winter/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="25" filename="replacementTextures/autumn/shrub01_diffuse.png" relativePath="true"/>
+    <File fileId="26" filename="replacementTextures/autumn/shrub01_LOD.png" relativePath="true"/>
 
-    <File fileId="38" filename="replacementTextures/winter/pine2LODSnow_diffuse.png" relativePath="true"/> 	
-    <File fileId="39" filename="replacementTextures/winter/pine2LOD_normal.png" relativePath="true"/> 		
-    <File fileId="40" filename="replacementTextures/winter/pine3LODSnow_diffuse.png" relativePath="true"/>	
-    <File fileId="41" filename="replacementTextures/winter/pine3LOD_normal.png" relativePath="true"/>		
-    <File fileId="42" filename="replacementTextures/winter/pine4LODSnow_diffuse.png" relativePath="true"/>	
-    <File fileId="43" filename="replacementTextures/winter/pine4LOD_normal.png" relativePath="true"/>		
-    <File fileId="44" filename="replacementTextures/winter/pine5LODSnow_diffuse.png" relativePath="true"/>	
-    <File fileId="45" filename="replacementTextures/winter/pine5LOD_normal.png" relativePath="true"/>		
-    <File fileId="46" filename="replacementTextures/winter/pine6LOD_diffuse.png" relativePath="true"/>		
-    <File fileId="47" filename="replacementTextures/winter/pine6LOD_normal.png" relativePath="true"/>		
-    <File fileId="48" filename="replacementTextures/winter/pineBranch_diffuse.png" relativePath="true"/>	
-    <File fileId="49" filename="replacementTextures/winter/pineBranch_normal.png" relativePath="true"/>		
-    <File fileId="50" filename="replacementTextures/winter/pineTrunkDead_diffuse.png" relativePath="true"/>	
-    <File fileId="51" filename="replacementTextures/winter/pineTrunkDead_normal.png" relativePath="true"/>	
-    <File fileId="52" filename="replacementTextures/winter/pineTrunk_diffuse.png" relativePath="true"/>		
-    <File fileId="53" filename="replacementTextures/winter/pineTrunk_normal.png" relativePath="true"/>
+    <File fileId="27" filename="replacementTextures/autumn/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="28" filename="replacementTextures/autumn/poplarBranch_normal.png" relativePath="true"/>
+    <File fileId="29" filename="replacementTextures/autumn/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="30" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
+
+    <!-- Winter  -->
+    <File fileId="31" filename="replacementTextures/winter/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="32" filename="replacementTextures/winter/poplarBranch_normal.png" relativePath="true"/>
+    <File fileId="33" filename="replacementTextures/winter/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="34" filename="replacementTextures/winter/poplar5LOD_normal.png" relativePath="true"/>
+
+    <File fileId="35" filename="replacementTextures/winter/mapleBranch_diffuse.png" relativePath="true"/>
+    <File fileId="36" filename="replacementTextures/winter/mapleBranch_normal.png" relativePath="true"/>
+    <File fileId="37" filename="replacementTextures/winter/maple5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="38" filename="replacementTextures/winter/maple5LOD_normal.png" relativePath="true"/>
+
+    <File fileId="39" filename="replacementTextures/winter/oakBranch_diffuse.png" relativePath="true"/>
+    <File fileId="40" filename="replacementTextures/winter/oakbranch_normal.png" relativePath="true"/>
+    <File fileId="41" filename="replacementTextures/winter/oak4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="42" filename="replacementTextures/winter/oak4LOD_normal.png" relativePath="true"/>
+
+    <File fileId="43" filename="replacementTextures/winter/shrub01_diffuse.png" relativePath="true"/>
+    <File fileId="44" filename="replacementTextures/winter/shrub01_LOD.png" relativePath="true"/>
+
+    <File fileId="50" filename="replacementTextures/winter/birchBranch_diffuse.png" relativePath="true"/>
+    <File fileId="51" filename="replacementTextures/winter/birchBranch_normal.png" relativePath="true"/>
+    <File fileId="52" filename="replacementTextures/winter/birch1LOD_diffuse.png" relativePath="true"/>
+    <File fileId="53" filename="replacementTextures/winter/birch1LOD_normal.png" relativePath="true"/>
+    <File fileId="54" filename="replacementTextures/winter/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="55" filename="replacementTextures/winter/birch2LOD_normal.png" relativePath="true"/>
+    <File fileId="56" filename="replacementTextures/winter/birch3LOD_diffuse.png" relativePath="true"/>
+    <File fileId="57" filename="replacementTextures/winter/birch3LOD_normal.png" relativePath="true"/>
+    <File fileId="58" filename="replacementTextures/winter/birch4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="59" filename="replacementTextures/winter/birch4LOD_normal.png" relativePath="true"/>
+    <File fileId="60" filename="replacementTextures/winter/birch5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="61" filename="replacementTextures/winter/birch5LOD_normal.png" relativePath="true"/>
+
+    <File fileId="98" filename="replacementTextures/winter/treeBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="99" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
+
+    <!-- Spring -->
+    <File fileId="63" filename="replacementTextures/spring/treeBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="64" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
+    <File fileId="65" filename="replacementTextures/spring/birchBranch_diffuse.png" relativePath="true"/>
+    <File fileId="66" filename="data/maps/trees/birchBranch_normal.png" relativePath="false"/>
+
+    <File fileId="67" filename="replacementTextures/spring/birch1LOD_diffuse.png" relativePath="true"/>
+    <File fileId="68" filename="data/maps/trees/birch1LOD_normal.png" relativePath="false"/>
+    <File fileId="69" filename="replacementTextures/spring/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="70" filename="data/maps/trees/birch2LOD_normal.png" relativePath="false"/>
+    <File fileId="71" filename="replacementTextures/spring/birch3LOD_diffuse.png" relativePath="true"/>
+    <File fileId="72" filename="data/maps/trees/birch3LOD_normal.png" relativePath="false"/>
+    <File fileId="73" filename="replacementTextures/spring/birch4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="74" filename="data/maps/trees/birch4LOD_normal.png" relativePath="false"/>
+    <File fileId="75" filename="replacementTextures/spring/birch5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="76" filename="data/maps/trees/birch5LOD_normal.png" relativePath="false"/>
+    <File fileId="77" filename="replacementTextures/spring/birch6LOD_diffuse.png" relativePath="true"/>
+    <File fileId="78" filename="data/maps/trees/birch6LOD_normal.png" relativePath="false"/>
+
+    <File fileId="79" filename="replacementTextures/spring/oakBranch_diffuse.png" relativePath="true"/>
+    <File fileId="80" filename="data/maps/trees/oakBranch_normal.png" relativePath="false"/>
+    <File fileId="81" filename="replacementTextures/spring/oak4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="82" filename="data/maps/trees/oak4LOD_normal.png" relativePath="false"/>
+
+    <File fileId="83" filename="replacementTextures/spring/mapleBranch_diffuse.png" relativePath="true"/>
+    <File fileId="84" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
+    <File fileId="85" filename="replacementTextures/spring/maple5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="86" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
+
+    <File fileId="87" filename="replacementTextures/spring/shrub01_diffuse.png" relativePath="true"/>
+    <File fileId="88" filename="replacementTextures/spring/shrub01_LOD.png" relativePath="true"/>
+
+    <File fileId="89" filename="replacementTextures/spring/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="90" filename="data/maps/trees/poplarBranch_normal.png" relativePath="false"/>
+    <File fileId="91" filename="replacementTextures/spring/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="92" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
 
     <File fileId="101" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
     <File fileId="102" filename="data/shaders/windShader.xml" relativePath="false"/>
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
+    <File fileId="104" filename="data/shaders/fruitGrowthFoliageShader.xml" relativePath="false"/>
+    <File fileId="105" filename="data/shaders/bunkerSiloSilageShader.xml" relativePath="false"/>
+
   </Files>
 
 
@@ -81,6 +140,7 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
       <CustomParameter name="speed" value="1 0 0 0"/>
     </Material>
+
     <Material name="birchBranch_mat" materialId="202" ambientColor="1 1 1" customShaderId="101">
       <Texture fileId="5"/>
       <Normalmap fileId="6"/>
@@ -96,7 +156,6 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="10"/>
     <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-
     <Material name="birch3LOD_mat" materialId="205" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="11"/>
       <Normalmap fileId="12"/>
@@ -112,6 +171,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="16"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
+
     <Material name="bushes_mat" materialId="208" ambientColor="1 1 1" customShaderId="102">
       <Texture fileId="3"/>
       <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
@@ -140,86 +200,360 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
 
+    <Material name="shrub01_mat" materialId="213" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="25"/>
+      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
+      <CustomParameter name="speed" value="1 0 0 0"/>
+    </Material>
+    <Material name="shrub01LOD_mat" materialId="214" ambientColor="1 1 1" >
+      <Texture fileId="26"/>
+    </Material>
+
+    <Material name="poplarBranch_mat" materialId="215" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="27"/>
+      <Normalmap fileId="28"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="poplar5LOD_mat" materialId="216" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="29"/>
+      <Normalmap fileId="30"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
     <!-- Winter -->
-    <Material name="birchBranch_mat" materialId="213" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="30"/>
-      <Normalmap fileId="31"/>
+    <Material name="birchBranch_mat" materialId="301" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="50"/>
+      <Normalmap fileId="51"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birchLOD_mat" materialId="214" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="32"/>
-      <Normalmap fileId="33"/>
+    <Material name="birch1LOD_mat" materialId="302" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="52"/>
+      <Normalmap fileId="53"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch2LOD_mat" materialId="215" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="34"/>
-      <Normalmap fileId="33"/>
+    <Material name="birch2LOD_mat" materialId="303" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="54"/>
+      <Normalmap fileId="55"/>
+    <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch3LOD_mat" materialId="304" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="56"/>
+      <Normalmap fileId="57"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="pineBranch_mat" materialId="216" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="48"/>
-      <Normalmap fileId="49"/>
+    <Material name="birch4LOD_mat" materialId="305" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="58"/>
+      <Normalmap fileId="59"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="pine2LOD_mat" materialId="217" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="38"/>
-      <Normalmap fileId="39"/>
+    <Material name="birch5LOD_mat" materialId="306" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="60"/>
+      <Normalmap fileId="61"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="pine3LOD_mat" materialId="218" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="40"/>
-      <Normalmap fileId="41"/>
+
+    <Material name="mapleBranch_mat" materialId="307" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="35"/>
+      <Normalmap fileId="36"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="pine4LOD_mat" materialId="219" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="42"/>
-      <Normalmap fileId="43"/>
+    <Material name="maple5LOD_mat" materialId="308" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="37"/>
+      <Normalmap fileId="38"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-      <Material name="pine5LOD_mat" materialId="220" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+
+    <Material name="oakBranch_mat" materialId="309" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="39"/>
+      <Normalmap fileId="40"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="oak4LOD_mat" materialId="310" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="41"/>
+      <Normalmap fileId="42"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="shrub01_mat" materialId="311" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="43"/>
+      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
+      <CustomParameter name="speed" value="1 0 0 0"/>
+    </Material>
+    <Material name="shrub01LOD_mat" materialId="312" ambientColor="1 1 1" >
       <Texture fileId="44"/>
-      <Normalmap fileId="45"/>
+    </Material>
+
+    <Material name="poplarBranch_mat" materialId="313" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="31"/>
+      <Normalmap fileId="32"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="pine6LOD_mat" materialId="221" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="46"/>
-      <Normalmap fileId="47"/>
+    <Material name="poplar5LOD_mat" materialId="314" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="33"/>
+      <Normalmap fileId="34"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="bushes_mat" materialId="315" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="98"/>
+      <CustomParameter name="directionAndFrequency" value="0.01 0 0 0.1"/>
+      <CustomParameter name="speed" value="0.1 0 0 0"/>
+    </Material>
+
+    <Material name="treeBranch_mat1" materialId="316" ambientColor="1 1 1" customShaderId="102" customShaderVariation="FORCE_SECONDUV">
+      <Texture fileId="98"/>
+      <Normalmap fileId="99"/>
+      <CustomParameter name="directionAndFrequency" value="0.01 0 0 0.1"/>
+      <CustomParameter name="speed" value="0.1 0 0 0"/>
+    </Material>
+
+    <!-- Spring -->
+    <Material name="treeBranch_mat1" materialId="401" ambientColor="1 1 1" customShaderId="102" customShaderVariation="FORCE_SECONDUV">
+      <Texture fileId="63"/>
+      <Normalmap fileId="64"/>
+      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
+      <CustomParameter name="speed" value="1 0 0 0"/>
+    </Material>
+    <Material name="birchBranch_mat" materialId="402" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="65"/>
+      <Normalmap fileId="66"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch1LOD_mat" materialId="403" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="67"/>
+      <Normalmap fileId="68"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch2LOD_mat" materialId="404" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="69"/>
+      <Normalmap fileId="70"/>
+    <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch3LOD_mat" materialId="405" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="71"/>
+      <Normalmap fileId="72"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch4LOD_mat" materialId="406" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="73"/>
+      <Normalmap fileId="74"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch5LOD_mat" materialId="407" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="75"/>
+      <Normalmap fileId="76"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="birch6LOD_mat" materialId="408" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="77"/>
+      <Normalmap fileId="78"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="bushes_mat" materialId="409" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="63"/>
+      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
+      <CustomParameter name="speed" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="oakBranch_mat" materialId="410" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="79"/>
+      <Normalmap fileId="80"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="oak4LOD_mat" materialId="411" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="81"/>
+      <Normalmap fileId="82"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="mapleBranch_mat" materialId="412" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="83"/>
+      <Normalmap fileId="84"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="maple5LOD_mat" materialId="413" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="85"/>
+      <Normalmap fileId="86"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <Material name="shrub01_mat" materialId="414" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="87"/>
+      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
+      <CustomParameter name="speed" value="1 0 0 0"/>
+    </Material>
+    <Material name="shrub01LOD_mat" materialId="415" ambientColor="1 1 1" >
+      <Texture fileId="88"/>
+    </Material>
+
+    <Material name="poplarBranch_mat" materialId="416" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="89"/>
+      <Normalmap fileId="90"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+    <Material name="poplar5LOD_mat" materialId="417" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="91"/>
+      <Normalmap fileId="92"/>
+      <CustomParameter name="windScale" value="1 0 0 0"/>
+    </Material>
+
+    <!-- Summer -->
+    <!-- FIXME  temporary added summer textures to ensure replace at season change -->
+    <Material name="treeBranch_mat1" materialId="901" ambientColor="1 1 1" customShaderId="102" customShaderVariation="FORCE_SECONDUV">
+      <Texture fileId="163"/>
+      <Normalmap fileId="164"/>
+      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
+      <CustomParameter name="speed" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birchBranch_mat" materialId="902" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="165"/>
+      <Normalmap fileId="166"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch1LOD_mat" materialId="903" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="167"/>
+      <Normalmap fileId="168"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch2LOD_mat" materialId="904" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="169"/>
+      <Normalmap fileId="170"/>
+    <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch3LOD_mat" materialId="905" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="171"/>
+      <Normalmap fileId="172"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch4LOD_mat" materialId="906" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="173"/>
+      <Normalmap fileId="174"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch5LOD_mat" materialId="907" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="175"/>
+      <Normalmap fileId="176"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="birch6LOD_mat" materialId="908" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="177"/>
+      <Normalmap fileId="178"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+
+    <Material name="bushes_mat" materialId="909" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="163"/>
+      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
+      <CustomParameter name="speed" value="0.5 0 0 0"/>
+    </Material>
+
+    <Material name="oakBranch_mat" materialId="910" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="179"/>
+      <Normalmap fileId="180"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="oak4LOD_mat" materialId="911" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="181"/>
+      <Normalmap fileId="182"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+
+    <Material name="mapleBranch_mat" materialId="912" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="183"/>
+      <Normalmap fileId="184"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="maple5LOD_mat" materialId="913" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="185"/>
+      <Normalmap fileId="186"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+
+    <!--Material name="shrub01_mat" materialId="914" ambientColor="1 1 1" customShaderId="102">
+      <Texture fileId="187"/>
+      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
+      <CustomParameter name="speed" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="shrub01LOD_mat" materialId="415" ambientColor="1 1 1" >
+      <Texture fileId="188"/>
+    </Material-->
+
+    <Material name="poplarBranch_mat" materialId="916" ambientColor="1 1 1" customShaderId="101">
+      <Texture fileId="189"/>
+      <Normalmap fileId="190"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
+    </Material>
+    <Material name="poplar5LOD_mat" materialId="917" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+      <Texture fileId="191"/>
+      <Normalmap fileId="192"/>
+      <CustomParameter name="windScale" value="0.5 0 0 0"/>
     </Material>
   </Materials>
 
-
   <Shapes externalShapesFile="replacementTexturesMaterialHolder.i3d.shapes">
   </Shapes>
-
 
   <Dynamics>
   </Dynamics>
 
   <Scene>
     <!-- Autumn -->
-    <Shape shapeId="1" name="ssTr_treeBranch_autumn" visibility="false" nodeId="301" materialIds="201" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birchBranch_autumn" visibility="false" nodeId="302" materialIds="202" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch1LOD_autumn" visibility="false" nodeId="303" materialIds="203" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch2LOD_autumn" visibility="false" nodeId="304" materialIds="204" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch3LOD_autumn" visibility="false" nodeId="305" materialIds="205" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch4LOD_autumn" visibility="false" nodeId="306" materialIds="206" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch5LOD_autumn" visibility="false" nodeId="307" materialIds="207" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_bushes_autumn" visibility="false" nodeId="308" materialIds="208" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_oakBranch_autumn" visibility="false" nodeId="309" materialIds="209" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_oak4LOD_autumn" visibility="false" nodeId="310" materialIds="210" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_mapleBranch_autumn" visibility="false" nodeId="311" materialIds="211" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_maple5LOD_autumn" visibility="false" nodeId="312" materialIds="212" distanceBlending="false" />
-    <!-- Winter -->
-    <Shape shapeId="1" name="ssTr_birchBranch_winter" visibility="false" nodeId="313" materialIds="213" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birchLOD_winter" visibility="false" nodeId="314" materialIds="214" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch2LOD_winter" visibility="false" nodeId="315" materialIds="215" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pineBranch_winter" visibility="false" nodeId="316" materialIds="216" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pine2LOD_winter" visibility="false" nodeId="317" materialIds="217" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pine3LOD_winter" visibility="false" nodeId="318" materialIds="218" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pine4LOD_winter" visibility="false" nodeId="319" materialIds="219" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pine5LOD_winter" visibility="false" nodeId="320" materialIds="220" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_pine6LOD_winter" visibility="false" nodeId="321" materialIds="221" distanceBlending="false" />
-  </Scene>
+    <Shape shapeId="1" name="ssTr_treeBranch_autumn" visibility="false" nodeId="501" materialIds="201" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birchBranch_autumn" visibility="false" nodeId="502" materialIds="202" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch1LOD_autumn" visibility="false" nodeId="503" materialIds="203" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch2LOD_autumn" visibility="false" nodeId="504" materialIds="204" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch3LOD_autumn" visibility="false" nodeId="505" materialIds="205" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch4LOD_autumn" visibility="false" nodeId="506" materialIds="206" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch5LOD_autumn" visibility="false" nodeId="507" materialIds="207" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_bushes_autumn" visibility="false" nodeId="508" materialIds="208" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oakBranch_autumn" visibility="false" nodeId="509" materialIds="209" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oak4LOD_autumn" visibility="false" nodeId="510" materialIds="210" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_mapleBranch_autumn" visibility="false" nodeId="511" materialIds="211" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_maple5LOD_autumn" visibility="false" nodeId="512" materialIds="212" distanceBlending="false" />
+    <!--Shape shapeId="1" name="ssTr_shrub01Branch_autumn" visibility="false" nodeId="513" materialIds="213" distanceBlending="false" /-->
+    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_autumn" visibility="false" nodeId="514" materialIds="214" distanceBlending="false" /-->
+    <Shape shapeId="1" name="ssTr_poplarBranch_autumn" visibility="false" nodeId="515" materialIds="215" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_poplar5LOD_autumn" visibility="false" nodeId="516" materialIds="216" distanceBlending="false" />
 
+    <!-- Winter -->
+    <Shape shapeId="1" name="ssTr_birchBranch_winter" visibility="false" nodeId="601" materialIds="301" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birchLOD_winter" visibility="false" nodeId="602" materialIds="302" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch2LOD_winter" visibility="false" nodeId="603" materialIds="303" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch3LOD_winter" visibility="false" nodeId="604" materialIds="304" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch4LOD_winter" visibility="false" nodeId="605" materialIds="305" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch5LOD_winter" visibility="false" nodeId="606" materialIds="306" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_mapleBranch_winter" visibility="false" nodeId="607" materialIds="307" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_maple5LOD_winter" visibility="false" nodeId="608" materialIds="308" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oakBranch_winter" visibility="false" nodeId="609" materialIds="309" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oak4LOD_winter" visibility="false" nodeId="610" materialIds="310" distanceBlending="false" />
+    <!--Shape shapeId="1" name="ssTr_shrub01Branch_winter" visibility="false" nodeId="611" materialIds="311" distanceBlending="false" /-->
+    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_winter" visibility="false" nodeId="612" materialIds="312" distanceBlending="false" /-->
+    <Shape shapeId="1" name="ssTr_poplarBranch_winter" visibility="false" nodeId="613" materialIds="313" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_poplar5LOD_winter" visibility="false" nodeId="614" materialIds="314" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_treeBranch_winter" visibility="false" nodeId="616" materialIds="316" distanceBlending="false" />
+
+    <!-- Spring -->
+    <Shape shapeId="1" name="ssTr_treeBranch_spring" visibility="false" nodeId="701" materialIds="401" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birchBranch_spring" visibility="false" nodeId="702" materialIds="402" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch1LOD_spring" visibility="false" nodeId="703" materialIds="403" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch2LOD_spring" visibility="false" nodeId="704" materialIds="404" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch3LOD_spring" visibility="false" nodeId="705" materialIds="405" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch4LOD_spring" visibility="false" nodeId="706" materialIds="406" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch5LOD_spring" visibility="false" nodeId="707" materialIds="407" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_birch6LOD_spring" visibility="false" nodeId="708" materialIds="408" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_bushes_spring" visibility="false" nodeId="709" materialIds="409" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oakBranch_spring" visibility="false" nodeId="710" materialIds="410" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_oak4LOD_spring" visibility="false" nodeId="711" materialIds="411" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_mapleBranch_spring" visibility="false" nodeId="712" materialIds="412" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_maple5LOD_spring" visibility="false" nodeId="713" materialIds="413" distanceBlending="false" />
+    <!--Shape shapeId="1" name="ssTr_shrub01Branch_spring" visibility="false" nodeId="714" materialIds="414" distanceBlending="false" /-->
+    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_spring" visibility="false" nodeId="715" materialIds="415" distanceBlending="false" /-->
+    <Shape shapeId="1" name="ssTr_poplarBranch_spring" visibility="false" nodeId="716" materialIds="416" distanceBlending="false" />
+    <Shape shapeId="1" name="ssTr_poplar5LOD_spring" visibility="false" nodeId="717" materialIds="417" distanceBlending="false" />
+
+    <!-- Clone-able object for winter -->
+    <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="201" distanceBlending="false" />
+  </Scene>
 </i3D>

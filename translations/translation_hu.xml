@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<l10n>
+    <translationContributors>n0tr3ady</translationContributors>
+    <texts>
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: idõjárás elõrejelzés be" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: gép / jármû javitása" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: menü megnyitás" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Vetési távolság (%d m)" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: idõjárás elõrejelzés ki" />
+
+        <text name="SS_WEEKDAY_1" text="Hétfõ" />
+        <text name="SS_WEEKDAY_2" text="Kedd" />
+        <text name="SS_WEEKDAY_3" text="Szerda" />
+        <text name="SS_WEEKDAY_4" text="Csütörtök" />
+        <text name="SS_WEEKDAY_5" text="Péntek" />
+        <text name="SS_WEEKDAY_6" text="Szombat" />
+        <text name="SS_WEEKDAY_7" text="Vasárnap" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Hét." />
+        <text name="SS_WEEKDAY_SHORT_2" text="Kedd" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Szer." />
+        <text name="SS_WEEKDAY_SHORT_4" text="Csüt." />
+        <text name="SS_WEEKDAY_SHORT_5" text="Pén." />
+        <text name="SS_WEEKDAY_SHORT_6" text="Szom." />
+        <text name="SS_WEEKDAY_SHORT_7" text="Vas." />
+
+        <text name="SS_SEASON_0" text="Tavasz" />
+        <text name="SS_SEASON_1" text="Nyár" />
+        <text name="SS_SEASON_2" text="Õsz" />
+        <text name="SS_SEASON_3" text="Tél" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Kora tavasz" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Tavasz" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Késõ tavasz" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Kora nyár" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Nyár" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Késõ nyár" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Kora õsz" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Õsz" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Késõ õsz" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Kora tél" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Tél" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Késõ tél" />
+
+        <text name="SS_MONTH_SHORT_1" text="Jan" />
+        <text name="SS_MONTH_SHORT_2" text="Feb" />
+        <text name="SS_MONTH_SHORT_3" text="Már" />
+        <text name="SS_MONTH_SHORT_4" text="Ápr" />
+        <text name="SS_MONTH_SHORT_5" text="Máj" />
+        <text name="SS_MONTH_SHORT_6" text="Jún" />
+        <text name="SS_MONTH_SHORT_7" text="Júl" />
+        <text name="SS_MONTH_SHORT_8" text="Aug" />
+        <text name="SS_MONTH_SHORT_9" text="Szep" />
+        <text name="SS_MONTH_SHORT_10" text="Okt" />
+        <text name="SS_MONTH_SHORT_11" text="Nov" />
+        <text name="SS_MONTH_SHORT_12" text="Dec" />
+
+        <text name="SS_VEHICLE_TAXES" text="Gépek adója" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Gépek karbantartása" />
+        <text name="SS_VEHICLE_REPAIRS" text="Gépek javítása" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nincs elég pénzed a karbantartásra!" />
+        <text name="SS_VEHICLE_REPAIRED" text="A karbantartása a(z) %s gépnek ennyibe került: %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Karbantartása a %s gépnek ennyiért: %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Karbantartást igényel!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás." />
+        <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
+        <text name="warning_repairBrokenMachine" text="A motor meghibásodott. Javítsd meg a gépedet!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
+
+        <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Egy új év, egy új vetési idõszak. TODO" />
+        <text name="SS_SEASON_INTRO_1" text="A nap száz ágra süt, a növények nõnek. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="Elérkezett a betakarítási szezon. Készülj a télre, talán a növényeid nem élik túl a telet. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Hideg van. A föld kemény, talán fagyott is. A növények nem nõnek, talán el is fagynak. TODO" />
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne mutasd újra" />
+
+        <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
+        <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
+        <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetõvájú maximum kapacitása 3 napra elegendõ élelmet biztosít az állataidnak." />
+
+        <text name="ui_pageOverview" text="Áttekintés" />
+        <text name="ui_pageSettings" text="Beállítások" />
+        <text name="ui_pageDebug" text="Hibakeresés" />
+
+        <text name="ui_buttonSave" text="Alkalmazás" />
+        <text name="ui_snowOneLayer" text="1 réteg csak" />
+        <text name="ui_days" text="%i napok" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celsius" />
+
+        <text name="tooltip_seasonLength" text="Egy szezon hossza napokban. 1 év négy szezonból áll." />
+        <text name="tooltip_seasonIntros" text="Mutasd be az évszakokat a szezon kezdetén." />
+        <text name="tooltip_snow" text="Télen esni fog a hó és útakadályokat fog emelni." />
+        <text name="tooltip_controlsHelp" text="Mutasd az elõrejelzést és a menügombot a help menüben." />
+        <text name="tooltip_snowTracks" text="A gépek letapossák a havat." />
+        <text name="tooltip_controlsTemperature" text="Beállítja a hõmérséklet skálát a játékban" />
+        <text name="tooltip_moisture" text="Aratás tiltása ha túl nedves a növény" />
+
+        <text name="setting_seasonIntros" text="Évszak bemutató" />
+        <text name="setting_seasonLength" text="Évszak hossza" />
+        <text name="setting_snow" text="Hó mód" />
+        <text name="setting_controlsHelp" text="Billentyûk a súgóban." />
+        <text name="setting_snowTracks" text="Keréknyomok a hóban" />
+        <text name="setting_controlsTemperature" text="Hõmérséklet skála" />
+        <text name="setting_moisture" text="Növény nedvesség" />
+
+        <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
+
+        <text name="dialog_resetGrowth" text="A Seasons egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe az a Seasons mod hibás mûködését eredményezheti." />
+        <text name="dialog_resetGrowth_title" text="Növény növekedés alaphelyzetbe" />
+        <text name="dialog_resetGrowth_no" text="Növény növekedés megtartása" />
+        <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
+
+        <text name="fillType_snow" text="Hó" />
+    </texts>
+</l10n>

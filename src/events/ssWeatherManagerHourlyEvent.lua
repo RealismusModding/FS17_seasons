@@ -25,13 +25,11 @@ function ssWeatherManagerHourlyEvent:new(cropMoistureContent, snowDepth)
     return self
 end
 
--- Server: send to client
 function ssWeatherManagerHourlyEvent:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteFloat32(streamId, self.snowDepth)
 end
 
--- Client: receive from server
 function ssWeatherManagerHourlyEvent:readStream(streamId, connection)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.snowDepth = streamReadFloat32(streamId)

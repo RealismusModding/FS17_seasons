@@ -174,7 +174,7 @@ end
 
 function ssWeatherForecast:drawToday(forecast)
     -- x-position of overlays has to be dynamically defined
-    self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.12 * self.guiScale / g_screenAspectRatio * screenAspectRatio
+    self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.10 * self.guiScale / g_screenAspectRatio * screenAspectRatio
     self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - self.hud.clockWidth*1.45
     -- Render clock background
     renderOverlay(self.hud.overlays.clock_overlay.overlayId, self.hud.clockPosX , self.hud.clockPosY, self.hud.clockWidth, self.hud.clockHeight)
@@ -189,11 +189,11 @@ function ssWeatherForecast:drawToday(forecast)
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
 
     if ssWeatherManager:isGroundFrozen() then
-        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
+        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.6, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
     end
 
     if g_seasons.weather.moistureEnabled and not ssWeatherManager:isGroundFrozen() and ssWeatherManager:isCropWet() then
-        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.8, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
+        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight*0.6, self.hud.dayPosY + self.hud.dayHeight*0.1, self.hud.dayHeight/g_screenAspectRatio*0.8, self.hud.dayHeight*0.8)
     end
 
     -- Render Season, cloud and ground icon
@@ -204,10 +204,10 @@ function ssWeatherForecast:drawToday(forecast)
     -- Render current air temperature
     setTextAlignment(RenderText.ALIGN_RIGHT)
     local airTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
-    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, ssLang.formatTemperature(airTemp))
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.4, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, ssLang.formatTemperature(airTemp))
 
     -- Render current soil temperature
     setTextAlignment(RenderText.ALIGN_RIGHT)
     local soilTemp = math.floor(ssWeatherManager.soilTemp, 0)
-    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.5, self.hud.dayPosY + self.hud.dayHeight*0.25, self.hud.textSize*1.1, ssLang.formatTemperature(soilTemp))
+    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.4, self.hud.dayPosY + self.hud.dayHeight*0.25, self.hud.textSize*1.1, ssLang.formatTemperature(soilTemp))
 end

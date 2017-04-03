@@ -25,7 +25,7 @@ function ssRepairVehicleEvent:new(vehicle)
 
     self.vehicle = vehicle
     self.ssLastRepairDay = vehicle.ssLastRepairDay
-    self.ssYesterdayOperatingTime = vehicle.ssYesterdayOperatingTime
+    self.ssLastRepairOperatingTime = vehicle.ssLastRepairOperatingTime
 
     return self
 end
@@ -33,13 +33,13 @@ end
 function ssRepairVehicleEvent:writeStream(streamId, connection)
     writeNetworkNodeObject(streamId, self.vehicle)
     streamWriteFloat32(streamId, self.ssLastRepairDay)
-    streamWriteFloat32(streamId, self.ssYesterdayOperatingTime)
+    streamWriteFloat32(streamId, self.ssLastRepairOperatingTime)
 end
 
 function ssRepairVehicleEvent:readStream(streamId, connection)
     self.vehicle = readNetworkNodeObject(streamId)
     self.ssLastRepairDay = streamReadFloat32(streamId)
-    self.ssYesterdayOperatingTime = streamReadFloat32(streamId)
+    self.ssLastRepairOperatingTime = streamReadFloat32(streamId)
 
     self:run(connection)
 end
@@ -51,6 +51,6 @@ function ssRepairVehicleEvent:run(connection)
 
     if self.vehicle ~= nil then
         self.vehicle.ssLastRepairDay = self.ssLastRepairDay
-        self.vehicle.ssYesterdayOperatingTime = self.ssYesterdayOperatingTime
+        self.vehicle.ssLastRepairOperatingTime = self.ssLastRepairOperatingTime
     end
 end
