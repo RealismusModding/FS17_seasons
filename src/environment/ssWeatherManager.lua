@@ -503,7 +503,7 @@ function ssWeatherManager:isCropWet()
     if self.moistureEnabled then
         return self.cropMoistureContent > 20 or g_currentMission.environment.timeSinceLastRain == 0
     else
-        return g_currentMission.environment.timeSinceLastRain < 2 * 60 * 60
+        return g_currentMission.environment.timeSinceLastRain < 2 * 60
     end
 end
 
