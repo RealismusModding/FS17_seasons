@@ -123,43 +123,6 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="91" filename="replacementTextures/spring/poplar5LOD_diffuse.png" relativePath="true"/>
     <File fileId="92" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
 
-    <!-- Summer -->
-    <!--<File fileId="163" filename="data/maps/textures/goldcrestValley/treeBranch_diffuse.dds" relativePath="false"/>
-    <File fileId="164" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
-    <File fileId="165" filename="data/maps/trees/birchBranch_diffuse.png" relativePath="false"/>
-    <File fileId="166" filename="data/maps/trees/birchBranch_normal.png" relativePath="false"/>
-
-    <File fileId="167" filename="data/maps/trees/birch1LOD_diffuse.png" relativePath="false"/>
-    <File fileId="168" filename="data/maps/trees/birch1LOD_normal.png" relativePath="false"/>
-    <File fileId="169" filename="data/maps/trees/birch2LOD_diffuse.png" relativePath="false"/>
-    <File fileId="170" filename="data/maps/trees/birch2LOD_normal.png" relativePath="false"/>
-    <File fileId="171" filename="data/maps/trees/birch3LOD_diffuse.png" relativePath="false"/>
-    <File fileId="172" filename="data/maps/trees/birch3LOD_normal.png" relativePath="false"/>
-    <File fileId="173" filename="data/maps/trees/birch4LOD_diffuse.png" relativePath="false"/>
-    <File fileId="174" filename="data/maps/trees/birch4LOD_normal.png" relativePath="false"/>
-    <File fileId="175" filename="data/maps/trees/birch5LOD_diffuse.png" relativePath="false"/>
-    <File fileId="176" filename="data/maps/trees/birch5LOD_normal.png" relativePath="false"/>
-    <File fileId="177" filename="data/maps/trees/birch6LOD_diffuse.png" relativePath="false"/>
-    <File fileId="178" filename="data/maps/trees/birch6LOD_normal.png" relativePath="false"/>
-
-    <File fileId="179" filename="data/maps/trees/oakBranch_diffuse.png" relativePath="false"/>
-    <File fileId="180" filename="data/maps/trees/oakBranch_normal.png" relativePath="false"/>
-    <File fileId="181" filename="data/maps/trees/oak4LOD_diffuse.png" relativePath="false"/>
-    <File fileId="182" filename="data/maps/trees/oak4LOD_normal.png" relativePath="false"/>
-
-    <File fileId="183" filename="data/maps/trees/mapleBranch_diffuse.png" relativePath="false"/>
-    <File fileId="184" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
-    <File fileId="185" filename="data/maps/trees/maple5LOD_diffuse.png" relativePath="false"/>
-    <File fileId="186" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>--.
-
-    <!--File fileId="187" filename="replacementTextures/summer/shrub01_diffuse.png" relativePath="true"/-->
-    <!--File fileId="188" filename="replacementTextures/summer/shrub01_LOD.png" relativePath="true"/-->
-
-    <!--<File fileId="189" filename="data/maps/trees/poplarBranch_diffuse.png" relativePath="false"/>
-    <File fileId="190" filename="data/maps/trees/poplarBranch_normal.png" relativePath="false"/>
-    <File fileId="191" filename="data/maps/trees/poplar5LOD_diffuse.png" relativePath="false"/>
-    <File fileId="192" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>-->
-
     <File fileId="101" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
     <File fileId="102" filename="data/shaders/windShader.xml" relativePath="false"/>
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
@@ -526,12 +489,10 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="192"/>
       <CustomParameter name="windScale" value="0.5 0 0 0"/>
     </Material>
-
   </Materials>
 
   <Shapes externalShapesFile="replacementTexturesMaterialHolder.i3d.shapes">
   </Shapes>
-
 
   <Dynamics>
   </Dynamics>
@@ -592,26 +553,7 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_poplarBranch_spring" visibility="false" nodeId="716" materialIds="416" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_spring" visibility="false" nodeId="717" materialIds="417" distanceBlending="false" />
 
-    <!-- Summer -->
-    <!-- FIXME  temporary added summer textures to ensure replace at season change -->
-    <Shape shapeId="1" name="ssTr_treeBranch_summer" visibility="false" nodeId="801" materialIds="901" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birchBranch_summer" visibility="false" nodeId="802" materialIds="902" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch1LOD_summer" visibility="false" nodeId="803" materialIds="903" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch2LOD_summer" visibility="false" nodeId="804" materialIds="904" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch3LOD_summer" visibility="false" nodeId="805" materialIds="905" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch4LOD_summer" visibility="false" nodeId="806" materialIds="906" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch5LOD_summer" visibility="false" nodeId="807" materialIds="907" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_birch6LOD_summer" visibility="false" nodeId="808" materialIds="908" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_bushes_summer" visibility="false" nodeId="809" materialIds="909" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_oakBranch_summer" visibility="false" nodeId="810" materialIds="910" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_oak4LOD_summer" visibility="false" nodeId="811" materialIds="911" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_mapleBranch_summer" visibility="false" nodeId="812" materialIds="912" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_maple5LOD_summer" visibility="false" nodeId="813" materialIds="913" distanceBlending="false" />
-    <!--Shape shapeId="1" name="ssTr_shrub01Branch_summer" visibility="false" nodeId="814" materialIds="914" distanceBlending="false" /-->
-    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_summer" visibility="false" nodeId="815" materialIds="915" distanceBlending="false" /-->
-    <Shape shapeId="1" name="ssTr_poplarBranch_summer" visibility="false" nodeId="816" materialIds="916" distanceBlending="false" />
-    <Shape shapeId="1" name="ssTr_poplar5LOD_summer" visibility="false" nodeId="817" materialIds="917" distanceBlending="false" />
-
+    <!-- Clone-able object for winter -->
+    <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="201" distanceBlending="false" />
   </Scene>
-
 </i3D>
