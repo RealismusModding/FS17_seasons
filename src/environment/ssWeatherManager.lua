@@ -12,11 +12,7 @@ g_seasons.weather = ssWeatherManager
 
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
-ssWeatherManager.snowDepth = 0
-ssWeatherManager.soilTemp = 4.9
-ssWeatherManager.cropMoistureContent = 15
 ssWeatherManager.weather = {}
-ssWeatherManager.moistureEnabled = true
 
 -- Load events
 source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
@@ -28,7 +24,7 @@ function ssWeatherManager:load(savegame, key)
     local i
 
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
-    self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 0.0)
+    self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 4.9)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
     self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.moistureEnabled = ssStorage.getXMLBool(savegame, key .. ".weather.moistureEnabled", true)
@@ -156,6 +152,7 @@ function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
     self.cropMoistureContent = streamReadFloat32(streamId)
+    self.moistureEnabled = streamReadBool(streamId)
 
     self.forecastLength = streamReadUInt8(streamId)
     local numRains = streamReadUInt8(streamId)
@@ -201,6 +198,7 @@ function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
     streamWriteFloat32(streamId, self.cropMoistureContent)
+    streamWriteBool(streamId, self.moistureEnabled)
 
     streamWriteUInt8(streamId, self.forecastLength)
     streamWriteUInt8(streamId, table.getn(self.weather))
