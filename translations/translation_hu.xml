@@ -1,219 +1,121 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors/>
+    <translationContributors>n0tr3ady</translationContributors>
     <texts>
-        <!-- Missing translation of "Seasons: Show weather forecast" -->
-        <text name="input_SEASONS_SHOW_WF" text="" />
-        <!-- Missing translation of "Seasons: Repair vehicle" -->
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="" />
-        <!-- Missing translation of "Seasons: Open menu" -->
-        <text name="input_SEASONS_SHOW_MENU" text="" />
-        <!-- Missing translation of "Planting distance (%d m)" -->
-        <text name="input_SEASONS_PLANTING_DISTANCE" text="" />
-        <!-- Missing translation of "Seasons: Hide weather forecast" -->
-        <text name="SEASONS_HIDE_WF" text="" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: idõjárás elõrejelzés be" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: gép / jármû javitása" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: menü megnyitás" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Vetési távolság (%d m)" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: idõjárás elõrejelzés ki" />
 
-        <!-- Missing translation of "Monday" -->
-        <text name="SS_WEEKDAY_1" text="" />
-        <!-- Missing translation of "Tuesday" -->
-        <text name="SS_WEEKDAY_2" text="" />
-        <!-- Missing translation of "Wednesday" -->
-        <text name="SS_WEEKDAY_3" text="" />
-        <!-- Missing translation of "Thursday" -->
-        <text name="SS_WEEKDAY_4" text="" />
-        <!-- Missing translation of "Friday" -->
-        <text name="SS_WEEKDAY_5" text="" />
-        <!-- Missing translation of "Saturday" -->
-        <text name="SS_WEEKDAY_6" text="" />
-        <!-- Missing translation of "Sunday" -->
-        <text name="SS_WEEKDAY_7" text="" />
+        <text name="SS_WEEKDAY_1" text="Hétfõ" />
+        <text name="SS_WEEKDAY_2" text="Kedd" />
+        <text name="SS_WEEKDAY_3" text="Szerda" />
+        <text name="SS_WEEKDAY_4" text="Csütörtök" />
+        <text name="SS_WEEKDAY_5" text="Péntek" />
+        <text name="SS_WEEKDAY_6" text="Szombat" />
+        <text name="SS_WEEKDAY_7" text="Vasárnap" />
 
-        <!-- Missing translation of "Mon" -->
-        <text name="SS_WEEKDAY_SHORT_1" text="" />
-        <!-- Missing translation of "Tue" -->
-        <text name="SS_WEEKDAY_SHORT_2" text="" />
-        <!-- Missing translation of "Wed" -->
-        <text name="SS_WEEKDAY_SHORT_3" text="" />
-        <!-- Missing translation of "Thu" -->
-        <text name="SS_WEEKDAY_SHORT_4" text="" />
-        <!-- Missing translation of "Fri" -->
-        <text name="SS_WEEKDAY_SHORT_5" text="" />
-        <!-- Missing translation of "Sat" -->
-        <text name="SS_WEEKDAY_SHORT_6" text="" />
-        <!-- Missing translation of "Sun" -->
-        <text name="SS_WEEKDAY_SHORT_7" text="" />
+        <text name="SS_WEEKDAY_SHORT_1" text="Hét." />
+        <text name="SS_WEEKDAY_SHORT_2" text="Kedd" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Szer." />
+        <text name="SS_WEEKDAY_SHORT_4" text="Csüt." />
+        <text name="SS_WEEKDAY_SHORT_5" text="Pén." />
+        <text name="SS_WEEKDAY_SHORT_6" text="Szom." />
+        <text name="SS_WEEKDAY_SHORT_7" text="Vas." />
 
-        <!-- Missing translation of "Spring" -->
-        <text name="SS_SEASON_0" text="" />
-        <!-- Missing translation of "Summer" -->
-        <text name="SS_SEASON_1" text="" />
-        <!-- Missing translation of "Autumn" -->
-        <text name="SS_SEASON_2" text="" />
-        <!-- Missing translation of "Winter" -->
-        <text name="SS_SEASON_3" text="" />
+        <text name="SS_SEASON_0" text="Tavasz" />
+        <text name="SS_SEASON_1" text="Nyár" />
+        <text name="SS_SEASON_2" text="Õsz" />
+        <text name="SS_SEASON_3" text="Tél" />
 
-        <!-- Missing translation of "Early Spring" -->
-        <text name="SS_SEASON_FULL_NAME_1" text="" />
-        <!-- Missing translation of "Mid Spring" -->
-        <text name="SS_SEASON_FULL_NAME_2" text="" />
-        <!-- Missing translation of "Late Spring" -->
-        <text name="SS_SEASON_FULL_NAME_3" text="" />
-        <!-- Missing translation of "Early Summer" -->
-        <text name="SS_SEASON_FULL_NAME_4" text="" />
-        <!-- Missing translation of "Mid Summer" -->
-        <text name="SS_SEASON_FULL_NAME_5" text="" />
-        <!-- Missing translation of "Late Summer" -->
-        <text name="SS_SEASON_FULL_NAME_6" text="" />
-        <!-- Missing translation of "Early Autumn" -->
-        <text name="SS_SEASON_FULL_NAME_7" text="" />
-        <!-- Missing translation of "Mid Autumn" -->
-        <text name="SS_SEASON_FULL_NAME_8" text="" />
-        <!-- Missing translation of "Late Autumn" -->
-        <text name="SS_SEASON_FULL_NAME_9" text="" />
-        <!-- Missing translation of "Early Winter" -->
-        <text name="SS_SEASON_FULL_NAME_10" text="" />
-        <!-- Missing translation of "Mid Winter" -->
-        <text name="SS_SEASON_FULL_NAME_11" text="" />
-        <!-- Missing translation of "Late Winter" -->
-        <text name="SS_SEASON_FULL_NAME_12" text="" />
+        <text name="SS_SEASON_FULL_NAME_1" text="Kora tavasz" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Tavasz" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Késõ tavasz" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Kora nyár" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Nyár" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Késõ nyár" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Kora õsz" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Õsz" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Késõ õsz" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Kora tél" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Tél" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Késõ tél" />
 
-        <!-- Missing translation of "Jan" -->
-        <text name="SS_MONTH_SHORT_1" text="" />
-        <!-- Missing translation of "Feb" -->
-        <text name="SS_MONTH_SHORT_2" text="" />
-        <!-- Missing translation of "Mar" -->
-        <text name="SS_MONTH_SHORT_3" text="" />
-        <!-- Missing translation of "Apr" -->
-        <text name="SS_MONTH_SHORT_4" text="" />
-        <!-- Missing translation of "May" -->
-        <text name="SS_MONTH_SHORT_5" text="" />
-        <!-- Missing translation of "Jun" -->
-        <text name="SS_MONTH_SHORT_6" text="" />
-        <!-- Missing translation of "Jul" -->
-        <text name="SS_MONTH_SHORT_7" text="" />
-        <!-- Missing translation of "Aug" -->
-        <text name="SS_MONTH_SHORT_8" text="" />
-        <!-- Missing translation of "Sep" -->
-        <text name="SS_MONTH_SHORT_9" text="" />
-        <!-- Missing translation of "Oct" -->
-        <text name="SS_MONTH_SHORT_10" text="" />
-        <!-- Missing translation of "Nov" -->
-        <text name="SS_MONTH_SHORT_11" text="" />
-        <!-- Missing translation of "Dec" -->
-        <text name="SS_MONTH_SHORT_12" text="" />
+        <text name="SS_MONTH_SHORT_1" text="Jan" />
+        <text name="SS_MONTH_SHORT_2" text="Feb" />
+        <text name="SS_MONTH_SHORT_3" text="Már" />
+        <text name="SS_MONTH_SHORT_4" text="Ápr" />
+        <text name="SS_MONTH_SHORT_5" text="Máj" />
+        <text name="SS_MONTH_SHORT_6" text="Jún" />
+        <text name="SS_MONTH_SHORT_7" text="Júl" />
+        <text name="SS_MONTH_SHORT_8" text="Aug" />
+        <text name="SS_MONTH_SHORT_9" text="Szep" />
+        <text name="SS_MONTH_SHORT_10" text="Okt" />
+        <text name="SS_MONTH_SHORT_11" text="Nov" />
+        <text name="SS_MONTH_SHORT_12" text="Dec" />
 
-        <!-- Missing translation of "Vehicle Taxes" -->
-        <text name="SS_VEHICLE_TAXES" text="" />
-        <!-- Missing translation of "Vehicle Maintenance" -->
-        <text name="SS_VEHICLE_MAINTENANCE" text="" />
-        <!-- Missing translation of "Vehicle Repairs" -->
-        <text name="SS_VEHICLE_REPAIRS" text="" />
+        <text name="SS_VEHICLE_TAXES" text="Gépek adója" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Gépek karbantartása" />
+        <text name="SS_VEHICLE_REPAIRS" text="Gépek javítása" />
 
-        <!-- Missing translation of "You don't have enough money to maintain this vehicle" -->
-        <text name="SS_NOT_ENOUGH_MONEY" text="" />
-        <!-- Missing translation of "Maintenance cost for %s was %s" -->
-        <text name="SS_VEHICLE_REPAIRED" text="" />
-        <!-- Missing translation of "Maintain %s for %s" -->
-        <text name="SS_REPAIR_VEHICLE_COST" text="" />
-        <!-- Missing translation of "Maintenance required" -->
-        <text name="SS_REPAIR_REQUIRED" text="" />
-        <!-- Missing translation of "%.1f engine hours or %d days until maintenance is required" -->
-        <text name="SS_REPAIR_REQUIRED_IN" text="" />
-        <!-- Missing translation of "Do you want to perform maintenance on the %s for %s?" -->
-        <text name="SS_REPAIR_DIALOG" text="" />
-        <!-- Missing translation of "Maintenance" -->
-        <text name="SS_REPAIR_DIALOG_TITLE" text="" />
-        <!-- Missing translation of "Engine breakdown. Repair your machinery!" -->
-        <text name="warning_repairBrokenMachine" text="" />
-        <!-- Missing translation of "at midnight" -->
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Nincs elég pénzed a karbantartásra!" />
+        <text name="SS_VEHICLE_REPAIRED" text="A karbantartása a(z) %s gépnek ennyibe került: %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Karbantartása a %s gépnek ennyiért: %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Karbantartást igényel!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás." />
+        <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
+        <text name="warning_repairBrokenMachine" text="A motor meghibásodott. Javítsd meg a gépedet!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
-        <!-- Missing translation of "Failed to save Seaons to your savegame. Please try again!" -->
-        <text name="SS_SAVE_FAILED" text="" />
+        <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
 
-        <!-- Missing translation of "A new year, a new seeding period. TODO" -->
-        <text name="SS_SEASON_INTRO_0" text="" />
-        <!-- Missing translation of "The sun is high, crops grow. TODO" -->
-        <text name="SS_SEASON_INTRO_1" text="" />
-        <!-- Missing translation of "Harvest period has arrived. Prepare for the winter as crops might not survive the cold. TODO" -->
-        <text name="SS_SEASON_INTRO_2" text="" />
-        <!-- Missing translation of "It is cold. The soil is hard, possibly frozen. Crops don't grow or even die. TODO" -->
-        <text name="SS_SEASON_INTRO_3" text="" />
-        <!-- Missing translation of "OK" -->
-        <text name="SS_BUTTON_OK" text="" />
-        <!-- Missing translation of "Don't show again" -->
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="" />
+        <text name="SS_SEASON_INTRO_0" text="Egy új év, egy új vetési idõszak. TODO" />
+        <text name="SS_SEASON_INTRO_1" text="A nap száz ágra süt, a növények nõnek. TODO" />
+        <text name="SS_SEASON_INTRO_2" text="Elérkezett a betakarítási szezon. Készülj a télre, talán a növényeid nem élik túl a telet. TODO" />
+        <text name="SS_SEASON_INTRO_3" text="Hideg van. A föld kemény, talán fagyott is. A növények nem nõnek, talán el is fagynak. TODO" />
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne mutasd újra" />
 
-        <!-- Missing translation of "The soil is frozen. You can't work on it!" -->
-        <text name="warning_soilIsFrozen" text="" />
-        <!-- Missing translation of "Do not thresh when the crops are too wet!" -->
-        <text name="warning_doNotThreshWithMoisture" text="" />
-        <!-- Missing translation of "Animals died (%d)" -->
-        <text name="warning_animalsKilled" text="" />
-        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
-        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+        <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
+        <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
+        <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetõvájú maximum kapacitása 3 napra elegendõ élelmet biztosít az állataidnak." />
 
-        <!-- Missing translation of "Overview" -->
-        <text name="ui_pageOverview" text="" />
-        <!-- Missing translation of "Settings" -->
-        <text name="ui_pageSettings" text="" />
-        <!-- Missing translation of "Debug Tools" -->
-        <text name="ui_pageDebug" text="" />
+        <text name="ui_pageOverview" text="Áttekintés" />
+        <text name="ui_pageSettings" text="Beállítások" />
+        <text name="ui_pageDebug" text="Hibakeresés" />
 
-        <!-- Missing translation of "Apply Settings" -->
-        <text name="ui_buttonSave" text="" />
-        <!-- Missing translation of "1 layer only" -->
-        <text name="ui_snowOneLayer" text="" />
-        <!-- Missing translation of "%i days" -->
-        <text name="ui_days" text="" />
-        <!-- Missing translation of "Fahrenheit" -->
-        <text name="ui_temperatureFahrenheit" text="" />
-        <!-- Missing translation of "Celcius" -->
-        <text name="ui_temperatureCelcius" text="" />
+        <text name="ui_buttonSave" text="Alkalmazás" />
+        <text name="ui_snowOneLayer" text="1 réteg csak" />
+        <text name="ui_days" text="%i napok" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celsius" />
 
-        <!-- Missing translation of "The length of a season in days. A year is four seasons." -->
-        <text name="tooltip_seasonLength" text="" />
-        <!-- Missing translation of "Show a season introduction at the start of a season." -->
-        <text name="tooltip_seasonIntros" text="" />
-        <!-- Missing translation of "Snow will fall in cold winters and block roads." -->
-        <text name="tooltip_snow" text="" />
-        <!-- Missing translation of "Show the forecast and menu key in the help menu." -->
-        <text name="tooltip_controlsHelp" text="" />
-        <!-- Missing translation of "Vehicles compress snow when driving over it." -->
-        <text name="tooltip_snowTracks" text="" />
-        <!-- Missing translation of "Set the temperature scale used in the game" -->
-        <text name="tooltip_controlsTemperature" text="" />
-        <!-- Missing translation of "Disallow threshing when crops are wet of moisture" -->
-        <text name="tooltip_moisture" text="" />
+        <text name="tooltip_seasonLength" text="Egy szezon hossza napokban. 1 év négy szezonból áll." />
+        <text name="tooltip_seasonIntros" text="Mutasd be az évszakokat a szezon kezdetén." />
+        <text name="tooltip_snow" text="Télen esni fog a hó és útakadályokat fog emelni." />
+        <text name="tooltip_controlsHelp" text="Mutasd az elõrejelzést és a menügombot a help menüben." />
+        <text name="tooltip_snowTracks" text="A gépek letapossák a havat." />
+        <text name="tooltip_controlsTemperature" text="Beállítja a hõmérséklet skálát a játékban" />
+        <text name="tooltip_moisture" text="Aratás tiltása ha túl nedves a növény" />
 
-        <!-- Missing translation of "Season introductions" -->
-        <text name="setting_seasonIntros" text="" />
-        <!-- Missing translation of "Season length" -->
-        <text name="setting_seasonLength" text="" />
-        <!-- Missing translation of "Snow mode" -->
-        <text name="setting_snow" text="" />
-        <!-- Missing translation of "Keys in help menu" -->
-        <text name="setting_controlsHelp" text="" />
-        <!-- Missing translation of "Snow tracks" -->
-        <text name="setting_snowTracks" text="" />
-        <!-- Missing translation of "Temperature scale" -->
-        <text name="setting_controlsTemperature" text="" />
-        <!-- Missing translation of "Crop moisture" -->
-        <text name="setting_moisture" text="" />
+        <text name="setting_seasonIntros" text="Évszak bemutató" />
+        <text name="setting_seasonLength" text="Évszak hossza" />
+        <text name="setting_snow" text="Hó mód" />
+        <text name="setting_controlsHelp" text="Billentyûk a súgóban." />
+        <text name="setting_snowTracks" text="Keréknyomok a hóban" />
+        <text name="setting_controlsTemperature" text="Hõmérséklet skála" />
+        <text name="setting_moisture" text="Növény nedvesség" />
 
-        <!-- Missing translation of "Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." -->
-        <text name="dialog_applySettings" text="" />
+        <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
 
-        <!-- Missing translation of "You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." -->
-        <text name="dialog_resetGrowth" text="" />
-        <!-- Missing translation of "Growth reset" -->
-        <text name="dialog_resetGrowth_title" text="" />
-        <!-- Missing translation of "Keep growth" -->
-        <text name="dialog_resetGrowth_no" text="" />
-        <!-- Missing translation of "Reset" -->
-        <text name="dialog_resetGrowth_yes" text="" />
+        <text name="dialog_resetGrowth" text="A Seasons egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe az a Seasons mod hibás mûködését eredményezheti." />
+        <text name="dialog_resetGrowth_title" text="Növény növekedés alaphelyzetbe" />
+        <text name="dialog_resetGrowth_no" text="Növény növekedés megtartása" />
+        <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
 
-        <!-- Missing translation of "Snow" -->
-        <text name="fillType_snow" text="" />
+        <text name="fillType_snow" text="Hó" />
     </texts>
 </l10n>
