@@ -1,6 +1,15 @@
+<!--------------------------------------------------------------------------------------------------
+-- REPAIR FACTORS
+----------------------------------------------------------------------------------------------------
+-- Purpose:  Data for repair factors
+-- Authors:  reallogger
+--
+-- Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter
+-- Life time divided by 20
+--
+-- Copyright (c) Realismus Modding, 2017
+--------------------------------------------------------------------------------------------------->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<!-- Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter -->
-<!-- Life time divided by 20 -->
 
 <factors>
     <factor category="tractors">
