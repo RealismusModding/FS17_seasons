@@ -367,8 +367,7 @@ function ssSeasonsMenu:updateOverview()
                     currentBlock = {}
                     currentBlock.type = type
                     currentBlock.s = i
-            end
-
+                end
                 currentBlock.e = i
             else
                 table.insert(blocks, currentBlock)
@@ -377,6 +376,8 @@ function ssSeasonsMenu:updateOverview()
         end
         if currentBlock ~= nil then table.insert(blocks, currentBlock) end --handle case where there is no false (like poplar)
     end
+
+    
 
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
         if fruitDesc.allowsSeeding then -- must be in list
