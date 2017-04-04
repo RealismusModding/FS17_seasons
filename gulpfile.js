@@ -167,6 +167,7 @@ class BuildConfig {
 var buildConfig = new BuildConfig();
 var package = JSON.parse(fs.readFileSync("package.json"));
 var packageVersion = package.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
+var modZipName = package.fs.modZipName;
 
 const zipSources = [
     "translations/translation_*.xml",
@@ -177,17 +178,17 @@ const zipSources = [
 ];
 
 gulp.task("clean:zip", () => {
-    return del("FS17_seasons*.zip");
+    return del(modZipName + "*.zip");
 });
 
 gulp.task("clean:mods", () => {
-    return del(path.join(buildConfig.get("modsFolder"), "FS17_seasons*.zip"), { force: true });
+    return del(path.join(buildConfig.get("modsFolder"), modZipName + "*.zip"), { force: true });
 });
 
 // Build the mod zipfile
 gulp.task("build", () => {
     const sourceStream = gulp.src(zipSources, { base: "." });
-    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
 
     return merge(sourceStream, fillModDesc(), templatedLua())
         .pipe(size())
@@ -198,11 +199,11 @@ gulp.task("build", () => {
 
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build", "clean:mods"], () => {
-    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
 
     return gulp
         .src(outputZipName, { base: "." })
-        .pipe(rename("FS17_seasons.zip"))
+        .pipe(rename(modZipName + ".zip"))
         .pipe(gulp.dest(buildConfig.get("modsFolder")));
 });
 
@@ -252,7 +253,7 @@ gulp.task("ir:1", ["install"], dediStop);
  * the old version is busy and can't be changed.
  */
 gulp.task("ir:2", ["ir:1"], () => {
-    const outputZipName = `FS17_seasons_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
     const conn = new ftp({
         host: buildConfig.get("server.ftp.host"),
         port: buildConfig.get("server.ftp.port", 21),
@@ -262,7 +263,7 @@ gulp.task("ir:2", ["ir:1"], () => {
 
     return gulp
         .src(outputZipName, { buffer: false })
-        .pipe(rename("FS17_seasons.zip"))
+        .pipe(rename(modZipName + ".zip"))
         .pipe(conn.dest(buildConfig.get("server.ftp.path")))
         .pipe(gutil.noop());
 });

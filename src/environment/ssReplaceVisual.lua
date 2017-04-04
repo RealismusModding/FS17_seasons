@@ -28,14 +28,16 @@ function ssReplaceVisual:loadMap(name)
         -- Only if this game does not need to wait for other modules to receive data,
         -- update the textures. (singleplayer)
         if g_currentMission:getIsServer() then
-            self:updateTextures(getRootNode())
+            self:updateTextures()
         end
+
+        addConsoleCommand("ssSetVisuals", "Set visuals", "consoleCommandSetVisuals", self)
     end
 end
 
 function ssReplaceVisual:readStream(streamId, connection)
-    -- Load after data for seaonUtils is loaded
-    self:updateTextures(getRootNode())
+    -- Load after environment is loaded
+    self:updateTextures()
 end
 
 function ssReplaceVisual:loadFromXML()
@@ -77,6 +79,10 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     if matHolder ~= nil then
         local replacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d")
         table.insert(self.modReplacements, replacements)
+
+        if self.tmpMaterialHolderNodeId == nil then
+            self.tmpMaterialHolderNodeId = self:findNodeByName(replacements, "summer_material_holder")
+        end
     end
 
     -- Load seasons replacements
@@ -124,7 +130,7 @@ end
 
 function ssReplaceVisual:seasonChanged()
     if g_currentMission:getIsClient() then
-        self:updateTextures(getRootNode())
+        self:updateTextures()
     end
 end
 
@@ -135,13 +141,13 @@ function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
 end
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
-function findNodeByName(nodeId, name)
+function ssReplaceVisual:findNodeByName(nodeId, name)
     if getName(nodeId) == name then
         return nodeId
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
-        local tmp = findNodeByName(getChildAt(nodeId, i), name)
+        local tmp = self:findNodeByName(getChildAt(nodeId, i), name)
 
         if tmp ~= nil then
             return tmp
@@ -164,7 +170,7 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
     for seasonId, seasonTable in pairs(self.textureReplacements) do
         for shapeName, shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName, secondaryNodeTable in pairs(shapeNameTable) do
-                local materialSrcId = findNodeByName(searchBase, secondaryNodeTable.replacementName)
+                local materialSrcId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
 
                 if materialSrcId ~= nil then -- Can be defined in an other I3D file.
                     -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
@@ -178,7 +184,18 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                         self.textureReplacements.default[shapeName][secondaryNodeName] = {}
                     end
 
-                    self.textureReplacements.default[shapeName][secondaryNodeName].materialId = ssReplaceVisual:findOriginalMaterial(getRootNode(), shapeName, secondaryNodeName)
+                    if self.textureReplacements.default[shapeName][secondaryNodeName].materialId == nil then
+                        local materialId = ssReplaceVisual:findOriginalMaterial(getRootNode(), shapeName, secondaryNodeName)
+                        self.textureReplacements.default[shapeName][secondaryNodeName].materialId = materialId
+
+                        -- Load an object to hold it as well to prevent garbage collect
+                        if materialId ~= nil and self.tmpMaterialHolderNodeId ~= nil then
+                            local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+
+                            link(getRootNode(), nodeId)
+                            setMaterial(nodeId, materialId, 0)
+                        end
+                    end
                 end
             end
         end
@@ -188,16 +205,15 @@ end
 -- Finds the material of the original Shape object
 function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNodeName)
     -- print("Searching for object: " .. shapeName .. "/" .. secondaryNodeName .. " under " .. searchBase )
-    local parentShapeId = findNodeByName(searchBase, shapeName)
+    local parentShapeId = self:findNodeByName(searchBase, shapeName)
     local childShapeId
     local materialId
 
     -- print("DEBUG: " .. parentShapeId )
     if parentShapeId ~= nil then
-        childShapeId = (findNodeByName(parentShapeId, secondaryNodeName))
+        childShapeId = (self:findNodeByName(parentShapeId, secondaryNodeName))
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
-            -- log("Found materialID: " .. materialId .. " for childobject " ..  childShapeId .. ".")
         end
     end
 
@@ -206,14 +222,17 @@ end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(nodeId)
-    local currentSeason = g_seasons.environment:currentSeason()
+    if nodeId == nil then
+        nodeId = getRootNode()
+    end
 
-    if self.textureReplacements[currentSeason][getName(nodeId)] ~= nil then
+    local season = g_seasons.environment:currentSeason()
+
+    if self.textureReplacements[season][getName(nodeId)] ~= nil then
         -- If there is a texture for this season and node, set it
-        for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[currentSeason][getName(nodeId)]) do
-
+        for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[season][getName(nodeId)]) do
             if secondaryNodeTable.materialId ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
             end
         end
@@ -222,7 +241,7 @@ function ssReplaceVisual:updateTextures(nodeId)
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements.default[getName(nodeId)]) do
             -- MATERIALID is NULL for birch
             if secondaryNodeTable.materialId ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"] .. ".")
+                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
             end
         end
@@ -241,7 +260,7 @@ end
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     if getName(nodeId) == shapeName then
-        -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId) .. ".")
+        -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId))
         setMaterial(nodeId, materialSrcId, 0)
     end
 
@@ -258,4 +277,31 @@ function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     end
 
     return nil
+end
+
+function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
+    local season = g_seasons.environment.SEASON_SPRING
+    if seasonName == "summer" then
+        season = g_seasons.environment.SEASON_SUMMER
+    elseif seasonName == "autumn" then
+        season = g_seasons.environment.SEASON_AUTUMN
+    elseif seasonName == "winter" then
+        season = g_seasons.environment.SEASON_WINTER
+    end
+
+    -- Overwrite getter
+    local oldCurrentSeason = g_seasons.environment.currentSeason
+    g_seasons.environment.currentSeason = function (self)
+        return season
+    end
+
+    -- Update
+    self:updateTextures()
+
+    -- Fix getter
+    g_seasons.environment.currentSeason = oldCurrentSeason
+
+    self.debug = false
+
+    return "Updated textures to " .. tostring(season)
 end

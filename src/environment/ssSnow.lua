@@ -65,9 +65,9 @@ function ssSnow:loadMap(name)
         ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
         ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
 
-        addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self);
-        addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self);
-        addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self);
+        addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self)
+        addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self)
+        addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self)
     end
 
 end

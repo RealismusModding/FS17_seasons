@@ -163,10 +163,33 @@ function ssSeasonsMenu:update(dt)
     ssSeasonsMenu:superClass().update(self, dt)
 
     self.alreadyClosed = false
-end
 
-function ssSeasonsMenu:onAdminOK()
-    g_gui:closeAllDialogs()
+    --[[
+    if not g_gui:getIsDialogVisible("PasswordDialog") then
+        if InputBinding.hasEvent(InputBinding.TOGGLE_GUI_SCREEN, true) or InputBinding.hasEvent(InputBinding.MENU_CANCEL, true) then
+            self:exitGUI();
+        end;
+    end;
+
+    if g_currentMission.missionDynamicInfo.isMultiplayer then
+        -- Set the correct page if your logged in.
+        if g_currentMission.isMasterUser then
+            if self.clientArentLoggedIn == nil then -- delay 1 frame
+                if g_gui_CurrentDialog ~= nil then
+                    -- Prevent dialog to open the ingameMenu
+                    g_gui_CurrentDialog.target:setCallback(GameExtensionGUI.onOK, self);
+                    g_gui_CurrentDialog.target:setReturnScreen(nil, nil);
+                    g_gui_CurrentDialog = nil;
+                end;
+            end;
+
+            if self.clientArentLoggedIn ~= nil then
+                self.clientArentLoggedIn = nil;
+                self:setPage();
+            end;
+        end;
+    end;
+    --]]
 end
 
 function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
@@ -601,7 +624,10 @@ function ssSeasonsMenu:updateServerSettingsVisibility()
 end
 
 function ssSeasonsMenu:onClickMultiplayerLogin(element)
-    g_gui:showPasswordDialog({text=g_i18n:getText("ui_enterAdminPassword"), callback=self.onAdminPassword, target=self, defaultPassword=""})
+    if not g_currentMission.isMasterUser then
+        local dialog = g_gui:showDialog("PasswordDialog")
+        dialog.target:setCallback(self.onAdminPassword, self)
+    end
 end
 
 function ssSeasonsMenu:onAdminPassword(password, login)

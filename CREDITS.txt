@@ -4,10 +4,12 @@ SEASONS MOD CREDITS
 
 Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 
+Seasonal tree and hegde textures -- KimG
 Snow Weather, tree textures, Season Huds and logo -- FSModding_Gary
 Snow mask files -- Vasylko
 Weather forecast HUD -- ian898, blacky_BPG
 Bale fermentation -- fatov (baron)
+Tiny dedicated server warning fix -- Decker_mmiv
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
