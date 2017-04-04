@@ -20,9 +20,7 @@ source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
 source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
 
 function ssWeatherManager:load(savegame, key)
-    if savegame == nil then return end
-    local i
-
+    -- Load or set default values
     self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
     self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 4.9)
     self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
@@ -35,7 +33,7 @@ function ssWeatherManager:load(savegame, key)
     local i = 0
     while true do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
-        if not hasXMLProperty(savegame, dayKey) then break end
+        if not ssStorage.hasXMLProperty(savegame, dayKey) then break end
 
         local day = {}
 
@@ -56,7 +54,7 @@ function ssWeatherManager:load(savegame, key)
     i = 0
     while true do
         local rainKey = string.format("%s.weather.forecast.rain(%i)", key, i)
-        if not hasXMLProperty(savegame, rainKey) then break end
+        if not ssStorage.hasXMLProperty(savegame, rainKey) then break end
 
         local rain = {}
 
