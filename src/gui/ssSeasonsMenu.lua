@@ -361,21 +361,23 @@ function ssSeasonsMenu:updateOverview()
             -- If block open, set end of block to new true
         -- When find false
             -- Add block, reset current block
-
         for i = 1, 12 do
             if data[fruitName][i] then
                 if currentBlock == nil then
                     currentBlock = {}
                     currentBlock.type = type
                     currentBlock.s = i
+                    trueFound = true
                 end
 
                 currentBlock.e = i
             else
                 table.insert(blocks, currentBlock)
                 currentBlock = nil
+                falseFound = true
             end
         end
+        if currentBlock ~= nil then table.insert(blocks, currentBlock) end --handle case where there is no false (like poplar)
     end
 
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
