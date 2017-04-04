@@ -516,7 +516,7 @@ function ssSeasonsMenu:drawOverview(element)
     local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
 
     o.rect:render(
-        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * dayInYear,
+        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * (dayInYear - 1),
         o.topLeftY + o.headerHeight,
         o.guideWidth,
         table.getn(self.overviewData) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight,

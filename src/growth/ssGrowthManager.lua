@@ -77,18 +77,18 @@ function ssGrowthManager:loadMap(name)
     g_currentMission:setPlantGrowthRate(1,nil)
     g_currentMission:setPlantGrowthRateLocked(true)
 
-    if g_currentMission:getIsServer() == true then
-       if self:getGrowthData() == false then
-            logInfo("ssGrowthManager:" ,"required data not loaded. ssGrowthManager disabled")
-            return
-        end
+    if not self:getGrowthData() then
+        logInfo("ssGrowthManager:" ,"required data not loaded. ssGrowthManager disabled")
+        return
+    end
+    self:buildCanPlantData(self.defaultFruitsData)
 
+    if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
         g_seasons.environment:addGrowthStageChangeListener(self)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
-        self:buildCanPlantData(self.defaultFruitsData)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthStage", self)
         addConsoleCommand("ssSetGrowthStage", "Sets growth for test purposes", "consoleCommandSetGrowthStage", self)
