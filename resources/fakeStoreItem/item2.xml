@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<placeable>
+    <storeData>
+        <name>Seasons fake store item</name>
+        <!-- <image>storeIcon.png</image> -->
+        <price>99999999</price>
+        <dailyUpkeep>99999999</dailyUpkeep>
+        <lifetime>1000</lifetime>
+        <rotation>0</rotation>
+        <brand>LIZARD</brand>
+        <species>placeable</species>
+        <category>placeables</category>
+    </storeData>
+
+    <placeableType>animatedObjectPlaceable</placeableType>
+    <filename>../replacementTexturesMaterialHolder.i3d</filename>
+    <placement testSizeX="24" testSizeZ="48.5" sizeX="24" sizeZ="48.5" useRandomYRotation="false" useManualYRotation="true" />
+
+<!--     <animatedObjects>
+        <animatedObject index="0" />
+        <animatedObject index="1" />
+        <animatedObject index="2" />
+        <animatedObject index="3" />
+        <animatedObject index="4" />
+        <animatedObject index="5" />
+        <animatedObject index="9" />
+        <animatedObject index="10" />
+    </animatedObjects> -->
+
+    <tipOcclusionUpdateArea sizeX="24" sizeZ="48.5" />
+<!--
+    <clearAreas>
+        <clearArea startIndex="12|0" widthIndex="12|1" heightIndex="12|2"/>
+    </clearAreas> -->
+</placeable>
