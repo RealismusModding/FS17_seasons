@@ -431,15 +431,24 @@ end
 
 -- update all GM data for a custom unknown fruit
 function ssGrowthManager:unknownFruitFound(fruitName)
-    self:copyDataTable(fruitName, self.defaultFruitsData)
+    self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
-    self:copyDataTable(fruitName, self.canPlantData)
-    self:copyDataTable(fruitName, self.canHarvestData)
+    self:updateCanPlantData(fruitName)
+    self:updateCanHarvestData(fruitName)
     self:updateWillGerminateData(fruitName)
 end
 
-function ssGrowthManager:copyDataTable(fruitname, data)
-    data[fruitName] = Utils.copyTable(data[self.fruitNameToCopyForUnknownFruits])
+function ssGrowthManager:updateCanPlantData(fruitName)
+    self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.fruitNameToCopyForUnknownFruits])
+end
+
+function ssGrowthManager:updateCanHarvestData(fruitName)
+    self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[self.fruitNameToCopyForUnknownFruits])
+end
+
+function ssGrowthManager:updateDefaultFruitsData(fruitName)
+    self.defaultFruitsData[fruitName] = {}
+    self.defaultFruitsData[fruitName].maxSprayGrowthStage = self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits].maxSprayGrowthStage
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
@@ -501,12 +510,15 @@ function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
 end
 
 function ssGrowthManager:consoleCommandTestStuff()
-    logInfo("ssGrowthManager: canPlantData")
-    print_r(self.canPlantData)
-    -- logInfo("ssGrowthManager: willGerminateData")
-    -- print_r(self.willGerminateData)
-    self:buildCanHarvestData()
-    logInfo("ssGrowthManager: canHarvestData")
-    print_r(self.canHarvestData)
+    -- logInfo("ssGrowthManager: canPlantData")
+    -- print_r(self.canPlantData)
+    -- -- logInfo("ssGrowthManager: willGerminateData")
+    -- -- print_r(self.willGerminateData)
+    -- self:buildCanHarvestData()
+    -- logInfo("ssGrowthManager: canHarvestData")
+    -- print_r(self.canHarvestData)
+    --print_r(self.defaultFruitsData)
+    self:unknownFruitFound("whatever")
+    
 
 end
