@@ -326,7 +326,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 
     o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
 
-    o.guideWidth, _ = getNormalizedScreenValues(1, 0)
+    o.guideWidth, _ = getNormalizedScreenValues(3, 0)
     o.headerSeparatorWidth, _ = getNormalizedScreenValues(1, 0)
 
     o.seasonIconWidth, o.seasonIconHeight = getNormalizedScreenValues(30, 30)
@@ -520,7 +520,7 @@ function ssSeasonsMenu:drawOverview(element)
         o.topLeftY + o.headerHeight,
         o.guideWidth,
         table.getn(self.overviewData) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight,
-        {0.0742, 0.4341, 0.6939, 1}
+        {0.8069, 0.0097, 0.0097, 1}
     )
 
     setTextColor(1, 1, 1, 1)
