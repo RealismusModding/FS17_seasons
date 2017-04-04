@@ -455,6 +455,14 @@ function ssGrowthManager:getCanPlantData()
     return self.canPlantData
 end
 
+function ssGrowthManager:canFruitBePlanted(fruitName, growthTransition)
+    if self.canPlantData[fruitName][growthTransition] ~= nil then
+        return self.canPlantData[fruitName][growthTransition]
+    end
+
+    return false
+end
+
 function ssGrowthManager:getCanHarvestData()
     return self.canHarvestData
 end
