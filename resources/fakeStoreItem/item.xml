@@ -14,22 +14,7 @@
 
     <placeableType>animatedObjectPlaceable</placeableType>
     <filename>../replacementTexturesMaterialHolder.i3d</filename>
-    <placement testSizeX="24" testSizeZ="48.5" sizeX="24" sizeZ="48.5" useRandomYRotation="false" useManualYRotation="true" />
+    <placement testSizeX="1" testSizeZ="1" sizeX="1" sizeZ="1" useRandomYRotation="false" useManualYRotation="true" />
 
-<!--     <animatedObjects>
-        <animatedObject index="0" />
-        <animatedObject index="1" />
-        <animatedObject index="2" />
-        <animatedObject index="3" />
-        <animatedObject index="4" />
-        <animatedObject index="5" />
-        <animatedObject index="9" />
-        <animatedObject index="10" />
-    </animatedObjects> -->
-
-    <tipOcclusionUpdateArea sizeX="24" sizeZ="48.5" />
-<!--
-    <clearAreas>
-        <clearArea startIndex="12|0" widthIndex="12|1" heightIndex="12|2"/>
-    </clearAreas> -->
+    <tipOcclusionUpdateArea sizeX="1" sizeZ="1" />
 </placeable>

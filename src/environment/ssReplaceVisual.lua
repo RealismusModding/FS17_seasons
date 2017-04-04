@@ -77,7 +77,12 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     -- If there is a material holder, load that first
     local matHolder = getXMLString(file, "textures#materialHolder")
     if matHolder ~= nil then
-        local replacements = loadI3DFile(g_seasons.modDir .. "resources/replacementTexturesMaterialHolder.i3d")
+        local dir, _ = string.match(path, "(.*/)(.*)")
+        local absPath = dir .. matHolder
+        local normPath = absPath:gsub("/[^/]+/%.%./", "/")
+
+        local replacements = loadI3DFile(normPath)
+
         table.insert(self.modReplacements, replacements)
 
         if self.tmpMaterialHolderNodeId == nil then

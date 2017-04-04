@@ -15,103 +15,103 @@ It references textures in the game directory that the editor will not find and t
 
   <Files>
     <!-- Autumn -->
-    <File fileId="1" filename="replacementTextures/autumn/pineBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="1" filename="autumn/pineBranch_diffuse.dds" relativePath="true"/>
     <File fileId="2" filename="data/maps/trees/pineBranch_normal.png" relativePath="false"/>
-    <File fileId="3" filename="replacementTextures/autumn/treeBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="3" filename="autumn/treeBranch_diffuse.dds" relativePath="true"/>
     <File fileId="4" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
-    <File fileId="5" filename="replacementTextures/autumn/birchBranch_diffuse.png" relativePath="true"/>
+    <File fileId="5" filename="autumn/birchBranch_diffuse.png" relativePath="true"/>
     <File fileId="6" filename="data/maps/trees/birchBranch_normal.png" relativePath="false"/>
 
-    <File fileId="7" filename="replacementTextures/autumn/birch1LOD_diffuse.png" relativePath="true"/>
+    <File fileId="7" filename="autumn/birch1LOD_diffuse.png" relativePath="true"/>
     <File fileId="8" filename="data/maps/trees/birch1LOD_normal.png" relativePath="false"/>
-    <File fileId="9" filename="replacementTextures/autumn/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="9" filename="autumn/birch2LOD_diffuse.png" relativePath="true"/>
     <File fileId="10" filename="data/maps/trees/birch2LOD_normal.png" relativePath="false"/>
-    <File fileId="11" filename="replacementTextures/autumn/birch3LOD_diffuse.png" relativePath="true"/>
+    <File fileId="11" filename="autumn/birch3LOD_diffuse.png" relativePath="true"/>
     <File fileId="12" filename="data/maps/trees/birch3LOD_normal.png" relativePath="false"/>
-    <File fileId="13" filename="replacementTextures/autumn/birch4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="13" filename="autumn/birch4LOD_diffuse.png" relativePath="true"/>
     <File fileId="14" filename="data/maps/trees/birch4LOD_normal.png" relativePath="false"/>
-    <File fileId="15" filename="replacementTextures/autumn/birch5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="15" filename="autumn/birch5LOD_diffuse.png" relativePath="true"/>
     <File fileId="16" filename="data/maps/trees/birch5LOD_normal.png" relativePath="false"/>
 
-    <File fileId="17" filename="replacementTextures/autumn/oakBranch_diffuse.png" relativePath="true"/>
+    <File fileId="17" filename="autumn/oakBranch_diffuse.png" relativePath="true"/>
     <File fileId="18" filename="data/maps/trees/oakBranch_normal.png" relativePath="false"/>
-    <File fileId="19" filename="replacementTextures/autumn/oak4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="19" filename="autumn/oak4LOD_diffuse.png" relativePath="true"/>
     <File fileId="20" filename="data/maps/trees/oak4LOD_normal.png" relativePath="false"/>
 
-    <File fileId="21" filename="replacementTextures/autumn/mapleBranch_diffuse.png" relativePath="true"/>
+    <File fileId="21" filename="autumn/mapleBranch_diffuse.png" relativePath="true"/>
     <File fileId="22" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
-    <File fileId="23" filename="replacementTextures/autumn/maple5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="23" filename="autumn/maple5LOD_diffuse.png" relativePath="true"/>
     <File fileId="24" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
 
-    <File fileId="27" filename="replacementTextures/autumn/poplarBranch_diffuse.png" relativePath="true"/>
-    <File fileId="28" filename="replacementTextures/autumn/poplarBranch_normal.png" relativePath="true"/>
-    <File fileId="29" filename="replacementTextures/autumn/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="27" filename="autumn/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="28" filename="autumn/poplarBranch_normal.png" relativePath="true"/>
+    <File fileId="29" filename="autumn/poplar5LOD_diffuse.png" relativePath="true"/>
     <File fileId="30" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
 
     <!-- Winter  -->
-    <File fileId="31" filename="replacementTextures/winter/poplarBranch_diffuse.png" relativePath="true"/>
-    <File fileId="32" filename="replacementTextures/winter/poplarBranch_normal.png" relativePath="true"/>
-    <File fileId="33" filename="replacementTextures/winter/poplar5LOD_diffuse.png" relativePath="true"/>
-    <File fileId="34" filename="replacementTextures/winter/poplar5LOD_normal.png" relativePath="true"/>
+    <File fileId="31" filename="winter/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="32" filename="winter/poplarBranch_normal.png" relativePath="true"/>
+    <File fileId="33" filename="winter/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="34" filename="winter/poplar5LOD_normal.png" relativePath="true"/>
 
-    <File fileId="35" filename="replacementTextures/winter/mapleBranch_diffuse.png" relativePath="true"/>
-    <File fileId="36" filename="replacementTextures/winter/mapleBranch_normal.png" relativePath="true"/>
-    <File fileId="37" filename="replacementTextures/winter/maple5LOD_diffuse.png" relativePath="true"/>
-    <File fileId="38" filename="replacementTextures/winter/maple5LOD_normal.png" relativePath="true"/>
+    <File fileId="35" filename="winter/mapleBranch_diffuse.png" relativePath="true"/>
+    <File fileId="36" filename="winter/mapleBranch_normal.png" relativePath="true"/>
+    <File fileId="37" filename="winter/maple5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="38" filename="winter/maple5LOD_normal.png" relativePath="true"/>
 
-    <File fileId="39" filename="replacementTextures/winter/oakBranch_diffuse.png" relativePath="true"/>
-    <File fileId="40" filename="replacementTextures/winter/oakbranch_normal.png" relativePath="true"/>
-    <File fileId="41" filename="replacementTextures/winter/oak4LOD_diffuse.png" relativePath="true"/>
-    <File fileId="42" filename="replacementTextures/winter/oak4LOD_normal.png" relativePath="true"/>
+    <File fileId="39" filename="winter/oakBranch_diffuse.png" relativePath="true"/>
+    <File fileId="40" filename="winter/oakbranch_normal.png" relativePath="true"/>
+    <File fileId="41" filename="winter/oak4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="42" filename="winter/oak4LOD_normal.png" relativePath="true"/>
 
-    <File fileId="50" filename="replacementTextures/winter/birchBranch_diffuse.png" relativePath="true"/>
-    <File fileId="51" filename="replacementTextures/winter/birchBranch_normal.png" relativePath="true"/>
-    <File fileId="52" filename="replacementTextures/winter/birch1LOD_diffuse.png" relativePath="true"/>
-    <File fileId="53" filename="replacementTextures/winter/birch1LOD_normal.png" relativePath="true"/>
-    <File fileId="54" filename="replacementTextures/winter/birch2LOD_diffuse.png" relativePath="true"/>
-    <File fileId="55" filename="replacementTextures/winter/birch2LOD_normal.png" relativePath="true"/>
-    <File fileId="56" filename="replacementTextures/winter/birch3LOD_diffuse.png" relativePath="true"/>
-    <File fileId="57" filename="replacementTextures/winter/birch3LOD_normal.png" relativePath="true"/>
-    <File fileId="58" filename="replacementTextures/winter/birch4LOD_diffuse.png" relativePath="true"/>
-    <File fileId="59" filename="replacementTextures/winter/birch4LOD_normal.png" relativePath="true"/>
-    <File fileId="60" filename="replacementTextures/winter/birch5LOD_diffuse.png" relativePath="true"/>
-    <File fileId="61" filename="replacementTextures/winter/birch5LOD_normal.png" relativePath="true"/>
+    <File fileId="50" filename="winter/birchBranch_diffuse.png" relativePath="true"/>
+    <File fileId="51" filename="winter/birchBranch_normal.png" relativePath="true"/>
+    <File fileId="52" filename="winter/birch1LOD_diffuse.png" relativePath="true"/>
+    <File fileId="53" filename="winter/birch1LOD_normal.png" relativePath="true"/>
+    <File fileId="54" filename="winter/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="55" filename="winter/birch2LOD_normal.png" relativePath="true"/>
+    <File fileId="56" filename="winter/birch3LOD_diffuse.png" relativePath="true"/>
+    <File fileId="57" filename="winter/birch3LOD_normal.png" relativePath="true"/>
+    <File fileId="58" filename="winter/birch4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="59" filename="winter/birch4LOD_normal.png" relativePath="true"/>
+    <File fileId="60" filename="winter/birch5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="61" filename="winter/birch5LOD_normal.png" relativePath="true"/>
 
-    <File fileId="98" filename="replacementTextures/winter/treeBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="98" filename="winter/treeBranch_diffuse.dds" relativePath="true"/>
     <File fileId="99" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
 
     <!-- Spring -->
-    <File fileId="63" filename="replacementTextures/spring/treeBranch_diffuse.dds" relativePath="true"/>
+    <File fileId="63" filename="spring/treeBranch_diffuse.dds" relativePath="true"/>
     <File fileId="64" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
-    <File fileId="65" filename="replacementTextures/spring/birchBranch_diffuse.png" relativePath="true"/>
+    <File fileId="65" filename="spring/birchBranch_diffuse.png" relativePath="true"/>
     <File fileId="66" filename="data/maps/trees/birchBranch_normal.png" relativePath="false"/>
 
-    <File fileId="67" filename="replacementTextures/spring/birch1LOD_diffuse.png" relativePath="true"/>
+    <File fileId="67" filename="spring/birch1LOD_diffuse.png" relativePath="true"/>
     <File fileId="68" filename="data/maps/trees/birch1LOD_normal.png" relativePath="false"/>
-    <File fileId="69" filename="replacementTextures/spring/birch2LOD_diffuse.png" relativePath="true"/>
+    <File fileId="69" filename="spring/birch2LOD_diffuse.png" relativePath="true"/>
     <File fileId="70" filename="data/maps/trees/birch2LOD_normal.png" relativePath="false"/>
-    <File fileId="71" filename="replacementTextures/spring/birch3LOD_diffuse.png" relativePath="true"/>
+    <File fileId="71" filename="spring/birch3LOD_diffuse.png" relativePath="true"/>
     <File fileId="72" filename="data/maps/trees/birch3LOD_normal.png" relativePath="false"/>
-    <File fileId="73" filename="replacementTextures/spring/birch4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="73" filename="spring/birch4LOD_diffuse.png" relativePath="true"/>
     <File fileId="74" filename="data/maps/trees/birch4LOD_normal.png" relativePath="false"/>
-    <File fileId="75" filename="replacementTextures/spring/birch5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="75" filename="spring/birch5LOD_diffuse.png" relativePath="true"/>
     <File fileId="76" filename="data/maps/trees/birch5LOD_normal.png" relativePath="false"/>
-    <File fileId="77" filename="replacementTextures/spring/birch6LOD_diffuse.png" relativePath="true"/>
+    <File fileId="77" filename="spring/birch6LOD_diffuse.png" relativePath="true"/>
     <File fileId="78" filename="data/maps/trees/birch6LOD_normal.png" relativePath="false"/>
 
-    <File fileId="79" filename="replacementTextures/spring/oakBranch_diffuse.png" relativePath="true"/>
+    <File fileId="79" filename="spring/oakBranch_diffuse.png" relativePath="true"/>
     <File fileId="80" filename="data/maps/trees/oakBranch_normal.png" relativePath="false"/>
-    <File fileId="81" filename="replacementTextures/spring/oak4LOD_diffuse.png" relativePath="true"/>
+    <File fileId="81" filename="spring/oak4LOD_diffuse.png" relativePath="true"/>
     <File fileId="82" filename="data/maps/trees/oak4LOD_normal.png" relativePath="false"/>
 
-    <File fileId="83" filename="replacementTextures/spring/mapleBranch_diffuse.png" relativePath="true"/>
+    <File fileId="83" filename="spring/mapleBranch_diffuse.png" relativePath="true"/>
     <File fileId="84" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
-    <File fileId="85" filename="replacementTextures/spring/maple5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="85" filename="spring/maple5LOD_diffuse.png" relativePath="true"/>
     <File fileId="86" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
 
-    <File fileId="89" filename="replacementTextures/spring/poplarBranch_diffuse.png" relativePath="true"/>
+    <File fileId="89" filename="spring/poplarBranch_diffuse.png" relativePath="true"/>
     <File fileId="90" filename="data/maps/trees/poplarBranch_normal.png" relativePath="false"/>
-    <File fileId="91" filename="replacementTextures/spring/poplar5LOD_diffuse.png" relativePath="true"/>
+    <File fileId="91" filename="spring/poplar5LOD_diffuse.png" relativePath="true"/>
     <File fileId="92" filename="data/maps/trees/poplar5LOD_normal.png" relativePath="false"/>
 
     <File fileId="101" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
@@ -119,7 +119,6 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
     <File fileId="104" filename="data/shaders/fruitGrowthFoliageShader.xml" relativePath="false"/>
     <File fileId="105" filename="data/shaders/bunkerSiloSilageShader.xml" relativePath="false"/>
-
   </Files>
 
 
