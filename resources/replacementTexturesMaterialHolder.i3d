@@ -43,9 +43,6 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="23" filename="replacementTextures/autumn/maple5LOD_diffuse.png" relativePath="true"/>
     <File fileId="24" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
 
-    <File fileId="25" filename="replacementTextures/autumn/shrub01_diffuse.png" relativePath="true"/>
-    <File fileId="26" filename="replacementTextures/autumn/shrub01_LOD.png" relativePath="true"/>
-
     <File fileId="27" filename="replacementTextures/autumn/poplarBranch_diffuse.png" relativePath="true"/>
     <File fileId="28" filename="replacementTextures/autumn/poplarBranch_normal.png" relativePath="true"/>
     <File fileId="29" filename="replacementTextures/autumn/poplar5LOD_diffuse.png" relativePath="true"/>
@@ -66,9 +63,6 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="40" filename="replacementTextures/winter/oakbranch_normal.png" relativePath="true"/>
     <File fileId="41" filename="replacementTextures/winter/oak4LOD_diffuse.png" relativePath="true"/>
     <File fileId="42" filename="replacementTextures/winter/oak4LOD_normal.png" relativePath="true"/>
-
-    <File fileId="43" filename="replacementTextures/winter/shrub01_diffuse.png" relativePath="true"/>
-    <File fileId="44" filename="replacementTextures/winter/shrub01_LOD.png" relativePath="true"/>
 
     <File fileId="50" filename="replacementTextures/winter/birchBranch_diffuse.png" relativePath="true"/>
     <File fileId="51" filename="replacementTextures/winter/birchBranch_normal.png" relativePath="true"/>
@@ -114,9 +108,6 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="84" filename="data/maps/trees/mapleBranch_normal.png" relativePath="false"/>
     <File fileId="85" filename="replacementTextures/spring/maple5LOD_diffuse.png" relativePath="true"/>
     <File fileId="86" filename="data/maps/trees/maple5LOD_normal.png" relativePath="false"/>
-
-    <File fileId="87" filename="replacementTextures/spring/shrub01_diffuse.png" relativePath="true"/>
-    <File fileId="88" filename="replacementTextures/spring/shrub01_LOD.png" relativePath="true"/>
 
     <File fileId="89" filename="replacementTextures/spring/poplarBranch_diffuse.png" relativePath="true"/>
     <File fileId="90" filename="data/maps/trees/poplarBranch_normal.png" relativePath="false"/>
@@ -200,15 +191,6 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
 
-    <Material name="shrub01_mat" materialId="213" ambientColor="1 1 1" customShaderId="102">
-      <Texture fileId="25"/>
-      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
-      <CustomParameter name="speed" value="1 0 0 0"/>
-    </Material>
-    <Material name="shrub01LOD_mat" materialId="214" ambientColor="1 1 1" >
-      <Texture fileId="26"/>
-    </Material>
-
     <Material name="poplarBranch_mat" materialId="215" ambientColor="1 1 1" customShaderId="101">
       <Texture fileId="27"/>
       <Normalmap fileId="28"/>
@@ -272,15 +254,6 @@ It references textures in the game directory that the editor will not find and t
       <Texture fileId="41"/>
       <Normalmap fileId="42"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
-    </Material>
-
-    <Material name="shrub01_mat" materialId="311" ambientColor="1 1 1" customShaderId="102">
-      <Texture fileId="43"/>
-      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
-      <CustomParameter name="speed" value="1 0 0 0"/>
-    </Material>
-    <Material name="shrub01LOD_mat" materialId="312" ambientColor="1 1 1" >
-      <Texture fileId="44"/>
     </Material>
 
     <Material name="poplarBranch_mat" materialId="313" ambientColor="1 1 1" customShaderId="101">
@@ -378,15 +351,6 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
 
-    <Material name="shrub01_mat" materialId="414" ambientColor="1 1 1" customShaderId="102">
-      <Texture fileId="87"/>
-      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
-      <CustomParameter name="speed" value="1 0 0 0"/>
-    </Material>
-    <Material name="shrub01LOD_mat" materialId="415" ambientColor="1 1 1" >
-      <Texture fileId="88"/>
-    </Material>
-
     <Material name="poplarBranch_mat" materialId="416" ambientColor="1 1 1" customShaderId="101">
       <Texture fileId="89"/>
       <Normalmap fileId="90"/>
@@ -470,15 +434,6 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="windScale" value="0.5 0 0 0"/>
     </Material>
 
-    <!--Material name="shrub01_mat" materialId="914" ambientColor="1 1 1" customShaderId="102">
-      <Texture fileId="187"/>
-      <CustomParameter name="directionAndFrequency" value="0.025 0 0 1"/>
-      <CustomParameter name="speed" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="shrub01LOD_mat" materialId="415" ambientColor="1 1 1" >
-      <Texture fileId="188"/>
-    </Material-->
-
     <Material name="poplarBranch_mat" materialId="916" ambientColor="1 1 1" customShaderId="101">
       <Texture fileId="189"/>
       <Normalmap fileId="190"/>
@@ -511,8 +466,6 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_oak4LOD_autumn" visibility="false" nodeId="510" materialIds="210" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_mapleBranch_autumn" visibility="false" nodeId="511" materialIds="211" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_maple5LOD_autumn" visibility="false" nodeId="512" materialIds="212" distanceBlending="false" />
-    <!--Shape shapeId="1" name="ssTr_shrub01Branch_autumn" visibility="false" nodeId="513" materialIds="213" distanceBlending="false" /-->
-    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_autumn" visibility="false" nodeId="514" materialIds="214" distanceBlending="false" /-->
     <Shape shapeId="1" name="ssTr_poplarBranch_autumn" visibility="false" nodeId="515" materialIds="215" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_autumn" visibility="false" nodeId="516" materialIds="216" distanceBlending="false" />
 
@@ -527,8 +480,6 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_maple5LOD_winter" visibility="false" nodeId="608" materialIds="308" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_oakBranch_winter" visibility="false" nodeId="609" materialIds="309" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_oak4LOD_winter" visibility="false" nodeId="610" materialIds="310" distanceBlending="false" />
-    <!--Shape shapeId="1" name="ssTr_shrub01Branch_winter" visibility="false" nodeId="611" materialIds="311" distanceBlending="false" /-->
-    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_winter" visibility="false" nodeId="612" materialIds="312" distanceBlending="false" /-->
     <Shape shapeId="1" name="ssTr_poplarBranch_winter" visibility="false" nodeId="613" materialIds="313" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_winter" visibility="false" nodeId="614" materialIds="314" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
@@ -548,8 +499,6 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_oak4LOD_spring" visibility="false" nodeId="711" materialIds="411" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_mapleBranch_spring" visibility="false" nodeId="712" materialIds="412" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_maple5LOD_spring" visibility="false" nodeId="713" materialIds="413" distanceBlending="false" />
-    <!--Shape shapeId="1" name="ssTr_shrub01Branch_spring" visibility="false" nodeId="714" materialIds="414" distanceBlending="false" /-->
-    <!--Shape shapeId="1" name="ssTr_shrub01_lod1_spring" visibility="false" nodeId="715" materialIds="415" distanceBlending="false" /-->
     <Shape shapeId="1" name="ssTr_poplarBranch_spring" visibility="false" nodeId="716" materialIds="416" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_poplar5LOD_spring" visibility="false" nodeId="717" materialIds="417" distanceBlending="false" />
 

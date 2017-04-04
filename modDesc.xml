@@ -30,6 +30,6 @@
 
     <storeItems>
         <storeItem xmlFilename="resources/fakeStoreItem/item.xml"/>
-        <storeItem xmlFilename="resources/fakeStoreItem/item.xml"/>
+        <storeItem xmlFilename="resources/fakeStoreItem/item2.xml"/>
     </storeItems>
 </modDesc>
