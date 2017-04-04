@@ -367,14 +367,12 @@ function ssSeasonsMenu:updateOverview()
                     currentBlock = {}
                     currentBlock.type = type
                     currentBlock.s = i
-                    trueFound = true
-                end
+            end
 
                 currentBlock.e = i
             else
                 table.insert(blocks, currentBlock)
                 currentBlock = nil
-                falseFound = true
             end
         end
         if currentBlock ~= nil then table.insert(blocks, currentBlock) end --handle case where there is no false (like poplar)
