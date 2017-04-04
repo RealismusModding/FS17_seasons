@@ -100,6 +100,10 @@ function ssMain:loadMap()
 
     -- Load the GUI configurations
     g_gui:loadGui(self.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", self.mainMenu)
+
+
+    local storeItemId = StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id
+    StoreItemsUtil.removeStoreItem(storeItemId)
 end
 
 function ssMain:update(dt)
