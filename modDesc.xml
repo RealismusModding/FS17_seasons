@@ -27,4 +27,9 @@
         <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse=""/>
         <input name="SEASONS_SHOW_MENU" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse=""/>
     </inputBindings>
+
+    <storeItems>
+        <storeItem xmlFilename="resources/fakeStoreItem/item.xml"/>
+        <storeItem xmlFilename="resources/fakeStoreItem/item2.xml"/>
+    </storeItems>
 </modDesc>
