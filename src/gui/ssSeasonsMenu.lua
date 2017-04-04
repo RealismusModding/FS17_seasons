@@ -26,10 +26,14 @@ function ssSeasonsMenu:new(target, custom_mt)
 
 
     self.overview = {}
+
+    self.BLOCK_TYPE_PLANTABLE = 1
+    self.BLOCK_TYPE_HARVESTABLE = 2
+
     self.overview.blockColors = {
-        plantable = {0.2122, 0.5271, 0.0307, 1},
+        [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.5271, 0.0307, 1},
         -- plantable = {0.662, 0.816, 0.557, 1},
-        harvestable = {0.9301, 0.6404, 0.0439, 1}
+        [self.BLOCK_TYPE_HARVESTABLE] = {0.9301, 0.6404, 0.0439, 1}
     }
 
     return self
@@ -322,7 +326,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 
     o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
 
-    o.guideWidth, _ = getNormalizedScreenValues(1, 0)
+    o.guideWidth, _ = getNormalizedScreenValues(3, 0)
     o.headerSeparatorWidth, _ = getNormalizedScreenValues(1, 0)
 
     o.seasonIconWidth, o.seasonIconHeight = getNormalizedScreenValues(30, 30)
@@ -335,146 +339,66 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     o.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_summer.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
     o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_autumn.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
     o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_winter.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+
+    -- Cache of icons, against leaking when rebuilding
+    o.iconCache = {}
 end
 
 function ssSeasonsMenu:updateOverview()
-    log("Update Overview DATA")
+    self.overviewData = {}
 
-    self.overviewData = {
-        [1] = {
-            name = "barley",
-            temperature = "5ºC",
-            blocks = {
-                [1] = {
-                    type = "plantable",
-                    s = "1",
-                    e = "3"
-                },
-                [2] = {
-                    type = "harvestable",
-                    s = "6",
-                    e = "9"
-                },
-                [3] = {
-                    type = "plantable",
-                    s = "7",
-                    e = "9"
-                }
-            }
-        },
-        [2] = {
-            name = "wheat",
-            temperature = "5ºC",
-            blocks = {
-                [1] = {
-                    type = "plantable",
-                    s = "1",
-                    e = "3"
-                },
-                [2] = {
-                    type = "harvestable",
-                    s = "6",
-                    e = "9"
-                },
-                [3] = {
-                    type = "plantable",
-                    s = "7",
-                    e = "9"
-                }
-            }
-        },
-        [3] = {
-            name = "rape",
-            temperature = "5ºC",
-            blocks = {
-                [1] = {
-                    type = "plantable",
-                    s = "1",
-                    e = "3"
-                },
-                [2] = {
-                    type = "harvestable",
-                    s = "6",
-                    e = "9"
-                },
-                [3] = {
-                    type = "plantable",
-                    s = "7",
-                    e = "9"
-                }
-            }
-        },
-        [4] = {
-            name = "maize",
-            temperature = "10ºC",
-            blocks = {}
-        },
-        [5] = {
-            name = "soybean",
-            temperature = "10ºC",
-            blocks = {}
-        },
-        [6] = {
-            name = "sunflower",
-            temperature = "7ºC",
-            blocks = {}
-        },
-        [7] = {
-            name = "potato",
-            temperature = "5ºC",
-            blocks = {}
-        },
-        [8] = {
-            name = "sugarBeet",
-            temperature = "5ºC",
-            blocks = {}
-        },
-        [9] = {
-            name = "grass",
-            temperature = "3ºC",
-            blocks = {
-                [1] = {
-                    type = "plantable",
-                    s = "1",
-                    e = "3"
-                },
-                [2] = {
-                    type = "harvestable",
-                    s = "3",
-                    e = "9"
-                },
-                [3] = {
-                    type = "plantable",
-                    s = "7",
-                    e = "9"
-                },
-                [4] = {
-                    type = "harvestable",
-                    s = "10",
-                    e = "12"
-                }
-            }
-        },
-        [10] = {
-            name = "poplar",
-            temperature = "5ºC",
-            blocks = {}
-        },
-        [11] = {
-            name = "oilseedRadish",
-            i18Name = ssLang.getText("fillType_oilRadish"), -- Different name from the others
-            temperature = "7ºC",
-            blocks = {}
-        }
-    }
+    local canPlant = g_seasons.growthManager:getCanPlantData()
+    local canHarvest = g_seasons.growthManager:getCanHarvestData()
 
-    for _, fruitData in ipairs(self.overviewData) do
-        if fruitData.i18Name == nil then
-            fruitData.i18Name = ssLang.getText("fillType_" .. fruitData.name)
+    function generateBlocks(blocks, fruitName, data, type)
+        if data == nil or data[fruitName] == nil then return end
+
+        local currentBlock = nil
+
+        -- Go over the data
+        -- When you find a true
+            -- If no block open, make new block
+            -- If block open, set end of block to new true
+        -- When find false
+            -- Add block, reset current block
+
+        for i = 1, 12 do
+            if data[fruitName][i] then
+                if currentBlock == nil then
+                    currentBlock = {}
+                    currentBlock.type = type
+                    currentBlock.s = i
+                end
+
+                currentBlock.e = i
+            else
+                table.insert(blocks, currentBlock)
+                currentBlock = nil
+            end
         end
+    end
 
-        -- FIXME(Jos): we leak memory here.
-        fruitData.icon = Overlay:new("ss_fruit_" .. fruitData.name, FillUtil.fillTypeNameToDesc[fruitData.name].hudOverlayFilename, 0, 0, 40, 40)
+    for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
+        if fruitDesc.allowsSeeding then -- must be in list
+            local item = {}
+            local fillTypeDesc = FillUtil.fillTypeIndexToDesc[FruitUtil.fruitTypeToFillType[index]]
+
+            item.name = fruitDesc.name
+            item.i18Name = fillTypeDesc.nameI18N
+
+            item.temperature = g_seasons.weather:germinationTemperature(fruitDesc.name)
+
+            if self.overview.iconCache[index] == nil then
+                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilename, 0, 0, 40, 40)
+            end
+            item.icon = self.overview.iconCache[index]
+
+            item.blocks = {}
+            generateBlocks(item.blocks, fruitDesc.name, canPlant, self.BLOCK_TYPE_PLANTABLE)
+            generateBlocks(item.blocks, fruitDesc.name, canHarvest, self.BLOCK_TYPE_HARVESTABLE)
+
+            table.insert(self.overviewData, item)
+        end
     end
 end
 
@@ -561,13 +485,18 @@ function ssSeasonsMenu:drawOverview(element)
             {0.013, 0.013, 0.013, 1}
         )
         setTextAlignment(RenderText.ALIGN_CENTER)
-        o.rect:renderText(fruitX + o.germinationWidth / 2, fruitY, o.textSize, fruitData.temperature, o.fruitHeight)
+
+        if math.floor(ssWeatherManager.soilTemp, 0) < fruitData.temperature then
+            setTextColor(0.0742, 0.4341, 0.6939, 1)
+        end
+        o.rect:renderText(fruitX + o.germinationWidth / 2, fruitY, o.textSize, ssLang.formatTemperature(fruitData.temperature), o.fruitHeight)
+        setTextColor(1, 1, 1, 1)
 
         fruitX = fruitX + o.germinationWidth + o.fruitSpacerWidth
 
         -- Draw all blocks
         for _, block in pairs(fruitData.blocks) do
-            local blockInY = block.type == "harvestable" and o.transitionHeight or 0
+            local blockInY = block.type == self.BLOCK_TYPE_HARVESTABLE and o.transitionHeight or 0
 
             o.rect:render(
                 fruitX + (block.s - 1) * o.transitionWidth,
@@ -587,13 +516,11 @@ function ssSeasonsMenu:drawOverview(element)
     local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
 
     o.rect:render(
-        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * dayInYear,
+        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * (dayInYear - 1),
         o.topLeftY + o.headerHeight,
         o.guideWidth,
         table.getn(self.overviewData) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight,
-        --{0.8069, 0.0097, 0.0097, 1}
-        -- {0.2832, 0.0091, 0.0091, 1}
-        {0.0742, 0.4341, 0.6939, 1}
+        {0.8069, 0.0097, 0.0097, 1}
     )
 
     setTextColor(1, 1, 1, 1)
