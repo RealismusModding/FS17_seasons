@@ -379,7 +379,7 @@ function ssSeasonsMenu:updateOverview()
     end
 
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
-        if fruitDesc.needsSeeding then -- must be in list
+        if fruitDesc.allowsSeeding then -- must be in list
             local item = {}
             local fillTypeDesc = FillUtil.fillTypeIndexToDesc[FruitUtil.fruitTypeToFillType[index]]
 
