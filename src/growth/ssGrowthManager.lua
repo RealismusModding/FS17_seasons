@@ -347,7 +347,6 @@ function ssGrowthManager:buildCanHarvestData()
         local plantedGrowthTransition = 1
         local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
-
         while plantedGrowthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
             if self.canPlantData[fruitName][plantedGrowthTransition] == true then
                 --if self.canPlantData[fruitName][plantedGrowthTransition] == false then break end
@@ -464,30 +463,11 @@ function ssGrowthManager:canFruitBePlanted(fruitName, growthTransition)
 end
 
 function ssGrowthManager:getCanHarvestData()
-    return self.canHarvestData
+    return nil -- not implemented yet
+    --return self.canHarvestData
 end
 
---do not use
---TODO need to build canHarvestData properly
-function ssGrowthManager:getCanHarvestData(fruitName)
-    -- local growthTransition = 1
-    -- local startTransition
-    -- local endTransition
-    -- local startFound = false
 
-    -- while growthTransition <= self.MAX_ALLOWABLE_GROWTH_PERIOD do
-    --     if self.canHarvestData[fruitName][growthTransition] == true and startFound == false then
-    --         startFound = true
-    --         startTransition = growthTransition
-    --     elseif self.canHarvestData[fruitName][growthTransition] == true and startFound == true then
-    --         endTransition = growthTransition
-    --     end
-    --     growthTransition = growthTransition + 1
-    -- end
-
-    -- return startTransition, endTransition
-    return nil
-end
 
 -- debug console commands
 
