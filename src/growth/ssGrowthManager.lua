@@ -355,7 +355,7 @@ function ssGrowthManager:buildCanHarvestData()
                 if plantedGrowthTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
                     transitionToCheck = 1
                 end
-
+                local safetyCheck = 1
                 while growthStage <= fruitNumStates do
                     growthStage = self:simulateGrowth(fruitName, transitionToCheck, growthStage)
                     if growthStage == fruitNumStates then
@@ -365,7 +365,9 @@ function ssGrowthManager:buildCanHarvestData()
                     end
                     --log("plantedGrowthTransition: " .. plantedGrowthTransition  .. " fruitName: " .. fruitName .. " transitionToCheck: " .. transitionToCheck .. " growthStage: " .. growthStage .. " fruitNumStates" .. fruitNumStates)
                     transitionToCheck = transitionToCheck + 1
+                    safetyCheck = safetyCheck + 1
                     if transitionToCheck > 12 then transitionToCheck = 1 end
+                    if safetyCheck > self.self.MAX_ALLOWABLE_GROWTH_PERIOD then break end --so we don't end up in infinite loop if growth pattern is not correct
                 end
                 
             end
