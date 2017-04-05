@@ -37,7 +37,6 @@ function ssGrowthManagerData:loadAllData()
 
     --additional modmap growthData
     for _, path in ipairs(g_seasons:getModPaths("growth")) do
-        self.data = --ssSeasonsXML:loadFile(path, "animals", elements, self.data, true)
         local optionalDefaultFruits, optionalGrowthData = self:loadAdditionalData(rootKey, path, defaultFruits, growthData)
         if optionalDefaultFruits == nil or optionalGrowthData == nil then
             logInfo("ssGrowthManagerData:", "Failed to process additional XML growth data file: " .. path)
