@@ -71,9 +71,6 @@ end
 
 function ssMain:readStream(streamId, connection)
     self.showControlsInHelpScreen = true
-
-    -- Variable to indicate 'everything' is loaded to keep objects working
-    self.loaded = true
 end
 
 function ssMain:writeStream(streamId, connection)
