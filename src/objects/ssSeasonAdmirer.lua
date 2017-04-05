@@ -41,9 +41,13 @@ function ssSeasonAdmirer:delete()
 end
 
 function ssSeasonAdmirer:updateVisibility()
-    local season = g_seasons.environment:currentSeason()
+    if g_seasons ~= nil and g_seasons.loaded then
+        local season = g_seasons.environment:currentSeason()
 
-    setVisibility(self.id, self.showIn[season])
+        setVisibility(self.id, self.showIn[season])
+    else
+        setVisibility(self.id, false)
+    end
 end
 
 function ssSeasonAdmirer:seasonChanged()
