@@ -30,7 +30,7 @@
             <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="default" normalGrowthState="1" normalGrowthMaxState="3"/>
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="grass" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="2"/>
+            <!--<fruit fruitName="grass" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="2"/>-->
             <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="2"> <!--early spring to mid spring-->

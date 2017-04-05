@@ -26,4 +26,9 @@
         <Value name="size" value="1000px 530px" /> <!-- 1000, 560    915?? -->
         <Value name="position" value="0px 0px" />
     </Profile>
+
+    <Profile name="cropsSliderVertical" parent="sliderVertical">
+        <Value name="position" value="0px 15px" />
+        <Value name="size" value="16px 458px" />
+    </Profile>
 </GUIProfiles>
