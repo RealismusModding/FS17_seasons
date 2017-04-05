@@ -167,33 +167,6 @@ function ssSeasonsMenu:update(dt)
     ssSeasonsMenu:superClass().update(self, dt)
 
     self.alreadyClosed = false
-
-    --[[
-    if not g_gui:getIsDialogVisible("PasswordDialog") then
-        if InputBinding.hasEvent(InputBinding.TOGGLE_GUI_SCREEN, true) or InputBinding.hasEvent(InputBinding.MENU_CANCEL, true) then
-            self:exitGUI();
-        end;
-    end;
-
-    if g_currentMission.missionDynamicInfo.isMultiplayer then
-        -- Set the correct page if your logged in.
-        if g_currentMission.isMasterUser then
-            if self.clientArentLoggedIn == nil then -- delay 1 frame
-                if g_gui_CurrentDialog ~= nil then
-                    -- Prevent dialog to open the ingameMenu
-                    g_gui_CurrentDialog.target:setCallback(GameExtensionGUI.onOK, self);
-                    g_gui_CurrentDialog.target:setReturnScreen(nil, nil);
-                    g_gui_CurrentDialog = nil;
-                end;
-            end;
-
-            if self.clientArentLoggedIn ~= nil then
-                self.clientArentLoggedIn = nil;
-                self:setPage();
-            end;
-        end;
-    end;
-    --]]
 end
 
 function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
@@ -256,11 +229,15 @@ function ssRectOverlay:new(parentElement)
     return self
 end
 
-function ssRectOverlay:render(x, y, width, height, color)
+function ssRectOverlay:render(x, y, width, height, color, boxHeight)
     if color ~= nil then
         ssRectOverlay.g_overlay:setColor(unpack(color))
     else
         ssRectOverlay.g_overlay:setColor(1, 1, 1, 1)
+    end
+
+    if boxHeight ~= nil then
+        y = y + (boxHeight - height) / 2
     end
 
     -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
@@ -320,19 +297,24 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     o.germinationWidth, _ = getNormalizedScreenValues(70, 0)
 
     _, o.headerHeight = getNormalizedScreenValues(0, 50)
+    _, o.footerHeight = getNormalizedScreenValues(0, 80)
 
     _, o.textSize = getNormalizedScreenValues(0, 14)
     o.textSpacingWidth, o.textSpacingHeight = getNormalizedScreenValues(5, 5)
 
     o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
 
-    o.guideWidth, _ = getNormalizedScreenValues(3, 0)
+    o.guideWidth, _ = getNormalizedScreenValues(2, 0)
     o.headerSeparatorWidth, _ = getNormalizedScreenValues(1, 0)
 
     o.seasonIconWidth, o.seasonIconHeight = getNormalizedScreenValues(30, 30)
 
     o.topLeftX, o.topLeftY = getNormalizedScreenValues(50, 20)
     o.totalWidth = o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth + 12 * o.transitionWidth
+
+    o.contentHeight = element.size[2] - o.headerHeight - o.topLeftY - o.footerHeight
+    local fruitElementHeight = o.fruitHeight + o.fruitSpacerHeight
+    o.maxContentHeight = math.floor(o.contentHeight / fruitElementHeight) * fruitElementHeight - o.fruitSpacerHeight
 
     o.seasons = {}
     o.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_spring.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
@@ -388,7 +370,7 @@ function ssSeasonsMenu:updateOverview()
             item.temperature = g_seasons.weather:germinationTemperature(fruitDesc.name)
 
             if self.overview.iconCache[index] == nil then
-                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilename, 0, 0, 40, 40)
+                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilenameSmall, 0, 0, 40, 40)
             end
             item.icon = self.overview.iconCache[index]
 
@@ -399,6 +381,19 @@ function ssSeasonsMenu:updateOverview()
             table.insert(self.overviewData, item)
         end
     end
+
+    -- Set up the slider
+    local numVisibleItems = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
+    local numTotalItems = table.getn(self.overviewData)
+
+    self.overview.scrollStart = 1
+    self.overview.scrollVisible = numVisibleItems
+
+    self.cropsSlider:setMinValue(numVisibleItems)
+    self.cropsSlider:setMaxValue(numTotalItems + numVisibleItems - 1)
+    self.cropsSlider:setValue(self.cropsSlider.maxValue)
+
+    self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
 function ssSeasonsMenu:drawOverview(element)
@@ -454,11 +449,13 @@ function ssSeasonsMenu:drawOverview(element)
         end
     end
 
-    -- Transition names
-
     -- Print all fruits' data
     local iFruit = 0
-    for _, fruitData in ipairs(self.overviewData) do
+
+    local scrollEnd = math.min(table.getn(self.overviewData), o.scrollStart + o.scrollVisible - 1)
+    for i = o.scrollStart, scrollEnd do
+        local fruitData = self.overviewData[i]
+
         local fruitY = o.topLeftY + o.headerHeight + iFruit * (o.fruitHeight + o.fruitSpacerHeight)
         local fruitX = topLeftX
 
@@ -514,16 +511,56 @@ function ssSeasonsMenu:drawOverview(element)
     local fruitsRight = fruitsLeft + 12 * o.transitionWidth
     local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
 
+    local guideHeight = (scrollEnd - o.scrollStart + 1) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight
     o.rect:render(
         fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * (dayInYear - 1),
         o.topLeftY + o.headerHeight,
         o.guideWidth,
-        table.getn(self.overviewData) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight,
+        guideHeight,
         {0.8069, 0.0097, 0.0097, 1}
     )
 
+    -- Draw legend in the footer
     setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
+
+    local footerY = o.topLeftY + o.headerHeight + o.contentHeight
+
+    -- Rect for planting
+    o.rect:render(
+        topLeftX,
+        footerY,
+        o.transitionWidth,
+        o.transitionHeight,
+        self.overview.blockColors[self.BLOCK_TYPE_PLANTABLE]
+    )
+    o.rect:renderText(
+        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
+        footerY,
+        o.textSize,
+        ssLang.getText("ui_plantingSeason"),
+        o.transitionHeight
+    )
+
+    -- Rect for harvesting
+    o.rect:render(
+        topLeftX,
+        footerY + o.transitionHeight + o.textSpacingHeight,
+        o.transitionWidth,
+        o.transitionHeight,
+        self.overview.blockColors[self.BLOCK_TYPE_HARVESTABLE]
+    )
+    o.rect:renderText(
+        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
+        footerY + o.transitionHeight + o.textSpacingHeight,
+        o.textSize,
+        ssLang.getText("ui_harvestSeason"),
+        o.transitionHeight
+    )
+end
+
+function ssSeasonsMenu:onSliderValueChanged()
+    self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
 end
 
 function ssSeasonsMenu:deleteOverview()
