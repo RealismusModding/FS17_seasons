@@ -356,17 +356,18 @@ function ssGrowthManager:buildCanHarvestData()
                     transitionToCheck = 1
                 end
 
-                while growthStage < fruitNumStates do
+                while growthStage <= fruitNumStates do
                     growthStage = self:simulateGrowth(fruitName, transitionToCheck, growthStage)
+                    if growthStage == fruitNumStates then
+                        --log("Inserting table for transition: " .. tostring(transitionToCheck-1))
+                        transitionTable[transitionToCheck] = true
+                        --print_r(transitionTable)
+                    end
                     --log("plantedGrowthTransition: " .. plantedGrowthTransition  .. " fruitName: " .. fruitName .. " transitionToCheck: " .. transitionToCheck .. " growthStage: " .. growthStage .. " fruitNumStates" .. fruitNumStates)
                     transitionToCheck = transitionToCheck + 1
                     if transitionToCheck > 12 then transitionToCheck = 1 end
                 end
-                if growthStage == fruitNumStates then
-                    --log("Inserting table for transition: " .. tostring(transitionToCheck-1))
-                    transitionTable[transitionToCheck-1] = true
-                    --print_r(transitionTable)
-                end
+                
             end
         end
         --fill in the gaps
