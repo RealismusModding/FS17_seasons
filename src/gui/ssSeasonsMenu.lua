@@ -229,11 +229,15 @@ function ssRectOverlay:new(parentElement)
     return self
 end
 
-function ssRectOverlay:render(x, y, width, height, color)
+function ssRectOverlay:render(x, y, width, height, color, boxHeight)
     if color ~= nil then
         ssRectOverlay.g_overlay:setColor(unpack(color))
     else
         ssRectOverlay.g_overlay:setColor(1, 1, 1, 1)
+    end
+
+    if boxHeight ~= nil then
+        y = y + (boxHeight - height) / 2
     end
 
     -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
@@ -293,7 +297,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     o.germinationWidth, _ = getNormalizedScreenValues(70, 0)
 
     _, o.headerHeight = getNormalizedScreenValues(0, 50)
-    _, o.footerHeight = getNormalizedScreenValues(0, 50)
+    _, o.footerHeight = getNormalizedScreenValues(0, 80)
 
     _, o.textSize = getNormalizedScreenValues(0, 14)
     o.textSpacingWidth, o.textSpacingHeight = getNormalizedScreenValues(5, 5)
@@ -308,7 +312,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     o.topLeftX, o.topLeftY = getNormalizedScreenValues(50, 20)
     o.totalWidth = o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth + 12 * o.transitionWidth
 
-    o.contentHeight = element.size[2] - o.headerHeight - o.topLeftY - o.topLeftY - o.footerHeight -- for some extra space at the bottom
+    o.contentHeight = element.size[2] - o.headerHeight - o.topLeftY - o.footerHeight
     local fruitElementHeight = o.fruitHeight + o.fruitSpacerHeight
     o.maxContentHeight = math.floor(o.contentHeight / fruitElementHeight) * fruitElementHeight - o.fruitSpacerHeight
 
@@ -366,7 +370,7 @@ function ssSeasonsMenu:updateOverview()
             item.temperature = g_seasons.weather:germinationTemperature(fruitDesc.name)
 
             if self.overview.iconCache[index] == nil then
-                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilename, 0, 0, 40, 40)
+                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilenameSmall, 0, 0, 40, 40)
             end
             item.icon = self.overview.iconCache[index]
 
@@ -517,11 +521,42 @@ function ssSeasonsMenu:drawOverview(element)
     )
 
     -- Draw legend in the footer
-    -- vertbox: o.footerHeight
-
-
     setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
+
+    local footerY = o.topLeftY + o.headerHeight + o.contentHeight
+
+    -- Rect for planting
+    o.rect:render(
+        topLeftX,
+        footerY,
+        o.transitionWidth,
+        o.transitionHeight,
+        self.overview.blockColors[self.BLOCK_TYPE_PLANTABLE]
+    )
+    o.rect:renderText(
+        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
+        footerY,
+        o.textSize,
+        ssLang.getText("ui_plantingSeason"),
+        o.transitionHeight
+    )
+
+    -- Rect for harvesting
+    o.rect:render(
+        topLeftX,
+        footerY + o.transitionHeight + o.textSpacingHeight,
+        o.transitionWidth,
+        o.transitionHeight,
+        self.overview.blockColors[self.BLOCK_TYPE_HARVESTABLE]
+    )
+    o.rect:renderText(
+        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
+        footerY + o.transitionHeight + o.textSpacingHeight,
+        o.textSize,
+        ssLang.getText("ui_harvestSeason"),
+        o.transitionHeight
+    )
 end
 
 function ssSeasonsMenu:onSliderValueChanged()

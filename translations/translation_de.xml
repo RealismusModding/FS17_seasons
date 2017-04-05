@@ -103,6 +103,11 @@
         <!-- Missing translation of "Celcius" -->
         <text name="ui_temperatureCelcius" text="" />
 
+        <!-- Missing translation of "Planting season" -->
+        <text name="ui_plantingSeason" text="" />
+        <!-- Missing translation of "Harvest season" -->
+        <text name="ui_harvestSeason" text="" />
+
         <text name="tooltip_seasonLength" text="Die länge einer Jahreszeit in Tagen. Ein Jahr dauert vier Jahreszeiten." />
         <text name="tooltip_seasonIntros" text="Zeigt die Jahreszeiten Einleitung." />
         <text name="tooltip_snow" text="Schnee wird im Winter fallen und Straßen blockieren." />

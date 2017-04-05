@@ -97,6 +97,11 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelcius" text="Celsius" />
 
+        <!-- Missing translation of "Planting season" -->
+        <text name="ui_plantingSeason" text="" />
+        <!-- Missing translation of "Harvest season" -->
+        <text name="ui_harvestSeason" text="" />
+
         <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones." />
         <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación." />
         <text name="tooltip_snow" text="Nevará en el frío invierno and se bloquearán las carreteras." />
