@@ -8,6 +8,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssIcePlane = {}
+getfenv(0)["ssIcePlane"] = ssIcePlane
 
 local ssIcePlane_mt = Class(ssIcePlane)
 
@@ -34,7 +35,11 @@ function ssIcePlane:delete()
 end
 
 function ssIcePlane:updateVisibility()
-    setVisibility(self.id, g_seasons.weather:isGroundFrozen())
+    if g_seasons ~= nil and g_seasons.loaded then
+        setVisibility(self.id, g_seasons.weather:isGroundFrozen())
+    else
+        setVisibility(self.id, false)
+    end
 end
 
 function ssIcePlane:weatherChanged()

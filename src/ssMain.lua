@@ -104,6 +104,10 @@ function ssMain:loadMap()
     -- Remove the (hacked) store items
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id)
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
+
+    if g_currentMission:getIsServer() then
+        self.loaded = true
+    end
 end
 
 function ssMain:update(dt)

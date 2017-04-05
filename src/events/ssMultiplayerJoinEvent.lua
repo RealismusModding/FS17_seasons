@@ -63,6 +63,9 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
                 _G[className]:readStream(streamId, connection)
             end
         end
+
+        -- Variable to indicate 'everything' is loaded to keep objects working
+        g_seasons.loaded = true
     end
 end
 
