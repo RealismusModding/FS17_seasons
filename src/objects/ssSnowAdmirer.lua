@@ -8,6 +8,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSnowAdmirer = {}
+getfenv(0)["ssSnowAdmirer"] = ssSnowAdmirer
 
 local ssSnowAdmirer_mt = Class(ssSnowAdmirer)
 
