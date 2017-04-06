@@ -119,8 +119,9 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
     <File fileId="104" filename="data/shaders/fruitGrowthFoliageShader.xml" relativePath="false"/>
     <File fileId="105" filename="data/shaders/bunkerSiloSilageShader.xml" relativePath="false"/>
-  </Files>
 
+    <File fileId="201" filename="winter/grass_diffuse.png" relativePath="true"/>
+  </Files>
 
   <Materials>
     <!-- Autumn -->
@@ -279,6 +280,14 @@ It references textures in the game directory that the editor will not find and t
       <CustomParameter name="speed" value="0.1 0 0 0"/>
     </Material>
 
+    <Material name="foliageGrassColor_mat" materialId="350" ambientColor="1 1 1" customShaderId="104" customShaderVariation="COLOR_MASK">
+      <Texture fileId="201"/>
+      <CustomParameter name="alphaBlendStartEnd" value="70 75 0 0"/>
+      <CustomParameter name="frequencyAndScale" value="0.3 0.1 0 0"/>
+      <CustomParameter name="plantRotate" value="0.4363 1.57 0 0"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="16 1024 2 255"/>
+    </Material>
+
     <!-- Spring -->
     <Material name="treeBranch_mat1" materialId="401" ambientColor="1 1 1" customShaderId="102" customShaderVariation="FORCE_SECONDUV">
       <Texture fileId="63"/>
@@ -360,89 +369,6 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="92"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-
-    <!-- Summer -->
-    <!-- FIXME  temporary added summer textures to ensure replace at season change -->
-    <Material name="treeBranch_mat1" materialId="901" ambientColor="1 1 1" customShaderId="102" customShaderVariation="FORCE_SECONDUV">
-      <Texture fileId="163"/>
-      <Normalmap fileId="164"/>
-      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
-      <CustomParameter name="speed" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birchBranch_mat" materialId="902" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="165"/>
-      <Normalmap fileId="166"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch1LOD_mat" materialId="903" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="167"/>
-      <Normalmap fileId="168"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch2LOD_mat" materialId="904" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="169"/>
-      <Normalmap fileId="170"/>
-    <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch3LOD_mat" materialId="905" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="171"/>
-      <Normalmap fileId="172"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch4LOD_mat" materialId="906" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="173"/>
-      <Normalmap fileId="174"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch5LOD_mat" materialId="907" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="175"/>
-      <Normalmap fileId="176"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="birch6LOD_mat" materialId="908" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="177"/>
-      <Normalmap fileId="178"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-
-    <Material name="bushes_mat" materialId="909" ambientColor="1 1 1" customShaderId="102">
-      <Texture fileId="163"/>
-      <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2"/>
-      <CustomParameter name="speed" value="0.5 0 0 0"/>
-    </Material>
-
-    <Material name="oakBranch_mat" materialId="910" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="179"/>
-      <Normalmap fileId="180"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="oak4LOD_mat" materialId="911" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="181"/>
-      <Normalmap fileId="182"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-
-    <Material name="mapleBranch_mat" materialId="912" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="183"/>
-      <Normalmap fileId="184"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="maple5LOD_mat" materialId="913" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="185"/>
-      <Normalmap fileId="186"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-
-    <Material name="poplarBranch_mat" materialId="916" ambientColor="1 1 1" customShaderId="101">
-      <Texture fileId="189"/>
-      <Normalmap fileId="190"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
-    <Material name="poplar5LOD_mat" materialId="917" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
-      <Texture fileId="191"/>
-      <Normalmap fileId="192"/>
-      <CustomParameter name="windScale" value="0.5 0 0 0"/>
-    </Material>
   </Materials>
 
   <Shapes externalShapesFile="replacementTexturesMaterialHolder.i3d.shapes">
@@ -483,6 +409,8 @@ It references textures in the game directory that the editor will not find and t
     <Shape shapeId="1" name="ssTr_poplar5LOD_winter" visibility="false" nodeId="614" materialIds="314" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_bushes_winter" visibility="false" nodeId="615" materialIds="315" distanceBlending="false" />
     <Shape shapeId="1" name="ssTr_treeBranch_winter" visibility="false" nodeId="616" materialIds="316" distanceBlending="false" />
+
+    <Shape shapeId="1" name="grass_winter" visibility="false" nodeId="651" materialIds="350" distanceBlending="false" />
 
     <!-- Spring -->
     <Shape shapeId="1" name="ssTr_treeBranch_spring" visibility="false" nodeId="701" materialIds="401" distanceBlending="false" />

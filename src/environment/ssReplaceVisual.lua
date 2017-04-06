@@ -77,9 +77,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     -- If there is a material holder, load that first
     local matHolder = getXMLString(file, "textures#materialHolder")
     if matHolder ~= nil then
-        local dir, _ = string.match(path, "(.*/)(.*)")
-        local absPath = dir .. matHolder
-        local normPath = absPath:gsub("/[^/]+/%.%./", "/")
+        local normPath = ssUtil.normalizedPath(ssUtil.basedir(path) .. matHolder)
 
         local replacements = loadI3DFile(normPath)
 
@@ -127,15 +125,83 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
                 i = i + 1
             end
 
+            -- Read foliage replacement
+            i = 0
+            season._foliages = {}
+            while true do
+                local foliageKey = string.format("%s.foliage(%i)", seasonKey, i)
+                if not hasXMLProperty(file, foliageKey) then break end
+
+                local fruitName = getXMLString(file, foliageKey .. "#fruitName")
+                local toShape = getXMLString(file, foliageKey .. "#to")
+
+                if fruitName == nil or toShape == nik then
+                    logInfo("ssReplaceVisual:", "Failed to load foliage replacements configuration from " .. path .. ": invalid format")
+                    return
+                end
+
+                season._foliages[fruitName] = {
+                    ["to"] = toShape
+                }
+
+                i = i + 1
+            end
         end
     end
 
     delete(file)
 end
 
+function ssReplaceVisual:update(dt)
+    if self.once ~= true and g_currentMission:getIsClient() then
+        self:updateFoliage()
+        self.once = true
+    end
+end
+
+function ssReplaceVisual:updateFoliage()
+    local foliages = self.textureReplacements[g_seasons.environment:currentSeason()]._foliages
+
+    -- Go over all fruits
+    for fruitName, data in pairs(FruitUtil.fruitTypes) do
+
+        -- If default does not exist, there was never a new one loaded
+        -- do set the default. We do this on demand because at loadMap,
+        -- the fruits are not loaded.
+        if self.textureReplacements.default._foliages[fruitName] == nil then
+            local f = FruitUtil.fruitTypes[fruitName].index
+            local id = g_currentMission.fruits[f].id
+
+            local default = getMaterial(getChildAt(id, 0), 0)
+
+            self.textureReplacements.default._foliages[fruitName] = default
+        end
+
+        if foliages[fruitName] ~= nil then
+            -- Set new
+            self:setFoliageMaterial(fruitName, foliages[fruitName].materialId)
+        else
+            -- Set default
+            local def = self.textureReplacements.default._foliages[fruitName]
+            if def ~= nil then
+                self:setFoliageMaterial(fruitName, def)
+            end
+        end
+    end
+end
+
+function ssReplaceVisual:setFoliageMaterial(foliageName, material)
+    local id = getTerrainDetailByName(g_currentMission.terrainRootNode, foliageName)
+
+    for i = 0, getNumOfChildren(id) - 1 do
+        setMaterial(getChildAt(id, i), material, 0)
+    end
+end
+
 function ssReplaceVisual:seasonChanged()
     if g_currentMission:getIsClient() then
         self:updateTextures()
+        self:updateFoliage()
     end
 end
 
@@ -172,6 +238,11 @@ end
 function ssReplaceVisual:loadTextureIdTable(searchBase)
     -- Go over each texture (season, shape, secShape), find the material in the game
     -- and store its ID
+
+    if self.textureReplacements.default._foliages == nil then
+        self.textureReplacements.default._foliages = {}
+    end
+
     for seasonId, seasonTable in pairs(self.textureReplacements) do
         for shapeName, shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName, secondaryNodeTable in pairs(shapeNameTable) do
@@ -201,6 +272,18 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                             setMaterial(nodeId, materialId, 0)
                         end
                     end
+                end
+            end
+        end
+
+        if self.textureReplacements[seasonId]._foliages ~= nil then
+            local foliages = self.textureReplacements[seasonId]._foliages
+
+            for fruitName, data in pairs(foliages) do
+                local node = self:findNodeByName(searchBase, data.to)
+
+                if node ~= nil then
+                    data.materialId = getMaterial(node, 0)
                 end
             end
         end
@@ -302,6 +385,7 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
 
     -- Update
     self:updateTextures()
+    self:updateFoliage()
 
     -- Fix getter
     g_seasons.environment.currentSeason = oldCurrentSeason

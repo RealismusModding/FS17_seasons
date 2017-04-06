@@ -13,8 +13,8 @@ g_seasons.economy = ssEconomy
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)
-    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
-    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
+    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1450)
+    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2275)
     self.aiDayStart = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayStart", 6)
     self.aiDayEnd = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
     self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1000000)

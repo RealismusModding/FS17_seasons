@@ -18,16 +18,16 @@
     </Profile>
 
     <Profile name="ssOverview" parent="baseReference">
-        <Value name="size" value="1000px 530px" /> <!-- 1000, 560    915?? -->
+        <Value name="size" value="1000px 458px" /> <!-- 530 -->
         <Value name="position" value="0px 30px" />
     </Profile>
 
     <Profile name="ssOverviewOverlay" parent="baseReference">
-        <Value name="size" value="1000px 530px" /> <!-- 1000, 560    915?? -->
+        <Value name="size" value="1000px 458px" />
         <Value name="position" value="0px 0px" />
     </Profile>
 
-    <Profile name="cropsSliderVertical" parent="sliderVertical">
+    <Profile name="ssCropsSliderVertical" parent="sliderVertical">
         <Value name="position" value="0px 15px" />
         <Value name="size" value="16px 458px" />
     </Profile>

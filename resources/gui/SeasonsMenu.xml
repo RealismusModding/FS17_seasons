@@ -13,14 +13,13 @@
             </GuiElement>
 
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
-                <!-- Forecast + crop data -->
-
+                <!-- Crop data -->
                 <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
-                    <GuiElement type="slider" profile="cropsSliderVertical" id="cropsSlider" onChanged="onSliderValueChanged">
-                        <GuiElement type="button" profile="sliderButtonUp"   focusId="sliderUpCrops"/>
+                    <GuiElement type="slider" profile="ssCropsSliderVertical" id="cropsSlider" onChanged="onSliderValueChanged">
+                        <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" />
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" />
 
-                        <GuiElement type="empty" profile="ssOverview" id="overviewElement" onDraw="drawOverview">
+                        <GuiElement type="empty" profile="ssOverview" id="overviewElement" onDraw="drawOverview" onCreate="onCreateOverview">
                             <GuiElement type="empty" profile="ssOverviewOverlay" id="overviewOverlay" onDraw="drawOverview"/>
                         </GuiElement>
                     </GuiElement>

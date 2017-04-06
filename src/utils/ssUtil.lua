@@ -168,6 +168,17 @@ function ssUtil.getModMapDataPath(dataFileName)
     return nil
 end
 
+function ssUtil.basedir(path)
+    local dir, _ = string.match(path, "(.*/)(.*)")
+
+    return dir
+end
+
+function ssUtil.normalizedPath(path)
+    return path:gsub("/[^/]+/%.%./", "/")
+end
+
+
 function Set(list)
     local set = {}
 
