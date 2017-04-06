@@ -8,7 +8,7 @@ Seasonal tree and hegde textures -- KimG
 Snow Weather, tree textures, Season Huds and logo -- FSModding_Gary
 Snow mask files -- Vasylko
 Weather forecast HUD -- ian898, blacky_BPG
-Bale fermentation -- fatov (baron)
+Bale fermentation & field job manager -- fatov (baron)
 Tiny dedicated server warning fix -- Decker_mmiv
 
 ## Translations
