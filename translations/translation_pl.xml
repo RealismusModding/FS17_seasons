@@ -93,10 +93,8 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheita" />
         <text name="ui_temperatureCelcius" text="Celsjusza" />
 
-        <!-- Missing translation of "Planting season" -->
-        <text name="ui_plantingSeason" text="" />
-        <!-- Missing translation of "Harvest season" -->
-        <text name="ui_harvestSeason" text="" />
+        <text name="ui_plantingSeason" text="Okres zasiewów" />
+        <text name="ui_harvestSeason" text="Okres zbiorów" />
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony." />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu." />
