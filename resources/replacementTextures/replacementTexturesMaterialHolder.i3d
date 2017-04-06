@@ -119,6 +119,8 @@ It references textures in the game directory that the editor will not find and t
     <File fileId="103" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
     <File fileId="104" filename="data/shaders/fruitGrowthFoliageShader.xml" relativePath="false"/>
     <File fileId="105" filename="data/shaders/bunkerSiloSilageShader.xml" relativePath="false"/>
+
+    <File fileId="201" filename="grass_diffuse 2.png" relativePath="true"/>
   </Files>
 
 
@@ -443,6 +445,17 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="192"/>
       <CustomParameter name="windScale" value="0.5 0 0 0"/>
     </Material>
+
+
+
+
+    <Material name="foliageGrassColor_mat" materialId="1000" ambientColor="1 1 1" customShaderId="104" customShaderVariation="COLOR_MASK">
+      <Texture fileId="201"/>
+      <CustomParameter name="alphaBlendStartEnd" value="70 75 0 0"/>
+      <CustomParameter name="frequencyAndScale" value="0.3 0.1 0 0"/>
+      <CustomParameter name="plantRotate" value="0.4363 1.57 0 0"/>
+      <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="16 1024 2 255"/>
+    </Material>
   </Materials>
 
   <Shapes externalShapesFile="replacementTexturesMaterialHolder.i3d.shapes">
@@ -503,5 +516,6 @@ It references textures in the game directory that the editor will not find and t
 
     <!-- Clone-able object for winter -->
     <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="201" distanceBlending="false" />
+    <Shape shapeId="1" name="winter_grass_material_holder" visibility="false" nodeId="1000" materialIds="1000" distanceBlending="false" />
   </Scene>
 </i3D>

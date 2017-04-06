@@ -88,6 +88,10 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         if self.tmpMaterialHolderNodeId == nil then
             self.tmpMaterialHolderNodeId = self:findNodeByName(replacements, "summer_material_holder")
         end
+
+        if self.grassMatHolderNodeId == nil then
+            self.grassMatHolderNodeId = self:findNodeByName(replacements, "winter_grass_material_holder")
+        end
     end
 
     -- Load seasons replacements
@@ -131,6 +135,28 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     end
 
     delete(file)
+end
+
+function ssReplaceVisual:update(dt)
+    if self.once ~= true then
+
+        if self.grassMatHolderNodeId ~= nil then
+            log("Replace grass")
+
+            local mat = getMaterial(self.grassMatHolderNodeId, 0)
+            self:setFoliageMaterial("grass", mat)
+        end
+
+        self.once = true
+    end
+end
+
+function ssReplaceVisual:setFoliageMaterial(foliageName, material)
+    local grassId = g_currentMission.fruits[FruitUtil.fruitTypes[foliageName].index].id
+
+    for i = 0, getNumOfChildren(grassId) - 1 do
+        setMaterial(getChildAt(grassId, i), material, 0)
+    end
 end
 
 function ssReplaceVisual:seasonChanged()
