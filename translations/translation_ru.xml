@@ -93,15 +93,13 @@
         <text name="ui_temperatureFahrenheit" text="Фаренгейт" />
         <text name="ui_temperatureCelcius" text="Цельсий" />
 
-        <!-- Missing translation of "Planting season" -->
-        <text name="ui_plantingSeason" text="" />
-        <!-- Missing translation of "Harvest season" -->
-        <text name="ui_harvestSeason" text="" />
+        <text name="ui_plantingSeason" text="Время посадки" />
+        <text name="ui_harvestSeason" text="Время уборки" />
 
         <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов." />
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
         <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
-        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш (Alt+F) для прогноза погоды и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
+        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш для прогноза погоды (Alt+F) и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
         <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему." />
         <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре." />
         <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
@@ -116,8 +114,8 @@
 
         <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона можно будет применить к полям, только по прошествии одного игрового года." />
 
-        <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить рост всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
-        <text name="dialog_resetGrowth_title" text="Сброс стадий роста культур" />
+        <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons хочет сбросить состояние роста всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
+        <text name="dialog_resetGrowth_title" text="Сброс состояния роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
         <text name="dialog_resetGrowth_yes" text="Сбросить" />
 
