@@ -171,7 +171,7 @@ function ssMain:getModPaths(name)
     if g_currentMission.missionInfo.map.isModMap then
         local mapPath = g_currentMission.missionInfo.map.baseDirectory .. "seasons_" .. name .. ".xml"
         if fileExists(mapPath) then
-            table.insert(ret, path)
+            table.insert(ret, mapPath)
         end
     end
 
