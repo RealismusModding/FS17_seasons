@@ -36,32 +36,36 @@ function ssGrowthManagerData:loadAllData()
     delete(file)
 
     --additional modmap growthData
-    local modMapDataPath = ssUtil.getModMapDataPath("seasons_growth.xml")
-    --modMapDataPath = g_seasons.modDir .. "data/seasons_growth.xml" --for testing
-
-    if  modMapDataPath ~= nil then
-        logInfo("ssGrowthManagerData:", "Additional growth data found - loading")
-        file = loadXMLFile("xml", modMapDataPath)
-        if file ~= nil then
-            local optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits)
-            if optionalDefaultFruits == nil then
-                logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file (defaultFruits) " .. path)
-            else
-                local optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
-                if optionalGrowthData == nil then
-                    logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file (growthTransitions) " .. path)
-                else
-                    defaultFruits = optionalDefaultFruits
-                    growthData = optionalGrowthData
-                end
-            end
-            delete(file)
+    for _, path in ipairs(g_seasons:getModPaths("growth")) do
+        local optionalDefaultFruits, optionalGrowthData = self:loadAdditionalData(rootKey, path, defaultFruits, growthData)
+        if optionalDefaultFruits == nil or optionalGrowthData == nil then
+            logInfo("ssGrowthManagerData:", "Failed to process additional XML growth data file: " .. path)
         else
-            logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file " .. modMapDataPath)
+            defaultFruits = optionalDefaultFruits
+            growthData = optionalGrowthData
         end
     end
 
     return defaultFruits, growthData
+end
+
+function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, defaultFruits, growthData)
+    logInfo("ssGrowthManagerData:", "Additional growth data found - loading: " .. modMapDataPath)
+    local optionalDefaultFruits = nil
+    local optionalGrowthData = nil
+
+    local file = loadXMLFile("xml", modMapDataPath)
+    if file ~= nil then
+        optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits)
+        if optionalDefaultFruits ~= nil then
+            optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
+        end
+        delete(file)
+    else
+        logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file: " .. modMapDataPath)
+    end
+    
+    return optionalDefaultFruits, optionalGrowthData
 end
 
 function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additionalData)
