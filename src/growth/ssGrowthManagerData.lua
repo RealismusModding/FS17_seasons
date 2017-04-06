@@ -182,6 +182,14 @@ function ssGrowthManagerData:getFruitsTransitionStates(growthTransitionKey, file
         if extraGrowthFactor ~= nil then
             growthData[growthTransitionNum][fruitName].extraGrowthFactor = extraGrowthFactor
         end
+        
+        local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
+        if removeTransition ~= nil then
+            if removeTransition == true then
+                growthData[growthTransitionNum][fruitName] = nil
+            end
+        end
+ 
         i = i + 1
     end
 
