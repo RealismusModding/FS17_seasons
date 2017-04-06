@@ -376,7 +376,7 @@ function ssGrowthManager:buildCanHarvestData()
         for plantedGrowthTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
             if fruitName == "poplar" then --hardcoding for poplar
                 transitionTable[plantedGrowthTransition] = true
-            elseif fruitName == "grass" and plantedGrowthTransition > ssEnvironment.TRANSITION_LATE_SPRING and plantedGrowthTransition < ssEnvironment.TRANSITION_EARLY_WINTER then
+            elseif fruitName == "grass" and plantedGrowthTransition > ssEnvironment.TRANSITION_EARLY_SPRING and plantedGrowthTransition < ssEnvironment.TRANSITION_EARLY_WINTER then
                 transitionTable[plantedGrowthTransition] = true
             elseif transitionTable[plantedGrowthTransition] ~= true then
                 transitionTable[plantedGrowthTransition] = false
