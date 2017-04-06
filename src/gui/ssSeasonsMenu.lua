@@ -288,7 +288,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     -- Pre-compute a lot of values
     o.rect = ssRectOverlay:new(element)
 
-    local fruitHeightPixels = 32
+    local fruitHeightPixels = 64
 
     o.transitionWidth, o.transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
     _, o.fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
@@ -324,6 +324,9 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 
     -- Cache of icons, against leaking when rebuilding
     o.iconCache = {}
+
+    o.scrollVisible = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
+    self.cropsSlider:setMinValue(o.scrollVisible)
 end
 
 function ssSeasonsMenu:updateOverview()
@@ -383,16 +386,12 @@ function ssSeasonsMenu:updateOverview()
     end
 
     -- Set up the slider
-    local numVisibleItems = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
     local numTotalItems = table.getn(self.overviewData)
 
     self.overview.scrollStart = 1
-    self.overview.scrollVisible = numVisibleItems
 
-    self.cropsSlider:setMinValue(numVisibleItems)
-    self.cropsSlider:setMaxValue(numTotalItems + numVisibleItems - 1)
+    self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
     self.cropsSlider:setValue(self.cropsSlider.maxValue)
-
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
@@ -519,12 +518,20 @@ function ssSeasonsMenu:drawOverview(element)
         guideHeight,
         {0.8069, 0.0097, 0.0097, 1}
     )
+    log("guideY", o.topLeftY + o.headerHeight, "height", guideHeight, "sum", o.topLeftY + o.headerHeight + guideHeight)
 
     -- Draw legend in the footer
     setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
 
-    local footerY = o.topLeftY + o.headerHeight + o.contentHeight
+    local footerY = o.topLeftY + o.headerHeight -- + o.contentHeight
+    footerY = footerY + o.scrollVisible * (o.fruitSpacerHeight + o.fruitHeight)
+
+    log("scrollVisible", o.scrollVisible)
+    log("footerY", footerY)
+    log("topLeftY", o.topLeftY)
+    log("headerHeight", o.headerHeight)
+    log("contentHeight", o.contentHeight)
 
     -- Rect for planting
     o.rect:render(
