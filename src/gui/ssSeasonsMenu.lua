@@ -288,7 +288,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     -- Pre-compute a lot of values
     o.rect = ssRectOverlay:new(element)
 
-    local fruitHeightPixels = 64
+    local fruitHeightPixels = 32
 
     o.transitionWidth, o.transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
     _, o.fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
