@@ -165,25 +165,13 @@ end
 
 function ssVehicle:loadAllowedInWinter()
     ssVehicle.allowedInWinter = {
-        [WorkArea.AREATYPE_BALER] = false,
-        [WorkArea.AREATYPE_COMBINE] = false,
         [WorkArea.AREATYPE_CULTIVATOR] = false,
-        [WorkArea.AREATYPE_CUTTER] = false,
-        [WorkArea.AREATYPE_DEFAULT] = false,
-        [WorkArea.AREATYPE_FORAGEWAGON] = false,
-        [WorkArea.AREATYPE_FRUITPREPARER] = false,
-        [WorkArea.AREATYPE_MOWER] = true,
-        [WorkArea.AREATYPE_MOWERDROP] = true,
         [WorkArea.AREATYPE_PLOUGH] = false,
         [WorkArea.AREATYPE_RIDGEMARKER] = false,
         [WorkArea.AREATYPE_ROLLER] = true,
         [WorkArea.AREATYPE_SOWINGMACHINE] = false,
         [WorkArea.AREATYPE_SPRAYER] = false,
-        [WorkArea.AREATYPE_TEDDER] = false,
-        [WorkArea.AREATYPE_TEDDERDROP] = false,
-        [WorkArea.AREATYPE_WEEDER] = false,
-        [WorkArea.AREATYPE_WINDROWER] = false,
-        [WorkArea.AREATYPE_WINDROWERDROP] = false,
+        [WorkArea.AREATYPE_WEEDER] = false
     }
 end
 
