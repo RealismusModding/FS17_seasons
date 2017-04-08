@@ -24,10 +24,10 @@
         <text name="SS_WEEKDAY_SHORT_6" text="Сб" />
         <text name="SS_WEEKDAY_SHORT_7" text="Вс" />
 
-        <text name="SS_SEASON_0" text="Весна" />
-        <text name="SS_SEASON_1" text="Лето" />
-        <text name="SS_SEASON_2" text="Осень" />
-        <text name="SS_SEASON_3" text="Зима" />
+        <text name="SS_SEASON_0" text="ВЕСНА" />
+        <text name="SS_SEASON_1" text="ЛЕТО" />
+        <text name="SS_SEASON_2" text="ОСЕНЬ" />
+        <text name="SS_SEASON_3" text="ЗИМА" />
 
         <text name="SS_SEASON_FULL_NAME_1" text="Ранняя весна" />
         <text name="SS_SEASON_FULL_NAME_2" text="Середина весны" />
