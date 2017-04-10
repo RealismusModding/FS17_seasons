@@ -13,15 +13,13 @@ getfenv(0)["ssIcePlane"] = ssIcePlane
 local ssIcePlane_mt = Class(ssIcePlane)
 
 function ssIcePlane:onCreate(id)
-    g_currentMission:addNonUpdateable(ssIcePlane:new(id))
+    g_currentMission:addUpdateable(ssIcePlane:new(id))
 end
 
 function ssIcePlane:new(id)
     local self = {}
     setmetatable(self, ssIcePlane_mt)
     self.id = id
-
-    self:updateVisibility()
 
     g_currentMission.environment:addWeatherChangeListener(self)
 
@@ -35,13 +33,17 @@ function ssIcePlane:delete()
 end
 
 function ssIcePlane:updateVisibility()
-    if g_seasons ~= nil and g_seasons.loaded then
-        setVisibility(self.id, g_seasons.weather:isGroundFrozen())
-    else
-        setVisibility(self.id, false)
-    end
+    setVisibility(self.id, g_seasons.weather:isGroundFrozen())
 end
 
 function ssIcePlane:weatherChanged()
     self:updateVisibility()
+end
+
+function ssIcePlane:update(dt)
+    if self.once ~= true then
+        self:updateVisibility()
+
+        self.once = true
+    end
 end

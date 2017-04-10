@@ -13,7 +13,7 @@ getfenv(0)["ssSnowAdmirer"] = ssSnowAdmirer
 local ssSnowAdmirer_mt = Class(ssSnowAdmirer)
 
 function ssSnowAdmirer:onCreate(id)
-    g_currentMission:addNonUpdateable(ssSnowAdmirer:new(id))
+    g_currentMission:addUpdateable(ssSnowAdmirer:new(id))
 end
 
 function ssSnowAdmirer:new(id)
@@ -23,8 +23,6 @@ function ssSnowAdmirer:new(id)
 
     -- If attribute is set to false, it will only show when there is NO snow
     self.showWhenSnow = Utils.getNoNil(getUserAttribute(id, "snow"), true)
-
-    self:updateVisibility()
 
     g_currentMission.environment:addWeatherChangeListener(self)
 
@@ -38,13 +36,17 @@ function ssSnowAdmirer:delete()
 end
 
 function ssSnowAdmirer:updateVisibility()
-    if g_seasons ~= nil and g_seasons.loaded then
-        setVisibility(self.id, g_seasons.weather:getSnowHeight() > 0)
-    else
-        setVisibility(self.id, false)
-    end
+    setVisibility(self.id, g_seasons.weather:getSnowHeight() > 0)
 end
 
 function ssSnowAdmirer:weatherChanged()
     self:updateVisibility()
+end
+
+function ssSnowAdmirer:update(dt)
+    if self.once ~= true then
+        self:updateVisibility()
+
+        self.once = true
+    end
 end

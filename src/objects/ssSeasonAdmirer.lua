@@ -13,7 +13,7 @@ getfenv(0)["ssSeasonAdmirer"] = ssSeasonAdmirer
 local ssSeasonAdmirer_mt = Class(ssSeasonAdmirer)
 
 function ssSeasonAdmirer:onCreate(id)
-    g_currentMission:addNonUpdateable(ssSeasonAdmirer:new(id))
+    g_currentMission:addUpdateable(ssSeasonAdmirer:new(id))
 end
 
 function ssSeasonAdmirer:new(id)
@@ -27,10 +27,6 @@ function ssSeasonAdmirer:new(id)
     self.showIn[g_seasons.environment.SEASON_AUTUMN] = Utils.getNoNil(getUserAttribute(id, "autumn"), true)
     self.showIn[g_seasons.environment.SEASON_WINTER] = Utils.getNoNil(getUserAttribute(id, "winter"), true)
 
-    self:updateVisibility()
-
-    g_seasons.environment:addSeasonChangeListener(self)
-
     return self
 end
 
@@ -41,15 +37,21 @@ function ssSeasonAdmirer:delete()
 end
 
 function ssSeasonAdmirer:updateVisibility()
-    if g_seasons ~= nil and g_seasons.loaded then
-        local season = g_seasons.environment:currentSeason()
+    local season = g_seasons.environment:currentSeason()
 
-        setVisibility(self.id, self.showIn[season])
-    else
-        setVisibility(self.id, false)
-    end
+    setVisibility(self.id, self.showIn[season])
 end
 
 function ssSeasonAdmirer:seasonChanged()
     self:updateVisibility()
+end
+
+function ssSeasonAdmirer:update(dt)
+    if self.once ~= true then
+        g_seasons.environment:addSeasonChangeListener(self)
+
+        self:updateVisibility()
+
+        self.once = true
+    end
 end
