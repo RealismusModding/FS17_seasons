@@ -16,19 +16,19 @@ function ssFieldJobManager:preLoad()
 end
 
 function ssFieldJobManager:load(savegame, key)
-    self.disableMissions = ssStorage.getXMLBool(savegame, key .. ".settings.disableMissions", false)
+    -- self.disableMissions = ssStorage.getXMLBool(savegame, key .. ".settings.disableMissions", false)
 end
 
 function ssFieldJobManager:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.disableMissions", self.disableMissions)
+    -- ssStorage.setXMLBool(savegame, key .. ".settings.disableMissions", self.disableMissions)
 end
 
 function ssFieldJobManager:loadMap(name)
-   if not (g_currentMission.fieldDefinitionBase ~= nil and g_currentMission.fieldDefinitionBase.fieldDefs ~= nil) then return end
+--    if not (g_currentMission.fieldDefinitionBase ~= nil and g_currentMission.fieldDefinitionBase.fieldDefs ~= nil) then return end
 
-    for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
-        fieldDef.fieldJobUsageAllowed = not self.disableMissions and fieldDef.fieldJobUsageAllowed
-    end
+--     for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+--         fieldDef.fieldJobUsageAllowed = not self.disableMissions and fieldDef.fieldJobUsageAllowed
+--     end
 end
 
 --filter what jobs are carried out by the FieldJobManager
