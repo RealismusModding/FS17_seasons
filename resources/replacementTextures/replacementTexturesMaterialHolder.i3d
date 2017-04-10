@@ -137,27 +137,27 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="6"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch1LOD_mat" materialId="203" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch1LOD_mat" materialId="203" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="7"/>
       <Normalmap fileId="8"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch2LOD_mat" materialId="204" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch2LOD_mat" materialId="204" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="9"/>
       <Normalmap fileId="10"/>
     <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch3LOD_mat" materialId="205" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch3LOD_mat" materialId="205" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="11"/>
       <Normalmap fileId="12"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch4LOD_mat" materialId="206" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch4LOD_mat" materialId="206" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="13"/>
       <Normalmap fileId="14"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch5LOD_mat" materialId="207" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch5LOD_mat" materialId="207" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="15"/>
       <Normalmap fileId="16"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -174,7 +174,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="18"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="oak4LOD_mat" materialId="210" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="oak4LOD_mat" materialId="210" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="19"/>
       <Normalmap fileId="20"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -185,7 +185,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="22"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="maple5LOD_mat" materialId="212" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="maple5LOD_mat" materialId="212" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="23"/>
       <Normalmap fileId="24"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -196,7 +196,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="28"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="poplar5LOD_mat" materialId="216" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="poplar5LOD_mat" materialId="216" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="29"/>
       <Normalmap fileId="30"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -208,27 +208,27 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="51"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch1LOD_mat" materialId="302" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch1LOD_mat" materialId="302" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="52"/>
       <Normalmap fileId="53"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch2LOD_mat" materialId="303" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch2LOD_mat" materialId="303" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="54"/>
       <Normalmap fileId="55"/>
     <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch3LOD_mat" materialId="304" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch3LOD_mat" materialId="304" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="56"/>
       <Normalmap fileId="57"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch4LOD_mat" materialId="305" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch4LOD_mat" materialId="305" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="58"/>
       <Normalmap fileId="59"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch5LOD_mat" materialId="306" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch5LOD_mat" materialId="306" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="60"/>
       <Normalmap fileId="61"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -239,7 +239,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="36"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="maple5LOD_mat" materialId="308" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="maple5LOD_mat" materialId="308" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="37"/>
       <Normalmap fileId="38"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -250,7 +250,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="40"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="oak4LOD_mat" materialId="310" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="oak4LOD_mat" materialId="310" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="41"/>
       <Normalmap fileId="42"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -261,7 +261,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="32"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="poplar5LOD_mat" materialId="314" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="poplar5LOD_mat" materialId="314" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="33"/>
       <Normalmap fileId="34"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -300,32 +300,32 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="66"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch1LOD_mat" materialId="403" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch1LOD_mat" materialId="403" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="67"/>
       <Normalmap fileId="68"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch2LOD_mat" materialId="404" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch2LOD_mat" materialId="404" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="69"/>
       <Normalmap fileId="70"/>
     <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch3LOD_mat" materialId="405" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch3LOD_mat" materialId="405" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="71"/>
       <Normalmap fileId="72"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch4LOD_mat" materialId="406" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch4LOD_mat" materialId="406" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="73"/>
       <Normalmap fileId="74"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch5LOD_mat" materialId="407" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch5LOD_mat" materialId="407" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="75"/>
       <Normalmap fileId="76"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="birch6LOD_mat" materialId="408" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="birch6LOD_mat" materialId="408" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="77"/>
       <Normalmap fileId="78"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -342,7 +342,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="80"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="oak4LOD_mat" materialId="411" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="oak4LOD_mat" materialId="411" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="81"/>
       <Normalmap fileId="82"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -353,7 +353,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="84"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="maple5LOD_mat" materialId="413" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="maple5LOD_mat" materialId="413" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="85"/>
       <Normalmap fileId="86"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
@@ -364,7 +364,7 @@ It references textures in the game directory that the editor will not find and t
       <Normalmap fileId="90"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
     </Material>
-    <Material name="poplar5LOD_mat" materialId="417" ambientColor="1 1 1" customShaderId="103" customShaderVariation="billboard180">
+    <Material name="poplar5LOD_mat" materialId="417" ambientColor="1 1 1" alphaBlending="true" customShaderId="103" customShaderVariation="billboard180">
       <Texture fileId="91"/>
       <Normalmap fileId="92"/>
       <CustomParameter name="windScale" value="1 0 0 0"/>
