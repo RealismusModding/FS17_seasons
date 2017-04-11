@@ -13,7 +13,7 @@ Tiny dedicated server warning fix -- Decker_MMIV
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
-German - tobiasgo, Oekobauer, ItZzShady
+German - tobiasgo, Oekobauer, ItZzShady, wieselflink
 Italian - fcelsa
 French - thierry62, Marxtai
 Russian - Vasylko
