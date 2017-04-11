@@ -20,6 +20,7 @@ function ssIcePlane:new(id)
     local self = {}
     setmetatable(self, ssIcePlane_mt)
     self.id = id
+    self.collisionMask = getCollisionMask(id)
 
     g_currentMission.environment:addWeatherChangeListener(self)
 
@@ -33,7 +34,10 @@ function ssIcePlane:delete()
 end
 
 function ssIcePlane:updateVisibility()
-    setVisibility(self.id, g_seasons.weather:isGroundFrozen())
+    local visible = g_seasons.weather:isGroundFrozen()
+
+    setVisibility(self.id, visible)
+    setCollisionMask(self.id, visible and self.collisionMask or 0)
 end
 
 function ssIcePlane:weatherChanged()

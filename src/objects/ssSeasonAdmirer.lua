@@ -20,6 +20,7 @@ function ssSeasonAdmirer:new(id)
     local self = {}
     setmetatable(self, ssSeasonAdmirer_mt)
     self.id = id
+    self.collisionMask = getCollisionMask(id)
 
     self.showIn = {}
     self.showIn[g_seasons.environment.SEASON_SPRING] = Utils.getNoNil(getUserAttribute(id, "spring"), true)
@@ -38,8 +39,10 @@ end
 
 function ssSeasonAdmirer:updateVisibility()
     local season = g_seasons.environment:currentSeason()
+    local visible = self.showIn[season]
 
-    setVisibility(self.id, self.showIn[season])
+    setVisibility(self.id, visible)
+    setCollisionMask(self.id, visible and self.collisionMask or 0)
 end
 
 function ssSeasonAdmirer:seasonChanged()

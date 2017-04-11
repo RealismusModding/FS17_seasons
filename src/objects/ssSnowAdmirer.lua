@@ -20,6 +20,7 @@ function ssSnowAdmirer:new(id)
     local self = {}
     setmetatable(self, ssSnowAdmirer_mt)
     self.id = id
+    self.collisionMask = getCollisionMask(id)
 
     -- If attribute is set to false, it will only show when there is NO snow
     self.showWhenSnow = Utils.getNoNil(getUserAttribute(id, "snow"), true)
@@ -36,7 +37,10 @@ function ssSnowAdmirer:delete()
 end
 
 function ssSnowAdmirer:updateVisibility()
-    setVisibility(self.id, g_seasons.weather:getSnowHeight() > 0)
+    local visible = g_seasons.weather:getSnowHeight() > 0
+
+    setVisibility(self.id, visible)
+    setCollisionMask(self.id, visible and self.collisionMask or 0)
 end
 
 function ssSnowAdmirer:weatherChanged()
