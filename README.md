@@ -87,7 +87,7 @@ For a better game experience, custom maps should add two new density layers: one
   - Currently there is no way to fix a completely broken vehicle: you can't drive it to a shop and resetting won't un-break it
 
 ### Economy
-- Loan cap is set to 30% of your total owned land value with a minimum of 300,000
+- Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000
 - The interest has been adjusted to the new year length.
 - Prices of almost everything changes during a year, realistically.
 - You can't sell grass/hay/straw in an unbaled form. (Price is 0)
