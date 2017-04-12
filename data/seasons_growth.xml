@@ -4,7 +4,7 @@
 
 <growth>
     <defaultFruits>
-        <defaultFruit fruitName="newFruit" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="newFruit" maxSprayGrowthState="4"/>
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->

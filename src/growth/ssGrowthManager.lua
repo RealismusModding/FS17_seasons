@@ -266,9 +266,9 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
 
     if growthResult ~= 0 then
         local terrainDetailId = g_currentMission.terrainDetailId
-        if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthStage then
+        if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthState then
             if useMaxState == true then
-                setDensityMaskParams(fruit.id, "between", minState, self.defaultFruitsData[fruitName].maxSprayGrowthStage)
+                setDensityMaskParams(fruit.id, "between", minState, self.defaultFruitsData[fruitName].maxSprayGrowthState)
             end
             local sprayResetResult = addDensityMaskedParallelogram(terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
         end
@@ -294,8 +294,8 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     if growthResult ~= 0 then
         local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
         local terrainDetailId = g_currentMission.terrainDetailId
-        if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthStage then
-            setDensityMaskParams(fruit.id, "between", minState, self.defaultFruitsData[fruitName].maxSprayGrowthStage)
+        if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthState then
+            setDensityMaskParams(fruit.id, "between", minState, self.defaultFruitsData[fruitName].maxSprayGrowthState)
             local sprayResetResult = addDensityMaskedParallelogram(terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, -1)
         end
     end
@@ -456,7 +456,7 @@ end
 
 function ssGrowthManager:updateDefaultFruitsData(fruitName)
     self.defaultFruitsData[fruitName] = {}
-    self.defaultFruitsData[fruitName].maxSprayGrowthStage = self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits].maxSprayGrowthStage
+    self.defaultFruitsData[fruitName].maxSprayGrowthState = self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits].maxSprayGrowthState
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)

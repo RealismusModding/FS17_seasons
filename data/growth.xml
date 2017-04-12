@@ -10,16 +10,16 @@
 
 <growth>
     <defaultFruits>
-        <defaultFruit fruitName="barley" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="wheat" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="rape" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="maize" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="soybean" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="sunflower" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="potato" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="sugarBeet" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="poplar" maxSprayGrowthStage="4"/>
-        <defaultFruit fruitName="grass" maxSprayGrowthStage="4"/>
+        <defaultFruit fruitName="barley" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="wheat" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="rape" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="maize" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="soybean" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="sunflower" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="potato" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="sugarBeet" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="poplar" maxSprayGrowthState="4"/>
+        <defaultFruit fruitName="grass" maxSprayGrowthState="4"/>
         <defaultFruit fruitName="oilseedRadish" />
         <defaultFruit fruitName="dryGrass" />
     </defaultFruits>
