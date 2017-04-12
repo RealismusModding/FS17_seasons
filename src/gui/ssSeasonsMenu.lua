@@ -346,7 +346,7 @@ function ssSeasonsMenu:updateOverview()
             -- If block open, set end of block to new true
         -- When find false
             -- Add block, reset current block
-        for i = 1, 12 do
+        for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
             if data[fruitName][i] then
                 if currentBlock == nil then
                     currentBlock = {}
@@ -407,7 +407,7 @@ function ssSeasonsMenu:drawOverview(element)
     o.rect:render(
         headerLeft,
         o.topLeftY,
-        o.transitionWidth * 12,
+        o.transitionWidth * g_seasons.environment.TRANSITIONS_IN_YEAR,
         o.headerHeight - o.fruitSpacerHeight,
         {0.013, 0.013, 0.013, 1}
     )
@@ -426,7 +426,7 @@ function ssSeasonsMenu:drawOverview(element)
     end
 
     -- Draw separator blocks in the header
-    for i = 1, 12 do
+    for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
         if i ~= 1 then
             if i == 4 or i == 7 or i == 10 then
                 o.rect:render(

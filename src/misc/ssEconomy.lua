@@ -71,7 +71,7 @@ function ssEconomy:loadFactorsFromXML(file, key)
     -- shortcut for setting all values to 1 or 0
     local allVal = getXMLFloat(file, key .. "#all")
     if allVal ~= nil then
-        for i = 1, 12 do
+        for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
             factors[i] = allVal
         end
 
@@ -92,7 +92,7 @@ function ssEconomy:loadFactorsFromXML(file, key)
         i = i + 1
     end
 
-    if table.getn(factors) ~= 12 then
+    if table.getn(factors) ~= g_seasons.environment.TRANSITIONS_IN_YEAR then
         logInfo("ssEconomy:", "Problem in economy data: not all transitions are configured in " .. key)
     end
 
@@ -308,7 +308,7 @@ end
 
 function ssEconomy:lerpFactors(factors)
     local transition, alpha = self:getTransitionAndAlpha()
-    local nextTransition = transition % 12 + 1
+    local nextTransition = transition % g_seasons.environment.TRANSITIONS_IN_YEAR + 1
 
     return Utils.lerp(factors[transition], factors[nextTransition], alpha)
 end

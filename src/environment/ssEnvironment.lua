@@ -18,6 +18,7 @@ g_seasons.environment = ssEnvironment
 ssEnvironment.DAYS_IN_WEEK = 7
 ssEnvironment.SEASONS_IN_YEAR = 4
 ssEnvironment.MONTHS_IN_YEAR = 12
+ssEnvironment.TRANSITIONS_IN_YEAR = 12
 
 ssEnvironment.SEASON_SPRING = 0 -- important to start at 0, not 1
 ssEnvironment.SEASON_SUMMER = 1
@@ -490,7 +491,7 @@ end
 
 function ssEnvironment:monthAtTransitionNumber(transitionNumber)
     local monthNumber = math.fmod(transitionNumber, self.MONTHS_IN_YEAR) + 2
-    if monthNumber > 12 then --because 11 becomes 13 TODO: brain gone  need to improve
+    if monthNumber > self.MONTHS_IN_YEAR then --because 11 becomes 13 TODO: brain gone  need to improve
         monthNumber = 1
     end
 
@@ -520,7 +521,7 @@ end
 
 function ssEnvironment:nextTransition()
     local cGT = self:transitionAtDay()
-    if cGT == 12 then
+    if cGT == self.TRANSITIONS_IN_YEAR then
         return 1
     else
         return cGT+1

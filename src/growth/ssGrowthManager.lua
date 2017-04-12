@@ -322,9 +322,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
                     while currentGrowthState < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
-                        if transitionToCheck > 12 then
-                            transitionToCheck = 1
-                        end
+                        if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
 
                         currentGrowthState = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthState)
                         if currentGrowthState >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
@@ -369,7 +367,7 @@ function ssGrowthManager:buildCanHarvestData()
                     
                     transitionToCheck = transitionToCheck + 1
                     safetyCheck = safetyCheck + 1
-                    if transitionToCheck > 12 then transitionToCheck = 1 end
+                    if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
                     if safetyCheck > 15 then break end --so we don't end up in infinite loop if growth pattern is not correct
                 end
                 
@@ -379,7 +377,7 @@ function ssGrowthManager:buildCanHarvestData()
         for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
             if fruitName == "poplar" then --hardcoding for poplar
                 transitionTable[plantedTransition] = true
-            elseif fruitName == "grass" and plantedTransition > ssEnvironment.TRANSITION_EARLY_SPRING and plantedTransition < ssEnvironment.TRANSITION_EARLY_WINTER then
+            elseif fruitName == "grass" and plantedTransition > g_seasons.environment.TRANSITION_EARLY_SPRING and plantedTransition < g_seasons.environment.TRANSITION_EARLY_WINTER then
                 transitionTable[plantedTransition] = true
             elseif transitionTable[plantedTransition] ~= true then
                 transitionTable[plantedTransition] = false
@@ -501,7 +499,7 @@ end
 
 function ssGrowthManager:consoleCommandIncrementGrowthState()
     self.fakeTransition = self.fakeTransition + 1
-    if self.fakeTransition > 12 then self.fakeTransition = 1 end
+    if self.fakeTransition > g_seasons.environment.TRANSITIONS_IN_YEAR then self.fakeTransition = 1 end
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
     self.currentTransition = self.fakeTransition
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)
