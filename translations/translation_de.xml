@@ -5,8 +5,8 @@
         <text name="input_SEASONS_SHOW_WF" text="Jahreszeiten: Wettervorhersage anzeigen" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Jahreszeiten: Fahrzeug Reparieren" />
         <text name="input_SEASONS_SHOW_MENU" text="Jahreszeiten: Menü öffnen" />
-		<text name="input_SEASONS_PLANTING_DISTANCE" text="Wachstumsdauer in (%d m)" />
-		<text name="SEASONS_HIDE_WF" text="Jahreszeiten: Wettervorhersage verbergen" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Wachstumsdauer in (%d m)" />
+        <text name="SEASONS_HIDE_WF" text="Jahreszeiten: Wettervorhersage verbergen" />
 
         <text name="SS_WEEKDAY_1" text="Montag" />
         <text name="SS_WEEKDAY_2" text="Dienstag" />
@@ -79,7 +79,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
 
         <text name="warning_soilIsFrozen" text="Der Boden ist gefroren. Eine Bearbeitung ist so leider nicht möglich. Warte etwas wärmere Tage ab." />
-                <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
+        <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
         <text name="warning_animalsKilled" text="Tiere versterben in (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog seine maximale Kapazität erreicht. Der Inhalt des Futtertroges langt für die nächsten weiteren 3 Tage" />
 
