@@ -178,6 +178,13 @@ function ssUtil.normalizedPath(path)
     return path:gsub("/[^/]+/%.%./", "/")
 end
 
+function ssUtil.isWorkHours()
+    local hour = g_currentMission.environment.currentHour
+    local dow = ssUtil.dayOfWeek(g_seasons.environment:currentDay())
+
+    return hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5
+end
+
 
 function Set(list)
     local set = {}

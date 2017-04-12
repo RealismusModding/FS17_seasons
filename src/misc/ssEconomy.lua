@@ -13,8 +13,8 @@ g_seasons.economy = ssEconomy
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)
-    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1450)
-    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2275)
+    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
+    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
     self.aiDayStart = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayStart", 6)
     self.aiDayEnd = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
     self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1500000)
@@ -219,14 +219,7 @@ end
 
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
     if self:getIsActive() then
-        local hour = g_currentMission.environment.currentHour
-        local dow = ssUtil.dayOfWeek(g_seasons.environment:currentDay())
-
-        if hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5 then
-            self.pricePerMS = ssEconomy.aiPricePerMSWork
-        else
-            self.pricePerMS = ssEconomy.aiPricePerMSOverwork
-        end
+        self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
     end
 
     return superFunc(self, dt)

@@ -11,34 +11,22 @@ ssFieldJobManager = {}
 g_seasons.fieldJobManager = ssFieldJobManager
 
 function ssFieldJobManager:preLoad()
-    FieldJob.init = Utils.overwrittenFunction(FieldJob.init,ssFieldJobManager.fieldJobInit)
+    FieldJob.init = Utils.overwrittenFunction(FieldJob.init, ssFieldJobManager.fieldJobInit)
+    FieldJob.finish = Utils.overwrittenFunction(FieldJob.finish, ssFieldJobManager.fieldJobFinish)
     FieldJobManager.update = Utils.overwrittenFunction(FieldJobManager.update, ssFieldJobManager.fieldJobManagerUpdate)
 end
 
-function ssFieldJobManager:load(savegame, key)
-    -- self.disableMissions = ssStorage.getXMLBool(savegame, key .. ".settings.disableMissions", false)
-end
-
-function ssFieldJobManager:save(savegame, key)
-    -- ssStorage.setXMLBool(savegame, key .. ".settings.disableMissions", self.disableMissions)
-end
-
 function ssFieldJobManager:loadMap(name)
---    if not (g_currentMission.fieldDefinitionBase ~= nil and g_currentMission.fieldDefinitionBase.fieldDefs ~= nil) then return end
-
---     for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
---         fieldDef.fieldJobUsageAllowed = not self.disableMissions and fieldDef.fieldJobUsageAllowed
---     end
 end
 
 --filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
     if self.coverCounter == nil then self.coverCounter = 0 end; --FIXME: maybe when ssFieldJobManager initializes?
-    
+
     if self.coverCounter > 500 or self.currentFieldPartitionIndex ~= nil or self:isFieldJobActive() then
         superFunc(self, dt + self.coverCounter)
         self.coverCounter = 0
-        
+
         --check if field job was started by NPC, terminate if not appropriate for current season
         if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
             local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
@@ -52,9 +40,9 @@ function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
                                 [FieldJobManager.FIELDSTATE_GROWING] = FieldJob.TYPE_SOWING}
 
             if not g_seasons.fieldJobManager.isFieldJobAllowed(stateToJob[paramSetState], true) then
-                self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update 
+                self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update
             end
-        end    
+        end
     else -- Use cover counter to prevent the FieldJobManager to initiate a job on every update
         self.coverCounter = self.coverCounter + dt
     end
@@ -63,10 +51,37 @@ end
 --filter mission assignments to the player
 function ssFieldJobManager:fieldJobInit(superFunc, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
     if superFunc(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7) then
-        return ssFieldJobManager.isFieldJobAllowed(self.jobType, false)
+        local isAllowed = ssFieldJobManager.isFieldJobAllowed(self.jobType, false)
+
+        if isAllowed then
+            -- Update income
+            local pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
+
+            -- Add difficulty factor
+            local difficultyFactor = 0.8
+            if g_currentMission.missionInfo.difficulty == 2 then
+                difficultyFactor = 1.0
+            elseif g_currentMission.missionInfo.difficulty == 1 then
+                difficultyFactor = 1.2
+            end
+
+            local seasonFactor = (6 / g_seasons.environment.daysInSeason) ^ 0.333333333
+
+            -- Time left at this point is the full time
+            self.reward = pricePerMS * self.timeLeft * 5 * difficultyFactor * seasonFactor
+
+            return true
+        end
     end
 
     return false
+end
+
+function ssFieldJobManager:fieldJobFinish(superFunc, arg1, arg2)
+    -- Set time left to 0 to disable time bonus
+    self.timeLeft = 0
+
+    return superFunc(self, arg1, arg2)
 end
 
 --fieldJob: FieldJob.TYPE_*
@@ -77,7 +92,7 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
 
     -- Use vanilla FieldJobManager if not using seasons growthManager
     if not g_seasons.growthManager.growthManagerEnabled then return true end
-    
+
     -- Allow nothing when ground is frozen
     if g_seasons.weather:isGroundFrozen() then return false end
 
@@ -118,3 +133,4 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     -- Disallow everything unknown
     return false
 end
+
