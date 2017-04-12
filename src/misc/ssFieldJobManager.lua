@@ -65,10 +65,8 @@ function ssFieldJobManager:fieldJobInit(superFunc, ...)
                 difficultyFactor = 1.2
             end
 
-            local seasonFactor = (6 / g_seasons.environment.daysInSeason) ^ 0.25
-
             -- Time left at this point is the full time
-            self.reward = pricePerMS * self.timeLeft * 5 * difficultyFactor * seasonFactor
+            self.reward = pricePerMS * self.timeLeft * 5 * difficultyFactor
 
             return true
         end
