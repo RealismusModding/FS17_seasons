@@ -99,6 +99,9 @@ function ssGrowthManager:loadMap(name)
     end
 end
 
+
+-- load all growth data
+-- returns false, if error
 function ssGrowthManager:getGrowthData()
     local defaultFruitsData,growthData = ssGrowthManagerData:loadAllData()
 
@@ -118,12 +121,14 @@ function ssGrowthManager:getGrowthData()
     return true
 end
 
+--handle reset growth console command
 function ssGrowthManager:consoleCommandResetGrowth()
     if g_currentMission:getIsServer() then
         self:resetGrowth()
     end
 end
 
+--reset growth to first_load_transition for all fields
 function ssGrowthManager:resetGrowth()
     if self.growthManagerEnabled == true then
         self.currentGrowthTransitionPeriod = self.FIRST_LOAD_TRANSITION
@@ -170,10 +175,11 @@ function ssGrowthManager:dayChanged()
     end
 end
 
+-- called by ssDensityScanner to make fruit grow
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-    for index,fruit in pairs(g_currentMission.fruits) do
+    for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
 
         --handling new unknown fruits
@@ -203,6 +209,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
     end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
 end
 
+--set growth state of fruit to a particular state based on self.currentGrowthTransitionPeriod
 function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ)
     local minState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].setGrowthState
     local desiredGrowthState = self.growthData[self.currentGrowthTransitionPeriod][fruitName].desiredGrowthState
@@ -300,7 +307,7 @@ function ssGrowthManager:buildCanPlantData(fruitData)
     for fruitName, value in pairs(fruitData) do
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
-            for transition,v in pairs(self.growthData) do
+            for transition, v in pairs(self.growthData) do
                 if transition == self.FIRST_LOAD_TRANSITION then
                     break
                 end
@@ -383,6 +390,7 @@ function ssGrowthManager:buildCanHarvestData()
     end
 end
 
+-- simulate growth helper function to calculate the next growth stage based on current growth stage and the current transition
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
     local newGrowthState = currentGrowthStage
 
