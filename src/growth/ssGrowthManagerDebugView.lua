@@ -70,19 +70,19 @@ end
 --which transition.
 --FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5.
 --Will think of a clever way to fix that without cheating
-function ssGrowthManagerDebugView:growthTransitionsDisplayData()
-    local growthStagesDisplayData = {}
+function ssGrowthManagerDebugView:getGrowthTransitionsDisplayData()
+    local growthTransitionsDisplayData = {}
     local data = ssUtil.calcDaysPerTransition()
 
     for index,value in pairs(data) do
         if index % 2 == 1 then
             if value == data[index+1] then
-                growthStagesDisplayData[index] = tostring(value)
+                growthTransitionsDisplayData[index] = tostring(value)
             else
-                growthStagesDisplayData[index] = value .. "-" .. data[index+1]
+                growthTransitionsDisplayData[index] = value .. "-" .. data[index+1]
             end
         end
     end
 
-    return growthStagesDisplayData
+    return growthTransitionsDisplayData
 end

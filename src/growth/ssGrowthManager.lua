@@ -91,9 +91,9 @@ function ssGrowthManager:loadMap(name)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
-        addConsoleCommand("ssResetGrowth", "Resets growth back to default starting stage", "consoleCommandResetGrowth", self)
-        addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthStage", self)
-        addConsoleCommand("ssSetGrowthStage", "Sets growth for test purposes", "consoleCommandSetGrowthStage", self)
+        addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
+        addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
+        addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
         addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
         self:dayChanged()
     end
@@ -316,26 +316,26 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     table.insert(transitionTable, transition , false)
                 else
                     local plantedGrowthTransition = transition
-                    local currentGrowthStage = 1
+                    local currentGrowthState = 1
 
                     local maxAllowedCounter = 0
                     local transitionToCheck = plantedGrowthTransition + 1 -- need to start checking from the next transition after planted transition
                     local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
-                    while currentGrowthStage < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
+                    while currentGrowthState < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
                         if transitionToCheck > 12 then
                             transitionToCheck = 1
                         end
 
-                        currentGrowthStage = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
-                        if currentGrowthStage >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
+                        currentGrowthState = self:simulateGrowth(fruitName, transitionToCheck, currentGrowthState)
+                        if currentGrowthState >= fruitNumStates then -- have to break or transitionToCheck will be incremented when it does not have to be
                             break
                         end
 
                         transitionToCheck = transitionToCheck + 1
                         maxAllowedCounter = maxAllowedCounter + 1
                     end
-                    if currentGrowthStage == fruitNumStates then
+                    if currentGrowthState == fruitNumStates then
                         table.insert(transitionTable, plantedGrowthTransition , true)
                     else
                         table.insert(transitionTable, plantedGrowthTransition , false)
@@ -356,15 +356,15 @@ function ssGrowthManager:buildCanHarvestData()
         
         for plantedGrowthTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
              if self.canPlantData[fruitName][plantedGrowthTransition] == true and fruitName ~= "poplar" and fruitName ~= "grass" then
-                local growthStage = 1
+                local growthState = 1
                 local transitionToCheck = plantedGrowthTransition + 1
                 if plantedGrowthTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
                     transitionToCheck = 1
                 end
                 local safetyCheck = 1
-                while growthStage <= fruitNumStates do
-                    growthStage = self:simulateGrowth(fruitName, transitionToCheck, growthStage)
-                    if growthStage == fruitNumStates then
+                while growthState <= fruitNumStates do
+                    growthState = self:simulateGrowth(fruitName, transitionToCheck, growthState)
+                    if growthState == fruitNumStates then
                         transitionTable[transitionToCheck] = true
                     end
                     
@@ -391,19 +391,19 @@ function ssGrowthManager:buildCanHarvestData()
 end
 
 -- simulate growth helper function to calculate the next growth stage based on current growth stage and the current transition
-function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthStage)
-    local newGrowthState = currentGrowthStage
+function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthState)
+    local newGrowthState = currentGrowthState
 
     if self.growthData[transitionToCheck][fruitName] ~= nil then
         --setGrowthState
         if self.growthData[transitionToCheck][fruitName].setGrowthState ~= nil
             and self.growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
             if self.growthData[transitionToCheck][fruitName].setGrowthMaxState ~= nil then
-                if currentGrowthStage >= self.growthData[transitionToCheck][fruitName].setGrowthState and currentGrowthStage <= self.growthData[transitionToCheck][fruitName].setGrowthMaxState then
+                if currentGrowthState >= self.growthData[transitionToCheck][fruitName].setGrowthState and currentGrowthState <= self.growthData[transitionToCheck][fruitName].setGrowthMaxState then
                     newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
                 end
             else
-                if currentGrowthStage == self.growthData[transitionToCheck][fruitName].setGrowthState then
+                if currentGrowthState == self.growthData[transitionToCheck][fruitName].setGrowthState then
                     newGrowthState = self.growthData[transitionToCheck][fruitName].desiredGrowthState
                 end
             end
@@ -413,11 +413,11 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
             local normalGrowthState = self.growthData[transitionToCheck][fruitName].normalGrowthState
             if self.growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
                 local normalGrowthMaxState = self.growthData[transitionToCheck][fruitName].normalGrowthMaxState
-                if currentGrowthStage >= normalGrowthState and currentGrowthStage <= normalGrowthMaxState then
+                if currentGrowthState >= normalGrowthState and currentGrowthState <= normalGrowthMaxState then
                     newGrowthState = newGrowthState + 1
                 end
             else
-                if currentGrowthStage == normalGrowthState then
+                if currentGrowthState == normalGrowthState then
                     newGrowthState = newGrowthState + 1
                 end
             end
@@ -429,7 +429,7 @@ function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGro
             local extraGrowthMinState = self.growthData[transitionToCheck][fruitName].extraGrowthMinState
             local extraGrowthMaxState = self.growthData[transitionToCheck][fruitName].extraGrowthMaxState
 
-            if currentGrowthStage >= extraGrowthMinState and currentGrowthStage <= extraGrowthMaxState then
+            if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
                 newGrowthState = newGrowthState + self.growthData[transitionToCheck][fruitName].extraGrowthFactor
             end
         end
@@ -500,7 +500,7 @@ end
 
 -- debug console commands
 
-function ssGrowthManager:consoleCommandIncrementGrowthStage()
+function ssGrowthManager:consoleCommandIncrementGrowthState()
     self.fakeGrowthTransitionNum = self.fakeGrowthTransitionNum + 1
     if self.fakeGrowthTransitionNum > 12 then self.fakeGrowthTransitionNum = 1 end
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
@@ -509,8 +509,8 @@ function ssGrowthManager:consoleCommandIncrementGrowthStage()
     self:rebuildWillGerminateData()
 end
 
-function ssGrowthManager:consoleCommandSetGrowthStage(newGrowthStage)
-    self.fakeGrowthTransitionNum = Utils.getNoNil(tonumber(newGrowthStage), 1)
+function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
+    self.fakeGrowthTransitionNum = Utils.getNoNil(tonumber(newGrowthState), 1)
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeGrowthTransitionNum)
     self.currentGrowthTransitionPeriod = self.fakeGrowthTransitionNum
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", 1)

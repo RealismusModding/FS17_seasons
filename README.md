@@ -58,14 +58,14 @@ For a better game experience, custom maps should add two new density layers: one
 - 7 day weather forecast
 
 ### Crops
-- At the beginning of a new game, the mod will reset all fields to the harvested stage. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest.
+- At the beginning of a new game, the mod will reset all fields to the harvested state. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest.
 - Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation.
 - Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
-- Grass is knocked back to stage 2 in the winter
+- Grass is knocked back to state 2 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
 - Growth is adjusted to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
-- Winter and spring crops are possible now. Some crops can be planted in autumn (barley, wheat and canola) and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
+- Winter and spring crops are possible now. Some crops can be planted in autumn (barley, wheat and canola) and in spring and will reach harvestable state by the summer. Some crops can only be planted at certain times of the year.
 - Growth is configurable and can be changed by map makers to suit their map
 - Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
 - Swaths will reduce over time.
@@ -74,7 +74,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Wrapped bales needs time to ferment before they are turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
-- Plants are only harvestable in the final growth stage, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
+- Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
 
 ### Maintenance
