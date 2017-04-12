@@ -62,7 +62,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation.
 - Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
 - Winter kills certain crops
-- Grass is knocked back to stage 1 in the winter
+- Grass is knocked back to stage 2 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
 - Growth is adjusted to match real life life as much as possible - for example, crops will not grow if planted at the wrong time of the year
 - Winter and spring crops are possible now. Some crops can be planted in autumn (barley, wheat and canola) and in spring and will reach harvestable stage by the summer. Some crops can only be planted at certain times of the year.
