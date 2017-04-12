@@ -49,8 +49,8 @@ function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
 end
 
 --filter mission assignments to the player
-function ssFieldJobManager:fieldJobInit(superFunc, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-    if superFunc(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7) then
+function ssFieldJobManager:fieldJobInit(superFunc, ...)
+    if superFunc(self, ...) then
         local isAllowed = ssFieldJobManager.isFieldJobAllowed(self.jobType, false)
 
         if isAllowed then

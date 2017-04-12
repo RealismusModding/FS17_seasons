@@ -518,7 +518,7 @@ function ssSeasonsMenu:drawOverview(element)
         guideHeight,
         {0.8069, 0.0097, 0.0097, 1}
     )
-    log("guideY", o.topLeftY + o.headerHeight, "height", guideHeight, "sum", o.topLeftY + o.headerHeight + guideHeight)
+    -- log("guideY", o.topLeftY + o.headerHeight, "height", guideHeight, "sum", o.topLeftY + o.headerHeight + guideHeight)
 
     -- Draw legend in the footer
     setTextColor(1, 1, 1, 1)
@@ -527,11 +527,11 @@ function ssSeasonsMenu:drawOverview(element)
     local footerY = o.topLeftY + o.headerHeight -- + o.contentHeight
     footerY = footerY + o.scrollVisible * (o.fruitSpacerHeight + o.fruitHeight)
 
-    log("scrollVisible", o.scrollVisible)
-    log("footerY", footerY)
-    log("topLeftY", o.topLeftY)
-    log("headerHeight", o.headerHeight)
-    log("contentHeight", o.contentHeight)
+    -- log("scrollVisible", o.scrollVisible)
+    -- log("footerY", footerY)
+    -- log("topLeftY", o.topLeftY)
+    -- log("headerHeight", o.headerHeight)
+    -- log("contentHeight", o.contentHeight)
 
     -- Rect for planting
     o.rect:render(
