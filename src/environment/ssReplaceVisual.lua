@@ -163,14 +163,15 @@ function ssReplaceVisual:updateFoliage()
     local foliages = self.textureReplacements[g_seasons.environment:currentSeason()]._foliages
 
     -- Go over all fruits
-    for fruitName, data in pairs(FruitUtil.fruitTypes) do
+    for fruitIndex, fruitInfo in pairs(g_currentMission.fruits) do
+        local fruitName = FruitUtil.fruitIndexToDesc[fruitIndex].name
 
         -- If default does not exist, there was never a new one loaded
         -- do set the default. We do this on demand because at loadMap,
         -- the fruits are not loaded.
         if self.textureReplacements.default._foliages[fruitName] == nil then
             local f = FruitUtil.fruitTypes[fruitName].index
-            local id = g_currentMission.fruits[f].id
+            local id = fruitInfo.id
 
             local default = getMaterial(getChildAt(id, 0), 0)
 
