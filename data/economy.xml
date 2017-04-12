@@ -12,50 +12,50 @@
     <animals>
         <animal name="cow">
             <factors>
-                <factor stage="11">0.97</factor>
-                <factor stage="12">0.92</factor>
-                <factor stage="1">1.01</factor>
-                <factor stage="2">1.13</factor>
-                <factor stage="3">1.05</factor>
-                <factor stage="4">0.86</factor>
-                <factor stage="5">0.72</factor>
-                <factor stage="6">1.11</factor>
-                <factor stage="7">0.88</factor>
-                <factor stage="8">1.06</factor>
-                <factor stage="9">1.09</factor>
-                <factor stage="10">1.20</factor>
+                <factor transition="11">0.97</factor>
+                <factor transition="12">0.92</factor>
+                <factor transition="1">1.01</factor>
+                <factor transition="2">1.13</factor>
+                <factor transition="3">1.05</factor>
+                <factor transition="4">0.86</factor>
+                <factor transition="5">0.72</factor>
+                <factor transition="6">1.11</factor>
+                <factor transition="7">0.88</factor>
+                <factor transition="8">1.06</factor>
+                <factor transition="9">1.09</factor>
+                <factor transition="10">1.20</factor>
             </factors>
         </animal>
         <animal name="sheep">
             <factors>
-                <factor stage="11">0.93</factor>
-                <factor stage="12">0.97</factor>
-                <factor stage="1">1.13</factor>
-                <factor stage="2">1.25</factor>
-                <factor stage="3">1.29</factor>
-                <factor stage="4">1.19</factor>
-                <factor stage="5">0.99</factor>
-                <factor stage="6">0.91</factor>
-                <factor stage="7">0.81</factor>
-                <factor stage="8">0.77</factor>
-                <factor stage="9">0.85</factor>
-                <factor stage="10">0.95</factor>
+                <factor transition="11">0.93</factor>
+                <factor transition="12">0.97</factor>
+                <factor transition="1">1.13</factor>
+                <factor transition="2">1.25</factor>
+                <factor transition="3">1.29</factor>
+                <factor transition="4">1.19</factor>
+                <factor transition="5">0.99</factor>
+                <factor transition="6">0.91</factor>
+                <factor transition="7">0.81</factor>
+                <factor transition="8">0.77</factor>
+                <factor transition="9">0.85</factor>
+                <factor transition="10">0.95</factor>
             </factors>
         </animal>
         <animal name="pig">
             <factors>
-                <factor stage="11">1.28</factor>
-                <factor stage="12">1.08</factor>
-                <factor stage="1">1.12</factor>
-                <factor stage="2">1.12</factor>
-                <factor stage="3">1.43</factor>
-                <factor stage="4">0.99</factor>
-                <factor stage="5">1.02</factor>
-                <factor stage="6">1.13</factor>
-                <factor stage="7">0.99</factor>
-                <factor stage="8">0.78</factor>
-                <factor stage="9">0.51</factor>
-                <factor stage="10">0.56</factor>
+                <factor transition="11">1.28</factor>
+                <factor transition="12">1.08</factor>
+                <factor transition="1">1.12</factor>
+                <factor transition="2">1.12</factor>
+                <factor transition="3">1.43</factor>
+                <factor transition="4">0.99</factor>
+                <factor transition="5">1.02</factor>
+                <factor transition="6">1.13</factor>
+                <factor transition="7">0.99</factor>
+                <factor transition="8">0.78</factor>
+                <factor transition="9">0.51</factor>
+                <factor transition="10">0.56</factor>
             </factors>
         </animal>
     </animals>
@@ -63,239 +63,239 @@
     <fills>
         <fill name="wheat">
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.00</factor>
-                <factor stage="1">1.07</factor>
-                <factor stage="2">0.99</factor>
-                <factor stage="3">0.94</factor>
-                <factor stage="4">0.85</factor>
-                <factor stage="5">0.81</factor>
-                <factor stage="6">0.86</factor>
-                <factor stage="7">0.99</factor>
-                <factor stage="8">1.08</factor>
-                <factor stage="9">1.13</factor>
-                <factor stage="10">1.21</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.00</factor>
+                <factor transition="1">1.07</factor>
+                <factor transition="2">0.99</factor>
+                <factor transition="3">0.94</factor>
+                <factor transition="4">0.85</factor>
+                <factor transition="5">0.81</factor>
+                <factor transition="6">0.86</factor>
+                <factor transition="7">0.99</factor>
+                <factor transition="8">1.08</factor>
+                <factor transition="9">1.13</factor>
+                <factor transition="10">1.21</factor>
             </factors>
         </fill>
 
         <fill name="barley">
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.00</factor>
-                <factor stage="1">1.07</factor>
-                <factor stage="2">0.99</factor>
-                <factor stage="3">0.94</factor>
-                <factor stage="4">0.85</factor>
-                <factor stage="5">0.81</factor>
-                <factor stage="6">0.86</factor>
-                <factor stage="7">0.99</factor>
-                <factor stage="8">1.08</factor>
-                <factor stage="9">1.13</factor>
-                <factor stage="10">1.21</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.00</factor>
+                <factor transition="1">1.07</factor>
+                <factor transition="2">0.99</factor>
+                <factor transition="3">0.94</factor>
+                <factor transition="4">0.85</factor>
+                <factor transition="5">0.81</factor>
+                <factor transition="6">0.86</factor>
+                <factor transition="7">0.99</factor>
+                <factor transition="8">1.08</factor>
+                <factor transition="9">1.13</factor>
+                <factor transition="10">1.21</factor>
             </factors>
         </fill>
 
         <fill name="rape"> <!-- canola -->
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.00</factor>
-                <factor stage="1">1.07</factor>
-                <factor stage="2">0.99</factor>
-                <factor stage="3">0.94</factor>
-                <factor stage="4">0.85</factor>
-                <factor stage="5">0.81</factor>
-                <factor stage="6">0.86</factor>
-                <factor stage="7">0.99</factor>
-                <factor stage="8">1.08</factor>
-                <factor stage="9">1.13</factor>
-                <factor stage="10">1.21</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.00</factor>
+                <factor transition="1">1.07</factor>
+                <factor transition="2">0.99</factor>
+                <factor transition="3">0.94</factor>
+                <factor transition="4">0.85</factor>
+                <factor transition="5">0.81</factor>
+                <factor transition="6">0.86</factor>
+                <factor transition="7">0.99</factor>
+                <factor transition="8">1.08</factor>
+                <factor transition="9">1.13</factor>
+                <factor transition="10">1.21</factor>
             </factors>
         </fill>
 
         <fill name="maize">
             <factors>
-                <factor stage="11">1.33</factor>
-                <factor stage="12">0.98</factor>
-                <factor stage="1">1.12</factor>
-                <factor stage="2">1.08</factor>
-                <factor stage="3">1.04</factor>
-                <factor stage="4">1.14</factor>
-                <factor stage="5">1.31</factor>
-                <factor stage="6">0.98</factor>
-                <factor stage="7">0.88</factor>
-                <factor stage="8">0.71</factor>
-                <factor stage="9">0.61</factor>
-                <factor stage="10">0.92</factor>
+                <factor transition="11">1.33</factor>
+                <factor transition="12">0.98</factor>
+                <factor transition="1">1.12</factor>
+                <factor transition="2">1.08</factor>
+                <factor transition="3">1.04</factor>
+                <factor transition="4">1.14</factor>
+                <factor transition="5">1.31</factor>
+                <factor transition="6">0.98</factor>
+                <factor transition="7">0.88</factor>
+                <factor transition="8">0.71</factor>
+                <factor transition="9">0.61</factor>
+                <factor transition="10">0.92</factor>
             </factors>
         </fill>
 
         <fill name="soybean">
             <factors>
-                <factor stage="11">0.74</factor>
-                <factor stage="12">0.64</factor>
-                <factor stage="1">0.99</factor>
-                <factor stage="2">1.05</factor>
-                <factor stage="3">1.16</factor>
-                <factor stage="4">1.42</factor>
-                <factor stage="5">1.59</factor>
-                <factor stage="6">1.13</factor>
-                <factor stage="7">0.87</factor>
-                <factor stage="8">0.81</factor>
-                <factor stage="9">0.77</factor>
-                <factor stage="10">0.87</factor>
+                <factor transition="11">0.74</factor>
+                <factor transition="12">0.64</factor>
+                <factor transition="1">0.99</factor>
+                <factor transition="2">1.05</factor>
+                <factor transition="3">1.16</factor>
+                <factor transition="4">1.42</factor>
+                <factor transition="5">1.59</factor>
+                <factor transition="6">1.13</factor>
+                <factor transition="7">0.87</factor>
+                <factor transition="8">0.81</factor>
+                <factor transition="9">0.77</factor>
+                <factor transition="10">0.87</factor>
             </factors>
         </fill>
 
         <fill name="potato">
             <factors>
-                <factor stage="11">1.22</factor>
-                <factor stage="12">1.21</factor>
-                <factor stage="1">1.12</factor>
-                <factor stage="2">1.04</factor>
-                <factor stage="3">0.93</factor>
-                <factor stage="4">0.85</factor>
-                <factor stage="5">0.79</factor>
-                <factor stage="6">0.79</factor>
-                <factor stage="7">0.86</factor>
-                <factor stage="8">0.96</factor>
-                <factor stage="9">1.08</factor>
-                <factor stage="10">1.16</factor>
+                <factor transition="11">1.22</factor>
+                <factor transition="12">1.21</factor>
+                <factor transition="1">1.12</factor>
+                <factor transition="2">1.04</factor>
+                <factor transition="3">0.93</factor>
+                <factor transition="4">0.85</factor>
+                <factor transition="5">0.79</factor>
+                <factor transition="6">0.79</factor>
+                <factor transition="7">0.86</factor>
+                <factor transition="8">0.96</factor>
+                <factor transition="9">1.08</factor>
+                <factor transition="10">1.16</factor>
             </factors>
         </fill>
 
         <fill name="sugarBeet">
             <factors>
-                <factor stage="11">1.22</factor>
-                <factor stage="12">1.21</factor>
-                <factor stage="1">1.12</factor>
-                <factor stage="2">1.04</factor>
-                <factor stage="3">0.93</factor>
-                <factor stage="4">0.85</factor>
-                <factor stage="5">0.79</factor>
-                <factor stage="6">0.79</factor>
-                <factor stage="7">0.86</factor>
-                <factor stage="8">0.96</factor>
-                <factor stage="9">1.08</factor>
-                <factor stage="10">1.16</factor>
+                <factor transition="11">1.22</factor>
+                <factor transition="12">1.21</factor>
+                <factor transition="1">1.12</factor>
+                <factor transition="2">1.04</factor>
+                <factor transition="3">0.93</factor>
+                <factor transition="4">0.85</factor>
+                <factor transition="5">0.79</factor>
+                <factor transition="6">0.79</factor>
+                <factor transition="7">0.86</factor>
+                <factor transition="8">0.96</factor>
+                <factor transition="9">1.08</factor>
+                <factor transition="10">1.16</factor>
             </factors>
         </fill>
 
         <fill name="sunflower">
             <factors all="1">
-                <factor stage="11"></factor>
-                <factor stage="12"></factor>
-                <factor stage="1"></factor>
-                <factor stage="2"></factor>
-                <factor stage="3"></factor>
-                <factor stage="4"></factor>
-                <factor stage="5"></factor>
-                <factor stage="6"></factor>
-                <factor stage="7"></factor>
-                <factor stage="8"></factor>
-                <factor stage="9"></factor>
-                <factor stage="10"></factor>
+                <factor transition="11"></factor>
+                <factor transition="12"></factor>
+                <factor transition="1"></factor>
+                <factor transition="2"></factor>
+                <factor transition="3"></factor>
+                <factor transition="4"></factor>
+                <factor transition="5"></factor>
+                <factor transition="6"></factor>
+                <factor transition="7"></factor>
+                <factor transition="8"></factor>
+                <factor transition="9"></factor>
+                <factor transition="10"></factor>
             </factors>
         </fill>
 
         <fill name="woodChips">
             <factors>
-                <factor stage="11">1.69</factor>
-                <factor stage="12">1.66</factor>
-                <factor stage="1">1.24</factor>
-                <factor stage="2">0.99</factor>
-                <factor stage="3">0.74</factor>
-                <factor stage="4">0.61</factor>
-                <factor stage="5">0.53</factor>
-                <factor stage="6">0.53</factor>
-                <factor stage="7">0.62</factor>
-                <factor stage="8">0.80</factor>
-                <factor stage="9">1.14</factor>
-                <factor stage="10">1.43</factor>
+                <factor transition="11">1.69</factor>
+                <factor transition="12">1.66</factor>
+                <factor transition="1">1.24</factor>
+                <factor transition="2">0.99</factor>
+                <factor transition="3">0.74</factor>
+                <factor transition="4">0.61</factor>
+                <factor transition="5">0.53</factor>
+                <factor transition="6">0.53</factor>
+                <factor transition="7">0.62</factor>
+                <factor transition="8">0.80</factor>
+                <factor transition="9">1.14</factor>
+                <factor transition="10">1.43</factor>
             </factors>
         </fill>
 
         <fill name="manure">
             <factors>
-                <factor stage="11">1.11</factor>
-                <factor stage="12">1.11</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.03</factor>
-                <factor stage="3">0.97</factor>
-                <factor stage="4">0.92</factor>
-                <factor stage="5">0.89</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.93</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.08</factor>
+                <factor transition="11">1.11</factor>
+                <factor transition="12">1.11</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.03</factor>
+                <factor transition="3">0.97</factor>
+                <factor transition="4">0.92</factor>
+                <factor transition="5">0.89</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.93</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.08</factor>
             </factors>
         </fill>
 
         <fill name="liquidManure">
             <factors>
-                <factor stage="11">1.11</factor>
-                <factor stage="12">1.11</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.03</factor>
-                <factor stage="3">0.97</factor>
-                <factor stage="4">0.92</factor>
-                <factor stage="5">0.89</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.93</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.08</factor>
+                <factor transition="11">1.11</factor>
+                <factor transition="12">1.11</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.03</factor>
+                <factor transition="3">0.97</factor>
+                <factor transition="4">0.92</factor>
+                <factor transition="5">0.89</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.93</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.08</factor>
             </factors>
         </fill>
 
         <fill name="digestate">
             <factors>
-                <factor stage="11">1.11</factor>
-                <factor stage="12">1.11</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.03</factor>
-                <factor stage="3">0.97</factor>
-                <factor stage="4">0.92</factor>
-                <factor stage="5">0.89</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.93</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.08</factor>
+                <factor transition="11">1.11</factor>
+                <factor transition="12">1.11</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.03</factor>
+                <factor transition="3">0.97</factor>
+                <factor transition="4">0.92</factor>
+                <factor transition="5">0.89</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.93</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.08</factor>
             </factors>
         </fill>
 
         <fill name="milk">
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.07</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.01</factor>
-                <factor stage="3">0.96</factor>
-                <factor stage="4">0.9</factor>
-                <factor stage="5">0.95</factor>
-                <factor stage="6">0.95</factor>
-                <factor stage="7">1.03</factor>
-                <factor stage="8">1.09</factor>
-                <factor stage="9">0.98</factor>
-                <factor stage="10">0.96</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.07</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.01</factor>
+                <factor transition="3">0.96</factor>
+                <factor transition="4">0.9</factor>
+                <factor transition="5">0.95</factor>
+                <factor transition="6">0.95</factor>
+                <factor transition="7">1.03</factor>
+                <factor transition="8">1.09</factor>
+                <factor transition="9">0.98</factor>
+                <factor transition="10">0.96</factor>
             </factors>
         </fill>
 
         <fill name="wool">
             <factors>
-                <factor stage="11">0.93</factor>
-                <factor stage="12">0.97</factor>
-                <factor stage="1">1.13</factor>
-                <factor stage="2">1.25</factor>
-                <factor stage="3">1.29</factor>
-                <factor stage="4">1.19</factor>
-                <factor stage="5">0.99</factor>
-                <factor stage="6">0.91</factor>
-                <factor stage="7">0.81</factor>
-                <factor stage="8">0.77</factor>
-                <factor stage="9">0.85</factor>
-                <factor stage="10">0.95</factor>
+                <factor transition="11">0.93</factor>
+                <factor transition="12">0.97</factor>
+                <factor transition="1">1.13</factor>
+                <factor transition="2">1.25</factor>
+                <factor transition="3">1.29</factor>
+                <factor transition="4">1.19</factor>
+                <factor transition="5">0.99</factor>
+                <factor transition="6">0.91</factor>
+                <factor transition="7">0.81</factor>
+                <factor transition="8">0.77</factor>
+                <factor transition="9">0.85</factor>
+                <factor transition="10">0.95</factor>
             </factors>
         </fill>
 
@@ -319,52 +319,52 @@
     <bales>
         <bale type="straw">
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.10</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.06</factor>
-                <factor stage="3">1.03</factor>
-                <factor stage="4">0.97</factor>
-                <factor stage="5">0.91</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.91</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.07</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
         <bale type="dryGrass_windrow">
             <factors>
-                <factor stage="11">1.08</factor>
-                <factor stage="12">1.10</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.06</factor>
-                <factor stage="3">1.03</factor>
-                <factor stage="4">0.97</factor>
-                <factor stage="5">0.91</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.91</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.07</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
         <bale type="silage">
             <factors>
-                <factor stage="11">1.11</factor>
-                <factor stage="12">1.11</factor>
-                <factor stage="1">1.06</factor>
-                <factor stage="2">1.03</factor>
-                <factor stage="3">0.97</factor>
-                <factor stage="4">0.92</factor>
-                <factor stage="5">0.89</factor>
-                <factor stage="6">0.89</factor>
-                <factor stage="7">0.93</factor>
-                <factor stage="8">0.98</factor>
-                <factor stage="9">1.05</factor>
-                <factor stage="10">1.08</factor>
+                <factor transition="11">1.11</factor>
+                <factor transition="12">1.11</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.03</factor>
+                <factor transition="3">0.97</factor>
+                <factor transition="4">0.92</factor>
+                <factor transition="5">0.89</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.93</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.08</factor>
             </factors>
         </bale>
 

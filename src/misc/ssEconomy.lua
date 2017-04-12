@@ -84,16 +84,16 @@ function ssEconomy:loadFactorsFromXML(file, key)
         local fKey = string.format("%s.factor(%d)", key, i)
         if not hasXMLProperty(file, fKey) then break end
 
-        local stage = getXMLInt(file, fKey .. "#stage")
+        local transition = getXMLInt(file, fKey .. "#transition")
         local value = getXMLFloat(file, fKey)
 
-        factors[stage] = value
+        factors[transition] = value
 
         i = i + 1
     end
 
     if table.getn(factors) ~= 12 then
-        logInfo("ssEconomy:", "Problem in economy data: not all stages are configured in " .. key)
+        logInfo("ssEconomy:", "Problem in economy data: not all transitions are configured in " .. key)
     end
 
     return factors
@@ -297,20 +297,20 @@ function ssEconomy:seasonLengthChanged()
     self:calculateLoanInterestRate()
 end
 
-function ssEconomy:getStageAndAlpha()
-    local currentGrowthStage = g_seasons.environment:currentGrowthStage()
+function ssEconomy:getTransitionAndAlpha()
+    local currentTransition = g_seasons.environment:transitionAtDay()
 
-    local dayInStage = (g_seasons.environment:dayInSeason() - 1) % 3 + 1
-    local stageLength = g_seasons.environment.daysInSeason / 3
+    local dayInTransition = (g_seasons.environment:dayInSeason() - 1) % 3 + 1
+    local transitionLength = g_seasons.environment.daysInSeason / 3
 
-    return currentGrowthStage, (dayInStage - 1) / stageLength
+    return currentTransition, (dayInTransition - 1) / transitionLength
 end
 
 function ssEconomy:lerpFactors(factors)
-    local stage, alpha = self:getStageAndAlpha()
-    local nextStage = stage % 12 + 1
+    local transition, alpha = self:getTransitionAndAlpha()
+    local nextTransition = transition % 12 + 1
 
-    return Utils.lerp(factors[stage], factors[nextStage], alpha)
+    return Utils.lerp(factors[transition], factors[nextTransition], alpha)
 end
 
 function ssEconomy:getBaleFactor(fillType)
