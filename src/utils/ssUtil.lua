@@ -79,8 +79,8 @@ function ssUtil.monthNameShort(monthNumber)
     return ssLang.getText("SS_MONTH_SHORT_" .. tostring(monthNumber), "???")
 end
 
-function ssUtil.fullSeasonName(growthTransition)
-    return ssLang.getText("SS_SEASON_FULL_NAME_" .. tostring(growthTransition), "???")
+function ssUtil.fullSeasonName(transition)
+    return ssLang.getText("SS_SEASON_FULL_NAME_" .. tostring(transition), "???")
 end
 
 function ssUtil.nextWeekDayNumber(currentDay)

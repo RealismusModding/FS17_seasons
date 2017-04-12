@@ -10,7 +10,7 @@
 ssGrowthManagerDebugView = {}
 
 --currently for debug view only. this should probably go into ssUtil and will need translations if we use it for the gui
-ssGrowthManagerDebugView.growthTransitionIndexToName =
+ssGrowthManagerDebugView.transitionIndexToName =
 {
     [1] = "Early Spring",
     [2] = "Mid Spring",
@@ -29,7 +29,7 @@ ssGrowthManagerDebugView.growthTransitionIndexToName =
 ssGrowthManagerDebugView.debugView = false
 
 function ssGrowthManagerDebugView:loadMap(name)
-    --self:growthTransitionsDisplayData() --for testing only right now
+    --self:transitionsDisplayData() --for testing only right now
     addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
 end
 
@@ -45,10 +45,10 @@ end
 
 function ssGrowthManagerDebugView:draw()
     if self.debugView == true then
-        renderText(0.44, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled) .. " doGrowthTransition: " .. tostring(ssGrowthManager.doGrowthTransition))
-        local growthTransition = g_seasons.environment:growthTransitionAtDay()
+        renderText(0.44, 0.98, 0.01, "GM enabled: " .. tostring(ssGrowthManager.growthManagerEnabled))
+        local transition = g_seasons.environment:transitionAtDay()
 
-        renderText(0.44, 0.96, 0.01, "Growth Transition: " .. growthTransition .. " " .. self.growthTransitionIndexToName[growthTransition])
+        renderText(0.44, 0.96, 0.01, "Growth Transition: " .. transition .. " " .. self.transitionIndexToName[transition])
 
         local cropsThatCanGrow = ""
 
@@ -70,19 +70,19 @@ end
 --which transition.
 --FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5.
 --Will think of a clever way to fix that without cheating
-function ssGrowthManagerDebugView:getGrowthTransitionsDisplayData()
-    local growthTransitionsDisplayData = {}
+function ssGrowthManagerDebugView:getTransitionsDisplayData()
+    local transitionsDisplayData = {}
     local data = ssUtil.calcDaysPerTransition()
 
     for index,value in pairs(data) do
         if index % 2 == 1 then
             if value == data[index+1] then
-                growthTransitionsDisplayData[index] = tostring(value)
+                transitionsDisplayData[index] = tostring(value)
             else
-                growthTransitionsDisplayData[index] = value .. "-" .. data[index+1]
+                transitionsDisplayData[index] = value .. "-" .. data[index+1]
             end
         end
     end
 
-    return growthTransitionsDisplayData
+    return transitionsDisplayData
 end

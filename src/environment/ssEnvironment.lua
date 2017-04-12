@@ -60,7 +60,7 @@ function ssEnvironment:load(savegame, key)
 
     self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestTransition = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --leaving this as stage in the xml file until release 
+    self.latestTransition = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release 
                                                                                                             --to not break existing test save games
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
@@ -130,7 +130,7 @@ function ssEnvironment:callListeners()
     if not g_seasons.enabled then return end
 
     local currentSeason = self:currentSeason()
-    local currentTransition = self:currentTransition()
+    local currentTransition = self:transitionAtDay()
 
     -- Call season change events
     if currentSeason ~= self.latestSeason then
@@ -534,12 +534,13 @@ function ssEnvironment:transitionAtDay(dayNumber)
     end
 
     local season = self:seasonAtDay(dayNumber)
-    local cTIS = self:currentTransitionInSeason(dayNumber)
-    return (cTIS + (season*3))
+    local seasonTransition = self:getTransitionInSeason(dayNumber)
+    return (seasonTransition + (season*3))
 end
 
-
-function ssEnvironment:currentTransitionInSeason(currentDay)
+--this funtion returns the transition within a season (1,2,3)
+--most functions should not call this directly. use transitionAtDay instead to get the current transition
+function ssEnvironment:getTransitionInSeason(currentDay)
     if (currentDay == nil) then
         currentDay = self:currentDay()
     end

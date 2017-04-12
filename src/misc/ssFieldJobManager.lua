@@ -72,7 +72,7 @@ end
 --fieldJob: FieldJob.TYPE_*
 --isNPC:    bool
 function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
-    local currentGT = g_seasons.environment:growthTransitionAtDay()
+    local currentGT = g_seasons.environment:transitionAtDay()
     local env = g_seasons.environment
 
     -- Use vanilla FieldJobManager if not using seasons growthManager
