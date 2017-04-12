@@ -2,7 +2,7 @@
 -- ssEnvironment
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Adjust day/night system and implement seasons
---           Definition of a season and growth stage
+--           Definition of a season and  transitions
 -- Authors:  Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
@@ -60,7 +60,8 @@ function ssEnvironment:load(savegame, key)
 
     self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestGrowthStage = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0)
+    self.latestTransition = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --leaving this as stage in the xml file until release 
+                                                                                                            --to not break existing test save games
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
     self._doInitalDayEvent = savegame == nil
@@ -71,13 +72,13 @@ function ssEnvironment:save(savegame, key)
 
     ssStorage.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
     ssStorage.setXMLInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
-    ssStorage.setXMLInt(savegame, key .. ".environment.latestGrowthStage", self.latestGrowthStage)
+    ssStorage.setXMLInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition) --TODO: fix this before release
     ssStorage.setXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
 function ssEnvironment:loadMap(name)
     self.seasonChangeListeners = {}
-    self.growthStageChangeListeners = {}
+    self.transitionChangeListeners = {}
     self.seasonLengthChangeListeners = {}
 
     -- Add day change listener to handle new dayNight system and new events
@@ -96,7 +97,7 @@ function ssEnvironment:readStream(streamId, connection)
     g_currentMission.environment.currentDay = streamReadInt32(streamId)
     self.daysInSeason = streamReadInt32(streamId)
     self.latestSeason = streamReadInt32(streamId)
-    self.latestGrowthStage = streamReadInt32(streamId)
+    self.latestTransition = streamReadInt32(streamId)
     self.currentDayOffset = streamReadInt32(streamId)
 
     self:setupDayNight()
@@ -108,7 +109,7 @@ function ssEnvironment:writeStream(streamId, connection)
     streamWriteInt32(streamId, g_currentMission.environment.currentDay)
     streamWriteInt32(streamId, self.daysInSeason)
     streamWriteInt32(streamId, self.latestSeason)
-    streamWriteInt32(streamId, self.latestGrowthStage)
+    streamWriteInt32(streamId, self.latestTransition)
     streamWriteInt32(streamId, self.currentDayOffset)
 end
 
@@ -129,7 +130,7 @@ function ssEnvironment:callListeners()
     if not g_seasons.enabled then return end
 
     local currentSeason = self:currentSeason()
-    local currentGrowthStage = self:currentGrowthStage()
+    local currentTransition = self:currentTransition()
 
     -- Call season change events
     if currentSeason ~= self.latestSeason then
@@ -140,12 +141,12 @@ function ssEnvironment:callListeners()
         end
     end
 
-    -- Call growth stage events
-    if currentGrowthStage ~= self.latestGrowthStage then
-        self.latestGrowthStage = currentGrowthStage
+    -- Call  transition events
+    if currentTransition ~= self.latestTransition then
+        self.latestTransition = currentTransition
 
-        for _, listener in pairs(self.growthStageChangeListeners) do
-            listener:growthStageChanged()
+        for _, listener in pairs(self.transitionChangeListeners) do
+            listener:transitionChanged()
         end
     end
 end
@@ -163,16 +164,16 @@ function ssEnvironment:removeSeasonChangeListener(listener)
     end
 end
 
--- Listeners for a change of growth stage
-function ssEnvironment:addGrowthStageChangeListener(listener)
+-- Listeners for a change of transition
+function ssEnvironment:addTransitionChangeListener(listener)
     if listener ~= nil then
-        self.growthStageChangeListeners[listener] = listener
+        self.transitionChangeListeners[listener] = listener
     end
 end
 
-function ssEnvironment:removeGrowthStageChangeListener(listener)
+function ssEnvironment:removeTransitionChangeListener(listener)
     if listener ~= nil then
-        self.growthStageChangeListeners[listener] = nil
+        self.transitionChangeListeners[listener] = nil
     end
 end
 
@@ -484,11 +485,11 @@ end
 
 -- Retuns month number based on dayNumber
 function ssEnvironment:monthAtDay(dayNumber)
-    return self:monthAtGrowthTransitionNumber(self:growthTransitionAtDay(dayNumber))
+    return self:monthAtTransitionNumber(self:transitionAtDay(dayNumber))
 end
 
-function ssEnvironment:monthAtGrowthTransitionNumber(growthTransitionNumber)
-    local monthNumber = math.fmod( growthTransitionNumber, self.MONTHS_IN_YEAR) + 2
+function ssEnvironment:monthAtTransitionNumber(transitionNumber)
+    local monthNumber = math.fmod(transitionNumber, self.MONTHS_IN_YEAR) + 2
     if monthNumber > 12 then --because 11 becomes 13 TODO: brain gone  need to improve
         monthNumber = 1
     end
@@ -517,8 +518,8 @@ function ssEnvironment:yearAtDay(dayNumber)
     return math.floor((dayNumber - 1) / (self.daysInSeason * self.SEASONS_IN_YEAR))
 end
 
-function ssEnvironment:nextGrowthTransition()
-    local cGT = self:growthTransitionAtDay()
+function ssEnvironment:nextTransition()
+    local cGT = self:transitionAtDay()
     if cGT == 12 then
         return 1
     else
@@ -527,18 +528,18 @@ function ssEnvironment:nextGrowthTransition()
 end
 
 --uses currentDay if dayNumber not passed in
-function ssEnvironment:growthTransitionAtDay(dayNumber)
+function ssEnvironment:transitionAtDay(dayNumber)
     if (dayNumber == nil) then
         dayNumber = self:currentDay()
     end
 
     local season = self:seasonAtDay(dayNumber)
-    local cGS = self:currentGrowthStage(dayNumber)
-    return (cGS + (season*3))
+    local cTIS = self:currentTransitionInSeason(dayNumber)
+    return (cTIS + (season*3))
 end
 
 
-function ssEnvironment:currentGrowthStage(currentDay)
+function ssEnvironment:currentTransitionInSeason(currentDay)
     if (currentDay == nil) then
         currentDay = self:currentDay()
     end

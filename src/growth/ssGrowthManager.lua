@@ -87,7 +87,7 @@ function ssGrowthManager:loadMap(name)
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
-        g_seasons.environment:addGrowthStageChangeListener(self)
+        g_seasons.environment:addTransitionChangeListener(self)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
 
@@ -137,8 +137,8 @@ function ssGrowthManager:resetGrowth()
     end
 end
 
---handle growthStageCHanged event
-function ssGrowthManager:growthStageChanged()
+--handle transitionChanged event
+function ssGrowthManager:transitionChanged()
     if self.growthManagerEnabled == false then return end
 
     local growthTransition = g_seasons.environment:growthTransitionAtDay()
@@ -157,7 +157,7 @@ function ssGrowthManager:growthStageChanged()
 end
 
 -- reset the willGerminateData and rebuild it based on the current transition
--- called just after growthStageChanged
+-- called just after growthTransitionChanged
 function ssGrowthManager:rebuildWillGerminateData()
     self.willGerminateData = {}
     self:dayChanged()
@@ -390,7 +390,7 @@ function ssGrowthManager:buildCanHarvestData()
     end
 end
 
--- simulate growth helper function to calculate the next growth stage based on current growth stage and the current transition
+-- simulate growth helper function to calculate the next growth state based on current growth state and the current transition
 function ssGrowthManager:simulateGrowth(fruitName, transitionToCheck, currentGrowthState)
     local newGrowthState = currentGrowthState
 

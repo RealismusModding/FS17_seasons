@@ -18,7 +18,7 @@ end
 
 function ssSwathManager:loadMap(name)
     if g_currentMission:getIsServer() then
-        g_seasons.environment:addGrowthStageChangeListener(self)
+        g_seasons.environment:addTransitionChangeListener(self)
         g_currentMission.environment:addDayChangeListener(self)
         g_currentMission.environment:addHourChangeListener(self)
 
@@ -115,7 +115,7 @@ function ssSwathManager:hourChanged()
     end
 end
 
-function ssSwathManager:growthStageChanged()
+function ssSwathManager:transitionChanged()
     if g_currentMission:getIsServer() then
         -- removing all swaths at beginning of winter
         if g_seasons.environment:growthTransitionAtDay() == g_seasons.environment.TRANSITION_EARLY_WINTER then
