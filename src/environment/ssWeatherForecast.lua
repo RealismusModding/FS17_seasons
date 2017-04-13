@@ -51,8 +51,10 @@ function ssWeatherForecast:loadMap(name)
 
         -- clock overlay and cloud and ground for day hud
         local width, height = getNormalizedScreenValues(64, 64)
-        self.hud.overlays.clock_overlay = Overlay:new("clock_overlay",  Utils.getFilename("resources/huds/clock_overlay.dds", g_seasons.modDir), 0, 0, height, height)
-        self.hud.overlays.clock_symbol = Overlay:new("clock_symbol",  Utils.getFilename("resources/huds/clock_symbol.dds", g_seasons.modDir), 0, 0, height, height)
+        local _, y = getNormalizedScreenValues(0, 5)
+        g_currentMission.timeOffsetY = g_currentMission.timeOffsetY + y
+        g_currentMission.timeIconOverlay.y = g_currentMission.timeIconOverlay.y + y
+
         self.hud.overlays.ground_symbol = Overlay:new("ground_symbol",  Utils.getFilename("resources/huds/ground_symbol.dds", g_seasons.modDir), 0, 0, height, height)
         self.hud.overlays.cloud_symbol = Overlay:new("cloud_symbol",  Utils.getFilename("resources/huds/cloud_symbol.dds", g_seasons.modDir), 0, 0, height, height)
 
@@ -175,15 +177,13 @@ end
 function ssWeatherForecast:drawToday(forecast)
     -- x-position of overlays has to be dynamically defined
     self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.10 * self.guiScale / g_screenAspectRatio * screenAspectRatio
-    self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - self.hud.clockWidth*1.45
-    -- Render clock background
-    renderOverlay(self.hud.overlays.clock_overlay.overlayId, self.hud.clockPosX , self.hud.clockPosY, self.hud.clockWidth, self.hud.clockHeight)
+    self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - self.hud.clockWidth * 1.42 -- 1.45
 
     -- Render clock
     setTextAlignment(RenderText.ALIGN_CENTER)
-    renderText(self.hud.clockPosX + self.hud.clockWidth/2 + self.hud.iconWidthSmall/2,self.hud.clockPosY + self.hud.clockHeight/2, self.hud.textSize*2.3, string.format("%02d:%02d", g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute))
-    renderOverlay(self.hud.overlays.clock_symbol.overlayId, self.hud.clockPosX + self.hud.iconWidthSmall/2, self.hud.clockPosY + self.hud.clockHeight/2.6, self.hud.iconWidthSmall*1.5, self.hud.iconHeightSmall*1.5)
-    renderText(self.hud.clockPosX + self.hud.clockWidth/2,self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.fullSeasonName(g_seasons.environment:transitionAtDay(forecast[1].day))))
+
+    -- Render day and season
+    renderText(self.hud.clockPosX + self.hud.clockWidth / 2, self.hud.clockPosY, self.hud.textSize*1.5, string.format("%02d/%s", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.fullSeasonName(g_seasons.environment:transitionAtDay(forecast[1].day))))
 
     -- Render Background
     renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
