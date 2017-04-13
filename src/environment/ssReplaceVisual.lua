@@ -139,13 +139,37 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
                 local fruitName = getXMLString(file, fruitKey .. "#name")
                 local toShape = getXMLString(file, fruitKey .. "#to")
 
-                if fruitName == nil or toShape == nik then
+                if fruitName == nil or toShape == nil then
                     logInfo("ssReplaceVisual:", "Failed to load fruit replacements configuration from " .. path .. ": invalid format")
                     return
                 end
 
                 season._fruits[fruitName] = {
                     ["to"] = toShape
+                }
+
+                i = i + 1
+            end
+
+
+            i = 0
+            season._foliageLayers = {}
+            while true do
+                local foliageKey = string.format("%s.foliageLayer(%i)", seasonKey, i)
+                if not hasXMLProperty(file, foliageKey) then break end
+
+                local layerName = getXMLString(file, foliageKey .. "#name")
+                local toShape = getXMLString(file, foliageKey .. "#to")
+                local visible = Utils.getNoNil(getXMLBool(file, foliageKey .. "#visible"), true)
+
+                if layerName == nil or (toShape == nil and visible == true) then
+                    logInfo("ssReplaceVisual:", "Failed to load foliage layer replacements configuration from " .. path .. ": invalid format")
+                    return
+                end
+
+                season._foliageLayers[layerName] = {
+                    ["to"] = toShape,
+                    ["visible"] = visible
                 }
 
                 i = i + 1
@@ -159,6 +183,7 @@ end
 function ssReplaceVisual:update(dt)
     if self.once ~= true and g_currentMission:getIsClient() then
         self:updateFruits()
+        self:updateFoliageLayers()
         self.once = true
     end
 end
@@ -207,6 +232,7 @@ function ssReplaceVisual:seasonChanged()
     if g_currentMission:getIsClient() then
         self:updateTextures()
         self:updateFruits()
+        self:updateFoliageLayers()
     end
 end
 
@@ -248,7 +274,13 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
         self.textureReplacements.default._fruits = {}
     end
 
+    if self.textureReplacements.default._foliageLayers == nil then
+        self.textureReplacements.default._foliageLayers = {}
+    end
+
     for seasonId, seasonTable in pairs(self.textureReplacements) do
+        if seasonId ~= "default" then
+
         for shapeName, shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName, secondaryNodeTable in pairs(shapeNameTable) do
                 local materialSrcId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
@@ -257,6 +289,7 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                     -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
                     self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialId = getMaterial(materialSrcId, 0)
 
+                    -- Load the current material
                     if self.textureReplacements.default[shapeName] == nil then
                         self.textureReplacements.default[shapeName] = {}
                     end
@@ -281,6 +314,8 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
             end
         end
 
+
+
         if self.textureReplacements[seasonId]._fruits ~= nil then
             local fruits = self.textureReplacements[seasonId]._fruits
 
@@ -291,6 +326,25 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                     data.materialId = getMaterial(node, 0)
                 end
             end
+        end
+
+        if self.textureReplacements[seasonId]._foliageLayers ~= nil then
+            local layers = self.textureReplacements[seasonId]._foliageLayers
+
+            for layerName, data in pairs(layers) do
+                if data.to ~= nil then
+                    local node = self:findNodeByName(searchBase, data.to)
+
+                    if node ~= nil then
+                        data.materialId = getMaterial(node, 0)
+                    end
+                end
+
+                -- To be able to iterate over it
+                self.textureReplacements.default._foliageLayers[layerName] = 0
+            end
+        end
+
         end
     end
 end
@@ -404,6 +458,7 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
     -- Update
     self:updateTextures()
     self:updateFruits()
+    self:updateFoliageLayers()
 
     -- Fix getter
     g_seasons.environment.currentSeason = oldCurrentSeason
@@ -411,4 +466,51 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
     self.debug = false
 
     return "Updated textures to " .. tostring(season)
+end
+
+function ssReplaceVisual:updateFoliageLayers()
+    local layers = self.textureReplacements[g_seasons.environment:currentSeason()]._foliageLayers
+
+    for layerName, defaultMaterial in pairs(self.textureReplacements.default._foliageLayers) do
+        local layerId = getChild(g_currentMission.terrainRootNode, layerName)
+        local seasonLayer = layers[layerName]
+
+        if layerId ~= 0 then
+            -- Load default
+            if defaultMaterial == 0 then
+                defaultMaterial = getMaterial(getChildAt(layerId, 0), 0)
+
+                self.textureReplacements.default._foliageLayers[layerName] = defaultMaterial
+
+                -- Store in a shape against GC
+                if defaultMaterial ~= nil and self.tmpMaterialHolderNodeId ~= nil then
+                    local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+
+                    link(getRootNode(), nodeId)
+                    setMaterial(nodeId, defaultMaterial, 0)
+                end
+            end
+
+            if layers[layerName] ~= nil then
+                -- Set updated material. Use default if not supplied (visibility toggle only)
+                if seasonLayer.materialId ~= nil then
+                    self:setFoliageMaterial(layerId, seasonLayer.materialId)
+                else
+                    self:setFoliageMaterial(layerId, defaultMaterial)
+                end
+
+                setVisibility(layerId, seasonLayer.visible)
+            else
+                -- Set default material
+                self:setFoliageMaterial(layerId, defaultMaterial)
+                setVisibility(layerId, true)
+            end
+        end
+    end
+end
+
+function ssReplaceVisual:setFoliageMaterial(layerId, material)
+    for i = 0, getNumOfChildren(layerId) - 1 do
+        setMaterial(getChildAt(layerId, i), material, 0)
+    end
 end
