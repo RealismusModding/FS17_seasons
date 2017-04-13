@@ -30,10 +30,23 @@ function ssSeasonsMenu:new(target, custom_mt)
     self.BLOCK_TYPE_PLANTABLE = 1
     self.BLOCK_TYPE_HARVESTABLE = 2
 
-    self.overview.blockColors = {
-        [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.5271, 0.0307, 1},
-        -- plantable = {0.662, 0.816, 0.557, 1},
-        [self.BLOCK_TYPE_HARVESTABLE] = {0.9301, 0.6404, 0.0439, 1}
+
+    self.overview.blockColors = {}
+
+    -- Colorblind = false
+    self.overview.blockColors[false] = {
+        -- [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.5271, 0.0307, 1},
+        -- [self.BLOCK_TYPE_HARVESTABLE] = {0.9301, 0.6404, 0.0439, 1}
+        [self.BLOCK_TYPE_PLANTABLE] = {0.0143, 0.2582, 0.0126, 1},
+        -- 0.1454, 0.5583, 0.0341
+        [self.BLOCK_TYPE_HARVESTABLE] = {0.8308, 0.5841, 0.0529, 1}
+    }
+
+    -- Colorblind = true
+    self.overview.blockColors[true] = {
+        [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.1779, 0.0027, 1},
+        -- 1.0000, 0.9046, 0.0130
+        [self.BLOCK_TYPE_HARVESTABLE] = {0.3372, 0.4397, 0.9911, 1}
     }
 
     return self
@@ -400,6 +413,8 @@ function ssSeasonsMenu:drawOverview(element)
     local topLeftX = (element.size[1] - o.totalWidth) / 2
     local headerLeft = topLeftX + o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth
 
+    local colorBlind = g_gameSettings:getValue("useColorblindMode")
+
     -- Print header
     setTextColor(1, 1, 1, 1)
 
@@ -498,7 +513,7 @@ function ssSeasonsMenu:drawOverview(element)
                 fruitY + blockInY,
                 o.transitionWidth * (block.e - block.s + 1),
                 o.transitionHeight,
-                self.overview.blockColors[block.type]
+                self.overview.blockColors[colorBlind][block.type]
             )
         end
 
@@ -516,7 +531,7 @@ function ssSeasonsMenu:drawOverview(element)
         o.topLeftY + o.headerHeight,
         o.guideWidth,
         guideHeight,
-        {0.8069, 0.0097, 0.0097, 1}
+        colorBlind and {1.0000, 0.8632, 0.0232, 1} or {0.8069, 0.0097, 0.0097, 1}
     )
     -- log("guideY", o.topLeftY + o.headerHeight, "height", guideHeight, "sum", o.topLeftY + o.headerHeight + guideHeight)
 
@@ -539,7 +554,7 @@ function ssSeasonsMenu:drawOverview(element)
         footerY,
         o.transitionWidth,
         o.transitionHeight,
-        self.overview.blockColors[self.BLOCK_TYPE_PLANTABLE]
+        self.overview.blockColors[colorBlind][self.BLOCK_TYPE_PLANTABLE]
     )
     o.rect:renderText(
         topLeftX + o.transitionWidth + o.fruitSpacerWidth,
@@ -555,7 +570,7 @@ function ssSeasonsMenu:drawOverview(element)
         footerY + o.transitionHeight + o.textSpacingHeight,
         o.transitionWidth,
         o.transitionHeight,
-        self.overview.blockColors[self.BLOCK_TYPE_HARVESTABLE]
+        self.overview.blockColors[colorBlind][self.BLOCK_TYPE_HARVESTABLE]
     )
     o.rect:renderText(
         topLeftX + o.transitionWidth + o.fruitSpacerWidth,
