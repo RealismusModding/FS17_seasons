@@ -98,7 +98,8 @@
             <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_winter" />
             <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_winter" />
 
-            <fruit name="grass" to="grass_winter" />
+            <!-- <fruit name="grass" to="grass_winter" /> -->
+            <foliageLayer name="grass" to="grass_winter" />
         </winter>
     </seasons>
 </textures>
