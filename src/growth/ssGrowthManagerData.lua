@@ -213,7 +213,7 @@ function ssGrowthManagerData:getDefaultFruitsData(rootKey, file, parentData)
                 if maxSprayGrowthState ~= nil then
                     defaultFruits[fruitName].maxSprayGrowthState = maxSprayGrowthState
                 else
-                    defaultFruits[fruitName].maxSprayGrowthState = 0
+                    defaultFruits[fruitName].maxSprayGrowthState = 4
                 end
             else
                 logInfo("ssGrowthManagerData:", "getDefaultFruitsData: XML loading failed " .. defaultFruitKey )
