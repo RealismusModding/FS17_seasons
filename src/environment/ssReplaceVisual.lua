@@ -109,7 +109,11 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
                 local secondaryNodeName = getXMLString(file, textureKey .. "#secondaryNodeName")
                 local toTexture = getXMLString(file, textureKey .. "#to")
 
-                if shapeName == nil or secondaryNodeName == nil or toTexture == nil then
+                if secondaryNodeName == nil then
+                    secondaryNodeName = ""
+                end
+
+                if shapeName == nil or toTexture == nil then
                     logInfo("ssReplaceVisual:", "Failed to load texture replacements configuration from " .. path .. ": invalid format")
                     return
                 end
@@ -300,6 +304,10 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
 
     -- print("DEBUG: " .. parentShapeId )
     if parentShapeId ~= nil then
+        if secondaryNodeName == "" then
+            return getMaterial(parentShapeId, 0)
+        end
+
         childShapeId = (self:findNodeByName(parentShapeId, secondaryNodeName))
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
@@ -316,18 +324,27 @@ function ssReplaceVisual:updateTextures(nodeId)
     end
 
     local season = g_seasons.environment:currentSeason()
+    local nodeName = getName(nodeId)
 
-    if self.textureReplacements[season][getName(nodeId)] ~= nil then
+    if self.textureReplacements[season][nodeName] ~= nil then
         -- If there is a texture for this season and node, set it
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[season][getName(nodeId)]) do
+            if secondaryNodeName == "" then
+                secondaryNodeName = nodeName
+            end
+
             if secondaryNodeTable.materialId ~= nil then
                 -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
             end
         end
-    elseif self.textureReplacements.default[getName(nodeId)] ~= nil then
+    elseif self.textureReplacements.default[nodeName] ~= nil then
         -- Otherwise, set the default
         for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements.default[getName(nodeId)]) do
+            if secondaryNodeName == "" then
+                secondaryNodeName = nodeName
+            end
+
             -- MATERIALID is NULL for birch
             if secondaryNodeTable.materialId ~= nil then
                 -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
