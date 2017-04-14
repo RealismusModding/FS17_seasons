@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------------------------------------
--- SCRIPT TO ADD PHYSICAL SNOW LAYERS
+-- SCRIPT TO ADJUST VISUALS DEPENDING ON SEASON
 ----------------------------------------------------------------------------------------------------
--- Purpose:  to create plowable snow on the ground
--- Authors:  mrbear
+-- Purpose:  to add autumn/winter/spring trees and other adjustables
+-- Authors:  mrbear, Rahkiin
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
