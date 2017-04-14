@@ -130,7 +130,10 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             end
 
             i = 0
-            season._foliageLayers = {}
+            if season._foliageLayers == nil then
+                season._foliageLayers = {}
+            end
+
             while true do
                 local foliageKey = string.format("%s.foliageLayer(%i)", seasonKey, i)
                 if not hasXMLProperty(file, foliageKey) then break end
