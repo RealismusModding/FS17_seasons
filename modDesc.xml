@@ -8,12 +8,14 @@
         <en>Seasons</en>
         <fr>Seasons</fr>
         <de>Seasons</de>
+        <es>Estaciones</es>
     </title>
 
     <description>
         <en>Seasons</en>
         <fr>Seasons</fr>
         <de>Seasons</de>
+        <es><![CDATA[Estaciones es un mod que, como bien indica su nombre, simula las estaciones añadiendo sus características y un punto más de realismo al juego.]]></es>
     </description>
 
     <iconFilename>icon.dds</iconFilename>
