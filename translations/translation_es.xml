@@ -2,12 +2,11 @@
 <l10n>
     <translationContributors>PromGames</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Muostrar predicción del tiempo" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Reparar vehículo" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Abrir menu" />
-        <!-- Missing translation of "Planting distance (%d m)" -->
-        <text name="input_SEASONS_PLANTING_DISTANCE" text="" />
-        <text name="SEASONS_HIDE_WF" text="Seasons: Ocultar predicción tiempo" />
+        <text name="input_SEASONS_SHOW_WF" text="Estaciones: Mostrar predicción del tiempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Estaciones: Reparar vehículo" />
+        <text name="input_SEASONS_SHOW_MENU" text="Estaciones: Abrir menu" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Falta %d m para sembrar" />
+        <text name="SEASONS_HIDE_WF" text="Estaciones: Ocultar predicción tiempo" />
 
         <text name="SS_WEEKDAY_1" text="Lunes" />
         <text name="SS_WEEKDAY_2" text="Martes" />
@@ -30,18 +29,18 @@
         <text name="SS_SEASON_2" text="Otoño" />
         <text name="SS_SEASON_3" text="Invierno" />
 
-        <text name="SS_SEASON_FULL_NAME_1" text="Early Spring" />
-        <text name="SS_SEASON_FULL_NAME_2" text="Mid Spring" />
-        <text name="SS_SEASON_FULL_NAME_3" text="Late Spring" />
-        <text name="SS_SEASON_FULL_NAME_4" text="Early Summer" />
-        <text name="SS_SEASON_FULL_NAME_5" text="Mid Summer" />
-        <text name="SS_SEASON_FULL_NAME_6" text="Late Summer" />
-        <text name="SS_SEASON_FULL_NAME_7" text="Early Autumn" />
-        <text name="SS_SEASON_FULL_NAME_8" text="Mid Autumn" />
-        <text name="SS_SEASON_FULL_NAME_9" text="Late Autumn" />
-        <text name="SS_SEASON_FULL_NAME_10" text="Early Winter" />
-        <text name="SS_SEASON_FULL_NAME_11" text="Mid Winter" />
-        <text name="SS_SEASON_FULL_NAME_12" text="Late Winter" />
+        <text name="SS_SEASON_FULL_NAME_1" text="Inicio Primavera" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mediados Primavera" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Final Privamera" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Inicio Verano" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Mediados Verano" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Final Verano" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Inicio Otoño" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Mediados Otoño" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Final Otoño" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Inicio Invierno" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mediados Invierno" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Final Invierno" />
 
         <text name="SS_MONTH_SHORT_1" text="Ene" />
         <text name="SS_MONTH_SHORT_2" text="Feb" />
@@ -68,66 +67,58 @@
         <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento el %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
         <text name="warning_repairBrokenMachine" text="Motor roto. Repare su vehículo!" />
-        <text name="SS_REPAIR_AT_MIDNIGHT" text="a medianoche" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
-        <text name="SS_SAVE_FAILED" text="Error al guardar el Seaons savegame. Inténtelo de nuevo!" />
+        <text name="SS_SAVE_FAILED" text="Error al guardar el Estaciones. Inténtelo de nuevo!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Un nuevo año, nuevo periodo de siembra. TODO" />
-        <text name="SS_SEASON_INTRO_1" text="El sol está potente, sus cosechas crecen. TODO" />
-        <text name="SS_SEASON_INTRO_2" text="La tempoprada de recolección ha llegado. Preparese para el invierno porque sus cosechas no sobrevivirán al frío. TODO" />
-        <text name="SS_SEASON_INTRO_3" text="Está helando. El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá. TODO" />
+        <text name="SS_SEASON_INTRO_0" text="Un nuevo año, nuevo periodo de siembra." />
+        <text name="SS_SEASON_INTRO_1" text="El sol está ha pleno rendimiento, sus cosechas crecen." />
+        <text name="SS_SEASON_INTRO_2" text="La tempoprada de recolección ha llegado. Preparese para el invierno porque sus cosechas no sobrevivirán al frío." />
+        <text name="SS_SEASON_INTRO_3" text="Está helando. El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="No mostrar de nuevo" />
 
         <text name="warning_soilIsFrozen" text="El terreno está congelado. No puede trabajar en él!" />
-        <!-- Missing translation of "Do not thresh when the crops are too wet!" -->
-        <text name="warning_doNotThreshWithMoisture" text="" />
-        <!-- Missing translation of "Animals died (%d)" -->
-        <text name="warning_animalsKilled" text="" />
-        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
-        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+        <text name="warning_doNotThreshWithMoisture" text="No se puede trillar con el cultivo mojado" />
+        <text name="warning_animalsKilled" text="%d ha muerto" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
 
         <text name="ui_pageOverview" text="General" />
         <text name="ui_pageSettings" text="Configuración" />
-        <text name="ui_pageDebug" text="Herramientas Debug" />
+        <text name="ui_pageDebug" text="Herramientas Desarrollo" />
 
         <text name="ui_buttonSave" text="Aplicar cambios" />
-        <text name="ui_snowOneLayer" text="1 capa sólo" />
+        <text name="ui_snowOneLayer" text="Solo 1 capa" />
         <text name="ui_days" text="%i días" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelcius" text="Celsius" />
 
-        <!-- Missing translation of "Planting season" -->
-        <text name="ui_plantingSeason" text="" />
-        <!-- Missing translation of "Harvest season" -->
-        <text name="ui_harvestSeason" text="" />
+        <text name="ui_plantingSeason" text="Temporada de Siembra" />
+        <text name="ui_harvestSeason" text="Temporada de Cosecha" />
 
         <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones." />
         <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación." />
-        <text name="tooltip_snow" text="Nevará en el frío invierno and se bloquearán las carreteras." />
-        <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en la ayuda." />
-        <text name="tooltip_snowTracks" text="Los vehículos comprimirán la nieve cuando pasen por encima." />
+        <text name="tooltip_snow" text="Nevará en el frío invierno y se bloquearán las carreteras." />
+        <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en panel de ayuda (F1)." />
+        <text name="tooltip_snowTracks" text="Los vehículos compactarán la nieve cuando pasen por encima." />
         <text name="tooltip_controlsTemperature" text="Define la escala de temperatura en el juego" />
-        <!-- Missing translation of "Disallow threshing when crops are wet of moisture" -->
-        <text name="tooltip_moisture" text="" />
+        <text name="tooltip_moisture" text="No permite trabajar los cultivos caundo están húmedos." />
 
-        <text name="setting_seasonIntros" text="Introducciones estaciones" />
+        <text name="setting_seasonIntros" text="Introducción Estaciones" />
         <text name="setting_seasonLength" text="Duración de la estación" />
         <text name="setting_snow" text="Modo nevando" />
         <text name="setting_controlsHelp" text="Teclas en menu de ayuda" />
         <text name="setting_snowTracks" text="Cadenas para la nieve" />
         <text name="setting_controlsTemperature" text="Escala de temperatura" />
-        <!-- Missing translation of "Crop moisture" -->
-        <text name="setting_moisture" text="" />
+        <text name="setting_moisture" text="Cultivo Húmedo" />
 
         <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerá después de un año de juego." />
 
-        <text name="dialog_resetGrowth" text="Ha cargado un savegame antiguo. Seasons debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Seasons no funcionará como se espera." />
-        <text name="dialog_resetGrowth_title" text="Reset crecimiento" />
+        <text name="dialog_resetGrowth" text="Ha cargado una partida antigua. Estaciones debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Estaciones no funcionará como debiera." />
+        <text name="dialog_resetGrowth_title" text="Resetear crecimiento" />
         <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
 
-        <!-- Missing translation of "Snow" -->
-        <text name="fillType_snow" text="" />
+        <text name="fillType_snow" text="Nieve" />
     </texts>
 </l10n>
