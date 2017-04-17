@@ -5,8 +5,7 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Zobrazit předpověď počasí" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Oprava vozidla" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otevřít menu" />
-        <!-- Missing translation of "Planting distance (%d m)" -->
-        <text name="input_SEASONS_PLANTING_DISTANCE" text="" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Skrýt předpověď počasí" />
 
         <text name="SS_WEEKDAY_1" text="Pondělí" />
@@ -94,10 +93,8 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelcius" text="Celsius" />
 
-        <!-- Missing translation of "Planting season" -->
-        <text name="ui_plantingSeason" text="" />
-        <!-- Missing translation of "Harvest season" -->
-        <text name="ui_harvestSeason" text="" />
+        <text name="ui_plantingSeason" text="Sezóna výsadby" />
+        <text name="ui_harvestSeason" text="Sezóna sklizně" />
 
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období." />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období." />
