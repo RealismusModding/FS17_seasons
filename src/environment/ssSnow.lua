@@ -117,6 +117,7 @@ function ssSnow:applySnow(targetSnowDepth)
         self.snowLayersDelta = 100
         ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         self.updateSnow = false
+        self.appliedSnowDepth = 0
     elseif targetSnowDepth > 0 then
         self.updateSnow = true
     end
