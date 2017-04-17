@@ -105,8 +105,8 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     -- Use vanilla FieldJobManager if not using seasons growthManager
     if not g_seasons.growthManager.growthManagerEnabled then return true end
 
-    -- Allow nothing when ground is frozen
-    if g_seasons.weather:isGroundFrozen() then return false end
+    -- Allow nothing when ground is frozen or snow-covered
+    if g_seasons.weather:isGroundFrozen() or g_seasons.snow.appliedSnowDepth > 0 then return false end
 
     -- Always allow fertilizing missions
     if fieldJob == FieldJob.TYPE_FERTILIZING_GROWING or fieldJob == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJob == FieldJob.TYPE_FERTILIZING_SOWN then
