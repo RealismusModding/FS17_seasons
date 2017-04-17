@@ -2,11 +2,11 @@
 <l10n>
     <translationContributors>PromGames</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Estaciones: Mostrar predicción del tiempo" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Estaciones: Reparar vehículo" />
-        <text name="input_SEASONS_SHOW_MENU" text="Estaciones: Abrir menu" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostrar predicción del tiempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Reparar vehículo" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Abrir menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Falta %d m para sembrar" />
-        <text name="SEASONS_HIDE_WF" text="Estaciones: Ocultar predicción tiempo" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Ocultar predicción tiempo" />
 
         <text name="SS_WEEKDAY_1" text="Lunes" />
         <text name="SS_WEEKDAY_2" text="Martes" />
@@ -79,7 +79,7 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="No mostrar de nuevo" />
 
         <text name="warning_soilIsFrozen" text="El terreno está congelado. No puede trabajar en él!" />
-        <text name="warning_doNotThreshWithMoisture" text="No se puede trillar con el cultivo mojado" />
+        <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado" />
         <text name="warning_animalsKilled" text="%d ha muerto" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
 
