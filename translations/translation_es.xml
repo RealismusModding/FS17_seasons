@@ -63,18 +63,18 @@
         <text name="SS_VEHICLE_REPAIRED" text="Coste de mantenimiento para %s fue %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Mantenimiento %s para %s" />
         <text name="SS_REPAIR_REQUIRED" text="Mantenimiento necesario" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas o %d días hasta mantenimiento" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas de trabajo o %d días hasta mantenimiento" />
         <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento el %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
         <text name="warning_repairBrokenMachine" text="Motor roto. Repare su vehículo!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
-        <text name="SS_SAVE_FAILED" text="Error al guardar el Estaciones. Inténtelo de nuevo!" />
+        <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
 
         <text name="SS_SEASON_INTRO_0" text="Un nuevo año, nuevo periodo de siembra." />
         <text name="SS_SEASON_INTRO_1" text="El sol está ha pleno rendimiento, sus cosechas crecen." />
         <text name="SS_SEASON_INTRO_2" text="La tempoprada de recolección ha llegado. Preparese para el invierno porque sus cosechas no sobrevivirán al frío." />
-        <text name="SS_SEASON_INTRO_3" text="Está helando. El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá." />
+        <text name="SS_SEASON_INTRO_3" text="¡Está helando! El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="No mostrar de nuevo" />
 
@@ -99,7 +99,7 @@
         <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones." />
         <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación." />
         <text name="tooltip_snow" text="Nevará en el frío invierno y se bloquearán las carreteras." />
-        <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en panel de ayuda (F1)." />
+        <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en panel de ayuda." />
         <text name="tooltip_snowTracks" text="Los vehículos compactarán la nieve cuando pasen por encima." />
         <text name="tooltip_controlsTemperature" text="Define la escala de temperatura en el juego" />
         <text name="tooltip_moisture" text="No permite trabajar los cultivos caundo están húmedos." />
