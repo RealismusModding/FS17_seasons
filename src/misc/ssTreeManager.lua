@@ -56,7 +56,7 @@ function ssTreeManager:update(dt)
             g_currentMission.plantedTrees.growingTrees[i].growthState = 0.65
 
         elseif growTrees[i].minDistanceNeighbour < 4.0 and growTrees[i].growthState > 0.85 then
-            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.65
+            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.85
         end
     end
 end

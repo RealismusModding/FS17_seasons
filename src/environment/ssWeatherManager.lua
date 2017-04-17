@@ -244,7 +244,10 @@ function ssWeatherManager:buildForecast()
     local startDayNum = g_seasons.environment:currentDay()
     local ssTmax
 
-    self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter. May not be correct if rebuilding forecast.
+    if self.prevHighTemp == nil then
+        self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter.
+    end
+    
     self.forecast = {}
     self.weather = {}
 
@@ -413,14 +416,8 @@ function ssWeatherManager:calculateSnowAccumulation()
     local currentTemp = self:currentTemperature()
     local currentSnow = self.snowDepth
 
-    --- more radiation during spring
-    --local meltFactor = 1
-    --if self.forecast[1].season ~= g_seasons.environment.SEASON_WINTER then
-    --    meltFactor = 5
-    --end
-
     -- calculating snow melt as a function of radiation
-    local meltFactor = self:calculateSolarRadiation()
+    local meltFactor = self:calculateSolarRadiation() * math.max(6 / g_seasons.environment.daysInSeason,1)
 
     if currentRain == nil then
         if currentTemp > -1 then
