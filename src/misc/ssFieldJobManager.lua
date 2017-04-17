@@ -19,7 +19,7 @@ end
 function ssFieldJobManager:loadMap(name)
 end
 
---filter what jobs are carried out by the FieldJobManager
+-- Filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
     if self.coverCounter == nil then self.coverCounter = 0 end; --FIXME: maybe when ssFieldJobManager initializes?
 
@@ -27,7 +27,7 @@ function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
         superFunc(self, dt + self.coverCounter)
         self.coverCounter = 0
 
-        --check if field job was started by NPC, terminate if not appropriate for current season
+        -- Check if field job was started by NPC, terminate if not appropriate for current season
         if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
             local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
             -- local paramFruitType        = self.fieldStatusParametersToSet[1].missionFruitType --current growing fruit
@@ -48,12 +48,20 @@ function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
     end
 end
 
---filter mission assignments to the player
+-- Filter mission assignments to the player
 function ssFieldJobManager:fieldJobInit(superFunc, ...)
-    if superFunc(self, ...) then
-        local isAllowed = ssFieldJobManager.isFieldJobAllowed(self.jobType, false)
+    local initFieldJob = superFunc(self, ...)
+    
+    -- If superFunc has reset snow, we need to re-apply it
+    local ssSnow = g_seasons.snow
+    if ssSnow.appliedSnowDepth > 0 then
+        self:applyFieldSnow(ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT)
+    end
 
-        if isAllowed then
+    if initFieldJob then
+        if not ssFieldJobManager.isFieldJobAllowed(self.jobType, false) then
+            initFieldJob = false
+        else
             -- Update income
             local pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
 
@@ -67,23 +75,29 @@ function ssFieldJobManager:fieldJobInit(superFunc, ...)
 
             -- Time left at this point is the full time
             self.reward = pricePerMS * self.timeLeft * 5 * difficultyFactor
-
-            return true
         end
     end
 
-    return false
+    return initFieldJob
 end
 
-function ssFieldJobManager:fieldJobFinish(superFunc, arg1, arg2)
+function ssFieldJobManager:fieldJobFinish(superFunc, ...)
     -- Set time left to 0 to disable time bonus
     self.timeLeft = 0
 
-    return superFunc(self, arg1, arg2)
+    local returnValue = superFunc(self, ...)
+
+    -- If superFunc has reset snow, we need to re-apply it
+    local ssSnow = g_seasons.snow
+    if ssSnow.appliedSnowDepth > 0 then
+        self:applyFieldSnow(ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT)
+    end
+
+    return returnValue
 end
 
---fieldJob: FieldJob.TYPE_*
---isNPC:    bool
+-- fieldJob: FieldJob.TYPE_*
+-- isNPC:    bool
 function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     local currentGT = g_seasons.environment:transitionAtDay()
     local env = g_seasons.environment
@@ -132,3 +146,12 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     return false
 end
 
+-- Applies snow to mission field
+function FieldJob:applyFieldSnow(layers)
+    for _, partition in pairs(self.fieldDef.maxFieldStatusPartitions) do
+        --set type
+        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 0, 5, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]) 
+        --set height
+        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 5, 6, layers) 
+    end
+end
