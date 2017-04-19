@@ -51,7 +51,7 @@ function ssDensityMapScanner:save(savegame, key)
         ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
         ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
         ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", self.currentJob.parameter)
+        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
         ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
     end
 
