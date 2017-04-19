@@ -21,6 +21,8 @@ function ssDensityMapScanner:load(savegame, key)
         job.numSegments = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
 
         self.currentJob = job
+        
+        log("[ssDensityMapScanner] Loaded current job:", job.callbackId, "with parameter", job.parameter)
     end
 
     -- Read queue
@@ -38,7 +40,7 @@ function ssDensityMapScanner:load(savegame, key)
 
         self.queue:push(job)
 
-        log("[ssDensityMapScanner] Loaded job:", job.callbackId, "with parameter", job.parameter)
+        log("[ssDensityMapScanner] Loaded queued job:", job.callbackId, "with parameter", job.parameter)
 
         i = i + 1
     end
