@@ -157,12 +157,11 @@ function ssGrowthManager:transitionChanged()
 end
 
 function ssGrowthManager:update(dt)
-    if self.additionalFruitsChecked == true then return end
-    log("update GM")
+    if self.additionalFruitsChecked == true or self.growthManagerEnabled == false then return end
+   
     self.additionalFruitsChecked = true
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
-
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
             log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
@@ -197,12 +196,6 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
 
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
-
-        --handling new unknown fruits
-        if self.defaultFruitsData[fruitName] == nil then
-            log("ssGrowthManager:handleGrowth: Fruit not found in default table: " .. fruitName)
-            self:unknownFruitFound(fruitName)
-        end
 
         if self.growthData[self.currentTransition][fruitName] ~= nil then
             --set growth state
