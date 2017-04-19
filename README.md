@@ -43,7 +43,7 @@ For a better game experience, custom maps should add two new density layers: one
 ### Seasons
 - Changeable season lengths. (For best results, restart the game / server after changing season length)
 - Plowable snow in the winter! Reduced tire friction when driving in snow.
-- Soil temperature is properly modelled using thermnodynamic equations and historical data, which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
+- Soil temperature is properly modelled using thermodynamic equations and historical data, which introduces interesting aspects like soil is frozen in the winter and sometimes in the first few days of spring, so you can't work on it
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
@@ -70,7 +70,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Germination of planted crops will only occur if the soil temperatures rise above the germination temperature.
 - Swaths will reduce over time.
 - Grass bales will rot and disappear after two days.
-- Hay and straw bales exposed to rain will start to rot so keep them inside.
+- Hay and straw bales exposed to rain will start to rot so keep them inside (only when the map has a snow mask)
 - Wrapped bales needs time to ferment before they are turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
