@@ -1,0 +1,6 @@
+# Enforce Unix newlines
+*.js    text eol=lf
+*.md    text eol=lf
+*.xml   text eol=lf
+*.lua   text eol=lf
+*.txt   text eol=lf
