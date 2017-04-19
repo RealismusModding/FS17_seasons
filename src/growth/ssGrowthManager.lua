@@ -30,6 +30,7 @@ ssGrowthManager.willGerminateData = {}
 -- properties
 ssGrowthManager.currentTransition = nil
 ssGrowthManager.fakeTransition = 1
+ssGrowthManager.additionalFruitsChecked = false
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
@@ -93,7 +94,7 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
-        addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
+        --addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
         self:dayChanged()
     end
 end
@@ -155,6 +156,22 @@ function ssGrowthManager:transitionChanged()
     end
 end
 
+function ssGrowthManager:update(dt)
+    if self.additionalFruitsChecked == true then return end
+    log("update GM")
+    self.additionalFruitsChecked = true
+    for index, fruit in pairs(g_currentMission.fruits) do
+        local fruitName = FruitUtil.fruitIndexToDesc[index].name
+
+        --handling new unknown fruits
+        if self.defaultFruitsData[fruitName] == nil then
+            log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
+            self:unknownFruitFound(fruitName)
+        end
+    end
+
+end
+
 -- reset the willGerminateData and rebuild it based on the current transition
 -- called just after transitionChanged
 function ssGrowthManager:rebuildWillGerminateData()
@@ -183,7 +200,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
 
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
-            log("Fruit not found in default table: " .. fruitName)
+            log("ssGrowthManager:handleGrowth: Fruit not found in default table: " .. fruitName)
             self:unknownFruitFound(fruitName)
         end
 
