@@ -182,7 +182,7 @@ end
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function ssReplaceVisual:findNodeByName(nodeId, name)
-    if getName(nodeId) == name then
+    if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == name then
         return nodeId
     end
 
@@ -285,6 +285,9 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
         childShapeId = self:findNodeByName(parentShapeId, secondaryNodeName)
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
+        else
+            -- Use parent as backup
+            return getMaterial(parentShapeId, 0)
         end
     end
 
@@ -339,7 +342,7 @@ end
 
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
-    if getName(nodeId) == shapeName then
+    if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == shapeName then
         -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId))
         setMaterial(nodeId, materialSrcId, 0)
     end
