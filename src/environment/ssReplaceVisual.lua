@@ -282,7 +282,7 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
             return getMaterial(parentShapeId, 0)
         end
 
-        childShapeId = (self:findNodeByName(parentShapeId, secondaryNodeName))
+        childShapeId = self:findNodeByName(parentShapeId, secondaryNodeName)
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
         end

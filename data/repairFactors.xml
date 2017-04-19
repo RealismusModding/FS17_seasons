@@ -126,12 +126,6 @@
         <ssLifeTime value="125" />
     </factor>
 
-    <factor category="loaderWagons">
-        <RF1 value="0.16" />
-        <RF2 value="1.6" />
-        <ssLifeTime value="100" />
-    </factor>
-
     <factor category="baling">
         <RF1 value="0.23" />
         <RF2 value="1.8" />
