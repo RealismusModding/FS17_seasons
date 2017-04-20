@@ -92,6 +92,7 @@ For a better game experience, custom maps should add two new density layers: one
 - You can't sell grass/hay/straw in an unbaled form. (Price is 0)
 - You can't sell wet grass bales (price is 0)
 - Income from missions is reduced to ~5x what a worker would earn if 100% of the time for a mission is used.
+- Field prices can be adjusted via the economy xml file using fieldPriceFactor. 1 = default prices. < 1 for cheaper fields and > 1 for more expensive fields
 
 ### Helpers
 - Wages have been changed to fit the new economy.

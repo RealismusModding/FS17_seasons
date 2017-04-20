@@ -174,17 +174,8 @@ function ssEconomy:loadFromXML(path)
     end
 
     --get fieldPriceFactor from economy.xml
-    local fieldPriceFactorKey = "economy.fieldPriceFactor"
-    local fieldPriceFactor = 1
-    if hasXMLProperty(file, fieldPriceFactorKey) then
-        fieldPriceFactor = getXMLFloat(file, fieldPriceFactorKey)
-        log("Fieldpricefactor: " .. fieldPriceFactor)
-        if fieldPriceFactor == nil then
-            fieldPriceFactor = 1 
-        end
-    end
-    self.fieldPriceFactor = fieldPriceFactor
-
+    self.fieldPriceFactor = ssStorage.getXMLFloat(file, "economy.fieldPriceFactor", 1.0)
+    
     delete(file)
 end
 
