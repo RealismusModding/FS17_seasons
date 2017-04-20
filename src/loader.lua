@@ -80,6 +80,7 @@ local files = {
     "utils/ssUtil",
     "environment/ssEnvironment",
 
+    "environment/ssDaylight",
     "misc/ssEconomy",
     "environment/ssWeatherManager",
     "environment/ssWeatherForecast",
