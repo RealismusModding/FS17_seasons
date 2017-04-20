@@ -185,6 +185,29 @@ function ssUtil.isWorkHours()
     return hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5
 end
 
+function ssUtil.getSnowMaskId()
+    local id = getTerrainDetailByName(g_currentMission.terrainRootNode, "ssSnowMask")
+
+    if id == 0 then
+        id = getTerrainDetailByName(g_currentMission.terrainRootNode, "SeasonsSnowMask")
+    end
+
+    if id == 0 then
+        return nil
+    end
+
+    return id
+end
+
+function ssUtil.getTempMaskId()
+    local id = getTerrainDetailByName(g_currentMission.terrainRootNode, "ssTempMask")
+
+    if id == 0 then
+        return nil
+    end
+
+    return id
+end
 
 function Set(list)
     local set = {}

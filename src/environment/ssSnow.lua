@@ -12,7 +12,6 @@ g_seasons.snow = ssSnow
 
 ssSnow.LAYER_HEIGHT = 0.06
 ssSnow.MAX_HEIGHT = 0.48
-ssSnow.SNOW_MASK_NAME = "SeasonsSnowMask"
 ssSnow.SNOW_MASK_FIRST_CHANNEL = 0
 ssSnow.SNOW_MASK_NUM_CHANNELS = 1
 
@@ -202,10 +201,7 @@ function ssSnow:update(dt)
     if not self.loadedSnowMask then
         self.loadedSnowMask = true
 
-        self.snowMaskId = getChild(g_currentMission.terrainRootNode, ssSnow.SNOW_MASK_NAME)
-        if self.snowMaskId == 0 then
-            self.snowMaskId = nil
-        end
+        self.snowMaskId = ssUtil.getSnowMaskId()
 
         if self.snowMaskId ~= nil then
             setVisibility(self.snowMaskId, false)
