@@ -14,9 +14,17 @@ function ssReplaceVisual:preLoad()
     Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.placeableUpdatePlacableOnCreation)
 end
 
+function ssReplaceVisual:load(savegame, key)
+    self.latestVisuals = ssStorage.getXMLInt(savegame, key .. ".environment.latestVisuals", g_seasons.environment:currentSeason())
+end
+
+function ssReplaceVisual:save(savegame, key)
+    ssStorage.setXMLFloat(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
+end
+
 function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
-        g_seasons.environment:addSeasonChangeListener(self)
+        g_currentMission.environment:addDayChangeListener(self)
 
         self:loadFromXML()
 
@@ -25,19 +33,16 @@ function ssReplaceVisual:loadMap(name)
             self:loadTextureIdTable(replacements)
         end
 
-        -- Only if this game does not need to wait for other modules to receive data,
-        -- update the textures. (singleplayer)
-        if g_currentMission:getIsServer() then
-            self:updateTextures()
-        end
-
         addConsoleCommand("ssSetVisuals", "Set visuals", "consoleCommandSetVisuals", self)
     end
 end
 
 function ssReplaceVisual:readStream(streamId, connection)
-    -- Load after environment is loaded
-    self:updateTextures()
+    self.latestVisuals = streamReadInt32(streamId)
+end
+
+function ssReplaceVisual:writeStream(streamId, connection)
+    streamWriteInt32(streamId, self.latestVisuals)
 end
 
 function ssReplaceVisual:loadFromXML()
@@ -162,21 +167,29 @@ end
 
 function ssReplaceVisual:update(dt)
     if self.once ~= true and g_currentMission:getIsClient() then
-        self:updateFoliageLayers()
+        self:updateFoliageLayers(self.latestVisuals)
+        self:updateTextures(self.latestVisuals)
+
         self.once = true
     end
 end
 
-function ssReplaceVisual:seasonChanged()
+function ssReplaceVisual:dayChanged()
     if g_currentMission:getIsClient() then
-        self:updateTextures()
-        self:updateFoliageLayers()
+        local newVisuals = self:getVisualSeason()
+
+        if newVisuals ~= self.latestVisuals then
+            self:updateTextures(newVisuals)
+            self:updateFoliageLayers(newVisuals)
+
+            self.latestVisuals = newVisuals
+        end
     end
 end
 
 function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
     if g_currentMission:getIsClient() then
-        ssReplaceVisual:updateTextures(self.nodeId)
+        ssReplaceVisual:updateTextures(g_seasons.replaceVisual.latestVisuals, self.nodeId)
     end
 end
 
@@ -299,17 +312,16 @@ function ssReplaceVisual:getVisualSeason()
 end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
-function ssReplaceVisual:updateTextures(nodeId)
+function ssReplaceVisual:updateTextures(visualSeason, nodeId)
     if nodeId == nil then
         nodeId = getRootNode()
     end
 
-    local season = self:getVisualSeason()
     local nodeName = getName(nodeId)
 
-    if self.textureReplacements[season][nodeName] ~= nil then
+    if self.textureReplacements[visualSeason][nodeName] ~= nil then
         -- If there is a texture for this season and node, set it
-        for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[season][getName(nodeId)]) do
+        for secondaryNodeName, secondaryNodeTable in pairs(self.textureReplacements[visualSeason][getName(nodeId)]) do
             if secondaryNodeName == "" then
                 secondaryNodeName = nodeName
             end
@@ -339,7 +351,7 @@ function ssReplaceVisual:updateTextures(nodeId)
         local childId = getChildAt(nodeId, i)
 
         if childId ~= nil then
-            self:updateTextures(childId, name)
+            self:updateTextures(visualSeason, childId, name)
         end
     end
 end
@@ -383,8 +395,8 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
     end
 
     -- Update
-    self:updateTextures()
-    self:updateFoliageLayers()
+    self:updateTextures(season)
+    self:updateFoliageLayers(season)
 
     -- Fix getter
     g_seasons.environment.currentSeason = oldCurrentSeason
@@ -394,8 +406,8 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
     return "Updated textures to " .. tostring(season)
 end
 
-function ssReplaceVisual:updateFoliageLayers()
-    local layers = self.textureReplacements[self:getVisualSeason()]._foliageLayers
+function ssReplaceVisual:updateFoliageLayers(visualSeason)
+    local layers = self.textureReplacements[visualSeason]._foliageLayers
 
     for layerName, defaultMaterial in pairs(self.textureReplacements.default._foliageLayers) do
         local layerId = getChild(g_currentMission.terrainRootNode, layerName)
