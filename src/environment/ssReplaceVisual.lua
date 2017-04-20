@@ -210,6 +210,10 @@ function ssReplaceVisual:findNodeByName(nodeId, name)
     return nil
 end
 
+function ssReplaceVisual:getVisualSeason()
+    return g_seasons.environment:currentSeason()
+end
+
 --
 -- Texture replacement
 --
@@ -307,10 +311,6 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
     return materialId
 end
 
-function ssReplaceVisual:getVisualSeason()
-    return g_seasons.environment:currentSeason()
-end
-
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(visualSeason, nodeId)
     if nodeId == nil then
@@ -378,33 +378,9 @@ function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
     return nil
 end
 
-function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
-    local season = g_seasons.environment.SEASON_SPRING
-    if seasonName == "summer" then
-        season = g_seasons.environment.SEASON_SUMMER
-    elseif seasonName == "autumn" then
-        season = g_seasons.environment.SEASON_AUTUMN
-    elseif seasonName == "winter" then
-        season = g_seasons.environment.SEASON_WINTER
-    end
-
-    -- Overwrite getter
-    local oldCurrentSeason = g_seasons.environment.currentSeason
-    g_seasons.environment.currentSeason = function (self)
-        return season
-    end
-
-    -- Update
-    self:updateTextures(season)
-    self:updateFoliageLayers(season)
-
-    -- Fix getter
-    g_seasons.environment.currentSeason = oldCurrentSeason
-
-    self.debug = false
-
-    return "Updated textures to " .. tostring(season)
-end
+--
+-- Foliage updating
+--
 
 function ssReplaceVisual:updateFoliageLayers(visualSeason)
     local layers = self.textureReplacements[visualSeason]._foliageLayers
@@ -451,4 +427,36 @@ function ssReplaceVisual:setFoliageMaterial(layerId, material)
     for i = 0, getNumOfChildren(layerId) - 1 do
         setMaterial(getChildAt(layerId, i), material, 0)
     end
+end
+
+--
+-- Console command for debugging and map makers
+--
+
+function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
+    local season = g_seasons.environment.SEASON_SPRING
+    if seasonName == "summer" then
+        season = g_seasons.environment.SEASON_SUMMER
+    elseif seasonName == "autumn" then
+        season = g_seasons.environment.SEASON_AUTUMN
+    elseif seasonName == "winter" then
+        season = g_seasons.environment.SEASON_WINTER
+    end
+
+    -- Overwrite getter
+    local oldCurrentSeason = g_seasons.environment.currentSeason
+    g_seasons.environment.currentSeason = function (self)
+        return season
+    end
+
+    -- Update
+    self:updateTextures(season)
+    self:updateFoliageLayers(season)
+
+    -- Fix getter
+    g_seasons.environment.currentSeason = oldCurrentSeason
+
+    self.debug = false
+
+    return "Updated textures to " .. tostring(season)
 end
