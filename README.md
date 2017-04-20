@@ -47,15 +47,17 @@ For a better game experience, custom maps should add two new density layers: one
 - Changed the weather system to fit the seasons
   - Rainy in autumn
   - Sunny in summer
-  - Snow and hail in winter.
+  - Snow and rain in winter.
 - Winters have longer nights than summers. In the winter it might be light only 8 hours while in summer it is near 17 hours.
 - Pedestrians do not spawn in the Winter.
 - When snow falls, tippers and shovels fill up. Put them in a shed (when the map has a snow mask) or activate the cover.
 - Snow will melt from tippers and shovels when it is not freezing outside.
 - Bunker Silo contents now take one third of a season to ferment.
+- Tree and bush textures will change with season and weather (trees drop their leaves when temperature becomes low etc.)
 
 ### Weather forecast
 - 7 day weather forecast
+- Hail may occur unexpectedly
 
 ### Crops
 - At the beginning of a new game, the mod will reset all fields to the harvested state. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest.
@@ -71,7 +73,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Swaths will reduce over time.
 - Grass bales will rot and disappear after two days.
 - Hay and straw bales exposed to rain will start to rot so keep them inside (only when the map has a snow mask)
-- Wrapped bales needs time to ferment before they are turned into silage
+- Wrapped bales needs time (one third of a season) to ferment before they are turned into silage
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
