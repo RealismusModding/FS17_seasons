@@ -211,7 +211,47 @@ function ssReplaceVisual:findNodeByName(nodeId, name)
 end
 
 function ssReplaceVisual:getVisualSeason()
-    return g_seasons.environment:currentSeason()
+
+    local curSeason = g_seasons.environment:currentSeason()
+    local avgAirTemp = (ssWeatherManager.forecast[2].highTemp*8 + ssWeatherManager.forecast[2].lowTemp*16) / 24
+    local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
+    local s = g_seasons.environment
+    local springLeavesTemp = 5
+    local autumnLeavesTemp = 5
+    local dropLeavesTemp = 0
+
+    -- Spring
+    -- Keeping bare winter textures if the daily average temperature is below a treshold
+    if curSeason == s.SEASON_SPRING and self.latestVisuals == s.SEASON_WINTER and avgAirTemp <= springLeavesTemp then
+        return s.SEASON_WINTER
+    elseif curSeason == s.SEASON_SPRING and self.latestVisuals == s.SEASON_WINTER and avgAirTemp > springLeavesTemp then
+        return curSeason
+    elseif curSeason == s.SEASON_SPRING and self.latestVisuals == s.SEASON_SPRING then
+        return curSeason  
+
+    -- Summer
+    elseif curSeason == s.SEASON_SUMMER then
+        return curSeason
+
+    -- Autumn
+    -- Keeping summer textures until the daily low temperature is below a treshold
+    elseif curSeason == s.SEASON_AUTUMN and self.latestVisuals == s.SEASON_SUMMER and lowAirTemp >= autumnLeavesTemp then
+        return s.SEASON_SUMMER
+    elseif curSeason == s.SEASON_AUTUMN and self.latestVisuals == s.SEASON_SUMMER and lowAirTemp < autumnLeavesTemp then
+        return curSeason
+    elseif curSeason == s.SEASON_AUTUMN and self.latestVisuals == s.SEASON_AUTUMN then
+        return curSeason
+
+    -- Winter
+    -- Keeping autumn textures until the daily average temperature is below a treshold
+    elseif curSeason == s.SEASON_WINTER and self.latestVisuals == s.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
+        return s.SEASON_AUTUMN
+    elseif curSeason == s.SEASON_WINTER and self.latestVisuals == s.SEASON_AUTUMN and avgAirTemp < dropLeavesTemp then
+        return curSeason
+    elseif curSeason == s.SEASON_WINTER and self.latestVisuals == s.SEASON_WINTER then
+        return curSeason
+    end
+
 end
 
 --
