@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
     <translationContributors>fcelsa, theSeb, zed636</translationContributors>
-
     <texts>
-        <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
@@ -85,7 +83,6 @@
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
 
-        <!-- GUI -->
         <text name="ui_pageOverview" text="Generali" />
         <text name="ui_pageSettings" text="Impostazioni" />
         <text name="ui_pageDebug" text="Tool di Debug" />
