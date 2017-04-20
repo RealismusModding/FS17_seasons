@@ -373,4 +373,5 @@
             <factors all="0" />
         </bale>
     </bales>
+    <fieldPriceFactor>1.00</fieldPriceFactor>
 </economy>

@@ -2,7 +2,7 @@
 -- ECONOMY SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the economy
--- Authors:  Rahkiin, reallogger
+-- Authors:  Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -173,6 +173,18 @@ function ssEconomy:loadFromXML(path)
         i = i + 1
     end
 
+    --get fieldPriceFactor from economy.xml
+    local fieldPriceFactorKey = "economy.fieldPriceFactor"
+    local fieldPriceFactor = 1
+    if hasXMLProperty(file, fieldPriceFactorKey) then
+        fieldPriceFactor = getXMLFloat(file, fieldPriceFactorKey)
+        log("Fieldpricefactor: " .. fieldPriceFactor)
+        if fieldPriceFactor == nil then
+            fieldPriceFactor = 1 
+        end
+    end
+    self.fieldPriceFactor = fieldPriceFactor
+
     delete(file)
 end
 
@@ -185,6 +197,7 @@ function ssEconomy:setup()
 
     self:calculateLoanInterestRate()
     self:updateAnimals()
+    self:updateFieldPrices()
 end
 
 function ssEconomy:readStream(streamId, connection)
@@ -194,6 +207,7 @@ function ssEconomy:readStream(streamId, connection)
     self.aiDayEnd = streamReadFloat32(streamId)
     self.loanMax = streamReadFloat32(streamId)
     self.baseLoanInterest = streamReadFloat32(streamId)
+    self.fieldPriceFactor = streamReadFloat32(streamId)
 
     self:setup()
 end
@@ -205,6 +219,7 @@ function ssEconomy:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.aiDayEnd)
     streamWriteFloat32(streamId, self.loanMax)
     streamWriteFloat32(streamId, self.baseLoanInterest)
+    streamWriteFloat32(streamId, self.fieldPriceFactor)
 end
 
 function ssEconomy:calculateLoanInterestRate()
@@ -374,3 +389,14 @@ end
 
 --tipTriggers
 --Animals
+
+
+-- update field prices
+function ssEconomy:updateFieldPrices()
+    --don't do anything if map has no fields
+    if not (g_currentMission.fieldDefinitionBase ~= nil and g_currentMission.fieldDefinitionBase.fieldDefs ~= nil) then return end
+
+    for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+        fieldDef.fieldPriceInitial  = fieldDef.fieldPriceInitial * self.fieldPriceFactor
+    end
+end
