@@ -53,7 +53,6 @@ function ssFieldJobManager:fieldJobInit(superFunc, ...)
     local initFieldJob = superFunc(self, ...)
     
     -- If superFunc has reset snow, we need to re-apply it
-    local ssSnow = g_seasons.snow
     if ssSnow.appliedSnowDepth > 0 then
         self:applyFieldSnow(ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT)
     end
@@ -88,7 +87,6 @@ function ssFieldJobManager:fieldJobFinish(superFunc, ...)
     local returnValue = superFunc(self, ...)
 
     -- If superFunc has reset snow, we need to re-apply it
-    local ssSnow = g_seasons.snow
     if ssSnow.appliedSnowDepth > 0 then
         self:applyFieldSnow(ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT)
     end
