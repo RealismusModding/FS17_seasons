@@ -76,10 +76,11 @@ function ssGrowthManagerDebugView:getTransitionsDisplayData()
 
     for index,value in pairs(data) do
         if index % 2 == 1 then
+            local putIndex = index - ((index - 1) / 2)
             if value == data[index+1] then
-                transitionsDisplayData[index] = tostring(value)
+                transitionsDisplayData[putIndex] = tostring(value)
             else
-                transitionsDisplayData[index] = value .. "-" .. data[index+1]
+                transitionsDisplayData[putIndex] = value .. "-" .. data[index+1]
             end
         end
     end

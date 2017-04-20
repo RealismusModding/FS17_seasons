@@ -260,11 +260,16 @@ function ssRectOverlay:render(x, y, width, height, color, boxHeight)
     renderOverlay(ssRectOverlay.g_overlay.overlayId, x, y, width, height)
 end
 
-function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight)
+function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight, boxWidth)
     local height = getTextHeight(fontSize, text)
 
     if boxHeight ~= nil then
         y = y + (boxHeight - height) / 2
+    end
+
+    if boxWidth ~= nil then
+        local width = getTextWidth(fontSize, text)
+        x = x + (boxWidth - width) / 2
     end
 
     -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
@@ -313,6 +318,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     _, o.footerHeight = getNormalizedScreenValues(0, 80)
 
     _, o.textSize = getNormalizedScreenValues(0, 14)
+    _, o.smallTextSize = getNormalizedScreenValues(0, 9)
     o.textSpacingWidth, o.textSpacingHeight = getNormalizedScreenValues(5, 5)
 
     o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
@@ -340,6 +346,25 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 
     o.scrollVisible = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
     self.cropsSlider:setMinValue(o.scrollVisible)
+end
+
+function ssSeasonsMenu:getTransitionHeaders()
+    local transitionsDisplayData = {}
+    local data = ssUtil.calcDaysPerTransition()
+
+    for index,value in pairs(data) do
+        if index % 2 == 1 then
+            local putIndex = index - ((index - 1) / 2)
+
+            if value == data[index+1] then
+                transitionsDisplayData[putIndex] = tostring(value)
+            else
+                transitionsDisplayData[putIndex] = value .. "-" .. data[index+1]
+            end
+        end
+    end
+
+    return transitionsDisplayData
 end
 
 function ssSeasonsMenu:updateOverview()
@@ -398,6 +423,10 @@ function ssSeasonsMenu:updateOverview()
         end
     end
 
+    -- Create the headers
+    self.overview.transitionHeaders = self:getTransitionHeaders()
+    print_r(self.overview.transitionHeaders)
+
     -- Set up the slider
     local numTotalItems = table.getn(self.overviewData)
 
@@ -441,27 +470,40 @@ function ssSeasonsMenu:drawOverview(element)
     end
 
     -- Draw separator blocks in the header
-    for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
-        if i ~= 1 then
-            if i == 4 or i == 7 or i == 10 then
-                o.rect:render(
-                    headerLeft + (i - 1) * o.transitionWidth,
-                    o.topLeftY,
-                    o.headerSeparatorWidth,
-                    o.headerHeight - o.fruitSpacerHeight,
-                    {0.0284, 0.0284, 0.0284, 1} -- ????
-                )
-            else
-                o.rect:render(
-                    headerLeft + (i - 1) * o.transitionWidth,
-                    o.topLeftY + o.seasonIconHeight,
-                    o.headerSeparatorWidth,
-                    o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
-                    {0.0284, 0.0284, 0.0284, 1}
-                )
-            end
+    for i = 2, g_seasons.environment.TRANSITIONS_IN_YEAR do
+        if i == 4 or i == 7 or i == 10 then
+            o.rect:render(
+                headerLeft + (i - 1) * o.transitionWidth,
+                o.topLeftY,
+                o.headerSeparatorWidth,
+                o.headerHeight - o.fruitSpacerHeight,
+                {0.0284, 0.0284, 0.0284, 1} -- ????
+            )
+        else
+            o.rect:render(
+                headerLeft + (i - 1) * o.transitionWidth,
+                o.topLeftY + o.seasonIconHeight,
+                o.headerSeparatorWidth,
+                o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
+                {0.0284, 0.0284, 0.0284, 1}
+            )
         end
     end
+
+    -- Write numbers in headers
+    setTextColor(0.5, 0.5, 0.5, 1)
+    for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
+        --x, y, fontSize, text, boxHeight, boxWidth
+        o.rect:renderText(
+            headerLeft + (i - 1) * o.transitionWidth,
+            o.topLeftY + o.seasonIconHeight,
+            o.smallTextSize,
+            o.transitionHeaders[(i - 1) % 3 + 1],
+            o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
+            o.transitionWidth
+        )
+    end
+    setTextColor(1, 1, 1, 1)
 
     -- Print all fruits' data
     local iFruit = 0
