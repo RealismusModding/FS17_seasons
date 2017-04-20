@@ -294,13 +294,17 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
     return materialId
 end
 
+function ssReplaceVisual:getVisualSeason()
+    return g_seasons.environment:currentSeason()
+end
+
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
 function ssReplaceVisual:updateTextures(nodeId)
     if nodeId == nil then
         nodeId = getRootNode()
     end
 
-    local season = g_seasons.environment:currentSeason()
+    local season = self:getVisualSeason()
     local nodeName = getName(nodeId)
 
     if self.textureReplacements[season][nodeName] ~= nil then
@@ -391,7 +395,7 @@ function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
 end
 
 function ssReplaceVisual:updateFoliageLayers()
-    local layers = self.textureReplacements[g_seasons.environment:currentSeason()]._foliageLayers
+    local layers = self.textureReplacements[self:getVisualSeason()]._foliageLayers
 
     for layerName, defaultMaterial in pairs(self.textureReplacements.default._foliageLayers) do
         local layerId = getChild(g_currentMission.terrainRootNode, layerName)
