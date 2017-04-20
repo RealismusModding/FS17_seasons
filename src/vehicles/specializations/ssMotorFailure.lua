@@ -15,9 +15,6 @@ function ssMotorFailure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations)
 end
 
-Motorized.startMotor = ssMotorFailure.startMotor
-Motorized.stopMotor = ssMotorFailure.stopMotor
-
 function ssMotorFailure:load(savegame)
     self.ssMotorStartFailDuration = math.min(self.motorStartDuration / 2, 500)
     self.ssMotorStartTries = 0
@@ -222,3 +219,6 @@ function ssMotorFailure:stopMotor(noEventSend)
 
     Motorized.turnOffImplement(self)
 end
+
+Motorized.startMotor = ssMotorFailure.startMotor
+Motorized.stopMotor = ssMotorFailure.stopMotor
