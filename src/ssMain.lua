@@ -44,7 +44,7 @@ function ssMain:preLoad()
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
-    TourIcons.onCreate = self.inj_disableTourIcons
+    TourIcons.showTourDialog = self.inj_disableShowTourDialog
 end
 
 ----------------------------
@@ -56,7 +56,6 @@ function ssMain:load(savegame, key)
     self.savegameVersion = ssStorage.getXMLInt(savegame, key .. ".version", 1)
 
     self.isNewSavegame = savegame == nil
-    --self.isOldSaveGame = not hasXMLProperty(savegame, key)
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
 end
 
@@ -202,14 +201,9 @@ function ssMain.inj_disableMenuOptions(self)
     self.motorStartElement:setDisabled(true)
 end
 
--- Disable the tutorial by clearing the onCreate function that is called by vanilla maps
+-- Disable the tutorial by clearing showTourDialog
 -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
 -- is already called.
-function ssMain.inj_disableTourIcons(self, id)
-    local tourIcons = TourIcons:new(id)
-    tourIcons.visible = false
+function ssMain.inj_disableShowTourDialog()
+    return
 end
-
-----------------------------
--- Important data
-----------------------------
