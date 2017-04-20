@@ -425,7 +425,6 @@ function ssSeasonsMenu:updateOverview()
 
     -- Create the headers
     self.overview.transitionHeaders = self:getTransitionHeaders()
-    print_r(self.overview.transitionHeaders)
 
     -- Set up the slider
     local numTotalItems = table.getn(self.overviewData)
