@@ -378,10 +378,6 @@ function ssEconomy:ttGetEffectiveFillTypePrice(superFunc, fillType)
     return price * g_seasons.economy:getFillFactor(fillType)
 end
 
---tipTriggers
---Animals
-
-
 -- update field prices
 function ssEconomy:updateFieldPrices()
     --don't do anything if map has no fields
