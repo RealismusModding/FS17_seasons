@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>fcelsa, theSeb</translationContributors>
+    <translationContributors>fcelsa, theSeb, zed636</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
@@ -80,10 +80,8 @@
 
         <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non è possibile lavorarlo!" />
         <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!" />
-        <!-- Missing translation of "Animals died (%d)" -->
-        <text name="warning_animalsKilled" text="" />
-        <!-- Missing translation of "The maximum capacity of the feeding trough suffices to feed the animals for 3 days." -->
-        <text name="warning_inAdvanceFeedingLimitReached3" text="" />
+        <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
 
         <text name="ui_pageOverview" text="Generali" />
         <text name="ui_pageSettings" text="Impostazioni" />
@@ -95,10 +93,8 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelcius" text="Centigradi" />
 
-        <!-- Missing translation of "Planting season" -->
-        <text name="ui_plantingSeason" text="" />
-        <!-- Missing translation of "Harvest season" -->
-        <text name="ui_harvestSeason" text="" />
+        <text name="ui_plantingSeason" text="Periodo di semina" />
+        <text name="ui_harvestSeason" text="Periodo di raccolto" />
 
         <text name="tooltip_seasonLength" text="La lunghezza di una stagione in giorni. Un anno è quattro stagioni." />
         <text name="tooltip_seasonIntros" text="Visualizza l'introduzione all'inizio della stagione." />
@@ -110,7 +106,7 @@
 
         <text name="setting_seasonIntros" text="Introduzioni stagione" />
         <text name="setting_seasonLength" text="Lunghezza stagione" />
-        <text name="setting_snow" text="Snow mode" />
+        <text name="setting_snow" text="Modalità neve" />
         <text name="setting_controlsHelp" text="Aiuto tasti in menu" />
         <text name="setting_snowTracks" text="Tracce neve" />
         <text name="setting_controlsTemperature" text="Scala temperatura" />

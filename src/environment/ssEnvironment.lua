@@ -57,11 +57,11 @@ function ssEnvironment:preLoad()
 end
 
 function ssEnvironment:load(savegame, key)
-    self.latitude = ssStorage.getXMLFloat(savegame, key .. ".environment.latitude", 51.9)
+    self.latitude = Utils.clamp(ssStorage.getXMLFloat(savegame, key .. ".environment.latitude", 51.9), 0, 72)
 
     self.daysInSeason = Utils.clamp(ssStorage.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssStorage.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestTransition = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release 
+    self.latestTransition = ssStorage.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release
                                                                                                             --to not break existing test save games
     self.currentDayOffset = ssStorage.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
