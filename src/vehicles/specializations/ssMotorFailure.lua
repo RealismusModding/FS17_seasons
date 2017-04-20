@@ -137,19 +137,25 @@ function ssMotorFailure:startMotor(noEventSend)
             end
         end
 
-        local overdueFactor = Utils.clamp(ssVehicle:calculateOverdueFactor(self), 1, ssMotorFailure.BROKEN_OVERDUE_FACTOR)
+        if not self:isa(RailroadVehicle) then
+            local overdueFactor = Utils.clamp(ssVehicle:calculateOverdueFactor(self), 1, ssMotorFailure.BROKEN_OVERDUE_FACTOR)
 
-        local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - (overdueFactor - 1)) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
-        local willStart = math.random() < p
+            local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - (overdueFactor - 1)) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
+            local willStart = math.random() < p
 
-        self.ssMotorStartTries = overdueFactor
-        self.ssMotorStartSoundTime = g_currentMission.time
-        self.ssMotorStartMustFail = not willStart
+            self.ssMotorStartTries = overdueFactor
+            self.ssMotorStartSoundTime = g_currentMission.time
+            self.ssMotorStartMustFail = not willStart
 
-        local hiccupTime = (self.ssMotorStartTries - 1) * self.ssMotorStartFailDuration * 3
-        self.motorStartTime = g_currentMission.time + self.motorStartDuration + hiccupTime
+            local hiccupTime = (self.ssMotorStartTries - 1) * self.ssMotorStartFailDuration * 3
+            self.motorStartTime = g_currentMission.time + self.motorStartDuration + hiccupTime
 
-        self.compressionSoundTime = g_currentMission.time + math.random(5000, 20000) * overdueFactor
+            self.compressionSoundTime = g_currentMission.time + math.random(5000, 20000) * overdueFactor
+        else
+            self.motorStartTime = g_currentMission.time + self.motorStartDuration
+            self.compressionSoundTime = g_currentMission.time + math.random(5000, 20000)
+        end
+
         self.lastRoundPerMinute = 0
 
         if self.fuelFillLevelHud ~= nil then
@@ -181,7 +187,7 @@ function ssMotorFailure:stopMotor(noEventSend)
 
         if self:getIsActiveForSound() then
             -- Only play stop sound if the motor has successfully started
-            if self.ssMotorStartMustFail or self.ssMotorStartTries > 1 then -- never started
+            if not self:isa(RailroadVehicle) and (self.ssMotorStartMustFail or self.ssMotorStartTries > 1) then -- never started
                 -- No sound
             elseif self.ssHasMotorBrokenDown then -- broken mid-drive
                 SoundUtil.playSample(self.sampleBrakeCompressorStop, 1, 0, nil)
