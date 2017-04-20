@@ -92,9 +92,9 @@ function ssUtil.calcDaysPerTransition()
     local l = g_seasons.environment.daysInSeason / 3.0
     local earlyStart = 1
     local earlyEnd = mathRound(1 * l)
-    local midStart = mathRound(1 * l) + 1
+    local midStart = earlyEnd + 1
     local midEnd = mathRound(2 * l)
-    local lateStart = mathRound(2 * l)+1
+    local lateStart = midEnd + 1
     local lateEnd = g_seasons.environment.daysInSeason
 
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
