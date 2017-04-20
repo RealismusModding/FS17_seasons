@@ -64,26 +64,3 @@ function ssGrowthManagerDebugView:draw()
     end
 end
 
---this function currently has no real purpose. It's testing the calculation of growth transition days in a season and generates a table with 3 entries
---early, mid, late and each entry then has the range of days in that growth transition
---the intention is that this is the day which will be repeated across the top of the growth gui display below each season to show which days fall into
---which transition.
---FIXME: currently the index is bugged. It should be 1,2,3 but it's 1,3,5.
---Will think of a clever way to fix that without cheating
-function ssGrowthManagerDebugView:getTransitionsDisplayData()
-    local transitionsDisplayData = {}
-    local data = ssUtil.calcDaysPerTransition()
-
-    for index,value in pairs(data) do
-        if index % 2 == 1 then
-            local putIndex = index - ((index - 1) / 2)
-            if value == data[index+1] then
-                transitionsDisplayData[putIndex] = tostring(value)
-            else
-                transitionsDisplayData[putIndex] = value .. "-" .. data[index+1]
-            end
-        end
-    end
-
-    return transitionsDisplayData
-end
