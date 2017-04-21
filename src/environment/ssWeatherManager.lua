@@ -576,7 +576,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         -- morning fog
         oneRainEvent.startDay = oneDayForecast.day
         oneRainEvent.endDay = oneDayForecast.day
-        local dayStart, dayEnd, nightEnd, nightStart = ssEnvironment:calculateStartEndOfDay(oneDayForecast.day)
+        local dayStart, dayEnd, nightEnd, nightStart = g_seasons.daylight:calculateStartEndOfDay(oneDayForecast.day)
 
         -- longer fog in winter and autumn
         if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
@@ -830,7 +830,7 @@ function ssWeatherManager:updateHail(day)
 
     if p < rainFactors.probHail and self.forecast[1].weatherState == "sun" then
         local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
-        dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
+        dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 
         self.weather[1].rainTypeId = "hail"
         self.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart,["mode"] = dayStart + 4 ,["max"] = dayEnd}) * 60 * 60 * 1000
