@@ -187,8 +187,8 @@ function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
 end
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
-function ssReplaceVisual:findNodeByName(nodeId, name)
-    if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == name then
+function ssReplaceVisual:findNodeByName(nodeId, name, skipCurrent)
+    if skipCurrent ~= true and getName(nodeId) == name then
         return nodeId
     end
 
@@ -320,12 +320,14 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
             return getMaterial(parentShapeId, 0)
         end
 
-        childShapeId = self:findNodeByName(parentShapeId, secondaryNodeName)
+        -- Look for children. (Children only)
+        childShapeId = self:findNodeByName(parentShapeId, secondaryNodeName, true)
+
         if childShapeId ~= nil then
             materialId = getMaterial(childShapeId, 0)
-        else
-            -- Use parent as backup
-            return getMaterial(parentShapeId, 0)
+        elseif getHasClassId(parentShapeId, ClassIds.SHAPE) then
+            -- Use parent if child is not found, or if no LOD
+            materialId = getMaterial(parentShapeId, 0)
         end
     end
 
