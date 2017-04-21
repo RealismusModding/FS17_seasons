@@ -2,7 +2,7 @@
 
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
-***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-now-support-adding-the-seasons-mod-to-an-existing-savegame)
+***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
 
 ***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
@@ -94,7 +94,7 @@ For a better game experience, custom maps should add two new density layers: one
 - You can't sell grass/hay/straw in an unbaled form. (Price is 0)
 - You can't sell wet grass bales (price is 0)
 - Income from missions is reduced to ~5x what a worker would earn if 100% of the time for a mission is used.
-- Field prices can be adjusted via the economy xml file using fieldPriceFactor. 1 = default prices. < 1 for cheaper fields and > 1 for more expensive fields
+- Field prices can be adjusted via the economy xml file using fieldPriceFactor. 1 = default prices. < 1 for cheaper fields and > 1 for more expensive fields. For example, setting this value to 0.5 will result in a price half of wht it would be in the standard game
 
 ### Helpers
 - Wages have been changed to fit the new economy.
