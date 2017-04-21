@@ -150,6 +150,10 @@ function ssDaylight:calculateSunDeclination(julianDay)
     return eta
 end
 
+----------------------------
+-- Curve generators
+----------------------------
+
 function ssDaylight:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator3) -- degree 2
 
@@ -307,4 +311,42 @@ end
 function ssDaylight:dayChanged()
     -- Update the time of the day
     self:adaptTime()
+end
+
+
+-- function to calculate solar radiation
+function ssDaylight:calculateSolarRadiation()
+    -- http://swat.tamu.edu/media/1292/swat2005theory.pdf
+    local dayTime = g_currentMission.environment.dayTime / 60 / 60 / 1000 --current time in hours
+
+    local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
+    local eta = self:calculateSunDeclination(julianDay)
+    local sunHeightAngle = self:calculateSunHeightAngle(julianDay)
+    local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
+
+    dayStart, dayEnd, _, _ = self:calculateStartEndOfDay(julianDay)
+
+    local lengthDay = dayEnd - dayStart
+    local midDay = dayStart + lengthDay / 2
+
+    local solarRadiation = 0
+    local Isc = 4.921 --MJ/(m2 * h)
+
+    if dayTime < dayStart or dayTime > dayEnd then
+        -- no radiation before sun rises
+        solarRadiation = 0
+
+    else
+        solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
+
+    end
+
+    -- lower solar radiation if it is overcast
+    if g_currentMission.environment.timeSinceLastRain == 0 then
+        local tmpSolRad = solarRadiation
+
+        solarRadiation = tmpSolRad * 0.05
+    end
+
+    return solarRadiation
 end

@@ -417,7 +417,7 @@ function ssWeatherManager:calculateSnowAccumulation()
     local currentSnow = self.snowDepth
 
     -- calculating snow melt as a function of radiation
-    local meltFactor = self:calculateSolarRadiation() * math.max(6 / g_seasons.environment.daysInSeason,1)
+    local meltFactor = g_seasons.daylight:calculateSolarRadiation() * math.max(6 / g_seasons.environment.daysInSeason,1)
 
     if currentRain == nil then
         if currentTemp > -1 then
@@ -802,49 +802,12 @@ function ssWeatherManager:calculateRelativeHumidity()
     return relativeHumidity
 end
 
--- function to calculate solar radiation
-function ssWeatherManager:calculateSolarRadiation()
-    -- http://swat.tamu.edu/media/1292/swat2005theory.pdf
-    local dayTime = g_currentMission.environment.dayTime / 60 / 60 / 1000 --current time in hours
-
-    local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
-    local eta = g_seasons.daylight:calculateSunDeclination(julianDay)
-    local sunHeightAngle = ssEnvironment:calculateSunHeightAngle(julianDay)
-    local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
-
-    dayStart, dayEnd, _, _ = ssEnvironment:calculateStartEndOfDay(julianDay)
-
-    local lengthDay = dayEnd - dayStart
-    local midDay = dayStart + lengthDay / 2
-
-    local solarRadiation = 0
-    local Isc = 4.921 --MJ/(m2 * h)
-
-    if dayTime < dayStart or dayTime > dayEnd then
-        -- no radiation before sun rises
-        solarRadiation = 0
-
-    else
-        solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
-
-    end
-
-    -- lower solar radiation if it is overcast
-    if g_currentMission.environment.timeSinceLastRain == 0 then
-        local tmpSolRad = solarRadiation
-
-        solarRadiation = tmpSolRad * 0.05
-    end
-
-    return solarRadiation
-end
-
 function ssWeatherManager:updateCropMoistureContent()
     local dayTime = g_currentMission.environment.dayTime
 
     local prevCropMoist = self.cropMoistureContent
     local relativeHumidity = self:calculateRelativeHumidity()
-    local solarRadiation = self:calculateSolarRadiation()
+    local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
 
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
     -- added effect of some wind drying crops
