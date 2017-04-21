@@ -247,7 +247,7 @@ function ssWeatherManager:buildForecast()
     if self.prevHighTemp == nil then
         self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter.
     end
-    
+
     self.forecast = {}
     self.weather = {}
 
@@ -808,7 +808,7 @@ function ssWeatherManager:calculateSolarRadiation()
     local dayTime = g_currentMission.environment.dayTime / 60 / 60 / 1000 --current time in hours
 
     local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
-    local eta = ssEnvironment:calculateSunDeclination(julianDay)
+    local eta = g_seasons.daylight:calculateSunDeclination(julianDay)
     local sunHeightAngle = ssEnvironment:calculateSunHeightAngle(julianDay)
     local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
 
