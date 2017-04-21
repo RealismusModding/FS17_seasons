@@ -307,7 +307,7 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     self.currentDayOffset = newOffset
 
     -- Re-do time
-    self:adaptTime()
+    ssDaylight:adaptTime()
 
     -- Call season length changed listeners
     for _, listener in pairs(self.seasonLengthChangeListeners) do
