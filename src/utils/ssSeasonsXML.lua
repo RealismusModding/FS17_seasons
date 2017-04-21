@@ -9,13 +9,6 @@
 
 ssSeasonsXML = {}
 
-local seasonKeyToId = {
-    ["spring"] = 0,
-    ["summer"] = 1,
-    ["autumn"] = 2,
-    ["winter"] = 3
-}
-
 -- Returns raw data
 function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
 
@@ -33,7 +26,7 @@ function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
     local data = parentData ~= nil and Utils.copyTable(parentData) or {}
 
     -- For each season
-    for seasonName, seasonId in pairs(seasonKeyToId) do
+    for seasonName, seasonId in pairs(g_seasons.util.seasonKeyToId) do
         -- Create the season if it does not exist
         if data[seasonId] == nil then
             data[seasonId] = { ["properties"] = {} }

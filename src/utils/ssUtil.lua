@@ -10,6 +10,13 @@
 ssUtil = {}
 g_seasons.util = ssUtil
 
+ssUtil.seasonKeyToId = {
+    ["spring"] = 0,
+    ["summer"] = 1,
+    ["autumn"] = 2,
+    ["winter"] = 3
+}
+
 -- Get the day within the week
 -- assumes that day 1 = monday
 function ssUtil.dayOfWeek(dayNumber)

@@ -66,13 +66,6 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         return
     end
 
-    local seasonKeyToId = {
-        ["spring"] = 0,
-        ["summer"] = 1,
-        ["autumn"] = 2,
-        ["winter"] = 3
-    }
-
     -- Load properties
     if Utils.getNoNil(getXMLBool(file, "textures#overwrite"), false) then
         self.textureReplacements = {}
@@ -94,7 +87,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     end
 
     -- Load seasons replacements
-    for seasonName, seasonId in pairs(seasonKeyToId) do
+    for seasonName, seasonId in pairs(g_seasons.util.seasonKeyToId) do
         -- Create the season if it does not exist
         if self.textureReplacements[seasonId] == nil then
             self.textureReplacements[seasonId] = {}
