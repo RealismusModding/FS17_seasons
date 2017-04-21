@@ -18,7 +18,6 @@ function ssXMLUtil.hasXMLProperty(xmlFile, key)
 end
 
 function ssXMLUtil.getXMLFloat(xmlFile, key, defaultValue)
-    -- log("getXMLFloat("..tostring(xmlFile)..", "..tostring(key)..", "..tostring(defaultValue)..")")
     if xmlFile ~= nil then
         return Utils.getNoNil(getXMLFloat(xmlFile, key), defaultValue)
     end
