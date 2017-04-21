@@ -13,21 +13,21 @@ g_seasons.economy = ssEconomy
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 
 function ssEconomy:load(savegame, key)
-    self.aiPricePerHourWork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
-    self.aiPricePerHourOverwork = ssStorage.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
-    self.aiDayStart = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayStart", 6)
-    self.aiDayEnd = ssStorage.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
-    self.loanMax = ssStorage.getXMLFloat(savegame, key .. ".settings.loanMax", 1500000)
-    self.baseLoanInterest = ssStorage.getXMLFloat(savegame, key .. ".settings.baseLoanInterest", 10)
+    self.aiPricePerHourWork = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
+    self.aiPricePerHourOverwork = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
+    self.aiDayStart = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiDayStart", 6)
+    self.aiDayEnd = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiDayEnd", 18)
+    self.loanMax = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.loanMax", 1500000)
+    self.baseLoanInterest = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.baseLoanInterest", 10)
 end
 
 function ssEconomy:save(savegame, key)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", self.aiPricePerHourWork)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", self.aiPricePerHourOverwork)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.aiDayStart", self.aiDayStart)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.aiDayEnd", self.aiDayEnd)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.loanMax", self.loanMax)
-    ssStorage.setXMLFloat(savegame, key .. ".settings.baseLoanInterest", self.baseLoanInterest)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", self.aiPricePerHourWork)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.aiPricePerHourOverwork", self.aiPricePerHourOverwork)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.aiDayStart", self.aiDayStart)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.aiDayEnd", self.aiDayEnd)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.loanMax", self.loanMax)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".settings.baseLoanInterest", self.baseLoanInterest)
 end
 
 function ssEconomy:loadMap(name)
@@ -174,7 +174,7 @@ function ssEconomy:loadFromXML(path)
     end
 
     --get fieldPriceFactor from economy.xml
-    self.fieldPriceFactor = ssStorage.getXMLFloat(file, "economy.fieldPriceFactor", 1.0)
+    self.fieldPriceFactor = ssXMLUtil.getXMLFloat(file, "economy.fieldPriceFactor", 1.0)
     
     delete(file)
 end

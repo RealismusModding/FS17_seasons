@@ -69,7 +69,7 @@ local srcFolder = g_currentModDirectory .. "src/"
 local files = {
     -- Utilities
     "utils/ssLang",
-    "utils/ssStorage",
+    "utils/ssXMLUtil",
     "utils/ssSeasonsXML",
     "utils/ssQueue",
 
@@ -195,7 +195,7 @@ function ssSeasonsMod:loadFromXML(...)
         local filename = g_currentMission.missionInfo.savegameDirectory .. "/careerSavegame.xml"
         xmlFile = loadXMLFile("xml", filename)
     end
-    -- Empty, is solved by ssStorage. Useful for loading defaults
+    -- Empty, is solved by ssXMLUtil. Useful for loading defaults
 
     for _, k in pairs(g_modClasses) do
         if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].load ~= nil then

@@ -11,14 +11,14 @@ ssDensityMapScanner = {}
 g_seasons.dms = ssDensityMapScanner
 
 function ssDensityMapScanner:load(savegame, key)
-    if ssStorage.hasXMLProperty(savegame, key .. ".densityMapScanner.currentJob") then
+    if ssXMLUtil.hasXMLProperty(savegame, key .. ".densityMapScanner.currentJob") then
         local job = {}
 
-        job.x = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", 0)
-        job.z = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", 0)
-        job.callbackId = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
-        job.parameter = ssStorage.getXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter")
-        job.numSegments = ssStorage.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
+        job.x = ssXMLUtil.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", 0)
+        job.z = ssXMLUtil.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", 0)
+        job.callbackId = ssXMLUtil.getXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
+        job.parameter = ssXMLUtil.getXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter")
+        job.numSegments = ssXMLUtil.getXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
 
         self.currentJob = job
         
@@ -31,12 +31,12 @@ function ssDensityMapScanner:load(savegame, key)
     local i = 0
     while true do
         local ikey = string.format("%s.densityMapScanner.queue.job(%d)", key, i)
-        if not ssStorage.hasXMLProperty(savegame, ikey) then break end
+        if not ssXMLUtil.hasXMLProperty(savegame, ikey) then break end
 
         local job = {}
 
-        job.callbackId = ssStorage.getXMLString(savegame, ikey .. "#callbackId")
-        job.parameter = ssStorage.getXMLString(savegame, ikey .. "#parameter")
+        job.callbackId = ssXMLUtil.getXMLString(savegame, ikey .. "#callbackId")
+        job.parameter = ssXMLUtil.getXMLString(savegame, ikey .. "#parameter")
 
         self.queue:push(job)
 
@@ -50,21 +50,21 @@ function ssDensityMapScanner:save(savegame, key)
     removeXMLProperty(savegame, key .. ".densityMapScanner")
 
     if self.currentJob ~= nil then
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
-        ssStorage.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
-        ssStorage.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
+        ssXMLUtil.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
+        ssXMLUtil.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
+        ssXMLUtil.setXMLString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
+        ssXMLUtil.setXMLString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
+        ssXMLUtil.setXMLInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
     end
 
     -- Save queue
     self.queue:iteratePushOrder(function (job, i)
         local ikey = string.format("%s.densityMapScanner.queue.job(%d)", key, i - 1)
 
-        ssStorage.setXMLString(savegame, ikey .. "#callbackId", job.callbackId)
+        ssXMLUtil.setXMLString(savegame, ikey .. "#callbackId", job.callbackId)
 
         if job.parameter ~= nil then
-            ssStorage.setXMLString(savegame, ikey .. "#parameter", tostring(job.parameter))
+            ssXMLUtil.setXMLString(savegame, ikey .. "#parameter", tostring(job.parameter))
         end
     end)
 end

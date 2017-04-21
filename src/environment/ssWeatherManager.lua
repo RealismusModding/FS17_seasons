@@ -21,11 +21,11 @@ source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
 
 function ssWeatherManager:load(savegame, key)
     -- Load or set default values
-    self.snowDepth = ssStorage.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
-    self.soilTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.soilTemp", 4.9)
-    self.prevHighTemp = ssStorage.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
-    self.cropMoistureContent = ssStorage.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
-    self.moistureEnabled = ssStorage.getXMLBool(savegame, key .. ".weather.moistureEnabled", true)
+    self.snowDepth = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
+    self.soilTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.soilTemp", 4.9)
+    self.prevHighTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
+    self.cropMoistureContent = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
+    self.moistureEnabled = ssXMLUtil.getXMLBool(savegame, key .. ".weather.moistureEnabled", true)
 
     -- load forecast
     self.forecast = {}
@@ -33,7 +33,7 @@ function ssWeatherManager:load(savegame, key)
     local i = 0
     while true do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
-        if not ssStorage.hasXMLProperty(savegame, dayKey) then break end
+        if not ssXMLUtil.hasXMLProperty(savegame, dayKey) then break end
 
         local day = {}
 
@@ -54,7 +54,7 @@ function ssWeatherManager:load(savegame, key)
     i = 0
     while true do
         local rainKey = string.format("%s.weather.forecast.rain(%i)", key, i)
-        if not ssStorage.hasXMLProperty(savegame, rainKey) then break end
+        if not ssXMLUtil.hasXMLProperty(savegame, rainKey) then break end
 
         local rain = {}
 
@@ -73,11 +73,11 @@ end
 function ssWeatherManager:save(savegame, key)
     local i = 0
 
-    ssStorage.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
-    ssStorage.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
-    ssStorage.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
-    ssStorage.setXMLFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
-    ssStorage.setXMLBool(savegame, key .. ".weather.moistureEnabled", self.moistureEnabled)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
+    ssXMLUtil.setXMLBool(savegame, key .. ".weather.moistureEnabled", self.moistureEnabled)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)

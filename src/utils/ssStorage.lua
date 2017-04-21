@@ -1,15 +1,15 @@
 ----------------------------------------------------------------------------------------------------
--- STORAGE SCRIPT
+-- XMLUTIL SCRIPT
 ----------------------------------------------------------------------------------------------------
--- Purpose:  For easy storage of savegame stuff
+-- Purpose:  For easy storage of savegame stuff and xml related utilities
 -- Authors:  Rahkiin
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
-ssStorage = {}
+ssXMLUtil = {}
 
-function ssStorage.hasXMLProperty(xmlFile, key)
+function ssXMLUtil.hasXMLProperty(xmlFile, key)
     if xmlFile ~= nil then
         return hasXMLProperty(xmlFile, key)
     end
@@ -17,7 +17,7 @@ function ssStorage.hasXMLProperty(xmlFile, key)
     return false
 end
 
-function ssStorage.getXMLFloat(xmlFile, key, defaultValue)
+function ssXMLUtil.getXMLFloat(xmlFile, key, defaultValue)
     -- log("getXMLFloat("..tostring(xmlFile)..", "..tostring(key)..", "..tostring(defaultValue)..")")
     if xmlFile ~= nil then
         return Utils.getNoNil(getXMLFloat(xmlFile, key), defaultValue)
@@ -26,7 +26,7 @@ function ssStorage.getXMLFloat(xmlFile, key, defaultValue)
     return defaultValue
 end
 
-function ssStorage.getXMLString(xmlFile, key, defaultValue)
+function ssXMLUtil.getXMLString(xmlFile, key, defaultValue)
     if xmlFile ~= nil then
         return Utils.getNoNil(getXMLString(xmlFile, key), defaultValue)
     end
@@ -34,7 +34,7 @@ function ssStorage.getXMLString(xmlFile, key, defaultValue)
     return defaultValue
 end
 
-function ssStorage.getXMLBool(xmlFile, key, defaultValue)
+function ssXMLUtil.getXMLBool(xmlFile, key, defaultValue)
     if xmlFile ~= nil then
         return Utils.getNoNil(getXMLBool(xmlFile, key), defaultValue)
     end
@@ -42,7 +42,7 @@ function ssStorage.getXMLBool(xmlFile, key, defaultValue)
     return defaultValue
 end
 
-function ssStorage.getXMLInt(xmlFile, key, defaultValue)
+function ssXMLUtil.getXMLInt(xmlFile, key, defaultValue)
     if xmlFile ~= nil then
         return Utils.getNoNil(getXMLInt(xmlFile, key), defaultValue)
     end
@@ -50,18 +50,18 @@ function ssStorage.getXMLInt(xmlFile, key, defaultValue)
     return defaultValue
 end
 
-function ssStorage.setXMLFloat(xmlFile, key, value)
+function ssXMLUtil.setXMLFloat(xmlFile, key, value)
     setXMLFloat(xmlFile, key, value)
 end
 
-function ssStorage.setXMLString(xmlFile, key, value)
+function ssXMLUtil.setXMLString(xmlFile, key, value)
     setXMLString(xmlFile, key, value)
 end
 
-function ssStorage.setXMLBool(xmlFile, key, value)
+function ssXMLUtil.setXMLBool(xmlFile, key, value)
     setXMLBool(xmlFile, key, value)
 end
 
-function ssStorage.setXMLInt(xmlFile, key, value)
+function ssXMLUtil.setXMLInt(xmlFile, key, value)
     setXMLInt(xmlFile, key, value)
 end

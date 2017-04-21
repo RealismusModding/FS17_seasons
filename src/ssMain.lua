@@ -11,7 +11,7 @@ ssMain = {}
 getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 
 g_seasons.lang = ssLang
-g_seasons.storage = ssStorage
+g_seasons.xmlUtil = ssXMLUtil
 g_seasons.multiplayer = ssMultiplayer
 g_seasons.xml = ssSeasonsXML
 
@@ -52,16 +52,16 @@ end
 ----------------------------
 
 function ssMain:load(savegame, key)
-    self.showControlsInHelpScreen = ssStorage.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
-    self.savegameVersion = ssStorage.getXMLInt(savegame, key .. ".version", 1)
+    self.showControlsInHelpScreen = ssXMLUtil.getXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
+    self.savegameVersion = ssXMLUtil.getXMLInt(savegame, key .. ".version", 1)
 
     self.isNewSavegame = savegame == nil
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
 end
 
 function ssMain:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", self.showControlsInHelpScreen)
-    ssStorage.setXMLInt(savegame, key .. ".version", self.savegameVersion)
+    ssXMLUtil.setXMLBool(savegame, key .. ".settings.showControlsInHelpScreen", self.showControlsInHelpScreen)
+    ssXMLUtil.setXMLInt(savegame, key .. ".version", self.savegameVersion)
 end
 
 ----------------------------

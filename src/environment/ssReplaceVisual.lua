@@ -15,11 +15,11 @@ function ssReplaceVisual:preLoad()
 end
 
 function ssReplaceVisual:load(savegame, key)
-    self.latestVisuals = ssStorage.getXMLInt(savegame, key .. ".environment.latestVisuals", g_seasons.environment:currentSeason())
+    self.latestVisuals = ssXMLUtil.getXMLInt(savegame, key .. ".environment.latestVisuals", g_seasons.environment:currentSeason())
 end
 
 function ssReplaceVisual:save(savegame, key)
-    ssStorage.setXMLFloat(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
+    ssXMLUtil.setXMLFloat(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
 end
 
 function ssReplaceVisual:loadMap(name)

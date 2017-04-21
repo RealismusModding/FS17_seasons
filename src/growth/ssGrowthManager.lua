@@ -33,7 +33,7 @@ ssGrowthManager.additionalFruitsChecked = false
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
 
-    self.growthManagerEnabled = ssStorage.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
+    self.growthManagerEnabled = ssXMLUtil.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
     
     if savegame == nil then return end
 
@@ -50,7 +50,7 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-    ssStorage.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
+    ssXMLUtil.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
     
     local i = 0
     for fruitName in pairs(self.willGerminateData) do
