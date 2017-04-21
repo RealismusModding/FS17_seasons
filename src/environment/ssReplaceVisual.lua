@@ -455,14 +455,7 @@ end
 --
 
 function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
-    local season = g_seasons.environment.SEASON_SPRING
-    if seasonName == "summer" then
-        season = g_seasons.environment.SEASON_SUMMER
-    elseif seasonName == "autumn" then
-        season = g_seasons.environment.SEASON_AUTUMN
-    elseif seasonName == "winter" then
-        season = g_seasons.environment.SEASON_WINTER
-    end
+    local season = g_seasons.util.seasonKeyToId[seasonName]
 
     -- Overwrite getter
     local oldCurrentSeason = g_seasons.environment.currentSeason
