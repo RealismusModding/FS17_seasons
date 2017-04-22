@@ -2,11 +2,12 @@
 <l10n>
     <translationContributors>tobiasgo, Oekobauer, ItZzShady, theSeb, WieSeLfLinK</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Jahreszeiten: Wettervorhersage anzeigen" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Jahreszeiten: Fahrzeug Reparieren" />
-        <text name="input_SEASONS_SHOW_MENU" text="Jahreszeiten: Menü öffnen" />
-        <text name="input_SEASONS_PLANTING_DISTANCE" text="Wachstumsdauer in (%d m)" />
-        <text name="SEASONS_HIDE_WF" text="Jahreszeiten: Wettervorhersage verbergen" />
+	    <!-- Control actions -->
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Wettervorhersage anzeigen" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Fahrzeug Reparieren" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Menü öffnen" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Pflanzabstand %d m " />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Wettervorhersage verbergen" />
 
         <text name="SS_WEEKDAY_1" text="Montag" />
         <text name="SS_WEEKDAY_2" text="Dienstag" />
@@ -29,18 +30,18 @@
         <text name="SS_SEASON_2" text="Herbst" />
         <text name="SS_SEASON_3" text="Winter" />
 
-        <text name="SS_SEASON_FULL_NAME_1" text="Frühlingsbeginn" />
+        <text name="SS_SEASON_FULL_NAME_1" text="Frühlingsanfang" />
         <text name="SS_SEASON_FULL_NAME_2" text="Frühlingsmitte" />
-        <text name="SS_SEASON_FULL_NAME_3" text="Spätfrühling" />
-        <text name="SS_SEASON_FULL_NAME_4" text="Frühsommer" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Frühlingsende" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Sommeranfang" />
         <text name="SS_SEASON_FULL_NAME_5" text="Sommermitte" />
-        <text name="SS_SEASON_FULL_NAME_6" text="Spätsommer" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Sommerende" />
         <text name="SS_SEASON_FULL_NAME_7" text="Herbstbeginn" />
         <text name="SS_SEASON_FULL_NAME_8" text="Herbstmitte" />
-        <text name="SS_SEASON_FULL_NAME_9" text="Spätherbst" />
-        <text name="SS_SEASON_FULL_NAME_10" text="Frühwinter" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Herbstende" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Winterbeginn" />
         <text name="SS_SEASON_FULL_NAME_11" text="Wintermitte" />
-        <text name="SS_SEASON_FULL_NAME_12" text="Spätwinter" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Winterende" />
 
         <text name="SS_MONTH_SHORT_1" text="Jan" />
         <text name="SS_MONTH_SHORT_2" text="Feb" />
@@ -59,30 +60,31 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Fahrzeugkosten" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparaturkosten" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu reparieren" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu reparieren!" />
         <text name="SS_VEHICLE_REPAIRED" text="%s wurde repariert für %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Reparatur benötigt" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen" />
-        <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s reparieren ?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Reparatur erforderlich" />
-        <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine reparieren" />
+        <text name="SS_REPAIR_REQUIRED" text="Reparatur benötigt!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen." />
+        <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s reparieren?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Reparatur erforderlich!" />
+        <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine reparieren!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Ein neues Jahr hat begonnen. Der Frühling steht in den Startlöchern. Diese Zeit solltest Du für die Aussaat nutzen." />
-        <text name="SS_SEASON_INTRO_1" text="Der Sommer hat begonnen und die Pflanzen wachsen. Es ist ratsam während dieser Zeit die nötigen Düngearbeiten durchzuführen und Dich auf die kommende Erntezeit einzustellen." />
+        <text name="SS_SEASON_INTRO_0" text="Ein neues Jahr hat begonnen. Der Frühling steht in den Startlöchern. Diese Zeit solltest Du für die Aussaat nutzen und mit der Düngung beginnen. Beachte die Aussaatzeiten, jede Pflanze hat einen anderen Zyklus." />
+        <text name="SS_SEASON_INTRO_1" text="Der Sommer hat begonnen und die Pflanzen wachsen. Es ist ratsam während dieser Zeit die nötigen Düngearbeiten durchzuführen und Dich auf die kommende Erntezeit einzustellen. Beachte immer die möglichen Erntezeiten." />
         <text name="SS_SEASON_INTRO_2" text="Die Erntezeit ist bereits im vollen Gange. Bis zum Winter solltest Du alle Felder abgeerntet haben." />
-        <text name="SS_SEASON_INTRO_3" text="Der Winter, die kalte Jahreszeit hat begonnen. Die Pflanzen ziehen sich zurück, die Böden sind teilweise unbefahrbar oder gefroren. Die Feldbearbeitung ist während dieser Zeit nicht möglich. Die Zeit für viele andere Dinge auf dem Hof." />
+        <text name="SS_SEASON_INTRO_3" text="Der Winter, die kalte Jahreszeit hat begonnen. Die Pflanzen ziehen sich zurück, die Böden sind teilweise unbefahrbar oder gefroren. Die Feldbearbeitung ist während dieser Zeit nicht möglich. Die Zeit für viele andere Beschäftigungen auf dem Hof." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
 
-        <text name="warning_soilIsFrozen" text="Der Boden ist gefroren. Eine Bearbeitung ist so leider nicht möglich. Warte etwas wärmere Tage ab." />
+        <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab." />
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
-        <text name="warning_animalsKilled" text="Tiere versterben in (%d)" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog seine maximale Kapazität erreicht. Der Inhalt des Futtertroges langt für die nächsten weiteren 3 Tage" />
+        <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend." />
 
+		 <!-- GUI -->
         <text name="ui_pageOverview" text="Übersicht" />
         <text name="ui_pageSettings" text="Einstellungen" />
         <text name="ui_pageDebug" text="Entwickler" />
@@ -96,9 +98,9 @@
         <text name="ui_plantingSeason" text="Aussaat möglich" />
         <text name="ui_harvestSeason" text="Erntezeit" />
 
-        <text name="tooltip_seasonLength" text="Die Dauer einer Jahreszeit in Tagen. Ein Jahr beinhaltet vier Jahreszeiten und beginnt mit dem Frühling, endet mit dem Winter." />
+        <text name="tooltip_seasonLength" text="Die Dauer einer Jahreszeit in Tagen. Ein Jahr beinhaltet vier Jahreszeiten. Frühjahr, Sommer, Herbst und Winter." />
         <text name="tooltip_seasonIntros" text="Hilfefenster beinhalten wichtige Informationen und Erklärungen zum Jahreszeiten-Mod." />
-        <text name="tooltip_snow" text="Während der Winterzeit wird vermutlich Schnee fallen und die Straßen blockieren." />
+        <text name="tooltip_snow" text="Im Winter kann es zu Schneefällen kommen. Hier hast Du die Möglichkeit diese Funktion an- und abzuschalten." />
         <text name="tooltip_controlsHelp" text="Zeigt die 'Jahreszeiten' Tastenkombination im Hilfe Fenster." />
         <text name="tooltip_snowTracks" text="Fahrzeugen hinterlassen Spuren im Schnee." />
         <text name="tooltip_controlsTemperature" text="Wähle zwischen 'Celcius' und 'Fahrenheit'" />
