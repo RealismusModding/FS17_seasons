@@ -315,7 +315,9 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     break
                 end
 
-                if transition == 10 or transition == 11 or transition == 12 then --hack for winter planting
+                if transition == g_seasons.environment.TRANSITION_EARLY_WINTER 
+                        or transition == g_seasons.environment.TRANSITION_MID_WINTER 
+                        or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
                     table.insert(transitionTable, transition , false)
                 else
                     local plantedTransition = transition
