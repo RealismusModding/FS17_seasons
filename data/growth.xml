@@ -101,7 +101,7 @@
             <fruit fruitName="maize" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="potato"    normalGrowthState="4" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="poplar" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
             <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
@@ -114,7 +114,7 @@
             <fruit fruitName="maize" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="potato"    normalGrowthState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <!--<fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>-->
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
