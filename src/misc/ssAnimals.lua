@@ -186,7 +186,7 @@ end
 
 function ssAnimals:killAnimals(animal, p)
     local husbandry = g_currentMission.husbandries[animal]
-    if husbandry == nil then return end
+    if husbandry == nil then return 0 end
 
     if not self:animalIsCaredFor(animal) then
         local killedAnimals = math.ceil(p * husbandry.totalNumAnimals)
