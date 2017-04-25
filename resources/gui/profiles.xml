@@ -17,18 +17,13 @@
         <Value name="margin" value="0px 25px 0px 14px" />
     </Profile>
 
-    <Profile name="ssOverview" parent="baseReference">
-        <Value name="size" value="1000px 458px" /> <!-- 530 -->
-        <Value name="position" value="0px 30px" />
-    </Profile>
-
-    <Profile name="ssOverviewOverlay" parent="baseReference">
-        <Value name="size" value="1000px 458px" />
-        <Value name="position" value="0px 0px" />
-    </Profile>
-
     <Profile name="ssCropsSliderVertical" parent="sliderVertical">
         <Value name="position" value="0px 15px" />
         <Value name="size" value="16px 458px" />
+    </Profile>
+
+    <Profile name="ssOverview" parent="baseReference">
+        <Value name="size" value="984px 560px" />
+        <Value name="position" value="0px 0px" />
     </Profile>
 </GUIProfiles>

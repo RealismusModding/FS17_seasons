@@ -300,6 +300,11 @@ end
 function ssSeasonsMenu:onCreatePageOverview(element)
     ssSeasonsMenu.PAGE_OVERVIEW = self.pagingElement:getPageIdByElement(element)
 
+    -- Cache of icons, against leaking when rebuilding
+    self.overview.iconCache = {}
+end
+
+function ssSeasonsMenu:createOverviewValues(element)
     local o = self.overview
     local _ = nil
 
@@ -341,11 +346,15 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_autumn.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
     o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_winter.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
 
-    -- Cache of icons, against leaking when rebuilding
-    o.iconCache = {}
+    -- Set up the slider
+    local numTotalItems = table.getn(self.overviewData)
+    self.overview.scrollStart = 1
 
     o.scrollVisible = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
     self.cropsSlider:setMinValue(o.scrollVisible)
+    self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
+    self.cropsSlider:setValue(self.cropsSlider.maxValue)
+    self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
 function ssSeasonsMenu:getTransitionHeaders()
@@ -425,18 +434,13 @@ function ssSeasonsMenu:updateOverview()
 
     -- Create the headers
     self.overview.transitionHeaders = self:getTransitionHeaders()
-
-    -- Set up the slider
-    local numTotalItems = table.getn(self.overviewData)
-
-    self.overview.scrollStart = 1
-
-    self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
-    self.cropsSlider:setValue(self.cropsSlider.maxValue)
-    self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
 function ssSeasonsMenu:drawOverview(element)
+    if self.overview.fruitSpacerHeight == nil then
+        self:createOverviewValues(element)
+    end
+
     local o = self.overview
     local topLeftX = (element.size[1] - o.totalWidth) / 2
     local headerLeft = topLeftX + o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth
@@ -574,7 +578,6 @@ function ssSeasonsMenu:drawOverview(element)
         guideHeight,
         colorBlind and {1.0000, 0.8632, 0.0232, 1} or {0.8069, 0.0097, 0.0097, 1}
     )
-    -- log("guideY", o.topLeftY + o.headerHeight, "height", guideHeight, "sum", o.topLeftY + o.headerHeight + guideHeight)
 
     -- Draw legend in the footer
     setTextColor(1, 1, 1, 1)
@@ -582,12 +585,6 @@ function ssSeasonsMenu:drawOverview(element)
 
     local footerY = o.topLeftY + o.headerHeight -- + o.contentHeight
     footerY = footerY + o.scrollVisible * (o.fruitSpacerHeight + o.fruitHeight)
-
-    -- log("scrollVisible", o.scrollVisible)
-    -- log("footerY", footerY)
-    -- log("topLeftY", o.topLeftY)
-    -- log("headerHeight", o.headerHeight)
-    -- log("contentHeight", o.contentHeight)
 
     -- Rect for planting
     o.rect:render(
