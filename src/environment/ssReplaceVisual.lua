@@ -26,6 +26,8 @@ function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
         g_currentMission.environment:addDayChangeListener(self)
 
+        self.loadedPlaceableDefaults = {}
+
         self:loadFromXML()
 
         self:loadTextureIdTable(getRootNode()) -- Built into map
@@ -44,6 +46,10 @@ end
 function ssReplaceVisual:writeStream(streamId, connection)
     streamWriteInt32(streamId, self.latestVisuals)
 end
+
+--
+-- XML
+--
 
 function ssReplaceVisual:loadFromXML()
     self.textureReplacements = {}
@@ -158,6 +164,10 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     delete(file)
 end
 
+--
+-- Callbacks
+--
+
 function ssReplaceVisual:update(dt)
     if self.once ~= true and g_currentMission:getIsClient() then
         self:updateFoliageLayers(self.latestVisuals)
@@ -182,9 +192,19 @@ end
 
 function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
     if g_currentMission:getIsClient() then
+        if g_seasons.replaceVisual.loadedPlaceableDefaults[string.lower(self.configFileName)] ~= true then
+            g_seasons.replaceVisual:loadMissingPlaceableDefaults(self.nodeId)
+
+            g_seasons.replaceVisual.loadedPlaceableDefaults[string.lower(self.configFileName)] = true
+        end
+
         ssReplaceVisual:updateTextures(g_seasons.replaceVisual.latestVisuals, self.nodeId)
     end
 end
+
+--
+-- Utilities
+--
 
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function ssReplaceVisual:findNodeByName(nodeId, name, skipCurrent)
@@ -233,6 +253,40 @@ function ssReplaceVisual:getVisualSeason()
     else
         return curSeason
     end
+end
+
+function ssReplaceVisual:walkOverReplacements(default, foliage, fn)
+    for seasonId, seasonTable in pairs(self.textureReplacements) do
+        if default ~= false or seasonId ~= "default" then
+            for shapeName, shapeNameTable in pairs(seasonTable) do
+                if foliage ~= false or shapeName ~= "_foliageLayers" then
+                    for secondaryNodeName, secondaryNodeTable in pairs(shapeNameTable) do
+                        fn(seasonId, shapeName, secondaryNodeName)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function ssReplaceVisual:loadMissingPlaceableDefaults(searchBase)
+    self:walkOverReplacements(false, false, function (seasonId, shapeName, secondaryNodeName)
+        -- Original aterial may not be loaded yet, because, for example, a tree was not in the map
+        -- but is in a Placeable
+        if self.textureReplacements.default[shapeName][secondaryNodeName].materialId == nil then
+            local materialId = ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNodeName)
+
+            self.textureReplacements.default[shapeName][secondaryNodeName].materialId = materialId
+
+            -- Load an object to hold it as well to prevent garbage collect
+            if materialId ~= nil and self.tmpMaterialHolderNodeId ~= nil then
+                local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+
+                link(getRootNode(), nodeId)
+                setMaterial(nodeId, materialId, 0)
+            end
+        end
+    end)
 end
 
 --
