@@ -98,6 +98,8 @@ end
 function ssSnow:applySnow(targetSnowDepth)
     if not g_currentMission:getIsServer() then return end
 
+    local oldSnowDepth = self.appliedSnowDepth
+
     if self.mode == self.MODE_ONE_LAYER then
         targetSnowDepth = math.min(self.LAYER_HEIGHT, targetSnowDepth)
     elseif self.mode == self.MODE_OFF then
@@ -139,6 +141,10 @@ function ssSnow:applySnow(targetSnowDepth)
 
             ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         end
+    end
+
+    if oldSnowDepth ~= self.appliedSnowDepth then
+        g_seasons.environment:invokeSnowHeightChangeListeners()
     end
 end
 
