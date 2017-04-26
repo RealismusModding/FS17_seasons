@@ -52,5 +52,6 @@ function ssRepairVehicleEvent:run(connection)
     if self.vehicle ~= nil then
         self.vehicle.ssLastRepairDay = self.ssLastRepairDay
         self.vehicle.ssLastRepairOperatingTime = self.ssLastRepairOperatingTime
+        self.vehicle.ssCumulativeDirt = 0
     end
 end

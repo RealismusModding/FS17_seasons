@@ -122,7 +122,7 @@ end
 
 function ssRepairable:update(dt)
     -- Show a message about the repairing
-    if self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
+    if self.isClient and self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
         self:ssRepairUpdate(dt)
     end
 

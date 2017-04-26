@@ -457,11 +457,11 @@ end
 function ssVehicle:updateWheelTireFriction(superFunc, wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
-            if wheel.tireType == WheelsUtil.getTireType('chains') then
+            if wheel.tireType == WheelsUtil.getTireType("chains") then
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
-            elseif wheel.tireType == WheelsUtil.getTireType('crawler') then
+            elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.5)
-            elseif wheel.tireType == WheelsUtil.getTireType('studded') then
+            elseif wheel.tireType == WheelsUtil.getTireType("studded") then
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.7)
             else
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.1)
