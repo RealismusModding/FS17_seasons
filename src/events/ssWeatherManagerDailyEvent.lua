@@ -36,7 +36,6 @@ function ssWeatherManagerDailyEvent:writeStream(streamId, connection)
     streamWriteString(streamId, self.day.weatherState)
     streamWriteFloat32(streamId, self.day.highTemp)
     streamWriteFloat32(streamId, self.day.lowTemp)
-    streamWriteFloat32(streamId, self.soilTemp)
 
     streamWriteInt16(streamId, self.rain.startDay)
     streamWriteFloat32(streamId, self.rain.endDayTime)
