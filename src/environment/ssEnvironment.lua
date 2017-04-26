@@ -77,7 +77,6 @@ function ssEnvironment:loadMap(name)
     self.seasonChangeListeners = {}
     self.transitionChangeListeners = {}
     self.seasonLengthChangeListeners = {}
-    self.snowHeightChangeListeners = {}
 
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
@@ -173,25 +172,6 @@ end
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
         self.seasonLengthChangeListeners[listener] = nil
-    end
-end
-
--- Listeners for a change in height of snow
-function ssEnvironment:addSnowHeightChangeListener(listener)
-    if listener ~= nil then
-        self.snowHeightChangeListeners[listener] = listener
-    end
-end
-
-function ssEnvironment:removeSnowHeightChangeListener(listener)
-    if listener ~= nil then
-        self.snowHeightChangeListeners[listener] = nil
-    end
-end
-
-function ssEnvironment:invokeSnowHeightChangeListeners()
-    for _, listener in pairs(self.snowHeightChangeListeners) do
-        listener:snowHeightChanged()
     end
 end
 

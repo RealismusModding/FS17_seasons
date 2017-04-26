@@ -142,10 +142,6 @@ function ssSnow:applySnow(targetSnowDepth)
             ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         end
     end
-
-    if oldSnowDepth ~= self.appliedSnowDepth then
-        g_seasons.environment:invokeSnowHeightChangeListeners()
-    end
 end
 
 function ssSnow:hourChanged()
