@@ -19,7 +19,7 @@ function ssReplaceVisual:load(savegame, key)
 end
 
 function ssReplaceVisual:save(savegame, key)
-    ssXMLUtil.setXMLFloat(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
+    ssXMLUtil.setXMLInt(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
 end
 
 function ssReplaceVisual:loadMap(name)
