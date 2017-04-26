@@ -14,15 +14,17 @@
 -- Always create the objects.
 -- We can't properly detect if Seasons is loaded, because
 -- that depends on the load order.
-local fn = function (self, id)
-    if getVisibility(id) == false then
-        setCollisionMask(id, 0)
+if ssIcePlane == nil then
+    local fn = function (self, id)
+        if getVisibility(id) == false then
+            setCollisionMask(id, 0)
+        end
     end
+
+    local class = {}
+    class.onCreate = fn
+
+    getfenv(0)["ssIcePlane"] = class
+    getfenv(0)["ssSeasonAdmirer"] = class
+    getfenv(0)["ssSnowAdmirer"] = class
 end
-
-local class = {}
-class.onCreate = fn
-
-getfenv(0)["ssIcePlane"] = class
-getfenv(0)["ssSeasonAdmirer"] = class
-getfenv(0)["ssSnowAdmirer"] = class
