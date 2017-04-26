@@ -151,11 +151,10 @@ function ssWeatherManager:readStream(streamId, connection)
     self.soilTemp = streamReadFloat32(streamId)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.moistureEnabled = streamReadBool(streamId)
+    self.prevHighTemp = streamReadFloat32(streamId)
 
     self.forecastLength = streamReadUInt8(streamId)
     local numRains = streamReadUInt8(streamId)
-
-    self.prevHighTemp = streamReadFloat32(streamId)
 
     -- load forecast
     self.forecast = {}
@@ -197,11 +196,10 @@ function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.soilTemp)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteBool(streamId, self.moistureEnabled)
+    streamWriteFloat32(streamId, self.prevHighTemp)
 
     streamWriteUInt8(streamId, self.forecastLength)
     streamWriteUInt8(streamId, table.getn(self.weather))
-
-    streamWriteFloat32(streamId, self.prevHighTemp)
 
     for _, day in pairs(self.forecast) do
         streamWriteInt16(streamId, day.day)

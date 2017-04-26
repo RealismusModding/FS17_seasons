@@ -205,7 +205,7 @@ function ssWeatherForecast:drawToday(forecast)
 
     -- Render current air temperature
     setTextAlignment(RenderText.ALIGN_RIGHT)
-    local airTemp = mathRound(ssWeatherManager:diurnalTemp(g_currentMission.environment.currentHour, g_currentMission.environment.currentMinute), 0)
+    local airTemp = mathRound(ssWeatherManager:currentTemperature(), 0)
     renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall*0.4, self.hud.dayPosY + self.hud.dayHeight*0.65, self.hud.textSize*1.1, ssLang.formatTemperature(airTemp))
 
     -- Render current soil temperature
