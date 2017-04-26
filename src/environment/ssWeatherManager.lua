@@ -307,7 +307,6 @@ function ssWeatherManager:updateForecast()
     elseif self.forecast[self.forecastLength-1].season ~= oneDayForecast.season then
         --Seasonal average for a day in the next season
         oneDayForecast.Tmaxmean = ssUtil.triDist(ssTmax)
-
     end
 
     oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)

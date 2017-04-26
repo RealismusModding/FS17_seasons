@@ -110,7 +110,7 @@ function ssVehicle:installVehicleSpecializations()
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("motorFailure"))
             end
 
-            if not g_modIsLoaded["FS17_RM_S01_Grass"] and SpecializationUtil.hasSpecialization(Tedder, vehicleType.specializations) then
+            if SpecializationUtil.hasSpecialization(Tedder, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("ss_tedder"))
             end
 
