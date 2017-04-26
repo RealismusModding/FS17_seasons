@@ -92,7 +92,8 @@ function ssWeatherManagerDailyEvent:run(connection)
         table.insert(ssWeatherManager.forecast, self.day)
 
         table.insert(ssWeatherManager.weather, self.rain)
-        ssWeatherManager:overwriteRaintable()
         table.remove(ssWeatherManager.weather, 1)
+
+        ssWeatherManager:overwriteRaintable()
     end
 end

@@ -373,8 +373,6 @@ function ssWeatherManager:hourChanged()
 
         self:updateCropMoistureContent()
 
-        -- TODO send update event
-        -- Also call the weather changed events on client side
         g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth))
     end
 end
