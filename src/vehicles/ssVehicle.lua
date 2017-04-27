@@ -119,7 +119,6 @@ function ssVehicle:installVehicleSpecializations()
             if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
             end
-
         end
     end
 end
@@ -507,12 +506,12 @@ function ssVehicle:registerWheelTypes()
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.05
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.95
 
-    WheelsUtil.registerTireType("studded",studdedFrictionCoeffs,studdedFrictionCoeffsWet)
-    WheelsUtil.registerTireType("chains",snowchainsFrictionCoeffs,snowchainsFrictionCoeffsWet)
+    WheelsUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
+    WheelsUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
 end
 
 -- Override the threshing for the moisture system
-function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
+function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
     if not g_seasons.weather.moistureEnabled then
         return superFunc(self, earlyWarning)
     end
