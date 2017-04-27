@@ -45,8 +45,8 @@ function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.getDailyUpKeep)
-    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.getSellPrice)
+    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.vehicleGetDailyUpKeep)
+    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.vehicleGetSellPrice)
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
@@ -288,7 +288,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 end
 
 -- all (guard)
-function ssVehicle:getDailyUpKeep(superFunc)
+function ssVehicle:vehicleGetDailyUpKeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
 
     -- If not repairable, show default amount
@@ -303,7 +303,7 @@ function ssVehicle:getDailyUpKeep(superFunc)
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false))
     else
-        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false) + ssVehicle:getRepairShopCost(self,storeItem,true)
+        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false) + ssVehicle:getRepairShopCost(self, storeItem, true)
     end
 
     return costs
@@ -325,7 +325,7 @@ function ssVehicle:calculateOverdueFactor(vehicle)
     return overdueFactor
 end
 
-function ssVehicle:getSellPrice(superFunc)
+function ssVehicle:vehicleGetSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local price = storeItem.price
     local minSellPrice = storeItem.price * 0.03
@@ -379,9 +379,13 @@ end
 -- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle:getSpecValueAge(superFunc, vehicle) -- storeItem, realItem
     if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-        return string.format(g_i18n:getText("shop_age"), g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - vehicle.ssLastRepairDay))
+        local daysUntil = math.max(g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - vehicle.ssLastRepairDay), 0)
+
+        return string.format(g_i18n:getText("shop_age"), daysUntil)
     elseif vehicle ~= nil and vehicle.age ~= nil then
         return "-"
+
+    -- FIXME this is never called because all vehicles have an age
     elseif not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
         return ssLang.getText("SS_REPAIR_AT_MIDNIGHT", "at midnight")
     end
