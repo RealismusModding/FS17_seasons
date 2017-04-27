@@ -40,11 +40,11 @@ function ssReplaceVisual:loadMap(name)
 end
 
 function ssReplaceVisual:readStream(streamId, connection)
-    self.latestVisuals = streamReadInt32(streamId)
+    self.latestVisuals = streamReadInt16(streamId)
 end
 
 function ssReplaceVisual:writeStream(streamId, connection)
-    streamWriteInt32(streamId, self.latestVisuals)
+    streamWriteInt16(streamId, self.latestVisuals)
 end
 
 --

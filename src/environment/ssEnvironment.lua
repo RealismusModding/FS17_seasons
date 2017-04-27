@@ -83,19 +83,19 @@ function ssEnvironment:loadMap(name)
 end
 
 function ssEnvironment:readStream(streamId, connection)
-    g_currentMission.environment.currentDay = streamReadInt32(streamId)
-    self.daysInSeason = streamReadInt32(streamId)
-    self.latestSeason = streamReadInt32(streamId)
-    self.latestTransition = streamReadInt32(streamId)
-    self.currentDayOffset = streamReadInt32(streamId)
+    g_currentMission.environment.currentDay = streamReadInt16(streamId)
+    self.daysInSeason = streamReadInt16(streamId)
+    self.latestSeason = streamReadInt16(streamId)
+    self.latestTransition = streamReadInt16(streamId)
+    self.currentDayOffset = streamReadInt16(streamId)
 end
 
 function ssEnvironment:writeStream(streamId, connection)
-    streamWriteInt32(streamId, g_currentMission.environment.currentDay)
-    streamWriteInt32(streamId, self.daysInSeason)
-    streamWriteInt32(streamId, self.latestSeason)
-    streamWriteInt32(streamId, self.latestTransition)
-    streamWriteInt32(streamId, self.currentDayOffset)
+    streamWriteInt16(streamId, g_currentMission.environment.currentDay)
+    streamWriteInt16(streamId, self.daysInSeason)
+    streamWriteInt16(streamId, self.latestSeason)
+    streamWriteInt16(streamId, self.latestTransition)
+    streamWriteInt16(streamId, self.currentDayOffset)
 end
 
 function ssEnvironment:update(dt)
