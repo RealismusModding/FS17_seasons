@@ -690,7 +690,7 @@ function ssSeasonsMenu:updateGameSettings()
     end
 
     self.settingElements.seasonIntros:setIsChecked(not ssSeasonIntro.hideSeasonIntro)
-    self.settingElements.seasonLength:setState(Util.clamp(math.floor(g_seasons.environment.daysInSeason / 3 - 1), 1, 3))
+    self.settingElements.seasonLength:setState(math.floor(g_seasons.environment.daysInSeason / 3))
     self.settingElements.controlsHelp:setIsChecked(g_seasons.showControlsInHelpScreen)
     self.settingElements.controlsTemperature:setIsChecked(ssWeatherForecast.degreeFahrenheit)
     self.settingElements.snow:setState(g_seasons.snow.mode)
@@ -718,7 +718,7 @@ end
 function ssSeasonsMenu:updateApplySettingsButton()
     local hasChanges = false
 
-    if (self.settingElements.seasonLength:getState() + 1) * 3 ~= g_seasons.environment.daysInSeason
+    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.controlsTemperature:getIsChecked() ~= ssWeatherForecast.degreeFahrenheit
@@ -733,7 +733,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
 end
 
 function ssSeasonsMenu:onClickSaveSettings()
-    if (self.settingElements.seasonLength:getState() + 1) * 3 ~= g_seasons.environment.daysInSeason
+    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
        or self.settingElements.snow:getState() ~= ssSnow.mode then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
@@ -749,7 +749,7 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
         ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
 
         if g_currentMission:getIsServer() then
-            local newLength = (self.settingElements.seasonLength:getState() + 1) * 3
+            local newLength = self.settingElements.seasonLength:getState() * 3
 
             g_seasons.snow:setMode(self.settingElements.snow:getState())
             self:updateSnowStatus()
@@ -803,7 +803,7 @@ function ssSeasonsMenu:onCreateSeasonLength(element)
     self:replaceTexts(element)
 
     local texts = {}
-    for i = 2, 4 do
+    for i = 1, 4 do
         table.insert(texts, string.format(ssLang.getText("ui_days", "%i days"), i * 3))
     end
     element:setTexts(texts)
