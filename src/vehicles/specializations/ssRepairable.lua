@@ -72,28 +72,29 @@ end
 function ssRepairable:draw()
 end
 
-local function isInDistance(self, player, distance, refNode)
+local function isInDistance(self, player, maxDistance, refNode)
     local vx, _, vz = getWorldTranslation(player.rootNode)
     local sx, _, sz = getWorldTranslation(refNode)
-    local dx, dz = vx - sx, vz - sz
 
-    if dx * dx + dz * dz < distance * distance then
-        return true
-    end
+    local dist = Utils.vector2Length(vx - sx, vz - sz)
 
-    return false
+    return dist <= maxDistance
 end
 
 -- Jos: Don't ask me why, but putting them inside Repairable breaks all, even with
 -- callSpecializationsFunction...
 local function getIsPlayerInRange(self, distance, player)
     if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
-        if player == nil then
+
+        if player == nil then -- this is a dedi server
+--[[
             for _, player in pairs(g_currentMission.players) do
+                -- FIXME this can only result in a single player
                 if isInDistance(self, player, distance, self.rootNode) then
                     return true, player
                 end
             end
+]]
         else
             return isInDistance(self, player, distance, self.rootNode), player
         end
@@ -104,12 +105,14 @@ end
 
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
-    local isPlayerInRange, player = getIsPlayerInRange(self, 3.5) --, g_currentMission.player)
+    if self.isClient then
+        local isPlayerInRange, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
 
-    if isPlayerInRange then
-        self.ssPlayerInRange = player
-    else
-        self.ssPlayerInRange = nil
+        if isPlayerInRange then
+            self.ssPlayerInRange = player
+        else
+            self.ssPlayerInRange = nil
+        end
     end
 
     -- Calculate cumulative dirt
