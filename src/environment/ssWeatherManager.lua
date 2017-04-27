@@ -250,26 +250,26 @@ function ssWeatherManager:buildForecast()
     self.weather = {}
 
     for n = 1, self.forecastLength do
-        oneDayForecast = {}
+        local oneDayForecast = {}
         local oneDayRain = {}
         local ssTmax = {}
         local Tmaxmean = {}
 
         oneDayForecast.day = startDayNum + n - 1 -- To match forecast with actual game
-        oneDayForecast.season = g_seasons.environment:seasonAtDay(startDayNum + n - 1)
+        oneDayForecast.season = g_seasons.environment:seasonAtDay(oneDayForecast.day)
 
         ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(oneDayForecast.day)]
 
-        oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode,2.5)
-        oneDayForecast.lowTemp = ssUtil.normDist(0,2) + 0.75 * ssTmax.mode-5
+        oneDayForecast.highTemp = ssUtil.normDist(ssTmax.mode, 2.5)
+        oneDayForecast.lowTemp = ssUtil.normDist(0, 2) + 0.75 * ssTmax.mode - 5
 
         if n == 1 then
-            oneDayRain = self:updateRain(oneDayForecast,0)
+            oneDayRain = self:updateRain(oneDayForecast, 0)
         else
-            if oneDayForecast.day == self.weather[n-1].endDay then
-                oneDayRain = self:updateRain(oneDayForecast,self.weather[n-1].endDayTime)
+            if oneDayForecast.day == self.weather[n - 1].endDay then
+                oneDayRain = self:updateRain(oneDayForecast, self.weather[n - 1].endDayTime)
             else
-                oneDayRain = self:updateRain(oneDayForecast,0)
+                oneDayRain = self:updateRain(oneDayForecast, 0)
             end
         end
 
