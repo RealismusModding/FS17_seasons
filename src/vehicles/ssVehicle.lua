@@ -51,8 +51,10 @@ function ssVehicle:loadMap()
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
-    Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.getGroundType)
+    -- Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.vehicleGetGroundType)
+    Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
+
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
@@ -456,7 +458,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     end
 end
 
-function ssVehicle:updateWheelTireFriction(superFunc, wheel)
+function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             if wheel.tireType == WheelsUtil.getTireType("chains") then
@@ -468,13 +470,13 @@ function ssVehicle:updateWheelTireFriction(superFunc, wheel)
             else
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.1)
             end
-        else
-            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
-        end
-	end
+        -- else
+        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+        -- end
+    end
 end
 
-function ssVehicle:getGroundType(superFunc,wheel)
+function ssVehicle:vehicleGetGroundType(superFunc, wheel)
     if wheel.inSnow then
         return WheelsUtil.GROUND_SOFT_TERRAIN
     end
@@ -514,7 +516,7 @@ end
 -- Override the threshing for the moisture system
 function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
     if not g_seasons.weather.moistureEnabled then
-        return superFunc(self,earlyWarning)
+        return superFunc(self, earlyWarning)
     end
 
     if self.allowThreshingDuringRain then
