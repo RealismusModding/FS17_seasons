@@ -55,7 +55,7 @@ function ssVehicle:loadMap()
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
-    VehicleSellingPoint.sellAreaTriggerCallback = Utils.overwrittenFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
+    VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
     g_currentMission:setAutomaticMotorStartEnabled(false)
 
@@ -395,25 +395,23 @@ end
 
 -- Tell a vehicle when it is in the area of a workshop. This information is
 -- then used in ssRepairable to show or hide the repair option
-function ssVehicle:sellAreaTriggerCallback(superFunc, triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+function ssVehicle:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+    log("AreaTriggerCallback", triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+
     if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
-            self.vehicleInRange[otherShapeId] = true
-
             local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+
             if vehicle ~= nil then
                 vehicle.ssInRangeOfWorkshop = self
             end
         elseif onLeave then
-            self.vehicleInRange[otherShapeId] = nil
-
             local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+
             if vehicle ~= nil then
                 vehicle.ssInRangeOfWorkshop = nil
             end
         end
-
-        self:determineCurrentVehicle()
     end
 end
 
