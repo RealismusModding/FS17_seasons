@@ -51,8 +51,10 @@ function ssVehicle:loadMap()
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
-    Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.getGroundType)
+    -- Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.vehicleGetGroundType)
+    Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
+
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
@@ -117,7 +119,6 @@ function ssVehicle:installVehicleSpecializations()
             if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
             end
-
         end
     end
 end
@@ -396,8 +397,6 @@ end
 -- Tell a vehicle when it is in the area of a workshop. This information is
 -- then used in ssRepairable to show or hide the repair option
 function ssVehicle:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-    log("AreaTriggerCallback", triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-
     if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
             local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
@@ -456,7 +455,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     end
 end
 
-function ssVehicle:updateWheelTireFriction(superFunc, wheel)
+function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             if wheel.tireType == WheelsUtil.getTireType("chains") then
@@ -468,13 +467,13 @@ function ssVehicle:updateWheelTireFriction(superFunc, wheel)
             else
                 setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.1)
             end
-        else
-            setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+        -- else
+        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
         end
-	end
+    end
 end
 
-function ssVehicle:getGroundType(superFunc,wheel)
+function ssVehicle:vehicleGetGroundType(superFunc, wheel)
     if wheel.inSnow then
         return WheelsUtil.GROUND_SOFT_TERRAIN
     end
@@ -507,14 +506,14 @@ function ssVehicle:registerWheelTypes()
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.05
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.95
 
-    WheelsUtil.registerTireType("studded",studdedFrictionCoeffs,studdedFrictionCoeffsWet)
-    WheelsUtil.registerTireType("chains",snowchainsFrictionCoeffs,snowchainsFrictionCoeffsWet)
+    WheelsUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
+    WheelsUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
 end
 
 -- Override the threshing for the moisture system
-function ssVehicle:getIsThreshingAllowed(superFunc,earlyWarning)
+function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
     if not g_seasons.weather.moistureEnabled then
-        return superFunc(self,earlyWarning)
+        return superFunc(self, earlyWarning)
     end
 
     if self.allowThreshingDuringRain then
