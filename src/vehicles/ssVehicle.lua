@@ -52,7 +52,7 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
     -- Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.vehicleGetGroundType)
-    Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, vehicleUpdateWheelTireFriction)
+    Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, ssVehicle.vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
 
     -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
