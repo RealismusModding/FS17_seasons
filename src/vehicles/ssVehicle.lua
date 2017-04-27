@@ -398,8 +398,6 @@ end
 -- Tell a vehicle when it is in the area of a workshop. This information is
 -- then used in ssRepairable to show or hide the repair option
 function ssVehicle:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-    log("AreaTriggerCallback", triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-
     if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
             local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
@@ -472,7 +470,7 @@ function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
             end
         -- else
         --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
-        -- end
+        end
     end
 end
 
