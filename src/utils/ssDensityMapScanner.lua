@@ -145,7 +145,7 @@ function ssDensityMapScanner:run(job)
     -- Run the callback
     local callback = self.callbacks[job.callbackId]
     if callback == nil then
-        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId,"'")
+        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
 
         return false
     end

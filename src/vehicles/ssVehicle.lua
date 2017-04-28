@@ -87,7 +87,7 @@ end
 function ssVehicle:dayChanged()
     for i, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            self:repair(vehicle,storeItem)
+            self:repair(vehicle, storeItem)
         end
     end
 end
@@ -349,7 +349,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         p3 = -4
         p4 = 85
         depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
-        brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep),1.1)
+        brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep), 1.1)
 
     elseif storeItem.category == "harvesters" or storeItem.category == "forageHarvesters" or storeItem.category == "potatoHarvesters" or storeItem.category == "beetHarvesters" then
         p1 = 81

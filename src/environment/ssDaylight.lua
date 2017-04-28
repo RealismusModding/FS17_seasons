@@ -279,7 +279,7 @@ function ssDaylight:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightSt
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local ex = function(rgb)
-        return (rgb/255)^2.2
+        return (rgb/255) ^ 2.2
     end
 
     local morningStep = (dayStart - nightEnd) / 5

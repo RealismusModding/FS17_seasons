@@ -66,7 +66,7 @@ function ssTreeManager:hourChanged()
     if ssTreeManager.numGrowingTrees ~= table.getn(g_currentMission.plantedTrees.growingTrees) then
 
         for i, singleTree in pairs(g_currentMission.plantedTrees.growingTrees) do
-            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree,0)
+            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree, 0)
         end
 
         ssTreeManager.numGrowingTrees = table.getn(g_currentMission.plantedTrees.growingTrees)
@@ -74,7 +74,7 @@ function ssTreeManager:hourChanged()
 end
 
 -- function to calculate minimum distance - to be improved
-function ssTreeManager:calculateDistance(singleTree,cutTree)
+function ssTreeManager:calculateDistance(singleTree, cutTree)
     local statTrees = g_currentMission.plantedTrees.splitTrees
     local growTrees = g_currentMission.plantedTrees.growingTrees
     local tmpDistance = 100
@@ -113,7 +113,7 @@ function ssTreeManager:plantTree(treesData, treeData, x, y, z, rx, ry, rz, growt
 
     if ssTreeManager.numGrowingTrees > 0 then
         for i, singleTree in pairs(g_currentMission.plantedTrees.growingTrees) do
-            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree,0)
+            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree, 0)
         end
     end
 end

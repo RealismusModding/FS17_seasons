@@ -46,7 +46,7 @@ local function split(str, pat)
 
     while s do
         if s ~= 1 or cap ~= "" then
-            table.insert(t,cap)
+            table.insert(t, cap)
         end
 
         last_end = e+1

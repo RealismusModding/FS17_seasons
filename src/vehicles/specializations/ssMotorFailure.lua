@@ -70,13 +70,13 @@ function ssMotorFailure:update(dt)
 
     if self.isClient and self:getIsActiveForSound() and not self:getIsMotorStarted() and self.ssHasMotorBrokenDown then
         if self.sampleGearbox.sample ~= nil then
-            local speedFactor = Utils.clamp((self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumForwardSpeed()*3.6), 0, 1)
-            local pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundPitchMax, speedFactor^self.gearboxSoundPitchExponent)
+            local speedFactor = Utils.clamp((self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumForwardSpeed() * 3.6), 0, 1)
+            local pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundPitchMax, speedFactor ^ self.gearboxSoundPitchExponent)
             local volumeGearbox = Utils.lerp(0.00001, self.gearboxSoundVolumeMax, speedFactor)
 
             if self.reverserDirection ~= self.movingDirection then
-                speedFactor = Utils.clamp( (self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumBackwardSpeed()*3.6), 0, 1)
-                pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundReversePitchMax, speedFactor^self.gearboxSoundPitchExponent)
+                speedFactor = Utils.clamp( (self:getLastSpeed() - 1) / math.ceil(self.motor:getMaximumBackwardSpeed() * 3.6), 0, 1)
+                pitchGearbox = Utils.lerp(self.sampleGearbox.pitchOffset, self.gearboxSoundReversePitchMax, speedFactor ^ self.gearboxSoundPitchExponent)
                 volumeGearbox = Utils.lerp(0, self.gearboxSoundReverseVolumeMax, speedFactor)
             end
 

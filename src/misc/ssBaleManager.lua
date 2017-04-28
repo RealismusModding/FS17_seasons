@@ -120,7 +120,7 @@ function ssBaleManager:removeBale()
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
                 if bale.baleDiameter ~= nil then
-                    volume = math.pi*(bale.baleDiameter / 2 )^2 * bale.baleWidth * 1000
+                    volume = math.pi*(bale.baleDiameter / 2 ) ^ 2 * bale.baleWidth * 1000
                 else
                     volume = bale.baleWidth * bale.baleLength * bale.baleHeight * 1000
                 end
@@ -177,8 +177,8 @@ function ssBaleManager:calculateBaleReduction(singleBale)
             singleBale.age = 0
         end
 
-        local dayReductionFactor = 1 - ( (2.4 * singleBale.age / daysInSeason + 1.2 )^5.75) / 100
-        reductionFactor = 1 - (1 - dayReductionFactor)/24
+        local dayReductionFactor = 1 - ( (2.4 * singleBale.age / daysInSeason + 1.2 ) ^ 5.75) / 100
+        reductionFactor = 1 - (1 - dayReductionFactor) / 24
     end
 
     return reductionFactor

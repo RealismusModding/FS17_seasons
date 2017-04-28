@@ -94,7 +94,7 @@ function ssUtil.nextWeekDayNumber(currentDay)
     return (currentDay + 1) % g_seasons.environment.DAYS_IN_WEEK
 end
 
--- Calculate the split of days into ealy,mid and late season
+-- Calculate the split of days into ealy, mid and late season
 function ssUtil.calcDaysPerTransition()
     local l = g_seasons.environment.daysInSeason / 3.0
     local earlyStart = 1
@@ -134,7 +134,7 @@ function ssUtil.rationalApproximation(t)
 end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
-function ssUtil.normDist(mu,sigma)
+function ssUtil.normDist(mu, sigma)
     --math.randomseed( g_currentMission.time )
     math.random()
 
@@ -230,7 +230,7 @@ end
 
 -- Yep, LUA does not have a math.round. It's a first.
 function mathRound(value, idp)
-    local mult = 10^(idp or 0)
+    local mult = 10 ^ (idp or 0)
     return math.floor(value * mult + 0.5) / mult
 end
 
@@ -263,35 +263,35 @@ end
 
 function print_r(t)
     local print_r_cache={}
-    local function sub_print_r(t,indent)
+    local function sub_print_r(t, indent)
         if (print_r_cache[tostring(t)]) then
-            print(indent.."*"..tostring(t))
+            print(indent .. "*" .. tostring(t))
         else
             print_r_cache[tostring(t)]=true
-            if (type(t)=="table") then
-                for pos,val in pairs(t) do
+            if (type(t) == "table") then
+                for pos, val in pairs(t) do
                     pos = tostring(pos)
-                    if (type(val)=="table") then
-                        print(indent.."["..pos.."] => "..tostring(t).." {")
-                        sub_print_r(val,indent..string.rep(" ",string.len(pos)+8))
-                        print(indent..string.rep(" ",string.len(pos)+6).."}")
-                    elseif (type(val)=="string") then
-                        print(indent.."["..pos..'] => "'..val..'"')
+                    if (type(val) == "table") then
+                        print(indent .. "[" .. pos .. "] => " .. tostring(t) .. " {")
+                        sub_print_r(val, indent .. string.rep(" ", string.len(pos) + 8))
+                        print(indent .. string.rep(" ", string.len(pos) + 6) .. "}")
+                    elseif (type(val) == "string") then
+                        print(indent .. "[" .. pos .. '] => "' .. val .. '"')
                     else
-                        print(indent.."["..pos.."] => "..tostring(val))
+                        print(indent .. "[" .. pos .. "] => " .. tostring(val))
                     end
                 end
             else
-                print(indent..tostring(t))
+                print(indent .. tostring(t))
             end
         end
     end
-    if (type(t)=="table") then
-        print(tostring(t).." {")
-        sub_print_r(t,"  ")
+    if (type(t) == "table") then
+        print(tostring(t) .. " {")
+        sub_print_r(t, "  ")
         print("}")
     else
-        sub_print_r(t,"  ")
+        sub_print_r(t, "  ")
     end
     print()
 end

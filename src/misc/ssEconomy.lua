@@ -383,7 +383,7 @@ function ssEconomy:updateFieldPrices()
     --don't do anything if map has no fields
     if not (g_currentMission.fieldDefinitionBase ~= nil and g_currentMission.fieldDefinitionBase.fieldDefs ~= nil) then return end
 
-    for _,fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
+    for _, fieldDef in pairs(g_currentMission.fieldDefinitionBase.fieldDefs) do
         fieldDef.fieldPriceInitial  = fieldDef.fieldPriceInitial * self.fieldPriceFactor
     end
 end
