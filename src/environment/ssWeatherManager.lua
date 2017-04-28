@@ -290,7 +290,7 @@ function ssWeatherManager:updateForecast()
 
     table.remove(self.forecast,1)
 
-    oneDayForecast = {}
+    local oneDayForecast = {}
     local ssTmax = {}
 
     oneDayForecast.day = dayNum -- To match forecast with actual game
@@ -538,7 +538,7 @@ function ssWeatherManager:switchRainSnow()
     end
 end
 
-function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
+function ssWeatherManager:updateRain(oneDayForecast, endRainTime)
     local rainFactors = self.rainData[g_seasons.environment:seasonAtDay(oneDayForecast.day)]
 
     local mu = rainFactors.mu
@@ -553,10 +553,10 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
 
     local oneRainEvent = {}
 
-    p = self:_randomRain(oneDayForecast.day)
+    p = self:_randomRain(oneDayForecast)
 
     if p < rainFactors.probRain then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
+        oneRainEvent = self:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
 
         if oneDayForecast.lowTemp < 1 then
             oneRainEvent.rainTypeId = "snow" -- forecast snow if temp < 1
@@ -565,7 +565,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
         end
 
     elseif p > rainFactors.probRain and p < rainFactors.probClouds then
-        oneRainEvent = self:_rainStartEnd(p,endRainTime,rainFactors)
+        oneRainEvent = self:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
         oneRainEvent.rainTypeId = "cloudy"
     elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 4 and endRainTime < 10800000 then
         -- morning fog
@@ -596,7 +596,7 @@ function ssWeatherManager:updateRain(oneDayForecast,endRainTime)
     return oneDayRain
 end
 
-function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
+function ssWeatherManager:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
     local oneRainEvent = {}
 
     oneRainEvent.startDay = oneDayForecast.day
@@ -615,8 +615,8 @@ function ssWeatherManager:_rainStartEnd(p,endRainTime,rainFactors)
     return oneRainEvent
 end
 
-function ssWeatherManager:_randomRain(day)
-    ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(day)]
+function ssWeatherManager:_randomRain(oneDayForecast)
+    ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(oneDayForecast.day)]
 
     if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
         if oneDayForecast.highTemp > ssTmax.mode then
