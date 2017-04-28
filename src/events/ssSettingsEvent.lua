@@ -42,6 +42,11 @@ function ssSettingsEvent:writeStream(streamId, connection)
 
     if not connection:getIsServer() then
         -- Write the new (current on server) forecast
+        streamWriteFloat32(streamId, g_seasons.weather.snowDepth)
+        streamWriteFloat32(streamId, g_seasons.weather.soilTemp)
+        streamWriteFloat32(streamId, g_seasons.weather.prevHighTemp)
+        streamWriteFloat32(streamId, g_seasons.weather.cropMoistureContent)
+
         streamWriteUInt8(streamId, table.getn(g_seasons.weather.forecast))
         streamWriteUInt8(streamId, table.getn(g_seasons.weather.weather))
 
@@ -75,6 +80,11 @@ function ssSettingsEvent:readStream(streamId, connection)
     self.moistureEnabled = streamReadBool(streamId)
 
     if connection:getIsServer() then
+        g_seasons.weather.snowDepth = streamReadFloat32(streamId)
+        g_seasons.weather.soilTemp = streamReadFloat32(streamId)
+        g_seasons.weather.prevHighTemp = streamReadFloat32(streamId)
+        g_seasons.weather.cropMoistureContent = streamReadFloat32(streamId)
+
         local numDays = streamReadUInt8(streamId)
         local numRains = streamReadUInt8(streamId)
 
