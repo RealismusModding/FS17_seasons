@@ -32,7 +32,7 @@ function ssBaleManager:loadMap(name)
 end
 
 function ssBaleManager:reduceFillLevel()
-    for index,object in pairs(g_currentMission.itemsToSave) do
+    for index, object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
         if object.item:isa(Bale) then
             local bale = object.item
@@ -59,7 +59,7 @@ function ssBaleManager:reduceFillLevel()
                     local z1 = bale.sendPosZ - dim.length
                     local z2 = bale.sendPosZ + dim.length
 
-                    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+                    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
                     local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
 
@@ -111,7 +111,7 @@ function ssBaleManager:seasonLengthChanged()
 end
 
 function ssBaleManager:removeBale()
-    for index,object in pairs(g_currentMission.itemsToSave) do
+    for index, object in pairs(g_currentMission.itemsToSave) do
         if object.item:isa(Bale) then
             local bale = object.item
 
@@ -152,7 +152,7 @@ function ssBaleManager:delete(singleBale)
 end
 
 function ssBaleManager:incrementBaleAge()
-    for index,object in pairs(g_currentMission.itemsToSave) do
+    for index, object in pairs(g_currentMission.itemsToSave) do
         if object.item:isa(Bale) then
             local bale = object.item
 
@@ -177,8 +177,8 @@ function ssBaleManager:calculateBaleReduction(singleBale)
             singleBale.age = 0
         end
 
-        local dayReductionFactor = 1 - ( ( 2.4 * singleBale.age / daysInSeason + 1.2 )^5.75) / 100
-        reductionFactor = 1 - ( 1 - dayReductionFactor)/24
+        local dayReductionFactor = 1 - ( (2.4 * singleBale.age / daysInSeason + 1.2 )^5.75) / 100
+        reductionFactor = 1 - (1 - dayReductionFactor)/24
     end
 
     return reductionFactor
@@ -266,7 +266,7 @@ end
 function ssBaleManager:baleReadStream(superFunc, streamId, connection)
     superFunc(self, streamId, connection)
 
-    if streamReadBool(streamId,connection) then
+    if streamReadBool(streamId, connection) then
         self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
     end
 end

@@ -361,7 +361,7 @@ function ssSeasonsMenu:getTransitionHeaders()
     local transitionsDisplayData = {}
     local data = ssUtil.calcDaysPerTransition()
 
-    for index,value in pairs(data) do
+    for index, value in pairs(data) do
         if index % 2 == 1 then
             local putIndex = index - ((index - 1) / 2)
 

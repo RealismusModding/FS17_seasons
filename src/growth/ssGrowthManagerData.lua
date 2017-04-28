@@ -73,7 +73,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
 
     local transitionsKey = rootKey .. ".growthTransitions"
 
-    if hasXMLProperty(file,transitionsKey) then
+    if hasXMLProperty(file, transitionsKey) then
         --load each transition
         local i = 0
         while true do
@@ -83,7 +83,7 @@ function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additional
             end
 
             local transitionNumKey = transitionKey .. "#growthTransitionNum"
-            local transitionNum = getXMLString(file,transitionNumKey)
+            local transitionNum = getXMLString(file, transitionNumKey)
             if transitionNum == nil then
                 logInfo("ssGrowthManagerData:", "getGrowthData: XML loading failed transitionNumKey:" .. transitionNumKey)
                 return nil
@@ -142,7 +142,7 @@ function ssGrowthManagerData:getFruitsTransitionStates(transitionKey, file, tran
             end
         end
 
-        local setGrowthState =  getXMLInt(file,fruitKey .. "#setGrowthState")
+        local setGrowthState =  getXMLInt(file, fruitKey .. "#setGrowthState")
         if setGrowthState ~= nil then
             growthData[transitionNum][fruitName].setGrowthState = setGrowthState
         end

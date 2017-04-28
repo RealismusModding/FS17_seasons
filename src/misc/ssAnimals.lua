@@ -98,7 +98,7 @@ function ssAnimals:adjustAnimals()
             local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / g_seasons.environment.daysInSeason
             -- small adjustment so there will be atleast one birth during the season
             if birthRatePerDay ~= 0 then
-                desc.birthRatePerDay = math.max(birthRatePerDay * self.seasonLengthfactor,1/(2*g_seasons.environment.daysInSeason))
+                desc.birthRatePerDay = math.max(birthRatePerDay * self.seasonLengthfactor, 1 / (2 * g_seasons.environment.daysInSeason))
             else
                 desc.birthRatePerDay = 0
             end
