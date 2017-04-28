@@ -11,7 +11,7 @@ ssEconomy = {}
 g_seasons.economy = ssEconomy
 
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
-ssEconmy.DEFAULT_FACTOR = 1
+ssEconomy.DEFAULT_FACTOR = 1
 
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
