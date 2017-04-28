@@ -602,7 +602,7 @@ function ssWeatherManager:_rainStartEnd(p, endRainTime, rainFactors, oneDayForec
     oneRainEvent.startDay = oneDayForecast.day
     oneRainEvent.duration = math.min(math.max(math.exp(ssUtil.lognormDist(rainFactors.beta, rainFactors.gamma, p)), 2), 24) * 60 * 60 * 1000
     -- rain can start from 01:00 (or 1 hour after last rain ended) to 23.00
-    oneRainEvent.startDayTime = math.random(3600 + endRainTime / 1000, 82800) *1000
+    oneRainEvent.startDayTime = math.random(3600 + endRainTime / 1000, 82800) * 1000
 
     if oneRainEvent.startDayTime + oneRainEvent.duration < 86400000 then
         oneRainEvent.endDay = oneRainEvent.startDay

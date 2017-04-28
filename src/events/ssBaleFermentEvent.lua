@@ -8,7 +8,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssBaleFermentEvent = {}
-ssBaleFermentEvent_mt = Class(ssBaleFermentEvent,Event)
+ssBaleFermentEvent_mt = Class(ssBaleFermentEvent, Event)
 InitEventClass(ssBaleFermentEvent, "ssBaleFermentEvent")
 
 function ssBaleFermentEvent:emptyNew()

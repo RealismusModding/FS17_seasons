@@ -29,7 +29,7 @@ function ssFruitManager:update(dt)
 end
 
 function ssFruitManager:updateHarvestStates()
-    for index,fruit in pairs(g_currentMission.fruits) do
+    for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
 
         if self:fruitShouldBeUpdated(index) == true then

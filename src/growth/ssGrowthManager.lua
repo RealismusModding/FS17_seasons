@@ -70,11 +70,11 @@ function ssGrowthManager:loadMap(name)
     end
 
     --lock changing the growth speed option and set growth rate to 1 (no growth)
-    g_currentMission:setPlantGrowthRate(1,nil)
+    g_currentMission:setPlantGrowthRate(1, nil)
     g_currentMission:setPlantGrowthRateLocked(true)
 
     if not self:getGrowthData() then
-        logInfo("ssGrowthManager:" ,"required data not loaded. ssGrowthManager disabled")
+        logInfo("ssGrowthManager:" , "required data not loaded. ssGrowthManager disabled")
         return
     end
     
@@ -99,7 +99,7 @@ end
 -- load all growth data
 -- returns false, if error
 function ssGrowthManager:getGrowthData()
-    local defaultFruitsData,growthData = ssGrowthManagerData:loadAllData()
+    local defaultFruitsData, growthData = ssGrowthManagerData:loadAllData()
 
     if defaultFruitsData ~= nil then
         self.defaultFruitsData = defaultFruitsData
@@ -209,7 +209,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
                 self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
-    end  -- end of for index,fruit in pairs(g_currentMission.fruits) do
+    end  -- end of for index, fruit in pairs(g_currentMission.fruits) do
 end
 
 --set growth state of fruit to a particular state based on transition
