@@ -228,13 +228,15 @@ function ssSnow:placeableOnSell()
     g_seasons.snow:setPlacableAreaInSnowMask(self, 0)
 end
 
-function ssSnow:setPlacableAreaInSnowMask(value)
-    local numAreas = table.getn(self.clearAreas)
+function ssSnow:setPlacableAreaInSnowMask(placeable, value)
+    local numAreas = table.getn(placeable.clearAreas)
+
     for i = 1, numAreas do
-        local x, _, z = getWorldTranslation(self.clearAreas[i].start)
-        local x1, _, z1 = getWorldTranslation(self.clearAreas[i].width)
-        local x2, _, z2 = getWorldTranslation(self.clearAreas[i].height)
-        local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
+        local x, _, z = getWorldTranslation(placeable.clearAreas[i].start)
+        local x1, _, z1 = getWorldTranslation(placeable.clearAreas[i].width)
+        local x2, _, z2 = getWorldTranslation(placeable.clearAreas[i].height)
+
+        local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(placeable.snowMaskId, x, z, x1, z1, x2, z2)
 
         setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, value)
     end
