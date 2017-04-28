@@ -51,7 +51,6 @@ function ssVehicle:loadMap()
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
-    -- Vehicle.getGroundType = Utils.overwrittenFunction(Vehicle.getGroundType, ssVehicle.vehicleGetGroundType)
     Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, ssVehicle.vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
 
@@ -470,12 +469,6 @@ function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
         -- else
         --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
         end
-    end
-end
-
-function ssVehicle:vehicleGetGroundType(superFunc, wheel)
-    if wheel.inSnow then
-        return WheelsUtil.GROUND_SOFT_TERRAIN
     end
 end
 
