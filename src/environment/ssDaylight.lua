@@ -160,23 +160,23 @@ function ssDaylight:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
     local morningStep = (dayStart - nightEnd) / 5
     local eveningStep = (nightStart - dayEnd) / 5
 
-    curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 0.00 * 60})
-    curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 3.00 * 60})
-    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = (nightEnd  - (2 * morningStep)) * 60}) --3:33 / 7:21
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.030, time = nightEnd  * 60})                        --4:19 / 8:11
-    curve:addKeyframe({x = 0.040, y = 0.040, z = 0.060, time = (nightEnd + morningStep) * 60})         --4:42 / 8:36
-    curve:addKeyframe({x = 0.080, y = 0.080, z = 0.140, time = (nightEnd + (0.3 + morningStep)) * 60})   --5:00 / 8:54
-    curve:addKeyframe({x = 0.140, y = 0.140, z = 0.120, time = (dayStart - (2.3 * morningStep)) * 60})   --6:15 / 10:15
-    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.180, time = (dayStart  - morningStep) * 60})        --7:15 / 11:15
+    curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 0.00 * 60})					--Longest day in summer /shortest day in Winter
+    curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 3.00 * 60}					--Times change with the latitude
+    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = (nightEnd  - (2 * morningStep)) * 60})     	--3:33 / 7:21     
+    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.030, time = nightEnd  * 60})                           	--4:19 / 8:11     
+    curve:addKeyframe({x = 0.040, y = 0.040, z = 0.060, time = (nightEnd + morningStep) * 60})            	--4:42 / 8:36
+    curve:addKeyframe({x = 0.080, y = 0.080, z = 0.140, time = (nightEnd + (0.3 + morningStep)) * 60})    	--5:00 / 8:54
+    curve:addKeyframe({x = 0.140, y = 0.140, z = 0.120, time = (dayStart - (2.3 * morningStep)) * 60})    	--6:15 / 10:15
+    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.180, time = (dayStart  - morningStep) * 60})           	--7:15 / 11:15
                                              
     curve:addKeyframe({x = 0.250, y = 0.250, z = 0.200, time = 12.20 * 60})
 	
-    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.180, time = (dayEnd + (0.13 + eveningStep)) * 60})     --20:15 / 16:16
-    curve:addKeyframe({x = 0.160, y = 0.140, z = 0.160, time = (dayEnd + (2 * eveningStep)) * 60})        --20:30 / 16:33
-    curve:addKeyframe({x = 0.100, y = 0.080, z = 0.070, time = (dayEnd + (3 * eveningStep)) * 60})        --20:54 / 16:58
-    curve:addKeyframe({x = 0.040, y = 0.040, z = 0.035, time = (nightStart - eveningStep) * 60})        --21:17 / 17:23
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.030, time = (nightStart - (0.3 * eveningStep)) * 60})  --21:33 / 17:41
-	curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = (nightStart + (0.8 * eveningStep)) * 60})  --21:58 / 18:08
+    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.180, time = (dayEnd + (0.13 + eveningStep)) * 60})     	--20:15 / 16:16
+    curve:addKeyframe({x = 0.160, y = 0.140, z = 0.160, time = (dayEnd + (2 * eveningStep)) * 60})        	--20:30 / 16:33
+    curve:addKeyframe({x = 0.100, y = 0.080, z = 0.070, time = (dayEnd + (3 * eveningStep)) * 60})        	--20:54 / 16:58
+    curve:addKeyframe({x = 0.040, y = 0.040, z = 0.035, time = (nightStart - eveningStep) * 60})          	--21:17 / 17:23
+    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.030, time = (nightStart - (0.3 * eveningStep)) * 60})  	--21:33 / 17:41
+    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = (nightStart + (0.8 * eveningStep)) * 60})  	--21:58 / 18:08
     curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 23.00 * 60})
     curve:addKeyframe({x = 0.003, y = 0.003, z = 0.003, time = 24.00 * 60})
     
@@ -190,49 +190,48 @@ function ssDaylight:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart
     local eveningStep = (nightStart - dayEnd) / 5
 
 -------------------------	Moon
-local currentDay ,daysInSeason ,dayInYear ,seasonAtDay ,dayInSeason
-currentDay = g_currentMission.environment.currentDay + g_seasons.environment.currentDayOffset
-daysInSeason = g_seasons.environment.daysInSeason	
-dayInYear = math.fmod(currentDay - 1, daysInSeason * 4) + 1
-seasonAtDay = math.fmod(math.floor((currentDay - 1) / daysInSeason), 4)	
-dayInSeason = (dayInYear - 1 - seasonAtDay * daysInSeason) + 1 
-daysInMonth = daysInSeason / 3
-dayInMonth  = math.fmod(currentDay - 1, daysInMonth ) + 1 
+    local currentDay ,daysInSeason ,daysInMonth dayInMonth
+		
+    currentDay = g_currentMission.environment.currentDay + g_seasons.environment.currentDayOffset 	
+    daysInSeason = g_seasons.environment.daysInSeason						
+	-- we need only 1st day of month - make funktion?
+    daysInMonth = daysInSeason / 3				-- there are three month at season
+    dayInMonth  = math.fmod(currentDay - 1, daysInMonth ) + 1 	-- we need only 1st day of month - make funktion?
 
 
-if dayInMonth == 2 or daysInMonth == 1  then
-	curve:addKeyframe({x = 0.060, y = 0.090, z = 0.180, time = 0.00 * 60})
-	curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 1.50 * 60})
-	curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = 2.30 * 60})
-	else
-    curve:addKeyframe({x = 0.002, y = 0.002, z = 0.002, time = 0.00 * 60})
-	end
+if dayInMonth == 2 then  -- (or daysInMonth == 1  then) No longer needed since there are no more 3-day season
+    curve:addKeyframe({x = 0.060, y = 0.090, z = 0.180, time = 0.00 * 60})	-- full moon
+    curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 1.50 * 60})
+    curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = 2.30 * 60})	-- moon gos down
+  else
+    curve:addKeyframe({x = 0.002, y = 0.002, z = 0.002, time = 0.00 * 60})	-- else dark night
+end
 	
-    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = 3.00 * 60})
-    curve:addKeyframe({x = 0.010, y = 0.010, z = 0.005, time = (nightEnd  - (2 * morningStep)) * 60}) --3:33 / 7:21 
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.015, time = nightEnd  * 60})                        --4:19 / 8:11
-    curve:addKeyframe({x = 0.060, y = 0.060, z = 0.040, time = (nightEnd + morningStep) * 60})         --4:42 / 8:36
-    curve:addKeyframe({x = 0.120, y = 0.120, z = 0.080, time = (nightEnd + (0.3 + morningStep)) * 60})   --5:00 / 8:54
-    curve:addKeyframe({x = 0.350, y = 0.300, z = 0.250, time = (dayStart - (2.3 * morningStep)) * 60})   --6:15 / 10:15
-    curve:addKeyframe({x = 0.950, y = 0.800, z = 0.700, time = (dayStart  - morningStep) * 60})        --7:15 / 11:15
+    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = 3.00 * 60})	-- darknes befor sunrise
+    curve:addKeyframe({x = 0.010, y = 0.010, z = 0.005, time = (nightEnd  - (2 * morningStep)) * 60}) 		--3:33 / 7:21 
+    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.015, time = nightEnd  * 60})                        		--4:19 / 8:11
+    curve:addKeyframe({x = 0.060, y = 0.060, z = 0.040, time = (nightEnd + morningStep) * 60})         		--4:42 / 8:36
+    curve:addKeyframe({x = 0.120, y = 0.120, z = 0.080, time = (nightEnd + (0.3 + morningStep)) * 60})		--5:00 / 8:54
+    curve:addKeyframe({x = 0.350, y = 0.300, z = 0.250, time = (dayStart - (2.3 * morningStep)) * 60})		--6:15 / 10:15
+    curve:addKeyframe({x = 0.950, y = 0.800, z = 0.700, time = (dayStart  - morningStep) * 60})         	--7:15 / 11:15
                                                                
     curve:addKeyframe({x = 1.600, y = 1.200, z = 0.900, time = 12.20 * 60})
 	                                                           
-    curve:addKeyframe({x = 0.850, y = 0.800, z = 0.700, time = (dayEnd + (0.13 + eveningStep)) * 60})     --20:15 / 16:16
-    curve:addKeyframe({x = 0.900, y = 0.900, z = 0.450, time = (dayEnd + (2 * eveningStep)) * 60})        --20:30 / 16:33
-    curve:addKeyframe({x = 0.400, y = 0.400, z = 0.200, time = (dayEnd + (3 * eveningStep)) * 60})        --20:54 / 16:58
-    curve:addKeyframe({x = 0.300, y = 0.100, z = 0.050, time = (nightStart - eveningStep) * 60})        --21:17 / 17:23
-    curve:addKeyframe({x = 0.100, y = 0.080, z = 0.040, time = (nightStart - (0.3 * eveningStep)) * 60})  --21:33 / 17:41
-    curve:addKeyframe({x = 0.010, y = 0.010, z = 0.020, time = (nightStart + (0.8 * eveningStep)) * 60})  --21:58 / 18:08
-    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = 23.00 * 60})
+    curve:addKeyframe({x = 0.850, y = 0.800, z = 0.700, time = (dayEnd + (0.13 + eveningStep)) * 60})     	--20:15 / 16:16
+    curve:addKeyframe({x = 0.900, y = 0.900, z = 0.450, time = (dayEnd + (2 * eveningStep)) * 60})        	--20:30 / 16:33
+    curve:addKeyframe({x = 0.400, y = 0.400, z = 0.200, time = (dayEnd + (3 * eveningStep)) * 60})        	--20:54 / 16:58
+    curve:addKeyframe({x = 0.300, y = 0.100, z = 0.050, time = (nightStart - eveningStep) * 60})        	--21:17 / 17:23
+    curve:addKeyframe({x = 0.100, y = 0.080, z = 0.040, time = (nightStart - (0.3 * eveningStep)) * 60})  	--21:33 / 17:41
+    curve:addKeyframe({x = 0.010, y = 0.010, z = 0.020, time = (nightStart + (0.8 * eveningStep)) * 60})  	--21:58 / 18:08
+    curve:addKeyframe({x = 0.005, y = 0.005, z = 0.005, time = 23.00 * 60})	-- darknes
 	
-if dayInMonth == 1  then	
-	curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = 23.20 * 60})
-	curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 23.50 * 60})
-    curve:addKeyframe({x = 0.060, y = 0.090, z = 0.180, time = 24.00 * 60})
-	else
-    curve:addKeyframe({x = 0.002, y = 0.002, z = 0.002, time = 24.00 * 60})
-	end
+if dayInMonth == 1  then						   	-- first day in month we have moon 
+   curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = 23.20 * 60})	-- moon lights up
+   curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 23.50 * 60})
+   curve:addKeyframe({x = 0.060, y = 0.090, z = 0.180, time = 24.00 * 60})	-- full moon
+  else
+   curve:addKeyframe({x = 0.002, y = 0.002, z = 0.002, time = 24.00 * 60})	-- else dark night
+  end
 
     return curve
 end
@@ -247,23 +246,23 @@ function ssDaylight:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
     -- x = daySky, y = eveningSky, z = nightSky, w = morningSky
     -- 4.5 -> 5.5 -> 6.0 = night morning transition
     -- 6.0 -> 7.0 -> 8.0 = morning day transition
-    curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 0.00 * 60})
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 0.00 * 60})					-- mixing skys slowly by sunrise and sunset
     curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 3.00 * 60})
-    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.9, w = 0.1, time = (nightEnd  - (2 * morningStep)) * 60}) --3:33 / 7:21 
-	curve:addKeyframe({x = 0.0, y = 0.0, z = 0.7, w = 0.3, time = nightEnd  * 60})                        --4:19 / 8:11
-	curve:addKeyframe({x = 0.0, y = 0.0, z = 0.3, w = 0.7, time = (nightEnd + morningStep) * 60})         --4:42 / 8:36
-    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.0, w = 1.0, time = (nightEnd + (0.3 + morningStep)) * 60})   --5:00 / 8:54
-    curve:addKeyframe({x = 0.5, y = 0.0, z = 0.0, w = 0.5, time = (dayStart - (2.3 * morningStep)) * 60})   --6:15 / 10:15
-    curve:addKeyframe({x = 1.0, y = 0.0, z = 0.0, w = 0.0, time = (dayStart  - morningStep) * 60})        --7:15 / 11:15
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.9, w = 0.1, time = (nightEnd  - (2 * morningStep)) * 60}) 	--3:33 / 7:21 
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.7, w = 0.3, time = nightEnd  * 60})                        	--4:19 / 8:11
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.3, w = 0.7, time = (nightEnd + morningStep) * 60})         	--4:42 / 8:36
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 0.0, w = 1.0, time = (nightEnd + (0.3 + morningStep)) * 60})   	--5:00 / 8:54
+    curve:addKeyframe({x = 0.5, y = 0.0, z = 0.0, w = 0.5, time = (dayStart - (2.3 * morningStep)) * 60})   	--6:15 / 10:15
+    curve:addKeyframe({x = 1.0, y = 0.0, z = 0.0, w = 0.0, time = (dayStart  - morningStep) * 60})        	--7:15 / 11:15
 
-    curve:addKeyframe({x = 1.0, y = 0.0, z = 0.0, w = 0.0, time = (dayEnd + (0.13 + eveningStep)) * 60})     --20:15 / 16:16
-    curve:addKeyframe({x = 0.8, y = 0.2, z = 0.0, w = 0.0, time = (dayEnd + (2 * eveningStep)) * 60})        --20:30 / 16:33
-    curve:addKeyframe({x = 0.5, y = 0.4, z = 0.1, w = 0.0, time = (dayEnd + (3 * eveningStep)) * 60})        --20:54 / 16:58
-    curve:addKeyframe({x = 0.0, y = 0.7, z = 0.3, w = 0.0, time = (nightStart - eveningStep) * 60})        --21:17 / 17:23
-    curve:addKeyframe({x = 0.0, y = 0.2, z = 0.8, w = 0.0, time = (nightStart - (0.3 * eveningStep)) * 60})  --21:33 / 17:41
-	curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = (nightStart + (0.3 * eveningStep)) * 60})  --21:58 / 18:08
-	curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 23.00 * 60})
-	curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 24.00 * 60})
+    curve:addKeyframe({x = 1.0, y = 0.0, z = 0.0, w = 0.0, time = (dayEnd + (0.13 + eveningStep)) * 60})     	--20:15 / 16:16
+    curve:addKeyframe({x = 0.8, y = 0.2, z = 0.0, w = 0.0, time = (dayEnd + (2 * eveningStep)) * 60})        	--20:30 / 16:33
+    curve:addKeyframe({x = 0.5, y = 0.4, z = 0.1, w = 0.0, time = (dayEnd + (3 * eveningStep)) * 60})        	--20:54 / 16:58
+    curve:addKeyframe({x = 0.0, y = 0.7, z = 0.3, w = 0.0, time = (nightStart - eveningStep) * 60})        	--21:17 / 17:23
+    curve:addKeyframe({x = 0.0, y = 0.2, z = 0.8, w = 0.0, time = (nightStart - (0.3 * eveningStep)) * 60})  	--21:33 / 17:41
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = (nightStart + (0.3 * eveningStep)) * 60})  	--21:58 / 18:08
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 23.00 * 60})
+    curve:addKeyframe({x = 0.0, y = 0.0, z = 1.0, w = 0.0, time = 24.00 * 60})
 
     return curve
 end
@@ -288,20 +287,21 @@ end
 function ssDaylight:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator1) -- degree 2
 
-	local morningStep = (dayStart - nightEnd) / 5
+    local morningStep = (dayStart - nightEnd) / 5
     local eveningStep = (nightStart - dayEnd) / 5
-
+		
+	-- we only need this shadow degrees , if there more the shadow flicks 
     curve:addKeyframe({v = Utils.degToRad(0),    time = 0.00 * 60})       
-	curve:addKeyframe({v = Utils.degToRad(  45),  time = 2.50 * 60})     
+    curve:addKeyframe({v = Utils.degToRad(  45),  time = 2.50 * 60})     
     curve:addKeyframe({v = Utils.degToRad(  45),   time = 3.00 * 60})          
-    curve:addKeyframe({v = Utils.degToRad( -80),   time = (nightEnd  - (2 * morningStep)) * 60})  
+    curve:addKeyframe({v = Utils.degToRad( -80),   time = (nightEnd  - (2 * morningStep)) * 60})  	-- Sunrise begins
     if dayStart > 12.0 then                                                                     
-        curve:addKeyframe({v = Utils.degToRad(0),  time = 12.30 * 60}) -- rotate over the day      
+        curve:addKeyframe({v = Utils.degToRad(0),  time = 12.30 * 60}) 					-- rotate over the day      
     else                                                                                        
-        curve:addKeyframe({v = Utils.degToRad(0),  time = 12.30 * 60}) -- rotate over the day    
+        curve:addKeyframe({v = Utils.degToRad(0),  time = 12.30 * 60}) 					-- rotate over the day    
     end                                                                                         
-    curve:addKeyframe({v = Utils.degToRad(80),     time =  (nightStart + (0.3 * eveningStep)) * 60})  
-    curve:addKeyframe({v = Utils.degToRad(-45),    time = 23.00 * 60}) 
+    curve:addKeyframe({v = Utils.degToRad(80),     time =  (nightStart + (0.3 * eveningStep)) * 60})	-- sunset ends
+    curve:addKeyframe({v = Utils.degToRad(-45),    time = 23.00 * 60})  
     curve:addKeyframe({v = Utils.degToRad(0),    time = 24.00 * 60})
 
     return curve
