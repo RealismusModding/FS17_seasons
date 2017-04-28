@@ -20,8 +20,8 @@ ssSnow.MODE_ONE_LAYER = 2
 ssSnow.MODE_ON = 3
 
 function ssSnow:preLoad()
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.updatePlaceableOnCreation)
-    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.updatePlaceablenOnDelete)
+    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.placeableFinalizePlacement)
+    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.placeableOnSell)
 end
 
 function ssSnow:load(savegame, key)
@@ -216,33 +216,33 @@ function ssSnow:update(dt)
     end
 end
 
-function ssSnow:updatePlaceableOnCreation()
-    if self.snowMaskId == nil then return end
+--
+-- Placeables auto-mask
+--
 
+function ssSnow:placeableFinalizePlacement()
+    g_seasons.snow:setPlacableAreaInSnowMask(self, 1)
+end
+
+function ssSnow:placeableOnSell()
+    g_seasons.snow:setPlacableAreaInSnowMask(self, 0)
+end
+
+function ssSnow:setPlacableAreaInSnowMask(value)
     local numAreas = table.getn(self.clearAreas)
     for i = 1, numAreas do
         local x, _, z = getWorldTranslation(self.clearAreas[i].start)
         local x1, _, z1 = getWorldTranslation(self.clearAreas[i].width)
         local x2, _, z2 = getWorldTranslation(self.clearAreas[i].height)
         local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
-        -- Remove area from snowMask
-        setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, 1)
+
+        setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, value)
     end
 end
 
-function ssSnow:updatePlaceablenOnDelete()
-    if self.snowMaskId == nil then return end
-
-    local numAreas = table.getn(self.clearAreas)
-    for i = 1, numAreas do
-        local x, _, z = getWorldTranslation(self.clearAreas[i].start)
-        local x1, _, z1 = getWorldTranslation(self.clearAreas[i].width)
-        local x2, _, z2 = getWorldTranslation(self.clearAreas[i].height)
-        local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
-        -- Add area to snowMask
-        setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, 0)
-    end
-end
+--
+-- No snow under objects
+--
 
 function ssSnow:removeSnowUnderObjects()
     local dim = {}
@@ -332,6 +332,10 @@ function ssSnow:getWheelCoord(wheel, width, length)
 
     return x0, z0, x1, z1, x2, z2
 end
+
+--
+-- Commands
+--
 
 function ssSnow:consoleCommandAddSnow()
     self:applySnow(self.appliedSnowDepth + ssSnow.LAYER_HEIGHT)
