@@ -11,6 +11,7 @@ ssEconomy = {}
 g_seasons.economy = ssEconomy
 
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
+ssEconmy.DEFAULT_FACTOR = 1
 
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getXMLFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
@@ -260,7 +261,7 @@ function ssEconomy:getEquity()
 end
 
 function ssEconomy:getLoanCap()
-    local roundedTo5000 = math.floor(ssEconomy.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
+    local roundedTo5000 = math.floor(self.EQUITY_LOAN_RATIO * self:getEquity() / 5000) * 5000
     return Utils.clamp(roundedTo5000, 300000, ssEconomy.loanMax)
 end
 
@@ -314,7 +315,7 @@ end
 
 function ssEconomy:getBaleFactor(fillType)
     if self.repricing.bales[fillType] == nil then
-        return 1
+        return self.DEFAULT_FACTOR
     end
 
     return self:lerpFactors(self.repricing.bales[fillType])
@@ -322,7 +323,7 @@ end
 
 function ssEconomy:getAnimalFactor(animal)
     if self.repricing.animals[animal] == nil then
-        return 1
+        return self.DEFAULT_FACTOR
     end
 
     return self:lerpFactors(self.repricing.animals[animal])
@@ -330,7 +331,7 @@ end
 
 function ssEconomy:getFillFactor(fillType)
     if self.repricing.fills[fillType] == nil then
-        return 1
+        return self.DEFAULT_FACTOR
     end
 
     return self:lerpFactors(self.repricing.fills[fillType])
