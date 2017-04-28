@@ -236,7 +236,7 @@ function ssSnow:setPlacableAreaInSnowMask(placeable, value)
         local x1, _, z1 = getWorldTranslation(placeable.clearAreas[i].width)
         local x2, _, z2 = getWorldTranslation(placeable.clearAreas[i].height)
 
-        local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(placeable.snowMaskId, x, z, x1, z1, x2, z2)
+        local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
 
         setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, value)
     end
