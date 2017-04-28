@@ -229,6 +229,8 @@ function ssSnow:placeableOnSell()
 end
 
 function ssSnow:setPlacableAreaInSnowMask(placeable, value)
+    if self.snowMaskId == nil then return end
+
     local numAreas = table.getn(placeable.clearAreas)
 
     for i = 1, numAreas do
@@ -238,6 +240,7 @@ function ssSnow:setPlacableAreaInSnowMask(placeable, value)
 
         local startX, startZ, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(self.snowMaskId, x, z, x1, z1, x2, z2)
 
+        log("self.snow", self.snowMaskId, "startX", startX)
         setDensityParallelogram(self.snowMaskId, startX, startZ, widthX, widthZ, heightX, heightZ, 0, 1, value)
     end
 end
