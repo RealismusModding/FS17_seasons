@@ -118,6 +118,8 @@ function ssSettingsEvent:readStream(streamId, connection)
 
             table.insert(g_seasons.weather.weather, rain)
         end
+
+        g_seasons.weather:overwriteRaintable()
     end
 
     self:run(connection)
