@@ -47,7 +47,7 @@ function ssVehicle:loadMap()
 
     Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.vehicleGetDailyUpKeep)
     Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.vehicleGetSellPrice)
-    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.getSpecValueAge)
+    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.vehicleGetSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
@@ -378,16 +378,16 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
 end
 
 -- Replace the visual age with the age since last repair, because actual age is useless
-function ssVehicle:getSpecValueAge(superFunc, vehicle) -- storeItem, realItem
-    if vehicle ~= nil and vehicle.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-        local daysUntil = math.max(g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - vehicle.ssLastRepairDay), 0)
+function ssVehicle.vehicleGetSpecValueAge(superFunc, storeItem, realItem) -- storeItem, realItem
+    if realItem ~= nil and realItem.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, realItem.specializations) then
+        local daysUntil = math.max(g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - realItem.ssLastRepairDay), 0)
 
         return string.format(g_i18n:getText("shop_age"), daysUntil)
-    elseif vehicle ~= nil and vehicle.age ~= nil then
+    elseif realItem ~= nil and realItem.age ~= nil then
         return "-"
 
     -- FIXME this is never called because all vehicles have an age
-    elseif not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
+    elseif not SpecializationUtil.hasSpecialization(Motorized, realItem.specializations) then
         return ssLang.getText("SS_REPAIR_AT_MIDNIGHT", "at midnight")
     end
 
