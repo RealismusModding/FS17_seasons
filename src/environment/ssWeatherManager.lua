@@ -240,7 +240,6 @@ end
 -- Only run this the very first time or if season length changes
 function ssWeatherManager:buildForecast()
     local startDayNum = g_seasons.environment:currentDay()
-    local ssTmax
 
     if self.prevHighTemp == nil then
         self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter.
@@ -253,7 +252,6 @@ function ssWeatherManager:buildForecast()
         local oneDayForecast = {}
         local oneDayRain = {}
         local ssTmax = {}
-        local Tmaxmean = {}
 
         oneDayForecast.day = startDayNum + n - 1 -- To match forecast with actual game
         oneDayForecast.season = g_seasons.environment:seasonAtDay(oneDayForecast.day)
