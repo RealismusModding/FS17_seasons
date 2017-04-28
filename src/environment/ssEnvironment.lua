@@ -226,7 +226,7 @@ function ssEnvironment:dayInSeason(currentDay)
 
     local season = self:seasonAtDay(currentDay) -- 0-3
     local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1 -- 1+
-    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1-daysInSeason
+    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1 - daysInSeason
 end
 
 -- Starts with 0
@@ -244,7 +244,7 @@ function ssEnvironment:nextTransition()
     if cGT == self.TRANSITIONS_IN_YEAR then
         return 1
     else
-        return cGT+1
+        return cGT + 1
     end
 end
 
@@ -256,10 +256,10 @@ function ssEnvironment:transitionAtDay(dayNumber)
 
     local season = self:seasonAtDay(dayNumber)
     local seasonTransition = self:getTransitionInSeason(dayNumber)
-    return (seasonTransition + (season*3))
+    return (seasonTransition + (season * 3))
 end
 
---this funtion returns the transition within a season (1,2,3)
+--this funtion returns the transition within a season (1, 2, 3)
 --most functions should not call this directly. use transitionAtDay instead to get the current transition
 function ssEnvironment:getTransitionInSeason(currentDay)
     if (currentDay == nil) then

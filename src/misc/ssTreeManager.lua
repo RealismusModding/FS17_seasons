@@ -84,7 +84,7 @@ function ssTreeManager:calculateDistance(singleTree, cutTree)
         --only one object. Have not been cut.
         if getNumOfChildren(statTrees[i].node) == 1 then
 
-            local vectorDistance = Utils.vector3Length(statTrees[i].x-singleTree.x, statTrees[i].y-singleTree.y, statTrees[i].z-singleTree.z)
+            local vectorDistance = Utils.vector3Length(statTrees[i].x - singleTree.x, statTrees[i].y - singleTree.y, statTrees[i].z - singleTree.z)
 
             if vectorDistance < tmpDistance then
                 tmpDistance = vectorDistance
@@ -95,7 +95,7 @@ function ssTreeManager:calculateDistance(singleTree, cutTree)
 
     for i, _ in pairs(growTrees) do
         if growTrees[i].node ~= cutTree then
-            local vectorDistance = Utils.vector3Length(growTrees[i].x-singleTree.x, growTrees[i].y-singleTree.y, growTrees[i].z-singleTree.z)
+            local vectorDistance = Utils.vector3Length(growTrees[i].x - singleTree.x, growTrees[i].y - singleTree.y, growTrees[i].z - singleTree.z)
 
             if vectorDistance ~= 0 and vectorDistance < tmpDistance then
                 tmpDistance = vectorDistance

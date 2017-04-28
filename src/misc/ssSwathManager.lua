@@ -100,7 +100,7 @@ end
 
 function ssSwathManager:dayChanged()
     if g_currentMission:getIsServer() then
-        --local reduceLayers = -1/3 * g_seasons.environment.daysInSeason + 5
+        --local reduceLayers = -1 / 3 * g_seasons.environment.daysInSeason + 5
         -- removing 1 layer each day
         g_seasons.dms:queueJob("ssReduceGrass", 1)
     end

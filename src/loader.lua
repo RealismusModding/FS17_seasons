@@ -49,7 +49,7 @@ local function split(str, pat)
             table.insert(t, cap)
         end
 
-        last_end = e+1
+        last_end = e + 1
         s, e, cap = str:find(fpat, last_end)
     end
 

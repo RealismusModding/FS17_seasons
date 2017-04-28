@@ -158,7 +158,7 @@ function ssWeatherForecast:drawForecast(forecast)
         renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + posYOffset, self.hud.textSize * 1.2, tempString)
 
         -- Render Day of The Week
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall / 2, self.hud.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n-1)))
+        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall / 2, self.hud.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1)))
     end
 end
 

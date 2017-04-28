@@ -34,16 +34,16 @@ local function applyTracks(self, dt)
         local newSnowDepth
 
         if wheel.hasGroundContact then
-            local x0,y0,z0
-            local x1,y1,z1
-            local x2,y2,z2
+            local x0, y0, z0
+            local x1, y1, z1
+            local x2, y2, z2
 
             local width = 0.5 * wheel.width;
             local length = math.min(0.2, 0.35 * wheel.width);
             local radius = wheel.radius
             local underTireSnowLayers = 0
             local sinkage = 0.7 * targetSnowDepth
-            local wheelRot = getWheelShapeAxleSpeed(wheel.node,wheel.wheelShape)
+            local wheelRot = getWheelShapeAxleSpeed(wheel.node, wheel.wheelShape)
             local wheelRotDir
 
             if wheelRot ~= 0 then
@@ -54,8 +54,8 @@ local function applyTracks(self, dt)
 
             local underTireSnowLayers = 0
             local fwdTireSnowLayers = 0
-            x0,z0, x1,z1, x2,z2,underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel,width,length,radius,length,length)
-            x0,z0, x1,z1, x2,z2,fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel,width,length,radius,-0.6 * radius * wheelRotDir,1.2 * radius * wheelRotDir)
+            x0, z0, x1, z1, x2, z2, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
+            x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
             local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100  --fwdTireSnowDepth in m
 
             if underTireSnowLayers >= 1 then
@@ -68,45 +68,45 @@ local function applyTracks(self, dt)
             end
 
             if fwdTireSnowLayers > 1 and reduceSnow then
-                sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT),fwdTireSnowLayers)
-                ssSnow:removeSnow(x0,z0, x1,z1, x2,z2, sinkageLayers)
+                sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT), fwdTireSnowLayers)
+                ssSnow:removeSnow(x0, z0, x1, z1, x2, z2, sinkageLayers)
 
                 if fwdTireSnowDepth <= radius then
-                    setLinearDamping(wheel.node,0.35)
+                    setLinearDamping(wheel.node, 0.35)
                 elseif fwdTireSnowDepth > radius and fwdTireSnowDepth <= 2 * radius then
-                    setLinearDamping(wheel.node,0.55)
+                    setLinearDamping(wheel.node, 0.55)
                 elseif fwdTireSnowDepth > 2 * radius then
-                    setLinearDamping(wheel.node,0.95)
+                    setLinearDamping(wheel.node, 0.95)
                 end
 
             elseif fwdTireSnowDepth > 2 * radius then
-                setLinearDamping(wheel.node,0.95)
+                setLinearDamping(wheel.node, 0.95)
 
             else
-                setLinearDamping(wheel.node,0)
+                setLinearDamping(wheel.node, 0)
             end
         end
     end
 end
 
-function ssSnowTracks:getSnowLayers(wheel,width,length,radius,delta0,delta2)
+function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2)
 
-    local x0,y0,z0
-    local x1,y1,z1
-    local x2,y2,z2
+    local x0, y0, z0
+    local x1, y1, z1
+    local x2, y2, z2
 
     if wheel.repr == wheel.driveNode then
-        x0,y0,z0 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ - delta0)
-        x1,y1,z1 = localToWorld(wheel.node, wheel.positionX - width, wheel.positionY, wheel.positionZ - delta0)
-        x2,y2,z2 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ + delta2)
+        x0, y0, z0 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ - delta0)
+        x1, y1, z1 = localToWorld(wheel.node, wheel.positionX - width, wheel.positionY, wheel.positionZ - delta0)
+        x2, y2, z2 = localToWorld(wheel.node, wheel.positionX + width, wheel.positionY, wheel.positionZ + delta2)
     else
-        local x,_,z = localToLocal(wheel.driveNode, wheel.repr, 0,0,0)
-        x0,y0,z0 = localToWorld(wheel.repr, x + width, 0, z - delta0)
-        x1,y1,z1 = localToWorld(wheel.repr, x - width, 0, z - delta0)
-        x2,y2,z2 = localToWorld(wheel.repr, x + width, 0, z + delta2)
+        local x, _, z = localToLocal(wheel.driveNode, wheel.repr, 0, 0, 0)
+        x0, y0, z0 = localToWorld(wheel.repr, x + width, 0, z - delta0)
+        x1, y1, z1 = localToWorld(wheel.repr, x - width, 0, z - delta0)
+        x2, y2, z2 = localToWorld(wheel.repr, x + width, 0, z + delta2)
     end
 
-    local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
@@ -115,7 +115,7 @@ function ssSnowTracks:getSnowLayers(wheel,width,length,radius,delta0,delta2)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 
-    return x0,z0, x1,z1, x2,z2,snowLayers
+    return x0, z0, x1, z1, x2, z2, snowLayers
 
 end
 

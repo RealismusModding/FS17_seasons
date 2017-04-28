@@ -470,7 +470,7 @@ function ssWeatherManager:updateSoilTemp()
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
     local facKT = 0.6
-    -- average thermal conductivity of soil and ice C_S + C_ICE, unit: kW/m/deg C, typical values C_S=1-1.3, C_ICE=4-15
+    -- average thermal conductivity of soil and ice C_S + C_ICE, unit: kW/m/deg C, typical values C_S = 1-1.3, C_ICE = 4-15
     local facCA = 10
     -- empirical snow damping parameter, unit 1/m, typical values -2 - -7
     local facfs = -5

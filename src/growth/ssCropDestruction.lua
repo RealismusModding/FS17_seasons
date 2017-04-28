@@ -30,25 +30,25 @@ function ssCropDestruction:seasonsDestroyFruitArea(superFunc, x0, z0, x1, z1, x2
 
             if desc.preparingOutputName ~= nil and entry.preparingOutputId ~= nil then
                 setDensityCompareParams(entry.preparingOutputId, "greater", -1);
-                setDensityMaskParams(entry.id, "between", 2, desc.maxPreparingGrowthState+1);
+                setDensityMaskParams(entry.id, "between", 2, desc.maxPreparingGrowthState + 1);
                 setDensityMaskedParallelogram(entry.preparingOutputId, x, z, widthX, widthZ, heightX, heightZ, 0, 1, entry.id, 0, g_currentMission.numFruitStateChannels, 1);
                 setDensityCompareParams(entry.preparingOutputId, "greater", -1);
                 setDensityMaskParams(entry.id, "greater", 0);
 
-                setDensityCompareParams(entry.id, "between", 2, desc.maxPreparingGrowthState+1);
-                setDensityParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState+1);
+                setDensityCompareParams(entry.id, "between", 2, desc.maxPreparingGrowthState + 1);
+                setDensityParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState + 1);
                 setDensityCompareParams(entry.id, "greater", -1);
             elseif index == FruitUtil.FRUITTYPE_GRASS then --desc.cutState < desc.minHarvestingGrowthState then
                 -- grass
-                setDensityCompareParams(entry.id, "between", desc.minHarvestingGrowthState+1, desc.maxHarvestingGrowthState+1);
-                setDensityParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState+2);
+                setDensityCompareParams(entry.id, "between", desc.minHarvestingGrowthState + 1, desc.maxHarvestingGrowthState + 1);
+                setDensityParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState + 2);
                 setDensityCompareParams(entry.id, "greater", -1);
             elseif index == FruitUtil.FRUITTYPE_OILSEEDRADISH then  --desc.minHarvestingGrowthState == desc.maxHarvestingGrowthState then
                 -- oilseed, no destruction
             else
                 -- all other/normal fruits
                 setDensityCompareParams(entry.id, "greater", 2);
-                setDensityMaskedParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitDensityMapChannels, detailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, desc.cutState+1);
+                setDensityMaskedParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitDensityMapChannels, detailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, desc.cutState + 1);
                 setDensityCompareParams(entry.id, "greater", -1); 
             end
         end

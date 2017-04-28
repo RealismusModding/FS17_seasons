@@ -115,12 +115,12 @@ function ssUtil.triDist(m)
     --math.randomseed( g_currentMission.time )
     math.random()
 
-    pmode = (m.mode-m.min)/(m.max-m.min)
+    pmode = (m.mode - m.min) / (m.max - m.min)
     p = math.random()
     if p < pmode then
-        return math.sqrt(p*(m.max-m.min)*(m.mode-m.min))+m.min
+        return math.sqrt(p * (m.max - m.min) * (m.mode - m.min)) + m.min
     else
-        return m.max-math.sqrt((1-p)*(m.max-m.min)*(m.max-m.mode))
+        return m.max - math.sqrt((1 - p) * (m.max - m.min) * (m.max - m.mode))
     end
 end
 
@@ -130,7 +130,7 @@ function ssUtil.rationalApproximation(t)
     local c = {2.515517, 0.802853, 0.010328}
     local d = {1.432788, 0.189269, 0.001308}
 
-    return t - ((c[3]*t + c[2])*t + c[1]) / (((d[3]*t + d[2])*t + d[1])*t + 1.0)
+    return t - ((c[3] * t + c[2]) * t + c[1]) / (((d[3] * t + d[2]) * t + d[1]) * t + 1.0)
 end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
@@ -156,9 +156,9 @@ function ssUtil.lognormDist(beta, gamma)
     local z
 
     if p < 0.5 then
-        z = ssUtil.rationalApproximation( math.sqrt(-2.0*math.log(p)))*-1
+        z = ssUtil.rationalApproximation( math.sqrt(-2.0 * math.log(p))) * -1
     else
-        z = ssUtil.rationalApproximation( math.sqrt(-2.0*math.log(1-p)))
+        z = ssUtil.rationalApproximation( math.sqrt(-2.0 * math.log(1 - p)))
     end
 
     return gamma * math.exp ( z / beta )
@@ -262,12 +262,12 @@ function arrayLength(arr)
 end
 
 function print_r(t)
-    local print_r_cache={}
+    local print_r_cache = {}
     local function sub_print_r(t, indent)
         if (print_r_cache[tostring(t)]) then
             print(indent .. "*" .. tostring(t))
         else
-            print_r_cache[tostring(t)]=true
+            print_r_cache[tostring(t)] = true
             if (type(t) == "table") then
                 for pos, val in pairs(t) do
                     pos = tostring(pos)

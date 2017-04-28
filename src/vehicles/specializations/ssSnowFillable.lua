@@ -42,12 +42,12 @@ end
 
 local function vehicleInShed(vehicle)
     if ssSnow.snowMaskId ~= nil then
-        local width = vehicle.sizeWidth/3
-        local length = vehicle.sizeLength/3
+        local width = vehicle.sizeWidth / 3
+        local length = vehicle.sizeLength / 3
         -- divide by 3 to ensure vehicle is registered as inside the shed even if the mask is not accurate
         -- and/or the vehicle is parked near the border of the mask
 
-        local positionX,positionY,positionZ = getWorldTranslation(vehicle.rootNode)
+        local positionX, positionY, positionZ = getWorldTranslation(vehicle.rootNode)
 
         local x0 = positionX + width
         local x1 = positionX - width
@@ -56,7 +56,7 @@ local function vehicleInShed(vehicle)
         local z1 = positionZ - length
         local z2 = positionZ + length
 
-        local x,z, widthX,widthZ, heightX,heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0,z0, x1,z1, x2,z2)
+        local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
         local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
 
         return density ~= 0

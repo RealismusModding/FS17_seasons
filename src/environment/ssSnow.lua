@@ -220,7 +220,7 @@ function ssSnow:updatePlaceableOnCreation()
     if self.snowMaskId == nil then return end
 
     local numAreas = table.getn(self.clearAreas)
-    for i=1, numAreas do
+    for i = 1, numAreas do
         local x, _, z = getWorldTranslation(self.clearAreas[i].start)
         local x1, _, z1 = getWorldTranslation(self.clearAreas[i].width)
         local x2, _, z2 = getWorldTranslation(self.clearAreas[i].height)
@@ -234,7 +234,7 @@ function ssSnow:updatePlaceablenOnDelete()
     if self.snowMaskId == nil then return end
 
     local numAreas = table.getn(self.clearAreas)
-    for i=1, numAreas do
+    for i = 1, numAreas do
         local x, _, z = getWorldTranslation(self.clearAreas[i].start)
         local x1, _, z1 = getWorldTranslation(self.clearAreas[i].width)
         local x2, _, z2 = getWorldTranslation(self.clearAreas[i].height)

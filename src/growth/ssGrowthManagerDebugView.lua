@@ -29,7 +29,6 @@ ssGrowthManagerDebugView.transitionIndexToName =
 ssGrowthManagerDebugView.debugView = false
 
 function ssGrowthManagerDebugView:loadMap(name)
-    --self:transitionsDisplayData() --for testing only right now
     addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
 end
 

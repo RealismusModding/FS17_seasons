@@ -12,7 +12,7 @@ ssGrowthManager = {}
 g_seasons.growthManager = ssGrowthManager
 
 -- constants
-ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates-1 if you're incrementing
+ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates - 1 if you're incrementing
 ssGrowthManager.CUT = 200
 ssGrowthManager.WITHERED = 300
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
@@ -59,7 +59,7 @@ function ssGrowthManager:save(savegame, key)
         setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
         setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[fruitName])
 
-        i = i+1
+        i = i + 1
     end
 end
 
@@ -256,7 +256,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         local maxState = self.growthData[transition][fruitName].normalGrowthMaxState
 
         if maxState == self.MAX_STATE then
-            maxState = fruitTypeGrowth.numGrowthStates-1
+            maxState = fruitTypeGrowth.numGrowthStates - 1
         end
         setDensityMaskParams(fruit.id, "between", minState, maxState)
         useMaxState = true

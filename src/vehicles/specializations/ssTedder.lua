@@ -63,21 +63,21 @@ function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaVa
         local wz = z1 - z0
         local wLength = Utils.vector2Length(wx, wz)
 
-        local sx = x0 + (hx * 0.5) + ((wx/wLength)*hLength_2)
-        local sz = z0 + (hz * 0.5) + ((wz/wLength)*hLength_2)
+        local sx = x0 + (hx * 0.5) + ((wx / wLength) * hLength_2)
+        local sz = z0 + (hz * 0.5) + ((wz / wLength) * hLength_2)
 
-        local ex = x1 + (hx * 0.5) - ((wx/wLength)*hLength_2)
-        local ez = z1 + (hz * 0.5) - ((wz/wLength)*hLength_2)
+        local ex = x1 + (hx * 0.5) - ((wx / wLength) * hLength_2)
+        local ez = z1 + (hz * 0.5) - ((wz / wLength) * hLength_2)
 
-        local sy = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, sx,0,sz)
-        local ey = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, ex,0,ez)
+        local sy = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, sx, 0, sz)
+        local ey = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, ex, 0, ez)
 
         local fillType1 = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_GRASS]
-        local liters1 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType1, sx,sy,sz, ex,ey,ez, hLength_2, nil, nil, false, nil)
+        local liters1 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType1, sx, sy, sz, ex, ey, ez, hLength_2, nil, nil, false, nil)
 
 
         local fillType2 = FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_DRYGRASS]
-        local liters2 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType2, sx,sy,sz, ex,ey,ez, hLength_2, nil, nil, false, nil)
+        local liters2 = TipUtil.tipToGroundAroundLine(self, -math.huge, fillType2, sx, sy, sz, ex, ey, ez, hLength_2, nil, nil, false, nil)
 
         local liters = -liters1 - liters2
 
@@ -91,21 +91,21 @@ function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaVa
         local wz = dz1 - dz0
         local wLength = Utils.vector2Length(wx, wz)
 
-        local sx = dx0 + (hx * 0.5) + ((wx/wLength)*hLength_2)
-        local sz = dz0 + (hz * 0.5) + ((wz/wLength)*hLength_2)
+        local sx = dx0 + (hx * 0.5) + ((wx / wLength) * hLength_2)
+        local sz = dz0 + (hz * 0.5) + ((wz / wLength) * hLength_2)
 
-        local ex = dx1 + (hx * 0.5) - ((wx/wLength)*hLength_2)
-        local ez = dz1 + (hz * 0.5) - ((wz/wLength)*hLength_2)
+        local ex = dx1 + (hx * 0.5) - ((wx / wLength) * hLength_2)
+        local ez = dz1 + (hz * 0.5) - ((wz / wLength) * hLength_2)
 
-        local sy = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, sx,0,sz)
-        local ey = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, ex,0,ez)
+        local sy = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, sx, 0, sz)
+        local ey = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, ex, 0, ez)
 
         local toDrop = accumulatedWorkAreaValues[i] + liters
 
         local fillType = g_seasons.weather:isCropWet() and FruitUtil.FRUITTYPE_GRASS or FruitUtil.FRUITTYPE_DRYGRASS
-        local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[fillType], sx,sy,sz, ex,ey,ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
+        local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[fillType], sx, sy, sz, ex, ey, ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
 
-        --local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_DRYGRASS], sx,sy,sz, ex,ey,ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
+        --local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_DRYGRASS], sx, sy, sz, ex, ey, ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
         self.tedderLineOffset = lineOffset
         local remain = toDrop - dropped
 

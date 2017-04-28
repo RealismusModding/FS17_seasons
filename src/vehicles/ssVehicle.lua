@@ -285,7 +285,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local overdueFactor = self:calculateOverdueFactor(vehicle) ^ 2
 
-    return (costs + workCosts + 50 * (overdueFactor -1 )) * dealerMultiplier * difficultyMultiplier * overdueFactor
+    return (costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * difficultyMultiplier * overdueFactor
 end
 
 -- all (guard)
@@ -459,16 +459,16 @@ function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             if wheel.tireType == WheelsUtil.getTireType("chains") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
             elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.5)
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.5)
             elseif wheel.tireType == WheelsUtil.getTireType("studded") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.7)
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.7)
             else
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff*0.1)
+                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.1)
             end
         -- else
-        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale*wheel.tireGroundFrictionCoeff)
+        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
         end
     end
 end

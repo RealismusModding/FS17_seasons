@@ -137,7 +137,7 @@ end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local sunHeightAngle = self:calculateSunDeclination(julianDay-176) - (90 - self.latitude)*math.pi/180
+    local sunHeightAngle = self:calculateSunDeclination(julianDay - 176) - (90 - self.latitude) * math.pi / 180
 
     return sunHeightAngle
 end
@@ -279,7 +279,7 @@ function ssDaylight:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightSt
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local ex = function(rgb)
-        return (rgb/255) ^ 2.2
+        return (rgb / 255) ^ 2.2
     end
 
     local morningStep = (dayStart - nightEnd) / 5
@@ -322,7 +322,7 @@ function ssDaylight:calculateSolarRadiation()
     local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
     local eta = self:calculateSunDeclination(julianDay)
     local sunHeightAngle = self:calculateSunHeightAngle(julianDay)
-    local sunZenithAngle = math.pi/2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
+    local sunZenithAngle = math.pi / 2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
 
     dayStart, dayEnd, _, _ = self:calculateStartEndOfDay(julianDay)
 
@@ -330,7 +330,7 @@ function ssDaylight:calculateSolarRadiation()
     local midDay = dayStart + lengthDay / 2
 
     local solarRadiation = 0
-    local Isc = 4.921 --MJ/(m2 * h)
+    local Isc = 4.921 --MJ / (m2 * h)
 
     if dayTime < dayStart or dayTime > dayEnd then
         -- no radiation before sun rises

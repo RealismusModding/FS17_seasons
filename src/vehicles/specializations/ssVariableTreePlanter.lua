@@ -70,9 +70,9 @@ function ssVariableTreePlanter:update(dt)
             local newDistance = 0
             local n = table.getn(ssVariableTreePlanter.plantingDistances)
 
-            for i,dist in pairs(ssVariableTreePlanter.plantingDistances) do
+            for i, dist in pairs(ssVariableTreePlanter.plantingDistances) do
                 if dist == currentDistance and i ~= n then
-                    newDistance = ssVariableTreePlanter.plantingDistances[i+1]
+                    newDistance = ssVariableTreePlanter.plantingDistances[i + 1]
                 elseif dist == currentDistance and i == n then
                     newDistance = ssVariableTreePlanter.plantingDistances[1]
                 end

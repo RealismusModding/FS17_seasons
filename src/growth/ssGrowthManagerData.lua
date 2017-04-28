@@ -69,7 +69,7 @@ function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, default
 end
 
 function ssGrowthManagerData:getGrowthData(rootKey, file, parentData, additionalData)
-    local growthData = parentData ~= nil and Utils.copyTable(parentData) or {}--{}
+    local growthData = parentData ~= nil and Utils.copyTable(parentData) or {}
 
     local transitionsKey = rootKey .. ".growthTransitions"
 

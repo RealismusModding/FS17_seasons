@@ -365,10 +365,10 @@ function ssSeasonsMenu:getTransitionHeaders()
         if index % 2 == 1 then
             local putIndex = index - ((index - 1) / 2)
 
-            if value == data[index+1] then
+            if value == data[index + 1] then
                 transitionsDisplayData[putIndex] = tostring(value)
             else
-                transitionsDisplayData[putIndex] = value .. "-" .. data[index+1]
+                transitionsDisplayData[putIndex] = value .. "-" .. data[index + 1]
             end
         end
     end
@@ -736,7 +736,7 @@ function ssSeasonsMenu:onClickSaveSettings()
     if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
        or self.settingElements.snow:getState() ~= ssSnow.mode then
         local text = ssLang.getText("dialog_applySettings")
-        g_gui:showYesNoDialog({text=text, callback=self.onYesNoSaveSettings, target=self})
+        g_gui:showYesNoDialog({text = text, callback = self.onYesNoSaveSettings, target = self})
     else
         self:onYesNoSaveSettings(true)
     end
