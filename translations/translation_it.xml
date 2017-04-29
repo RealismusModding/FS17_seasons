@@ -63,7 +63,7 @@
         <text name="SS_VEHICLE_REPAIRED" text="%s riparato per %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Ripara %s per %s" />
         <text name="SS_REPAIR_REQUIRED" text="Riparazioni necessarie" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="entro %.1f ore motore o %d giorni è necessaria la manutenzione" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Manutenzione necessaria entro %.1f ore motore o %d giorni" />
         <text name="SS_REPAIR_DIALOG" text="Vuoi riparare %s per %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
         <text name="warning_repairBrokenMachine" text="Motore danneggiato. Ripara il macchinario!" />
