@@ -57,7 +57,7 @@ function templatedLua() {
 
 function createVersionName() {
     const short = git.short();
-    const branch = git.branch();
+    const branch = git.branch().replace("/", "_");
     const tag = git.tag();
 
     let versionName = "";
