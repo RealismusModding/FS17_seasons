@@ -11,7 +11,7 @@ ssDaylight = {}
 g_seasons.daylight = ssDaylight
 
 function ssDaylight:load(savegame, key)
-    self.latitude = Utils.clamp(ssXMLUtil.getXMLFloat(savegame, key .. ".environment.latitude", 47.4), 0, 72)
+    self.latitude = Utils.clamp(ssXMLUtil.getXMLFloat(savegame, key .. ".environment.latitude", 51.9), 0, 72)
 end
 
 function ssDaylight:save(savegame, key)
