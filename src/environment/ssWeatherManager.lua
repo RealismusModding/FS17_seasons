@@ -354,7 +354,7 @@ function ssWeatherManager:seasonLengthChanged()
 
         self:buildForecast()
 
-        -- TODO(Jos): possible bug, data not sent to client. Workaround: quit all clients and rejoin
+        -- The new forecast is sent with the ssSettings event.
     end
 end
 
