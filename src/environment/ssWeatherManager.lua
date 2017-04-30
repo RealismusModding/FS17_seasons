@@ -163,7 +163,7 @@ function ssWeatherManager:readStream(streamId, connection)
         local day = {}
 
         day.day = streamReadInt16(streamId)
-        day.season = g_seasons.environment:seasonAtDay(day.day)
+        day.season = streamReadUInt8(streamId)
 
         day.weatherState = streamReadString(streamId)
         day.highTemp = streamReadFloat32(streamId)
@@ -198,11 +198,13 @@ function ssWeatherManager:writeStream(streamId, connection)
     streamWriteBool(streamId, self.moistureEnabled)
     streamWriteFloat32(streamId, self.prevHighTemp)
 
-    streamWriteUInt8(streamId, self.forecastLength)
+    streamWriteUInt8(streamId, table.getn(self.forecast))
     streamWriteUInt8(streamId, table.getn(self.weather))
 
     for _, day in pairs(self.forecast) do
         streamWriteInt16(streamId, day.day)
+        streamWriteUInt8(streamId, day.season)
+
         streamWriteString(streamId, day.weatherState)
         streamWriteFloat32(streamId, day.highTemp)
         streamWriteFloat32(streamId, day.lowTemp)
