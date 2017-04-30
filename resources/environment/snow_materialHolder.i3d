@@ -16,8 +16,8 @@
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
     </Material>
-    
-    
+
+
     <Material name="snow_mat1" materialId="46" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="7" customShaderVariation="CUSTOM_ALPHA_TEST">
       <CustomParameter name="UVScaleSpeed" value="3.5 -2 0 0"/>
       <CustomParameter name="vSpeedFrequencyAmplitudeFadescale" value="10 5 0.25 -0.025"/>
@@ -39,17 +39,17 @@
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
     </Material>
-    
+
     <Material name="snow_mat4" materialId="49" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" alphaBlending="true" customShaderId="8" customShaderVariation="LEVELER">
       <CustomParameter name="VertxoffsetVertexdeformMotionUVscale" value="-35.0 1.0 0.0 6.0"/>
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
     </Material>
-    
+
     <Material name="smoke_snow" materialId="50" diffuseColor="0.5 0.5 0.5 1" specularColor="0 0 0" ambientColor="1 1 1" alphaBlending="true" customShaderId="9">
       <CustomParameter name="ColorAlpha" value="0.904 0.752 0.489 2"/>
     </Material>
-    
+
     <Material name="snow_mat_pipe" materialId="51" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="10">
       <CustomParameter name="uvScaleSpeedFreqAmp" value="1.25 6 3 0"/>
       <CustomParameter name="shapeScaleSpread" value="0.4 0.2 1 0"/>
@@ -58,17 +58,17 @@
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
     </Material>
-    
+
     <Material name="snow_mat_belt" materialId="52" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="11" customShaderVariation="ALPHA_DISABLE">
       <CustomParameter name="morphPosition" value="0.0 1.0 1.0 2.0"/>
       <CustomParameter name="uvScale" value="2 2 1 1"/>
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
     </Material>
-    
+
   </Materials>
-  
-  
+
+
     <Shapes externalShapesFile="snow_materialHolder.i3d.shapes">
   </Shapes>
   <Scene>
@@ -90,8 +90,8 @@
       <Attribute name="materialType" type="string" value="FILLPLANE"/>
       <Attribute name="materialId" type="string" value="1"/>
     </UserAttribute>
-    
-    
+
+
     <UserAttribute nodeId="4">
       <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
       <Attribute name="fillType" type="string" value="snow"/>
