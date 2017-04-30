@@ -309,8 +309,11 @@ function ssSnow:removeSnowLayer(objectInSnow, dim)
 
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+
     local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
     local snowLayers = density / area
+
+    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 
     if snowLayers > 1 then
