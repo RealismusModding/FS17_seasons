@@ -41,34 +41,7 @@ function ssSettingsEvent:writeStream(streamId, connection)
     streamWriteBool(streamId, self.moistureEnabled)
 
     if not connection:getIsServer() then
-        -- Write the new (current on server) forecast
-        streamWriteFloat32(streamId, g_seasons.weather.snowDepth)
-        streamWriteFloat32(streamId, g_seasons.weather.soilTemp)
-        streamWriteFloat32(streamId, g_seasons.weather.prevHighTemp)
-        streamWriteFloat32(streamId, g_seasons.weather.cropMoistureContent)
-
-        streamWriteUInt8(streamId, table.getn(g_seasons.weather.forecast))
-        streamWriteUInt8(streamId, table.getn(g_seasons.weather.weather))
-
-        for _, day in pairs(g_seasons.weather.forecast) do
-            streamWriteInt16(streamId, day.day)
-
-            -- Include season, season on client is not in sync
-            streamWriteInt16(streamId, day.season)
-
-            streamWriteString(streamId, day.weatherState)
-            streamWriteFloat32(streamId, day.highTemp)
-            streamWriteFloat32(streamId, day.lowTemp)
-        end
-
-        for _, rain in pairs(g_seasons.weather.weather) do
-            streamWriteInt16(streamId, rain.startDay)
-            streamWriteFloat32(streamId, rain.endDayTime)
-            streamWriteFloat32(streamId, rain.startDayTime)
-            streamWriteInt16(streamId, rain.endDay)
-            streamWriteString(streamId, rain.rainTypeId)
-            streamWriteFloat32(streamId, rain.duration)
-        end
+        g_seasons.weather:writeStream(streamId, connection)
     end
 end
 
@@ -80,46 +53,7 @@ function ssSettingsEvent:readStream(streamId, connection)
     self.moistureEnabled = streamReadBool(streamId)
 
     if connection:getIsServer() then
-        g_seasons.weather.snowDepth = streamReadFloat32(streamId)
-        g_seasons.weather.soilTemp = streamReadFloat32(streamId)
-        g_seasons.weather.prevHighTemp = streamReadFloat32(streamId)
-        g_seasons.weather.cropMoistureContent = streamReadFloat32(streamId)
-
-        local numDays = streamReadUInt8(streamId)
-        local numRains = streamReadUInt8(streamId)
-
-        g_seasons.weather.forecast = {}
-
-        for i = 1, numDays do
-            local day = {}
-
-            day.day = streamReadInt16(streamId)
-            day.season = streamReadInt16(streamId)
-
-            day.weatherState = streamReadString(streamId)
-            day.highTemp = streamReadFloat32(streamId)
-            day.lowTemp = streamReadFloat32(streamId)
-
-            table.insert(g_seasons.weather.forecast, day)
-        end
-
-        -- load rains
-        g_seasons.weather.weather = {}
-
-        for i = 1, numRains do
-            local rain = {}
-
-            rain.startDay = streamReadInt16(streamId)
-            rain.endDayTime = streamReadFloat32(streamId)
-            rain.startDayTime = streamReadFloat32(streamId)
-            rain.endDay = streamReadInt16(streamId)
-            rain.rainTypeId = streamReadString(streamId)
-            rain.duration = streamReadFloat32(streamId)
-
-            table.insert(g_seasons.weather.weather, rain)
-        end
-
-        g_seasons.weather:overwriteRaintable()
+        g_seasons.weather:readStream(streamId, connection)
     end
 
     self:run(connection)
