@@ -22,8 +22,8 @@ source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
 function ssWeatherManager:load(savegame, key)
     -- Load or set default values
     self.snowDepth = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
-    self.soilTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.soilTemp", 4.9)
-    self.prevHighTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.prevHighTemp", 0.0)
+    self.soilTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.soilTemp")
+    self.prevHighTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.moistureEnabled = ssXMLUtil.getXMLBool(savegame, key .. ".weather.moistureEnabled", true)
 
@@ -244,7 +244,7 @@ function ssWeatherManager:buildForecast()
     local startDayNum = g_seasons.environment:currentDay()
 
     if self.prevHighTemp == nil then
-        self.prevHighTemp = 5 -- initial assumption high temperature during last day of winter.
+        self.prevHighTemp = self.startValues.highAirTemp -- initial assumption high temperature during last day of winter.
     end
 
     self.forecast = {}
@@ -465,7 +465,7 @@ end
 function ssWeatherManager:updateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp * 8 + self.forecast[1].lowTemp * 16) / 24
     local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
-    local soilTemp = self.soilTemp
+    local soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
     local snowDamp = 1
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
@@ -703,6 +703,11 @@ end
 
 function ssWeatherManager:loadFromXML(path)
     local file = loadXMLFile("weather", path)
+
+    -- Load start values
+    self.startValues = {}
+    self.startValues.soilTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.soilTemp", 4.9)
+    self.startValues.highAirTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.highAirTemp", 5)
 
     -- Load temperature data
     local i = 0
