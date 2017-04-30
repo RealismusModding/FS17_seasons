@@ -9,6 +9,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <weather>
+    <startValues>
+        <soilTemp>4.9</soilTemp>
+        <highAirTemp>5</highAirTemp>
+        <snowDepth>0</snowDepth>
+    </startValues>
     <temperature>
         <p period="1">
             <min value="4.4" />
