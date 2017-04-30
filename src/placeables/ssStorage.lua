@@ -28,6 +28,6 @@ function ssStorage:load(superFunc)
     return ret
 end
 
-function ssStorage:placeableSeasonLengthChanged()
+function ssStorage:storageSeasonLengthChanged()
     --TODO: implement
 end
