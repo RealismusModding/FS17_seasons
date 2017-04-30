@@ -648,29 +648,31 @@ end
 
 function ssSeasonsMenu:onClickMultiplayerLogin(element)
     if not g_currentMission.isMasterUser then
-        local dialog = g_gui:showDialog("PasswordDialog")
-        dialog.target:setCallback(self.onAdminPassword, self)
+        g_gui:showPasswordDialog({
+            text = g_i18n:getText("ui_enterAdminPassword"),
+            callback = self.onAdminPassword,
+            target = self,
+            defaultPassword = ""
+        })
     end
 end
 
 function ssSeasonsMenu:onAdminPassword(password, login)
-    if login then
-        g_client:getServerConnection():sendEvent(GetAdminEvent:new(password))
+    g_client:getServerConnection():sendEvent(GetAdminEvent:new(password))
+end
+
+function ssSeasonsMenu:ingameOnAdminLoginSuccess(superFunc)
+    if g_gui.currentGuiName == "SeasonsMenu" then
+        g_seasons.mainMenu:updateServerSettingsVisibility()
+
+        -- Close new password dialog. (No idea why it shows)
+        g_gui:closeAllDialogs()
     else
-        g_gui:closeDialogByName("PasswordDialog")
+        superFunc(self)
     end
 end
 
-function GetAdminAnswerEvent.onAnswerOk(args)
-    if args ~= nil and args[1] == true then
-        if g_gui.currentGuiName == "SeasonsMenu" then
-            g_seasons.mainMenu:updateServerSettingsVisibility()
-        else
-            g_inGameMenu:onAdminLoginSuccess()
-        end
-    end
-end
-
+InGameMenu.onAdminLoginSuccess = Utils.overwrittenFunction(InGameMenu.onAdminLoginSuccess, ssSeasonsMenu.ingameOnAdminLoginSuccess)
 ------------------------------------------
 -- SETTINGS PAGE
 ------------------------------------------

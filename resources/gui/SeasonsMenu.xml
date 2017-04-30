@@ -100,7 +100,7 @@
 
                     <!-- Login column -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="675px 536px" onCreate="onCreateMultiplayerLogin" id="multiplayerLogin">
-                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" />
+                        <GuiElement type="button" profile="ssSettingsButton" onClick="onClickMultiplayerLogin" text="$l10n_button_adminLogin" focusId="230" focusChangeTop="1" focusChangeBottom="100" positionOrigin="topCenter" focusChangeLeft="1" focusChangeRight="1" />
                     </GuiElement>
                 </GuiElement>
 
