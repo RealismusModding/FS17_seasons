@@ -17,7 +17,6 @@
       <Normalmap fileId="2"/>
     </Material>
 
-
     <Material name="snow_mat1" materialId="46" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="7" customShaderVariation="CUSTOM_ALPHA_TEST">
       <CustomParameter name="UVScaleSpeed" value="3.5 -2 0 0"/>
       <CustomParameter name="vSpeedFrequencyAmplitudeFadescale" value="10 5 0.25 -0.025"/>
@@ -68,9 +67,9 @@
 
   </Materials>
 
-
-    <Shapes externalShapesFile="snow_materialHolder.i3d.shapes">
+  <Shapes externalShapesFile="snow_materialHolder.i3d.shapes">
   </Shapes>
+
   <Scene>
     <TransformGroup name="snow" collision="false" clipDistance="10" nodeId="1">
       <Shape name="snow_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="10" nodeId="2"/>
@@ -83,6 +82,7 @@
       <Shape name="snow_belt_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="52" clipDistance="10" nodeId="10"/>
     </TransformGroup>
   </Scene>
+
   <UserAttributes>
     <UserAttribute nodeId="2">
       <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
@@ -90,7 +90,6 @@
       <Attribute name="materialType" type="string" value="FILLPLANE"/>
       <Attribute name="materialId" type="string" value="1"/>
     </UserAttribute>
-
 
     <UserAttribute nodeId="4">
       <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
@@ -110,6 +109,7 @@
       <Attribute name="materialType" type="string" value="unloading"/>
       <Attribute name="materialId" type="string" value="3"/>
     </UserAttribute>
+
     <UserAttribute nodeId="7">
       <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
       <Attribute name="fillType" type="string" value="snow"/>
