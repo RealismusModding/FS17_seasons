@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D name="effect_materialHolder" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Files>
+    <File fileId="1" filename="snow_diffuse.png" relativePath="true"/>
+    <File fileId="2" filename="snow_normal.png" relativePath="true"/>
+    <File fileId="3" filename="data/shaders/fillPlaneShader.xml" relativePath="false"/>
+    <File fileId="7" filename="data/shaders/grainUnloadingShader.xml" relativePath="false"/>
+    <File fileId="8" filename="data/shaders/cultivatorSoilShader.xml" relativePath="false"/>
+    <File fileId="9" filename="data/shaders/grainSmokeShader.xml" relativePath="false"/>
+    <File fileId="10" filename="data/shaders/pipeUnloadingShader.xml" relativePath="false"/>
+    <File fileId="11" filename="data/shaders/morphTargetShader.xml" relativePath="false"/>
+  </Files>
+  <Materials>
+    <Material name="snow" materialId="1" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="3">
+      <CustomParameter name="uvScale" value="1 1 1 1"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    
+    
+    <Material name="snow_mat1" materialId="46" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="7" customShaderVariation="CUSTOM_ALPHA_TEST">
+      <CustomParameter name="UVScaleSpeed" value="3.5 -2 0 0"/>
+      <CustomParameter name="vSpeedFrequencyAmplitudeFadescale" value="10 5 0.25 -0.025"/>
+      <CustomParameter name="alphaBlendStartEnd" value="75 80 -0.001 0.01"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="snow_mat2" materialId="47" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="7" customShaderVariation="CUSTOM_ALPHA_TEST">
+      <CustomParameter name="UVScaleSpeed" value="3.5 -2 0 0"/>
+      <CustomParameter name="vSpeedFrequencyAmplitudeFadescale" value="10 5 0.25 -0.05"/>
+      <CustomParameter name="alphaBlendStartEnd" value="75 80 -0.001 0.01"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    <Material name="snow_mat3" materialId="48" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="7" customShaderVariation="CUSTOM_ALPHA_TEST">
+      <CustomParameter name="UVScaleSpeed" value="3.5 -2 0 0"/>
+      <CustomParameter name="vSpeedFrequencyAmplitudeFadescale" value="10 5 0.25 -0.15"/>
+      <CustomParameter name="alphaBlendStartEnd" value="75 80 -0.001 0.01"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    
+    <Material name="snow_mat4" materialId="49" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" alphaBlending="true" customShaderId="8" customShaderVariation="LEVELER">
+      <CustomParameter name="VertxoffsetVertexdeformMotionUVscale" value="-35.0 1.0 0.0 6.0"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    
+    <Material name="smoke_snow" materialId="50" diffuseColor="0.5 0.5 0.5 1" specularColor="0 0 0" ambientColor="1 1 1" alphaBlending="true" customShaderId="9">
+      <CustomParameter name="ColorAlpha" value="0.904 0.752 0.489 2"/>
+    </Material>
+    
+    <Material name="snow_mat_pipe" materialId="51" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="10">
+      <CustomParameter name="uvScaleSpeedFreqAmp" value="1.25 6 3 0"/>
+      <CustomParameter name="shapeScaleSpread" value="0.4 0.2 1 0"/>
+      <CustomParameter name="controlPoint" value="10 0 0 0"/>
+      <CustomParameter name="alphaRemap" value="0.25 1.0 0.0 0.0"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    
+    <Material name="snow_mat_belt" materialId="52" cosPower="2" specularColor="0 0 0" ambientColor="1 1 1" customShaderId="11" customShaderVariation="ALPHA_DISABLE">
+      <CustomParameter name="morphPosition" value="0.0 1.0 1.0 2.0"/>
+      <CustomParameter name="uvScale" value="2 2 1 1"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+    </Material>
+    
+  </Materials>
+  
+  
+    <Shapes externalShapesFile="snow_materialHolder.i3d.shapes">
+  </Shapes>
+  <Scene>
+    <TransformGroup name="snow" collision="false" clipDistance="10" nodeId="1">
+      <Shape name="snow_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="10" nodeId="2"/>
+      <Shape name="snow0_025_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="46" clipDistance="10" nodeId="4"/>
+      <Shape name="snow0_05_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="47" clipDistance="10" nodeId="5"/>
+      <Shape name="snow0_15_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="48" clipDistance="10" nodeId="6"/>
+      <Shape name="snow" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="49" clipDistance="10" nodeId="7"/>
+      <Shape name="snow_smoke_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="50" clipDistance="10" nodeId="8"/>
+      <Shape name="snow_pipe" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="51" clipDistance="10" nodeId="9"/>
+      <Shape name="snow_belt_materialHolder" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="52" clipDistance="10" nodeId="10"/>
+    </TransformGroup>
+  </Scene>
+  <UserAttributes>
+    <UserAttribute nodeId="2">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="FILLPLANE"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+    
+    
+    <UserAttribute nodeId="4">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="unloading"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+    <UserAttribute nodeId="5">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="unloading"/>
+      <Attribute name="materialId" type="string" value="2"/>
+    </UserAttribute>
+    <UserAttribute nodeId="6">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="unloading"/>
+      <Attribute name="materialId" type="string" value="3"/>
+    </UserAttribute>
+    <UserAttribute nodeId="7">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="LEVELER"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+    <UserAttribute nodeId="8">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="smoke"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+    <UserAttribute nodeId="9">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="PIPE"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+    <UserAttribute nodeId="10">
+      <Attribute name="onCreate" type="scriptCallback" value="MaterialUtil.onCreateMaterial"/>
+      <Attribute name="fillType" type="string" value="snow"/>
+      <Attribute name="materialType" type="string" value="belt"/>
+      <Attribute name="materialId" type="string" value="1"/>
+    </UserAttribute>
+  </UserAttributes>
+</i3D>
