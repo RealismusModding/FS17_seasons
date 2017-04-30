@@ -673,6 +673,7 @@ function ssSeasonsMenu:ingameOnAdminLoginSuccess(superFunc)
 end
 
 InGameMenu.onAdminLoginSuccess = Utils.overwrittenFunction(InGameMenu.onAdminLoginSuccess, ssSeasonsMenu.ingameOnAdminLoginSuccess)
+
 ------------------------------------------
 -- SETTINGS PAGE
 ------------------------------------------
