@@ -33,8 +33,8 @@ ssGrowthManager.additionalFruitsChecked = false
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
 
-    self.growthManagerEnabled = ssXMLUtil.getXMLBool(savegame, key .. ".settings.growthManagerEnabled", true)
-    
+    self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
+
     if savegame == nil then return end
 
     local i = 0
@@ -50,8 +50,8 @@ function ssGrowthManager:load(savegame, key)
 end
 
 function ssGrowthManager:save(savegame, key)
-    ssXMLUtil.setXMLBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
-    
+    ssXMLUtil.setBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
+
     local i = 0
     for fruitName in pairs(self.willGerminateData) do
         local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
@@ -77,7 +77,7 @@ function ssGrowthManager:loadMap(name)
         logInfo("ssGrowthManager:" , "required data not loaded. ssGrowthManager disabled")
         return
     end
-    
+
     self:buildCanPlantData(self.defaultFruitsData)
     self:buildCanHarvestData()
 
@@ -151,7 +151,7 @@ end
 
 function ssGrowthManager:update(dt)
     if self.additionalFruitsChecked == true or self.growthManagerEnabled == false then return end
-   
+
     self.additionalFruitsChecked = true
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
@@ -315,8 +315,8 @@ function ssGrowthManager:buildCanPlantData(fruitData)
                     break
                 end
 
-                if transition == g_seasons.environment.TRANSITION_EARLY_WINTER 
-                        or transition == g_seasons.environment.TRANSITION_MID_WINTER 
+                if transition == g_seasons.environment.TRANSITION_EARLY_WINTER
+                        or transition == g_seasons.environment.TRANSITION_MID_WINTER
                         or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
                     table.insert(transitionTable, transition , false)
                 else
@@ -356,7 +356,7 @@ function ssGrowthManager:buildCanHarvestData()
         local transitionTable = {}
         local plantedTransition = 1
         local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
-        
+
         for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
              if self.canPlantData[fruitName][plantedTransition] == true and fruitName ~= "poplar" and fruitName ~= "grass" then
                 local growthState = 1
@@ -370,13 +370,13 @@ function ssGrowthManager:buildCanHarvestData()
                     if growthState == fruitNumStates then
                         transitionTable[transitionToCheck] = true
                     end
-                    
+
                     transitionToCheck = transitionToCheck + 1
                     safetyCheck = safetyCheck + 1
                     if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
                     if safetyCheck > 15 then break end --so we don't end up in infinite loop if growth pattern is not correct
                 end
-                
+
             end
         end
         --fill in the gaps

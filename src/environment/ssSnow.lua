@@ -25,10 +25,10 @@ function ssSnow:preLoad()
 end
 
 function ssSnow:load(savegame, key)
-    self.appliedSnowDepth = ssXMLUtil.getXMLInt(savegame, key .. ".weather.appliedSnowDepth", 0) * self.LAYER_HEIGHT
-    self.updateSnow = ssXMLUtil.getXMLBool(savegame, key .. ".weather.updateSnow", false)
+    self.appliedSnowDepth = ssXMLUtil.getInt(savegame, key .. ".weather.appliedSnowDepth", 0) * self.LAYER_HEIGHT
+    self.updateSnow = ssXMLUtil.getBool(savegame, key .. ".weather.updateSnow", false)
 
-    local saveMode = ssXMLUtil.getXMLInt(savegame, key .. ".weather.snowMode", nil)
+    local saveMode = ssXMLUtil.getInt(savegame, key .. ".weather.snowMode", nil)
     if saveMode == nil then
         self.mode = ssSnow.MODE_ON
     else
@@ -41,9 +41,9 @@ function ssSnow:load(savegame, key)
 end
 
 function ssSnow:save(savegame, key)
-    ssXMLUtil.setXMLInt(savegame, key .. ".weather.appliedSnowDepth", self.appliedSnowDepth / self.LAYER_HEIGHT)
-    ssXMLUtil.setXMLBool(savegame, key .. ".weather.updateSnow", self.updateSnow)
-    ssXMLUtil.setXMLInt(savegame, key .. ".weather.snowMode", self.mode)
+    ssXMLUtil.setInt(savegame, key .. ".weather.appliedSnowDepth", self.appliedSnowDepth / self.LAYER_HEIGHT)
+    ssXMLUtil.setBool(savegame, key .. ".weather.updateSnow", self.updateSnow)
+    ssXMLUtil.setInt(savegame, key .. ".weather.snowMode", self.mode)
 end
 
 function ssSnow:loadMap(name)

@@ -34,11 +34,11 @@ function ssVehicle:preLoad()
 end
 
 function ssVehicle:load(savegame, key)
-    self.snowTracksEnabled = ssXMLUtil.getXMLBool(savegame, key .. ".settings.snowTracks", true)
+    self.snowTracksEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.snowTracks", true)
 end
 
 function ssVehicle:save(savegame, key)
-    ssXMLUtil.setXMLBool(savegame, key .. ".settings.snowTracks", self.snowTracksEnabled)
+    ssXMLUtil.setBool(savegame, key .. ".settings.snowTracks", self.snowTracksEnabled)
 end
 
 function ssVehicle:loadMap()

@@ -26,9 +26,9 @@ function ssRepairable:load(savegame)
     self.ssCumulativeDirt = 0
 
     if savegame ~= nil then
-        self.ssLastRepairDay = ssXMLUtil.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
-        self.ssLastRepairOperatingTime = ssXMLUtil.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssLastRepairOperatingTime)
-        self.ssCumulativeDirt = ssXMLUtil.getXMLFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
+        self.ssLastRepairDay = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
+        self.ssLastRepairOperatingTime = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssLastRepairOperatingTime)
+        self.ssCumulativeDirt = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
     end
 end
 

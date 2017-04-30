@@ -84,14 +84,14 @@ function ssWeatherForecast:loadMap(name)
 end
 
 function ssWeatherForecast:load(savegame, key)
-    self.hud.visible = ssXMLUtil.getXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
-    self.degreeFahrenheit = ssXMLUtil.getXMLBool(savegame, key .. ".weather.fahrenheit", false)
+    self.hud.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
+    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
 end
 
 function ssWeatherForecast:save(savegame, key)
     if g_currentMission:getIsServer() == true then
-        ssXMLUtil.setXMLBool(savegame, key .. ".settings.weatherForecastHudVisible", self.hud.visible)
-        ssXMLUtil.setXMLBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
+        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.hud.visible)
+        ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
     end
 end
 

@@ -11,11 +11,11 @@ ssSeasonIntro = {}
 g_seasons.seasonIntro = ssSeasonIntro
 
 function ssSeasonIntro:load(savegame, key)
-    self.hideSeasonIntro = ssXMLUtil.getXMLBool(savegame, key .. ".settings.hideSeasonIntro", false)
+    self.hideSeasonIntro = ssXMLUtil.getBool(savegame, key .. ".settings.hideSeasonIntro", false)
 end
 
 function ssSeasonIntro:save(savegame, key)
-    ssXMLUtil.setXMLBool(savegame, key .. ".settings.hideSeasonIntro", self.hideSeasonIntro)
+    ssXMLUtil.setBool(savegame, key .. ".settings.hideSeasonIntro", self.hideSeasonIntro)
 end
 
 function ssSeasonIntro:loadMap(name)

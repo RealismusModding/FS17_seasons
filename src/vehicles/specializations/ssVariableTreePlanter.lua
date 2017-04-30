@@ -21,7 +21,7 @@ function ssVariableTreePlanter:load(savegame)
     self.treePlanterMinDistance = 10
 
     if savegame ~= nil then
-        self.treePlanterMinDistance = ssXMLUtil.getXMLInt(savegame.xmlFile, savegame.key .. "#ssPlantingDistance", self.treePlanterMinDistance)
+        self.treePlanterMinDistance = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssPlantingDistance", self.treePlanterMinDistance)
     end
 end
 

@@ -57,20 +57,20 @@ function ssEnvironment:preLoad()
 end
 
 function ssEnvironment:load(savegame, key)
-    self.daysInSeason = Utils.clamp(ssXMLUtil.getXMLInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
-    self.latestSeason = ssXMLUtil.getXMLInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestTransition = ssXMLUtil.getXMLInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release
+    self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
+    self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", -1)
+    self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release
                                                                                                             --to not break existing test save games
-    self.currentDayOffset = ssXMLUtil.getXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
+    self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
     self._doInitalDayEvent = savegame == nil
 end
 
 function ssEnvironment:save(savegame, key)
-    ssXMLUtil.setXMLInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
-    ssXMLUtil.setXMLInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
-    ssXMLUtil.setXMLInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition) --TODO: fix this before release
-    ssXMLUtil.setXMLInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
+    ssXMLUtil.setInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
+    ssXMLUtil.setInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
+    ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition) --TODO: fix this before release
+    ssXMLUtil.setInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
 function ssEnvironment:loadMap(name)
