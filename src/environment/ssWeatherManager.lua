@@ -21,7 +21,7 @@ source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
 
 function ssWeatherManager:load(savegame, key)
     -- Load or set default values
-    self.snowDepth = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.snowDepth", 0.0)
+    self.snowDepth = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.snowDepth")
     self.soilTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.soilTemp")
     self.prevHighTemp = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getXMLFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
@@ -121,6 +121,9 @@ function ssWeatherManager:loadMap(name)
     self.rainData = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
 
+    -- Set snowDepth (can be more than 0 with custom weather)
+    self.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
+
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("weather")) do
         self:loadFromXML(path)
@@ -143,6 +146,7 @@ function ssWeatherManager:loadMap(name)
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
 
         self:overwriteRaintable()
+        self:setupStartValues()
     end
 end
 
@@ -189,6 +193,8 @@ function ssWeatherManager:readStream(streamId, connection)
     end
 
     self:overwriteRaintable()
+
+    self:setupStartValues()
 end
 
 function ssWeatherManager:writeStream(streamId, connection)
@@ -217,6 +223,18 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteInt16(streamId, rain.endDay)
         streamWriteString(streamId, rain.rainTypeId)
         streamWriteFloat32(streamId, rain.duration)
+    end
+end
+
+function ssWeatherManager:setupStartValues()
+    if g_currentMission:getIsClient() then
+        self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
+
+        log("g_seasons.isNewSavegame", g_seasons.isNewSavegame, "self.snowDepth", self.snowDepth)
+
+        if g_seasons.isNewSavegame and self.snowDepth > 0 then
+            g_seasons.snow:applySnow(self.snowDepth)
+        end
     end
 end
 
@@ -465,7 +483,7 @@ end
 function ssWeatherManager:updateSoilTemp()
     local avgAirTemp = (self.forecast[1].highTemp * 8 + self.forecast[1].lowTemp * 16) / 24
     local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
-    local soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
+    local soilTemp = self.soilTemp
     local snowDamp = 1
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
@@ -708,6 +726,7 @@ function ssWeatherManager:loadFromXML(path)
     self.startValues = {}
     self.startValues.soilTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.soilTemp", 4.9)
     self.startValues.highAirTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.highAirTemp", 5)
+    self.startValues.snowDepth = ssXMLUtil.getXMLFloat(file, "weather.startValues.snowDepth", 0)
 
     -- Load temperature data
     local i = 0

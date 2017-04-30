@@ -12,6 +12,7 @@
     <startValues>
         <soilTemp>4.9</soilTemp>
         <highAirTemp>5</highAirTemp>
+        <snowDepth>0</snowDepth>
     </startValues>
     <temperature>
         <p period="1">
