@@ -119,6 +119,7 @@ function ssWeatherManager:loadMap(name)
     -- Load data from the mod and from a map
     self.temperatureData = {}
     self.rainData = {}
+    self.startValues = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
 
     -- Set snowDepth (can be more than 0 with custom weather)
@@ -722,11 +723,10 @@ end
 function ssWeatherManager:loadFromXML(path)
     local file = loadXMLFile("weather", path)
 
-    -- Load start values
-    self.startValues = {}
-    self.startValues.soilTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.soilTemp", 4.9)
-    self.startValues.highAirTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.highAirTemp", 5)
-    self.startValues.snowDepth = ssXMLUtil.getXMLFloat(file, "weather.startValues.snowDepth", 0)
+    -- Load start values. This assumes at least 1 file has those values. (Seasons data)
+    self.startValues.soilTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.soilTemp", self.startValues.soilTemp)
+    self.startValues.highAirTemp = ssXMLUtil.getXMLFloat(file, "weather.startValues.highAirTemp", self.startValues.highAirTemp)
+    self.startValues.snowDepth = ssXMLUtil.getXMLFloat(file, "weather.startValues.snowDepth", self.startValues.snowDepth)
 
     -- Load temperature data
     local i = 0
