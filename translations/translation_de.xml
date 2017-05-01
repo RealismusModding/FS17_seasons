@@ -2,7 +2,6 @@
 <l10n>
     <translationContributors>tobiasgo, Oekobauer, ItZzShady, theSeb, WieSeLfLinK</translationContributors>
     <texts>
-	    <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Wettervorhersage anzeigen" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Fahrzeug Reparieren" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Menü öffnen" />
@@ -84,7 +83,6 @@
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend." />
 
-		 <!-- GUI -->
         <text name="ui_pageOverview" text="Übersicht" />
         <text name="ui_pageSettings" text="Einstellungen" />
         <text name="ui_pageDebug" text="Entwickler" />
@@ -117,7 +115,7 @@
         <text name="dialog_applySettings" text="Willst du wirklich die Jahreszeiten Einstellungen überschreiben? Änderungen an der Jahreszeitendauer und am Wachstum können erst nach einem Ingame Jahr geändert werden." />
 
         <text name="dialog_resetGrowth" text="Du hast einen bestehenden Speicherstand geladen. Wir empfehlen das Zurücksetzen aller Wachstumsstufen zur besseren Funktionalität. Solltest Du diesen Schritt nicht wünschen, lehne ihn ab. Wir weisen darauf hin, dass Seasons dann eventuell nicht korrekt funktioniert.  " />
-        <text name="dialog_resetGrowth_title" text="Neustart mit dem Jahreszeiten-Mod. Wachstum zurücksetzen?" />
+        <text name="dialog_resetGrowth_title" text="Neustart mit dem Seasons-Mod. Wachstum zurücksetzen?" />
         <text name="dialog_resetGrowth_no" text="Wachstum beibehalten" />
         <text name="dialog_resetGrowth_yes" text="Alle Wachstumsstufen zurücksetzen" />
 
