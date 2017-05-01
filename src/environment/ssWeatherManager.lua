@@ -122,13 +122,13 @@ function ssWeatherManager:loadMap(name)
     self.startValues = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
 
-    -- Set snowDepth (can be more than 0 with custom weather)
-    self.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
-
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("weather")) do
         self:loadFromXML(path)
     end
+
+    -- Set snowDepth (can be more than 0 with custom weather)
+    self.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
 
     -- Load germination temperatures
     self.germinateTemp = {}
@@ -194,7 +194,6 @@ function ssWeatherManager:readStream(streamId, connection)
     end
 
     self:overwriteRaintable()
-
     self:setupStartValues()
 end
 
@@ -230,7 +229,6 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
-        self.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
 
         if g_seasons.isNewSavegame and self.snowDepth > 0 then
             g_seasons.snow:applySnow(self.snowDepth)
