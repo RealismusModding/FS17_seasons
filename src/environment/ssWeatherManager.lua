@@ -230,8 +230,7 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
-
-        log("g_seasons.isNewSavegame", g_seasons.isNewSavegame, "self.snowDepth", self.snowDepth)
+        self.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
 
         if g_seasons.isNewSavegame and self.snowDepth > 0 then
             g_seasons.snow:applySnow(self.snowDepth)
