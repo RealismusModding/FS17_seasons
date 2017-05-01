@@ -10,6 +10,8 @@
 ssDensityMapScanner = {}
 g_seasons.dms = ssDensityMapScanner
 
+ssDensityMapScanner.TIMESPLIT = 25 -- ms
+
 function ssDensityMapScanner:load(savegame, key)
     if ssXMLUtil.hasProperty(savegame, key .. ".densityMapScanner.currentJob") then
         local job = {}
@@ -74,6 +76,8 @@ function ssDensityMapScanner:loadMap(name)
         if self.queue == nil then
             self.queue = ssQueue:new()
         end
+
+        self.timeCounter = 0
     end
 end
 
@@ -83,6 +87,7 @@ function ssDensityMapScanner:update(dt)
     if self.currentJob == nil then
         self.currentJob = self.queue:pop()
 
+        -- A new job has started
         if self.currentJob then
             self.currentJob.x = 0
             self.currentJob.z = 0
@@ -99,8 +104,17 @@ function ssDensityMapScanner:update(dt)
     end
 
     if self.currentJob ~= nil then
-        if not self:run(self.currentJob) then
-            self.currentJob = nil
+        self.timeCounter = self.timeCounter + dt
+
+        -- Use a timer to spread updates: only on SP, as it would only lag on MP
+        -- due to density map synchronization
+        if g_dedicatedServerInfo ~= nil or self.timeCounter >= ssDensityMapScanner.TIMESPLIT then
+            if not self:run(self.currentJob) then
+                self.currentJob = nil
+            end
+
+            -- Reset timer
+            self.timeCounter = 0
         end
     end
 end
