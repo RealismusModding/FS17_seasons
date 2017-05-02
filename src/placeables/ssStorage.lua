@@ -22,13 +22,15 @@ end
 
 function ssStorage:load(superFunc)
     local ret = superFunc(self)
-    
-    local difficultyFac = 1 - ( g_currentMission.missionInfo.difficulty - 2 ) * 0.1
-    self.costsPerFillLevelAndDay = 0.01 / g_seasons.environment.daysInSeason * difficultyFac
-    
+    self:calculateCosts()
     return ret
 end
 
 function ssStorage:storageSeasonLengthChanged()
-    --TODO: implement
+    self:calculateCosts()
+end
+
+function ssStorage:calculateCosts()
+    local difficultyFac = 1 - ( g_currentMission.missionInfo.difficulty - 2 ) * 0.1
+    self.costsPerFillLevelAndDay = 0.01 / g_seasons.environment.daysInSeason * difficultyFac
 end
