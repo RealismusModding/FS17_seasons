@@ -59,7 +59,7 @@ function ssCatchingUp:update(dt)
             if self.dialog ~= nil then
                 self.dialog.target:setDialogType(DialogElement.TYPE_LOADING)
                 self.dialog.target:setIsCloseAllowed(false)
-                self.dialog.target:setText("The game is catching up to your time travelling" .. tostring(g_seasons.dms.queue.size))
+                self.dialog.target:setText(ssLang.getText("dialog_timeTravel"))
             end
         end
     else
@@ -104,7 +104,7 @@ function ssCatchingUp:foldSnowJobs()
                 first.layers = first.layers - layers
             end
 
-            g_seasons.dms.queue:remove(job)
+            g_seasons.dms.queue:remove(job, true)
         end
     end)
 
@@ -138,7 +138,7 @@ function ssCatchingUp:foldReduceJob(name)
             -- Remove all others
             first.layers = first.layers + tonumber(job.parameter)
 
-            g_seasons.dms.queue:remove(job)
+            g_seasons.dms.queue:remove(job, true)
         end
     end)
 

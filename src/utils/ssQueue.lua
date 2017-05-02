@@ -64,7 +64,7 @@ function ssQueue:pop()
     return value
 end
 
-function ssQueue:remove(value)
+function ssQueue:remove(value, mutateIterating)
     if value._next then
         if value._prev then
             value._next._prev = value._prev
@@ -81,8 +81,14 @@ function ssQueue:remove(value)
         self.last = nil
     end
 
-    -- value._next = nil
-    -- value._prev = nil
+    -- Normally, this should be emptied
+    -- However, the only place it is currently used is inside a loop
+    -- of the iteratePushOrder. One can't mutate the list you iterate
+    -- over, unless this is commented out
+    if mutateIterating ~= true then
+        value._next = nil
+        value._prev = nil
+    end
 
     self.size = self.size - 1
 end

@@ -123,6 +123,7 @@
         <text name="dialog_resetGrowth_title" text="Growth reset" />
         <text name="dialog_resetGrowth_no" text="Keep growth" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
+        <text name="dialog_timeTravel" text="The game is catching up to your time travelling" />
 
         <text name="fillType_snow" text="Snow" />
     </texts>
