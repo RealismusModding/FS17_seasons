@@ -30,12 +30,16 @@ function ssCatchingUp:update(dt)
     if self.didFfwd and g_currentMission.missionInfo.timeScale <= ssCatchingUp.FFWD then
         -- Did ffwd and stopped doing so
         -- if size too much, then show warning
-        if g_seasons.dms.queue.size > ssCatchingUp.LIMIT then
+        if g_seasons.dms.queue.size > ssCatchingUp.LIMIT and self.showWarning ~= true then
+            local oldSize = g_seasons.dms.queue.size
+
             self.showWarning = true
 
             self:foldJobs()
-        else
-            -- Already below limit, reset the catchUp
+
+            logInfo("[ssCatchingUp] Game was fast forwarded: number of jobs is reduced from", oldSize, "to", g_seasons.dms.queue.size)
+        elseif g_seasons.dms.queue.size == 0 then
+            -- Only stop when queue is empty for best effect
             self.showWarning = false
             self.didFfwd = false
         end
@@ -55,7 +59,7 @@ function ssCatchingUp:update(dt)
             if self.dialog ~= nil then
                 self.dialog.target:setDialogType(DialogElement.TYPE_LOADING)
                 self.dialog.target:setIsCloseAllowed(false)
-                self.dialog.target:setText("The game is catching up " .. tostring(g_seasons.dms.queue.size))
+                self.dialog.target:setText("The game is catching up to your time travelling" .. tostring(g_seasons.dms.queue.size))
             end
         end
     else
@@ -76,31 +80,69 @@ function ssCatchingUp:foldJobs()
 end
 
 function ssCatchingUp:foldSnowJobs()
+    local first = nil
+
     -- Go over all jobs
+    g_seasons.dms.queue:iteratePushOrder(function (job)
+        if job.callbackId ~= "ssSnowAddSnow" and job.callbackId ~= "ssSnowRemoveSnow" then return end
 
-    -- If job has name with snow
-        -- if first == nil
-            -- first = job
-            -- first.layers = tonumber(job.param)
-            -- if name == remove then first.layers = -first.layers
-        -- else
-            -- layers = tonumber(job.param)
-            -- if name == add then first.layers = first.layers + layers
-            -- if name == remove then first.layers = first.layers - layers
-            -- remove(job)
+        -- Store first, we will update this one
+        if first == nil then
+            first = job
+            first.layers = tonumber(job.parameter)
 
-    -- if first.layers < 0 then first.name = remove else first.name = add
+            if first.callbackId == "ssSnowRemoveSnow" then
+                first.layers = -first.layers
+            end
+        else
+            -- Remove all others
+            local layers = tonumber(job.parameter)
+
+            if job.callbackId == "ssSnowAddSnow" then
+                first.layers = first.layers + layers
+            elseif job.callbackId == "ssSnowRemoveSnow" then
+                first.layers = first.layers - layers
+            end
+
+            g_seasons.dms.queue:remove(job)
+        end
+    end)
+
+    -- Update first
+    if first ~= nil then
+        first.parameter = tostring(first.layers)
+
+        if first.layers == 0 then
+            g_seasons.dms.queue:remove(first)
+        elseif first.layers < 0 then
+            first.callbackId = "ssSnowRemoveSnow"
+        else
+            first.callbackId = "ssSnowAddSnow"
+        end
+    end
 end
 
 function ssCatchingUp:foldReduceJob(name)
-    -- Go over all jobs
+    local first = nil
 
-    -- If job has name = name
-        -- if first == nil
-            -- first = job
-            -- first.layers = tonumber(job.param)
-        -- else
-            -- first.layers = first.layers + tonumber(job.param)
-            -- remove(job)
-    -- end
+    -- Go over all jobs
+    g_seasons.dms.queue:iteratePushOrder(function (job)
+        -- Only target correct jobs
+        if job.callbackId ~= name then return end
+
+        -- Store first, we will update this one
+        if first == nil then
+            first = job
+            first.layers = tonumber(job.parameter)
+        else
+            -- Remove all others
+            first.layers = first.layers + tonumber(job.parameter)
+
+            g_seasons.dms.queue:remove(job)
+        end
+    end)
+
+    if first ~= nil then
+        first.parameter = tostring(first.layers)
+    end
 end
