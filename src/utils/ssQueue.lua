@@ -22,6 +22,7 @@ function ssQueue:new()
     self.first = 0
     self.last = -1
     self.items = {}
+    self.size = 0
 
     return self
 end
@@ -32,6 +33,7 @@ function ssQueue:push(value) -- right
 
     self.last = last
     self.items[last] = value
+    self.size = self.size + 1
 end
 
 -- Get an item at the 'first' position (FIFO)
@@ -47,6 +49,7 @@ function ssQueue:pop() -- left
     self.items[first] = nil
 
     self.first = first + 1
+    self.size = self.size - 1
 
     return value
 end
