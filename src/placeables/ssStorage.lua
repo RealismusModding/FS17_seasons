@@ -18,6 +18,7 @@ function ssStorage:preLoad()
 end
 
 function ssStorage:loadMap()
+    g_seasons.environment:addSeasonLengthChangeListener(self)
 end
 
 function ssStorage:load(superFunc)
