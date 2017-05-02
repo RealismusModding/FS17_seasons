@@ -115,7 +115,8 @@ local files = {
 
     -- GUI
     "gui/ssHelpLines",
-    "gui/ssSeasonsMenu"
+    "gui/ssSeasonsMenu",
+    "gui/ssCatchingUp"
 }
 
 local isDebug = false--<%=debug %>

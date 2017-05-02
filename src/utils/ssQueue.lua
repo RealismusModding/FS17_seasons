@@ -7,7 +7,12 @@
 -- A fast implementation of queue(actually double queue) in Lua is done by the book Programming in Lua:
 -- http://www.lua.org/pil/11.4.html
 -- Reworked by MrBear
+--
 -- Complete rewrite by Rahkiin
+--
+-- Reworked again by using a full doubly linked list, to be able to remove in the middle.
+-- Only supports objects. https://gist.github.com/BlackBulletIV/4084042
+--
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -19,40 +24,77 @@ function ssQueue:new()
     local self = {}
     setmetatable(self, ssQueue_mt)
 
-    self.first = 0
-    self.last = -1
-    self.items = {}
+    self.size = 0
 
     return self
 end
 
--- Add an item after the 'last' position
-function ssQueue:push(value) -- right
-    local last = self.last + 1
-
-    self.last = last
-    self.items[last] = value
-end
-
--- Get an item at the 'first' position (FIFO)
-function ssQueue:pop() -- left
-    local first = self.first
-
-    -- Check for empty queue
-    if self:isEmpty() then
-        return nil
+-- Add an item to the end of the list
+function ssQueue:push(value)
+    if self.last then
+        value._prev = self.last
+        self.last._next = value
+        self.last = value
+    else
+        -- First node
+        self.first = value
+        self.last = value
     end
 
-    local value = self.items[first]
-    self.items[first] = nil
+    self.size = self.size + 1
+end
 
-    self.first = first + 1
+-- Remove an item from the beginning of the list
+function ssQueue:pop()
+    if not self.first then return end
+
+    local value = self.first
+
+    if value._next then
+        value._next._prev = nil
+        self.first = value._next
+        value._next = nil
+    else
+        self.first = nil
+        self.last = nil
+    end
+
+    self.size = self.size - 1
 
     return value
 end
 
+function ssQueue:remove(value, mutateIterating)
+    if value._next then
+        if value._prev then
+            value._next._prev = value._prev
+            value._prev._next = value._next
+        else
+            value._next._prev = nil
+            self.first = value._next
+        end
+    elseif value._prev then
+        value._prev._next = nil
+        self._last = value._prev
+    else
+        self.first = nil
+        self.last = nil
+    end
+
+    -- Normally, this should be emptied
+    -- However, the only place it is currently used is inside a loop
+    -- of the iteratePushOrder. One can't mutate the list you iterate
+    -- over, unless this is commented out
+    if mutateIterating ~= true then
+        value._next = nil
+        value._prev = nil
+    end
+
+    self.size = self.size - 1
+end
+
 function ssQueue:isEmpty()
-    return self.first > self.last
+    return self.first == nil
 end
 
 -- Iterate over all items in the order they
@@ -60,14 +102,12 @@ end
 -- This is from first to last.
 function ssQueue:iteratePushOrder(func)
     local i = 1
+    local item = self.first
 
-    for p = self.first, self.last, 1 do
-        item = self.items[p]
+    while item ~= nil do
+        func(item, i)
 
-        if item ~= nil then
-            func(item, i)
-
-            i = i + 1
-        end
+        i = i + 1
+        item = item._next
     end
 end
