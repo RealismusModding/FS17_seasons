@@ -118,8 +118,7 @@
         <text name="dialog_resetGrowth_title" text="Сброс состояния роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
         <text name="dialog_resetGrowth_yes" text="Сбросить" />
-        <!-- Missing translation of "The game is catching up to your time travelling" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Игра догоняет ваше путешествие во времени" />
 
         <text name="fillType_snow" text="Снег" />
     </texts>
