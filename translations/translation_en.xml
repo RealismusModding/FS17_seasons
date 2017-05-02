@@ -5,11 +5,11 @@
     </translationContributors>
 
     <texts>
-        <!-- Control actions -->
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -123,7 +123,7 @@
         <text name="dialog_resetGrowth_title" text="Growth reset" />
         <text name="dialog_resetGrowth_no" text="Keep growth" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
-        <text name="dialog_timeTravel" text="The game is catching up to your time travelling" />
+        <text name="dialog_timeTravel" text="The game is synchronizing after the fast-forward" />
 
         <text name="fillType_snow" text="Snow" />
     </texts>
