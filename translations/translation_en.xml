@@ -2,6 +2,7 @@
 <l10n>
     <translationContributors>
         Rahkiin
+        theSeb
     </translationContributors>
 
     <texts>
@@ -109,13 +110,13 @@
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops are wet of moisture" />
 
-        <text name="setting_seasonIntros" text="Season introductions" />
-        <text name="setting_seasonLength" text="Season length" />
-        <text name="setting_snow" text="Snow mode" />
+        <text name="setting_seasonIntros" text="Season Introductions" />
+        <text name="setting_seasonLength" text="Season Length" />
+        <text name="setting_snow" text="Snow Mode" />
         <text name="setting_controlsHelp" text="Keys in help menu" />
-        <text name="setting_snowTracks" text="Snow tracks" />
-        <text name="setting_controlsTemperature" text="Temperature scale" />
-        <text name="setting_moisture" text="Crop moisture" />
+        <text name="setting_snowTracks" text="Snow Tracks" />
+        <text name="setting_controlsTemperature" text="Temperature Scale" />
+        <text name="setting_moisture" text="Crop Moisture" />
 
         <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
 
