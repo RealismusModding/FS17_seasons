@@ -199,11 +199,14 @@ function ssBaleManager:baleWrapperDoStateChange(superFunc, id, nearestBaleServer
 
     if self.isServer then
         if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
-           if self.lastDroppedBale.fillType == FillUtil.FILLTYPE_SILAGE and self.lastDroppedBale.wrappingState >= 1 then
+            local bale = self.lastDroppedBale
+
+           if bale.fillType == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
                 --initiate fermenting process
-                self.lastDroppedBale.fillType = Utils.getNoNil(self.ssSilageSource, FillUtil.FILLTYPE_GRASS_WINDROW)
-                self.lastDroppedBale.fermentingProcess = 0
-                ssBaleFermentEvent:sendEvent(self.lastDroppedBale)
+                bale.fillType = Utils.getNoNil(bale.ssSilageSource, FillUtil.FILLTYPE_GRASS_WINDROW)
+                bale.fermentingProcess = 0
+
+                ssBaleFermentEvent:sendEvent(bale)
             end
         end
     end
