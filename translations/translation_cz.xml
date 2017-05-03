@@ -6,8 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Oprava vozidla" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otevřít menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin" />
-        <!-- Missing translation of "Skip night" -->
-        <text name="input_SEASONS_SKIP_NIGHT" text="" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Přeskočit noc" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Skrýt předpověď počasí" />
 
         <text name="SS_WEEKDAY_1" text="Pondělí" />
@@ -120,8 +119,7 @@
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání vpřed" />
 
         <text name="fillType_snow" text="Sníh" />
     </texts>
