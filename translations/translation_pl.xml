@@ -74,8 +74,8 @@
 
         <text name="SS_SEASON_INTRO_0" text="Rozpoczęła się wiosna, kwitną kwiaty i drzewa, a twoje pola są gotowe do uprawy i zasiewów." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="Dni są długie i ciepłe. To odpowiedni czas, aby robić siano i obserwować wzrost zbóż." />
-        <text name="SS_SEASON_INTRO_2" text="Liście żółkną, robi się chłodniej: nadeszła jesień. Twoje pola są gotowe do zbiorów." />
-        <text name="SS_SEASON_INTRO_3" text="Nastała zima, ziemia jest zamarznięta, nie można pracować na polach. To czas odpoczynku i doglądania zwierząt." /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_2" text="Liście żółkną i robi się chłodniej - nadeszła jesień. Twoje pola są gotowe do zbiorów." />
+        <text name="SS_SEASON_INTRO_3" text="Nastała zima. Ziemia jest zamarznięta i nie można pracować na polach. To czas odpoczynku i doglądania zwierząt." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
 
