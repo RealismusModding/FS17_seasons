@@ -6,8 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distanza piantatrice (%d m)" />
-        <!-- Missing translation of "Skip night" -->
-        <text name="input_SEASONS_SKIP_NIGHT" text="" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Salta la notte" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Nascondi previsioni del tempo" />
 
         <text name="SS_WEEKDAY_1" text="Lunedì" />
