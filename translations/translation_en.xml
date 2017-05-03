@@ -101,11 +101,11 @@
         <text name="ui_plantingSeason" text="Planting season" />
         <text name="ui_harvestSeason" text="Harvest season" />
 
-        <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons." />
-        <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season." />
-        <text name="tooltip_snow" text="Snow will fall in cold winters and block roads." />
-        <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu." />
-        <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it." />
+        <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons" />
+        <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season" />
+        <text name="tooltip_snow" text="Snow will fall in cold winters and block roads" />
+        <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu" />
+        <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops are wet of moisture" />
 
