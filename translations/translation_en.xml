@@ -75,10 +75,10 @@
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Spring has begun, flowers and trees blossom, and your fields are ready to be cultivated and sown." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_0" text="Spring has begun, flowers and trees blossom and your fields are ready to be cultivated and sown." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="The days are long and warm. It is time to make hay and watch the crops grow." />
-        <text name="SS_SEASON_INTRO_2" text="Leafs are getting brown, it is getting colder: autumn is has arrived. Your fields are ready to harvest." />
-        <text name="SS_SEASON_INTRO_3" text="Winter has fallen, the ground is frozen, you cannot work your fields. It is time to rest and tend to your animals." /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_2" text="Leaves are getting brown and it is getting colder - autumn has arrived. Your fields are ready to harvest." />
+        <text name="SS_SEASON_INTRO_3" text="Winter has fallen. The ground is frozen and you cannot work your fields. It is time to rest and tend to your animals." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
