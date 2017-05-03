@@ -120,8 +120,7 @@
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Il gioco si sta sincronizzando dopo l'avanzamento veloce" />
 
         <text name="fillType_snow" text="Neve" />
     </texts>
