@@ -32,6 +32,7 @@
         <input name="SEASONS_SHOW_WF" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse=""/>
         <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse=""/>
         <input name="SEASONS_SHOW_MENU" category="ONFOOT VEHICLE" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse=""/>
+        <input name="SEASONS_SKIP_NIGHT" category="ONFOOT" key1="KEY_lalt KEY_n" key2="" button="" device="" mouse=""/>
     </inputBindings>
 
     <storeItems>

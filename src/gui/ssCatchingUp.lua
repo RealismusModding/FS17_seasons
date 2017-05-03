@@ -13,7 +13,7 @@ ssCatchingUp = {}
 g_seasons.catchingUp = ssCatchingUp
 
 ssCatchingUp.LIMIT = 3
-ssCatchingUp.FFWD = 120
+ssCatchingUp.FFWD = 300
 
 function ssCatchingUp:loadMap()
     self.showWarning = false
@@ -33,12 +33,15 @@ function ssCatchingUp:update(dt)
         if g_seasons.dms.queue.size > ssCatchingUp.LIMIT and self.showWarning ~= true then
             local oldSize = g_seasons.dms.queue.size
 
-            self.showWarning = true
-
             self:foldJobs()
 
             logInfo("[ssCatchingUp] Game was fast forwarded: number of jobs is reduced from", oldSize, "to", g_seasons.dms.queue.size)
-        elseif g_seasons.dms.queue.size == 0 then
+
+            -- If after reduction the number of items is still more than the limit, show a warning
+            if g_seasons.dms.queue.size > ssCatchingUp.LIMIT then
+                self.showWarning = true
+            end
+        elseif g_seasons.dms.queue.size <= ssCatchingUp.LIMIT then
             -- Only stop when queue is empty for best effect
             self.showWarning = false
             self.didFfwd = false

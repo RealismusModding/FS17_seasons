@@ -6,6 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Расстояние посадки (%d м)" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Пропустить ночь" />
         <text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды" />
 
         <text name="SS_WEEKDAY_1" text="Понедельник" />

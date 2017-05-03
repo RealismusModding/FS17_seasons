@@ -6,6 +6,8 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Afficher le menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distance de Plantation (%d m)" />
+        <!-- Missing translation of "Skip night" -->
+        <text name="input_SEASONS_SKIP_NIGHT" text="" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Cacher les prévisions" />
 
         <text name="SS_WEEKDAY_1" text="Lundi" />
@@ -118,7 +120,7 @@
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance" />
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="réinitialisation" />
-        <!-- Missing translation of "The game is catching up to your time travelling" -->
+        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
         <text name="dialog_timeTravel" text="" />
 
         <text name="fillType_snow" text="Neige" />

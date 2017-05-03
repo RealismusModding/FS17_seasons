@@ -102,6 +102,7 @@ local files = {
     "misc/ssSwathManager",
     "misc/ssBaleManager",
     "misc/ssAnimals",
+    "misc/ssSkipNight",
 
     -- Adjusted objects
     "objects/ssBunkerSilo",
