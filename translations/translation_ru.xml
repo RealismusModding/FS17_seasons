@@ -97,12 +97,12 @@
         <text name="ui_plantingSeason" text="Время посадки" />
         <text name="ui_harvestSeason" text="Время уборки" />
 
-        <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов." />
-        <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
-        <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
-        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш для прогноза погоды (Alt+F) и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
-        <text name="tooltip_snowTracks" text="Транспортные средства при движении уплотняют снег." />
-        <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре." />
+        <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Год состоит из четырёх сезонов" />
+        <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона" />
+        <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги" />
+        <text name="tooltip_controlsHelp" text="Показать сочетание клавиш для прогноза погоды (Alt+F) и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места" />
+        <text name="tooltip_snowTracks" text="Транспортные средства при движении уплотняют снег" />
+        <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре" />
         <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
 
         <text name="setting_seasonIntros" text="Напоминание о сезонах" />

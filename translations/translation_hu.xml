@@ -100,11 +100,11 @@
         <!-- Missing translation of "Harvest season" -->
         <text name="ui_harvestSeason" text="" />
 
-        <text name="tooltip_seasonLength" text="Egy szezon hossza napokban. 1 év négy szezonból áll." />
-        <text name="tooltip_seasonIntros" text="Mutasd be az évszakokat a szezon kezdetén." />
-        <text name="tooltip_snow" text="Télen esni fog a hó és útakadályokat fog emelni." />
-        <text name="tooltip_controlsHelp" text="Mutasd az elõrejelzést és a menügombot a help menüben." />
-        <text name="tooltip_snowTracks" text="A gépek letapossák a havat." />
+        <text name="tooltip_seasonLength" text="Egy szezon hossza napokban. 1 év négy szezonból áll" />
+        <text name="tooltip_seasonIntros" text="Mutasd be az évszakokat a szezon kezdetén" />
+        <text name="tooltip_snow" text="Télen esni fog a hó és útakadályokat fog emelni" />
+        <text name="tooltip_controlsHelp" text="Mutasd az elõrejelzést és a menügombot a help menüben" />
+        <text name="tooltip_snowTracks" text="A gépek letapossák a havat" />
         <text name="tooltip_controlsTemperature" text="Beállítja a hõmérséklet skálát a játékban" />
         <text name="tooltip_moisture" text="Aratás tiltása ha túl nedves a növény" />
 
