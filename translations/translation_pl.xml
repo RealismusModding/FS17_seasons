@@ -6,8 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Napraw pojazd" />
         <text name="input_SEASONS_SHOW_MENU" text="Sezony: Otwórz menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Odległość sadzenia (%d m)" />
-        <!-- Missing translation of "Skip night" -->
-        <text name="input_SEASONS_SKIP_NIGHT" text="" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Pomiń noc" />
         <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody" />
 
         <text name="SS_WEEKDAY_1" text="Poniedziałek" />
@@ -120,8 +119,7 @@
         <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Gra jest synchronizowana po przewinięciu czasu" />
 
         <text name="fillType_snow" text="Śnieg" />
     </texts>
