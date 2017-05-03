@@ -113,7 +113,7 @@ function ssCatchingUp:foldSnowJobs()
 
     -- Update first
     if first ~= nil then
-        first.parameter = tostring(first.layers)
+        first.parameter = tostring(math.abs(first.layers))
 
         if first.layers == 0 then
             g_seasons.dms.queue:remove(first)
