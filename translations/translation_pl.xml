@@ -72,10 +72,10 @@
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Nowy rok, nowy okres zasiewów." />
-        <text name="SS_SEASON_INTRO_1" text="Słońce jest wysoko, zboża rosną." />
-        <text name="SS_SEASON_INTRO_2" text="Nadszedł czas żniw. Przygotuj się do zimy, ponieważ zboża mogą jej nie przetrwać." />
-        <text name="SS_SEASON_INTRO_3" text="Jest zimno. Gleba jest zmarznięta. Zboża nie urosną, a uprawy mogą zostać zniszczone." />
+        <text name="SS_SEASON_INTRO_0" text="Rozpoczęła się wiosna, kwitną kwiaty i drzewa. To czas uprawy i zasiewu twoich pól." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="W lecie dni są długie i ciepłe. To odpowiedni czas, aby robić siano i obserwować wzrost zbóż." />
+        <text name="SS_SEASON_INTRO_2" text="Liście żółkną i robi się chłodniej - nadeszła jesień. Zbierz swoje zboża przed nadejściem zimy." />
+        <text name="SS_SEASON_INTRO_3" text="Nastała zima i zwierzęta potrzebują większej uwagi. Ziemia będzie zamarznięta i nie można pracować na polach. To czas pracy w lesie i odśnieżania." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
 
