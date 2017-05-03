@@ -7,7 +7,7 @@
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Расстояние посадки (%d м)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Пропустить ночь" />
-        <text name="SEASONS_HIDE_WF" text="Скрыть прогноз погоды" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Скрыть прогноз погоды" />
 
         <text name="SS_WEEKDAY_1" text="Понедельник" />
         <text name="SS_WEEKDAY_2" text="Вторник" />
@@ -70,7 +70,7 @@
         <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
 
-        <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seaons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
+        <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seasons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
 
         <text name="SS_SEASON_INTRO_0" text="Наступил новый год, новый посевной сезон. Готовим технику к работе." />
         <text name="SS_SEASON_INTRO_1" text="Солнце уже высоко, урожай растёт. Можно уделить больше внимания животным." />
@@ -101,7 +101,7 @@
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона." />
         <text name="tooltip_snow" text="Снег будет падать холодной зимой и перекрывать дороги." />
         <text name="tooltip_controlsHelp" text="Показать сочетание клавиш для прогноза погоды (Alt+F) и вызова этого меню (Alt+S) в меню справки. Выключите, если вам не хватает места." />
-        <text name="tooltip_snowTracks" text="Транспортные средства спресовуют снег при движении по нему." />
+        <text name="tooltip_snowTracks" text="Транспортные средства при движении уплотняют снег." />
         <text name="tooltip_controlsTemperature" text="Изменяется единица измерения температуры, используемая в игре." />
         <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
 
@@ -119,7 +119,7 @@
         <text name="dialog_resetGrowth_title" text="Сброс состояния роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
         <text name="dialog_resetGrowth_yes" text="Сбросить" />
-        <text name="dialog_timeTravel" text="Игра догоняет ваше путешествие во времени" />
+        <text name="dialog_timeTravel" text="После перемотки времени происходит синхронизация игровых процессов " />
 
         <text name="fillType_snow" text="Снег" />
     </texts>
