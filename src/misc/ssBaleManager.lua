@@ -15,10 +15,10 @@ source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 function ssBaleManager:preLoad()
     Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
     Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.baleGetSaveAttributesAndNodes)
-    Bale.updateTick = Utils.overwrittenFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
-    BaleWrapper.doStateChange = Utils.overwrittenFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
-    Bale.readStream = Utils.overwrittenFunction(Bale.readStream, ssBaleManager.baleReadStream)
-    Bale.writeStream = Utils.overwrittenFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
+    Bale.updateTick = Utils.appendedFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
+    BaleWrapper.doStateChange = Utils.appendedFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
+    Bale.readStream = Utils.appendedFunction(Bale.readStream, ssBaleManager.baleReadStream)
+    Bale.writeStream = Utils.appendedFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
 end
 
 function ssBaleManager:loadMap(name)
@@ -194,8 +194,7 @@ end
 --------------------------------------------------------
 
 -- from fatov - balewrapper determines what bales to ferment
-function ssBaleManager:baleWrapperDoStateChange(superFunc, id, nearestBaleServerId)
-    superFunc(self, id, nearestBaleServerId)
+function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
 
     if self.isServer then
         if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
@@ -213,9 +212,7 @@ function ssBaleManager:baleWrapperDoStateChange(superFunc, id, nearestBaleServer
 end
 
 -- from fatov - ferment bales
-function ssBaleManager:baleUpdateTick(superFunc, dt)
-    superFunc(self, dt)
-
+function ssBaleManager:baleUpdateTick(dt)
     if self.isServer then
         if self.fermentingProcess ~= nil then
             self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
@@ -258,17 +255,13 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
     return attributes, nodes
 end
 
-function ssBaleManager:baleWriteStream(superFunc, streamId, connection)
-    superFunc(self, streamId, connection)
-
+function ssBaleManager:baleWriteStream(streamId, connection)
     local isFermenting = self.fermentingProcess ~= nil
 
     streamWriteBool(streamId, isFermenting)
 end
 
-function ssBaleManager:baleReadStream(superFunc, streamId, connection)
-    superFunc(self, streamId, connection)
-
+function ssBaleManager:baleReadStream(streamId, connection)
     if streamReadBool(streamId, connection) then
         self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
     end
