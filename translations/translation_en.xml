@@ -3,6 +3,7 @@
     <translationContributors>
         Rahkiin
         theSeb
+        reallogger
     </translationContributors>
 
     <texts>
@@ -76,8 +77,8 @@
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Spring has begun, flowers and trees blossom and your fields are ready to be cultivated and sown." /> <!-- spring -->
-        <text name="SS_SEASON_INTRO_1" text="The days are long and warm. It is time to make hay and watch the crops grow." />
+        <text name="SS_SEASON_INTRO_0" text="Spring is here; flowers and trees blossom. It is time to cultivate and sow your fields." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="The days are long and warm in summer. It is time to make hay and watch the crops grow." />
         <text name="SS_SEASON_INTRO_2" text="Leaves are getting brown and it is getting colder - autumn has arrived. Make sure to harvest crops before the winter comes." />
         <text name="SS_SEASON_INTRO_3" text="Winter has fallen. The ground is frozen and you cannot work your fields. It is time for forestry and tending to your animals." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
