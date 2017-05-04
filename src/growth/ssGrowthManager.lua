@@ -48,7 +48,6 @@ function ssGrowthManager:load(savegame, key)
 
         i = i + 1
     end
-
 end
 
 function ssGrowthManager:save(savegame, key)
