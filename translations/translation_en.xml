@@ -224,6 +224,6 @@
         <text name="ss_helpText_19_01" text="If you do not wish to work during the night, you have the option to skip to the morning. After the night falls and you are on foot you can press Left Alt + N to skip to the morning." />
         <text name="ss_helpText_19_02" text="If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." />
         <text name="ss_helpText_19_03" text="While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." />
-        <text name="ss_helpText_19_04" text="While Seasons is enabled on a savegame all vehicles will be required to be started manually." />
+        <text name="ss_helpText_19_04" text="All vehicles need to be started manually." />
     </texts>
 </l10n>
