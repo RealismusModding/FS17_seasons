@@ -246,7 +246,7 @@ end
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
     local useMaxState = false
     local minState = self.growthData[transition][fruitName].normalGrowthState
-    if minState == 1 and self.previousWillGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
+    if minState == 1 and self.willGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
         return
     end
 
