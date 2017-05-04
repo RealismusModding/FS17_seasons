@@ -202,7 +202,7 @@ function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
 
            if bale.fillType == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
                 --initiate fermenting process
-                bale.fillType = Utils.getNoNil(bale.ssSilageSource, FillUtil.FILLTYPE_GRASS_WINDROW)
+                bale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
                 bale.fermentingProcess = 0
 
                 ssBaleFermentEvent:sendEvent(bale)
