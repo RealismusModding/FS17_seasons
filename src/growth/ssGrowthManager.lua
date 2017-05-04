@@ -48,6 +48,8 @@ function ssGrowthManager:load(savegame, key)
 
         i = i + 1
     end
+    
+    self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
 end
 
 function ssGrowthManager:save(savegame, key)
