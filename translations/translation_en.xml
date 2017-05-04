@@ -161,7 +161,7 @@
         <text name="ss_helpText_06_02" text="The default growth patterns of crops have been replaced with the Seasons Mod. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." />
 
         <text name="ss_helpTitle_07" text="Crops - Intro (2)" />
-        <text name="ss_helpText_07_01" text="Crops are only harvestable in their final growth stage, except for poplar, oilseed radish, potatoes and sugar beets and will stay in this final stage until they are killed off in the winter." />
+        <text name="ss_helpText_07_01" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." />
         <text name="ss_helpText_07_02" text="Silage from whole-crop or corn can still be harvested in its final green state." />
 
         <text name="ss_helpTitle_08" text="Crops - Arable Crops" />
