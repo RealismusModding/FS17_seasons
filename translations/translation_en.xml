@@ -185,7 +185,7 @@
 
         <text name="ss_helpTitle_12" text="Maintenance" />
         <text name="ss_helpText_12_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
-        <text name="ss_helpText_12_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle either the garage or a placeable garage and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." />
+        <text name="ss_helpText_12_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." />
         <text name="ss_helpText_12_03" text="The age of your vehicle is the days since your last repair." />
         <text name="ss_helpText_12_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
 
