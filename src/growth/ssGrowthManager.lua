@@ -48,7 +48,7 @@ function ssGrowthManager:load(savegame, key)
 
         i = i + 1
     end
-    
+
     self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
 end
 
@@ -169,20 +169,23 @@ end
 -- reset the willGerminateData and rebuild it based on the current transition
 function ssGrowthManager:rebuildWillGerminateData()
     self.willGerminateData = {}
-    self:dayChanged()
+
+    for fruitName, transition in pairs(self.canPlantData) do
+        if self.canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
+            self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
+        end
+    end
 end
 
 -- handle dayChanged event
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
-    if self.growthManagerEnabled == false then return end
-
-    self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
-    
-    for fruitName, transition in pairs(self.canPlantData) do
-        if self.canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
-            self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
-        end
+    if self.isNewSavegame == true then
+        self:rebuildWillGerminateData()
+        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+    else
+        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+        self:rebuildWillGerminateData()
     end
 end
 
@@ -248,7 +251,7 @@ end
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
     local useMaxState = false
     local minState = self.growthData[transition][fruitName].normalGrowthState
-    if minState == 1 and self.willGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
+    if minState == 1 and self.previousWillGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
         return
     end
 
