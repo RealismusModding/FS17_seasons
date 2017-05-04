@@ -195,6 +195,7 @@ end
 
 -- from fatov - balewrapper determines what bales to ferment
 function ssBaleManager:baleWrapperPickupWrapperBale(bale, baleType)
+    -- from https://gdn.giants-software.com/documentation_scripting.php?version=script&category=70&class=3416#pickupWrapperBale46390
     log("Source bale fillType is:", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N)
     if baleType ~= nil and bale.i3dFilename ~= baleType.wrapperBaleFilename then
         -- here is sure that the current bale supports the wrapping
