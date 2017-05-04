@@ -55,7 +55,6 @@
         <!-- Crops - Intro (2) -->
         <helpLine title="ss_helpTitle_07">
             <item type="text" value="ss_helpText_07_01" />
-            <item type="text" value="ss_helpText_07_02" />
         </helpLine>
 
         <!-- Crops - Arable Crops -->
