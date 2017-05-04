@@ -134,11 +134,9 @@ function ssWeatherManager:loadMap(name)
     self.germinateTemp = {}
     self:loadGerminateTemperature(g_seasons.modDir .. "data/growth.xml")
 
-    local modPath = ssUtil.getModMapDataPath("seasons_growth.xml")
-    if modPath ~= nil then
-        self:loadGerminateTemperature(modPath)
+    for _, path in ipairs(g_seasons:getModPaths("growth")) do
+        self:loadGerminateTemperature(path)
     end
-
 
     if g_currentMission:getIsServer() then
         if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_seasons.environment:currentDay() then
