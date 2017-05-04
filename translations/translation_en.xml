@@ -159,9 +159,8 @@
         <text name="ss_helpTitle_06" text="Crops - Intro (1)" />
         <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." />
         <text name="ss_helpText_06_02" text="The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." />
-
-        <text name="ss_helpTitle_07" text="Crops - Intro (2)" />
-        <text name="ss_helpText_07_01" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter. You can still silage green crops." />
+        <text name="ss_helpText_06_03" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." />
+        <text name="ss_helpText_06_04" text="You can still silage green crops." />
         
         <text name="ss_helpTitle_08" text="Crops - Arable Crops" />
         <text name="ss_helpText_08_01" text="Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." />
@@ -186,7 +185,7 @@
 
         <text name="ss_helpTitle_12" text="Maintenance" />
         <text name="ss_helpText_12_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
-        <text name="ss_helpText_12_02" text="You can repair your vehicles either at the vehicle shop or the placeable repair shop. Note that it will be more expensive to repair at the vehicle shop." />
+        <text name="ss_helpText_12_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle either the garage or a placeable garage and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." />
         <text name="ss_helpText_12_03" text="The age of your vehicle is the days since your last repair." />
         <text name="ss_helpText_12_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
 
