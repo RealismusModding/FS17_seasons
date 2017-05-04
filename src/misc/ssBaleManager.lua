@@ -16,9 +16,12 @@ function ssBaleManager:preLoad()
     Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
     Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.baleGetSaveAttributesAndNodes)
     Bale.updateTick = Utils.appendedFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
-    BaleWrapper.doStateChange = Utils.appendedFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
     Bale.readStream = Utils.appendedFunction(Bale.readStream, ssBaleManager.baleReadStream)
     Bale.writeStream = Utils.appendedFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
+    BaleWrapper.load = Utils.appendedFunction(BaleWrapper.load, ssBaleManager.baleWrapperLoad)
+    BaleWrapper.getSaveAttributesAndNodes = Utils.overwrittenFunction(BaleWrapper.getSaveAttributesAndNodes, ssBaleManager.baleWrapperGetSaveAttributesAndNodes)
+    BaleWrapper.doStateChange = Utils.appendedFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
+    BaleWrapper.pickupWrapperBale = Utils.prependedFunction(BaleWrapper.pickupWrapperBale, ssBaleManager.baleWrapperPickupWrapperBale)
 end
 
 function ssBaleManager:loadMap(name)
@@ -189,33 +192,18 @@ function ssBaleManager:setFermentationTime()
     self.fermentationTime = 3600 * 24 * g_seasons.environment.daysInSeason / 3
 end
 
+
 --------------------------------------------------------
--- Bale(Wrapper) overwrite functions for fermentation
+-- Overwritten bale functions for fermentation
 --------------------------------------------------------
-
--- from fatov - balewrapper determines what bales to ferment
-function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
-
-    if self.isServer then
-        if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
-            local bale = self.lastDroppedBale
-
-           if bale.fillType == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
-                --initiate fermenting process
-                bale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-                bale.fermentingProcess = 0
-
-                ssBaleFermentEvent:sendEvent(bale)
-            end
-        end
-    end
-end
 
 -- from fatov - ferment bales
 function ssBaleManager:baleUpdateTick(dt)
     if self.isServer then
         if self.fermentingProcess ~= nil then
-            self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
+            if self.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and self.fillType ~= FillUtil.FILLTYPE_STRAW then -- dryGrass or straw will not ferment
+                self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
+            end
 
             if self.fermentingProcess >= 1 then
                 --finish fermenting process
@@ -228,14 +216,80 @@ function ssBaleManager:baleUpdateTick(dt)
     end
 end
 
+--------------------------------------------------------
+-- Overwritten BaleWrapper functions for fermentation
+--------------------------------------------------------
+
+-- append baleWrapper.doStateChange to initiate fermentation
+function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
+
+    if self.isServer then
+        if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
+            local bale = self.lastDroppedBale
+
+           if bale.fillType == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
+                --initiate fermenting process
+                bale.fillType = Utils.getNoNil(self.baleFillTypeSource, FillUtil.FILLTYPE_GRASS_WINDROW)
+                bale.fermentingProcess = 0
+
+                ssBaleFermentEvent:sendEvent(bale)
+            end
+
+            self.baleFillTypeSource = nil
+        end
+    end
+end
+
+-- prepended baleWrapper.pickupWrapperBale, to store fillTypeSource
+function ssBaleManager:baleWrapperPickupWrapperBale(bale, baleType)
+    self.baleFillTypeSource = bale.fillType
+end
+
+
+--------------------------------------------------------
+-- Network sync bales
+--------------------------------------------------------
+
+function ssBaleManager:baleWriteStream(streamId, connection)
+    streamWriteUIntN(streamId, self.fillType, FillUtil.sendNumBits)
+end
+
+function ssBaleManager:baleReadStream(streamId, connection)
+    self.fillType = streamReadUIntN(streamId, FillUtil.sendNumBits)
+end
+
+--------------------------------------------------------
+-- Saving and loading
+--------------------------------------------------------
+
+-- Store baleFillTypeSource for bale wrappers
+function ssBaleManager:baleWrapperLoad(savegame)
+    if savegame ~= nil and not savegame.resetVehicles then
+        local baleFillTypeSourceName = Utils.getNoNil(getXMLString(savegame.xmlFile, savegame.key .. "#baleFillTypeSource"), "grass_windrow")
+        self.baleFillTypeSource = FillUtil.getFillTypesByNames(baleFillTypeSourceName)[1]
+    end
+end
+
+function ssBaleManager:baleWrapperGetSaveAttributesAndNodes(superFunc, nodeIdent)
+    local attributes, nodes = superFunc(self, nodeIdent)
+    
+    if attributes ~= nil and self.baleFillTypeSource ~= nil then
+        attributes = attributes .. ' baleFillTypeSource="' .. Utils.getNoNil(FillUtil.fillTypeIntToName[self.baleFillTypeSource], "grass_windrow") .. '"'
+    end
+    
+    return attributes, nodes
+end
+
+-- Store bale parameters
 function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, resetVehicles)
     local state = superFunc(self, xmlFile, key, resetVehicles)
 
     self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
-    self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
-
+    self.fermentingProcess  = getXMLFloat(xmlFile, key .. "#fermentingProcess")
+    local fermentingFillTypeName = Utils.getNoNil(getXMLString(xmlFile, key .. "#fermentingFillType"), "grass_windrow")
+    
     if self.fermentingProcess ~= nil then
-        self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
+        self.fillType = FillUtil.getFillTypesByNames(fermentingFillTypeName)[1]
     end
 
     return state
@@ -250,19 +304,8 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
 
     if attributes ~= nil and self.fermentingProcess ~= nil then
         attributes = attributes .. ' fermentingProcess="' .. self.fermentingProcess .. '"'
+        attributes = attributes .. ' fermentingFillType="' .. Utils.getNoNil(FillUtil.fillTypeIntToName[self.fillType], "grass_windrow") .. '"'
     end
 
     return attributes, nodes
-end
-
-function ssBaleManager:baleWriteStream(streamId, connection)
-    local isFermenting = self.fermentingProcess ~= nil
-
-    streamWriteBool(streamId, isFermenting)
-end
-
-function ssBaleManager:baleReadStream(streamId, connection)
-    if streamReadBool(streamId, connection) then
-        self.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-    end
 end
