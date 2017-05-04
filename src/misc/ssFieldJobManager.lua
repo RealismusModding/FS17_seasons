@@ -51,7 +51,7 @@ end
 -- Filter mission assignments to the player
 function ssFieldJobManager:fieldJobInit(superFunc, ...)
     local initFieldJob = superFunc(self, ...)
-    
+
     -- If superFunc has reset snow, we need to re-apply it
     if ssSnow.appliedSnowDepth > 0 then
         self:applyFieldSnow(ssSnow.appliedSnowDepth / ssSnow.LAYER_HEIGHT)
@@ -148,8 +148,8 @@ end
 function FieldJob:applyFieldSnow(layers)
     for _, partition in pairs(self.fieldDef.maxFieldStatusPartitions) do
         --set type
-        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 0, 5, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"]) 
+        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 0, 5, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
         --set height
-        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 5, 6, layers) 
+        setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 5, 6, layers)
     end
 end

@@ -145,10 +145,9 @@
         <text name="ss_helpText_03_01" text="Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." />
         <text name="ss_helpText_03_02" text="Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale." />
         <text name="ss_helpText_03_03" text="Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." />
-        <text name="ss_helpText_03_04" text="(note: maybe add a picture of foliage in spring, summer, fall and winter)" />
 
         <text name="ss_helpTitle_04" text="Weather Forecast" />
-        <text name="ss_helpText_04_01" text="The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F. (note: maybe add a picture of the forecast here)" />
+        <text name="ss_helpText_04_01" text="The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F." />
         <text name="ss_helpText_04_02" text="The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." />
         <text name="ss_helpText_04_03" text="The number on the right of each forecast block represents the day of the season." />
 

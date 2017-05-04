@@ -156,12 +156,10 @@
         <text name="ss_helpText_03_02" text="" />
         <!-- Missing translation of "Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." -->
         <text name="ss_helpText_03_03" text="" />
-        <!-- Missing translation of "(note: maybe add a picture of foliage in spring, summer, fall and winter)" -->
-        <text name="ss_helpText_03_04" text="" />
 
         <!-- Missing translation of "Weather Forecast" -->
         <text name="ss_helpTitle_04" text="" />
-        <!-- Missing translation of "The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F. (note: maybe add a picture of the forecast here)" -->
+        <!-- Missing translation of "The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F." -->
         <text name="ss_helpText_04_01" text="" />
         <!-- Missing translation of "The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." -->
         <text name="ss_helpText_04_02" text="" />
