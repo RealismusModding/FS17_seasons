@@ -154,11 +154,11 @@
         <text name="ss_helpTitle_05" text="Soil" />
         <text name="ss_helpText_05_01" text="Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." />
         <text name="ss_helpText_05_02" text="The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." />
-        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Mod settings menu (Left Alt + S)." />
+        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." />
 
         <text name="ss_helpTitle_06" text="Crops - Intro (1)" />
-        <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using the Seasons mod for the first time in an existing save game you will have the option to either reset the crops or not." />
-        <text name="ss_helpText_06_02" text="The default growth patterns of crops have been replaced with the Seasons Mod. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." />
+        <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." />
+        <text name="ss_helpText_06_02" text="The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." />
 
         <text name="ss_helpTitle_07" text="Crops - Intro (2)" />
         <text name="ss_helpText_07_01" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter. You can still silage green crops." />
@@ -166,7 +166,7 @@
         <text name="ss_helpTitle_08" text="Crops - Arable Crops" />
         <text name="ss_helpText_08_01" text="Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." />
         <text name="ss_helpText_08_02" text="Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." />
-        <text name="ss_helpText_08_03" text="Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." />
+        <text name="ss_helpText_08_03" text="Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." />
 
         <text name="ss_helpTitle_09" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_09_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
@@ -211,7 +211,7 @@
         <text name="ss_helpText_16_03" text="Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." />
 
         <text name="ss_helpTitle_17" text="Seasons Menu" />
-        <text name="ss_helpText_17_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to the Seasons. This menu is activated by Left Alt + S." />
+        <text name="ss_helpText_17_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." />
         <text name="ss_helpText_17_02" text="The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
         <text name="ss_helpText_17_03" text="The second page is the settings menu. Here the season length (3/6/9/12 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." />
 
