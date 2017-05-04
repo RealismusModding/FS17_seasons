@@ -13,9 +13,12 @@ function ssHelpLines:loadMap()
     self:loadFromXML(g_seasons.modDir .. "resources/gui/helpLine.xml")
 end
 
+function ssHelpLines:loadI18NIntoGlobal(key)
+    g_i18n.globalI18N:setText(key, ssLang.getText(key))
+end
+
 function ssHelpLines:loadFromXML(path)
     local xmlFile = loadXMLFile("helpLine", path)
-
 
     local categoryIndex = 0
     while true do
@@ -23,9 +26,10 @@ function ssHelpLines:loadFromXML(path)
         if not hasXMLProperty(xmlFile, categoryKey) then break end
 
         local category = {}
-
         category.title = getXMLString(xmlFile, categoryKey .. "#title")
         category.helpLines = {}
+
+        self:loadI18NIntoGlobal(category.title)
 
         g_inGameMenu.helpLineCategorySelectorElement:addText(ssLang.getText(category.title))
 
@@ -38,6 +42,8 @@ function ssHelpLines:loadFromXML(path)
             helpLine.title = getXMLString(xmlFile, lineKey .. "#title")
             helpLine.items = {}
 
+            self:loadI18NIntoGlobal(helpLine.title)
+
             local itemIndex = 0
             while true do
                 local itemKey = string.format("%s.item(%d)", lineKey, itemIndex)
@@ -46,7 +52,11 @@ function ssHelpLines:loadFromXML(path)
                 local type = getXMLString(xmlFile, itemKey .. "#type")
                 local value = getXMLString(xmlFile, itemKey .. "#value")
 
-                if value ~= nil and (value == "text" or type == "image") then
+                if type == "text" then
+                    self:loadI18NIntoGlobal(value)
+                end
+
+                if value ~= nil and (type == "text" or type == "image") then
                     local item = {
                         type = type,
                         value = value,

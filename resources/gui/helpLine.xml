@@ -1,19 +1,148 @@
+<!--------------------------------------------------------------------------------------------------
+-- HELP MENU
+----------------------------------------------------------------------------------------------------
+-- Purpose:  Setup of the help menu contents
+-- Authors:  Rahkiin
+--
+-- Copyright (c) Realismus Modding, 2017
+--------------------------------------------------------------------------------------------------->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
 <helpLines>
-    <helpLineCategory title="helpCategory_01">
-        <helpLine title="helpTitle_02">
-            <item type="text" value="helpText_02_part01"/>
-            <item type="image" value="dataS2/menu/helpline/helplineItem02_01.png"/>
-            <item type="text" value="helpText_02_part02"/>
-            <item type="image" value="dataS2/menu/helpline/helplineItem02_02.png"/>
+    <helpLineCategory title="ss_helpCategory">
+        <!-- Intro -->
+        <helpLine title="ss_helpTitle_01">
+            <item type="text" value="ss_helpText_01_01" />
+            <item type="text" value="ss_helpText_01_02" />
+            <item type="text" value="ss_helpText_01_03" />
+            <!-- <item type="image" value="dataS2/menu/helpline/helplineItem02_02.png"/> -->
         </helpLine>
-        <helpLine title="helpTitle_03">
-            <item type="text" value="helpText_03_part01"/>
-            <item type="image" value="dataS2/menu/helpline/helplineItem03_01.png"/>
+
+        <!-- Seasonal Effects (1) -->
+        <helpLine title="ss_helpTitle_02">
+            <item type="text" value="ss_helpText_02_01" />
+            <item type="text" value="ss_helpText_02_02" />
+            <item type="text" value="ss_helpText_02_03" />
+        </helpLine>
+
+        <!-- Seasonal Effects (2) -->
+        <helpLine title="ss_helpTitle_03">
+            <item type="text" value="ss_helpText_03_01" />
+            <item type="text" value="ss_helpText_03_02" />
+            <item type="text" value="ss_helpText_03_03" />
+        </helpLine>
+
+        <!-- Weather forecast -->
+        <helpLine title="ss_helpTitle_04">
+            <item type="text" value="ss_helpText_04_01" />
+            <item type="text" value="ss_helpText_04_02" />
+            <item type="text" value="ss_helpText_04_03" />
+        </helpLine>
+
+        <!-- Soil -->
+        <helpLine title="ss_helpTitle_05">
+            <item type="text" value="ss_helpText_05_01" />
+            <item type="text" value="ss_helpText_05_02" />
+            <item type="text" value="ss_helpText_05_03" />
+        </helpLine>
+
+        <!-- Crops - Intro (1) -->
+        <helpLine title="ss_helpTitle_06">
+            <item type="text" value="ss_helpText_06_01" />
+            <item type="text" value="ss_helpText_06_02" />
+        </helpLine>
+
+        <!-- Crops - Intro (2) -->
+        <helpLine title="ss_helpTitle_07">
+            <item type="text" value="ss_helpText_07_01" />
+            <item type="text" value="ss_helpText_07_02" />
+        </helpLine>
+
+        <!-- Crops - Arable Crops -->
+        <helpLine title="ss_helpTitle_08">
+            <item type="text" value="ss_helpText_08_01" />
+            <item type="text" value="ss_helpText_08_02" />
+            <item type="text" value="ss_helpText_08_03" />
+        </helpLine>
+
+        <!-- Crops - Hay, Straw, and Grass -->
+        <helpLine title="ss_helpTitle_09">
+            <item type="text" value="ss_helpText_09_01" />
+            <item type="text" value="ss_helpText_09_02" />
+            <item type="text" value="ss_helpText_09_03" />
+            <item type="text" value="ss_helpText_09_04" />
+        </helpLine>
+
+        <!-- Crops - Trees -->
+        <helpLine title="ss_helpTitle_10">
+            <item type="text" value="ss_helpText_10_01" />
+            <item type="text" value="ss_helpText_10_02" />
+        </helpLine>
+
+        <!-- Crops - Weather Effects -->
+        <helpLine title="ss_helpTitle_11">
+            <item type="text" value="ss_helpText_11_01" />
+            <item type="text" value="ss_helpText_11_02" />
+            <item type="text" value="ss_helpText_11_03" />
+            <item type="text" value="ss_helpText_11_04" />
+        </helpLine>
+
+        <!-- Maintenance -->
+        <helpLine title="ss_helpTitle_12">
+            <item type="text" value="ss_helpText_12_01" />
+            <item type="text" value="ss_helpText_12_02" />
+            <item type="text" value="ss_helpText_12_03" />
+            <item type="text" value="ss_helpText_12_04" />
+        </helpLine>
+
+        <!-- Economy -->
+        <helpLine title="ss_helpTitle_13">
+            <item type="text" value="ss_helpText_13_01" />
+            <item type="text" value="ss_helpText_13_02" />
+            <item type="text" value="ss_helpText_13_03" />
+            <item type="text" value="ss_helpText_13_04" />
+        </helpLine>
+
+        <!-- Hired Help -->
+        <helpLine title="ss_helpTitle_14">
+            <item type="text" value="ss_helpText_14_01" />
+        </helpLine>
+
+        <!-- Animals - Intro -->
+        <helpLine title="ss_helpTitle_15">
+            <item type="text" value="ss_helpText_15_01" />
+            <item type="text" value="ss_helpText_15_02" />
+            <item type="text" value="ss_helpText_15_03" />
+            <item type="text" value="ss_helpText_15_04" />
+        </helpLine>
+
+        <!-- Animals - Production -->
+        <helpLine title="ss_helpTitle_16">
+            <item type="text" value="ss_helpText_16_01" />
+            <item type="text" value="ss_helpText_16_02" />
+            <item type="text" value="ss_helpText_16_03" />
+        </helpLine>
+
+        <!-- Seasons menu -->
+        <helpLine title="ss_helpTitle_17">
+            <item type="text" value="ss_helpText_17_01" />
+            <item type="text" value="ss_helpText_17_02" />
+            <item type="text" value="ss_helpText_17_03" />
+        </helpLine>
+
+        <!-- HUD -->
+        <helpLine title="ss_helpTitle_18">
+            <item type="text" value="ss_helpText_18_01" />
+            <item type="text" value="ss_helpText_18_02" />
+            <item type="text" value="ss_helpText_18_03" />
+            <item type="text" value="ss_helpText_18_04" />
+        </helpLine>
+
+        <!-- Misc. -->
+        <helpLine title="ss_helpTitle_19">
+            <item type="text" value="ss_helpText_19_01" />
+            <item type="text" value="ss_helpText_19_02" />
+            <item type="text" value="ss_helpText_19_03" />
         </helpLine>
     </helpLineCategory>
 </helpLines>
-
-<!-- <item type="text" value="helpText_02_part01"/> -->
-<!-- <item type="image" value="dataS2/menu/helpline/helplineItem08_01.png"/> -->
-
