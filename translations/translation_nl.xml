@@ -179,11 +179,10 @@
         <text name="ss_helpText_06_01" text="" />
         <!-- Missing translation of "The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." -->
         <text name="ss_helpText_06_02" text="" />
-
-        <!-- Missing translation of "Crops - Intro (2)" -->
-        <text name="ss_helpTitle_07" text="" />
-        <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter. You can still silage green crops." -->
-        <text name="ss_helpText_07_01" text="" />
+        <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." -->
+        <text name="ss_helpText_06_03" text="" />
+        <!-- Missing translation of "You can still silage green crops." -->
+        <text name="ss_helpText_06_04" text="" />
         <!-- Missing translation of "Crops - Arable Crops" -->
         <text name="ss_helpTitle_08" text="" />
         <!-- Missing translation of "Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." -->
@@ -226,7 +225,7 @@
         <text name="ss_helpTitle_12" text="" />
         <!-- Missing translation of "Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." -->
         <text name="ss_helpText_12_01" text="" />
-        <!-- Missing translation of "You can repair your vehicles either at the vehicle shop or the placeable repair shop. Note that it will be more expensive to repair at the vehicle shop." -->
+        <!-- Missing translation of "You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." -->
         <text name="ss_helpText_12_02" text="" />
         <!-- Missing translation of "The age of your vehicle is the days since your last repair." -->
         <text name="ss_helpText_12_03" text="" />
