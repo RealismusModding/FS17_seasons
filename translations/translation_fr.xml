@@ -171,7 +171,7 @@
         <!-- Missing translation of "Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." -->
         <text name="ss_helpText_05_03" text="" />
 
-        <!-- Missing translation of "Crops - Intro (1)" -->
+        <!-- Missing translation of "Crops - Intro" -->
         <text name="ss_helpTitle_06" text="" />
         <!-- Missing translation of "When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." -->
         <text name="ss_helpText_06_01" text="" />
@@ -181,6 +181,7 @@
         <text name="ss_helpText_06_03" text="" />
         <!-- Missing translation of "You can still silage green crops." -->
         <text name="ss_helpText_06_04" text="" />
+
         <!-- Missing translation of "Crops - Arable Crops" -->
         <text name="ss_helpTitle_08" text="" />
         <!-- Missing translation of "Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." -->
@@ -294,5 +295,7 @@
         <text name="ss_helpText_19_02" text="" />
         <!-- Missing translation of "While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." -->
         <text name="ss_helpText_19_03" text="" />
+        <!-- Missing translation of "All vehicles need to be started manually." -->
+        <text name="ss_helpText_19_04" text="" />
     </texts>
 </l10n>

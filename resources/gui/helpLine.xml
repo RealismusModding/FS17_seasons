@@ -46,15 +46,10 @@
             <item type="text" value="ss_helpText_05_03" />
         </helpLine>
 
-        <!-- Crops - Intro (1) -->
+        <!-- Crops - Intro -->
         <helpLine title="ss_helpTitle_06">
             <item type="text" value="ss_helpText_06_01" />
             <item type="text" value="ss_helpText_06_02" />
-        </helpLine>
-
-        <!-- Crops - Intro (2) -->
-        <helpLine title="ss_helpTitle_07">
-            <item type="text" value="ss_helpText_07_01" />
         </helpLine>
 
         <!-- Crops - Arable Crops -->
