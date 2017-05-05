@@ -162,7 +162,7 @@
         <text name="ss_helpText_06_03" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." />
         <text name="ss_helpText_06_04" text="You can still silage green crops." />
 
-        <text name="ss_helpTitle_08" text="Crops - Arable Crops" />
+        <text name="ss_helpTitle_07" text="Crops - Arable Crops" />
         <text name="ss_helpText_07_01" text="Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." />
         <text name="ss_helpText_07_02" text="Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." />
         <text name="ss_helpText_07_03" text="Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." />
@@ -171,7 +171,7 @@
         <text name="ss_helpText_08_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
         <text name="ss_helpText_08_02" text="Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." />
         <text name="ss_helpText_08_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
-        <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold as their price is 0. Grass, baled or loose, cannot be sold, as their price is also 0. Wrap the grass bales before selling them." />
+        <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
 
         <text name="ss_helpTitle_09" text="Crops - Trees" />
         <text name="ss_helpText_09_01" text="Trees take more time to reach their fully grown state. It will take plantable trees 5 game years to be fully grown and after 2 years they can be cut." />
