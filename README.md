@@ -74,6 +74,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Grass bales will rot and disappear after two days.
 - Hay and straw bales exposed to rain will start to rot so keep them inside (only when the map has a snow mask)
 - Wrapped bales needs time (one third of a season) to ferment before they are turned into silage
+- Wrapped hay will not ferment. Wrapped hay bales can be stored outside.
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified

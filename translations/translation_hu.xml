@@ -152,7 +152,7 @@
         <text name="ss_helpTitle_03" text="" />
         <!-- Missing translation of "Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." -->
         <text name="ss_helpText_03_01" text="" />
-        <!-- Missing translation of "Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale." -->
+        <!-- Missing translation of "Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale. Wrapped hay will not ferment, but they will be protected against the weather." -->
         <text name="ss_helpText_03_02" text="" />
         <!-- Missing translation of "Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." -->
         <text name="ss_helpText_03_03" text="" />
