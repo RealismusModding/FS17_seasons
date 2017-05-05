@@ -20,9 +20,9 @@ function ssSkipNight:update(dt)
     -- Singleplayer only
     if not g_currentMission:getIsServer() or not g_currentMission:getIsClient() then return end
 
-    local time = g_currentMission.environment.dayTime / 60 / 1000
-    local isEvening = time >= g_currentMission.environment.nightStart
-    local isMorning = time >= g_currentMission.environment.nightEnd and time < (12 * 60)
+    local time = g_currentMission.environment.dayTime / 60 / 1000 -- minutes
+    local isEvening = time >= math.max(g_currentMission.environment.nightStart, 20 * 60)
+    local isMorning = time >= math.min(g_currentMission.environment.nightEnd, 6 * 60) and time < (12 * 60)
 
     if isEvening then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SKIP_NIGHT"), InputBinding.SEASONS_SKIP_NIGHT)
