@@ -192,6 +192,9 @@ function ssBaleManager:setFermentationTime()
     self.fermentationTime = 3600 * 24 * g_seasons.environment.daysInSeason / 3
 end
 
+function ssBaleManager.isBaleFermenting(bale)
+    return bale.fermentingProcess ~= nil and bale.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and bale.fillType ~= FillUtil.FILLTYPE_STRAW 
+end
 
 --------------------------------------------------------
 -- Overwritten bale functions for fermentation
@@ -200,10 +203,8 @@ end
 -- from fatov - ferment bales
 function ssBaleManager:baleUpdateTick(dt)
     if self.isServer then
-        if self.fermentingProcess ~= nil then
-            if self.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and self.fillType ~= FillUtil.FILLTYPE_STRAW then -- dryGrass or straw will not ferment
-                self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
-            end
+        if ssBaleManager.isBaleFermenting(self) then
+            self.fermentingProcess = self.fermentingProcess + ((dt * 0.001 * g_currentMission.missionInfo.timeScale) / ssBaleManager.fermentationTime)
 
             if self.fermentingProcess >= 1 then
                 --finish fermenting process
@@ -265,8 +266,11 @@ end
 -- Store baleFillTypeSource for bale wrappers
 function ssBaleManager:baleWrapperLoad(savegame)
     if savegame ~= nil and not savegame.resetVehicles then
-        local baleFillTypeSourceName = Utils.getNoNil(getXMLString(savegame.xmlFile, savegame.key .. "#baleFillTypeSource"), "grass_windrow")
-        self.baleFillTypeSource = FillUtil.getFillTypesByNames(baleFillTypeSourceName)[1]
+        local baleFillTypeSourceName = getXMLString(savegame.xmlFile, savegame.key .. "#baleFillTypeSource")
+        
+        if baleFillTypeSourceName ~= nil then
+            self.baleFillTypeSource = FillUtil.getFillTypesByNames(baleFillTypeSourceName)[1]
+        end
     end
 end
 
