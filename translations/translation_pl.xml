@@ -233,7 +233,7 @@
 
         <!-- Missing translation of "Economy" -->
         <text name="ss_helpTitle_12" text="" />
-        <!-- Missing translation of "The loan cap has been changed from 200,000 to 30% of your owned land and placeable building values. The minimum loan cap is 300,000 and the maximum loan cap is 1,000,000." -->
+        <!-- Missing translation of "The loan cap has been changed from 200,000 to 30% of your owned land and placeable building values. The minimum loan cap is 300,000 and the maximum loan cap is 1,500,000." -->
         <text name="ss_helpText_12_01" text="" />
         <!-- Missing translation of "Income from missions have been reduced. You will earn roughly 5 times more than a hired worker working on the same field." -->
         <text name="ss_helpText_12_02" text="" />

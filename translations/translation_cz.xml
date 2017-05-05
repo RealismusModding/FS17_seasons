@@ -1,4 +1,4 @@
-<<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
     <translationContributors>gorgona, DrewCZ</translationContributors>
     <texts>
@@ -123,23 +123,23 @@
 
         <text name="fillType_snow" text="Sníh" />
 
-          <text name="ss_helpCategory" text="Roční období" />
+        <text name="ss_helpCategory" text="Roční období" />
 
         <text name="ss_helpTitle_01" text="Roční období" />
         <text name="ss_helpText_01_01" text="Roční období je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
         <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: rané, střední a pozdní. Tyto díly jsou označovány jako přechody." />
         <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu odehrávající se v reálném životě." />
-        
+
         <text name="ss_helpTitle_02" text="Sezónní efekty (1)" />
         <text name="ss_helpText_02_01" text="Předpověď je náhodná ze dne na den, ale sleduje vzor sezónu od sezóny." />
         <text name="ss_helpText_02_02" text="Jaro bude deštivé a mlhavé s možností na slunečné počasí. Léto bude teplejší a sušší. Kroupy bouře může přjít bez varování. Podzim bude deštivý s nějakým slunečného počasí. Zima bude deštivo, ale často dost studená, bude padat sníh, možná dokonce zůstane na zemi." />
         <text name="ss_helpText_02_03" text="Sníh bude naplňovat sklápěče a lopaty, pokud není sklápěč nebo lopata ukryta v kůlně se sněhovou maskou nebo plachtou. Sníh také sníží trakci, čímž se vozidlo zpomalí." />
-        
+
         <text name="ss_helpTitle_03" text="Sezónní efekty (2)" />
         <text name="ss_helpText_03_01" text="Denní světlo je také ovlivňováno ročním obdobím. Zimy mají kratší dny (8 hodin), zatímco léto má delší dny (17 hodin)." />
         <text name="ss_helpText_03_02" text="Silážn sila a silážní balíky vyžadují čas k fermentaci. Trvá jednu třetinu ročních období (1 přechod) k úplnému zkvašení buď silážního sila nebo siláž bal. Obalené seno nebude kvasit, ale bude chráněno proti počasí." />
         <text name="ss_helpText_03_03" text="Roční období také ovlivní stromy a listí. Stromy změní stav podle sezónních teplotních změn. Listy změní barvu a opadnou na podzim. Stromy budou v zimě holé a na jaře budou světlezelené." />
-        
+
         <text name="ss_helpTitle_04" text="Předpověď počasí" />
         <text name="ss_helpText_04_01" text="Předpověď počasí byla znovu zavedena se sezónním obdobím a může být aktivována levý  Alt + F." />
         <text name="ss_helpText_04_02" text="Předpověď počasí ukazuje vysoké / nízké teploty a počasí (slunečné, mlhavé, deštivé, zasněžené, oblačno) po dobu dalších 7 dnů. Krupobití se na předpovědi počasí nezobrazí, protože krupobití v reálném životě je často nečekanou událostí." />
@@ -184,7 +184,7 @@
         <text name="ss_helpText_11_04" text="Pouze jízdní vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
         <text name="ss_helpTitle_12" text="Ekonomika" />
-        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z 200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je 300 000 a maximální výše úvěru je 1 000 000." />
+        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z 200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je 300 000 a maximální výše úvěru je 1 500 000." />
         <text name="ss_helpText_12_02" text="Výnosy z misí byly sníženy. Vyděláte zhruba pětkrát více než najatý pracovník pracující na stejném poli." />
         <text name="ss_helpText_12_03" text="Údržba všech vozidel (kromě pravidelné údržby) zahrnuje údržbu a daně ve vztahu k tomu, kolik se používají. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, také sníží náklady na údržbu." />
         <text name="ss_helpText_12_04" text="Ceny úrody kolísají se změnami v ročních obdobích realisticky." />
@@ -221,4 +221,3 @@
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být spuštěna manuálně." />
     </texts>
 </l10n>
-
