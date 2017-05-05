@@ -137,6 +137,7 @@
             <item type="text" value="ss_helpText_18_01" />
             <item type="text" value="ss_helpText_18_02" />
             <item type="text" value="ss_helpText_18_03" />
+            <item type="text" value="ss_helpText_18_04" />
         </helpLine>
     </helpLineCategory>
 </helpLines>
