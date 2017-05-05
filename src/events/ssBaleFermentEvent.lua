@@ -21,31 +21,27 @@ function ssBaleFermentEvent:new(bale)
     local self = ssBaleFermentEvent:emptyNew()
 
     self.bale = bale
-    self.isFermenting = self.bale.fermentingProcess ~= nil and true or false
+    self.fillType = self.bale.fillType
 
     return self
 end
 
 function ssBaleFermentEvent:writeStream(streamId, connection)
     streamWriteInt32(streamId, networkGetObjectId(self.bale))
-    streamWriteBool(streamId, self.isFermenting)
+    streamWriteUIntN(streamId, self.fillType, FillUtil.sendNumBits)
 end
 
 function ssBaleFermentEvent:readStream(streamId, connection)
     local objectId = streamReadInt32(streamId)
 
     self.bale = networkGetObject(objectId)
-    self.isFermenting = streamReadBool(streamId)
+    self.fillType = streamReadUIntN(streamId, FillUtil.sendNumBits)
 
     self:run(connection)
 end
 
 function ssBaleFermentEvent:run(connection)
-    if self.isFermenting then
-        self.bale.fillType = FillUtil.FILLTYPE_GRASS_WINDROW
-    else
-        self.bale.fillType = FillUtil.FILLTYPE_SILAGE
-    end
+    self.bale.fillType = self.fillType
 end
 
 function ssBaleFermentEvent:sendEvent(bale)
