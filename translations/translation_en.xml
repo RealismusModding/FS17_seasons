@@ -80,7 +80,7 @@
         <text name="SS_SEASON_INTRO_0" text="Spring is here; flowers and trees blossom. It is time to cultivate and sow your fields." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="The days are long and warm in summer. It is time to make hay and watch the crops grow." />
         <text name="SS_SEASON_INTRO_2" text="Leaves are getting brown and it is becoming colder - autumn has arrived. Make sure to harvest the crops before winter comes." />
-        <text name="SS_SEASON_INTRO_3" text="Winter has fallen and animals need more care. The ground will be frozen and you can't work your fields. It is time for forestry and ploughing snow." /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_3" text="Winter has fallen and animals need more care. The ground will be frozen and you cannot work your fields. It is time for forestry and ploughing snow." /> <!-- winter -->
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
@@ -153,7 +153,7 @@
 
         <text name="ss_helpTitle_05" text="Soil" />
         <text name="ss_helpText_05_01" text="Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." />
-        <text name="ss_helpText_05_02" text="The soil can't be worked when the ground is frozen. Crops will not grow in frozen soil." />
+        <text name="ss_helpText_05_02" text="The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." />
         <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." />
 
         <text name="ss_helpTitle_06" text="Crops - Intro" />
@@ -165,13 +165,13 @@
         <text name="ss_helpTitle_08" text="Crops - Arable Crops" />
         <text name="ss_helpText_08_01" text="Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." />
         <text name="ss_helpText_08_02" text="Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." />
-        <text name="ss_helpText_08_03" text="Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops can't be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." />
+        <text name="ss_helpText_08_03" text="Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." />
 
         <text name="ss_helpTitle_09" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_09_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
         <text name="ss_helpText_09_02" text="Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." />
         <text name="ss_helpText_09_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
-        <text name="ss_helpText_09_04" text="Straw and hay must be baled before it can be sold - loose straw and hay can't be sold, only given away for free. Grass, baled or loose, can't be sold either." />
+        <text name="ss_helpText_09_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
 
         <text name="ss_helpTitle_10" text="Crops - Trees" />
         <text name="ss_helpText_10_01" text="Trees take more time to reach their fully grown state. It will take plantable trees 5 game years to be fully grown and after 2 years they can be cut." />
@@ -202,12 +202,12 @@
         <text name="ss_helpText_15_01" text="Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." />
         <text name="ss_helpText_15_02" text="Animals only give offspring at a certain time of the year. Pigs and sheep will produce offspring in the spring, while cows will produce offspring in the summer." />
         <text name="ss_helpText_15_03" text="Animals will die if they do not have food or water. This is disabled on Easy difficulty." />
-        <text name="ss_helpText_15_04" text="Grass can't be fed in the winter. You should use hay instead." />
+        <text name="ss_helpText_15_04" text="Grass cannot be fed in the winter. You should use hay instead." />
 
         <text name="ss_helpTitle_16" text="Animals - Production" />
         <text name="ss_helpText_16_01" text="Milk and wool production is dependent upon the season." />
         <text name="ss_helpText_16_02" text="Wool is only produced in the spring." />
-        <text name="ss_helpText_16_03" text="Milk is produced year round, but is increased in the winter and the spring. While grass can't be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." />
+        <text name="ss_helpText_16_03" text="Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." />
 
         <text name="ss_helpTitle_17" text="Seasons Menu" />
         <text name="ss_helpText_17_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." />

@@ -166,7 +166,7 @@
         <text name="ss_helpTitle_05" text="" />
         <!-- Missing translation of "Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." -->
         <text name="ss_helpText_05_01" text="" />
-        <!-- Missing translation of "The soil can't be worked when the ground is frozen. Crops will not grow in frozen soil." -->
+        <!-- Missing translation of "The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." -->
         <text name="ss_helpText_05_02" text="" />
         <!-- Missing translation of "Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." -->
         <text name="ss_helpText_05_03" text="" />
@@ -188,7 +188,7 @@
         <text name="ss_helpText_08_01" text="" />
         <!-- Missing translation of "Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." -->
         <text name="ss_helpText_08_02" text="" />
-        <!-- Missing translation of "Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops can't be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." -->
+        <!-- Missing translation of "Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." -->
         <text name="ss_helpText_08_03" text="" />
 
         <!-- Missing translation of "Crops - Hay, Straw and Grass" -->
@@ -199,7 +199,7 @@
         <text name="ss_helpText_09_02" text="" />
         <!-- Missing translation of "Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." -->
         <text name="ss_helpText_09_03" text="" />
-        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay can't be sold, only given away for free. Grass, baled or loose, can't be sold either." -->
+        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." -->
         <text name="ss_helpText_09_04" text="" />
 
         <!-- Missing translation of "Crops - Trees" -->
@@ -255,7 +255,7 @@
         <text name="ss_helpText_15_02" text="" />
         <!-- Missing translation of "Animals will die if they do not have food or water. This is disabled on Easy difficulty." -->
         <text name="ss_helpText_15_03" text="" />
-        <!-- Missing translation of "Grass can't be fed in the winter. You should use hay instead." -->
+        <!-- Missing translation of "Grass cannot be fed in the winter. You should use hay instead." -->
         <text name="ss_helpText_15_04" text="" />
 
         <!-- Missing translation of "Animals - Production" -->
@@ -264,7 +264,7 @@
         <text name="ss_helpText_16_01" text="" />
         <!-- Missing translation of "Wool is only produced in the spring." -->
         <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass can't be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
+        <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
         <text name="ss_helpText_16_03" text="" />
 
         <!-- Missing translation of "Seasons Menu" -->
