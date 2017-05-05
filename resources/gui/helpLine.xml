@@ -50,6 +50,8 @@
         <helpLine title="ss_helpTitle_06">
             <item type="text" value="ss_helpText_06_01" />
             <item type="text" value="ss_helpText_06_02" />
+            <item type="text" value="ss_helpText_06_03" />
+            <item type="text" value="ss_helpText_06_04" />
         </helpLine>
 
         <!-- Crops - Arable Crops -->
