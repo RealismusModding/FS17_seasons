@@ -289,7 +289,7 @@ function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, r
     local state = superFunc(self, xmlFile, key, resetVehicles)
 
     self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
-    self.fermentingProcess  = getXMLFloat(xmlFile, key .. "#fermentingProcess")
+    self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
     local fermentingFillTypeName = Utils.getNoNil(getXMLString(xmlFile, key .. "#fermentingFillType"), "grass_windrow")
     
     if self.fermentingProcess ~= nil then
