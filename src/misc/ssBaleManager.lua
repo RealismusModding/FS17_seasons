@@ -35,7 +35,7 @@ function ssBaleManager:loadMap(name)
 end
 
 function ssBaleManager:reduceFillLevel()
-    for index, object in pairs(g_currentMission.itemsToSave) do
+    for _, object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
         if object.item:isa(Bale) then
             local bale = object.item
@@ -110,7 +110,7 @@ function ssBaleManager:seasonLengthChanged()
 end
 
 function ssBaleManager:removeBale()
-    for index, object in pairs(g_currentMission.itemsToSave) do
+    for _, object in pairs(g_currentMission.itemsToSave) do
         if object.item:isa(Bale) then
             local bale = object.item
 
@@ -151,7 +151,7 @@ function ssBaleManager:delete(singleBale)
 end
 
 function ssBaleManager:incrementBaleAge()
-    for index, object in pairs(g_currentMission.itemsToSave) do
+    for _, object in pairs(g_currentMission.itemsToSave) do
         if object.item:isa(Bale) then
             local bale = object.item
 
@@ -219,7 +219,6 @@ end
 
 -- append baleWrapper.doStateChange to initiate fermentation
 function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
-
     if self.isServer then
         if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
             local bale = self.lastDroppedBale
