@@ -21,7 +21,7 @@ end
 
 -- Filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
-    if self.coverCounter == nil then self.coverCounter = 0 end; --FIXME: maybe when ssFieldJobManager initializes?
+    if self.coverCounter == nil then self.coverCounter = 0 end
 
     if self.coverCounter > 500 or self.currentFieldPartitionIndex ~= nil or self:isFieldJobActive() then
         superFunc(self, dt + self.coverCounter)
