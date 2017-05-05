@@ -199,7 +199,7 @@
         <text name="ss_helpText_09_02" text="" />
         <!-- Missing translation of "Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." -->
         <text name="ss_helpText_09_03" text="" />
-        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold as their price is 0. Grass, baled or loose, cannot be sold, as their price is also 0. Wrap the grass bales before selling them." -->
+        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold. Grass, baled or loose, cannot be sold, as their price is also 0. Wrap the grass bales before selling them." -->
         <text name="ss_helpText_09_04" text="" />
 
         <!-- Missing translation of "Crops - Trees" -->

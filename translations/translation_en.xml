@@ -171,7 +171,7 @@
         <text name="ss_helpText_09_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
         <text name="ss_helpText_09_02" text="Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." />
         <text name="ss_helpText_09_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
-        <text name="ss_helpText_09_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold as their price is 0. Grass, baled or loose, cannot be sold, as their price is also 0. Wrap the grass bales before selling them." />
+        <text name="ss_helpText_09_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold. Grass, baled or loose, cannot be sold, as their price is also 0. Wrap the grass bales before selling them." />
 
         <text name="ss_helpTitle_10" text="Crops - Trees" />
         <text name="ss_helpText_10_01" text="Trees take more time to reach their fully grown state. It will take plantable trees 5 game years to be fully grown and after 2 years they can be cut." />
