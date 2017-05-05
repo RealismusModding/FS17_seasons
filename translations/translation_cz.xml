@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
     <translationContributors>gorgona, DrewCZ</translationContributors>
     <texts>
@@ -81,7 +81,7 @@
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
-        <text name="warning_animalsKilled" text="Zvířata chcípnou za %d dní." />
+        <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
 
         <text name="ui_pageOverview" text="Přehled" />
@@ -123,179 +123,102 @@
 
         <text name="fillType_snow" text="Sníh" />
 
-        <!-- Missing translation of "Seasons" -->
-        <text name="ss_helpCategory" text="" />
+          <text name="ss_helpCategory" text="Roční období" />
 
-        <!-- Missing translation of "Seasons" -->
-        <text name="ss_helpTitle_01" text="" />
-        <!-- Missing translation of "Seasons is a mod that improves realism in the Farming Simulator game by adjusting nearly all aspects  to more realistic parameters. Everything from seasonal effects to crop growth patterns to animal production has been changed to a more realistic level." -->
-        <text name="ss_helpText_01_01" text="" />
-        <!-- Missing translation of "The game year has been broken up into 4 seasons: spring, summer, autumn and winter. Each season is broken into 3 parts: early, mid and late. These parts are referred to as transitions." -->
-        <text name="ss_helpText_01_02" text="" />
-        <!-- Missing translation of "Your activities are tied to the time of year they take place in real life." -->
-        <text name="ss_helpText_01_03" text="" />
+        <text name="ss_helpTitle_01" text="Roční období" />
+        <text name="ss_helpText_01_01" text="Roční období je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
+        <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: rané, střední a pozdní. Tyto díly jsou označovány jako přechody." />
+        <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu odehrávající se v reálném životě." />
+        
+        <text name="ss_helpTitle_02" text="Sezónní efekty (1)" />
+        <text name="ss_helpText_02_01" text="Předpověď je náhodná ze dne na den, ale sleduje vzor sezónu od sezóny." />
+        <text name="ss_helpText_02_02" text="Jaro bude deštivé a mlhavé s možností na slunečné počasí. Léto bude teplejší a sušší. Kroupy bouře může přjít bez varování. Podzim bude deštivý s nějakým slunečného počasí. Zima bude deštivo, ale často dost studená, bude padat sníh, možná dokonce zůstane na zemi." />
+        <text name="ss_helpText_02_03" text="Sníh bude naplňovat sklápěče a lopaty, pokud není sklápěč nebo lopata ukryta v kůlně se sněhovou maskou nebo plachtou. Sníh také sníží trakci, čímž se vozidlo zpomalí." />
+        
+        <text name="ss_helpTitle_03" text="Sezónní efekty (2)" />
+        <text name="ss_helpText_03_01" text="Denní světlo je také ovlivňováno ročním obdobím. Zimy mají kratší dny (8 hodin), zatímco léto má delší dny (17 hodin)." />
+        <text name="ss_helpText_03_02" text="Silážn sila a silážní balíky vyžadují čas k fermentaci. Trvá jednu třetinu ročních období (1 přechod) k úplnému zkvašení buď silážního sila nebo siláž bal. Obalené seno nebude kvasit, ale bude chráněno proti počasí." />
+        <text name="ss_helpText_03_03" text="Roční období také ovlivní stromy a listí. Stromy změní stav podle sezónních teplotních změn. Listy změní barvu a opadnou na podzim. Stromy budou v zimě holé a na jaře budou světlezelené." />
+        
+        <text name="ss_helpTitle_04" text="Předpověď počasí" />
+        <text name="ss_helpText_04_01" text="Předpověď počasí byla znovu zavedena se sezónním obdobím a může být aktivována levý  Alt + F." />
+        <text name="ss_helpText_04_02" text="Předpověď počasí ukazuje vysoké / nízké teploty a počasí (slunečné, mlhavé, deštivé, zasněžené, oblačno) po dobu dalších 7 dnů. Krupobití se na předpovědi počasí nezobrazí, protože krupobití v reálném životě je často nečekanou událostí." />
+        <text name="ss_helpText_04_03" text="Číslo na pravé straně každého bloku předpovědi představuje den sezóny." />
 
-        <!-- Missing translation of "Seasonal Effects (1)" -->
-        <text name="ss_helpTitle_02" text="" />
-        <!-- Missing translation of "Weather is random from day to day, but follows a pattern from season to season." -->
-        <text name="ss_helpText_02_01" text="" />
-        <!-- Missing translation of "Spring will be rainy and foggy with some chances of sunny weather. Summer will be warmer and drier. Hail storms can occur without any warning. Autumn will be rainy with some sunny weather. Winter will be rainy, but often cold enough to allow snow to fall, maybe even stay on the ground." -->
-        <text name="ss_helpText_02_02" text="" />
-        <!-- Missing translation of "Snow will fill tippers and shovels, unless the tipper or shovel is covered in a shed with a snow mask or a tarp. Snow will also reduce traction, thus making vehicles slower." -->
-        <text name="ss_helpText_02_03" text="" />
+        <text name="ss_helpTitle_05" text="Půda" />
+        <text name="ss_helpText_05_01" text="Teplota půdy je modelována pomocí termodynamických rovnic a historických dat. To znamená, že půda zmrzne v zimě, kdy teplota vzduchu klesne pod určitou hodnotu po určitou dobu. Půda se pak rozmrzá na jaře, když teplota vzduchu stoupne nad určitou prahovou hodnotu po určitou dobu." />
+        <text name="ss_helpText_05_02" text="Půda nemůže být zpracována, když je půda zmrzlá. Plodiny nebudou růst v zmrzlé půdě." />
+        <text name="ss_helpText_05_03" text="Plodiny budou klíčit pouze tehdy, když teplota půdy přesáhne jejich klíčivost. Teploty klíčení jsou uvedeny na první stránce nabídky Nastavení sezóny (Left Alt + S)." />
 
-        <!-- Missing translation of "Seasonal Effects (2)" -->
-        <text name="ss_helpTitle_03" text="" />
-        <!-- Missing translation of "Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." -->
-        <text name="ss_helpText_03_01" text="" />
-        <!-- Missing translation of "Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale. Wrapped hay will not ferment, but they will be protected against the weather." -->
-        <text name="ss_helpText_03_02" text="" />
-        <!-- Missing translation of "Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." -->
-        <text name="ss_helpText_03_03" text="" />
+        <text name="ss_helpTitle_06" text="Plodiny - úvod" />
+        <text name="ss_helpText_06_01" text="Při spuštění nové hry budou všechny plodiny vynulovány na sklizené etapy, aby se simulovala skutečnost, že na polích nebylo pracováno od podzimu. Pokud používáte Seasons poprvé v existující hře, máte možnost buď obnovit plodiny, nebo ne." />
+        <text name="ss_helpText_06_02" text="Standardní doby růstu plodin byly nahrazeny obdobími. Plodiny budou nyní sledovat realistický růst odpovídající sezónní výsadbě a době sklizně. To také znamená, že zima zničí většinu plodin a plodiny vysazené v nesprávné době nebudou růst." />
+        <text name="ss_helpText_06_03" text="Plodiny jsou sklízeny až v konečné fázi růstu, s výjimkou topolu a řepky olejky, a zůstanou v této poslední fázi, dokud nebudou v zimě zničeny." />
+        <text name="ss_helpText_06_04" text="Stále můžete silážovat zelené plodiny." />
 
-        <!-- Missing translation of "Weather Forecast" -->
-        <text name="ss_helpTitle_04" text="" />
-        <!-- Missing translation of "The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F." -->
-        <text name="ss_helpText_04_01" text="" />
-        <!-- Missing translation of "The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." -->
-        <text name="ss_helpText_04_02" text="" />
-        <!-- Missing translation of "The number on the right of each forecast block represents the day of the season." -->
-        <text name="ss_helpText_04_03" text="" />
+        <text name="ss_helpTitle_07" text="Plodiny - Plodiny na orné půdě" />
+        <text name="ss_helpText_07_01" text="Růst plodin je nyní mnohem delší. Může trvat půl roku, než plodina dosáhne zralosti." />
+        <text name="ss_helpText_07_02" text="Zima zničí většinu plodin, ale jsou možné i zimní a jarní plodiny. Pšenice, ječmen, topol, tráva, řepky olejky a řepka mohou být vysazeny na podzim jako zimní plodiny nebo vysázeny na jaře jako jarní plodiny. Ujistěte se, že půda je dost teplá pro klíčení těchto plodin." />
+        <text name="ss_helpText_07_03" text="Kukuřice, sója, slunečnice, cukrová řepa a brambory musí být vysázeny na jaře. Nezapomeňte zkontrolovat přehled růstu v nabídce sezón, protože některé plodiny nelze vysadit při prvním přechodu jara (brzy na jaře) a uhynou, i když je teplota půdy vyšší než klíčivost." />
 
-        <!-- Missing translation of "Soil" -->
-        <text name="ss_helpTitle_05" text="" />
-        <!-- Missing translation of "Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." -->
-        <text name="ss_helpText_05_01" text="" />
-        <!-- Missing translation of "The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." -->
-        <text name="ss_helpText_05_02" text="" />
-        <!-- Missing translation of "Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." -->
-        <text name="ss_helpText_05_03" text="" />
+        <text name="ss_helpTitle_08" text="Plodiny - seno, sláma a tráva" />
+        <text name="ss_helpText_08_01" text="V zimě se tráva vynuluje na sklizenou plochu, aby simulovala zimní uvadání trávy, když se ochladí." />
+        <text name="ss_helpText_08_02" text="Balíky trávy je třeba použít nebo zabalit do fólie do 2 dnů od balicího procesu. Po 2 dnech bude tráva hnit a balík zmizí." />
+        <text name="ss_helpText_08_03" text="Řádky sena, trávy a slámy se začnou zmenšovat a nakonec zmizí po několika dnech. Řádek trávy se každý den zmenší o půlnoci. Řádek slámy a sena se zmenší po každém růstovém stádiu i po vystavení dešti." />
+        <text name="ss_helpText_08_04" text="Sláma a seno musí být baleny před tím, než mohou být prodány - sypaná sláma a seno nemohou být prodávány, protože jejich cena je 0. Tráva, balená nebo volná, nemůže být prodána, neboť jejich cena je také 0. Před prodejem balíky trávy obalte." />
 
-        <!-- Missing translation of "Crops - Intro" -->
-        <text name="ss_helpTitle_06" text="" />
-        <!-- Missing translation of "When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." -->
-        <text name="ss_helpText_06_01" text="" />
-        <!-- Missing translation of "The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." -->
-        <text name="ss_helpText_06_02" text="" />
-        <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." -->
-        <text name="ss_helpText_06_03" text="" />
-        <!-- Missing translation of "You can still silage green crops." -->
-        <text name="ss_helpText_06_04" text="" />
+        <text name="ss_helpTitle_09" text="Plodiny - stromy" />
+        <text name="ss_helpText_09_01" text="Stromy rostou déle, než dosáhnou své plné velikosti.Doba růstu od výsadby do konečné velikosti 5 let, po 2 letech je možné stromy řezat." />
+        <text name="ss_helpText_09_02" text="Stromy zabraňují růstu ostatních stromů, pokud byly vysazeny příliš blízko sebe. Chcete-li znovu spustit růst stromu, budete muset stromy prořezat." />
 
-        <!-- Missing translation of "Crops - Arable Crops" -->
-        <text name="ss_helpTitle_07" text="" />
-        <!-- Missing translation of "Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." -->
-        <text name="ss_helpText_07_01" text="" />
-        <!-- Missing translation of "Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." -->
-        <text name="ss_helpText_07_02" text="" />
-        <!-- Missing translation of "Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." -->
-        <text name="ss_helpText_07_03" text="" />
+        <text name="ss_helpTitle_10" text="Plodiny - účinky počasí" />
+        <text name="ss_helpText_10_01" text="Déšť, krupobití a sníh ovlivňují hladinu vlhkosti plodin.Pokud je vlhkost plodiny nad určitým bodem kvůli špatnému počasí, nebudete moci sklízet plodiny.Vlhké letní noci mohou nastat bez varování." />
+        <text name="ss_helpText_10_02" text="Po dešti budou vaše plodiny potřebovat čas na vyschnutí, což závisí na teplotě vzduchu a na ročním období. Teplejší počasí znamená, že plodiny vyschnou rychleji než v chladnějším počasí." />
+        <text name="ss_helpText_10_03" text="Použitím obraceče na seno, zatímco plodiny jsou mokré, vytvoříte mokrou trávu. Ujistěte se, že používáte pouze obraceč, když jsou plodiny dostatečně suché." />
+        <text name="ss_helpText_10_04" text="Na mapě mod, která byla připravena se sněhovou maskou modifikovaného sena a balíků slámy, které byly vystaveny dešti nebo sněhu, začne hnit, pokud nejsou balíky uloženy v kůlně se sněhovou maskou. Špatné počasí neovlivní zabalené balíky nebo balíky na mapě bez sněhové masky." />
 
-        <!-- Missing translation of "Crops - Hay, Straw and Grass" -->
-        <text name="ss_helpTitle_08" text="" />
-        <!-- Missing translation of "In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." -->
-        <text name="ss_helpText_08_01" text="" />
-        <!-- Missing translation of "Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." -->
-        <text name="ss_helpText_08_02" text="" />
-        <!-- Missing translation of "Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." -->
-        <text name="ss_helpText_08_03" text="" />
-        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." -->
-        <text name="ss_helpText_08_04" text="" />
+        <text name="ss_helpTitle_11" text="Údržba" />
+        <text name="ss_helpText_11_01" text="Vaše traktory a kombajny vyžadují pravidelnou údržbu, aby byly funkční. Perioda údržby je každých 30 hodin nebo půl roku, podle toho, co nastane dříve. Vozidla, která jsou po jejich údržbě vydrží déle " />
+        <text name="ss_helpText_11_02" text="Vaše vozidla můžete opravit buď ve vozidle, nebo ve vozidlové garáži. Chcete-li opravit své vozidlo, jeďte s vozidlem do garáže nebo umístěte do garáže a stiskněte levou klávesu Alt + R. Uvědomte si, že bude opravovat dražší ve vozidle." />
+        <text name="ss_helpText_11_03" text="Věk vašeho vozidla je dnů od poslední opravy." />
+        <text name="ss_helpText_11_04" text="Pouze jízdní vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
-        <!-- Missing translation of "Crops - Trees" -->
-        <text name="ss_helpTitle_09" text="" />
-        <!-- Missing translation of "Trees take more time to reach their fully grown state. It will take plantable trees 5 game years to be fully grown and after 2 years they can be cut." -->
-        <text name="ss_helpText_09_01" text="" />
-        <!-- Missing translation of "Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees." -->
-        <text name="ss_helpText_09_02" text="" />
+        <text name="ss_helpTitle_12" text="Ekonomika" />
+        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z 200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je 300 000 a maximální výše úvěru je 1 000 000." />
+        <text name="ss_helpText_12_02" text="Výnosy z misí byly sníženy. Vyděláte zhruba pětkrát více než najatý pracovník pracující na stejném poli." />
+        <text name="ss_helpText_12_03" text="Údržba všech vozidel (kromě pravidelné údržby) zahrnuje údržbu a daně ve vztahu k tomu, kolik se používají. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, také sníží náklady na údržbu." />
+        <text name="ss_helpText_12_04" text="Ceny úrody kolísají se změnami v ročních obdobích realisticky." />
 
-        <!-- Missing translation of "Crops - Weather Effects" -->
-        <text name="ss_helpTitle_10" text="" />
-        <!-- Missing translation of "Rain, hail and snow affect the moisture levels of the crops. If the moisture in the crops is above certain point because of bad weather, you will not be able to harvest your crops. Moist summer nights can occur without warning." -->
-        <text name="ss_helpText_10_01" text="" />
-        <!-- Missing translation of "After the rain your crops will need time to dry out, which is dependent upon the air temperature and the time of year. Warmer weather means crops will dry out faster than in cooler weather." -->
-        <text name="ss_helpText_10_02" text="" />
-        <!-- Missing translation of "Using a tedder on hay while crops are wet will produce wet grass. Be certain to only use a tedder when the crops are dry enough." -->
-        <text name="ss_helpText_10_03" text="" />
-        <!-- Missing translation of "On a mod map that has been prepared with a snow mask by the modder hay and straw bales that have been exposed to the rain or snow will begin to rot, unless the bales are stored in a shed with a snow mask. Bad weather will not affect wrapped bales or bales on a map without a snow mask." -->
-        <text name="ss_helpText_10_04" text="" />
+        <text name="ss_helpTitle_13" text="Najatá pomoc" />
+        <text name="ss_helpText_13_01" text="Najímaní pracovníci vyžadují odměnu za přesčas. Pokud je zaměstnanec zaměstnán před 6:00 a po 18:00 nebo o víkendech, bude jeho plat 50% vyšší." />
 
-        <!-- Missing translation of "Maintenance" -->
-        <text name="ss_helpTitle_11" text="" />
-        <!-- Missing translation of "Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." -->
-        <text name="ss_helpText_11_01" text="" />
-        <!-- Missing translation of "You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." -->
-        <text name="ss_helpText_11_02" text="" />
-        <!-- Missing translation of "The age of your vehicle is the days since your last repair." -->
-        <text name="ss_helpText_11_03" text="" />
-        <!-- Missing translation of "Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." -->
-        <text name="ss_helpText_11_04" text="" />
+        <text name="ss_helpTitle_14" text="Zvířata - úvod" />
+        <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se sezónními parametry na realističtější parametry.Všechny druhy zvířat budou v létě konzumovat více vody než v zimě.V zimních měsících budou krávy a prasata vyžadovat více slámy Maximální kapacity krmení byly sníženy ze 6 dnů na 3 Dny." />
+        <text name="ss_helpText_14_02" text="Zvířata pouze produkují potomky v určitém čase roku. Prasata a ovce budou produkovat potomky na jaře, zatímco krávy produkují potomky v létě." />
+        <text name="ss_helpText_14_03" text="Zvířata uhynou, pokud nemají krmivo nebo vodu. Toto je zakázáno v případě obtížnosti Easy." />
+        <text name="ss_helpText_14_04" text="Tráva nemůžete krmit v zimě. Místo toho byste měli používat seno." />
 
-        <!-- Missing translation of "Economy" -->
-        <text name="ss_helpTitle_12" text="" />
-        <!-- Missing translation of "The loan cap has been changed from 200,000 to 30% of your owned land and placeable building values. The minimum loan cap is 300,000 and the maximum loan cap is 1,000,000." -->
-        <text name="ss_helpText_12_01" text="" />
-        <!-- Missing translation of "Income from missions have been reduced. You will earn roughly 5 times more than a hired worker working on the same field." -->
-        <text name="ss_helpText_12_02" text="" />
-        <!-- Missing translation of "Maintenance of all vehicles (in addition to the periodic maintenance) includes maintenance and taxes relative to how much it is being used. Clean machines will also reduce maintenance costs. Machines that are not used will also have their maintenance costs reduced." -->
-        <text name="ss_helpText_12_03" text="" />
-        <!-- Missing translation of "Crop prices fluctuate with the changes in the seasons in a more realistic manner." -->
-        <text name="ss_helpText_12_04" text="" />
+        <text name="ss_helpTitle_15" text="Zvířata - produkce" />
+        <text name="ss_helpText_15_01" text="Výroba mléka a vlny závisí na sezóně." />
+        <text name="ss_helpText_15_02" text="Vlna se produkuje pouze na jaře." />
+        <text name="ss_helpText_15_03" text="Mléko je vyráběno celoročně, ale v zimě a na jaře se zvyšuje. Zatímco tráva nemůže být krmena v zimě, normálně by se snížila produktivita krav na maximálně 80%. Seasons však zvyšuje produkci mléka v zimě a na jaře, aby vyrovnal nedostatek trávy v těchto měsících." />
 
-        <!-- Missing translation of "Hired Help" -->
-        <text name="ss_helpTitle_13" text="" />
-        <!-- Missing translation of "Hired workers require overtime pay. If a hired worker is used before 6AM and after 6PM, or on the weekends, his/her pay will be 50% higher." -->
-        <text name="ss_helpText_13_01" text="" />
+        <text name="ss_helpTitle_16" text="Seasons Menu" />
+        <text name="ss_helpText_16_01" text="Menu Seasons se používá jako referenční příručka pro výsadbu a změnu nastavení souvisejících se sezónními obdobími. Toto menu je aktivováno levým Alt + S." />
+        <text name="ss_helpText_16_02" text="První stránka je váš průvodce okno pro výsadbu a sklizeň.Teploty klíčení všech plodin jsou uvedeny vlevo od grafu. Pokud je teplota vedle plodiny bílá, znamená to, že je dostatečné teplo na to, aby jste tuto plodinu vypěstovali. Pokud je teplota modrá, je příliš chladno." />
+        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3/6/9/12 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstvá, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
 
-        <!-- Missing translation of "Animals - Intro" -->
-        <text name="ss_helpTitle_14" text="" />
-        <!-- Missing translation of "Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." -->
-        <text name="ss_helpText_14_01" text="" />
-        <!-- Missing translation of "Animals only give offspring at a certain time of the year. Pigs and sheep will produce offspring in the spring, while cows will produce offspring in the summer." -->
-        <text name="ss_helpText_14_02" text="" />
-        <!-- Missing translation of "Animals will die if they do not have food or water. This is disabled on Easy difficulty." -->
-        <text name="ss_helpText_14_03" text="" />
-        <!-- Missing translation of "Grass cannot be fed in the winter. You should use hay instead." -->
-        <text name="ss_helpText_14_04" text="" />
+        <text name="ss_helpTitle_17" text="HUD" />
+        <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje aktuální teplotu vzduchu na horní a dolní teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />
+        <text name="ss_helpText_17_02" text="Přímo pod časem se zobrazuje sezónní období a den aktuální sezóny." />
+        <text name="ss_helpText_17_03" text="Po aktivaci se prognóza HUD objeví pod hodinami v levém horním rohu." />
+        <text name="ss_helpText_17_04" text="Pokud je aktivována nabídka nápovědy (F1), časovač údržby se zobrazí v dolní části. Zobrazuje se pouze tehdy, když jste ve vozidle." />
 
-        <!-- Missing translation of "Animals - Production" -->
-        <text name="ss_helpTitle_15" text="" />
-        <!-- Missing translation of "Milk and wool production is dependent upon the season." -->
-        <text name="ss_helpText_15_01" text="" />
-        <!-- Missing translation of "Wool is only produced in the spring." -->
-        <text name="ss_helpText_15_02" text="" />
-        <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
-        <text name="ss_helpText_15_03" text="" />
-
-        <!-- Missing translation of "Seasons Menu" -->
-        <text name="ss_helpTitle_16" text="" />
-        <!-- Missing translation of "The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." -->
-        <text name="ss_helpText_16_01" text="" />
-        <!-- Missing translation of "The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "The second page is the settings menu. Here the season length (3/6/9/12 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." -->
-        <text name="ss_helpText_16_03" text="" />
-
-        <!-- Missing translation of "HUD" -->
-        <text name="ss_helpTitle_17" text="" />
-        <!-- Missing translation of "A HUD to the left of the clock in the upper left corner displays information relevant to Seasons. It shows the current air temperature on top and ground temperature on bottom. The state of the ground (wetcrops/frozen ground) is also displayed to the left of this HUD." -->
-        <text name="ss_helpText_17_01" text="" />
-        <!-- Missing translation of "Directly below the clock is where the seasonal period and day of the current season is displayed." -->
-        <text name="ss_helpText_17_02" text="" />
-        <!-- Missing translation of "When activated, the forecast HUD will appear below the clock in the upper left corner." -->
-        <text name="ss_helpText_17_03" text="" />
-        <!-- Missing translation of "When the help menu is activated (F1) the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." -->
-        <text name="ss_helpText_17_04" text="" />
-
-        <!-- Missing translation of "Miscellaneous" -->
-        <text name="ss_helpTitle_18" text="" />
-        <!-- Missing translation of "If you do not wish to work during the night, you have the option to skip to the morning. After the night falls and you are on foot you can press Left Alt + N to skip to the morning." -->
-        <text name="ss_helpText_18_01" text="" />
-        <!-- Missing translation of "If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." -->
-        <text name="ss_helpText_18_02" text="" />
-        <!-- Missing translation of "While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." -->
-        <text name="ss_helpText_18_03" text="" />
-        <!-- Missing translation of "All vehicles need to be started manually." -->
-        <text name="ss_helpText_18_04" text="" />
+        <text name="ss_helpTitle_18" text="Různé" />
+        <text name="ss_helpText_18_01" text="Pokud nechcete pracovat v noci, máte možnost přeskočit na ráno.Po setmění, můžete stisknout levý Alt + N přeskočit na ráno." />
+        <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry pro uložení, doporučuje se 1) změnit zimní období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně sezóny restartujte hru / sezónar délka." />
+        <text name="ss_helpText_18_03" text="Zatímco se jedná o hru, kterou chcete hrát, jak chcete, je navržena jako výzva pouze na hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte jaro pouze pěstováním a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a zacházením se zvířaty, stroji, lesy a prodejem plodin v zimě." />
+        <text name="ss_helpText_18_04" text="Všechna vozidla musí být spuštěna manuálně." />
     </texts>
 </l10n>
+
