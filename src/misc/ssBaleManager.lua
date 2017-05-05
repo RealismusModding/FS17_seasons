@@ -42,9 +42,11 @@ function ssBaleManager:reduceFillLevel()
 
             -- wrapped bales are not affected
             if bale.wrappingState ~= 1 then
+                local isGrassBale = bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1]
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
-                if ssSnow.snowMaskId ~= nil then
+                -- if there has been rain during the day
+                if ssSnow.snowMaskId ~= nil and not isGrassBale and g_currentMission.environment.timeSinceLastRain < 60 then
                     local dim = {}
 
                     if bale.baleDiameter ~= nil then
@@ -66,29 +68,23 @@ function ssBaleManager:reduceFillLevel()
 
                     local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
 
-                    -- check if the bale is outside and there has been rain during the day
-                    if density == 0 and g_currentMission.environment.timeSinceLastRain < 60 then
-
+                    -- check if the bale is outside
+                    if density == 0 then
                         if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
                             local origFillLevel = bale.fillLevel
                             local reductionFactor = self:calculateBaleReduction(bale)
+
                             bale.fillLevel = origFillLevel * reductionFactor
                         end
                     end
 
-                    if bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
-                        local origFillLevel = bale.fillLevel
-                        local reductionFactor = self:calculateBaleReduction(bale)
-                        bale.fillLevel = origFillLevel * reductionFactor
-                    end
-
-                -- without a snowmask reduce only unwrapped grass bales
-                elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+                -- with or without a snowmask reduce only unwrapped grass bales
+                elseif isGrassBale then
                     local origFillLevel = bale.fillLevel
                     local reductionFactor = self:calculateBaleReduction(bale)
+
                     bale.fillLevel = origFillLevel * reductionFactor
                 end
-
             end
         end
     end
@@ -193,7 +189,7 @@ function ssBaleManager:setFermentationTime()
 end
 
 function ssBaleManager.isBaleFermenting(bale)
-    return bale.fermentingProcess ~= nil and bale.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and bale.fillType ~= FillUtil.FILLTYPE_STRAW 
+    return bale.fermentingProcess ~= nil and bale.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and bale.fillType ~= FillUtil.FILLTYPE_STRAW
 end
 
 --------------------------------------------------------
@@ -267,7 +263,7 @@ end
 function ssBaleManager:baleWrapperLoad(savegame)
     if savegame ~= nil and not savegame.resetVehicles then
         local baleFillTypeSourceName = getXMLString(savegame.xmlFile, savegame.key .. "#baleFillTypeSource")
-        
+
         if baleFillTypeSourceName ~= nil then
             self.baleFillTypeSource = FillUtil.getFillTypesByNames(baleFillTypeSourceName)[1]
         end
@@ -276,11 +272,11 @@ end
 
 function ssBaleManager:baleWrapperGetSaveAttributesAndNodes(superFunc, nodeIdent)
     local attributes, nodes = superFunc(self, nodeIdent)
-    
+
     if attributes ~= nil and self.baleFillTypeSource ~= nil then
         attributes = attributes .. ' baleFillTypeSource="' .. Utils.getNoNil(FillUtil.fillTypeIntToName[self.baleFillTypeSource], "grass_windrow") .. '"'
     end
-    
+
     return attributes, nodes
 end
 
@@ -291,7 +287,7 @@ function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, r
     self.age = Utils.getNoNil(getXMLInt(xmlFile, key .. "#age"), 0)
     self.fermentingProcess = getXMLFloat(xmlFile, key .. "#fermentingProcess")
     local fermentingFillTypeName = Utils.getNoNil(getXMLString(xmlFile, key .. "#fermentingFillType"), "grass_windrow")
-    
+
     if self.fermentingProcess ~= nil then
         self.fillType = FillUtil.getFillTypesByNames(fermentingFillTypeName)[1]
     end
