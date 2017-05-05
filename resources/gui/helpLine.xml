@@ -53,27 +53,35 @@
         </helpLine>
 
         <!-- Crops - Arable Crops -->
+        <helpLine title="ss_helpTitle_07">
+            <item type="text" value="ss_helpText_07_01" />
+            <item type="text" value="ss_helpText_07_02" />
+            <item type="text" value="ss_helpText_07_03" />
+        </helpLine>
+
+        <!-- Crops - Hay, Straw, and Grass -->
         <helpLine title="ss_helpTitle_08">
             <item type="text" value="ss_helpText_08_01" />
             <item type="text" value="ss_helpText_08_02" />
             <item type="text" value="ss_helpText_08_03" />
-        </helpLine>
-
-        <!-- Crops - Hay, Straw, and Grass -->
-        <helpLine title="ss_helpTitle_09">
-            <item type="text" value="ss_helpText_09_01" />
-            <item type="text" value="ss_helpText_09_02" />
-            <item type="text" value="ss_helpText_09_03" />
-            <item type="text" value="ss_helpText_09_04" />
+            <item type="text" value="ss_helpText_08_04" />
         </helpLine>
 
         <!-- Crops - Trees -->
-        <helpLine title="ss_helpTitle_10">
-            <item type="text" value="ss_helpText_10_01" />
-            <item type="text" value="ss_helpText_10_02" />
+        <helpLine title="ss_helpTitle_09">
+            <item type="text" value="ss_helpText_09_01" />
+            <item type="text" value="ss_helpText_09_02" />
         </helpLine>
 
         <!-- Crops - Weather Effects -->
+        <helpLine title="ss_helpTitle_10">
+            <item type="text" value="ss_helpText_10_01" />
+            <item type="text" value="ss_helpText_10_02" />
+            <item type="text" value="ss_helpText_10_03" />
+            <item type="text" value="ss_helpText_10_04" />
+        </helpLine>
+
+        <!-- Maintenance -->
         <helpLine title="ss_helpTitle_11">
             <item type="text" value="ss_helpText_11_01" />
             <item type="text" value="ss_helpText_11_02" />
@@ -81,7 +89,7 @@
             <item type="text" value="ss_helpText_11_04" />
         </helpLine>
 
-        <!-- Maintenance -->
+        <!-- Economy -->
         <helpLine title="ss_helpTitle_12">
             <item type="text" value="ss_helpText_12_01" />
             <item type="text" value="ss_helpText_12_02" />
@@ -89,54 +97,46 @@
             <item type="text" value="ss_helpText_12_04" />
         </helpLine>
 
-        <!-- Economy -->
+        <!-- Hired Help -->
         <helpLine title="ss_helpTitle_13">
             <item type="text" value="ss_helpText_13_01" />
-            <item type="text" value="ss_helpText_13_02" />
-            <item type="text" value="ss_helpText_13_03" />
-            <item type="text" value="ss_helpText_13_04" />
-        </helpLine>
-
-        <!-- Hired Help -->
-        <helpLine title="ss_helpTitle_14">
-            <item type="text" value="ss_helpText_14_01" />
         </helpLine>
 
         <!-- Animals - Intro -->
+        <helpLine title="ss_helpTitle_14">
+            <item type="text" value="ss_helpText_14_01" />
+            <item type="text" value="ss_helpText_14_02" />
+            <item type="text" value="ss_helpText_14_03" />
+            <item type="text" value="ss_helpText_14_04" />
+        </helpLine>
+
+        <!-- Animals - Production -->
         <helpLine title="ss_helpTitle_15">
             <item type="text" value="ss_helpText_15_01" />
             <item type="text" value="ss_helpText_15_02" />
             <item type="text" value="ss_helpText_15_03" />
-            <item type="text" value="ss_helpText_15_04" />
         </helpLine>
 
-        <!-- Animals - Production -->
+        <!-- Seasons menu -->
         <helpLine title="ss_helpTitle_16">
             <item type="text" value="ss_helpText_16_01" />
             <item type="text" value="ss_helpText_16_02" />
             <item type="text" value="ss_helpText_16_03" />
         </helpLine>
 
-        <!-- Seasons menu -->
+        <!-- HUD -->
         <helpLine title="ss_helpTitle_17">
             <item type="text" value="ss_helpText_17_01" />
             <item type="text" value="ss_helpText_17_02" />
             <item type="text" value="ss_helpText_17_03" />
+            <item type="text" value="ss_helpText_17_04" />
         </helpLine>
 
-        <!-- HUD -->
+        <!-- Misc. -->
         <helpLine title="ss_helpTitle_18">
             <item type="text" value="ss_helpText_18_01" />
             <item type="text" value="ss_helpText_18_02" />
             <item type="text" value="ss_helpText_18_03" />
-            <item type="text" value="ss_helpText_18_04" />
-        </helpLine>
-
-        <!-- Misc. -->
-        <helpLine title="ss_helpTitle_19">
-            <item type="text" value="ss_helpText_19_01" />
-            <item type="text" value="ss_helpText_19_02" />
-            <item type="text" value="ss_helpText_19_03" />
         </helpLine>
     </helpLineCategory>
 </helpLines>
