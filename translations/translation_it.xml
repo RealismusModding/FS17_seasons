@@ -2,12 +2,12 @@
 <l10n>
     <translationContributors>fcelsa, theSeb, zed636</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Season: Visualizza previsioni del tempo" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Season: Ripara Veicolo" />
-        <text name="input_SEASONS_SHOW_MENU" text="Season: Apri menu" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distanza piantatrice (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Salta la notte" />
-        <text name="SEASONS_HIDE_WF" text="Season: Nascondi previsioni del tempo" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Nascondi previsioni del tempo" />
 
         <text name="SS_WEEKDAY_1" text="Lunedì" />
         <text name="SS_WEEKDAY_2" text="Martedì" />
@@ -70,7 +70,7 @@
         <text name="warning_repairBrokenMachine" text="Motore danneggiato. Ripara il macchinario!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="alla mezzanotte" />
 
-        <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Season nel tuo salvataggio. Riprova!" />
+        <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
         <text name="SS_SEASON_INTRO_0" text="Un nuovo anno, un nuovo perido di semina." />
         <text name="SS_SEASON_INTRO_1" text="Il sole è alto, i prodotti crescono." />
@@ -113,9 +113,9 @@
         <text name="setting_controlsTemperature" text="Scala termometrica" />
         <text name="setting_moisture" text="Umidità raccolto" />
 
-        <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora i settaggi di Season? Cambiamenti nella lunghezza delle stagioni e crescita possono determinare problemi che si riparano solo dopo un anno/gioco." />
+        <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora i settaggi di Seasons? Cambiamenti nella lunghezza delle stagioni e crescita possono determinare problemi che si riparano solo dopo un anno/gioco." />
 
-        <text name="dialog_resetGrowth" text="Hai attivato Season su un salvataggio esistente. Season farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i tuoi raccolti. Senza un reset della crescita, Season non si comporterà correttamente." />
+        <text name="dialog_resetGrowth" text="Hai attivato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i tuoi raccolti. Senza un reset della crescita, Seasons non si comporterà correttamente." />
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
@@ -123,10 +123,10 @@
 
         <text name="fillType_snow" text="Neve" />
 
-        <text name="ss_helpCategory" text="Season" />
+        <text name="ss_helpCategory" text="Seasons" />
 
-        <text name="ss_helpTitle_01" text="Season" />
-        <text name="ss_helpText_01_01" text="Season è una mod che incrementa il realismo in Farming Simulator regolando quasi tutti gli aspetti del gioco su parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato modificato su un livello più realistico" />
+        <text name="ss_helpTitle_01" text="Seasons" />
+        <text name="ss_helpText_01_01" text="Seasons è una mod che incrementa il realismo in Farming Simulator regolando quasi tutti gli aspetti del gioco su parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato modificato su un livello più realistico" />
         <text name="ss_helpText_01_02" text="L'anno di gioco è stato suddiviso in quattro stagioni: primavera, estate, autunno e inverno. Ogni statgione può essere ulteriormente suddivisa in tre parti: iniziale, centrale e finale. Queste parti sono indicate come terzine" />
         <text name="ss_helpText_01_03" text="Le attività in gioco sono ora legate al periodo dell'anno in cui si svolgono nella vita reale." />
 
@@ -138,28 +138,28 @@
         <text name="ss_helpTitle_03" text="Effetti stagionali (2)" />
         <text name="ss_helpText_03_01" text="Anche le ore di luce sono influenzate dalle stagioni. Gli inverni hanno giorni più brevi (8 ore) mentre le estati hanno più giorni lunghi (17 ore)." />
         <text name="ss_helpText_03_02" text="Sia le trincee che le balle di insilato richiedono tempo per fermentare. E' necessario attendere un terzo di una stagione (1 transizione) per far fermentare completamente un silos o una balla fasciata. Fasciare le balle di fieno aiuterà a proteggerle dalle intemperie, ma non fermeteranno." />
-        <text name="ss_helpText_03_03" text="Season avrà effetto anche sugli alberi e sulle foglie. Gli alberi cambieranno lo stato secondo le variazioni stagionali di temperatura. In autunno le foglie cambieranno colore e cadranno, lasciando gli alberi spogli in inverno; in primavera invece si tingeranno di nuovo di un verde acceso." />
+        <text name="ss_helpText_03_03" text="Seasons avrà effetto anche sugli alberi e sulle foglie. Gli alberi cambieranno lo stato secondo le variazioni stagionali di temperatura. In autunno le foglie cambieranno colore e cadranno, lasciando gli alberi spogli in inverno; in primavera invece si tingeranno di nuovo di un verde acceso." />
 
         <text name="ss_helpTitle_04" text="Tempo metereologico" />
-        <text name="ss_helpText_04_01" text="Le previsioni meteo sono state reintrodotte con Season e per essere visualizzate è necessario premere la combinazione di tasti Alt Sinitro + F." />
+        <text name="ss_helpText_04_01" text="Le previsioni meteo sono state reintrodotte con Seasons e per essere visualizzate è necessario premere la combinazione di tasti Alt Sinitro + F." />
         <text name="ss_helpText_04_02" text="Le previsioni meteo mostrano le temperature massime/minime e il tempo (soleggiato, nebbioso, piovoso, nevoso, nuvoloso) per i prossimi 7 giorni. Le grandinate non appaiono sulle previsioni meteorologiche, come nella vita reale la grandine è spesso un evento inaspettato." />
         <text name="ss_helpText_04_03" text="Il numero a destra di ogni riquadro della singola previsione rappresenta il giorno della stagione." />
 
         <text name="ss_helpTitle_05" text="Terreno" />
         <text name="ss_helpText_05_01" text="La temperatura del suolo è modellata usando equazioni termodinamiche e dati storici. Ciò significa che il suolo si gelerà in inverno solo quando la temperatura dell'aria scende al di sotto di una certa gradazione per un determinato periodo di tempo. Il terreno si scongelerà in primavera quando la temperatura dell'aria salirà al di sopra una determinata soglia per un certo periodo di tempo." />
         <text name="ss_helpText_05_02" text="Il campo non può essere lavorato quando il terreno è congelato e le colture non cresceranno." />
-        <text name="ss_helpText_05_03" text="Le colture germinano solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nella prima pagina del menu' Impostazioni Season (Alt sinistro + S)." />
+        <text name="ss_helpText_05_03" text="Le colture germinano solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nella prima pagina del menu' Impostazioni Seasons (Alt sinistro + S)." />
 
         <text name="ss_helpTitle_06" text="Colture" />
-        <text name="ss_helpText_06_01" text="All'avvio di un nuovo gioco tutte le colture saranno ripristinate alla loro fase di crescita mietuto per simulare il fatto che i campi non sono stati lavorati dall'autunno precedente. Quando si utilizza Season per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
-        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Season. I raccolti seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di coltivazione e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
+        <text name="ss_helpText_06_01" text="All'avvio di un nuovo gioco tutte le colture saranno ripristinate alla loro fase di crescita mietuto per simulare il fatto che i campi non sono stati lavorati dall'autunno precedente. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
+        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. I raccolti seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di coltivazione e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture possono essere raccolte solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
         <text name="ss_helpText_06_04" text="E' ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
         <text name="ss_helpText_07_01" text="La crescita delle colture ora è molto più lunga, può essere necessario fino sei mesi per raggiungere la fase di raccolto." />
         <text name="ss_helpText_07_02" text="L'inverno ucciderà la maggior parte delle colture, ma sono possibili colture invernali e primaverili. Grano, orzo, pioppo, erba, rafano oleifero e colza possono essere piantati in autunno per colture invernali o in primavera per colture primaverili. Assicurati che il terreno sia abbastanza caldo per la germinazione di queste colture." />
-        <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menu Season la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
+        <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menu Seasons la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
 
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
         <text name="ss_helpText_08_01" text="In inverno l'erba viene ripristinata nella sua fase di crescita mietuto per simulare che il freddo non permette la crescita dell'erba stessa." />
@@ -193,7 +193,7 @@
         <text name="ss_helpText_13_01" text="Gli aiutanti richiedono pagamenti straordinari. Se viene impiegato prima delle ore 6 del mattino o dopo le 6 del pomeriggio o nei fine settimana, la sua retribuzione sarà superiore del 50%." />
 
         <text name="ss_helpTitle_14" text="Animali" />
-        <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Season a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le mucche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
+        <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le mucche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
         <text name="ss_helpText_14_02" text="Gli animali si moltiplicheranno solo in un certo periodo dell'anno. Maiali e pecore si riprodurranno solo in primavera, mentre le vacche solo in estate." />
         <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata su difficoltà Facile." />
         <text name="ss_helpText_14_04" text="L'erba non può alimentare gli animali in inverno, dovrai usare il fieno." />
@@ -201,15 +201,15 @@
         <text name="ss_helpTitle_15" text="Animali - Produzione" />
         <text name="ss_helpText_15_01" text="La produzione di latte e di lana dipende dalla stagione." />
         <text name="ss_helpText_15_02" text="La lana viene prodotta solo in primavera." />
-        <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle mucche al massimo all'80%. Tuttavia, Season aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
+        <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle mucche al massimo all'80%. Tuttavia, Seasons aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
 
-        <text name="ss_helpTitle_16" text="Menu' Season" />
-        <text name="ss_helpText_16_01" text="Il menu Season viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative alla stagione. Questo menu è attivabile con i tasti Alt sinistro + S." />
+        <text name="ss_helpTitle_16" text="Menu' Seasons" />
+        <text name="ss_helpText_16_01" text="Il menu Seasons viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative alla stagione. Questo menu è attivabile con i tasti Alt sinistro + S." />
         <text name="ss_helpText_16_02" text="La prima pagina è la tua guida per piantare e raccogliere. Le temperature di germinazione di tutte le colture sono mostrate sulla sinistra del grafico. Se il colore della temperatura accanto a una coltura è bianca, significa che è abbastanza caldo per piantare quella coltura particolare. Se invece la temperatura è blu, è troppo fredda." />
         <text name="ss_helpText_16_03" text="La seconda pagina è il menu delle impostazioni. Qui si imposta la lunghezza della stagione (3/6/9/12 giorni stagione), le notifiche delle stagioni (attiva/disattiva), la modalità neve (attiva/disattiva/solo 1-layer, tracce attive/disattive), l'umidità della colture (attiva/disattiva) e  può essere modificate anche la scala termodinamica (C/F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
-        <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Season; mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno congelato) verrà visualizzato a sinistra di questo HUD." />
+        <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons; mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno congelato) verrà visualizzato a sinistra di questo HUD." />
         <text name="ss_helpText_17_02" text="Direttamente sotto l'orologio è indicato il periodo stagionale e il giorno della stagione corrente." />
         <text name="ss_helpText_17_03" text="Quando è attiva, l'indicatore HUD viene visualizzato sotto l'orologio nell'angolo in alto a destra." />
         <text name="ss_helpText_17_04" text="Quando il menu di aiuto è attivato (F1), il timer di manutenzione viene visualizzato al fondo del menu' stesso. Questo viene visualizzato solo quando si è in un veicolo." />
