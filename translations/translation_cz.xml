@@ -6,7 +6,6 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Oprava vozidla" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otevřít menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin" />
-        <text name="input_SEASONS_SKIP_NIGHT" text="Přeskočit noc" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Skrýt předpověď počasí" />
 
         <text name="SS_WEEKDAY_1" text="Pondělí" />
@@ -81,7 +80,7 @@
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
-        <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
+        <text name="warning_animalsKilled" text="Zvířata chcípnou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
 
         <text name="ui_pageOverview" text="Přehled" />
@@ -97,11 +96,11 @@
         <text name="ui_plantingSeason" text="Sezóna výsadby" />
         <text name="ui_harvestSeason" text="Sezóna sklizně" />
 
-        <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
-        <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
-        <text name="tooltip_snow" text="Sníh bude padat během chladné zimy a blokovat silnice" />
-        <text name="tooltip_controlsHelp" text="Zobrazit předpovědi a klávesové zkratky v okně nápovědy F1" />
-        <text name="tooltip_snowTracks" text="Vozidla stlačí koly sníh a vytvoří stopy" />
+        <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období." />
+        <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období." />
+        <text name="tooltip_snow" text="Sníh bude padat během chladné zimy a blokovat silnice." />
+        <text name="tooltip_controlsHelp" text="Zobrazit předpovědi a klávesové zkratky v okně nápovědy F1." />
+        <text name="tooltip_snowTracks" text="Vozidla stlačí koly sníh a vytvoří stopy." />
         <text name="tooltip_controlsTemperature" text="Nastavit jednotky teploty, používané ve hře" />
         <text name="tooltip_moisture" text="Znemožnit mlácení, pokud je zrno mokré" />
 
@@ -119,27 +118,26 @@
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
-        <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání vpřed" />
 
         <text name="fillType_snow" text="Sníh" />
-
-        <text name="ss_helpCategory" text="Roční období" />
+        
+         <text name="ss_helpCategory" text="Roční období" />
 
         <text name="ss_helpTitle_01" text="Roční období" />
         <text name="ss_helpText_01_01" text="Roční období je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
         <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: rané, střední a pozdní. Tyto díly jsou označovány jako přechody." />
         <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu odehrávající se v reálném životě." />
-
+        
         <text name="ss_helpTitle_02" text="Sezónní efekty (1)" />
         <text name="ss_helpText_02_01" text="Předpověď je náhodná ze dne na den, ale sleduje vzor sezónu od sezóny." />
         <text name="ss_helpText_02_02" text="Jaro bude deštivé a mlhavé s možností na slunečné počasí. Léto bude teplejší a sušší. Kroupy bouře může přjít bez varování. Podzim bude deštivý s nějakým slunečného počasí. Zima bude deštivo, ale často dost studená, bude padat sníh, možná dokonce zůstane na zemi." />
         <text name="ss_helpText_02_03" text="Sníh bude naplňovat sklápěče a lopaty, pokud není sklápěč nebo lopata ukryta v kůlně se sněhovou maskou nebo plachtou. Sníh také sníží trakci, čímž se vozidlo zpomalí." />
-
+        
         <text name="ss_helpTitle_03" text="Sezónní efekty (2)" />
         <text name="ss_helpText_03_01" text="Denní světlo je také ovlivňováno ročním obdobím. Zimy mají kratší dny (8 hodin), zatímco léto má delší dny (17 hodin)." />
         <text name="ss_helpText_03_02" text="Silážn sila a silážní balíky vyžadují čas k fermentaci. Trvá jednu třetinu ročních období (1 přechod) k úplnému zkvašení buď silážního sila nebo siláž bal. Obalené seno nebude kvasit, ale bude chráněno proti počasí." />
         <text name="ss_helpText_03_03" text="Roční období také ovlivní stromy a listí. Stromy změní stav podle sezónních teplotních změn. Listy změní barvu a opadnou na podzim. Stromy budou v zimě holé a na jaře budou světlezelené." />
-
+        
         <text name="ss_helpTitle_04" text="Předpověď počasí" />
         <text name="ss_helpText_04_01" text="Předpověď počasí byla znovu zavedena se sezónním obdobím a může být aktivována levý  Alt + F." />
         <text name="ss_helpText_04_02" text="Předpověď počasí ukazuje vysoké / nízké teploty a počasí (slunečné, mlhavé, deštivé, zasněžené, oblačno) po dobu dalších 7 dnů. Krupobití se na předpovědi počasí nezobrazí, protože krupobití v reálném životě je často nečekanou událostí." />
@@ -184,7 +182,7 @@
         <text name="ss_helpText_11_04" text="Pouze jízdní vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
         <text name="ss_helpTitle_12" text="Ekonomika" />
-        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z 200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je 300 000 a maximální výše úvěru je 1 500 000." />
+        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z 200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je 300 000 a maximální výše úvěru je 1 000 000." />
         <text name="ss_helpText_12_02" text="Výnosy z misí byly sníženy. Vyděláte zhruba pětkrát více než najatý pracovník pracující na stejném poli." />
         <text name="ss_helpText_12_03" text="Údržba všech vozidel (kromě pravidelné údržby) zahrnuje údržbu a daně ve vztahu k tomu, kolik se používají. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, také sníží náklady na údržbu." />
         <text name="ss_helpText_12_04" text="Ceny úrody kolísají se změnami v ročních obdobích realisticky." />
@@ -221,3 +219,5 @@
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být spuštěna manuálně." />
     </texts>
 </l10n>
+   
+
