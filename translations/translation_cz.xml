@@ -6,8 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Oprava vozidla" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otevřít menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin" />
-        <!-- Missing translation of "Skip night" -->
-        <text name="input_SEASONS_SKIP_NIGHT" text="" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Přeskočit noc" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Skrýt předpověď počasí" />
 
         <text name="SS_WEEKDAY_1" text="Pondělí" />
@@ -125,10 +124,10 @@
 
         <text name="fillType_snow" text="Sníh" />
 
-        <text name="ss_helpCategory" text="Roční období" />
+        <text name="ss_helpCategory" text="Seasons" />
 
-        <text name="ss_helpTitle_01" text="Roční období" />
-        <text name="ss_helpText_01_01" text="Roční období je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
+        <text name="ss_helpTitle_01" text="Seasons" />
+        <text name="ss_helpText_01_01" text="Seasons je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
         <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: rané, střední a pozdní. Tyto díly jsou označovány jako přechody." />
         <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu odehrávající se v reálném životě." />
 
