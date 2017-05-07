@@ -113,9 +113,9 @@
         <text name="setting_controlsTemperature" text="Skala temperatury" />
         <text name="setting_moisture" text="Wilgotność zboża" />
 
-        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Sezonów? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
+        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Seasons? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
 
-        <text name="dialog_resetGrowth" text="Uruchomiłeś Sezony na starym stanie gry. Mod Sezonów chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie." />
+        <text name="dialog_resetGrowth" text="Uruchomiłeś Seasons na starym stanie gry. Seasons Mod chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie." />
         <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
@@ -123,24 +123,24 @@
 
         <text name="fillType_snow" text="Śnieg" />
 
-        <text name="ss_helpCategory" text="Sezony" />
+        <text name="ss_helpCategory" text="Seasons" />
 
-        <text name="ss_helpTitle_01" text="Sezony" />
-        <text name="ss_helpText_01_01" text="Sezony to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych po wzorce wzrostu upraw do produkcji zwierzęcej zostało zmienione na bardziej realistyczny." />
+        <text name="ss_helpTitle_01" text="Seasons" />
+        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych do wzorce wzrostu upraw i produkcji zwierzęcej zostało zmienione na bardziej realistyczny." />
         <text name="ss_helpText_01_02" text="Rok rozgrywki został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 części: wczesny, w połowie i późny. Te części są określane jako przejścia." />
         <text name="ss_helpText_01_03" text="Twoja działalność związana jest z porą roku rokiem, tak jak w prawdziwym życiu." />
 
-        <text name="ss_helpTitle_02" text="Efekty sezonów (1)" />
+        <text name="ss_helpTitle_02" text="Seasons Efekty (1)" />
         <text name="ss_helpText_02_01" text="Pogoda jest przypadkowa z dnia na dzień, ale według wzoru z sezonu na sezonu." />
         <text name="ss_helpText_02_02" text="Wiosną będzie deszczowo i mglisto z pewnymi szansami słonecznej pogody. Latem będzie cieplej i bardziej sucho. Burze z gradem mogą wystąpić bez ostrzeżenia. Jesienią pada dużo deszczu, ale pojawi się też słońce. Zimą będzie deszczowo, ale często wystarczaojąco zimno, aby spadł śnieg, może nawet pozostać na ziemi." />
         <text name="ss_helpText_02_03" text="Śnieg wypełnia przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską śnieżną* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(odpowiednio zmodyfikowany obiekt nieprzepuszcający śniegu do wnętrza)" />
 
-        <text name="ss_helpTitle_03" text="Efekty sezonów (2)" />
+        <text name="ss_helpTitle_03" text="Seasons Efekty (2)" />
         <text name="ss_helpText_03_01" text="Długość dnia została również zmieniona w sezonach. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
         <text name="ss_helpText_03_02" text="Silosy bunkrowe i bele kiszonkowe wymagają czasu na fermentację. Trwa to 1/3 sezonów (1 przejście), w celu pełnego sfermentowania silosu bunkrowego lub beli kiszonki. Owinięte siano nie sfermentuje, ale będie chronione przed wpływami atmosferycznymi." />
        ' <text name="ss_helpText_03_03" text="Sezony również ingerują w drzewa i rośliny. Drzewa zmieniają stan według sezonowych zmian temperatury. Liście zmienią kolor i spadną jesienią. Zimą drzewa będą gołe, a wiosną wiosną zazielenią się." />
 
-        <text name="ss_helpTitle_04" text="Prognoza pogody" />
+        <text name="ss_helpTitle_04" text="Prognoza Pogody" />
         <text name="ss_helpText_04_01" text="Prognoza pogody została ponownie wprowadzona w Sezony i może zostać aktywowana poprzez klawisze Lewy Alt + F." />
         <text name="ss_helpText_04_02" text="Prognoza pogody pokazuje wysoką/niskś temperaturę i pogodzę (słonecznie, mglisto, deszczowo, śnieżne, pochmurno) przez następne 7 dni. Gradobicie nie pojawia się w prognozie pogody, tak jak grad w prawdziwym życiu, jest to często niespodziewane wydarzenie." />
         <text name="ss_helpText_04_03" text="Liczba po prawej stronie każdego bloku prognozy reprezentuje dzień w sezonie." />
@@ -156,12 +156,12 @@
         <text name="ss_helpText_06_03" text="Uprawy mogą być zebrane tylko w końcowym stadium wzrostu (z wyjątkiem topoli i rzodkiewki oleistej) i pozostaną w ostatnim etapie dopóki nie zostaną 'zabite' zimą." />
         <text name="ss_helpText_06_04" text="Nadal możesz robić sieczkę z zielonych upraw." />
 
-        <text name="ss_helpTitle_07" text="Uprawy - Uprawa roślin" />
+        <text name="ss_helpTitle_07" text="Uprawy - Uprawa Roślin" />
         <text name="ss_helpText_07_01" text="Rośliny uprawiane są teraz znacznie dłużej. Uprawa może zająć pół roku w celu osiągnięcia gotowości do zbioru." />
         <text name="ss_helpText_07_02" text="Zima 'zabije' większość upraw, ale uprawy ozime i jare są możliwe. Pszenicę, jęczmień, topolę, trawę, rzodkiew oleistą i rzepak można uprawiać jesienią jako oziminy lub wiosną jako jare. Upewnij się, że gleba jest wystarczająco ciepła, aby uprawy wykiełkowały." />
         <text name="ss_helpText_07_03" text="Kukurydza, soja, słonecznik, buraki cukrowe i ziemniaki muszą być posiane/posadzone wiosną. Pamiętaj o kontroli wzrostu w Menu Sezony, ponieważ niektóre uprawy nie mogą być posiane/posadzone w pierwszym okresie wiosny (wczesną wiosną) i 'umrą', nawet jeśli temperatura gleby jest powyżej temperatury kiełkowania." />
 
-        <text name="ss_helpTitle_08" text="Uprawy - Siano, słoma i trawa" />
+        <text name="ss_helpTitle_08" text="Uprawy - Siano, Słoma i Trawa" />
         <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do stadium zebranej, aby symulować 'zabicie' trawy zimą, gdy robi się zimno." />
         <text name="ss_helpText_08_02" text="Bale trawy muszą być użyte lub owinięte w ciągu 2 dni od belowania. Po 2 dniach trawa zgnije, a bela zniknie." />
         <text name="ss_helpText_08_03" text="Pokosy siana, trawy i słomy zaczynają się zmniejszać, a po kilku dniach ostatecznie znikną. Pokosy traw zmniejszają się o północy każdego dnia. Pokosy siana i słomy zmniejszają się po każdym stadium wzrostu, jak również po wystawieniu na działanie deszczu." />
@@ -171,7 +171,7 @@
         <text name="ss_helpText_09_01" text="Drzewa potrzebują więcej czasu, aby osiągnąć w pełni rozwinięty stan. Posadzone drzew potrzebują 5 lat gry do ostecznego stanu rozwoju, po upływie 2 lat można już je ścinać." />
         <text name="ss_helpText_09_02" text="Drzewa hamują wzrost innych drzew, jeśli zostały rozmieszczone zbyt blisko siebie. Aby zrestartować wzrost drzew musisz je przerzedzić." />
 
-        <text name="ss_helpTitle_10" text="Uprawy - Efekty pogody" />
+        <text name="ss_helpTitle_10" text="Uprawy - Efekty Pogody" />
         <text name="ss_helpText_10_01" text="Deszcz, grad i śnieg wpływają na poziom wilgotności upraw. Jeśli wilgotność upraw znajduje się powyżej pewnego punktu z powodu złej pogody, nie będziesz mógł zebrać swoich plonów. Letnie wilgotne noce mogą pojawić się bez ostrzeżenia." />
         <text name="ss_helpText_10_02" text="Po opadach deszczu twoje rośliny potrzebują czasu na wyschnięcie, co zależy od temperatury powietrza i pory roku. W cieplejszy dzień, rośliny wyschną szybciej niż w chłodniejszy." />
         <text name="ss_helpText_10_03" text="Użycie przetrząsacza na sianie, gdy jest mokre spowoduje powstanie mokrej trawy. Upewnij się, że używasz przetrząsacza tylko, gdy uprawa jest już wystarczająco sucha." />
@@ -203,7 +203,7 @@
         <text name="ss_helpText_15_02" text="Wełna produkowana jest tylko wiosną." />
         <text name="ss_helpText_15_03" text="Mleko jest produkowane przez cały rok, ale produkcja jest zwiększana zimą i wiosną. Podczas gdy zimą nie można karmić zwierząt trawą zmniejszy to wydajność krów do co najwyżej 80%. Jednak Sezony zwiększają produkcję mleka zimą i wiosą, aby nadrobić brak trawy w tych miesiącach." />
 
-        <text name="ss_helpTitle_16" text="Menu sezonów" />
+        <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="Menu sezonów jest używane jako przewodnik siewu i zmiany ustawień związanych z Sezonami. To menu jest aktywowane przez Lewy Alt + S." />
         <text name="ss_helpText_16_02" text="Pierwsza strona jest twoim przewodnikiem po oknach siewów i żniw. Temperatury kiełkowania wszystkich roślin są pokazane po lewej stronie wykresu. Jeśli temperatura obok uprawy jest biała, oznacza to, że jest wystarczająco ciepło, aby zasiać/zasadzić tę konkretną uprawę. Jeśli temperatura jest niebieska, jest za zimno." />
         <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Długość sezonu (3/6/9/12 dniowy sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady wł/wył), wilgotność (wł/wył) i temperatura (C/F), wszystko tutaj możesz zmienić." />
