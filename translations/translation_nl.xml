@@ -125,11 +125,9 @@
 
         <text name="fillType_snow" text="Sneeuw" />
 
-        <!-- Missing translation of "Seasons" -->
-        <text name="ss_helpCategory" text="" />
+        <text name="ss_helpCategory" text="Seasons" />
 
-        <!-- Missing translation of "Seasons" -->
-        <text name="ss_helpTitle_01" text="" />
+        <text name="ss_helpTitle_01" text="Seasons" />
         <!-- Missing translation of "Seasons is a mod that improves realism in the Farming Simulator game by adjusting nearly all aspects  to more realistic parameters. Everything from seasonal effects to crop growth patterns and animal production has been changed to a more realistic level." -->
         <text name="ss_helpText_01_01" text="" />
         <!-- Missing translation of "The game year has been broken up into 4 seasons: spring, summer, autumn and winter. Each season is broken into 3 parts: early, mid and late. These parts are referred to as transitions." -->
