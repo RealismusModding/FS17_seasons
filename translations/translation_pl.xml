@@ -130,12 +130,12 @@
         <text name="ss_helpText_01_02" text="Rok rozgrywki został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 części: wczesny, w połowie i późny. Te części są określane jako przejścia." />
         <text name="ss_helpText_01_03" text="Twoja działalność związana jest z porą roku rokiem, tak jak w prawdziwym życiu." />
 
-        <text name="ss_helpTitle_02" text="Seasons Efekty (1)" />
+        <text name="ss_helpTitle_02" text="Sezonowe Efekty (1)" />
         <text name="ss_helpText_02_01" text="Pogoda jest przypadkowa z dnia na dzień, ale według wzoru z sezonu na sezonu." />
         <text name="ss_helpText_02_02" text="Wiosną będzie deszczowo i mglisto z pewnymi szansami słonecznej pogody. Latem będzie cieplej i bardziej sucho. Burze z gradem mogą wystąpić bez ostrzeżenia. Jesienią pada dużo deszczu, ale pojawi się też słońce. Zimą będzie deszczowo, ale często wystarczaojąco zimno, aby spadł śnieg, może nawet pozostać na ziemi." />
         <text name="ss_helpText_02_03" text="Śnieg wypełnia przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską śnieżną* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(odpowiednio zmodyfikowany obiekt nieprzepuszcający śniegu do wnętrza)" />
 
-        <text name="ss_helpTitle_03" text="Seasons Efekty (2)" />
+        <text name="ss_helpTitle_03" text="Sezonowe Efekty (2)" />
         <text name="ss_helpText_03_01" text="Długość dnia została również zmieniona w sezonach. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
         <text name="ss_helpText_03_02" text="Silosy bunkrowe i bele kiszonkowe wymagają czasu na fermentację. Trwa to 1/3 sezonów (1 przejście), w celu pełnego sfermentowania silosu bunkrowego lub beli kiszonki. Owinięte siano nie sfermentuje, ale będie chronione przed wpływami atmosferycznymi." />
         <text name="ss_helpText_03_03" text="Sezony również ingerują w drzewa i rośliny. Drzewa zmieniają stan według sezonowych zmian temperatury. Liście zmienią kolor i spadną jesienią. Zimą drzewa będą gołe, a wiosną wiosną zazielenią się." />
