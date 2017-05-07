@@ -132,7 +132,7 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons is a mod that improves realism in the Farming Simulator game by adjusting nearly all aspects  to more realistic parameters. Everything from seasonal effects to crop growth patterns to animal production has been changed to a more realistic level." />
+        <text name="ss_helpText_01_01" text="Seasons is a mod that improves realism in the Farming Simulator game by adjusting nearly all aspects  to more realistic parameters. Everything from seasonal effects to crop growth patterns and animal production has been changed to a more realistic level." />
         <text name="ss_helpText_01_02" text="The game year has been broken up into 4 seasons: spring, summer, autumn and winter. Each season is broken into 3 parts: early, mid and late. These parts are referred to as transitions." />
         <text name="ss_helpText_01_03" text="Your activities are tied to the time of year they take place in real life." />
 
