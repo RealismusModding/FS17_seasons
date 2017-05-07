@@ -217,7 +217,7 @@
         <text name="ss_helpTitle_18" text="Różne" />
         <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Po nadejściu nocy, gdy jesteś pieszo możesz nacisnąć Lewy Alt + N, aby przejść do rana." />
         <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakcie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Zrestartować grę/serwer po zmianie długość sezonu." />
-        <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie, w grę tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając i siejąc uprawy, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
+        <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie polegające na grze tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając ziemię i siejąc zboża, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />
     </texts>
 </l10n>
