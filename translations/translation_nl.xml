@@ -126,7 +126,7 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seizoenen is een mod die het realisme verbetert in het Farming Simulator spel door bijna alle aspecten aan te passen naar meer realistische parameters. Alles van seizoensgebonden effecten op gewasgroeipatronen en dierproductie is veranderd tot een meer realistisch niveau.
+        <text name="ss_helpText_01_01" text="Seasons is een mod die het realisme verbetert in het Farming Simulator spel door bijna alle aspecten aan te passen naar meer realistische parameters. Alles van seizoensgebonden effecten op gewasgroeipatronen en dierproductie is veranderd tot een meer realistisch niveau.
 " />
         <text name="ss_helpText_01_02" text="Het speljaar is opgebroken in 4 seizoenen: lente, zomer, herfst en winter. Elk seizoen is in 3 delen verdeeld: vroeg, midden en laat. Deze delen worden overgangen genoemd." />
         <text name="ss_helpText_01_03" text="Uw activiteiten zijn gebonden aan de tijd van het jaar dat ze in het echte leven plaatsvinden." />
@@ -145,7 +145,7 @@
         <text name="ss_helpText_03_03" text="" />
 
         <text name="ss_helpTitle_04" text="Weersvoorspellingen" />
-        <text name="ss_helpText_04_01" text="De weersverwachting is opnieuw geïntroduceerd met Seizoenen en kan geactiveerd worden door Left Alt + F." />
+        <text name="ss_helpText_04_01" text="De weersverwachting is opnieuw geïntroduceerd met Seasons en kan geactiveerd worden door Left Alt + F." />
         <!-- Missing translation of "The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." -->
         <text name="ss_helpText_04_02" text="" />
         <!-- Missing translation of "The number on the right of each forecast block represents the day of the season." -->
@@ -243,7 +243,7 @@
         <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
         <text name="ss_helpText_15_03" text="" />
 
-        <text name="ss_helpTitle_16" text="Seizoenen Menu" />
+        <text name="ss_helpTitle_16" text="Seasons Menu" />
         <!-- Missing translation of "The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." -->
         <text name="ss_helpText_16_01" text="" />
         <!-- Missing translation of "The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
