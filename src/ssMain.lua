@@ -27,15 +27,15 @@ function ssMain:preLoad()
     local modItem = ModsUtil.findModItemByModName(g_currentModName)
     self.modDir = g_currentModDirectory
 
-    local buildnumber = false--<%=buildnumber %>
+    local buildnumber = --<%=buildnumber %>
     self.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
     -- Simple version number for comparing minimum required version of seasons
-    self.simpleVersion = false--<%=simpleVersion %>
+    self.simpleVersion = --<%=simpleVersion %>
 
     -- Set global settings
-    self.verbose = false--<%=verbose %>
-    self.debug = false--<%=debug %>
+    self.verbose = --<%=verbose %>
+    self.debug = --<%=debug %>
     self.enabled = false -- will be enabled later in the loading process
 
     logInfo("Loading Seasons " .. self.version)
