@@ -81,7 +81,7 @@
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
-        <text name="warning_animalsKilled" text="Zvířata chcípnou za %d dní." />
+        <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
 
         <text name="ui_pageOverview" text="Přehled" />
@@ -119,8 +119,7 @@
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
 
         <text name="fillType_snow" text="Sníh" />
 
