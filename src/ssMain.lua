@@ -34,9 +34,9 @@ function ssMain:preLoad()
     self.simpleVersion = --<%=simpleVersion %>
 
     -- Set global settings
+    self.enabled = false -- will be enabled later in the loading process
     self.verbose = --<%=verbose %>
     self.debug = --<%=debug %>
-    self.enabled = false -- will be enabled later in the loading process
 
     logInfo("Loading Seasons " .. self.version)
 
