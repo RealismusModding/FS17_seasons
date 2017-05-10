@@ -2,9 +2,9 @@
 <l10n>
     <translationContributors>Rahkiin, theSeb, JoshvZeyl</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seizoenen: Laat weersvoorspelling zien" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seizoenen: Repareer voertuig" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seizoenen: Open menu" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Laat weersvoorspelling zien" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repareer voertuig" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Plantafstand (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Sla nacht over" />
         <text name="SEASONS_HIDE_WF" text="Verberg weersvoorspelling" />
@@ -134,7 +134,7 @@
         <text name="ss_helpTitle_02" text="Seizoensgebonden effecten (1)" />
         <text name="ss_helpText_02_01" text="Het weer is willekeurig van dag tot dag, maar volgt een patroon van seizoen tot seizoen." />
         <text name="ss_helpText_02_02" text="De lente zal regenachtig en mistig zijn met enkele kansen op zonnig weer. De zomer wordt warmer en droger. Hagel kan optreden zonder enige waarschuwing. Herfst wordt regenachtig met zonnig weer. Winter zal regenachtig, maar vaak koud genoeg om sneeuw te vallen, misschien zelfs op de grond blijven liggen.De lente zal regenachtig en mistig zijn met enkele kansen op zonnig weer. De zomer wordt warmer en droger. Hagel kan optreden zonder enige waarschuwing. Herfst wordt regenachtig met zonnig weer. Winter zal regenachtig, maar vaak koud genoeg zijn om sneeuw te laten vallen. Wat misschien zelfs op de grond blijft liggen." />
-        <text name="ss_helpText_02_03" text="Sneeuw zal vullen kiepers en bak, tenzij de kieper of bak is bedekt met een schuur met een sneeuwmask of een zeil. Sneeuw zal ook tractie verminderen, waardoor voertuigen langzamer worden." />
+        <text name="ss_helpText_02_03" text="Sneeuw zal vullen kiepers en bak, tenzij de kieper of bak is bedekt met een schuur met een snowmask of een zeil. Sneeuw zal ook tractie verminderen, waardoor voertuigen langzamer worden." />
 
         <text name="ss_helpTitle_03" text="Seizoensgebonden effecten (2)" />
         <!-- Missing translation of "Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." -->
@@ -166,12 +166,10 @@
         <text name="ss_helpText_06_02" text="" />
         <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." -->
         <text name="ss_helpText_06_03" text="" />
-        <!-- Missing translation of "You can still silage green crops." -->
-        <text name="ss_helpText_06_04" text="" />
+        <text name="ss_helpText_06_04" text="Je kan nog steeds groene gewassen inkuilen." />
 
         <text name="ss_helpTitle_07" text="Gewassen - Akkerbouwgewassen" />
-        <!-- Missing translation of "Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." -->
-        <text name="ss_helpText_07_01" text="" />
+        <text name="ss_helpText_07_01" text="Gewasgroei duurt een stuk langer. Het duurt mogelijk een half jaar voordat een gewas de oogstbare status behaald." />
         <!-- Missing translation of "Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." -->
         <text name="ss_helpText_07_02" text="" />
         <!-- Missing translation of "Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." -->
@@ -180,8 +178,7 @@
         <text name="ss_helpTitle_08" text="Gewassen - Hooi, Stro en Gras" />
         <!-- Missing translation of "In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." -->
         <text name="ss_helpText_08_01" text="" />
-        <!-- Missing translation of "Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." -->
-        <text name="ss_helpText_08_02" text="" />
+        <text name="ss_helpText_08_02" text="Gras balen moeten gebruikt worden of worden ingepakt voor kuilvoer binnen 2 dagen naar balenpersen. Na 2 dagen begint gras te rotten en zal de baal verdwijnen." />
         <!-- Missing translation of "Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." -->
         <text name="ss_helpText_08_03" text="" />
         <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." -->
@@ -194,7 +191,7 @@
         <text name="ss_helpText_09_02" text="" />
 
         <!-- Missing translation of "Crops - Weather Effects" -->
-        <text name="ss_helpTitle_10" text="" />
+        <text name="ss_helpTitle_10" text="Weer effecten" />
         <!-- Missing translation of "Rain, hail and snow affect the moisture levels of the crops. If the moisture in the crops is above certain point because of bad weather, you will not be able to harvest your crops. Moist summer nights can occur without warning." -->
         <text name="ss_helpText_10_01" text="" />
         <!-- Missing translation of "After the rain your crops will need time to dry out, which is dependent upon the air temperature and the time of year. Warmer weather means crops will dry out faster than in cooler weather." -->
@@ -237,9 +234,8 @@
         <text name="ss_helpText_14_04" text="Gras kan niet gevoerd worden in de winter. Je moet hooi gebruiken inplaats van gras." />
 
         <text name="ss_helpTitle_15" text="Dieren - Productie" />
-        <!-- Missing translation of "Milk and wool production is dependent upon the season." -->
-        <text name="ss_helpText_15_01" text="" />
-        <text name="ss_helpText_15_02" text="Wol wordt alleen geproduceerd in de lente" />
+        <text name="ss_helpText_15_01" text="melk en wol productie is afhankelijk van het seizoen." />
+        <text name="ss_helpText_15_02" text="Wol wordt alleen geproduceerd in de lente." />
         <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
         <text name="ss_helpText_15_03" text="" />
 
