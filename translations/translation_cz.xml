@@ -79,7 +79,7 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
 
-        <text name ="ss_version" text="Blah" />
+        <text name ="ss_version" text="V minulosti jste stáhli ukradené kopie našeho módu z webu, který nerespektuje komunitu modderů a porušil naše autorská práva nebo jste stáhli neúplnou verzi tohoto modu z našeho úložiště kódu . Vážíme si vaší horlivost a nadšení, ale bohužel uložená hra není kompatibilní s touto verzí Fashion Seasons. Prosím, nepoužívejte v budoucnu, webové stránky, které kradou z modů." />
         
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
