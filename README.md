@@ -9,7 +9,7 @@ This mod is not complete and is actively being worked on. Nothing is guaranteed 
 ***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
 ## Publishing
-Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
+Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site, or file sharing site.
 The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
