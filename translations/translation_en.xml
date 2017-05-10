@@ -84,7 +84,7 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
-        <text name ="ss_old_version" text="Blah" />
+        <text name ="ss_version" text="Blah" />
         
         <text name="warning_soilIsFrozen" text="The soil is frozen. You can't work on it!" />
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />

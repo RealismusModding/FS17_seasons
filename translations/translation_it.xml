@@ -79,7 +79,7 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
 
-        <text name ="ss_old_version" text="Blah" />
+        <text name ="ss_version" text="Blah" />
         
         <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non è possibile lavorarlo!" />
         <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!" />

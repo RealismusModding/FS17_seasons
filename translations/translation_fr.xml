@@ -79,7 +79,7 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne pas montrer à nouveau" />
 
-        <text name ="ss_old_version" text="Blah" />
+        <text name ="ss_version" text="Blah" />
         
         <text name="warning_soilIsFrozen" text="Le sol est gelé. Vous ne pouvez pas le travailler!" />
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />

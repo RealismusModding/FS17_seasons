@@ -59,17 +59,20 @@ end
 function ssEnvironment:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release
-                                                                                                            --to not break existing test save games
+    
+    self.lastGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", 0) 
+    
+    self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 0) 
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
 
     self._doInitalDayEvent = savegame == nil
+    self.lastGrowthStage = math.fmod(self.lastGrowthStage, self.TRANSITIONS_IN_YEAR + 1)
 end
 
 function ssEnvironment:save(savegame, key)
     ssXMLUtil.setInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
     ssXMLUtil.setInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
-    ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition) --TODO: fix this before release
+    ssXMLUtil.setInt(savegame, key .. ".environment.latestTransition", self.latestTransition)
     ssXMLUtil.setInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
@@ -101,6 +104,13 @@ end
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
+    
+    if self.lastGrowthStage > self.SEASON_SPRING then
+        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("ss_version"), 10000)
+        self = nil
+        return
+    end
+
      if self._doInitalDayEvent then
         self:callListeners()
         self._doInitalDayEvent = false
