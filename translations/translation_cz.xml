@@ -79,6 +79,8 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
 
+        <text name ="ss_old_version" text="Blah" />
+        
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
         <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />

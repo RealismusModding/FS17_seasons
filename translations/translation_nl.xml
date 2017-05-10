@@ -80,6 +80,8 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
 
+        <text name ="ss_old_version" text="Blah" />
+        
         <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
         <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn" />
         <text name="warning_animalsKilled" text="Dieren zijn dood gegaan (%d)" />

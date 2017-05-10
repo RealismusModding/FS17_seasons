@@ -79,6 +79,8 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Больше не сообщать" />
 
+        <text name ="ss_old_version" text="Blah" />
+        
         <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!" />
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!" />
         <text name="warning_animalsKilled" text="У Вас умерло животное (%d шт.)" />
