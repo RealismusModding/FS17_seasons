@@ -59,14 +59,11 @@ end
 function ssEnvironment:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", -1)
-    
-    self.lastGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", 0) 
-    
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 0) 
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
-
+    self.latestGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", -1) 
+    
     self._doInitalDayEvent = savegame == nil
-    self.lastGrowthStage = math.fmod(self.lastGrowthStage, self.TRANSITIONS_IN_YEAR + 1)
 end
 
 function ssEnvironment:save(savegame, key)
@@ -104,10 +101,9 @@ end
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
-    
-    if self.lastGrowthStage > self.SEASON_SPRING then
+     if self.latestGrowthStage >= self.SEASON_SPRING then
         g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("ss_version"), 10000)
-        self = nil
+        g_currentMission.environment.currentDay = nil
         return
     end
 
