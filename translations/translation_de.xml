@@ -79,7 +79,8 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
 
-         <text name ="ss_version" text="Blah" />
+        <!-- Missing translation of "You have in the past downloaded a stolen copy of our mod from a site which doesn’t respect the modding community and has violated our copyright, or downloaded an incomplete version of this mod from our code repository. We appreciate your eagerness and excitement, but unfortunately your save game is incompatible with this version of the Seasons mod. Please do not use sites which steal from modders in the future." -->
+         <text name ="ss_version" text="" />
          
         <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab." />
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
