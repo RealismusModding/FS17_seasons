@@ -81,6 +81,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
+- Growth and withering settings are disabled as this mod overwrites this functionality
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
@@ -89,6 +90,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Machine not used? Pay less
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
 - If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may be very hard to start it.
+- Motor start setting is disabled as this mod overwrites the functionality
 
 ### Economy
 - Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000
