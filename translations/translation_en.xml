@@ -160,7 +160,7 @@
         <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." />
         <text name="ss_helpText_06_02" text="The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." />
         <text name="ss_helpText_06_03" text="Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." />
-        <text name="ss_helpText_06_04" text="" />
+        <text name="ss_helpText_06_04" text="Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." />
         <text name="ss_helpText_06_05" text="You can still silage green crops." />
 
         <text name="ss_helpTitle_07" text="Crops - Arable Crops" />
