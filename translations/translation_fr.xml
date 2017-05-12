@@ -155,7 +155,7 @@
         <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques cultures semées à la mauvaise période ne pourront pas pousser." />
         <text name="ss_helpText_06_03" text="La récolte des cultures ne sera possible que pendant leur dernier cylce de croissance, mis à part les peupliers et les radis oléagineux. Elles resteront à cette étape jusqu'à ce que l'hiver les détruise." />
         <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
-        <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu esc, elle est prête à récolter. C'est la phase finale de récolte">
+        <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu esc, elle est prête à récolter. C'est la phase finale de récolte" />
         <text name="ss_helpText_06_05" text="Il est toujours possible d'ensiler une culture sur pied." />
 
         <text name="ss_helpTitle_07" text="Cultures - Arables" />
