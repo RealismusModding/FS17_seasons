@@ -156,7 +156,9 @@
         <text name="ss_helpText_06_01" text="Při spuštění nové hry budou všechny plodiny vynulovány na sklizené etapy, aby se simulovala skutečnost, že na polích nebylo pracováno od podzimu. Pokud používáte Seasons poprvé v existující hře, máte možnost buď obnovit plodiny, nebo ne." />
         <text name="ss_helpText_06_02" text="Standardní doby růstu plodin byly nahrazeny obdobími. Plodiny budou nyní sledovat realistický růst odpovídající sezónní výsadbě a době sklizně. To také znamená, že zima zničí většinu plodin a plodiny vysazené v nesprávné době nebudou růst." />
         <text name="ss_helpText_06_03" text="Plodiny jsou sklízeny až v konečné fázi růstu, s výjimkou topolu a řepky olejky, a zůstanou v této poslední fázi, dokud nebudou v zimě zničeny." />
-        <text name="ss_helpText_06_04" text="Stále můžete silážovat zelené plodiny." />
+        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
+        <text name="ss_helpText_06_04" text="">
+        <text name="ss_helpText_06_05" text="Stále můžete silážovat zelené plodiny." />
 
         <text name="ss_helpTitle_07" text="Plodiny - Plodiny na orné půdě" />
         <text name="ss_helpText_07_01" text="Růst plodin je nyní mnohem delší. Může trvat půl roku, než plodina dosáhne zralosti." />
