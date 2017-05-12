@@ -154,8 +154,7 @@
         <text name="ss_helpText_06_01" text="All'avvio di un nuovo gioco tutte le colture saranno ripristinate alla loro fase di crescita mietuto per simulare il fatto che i campi non sono stati lavorati dall'autunno precedente. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
         <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. I raccolti seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di coltivazione e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture possono essere raccolte solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
-        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
-        <text name="ss_helpText_06_04" text="">
+        <text name="ss_helpText_06_04" text="Una volta che una coltura, escluso patate e barbabietole, raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menu Esc, è pronta per la trebbiatura. Questa è la fase finale di maturazione.">
         <text name="ss_helpText_06_05" text="E' ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
