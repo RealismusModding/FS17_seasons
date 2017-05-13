@@ -156,8 +156,7 @@
         <text name="ss_helpText_06_01" text="Rozpoczynając nową grę wszystkie uprawy zostaną zresetowane do stanu zebranych, aby symulować sytuację, w której pola nie były uprawiane od jesieni. Uruchomienie modu Seasons po raz pierwszy w istniejącym zapisie gry pozwoli wybrać opcję zresetowania lub pozostawienia upraw." />
         <text name="ss_helpText_06_02" text="Domyślne wzorce wzrostu upraw zostały zastąpione w modzie Seasons. Uprawa zbóż będzie odwzorowywała realistyczne okresy zasiewów i zbiorów odpowiednie dla każdego ze zbóż. Oznacza to, że większość zbóż nie przetrwa zimy, a posiane w złym momencie nie urosną." />
         <text name="ss_helpText_06_03" text="Uprawy mogą być zebrane tylko w końcowym stadium wzrostu (z wyjątkiem topoli i rzodkiewki oleistej), w którym pozostaną, aż uschną z nadejściem zimy." />
-        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
-        <text name="ss_helpText_06_04" text="">
+        <text name="ss_helpText_06_04" text="Uprawy zbożowe są gotowe do zbioru w pierwszym etapie gotowości do zbioru wyświetlanej w sekcji wzrostu w podglądzie mapy. Jest to jednocześnie ich końcowe stadium wzrostu i gotowości do zbioru.">
         <text name="ss_helpText_06_05" text="Nadal można robić sieczkę z zielonych upraw." />
 
         <text name="ss_helpTitle_07" text="Uprawy - rośliny uprawne" />
