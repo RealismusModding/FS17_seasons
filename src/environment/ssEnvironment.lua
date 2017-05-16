@@ -104,6 +104,7 @@ function ssEnvironment:update(dt)
      if self._doInitalDayEvent then
         self:callListeners()
         self._doInitalDayEvent = false
+        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("msg_welcome"), 10000)
     end
 end
 
