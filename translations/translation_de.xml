@@ -83,6 +83,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend." />
+        <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Für Fragen zum Seasons Mod nutze das Hilfemenü durch Drücken der ESC-Taste." />
 
         <text name="ui_pageOverview" text="Übersicht" />
         <text name="ui_pageSettings" text="Einstellungen" />
@@ -155,7 +156,7 @@
         <text name="ss_helpText_06_02" text="Seasons verändert das gesamte Pflanzenwachstum.Die Pflanzen folgen nun ihrem natürlichen Zyklus und wachsen nun nur während ihrer typischen Zeiten. Ebenso sind nun die richtigen Aussaatzeiten von Bedeutung. Eine Übersicht erhaltet Ihr im Hilfefenster ALT links + S  Beachte: Im Winter werden die meisten Pflanzen absterben! Beende die Ernte also rechtzeitig. Wird eine Pflanze zur falschen Zeit gesäht kann es zu erheblichen Ernteausfällen kommen." />
         <text name="ss_helpText_06_03" text="Pflanzen sind nur in der letzten Wachstumsstufe erntbar." />
          <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
-		<text name="ss_helpText_06_04" text="" />
+        <text name="ss_helpText_06_04" text="" />
         <text name="ss_helpText_06_05" text="Grüne Pflanzen können weiterhin zur Silage benutzt werden." />
 
         <text name="ss_helpTitle_07" text="Acker-Pflanzen" />
@@ -187,13 +188,13 @@
 
         <text name="ss_helpTitle_12" text="Wirtschaft" />
          <!-- Missing translation of "The loan cap has been changed from 200,000 to 30% of your owned land and placeable building values. The minimum loan cap is 300,000 and the maximum loan cap is 1,500,000." -->
-		<text name="ss_helpText_12_01" text="" />
+	<text name="ss_helpText_12_01" text="" />
          <!-- Missing translation of "Income from missions have been reduced. You will earn roughly 5 times more than a hired worker working on the same field." -->
-		<text name="ss_helpText_12_02" text="" />
+	<text name="ss_helpText_12_02" text="" />
          <!-- Missing translation of "Maintenance of all vehicles (in addition to the periodic maintenance) includes maintenance and taxes relative to how much it is being used. Clean machines will also reduce maintenance costs. Machines that are not used will also have their maintenance costs reduced." -->
-		<text name="ss_helpText_12_03" text="" />
+	<text name="ss_helpText_12_03" text="" />
         <!-- Missing translation of "Crop prices fluctuate with the changes in the seasons in a more realistic manner." -->
-		<text name="ss_helpText_12_04" text="" />
+        <text name="ss_helpText_12_04" text="" />
 
         <text name="ss_helpTitle_13" text="Helfer" />
         <text name="ss_helpText_13_01" text="Eingestellte Helfer verlangen Überstundenzuschläge! Wird ein Helfer vor 6Uhr Morgens und nach 18Uhr Abends beschäftigt, erhält dieser einen Zuschlag von 50%. Dieser Zuschlag gilt ebenso für das gesamte Wochenende." />
@@ -224,7 +225,7 @@
         <text name="ss_helpText_18_01" text="Wenn Du Nachts nicht arbeiten möchtest, nutze die Funktion zur Nacht überspringen. Einfach am Anfang der Nacht die standartmäßig einstellte Tastenkombination  Alt links + N drücken und automatisch zum nächsten Morgen vorspulen.(Du musst außerhalb eines Fahrzeuges stehen)" />
         <text name="ss_helpText_18_02" text="Möchtest Du die Jahreszeitenlänge während eines aktiven Spielstandes verändern, solltest Du 1.) die Veränderung während des Winters vornehmen um ungewollte Probleme mit dem aktuellen Pflanzenwachstum zu bekommen 2.)sollte das Spiel bzw. der Onlineserver neugestartet werden." />
          <!-- Missing translation of "While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." -->
-		<text name="ss_helpText_18_03" text="" />
+	<text name="ss_helpText_18_03" text="" />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
     </texts>
 </l10n>
