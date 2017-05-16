@@ -335,10 +335,10 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
-    local lifetime = storeItem.lifetime
-    if factors ~= nil then
-        lifetime = Utils.getNoNil(factors.lifetime, lifetime)
+    if factors == nil then
+        factors = ssVehicle.repairFactors["other"]
     end
+    lifetime = factors.lifetime
 
     local p1, p2, p3, p4, depFac, brandFac
 
