@@ -85,8 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!" />
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
-        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
-        <text name="msg_welcome" text="" />
+        <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Nel menu' Esc ci sono tutte le indicazioni per utilizzare questa mod." />
         
         <text name="ui_pageOverview" text="Generali" />
         <text name="ui_pageSettings" text="Impostazioni" />
