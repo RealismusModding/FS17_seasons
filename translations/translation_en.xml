@@ -90,7 +90,8 @@
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />
         <text name="warning_animalsKilled" text="Animals died (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="The maximum capacity of the feeding trough suffices to feed the animals for 3 days." />
-
+        <text name="msg_welcome" text="Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." />
+        
         <!-- GUI -->
         <text name="ui_pageOverview" text="Overview" />
         <text name="ui_pageSettings" text="Settings" />

@@ -87,7 +87,9 @@
         <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado" />
         <text name="warning_animalsKilled" text="%d ha muerto" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="General" />
         <text name="ui_pageSettings" text="Configuración" />
         <text name="ui_pageDebug" text="Herramientas Desarrollo" />
