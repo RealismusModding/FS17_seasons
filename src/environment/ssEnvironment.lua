@@ -120,7 +120,7 @@ function ssEnvironment:update(dt)
         self.latestSeason = -1
         self:callListeners()
         self._doInitalDayEvent = false
-        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("msg_welcome"), 10000)
+        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("msg_welcome"), 30000)
     end
 end
 
