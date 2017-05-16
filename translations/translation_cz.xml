@@ -83,6 +83,8 @@
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
         <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
 
         <text name="ui_pageOverview" text="Přehled" />
         <text name="ui_pageSettings" text="Nastavení" />

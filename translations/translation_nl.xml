@@ -84,7 +84,9 @@
         <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn" />
         <text name="warning_animalsKilled" text="Dieren zijn dood gegaan (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="Overzicht" />
         <text name="ui_pageSettings" text="Instellingen" />
         <text name="ui_pageDebug" text="Debug" />
