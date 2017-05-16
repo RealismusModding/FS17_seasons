@@ -83,7 +83,9 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
         <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
@@ -154,7 +156,9 @@
         <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
         <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques cultures semées à la mauvaise période ne pourront pas pousser." />
         <text name="ss_helpText_06_03" text="La récolte des cultures ne sera possible que pendant leur dernier cylce de croissance, mis à part les peupliers et les radis oléagineux. Elles resteront à cette étape jusqu'à ce que l'hiver les détruise." />
-        <text name="ss_helpText_06_04" text="Il est toujours possible d'ensiler une culture sur pied." />
+        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
+        <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu esc, elle est prête à récolter. C'est la phase finale de récolte" />
+        <text name="ss_helpText_06_05" text="Il est toujours possible d'ensiler une culture sur pied." />
 
         <text name="ss_helpTitle_07" text="Cultures - Arables" />
         <text name="ss_helpText_07_01" text="La croissance des cultures prend maintenant beaucoup plus de temps. Cela peut durer jusqu'à 6 mois pour qu'une culture soit bonne à la récolte." />
@@ -216,8 +220,8 @@
 
         <text name="ss_helpTitle_18" text="Divers" />
         <text name="ss_helpText_18_01" text="Si vous ne souhaitez pas travailler pendant la nuit, vous pouvez aller directement au matin. Une fois la nuit tombée, il faut sortir de votre véhicule et appuyer sur 'Alt + N'." />
-        <text name="ss_helpText_18_02" text="Si vous souhaitez modifier la durée des saisons pour une partie en cours, il est recommandé de : 1) procéder au changement suelement pendant l'hiver afin de minimiser les effets indésirables sur les cultures en place. 2) redémarrer le jeu ensuite (sur le serveur le cas échéant)." />
-        <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représnte un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
+        <text name="ss_helpText_18_02" text="Si vous souhaitez modifier la durée des saisons pour une partie en cours, il est recommandé de : 1) procéder au changement seulement pendant l'hiver afin de minimiser les effets indésirables sur les cultures en place. 2) redémarrer le jeu ensuite (sur le serveur le cas échéant)." />
+        <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représente un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
         <text name="ss_helpText_18_04" text="Tous les véhicules doivent être démarrés manuellement." />
     </texts>
 </l10n>

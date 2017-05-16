@@ -1,5 +1,7 @@
 # FS17 Seasons (Not yet released, work in progress)
 
+***DO NOT SHARE THIS GITHUB LINK*** ***DO NOT UPLOAD ZIP FILES OF THIS MOD***
+
 This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
 
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
@@ -7,7 +9,7 @@ This mod is not complete and is actively being worked on. Nothing is guaranteed 
 ***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
 ## Publishing
-Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site.
+Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site, or file sharing site.
 The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
 This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
@@ -79,6 +81,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
+- Growth and withering settings are disabled as this mod overwrites this functionality
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
@@ -87,6 +90,7 @@ For a better game experience, custom maps should add two new density layers: one
 - Machine not used? Pay less
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
 - If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may be very hard to start it.
+- Motor start setting is disabled as this mod overwrites the functionality
 
 ### Economy
 - Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000

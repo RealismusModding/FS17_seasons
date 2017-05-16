@@ -84,7 +84,9 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
         <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetõvájú maximum kapacitása 3 napra elegendõ élelmet biztosít az állataidnak." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="Áttekintés" />
         <text name="ui_pageSettings" text="Beállítások" />
         <text name="ui_pageDebug" text="Hibakeresés" />
@@ -181,8 +183,10 @@
         <text name="ss_helpText_06_02" text="" />
         <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." -->
         <text name="ss_helpText_06_03" text="" />
+        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
+        <text name="ss_helpText_06_04" text="">
         <!-- Missing translation of "You can still silage green crops." -->
-        <text name="ss_helpText_06_04" text="" />
+        <text name="ss_helpText_06_05" text="" />
 
         <!-- Missing translation of "Crops - Arable Crops" -->
         <text name="ss_helpTitle_07" text="" />

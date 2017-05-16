@@ -81,8 +81,10 @@
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
-        <text name="warning_animalsKilled" text="Zvířata chcípnou za %d dní." />
+        <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
 
         <text name="ui_pageOverview" text="Přehled" />
         <text name="ui_pageSettings" text="Nastavení" />
@@ -119,8 +121,7 @@
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
+        <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
 
         <text name="fillType_snow" text="Sníh" />
 
@@ -155,7 +156,9 @@
         <text name="ss_helpText_06_01" text="Při spuštění nové hry budou všechny plodiny vynulovány na sklizené etapy, aby se simulovala skutečnost, že na polích nebylo pracováno od podzimu. Pokud používáte Seasons poprvé v existující hře, máte možnost buď obnovit plodiny, nebo ne." />
         <text name="ss_helpText_06_02" text="Standardní doby růstu plodin byly nahrazeny obdobími. Plodiny budou nyní sledovat realistický růst odpovídající sezónní výsadbě a době sklizně. To také znamená, že zima zničí většinu plodin a plodiny vysazené v nesprávné době nebudou růst." />
         <text name="ss_helpText_06_03" text="Plodiny jsou sklízeny až v konečné fázi růstu, s výjimkou topolu a řepky olejky, a zůstanou v této poslední fázi, dokud nebudou v zimě zničeny." />
-        <text name="ss_helpText_06_04" text="Stále můžete silážovat zelené plodiny." />
+        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
+        <text name="ss_helpText_06_04" text="">
+        <text name="ss_helpText_06_05" text="Stále můžete silážovat zelené plodiny." />
 
         <text name="ss_helpTitle_07" text="Plodiny - Plodiny na orné půdě" />
         <text name="ss_helpText_07_01" text="Růst plodin je nyní mnohem delší. Může trvat půl roku, než plodina dosáhne zralosti." />

@@ -2,9 +2,9 @@
 <l10n>
     <translationContributors>Dzi4d3k, KITT3000, theSeb</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Sezony: Pokaż prognozę pogody" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Sezony: Napraw pojazd" />
-        <text name="input_SEASONS_SHOW_MENU" text="Sezony: Otwórz menu" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Pokaż prognozę pogody" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Napraw pojazd" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otwórz menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Odległość sadzenia (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Pomiń noc" />
         <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody" />
@@ -58,7 +58,7 @@
 
         <text name="SS_VEHICLE_TAXES" text="Opłaty pojazdów" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Utrzymanie pojazdów" />
-        <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojadów" />
+        <text name="SS_VEHICLE_REPAIRS" text="Naprawy pojazdów" />
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać przegląd" />
         <text name="SS_VEHICLE_REPAIRED" text="Przegląd %s kosztował %s" />
@@ -70,7 +70,7 @@
         <text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
-        <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu Sezonów. Spróbuj ponownie!" />
+        <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
 
         <text name="SS_SEASON_INTRO_0" text="Rozpoczęła się wiosna, kwitną kwiaty i drzewa. To czas uprawy i zasiewu twoich pól." />
         <text name="SS_SEASON_INTRO_1" text="W lecie dni są długie i ciepłe. To odpowiedni czas, aby robić siano i obserwować wzrost zbóż." />
@@ -83,7 +83,9 @@
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
         <text name="ui_pageDebug" text="Narzędzia debugowania" />
@@ -113,9 +115,9 @@
         <text name="setting_controlsTemperature" text="Skala temperatury" />
         <text name="setting_moisture" text="Wilgotność zboża" />
 
-        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia Seasons? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
+        <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia modu Seasons? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
 
-        <text name="dialog_resetGrowth" text="Uruchomiłeś Seasons na starym stanie gry. Seasons Mod chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, Sezony mogą nie działać poprawnie." />
+        <text name="dialog_resetGrowth" text="Uruchomiłeś Seasons na starym stanie gry. Mod Seasons chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, mod Seasons może nie działać poprawnie." />
         <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
@@ -126,98 +128,99 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych do wzorce wzrostu upraw i produkcji zwierzęcej zostało zmienione na bardziej realistyczny." />
-        <text name="ss_helpText_01_02" text="Rok rozgrywki został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 części: wczesny, w połowie i późny. Te części są określane jako przejścia." />
-        <text name="ss_helpText_01_03" text="Twoja działalność związana jest z porą roku rokiem, tak jak w prawdziwym życiu." />
+        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych poprzez wzrost upraw aż do produkcji zwierzęcej zostało przeniesione na bardziej realistyczny poziom." />
+        <text name="ss_helpText_01_02" text="Rok w grze został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 pory: wczesną, środkową i późną. Te pory są określane mianem przejść." />
+        <text name="ss_helpText_01_03" text="Twoje prace są powiązane z porą roku tak, jak ma to miejsce w prawdziwym życiu." />
 
-        <text name="ss_helpTitle_02" text="Sezonowe Efekty (1)" />
+        <text name="ss_helpTitle_02" text="Efekty sezonowe (1)" />
         <text name="ss_helpText_02_01" text="Pogoda jest przypadkowa z dnia na dzień, ale według wzoru z sezonu na sezonu." />
-        <text name="ss_helpText_02_02" text="Wiosną będzie deszczowo i mglisto z pewnymi szansami słonecznej pogody. Latem będzie cieplej i bardziej sucho. Burze z gradem mogą wystąpić bez ostrzeżenia. Jesienią pada dużo deszczu, ale pojawi się też słońce. Zimą będzie deszczowo, ale często wystarczaojąco zimno, aby spadł śnieg, może nawet pozostać na ziemi." />
-        <text name="ss_helpText_02_03" text="Śnieg wypełnia przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską śnieżną* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(odpowiednio zmodyfikowany obiekt nieprzepuszcający śniegu do wnętrza)" />
+        <text name="ss_helpText_02_02" text="Wiosną będzie deszczowo i mglisto z szansą na słoneczną pogodę. Latem będzie cieplej i bardziej sucho. Mogą wystąpić nieoczekiwane gradobicia. Jesienią będzie dużo padać, ale pojawi się też słońce. Zimą będzie deszczowo, ale często wystarczająco zimno, aby spadł śnieg, który może nawet pozostać na ziemi." />
+        <text name="ss_helpText_02_03" text="Śnieg wypełni przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską śnieżną* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
-        <text name="ss_helpTitle_03" text="Sezonowe Efekty (2)" />
+        <text name="ss_helpTitle_03" text="Efekty sezonowe (2)" />
         <text name="ss_helpText_03_01" text="Długość dnia została również zmieniona w sezonach. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
-        <text name="ss_helpText_03_02" text="Silosy bunkrowe i bele kiszonkowe wymagają czasu na fermentację. Trwa to 1/3 sezonów (1 przejście), w celu pełnego sfermentowania silosu bunkrowego lub beli kiszonki. Owinięte siano nie sfermentuje, ale będie chronione przed wpływami atmosferycznymi." />
-        <text name="ss_helpText_03_03" text="Sezony również ingerują w drzewa i rośliny. Drzewa zmieniają stan według sezonowych zmian temperatury. Liście zmienią kolor i spadną jesienią. Zimą drzewa będą gołe, a wiosną wiosną zazielenią się." />
+        <text name="ss_helpText_03_02" text="Silosy z kiszoną i bele kiszonki potrzebują czasu na fermentację. Pełna fermentacja silosu lub beli kiszonki trwa jedną trzecią sezonu (1 przejście). Bele siana owinięte folią nie sfermentują, ale będą chronione przed wpływem pogody." />
+        <text name="ss_helpText_03_03" text="Sezony mają również wpływ na drzewa i rośliny. Drzewa zmieniają wygląd wraz ze zmianą temperatur sezonowych. Liście zmienią kolor i opadną jesienią. Zimą drzewa będą gołe, a wiosną pokryją się jasną zielenią." />
 
-        <text name="ss_helpTitle_04" text="Prognoza Pogody" />
-        <text name="ss_helpText_04_01" text="Prognoza pogody została ponownie wprowadzona w Sezony i może zostać aktywowana poprzez klawisze Lewy Alt + F." />
-        <text name="ss_helpText_04_02" text="Prognoza pogody pokazuje wysoką/niskś temperaturę i pogodzę (słonecznie, mglisto, deszczowo, śnieżne, pochmurno) przez następne 7 dni. Gradobicie nie pojawia się w prognozie pogody, tak jak grad w prawdziwym życiu, jest to często niespodziewane wydarzenie." />
-        <text name="ss_helpText_04_03" text="Liczba po prawej stronie każdego bloku prognozy reprezentuje dzień w sezonie." />
+        <text name="ss_helpTitle_04" text="Prognoza pogody" />
+        <text name="ss_helpText_04_01" text="Prognoza pogody została ponownie wprowadzona w modzie Seasons i może być aktywowana przy użyciu Lewego Alt + F." />
+        <text name="ss_helpText_04_02" text="Prognoza pogody pokazuje najwyższą/najniższą temperaturę i pogodę (słonecznie, mglisto, deszczowo, opady śniegu, pochmurno) dla kolejnych 7 dni. Gradobicie nie pojawia się w prognozie pogody, ponieważ w rzeczywistości grad jest niespodziewanym zjawiskiem pogodowym." />
+        <text name="ss_helpText_04_03" text="Numer po prawej stronie prognozowanego dnia to dzień sezonu." />
 
         <text name="ss_helpTitle_05" text="Gleba" />
-        <text name="ss_helpText_05_01" text="Temperatura gleby jest modelowana za pomocą równań termodynamicznych i danych historycznych. Oznacza to, że gleba zamarznie zimą, gdy temperatura powietrza spadnie poniżej pewnego progu przez pewien czas. Wiosną gleba odtaje, gdy temperatura powietrza wzrośnie powyżej pewnego progu przez pewien czas." />
-        <text name="ss_helpText_05_02" text="Gleba nie może być uprawiana, gdy grunt jest zamarznięty. Uprawy nie rosną w zamrożonej glebie." />
-        <text name="ss_helpText_05_03" text="Rośliny kiełkują tylko wtedy, gdy temperatura gleby przekracza temperaturę kiełkowania. Temperatury kiełkowania znajdują się na pierwszej stronie menu ustawień sezonowych (Lewy Alt + S)." />
+        <text name="ss_helpText_05_01" text="Temperatura gleby jest modelowana za pomocą równań termodynamicznych i danych historycznych. Oznacza to, że gleba zamarznie zimą, gdy temperatura powietrza spadnie poniżej pewnego progu przez pewien czas. Wiosną gleba rozmarznie, gdy temperatura powietrza powietrza odpowiednio się podniesie." />
+        <text name="ss_helpText_05_02" text="Gleba nie może być uprawiana, gdy grunt jest zamarznięty. Uprawy nie rosną w zamarzniętej glebie." />
+        <text name="ss_helpText_05_03" text="Rośliny kiełkują tylko wtedy, gdy temperatura gleby przekracza temperaturę kiełkowania. Temperatury kiełkowania znajdują się na pierwszej stronie menu ustawień modu Seasons (Lewy Alt + S)." />
 
-        <text name="ss_helpTitle_06" text="Uprawy - Wprowadzenie" />
-        <text name="ss_helpText_06_01" text="Przy uruchamianiu nowej gry wszystkie uprawy zostaną zresetowane do etapu zebranych, aby symulować fakt, że pola nie były uprawiane od jesieni. Używając Sezony po raz pierwszy w istniejącym zapisie gry, będziesz miał możliwość zresetowania upraw lub nie." />
-        <text name="ss_helpText_06_02" text="Domyślne wzorce wzrostu roślin zostały zastąpione przez Sezony. Uprawy będą teraz realistycznie rosnąć, gdy odpowiednim sezonie zostaną zasiane i zebrane. Oznacza to także, że zima 'zabije' większość upraw, a uprawy zasiane w niewłaściwym czasie nie wzrosną." />
-        <text name="ss_helpText_06_03" text="Uprawy mogą być zebrane tylko w końcowym stadium wzrostu (z wyjątkiem topoli i rzodkiewki oleistej) i pozostaną w ostatnim etapie dopóki nie zostaną 'zabite' zimą." />
-        <text name="ss_helpText_06_04" text="Nadal możesz robić sieczkę z zielonych upraw." />
+        <text name="ss_helpTitle_06" text="Uprawy - wprowadzenie" />
+        <text name="ss_helpText_06_01" text="Rozpoczynając nową grę wszystkie uprawy zostaną zresetowane do stanu zebranych, aby symulować sytuację, w której pola nie były uprawiane od jesieni. Uruchomienie modu Seasons po raz pierwszy w istniejącym zapisie gry pozwoli wybrać opcję zresetowania lub pozostawienia upraw." />
+        <text name="ss_helpText_06_02" text="Domyślne wzorce wzrostu upraw zostały zastąpione w modzie Seasons. Uprawa zbóż będzie odwzorowywała realistyczne okresy zasiewów i zbiorów odpowiednie dla każdego ze zbóż. Oznacza to, że większość zbóż nie przetrwa zimy, a posiane w złym momencie nie urosną." />
+        <text name="ss_helpText_06_03" text="Uprawy mogą być zebrane tylko w końcowym stadium wzrostu (z wyjątkiem topoli i rzodkiewki oleistej), w którym pozostaną, aż uschną z nadejściem zimy." />
+        <text name="ss_helpText_06_04" text="Uprawy zbożowe są gotowe do zbioru w pierwszym etapie gotowości do zbioru wyświetlanej w sekcji wzrostu w podglądzie mapy. Jest to jednocześnie ich końcowe stadium wzrostu i gotowości do zbioru.">
+        <text name="ss_helpText_06_05" text="Nadal można robić sieczkę z zielonych upraw." />
 
-        <text name="ss_helpTitle_07" text="Uprawy - Uprawa Roślin" />
-        <text name="ss_helpText_07_01" text="Rośliny uprawiane są teraz znacznie dłużej. Uprawa może zająć pół roku w celu osiągnięcia gotowości do zbioru." />
-        <text name="ss_helpText_07_02" text="Zima 'zabije' większość upraw, ale uprawy ozime i jare są możliwe. Pszenicę, jęczmień, topolę, trawę, rzodkiew oleistą i rzepak można uprawiać jesienią jako oziminy lub wiosną jako jare. Upewnij się, że gleba jest wystarczająco ciepła, aby uprawy wykiełkowały." />
-        <text name="ss_helpText_07_03" text="Kukurydza, soja, słonecznik, buraki cukrowe i ziemniaki muszą być posiane/posadzone wiosną. Pamiętaj o kontroli wzrostu w Menu Sezony, ponieważ niektóre uprawy nie mogą być posiane/posadzone w pierwszym okresie wiosny (wczesną wiosną) i 'umrą', nawet jeśli temperatura gleby jest powyżej temperatury kiełkowania." />
+        <text name="ss_helpTitle_07" text="Uprawy - rośliny uprawne" />
+        <text name="ss_helpText_07_01" text="Wzrost zbóż jest teraz dużo dłuższy. Może minąć nawet pół roku, zanim zboża będą gotowe do zbiorów." />
+        <text name="ss_helpText_07_02" text="Zima niszczy większość uprawa, ale można siać zboża ozime i jare. Pszenica, jęczmień, topola, trawa, rzodkiew oleista i rzepak mogą być zasiane jesienią jako oziminy lub wiosną jako jare. Należy upewnić się, że temperatura gleby jest wystarczająca, aby uprawy mogły wykiełkować." />
+        <text name="ss_helpText_07_03" text="Kukurydza, soja, słonecznik, buraki cukrowe i ziemniaki muszą być posiane/posadzone wiosną. Należy sprawdzić tabelę zasiewów w menu modu Seasons, ponieważ niektóre zboża nie mogą być siane w pierwszej porze wiosny (wczesną wiosną), gdyż uschną nawet, gdy temperatura gleby przekroczy temperaturę kiełkowania." />
 
-        <text name="ss_helpTitle_08" text="Uprawy - Siano, Słoma i Trawa" />
-        <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do stadium zebranej, aby symulować 'zabicie' trawy zimą, gdy robi się zimno." />
-        <text name="ss_helpText_08_02" text="Bale trawy muszą być użyte lub owinięte w ciągu 2 dni od belowania. Po 2 dniach trawa zgnije, a bela zniknie." />
-        <text name="ss_helpText_08_03" text="Pokosy siana, trawy i słomy zaczynają się zmniejszać, a po kilku dniach ostatecznie znikną. Pokosy traw zmniejszają się o północy każdego dnia. Pokosy siana i słomy zmniejszają się po każdym stadium wzrostu, jak również po wystawieniu na działanie deszczu." />
-        <text name="ss_helpText_08_04" text="Słoma i siano muszą być sprasowane zanim zostaną sprzedane - luzem słomy i siana nie wolno sprzedawać, jedynie oddać bezpłatnie. Trawa, sprasowana lub luźna, również nie może być sprzedawana." />
+        <text name="ss_helpTitle_08" text="Uprawy - siano, słoma i trawa" />
+        <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do fazy zebranej, aby odwzorować sytuację, w której trawa usycha, gdy robi się zimno." />
+        <text name="ss_helpText_08_02" text="Bele z trawy muszą być wykorzystane lub owinięte w folię w ciągu 2 dni od belowania. Inaczej po 2 dniach trawa zgnije, a bela zniknie." />
+        <text name="ss_helpText_08_03" text="Pokosy siana, trawy i słomy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy traw zmniejszają się o północy każdego dnia. Pokosy siana i słomy zmniejszają się wraz z każdym etapem wzrostu upraw (przejściem), jak również po wystawieniu na działanie deszczu." />
+        <text name="ss_helpText_08_04" text="Słoma i siano muszą być belowane zanim zostaną sprzedane - luzem słomy i siana nie wolno sprzedawać, jedynie oddać bezpłatnie. Trawa, belowana lub luźna, również nie może być sprzedawana." />
 
-        <text name="ss_helpTitle_09" text="Uprawy - Drzewa" />
-        <text name="ss_helpText_09_01" text="Drzewa potrzebują więcej czasu, aby osiągnąć w pełni rozwinięty stan. Posadzone drzew potrzebują 5 lat gry do ostecznego stanu rozwoju, po upływie 2 lat można już je ścinać." />
-        <text name="ss_helpText_09_02" text="Drzewa hamują wzrost innych drzew, jeśli zostały rozmieszczone zbyt blisko siebie. Aby zrestartować wzrost drzew musisz je przerzedzić." />
+        <text name="ss_helpTitle_09" text="Uprawy - drzewa" />
+        <text name="ss_helpText_09_01" text="Pełny wzrost drzew trwa o wiele dłużej. Posadzone drzewa potrzebują 5 lat w grze, aby w pełni wyrosnąć, a dopiero po 2 latach można je ścinać." />
+        <text name="ss_helpText_09_02" text="Drzewa hamują wzrost innych drzew, jeśli zostały rozmieszczone zbyt blisko siebie. Aby wznowić ich wzrost należy je przerzedzić." />
 
-        <text name="ss_helpTitle_10" text="Uprawy - Efekty Pogody" />
-        <text name="ss_helpText_10_01" text="Deszcz, grad i śnieg wpływają na poziom wilgotności upraw. Jeśli wilgotność upraw znajduje się powyżej pewnego punktu z powodu złej pogody, nie będziesz mógł zebrać swoich plonów. Letnie wilgotne noce mogą pojawić się bez ostrzeżenia." />
-        <text name="ss_helpText_10_02" text="Po opadach deszczu twoje rośliny potrzebują czasu na wyschnięcie, co zależy od temperatury powietrza i pory roku. W cieplejszy dzień, rośliny wyschną szybciej niż w chłodniejszy." />
-        <text name="ss_helpText_10_03" text="Użycie przetrząsacza na sianie, gdy jest mokre spowoduje powstanie mokrej trawy. Upewnij się, że używasz przetrząsacza tylko, gdy uprawa jest już wystarczająco sucha." />
-        <text name="ss_helpText_10_04" text="Na mod-mapie, do której dodano maskę śnieżną*, bele siana i słomy, które były wystawione na działanie deszczu lub śniegu, zaczną się gnić, chyba że bele są przechowywane w szopie z maską śnieżną. Zła pogoda nie wpływa na owinięte bele lub bele na mapie bez maski śnieżnej*. *(odpowiednio zmodyfikowany obiekt nieprzepuszcający śniegu do wnętrza)" />
+        <text name="ss_helpTitle_10" text="Uprawy - Efekty działania pogody" />
+        <text name="ss_helpText_10_01" text="Deszcz, grad i śnieg wpływają na poziom wilgotności zbóż. Jeżeli, z powodu złej pogody, wilgotność zbóż przekracza określoną wartość, nie będzie można ich zbierać. Wilgotne noce w trakcie lata mogą wystąpić bez ostrzeżenia." />
+        <text name="ss_helpText_10_02" text="Po opadach deszczu zboża potrzebują czasu na wyschnięcie, którego ilość zależy od temperatury powietrza i sezonu. W cieplejszy dzień, zboża wyschną szybciej niż w chłodniejszy." />
+        <text name="ss_helpText_10_03" text="Użycie przetrząsacza na sianie, gdy jest mokre spowoduje powstanie mokrej trawy. Należy upewnić się, że przetrząsanie wykonywane jest tylko wtedy, gdy uprawy są wystarczająco suche." />
+        <text name="ss_helpText_10_04" text="Na mod-mapie, do której dodano maskę śnieżną*, bele siana lub słomy wystawione na działanie deszczu lub śniegu, zaczną się gnić, chyba że bele są przechowywane w szopie z maską śnieżną. Zła pogoda nie wpływa na owinięte bele lub bele na mapie bez maski śnieżnej*. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
-        <text name="ss_helpTitle_11" text="Konserwacja" />
-        <text name="ss_helpText_11_01" text="Ciągniki i kombajny wymagają okresowej konserwacji w celu utrzymania ich w pełnej sprawności. Konserwacja wymagana jest co 30 godzin lub pół roku, w zależności od tego, co nastąpi wcześniej. Vehicles that are past due their maintenance may take longer to start." />
-        <text name="ss_helpText_11_02" text="Możesz naprawiać pojazdy w sklepie lub w warsztacie. Aby naprawić pojazd, musisz pojechać do warsztatu, a następnie wcisnąć Lewy Alt + R. Należy pamiętać, że naprawa w sklepie będzie droższa." />
-        <text name="ss_helpText_11_03" text="Wiek twojego pojazdu to okres od ostatniej naprawy." />
-        <text name="ss_helpText_11_04" text="Tylko pojazdy sterowalne wymagają okresowej konserwacji. Narzędzia i maszyny zostaną naprawione automatycznie w razie potrzeby." />
+        <text name="ss_helpTitle_11" text="Utrzymanie maszyn" />
+        <text name="ss_helpText_11_01" text="Twoje maszyny wymagają regularnych przeglądów, aby były w pełni sprawne. Okres przeglądów to co 30 godzin roboczych lub co pół roku, w zależności co nastąpi wcześniej. Pojazdy, które przekroczą termin przeglądu mogą mieć problem z uruchomieniem." />
+        <text name="ss_helpText_11_02" text="Przegląd można wykonać w warsztacie sklepu z maszynami lub we własnym postawionym garażu. Aby wykonać przegląd należy wjechać pojazdem do warsztatu lub garażu i wcisnąć Lewy Alt + R. Należy pamiętać, że przegląd w warsztacie sklepowym jest droższy." />
+        <text name="ss_helpText_11_03" text="Wiek pojazdu podawany jest w dniach od ostatniego przeglądu." />
+        <text name="ss_helpText_11_04" text="Tylko pojazdy kierowane wymagają okresowych przeglądów. Pozostałe maszyny będą przechodziły przegląd automatyczny w razie potrzeby." />
 
         <text name="ss_helpTitle_12" text="Ekonomia" />
-        <text name="ss_helpText_12_01" text="Limit pożyczki został zmieniony z 200 000 do 30% wartości posiadanych gruntów i budynków. Minimalna kwota pożyczki to 300 000, a maksymalna kwota pożyczki wynosi 1 500 000." />
-        <text name="ss_helpText_12_02" text="Dochody z misji zostały obniżone. Zarobisz około 5 razy więcej niż zatrudniony pracownik pracujący na tym samym polu." />
-        <text name="ss_helpText_12_03" text="Utrzymanie wszystkich pojazdów (oprócz okresowej konserwacji) obejmuje utrzymanie i podatki w zależności od tego, jak mocno są zużyte. Czyste maszyny obniżą koszty utrzymania. Maszyny, które nie są używane, również obniżą koszty ich utrzymania." />
-        <text name="ss_helpText_12_04" text="Ceny upraw zmieniają się bardziej realistyczny sposób w sezonach." />
+        <text name="ss_helpText_12_01" text="Limit pożyczki został zmieniony z 200 000 na 30% sumy wartości posiadanej ziemi oraz postawionych budynków. Jednakże najniższy limit pożyczki to 300 000, a najwyższy to 1 500 000." />
+        <text name="ss_helpText_12_02" text="Dochody z misji zostały obniżone. Obecny zarobek to około pięciokrotność tego, co zarobiłby pracownik na takim samym polu." />
+        <text name="ss_helpText_12_03" text="Koszty pojazdów, oprócz okresowych przeglądów, uwzględniają również koszty utrzymania i podatki zależne do stopnia w jakim maszyny są wykorzystywane. Czyste maszyny będą tańsze w utrzymaniu. Maszyny, które nie będą używane, również będą miały niższe koszty utrzymania." />
+        <text name="ss_helpText_12_04" text="Ceny zbóż zmieniają się pomiędzy sezonami w bardziej realistyczny sposób." />
 
         <text name="ss_helpTitle_13" text="Pomocnik" />
-        <text name="ss_helpText_13_01" text="Zatrudnieni pracownicy wymagają wynagrodzenia za nadgodziny. Jeśli zatrudniony pracownik zostanie wykorzystany przed godziną 06:00 i po godzinie 18:00 lub weekendy, jego wynagrodzenie będzie o 50% wyższe." />
+        <text name="ss_helpText_13_01" text="Zatrudnieni pracownicy wymagają wynagrodzenia za nadgodziny. Jeśli pracownik zostanie zatrudniony poza godzinami 6:00 - 18:00 lub w weekendy, jego wynagrodzenie będzie wyższe o 50%." />
 
-        <text name="ss_helpTitle_14" text="Zwierzęta - Wprowadzenie" />
-        <text name="ss_helpText_14_01" text="Produkcja zwierzęca została dostosowana do bardziej realistycznych parametrów. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej słomy zimą. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />
-        <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko o określonej porze roku. Świnie i owce będą romnażać się wiosną, podczas gdy krowy będą ocielą się latem." />
-        <text name="ss_helpText_14_03" text="Zwierzęta umrą, jeśli nie będą miały żywności lub wody. To jest wyłączone na poziomie ŁATWY." />
-        <text name="ss_helpText_14_04" text="Zimą nie można karmić trawą. Powinieneś użyć siana zamiast niej." />
+        <text name="ss_helpTitle_14" text="Zwierzęta - wprowadzenie" />
+        <text name="ss_helpText_14_01" text="Produkcja zwierzęca została zmieniona na bardziej realistyczną. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej ścielenia słomą w zimie. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />
+        <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko w określonych sezonach. Świnie i owce będą rozmnażać się wiosną, a krowy latem." />
+        <text name="ss_helpText_14_03" text="Zwierzęta będą zdychać, gdy nie będą miały jedzenia lub wody. Funkcjonalność ta jest wyłączona na Łatwym poziomie trudności gry." />
+        <text name="ss_helpText_14_04" text="Zimą nie można karmić zwierząt trawą. Należy wówczas karmić je sianem." />
 
-        <text name="ss_helpTitle_15" text="Zwierzęta - Proukcja" />
+        <text name="ss_helpTitle_15" text="Zwierzęta - produkcja" />
         <text name="ss_helpText_15_01" text="Produkcja mleka i wełny zależy od sezonu." />
         <text name="ss_helpText_15_02" text="Wełna produkowana jest tylko wiosną." />
-        <text name="ss_helpText_15_03" text="Mleko jest produkowane przez cały rok, ale produkcja jest zwiększana zimą i wiosną. Podczas gdy zimą nie można karmić zwierząt trawą zmniejszy to wydajność krów do co najwyżej 80%. Jednak Sezony zwiększają produkcję mleka zimą i wiosą, aby nadrobić brak trawy w tych miesiącach." />
+        <text name="ss_helpText_15_03" text="Mleko jest produkowane przez cały rok, ale produkcja jest zwiększana zimą i wiosną. Ponieważ zimą nie ma możliwości karmienia trawą, zmniejszyłoby to wydajność krów do co najwyżej 80%. Mod Seasons kompensuje brak trawy w tym czasie poprzez zwiększenie produkcji mleka." />
 
-        <text name="ss_helpTitle_16" text="Seasons Menu" />
-        <text name="ss_helpText_16_01" text="Menu sezonów jest używane jako przewodnik siewu i zmiany ustawień związanych z Sezonami. To menu jest aktywowane przez Lewy Alt + S." />
-        <text name="ss_helpText_16_02" text="Pierwsza strona jest twoim przewodnikiem po oknach siewów i żniw. Temperatury kiełkowania wszystkich roślin są pokazane po lewej stronie wykresu. Jeśli temperatura obok uprawy jest biała, oznacza to, że jest wystarczająco ciepło, aby zasiać/zasadzić tę konkretną uprawę. Jeśli temperatura jest niebieska, jest za zimno." />
-        <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Długość sezonu (3/6/9/12 dniowy sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady wł/wył), wilgotność (wł/wył) i temperatura (C/F), wszystko tutaj możesz zmienić." />
+        <text name="ss_helpTitle_16" text="Menu modu Seasons" />
+        <text name="ss_helpText_16_01" text="Menu modu Seasons zawiera przewodnik zasiewów oraz ustawienia modu Seasons. To menu otwierane jest za pomocą Lewego Alt + S." />
+        <text name="ss_helpText_16_02" text="Pierwsza strona zawiera tabelę z okresami zasiewów i zbiorów. Temperatury kiełkowania wszystkich zbóż znajdują się po lewej stronie tabeli. Jeśli temperatura obok zboża jest w kolorze białym, oznacza to, że jest wystarczająco ciepło do jego zasiewu. Jeśli temperatura jest w kolorze niebieskim, znaczy, że jest za zimno." />
+        <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Zawiera ona długość sezonu (3/6/9/12 dniowy sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady na śniegu wł/wył), wilgotność zbóż (wł/wył) i skala temperatura (C/F), wszystkie te ustawienia można zmieniać." />
 
-        <text name="ss_helpTitle_17" text="HUD" />
-        <text name="ss_helpText_17_01" text="HUD po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące Sezonów. Pokazuje aktualną temperaturę powietrza (na górze) i na ziemi (na dole). Stan gleby (mokre uprawy/zamrożona ziemia) jest również wyświetlany po lewej stronie tego HUD." />
-        <text name="ss_helpText_17_02" text="Bezpośrednio poniżej zegara znajduje się sezon i obecy dzień w sezonie." />
-        <text name="ss_helpText_17_03" text="Po aktywacji, HUD prognozy pojawi się poniżej zegara w prawym górnym rogu." />
-        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne (F1), na samym jego dole wyświetlany jest licznik konserwacji. Jest on wyświetlany tylko wtedy, gdy jesteś w pojeździe." />
+        <text name="ss_helpTitle_17" text="Interfejs" />
+        <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (wilgotne zboża - ikona Wet Crop/zamarznięta gleba - ikona  Frozen ground) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />
+        <text name="ss_helpText_17_02" text="Bezpośrednio poniżej zegara znajduje się dzień i pora obecnego sezonu." />
+        <text name="ss_helpText_17_03" text="Po aktywacji interfejsu prognozy pogody pojawi się on poniżej zegara w prawym górnym rogu." />
+        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne (F1), na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
 
         <text name="ss_helpTitle_18" text="Różne" />
         <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Po nadejściu nocy, gdy jesteś pieszo możesz nacisnąć Lewy Alt + N, aby przejść do rana." />
-        <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakicie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Xrestartować grę/serwer po zmianie długość sezonu." />
-        <text name="ss_helpText_18_03" text="Choć jest to gra, w którą chcesz grać, to jest sugestia jako wyzwanie, aby grać tylko z 9-dniowym sezonem i przy 5x czasie. W ten sposób spędzasz wiosnę tylko uprawiając i siejąc uprawy, latem pielęgnujesz uprawy i robisz siano, jesienią żniwujesz i wykonujesz orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
+        <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakcie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Zrestartować grę/serwer po zmianie długość sezonu." />
+        <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie polegające na grze tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając ziemię i siejąc zboża, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />
     </texts>
 </l10n>

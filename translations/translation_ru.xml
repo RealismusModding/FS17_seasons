@@ -64,7 +64,7 @@
         <text name="SS_VEHICLE_REPAIRED" text="Тех.обслуживание %s обошлось %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Провести ТО %s за %s" />
         <text name="SS_REPAIR_REQUIRED" text="Нуждается в тех.обслуживании" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дней, до ТО" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дн. до ТО" />
         <text name="SS_REPAIR_DIALOG" text="Вы желаете провести тех. обслуживание %s за %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
         <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
@@ -83,7 +83,9 @@
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!" />
         <text name="warning_animalsKilled" text="У Вас умерло животное (%d шт.)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней." />
-
+        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
+        <text name="msg_welcome" text="" />
+        
         <text name="ui_pageOverview" text="Обзор" />
         <text name="ui_pageSettings" text="Настройки" />
         <text name="ui_pageDebug" text="Инструменты отладки" />
@@ -154,7 +156,8 @@
         <text name="ss_helpText_06_01" text="При запуске новой игры все посевы будут сброшены до состояния 'урожай собран', чтобы имитировать то, что поля не обрабатывались с осени. При использовании Seasons в первый раз на уже существующей сохранённой игре у вас будет возможность либо сбросить урожай, либо нет." />
         <text name="ss_helpText_06_02" text="Seasons также изменяет модель роста по умолчанию для сельскохозяйственных культур. Теперь урожай будет следовать реалистичной модели роста, соответствующего сезонному времени посадки и уборки. Это также означает, что зима уничтожит большую часть посевов, а посевы, сделанные не в то время, расти не будут." />
         <text name="ss_helpText_06_03" text="Сельскохозяйственные культуры можно собирать только в стадии их окончательного созревания, за исключением тополя и масличной редьки и останутся в этой заключительной стадии до тех пор, пока они не будут уничтожены зимой." />
-        <text name="ss_helpText_06_04" text="Вы также можете заготавливать силос из зеленого урожая." />
+        <text name="ss_helpText_06_04" text="Как только урожай (кроме корнеплодов) достигает первой стадии зрелости, согласно меню обзора созревания, которое вызывается по клавише ESC, он готов к уборке. Это заключительный этап сбора урожая."/>
+        <text name="ss_helpText_06_05" text="Вы также можете заготавливать силос из зеленого урожая." />
 
         <text name="ss_helpTitle_07" text="Урожай - Пахотные культуры" />
         <text name="ss_helpText_07_01" text="Длительность роста урожая теперь намного больше. Может потребоваться полгода, чтобы урожай достиг своей спелости." />
