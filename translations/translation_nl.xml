@@ -206,7 +206,7 @@
 
         <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="Het Seasons menu wordt gebruikt als referentiegids voor het planten en wijzigen van instellingen in verband met Seasons. Dit menu is geactiveerd door Left Alt + S." />
-        <text name="ss_helpText_16_02" text="De eerste pagina is uw gids voor het plant- en oogsttijden van uw gewassen. De ontkiemingstemperaturen van alle gewassen worden getoond aan de linkerkant van de grafiek. Als de temperatuur naast een gewas wit is, betekent het dat het warm genoeg is om dat gewas te planten. Als de temperatuur blauw is, is het te koud." />
+        <text name="ss_helpText_16_02" text="De eerste pagina is uw gids voor de plant- en oogsttijden van uw gewassen. De ontkiemingstemperaturen van alle gewassen worden getoond aan de linkerkant van de grafiek. Als de temperatuur naast een gewas wit is, betekent het dat het warm genoeg is om dat gewas te planten. Als de temperatuur blauw is, is het te koud." />
         <text name="ss_helpText_16_03" text="De tweede pagina is het instellingenmenu. Hier kunnen de seizoenlengte (seizoenen 3/6/9/12/12), seizoenmeldingen (aan / uit), sneeuwmodus (aan / uit / 1-laag, sporen aan / uit), vochtgewicht (aan / uit) en temperatuur Instellingen (C / F)  allemaal worden gewijzigd." />
 
         <text name="ss_helpTitle_17" text="HUD" />
@@ -218,7 +218,7 @@
         <text name="ss_helpTitle_18" text="Diversen" />
         <text name="ss_helpText_18_01" text="Als u niet in de nacht wilt werken, kunt u de nacht overslaan en gelijk naar de volgende morgen gaan. Nadat de avond valt en je bent te voet kunt u links Alt + N drukken om naar de ochtend over te slaan." />
         <text name="ss_helpText_18_02" text="Als u besluit om de seizoenlengte te wijzigen in het midden van een bestaand spaarspel, wordt het aanbevolen 1) de seizoenlengte in de winter te wijzigen om ongewenste effecten op bestaande gewassen te verminderen en 2) het spel / de server opnieuw te starten na het seizoen te veranderen lengte." />
-        <text name="ss_helpText_18_03" text="Terwijl het is jouw spel om te spelen zoals je wilt, wordt het voorgesteld als een uitdaging om alleen te spelen met een 9-daags seizoen en 5x-versnelling.Op deze manier besteedt u de lente voor het cultiveren en planten van gewassen, verzorgen van gewassen en het maaien van gras in de zomer. Oogsten van gewassen en het ploegen van de velden in de herfst. Het verzorgen van dieren, machines, bossen en het verkopen van gewassen in de winter.&#xA;" />
-        <text name="ss_helpText_18_04" text="Alle voertuigen moeten handmatig gestart worden" />
+        <text name="ss_helpText_18_03" text="Terwijl het is jouw spel om te spelen zoals je wilt, wordt het voorgesteld als een uitdaging om alleen te spelen met een 9-daags seizoen en 5x-versnelling.Op deze manier besteedt u de lente voor het cultiveren en planten van gewassen, verzorgen van gewassen en het maaien van gras in de zomer. Oogsten van gewassen en het ploegen van de velden in de herfst. Het verzorgen van dieren, machines, bossen en het verkopen van gewassen in de winter." />
+        <text name="ss_helpText_18_04" text="Alle voertuigen moeten handmatig gestart worden." />
     </texts>
 </l10n>
