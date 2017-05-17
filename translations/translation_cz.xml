@@ -84,6 +84,7 @@
         <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
         <text name="msg_welcome" text="Vítejte na Seasons módu realistické modifikaci. Další informace naleznete v nabídce Nápovědy ve hře (ESC) se dozvíte, jak používat tento mód." />
+
         <text name="ui_pageOverview" text="Přehled" />
         <text name="ui_pageSettings" text="Nastavení" />
         <text name="ui_pageDebug" text="Ladicí nástroje" />
@@ -120,6 +121,8 @@
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
         <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Sníh" />
 

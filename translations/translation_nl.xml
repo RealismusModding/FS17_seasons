@@ -84,6 +84,7 @@
         <text name="warning_animalsKilled" text="Dieren zijn dood gegaan (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
         <text name="msg_welcome" text="Welkom bij de Seasons Mod door Realismus Modding. Bekijk de helppagina’s in het Esc-menu voor meer informatie over het gebruik van deze mod." />
+
         <text name="ui_pageOverview" text="Overzicht" />
         <text name="ui_pageSettings" text="Instellingen" />
         <text name="ui_pageDebug" text="Debug" />
@@ -120,6 +121,8 @@
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd." />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Sneeuw" />
 

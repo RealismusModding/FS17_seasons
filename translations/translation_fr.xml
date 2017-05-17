@@ -85,6 +85,7 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours." />
         <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
         <text name="msg_welcome" text="" />
+
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
@@ -121,6 +122,8 @@
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Neige" />
 

@@ -86,6 +86,7 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
         <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
         <text name="msg_welcome" text="" />
+
         <text name="ui_pageOverview" text="General" />
         <text name="ui_pageSettings" text="Configuración" />
         <text name="ui_pageDebug" text="Herramientas Desarrollo" />
@@ -123,6 +124,8 @@
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
         <text name="dialog_timeTravel" text="" />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Nieve" />
 
