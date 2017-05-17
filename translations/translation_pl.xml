@@ -83,8 +83,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni." />
-        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
-        <text name="msg_welcome" text="" />
+        <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
         
         <text name="ui_pageOverview" text="Opis" />
         <text name="ui_pageSettings" text="Ustawienia" />
@@ -156,7 +155,7 @@
         <text name="ss_helpText_06_01" text="Rozpoczynając nową grę wszystkie uprawy zostaną zresetowane do stanu zebranych, aby symulować sytuację, w której pola nie były uprawiane od jesieni. Uruchomienie modu Seasons po raz pierwszy w istniejącym zapisie gry pozwoli wybrać opcję zresetowania lub pozostawienia upraw." />
         <text name="ss_helpText_06_02" text="Domyślne wzorce wzrostu upraw zostały zastąpione w modzie Seasons. Uprawa zbóż będzie odwzorowywała realistyczne okresy zasiewów i zbiorów odpowiednie dla każdego ze zbóż. Oznacza to, że większość zbóż nie przetrwa zimy, a posiane w złym momencie nie urosną." />
         <text name="ss_helpText_06_03" text="Uprawy mogą być zebrane tylko w końcowym stadium wzrostu (z wyjątkiem topoli i rzodkiewki oleistej), w którym pozostaną, aż uschną z nadejściem zimy." />
-        <text name="ss_helpText_06_04" text="Uprawy zbożowe są gotowe do zbioru w pierwszym etapie gotowości do zbioru wyświetlanej w sekcji wzrostu w podglądzie mapy. Jest to jednocześnie ich końcowe stadium wzrostu i gotowości do zbioru.">
+        <text name="ss_helpText_06_04" text="Uprawy zbożowe są gotowe do zbioru w pierwszym etapie gotowości do zbioru wyświetlanej w sekcji wzrostu w podglądzie mapy. Jest to jednocześnie ich końcowe stadium wzrostu i gotowości do zbioru."/>
         <text name="ss_helpText_06_05" text="Nadal można robić sieczkę z zielonych upraw." />
 
         <text name="ss_helpTitle_07" text="Uprawy - rośliny uprawne" />
