@@ -84,7 +84,6 @@
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen." />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend." />
         <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
-
         <text name="ui_pageOverview" text="Übersicht" />
         <text name="ui_pageSettings" text="Einstellungen" />
         <text name="ui_pageDebug" text="Entwickler" />
@@ -187,8 +186,8 @@
 
         <text name="ss_helpTitle_12" text="Wirtschaft" />
         <text name="ss_helpText_12_01" text="Die alte Kreditobergrenze von 200.000 wurde abgeschaffen. Der maximal mögliche Kreditrahmen richtig sich nun nach den eigenen Vermögenswerten. (Landbesitz und Gebäude usw.) Die minimale Kreditgrenze liegt nun bei 300.000, die Maximagrenze bei 1.500.000.  " />
-	<text name="ss_helpText_12_02" text="Die Belohnungen für erfolgreiche Missionen wurden stark verringert. (entspricht ca. dem 5-fachen Wert eines eingestellten Helfers) " />
-     	<text name="ss_helpText_12_03" text="Die Unterhaltskosten aller Fahrzeuge beinhalten bereits die laufenden Kosten wie z.B. Steuern und Versicherungen, ändern sich jedoch mit dem Nutzungsgrad der Maschinen. Saubere Maschinen unterliegen weniger Verschleiß und sind in den Unterhaltskosten dementsprechend etwas günstiger. Halte deine Geräte und Fahrzeuge also schön sauber! Fahrzeuge welche wenig benutzt werden, produzieren auch geringere Unterhaltskosten." />
+        <text name="ss_helpText_12_02" text="Die Belohnungen für erfolgreiche Missionen wurden stark verringert. (entspricht ca. dem 5-fachen Wert eines eingestellten Helfers) " />
+        <text name="ss_helpText_12_03" text="Die Unterhaltskosten aller Fahrzeuge beinhalten bereits die laufenden Kosten wie z.B. Steuern und Versicherungen, ändern sich jedoch mit dem Nutzungsgrad der Maschinen. Saubere Maschinen unterliegen weniger Verschleiß und sind in den Unterhaltskosten dementsprechend etwas günstiger. Halte deine Geräte und Fahrzeuge also schön sauber! Fahrzeuge welche wenig benutzt werden, produzieren auch geringere Unterhaltskosten." />
         <text name="ss_helpText_12_04" text="Die Verkaufspreise für Erntegüter variieren nun in Abhängikeit der Jahreszeit." />
 
         <text name="ss_helpTitle_13" text="Helfer" />
@@ -219,7 +218,7 @@
         <text name="ss_helpTitle_18" text="Verschiedenes" />
         <text name="ss_helpText_18_01" text="Wenn Du Nachts nicht arbeiten möchtest, nutze die Funktion zur Nacht überspringen. Einfach am Anfang der Nacht die standartmäßig einstellte Tastenkombination  Alt links + N drücken und automatisch zum nächsten Morgen vorspulen.(Du musst außerhalb eines Fahrzeuges stehen)" />
         <text name="ss_helpText_18_02" text="Möchtest Du die Jahreszeitenlänge während eines aktiven Spielstandes verändern, solltest Du 1.) die Veränderung während des Winters vornehmen um ungewollte Probleme mit dem aktuellen Pflanzenwachstum zu bekommen 2.)sollte das Spiel bzw. der Onlineserver neugestartet werden." />
-    	<text name="ss_helpText_18_03" text="Seasons verändert die Spielweise in vielen Punkten. Die meisten Leute konnten mit 9-Tage Jahreszeit und einer Zeitskalierung von 5x das beste Spielerlebnis erreichen. Natürlich hat jeder seine eigenen Vorlieben und Spielweise. Der Frühling sollte dennoch zum pflügen/grubbern/säen genutzt werden. Der Sommer sollte für den Pflanzenschutz( Dünger ausbringen etc.) und den ersten Gras-Schnitt und/oder Heuproduktion. Danach kommt die Ernte der Pflanzen bis in den späten Herbst. Die ersten Vorbereitungen zur Aussaat sind danach möglich. Da der Boden im Winter vermutlich zu kalt und gefroren sein wird, könnten man sich nun verstärkt um die Tiere oder die Forstwirtschaft kümmern. Dein Fuhrpark sollte natürlich auch regelmäßig gewartet werden. Nutze die freie Zeit im Winter!" />
+        <text name="ss_helpText_18_03" text="Seasons verändert die Spielweise in vielen Punkten. Die meisten Leute konnten mit 9-Tage Jahreszeit und einer Zeitskalierung von 5x das beste Spielerlebnis erreichen. Natürlich hat jeder seine eigenen Vorlieben und Spielweise. Der Frühling sollte dennoch zum pflügen/grubbern/säen genutzt werden. Der Sommer sollte für den Pflanzenschutz( Dünger ausbringen etc.) und den ersten Gras-Schnitt und/oder Heuproduktion. Danach kommt die Ernte der Pflanzen bis in den späten Herbst. Die ersten Vorbereitungen zur Aussaat sind danach möglich. Da der Boden im Winter vermutlich zu kalt und gefroren sein wird, könnten man sich nun verstärkt um die Tiere oder die Forstwirtschaft kümmern. Dein Fuhrpark sollte natürlich auch regelmäßig gewartet werden. Nutze die freie Zeit im Winter!" />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
     </texts>
 </l10n>
