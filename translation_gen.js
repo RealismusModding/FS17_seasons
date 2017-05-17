@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const xmlbuilder = require("xmlbuilder");
 const _map = require("lodash.map");
 const _ = require("lodash");
@@ -92,6 +94,7 @@ function readXML(path) {
 
             xml2js.parseString(data, (err, data) => {
                 if (err) {
+                    console.log(path);
                     return reject(err);
                 }
 
