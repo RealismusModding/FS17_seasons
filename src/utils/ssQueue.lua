@@ -32,8 +32,8 @@ end
 -- Add an item to the end of the list
 function ssQueue:push(value)
     if self.last then
-        value._prev = self.last
         self.last._next = value
+        value._prev = self.last
         self.last = value
     else
         -- First node
@@ -75,7 +75,7 @@ function ssQueue:remove(value, mutateIterating)
         end
     elseif value._prev then
         value._prev._next = nil
-        self._last = value._prev
+        self.last = value._prev
     else
         self.first = nil
         self.last = nil

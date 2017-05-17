@@ -52,8 +52,6 @@ function ssCatchingUp:update(dt)
     end
 
     if self.showWarning then
-        -- g_currentMission:showBlinkingWarning("HALLO!!!!! DUURT LANG "..tostring(g_seasons.dms.queue.size))
-
         -- If no dialog, open it
         if self.dialog == nil then
             g_gui:closeAllDialogs()
