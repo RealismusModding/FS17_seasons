@@ -37,6 +37,16 @@ function ssSkipNight:update(dt)
 
             self.oldTimeScale = g_currentMission.missionInfo.timeScale
             g_currentMission:setTimeScale(ssSkipNight.SPEED)
+
+            -- Close all dialogs and show a sleeping window
+            g_gui:closeAllDialogs()
+
+            self.dialog = g_gui:showDialog("MessageDialog")
+            if self.dialog ~= nil then
+                self.dialog.target:setDialogType(DialogElement.TYPE_LOADING)
+                self.dialog.target:setIsCloseAllowed(false)
+                self.dialog.target:setText(ssLang.getText("dialog_sleeping"))
+            end
         end
     end
 
@@ -49,6 +59,9 @@ function ssSkipNight:update(dt)
         g_currentMission.environment:removeHourChangeListener(self)
 
         g_currentMission:setTimeScale(self.oldTimeScale)
+
+        g_gui:closeDialog(self.dialog)
+        self.dialog = nil
     end
 
     -- Ignore any change in timescale by the player

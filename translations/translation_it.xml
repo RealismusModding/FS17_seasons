@@ -79,13 +79,13 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
 
-        <text name ="ss_version" text="In passato hai scaricato una copia rubata della nostra mod da un sito che non rispetta la comunità di modding e ha violato il nostro copyright, o hai scaricato una versione incompleta di questa mod dalla nostra repository. Apprezziamo la tua voglia e l'eccitazione, ma purtroppo il tuo salvataggio è incompatibile con questa versione della Seasons. Non utilizzare siti che rubano da modders in futuro." />
-        
+        <text name="ss_version" text="In passato hai scaricato una copia rubata della nostra mod da un sito che non rispetta la comunità di modding e ha violato il nostro copyright, o hai scaricato una versione incompleta di questa mod dalla nostra repository. Apprezziamo la tua voglia e l'eccitazione, ma purtroppo il tuo salvataggio è incompatibile con questa versione della Seasons. Non utilizzare siti che rubano da modders in futuro." />
         <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non è possibile lavorarlo!" />
         <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!" />
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
         <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Nel menu' Esc ci sono tutte le indicazioni per utilizzare questa mod." />
+
         <text name="ui_pageOverview" text="Generali" />
         <text name="ui_pageSettings" text="Impostazioni" />
         <text name="ui_pageDebug" text="Tool di Debug" />
@@ -122,6 +122,8 @@
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="Il gioco si sta sincronizzando dopo l'avanzamento veloce" />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Neve" />
 

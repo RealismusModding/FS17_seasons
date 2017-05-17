@@ -79,13 +79,13 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
 
-        <text name ="ss_version" text="Je bent in het verleden een gestolen kopie van onze mod gedownload van een website die geen respect heeft voor de modding gemeenschap, en die onze eigendomsrechten hebben geschonden, of je hebt een incomplete versie van onze mod gedownload van onze code. We waarderen je gretigheid en opwinding, maar helaas is je savegame niet compatibel met deze versie van Seasons. Gebruik alsjeblieft geen websites die stelen van modders in de toekomst" />
-        
+        <text name="ss_version" text="Je bent in het verleden een gestolen kopie van onze mod gedownload van een website die geen respect heeft voor de modding gemeenschap, en die onze eigendomsrechten hebben geschonden, of je hebt een incomplete versie van onze mod gedownload van onze code. We waarderen je gretigheid en opwinding, maar helaas is je savegame niet compatibel met deze versie van Seasons. Gebruik alsjeblieft geen websites die stelen van modders in de toekomst" />
         <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
         <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn" />
         <text name="warning_animalsKilled" text="Dieren zijn dood gegaan (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
         <text name="msg_welcome" text="Welkom bij de Seasons Mod door Realismus Modding. Bekijk de helppagina’s in het Esc-menu voor meer informatie over het gebruik van deze mod." />
+
         <text name="ui_pageOverview" text="Overzicht" />
         <text name="ui_pageSettings" text="Instellingen" />
         <text name="ui_pageDebug" text="Debug" />
@@ -122,6 +122,8 @@
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd." />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Sneeuw" />
 

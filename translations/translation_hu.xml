@@ -79,13 +79,13 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne mutasd újra" />
 
-        <text name ="ss_version" text="A múltban valamikor letöltötted a modunk egy lopott verzióját egy olyan oldalról, ami nem támogatja a modder közösséget és megsértette a minket illető szerzői jogokat, vagy letöltötted a mod nem végleges verzióját. Nagyra értékeljük az érdeklődésed, de a mentett állásod inkompatibilis a Seasons mod ezen verziójával. Arra kérünk, többe ne látogass olyan oldalakat a jövőben, amelyek a modderektől lopnak." />
-        
+        <text name="ss_version" text="A múltban valamikor letöltötted a modunk egy lopott verzióját egy olyan oldalról, ami nem támogatja a modder közösséget és megsértette a minket illető szerzői jogokat, vagy letöltötted a mod nem végleges verzióját. Nagyra értékeljük az érdeklődésed, de a mentett állásod inkompatibilis a Seasons mod ezen verziójával. Arra kérünk, többe ne látogass olyan oldalakat a jövőben, amelyek a modderektől lopnak." />
         <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
         <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
         <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetõvájú maximum kapacitása 3 napra elegendõ élelmet biztosít az állataidnak." />
         <text name="msg_welcome" text="A Realismus Modding nevében üdvözlünk a Seasons modban. Kérlek olvasd át az Áttekintést az ESC menüben, hogy megismerkedj a mod használatával." />
+
         <text name="ui_pageOverview" text="Áttekintés" />
         <text name="ui_pageSettings" text="Beállítások" />
         <text name="ui_pageDebug" text="Hibakeresés" />
@@ -122,6 +122,8 @@
         <text name="dialog_resetGrowth_no" text="Növény növekedés megtartása" />
         <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
         <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után." />
+        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
+        <text name="dialog_sleeping" text="" />
 
         <text name="fillType_snow" text="Hó" />
 
