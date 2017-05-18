@@ -122,8 +122,7 @@
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="Il gioco si sta sincronizzando dopo l'avanzamento veloce" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Riposando prima di un altro giorno in fattoria... Zzz.." />
 
         <text name="fillType_snow" text="Neve" />
 

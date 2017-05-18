@@ -122,8 +122,7 @@
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
         <text name="dialog_timeTravel" text="Gra jest synchronizowana po przewinięciu czasu" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Odpoczynek przed kolejnym dniem pracy na farmie... Zzz..." />
 
         <text name="fillType_snow" text="Śnieg" />
 

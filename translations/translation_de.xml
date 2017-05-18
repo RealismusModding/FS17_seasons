@@ -123,8 +123,7 @@
         <text name="dialog_resetGrowth_no" text="Wachstum beibehalten" />
         <text name="dialog_resetGrowth_yes" text="Alle Wachstumsstufen zurücksetzen" />
         <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen!" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
 
         <text name="fillType_snow" text="Schnee" />
 

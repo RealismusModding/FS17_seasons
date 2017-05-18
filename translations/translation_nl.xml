@@ -122,8 +122,7 @@
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd." />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Aan het rusten voor de volgende werkdag op de boerderij... Zzzzz..." />
 
         <text name="fillType_snow" text="Sneeuw" />
 
