@@ -62,6 +62,7 @@ function ssEnvironment:load(savegame, key)
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1)
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
     self.latestGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", -1)
+    self.latestVisualSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestVisualSeason", self.latestSeason)
 
     self._doInitalDayEvent = savegame == nil
 
@@ -73,11 +74,14 @@ end
 function ssEnvironment:save(savegame, key)
     ssXMLUtil.setInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
     ssXMLUtil.setInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
+    ssXMLUtil.setInt(savegame, key .. ".environment.latestVisualSeason", self.latestVisualSeason)
+
     if self.latestGrowthStage == self.SEASON_SPRING - 1 then
         ssXMLUtil.setInt(savegame, key .. ".environment.latestTransition", self.latestTransition)
     else
         ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition)
     end
+
     ssXMLUtil.setInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
@@ -85,9 +89,12 @@ function ssEnvironment:loadMap(name)
     self.seasonChangeListeners = {}
     self.transitionChangeListeners = {}
     self.seasonLengthChangeListeners = {}
+    self.visualSeasonChangeListeners = {}
 
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
+
+    addConsoleCommand("ssSetVisualSeason", "Set visual season", "consoleCommandSetVisualSeason", self)
 end
 
 function ssEnvironment:readStream(streamId, connection)
@@ -95,6 +102,7 @@ function ssEnvironment:readStream(streamId, connection)
     self.daysInSeason = streamReadInt16(streamId)
     self.latestSeason = streamReadInt16(streamId)
     self.latestTransition = streamReadInt16(streamId)
+    self.latestVisualSeason = streamReadInt16(streamId)
     self.currentDayOffset = streamReadInt16(streamId)
 end
 
@@ -103,6 +111,7 @@ function ssEnvironment:writeStream(streamId, connection)
     streamWriteInt16(streamId, self.daysInSeason)
     streamWriteInt16(streamId, self.latestSeason)
     streamWriteInt16(streamId, self.latestTransition)
+    streamWriteInt16(streamId, self.latestVisualSeason)
     streamWriteInt16(streamId, self.currentDayOffset)
 end
 
@@ -151,6 +160,19 @@ function ssEnvironment:callListeners()
             listener:transitionChanged()
         end
     end
+
+    -- Call visual season events
+    if g_currentMission:getIsClient() then
+        local newVisuals = self:calculateVisualSeason()
+
+        if newVisuals ~= self.latestVisualSeason then
+            self.latestVisualSeason = newVisuals
+
+            for _, listener in pairs(self.visualSeasonChangeListeners) do
+                listener:visualSeasonChanged(newVisuals)
+            end
+        end
+    end
 end
 
 -- Listeners for a change of season
@@ -192,6 +214,55 @@ function ssEnvironment:removeSeasonLengthChangeListener(listener)
     end
 end
 
+-- Listeners for the change of the visual season (not aligned with actual seasons)
+function ssEnvironment:addVisualSeasonChangeListener(listener)
+    if listener ~= nil then
+        self.visualSeasonChangeListeners[listener] = listener
+    end
+end
+
+function ssEnvironment:removeVisualSeasonChangeListener(listener)
+    if listener ~= nil then
+        self.visualSeasonChangeListeners[listener] = nil
+    end
+end
+
+----------------------------
+-- Visual season calc
+----------------------------
+
+-- Only run once per day
+function ssEnvironment:calculateVisualSeason()
+    local curSeason = self:currentSeason()
+    local avgAirTemp = (ssWeatherManager.forecast[2].highTemp * 8 + ssWeatherManager.forecast[2].lowTemp * 16) / 24
+    local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
+    local springLeavesTemp = 5
+    local autumnLeavesTemp = 5
+    local dropLeavesTemp = 0
+
+    -- Spring
+    -- Keeping bare winter textures if the daily average temperature is below a treshold
+    if curSeason == self.SEASON_SPRING and self.latestVisualSeason == self.SEASON_WINTER and avgAirTemp <= springLeavesTemp then
+        return self.SEASON_WINTER
+
+    -- Summer
+    -- Summer is never shorter, so if it is currently summer, always show summer (see else statement)
+
+    -- Autumn
+    -- Keeping summer textures until the daily low temperature is below a treshold
+    elseif curSeason == self.SEASON_AUTUMN and self.latestVisualSeason == self.SEASON_SUMMER and lowAirTemp >= autumnLeavesTemp then
+        return self.SEASON_SUMMER
+
+    -- Winter
+    -- Keeping autumn textures until the daily average temperature is below a treshold
+    elseif curSeason == self.SEASON_WINTER and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
+        return self.SEASON_AUTUMN
+
+    else
+        return curSeason
+    end
+end
+
 ----------------------------
 -- Events
 ----------------------------
@@ -216,6 +287,10 @@ end
 -- Starts with 0
 function ssEnvironment:currentSeason()
     return self:seasonAtDay(self:currentDay())
+end
+
+function ssEnvironment:currentVisualSeason()
+    return self.latestVisualSeason
 end
 
 -- Starts with 0
@@ -332,4 +407,35 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     for _, listener in pairs(self.seasonLengthChangeListeners) do
         listener:seasonLengthChanged()
     end
+end
+
+--
+-- Console command for debugging and map makers
+--
+
+function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
+    local season = g_seasons.util.seasonKeyToId[seasonName]
+
+    -- Overwrite getter
+    -- local oldCurrentSeason = self.currentSeason
+    -- self.currentSeason = function (self)
+    --     return season
+    -- end
+    local oldVSeason = self.currentVisualSeason
+    self.currentVisualSeason = function (self)
+        return season
+    end
+
+    -- Update
+    for _, listener in pairs(self.visualSeasonChangeListeners) do
+        listener:visualSeasonChanged(season)
+    end
+
+    -- Fix getter
+    -- self.currentSeason = oldCurrentSeason
+    self.currentVisualSeason = oldVSeason
+
+    self.debug = false
+
+    return "Updated textures to " .. tostring(season)
 end

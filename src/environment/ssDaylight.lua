@@ -10,33 +10,82 @@
 ssDaylight = {}
 g_seasons.daylight = ssDaylight
 
-function ssDaylight:load(savegame, key)
-    self.latitude = Utils.clamp(ssXMLUtil.getFloat(savegame, key .. ".environment.latitude", 51.9), 0, 72)
-end
-
-function ssDaylight:save(savegame, key)
-    ssXMLUtil.setFloat(savegame, key .. ".environment.latitude", self.latitude)
-end
-
 function ssDaylight:loadMap(name)
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addVisualSeasonChangeListener(self)
 
+    self.data = {}
+    self.latitude = 51.9
 
-    if g_currentMission:getIsServer() then
-        -- if server, do it here. Otherwise do it in :load
-        self:setupDayNight()
+    self:loadFromXML(g_seasons.modDir .. "data/daylight.xml")
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("daylight")) do
+        self:loadFromXML(path)
     end
-end
-
-function ssDaylight:readStream(streamId, connection)
-    self.latitude = streamReadFloat32(streamId)
 
     self:setupDayNight()
 end
 
-function ssDaylight:writeStream(streamId, connection)
-    streamWriteFloat32(streamId, self.latitude)
+function ssDaylight:loadFromXML(path)
+    local file = loadXMLFile("daylight", path)
+
+    self.latitude = Utils.clamp(ssXMLUtil.getFloat(file, "daylight.latitude", self.latitude), 0, 70)
+
+    local curves = {
+        ["ambient"] = {3, 16},
+        ["sunColor"] = {3, 18},
+        ["distanceFog"] = {4, 11},
+        -- volumeFog 3
+        ["dustDensity"] = {1, 9}
+    }
+
+    for seasonName, seasonId in pairs(g_seasons.util.seasonKeyToId) do
+        for curve, num in pairs(curves) do
+            local key = string.format("daylight.seasons.%s.%s", seasonName, curve)
+
+            if self.data[curve] == nil then
+                self.data[curve] = {}
+            end
+
+            self.data[curve][seasonId] = Utils.getNoNil(self:loadCurveFromXML(file, key, num[1], num[2]), self.data[curve][seasonId])
+        end
+    end
+
+    delete(file)
+end
+
+function ssDaylight:loadCurveFromXML(file, key, numDims, numKeys)
+    local data = {}
+    local names = {"x", "y", "z", "w"}
+
+    local i = 0
+    while true do
+        local skey = string.format("%s.key(%d)", key, i)
+        if not hasXMLProperty(file, skey) then break end
+
+        local values = Utils.splitString(" ", ssXMLUtil.getString(file, skey .. "#values", nil))
+        local result = {}
+
+        if numDims == 1 then
+            result.v = Utils.evaluateFormula(values[1])
+        else
+            for j = 1, numDims do
+                result[names[j]] = Utils.evaluateFormula(values[j])
+            end
+        end
+
+        data[i + 1] = result;
+
+        i = i + 1
+    end
+
+    if table.getn(data) == numKeys then
+        return data
+    end
+
+    return nil
 end
 
 ----------------------------
@@ -85,12 +134,15 @@ function ssDaylight:adaptTime()
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000
 
     -- For the visual looks
-    env.skyCurve = self:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
-    env.ambientCurve = self:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
-    env.sunRotCurve = self:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
-    env.sunColorCurve = self:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
-    env.distanceFogCurve = self:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
-    env.rainFadeCurve = self:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
+    local season = g_seasons.environment:currentVisualSeason()
+
+    env.skyCurve = self:generateSkyCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.ambientCurve = self:generateAmbientCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.sunRotCurve = self:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.sunColorCurve = self:generateSunColorCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.distanceFogCurve = self:generateDistanceFogCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.rainFadeCurve = self:generateRainFadeCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    env.dustDensityCurve = self:generateDustDensityCurve(season, nightEnd, dayStart, dayEnd, nightStart)
 
     env.sunHeightAngle = self:calculateSunHeightAngle(julianDay)
 end
@@ -154,63 +206,73 @@ end
 -- Curve generators
 ----------------------------
 
-function ssDaylight:generateAmbientCurve(nightEnd, dayStart, dayEnd, nightStart)
+function addKeyframeTime(curve, data, time)
+    data.time = time
+
+    curve:addKeyframe(data)
+end
+
+function ssDaylight:generateAmbientCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator3) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 5
     local eveningStep = (nightStart - dayEnd) / 5
 
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = 0.00 * 60})
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = (nightEnd - 0.25 * morningStep) * 60})
-    curve:addKeyframe({x = 0.065, y = 0.065, z = 0.075, time = (nightEnd + 0.01) * 60}) -- light up ambient to compensate for switch to sunlight
-    curve:addKeyframe({x = 0.065, y = 0.065, z = 0.075, time = (nightEnd + 0.02) * 60})
-    curve:addKeyframe({x = 0.040, y = 0.040, z = 0.060, time = (nightEnd + 0.25 * morningStep) * 60}) -- back to regular ambient settings
-    curve:addKeyframe({x = 0.080, y = 0.080, z = 0.140, time = (nightEnd + 1 * morningStep) * 60})
-    curve:addKeyframe({x = 0.140, y = 0.140, z = 0.120, time = (nightEnd + 2 * morningStep) * 60})
-    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.200, time = dayStart * 60})
+    local data = self.data.ambient[season]
 
-    curve:addKeyframe({x = 0.200, y = 0.200, z = 0.200, time = dayEnd * 60})
-    curve:addKeyframe({x = 0.160, y = 0.140, z = 0.160, time = (dayEnd + 1 * eveningStep) * 60})
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = (dayEnd + 4 * eveningStep) * 60}) -- ambient night
-    curve:addKeyframe({x = 0.024, y = 0.024, z = 0.036, time = (nightStart - 0.15 * eveningStep) * 60})
-    curve:addKeyframe({x = 0.072, y = 0.072, z = 0.088, time = (nightStart + 0.01) * 60}) -- light up ambient to compensate for switch to moonlight
-    curve:addKeyframe({x = 0.072, y = 0.072, z = 0.088, time = (nightStart + 0.02) * 60})
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = (nightStart + 0.15 * eveningStep) * 60}) -- back to regular ambient settings
-    curve:addKeyframe({x = 0.020, y = 0.020, z = 0.032, time = 24.00 * 60})
+    addKeyframeTime(curve, data[1], 0.00 * 60)
+    addKeyframeTime(curve, data[2], (nightEnd - 0.25 * morningStep) * 60)
+    addKeyframeTime(curve, data[3], (nightEnd + 0.01) * 60) -- light up ambient to compensate for switch to sunlight
+    addKeyframeTime(curve, data[4], (nightEnd + 0.02) * 60)
+    addKeyframeTime(curve, data[5], (nightEnd + 0.25 * morningStep) * 60) -- back to regular ambient settings
+    addKeyframeTime(curve, data[6], (nightEnd + 1 * morningStep) * 60) --5
+    addKeyframeTime(curve, data[7], (nightEnd + 2 * morningStep) * 60) --6
+    addKeyframeTime(curve, data[8], dayStart * 60) --9
+
+    addKeyframeTime(curve, data[9], dayEnd * 60) --17
+    addKeyframeTime(curve, data[10], (dayEnd + 1 * eveningStep) * 60) --18
+    addKeyframeTime(curve, data[11], (dayEnd + 4 * eveningStep) * 60) -- ambient night 21
+    addKeyframeTime(curve, data[12], (nightStart - 0.15 * eveningStep) * 60)
+    addKeyframeTime(curve, data[13], (nightStart + 0.01) * 60) -- light up ambient to compensate for switch to moonlight
+    addKeyframeTime(curve, data[14], (nightStart + 0.02) * 60)
+    addKeyframeTime(curve, data[15], (nightStart + 0.15 * eveningStep) * 60) -- back to regular ambient settings -- 22.15
+    addKeyframeTime(curve, data[16], 24.00 * 60)
 
     return curve
 end
 
-function ssDaylight:generateSunColorCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssDaylight:generateSunColorCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator3) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 5
     local eveningStep = (nightStart - dayEnd) / 5
 
-    curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 0.00 * 60})
-    curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = (nightEnd - 0.25 * morningStep) * 60})
-    curve:addKeyframe({x = 0.000, y = 0.000, z = 0.000, time = (nightEnd + 0.01) * 60}) -- shift to brief complete darkness for switch to sunlight
-    curve:addKeyframe({x = 0.000, y = 0.000, z = 0.000, time = (nightEnd + 0.02) * 60})
-    curve:addKeyframe({x = 0.060, y = 0.050, z = 0.030, time = (nightEnd + 0.25 * morningStep) * 60})
-    curve:addKeyframe({x = 0.700, y = 0.450, z = 0.350, time = (nightEnd + 2 * morningStep) * 60}) -- lighten, red
-    curve:addKeyframe({x = 1.100, y = 0.850, z = 0.600, time = (nightEnd + 3 * morningStep) * 60}) -- shift to orange
-    curve:addKeyframe({x = 0.750, y = 0.750, z = 0.750, time = dayStart * 60})
+    local data = self.data.sunColor[season]
 
-    curve:addKeyframe({x = 0.750, y = 0.750, z = 0.750, time = dayEnd * 60})
-    curve:addKeyframe({x = 0.750, y = 0.700, z = 0.650, time = (dayEnd + 1 * eveningStep) * 60}) -- darken
-    curve:addKeyframe({x = 1.000, y = 0.900, z = 0.300, time = (dayEnd + 2 * eveningStep) * 60}) -- orange sunset
-    curve:addKeyframe({x = 0.900, y = 0.400, z = 0.100, time = (dayEnd + 3 * eveningStep) * 60}) -- shift to red
-    curve:addKeyframe({x = 0.300, y = 0.250, z = 0.500, time = (dayEnd + 4 * eveningStep) * 60}) -- shift to blue
-    curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = (nightStart - 0.15 * eveningStep) * 60})
-    curve:addKeyframe({x = 0.000, y = 0.000, z = 0.000, time = (nightStart + 0.01) * 60}) -- shift to brief complete darkness for switch to moonlight
-    curve:addKeyframe({x = 0.000, y = 0.000, z = 0.000, time = (nightStart + 0.02) * 60})
-    curve:addKeyframe({x = 0.050, y = 0.060, z = 0.100, time = (nightStart + 0.15 * eveningStep) * 60})
-    curve:addKeyframe({x = 0.060, y = 0.070, z = 0.150, time = 24.00 * 60}) -- shift to bluish darkness
+    addKeyframeTime(curve, data[1], 0.00 * 60)
+    addKeyframeTime(curve, data[2], (nightEnd - 0.25 * morningStep) * 60)
+    addKeyframeTime(curve, data[3], (nightEnd + 0.01) * 60) -- shift to brief complete darkness for switch to sunlight
+    addKeyframeTime(curve, data[4], (nightEnd + 0.02) * 60)
+    addKeyframeTime(curve, data[5], (nightEnd + 0.25 * morningStep) * 60)
+    addKeyframeTime(curve, data[6], (nightEnd + 2 * morningStep) * 60) -- lighten, red
+    addKeyframeTime(curve, data[7], (nightEnd + 3 * morningStep) * 60) -- shift to orange
+    addKeyframeTime(curve, data[8], dayStart * 60)
+
+    addKeyframeTime(curve, data[9], dayEnd * 60)
+    addKeyframeTime(curve, data[10], (dayEnd + 1 * eveningStep) * 60) -- darken
+    addKeyframeTime(curve, data[11], (dayEnd + 2 * eveningStep) * 60) -- orange sunset
+    addKeyframeTime(curve, data[12], (dayEnd + 3 * eveningStep) * 60) -- shift to red
+    addKeyframeTime(curve, data[13], (dayEnd + 4 * eveningStep) * 60) -- shift to blue
+    addKeyframeTime(curve, data[14], (nightStart - 0.15 * eveningStep) * 60)
+    addKeyframeTime(curve, data[15], (nightStart + 0.01) * 60) -- shift to brief complete darkness for switch to moonlight
+    addKeyframeTime(curve, data[16], (nightStart + 0.02) * 60)
+    addKeyframeTime(curve, data[17], (nightStart + 0.15 * eveningStep) * 60)
+    addKeyframeTime(curve, data[18], 24.00 * 60) -- shift to bluish darkness
 
     return curve
 end
 
-function ssDaylight:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssDaylight:generateSkyCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 10
@@ -236,7 +298,7 @@ function ssDaylight:generateSkyCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssDaylight:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssDaylight:generateRainFadeCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local morningStep = (dayStart - nightEnd) / 10
@@ -253,7 +315,7 @@ function ssDaylight:generateRainFadeCurve(nightEnd, dayStart, dayEnd, nightStart
     return curve
 end
 
-function ssDaylight:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssDaylight:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator1) -- degree 2
 
     curve:addKeyframe({v = Utils.degToRad(-15), time = 0.00 * 60}) -- start (moon)
@@ -275,7 +337,7 @@ function ssDaylight:generateSunRotCurve(nightEnd, dayStart, dayEnd, nightStart)
     return curve
 end
 
-function ssDaylight:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightStart)
+function ssDaylight:generateDistanceFogCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     local curve = AnimCurve:new(linearInterpolator4) -- degree 2
 
     local ex = function(rgb)
@@ -285,21 +347,44 @@ function ssDaylight:generateDistanceFogCurve(nightEnd, dayStart, dayEnd, nightSt
     local morningStep = (dayStart - nightEnd) / 5
     local eveningStep = (nightStart - dayEnd) / 5
 
+    local data = self.data.distanceFog[season]
+
     -- Nothing at night (darkness)
     -- When dawn, go red-ish. At 8AM go blue (compensate), at 9AM blue but less intense
     -- Do reverse in the evening,
-    curve:addKeyframe({x = 0, y = 0, z = 0, w = 0.003, time = 0 * 60}) -- night
-    curve:addKeyframe({x = ex(010), y = ex(012), z = ex(015), w = 0.0008, time = (nightEnd + 1 * morningStep) * 60})
-    curve:addKeyframe({x = ex(085), y = ex(060), z = ex(055), w = 0.0006, time = (nightEnd + 2 * morningStep) * 60})
-    curve:addKeyframe({x = ex(085), y = ex(070), z = ex(065), w = 0.0005, time = (nightEnd + 3 * morningStep) * 60})
-    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0006, time = (nightEnd + 4 * morningStep) * 60})
-    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0003, time = dayStart * 60})
+    addKeyframeTime(curve, data[1], 0 * 60) -- night
+    addKeyframeTime(curve, data[2], (nightEnd + 1 * morningStep) * 60)
+    addKeyframeTime(curve, data[3], (nightEnd + 2 * morningStep) * 60)
+    addKeyframeTime(curve, data[4], (nightEnd + 3 * morningStep) * 60)
+    addKeyframeTime(curve, data[5], (nightEnd + 4 * morningStep) * 60)
+    addKeyframeTime(curve, data[6], dayStart * 60)
 
-    curve:addKeyframe({x = ex(105), y = ex(130), z = ex(150), w = 0.0003, time = dayEnd * 60})
-    curve:addKeyframe({x = ex(070), y = ex(045), z = ex(030), w = 0.0004, time = (dayEnd + 2 * eveningStep) * 60})
-    curve:addKeyframe({x = ex(045), y = ex(040), z = ex(050), w = 0.0006, time = (dayEnd + 3 * eveningStep) * 60})
-    curve:addKeyframe({x = ex(020), y = ex(020), z = ex(030), w = 0.0008, time = (dayEnd + 4 * eveningStep) * 60})
-    curve:addKeyframe({x = 0, y = 0, z = 0, w = 0.003, time = nightStart * 60}) -- night
+    addKeyframeTime(curve, data[7], dayEnd * 60)
+    addKeyframeTime(curve, data[8], (dayEnd + 2 * eveningStep) * 60)
+    addKeyframeTime(curve, data[9], (dayEnd + 3 * eveningStep) * 60)
+    addKeyframeTime(curve, data[10], (dayEnd + 4 * eveningStep) * 60)
+    addKeyframeTime(curve, data[11], nightStart * 60) -- night
+
+    return curve
+end
+
+function ssDaylight:generateDustDensityCurve(season, nightEnd, dayStart, dayEnd, nightStart)
+    local curve = AnimCurve:new(linearInterpolator1)
+
+    local morningStep = (dayStart - nightEnd) / 10
+    local eveningStep = (nightStart - dayEnd) / 5
+
+    local data = self.data.dustDensity[season]
+
+    addKeyframeTime(curve, data[1], 0 * 60)
+    addKeyframeTime(curve, data[2], (nightEnd + 2 * morningStep) * 60)
+    addKeyframeTime(curve, data[3], (nightEnd + 7.5 * morningStep) * 60)
+    addKeyframeTime(curve, data[4], (nightEnd + 8 * morningStep) * 60)
+    addKeyframeTime(curve, data[5], dayStart * 60)
+    addKeyframeTime(curve, data[6], (dayEnd + 1 * eveningStep) * 60)
+    addKeyframeTime(curve, data[7], (dayEnd + 2 * eveningStep) * 60)
+    addKeyframeTime(curve, data[8], (dayEnd + 3.25 * eveningStep) * 60)
+    addKeyframeTime(curve, data[9], 24 * 60)
 
     return curve
 end
@@ -313,6 +398,9 @@ function ssDaylight:dayChanged()
     self:adaptTime()
 end
 
+function ssDaylight:visualSeasonChanged()
+    self:adaptTime()
+end
 
 -- function to calculate solar radiation
 function ssDaylight:calculateSolarRadiation()
