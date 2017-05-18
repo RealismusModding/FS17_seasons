@@ -72,10 +72,10 @@
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Un nuovo anno, un nuovo perido di semina." />
-        <text name="SS_SEASON_INTRO_1" text="Il sole è alto, i prodotti crescono." />
-        <text name="SS_SEASON_INTRO_2" text="Il momento della raccolta è arrivato. Prepararsi prima dell'inverno o le piante non sopravviveranno al freddo." />
-        <text name="SS_SEASON_INTRO_3" text="Fa freddo. il terreno è difficile, forse ghiacciato. I raccolti non crescono e possono anche appassire." />
+        <text name="SS_SEASON_INTRO_0" text="La primavera è alle porte; Fiori e alberi fioriscono. È tempo di coltivare e seminare i tuoi campi." />
+        <text name="SS_SEASON_INTRO_1" text="In estate i giorni diventano lunghe e caldi. È tempo di fienagione e di crescita per le colture." />
+        <text name="SS_SEASON_INTRO_2" text="Le foglie degli alberi ingialliscono e sta diventando sempre più freddo, l'autunno è arrivato. Assicuratevi di raccogliere tutte le colture prima dell'arrivo dell'inverno." />
+        <text name="SS_SEASON_INTRO_3" text="L'inverno è sceso e gli animali hanno bisogno di maggiore cura. Il terreno sarà congelato e non è possibile lavorare i campi. E' tempo per la silvicoltura e per la spalatura dalla neve." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
 
