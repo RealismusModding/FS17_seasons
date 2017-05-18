@@ -56,6 +56,10 @@ function ssHelpLines:loadFromXML(path)
                     self:loadI18NIntoGlobal(value)
                 end
 
+                if type == "image" then
+                    value = g_seasons.modDir .. value
+                end
+
                 if value ~= nil and (type == "text" or type == "image") then
                     local item = {
                         type = type,
