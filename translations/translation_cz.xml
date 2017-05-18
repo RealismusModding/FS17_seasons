@@ -122,8 +122,7 @@
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
         <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Čas jít spát a odpočinout si po práci ... Zzz ..." />
 
         <text name="fillType_snow" text="Sníh" />
 
