@@ -32,6 +32,24 @@ For further info on game play checkout the Seasons section of the in-game help. 
         </en>
         <fr>Seasons</fr>
         <de>Seasons</de>
+        <pl><![CDATA[
+        Nadchodzi zima... i wiosna oraz lato i jesień.
+Mod Seasons zmienia podstawowy sposób gry w Farming Simulator wprowadzając pory roku i zmieniając wszystkie aspekty rozgrywki, takie jak pogoda, wzrost roślin, ekonomia, obsługa maszyny oraz zwierząt w pasującą całość.
+
+Doświadcz problemów i trosk z życia prawdziwego farmera obawiającego się czy uda się posiać wszystkie uprawy zanim zrobi się za zimo lub za sucho, aby wykiełkowały oraz czy uda się zakończyć żniwa przed jesiennymi deszczami, kiedy zboża zamokną.
+
+Piękna szata graficzna wpisująca się w porę roku, taka jaka rozkwitające wiosną życie, bogactwo kolorów jesienią oraz nagie drzewa w ponury zimowy dzień kiedy zajmujesz się odśnieżaniem lub pracą w lesie, w pełni pozwolą Ci się wczuć w nowe środowisko.
+
+Zdecydowanie zalecamy rozpoczęcie przygody z modem Seasons na nowym zapisie gry. Uwaga: ta wersja modu jest niekompatybilną z wcześniejszymi nieukończonym wersjami. Należy skasować wcześniejszą nieukończoną wersję, zainstalować tą i rozpocząć nową grę.
+
+Alt + S : Menu modu Seasons (zestawianie wzrostu upraw i ustawienia)
+Alt + F : Wyświetlenie / Ukrycie prognozy pogody
+Alt + R : Przegląd pojazdu (wykonywalny tylko dla pojazdu zaparkowanego w warsztacie oraz możliwy jedynie gdy przegląd jest wymagany)
+Alt + N : Pominiecie nocy (dostępne tylko wieczorem, przed północą)
+
+Więcej informacji o grze z modem Seasons znajduje się w menu pomocy gry. Pełna lista funkcjonalności dostępna jest w pliku readme oraz na naszej stronie internetowej
+        ]]>
+        </pl>
         <es><![CDATA[Seasons es un mod que, como bien indica su nombre, simula las estaciones añadiendo sus características y un punto más de realismo al juego.]]></es>
     </description>
 
