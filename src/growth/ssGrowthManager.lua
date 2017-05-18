@@ -31,6 +31,7 @@ ssGrowthManager.previousWillGerminateData = {}
 ssGrowthManager.fakeTransition = 1
 ssGrowthManager.additionalFruitsChecked = false
 ssGrowthManager.dayHasChanged = false
+ssGrowthManager.isActivatedOnOldSave = false
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
@@ -48,6 +49,10 @@ function ssGrowthManager:load(savegame, key)
         self.willGerminateData[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
 
         i = i + 1
+    end
+
+    if i == 0 then
+        self.isActivatedOnOldSave = true
     end
 end
 
@@ -92,9 +97,9 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
-        addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
+        addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
         
-        if self.isNewSavegame == true then
+        if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
             self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         else
@@ -155,7 +160,6 @@ function ssGrowthManager:transitionChanged()
         self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
-        --print_r(self.previousWillGerminateData)
     end
 end
 
@@ -535,10 +539,33 @@ function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
     self:rebuildWillGerminateData()
 end
 
-function ssGrowthManager:consoleCommandTestStuff()
-    --put stuff to test in here
-    log("Previous")
+function ssGrowthManager:consoleCommandPrintDebugInfo()
+    local transition = g_seasons.environment:transitionAtDay()
+    logInfo("------------------------------------------")
+    logInfo("Seasons Debug Info")
+    print("")
+    logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
+    logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
+    logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
+    print("")
+    local cropsThatCanGrow = ""
+
+    for fruitName in pairs(ssGrowthManager.willGerminateData) do
+        if ssGrowthManager.willGerminateData[fruitName] == true then
+            cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+        end
+    end
+
+    logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+    print("")
+    logInfo("Previous willGerminateData")
     print_r(self.previousWillGerminateData)
-    log("Current")
+    print("")
+    logInfo("Current willGerminateData")
     print_r(self.willGerminateData)
+    print("")
+    logInfo("Growth Data")
+    print_r(self.growthData)
+    logInfo("------------------------------------------")
+    
 end
