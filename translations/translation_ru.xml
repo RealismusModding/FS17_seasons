@@ -122,8 +122,7 @@
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />
         <text name="dialog_resetGrowth_yes" text="Сбросить" />
         <text name="dialog_timeTravel" text="После перемотки времени происходит синхронизация игровых процессов " />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Вы отдыхаете до следующего дня на ферме... Хр-р-р..." />
 
         <text name="fillType_snow" text="Снег" />
 
