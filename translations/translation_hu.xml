@@ -80,7 +80,7 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne mutasd újra" />
 
-        <text name="ss_version" text="A múltban valamikor letöltötted a modunk egy lopott verzióját egy olyan oldalról, ami nem támogatja a modder közösséget és megsértette a minket illető szerzői jogokat, vagy letöltötted a mod nem végleges verzióját. Nagyra értékeljük az érdeklődésed, de a mentett állásod inkompatibilis a Seasons mod ezen verziójával. Arra kérünk, többe ne látogass olyan oldalakat a jövőben, amelyek a modderektől lopnak." />
+        <text name="ss_version" text="A múltban valamikor letöltötted a modunk egy lopott verzióját egy olyan oldalról, ami nem támogatja a modder közösséget és megsértette a minket illető szerzői jogokat, vagy letöltötted a mod nem végleges verzióját. Nagyra értékeljük az érdeklődésed, de a mentett állásod inkompatibilis a Seasons mod ezen verziójával. Arra kérünk, többe ne látogass olyan oldalakat a jövőben, amelyek a modderektől lopnak. Új játékot kell kezdened" />
         <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
         <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
         <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
