@@ -94,7 +94,7 @@
         <gt growthTransitionNum="7"> <!--late summer to early autumn-->
             <fruit fruitName="barley"  normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="wheat"   normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="rape"    normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
+            <fruit fruitName="rape"    normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"/>
             <fruit fruitName="maize" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
