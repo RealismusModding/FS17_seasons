@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
     <translationContributors>n0tr3adY</translationContributors>
-    <texts>
+  
+  <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: idõjárás elõrejelzés be" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: gép / jármû javitása" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: menü megnyitás" />
@@ -71,7 +72,7 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
-
+		
         <text name="SS_SEASON_INTRO_0" text="Itt a tavasz! A virágok és fák rügyeznek. Itt az idő, hogy megműveld és bevesd a földjeidet!" />
         <text name="SS_SEASON_INTRO_1" text="A napok hosszúak és melegek nyáron. Készíts szalmát, közben figyeld hogy növekednek a növényeid." />
         <text name="SS_SEASON_INTRO_2" text="A levelek kezdenek barnulni és hűl az idő - megérkezett az ősz. Légy kész az aratással, mielőtt beköszönt a tél!" />
@@ -91,7 +92,7 @@
 
         <text name="ui_buttonSave" text="Alkalmazás" />
         <text name="ui_snowOneLayer" text="1 réteg csak" />
-        <text name="ui_days" text="%i napok" />
+        <text name="ui_days" text="%i nap" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelcius" text="Celsius" />
 
@@ -99,37 +100,36 @@
         <text name="ui_harvestSeason" text="Aratási szezon" />
 
         <text name="tooltip_seasonLength" text="Egy szezon hossza napokban. 1 év négy szezonból áll" />
-        <text name="tooltip_seasonIntros" text="Mutasd be az évszakokat a szezon kezdetén" />
+        <text name="tooltip_seasonIntros" text="Rövid leirást olvashatsz az aktuális évszakról a szezon kezdetén." />
         <text name="tooltip_snow" text="Télen esni fog a hó és útakadályokat fog emelni" />
         <text name="tooltip_controlsHelp" text="Mutasd az elõrejelzést és a menügombot a help menüben" />
         <text name="tooltip_snowTracks" text="A gépek letapossák a havat" />
-        <text name="tooltip_controlsTemperature" text="Beállítja a hõmérséklet skálát a játékban" />
+        <text name="tooltip_controlsTemperature" text="Beállítja a hõmérséklet mértékegységét a játékban" />
         <text name="tooltip_moisture" text="Aratás tiltása ha túl nedves a növény" />
 
-        <text name="setting_seasonIntros" text="Évszak bemutató" />
+        <text name="setting_seasonIntros" text="Évszak bemutatása" />
         <text name="setting_seasonLength" text="Évszak hossza" />
         <text name="setting_snow" text="Hó mód" />
         <text name="setting_controlsHelp" text="Billentyûk a súgóban." />
         <text name="setting_snowTracks" text="Keréknyomok a hóban" />
-        <text name="setting_controlsTemperature" text="Hõmérséklet skála" />
+        <text name="setting_controlsTemperature" text="Hõmérséklet mértékegysége" />
         <text name="setting_moisture" text="Növény nedvesség" />
 
         <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
 
-        <text name="dialog_resetGrowth" text="A Seasons egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe az a Seasons mod hibás mûködését eredményezheti." />
+        <text name="dialog_resetGrowth" text="A Seasons-t egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe az a Seasons mod hibás mûködését eredményezheti." />
         <text name="dialog_resetGrowth_title" text="Növény növekedés alaphelyzetbe" />
         <text name="dialog_resetGrowth_no" text="Növény növekedés megtartása" />
         <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
         <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után." />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+		<text name="dialog_sleeping" text="Pihenés a következő napig... Zzz..." />
 
         <text name="fillType_snow" text="Hó" />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="A Seasons mod növeli a játék realitását közel minden oldalról, hogy minél valóságszerűbb paraméterek között játszhass. Az időjárás hatásaitól kezdve a növény növekedésén át egészen az állatok szaporodásáig, minden egy kicsit közelebb kerül a valósághoz." />
+        <text name="ss_helpText_01_01" text="A Seasons mod növeli a játék realitását minden szempontból, hogy minél valóságszerűbb paraméterek között játszhass. Az időjárás hatásaitól kezdve a növény növekedésén át egészen az állatok szaporodásáig, minden egy kicsit közelebb kerül a valósághoz." />
         <text name="ss_helpText_01_02" text="Egy játékbeli év 4 szezonra van osztva : tavasz, nyár, ősz, tél. Minden szezon 3 részre van osztva: kora, közép, késő." />
         <text name="ss_helpText_01_03" text="Minden cselekedeted az aktuális időszakhoz kösd, hasonlóan a való élethez." />
 
@@ -142,36 +142,34 @@
         <text name="ss_helpText_03_01" text="A napsütéses órák számát is befolyásolja a Seasons. Télen rövidebbek a nappalok (8 óra), míg a nyári időszakban ez 17 óra." />
         <text name="ss_helpText_03_02" text="Mind a silóbunkernek, mind a csomagolt bálának idő kell az erjedéshez. A teljes erjedés 1/3-ad szezon alatt megy végbe. A csomagolt szénabála nem fog megerjedni, de védve lesz az időjárástól. " />
         <text name="ss_helpText_03_03" text="A szezonok kihatnak a fákra és foliagekre is. A fák a hőmérsékletnek megfelelően változtanak. A levelek színt váltanak és lehullanak ősszel, télen pedig lecsupaszodnak. Tavasszal világoszöld színben pompáznak." />
-
+       
         <text name="ss_helpTitle_04" text="Időjárás előrejelzés" />
         <text name="ss_helpText_04_01" text="Az időjárás előrejelzést bekapcsolhatod a Left Alt + F gombokkal." />
         <text name="ss_helpText_04_02" text="Az időjárás előrejelzés mutatja a hőmérsékletet valamit az időjárást (napos, ködös, esős, havas, felhős) a következő 7 napra. A jégesőre nem figyelmeztet - akár a való életben." />
         <text name="ss_helpText_04_03" text="A jobb oldali szám az előrejelzésnél mutatja a napot a szezonból." />
-
+       
         <text name="ss_helpTitle_05" text="Föld" />
-        <text name="ss_helpText_05_01" text="A termőföld hőmérséklete termodinamikus számításokkal és korábbi adatokkal van modellezve. Ez azt jelenti, hogy a föld megfagy télen, ha a hőmérséklet egy bizonyos pont alá esik meghatározott ideig. Ez a fagyás tavasszal megszűnik, ha a levegő hőmérséklete elér egy bizonyos hőfokot egy meghatározott ideig." />
+        <text name="ss_helpText_05_01" text="A termőföld hőmérséklete termodinamikus számításokkal és korábbi adatokkal van modellezve. Ez azt jelenti, hogy a föld megfagy télen, ha a hőmérséklet egy bizonyos fok alá esik meghatározott ideig. Ez a fagyás tavasszal megszűnik, ha a levegő hőmérséklete elér egy bizonyos hőfokot egy meghatározott ideig." />
         <text name="ss_helpText_05_02" text="A termőföld nem művelhető ha a föld fagyott. A növények nem fejlődnek a fagyott földön." />
         <text name="ss_helpText_05_03" text="A növények csak akkor hajtanak ki, ha a föld hőmérséklete a csírázási hő fölött van. Ezek a hőfokok a Seasons beállitási menü első oldalán vannak (Left Alt + S)." />
-
+       
         <text name="ss_helpTitle_06" text="Növények - bevezetés" />
         <text name="ss_helpText_06_01" text="Ha új játékot kezdesz, az összes növény a már betakarított állapotba kerül - tehát ősz óta a földek nem voltak művelve. Ha a Seasons-t már meglévő mentett álláson használod, lehetőséged van beállítani a növények alapállapotba való állítását." />
         <text name="ss_helpText_06_02" text="Az alapértelmezett növekedési mintát felülírja a Seasons. A növények a valóságnak megfelelően fognak növekedni - hasonlóan a megfelelő vetési és aratási szezonhoz. Ez azt jelenti, hogy a tél kipusztítja majdnem az összes növényt, és ha rossz szezonban veted, nem fog növekedni." />
         <text name="ss_helpText_06_03" text="A növények csak a legutolsó növekedési fázisban arathatóak, kivéve az energiafűz és az olajretek. A növények az aratási fázisban maradnak mindaddig, amíg a tél ki nem pusztítja őket." />
         <text name="ss_helpText_06_04" text="Továbbra is tudsz zöld (ki nem fejlett) növényeket silózni." />
-        <!-- Missing translation of "You can still silage green crops." -->
-        <text name="ss_helpText_06_05" text="" />
-
+        
         <text name="ss_helpTitle_07" text=" Növények - szántóföld" />
         <text name="ss_helpText_07_01" text="A növény növekedése tovább tart. Közel fél évig tart, mire eléri a betakarítható állapotot." />
         <text name="ss_helpText_07_02" text="A tél majdnem az összes növényt elpusztítja, de van lehetőség téli és tavaszi növényekre. Búza, árpa, energiafűz, fű, olajretek és repce vethető őssze. Légy biztos benne, hogy a föld elég meleg lesz a növények csírázásához." />
         <text name="ss_helpText_07_03" text="A kukoricát, szójababot, napraforgót, cukorrépát és burgonyát tavasszal kell vetni. A Seasons menü növekedési áttekintés részén találod a csírázási hőre vonatkozó leirást, mert néhány növényt ha kora tavasszal vetsz, ki fog halni. Akkor is, ha a föld hőmérséklete felette van a csírázási hőnek." />
-
+       
         <text name="ss_helpTitle_08" text="Növények - széna, szalma, fű" />
         <text name="ss_helpText_08_01" text="Télen a fű visszaáll a lekaszált állapotba, hogy szimulálja a téli fagy fűre gyakorolt hatását." />
         <text name="ss_helpText_08_02" text="A fűbálákat be kell csomagolni a megfelelő minőségű silóhoz a kaszálás után 2 napon belül. 2 nap után elkezd rohadni és a bála eltűnik." />
         <text name="ss_helpText_08_03" text="A széna, szalma és fűrendek mérete elkezd csökkeni, és pár nap múlva eltűnik. A fűrendek mérete éjjelente csökken. A széna és szalmarendek mérete pedig növekedési fázisonként illetve eső után csökken." />
         <text name="ss_helpText_08_04" text="A szalmát és szénát be kell bálázni mielőtt beköszönt a fagy. A rossz minőségű szénáért és szalmáért nem fizetnek, de ingyen leadhatod. A fű - akár bála, akár rossz minőségű - nem eladható." />
-
+        
         <text name="ss_helpTitle_09" text="Növények - fák" />
         <text name="ss_helpText_09_01" text="A fáknak több idő kell, hogy elérjék a teljes kifejlettségüket. A facsemeték 5 játékbeli év után érik el a teljes méretüket, 2 év után lehet kivágni." />
         <text name="ss_helpText_09_02" text="A túl közel palántált facsemeték akadályozzák egymás növekedését. Hogy újra fejlődjenek, el kell tüntetned ezeket a facsemetéket." />
@@ -181,37 +179,37 @@
         <text name="ss_helpText_10_02" text="Eső után a növényeidnek több idő kell a száradáshoz, ami függ az évszaktól és a levegő hőmérsékletétől is. Meleg időben a növények gyorsabban kiszáradnak, mint hidegben." />
         <text name="ss_helpText_10_03" text="Forgatót használva a szénán miközben a növények vizesek, nedves füvet fog eredményezni. Csak akkor használd a forgatót, ha a növények elég szárazak." />
         <text name="ss_helpText_10_04" text="Azokon a térképeken, ahol a készitő a hómaszkot elkészítette, és a széna- és szalmabálák ki vannak téve esőnek/hónak, elkezdenek romlani mindaddig, amig fedett helyre nem kerülnek. Hómaszk nélkül a rossz idő nem befolyásolja a bálák minőségét." />
-
+        
         <text name="ss_helpTitle_11" text="Karbantartás" />
         <text name="ss_helpText_11_01" text="Járműveidet időnként karban kell tartanod a hibátlan működéshez. A karbantartási periódus minden 30 munkaóra után jön el félévenként. Amely járműveket kihagyod a karbantartásból, nehezebben indulnak el." />
         <text name="ss_helpText_11_02" text="A járműveidet a gépboltnál vagy elhelyezhető garázsnál is karbantarthatod. A karbantartáshoz vezesd a járműved a garázshoz vagy gépbolt és nyomd meg a Bal Alt + R gombokat. A gépboltnál kicsit drágább a javítás." />
         <text name="ss_helpText_11_03" text="A gépjárműved kora az utolsó karbantartás óta." />
         <text name="ss_helpText_11_04" text="Csak a vezethető járműveket kell időszakosan szervízelni. Az munkaeszközöket szükség szerint automatikusan javítják." />
-
+     
         <text name="ss_helpTitle_12" text="Gazdálkodás" />
-        <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltoztott a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
-        <text name="ss_helpText_12_02" text="Bérmunkából a bevétel csökkentve. Nagyjából 5x keresel többet mint egy bérmunkás ugyanazon a földön." />
-        <text name="ss_helpText_12_03" text="A járműveid karbantartása (beleértve az időszakos szervízt) tartalmazza az adót és függ attól mennyit használod. A tiszta gépek karbantartása kevesebbe kerül. A nem használt gépeidnek természetesen kevesebb a karbantartási és javitási költsége." />
+        <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltoztott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
+        <text name="ss_helpText_12_02" text="A küldetésekből származó jövedelem csökkentve. Nagyjából 5x keresel többet, mint egy bérmunkás ugyanazon a földön." />
+        <text name="ss_helpText_12_03" text="A járműveid karbantartása (beleértve az időszakos szervízt) tartalmazza az adót, és függ attól is, hogy mennyit használod. A tiszta gépek karbantartása kevesebbe kerül. A nem használt gépeidnek természetesen kevesebb a karbantartási és javitási költsége." />
         <text name="ss_helpText_12_04" text="A termények árai ingadoznak a szezonnak megfelelően." />
-
+      
         <text name="ss_helpTitle_13" text="Bérmunkás segítők" />
         <text name="ss_helpText_13_01" text="A bérmunkásoknak esetlegesen túlórapénzt is fizetsz. Ha reggel 6 előtt, vagy este 6 után, esetleg hétvégén veszel fel bérmunkást, a munkabére 50% többe kerül." />
-
+      
         <text name="ss_helpTitle_14" text="Állatok - bevezetés" />
-        <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etetési kapacitás 6-ról 3 napra lecsökkent." />
+        <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etető kapacitása 6 napról 3-ra lecsökkent." />
         <text name="ss_helpText_14_02" text="Az állatok szaporodása meghatározott időben történik. A disznók és birkák szaporulata tavasszal, míg a tehenek nyáron szaporodnak." />
-        <text name="ss_helpText_14_03" text="Az állatok meghalnak, ha nincs vizük vagy élelmük. Ez az opció ki van kapcsolva Könnyű nehézségi fokozaton." />
-        <text name="ss_helpText_14_04" text="Télen nem etethetsz fűvel. Használj helyette inkább szalmát." />
+        <text name="ss_helpText_14_03" text="Az állatok elpusztulnak, ha nincs vizük vagy élelmük. Ez az opció ki van kapcsolva Könnyű nehézségi fokozaton." />
+        <text name="ss_helpText_14_04" text="Télen nem etethetsz fűvel. Használj helyette inkább szénát." />
 
         <text name="ss_helpTitle_15" text="Állatok - termelékenység" />
         <text name="ss_helpText_15_01" text="A tej és gyapjú termelés függ a szezontól." />
         <text name="ss_helpText_15_02" text="Gyapjú csak tavasszal adnak a birkák." />
-        <text name="ss_helpText_15_03" text="A tej egész évben termelődik, de télen és tavasszal még több. Mivel télen füvel nem tudsz etetni, a tehenek termelékenysége visszaesik 80% körülire. Ez teljesen normális. Egyébként a Seasons megnöveli a tejtermelést télen és tavasszal, hogy a fűhiány miatti kiesést kompenzálja." />
+        <text name="ss_helpText_15_03" text="A tej egész évben termelődik. Mivel télen füvel nem tudsz etetni, a tehenek termelékenysége visszaesik 80% körülire. Ez teljesen normális. A Seasons megnöveli a tejtermelést télen és tavasszal, hogy a fűhiány miatti kiesést kompenzálja." />
 
         <text name="ss_helpTitle_16" text="Seasons menü" />
         <text name="ss_helpText_16_01" text="A Seasons menüben találhatsz leirást is, és megváltoztathatod a Seasons beállitásait. Ezt a menüt a Left Alt + S gombbal tudod megnyitni." />
         <text name="ss_helpText_16_02" text="Az első oldal átvezet a vetési és aratási ablakokon. A növények csírázási hőmérsékletét a bal oldalon találod. Ha a hőmérséklet a növény mellett fehér, az megfelelő meleget jelent a növénynek. Ha kék, a környezet túl hideg." />
-        <text name="ss_helpText_16_03" text="A második oldal a beállitások menüje. Itt be tudod állitani a szezon hosszát (3/6/9/12 napos szezon), szezon értesitéseket, a hó módo (be / ki / 1-rétegű / keréknyomok be/ki), növény nedvesség (be/ki) és a hőmérséklet kijelzést (Celsius/Fahrenheit)." />
+        <text name="ss_helpText_16_03" text="A második oldal a beállitások menüje. Itt be tudod állitani a szezon hosszát (3/6/9/12 napos szezon), szezon értesitéseket, a hó módot (be / ki / 1-rétegű / keréknyomok be/ki), növény nedvességet (be/ki) és a hőmérséklet kijelzést (Celsius/Fahrenheit)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUDot balra az órától a jobb felső sarokban találod, és a Seasons-al kapcsolatban látsz információkat. Felül mutatja a levegő, alul pedig a föld hőmérsékletét. A föld állapota (nedves növények / fagyott talaj) is itt van kiírva a bal oldalon." />
