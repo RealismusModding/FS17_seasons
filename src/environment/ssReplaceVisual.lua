@@ -14,17 +14,9 @@ function ssReplaceVisual:preLoad()
     Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.placeableUpdatePlacableOnCreation)
 end
 
-function ssReplaceVisual:load(savegame, key)
-    self.latestVisuals = ssXMLUtil.getInt(savegame, key .. ".environment.latestVisuals", g_seasons.environment:currentSeason())
-end
-
-function ssReplaceVisual:save(savegame, key)
-    ssXMLUtil.setInt(savegame, key .. ".environment.latestVisuals", self.latestVisuals)
-end
-
 function ssReplaceVisual:loadMap(name)
     if g_currentMission:getIsClient() then
-        g_currentMission.environment:addDayChangeListener(self)
+        g_seasons.environment:addVisualSeasonChangeListener(self)
 
         self.loadedPlaceableDefaults = {}
 
@@ -34,17 +26,7 @@ function ssReplaceVisual:loadMap(name)
         for _, replacements in ipairs(self.modReplacements) do
             self:loadTextureIdTable(replacements)
         end
-
-        addConsoleCommand("ssSetVisuals", "Set visuals", "consoleCommandSetVisuals", self)
     end
-end
-
-function ssReplaceVisual:readStream(streamId, connection)
-    self.latestVisuals = streamReadInt16(streamId)
-end
-
-function ssReplaceVisual:writeStream(streamId, connection)
-    streamWriteInt16(streamId, self.latestVisuals)
 end
 
 --
@@ -170,24 +152,16 @@ end
 
 function ssReplaceVisual:update(dt)
     if self.once ~= true and g_currentMission:getIsClient() then
-        self:updateFoliageLayers(self.latestVisuals)
-        self:updateTextures(self.latestVisuals)
+        self:updateFoliageLayers()
+        self:updateTextures()
 
         self.once = true
     end
 end
 
-function ssReplaceVisual:dayChanged()
-    if g_currentMission:getIsClient() then
-        local newVisuals = self:getVisualSeason()
-
-        if newVisuals ~= self.latestVisuals then
-            self:updateTextures(newVisuals)
-            self:updateFoliageLayers(newVisuals)
-
-            self.latestVisuals = newVisuals
-        end
-    end
+function ssReplaceVisual:visualSeasonChanged()
+    self:updateTextures()
+    self:updateFoliageLayers()
 end
 
 function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
@@ -198,7 +172,7 @@ function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
             g_seasons.replaceVisual.loadedPlaceableDefaults[string.lower(self.configFileName)] = true
         end
 
-        ssReplaceVisual:updateTextures(g_seasons.replaceVisual.latestVisuals, self.nodeId)
+        ssReplaceVisual:updateTextures(self.nodeId)
     end
 end
 
@@ -221,38 +195,6 @@ function ssReplaceVisual:findNodeByName(nodeId, name, skipCurrent)
     end
 
     return nil
-end
-
-function ssReplaceVisual:getVisualSeason()
-    local curSeason = g_seasons.environment:currentSeason()
-    local avgAirTemp = (ssWeatherManager.forecast[2].highTemp * 8 + ssWeatherManager.forecast[2].lowTemp * 16) / 24
-    local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
-    local s = g_seasons.environment
-    local springLeavesTemp = 5
-    local autumnLeavesTemp = 5
-    local dropLeavesTemp = 0
-
-    -- Spring
-    -- Keeping bare winter textures if the daily average temperature is below a treshold
-    if curSeason == s.SEASON_SPRING and self.latestVisuals == s.SEASON_WINTER and avgAirTemp <= springLeavesTemp then
-        return s.SEASON_WINTER
-
-    -- Summer
-    -- Summer is never shorter, so if it is currently summer, always show summer (see else statement)
-
-    -- Autumn
-    -- Keeping summer textures until the daily low temperature is below a treshold
-    elseif curSeason == s.SEASON_AUTUMN and self.latestVisuals == s.SEASON_SUMMER and lowAirTemp >= autumnLeavesTemp then
-        return s.SEASON_SUMMER
-
-    -- Winter
-    -- Keeping autumn textures until the daily average temperature is below a treshold
-    elseif curSeason == s.SEASON_WINTER and self.latestVisuals == s.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
-        return s.SEASON_AUTUMN
-
-    else
-        return curSeason
-    end
 end
 
 function ssReplaceVisual:walkOverReplacements(default, foliage, fn)
@@ -389,11 +331,12 @@ function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNo
 end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
-function ssReplaceVisual:updateTextures(visualSeason, nodeId)
+function ssReplaceVisual:updateTextures(nodeId)
     if nodeId == nil then
         nodeId = getRootNode()
     end
 
+    local visualSeason = g_seasons.environment:currentVisualSeason()
     local nodeName = getName(nodeId)
 
     if self.textureReplacements[visualSeason][nodeName] ~= nil then
@@ -428,7 +371,7 @@ function ssReplaceVisual:updateTextures(visualSeason, nodeId)
         local childId = getChildAt(nodeId, i)
 
         if childId ~= nil then
-            self:updateTextures(visualSeason, childId, name)
+            self:updateTextures(childId, name)
         end
     end
 end
@@ -459,7 +402,8 @@ end
 -- Foliage updating
 --
 
-function ssReplaceVisual:updateFoliageLayers(visualSeason)
+function ssReplaceVisual:updateFoliageLayers()
+    local visualSeason = g_seasons.environment:currentVisualSeason()
     local layers = self.textureReplacements[visualSeason]._foliageLayers
 
     for layerName, defaultMaterial in pairs(self.textureReplacements.default._foliageLayers) do
@@ -504,29 +448,4 @@ function ssReplaceVisual:setFoliageMaterial(layerId, material)
     for i = 0, getNumOfChildren(layerId) - 1 do
         setMaterial(getChildAt(layerId, i), material, 0)
     end
-end
-
---
--- Console command for debugging and map makers
---
-
-function ssReplaceVisual:consoleCommandSetVisuals(seasonName)
-    local season = g_seasons.util.seasonKeyToId[seasonName]
-
-    -- Overwrite getter
-    local oldCurrentSeason = g_seasons.environment.currentSeason
-    g_seasons.environment.currentSeason = function (self)
-        return season
-    end
-
-    -- Update
-    self:updateTextures(season)
-    self:updateFoliageLayers(season)
-
-    -- Fix getter
-    g_seasons.environment.currentSeason = oldCurrentSeason
-
-    self.debug = false
-
-    return "Updated textures to " .. tostring(season)
 end

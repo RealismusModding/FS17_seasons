@@ -13,6 +13,7 @@ g_seasons.daylight = ssDaylight
 function ssDaylight:loadMap(name)
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
+    g_seasons.environment:addVisualSeasonChangeListener(self)
 
     self.data = {}
     self.latitude = 51.9
@@ -132,9 +133,9 @@ function ssDaylight:adaptTime()
     env.skyDayTimeStart = dayStart * 60 * 60 * 1000
     env.skyDayTimeEnd = dayEnd * 60 * 60 * 1000
 
-    local season = ssEnvironment.SEASON_SPRING
-
     -- For the visual looks
+    local season = g_seasons.environment:currentVisualSeason()
+
     env.skyCurve = self:generateSkyCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     env.ambientCurve = self:generateAmbientCurve(season, nightEnd, dayStart, dayEnd, nightStart)
     env.sunRotCurve = self:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nightStart)
@@ -382,7 +383,7 @@ function ssDaylight:generateDustDensityCurve(season, nightEnd, dayStart, dayEnd,
     addKeyframeTime(curve, data[5], dayStart * 60)
     addKeyframeTime(curve, data[6], (dayEnd + 1 * eveningStep) * 60)
     addKeyframeTime(curve, data[7], (dayEnd + 2 * eveningStep) * 60)
-    addKeyframeTime(curve, data[8], (dayEnd + 3.25 * eveningStep) * 60 * 60)
+    addKeyframeTime(curve, data[8], (dayEnd + 3.25 * eveningStep) * 60)
     addKeyframeTime(curve, data[9], 24 * 60)
 
     return curve
@@ -397,6 +398,9 @@ function ssDaylight:dayChanged()
     self:adaptTime()
 end
 
+function ssDaylight:visualSeasonChanged()
+    self:adaptTime()
+end
 
 -- function to calculate solar radiation
 function ssDaylight:calculateSolarRadiation()

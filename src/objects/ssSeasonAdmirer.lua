@@ -33,25 +33,25 @@ end
 
 function ssSeasonAdmirer:delete()
     if g_seasons and g_seasons.environment then
-        g_seasons.environment:removeSeasonChangeListener(self)
+        g_seasons.environment:removeVisualSeasonChangeListener(self)
     end
 end
 
 function ssSeasonAdmirer:updateVisibility()
-    local season = g_seasons.environment:currentSeason()
+    local season = g_seasons.environment:currentVisualSeason()
     local visible = self.showIn[season]
 
     setVisibility(self.id, visible)
     setCollisionMask(self.id, visible and self.collisionMask or 0)
 end
 
-function ssSeasonAdmirer:seasonChanged()
+function ssSeasonAdmirer:visualSeasonChanged()
     self:updateVisibility()
 end
 
 function ssSeasonAdmirer:update(dt)
     if self.once ~= true then
-        g_seasons.environment:addSeasonChangeListener(self)
+        g_seasons.environment:addVisualSeasonChangeListener(self)
 
         self:updateVisibility()
 
