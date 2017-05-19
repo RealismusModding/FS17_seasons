@@ -27,8 +27,7 @@ end
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        -- TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
-        TreePlantUtil.treeTypes[i].growthTimeHours = 4
+        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
     end
 end
 
@@ -108,7 +107,7 @@ function ssTreeManager:addTreeCutJoint(...)
     -- Find the tree that was just cut
     for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
         -- Cut
-        if getChildAt(tree.node, 0) ~= tree.origSplitShape and tree.ssHandled ~= true then
+        if getChildAt(tree.node, 0) ~= tree.origSplitShape and tree.ssCutHandled ~= true then
             tree.ssCutHandled = true
 
             cutTree = tree
