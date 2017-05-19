@@ -15,7 +15,7 @@ Tiny dedicated server warning fix -- Decker_MMIV
 Polish - Dzi4d3k, KITT3000
 German - tobiasgo, Oekobauer, ItZzShady, wieselflink
 Italian - fcelsa
-French - thierry62, Marxtai
+French - thierry62, Marxtai, dural
 Russian - Vasylko
 Czech - gorgona
 Spanish - PromGames
