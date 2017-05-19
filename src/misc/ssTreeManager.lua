@@ -11,6 +11,7 @@ ssTreeManager = {}
 g_seasons.treeManager = ssTreeManager
 
 ssTreeManager.MIN_DISTANCE = 4.0 -- meters
+ssTreeManager.MIN_DISTANCE_SQ = ssTreeManager.MIN_DISTANCE * ssTreeManager.MIN_DISTANCE
 
 function ssTreeManager:loadMap()
     if g_currentMission:getIsServer() then
@@ -64,13 +65,15 @@ end
 
 -- Find the nearest in the small set
 function ssTreeManager:updateNearest(tree)
-    tree.ssNearestDistance = self.MIN_DISTANCE + 1
+    tree.ssNearestDistance = self.MIN_DISTANCE_SQ + 1
 
     for other, distance in pairs(tree.ssNear) do
         if distance < tree.ssNearestDistance then
             tree.ssNearestDistance = distance
         end
     end
+
+    tree.ssNearestDistance = math.sqrt(tree.ssNearestDistance)
 end
 
 -- This seems to be the function that is called when a tree is planted. If an existing savegame has
@@ -83,10 +86,10 @@ function ssTreeManager:plantTree(...)
 
     for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
         if tree ~= plantedTree then
-            local distance = Utils.vector3Length(tree.x - plantedTree.x, tree.y - plantedTree.y, tree.z - plantedTree.z)
+            local distance = Utils.vector3LengthSq(tree.x - plantedTree.x, tree.y - plantedTree.y, tree.z - plantedTree.z)
 
             -- If the trees are in distance, store their relation
-            if distance < ssTreeManager.MIN_DISTANCE then
+            if distance < ssTreeManager.MIN_DISTANCE_SQ then
                 plantedTree.ssNear[tree] = distance
 
                 tree.ssNear[plantedTree] = distance
