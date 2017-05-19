@@ -196,10 +196,6 @@ function ssUtil.getSnowMaskId()
     local id = getTerrainDetailByName(g_currentMission.terrainRootNode, "ssSnowMask")
 
     if id == 0 then
-        id = getTerrainDetailByName(g_currentMission.terrainRootNode, "SeasonsSnowMask")
-    end
-
-    if id == 0 then
         return nil
     end
 
