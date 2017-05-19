@@ -27,13 +27,25 @@ Alt + R : Maintain vehicle (must be done when vehicle is parked by a workshop an
 Alt + N : Skip night (only available once it gets dark, before midnight)
 
 For further info on game play checkout the Seasons section of the in-game help. A full list of features can be found in the mod's readme file and on our website. 
-
         ]]>
         </en>
-        <fr>Seasons</fr>
+        <fr><![CDATA[L'hiver se profile... puis suivront le printemps, l'été et l'automne.
+Le mod Seasons change de manière fondamentale la manière de jouer à Farming Simulator en introduisant les saisons et modifiant tous les aspects du gameplay, tels que le temps, la croissance, l'économie, l'entretien des véhicules ou encore l'élevage.
+
+Faîtes l'expérience des épreuves et tribulations d'un agriculteur de la vie réelle s'inquiétant de savoir si tous ses semis seront effectués avant qu'il ne fasse trop froid ou trop sec pour que la germination puisse avoir lieu, mais aussi s'il pourra finir sa moisson avant que les jours pluvieux de l'automne ne le rattrapent.
+
+Des décors magnifiques spécifiques aux saisons, tels que la naissance de la vie au printemps, l'automne et la richesse de ses couleurs ou encore les arbres nus d'un hiver sombre pendant que vous déneigez ou faîtes du bois, vous aideront à vous plonger complètement dans ce nouvel environnement.
+
+Il est fortement conseillé de démarrer une nouvelle partie afin de profiter au mieux du mod Seasons. Veuillez noter que cette "release" du mod n'est pas compatible avec les versions incomplètes précédentes. Merci de supprimer la version incomplète, puis d'installer cette "release" et de démarrer une nouvelle partie.
+
+Alt + S : menu du mod Seasons (vue d'ensemble de la croissance, configuration du mod)
+Alt + F : Afficher / Masquer les prévisions météorologiques
+Alt + R : Maintenance du véhicule (à faire lorsque cela est requis, et placer le véhicule près d'un atelier de réparation)
+Alt + N : Passer la nuit (seulement possible une fois qu'il fait noir, avant minuit)
+        ]]>
+        </fr>
         <de>Seasons</de>
-        <pl><![CDATA[
-        Nadchodzi zima... i wiosna oraz lato i jesień.
+        <pl><![CDATA[Nadchodzi zima... i wiosna oraz lato i jesień.
 Mod Seasons zmienia podstawowy sposób gry w Farming Simulator wprowadzając pory roku i zmieniając wszystkie aspekty rozgrywki, takie jak pogoda, wzrost roślin, ekonomia, obsługa maszyn oraz zwierząt w pasującą całość.
 
 Doświadcz problemów i trosk z życia prawdziwego farmera obawiającego się czy zdąży posiać wszystkie uprawy zanim zrobi się za zimo lub za sucho, aby wykiełkowały oraz czy uda się zakończyć żniwa przed jesiennymi deszczami, kiedy zboża zamokną.
@@ -67,6 +79,23 @@ Alt + N : Éjszaka átugrása (csak sötétedés után elérhető, éjfél előt
 További információkért nézd meg a játék súgójának Season részét. A teljes lista a mod ReadMe fájljában található, illetve a weboldalunkon.
         ]]>
         </hu>
+        <it><![CDATA[L'inverno sta arrivando... e la primavera, l'estate e infine l'autunno.
+La mod Seasons cambia il modo di giocare a Farming Simulator con l'introduzione delle stagioni e con la modifica di tutti gli aspetti della modalità di gioco, come il meteo, la crescita, l'economia, la manutenzione dei veicoli e il mantenimento degli animali.
+
+Immergiti nelle prove e nelle le tribolazioni di un vero agricoltore preoccupandoti se le colture piantate matureranno tutte per tempo prima che diventi troppo freddo, oppure se è troppo secco per farle germogliarle e se completerai il raccolto prima dei giorni piovosi d'autunno quando le colture saranno bagnato.
+
+Bellissimi panorami che si adattano alle stagioni, come la nascita della vita in primavera, la ricchezza del colore degli alberi autunnali e gli alberi spogli in un freddo giorno invernale quando stai spalando la neve o facendo silvicoltura, aiuterà a immergerti completamente in questo nuovo ambiente.
+
+Consigliamo vivamente di iniziare la tua esperienza con Seasons in un nuovo salvataggio di gioco. Tieni presente che questa versione della mod non è compatibile con le versioni precedenti incomplete. Eliminare la versione incompleta della mod, installare questa versione e avviare una nuova partita.
+
+Alt + S : Seasons menu' (panoramica di crescita e impostazioni)
+Alt + F : Visualizza / Nascondi previsioni del tempo
+Alt + R : Riparazioni veicoli (deve essere fatto quando il veicolo è parcheggiato in un officina e solo quando è necessaria la manutenzione)
+Alt + N : Salta la notte (disponibile solo una volta che diventa buio, prima di mezzanotte)
+
+Per ulteriori informazioni sul gioco, consulta la sezione Seasons della guida in partita. Un elenco completo delle funzionalità può essere trovato nel file readme nella cartella della mod e sul nostro sito web.
+        ]]>
+        </it>
         <es><![CDATA[Seasons es un mod que, como bien indica su nombre, simula las estaciones añadiendo sus características y un punto más de realismo al juego.]]></es>
     </description>
 
