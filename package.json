@@ -38,7 +38,7 @@
     "xmlbuilder": "^8.2.2"
   },
   "fs": {
-    "modDescRev": "33",
+    "modDescRev": "37",
     "modZipName": "FS17_seasons",
     "simpleVersion": 1
   }

@@ -8,22 +8,26 @@
 ----------------------------------------------------------------------------------------------------
 
 ssTreeManager = {}
+g_seasons.treeManager = ssTreeManager
+
+ssTreeManager.MIN_DISTANCE = 4 -- meters
 
 function ssTreeManager:loadMap()
     if g_currentMission:getIsServer() then
         g_seasons.environment:addSeasonLengthChangeListener(self)
-        g_currentMission.environment:addHourChangeListener(self)
 
         self:adjust()
     end
 
     TreePlantUtil.plantTree = Utils.appendedFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
+    TreePlantUtil.addTreeCutJoint = Utils.appendedFunction(TreePlantUtil.addTreeCutJoint, ssTreeManager.addTreeCutJoint)
 end
 
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
+        -- TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
+        TreePlantUtil.treeTypes[i].growthTimeHours = 4
     end
 end
 
@@ -32,9 +36,12 @@ function ssTreeManager:seasonLengthChanged()
 end
 
 function ssTreeManager:update(dt)
-    local growTrees = g_currentMission.plantedTrees.growingTrees
+    if not self.finishedLoading then
+        print_r(g_currentMission.plantedTrees.growingTrees)
+    end
+    self.finishedLoading = true
 
-    for i, _ in pairs(growTrees) do
+    for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
         --thanks to Dogface at fs-uk.com for finding these values
         --growthStatel         growthState
         --    1             0.0000 to 0.1999
@@ -46,74 +53,93 @@ function ssTreeManager:update(dt)
 
         -- capping growthState if the distance is too small for the tree to grown
         -- distances are somwehat larger than what should be expected in RL
-        if growTrees[i].minDistanceNeighbour < 1.0 and growTrees[i].growthState > 0.25 then
-            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.25
-
-        elseif growTrees[i].minDistanceNeighbour < 2.0 and growTrees[i].growthState > 0.45 then
-            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.45
-
-        elseif growTrees[i].minDistanceNeighbour < 3.0 and growTrees[i].growthState > 0.65 then
-            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.65
-
-        elseif growTrees[i].minDistanceNeighbour < 4.0 and growTrees[i].growthState > 0.85 then
-            g_currentMission.plantedTrees.growingTrees[i].growthState = 0.85
+        if tree.ssNearestDistance < 1.0 and tree.growthState > 0.25 then
+            tree.growthState = 0.25
+        elseif tree.ssNearestDistance < 2.0 and tree.growthState > 0.45 then
+            tree.growthState = 0.45
+        elseif tree.ssNearestDistance < 3.0 and tree.growthState > 0.65 then
+            tree.growthState = 0.65
+        elseif tree.ssNearestDistance < 4.0 and tree.growthState > 0.85 then
+            tree.growthState = 0.85
         end
     end
 end
 
-function ssTreeManager:hourChanged()
-    -- check if any trees have been cut during the last hour
-    if ssTreeManager.numGrowingTrees ~= table.getn(g_currentMission.plantedTrees.growingTrees) then
+-- Find the nearest in the small set
+function ssTreeManager:updateNearest(tree)
+    tree.ssNearestDistance = self.MIN_DISTANCE + 1
 
-        for i, singleTree in pairs(g_currentMission.plantedTrees.growingTrees) do
-            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree, 0)
-        end
-
-        ssTreeManager.numGrowingTrees = table.getn(g_currentMission.plantedTrees.growingTrees)
-    end
-end
-
--- function to calculate minimum distance - to be improved
-function ssTreeManager:calculateDistance(singleTree, cutTree)
-    local statTrees = g_currentMission.plantedTrees.splitTrees
-    local growTrees = g_currentMission.plantedTrees.growingTrees
-    local tmpDistance = 100
-    local tmpNode = 0
-
-    for i, _ in pairs(statTrees) do
-        --only one object. Have not been cut.
-        if getNumOfChildren(statTrees[i].node) == 1 then
-
-            local vectorDistance = Utils.vector3Length(statTrees[i].x - singleTree.x, statTrees[i].y - singleTree.y, statTrees[i].z - singleTree.z)
-
-            if vectorDistance < tmpDistance then
-                tmpDistance = vectorDistance
-                tmpNode = statTrees[i].node
-            end
+    for other, distance in pairs(tree.ssNear) do
+        if distance < tree.ssNearestDistance then
+            tree.ssNearestDistance = distance
         end
     end
-
-    for i, _ in pairs(growTrees) do
-        if growTrees[i].node ~= cutTree then
-            local vectorDistance = Utils.vector3Length(growTrees[i].x - singleTree.x, growTrees[i].y - singleTree.y, growTrees[i].z - singleTree.z)
-
-            if vectorDistance ~= 0 and vectorDistance < tmpDistance then
-                tmpDistance = vectorDistance
-                tmpNode = growTrees[i].node
-            end
-        end
-    end
-
-    return tmpDistance
 end
 
 -- This seems to be the function that is called when a tree is planted. If an existing savegame has planted trees, the function is called during loading as well.
-function ssTreeManager:plantTree(treesData, treeData, x, y, z, rx, ry, rz, growthState, growthStateI, isGrowing, splitShapeFileId)
-    ssTreeManager.numGrowingTrees = table.getn(g_currentMission.plantedTrees.growingTrees)
+function ssTreeManager:plantTree(...)
+    local plantedTree = g_currentMission.plantedTrees.growingTrees[table.getn(g_currentMission.plantedTrees.growingTrees)]
 
-    if ssTreeManager.numGrowingTrees > 0 then
-        for i, singleTree in pairs(g_currentMission.plantedTrees.growingTrees) do
-            g_currentMission.plantedTrees.growingTrees[i].minDistanceNeighbour = ssTreeManager:calculateDistance(singleTree, 0)
+    log("plantedTree")
+    print_r(plantedTree)
+
+    if not ssTreeManager.finishedLoading then
+        log("Loading!")
+    end
+
+    plantedTree.ssNear = {}
+
+    for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
+        if tree ~= plantedTree then
+            local distance = Utils.vector3Length(tree.x - plantedTree.x, tree.y - plantedTree.y, tree.z - plantedTree.z)
+
+            -- If the trees are in distance, store their relation
+            log("distance from", plantedTree, "to", tree, "is", distance)
+
+            if distance <= ssTreeManager.MIN_DISTANCE then
+                plantedTree.ssNear[tree] = distance
+
+                -- Also add to the other if we are not loading (if loading it is automatic because all trees are handled)
+                if ssTreeManager.finishedLoading then
+                    tree.ssNear[plantedTree] = distance
+                    ssTreeManager:updateNearest(tree)
+                end
+            end
         end
     end
+
+    ssTreeManager:updateNearest(plantedTree)
+end
+
+function ssTreeManager:addTreeCutJoint(...)
+    local cutTree = nil
+
+    log("Add cut tree")
+
+    -- Find the tree that was just cut
+    for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
+        -- Cut
+        if getNumOfChildren(tree.node) ~= tree.origSplitShape and tree.ssHandled ~= true then
+            tree.ssCutHandled = true
+
+            cutTree = tree
+
+            break
+        end
+    end
+
+    log("cut tree", cutTree)
+    if cutTree == nil then return end
+
+    log("cutTree")
+    print_r(cutTree)
+
+    -- Remove the cut tree from all its neighbors
+    for otherTree, _ in pairs(cutTree.ssNear) do
+        otherTree.ssNear[cutTree] = nil
+
+        ssTreeManager:updateNearest(otherTree)
+    end
+
+    cutTree.ssNear = {}
 end
