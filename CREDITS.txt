@@ -20,3 +20,20 @@ Russian - Vasylko
 Czech - gorgona
 Spanish - PromGames
 Dutch - joshvzeyl
+
+## Testers
+astro80
+baron (fatov) 
+blueweb
+dkdon (and everybody else on his server) 
+dzi4d3k
+iw_shawn 
+kimg
+leifege640
+masseyharris
+mike3650
+thierry62
+vasylko
+wbf
+
+and anybody else who submitted issues
