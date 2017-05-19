@@ -23,7 +23,7 @@ Dutch - joshvzeyl
 
 ## Testers
 astro80
-baron (fatov) 
+fatov (baron) 
 blueweb
 dkdon (and everybody else on his server) 
 dzi4d3k
