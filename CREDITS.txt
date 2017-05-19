@@ -20,6 +20,7 @@ Russian - Vasylko
 Czech - gorgona
 Spanish - PromGames
 Dutch - joshvzeyl
+Hungarian - n0tr3adY
 
 ## Testers
 astro80
