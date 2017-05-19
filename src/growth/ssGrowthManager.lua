@@ -30,6 +30,7 @@ ssGrowthManager.previousWillGerminateData = {}
 -- properties
 ssGrowthManager.fakeTransition = 1
 ssGrowthManager.additionalFruitsChecked = false
+ssGrowthManager.dayHasChanged = false
 
 function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
@@ -91,8 +92,14 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
-        --addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
-        self:dayChanged()
+        addConsoleCommand("ssTestStuff", "Tests stuff", "consoleCommandTestStuff", self)
+        
+        if self.isNewSavegame == true then
+            self:rebuildWillGerminateData()
+            self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+        else
+            self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+        end
     end
 end
 
@@ -144,24 +151,33 @@ function ssGrowthManager:transitionChanged()
         self.isNewSavegame = false
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
     else
+        self.fakeTransition = transition
+        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
+        --print_r(self.previousWillGerminateData)
     end
 end
 
 function ssGrowthManager:update(dt)
-    if self.additionalFruitsChecked == true or self.growthManagerEnabled == false then return end
+    if self.growthManagerEnabled == false then return end
 
-    self.additionalFruitsChecked = true
-    for index, fruit in pairs(g_currentMission.fruits) do
-        local fruitName = FruitUtil.fruitIndexToDesc[index].name
-        --handling new unknown fruits
-        if self.defaultFruitsData[fruitName] == nil then
-            log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
-            self:unknownFruitFound(fruitName)
+    if self.additionalFruitsChecked == false then
+        self.additionalFruitsChecked = true
+        for index, fruit in pairs(g_currentMission.fruits) do
+            local fruitName = FruitUtil.fruitIndexToDesc[index].name
+            --handling new unknown fruits
+            if self.defaultFruitsData[fruitName] == nil then
+                log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
+                self:unknownFruitFound(fruitName)
+            end
         end
     end
 
+    if self.dayHasChanged == true then
+        self.dayHasChanged = false
+        self:rebuildWillGerminateData()
+    end
 end
 
 -- reset the willGerminateData and rebuild it based on the current transition
@@ -178,13 +194,7 @@ end
 -- handle dayChanged event
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
-    if self.isNewSavegame == true then
-        self:rebuildWillGerminateData()
-        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
-    else
-        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
-        self:rebuildWillGerminateData()
-    end
+  self.dayHasChanged = true
 end
 
 -- called by ssDensityScanner to make fruit grow
@@ -524,4 +534,8 @@ end
 
 function ssGrowthManager:consoleCommandTestStuff()
     --put stuff to test in here
+    log("Previous")
+    print_r(self.previousWillGerminateData)
+    log("Current")
+    print_r(self.willGerminateData)
 end

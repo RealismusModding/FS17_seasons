@@ -58,18 +58,26 @@ end
 
 function ssEnvironment:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
-    self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", -1)
-    self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", 0) --todo: fix this ... leaving this as stage in the xml file until release
-                                                                                                            --to not break existing test save games
+    self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", 0)
+    self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1) 
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
-
+    self.latestGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", -1) 
+    
     self._doInitalDayEvent = savegame == nil
+    
+    if self.latestGrowthStage >= self.SEASON_SPRING then
+        logInfo(ssLang.getText("ss_version"))
+    end
 end
 
 function ssEnvironment:save(savegame, key)
     ssXMLUtil.setInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
     ssXMLUtil.setInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
-    ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition) --TODO: fix this before release
+    if self.latestGrowthStage == self.SEASON_SPRING - 1 then
+        ssXMLUtil.setInt(savegame, key .. ".environment.latestTransition", self.latestTransition)
+    else
+        ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition)
+    end
     ssXMLUtil.setInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
@@ -101,7 +109,15 @@ end
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
-     if self._doInitalDayEvent then
+     
+    if self.latestGrowthStage >= self.SEASON_SPRING then
+        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("ss_version"), 10000)
+        return
+    end
+    
+    if self._doInitalDayEvent then
+        self.latestTransition = 0
+        self.latestSeason = -1
         self:callListeners()
         self._doInitalDayEvent = false
         g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("msg_welcome"), 10000)
@@ -130,7 +146,7 @@ function ssEnvironment:callListeners()
     -- Call  transition events
     if currentTransition ~= self.latestTransition then
         self.latestTransition = currentTransition
-
+        
         for _, listener in pairs(self.transitionChangeListeners) do
             listener:transitionChanged()
         end
@@ -181,7 +197,9 @@ end
 ----------------------------
 
 function ssEnvironment:dayChanged()
-    self:callListeners()
+    if self.latestGrowthStage == self.SEASON_SPRING - 1 then
+        self:callListeners()
+    end
 end
 
 ----------------------------

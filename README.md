@@ -79,7 +79,8 @@ For a better game experience, custom maps should add two new density layers: one
 - Wrapped hay will not ferment. Wrapped hay bales can be stored outside.
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
-- Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
+- Crops are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified.
+- Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage. 
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
 - Growth and withering settings are disabled as this mod overwrites this functionality
 
@@ -117,7 +118,8 @@ For a better game experience, custom maps should add two new density layers: one
 ### Warnings for gameplay
 - Do not fast forward faster than 6000x on singleplayer (preferable even slower)
 - Do not fast forward faster than 1200x on multiplayer (120x is even better)
-The game will get out of sync with the extra load of Seasons
+- The game will get out of sync with the extra load of Seasons
+- The released version of this mod does not work with save games created using any previous versions. Delete the old version and start a new save game. 
 
 ## Mod conflicts
 Do not load multiple map mods. Only load the map you are using!
