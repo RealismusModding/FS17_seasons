@@ -50,6 +50,23 @@ Alt + N : Pominięcie nocy (dostępne tylko wieczorem, przed północą)
 Więcej informacji o grze z modem Seasons znajduje się w menu pomocy gry. Pełna lista funkcjonalności dostępna jest w pliku readme oraz na naszej stronie internetowej.
         ]]>
         </pl>
+        <hu><![CDATA[Közeleg a tél... és a tavasz, a nyár és az ősz is.
+A Seasons mod alapvetően megváltoztatja a Farming Simulator játékélményt, kezdve az évszakok bekerülésével, az időjáráson át a növények növekedésén, a gazdálkodáson, a gépek karbantartásán keresztül egészen az állatok gondozásáig.
+
+Tapasztald meg a kihivásokat és nehézségeket, amelyeket egy igazi gazdálkodónak is át kell élnie: még a hideg vagy szárazság beköszönte előtt minden növény el legyen vetve, vagy épp kész leszen az aratás az esős időszak előtt.
+
+Gyönyörű látképek illenek minden szezonhoz, úgy mint az élet kezdete tavasszal, a pompás szinek kavalkádja ősszel, vagy épp a kopasz fák látványa a zord téli napon miközben havat takaritasz, vagy épp erdészkedsz. Ettől lesz még komplexebb a játékélmény az új környezetben.
+
+Erősen ajánljott, hogy a Seasons-t egy új játékmentésen kezd el. Azt ne feledd, hogy a mod ezen verzió nem kompatibilis bármilyen más, korábbi befejezetlen verzióval. Töröld a korábbi félkész verziót, telepitsd az aktuális kiadást és kezdj egy új játékot.
+
+Alt + S : Seasons menü (növekedés áttekintés és beállitások)
+Alt + F : Időjárás előrejelzés mutatása / elrejtése 
+Alt + R : Gép karbantartás (csak a garázsnál leparkolva végezheted el, és csak akkor lehetséges, ha szükséges a karbantartás)
+Alt + N : Éjszaka átugrása (csak sötétedés után elérhető, éjfél előtt)
+
+További információkért nézd meg a játék súgójának Season részét. A teljes lista a mod ReadMe fájljában található, illetve a weboldalunkon.
+        ]]>
+        </hu>
         <es><![CDATA[Seasons es un mod que, como bien indica su nombre, simula las estaciones añadiendo sus características y un punto más de realismo al juego.]]></es>
     </description>
 
