@@ -45,7 +45,25 @@ Alt + N : Passer la nuit (seulement possible une fois qu'il fait noir, avant min
 Pour plus d'information sur le "gameplay", vous pouvez vérifier la section "Seasons" du menu d'aide dans le jeu. La liste complète des fonctionnalités est disponible dans le fichier "readme" du mod et sur notre site internet.
         ]]>
         </fr>
-        <de>Seasons</de>
+        <de><![CDATA[Der Winter kommt, … der Frühling, Sommer und Herbst ebenso.
+Seasons verändert die Spielweise des Landwirtschafts-Simulators grundlegend und beeinflusst so gut wie alles – das Wetter, das Pflanzenwachstum, die Fahrzeughaltung und die gesamte Landschaftsumgebung.
+
+Erfahre den Zeitdruck, unter dem der moderne Landwirt von heute steht. Die Zeiten für die Aussaat sich endlich, die Bodentemperaturen und das Wetter spielen nun eine wichtige Rolle. Die Ernte ist nicht mehr unendlich lange möglich. Regen und zu niedrige Bodentemperaturen machen das Ernten irgendwann unmöglich oder führen zu erheblichen Ernteverlusten.
+
+Jede der vier Jahreszeiten hat ihre eigene Faszination. Im Frühling blüht die Landschaft so richtig auf, im Sommer ist es dementsprechend heller und die Tage sind länger, die Pflanzen stehen in voller Blüte. Der Herbst ist von Nebel- und Regenphasen durchwachsen. Die Bäume und Pflanzen werfen ihre Blätter und erscheinen im typischen Herbstkleid. Der Winter wird wesentlich dunkler und es wird vereinzelnd Schnee fallen. Nutze diese Zeit für die Forstwirtschaft oder andere Beschäftigungen auf dem Hof.
+
+Wir empfehlen ausdrücklich das Starten eines neuen Spielstandes! 
+
+Bitte beachte, dass diese Version mit keiner Test-Version von Seasons kompatibel ist. Lösche daher die alte und installiere diese Version. Danach starte einen neuen Spielstand.
+
+Alt + S : Seasons Menü
+Alt + F : Wettervorhersage ein- und ausblenden
+Alt + R : Fahrzeug reparieren (Fahrzeug muss im Bereich einer Werkstatt stehen und die Reparatur muss erforderlich sein)
+Alt + N : Nacht überspringen (nur möglich ab der Dämmerung bis Mitternacht)
+
+Für weitere Informationen rufe die Hilfe-Sektion(Taste „Esc“) im Spiel auf. Eine komplette Liste der Funktionen befindet sich in der readme-Datei und auf unserer Webseite.
+        ]]>
+        </de>
         <pl><![CDATA[Nadchodzi zima... i wiosna oraz lato i jesień.
 Mod Seasons zmienia podstawowy sposób gry w Farming Simulator wprowadzając pory roku i zmieniając wszystkie aspekty rozgrywki, takie jak pogoda, wzrost roślin, ekonomia, obsługa maszyn oraz zwierząt w pasującą całość.
 

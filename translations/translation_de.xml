@@ -78,9 +78,8 @@
         <text name="SS_SEASON_INTRO_3" text="Der Winter, die kalte Jahreszeit hat begonnen. Die Pflanzen ziehen sich zurück, die Böden sind teilweise unbefahrbar oder gefroren. Die Feldbearbeitung ist während dieser Zeit nicht möglich. Die Zeit für viele andere Beschäftigungen auf dem Hof." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
-
-        <!-- Missing translation of "You have in the past downloaded a stolen copy of our mod from a site which doesn’t respect the modding community and has violated our copyright, or downloaded an incomplete version of this mod from our code repository. We appreciate your eagerness and excitement, but unfortunately your save game is incompatible with this version of the Seasons mod. Please do not use sites which steal from modders in the future. You will need to start a new game." -->
-        <text name="ss_version" text="" />
+        
+        <text name="ss_version" text="Diese Kopie von Seasons ist keine offizielle Version. Bitte vermeide aus Respekt an die Modding-Community das Herunterladen illegaler Beta-Versionen. Wir freuen uns natürlich riesig über die Interesse an unserem Mod, bitten Dich dennoch sich an die Regeln zu halten. Dein aktueller Spielstand ist mit dieser Version von Season inkompatibel. Bitte starte einen neuen Spielstand." />
         <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab." />
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind." />
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen." />
