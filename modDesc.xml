@@ -8,7 +8,6 @@
         <en>Seasons</en>
         <fr>Seasons</fr>
         <de>Seasons</de>
-        <es>Seasons</es>
     </title>
 
     <description>
@@ -96,7 +95,6 @@ Alt + N : Salta la notte (disponibile solo una volta che diventa buio, prima di 
 Per ulteriori informazioni sul gioco, consulta la sezione Seasons della guida in partita. Un elenco completo delle funzionalità può essere trovato nel file readme nella cartella della mod e sul nostro sito web.
         ]]>
         </it>
-        <es><![CDATA[Seasons es un mod que, como bien indica su nombre, simula las estaciones añadiendo sus características y un punto más de realismo al juego.]]></es>
     </description>
 
     <iconFilename>icon.dds</iconFilename>
