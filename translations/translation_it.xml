@@ -2,7 +2,7 @@
 <l10n>
     <translationContributors>fcelsa, theSeb, zed636</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Visualizza previsioni del tempo" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Mosta previsioni del tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distanza piantatrice (%d m)" />
@@ -72,19 +72,19 @@
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
-        <text name="SS_SEASON_INTRO_0" text="La primavera è alle porte; Fiori e alberi fioriscono. È tempo di coltivare e seminare i tuoi campi." />
-        <text name="SS_SEASON_INTRO_1" text="In estate i giorni diventano lunghe e caldi. È tempo di fienagione e di crescita per le colture." />
-        <text name="SS_SEASON_INTRO_2" text="Le foglie degli alberi ingialliscono e sta diventando sempre più freddo, l'autunno è arrivato. Assicuratevi di raccogliere tutte le colture prima dell'arrivo dell'inverno." />
-        <text name="SS_SEASON_INTRO_3" text="L'inverno è sceso e gli animali hanno bisogno di maggiore cura. Il terreno sarà congelato e non è possibile lavorare i campi. E' tempo per la silvicoltura e per la spalatura dalla neve." />
+        <text name="SS_SEASON_INTRO_0" text="E' arrivata la primavera; fioriscono alberi e fiori. È il momento di coltivare e seminare i tuoi campi." />
+        <text name="SS_SEASON_INTRO_1" text="In estate i giorni diventano lunghi e caldi. Per le colture è tempo di fienagione e di crescita ." />
+        <text name="SS_SEASON_INTRO_2" text="Le foglie stanno ingiallendo e fa sempre più freddo, l'autunno è arrivato. Assicuratevi di raccogliere tutte le colture prima che arrivi l'inverno." />
+        <text name="SS_SEASON_INTRO_3" text="L'inverno è arrivato e gli animali hanno bisogno di più cure. Il terreno si ghiaccerà perciò non puoi lavorare i tuoi campi. E' tempo per la silvicoltura e per spalare la neve." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
 
         <text name="ss_version" text="In passato hai scaricato una copia rubata della nostra mod da un sito che non rispetta la comunità di modding e ha violato il nostro copyright, o hai scaricato una versione incompleta di questa mod dalla nostra repository. Apprezziamo la tua voglia e l'eccitazione, ma purtroppo il tuo salvataggio è incompatibile con questa versione della Seasons. Non utilizzare siti che rubano da modders in futuro. Avrai bisogno di iniziare una nuova partita." />
-        <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non è possibile lavorarlo!" />
-        <text name="warning_doNotThreshWithMoisture" text="Non puoi trebbiare quando le colture sono troppo umide!" />
+        <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non puoi lavorarlo!" />
+        <text name="warning_doNotThreshWithMoisture" text="Non trebbiare quando le colture sono troppo umide!" />
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
-        <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Nel menu' Esc ci sono tutte le indicazioni per utilizzare questa mod." />
+        <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
 
         <text name="ui_pageOverview" text="Generali" />
         <text name="ui_pageSettings" text="Impostazioni" />
@@ -99,25 +99,25 @@
         <text name="ui_plantingSeason" text="Periodo di semina" />
         <text name="ui_harvestSeason" text="Periodo di raccolto" />
 
-        <text name="tooltip_seasonLength" text="La lunghezza di una stagione in giorni. Un anno è quattro stagioni" />
-        <text name="tooltip_seasonIntros" text="Visualizza l'introduzione all'inizio della stagione" />
+        <text name="tooltip_seasonLength" text="La durata di una stagione in giorni. Un anno è quattro stagioni" />
+        <text name="tooltip_seasonIntros" text="Mostra l'introduzione all'inizio della stagione" />
         <text name="tooltip_snow" text="Negli inverni freddi cadrà la neve e bloccherà le strade" />
-        <text name="tooltip_controlsHelp" text="Visualizza le previsioni ed i tasti nel menu di aiuto" />
-        <text name="tooltip_snowTracks" text="I veicoli comprimono la neve passandoci sopra" />
-        <text name="tooltip_controlsTemperature" text="Settare la scala termometrica" />
-        <text name="tooltip_moisture" text="Impedisci la trebbiatura delle colture umide" />
+        <text name="tooltip_controlsHelp" text="Mostra la previsione ed i tasti nel menu di aiuto" />
+        <text name="tooltip_snowTracks" text="I veicoli comprimono la neve quando ci si guida sopra" />
+        <text name="tooltip_controlsTemperature" text="Impostare la scala termometrica utilizzata nel gioco " />
+        <text name="tooltip_moisture" text="Disattivare la trebbiatura quando i raccolti sono bagnati dall'umidità" />
 
-        <text name="setting_seasonIntros" text="Introduzioni stagione" />
-        <text name="setting_seasonLength" text="Lunghezza stagione" />
+        <text name="setting_seasonIntros" text="Introduzioni Season" />
+        <text name="setting_seasonLength" text="Durata Season" />
         <text name="setting_snow" text="Modalità neve" />
-        <text name="setting_controlsHelp" text="Aiuto tasti in menu" />
-        <text name="setting_snowTracks" text="Tracce neve" />
+        <text name="setting_controlsHelp" text="Tasti in Help menu" />
+        <text name="setting_snowTracks" text="Tracce nella neve" />
         <text name="setting_controlsTemperature" text="Scala termometrica" />
-        <text name="setting_moisture" text="Umidità raccolto" />
+        <text name="setting_moisture" text="Umidità del raccolto" />
 
-        <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora i settaggi di Seasons? Cambiamenti nella lunghezza delle stagioni e crescita possono determinare problemi che si riparano solo dopo un anno/gioco." />
+        <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora le impostazioni di Seasons? Cambiamenti nella durata delle stagioni possono avere sui campi conseguenze rimediabili solo dopo un anno/gioco." />
 
-        <text name="dialog_resetGrowth" text="Hai attivato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i tuoi raccolti. Senza un reset della crescita, Seasons non si comporterà correttamente." />
+        <text name="dialog_resetGrowth" text="Hai caricato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i raccolti. Senza un reset della crescita, Seasons potrebbe non funzionare come previsto." />
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
@@ -129,19 +129,19 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons è una mod che incrementa il realismo in Farming Simulator regolando quasi tutti gli aspetti del gioco su parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato modificato su un livello più realistico" />
-        <text name="ss_helpText_01_02" text="L'anno di gioco è stato suddiviso in quattro stagioni: primavera, estate, autunno e inverno. Ogni statgione può essere ulteriormente suddivisa in tre parti: iniziale, centrale e finale. Queste parti sono indicate come terzine" />
-        <text name="ss_helpText_01_03" text="Le attività in gioco sono ora legate al periodo dell'anno in cui si svolgono nella vita reale." />
+        <text name="ss_helpText_01_01" text="Seasons è una mod che migliora il realismo in Farming Simulator regolando quasi tutti gli aspetti a parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato cambiato in un livello più realistico" />
+        <text name="ss_helpText_01_02" text="L'anno di gioco è stato suddiviso in quattro stagioni: primavera, estate, autunno e inverno. Ogni stagione può essere ulteriormente suddivisa in tre parti: iniziale, centrale e finale. Queste parti sono indicate come transizioni" />
+        <text name="ss_helpText_01_03" text="Le tue attività sono ora legate al periodo dell'anno in cui si svolgono nella vita reale." />
 
         <text name="ss_helpTitle_02" text="Effetti stagionali (1)" />
         <text name="ss_helpText_02_01" text="Il tempo metereologico è casuale di giorno in giorno, ma segue un modello da stagione a stagione" />
-        <text name="ss_helpText_02_02" text="La primavera sarà piovosa e nebbiosa con alcune probabilità di tempo soleggiato. L'estate sarà più calda e più secca. Le tempeste di grandine possono verificarsi senza alcun avvertimento. L'autunno sarà piovoso con alcuni giorni di bel tempo. L'inverno sarà piovoso, ma spesso abbastanza freddo per permettere la caduta della neve, forse fino a terra." />
+        <text name="ss_helpText_02_02" text="La primavera sarà piovosa e nebbiosa con alcune probabilità di tempo soleggiato. L'estate sarà più calda e più secca. Le tempeste di grandine possono verificarsi senza alcun avvertimento. L'autunno sarà piovoso con alcuni giorni di bel tempo. L'inverno sarà piovoso, ma spesso abbastanza freddo per permettere alla neve di cadere, e forse di rimanere a terra." />
         <text name="ss_helpText_02_03" text="La neve riempirà rimorchi e pale, a meno che non siano al riparo in un capannone con 'snow mask' o 'collision'. La neve ridurrà anche la trazione, rendendo i veicoli più lenti." />
 
         <text name="ss_helpTitle_03" text="Effetti stagionali (2)" />
-        <text name="ss_helpText_03_01" text="Anche le ore di luce sono influenzate dalle stagioni. Gli inverni hanno giorni più brevi (8 ore) mentre le estati hanno più giorni lunghi (17 ore)." />
-        <text name="ss_helpText_03_02" text="Sia le trincee che le balle di insilato richiedono tempo per fermentare. E' necessario attendere un terzo di una stagione (1 transizione) per far fermentare completamente un silos o una balla fasciata. Fasciare le balle di fieno aiuterà a proteggerle dalle intemperie, ma non fermeteranno." />
-        <text name="ss_helpText_03_03" text="Seasons avrà effetto anche sugli alberi e sulle foglie. Gli alberi cambieranno lo stato secondo le variazioni stagionali di temperatura. In autunno le foglie cambieranno colore e cadranno, lasciando gli alberi spogli in inverno; in primavera invece si tingeranno di nuovo di un verde acceso." />
+        <text name="ss_helpText_03_01" text="Anche le ore di luce sono influenzate dalle stagioni. Gli inverni hanno giorni più brevi (8 ore) mentre le estati hanno giorni più lunghi (17 ore)." />
+        <text name="ss_helpText_03_02" text="Le trincee e le balle di insilato richiedono tempo per fermentare. Entrambe impiegano un terzo di una stagione (1 transizione) per la fermentazione completa. Il fieno fasciato non fermenterà, ma sarà protetto contro le intemperie" />
+        <text name="ss_helpText_03_03" text="Seasons influenzerò anche gli alberi e le chiome. Gli alberi cambieranno lo stato secondo le variazioni stagionali della temperatura. In autunno le foglie cambieranno colore e cadranno. In inverno gli alberi si spoglieranno e in primavera si tingeranno di verde." />
 
         <text name="ss_helpTitle_04" text="Tempo metereologico" />
         <text name="ss_helpText_04_01" text="Le previsioni meteo sono state reintrodotte con Seasons e per essere visualizzate è necessario premere la combinazione di tasti Alt Sinitro + F." />
