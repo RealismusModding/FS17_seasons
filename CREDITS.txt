@@ -13,13 +13,13 @@ Tiny dedicated server warning fix -- Decker_MMIV
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
-German - tobiasgo, Oekobauer, ItZzShady, wieselflink
+German - tobiasgo, Oekobauer, ItZzShady, WieSeLfLinK
 Italian - fcelsa, zed636
 French - thierry62, Marxtai, dural
-Russian - Vasylko
+Russian - Vasil'ko
 Czech - gorgona, DrewCZ
-Spanish - PromGames
-Dutch - joshvzeyl
+Spanish - PromGames, Vanquish081
+Dutch - JoshvZeyl
 Hungarian - n0tr3adY
 
 ## Testers
@@ -27,14 +27,14 @@ astro80
 baron
 blueweb
 dkdon (and everybody else on his server) 
-dzi4d3k
+Dzi4d3k
 iw_shawn 
 kimg
 leifege640
 masseyharris
 mike3650 (and everybody else on his server) 
 thierry62
-vasylko
+Vasil'ko
 wbf
 
 and anybody else who submitted issues
