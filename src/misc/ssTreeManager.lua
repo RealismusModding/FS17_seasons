@@ -21,7 +21,7 @@ function ssTreeManager:loadMap()
     end
 
     TreePlantUtil.plantTree = Utils.appendedFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
-    TreePlantUtil.addTreeCutJoint = Utils.appendedFunction(TreePlantUtil.addTreeCutJoint, ssTreeManager.addTreeCutJoint)
+    ChainsawUtil.cutSplitShapeCallback = Utils.appendedFunction(ChainsawUtil.cutSplitShapeCallback, ssTreeManager.cutSplitShapeCallback)
 end
 
 function ssTreeManager:adjust()
@@ -101,7 +101,7 @@ function ssTreeManager:plantTree(...)
 end
 
 -- This code is about O(5) (theoretically max O(n) but can't plant trees that close)
-function ssTreeManager:addTreeCutJoint(...)
+function ssTreeManager:cutSplitShapeCallback(...)
     local cutTree = nil
 
     -- Find the tree that was just cut
