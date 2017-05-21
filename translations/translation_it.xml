@@ -143,20 +143,20 @@
         <text name="ss_helpText_03_03" text="Seasons influenzerò anche gli alberi e le chiome. Gli alberi cambieranno lo stato secondo le variazioni stagionali della temperatura. In autunno le foglie cambieranno colore e cadranno. In inverno gli alberi si spoglieranno e in primavera si tingeranno di verde." />
 
         <text name="ss_helpTitle_04" text="Tempo metereologico" />
-        <text name="ss_helpText_04_01" text="Le previsioni meteo sono state reintrodotte con Seasons e per essere visualizzate è necessario premere la combinazione di tasti Alt Sinitro + F." />
-        <text name="ss_helpText_04_02" text="Le previsioni meteo mostrano le temperature massime/minime e il tempo (soleggiato, nebbioso, piovoso, nevoso, nuvoloso) per i prossimi 7 giorni. Le grandinate non appaiono sulle previsioni meteorologiche, come nella vita reale la grandine è spesso un evento inaspettato." />
-        <text name="ss_helpText_04_03" text="Il numero a destra di ogni riquadro della singola previsione rappresenta il giorno della stagione." />
+        <text name="ss_helpText_04_01" text="La previsione meteo è stata reintrodotta con Seasons e può essere attivata da Alt Sinitro + F." />
+        <text name="ss_helpText_04_02" text="La previsione meteo mostra la temperatura massima/minima e il meteo (soleggiato, nebbioso, piovoso, nevoso, nuvoloso) per i prossimi 7 giorni. Le grandinate non appaiono sulle previsioni meteorologiche, come nella vita reale la grandine è spesso un evento inaspettato." />
+        <text name="ss_helpText_04_03" text="Il numero a destra di ogni riquadro della previsione rappresenta il giorno della stagione." />
 
         <text name="ss_helpTitle_05" text="Terreno" />
         <text name="ss_helpText_05_01" text="La temperatura del suolo è modellata usando equazioni termodinamiche e dati storici. Ciò significa che il suolo si gelerà in inverno solo quando la temperatura dell'aria scende al di sotto di una certa gradazione per un determinato periodo di tempo. Il terreno si scongelerà in primavera quando la temperatura dell'aria salirà al di sopra una determinata soglia per un certo periodo di tempo." />
-        <text name="ss_helpText_05_02" text="Il campo non può essere lavorato quando il terreno è congelato e le colture non cresceranno." />
+        <text name="ss_helpText_05_02" text="Il suolo non può essere lavorato quando il terreno è ghiacciato. Le colture non crescono nel terreno ghiacciato." />
         <text name="ss_helpText_05_03" text="Le colture germinano solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nella prima pagina del menu' Impostazioni Seasons (Alt sinistro + S)." />
 
         <text name="ss_helpTitle_06" text="Colture" />
-        <text name="ss_helpText_06_01" text="All'avvio di un nuovo gioco tutte le colture saranno ripristinate alla loro fase di crescita mietuto per simulare il fatto che i campi non sono stati lavorati dall'autunno precedente. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
-        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. I raccolti seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di coltivazione e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
+        <text name="ss_helpText_06_01" text="All'avvio di un nuovo gioco tutte le colture saranno ripristinate alla loro fase mietuto per simulare il fatto che i campi non sono stati lavorati dall'autunno. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
+        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. Le colture seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di coltivazione e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture possono essere raccolte solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
-        <text name="ss_helpText_06_04" text="Una volta che una coltura, escluso patate e barbabietole, raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menu Esc, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
+        <text name="ss_helpText_06_04" text="Una volta che una coltura escluso radici raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menu Esc, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
         <text name="ss_helpText_06_05" text="E' ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
@@ -165,51 +165,51 @@
         <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menu Seasons la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
 
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
-        <text name="ss_helpText_08_01" text="In inverno l'erba viene ripristinata nella sua fase di crescita mietuto per simulare che il freddo non permette la crescita dell'erba stessa." />
+        <text name="ss_helpText_08_01" text="L'erba d'inverno viene ripristinata nella sua fase mietuto per simulare che l'inverno uccide l'erba quando diventa freddo." />
         <text name="ss_helpText_08_02" text="Le balle di erba devono essere utilizzate o fasciate per il silaggio entro 2 giorni dall'imballatura. Dopo 2 giorni l'erba rotterà e la balla scomparirà." />
-        <text name="ss_helpText_08_03" text="Andane di fieno, erba e paglia cominciano a ridursi di dimensioni e alla fine scompaiono dopo diversi giorni. Le andane d'erba vengono ridotte alla mezzanotte ogni giorno. Il fieno e la paglia vengono ridotti dopo ogni fase di crescita e dopo essere stati esposti alla pioggia." />
-        <text name="ss_helpText_08_04" text="L'imballatura è necessaria per vendita di paglia e fieno. Erba in balle oppure paglia, erba e fieno non imballati possono essere comunque scaricati ma senza remunerazione." />
+        <text name="ss_helpText_08_03" text="Le andane di fieno, erba e paglia cominciano a ridursi in dimensioni e alla fine scompaiono dopo diversi giorni. Le andane d'erba vengono ridotte alla mezzanotte di ogni giorno. Il fieno e la paglia vengono ridotti dopo ogni fase di crescita e dopo essere stati esposti alla pioggia." />
+        <text name="ss_helpText_08_04" text="La paglia e il fieno devono essere compresse in balle prima di poterle vendere - la paglia sciolta e il fieno non possono essere venduti, solo date gratuitamente. Erba, in balle o sciolta, non può essere venduta." />
 
         <text name="ss_helpTitle_09" text="Colture - Piante" />
-        <text name="ss_helpText_09_01" text="Gli alberi richiedono più tempo per raggiungere il loro stato di piena maturazione. Gli alberi piantabili richiedono 5 anni di gioco per essere completare le fasi crescita, ma già dopo 2 anni possono essere tagliati." />
-        <text name="ss_helpText_09_02" text="Se piantati troppo vicini fra loro inibiscono la crescita gli uni agli altri. Per riavviare la crescita di un albero bisogna tagliare quelli vicini." />
+        <text name="ss_helpText_09_01" text="Gli alberi richiedono più tempo per raggiungere il loro stato di piena maturazione. Gli alberi piantabili richiedono 5 anni di gioco per completare le fasi crescita, ma già dopo 2 anni possono essere tagliati." />
+        <text name="ss_helpText_09_02" text="Gli alberi inibiscono la crescita di altri alberi se sono stati piantati troppo vicini. Per riavviare la crescita dell'albero bisogna tagliare gli alberi." />
 
         <text name="ss_helpTitle_10" text="Colture - Effetti climatici" />
-        <text name="ss_helpText_10_01" text="Pioggia, grandine e neve influenzano i livelli di umidità delle colture. Se l'umidità delle colture è al di sopra di un determinato punto a causa del maltempo, non sarete in grado di raccogliere i vostri prodotti. Precipitazioni nelle notti d'estate possono verificarsi senza preavviso." />
-        <text name="ss_helpText_10_02" text="Dopo la pioggia le colture avranno bisogno di tempo per asciugare; tempo che dipende dalla temperatura dell'aria e dal periodo dell'anno. Significa che i raccolti si asciugheranno più velocemente nel periodo più caldo che nel periodo più freddo." />
-        <text name="ss_helpText_10_03" text="Utilizzando un raccoglitore mentre il fieno è bagnato produrrà erba bagnata. Assicurati di utilizzare il raccoglitore solo quando le andane sono abbastanza secche." />
-        <text name="ss_helpText_10_04" text="Su una mappa mod che è stata preparata con una 'snow mask' da parte di modder, balle di fieno e paglia esposti alla pioggia o la neve cominceranno a decomporsi, a meno che non siano al riparo in un capannone con 'collision'. Il cattivo tempo non ha effetto su balle fasciate o su una mappa senza una 'snow mask'." />
+        <text name="ss_helpText_10_01" text="Pioggia, grandine e neve influenzano i livelli di umidità delle colture. Se l'umidità delle colture è al di sopra di un determinato punto a causa del maltempo, non sarete in grado di raccogliere i vostri prodotti. Umidità nelle notti d'estate possono verificarsi senza preavviso." />
+        <text name="ss_helpText_10_02" text="Dopo la pioggia le colture avranno bisogno di tempo per asciugare, il quale è dipendente dalla temperatura dell'aria e dal periodo dell'anno. Significa che i raccolti si asciugheranno più velocemente nel periodo più caldo che nel periodo più freddo." />
+        <text name="ss_helpText_10_03" text="Utilizzando un raccoglitore sul fieno quando è bagnato produrrà erba bagnata. Assicurati di utilizzare il raccoglitore solo quando le andane sono abbastanza secche." />
+        <text name="ss_helpText_10_04" text="Su una mappa mod che è stata preparata con 'snow mask' da parte di modder, balle di fieno e paglia esposti alla pioggia o la neve cominceranno a decomporsi, a meno che non siano al riparo in un capannone con 'collision'. Il cattivo tempo non avrà effetto su balle fasciate o balle su una mappa senza una 'snow mask'." />
 
         <text name="ss_helpTitle_11" text="Manutenzione" />
-        <text name="ss_helpText_11_01" text="I trattori e le raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o metà anno, a seconda di quale sia il primo. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
-        <text name="ss_helpText_11_02" text="È possibile riparare i veicoli presso il concessionario o il garage posizionabile. Per riparare il veicolo, avvicinarlo al garage, o al punto di vendita e premere Alt sinistro + R. Sarà più costoso riparare i veicoli presso il concessionario." />
+        <text name="ss_helpText_11_01" text="I trattori e le raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o metà anno, qualunque sia il primo. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
+        <text name="ss_helpText_11_02" text="Puoi riparare i tuoi veicoli presso il concessionario o il garage posizionabile. Per riparare il tuo veicolo avvicinalo al punto di vendita, o al garage posizionabile e premei Alt sinistro + R. Ricordati che sarà più costoso riparare i veicoli presso il concessionario." />
         <text name="ss_helpText_11_03" text="L'età del tuo veicolo è il giorno dopo l'ultima riparazione." />
-        <text name="ss_helpText_11_04" text="Solo veicoli guidabili richiederanno una manutenzione periodica. Gli strumenti e gli utensili verranno automaticamente riparati a seconda delle necessità." />
+        <text name="ss_helpText_11_04" text="Solo veicoli guidabili richiederanno una manutenzione periodica. Strumenti e utensili verranno automaticamente riparati a seconda delle necessità." />
 
         <text name="ss_helpTitle_12" text="Economia" />
-        <text name="ss_helpText_12_01" text="Il limite di prestito è stato modificato da 200.000 al 30% dei vostri valori di proprietà terriera e posizionabili. Il limite di prestito minimo è di 300.000 e il massimo è di 1.500.000." />
+        <text name="ss_helpText_12_01" text="Il limite di prestito è stato modificato da 200.000 al 30% dei vostri valori di proprietà terriera e posizionabili. Il limite di prestito minimo è di 300.000 e il limite di prestito massimo è di 1.500.000." />
         <text name="ss_helpText_12_02" text="I redditi da missioni sono stati ridotti. Guadagnerai circa 5 volte di più rispetto all'aiutante che lavora nello stesso campo." />
-        <text name="ss_helpText_12_03" text="La manutenzione di tutti i veicoli (oltre alla manutenzione periodica) include la manutenzione e le tasse rispetto a quanto viene utilizzato. Mezzi e attrezzi sempre puliti riducono i costi di manutenzione. Macchinari non utilizzate avranno anche i loro costi di manutenzione ridotti." />
-        <text name="ss_helpText_12_04" text="I prezzi delle colture fluttuano con i cambiamenti delle stagioni in modo più realistico." />
+        <text name="ss_helpText_12_03" text="La manutenzione di tutti i veicoli (oltre alla manutenzione periodica) include la manutenzione e le tasse rispetto a quanto è stato usato. Pulire i macchinari ridurrà anche i costi di manutenzione. Macchinari non utilizzati avranno anche i loro costi di manutenzione ridotti." />
+        <text name="ss_helpText_12_04" text="I prezzi delle colture fluttuano con i cambiamenti nelle stagioni in modo più realistico." />
 
         <text name="ss_helpTitle_13" text="Aiutanti" />
-        <text name="ss_helpText_13_01" text="Gli aiutanti richiedono pagamenti straordinari. Se viene impiegato prima delle ore 6 del mattino o dopo le 6 del pomeriggio o nei fine settimana, la sua retribuzione sarà superiore del 50%." />
+        <text name="ss_helpText_13_01" text="Gli aiutanti richiedono il pagamento degli straordinari. Se un aiutante viene impiegato prima delle ore 6 del mattino o dopo le 6 del pomeriggio, o nei fine settimana, la sua retribuzione sarà superiore del 50%." />
 
         <text name="ss_helpTitle_14" text="Animali" />
-        <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le mucche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
+        <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le vacche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
         <text name="ss_helpText_14_02" text="Gli animali si moltiplicheranno solo in un certo periodo dell'anno. Maiali e pecore si riprodurranno solo in primavera, mentre le vacche solo in estate." />
-        <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata su difficoltà Facile." />
+        <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata con difficoltà Facile." />
         <text name="ss_helpText_14_04" text="L'erba non può alimentare gli animali in inverno, dovrai usare il fieno." />
 
         <text name="ss_helpTitle_15" text="Animali - Produzione" />
         <text name="ss_helpText_15_01" text="La produzione di latte e di lana dipende dalla stagione." />
         <text name="ss_helpText_15_02" text="La lana viene prodotta solo in primavera." />
-        <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle mucche al massimo all'80%. Tuttavia, Seasons aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
+        <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle vacche al massimo all'80%. Tuttavia, Seasons aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
 
         <text name="ss_helpTitle_16" text="Menu' Seasons" />
-        <text name="ss_helpText_16_01" text="Il menu Seasons viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative alla stagione. Questo menu è attivabile con i tasti Alt sinistro + S." />
-        <text name="ss_helpText_16_02" text="La prima pagina è la tua guida per piantare e raccogliere. Le temperature di germinazione di tutte le colture sono mostrate sulla sinistra del grafico. Se il colore della temperatura accanto a una coltura è bianca, significa che è abbastanza caldo per piantare quella coltura particolare. Se invece la temperatura è blu, è troppo fredda." />
-        <text name="ss_helpText_16_03" text="La seconda pagina è il menu delle impostazioni. Qui si imposta la lunghezza della stagione (3/6/9/12 giorni stagione), le notifiche delle stagioni (attiva/disattiva), la modalità neve (attiva/disattiva/solo 1-layer, tracce attive/disattive), l'umidità della colture (attiva/disattiva) e  può essere modificate anche la scala termodinamica (C/F)." />
+        <text name="ss_helpText_16_01" text="Il menu Seasons viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative a Seasons. Questo menu è attivato con Alt sinistro + S." />
+        <text name="ss_helpText_16_02" text="La prima pagina è la tua guida per le finestre di piantagione e di trebbiatura. Le temperature di germinazione di tutte le colture sono mostrate sulla sinistra del grafico. Se il colore della temperatura accanto a una coltura è bianco, significa che è abbastanza caldo per piantare quella coltura particolare. Se invece la temperatura è blu, è troppo freddo." />
+        <text name="ss_helpText_16_03" text="La seconda pagina è il menu delle impostazioni. Qui si imposta la lunghezza della stagione (3/6/9/12 giorni stagione), le notifiche delle stagioni (attiva/disattiva), la modalità neve (attiva/disattiva/solo 1-layer, tracce attive/disattive), l'umidità della colture (attiva/disattiva) e scala termometrica (C/F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons; mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno congelato) verrà visualizzato a sinistra di questo HUD." />
