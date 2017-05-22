@@ -155,7 +155,7 @@ function ssRepairable:ssRepairUpdate(dt)
     local vehicleName = storeItem.brand .. " " .. storeItem.name
 
     -- Show repair button
-    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), vehicleName, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), storeItem.name, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
