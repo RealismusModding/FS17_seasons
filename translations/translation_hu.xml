@@ -63,7 +63,7 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nincs elég pénzed a karbantartásra!" />
         <text name="SS_VEHICLE_REPAIRED" text="A karbantartása a(z) %s gépnek ennyibe került: %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Karbantartása a %s gépnek ennyiért: %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="%s javitása: %s" />
         <text name="SS_REPAIR_REQUIRED" text="Karbantartást igényel!" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás." />
         <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
@@ -142,11 +142,11 @@
         <text name="ss_helpTitle_03" text="Szezonális effektek (2)" />
         <text name="ss_helpText_03_01" text="A napsütéses órák számát is befolyásolja a Seasons. Télen rövidebbek a nappalok (8 óra), míg a nyári időszakban ez 17 óra." />
         <text name="ss_helpText_03_02" text="Mind a silóbunkernek, mind a csomagolt bálának idő kell az erjedéshez. A teljes erjedés 1/3-ad szezon alatt megy végbe. A csomagolt szénabála nem fog megerjedni, de védve lesz az időjárástól. " />
-        <text name="ss_helpText_03_03" text="A szezonok kihatnak a fákra és foliagekre is. A fák a hőmérsékletnek megfelelően változtanak. A levelek színt váltanak és lehullanak ősszel, télen pedig lecsupaszodnak. Tavasszal világoszöld színben pompáznak." />
+        <text name="ss_helpText_03_03" text="A szezonok kihatnak a fákra és foliagekre is. A fák az évszaknak megfelelően változnak. A levelek színt váltanak és lehullanak ősszel, télen pedig lecsupaszodnak. Tavasszal világoszöld színben pompáznak." />
        
         <text name="ss_helpTitle_04" text="Időjárás előrejelzés" />
         <text name="ss_helpText_04_01" text="Az időjárás előrejelzést bekapcsolhatod a Left Alt + F gombokkal." />
-        <text name="ss_helpText_04_02" text="Az időjárás előrejelzés mutatja a hőmérsékletet valamit az időjárást (napos, ködös, esős, havas, felhős) a következő 7 napra. A jégesőre nem figyelmeztet - akár a való életben." />
+        <text name="ss_helpText_04_02" text="Az időjárás előrejelzés mutatja a várható hőmérsékletet és időjárást (napos, ködös, esős, havas, felhős) a következő 7 napra. A jégesőre nem figyelmeztet - akár a való életben." />
         <text name="ss_helpText_04_03" text="A jobb oldali szám az előrejelzésnél mutatja a napot a szezonból." />
        
         <text name="ss_helpTitle_05" text="Föld" />
@@ -158,11 +158,12 @@
         <text name="ss_helpText_06_01" text="Ha új játékot kezdesz, az összes növény a már betakarított állapotba kerül - tehát ősz óta a földek nem voltak művelve. Ha a Seasons-t már meglévő mentett álláson használod, lehetőséged van beállítani a növények alapállapotba való állítását." />
         <text name="ss_helpText_06_02" text="Az alapértelmezett növekedési mintát felülírja a Seasons. A növények a valóságnak megfelelően fognak növekedni - hasonlóan a megfelelő vetési és aratási szezonhoz. Ez azt jelenti, hogy a tél kipusztítja majdnem az összes növényt, és ha rossz szezonban veted, nem fog növekedni." />
         <text name="ss_helpText_06_03" text="A növények csak a legutolsó növekedési fázisban arathatóak, kivéve az energiafűz és az olajretek. A növények az aratási fázisban maradnak mindaddig, amíg a tél ki nem pusztítja őket." />
-        <text name="ss_helpText_06_04" text="Továbbra is tudsz zöld (ki nem fejlett) növényeket silózni." />
-        
+		<text name="ss_helpText_06_04" text="Bármelyik növény (kivéve cukkorrépa és burgonya) ha eléri az első betakarítási állapotát a Növekedési áttekintésnek megfelelően (ESC menü), az kész a betakarításra. Ez a végső betakarítási állapot." />
+        <text name="ss_helpText_06_05" text="Továbbra is tudsz zöld (ki nem fejlett) növényeket silózni." />
+
         <text name="ss_helpTitle_07" text=" Növények - szántóföld" />
         <text name="ss_helpText_07_01" text="A növény növekedése tovább tart. Közel fél évig tart, mire eléri a betakarítható állapotot." />
-        <text name="ss_helpText_07_02" text="A tél majdnem az összes növényt elpusztítja, de van lehetőség téli és tavaszi növényekre. Búza, árpa, energiafűz, fű, olajretek és repce vethető őssze. Légy biztos benne, hogy a föld elég meleg lesz a növények csírázásához." />
+        <text name="ss_helpText_07_02" text="A tél majdnem az összes növényt elpusztítja, de van lehetőség téli és tavaszi növényekre. Búza, árpa, energiafűz, fű, olajretek és repce vethető ősszel. Légy biztos benne, hogy a föld elég meleg lesz a növények csírázásához." />
         <text name="ss_helpText_07_03" text="A kukoricát, szójababot, napraforgót, cukorrépát és burgonyát tavasszal kell vetni. A Seasons menü növekedési áttekintés részén találod a csírázási hőre vonatkozó leirást, mert néhány növényt ha kora tavasszal vetsz, ki fog halni. Akkor is, ha a föld hőmérséklete felette van a csírázási hőnek." />
        
         <text name="ss_helpTitle_08" text="Növények - széna, szalma, fű" />
@@ -183,12 +184,12 @@
         
         <text name="ss_helpTitle_11" text="Karbantartás" />
         <text name="ss_helpText_11_01" text="Járműveidet időnként karban kell tartanod a hibátlan működéshez. A karbantartási periódus minden 30 munkaóra után jön el félévenként. Amely járműveket kihagyod a karbantartásból, nehezebben indulnak el." />
-        <text name="ss_helpText_11_02" text="A járműveidet a gépboltnál vagy elhelyezhető garázsnál is karbantarthatod. A karbantartáshoz vezesd a járműved a garázshoz vagy gépbolt és nyomd meg a Bal Alt + R gombokat. A gépboltnál kicsit drágább a javítás." />
+        <text name="ss_helpText_11_02" text="A járműveidet a gépboltnál vagy elhelyezhető garázsnál is karbantarthatod. A karbantartáshoz vezesd a járműved a garázshoz vagy gépbolthoz és nyomd meg a Bal Alt + R gombokat. A gépboltnál kicsit drágább a javítás." />
         <text name="ss_helpText_11_03" text="A gépjárműved kora az utolsó karbantartás óta." />
-        <text name="ss_helpText_11_04" text="Csak a vezethető járműveket kell időszakosan szervízelni. Az munkaeszközöket szükség szerint automatikusan javítják." />
+        <text name="ss_helpText_11_04" text="Csak a vezethető járműveket kell időszakosan szervízelni. A munkaeszközöket szükség szerint automatikusan javítják." />
      
         <text name="ss_helpTitle_12" text="Gazdálkodás" />
-        <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltoztott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
+        <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltozott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
         <text name="ss_helpText_12_02" text="A küldetésekből származó jövedelem csökkentve. Nagyjából 5x keresel többet, mint egy bérmunkás ugyanazon a földön." />
         <text name="ss_helpText_12_03" text="A járműveid karbantartása (beleértve az időszakos szervízt) tartalmazza az adót, és függ attól is, hogy mennyit használod. A tiszta gépek karbantartása kevesebbe kerül. A nem használt gépeidnek természetesen kevesebb a karbantartási és javitási költsége." />
         <text name="ss_helpText_12_04" text="A termények árai ingadoznak a szezonnak megfelelően." />
@@ -204,7 +205,7 @@
 
         <text name="ss_helpTitle_15" text="Állatok - termelékenység" />
         <text name="ss_helpText_15_01" text="A tej és gyapjú termelés függ a szezontól." />
-        <text name="ss_helpText_15_02" text="Gyapjú csak tavasszal adnak a birkák." />
+        <text name="ss_helpText_15_02" text="Gyapjút csak tavasszal adnak a birkák." />
         <text name="ss_helpText_15_03" text="A tej egész évben termelődik. Mivel télen füvel nem tudsz etetni, a tehenek termelékenysége visszaesik 80% körülire. Ez teljesen normális. A Seasons megnöveli a tejtermelést télen és tavasszal, hogy a fűhiány miatti kiesést kompenzálja." />
 
         <text name="ss_helpTitle_16" text="Seasons menü" />
