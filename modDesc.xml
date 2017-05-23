@@ -8,6 +8,12 @@
         <en>Seasons</en>
         <fr>Seasons</fr>
         <de>Seasons</de>
+        <pl>Seasons</pl>
+        <hu>Seasons</hu>
+        <it>Seasons</it>
+        <nl>Seasons</nl>
+        <ru>Seasons</ru>
+        <cz>Seasons</cz>
     </title>
 
     <description>
@@ -147,6 +153,27 @@ Alt + N : Пропустить ночь (доступно только посл�
 Для получения дополнительной информации о проверке игры посетите раздел справки «Seasons» в игре. Полный список функций можно найти в файле readme мода и на нашем веб-сайте.
         ]]>
         </ru>
+        <cz><![CDATA[Přichází zima ...jaro, léto a podzim.
+Mód Seasons změní obvyklý způsob, jak hrát Farming Simulator, zavedením ročních období se mění každý aspekt hry, jako je počasí, růst rostlin, růst ekonomiky, údržba vozidel a chov hospodářských zvířat.
+
+
+Zažijete všechny obtíže a těžkosti zemědělců v reálném životě, starosti s tím, jak zasít plodiny v době, kdy není příliš chladno, ale ani příliš sucho, takže má čas vyklíčit, a zda budete moci sklízet za deštivých dnů na podzim, kdy jsou plodiny mokré.
+
+
+Krásné vizuální efekty odpovídající sezónám, jako je narození života na jaře, syté barvy stromů na podzim, a holé stromy v chladné zimní dny, kdy odhrabujete sníh anebo pracujete v lese, vám pomůžou ponořit se do tohoto nového prostředí.
+
+
+Důrazně vám doporučujeme začít svůj Seasons zažítek na zcela nové uložené hře. Upozorňujeme, že vydaná verze módu není kompatibilní s předchozími verzemi. Smažte neúplnou verzi módu, nainstalujte tuto verzi a začněte novou hru.
+
+
+Alt + S: Menu Seasons (přehled o růstu a nastavení)
+Alt + F: Ukázat / Skrýt předpověď počasí
+Alt + R: Údržba vozidel (je třeba provést, je-li vozidlo zaparkováno na dílně a je požadována pouze údržba)
+Alt + N : Přeskočit noc (k dispozici pouze po setmění do půlnoci)
+
+Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný seznam funkcí, lze nalézt v souboru readme módu a na našich webových stránkách.
+        ]]>
+        </cz>
     </description>
 
     <iconFilename>icon.dds</iconFilename>
