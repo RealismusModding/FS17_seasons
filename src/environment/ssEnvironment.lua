@@ -119,7 +119,7 @@ function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
 
-    if self.latestGrowthStage >= self.SEASON_SPRING then
+    if self.latestGrowthStage ~= nil and self.latestGrowthStage >= self.SEASON_SPRING then
         g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("ss_version"), 10000)
         return
     end

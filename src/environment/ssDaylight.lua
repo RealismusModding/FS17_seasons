@@ -25,6 +25,12 @@ function ssDaylight:loadMap(name)
         self:loadFromXML(path)
     end
 
+    if g_currentMission:getIsServer() then
+        self:setupDayNight()
+    end
+end
+
+function ssDaylight:readStream()
     self:setupDayNight()
 end
 
