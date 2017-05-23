@@ -18,7 +18,7 @@ end
 
 function ssSkipNight:update(dt)
     -- Singleplayer only
-    if not g_currentMission:getIsServer() or not g_currentMission:getIsClient() then return end
+    if g_currentMission.missionDynamicInfo.isMultiplayer then return end
 
     local time = g_currentMission.environment.dayTime / 60 / 1000 -- minutes
     local isEvening = time >= math.max(g_currentMission.environment.nightStart, 20 * 60)
