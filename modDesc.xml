@@ -12,11 +12,11 @@
 
     <description>
         <en><![CDATA[Winter is coming... and spring, summer and autumn too.
-The Seasons mod changes the fundamental way to play Farming Simulator by introducing seasons and changing all aspects of the gameplay, such as weather, growth, economy, vehicle maintenance and husbandry to suit. 
+The Seasons mod changes the fundamental way to play Farming Simulator by introducing seasons and changing all aspects of the gameplay, such as weather, growth, economy, vehicle maintenance and husbandry to suit.
 
-Experience the trials and tribulations of a real life farmer worrying if you will get all your crops planted on time before it gets too cold, or too dry, for them to germinate and whether you will complete the harvest before the rainy days of autumn when crops will be wet. 
+Experience the trials and tribulations of a real life farmer worrying if you will get all your crops planted on time before it gets too cold, or too dry, for them to germinate and whether you will complete the harvest before the rainy days of autumn when crops will be wet.
 
-Beautiful visuals to suit the seasons, such as the birth of life in spring, the richness of colour of autumn and bare trees on a bleak winter's day when you are clearing the snow, or doing forestry, will help to fully immerse you in this new environment.  
+Beautiful visuals to suit the seasons, such as the birth of life in spring, the richness of colour of autumn and bare trees on a bleak winter's day when you are clearing the snow, or doing forestry, will help to fully immerse you in this new environment.
 
 We strongly recommend that you start your Seasons experience on a brand new save game. Please note that this released version of the mod is not compatible with any previous incomplete versions. Delete the incomplete version of the mod, install this release version and start a new save game.
 
@@ -25,7 +25,7 @@ Alt + F : Show / Hide weather forecast
 Alt + R : Maintain vehicle (must be done when vehicle is parked by a workshop and is only possible when maintenance is necessary)
 Alt + N : Skip night (only available once it gets dark, before midnight)
 
-For further info on game play checkout the Seasons section of the in-game help. A full list of features can be found in the mod's readme file and on our website. 
+For further info on game play checkout the Seasons section of the in-game help. A full list of features can be found in the mod's readme file and on our website.
         ]]>
         </en>
         <fr><![CDATA[L'hiver se profile... puis suivront le printemps, l'été et l'automne.
@@ -52,7 +52,7 @@ Erfahre den Zeitdruck, unter dem der moderne Landwirt von heute steht. Die Zeite
 
 Jede der vier Jahreszeiten hat ihre eigene Faszination. Im Frühling blüht die Landschaft so richtig auf, im Sommer ist es dementsprechend heller und die Tage sind länger, die Pflanzen stehen in voller Blüte. Der Herbst ist von Nebel- und Regenphasen durchwachsen. Die Bäume und Pflanzen werfen ihre Blätter und erscheinen im typischen Herbstkleid. Der Winter wird wesentlich dunkler und es wird vereinzelnd Schnee fallen. Nutze diese Zeit für die Forstwirtschaft oder andere Beschäftigungen auf dem Hof.
 
-Wir empfehlen ausdrücklich das Starten eines neuen Spielstandes! 
+Wir empfehlen ausdrücklich das Starten eines neuen Spielstandes!
 Bitte beachte, dass diese Version mit keiner Test-Version von Seasons kompatibel ist. Lösche daher die alte und installiere diese Version. Danach starte einen neuen Spielstand.
 
 Alt + S : Seasons Menü
@@ -90,7 +90,7 @@ Gyönyörű látképek illenek minden szezonhoz, úgy mint az élet kezdete tava
 Erősen ajánljott, hogy a Seasons-t egy új játékmentésen kezd el. Azt ne feledd, hogy a mod ezen verzió nem kompatibilis bármilyen más, korábbi befejezetlen verzióval. Töröld a korábbi félkész verziót, telepitsd az aktuális kiadást és kezdj egy új játékot.
 
 Alt + S : Seasons menü (növekedés áttekintés és beállitások)
-Alt + F : Időjárás előrejelzés mutatása / elrejtése 
+Alt + F : Időjárás előrejelzés mutatása / elrejtése
 Alt + R : Gép karbantartás (csak a garázsnál leparkolva végezheted el, és csak akkor lehetséges, ha szükséges a karbantartás)
 Alt + N : Éjszaka átugrása (csak sötétedés után elérhető, éjfél előtt)
 
@@ -114,6 +114,22 @@ Alt + N : Salta la notte (disponibile solo una volta che diventa buio, prima di 
 Per ulteriori informazioni sul gioco, consulta la sezione Seasons della guida in partita. Un elenco completo delle funzionalità può essere trovato nel file readme nella cartella della mod e sul nostro sito web.
         ]]>
         </it>
+        <nl><![CDATA[Winter komt er aan.. En lente, zomer en herfst komen er ook aan.
+De Seasons mod verandert de fundamentele manier om Farming Simulator te spelen door seizoenen te introduceren en alle aspecten van de gameplay te veranderen, zoals het weer, groei, economie, voertuigonderhoud en veeteelt.
+Ervaar de proeven en beproevingen van een echte boer om ervoor te zorgen dat je al je gewassen tijdig plant, voordat het te koud of te droog wordt, om te ontkiemen en of je de oogst voor de regenachtige dagen van de herfst zal kunnen oogsten wanneer gewassen nat zullen zijn.
+
+Prachtige visuals die zich aanpassen aan het seizoen, zoals de geboorte van het leven in het voorjaar, de rijkdom van de herfstkleuren in de herfst en de kale bomen op een fijne winterdag wanneer u de sneeuw opruimt of bosbouw doet, helpt u hier volledig zich aan te passen aan deze nieuwe omgeving.
+We raden u aan om uw Seasons ervaring op een gloednieuwe savegame te starten. Houd er rekening mee dat deze vrijgegeven versie van de mod niet compatibel is met vorige incomplete versies. Verwijder de onvolledige versie van de mod, installeer deze versie en start een nieuwe savegame.
+
+Alt + S : Seasons menu (groei overzicht en instellingen)
+Alt + F : laat de weersvoorspelling zien of verberg de weersvoorspelling
+Alt + R : Onderhoud van het voertuig (moet gebeuren wanneer het voertuig voor een werkplaats wordt geparkeerd en is alleen mogelijk  als onderhoud nodig is)
+Alt + N : Sla de nacht over (alleen beschikbaar als het donker wordt, voor middernacht)
+
+Voor nadere informatie over de game play bekijk de Seasons sectie van de in-game help. Een volledige lijst van functies vindt u in het mod's readme bestand en op onze website.
+Add Comment
+        ]]>
+        </nl>
     </description>
 
     <iconFilename>icon.dds</iconFilename>
