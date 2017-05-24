@@ -64,7 +64,7 @@ For a better game experience, custom maps should add two new density layers: one
 ### Crops
 - At the beginning of a new game, the mod will reset all fields to the harvested state. This is to simulate the fact that you just bought the farm and the fields haven't been worked since the last harvest.
 - Using the mod on an existing save game is not recommended, but it is supported. The mod will prompt if you wish to reset all fields in this situation.
-- Vanilla growth is completely disabled. The mod controls all growth of fruits, including pine trees (5 years to fully grown, harvestable after 2 years)
+- Vanilla growth is completely disabled. The mod controls all growth of fruits.
 - Winter kills certain crops
 - Grass is knocked back to state 2 in the winter
 - Crop growth duration is much, much longer: for some crops more than half a year
@@ -82,6 +82,8 @@ For a better game experience, custom maps should add two new density layers: one
 - Plants are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
 - Growth and withering settings are disabled as this mod overwrites this functionality
+- The mod also controls the growth of planted trees. It takes 5 years for trees to be fully grown, harvestable after 2 years. 
+- Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees.
 
 ### Maintenance
 - Age in maintenance GUI is now days since last repair
