@@ -6,8 +6,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Reparar vehículo" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Abrir menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Falta %d m para sembrar" />
-        <!-- Missing translation of "Skip night" -->
-        <text name="input_SEASONS_SKIP_NIGHT" text="" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Seasons: Adelantar Noche" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Ocultar predicción tiempo" />
 
         <text name="SS_WEEKDAY_1" text="Lunes" />
@@ -86,8 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado" />
         <text name="warning_animalsKilled" text="%d ha muerto" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
-        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
-        <text name="msg_welcome" text="" />
+        <text name="msg_welcome" text="Bienvenido al Mod Seasons hecho por Realismus Modding. Por favor, consulte la ayuda en el menú Esc para obtener más información sobre cómo utilizar este mod." />
 
         <text name="ui_pageOverview" text="General" />
         <text name="ui_pageSettings" text="Configuración" />
@@ -124,186 +122,107 @@
         <text name="dialog_resetGrowth_title" text="Resetear crecimiento" />
         <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
-        <!-- Missing translation of "The game is synchronizing after the fast-forward" -->
-        <text name="dialog_timeTravel" text="" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_timeTravel" text="El juego se sincronizará después del avance rápido." />
+        <text name="dialog_sleeping" text="Descansando para otro dia en la granja... ZzZzz...." />
 
         <text name="fillType_snow" text="Nieve" />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <!-- Missing translation of "Seasons is a mod that improves realism in the Farming Simulator game by adjusting nearly all aspects  to more realistic parameters. Everything from seasonal effects to crop growth patterns and animal production has been changed to a more realistic level." -->
-        <text name="ss_helpText_01_01" text="" />
-        <!-- Missing translation of "The game year has been broken up into 4 seasons: spring, summer, autumn and winter. Each season is broken into 3 parts: early, mid and late. These parts are referred to as transitions." -->
-        <text name="ss_helpText_01_02" text="" />
-        <!-- Missing translation of "Your activities are tied to the time of year they take place in real life." -->
-        <text name="ss_helpText_01_03" text="" />
+        <text name="ss_helpText_01_01" text="Seasons es un mod que mejora el realismo en el juego Farming Simulator ajustando casi todos los aspectos a parámetros más realistas. Todo, desde los efectos estacionales hasta los patrones de crecimiento de los cultivos y la producción animal, se ha cambiado a un nivel más realista." />
+        <text name="ss_helpText_01_02" text="El año del juego se ha fraccionado en 4 estaciones: primavera, verano, otoño e invierno. Cada estacion se fracciona en 3 partes: principios, mediados y final. Estas partes se denominan transiciones." />
+        <text name="ss_helpText_01_03" text="Sus actividades están vinculadas a la época del año que tienen lugar en la vida real." />
 
-        <!-- Missing translation of "Seasonal Effects (1)" -->
-        <text name="ss_helpTitle_02" text="" />
-        <!-- Missing translation of "Weather is random from day to day, but follows a pattern from season to season." -->
-        <text name="ss_helpText_02_01" text="" />
-        <!-- Missing translation of "Spring will be rainy and foggy with some chances of sunny weather. Summer will be warmer and drier. Hail storms can occur without any warning. Autumn will be rainy with some sunny weather. Winter will be rainy, but often cold enough to allow snow to fall, maybe even stay on the ground." -->
-        <text name="ss_helpText_02_02" text="" />
-        <!-- Missing translation of "Snow will fill tippers and shovels, unless the tipper or shovel is covered in a shed with a snow mask or a tarp. Snow will also reduce traction, thus making vehicles slower." -->
-        <text name="ss_helpText_02_03" text="" />
+        <text name="ss_helpTitle_02" text="Efectos Estacionales (1)" />
+        <text name="ss_helpText_02_01" text="El tiempo es aleatorio de un dia para otro, pero sigue un patrón de estación a estación." />
+        <text name="ss_helpText_02_02" text="La primavera será lluviosa, con niebla y algunas posibilidades de tiempo soleado. El verano será más cálido y más seco. Las tormentas de granizo pueden ocurrir sin ninguna advertencia. El otoño será lluvioso con un tiempo soleado. El invierno será lluvioso, pero a menudo lo suficientemente frío como para permitir que la nieve caiga, tal vez incluso permanecer en el suelo." />
+        <text name="ss_helpText_02_03" text="La nieve llenará los remolques y palas, a menos que el volquete o la pala se cubra en un cobertizo adecuado para Seasons o una lona. La nieve también reducirá la tracción, haciendo así los vehículos más lentos." />
 
-        <!-- Missing translation of "Seasonal Effects (2)" -->
-        <text name="ss_helpTitle_03" text="" />
-        <!-- Missing translation of "Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." -->
-        <text name="ss_helpText_03_01" text="" />
-        <!-- Missing translation of "Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale. Wrapped hay will not ferment, but they will be protected against the weather." -->
-        <text name="ss_helpText_03_02" text="" />
-        <!-- Missing translation of "Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." -->
-        <text name="ss_helpText_03_03" text="" />
+        <text name="ss_helpTitle_03" text="Efectos Estacionales (2)" />
+        <text name="ss_helpText_03_01" text="Las horas de luz del día también se ven afectadas por las estaciones. Los inviernos tienen días más cortos (8 horas) mientras que los veranos tienen días más largos (17 horas)." />
+        <text name="ss_helpText_03_02" text="Los silos de búnker y los fardos de ensilaje requieren tiempo para fermentar. Se necesita un tercio de las estaciones (1 transición) para fermentar completamente un silo de búnker o un fardo de ensilaje. El heno envuelto no fermentará, pero estará protegido contra el clima." />
+	    <text name="ss_helpText_03_03" text="Las estaciones también afectarán a los árboles y al follaje. Los árboles cambiarán de estado según los cambios estacionales de temperatura. Las hojas se vuelven de color y caerán en otoño. Los árboles se ven desnudos en invierno y tendrán un verde claro en primavera." />
 
-        <!-- Missing translation of "Weather Forecast" -->
-        <text name="ss_helpTitle_04" text="" />
-        <!-- Missing translation of "The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F." -->
-        <text name="ss_helpText_04_01" text="" />
-        <!-- Missing translation of "The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." -->
-        <text name="ss_helpText_04_02" text="" />
-        <!-- Missing translation of "The number on the right of each forecast block represents the day of the season." -->
-        <text name="ss_helpText_04_03" text="" />
+        <text name="ss_helpTitle_04" text="Pronóstico del tiempo" />
+        <text name="ss_helpText_04_01" text="El pronóstico del tiempo será reintroducido con Seasons y puede ser activado con Alt Izq. + F." />
+        <text name="ss_helpText_04_02" text="El pronóstico del tiempo mostrará las altas/bajas temperaturas y el tiempo (soleado, niebla, lluvia, nieve, nubaldo) para los siguientes 7 días. Las tormentas de granizo no se mostrarán en el pronóstico del tiempo, como en la vida real, es un acontecimiento inesperado." />
+        <text name="ss_helpText_04_03" text="El número a la derecha de cada bloque de pronóstico representa el día de la estación." />
 
-        <!-- Missing translation of "Soil" -->
-        <text name="ss_helpTitle_05" text="" />
-        <!-- Missing translation of "Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." -->
-        <text name="ss_helpText_05_01" text="" />
-        <!-- Missing translation of "The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." -->
-        <text name="ss_helpText_05_02" text="" />
-        <!-- Missing translation of "Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." -->
-        <text name="ss_helpText_05_03" text="" />
+        <text name="ss_helpTitle_05" text="Suelo" />
+        <text name="ss_helpText_05_01" text="La temperatura del suelo se modela utilizando ecuaciones termodinámicas y datos históricos. Esto significa que el suelo se congelará en el invierno cuando la temperatura del aire caiga por debajo de un cierto punto y período de tiempo. El suelo se descongelará en primavera cuando la temperatura del aire se eleve por encima de un cierto umbral y tiempo." />
+        <text name="ss_helpText_05_02" text="El suelo no podrá ser trabajado cuando este congelado. Los cultivos no crecerán en suelo congelado." />
+        <text name="ss_helpText_05_03" text="Los cultivos sólo germinan cuando la temperatura del suelo está por encima de sus temperaturas de germinación. Las temperaturas de germinación se incluyen en la primera página del menú de configuración de estaciones (Alt Izq. + S)." />
 
-        <!-- Missing translation of "Crops - Intro" -->
-        <text name="ss_helpTitle_06" text="" />
-        <!-- Missing translation of "When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." -->
-        <text name="ss_helpText_06_01" text="" />
-        <!-- Missing translation of "The default growth patterns of crops have been replaced with Seasons. Crops will now follow a realistic growth pattern following their corresponding seasonal planting and harvesting times. This also means that the winter will kill most crops and crops planted at the wrong time will not grow." -->
-        <text name="ss_helpText_06_02" text="" />
-        <!-- Missing translation of "Crops are only harvestable in their final growth stage, except for poplar and oilseed radish, and will stay in this final stage until they are killed off in the winter." -->
-        <text name="ss_helpText_06_03" text="" />
-        <!-- Missing translation of "Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage." -->
-        <text name="ss_helpText_06_04" text="" />
-        <!-- Missing translation of "You can still silage green crops." -->
-        <text name="ss_helpText_06_05" text="" />
+        <text name="ss_helpTitle_06" text="Cultivos - Introducción" />
+        <text name="ss_helpText_06_01" text="Al comenzar un nuevo juego, todos los cultivos serán reajustados a sus etapas cosechadas para simular el hecho de que los campos no han sido trabajados desde el otoño. Cuando se usa Seasons por primera vez en una partida existente, tendrá la opción de reiniciar los cultivos o no." />
+        <text name="ss_helpText_06_02" text="Los patrones de crecimiento por defecto de los cultivos han sido reemplazados por este mod, Seasons. Los cultivos seguirán un patrón de crecimiento realista, después de los correspondientes períodos estacionales de siembra y cosecha. Esto también significa que el invierno matará a la mayoría de los cultivos y los cultivos plantados en el momento equivocado no crecerán." />
+        <text name="ss_helpText_06_03" text="Los cultivos sólo se pueden cosechar en su etapa de crecimiento final, excepto el álamo y el rábano oleaginoso, y permanecerán en esta etapa final hasta que mueran en el invierno." />
+        <text name="ss_helpText_06_04" text="Una vez que un cultivo de cereal alcanza la primera etapa de cosecha de acuerdo con la visión general del crecimiento en el menú Esc, está listo para la cosecha. Esta es la etapa final de la cosecha." />
+        <text name="ss_helpText_06_05" text="Todavía puede ensilar cultivos verdes" />
 
-        <!-- Missing translation of "Crops - Arable Crops" -->
-        <text name="ss_helpTitle_07" text="" />
-        <!-- Missing translation of "Crop growth is now much longer. It may take a half a year for a crop to reach the harvestable stage." -->
-        <text name="ss_helpText_07_01" text="" />
-        <!-- Missing translation of "Winter will kill most crops, but winter and spring crops are possible. Wheat, barley, poplar, grass, oilseed radishes and canola can be planted in the autumn for winter crops or planted in the spring for spring crops. Be certain that the soil is warm enough for the germination of these crops." -->
-        <text name="ss_helpText_07_02" text="" />
-        <!-- Missing translation of "Corn, soybeans, sunflower, sugar beets and potatoes must be planted in the spring. Be sure to check the growth overview in the Seasons Menu because some crops cannot be planted in the first transition of spring (early spring) and will die, even if the soil temperature is above germination temperature." -->
-        <text name="ss_helpText_07_03" text="" />
+        <text name="ss_helpTitle_07" text="Cultivos - Cultivos Herbáceos" />
+        <text name="ss_helpText_07_01" text="El crecimiento del cultivo ahora es más largo. Puede tardar medio año para llegar a la etapa de cosecha." />
+        <text name="ss_helpText_07_02" text="El invierno matará la mayoría de los cultivos, pero hay cultivos que aguantan el invierno y primavera. El trigo, la cebada, el álamo, el césped, los rábanos de semillas oleaginosas y la colza pueden ser plantados en otoño para cultivos de invierno o plantados en primavera para cultivos de primavera. Asegúrese de que el suelo está lo suficientemente caliente para la germinación de estos cultivos." />
+        <text name="ss_helpText_07_03" text="El maíz, la soja, el girasol, la remolacha y las patatas deben ser plantadas en primavera. Asegúrese de revisar la vista general del crecimiento en el menú Seasons debido a que algunos cultivos no pueden ser plantados en la primera transición de la primavera (principios de primavera) y morirán, incluso si la temperatura del suelo está por encima de la temperatura de germinación." />
 
-        <!-- Missing translation of "Crops - Hay, Straw and Grass" -->
-        <text name="ss_helpTitle_08" text="" />
-        <!-- Missing translation of "In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." -->
-        <text name="ss_helpText_08_01" text="" />
-        <!-- Missing translation of "Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." -->
-        <text name="ss_helpText_08_02" text="" />
-        <!-- Missing translation of "Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." -->
-        <text name="ss_helpText_08_03" text="" />
-        <!-- Missing translation of "Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." -->
-        <text name="ss_helpText_08_04" text="" />
+        <text name="ss_helpTitle_08" text="Cultivos - Hierba, Paja y Heno" />
+        <text name="ss_helpText_08_01" text="En invierno, la hierba se restablece a su etapa cosechada para simular el invierno, matando la hierba cuando se hace frío." />
+        <text name="ss_helpText_08_02" text="Los fardos de hierba necesitan ser consumidos o envueltos para el ensilaje en los siguientes 2 días a su empacado. Después de 2 días la hierba se pudrirá y el fardo desaparecerá." />
+        <text name="ss_helpText_08_03" text="Las hileras de heno, hierba y paja comenzarán a reducir su tamaño, y eventualmente desaparecerán después de varios días. Las franjas de hierba se reducen a medianoche todos los días. El heno y la hilera de paja se reducen después de cada etapa de crecimiento, así como después de haber estado expuestos a la lluvia." />
+        <text name="ss_helpText_08_04" text="La paja y el heno deben ser empacados antes de que puedan ser vendidos - la paja y el heno sueltos no pueden ser vendidos, no recibirás dinero a cambio. La hierba, embalada o suelta, no puede ser vendida tampoco." />
 
-        <!-- Missing translation of "Crops - Trees" -->
-        <text name="ss_helpTitle_09" text="" />
-        <!-- Missing translation of "Trees take more time to reach their fully grown state. It will take plantable trees 5 game years to be fully grown and after 2 years they can be cut." -->
-        <text name="ss_helpText_09_01" text="" />
-        <!-- Missing translation of "Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees." -->
-        <text name="ss_helpText_09_02" text="" />
+        <text name="ss_helpTitle_09" text="Cultivos - Árboles" />
+        <text name="ss_helpText_09_01" text="Los árboles tardan más tiempo en llegar a su estado maduro. Se necesitarán 5 años de juego para crecer completamente los árboles plantados y después de 2 años se pueden cortar." />
+        <text name="ss_helpText_09_02" text="Los árboles inhiben el crecimiento de otros árboles si han sido plantados demasiado juntos. Para reiniciar el crecimiento del árbol necesitará delgadear los árboles." />
 
-        <!-- Missing translation of "Crops - Weather Effects" -->
-        <text name="ss_helpTitle_10" text="" />
-        <!-- Missing translation of "Rain, hail and snow affect the moisture levels of the crops. If the moisture in the crops is above certain point because of bad weather, you will not be able to harvest your crops. Moist summer nights can occur without warning." -->
-        <text name="ss_helpText_10_01" text="" />
-        <!-- Missing translation of "After the rain your crops will need time to dry out, which is dependent upon the air temperature and the time of year. Warmer weather means crops will dry out faster than in cooler weather." -->
-        <text name="ss_helpText_10_02" text="" />
-        <!-- Missing translation of "Using a tedder on hay while crops are wet will produce wet grass. Be certain to only use a tedder when the crops are dry enough." -->
-        <text name="ss_helpText_10_03" text="" />
-        <!-- Missing translation of "On a mod map that has been prepared with a snow mask by the modder hay and straw bales that have been exposed to the rain or snow will begin to rot, unless the bales are stored in a shed with a snow mask. Bad weather will not affect wrapped bales or bales on a map without a snow mask." -->
-        <text name="ss_helpText_10_04" text="" />
+        <text name="ss_helpTitle_10" text="Cultivos - Efectos Climáticos" />
+        <text name="ss_helpText_10_01" text="Lluvia, tormenta y nieve afecta los niveles de humedad de los cultivos. Si la humedad en los cultivos está por encima de cierto punto debido al mal tiempo, no será capaz de cosechar sus cultivos. Las noches de verano húmedas pueden ocurrir sin previo aviso." />
+        <text name="ss_helpText_10_02" text="Después de la lluvia sus cosechas necesitarán tiempo para secarse, lo que depende de la temperatura del aire y la época del año. Un clima más cálido significa que los cultivos se secarán más rápido que en climas más fríos." />
+        <text name="ss_helpText_10_03" text="El uso de una henificadora en el heno mientras los cultivos están húmedos producirá hierba húmeda. Asegúrese de usar sólo una henificadora cuando los cultivos estén suficientemente secos." />
+        <text name="ss_helpText_10_04" text="En un mapa Mod que ha sido preparado con una máscara de nieve por el autor, el heno y los fardos de paja que han sido expuestos a la lluvia o la nieve comenzará a pudrirse, a menos que las pacas se almacenan en un cobertizo (adecuado para Seasons). El mal tiempo no afectará a las balas o fardos envueltos en un mapa sin una máscara de nieve." />
 
-        <!-- Missing translation of "Maintenance" -->
-        <text name="ss_helpTitle_11" text="" />
-        <!-- Missing translation of "Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." -->
-        <text name="ss_helpText_11_01" text="" />
-        <!-- Missing translation of "You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." -->
-        <text name="ss_helpText_11_02" text="" />
-        <!-- Missing translation of "The age of your vehicle is the days since your last repair." -->
-        <text name="ss_helpText_11_03" text="" />
-        <!-- Missing translation of "Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." -->
-        <text name="ss_helpText_11_04" text="" />
+        <text name="ss_helpTitle_11" text="Mantenimiento" />
+        <text name="ss_helpText_11_01" text="Sus tractores y cosechadoras requieren mantenimiento periódico para mantenerlos operativos. El período de mantenimiento es cada 30 horas o medio año, lo que ocurra primero. Los vehículos que están atrasados debido a su mantenimiento pueden tardar más en comenzar." />
+        <text name="ss_helpText_11_02" text="Usted puede reparar sus vehículos en la tienda de vehículos o en el garaje colocable. Para reparar su vehículo diríjase a la tienda, o garaje colocable, y presione Alt Izq. + R. Ojo! Es más costoso reparar en la tienda de vehículos." />
+        <text name="ss_helpText_11_03" text="La edad de su vehículo son los días transcurridos desde su última reparación" />
+        <text name="ss_helpText_11_04" text="Sólo los vehículos conducibles requerirán mantenimiento periódico. Las herramientas e implementos se repararán automáticamente según sea necesario." />
 
-        <!-- Missing translation of "Economy" -->
-        <text name="ss_helpTitle_12" text="" />
-        <!-- Missing translation of "The loan cap has been changed from 200,000 to 30% of your owned land and placeable building values. The minimum loan cap is 300,000 and the maximum loan cap is 1,500,000." -->
-        <text name="ss_helpText_12_01" text="" />
-        <!-- Missing translation of "Income from missions have been reduced. You will earn roughly 5 times more than a hired worker working on the same field." -->
-        <text name="ss_helpText_12_02" text="" />
-        <!-- Missing translation of "Maintenance of all vehicles (in addition to the periodic maintenance) includes maintenance and taxes relative to how much it is being used. Clean machines will also reduce maintenance costs. Machines that are not used will also have their maintenance costs reduced." -->
-        <text name="ss_helpText_12_03" text="" />
-        <!-- Missing translation of "Crop prices fluctuate with the changes in the seasons in a more realistic manner." -->
-        <text name="ss_helpText_12_04" text="" />
+        <text name="ss_helpTitle_12" text="Economía" />
+        <text name="ss_helpText_12_01" text="El tope del préstamo se ha cambiado de 200.000 €, 30% de su propiedad de terreno y los valores de construcción que se pueden colocar. El límite mínimo de préstamo es de 300.000 € y el límite máximo de préstamo es de 1.500.000 €" />
+        <text name="ss_helpText_12_02" text="Los ingresos de las misiones se han reducido. Usted ganará aproximadamente 5 veces más que un trabajador contratado que trabaja en el mismo campo." />
+        <text name="ss_helpText_12_03" text="El mantenimiento de todos los vehículos (además del mantenimiento periódico) incluye el mantenimiento y los impuestos relativos a cuánto se está utilizando. Las máquinas limpias también reducirán los costos de mantenimiento. Las máquinas que no se usan también tendrán sus costos de mantenimiento reducidos." />
+        <text name="ss_helpText_12_04" text="Los precios de los cultivos fluctúan con los cambios en las estaciones de una manera más realista." />
 
-        <!-- Missing translation of "Hired Help" -->
-        <text name="ss_helpTitle_13" text="" />
-        <!-- Missing translation of "Hired workers require overtime pay. If a hired worker is used before 6AM and after 6PM, or on the weekends, his/her pay will be 50% higher." -->
-        <text name="ss_helpText_13_01" text="" />
+        <text name="ss_helpTitle_13" text="Ayudante Contratado" />
+        <text name="ss_helpText_13_01" text="Los trabajadores contratados requieren pago de horas extras. Si un trabajador contratado es usado antes de las 6AM y después de las 6PM, o los fines de semana, su pago será 50% más alto." />
 
-        <!-- Missing translation of "Animals - Intro" -->
-        <text name="ss_helpTitle_14" text="" />
-        <!-- Missing translation of "Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." -->
-        <text name="ss_helpText_14_01" text="" />
-        <!-- Missing translation of "Animals only give offspring at a certain time of the year. Pigs and sheep will produce offspring in the spring, while cows will produce offspring in the summer." -->
-        <text name="ss_helpText_14_02" text="" />
-        <!-- Missing translation of "Animals will die if they do not have food or water. This is disabled on Easy difficulty." -->
-        <text name="ss_helpText_14_03" text="" />
-        <!-- Missing translation of "Grass cannot be fed in the winter. You should use hay instead." -->
-        <text name="ss_helpText_14_04" text="" />
+        <text name="ss_helpTitle_14" text="Animales - Introducción" />
+        <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en el verano que en el invierno. Vacas y cerdos requieren más paja en el invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />
+        <text name="ss_helpText_14_02" text="Los animales sólo dan crías en una determinada época del año. Los cerdos y ovejas producirán crías en primavera, mientras que las vacas producirán crías en verano." />
+        <text name="ss_helpText_14_03" text="Los animales morirán si no tienen comida o agua. Esto está desactivado en dificultad fácil." />
+        <text name="ss_helpText_14_04" text="En invierno no se podrá alimentar con hierba, deberás usar heno en su lugar." />
 
-        <!-- Missing translation of "Animals - Production" -->
-        <text name="ss_helpTitle_15" text="" />
-        <!-- Missing translation of "Milk and wool production is dependent upon the season." -->
-        <text name="ss_helpText_15_01" text="" />
-        <!-- Missing translation of "Wool is only produced in the spring." -->
-        <text name="ss_helpText_15_02" text="" />
-        <!-- Missing translation of "Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." -->
-        <text name="ss_helpText_15_03" text="" />
+        <text name="ss_helpTitle_15" text="Animales - Producción" />
+        <text name="ss_helpText_15_01" text="La producción de leche y lana depende de la estación" />
+        <text name="ss_helpText_15_02" text="La lana es producida solo en primavera." />
+        <text name="ss_helpText_15_03" text="La leche se produce durante todo el año, pero se incrementa en el invierno y la primavera. Como en invierno no puede alimentar con hierba, esto normalmente reduciría la productividad de las vacas a un máximo de 80%. Sin embargo, Seasons aumenta la producción de leche en invierno y primavera para compensar la falta de hierba en estos meses." />
 
-        <!-- Missing translation of "Seasons Menu" -->
-        <text name="ss_helpTitle_16" text="" />
-        <!-- Missing translation of "The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." -->
-        <text name="ss_helpText_16_01" text="" />
-        <!-- Missing translation of "The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "The second page is the settings menu. Here the season length (3/6/9/12 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." -->
-        <text name="ss_helpText_16_03" text="" />
+        <text name="ss_helpTitle_16" text="Menú Seasons" />
+        <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
+        <text name="ss_helpText_16_02" text="La primera página es una guía para plantar y cosechar. Las temperaturas de germinación de todos los cultivos se muestran a la izquierda del gráfico. Si la temperatura al lado de un cultivo es blanca, significa que es lo suficientemente caliente para plantar ese cultivo en particular. Si la temperatura es azul, hace demasiado frío." />
+        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3/6/9/12 días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
 
-        <!-- Missing translation of "HUD" -->
-        <text name="ss_helpTitle_17" text="" />
-        <!-- Missing translation of "A HUD to the left of the clock in the upper right corner displays information relevant to Seasons. It shows the current air temperature on top and ground temperature on bottom. The state of the ground (wetcrops/frozen ground) is also displayed to the left of this HUD." -->
-        <text name="ss_helpText_17_01" text="" />
-        <!-- Missing translation of "Directly below the clock is where the seasonal period and day of the current season is displayed." -->
-        <text name="ss_helpText_17_02" text="" />
-        <!-- Missing translation of "When activated, the forecast HUD will appear below the clock in the upper right corner." -->
-        <text name="ss_helpText_17_03" text="" />
-        <!-- Missing translation of "When the help menu is activated (F1) the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." -->
-        <text name="ss_helpText_17_04" text="" />
+        <text name="ss_helpTitle_17" text="HUD" />
+        <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />
+        <text name="ss_helpText_17_02" text="Justo debajo del reloj es donde se muestra el período de temporada y el día de la temporada actual." />
+        <text name="ss_helpText_17_03" text="Cuando se activa, el HUD del pronóstico aparecerá debajo del reloj en la esquina superior derecha." />
+        <text name="ss_helpText_17_04" text="Cuando se activa el menú de ayuda (F1), el temporizador de mantenimiento aparece cerca de la parte inferior. Esto sólo se muestra cuando está en un vehículo." />
 
-        <!-- Missing translation of "Miscellaneous" -->
-        <text name="ss_helpTitle_18" text="" />
-        <!-- Missing translation of "If you do not wish to work during the night, you have the option to skip to the morning. After the night falls and you are on foot you can press Left Alt + N to skip to the morning." -->
-        <text name="ss_helpText_18_01" text="" />
-        <!-- Missing translation of "If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." -->
-        <text name="ss_helpText_18_02" text="" />
-        <!-- Missing translation of "While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." -->
-        <text name="ss_helpText_18_03" text="" />
-        <!-- Missing translation of "All vehicles need to be started manually." -->
-        <text name="ss_helpText_18_04" text="" />
+        <text name="ss_helpTitle_18" text="Varios" />
+        <text name="ss_helpText_18_01" text="Si no quiere trabajar duro por la noche, tiene la opción de saltar a la mañana siguiente. Después de caer la noche y usted está fuera del vehículo, presione Alt Izq. + N para saltar a la mañana siguiente." />
+        <text name="ss_helpText_18_02" text="Si usted decide cambiar la duración de la temporada en medio de una partida existente, se recomienda que primero cambie la duración de la temporada durante el invierno para reducir los efectos no deseados sobre los cultivos existentes y segundo reinicie el juego / servidor después de cambiar la duración de la temporada." />
+        <text name="ss_helpText_18_03" text="Es su juego y puede jugar como desee, pero Seasons se sugiere como un desafío para jugar sólo con una temporada de 9 días y en la aceleración del tiempo 5x. De esta manera se pasa la primavera sólo pasando cultivador y plantando cultivos, tendiendo cultivos y cortando heno en verano, cosechando y arando en el otoño, y atendiendo a los animales, las máquinas, los bosques y vendiendo cultivos durante el invierno." />
+        <text name="ss_helpText_18_04" text="Todos los vehículos necesitan ser arrancados manualmente." />
     </texts>
 </l10n>
