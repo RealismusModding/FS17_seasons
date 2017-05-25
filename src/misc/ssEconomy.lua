@@ -376,7 +376,11 @@ end
 function ssEconomy:ttGetEffectiveFillTypePrice(superFunc, fillType)
     local price = superFunc(self, fillType)
 
-    return price * g_seasons.economy:getFillFactor(fillType)
+    if self.isServer then
+        return price * g_seasons.economy:getFillFactor(fillType)
+    else
+        return price
+    end
 end
 
 -- update field prices
