@@ -15,6 +15,8 @@ ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
     if g_currentMission:getIsClient() then
+        self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
+
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
         self.hud.width, self.hud.height = getNormalizedScreenValues(60 * 7 * self.guiScale, 60 * self.guiScale)
         self.hud.widthSmall, _ = getNormalizedScreenValues(60 * 4 * self.guiScale, 0)
@@ -105,8 +107,25 @@ function ssWeatherForecast:update(dt)
     end
 
     if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
-        self.hud.visible = not self.hud.visible
+        if self.hud.visible then
+            self:setInvisible()
+        else
+            self:setVisible()
+        end
     end
+end
+
+function ssWeatherForecast:setVisible()
+    self.hud.visible = true
+
+    -- No idea what the /2 is for but it works
+    g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
+end
+
+function ssWeatherForecast:setInvisible()
+    self.hud.visible = false
+
+    g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset
 end
 
 function ssWeatherForecast:draw()
