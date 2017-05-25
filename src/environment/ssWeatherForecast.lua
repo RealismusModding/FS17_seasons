@@ -88,6 +88,12 @@ end
 function ssWeatherForecast:load(savegame, key)
     self.hud.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
     self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
+
+    if self.hud.visible == true then
+        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
+    else
+       g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset 
+    end
 end
 
 function ssWeatherForecast:save(savegame, key)
