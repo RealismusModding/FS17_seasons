@@ -82,11 +82,7 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.hail = self.hud.overlays.snow
 
         self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
-        if self.hud.visible == true then
-            self:setForecastVisible(true)
-        else
-            self:setForecastVisible(false)
-        end
+        self:setForecastVisible(self.hud.visible)
     end
 end
 
@@ -112,17 +108,14 @@ function ssWeatherForecast:update(dt)
     end
 
     if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
-        if self.hud.visible then
-            self:setForecastVisible(false)
-        else
-            self:setForecastVisible(true)
-        end
+        self:setForecastVisible(not self.hud.visible)
     end
 end
 
 function ssWeatherForecast:setForecastVisible(visible)
     self.hud.visible = visible
-    if visible == true then
+
+    if visible then
         -- No idea what the /2 is for but it works
         g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
     else
