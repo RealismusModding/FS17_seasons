@@ -123,6 +123,7 @@ For a better game experience, custom maps should add two new density layers: one
 - The game will get out of sync with the extra load of Seasons
 - The released version of this mod does not work with save games created using any previous versions. Delete the old version and start a new save game. 
 
+
 ## Mod conflicts
 Do not load multiple map mods. Only load the map you are using!
 
@@ -130,6 +131,7 @@ Do not load multiple map mods. Only load the map you are using!
 - Any mod that manipulates growth
 - Any mod that changes animals
 - Any 'season manager' type mods
+- Some animal cleaning mods may not work correctly, especially during the winter
 
 Known:
 - Difficulties Improve by TyKonKet
