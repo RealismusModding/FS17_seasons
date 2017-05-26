@@ -80,19 +80,19 @@ function ssWeatherForecast:loadMap(name)
 
         g_currentMission.weatherForecastIconOverlays.snow = self.hud.overlays.snow
         self.hud.overlays.hail = self.hud.overlays.snow
+
+        self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
+        if self.hud.visible == true then
+            g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
+        else
+            g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset 
+        end
     end
 end
 
 function ssWeatherForecast:load(savegame, key)
     self.hud.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
     self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
-    self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
-    
-    if self.hud.visible == true then
-        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
-    else
-       g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset 
-    end
 end
 
 function ssWeatherForecast:save(savegame, key)
