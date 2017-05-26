@@ -15,8 +15,6 @@ ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
     if g_currentMission:getIsClient() then
-        self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
-
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
         self.hud.width, self.hud.height = getNormalizedScreenValues(60 * 7 * self.guiScale, 60 * self.guiScale)
         self.hud.widthSmall, _ = getNormalizedScreenValues(60 * 4 * self.guiScale, 0)
@@ -88,7 +86,8 @@ end
 function ssWeatherForecast:load(savegame, key)
     self.hud.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
     self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
-
+    self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
+    
     if self.hud.visible == true then
         g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
     else
