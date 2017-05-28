@@ -53,7 +53,7 @@ end
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssXMLUtil.getBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
-    self.savegameVersion = ssXMLUtil.getInt(savegame, key .. ".version", 1)
+    self.savegameVersion = ssXMLUtil.getInt(savegame, key .. ".version", 2)
 
     self.isNewSavegame = savegame == nil
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
