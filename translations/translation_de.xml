@@ -116,12 +116,11 @@
         <text name="setting_moisture" text="Ernten bei Feuchtigkeit" />
 
         <text name="dialog_applySettings" text="Willst du wirklich die Jahreszeiten Einstellungen überschreiben? Änderungen an der Jahreszeitendauer und am Wachstum können erst nach einem Ingame Jahr geändert werden." />
-
-        <text name="dialog_resetGrowth" text="Du hast einen bestehenden Speicherstand geladen. Wir empfehlen das Zurücksetzen aller Wachstumsstufen zur besseren Funktionalität. Solltest Du diesen Schritt nicht wünschen, lehne ihn ab. Wir weisen darauf hin, dass Seasons dann eventuell nicht korrekt funktioniert.  " />
+        <text name="dialog_resetGrowth" text="Du hast einen bestehenden Speicherstand geladen. Wir empfehlen das Zurücksetzen aller Wachstumsstufen zur besseren Funktionalität. Solltest Du diesen Schritt nicht wünschen, lehne ihn ab. Wir weisen darauf hin, dass Seasons dann eventuell nicht korrekt funktioniert." />
         <text name="dialog_resetGrowth_title" text="Neustart mit dem Seasons-Mod. Wachstum zurücksetzen?" />
         <text name="dialog_resetGrowth_no" text="Wachstum beibehalten" />
         <text name="dialog_resetGrowth_yes" text="Alle Wachstumsstufen zurücksetzen" />
-        <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen!" />
+        <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen" />
         <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
 
         <text name="fillType_snow" text="Schnee" />

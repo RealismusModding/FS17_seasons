@@ -118,12 +118,11 @@
         <text name="setting_moisture" text="Növény nedvesség" />
 
         <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
-
-        <text name="dialog_resetGrowth" text="A Seasons-t egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe, akkor az a Seasons mod hibás működését eredményezheti!" />
+        <text name="dialog_resetGrowth" text="A Seasons-t egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe, akkor az a Seasons mod hibás működését eredményezheti." />
         <text name="dialog_resetGrowth_title" text="Növény fejlődés alaphelyzetbe" />
         <text name="dialog_resetGrowth_no" text="Növény fejlődés megtartása" />
         <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
-        <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után." />
+        <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után" />
         <text name="dialog_sleeping" text="Pihenés a következő napig... Zzz..." />
 
         <text name="fillType_snow" text="Hó" />

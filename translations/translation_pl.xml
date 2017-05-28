@@ -116,7 +116,6 @@
         <text name="setting_moisture" text="Wilgotność zboża" />
 
         <text name="dialog_applySettings" text="Czy jesteś pewien, że chcesz zmienić ustawienia modu Seasons? Zmiany długości sezonów i wzrostu będą działać poprawnie dopiero po roku w grze." />
-
         <text name="dialog_resetGrowth" text="Uruchomiłeś Seasons na starym stanie gry. Mod Seasons chce zresetować wszystkie pola do gołej ziemi, aby je zsynchronizować z dniem w grze. Stracisz wszystkie uprawy. Jeżeli nie zresetujesz wzrostu upraw, mod Seasons może nie działać poprawnie." />
         <text name="dialog_resetGrowth_title" text="Resetowanie wzrostu upraw" />
         <text name="dialog_resetGrowth_no" text="Zachowaj uprawy" />

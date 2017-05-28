@@ -116,12 +116,11 @@
         <text name="setting_moisture" text="Vochtigheid gewas" />
 
         <text name="dialog_applySettings" text="Weet je zeker dat je de seizoensinstellingen wilt veranderen? Het veranderen van de seizoenslengte kan er voor zorgen dat je sommige velden pas na één jaar weer kan gebruiken." />
-
         <text name="dialog_resetGrowth" text="Je hebt de Seasons mod op een oude savegame geladen. Seasons wil alle velden naar hun kale toestand brengen om synchroon te zijn met de speldag. Je zal alle gewassen verliezen. Als je de gewasgroei niet terug zet, zal Seasons niet werken zoals verwacht." />
         <text name="dialog_resetGrowth_title" text="Reset gewasgroei" />
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
-        <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd." />
+        <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd" />
         <text name="dialog_sleeping" text="Aan het rusten voor de volgende werkdag op de boerderij... Zzzzz..." />
 
         <text name="fillType_snow" text="Sneeuw" />

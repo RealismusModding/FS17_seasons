@@ -116,7 +116,6 @@
         <text name="setting_moisture" text="Vlhká sklizeň" />
 
         <text name="dialog_applySettings" text="Jste si jisti, že chcete změnit nastavení Seasons? Změny v délce sezóny a růstu mohou mít osudný dopad na pole, která pak lze opravit pouze po jednom herním roce." />
-
         <text name="dialog_resetGrowth" text="Vložili jste Seasons na staré savegame. Seasons chce obnovit všechna pole do jejich holého stavu a synchronizovat podle aktuálního dne. Ztratíte všechny plodiny. Pokud neobnovíte růst, možná Seasons nemusí fungovat podle očekávání." />
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />

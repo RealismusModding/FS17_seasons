@@ -116,7 +116,6 @@
         <text name="setting_moisture" text="Umidità del raccolto" />
 
         <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora le impostazioni di Seasons? Cambiamenti nella durata delle stagioni possono avere sui campi conseguenze rimediabili solo dopo un anno/gioco." />
-
         <text name="dialog_resetGrowth" text="Hai caricato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i raccolti. Senza un reset della crescita, Seasons potrebbe non funzionare come previsto." />
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />

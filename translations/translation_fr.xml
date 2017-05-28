@@ -116,7 +116,6 @@
         <text name="setting_moisture" text="L'humidité des cultures" />
 
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
-
         <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvegarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance" />
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />

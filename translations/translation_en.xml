@@ -122,7 +122,6 @@
         <text name="setting_moisture" text="Crop Moisture" />
 
         <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
-
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />
         <text name="dialog_resetGrowth_title" text="Growth reset" />
         <text name="dialog_resetGrowth_no" text="Keep growth" />

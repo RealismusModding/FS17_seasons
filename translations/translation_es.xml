@@ -117,12 +117,11 @@
         <text name="setting_moisture" text="Cultivo Húmedo" />
 
         <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerá después de un año de juego." />
-
         <text name="dialog_resetGrowth" text="Ha cargado una partida antigua. Estaciones debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Estaciones no funcionará como debiera." />
         <text name="dialog_resetGrowth_title" text="Resetear crecimiento" />
         <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
-        <text name="dialog_timeTravel" text="El juego se sincronizará después del avance rápido." />
+        <text name="dialog_timeTravel" text="El juego se sincronizará después del avance rápido" />
         <text name="dialog_sleeping" text="Descansando para otro dia en la granja... ZzZzz...." />
 
         <text name="fillType_snow" text="Nieve" />
