@@ -83,7 +83,7 @@
         <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
         <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
 
         <text name="ui_pageOverview" text="Opis" />

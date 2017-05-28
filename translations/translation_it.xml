@@ -83,7 +83,7 @@
         <text name="warning_soilIsFrozen" text="Il terreno è ghiacciato. Non puoi lavorarlo!" />
         <text name="warning_doNotThreshWithMoisture" text="Non trebbiare quando le colture sono troppo umide!" />
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni" />
         <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
 
         <text name="ui_pageOverview" text="Generali" />

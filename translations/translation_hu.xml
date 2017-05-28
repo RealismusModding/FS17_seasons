@@ -65,7 +65,7 @@
         <text name="SS_VEHICLE_REPAIRED" text="A(z) %s gép karbantartásának összege: %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="%s javítása: %s" />
         <text name="SS_REPAIR_REQUIRED" text="Karbantartást igényel!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás." />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás" />
         <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
         <text name="warning_repairBrokenMachine" text="A motor meghibásodott. Javítsd meg a gépedet!" />
@@ -85,7 +85,7 @@
         <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
         <text name="warning_doNotThreshWithMoisture" text="Ne arass, amikor a növények túl nedvesek!" />
         <text name="warning_animalsKilled" text="Elhullott állatok: (%d)" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetővájú maximális kapacitása 3 napra elegendő élelmet biztosít az állataidnak." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetővájú maximális kapacitása 3 napra elegendő élelmet biztosít az állataidnak" />
         <text name="msg_welcome" text="A Realismus Modding nevében üdvözlünk a Seasons modban. Kérlek olvasd át az Áttekintést az ESC menüben, hogy megismerkedj a mod használatával." />
 
         <text name="ui_pageOverview" text="Áttekintés" />

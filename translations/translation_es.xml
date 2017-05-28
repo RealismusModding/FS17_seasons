@@ -82,9 +82,9 @@
         <!-- Missing translation of "You have in the past downloaded a stolen copy of our mod from a site which doesn’t respect the modding community and has violated our copyright, or downloaded an incomplete version of this mod from our code repository. We appreciate your eagerness and excitement, but unfortunately your save game is incompatible with this version of the Seasons mod. Please do not use sites which steal from modders in the future." -->
         <text name="ss_version" text="" />
         <text name="warning_soilIsFrozen" text="El terreno está congelado. No puede trabajar en él!" />
-        <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado" />
+        <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado!" />
         <text name="warning_animalsKilled" text="%d ha muerto" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días" />
         <text name="msg_welcome" text="Bienvenido al Mod Seasons hecho por Realismus Modding. Por favor, consulte la ayuda en el menú Esc para obtener más información sobre cómo utilizar este mod." />
 
         <text name="ui_pageOverview" text="General" />

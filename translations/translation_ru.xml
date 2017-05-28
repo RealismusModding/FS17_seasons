@@ -83,7 +83,7 @@
         <text name="warning_soilIsFrozen" text="Почва замёрзла. Вы не можете работать на ней!" />
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!" />
         <text name="warning_animalsKilled" text="У Вас умерло животное (%d шт.)" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней" />
         <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню Esc, чтобы узнать больше о том, как использовать этот мод." />
 
         <text name="ui_pageOverview" text="Обзор" />
