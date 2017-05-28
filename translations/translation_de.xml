@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>tobiasgo, Oekobauer, ItZzShady, theSeb, WieSeLfLinK</translationContributors>
+    <translationContributors>tobiasgo, Oekobauer, ItZzShady, theSeb, WieSeLfLinK, Amadeo</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Wettervorhersage anzeigen" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Fahrzeug Reparieren" />

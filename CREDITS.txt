@@ -14,7 +14,7 @@ In-game English help texts - leifege640
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
-German - tobiasgo, Oekobauer, ItZzShady, WieSeLfLinK
+German - tobiasgo, Oekobauer, ItZzShady, WieSeLfLinK, Amadeo
 Italian - fcelsa, zed636
 French - thierry62, Marxtai, dural
 Russian - Vasil'ko
