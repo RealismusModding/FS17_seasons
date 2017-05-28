@@ -72,10 +72,10 @@
 
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
-        <text name="SS_SEASON_INTRO_0" text="A je tu jaro! Začíná nové období setí. ZAČNI" />
-        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, plodiny rostou. ZAČNI" />
-        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu protože plodiny nemusí přežít zimu. ZAČNI" />
-        <text name="SS_SEASON_INTRO_3" text="Je chladno. Půda je tvrdá, možná zmrzlá. Plodiny nerostou, nebo dokonce odumírají. ZAČNI" />
+        <text name="SS_SEASON_INTRO_0" text="A je tu jaro! Začíná nové období setí." />
+        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, plodiny rostou." />
+        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu protože plodiny nemusí přežít zimu." />
+        <text name="SS_SEASON_INTRO_3" text="Je chladno. Půda je tvrdá, možná zmrzlá. Plodiny nerostou, nebo dokonce odumírají." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
 
