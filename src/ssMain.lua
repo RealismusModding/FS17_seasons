@@ -15,6 +15,8 @@ g_seasons.xmlUtil = ssXMLUtil
 g_seasons.multiplayer = ssMultiplayer
 g_seasons.xml = ssSeasonsXML
 
+ssMain.SAVEGAME_VERSION = 2
+
 ----------------------------
 -- Constants
 ----------------------------
@@ -53,7 +55,11 @@ end
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssXMLUtil.getBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
-    self.savegameVersion = ssXMLUtil.getInt(savegame, key .. ".version", 2)
+    
+    self.savegameVersion = ssXMLUtil.getInt(savegame, key .. ".version", self.SAVEGAME_VERSION)
+    if self.savegameVersion > self.SAVEGAME_VERSION then
+        error("Your savegame was created with a newer version of the Seasons mod and cannot be loaded")
+    end
 
     self.isNewSavegame = savegame == nil
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
@@ -61,7 +67,7 @@ end
 
 function ssMain:save(savegame, key)
     ssXMLUtil.setBool(savegame, key .. ".settings.showControlsInHelpScreen", self.showControlsInHelpScreen)
-    ssXMLUtil.setInt(savegame, key .. ".version", self.savegameVersion)
+    ssXMLUtil.setInt(savegame, key .. ".version", self.SAVEGAME_VERSION)
 end
 
 ----------------------------
