@@ -128,18 +128,18 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons è una mod che migliora il realismo in Farming Simulator regolando quasi tutti gli aspetti a parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato cambiato in un livello più realistico" />
-        <text name="ss_helpText_01_02" text="L'anno di gioco è stato suddiviso in quattro stagioni: primavera, estate, autunno e inverno. Ogni stagione può essere ulteriormente suddivisa in tre parti: iniziale, centrale e finale. Queste parti sono indicate come transizioni" />
+        <text name="ss_helpText_01_01" text="Seasons è una mod che migliora il realismo in Farming Simulator regolando quasi tutti gli aspetti a parametri più realistici. Tutto, dagli effetti stagionali, ai modelli di crescita delle colture, alla produzione animale è stato cambiato in un livello più realistico." />
+        <text name="ss_helpText_01_02" text="L'anno di gioco è stato suddiviso in quattro stagioni: primavera, estate, autunno e inverno. Ogni stagione può essere ulteriormente suddivisa in tre parti: iniziale, centrale e finale. Queste parti sono indicate come transizioni." />
         <text name="ss_helpText_01_03" text="Le tue attività sono ora legate al periodo dell'anno in cui si svolgono nella vita reale." />
 
         <text name="ss_helpTitle_02" text="Effetti stagionali (1)" />
-        <text name="ss_helpText_02_01" text="Il tempo metereologico è casuale di giorno in giorno, ma segue un modello da stagione a stagione" />
+        <text name="ss_helpText_02_01" text="Il tempo metereologico è casuale di giorno in giorno, ma segue un modello da stagione a stagione." />
         <text name="ss_helpText_02_02" text="La primavera sarà piovosa e nebbiosa con alcune probabilità di tempo soleggiato. L'estate sarà più calda e più secca. Le tempeste di grandine possono verificarsi senza alcun avvertimento. L'autunno sarà piovoso con alcuni giorni di bel tempo. L'inverno sarà piovoso, ma spesso abbastanza freddo per permettere alla neve di cadere, e forse di rimanere a terra." />
         <text name="ss_helpText_02_03" text="La neve riempirà rimorchi e pale, a meno che non siano al riparo in un capannone con 'snow mask' o 'collision'. La neve ridurrà anche la trazione, rendendo i veicoli più lenti." />
 
         <text name="ss_helpTitle_03" text="Effetti stagionali (2)" />
         <text name="ss_helpText_03_01" text="Anche le ore di luce sono influenzate dalle stagioni. Gli inverni hanno giorni più brevi (8 ore) mentre le estati hanno giorni più lunghi (17 ore)." />
-        <text name="ss_helpText_03_02" text="Le trincee e le balle di insilato richiedono tempo per fermentare. Entrambe impiegano un terzo di una stagione (1 transizione) per la fermentazione completa. Il fieno fasciato non fermenterà, ma sarà protetto contro le intemperie" />
+        <text name="ss_helpText_03_02" text="Le trincee e le balle di insilato richiedono tempo per fermentare. Entrambe impiegano un terzo di una stagione (1 transizione) per la fermentazione completa. Il fieno fasciato non fermenterà, ma sarà protetto contro le intemperie." />
         <text name="ss_helpText_03_03" text="Seasons influenzerò anche gli alberi e le chiome. Gli alberi cambieranno lo stato secondo le variazioni stagionali della temperatura. In autunno le foglie cambieranno colore e cadranno. In inverno gli alberi si spoglieranno e in primavera si tingeranno di verde." />
 
         <text name="ss_helpTitle_04" text="Tempo metereologico" />

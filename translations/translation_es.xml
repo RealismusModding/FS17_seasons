@@ -158,7 +158,7 @@
         <text name="ss_helpText_06_02" text="Los patrones de crecimiento por defecto de los cultivos han sido reemplazados por este mod, Seasons. Los cultivos seguirán un patrón de crecimiento realista, después de los correspondientes períodos estacionales de siembra y cosecha. Esto también significa que el invierno matará a la mayoría de los cultivos y los cultivos plantados en el momento equivocado no crecerán." />
         <text name="ss_helpText_06_03" text="Los cultivos sólo se pueden cosechar en su etapa de crecimiento final, excepto el álamo y el rábano oleaginoso, y permanecerán en esta etapa final hasta que mueran en el invierno." />
         <text name="ss_helpText_06_04" text="Una vez que un cultivo de cereal alcanza la primera etapa de cosecha de acuerdo con la visión general del crecimiento en el menú Esc, está listo para la cosecha. Esta es la etapa final de la cosecha." />
-        <text name="ss_helpText_06_05" text="Todavía puede ensilar cultivos verdes" />
+        <text name="ss_helpText_06_05" text="Todavía puede ensilar cultivos verdes." />
 
         <text name="ss_helpTitle_07" text="Cultivos - Cultivos Herbáceos" />
         <text name="ss_helpText_07_01" text="El crecimiento del cultivo ahora es más largo. Puede tardar medio año para llegar a la etapa de cosecha." />
@@ -184,7 +184,7 @@
         <text name="ss_helpTitle_11" text="Mantenimiento" />
         <text name="ss_helpText_11_01" text="Sus tractores y cosechadoras requieren mantenimiento periódico para mantenerlos operativos. El período de mantenimiento es cada 30 horas o medio año, lo que ocurra primero. Los vehículos que están atrasados debido a su mantenimiento pueden tardar más en comenzar." />
         <text name="ss_helpText_11_02" text="Usted puede reparar sus vehículos en la tienda de vehículos o en el garaje colocable. Para reparar su vehículo diríjase a la tienda, o garaje colocable, y presione Alt Izq. + R. Ojo! Es más costoso reparar en la tienda de vehículos." />
-        <text name="ss_helpText_11_03" text="La edad de su vehículo son los días transcurridos desde su última reparación" />
+        <text name="ss_helpText_11_03" text="La edad de su vehículo son los días transcurridos desde su última reparación." />
         <text name="ss_helpText_11_04" text="Sólo los vehículos conducibles requerirán mantenimiento periódico. Las herramientas e implementos se repararán automáticamente según sea necesario." />
 
         <text name="ss_helpTitle_12" text="Economía" />
@@ -203,7 +203,7 @@
         <text name="ss_helpText_14_04" text="En invierno no se podrá alimentar con hierba, deberás usar heno en su lugar." />
 
         <text name="ss_helpTitle_15" text="Animales - Producción" />
-        <text name="ss_helpText_15_01" text="La producción de leche y lana depende de la estación" />
+        <text name="ss_helpText_15_01" text="La producción de leche y lana depende de la estación." />
         <text name="ss_helpText_15_02" text="La lana es producida solo en primavera." />
         <text name="ss_helpText_15_03" text="La leche se produce durante todo el año, pero se incrementa en el invierno y la primavera. Como en invierno no puede alimentar con hierba, esto normalmente reduciría la productividad de las vacas a un máximo de 80%. Sin embargo, Seasons aumenta la producción de leche en invierno y primavera para compensar la falta de hierba en estos meses." />
 

@@ -128,7 +128,7 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons is een mod die het realisme verbetert in het Farming Simulator spel door bijna alle aspecten aan te passen naar meer realistische parameters. Alles van seizoensgebonden effecten op gewasgroeipatronen en dierproductie is veranderd tot een meer realistisch niveau.&#xA;" />
+        <text name="ss_helpText_01_01" text="Seasons is een mod die het realisme verbetert in het Farming Simulator spel door bijna alle aspecten aan te passen naar meer realistische parameters. Alles van seizoensgebonden effecten op gewasgroeipatronen en dierproductie is veranderd tot een meer realistisch niveau." />
         <text name="ss_helpText_01_02" text="Het speljaar is opgebroken in 4 seizoenen: lente, zomer, herfst en winter. Elk seizoen is in 3 delen verdeeld: vroeg, midden en laat. Deze delen worden overgangen genoemd." />
         <text name="ss_helpText_01_03" text="Uw activiteiten zijn gebonden aan de tijd van het jaar dat ze in het echte leven plaatsvinden." />
 
@@ -138,7 +138,7 @@
         <text name="ss_helpText_02_03" text="Sneeuw zal vullen kiepers en bak, tenzij de kieper of bak is bedekt met een schuur met een snowmask of een zeil. Sneeuw zal ook tractie verminderen, waardoor voertuigen langzamer worden." />
 
         <text name="ss_helpTitle_03" text="Seizoensgebonden effecten (2)" />
-        <text name="ss_helpText_03_01" text="Aantal uren daglicht wordt beïnvloed door het seizoen. Winters hebben kortere dagen (8 uren) terwijl zomers langere dagen hebben (17 uren)" />
+        <text name="ss_helpText_03_01" text="Aantal uren daglicht wordt beïnvloed door het seizoen. Winters hebben kortere dagen (8 uren) terwijl zomers langere dagen hebben (17 uren)." />
         <text name="ss_helpText_03_02" text="Bunker silo's en kuilvoer balen hebben tijd nodig om te fermenteren. Het duurt een derde van de seizoenen (1 overgang) om een bunker silo of een kuilvoer baal  volledig te laten fermenteren. Verpakte hooi zal niet fermenteren, maar zal worden beschermd tegen het weer." />
         <text name="ss_helpText_03_03" text="Seasons beïnvloed zowel bomen en hun bladeren. De bomen zullen veranderen naargelang de seizoensgebonden temperatuursveranderingen. bladeren veranderen van kleur en zullen van de boom vallen in de herfst. Bomen zijn kaal in de winter en kleuren licht groen in de lente." />
 
@@ -183,7 +183,7 @@
         <text name="ss_helpTitle_11" text="Onderhoud" />
         <text name="ss_helpText_11_01" text="Uw tractoren en harvesters vereisen periodiek onderhoud om ze operationeel te houden. De onderhoudsperiode is om de 30 uur of een half jaar, naargelang het eerste komt. Voertuigen die hun onderhoudsperiode overschrijden, kunnen langer nodig hebben om te starten." />
         <text name="ss_helpText_11_02" text="U kunt uw voertuigen repareren bij de voertuigen winkel of bij de plaatsbare garage. Om uw voertuig te repareren, rijd uw voertuig naar de voertuigen winkel of een plaatsbare garage en druk op Alt + R. Opmerking dat het duurder zal zijn om uw voertuig bij de voertuigen winkel te laten repareren." />
-        <text name="ss_helpText_11_03" text="De leeftijd van uw voertuig is de dagen sinds uw laatste reparatie" />
+        <text name="ss_helpText_11_03" text="De leeftijd van uw voertuig is de dagen sinds uw laatste reparatie." />
         <text name="ss_helpText_11_04" text="Alleen rijbare voertuigen vereisen periodiek onderhoud. Gereedschappen en werktuigen worden automatisch gerepareerd." />
 
         <text name="ss_helpTitle_12" text="Economie" />
