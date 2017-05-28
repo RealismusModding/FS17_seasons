@@ -101,13 +101,13 @@
         <text name="ui_plantingSeason" text="Vetési szezon" />
         <text name="ui_harvestSeason" text="Aratási szezon" />
 
-        <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll." />
-        <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén." />
-        <text name="tooltip_snow" text="Télen esni fog a hó és belepi az utakat." />
-        <text name="tooltip_controlsHelp" text="Mutatja az előrejelzés -és menügömböt a help (F1) menüben." />
-        <text name="tooltip_snowTracks" text="A gépek letapossák a havat." />
-        <text name="tooltip_controlsTemperature" text="Beállítja a hőmérséklet mértékegységét a játékban." />
-        <text name="tooltip_moisture" text="A betakarítást nem engedélyezi, ha túl nedves a növény." />
+        <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll" />
+        <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén" />
+        <text name="tooltip_snow" text="Télen esni fog a hó és belepi az utakat" />
+        <text name="tooltip_controlsHelp" text="Mutatja az előrejelzés -és menügömböt a help (F1) menüben" />
+        <text name="tooltip_snowTracks" text="A gépek letapossák a havat" />
+        <text name="tooltip_controlsTemperature" text="Beállítja a hőmérséklet mértékegységét a játékban" />
+        <text name="tooltip_moisture" text="A betakarítást nem engedélyezi, ha túl nedves a növény" />
 
         <text name="setting_seasonIntros" text="Évszak bemutatása" />
         <text name="setting_seasonLength" text="Évszak hossza" />

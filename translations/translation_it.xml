@@ -104,7 +104,7 @@
         <text name="tooltip_snow" text="Negli inverni freddi cadrà la neve e bloccherà le strade" />
         <text name="tooltip_controlsHelp" text="Mostra la previsione ed i tasti nel menu di aiuto" />
         <text name="tooltip_snowTracks" text="I veicoli comprimono la neve quando ci si guida sopra" />
-        <text name="tooltip_controlsTemperature" text="Impostare la scala termometrica utilizzata nel gioco " />
+        <text name="tooltip_controlsTemperature" text="Impostare la scala termometrica utilizzata nel gioco" />
         <text name="tooltip_moisture" text="Disattivare la trebbiatura quando i raccolti sono bagnati dall'umidità" />
 
         <text name="setting_seasonIntros" text="Introduzioni Season" />

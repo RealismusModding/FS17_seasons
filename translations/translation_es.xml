@@ -106,7 +106,7 @@
         <text name="tooltip_controlsHelp" text="Mostrar predicción y menu en panel de ayuda" />
         <text name="tooltip_snowTracks" text="Los vehículos compactarán la nieve cuando pasen por encima" />
         <text name="tooltip_controlsTemperature" text="Define la escala de temperatura en el juego" />
-        <text name="tooltip_moisture" text="No permite trabajar los cultivos caundo están húmedos." />
+        <text name="tooltip_moisture" text="No permite trabajar los cultivos caundo están húmedos" />
 
         <text name="setting_seasonIntros" text="Introducción Estaciones" />
         <text name="setting_seasonLength" text="Duración de la estación" />
