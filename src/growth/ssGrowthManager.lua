@@ -150,13 +150,13 @@ function ssGrowthManager:transitionChanged()
     if self.growthManagerEnabled == false then return end
 
     local transition = g_seasons.environment:transitionAtDay()
-
+    self.fakeTransition = transition
+    
     if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
         logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
         self.isNewSavegame = false
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
     else
-        self.fakeTransition = transition
         self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
