@@ -133,7 +133,7 @@
         <text name="ss_helpText_01_03" text="Deine täglichen Arbeiten sollten nun, wie im wahren Leben, auf die aktuelle Jahreszeit angepasst werden." />
 
         <text name="ss_helpTitle_02" text="Saisonale Veränderungen (1)" />
-        <text name="ss_helpText_02_01" text="Das Wetter entspricht den Jahrezeiten, bleibt aber dennoch wie im wahren Leben unbeständig und kann sich in kurzer Zeit schlagartig verändern." />
+        <text name="ss_helpText_02_01" text="Das Wetter entspricht den Jahreszeiten, bleibt aber dennoch wie im wahren Leben unbeständig und kann sich in kurzer Zeit schlagartig verändern." />
         <text name="ss_helpText_02_02" text="Der Frühling ist eher verregnet und oftmals sehr nebelig, manchmal kommt die Sonne für wenige Stunden dennoch durch. Der Sommer wird wesentlich wärmer und es bleibt über einen längeren Zeitraum sehr trocken. Achtung! Spontane Regen- und Hagelschauer sind jederzeit möglich. Der Herbst ist typisch verregnet mit eher weniger Sonne. Im Winter bleibt es sehr regnerisch, solange die Temperaturen nicht so weit sinken, dass es zu spontanen Schnellfällen kommt." />
         <text name="ss_helpText_02_03" text="Der gefallene Schnee füllt Schaufeln und Kipper, sofern diese ohne Plane und nicht in einer Halle(mit snowMask markiert) stehen. Der Schnee verschlechtert die Traktion erheblich und macht die Fahrzeuge langsamer." />
 
@@ -154,29 +154,29 @@
 
         <text name="ss_helpTitle_06" text="Pflanzen - Einführung" />
         <text name="ss_helpText_06_01" text="Wird ein neuer Spielstand gestartet, werden zu Beginn sämtliche Wachstumsstufen zurückgesetzt um den Übergang vom Herbst zum Frühling zu simulieren. Wird ein bestehender Spielstand gestartet kann man das Zurücksetzen der Wachstumsstufen ablehnen." />
-        <text name="ss_helpText_06_02" text="Seasons verändert das gesamte Pflanzenwachstum. Die Pflanzen folgen nun ihrem natürlichen Zyklus und wachsen  nur während ihrer typischen Zeiten. Ebenso sind nun die richtigen Aussaatzeiten von Bedeutung. Eine Übersicht erhaltet Ihr im Hilfefenster ALT links + S  Beachte: Im Winter werden die meisten Pflanzen absterben! Beende die Ernte also rechtzeitig. Wird eine Pflanze zur falschen Zeit gesäht kann es zu erheblichen Ernteausfällen kommen." />
+        <text name="ss_helpText_06_02" text="Seasons verändert das gesamte Pflanzenwachstum. Die Pflanzen folgen nun ihrem natürlichen Zyklus und wachsen  nur während ihrer typischen Zeiten. Ebenso sind nun die richtigen Aussaatzeiten von Bedeutung. Eine Übersicht erhaltet Ihr im Hilfefenster ALT links + S  Beachte: Im Winter werden die meisten Pflanzen absterben! Beende die Ernte also rechtzeitig. Wird eine Pflanze zur falschen Zeit gesät kann es zu erheblichen Ernteausfällen kommen." />
         <text name="ss_helpText_06_03" text="Pflanzen sind nur in der letzten Wachstumsstufe erntbar." />
         <text name="ss_helpText_06_04" text="Sobald eine Nicht-Wurzelpflanze laut Anzeige in der Wachstumsübersicht die erste Erntestufe erreicht hat, ist diese Pflanze uneingeschränkt erntereif. Eine weitere Erntestufe gibt es dann nicht mehr." />
         <text name="ss_helpText_06_05" text="Grüne Pflanzen können weiterhin zur Silage benutzt werden." />
 
         <text name="ss_helpTitle_07" text="Acker-Pflanzen" />
         <text name="ss_helpText_07_01" text="Die Wachstumszeiten sind nun wesentlich länger. Das Erreichen einer erntereifen Stufe kann  bis zu einem halben Jahr dauern." />
-        <text name="ss_helpText_07_02" text="Der Winter wird die meisten Pflanzen aufgrund der Temperaturen vernichten. Doch es gibt auch Winterpflanzen. Weizen, Gerste, Pappeln, Gras, Ölrettich und Raps können im Herbst gesäht und im Frühjahr geerntet werden. Beachte hierbei jedoch die richtigen Bodentemperaturen! " />
-        <text name="ss_helpText_07_03" text="Körnermais, Sojabohnen, Sonnenblumen, Zückerrüben und Kartoffeln müssen im Frühjahr ausgebracht werden. Kontrolliere vor der Aussaat ob die jeweilige Pflanze bereits im Frühjahr gesäht werden darf. Nicht alle Pflanzen können direkt am Anfang des Frühlings ausgesäht werden. zu früh ausgesähte Pflanzen werden absterben! " />
+        <text name="ss_helpText_07_02" text="Der Winter wird die meisten Pflanzen aufgrund der Temperaturen vernichten. Doch es gibt auch Winterpflanzen. Weizen, Gerste, Pappeln, Gras, Ölrettich und Raps können im Herbst gesät und im Frühjahr geerntet werden. Beachte hierbei jedoch die richtigen Bodentemperaturen! " />
+        <text name="ss_helpText_07_03" text="Körnermais, Sojabohnen, Sonnenblumen, Zuckerrüben und Kartoffeln müssen im Frühjahr ausgebracht werden. Kontrolliere vor der Aussaat ob die jeweilige Pflanze bereits im Frühjahr gesät werden darf. Nicht alle Pflanzen können direkt am Anfang des Frühlings ausgesät werden. zu früh ausgesäte Pflanzen werden absterben! " />
 
         <text name="ss_helpTitle_08" text="Heu, Stroh und Gras" />
         <text name="ss_helpText_08_01" text="Im Winter wird die Wachstumsstufe von Gras zurückgesetzt um den natürlich Rückgang im Winter zu simulieren." />
-        <text name="ss_helpText_08_02" text="Grassballen müssen nach dem Erstellen innerhalb der nächsten 2 Tagen verbraucht oder gewickelt werden. Lässt Du die 2 Tage verstreichen, werden die Ballen anfangen zu verrotten und verschwinden irgendwann vollständig." />
+        <text name="ss_helpText_08_02" text="Grasballen müssen nach dem Erstellen innerhalb der nächsten 2 Tagen verbraucht oder gewickelt werden. Lässt Du die 2 Tage verstreichen, werden die Ballen anfangen zu verrotten und verschwinden irgendwann vollständig." />
         <text name="ss_helpText_08_03" text="Heu-, Gras- und Strohhaufen verändern nach der Zeit ihre Größe und verschwinden nach einiger Zeit komplett. Grasshaufen reduzieren ihr Volumen jeden Tag um Mitternacht. Heu- und Strohhaufen veringern sich nach jeder Wachstumsstufe kleiner, besonders wenn diese Haufen dem Regen ausgesetzt werden." />
         <text name="ss_helpText_08_04" text="Stroh und Heu muss vor dem Verkauf zu Ballen verarbeitet werden. Loses Streu/Heu erzielt keinen Verkaufswert, kann jedoch verschenkt werden. Gras, egal ob in Ballenform oder lose, erzielt ebenfalls keinen Verkaufswert." />
 
         <text name="ss_helpTitle_09" text="Bäume" />
-        <text name="ss_helpText_09_01" text="Bäume benötigen nun mehr Zeit um vollständig aus zu wachsen. Ein selber gesähter Baum ist erst in 5 Jahren ausgewachsen, nach 2 Jahren kann er aber bereits verarbeitet werden." />
+        <text name="ss_helpText_09_01" text="Bäume benötigen nun mehr Zeit um vollständig aus zu wachsen. Ein selber gesäter Baum ist erst in 5 Jahren ausgewachsen, nach 2 Jahren kann er aber bereits verarbeitet werden." />
         <text name="ss_helpText_09_02" text="Zu nah aneinander gepflanzte Bäume hemmen ihr Wachstum gegenseitig. Um dem entgegen zu wirken, ist das ausdünnen der Fläche notwendig. Dafür einfach einige Bäume fällen um den restlichen Bäumen ein normales Wachstum zu ermöglichen." />
 
         <text name="ss_helpTitle_10" text="Wetter Effekte" />
         <text name="ss_helpText_10_01" text="Regen, Hagel und Schnee beeinflussen den Feuchtigkeitsgehalt der Pflanzen. Sind die Pflanzen durch anhaltenden Regen, Hagel oder Schnee zu feucht, ist das Ernten nicht möglich. Moist summer nights can occur without warning." />
-        <text name="ss_helpText_10_02" text="Nach einem Regenschauer benötigen die Pflanzen eine gewisse Zeit zum Trocknen. Außentemperaturen und Jahreszeit beinflussen diesen Vorgang." />
+        <text name="ss_helpText_10_02" text="Nach einem Regenschauer benötigen die Pflanzen eine gewisse Zeit zum Trocknen. Außentemperaturen und Jahreszeit beeinflussen diesen Vorgang." />
         <text name="ss_helpText_10_03" text="Sind die Pflanzen nass und Du benutzt einen Heuwender, wird daraus feuchtes Gras. Achte daher bei Verwendung des Heuwenders, dass deine Pflanzen trocken genug sind!." />
         <text name="ss_helpText_10_04" text="Bei Verwendung einer Mod-Map mit Vorbereitung für den Seasons Mod (gemalte snowMask) werden Heu- und Strohballen welche Regen/Feuchtigkeit ausgesetzt werden in wenigen Tagen verrotten. Werden die Ballen in einer Halle bzw. einem Bereich ohne snowMask abgestellt, passiert ihnen nichts. Schlechtes Wetter hat keinen Einfluss auf gewickelte Ballen oder abgestellte Ballen auf einer Modmap ohne Seasons-Vorbereitung(fehlende snowMask)." />
 
@@ -190,7 +190,7 @@
         <text name="ss_helpText_12_01" text="Die alte Kreditobergrenze von 200.000 wurde abgeschaffen. Der maximal mögliche Kreditrahmen richtig sich nun nach den eigenen Vermögenswerten. (Landbesitz und Gebäude usw.) Die minimale Kreditgrenze liegt nun bei 300.000, die Maximagrenze bei 1.500.000.  " />
         <text name="ss_helpText_12_02" text="Die Belohnungen für erfolgreiche Missionen wurden stark verringert. (entspricht ca. dem 5-fachen Wert eines eingestellten Helfers) " />
         <text name="ss_helpText_12_03" text="Die Unterhaltskosten aller Fahrzeuge beinhalten bereits die laufenden Kosten wie z.B. Steuern und Versicherungen, ändern sich jedoch mit dem Nutzungsgrad der Maschinen. Saubere Maschinen unterliegen weniger Verschleiß und sind in den Unterhaltskosten dementsprechend etwas günstiger. Halte deine Geräte und Fahrzeuge also schön sauber! Fahrzeuge welche wenig benutzt werden, produzieren auch geringere Unterhaltskosten." />
-        <text name="ss_helpText_12_04" text="Die Verkaufspreise für Erntegüter variieren nun in Abhängikeit der Jahreszeit." />
+        <text name="ss_helpText_12_04" text="Die Verkaufspreise für Erntegüter variieren nun in Abhängigkeit der Jahreszeit." />
 
         <text name="ss_helpTitle_13" text="Helfer" />
         <text name="ss_helpText_13_01" text="Eingestellte Helfer verlangen Überstundenzuschläge! Wird ein Helfer vor 6Uhr Morgens und nach 18Uhr Abends beschäftigt, erhält dieser einen Zuschlag von 50%. Dieser Zuschlag gilt ebenso für das gesamte Wochenende." />
@@ -203,7 +203,7 @@
 
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
         <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion verändert sich mit den jeweiligen Jahreszeiten." />
-        <text name="ss_helpText_15_02" text="Wolle wird ausschlielich im Frühjahr produziert." />
+        <text name="ss_helpText_15_02" text="Wolle wird ausschliesslich im Frühjahr produziert." />
         <text name="ss_helpText_15_03" text="Milch wird das gesamte Jahr über produziert. Die Produktivität verringert sich jedoch zum Frühling und Winter. Normalerweise kann während der Wintersaison kein frisches Gras gefüttert werden. Die Produktivität würde dementsprechend massiv sinken. Seasons verringert die Milchproduktion im Winter künstlich um den Grasmangel zu simulieren" />
 
         <text name="ss_helpTitle_16" text="Seasons Menü" />
@@ -218,7 +218,7 @@
         <text name="ss_helpText_17_04" text="Wenn das Hilfefenster F1 aktiv ist und man in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur unterhalb des Fensters angezeigt." />
 
         <text name="ss_helpTitle_18" text="Verschiedenes" />
-        <text name="ss_helpText_18_01" text="Wenn Du Nachts nicht arbeiten möchtest, nutze die Funktion zur Nacht überspringen. Einfach am Anfang der Nacht die standartmäßig einstellte Tastenkombination  Alt links + N drücken und automatisch zum nächsten Morgen vorspulen.(Du musst außerhalb eines Fahrzeuges stehen)" />
+        <text name="ss_helpText_18_01" text="Wenn Du Nachts nicht arbeiten möchtest, nutze die Funktion zur Nacht überspringen. Einfach am Anfang der Nacht die standardmäßig einstellte Tastenkombination  Alt links + N drücken und automatisch zum nächsten Morgen vorspulen.(Du musst außerhalb eines Fahrzeuges stehen)" />
         <text name="ss_helpText_18_02" text="Möchtest Du die Jahreszeitenlänge während eines aktiven Spielstandes verändern, solltest Du 1.) die Veränderung während des Winters vornehmen um ungewollte Probleme mit dem aktuellen Pflanzenwachstum zu bekommen 2.)sollte das Spiel bzw. der Onlineserver neugestartet werden." />
         <text name="ss_helpText_18_03" text="Seasons verändert die Spielweise in vielen Punkten. Die meisten Leute konnten mit 9-Tage Jahreszeit und einer Zeitskalierung von 5x das beste Spielerlebnis erreichen. Natürlich hat jeder seine eigenen Vorlieben und Spielweise. Der Frühling sollte dennoch zum pflügen/grubbern/säen genutzt werden. Der Sommer sollte für den Pflanzenschutz( Dünger ausbringen etc.) und den ersten Gras-Schnitt und/oder Heuproduktion. Danach kommt die Ernte der Pflanzen bis in den späten Herbst. Die ersten Vorbereitungen zur Aussaat sind danach möglich. Da der Boden im Winter vermutlich zu kalt und gefroren sein wird, könnten man sich nun verstärkt um die Tiere oder die Forstwirtschaft kümmern. Dein Fuhrpark sollte natürlich auch regelmäßig gewartet werden. Nutze die freie Zeit im Winter!" />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
