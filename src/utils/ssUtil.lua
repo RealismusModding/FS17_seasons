@@ -212,6 +212,10 @@ function ssUtil.getTempMaskId()
     return id
 end
 
+function ssUtil.trim(str)
+    return str:match'^%s*(.*%S)' or ''
+end
+
 function Set(list)
     local set = {}
 
