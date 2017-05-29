@@ -8,6 +8,8 @@
 
 ssRepairable = {}
 
+ssRepairable.MAX_CHARS_TO_DISPLAY = 20
+
 source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
 
 function ssRepairable:prerequisitesPresent(specializations)
@@ -153,9 +155,13 @@ function ssRepairable:ssRepairUpdate(dt)
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
-
+    
     -- Show repair button
-    g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), storeItem.name, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+    if string.len(storeItem.name) > ssRepairable.MAX_CHARS_TO_DISPLAY then
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), string.sub(storeItem.name, 1, ssRepairable.MAX_CHARS_TO_DISPLAY), g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+    else
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("SS_REPAIR_VEHICLE_COST"), storeItem.name, g_i18n:formatMoney(repairCost, 0)), InputBinding.SEASONS_REPAIR_VEHICLE)
+    end
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
