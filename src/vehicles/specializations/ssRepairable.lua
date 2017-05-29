@@ -87,19 +87,7 @@ end
 -- callSpecializationsFunction...
 local function getIsPlayerInRange(self, distance, player)
     if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
-
-        if player == nil then -- this is a dedi server
---[[
-            for _, player in pairs(g_currentMission.players) do
-                -- FIXME this can only result in a single player
-                if isInDistance(self, player, distance, self.rootNode) then
-                    return true, player
-                end
-            end
-]]
-        else
-            return isInDistance(self, player, distance, self.rootNode), player
-        end
+        return isInDistance(self, player, distance, self.rootNode), player
     end
 
     return false, nil
