@@ -569,5 +569,4 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     logInfo("Growth Data")
     print_r(self.growthData)
     logInfo("------------------------------------------")
-    
 end
