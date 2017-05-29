@@ -50,8 +50,7 @@ function ssVehicle:loadMap()
     Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
     Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, ssVehicle.vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
-
-    -- Vehicle.getSpecValueDailyUpKeep = Utils.overwrittenFunction(Vehicle.getSpecValueDailyUpKeep, ssVehicle.getSpecValueDailyUpKeep)
+    AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
@@ -511,4 +510,24 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
     end
 
     return not g_seasons.weather:isCropWet()
+end
+
+function ssVehicle:aiVehicleUpdate(dt)
+    -- Only adjust lights if available and if hired
+    if not self.isHired or self.aiLightsTypesMask == nil then return end
+
+    -- check light and turn on dependent on daytime
+    local dayMinutes = g_currentMission.environment.dayTime / (1000 * 60)
+    local needLights = (dayMinutes > g_currentMission.environment.nightStart
+                        or dayMinutes < g_currentMission.environment.nightEnd)
+
+    if needLights then
+        if self.lightsTypesMask ~= self.aiLightsTypesMask then
+            self:setLightsTypesMask(self.aiLightsTypesMask)
+        end
+    else
+        if self.lightsTypesMask ~= 0 then
+            self:setLightsTypesMask(0)
+        end
+    end
 end
