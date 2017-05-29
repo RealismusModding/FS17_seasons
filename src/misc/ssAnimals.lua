@@ -95,14 +95,7 @@ function ssAnimals:adjustAnimals()
         if g_currentMission.husbandries[typ] ~= nil then
             local desc = g_currentMission.husbandries[typ].animalDesc
 
-            local birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) / g_seasons.environment.daysInSeason
-            -- small adjustment so there will be atleast one birth during the season
-            if birthRatePerDay ~= 0 then
-                desc.birthRatePerDay = math.max(birthRatePerDay * self.seasonLengthfactor, 1 / (2 * g_seasons.environment.daysInSeason))
-            else
-                desc.birthRatePerDay = 0
-            end
-
+            desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) * self.seasonLengthfactor
             desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0) * self.seasonLengthfactor
             desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0) * self.seasonLengthfactor
             desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0) * self.seasonLengthfactor

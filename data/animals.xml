@@ -17,22 +17,22 @@
                 <water>35</water>
                 <birthRate>0</birthRate>
                 <milk>1071</milk>
-                <manure>180</manure>
-                <liquidManure>250</liquidManure>
+                <manure>85</manure>
+                <liquidManure>98</liquidManure>
             </properties>
             <properties type="sheep">
                 <food>27</food>
                 <water>15</water>
-                <birthRate>0.1</birthRate>
+                <birthRate>0.035</birthRate>
                 <wool>67.2</wool>
             </properties>
             <properties type="pig">
                 <straw>15</straw>
                 <food>81</food>
                 <water>10</water>
-                <birthRate>0.66666667</birthRate>
-                <manure>45</manure>
-                <liquidManure>65</liquidManure>
+                <birthRate>0.066666667</birthRate>
+                <manure>27</manure>
+                <liquidManure>46</liquidManure>
             </properties>
         </spring>
 
@@ -41,10 +41,10 @@
                 <straw>17.5</straw>
                 <food>315</food>
                 <water>52.5</water>
-                <birthRate>0.08</birthRate>
+                <birthRate>0.02</birthRate>
                 <milk>571.2</milk>
-                <manure>180</manure>
-                <liquidManure>300</liquidManure>
+                <manure>51</manure>
+                <liquidManure>59</liquidManure>
             </properties>
 
             <properties type="sheep">
@@ -59,8 +59,8 @@
                 <food>81</food>
                 <water>15</water>
                 <birthRate>0</birthRate>
-                <manure>45</manure>
-                <liquidManure>97.5</liquidManure>
+                <manure>23</manure>
+                <liquidManure>40</liquidManure>
             </properties>
         </summer>
 
@@ -71,8 +71,8 @@
                 <water>26.25</water>
                 <birthRate>0</birthRate>
                 <milk>285.6</milk>
-                <manure>200</manure>
-                <liquidManure>200</liquidManure>
+                <manure>119</manure>
+                <liquidManure>137</liquidManure>
             </properties>
 
             <properties type="sheep">
@@ -87,8 +87,8 @@
                 <food>90</food>
                 <water>7.5</water>
                 <birthRate>0</birthRate>
-                <manure>50</manure>
-                <liquidManure>48.75</liquidManure>
+                <manure>30</manure>
+                <liquidManure>53</liquidManure>
             </properties>
         </autumn>
 
@@ -99,8 +99,8 @@
                 <water>26.25</water>
                 <birthRate>0</birthRate>
                 <milk>928.2</milk>
-                <manure>240</manure>
-                <liquidManure>250</liquidManure>
+                <manure>153</manure>
+                <liquidManure>176</liquidManure>
             </properties>
 
             <properties type="sheep">
@@ -115,8 +115,8 @@
                 <food>108</food>
                 <water>7.5</water>
                 <birthRate>0</birthRate>
-                <manure>60</manure>
-                <liquidManure>48.75</liquidManure>
+                <manure>38</manure>
+                <liquidManure>66</liquidManure>
             </properties>
         </winter>
     </seasons>
