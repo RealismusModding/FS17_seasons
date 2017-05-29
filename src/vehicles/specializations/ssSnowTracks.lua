@@ -52,7 +52,6 @@ local function applyTracks(self, dt)
                 wheelRotDir = 1
             end
 
-            local underTireSnowLayers = 0
             local fwdTireSnowLayers = 0
             x0, z0, x1, z1, x2, z2, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
             x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)

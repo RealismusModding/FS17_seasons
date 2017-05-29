@@ -15,6 +15,8 @@ ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
     if g_currentMission:getIsClient() then
+        local width, height
+
         self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
         self.hud.width, self.hud.height = getNormalizedScreenValues(60 * 7 * self.guiScale, 60 * self.guiScale)
         self.hud.widthSmall, _ = getNormalizedScreenValues(60 * 4 * self.guiScale, 0)
@@ -42,15 +44,15 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays = {}
 
         -- Forecast hud
-        local width, height = getNormalizedScreenValues(1024, 128)
+        width, height = getNormalizedScreenValues(1024, 128)
         self.hud.overlays.forecast_hud = Overlay:new("hud_forecast", Utils.getFilename("resources/huds/hud_forecast.dds", g_seasons.modDir), 0, 0, width, height)
 
         -- Current day hud
-        local width, height = getNormalizedScreenValues(256, 128)
+        width, height = getNormalizedScreenValues(256, 128)
         self.hud.overlays.day_hud = Overlay:new("hud_day",  Utils.getFilename("resources/huds/hud_day.dds", g_seasons.modDir), 0, 0, height, height)
 
         -- clock overlay and cloud and ground for day hud
-        local width, height = getNormalizedScreenValues(64, 64)
+        width, height = getNormalizedScreenValues(64, 64)
         local _, y = getNormalizedScreenValues(0, 5)
         g_currentMission.timeOffsetY = g_currentMission.timeOffsetY + y
         g_currentMission.timeIconOverlay.y = g_currentMission.timeIconOverlay.y + y
@@ -59,7 +61,7 @@ function ssWeatherForecast:loadMap(name)
         self.hud.overlays.cloud_symbol = Overlay:new("cloud_symbol",  Utils.getFilename("resources/huds/cloud_symbol.dds", g_seasons.modDir), 0, 0, height, height)
 
         -- Seasons "White" Icons
-        local width, height = getNormalizedScreenValues(128, 128)
+        width, height = getNormalizedScreenValues(128, 128)
 
         -- Seasons "Color" Icons
         self.hud.overlays.seasons = {}

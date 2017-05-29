@@ -28,7 +28,7 @@ function ssGrowthManagerData:loadAllData()
         return nil, nil
     end
 
-    local growthData = self:getGrowthData(rootKey, file)
+    growthData = self:getGrowthData(rootKey, file)
     if growthData == nil then
         logInfo("ssGrowthManagerData:", "Failed to load XML growth data file (transitions) " .. path)
         return nil, nil
@@ -36,10 +36,10 @@ function ssGrowthManagerData:loadAllData()
     delete(file)
 
     --additional modmap growthData
-    for _, path in ipairs(g_seasons:getModPaths("growth")) do
-        local optionalDefaultFruits, optionalGrowthData = self:loadAdditionalData(rootKey, path, defaultFruits, growthData)
+    for _, modPath in ipairs(g_seasons:getModPaths("growth")) do
+        local optionalDefaultFruits, optionalGrowthData = self:loadAdditionalData(rootKey, modPath, defaultFruits, growthData)
         if optionalDefaultFruits == nil or optionalGrowthData == nil then
-            logInfo("ssGrowthManagerData:", "Failed to process additional XML growth data file: " .. path)
+            logInfo("ssGrowthManagerData:", "Failed to process additional XML growth data file: " .. modPath)
         else
             defaultFruits = optionalDefaultFruits
             growthData = optionalGrowthData
@@ -64,7 +64,7 @@ function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, default
     else
         logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file: " .. modMapDataPath)
     end
-    
+
     return optionalDefaultFruits, optionalGrowthData
 end
 
@@ -181,12 +181,12 @@ function ssGrowthManagerData:getFruitsTransitionStates(transitionKey, file, tran
         if extraGrowthFactor ~= nil then
             growthData[transitionNum][fruitName].extraGrowthFactor = extraGrowthFactor
         end
-        
+
         local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
         if removeTransition == true then
             growthData[transitionNum][fruitName] = nil
         end
- 
+
         i = i + 1
     end
 

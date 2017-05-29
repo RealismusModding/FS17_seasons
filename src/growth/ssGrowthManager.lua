@@ -98,7 +98,7 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
         addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
-        
+
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
             self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
@@ -151,7 +151,7 @@ function ssGrowthManager:transitionChanged()
 
     local transition = g_seasons.environment:transitionAtDay()
     self.fakeTransition = transition
-    
+
     if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
         logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
         self.isNewSavegame = false
@@ -375,7 +375,6 @@ end
 function ssGrowthManager:buildCanHarvestData()
     for fruitName, transition in pairs(self.canPlantData) do
         local transitionTable = {}
-        local plantedTransition = 1
         local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
         for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
@@ -569,5 +568,5 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     logInfo("Growth Data")
     print_r(self.growthData)
     logInfo("------------------------------------------")
-    
+
 end

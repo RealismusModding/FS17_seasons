@@ -261,7 +261,7 @@ function arrayLength(arr)
     return n
 end
 
-function print_r(t)
+function print_r(x)
     local print_r_cache = {}
     local function sub_print_r(t, indent)
         if (print_r_cache[tostring(t)]) then
@@ -286,12 +286,12 @@ function print_r(t)
             end
         end
     end
-    if (type(t) == "table") then
-        print(tostring(t) .. " {")
-        sub_print_r(t, "  ")
+    if (type(x) == "table") then
+        print(tostring(x) .. " {")
+        sub_print_r(x, "  ")
         print("}")
     else
-        sub_print_r(t, "  ")
+        sub_print_r(x, "  ")
     end
     print()
 end

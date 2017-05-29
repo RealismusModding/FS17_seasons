@@ -116,6 +116,7 @@ local files = {
 
     -- GUI
     "gui/ssHelpLines",
+    "gui/ssRectOverlay",
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp"
 }

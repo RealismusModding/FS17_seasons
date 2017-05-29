@@ -34,7 +34,7 @@ function ssCropDestruction:seasonsDestroyFruitArea(superFunc, x0, z0, x1, z1, x2
                 setDensityMaskedParallelogram(entry.preparingOutputId, x, z, widthX, widthZ, heightX, heightZ, 0, 1, entry.id, 0, g_currentMission.numFruitStateChannels, 1)
                 setDensityCompareParams(entry.preparingOutputId, "greater", -1)
                 setDensityMaskParams(entry.preparingOutputId, "greater", 0)
-                
+
                 setDensityCompareParams(entry.id, "between", 2, desc.maxPreparingGrowthState + 1)
                 setDensityParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitStateChannels, desc.cutState + 1)
                 setDensityCompareParams(entry.id, "greater", -1)
