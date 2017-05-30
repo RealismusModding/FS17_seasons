@@ -41,6 +41,8 @@ ssEnvironment.TRANSITION_EARLY_WINTER = 10
 ssEnvironment.TRANSITION_MID_WINTER = 11
 ssEnvironment.TRANSITION_LATE_WINTER = 12
 
+source(g_seasons.modDir .. "src/events/ssVisualSeasonChangedEvent.lua")
+
 function ssEnvironment:preLoad()
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and
@@ -129,6 +131,7 @@ function ssEnvironment:update(dt)
         self.latestSeason = -1
         self:callListeners()
         self._doInitalDayEvent = false
+
         g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("msg_welcome"), 30000)
     end
 end
@@ -161,8 +164,8 @@ function ssEnvironment:callListeners()
         end
     end
 
-    -- Call visual season events
-    if g_currentMission:getIsClient() then
+    -- Let MP do the calling on the client
+    if g_currentMission:getIsServer() then
         local newVisuals = self:calculateVisualSeason()
 
         if newVisuals ~= self.latestVisualSeason then
@@ -171,6 +174,8 @@ function ssEnvironment:callListeners()
             for _, listener in pairs(self.visualSeasonChangeListeners) do
                 listener:visualSeasonChanged(newVisuals)
             end
+
+            ssVisualSeasonChangedEvent.sendEvent(newVisuals)
         end
     end
 end
@@ -415,6 +420,11 @@ end
 
 function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
     local season = g_seasons.util.seasonKeyToId[seasonName]
+
+    if season == nil then
+        logInfo("The supplied visual season does not exist")
+        return
+    end
 
     -- Overwrite getter
     -- local oldCurrentSeason = self.currentSeason
