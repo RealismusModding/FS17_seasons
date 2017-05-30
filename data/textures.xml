@@ -95,8 +95,8 @@
             <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="ssTr_oak4LOD_winter" />
             <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_winter" />
             <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_winter" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_winter" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_winter" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="ssTr_poplarBranch_winter" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_winter" />
 
             <!-- <fruit name="grass" to="grass_winter" /> -->
             <foliageLayer name="grass" to="grass_winter" />
