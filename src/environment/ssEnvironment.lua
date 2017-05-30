@@ -180,17 +180,17 @@ function ssEnvironment:callListeners()
     end
 end
 
-local function removeItemFromTable(table, item)
+local function removeItemFromTable(tbl, item)
     local i
 
-    for j, v in ipairs(table) do
+    for j, v in ipairs(tbl) do
         if v == item then
             i = j
         end
     end
 
     if i ~= nil then
-        table.remove(table, i)
+        table.remove(tbl, i)
     end
 end
 
