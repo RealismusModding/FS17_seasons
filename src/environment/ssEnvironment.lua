@@ -150,7 +150,7 @@ function ssEnvironment:callListeners()
     if currentSeason ~= self.latestSeason then
         self.latestSeason = currentSeason
 
-        for _, listener in pairs(self.seasonChangeListeners) do
+        for _, listener in ipairs(self.seasonChangeListeners) do
             listener:seasonChanged()
         end
     end
@@ -159,7 +159,7 @@ function ssEnvironment:callListeners()
     if currentTransition ~= self.latestTransition then
         self.latestTransition = currentTransition
 
-        for _, listener in pairs(self.transitionChangeListeners) do
+        for _, listener in ipairs(self.transitionChangeListeners) do
             listener:transitionChanged()
         end
     end
@@ -171,7 +171,7 @@ function ssEnvironment:callListeners()
         if newVisuals ~= self.latestVisualSeason then
             self.latestVisualSeason = newVisuals
 
-            for _, listener in pairs(self.visualSeasonChangeListeners) do
+            for _, listener in ipairs(self.visualSeasonChangeListeners) do
                 listener:visualSeasonChanged(newVisuals)
             end
 
@@ -180,55 +180,69 @@ function ssEnvironment:callListeners()
     end
 end
 
+local function removeItemFromTable(table, item)
+    local i
+
+    for j, v in ipairs(table) do
+        if v == item then
+            i = j
+        end
+    end
+
+    if i ~= nil then
+        table.remove(table, i)
+    end
+end
+
 -- Listeners for a change of season
 function ssEnvironment:addSeasonChangeListener(listener)
     if listener ~= nil then
-        self.seasonChangeListeners[listener] = listener
+        table.insert(self.seasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonChangeListener(listener)
     if listener ~= nil then
-        self.seasonChangeListeners[listener] = nil
+        removeItemFromTable(self.seasonChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of transition
 function ssEnvironment:addTransitionChangeListener(listener)
     if listener ~= nil then
-        self.transitionChangeListeners[listener] = listener
+        table.insert(self.transitionChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeTransitionChangeListener(listener)
     if listener ~= nil then
-        self.transitionChangeListeners[listener] = nil
+        removeItemFromTable(self.transitionChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of season length
 function ssEnvironment:addSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        self.seasonLengthChangeListeners[listener] = listener
+        table.insert(self.seasonLengthChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        self.seasonLengthChangeListeners[listener] = nil
+        removeItemFromTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
 -- Listeners for the change of the visual season (not aligned with actual seasons)
 function ssEnvironment:addVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        self.visualSeasonChangeListeners[listener] = listener
+        table.insert(self.visualSeasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        self.visualSeasonChangeListeners[listener] = nil
+        removeItemFromTable(self.visualSeasonChangeListeners, listener)
     end
 end
 
@@ -409,7 +423,7 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     g_seasons.daylight:adaptTime()
 
     -- Call season length changed listeners
-    for _, listener in pairs(self.seasonLengthChangeListeners) do
+    for _, listener in ipairs(self.seasonLengthChangeListeners) do
         listener:seasonLengthChanged()
     end
 end
