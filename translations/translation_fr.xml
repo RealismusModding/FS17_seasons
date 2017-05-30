@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>thierry62, Marxtai, theSeb, dural</translationContributors>
+    <translationContributors>thierry62, Marxtai, theSeb, dural, Anonymous</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Afficher les prévisions" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
@@ -83,8 +83,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
         <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours." />
-        <!-- Missing translation of "Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." -->
-        <text name="msg_welcome" text="" />
+        <text name="msg_welcome" text="Bienvenue avec le Seasons mod by Realismus Modding. Consultez l'aide dans le menu avec Esc pour en savoir plus sur l'utilisation de ce mod." />
 
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
@@ -122,8 +121,7 @@
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
-        <!-- Missing translation of "Resting for another day at the farm... Zzz..." -->
-        <text name="dialog_sleeping" text="" />
+        <text name="dialog_sleeping" text="Se reposer pour un autre jour à la ferme... Zzz..." />
 
         <text name="fillType_snow" text="Neige" />
 
