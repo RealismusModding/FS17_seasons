@@ -65,15 +65,15 @@
                 <key values="0 0 0 0.003" />
             </distanceFog>
             <dustDensity>
-                <key value="0" />
-                <key value="0" />
-                <key value="1" />
-                <key value="0.25" />
-                <key value="0.1" />
-                <key value="0.1" />
-                <key value="0.3" />
-                <key value="0" />
-                <key value="0" />
+                <key values="0" />
+                <key values="0" />
+                <key values="1" />
+                <key values="0.25" />
+                <key values="0.1" />
+                <key values="0.1" />
+                <key values="0.3" />
+                <key values="0" />
+                <key values="0" />
             </dustDensity>
         </spring>
 
@@ -130,15 +130,15 @@
                 <key values="0 0 0 0.003" />
             </distanceFog>
             <dustDensity>
-                <key value="0" />
-                <key value="0" />
-                <key value="1.5" />
-                <key value="0.50" />
-                <key value="0.2" />
-                <key value="0.2" />
-                <key value="0.6" />
-                <key value="0" />
-                <key value="0" />
+                <key values="0" />
+                <key values="0" />
+                <key values="1.5" />
+                <key values="0.50" />
+                <key values="0.2" />
+                <key values="0.2" />
+                <key values="0.6" />
+                <key values="0" />
+                <key values="0" />
             </dustDensity>
         </summer>
 
@@ -195,15 +195,15 @@
                 <key values="0 0 0 0.003" />
             </distanceFog>
             <dustDensity>
-                <key value="0" />
-                <key value="0" />
-                <key value="0.75" />
-                <key value="0.15" />
-                <key value="0.05" />
-                <key value="0.05" />
-                <key value="0.15" />
-                <key value="0" />
-                <key value="0" />
+                <key values="0" />
+                <key values="0" />
+                <key values="0.75" />
+                <key values="0.15" />
+                <key values="0.05" />
+                <key values="0.05" />
+                <key values="0.15" />
+                <key values="0" />
+                <key values="0" />
             </dustDensity>
         </autumn>
 
@@ -260,15 +260,15 @@
                 <key values="0 0 0 0.003" />
             </distanceFog>
             <dustDensity>
-                <key value="0" />
-                <key value="0" />
-                <key value=".25" />
-                <key value="0.1" />
-                <key value="0.0" />
-                <key value="0.0" />
-                <key value="0.1" />
-                <key value="0" />
-                <key value="0" />
+                <key values="0" />
+                <key values="0" />
+                <key values=".25" />
+                <key values="0.1" />
+                <key values="0.0" />
+                <key values="0.0" />
+                <key values="0.1" />
+                <key values="0" />
+                <key values="0" />
             </dustDensity>
         </winter>
     </seasons>
