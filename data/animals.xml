@@ -2,7 +2,7 @@
 -- ANIMAL DATA
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Data for adjusted animals
--- Authors:  Rahkiin
+-- Authors:  Rahkiin, reallogger
 --
 -- Copyright (c) Realismus Modding, 2017
 --------------------------------------------------------------------------------------------------->
@@ -16,15 +16,17 @@
                 <food>315</food>
                 <water>35</water>
                 <birthRate>0</birthRate>
-                <milk>1071</milk>
+                <milk>643</milk>
                 <manure>85</manure>
                 <liquidManure>98</liquidManure>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
             <properties type="sheep">
                 <food>27</food>
                 <water>15</water>
                 <birthRate>0.035</birthRate>
-                <wool>67.2</wool>
+                <wool>22.4</wool>
+                <dailyUpkeep>15</dailyUpkeep>
             </properties>
             <properties type="pig">
                 <straw>15</straw>
@@ -33,6 +35,7 @@
                 <birthRate>0.066666667</birthRate>
                 <manure>27</manure>
                 <liquidManure>46</liquidManure>
+                <dailyUpkeep>30</dailyUpkeep>
             </properties>
         </spring>
 
@@ -42,16 +45,18 @@
                 <food>315</food>
                 <water>52.5</water>
                 <birthRate>0.02</birthRate>
-                <milk>571.2</milk>
+                <milk>343</milk>
                 <manure>51</manure>
                 <liquidManure>59</liquidManure>
+                <dailyUpkeep>40</dailyUpkeep>
             </properties>
 
             <properties type="sheep">
                 <food>27</food>
                 <water>22.5</water>
                 <birthRate>0</birthRate>
-                <wool>28.8</wool>
+                <wool>9.6</wool>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
 
             <properties type="pig">
@@ -61,6 +66,7 @@
                 <birthRate>0</birthRate>
                 <manure>23</manure>
                 <liquidManure>40</liquidManure>
+                <dailyUpkeep>7</dailyUpkeep>
             </properties>
         </summer>
 
@@ -70,9 +76,10 @@
                 <food>350</food>
                 <water>26.25</water>
                 <birthRate>0</birthRate>
-                <milk>285.6</milk>
+                <milk>171</milk>
                 <manure>119</manure>
                 <liquidManure>137</liquidManure>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
 
             <properties type="sheep">
@@ -80,6 +87,7 @@
                 <water>11.25</water>
                 <birthRate>0</birthRate>
                 <wool>0</wool>
+                <dailyUpkeep>5</dailyUpkeep>
             </properties>
 
             <properties type="pig">
@@ -89,6 +97,7 @@
                 <birthRate>0</birthRate>
                 <manure>30</manure>
                 <liquidManure>53</liquidManure>
+                <dailyUpkeep>8</dailyUpkeep>
             </properties>
         </autumn>
 
@@ -98,9 +107,10 @@
                 <food>420</food>
                 <water>26.25</water>
                 <birthRate>0</birthRate>
-                <milk>928.2</milk>
+                <milk>557</milk>
                 <manure>153</manure>
                 <liquidManure>176</liquidManure>
+                <dailyUpkeep>20</dailyUpkeep>
             </properties>
 
             <properties type="sheep">
@@ -108,6 +118,7 @@
                 <water>11.25</water>
                 <birthRate>0</birthRate>
                 <wool>0</wool>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
 
             <properties type="pig">
@@ -117,6 +128,7 @@
                 <birthRate>0</birthRate>
                 <manure>38</manure>
                 <liquidManure>66</liquidManure>
+                <dailyUpkeep>15</dailyUpkeep>
             </properties>
         </winter>
     </seasons>
