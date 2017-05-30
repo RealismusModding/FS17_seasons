@@ -42,7 +42,7 @@ function ssVisualSeasonChangedEvent:run(connection)
     if g_seasons.environment.latestVisualSeason ~= self.season then
         g_seasons.environment.latestVisualSeason = self.season
 
-        for _, listener in pairs(g_seasons.environment.visualSeasonChangeListeners) do
+        for _, listener in ipairs(g_seasons.environment.visualSeasonChangeListeners) do
             listener:visualSeasonChanged(self.season)
         end
     end
