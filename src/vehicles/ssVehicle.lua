@@ -47,8 +47,6 @@ function ssVehicle:loadMap()
     Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.vehicleGetSpecValueAge)
     Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
-    Vehicle.updateWheelFriction = Utils.overwrittenFunction(Vehicle.updateWheelFriction, ssVehicle.updateWheelFriction)
-    Vehicle.updateWheelTireFriction = Utils.appendedFunction(Vehicle.updateWheelTireFriction, ssVehicle.vehicleUpdateWheelTireFriction)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
 
@@ -446,24 +444,6 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     if self.isClient then
         if self.ssNotAllowedSoilFrozen then
             g_currentMission:showBlinkingWarning(ssLang.getText("warning_soilIsFrozen"), 2000)
-        end
-    end
-end
-
-function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
-    if self.isServer and self.isAddedToPhysics then
-        if wheel.inSnow then
-            if wheel.tireType == WheelsUtil.getTireType("chains") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
-            elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.5)
-            elseif wheel.tireType == WheelsUtil.getTireType("studded") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.7)
-            else
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.1)
-            end
-        -- else
-        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
         end
     end
 end

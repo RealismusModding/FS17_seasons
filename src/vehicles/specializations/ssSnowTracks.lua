@@ -13,6 +13,7 @@ function ssSnowTracks:prerequisitesPresent(specializations)
 end
 
 function ssSnowTracks:load(savegame)
+    self.updateWheelTireFriction = Utils.appendedFunction(self.updateWheelTireFriction, ssSnowTracks.vehicleUpdateWheelTireFriction)
 end
 
 function ssSnowTracks:delete()
@@ -58,14 +59,15 @@ local function applyTracks(self, dt)
             x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
             local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100  --fwdTireSnowDepth in m
 
-            if underTireSnowLayers >= 1 then
-                wheel.inSnow = true
+            -- If the wheel is in snow, update its traction
+            local oldInSnow = wheel.inSnow
+            wheel.inSnow = underTireSnowLayers >= 1
+
+            if oldInSnow ~= wheel.inSnow then
+                self:updateWheelTireFriction(wheel)
             end
 
-            local reduceSnow = false
-            if snowLayers == fwdTireSnowLayers then
-                reduceSnow = true
-            end
+            local reduceSnow = snowLayers == fwdTireSnowLayers
 
             if fwdTireSnowLayers > 1 and reduceSnow then
                 sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT), fwdTireSnowLayers)
@@ -81,7 +83,6 @@ local function applyTracks(self, dt)
 
             elseif fwdTireSnowDepth > 2 * radius then
                 setLinearDamping(wheel.node, 0.95)
-
             else
                 setLinearDamping(wheel.node, 0)
             end
@@ -90,7 +91,6 @@ local function applyTracks(self, dt)
 end
 
 function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2)
-
     local x0, y0, z0
     local x1, y1, z1
     local x2, y2, z2
@@ -116,7 +116,6 @@ function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
 
     return x0, z0, x1, z1, x2, z2, snowLayers
-
 end
 
 function ssSnowTracks:update(dt)
@@ -126,12 +125,21 @@ function ssSnowTracks:update(dt)
         applyTracks(self, dt)
     elseif self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth <= ssSnow.LAYER_HEIGHT then
         for _, wheel in pairs(self.wheels) do
-           wheel.inSnow = false
-           setLinearDamping(wheel.node, 0)
+            if wheel.inSnow then
+                wheel.inSnow = false
+
+                self:updateWheelTireFriction(wheel)
+            end
+
+            setLinearDamping(wheel.node, 0)
         end
     else
         for _, wheel in pairs(self.wheels) do
-            wheel.inSnow = false
+            if wheel.inSnow then
+                wheel.inSnow = false
+                self:updateWheelTireFriction(wheel)
+            end
+
             setLinearDamping(wheel.node, 0)
         end
     end
@@ -143,3 +151,23 @@ end
 function ssSnowTracks:draw()
 end
 
+function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
+    local function setFriction(factor)
+        setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness,
+            wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * factor)
+    end
+
+    if self.isServer and self.isAddedToPhysics then
+        if wheel.inSnow then
+            if wheel.tireType == WheelsUtil.getTireType("chains") then
+                setFriction(1.0)
+            elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
+                setFriction(0.5)
+            elseif wheel.tireType == WheelsUtil.getTireType("studded") then
+                setFriction(0.7)
+            else
+                setFriction(0.2)
+            end
+        end
+    end
+end
