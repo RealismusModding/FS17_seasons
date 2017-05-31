@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>thierry62, Marxtai, theSeb, dural</translationContributors>
+    <translationContributors>thierry62, Marxtai, theSeb, dural, Anonymous</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Afficher les prévisions" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
@@ -84,7 +84,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
         <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
-        <text name="msg_welcome" text="Bienvenue sur le Saisons mod creé par Realismus Modding. Vérifiez S'il vous plaît l'aide dans le menu Esc pour découvrir plus de façon d'utiliser ce mod" />
+        <text name="msg_welcome" text="Bienvenue sur le Saisons mod creé par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
@@ -116,26 +116,26 @@
         <text name="setting_moisture" text="L'humidité des cultures" />
 
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
-        <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvegarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le gameday. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
+        <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvegarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise a zéro dela croissance" />
         <text name="dialog_resetGrowth_no" text="maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
-        <text name="dialog_sleeping" text="Repos pendant un autre jour à la ferme... Zzz.." />
+        <text name="dialog_sleeping" text="Se reposer pendant un autre jour à la ferme... Zzz.." />
 
         <text name="fillType_snow" text="Neige" />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons est un mod qui améliore le réalisme de Farming Simulator en ajustant presque tous les aspects avec des parametres plus réalistes. A peu pès tout, en partant des effets des saisons, en passant par la croissance des cultures et jusqu'à la production animale a été changé à un niveau plus réaliste." />
+        <text name="ss_helpText_01_01" text="Seasons est un mod qui améliore le réalisme de Farming Simulator en ajustant presque tous les aspects avec des parametres plus réalistes. A peu près tout, en partant des effets des saisons, en passant par la croissance des cultures et jusqu'à la production animale a été changé à un niveau plus réaliste." />
         <text name="ss_helpText_01_02" text="Une année dans le jeu a été découpée en 4 saisons : printemps, été, automne et hiver. Chaque saison est ensuite découpée en 3 parties : début, milieu et fin. Ces parties sont appelées des transitions." />
         <text name="ss_helpText_01_03" text="Vos activités sont liées à la période de l'année durant laquelle elles se produisent dans la vie réelle." />
 
         <text name="ss_helpTitle_02" text="Effets saisonniers (1)" />
         <text name="ss_helpText_02_01" text="Le temps est aléatoire au jour le jour mais suit une certaine mouvance saison après saison." />
-        <text name="ss_helpText_02_02" text="Le printemps sera pluvieux et brumeux avec quelques apparitions du soleil. L'été sera plus chaud et sec. Des orages pourront survenir sans avertissement. L'automne sera pluvieuse et parfois ensoleillée. L'hiver sera pluvieux, mais souvent assez froid pour que de la neige tombe et parfois reste au sol." />
-        <text name="ss_helpText_02_03" text="La neige remplira les remorques et godets, à moins que ceux-ci soit couvert par une bâche ou à l'abri sous un hanger (adapté au mod Seasons avec un 'snow mask'). La neige réduira la force de traction, ralentissant les véhicules." />
+        <text name="ss_helpText_02_02" text="Le printemps sera pluvieux et brumeux avec quelques apparitions du soleil. L'été sera plus chaud et sec. Des orages pourront survenir sans avertissement. L'automne sera pluvieux et parfois ensoleillée. L'hiver sera pluvieux, mais souvent assez froid pour que de la neige tombe et parfois reste au sol." />
+        <text name="ss_helpText_02_03" text="La neige remplira les remorques et godets, à moins que ceux-ci soit couvert par une bâche ou à l'abri sous un hangar (adapté au mod Seasons avec un 'snow mask'). La neige réduira la force de traction, ralentissant les véhicules." />
 
         <text name="ss_helpTitle_03" text="Effets saisonniers (2)" />
         <text name="ss_helpText_03_01" text="La journée est aussi affectée par la saison. En hiver, les jours seront plus courts (8 heures) alors qu'en été ils seront plus longs (17 Heures)." />
@@ -144,7 +144,7 @@
 
         <text name="ss_helpTitle_04" text="Prévisions météo" />
         <text name="ss_helpText_04_01" text="Les prévisions météo ont été réintroduites avec le mod Seasons et peuvent être activées en utilisant le raccourci clavier 'Alt + F'." />
-        <text name="ss_helpText_04_02" text="Les prévisions météo montrent les températures minis/maxis et le temps (ensoleillé, brumeux, pluvieux, neigeux, nuageux) pour les 7 prochains jours. Les orages de grêle n'apparaitront pas sur les prévisions, car ils restent imprévisibles comme dans la réalité." />
+        <text name="ss_helpText_04_02" text="Les prévisions météo montrent les températures mini/maxi et le temps (ensoleillé, brumeux, pluvieux, neigeux, nuageux) pour les 7 prochains jours. Les orages de grêle n'apparaitront pas sur les prévisions, car ils restent imprévisibles comme dans la réalité." />
         <text name="ss_helpText_04_03" text="Le chiffre apparaissant à droite des prévisions représente le jour de la saison." />
 
         <text name="ss_helpTitle_05" text="Sol" />
@@ -156,7 +156,7 @@
         <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
         <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques cultures semées à la mauvaise période ne pourront pas pousser." />
         <text name="ss_helpText_06_03" text="La récolte des cultures ne sera possible que pendant leur dernier cylce de croissance, mis à part les peupliers et les radis oléagineux. Elles resteront à cette étape jusqu'à ce que l'hiver les détruise." />
-        <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu esc, elle est prête à récolter. C'est la phase finale de récolte" />
+        <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu Esc, elle est prête à être récolté. C'est la phase finale de récolte" />
         <text name="ss_helpText_06_05" text="Il est toujours possible d'ensiler une culture sur pied." />
 
         <text name="ss_helpTitle_07" text="Cultures - Arables" />
@@ -176,9 +176,9 @@
 
         <text name="ss_helpTitle_10" text="Cultures - Effets du temps" />
         <text name="ss_helpText_10_01" text="La pluie, la grêle et la neige affectent l'humidité des cultures. Si cette humidité est trop élevée, il ne sera pas possible de récolter certaines cultures. Certaines nuits d'été peuvent être moîtes sans prévenir." />
-        <text name="ss_helpText_10_02" text="Après la pluie, il faudra u ncertain temps pour que la culture séche (en fonction de la température ambiante et de la période de l'année). Plus il fait chaud, plus la récolte sèche vite." />
+        <text name="ss_helpText_10_02" text="Après la pluie, il faudra un certain temps pour que la culture sèche (en fonction de la température ambiante et de la période de l'année). Plus il fait chaud, plus la récolte sèche vite." />
         <text name="ss_helpText_10_03" text="Utiliser une faneuse sur du foin humide le rétrogadera en herbe humide. Il faudra donc être vigilant sur l'humidité avant toute intervention." />
-        <text name="ss_helpText_10_04" text="Sur un mod de type carte qui a été préparée avec un 'snow mask' par le modder, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hanger bénéficant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
+        <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le modder, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hanger bénéficant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
         <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
@@ -196,15 +196,15 @@
         <text name="ss_helpText_13_01" text="On doit maintenant payer les heures supplémentaires de l'ouvrier. Si celui-ci travaille avant 6h du matin ou après 6h du soir, ou encore les week-ends, sa paie sera majorée de 50%." />
 
         <text name="ss_helpTitle_14" text="Animaux - Intro" />
-        <text name="ss_helpText_14_01" text="La production animal a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 jours à 3 jours." />
-        <text name="ss_helpText_14_02" text="Les naissances d'animaux se produisent qu'à certains moments de l'année. pour les cochons et les moutons, c'est au printemps alors que pour les vaches, c'est durant l'été." />
-        <text name="ss_helpText_14_03" text="LEs animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
+        <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 jours à 3 jours." />
+        <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons et les moutons, c'est au printemps alors que pour les vaches, c'est durant l'été." />
+        <text name="ss_helpText_14_03" text="Les animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
         <text name="ss_helpText_14_04" text="Il n'est pas possible de nourrir les animaux avec de l'herbe l'hiver, il faut utiliser du foin." />
 
         <text name="ss_helpTitle_15" text="Animaux - Production" />
         <text name="ss_helpText_15_01" text="La production de lait et de laine dépend de la saison." />
         <text name="ss_helpText_15_02" text="La laine est seulement produite au printemps." />
-        <text name="ss_helpText_15_03" text="La production de lait se fait toute l'année mais elle est augmentée en hiver et au printemps. Comme on ne peut pas donner d'herbe pendant l'hiver, normalement, la productivité des vaches ne pourrait être que de 80% au mieux. Cependant, le mod Seasons augmente la production pour compenser cette perte de prodictivité." />
+        <text name="ss_helpText_15_03" text="La production de lait se fait toute l'année mais elle est augmentée en hiver et au printemps. Comme on ne peut pas donner d'herbe pendant l'hiver, normalement, la productivité des vaches ne pourrait être que de 80% au mieux. Cependant, le mod Seasons augmente la production pour compenser cette perte de productivité." />
 
         <text name="ss_helpTitle_16" text="Menu Saisons" />
         <text name="ss_helpText_16_01" text="Le menu Saisons est utilisé comme guide de référence pour les semis et les modifications à apporter aux mod Seasons. Ce menu est activé avec les touches 'Alt + S'." />
@@ -212,7 +212,7 @@
         <text name="ss_helpText_16_03" text="La deuxième page regroupe les paramètres du mod Seasons. Dans celle-ci, il est possible de modifier la durée d'une saison, d'activer ou non les notifications concernant les saisons, le mode neige, la prise en compte de l'humidité des cultures et enfin l'unité d'affichage des températures." />
 
         <text name="ss_helpTitle_17" text="GUI" />
-        <text name="ss_helpText_17_01" text="Une interface utilisateur à gauche de l'horloge du jeu, dans le coin haut droite, affiche les informations realtives au mod Seasons. On peut y voir la température ambiante actuelle sur le dessus, et celle du sol en dessous. L'état du sol (culture humide, sol gelé) est aussi affiché sur la gauche de cette interface." />
+        <text name="ss_helpText_17_01" text="Une interface utilisateur à gauche de l'horloge du jeu, dans le coin en haut à droite, affiche les informations relatives au mod Seasons. On peut y voir la température ambiante actuelle sur le dessus, et celle du sol en dessous. L'état du sol (culture humide, sol gelé) est aussi affiché sur la gauche de cette interface." />
         <text name="ss_helpText_17_02" text="Juste en dessous de l'horloge, la période actuelle ainsi que le jour de la saison sont affichés." />
         <text name="ss_helpText_17_03" text="Lorsqu'il est activé, le panneau d'affichage des prévisions météo apparaît sous l'horloge, dans le coin supérieur droit." />
         <text name="ss_helpText_17_04" text="Quand le menu d'aide est activé ('F1'), le temps restant jusqu'à la prochaine maintenance est affiché près du bas de ce menu. Cela n'est visible que lorsque l'on est dans un véhicule." />
