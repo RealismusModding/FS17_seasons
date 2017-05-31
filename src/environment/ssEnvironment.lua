@@ -261,7 +261,8 @@ function ssEnvironment:calculateVisualSeason()
 
     -- Spring
     -- Keeping bare winter textures if the daily average temperature is below a treshold
-    if curSeason == self.SEASON_SPRING and self.latestVisualSeason == self.SEASON_WINTER and avgAirTemp <= springLeavesTemp then
+    if curSeason == self.SEASON_SPRING and self.latestVisualSeason == self.SEASON_WINTER
+        and (avgAirTemp <= springLeavesTemp or g_seasons.snow.appliedSnowDepth > 0) then
         return self.SEASON_WINTER
 
     -- Summer
