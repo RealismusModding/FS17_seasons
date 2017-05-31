@@ -443,14 +443,14 @@ function ssWeatherManager:calculateSnowAccumulation()
         if self.snowDepth < 0 then
             self.snowDepth = 0
         end
-        self.snowDepth = self.snowDepth + 10 / 1000
+        self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
 
     elseif currentRain.rainTypeId == "snow" and currentTemp < 0 then
         -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
         if self.snowDepth < 0 then
             self.snowDepth = 0
         elseif self.snowDepth > 0.06 then
-            self.snowDepth = self.snowDepth + 10 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
+            self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
         else
             self.snowDepth = self.snowDepth + 30 / 1000
         end
