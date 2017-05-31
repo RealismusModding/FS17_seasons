@@ -5,7 +5,7 @@
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Zobrazit předpověď počasí" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Oprava vozidla" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otevřít menu" />
-        <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Vzdálenost rostlin (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Přeskočit noc" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Skrýt předpověď počasí" />
 
