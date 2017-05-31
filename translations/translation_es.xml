@@ -140,7 +140,7 @@
         <text name="ss_helpTitle_03" text="Efectos Estacionales (2)" />
         <text name="ss_helpText_03_01" text="Las horas de luz del día también se ven afectadas por las estaciones. Los inviernos tienen días más cortos (8 horas) mientras que los veranos tienen días más largos (17 horas)." />
         <text name="ss_helpText_03_02" text="Los silos de búnker y los fardos de ensilaje requieren tiempo para fermentar. Se necesita un tercio de las estaciones (1 transición) para fermentar completamente un silo de búnker o un fardo de ensilaje. El heno envuelto no fermentará, pero estará protegido contra el clima." />
-	    <text name="ss_helpText_03_03" text="Las estaciones también afectarán a los árboles y al follaje. Los árboles cambiarán de estado según los cambios estacionales de temperatura. Las hojas se vuelven de color y caerán en otoño. Los árboles se ven desnudos en invierno y tendrán un verde claro en primavera." />
+        <text name="ss_helpText_03_03" text="Las estaciones también afectarán a los árboles y al follaje. Los árboles cambiarán de estado según los cambios estacionales de temperatura. Las hojas se vuelven de color y caerán en otoño. Los árboles se ven desnudos en invierno y tendrán un verde claro en primavera." />
 
         <text name="ss_helpTitle_04" text="Pronóstico del tiempo" />
         <text name="ss_helpText_04_01" text="El pronóstico del tiempo será reintroducido con Seasons y puede ser activado con Alt Izq. + F." />

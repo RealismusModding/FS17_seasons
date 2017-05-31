@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
     <translationContributors>n0tr3adY</translationContributors>
-  
-  <texts>
+    <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: időjárás elõrejelzés mutatása" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: gép / jármű javítása" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: MENÜ megnyitás" />
@@ -72,14 +71,13 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
-		
+
         <text name="SS_SEASON_INTRO_0" text="Itt a tavasz! Nyílnak a virágok, a fák rügyeznek. Itt az idő, hogy megműveld és bevesd a földjeidet!" />
         <text name="SS_SEASON_INTRO_1" text="A napok hosszabbak és forróbbak nyáron. Készíts szalmát, közben figyeld hogyan fejlődnek a növényeid." />
         <text name="SS_SEASON_INTRO_2" text="Besárgultak a levelek és hűvösebb az idő - megérkezett az ősz. Légy kész az aratással, mielőtt beköszönt a rideg tél!" />
         <text name="SS_SEASON_INTRO_3" text="Beköszöntött a tél és az állataidnak még nagyobb szüksége van a törődésre. A talaj hamarosan megfagy és nem tudsz dolgozni a földeken. Foglalkozhatsz addig is az erdészettel, vagy eltakaríthatod a havat." />
         <text name="SS_BUTTON_OK" text="Ok" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Ne mutasd újra" />
-
 
         <text name="ss_version" text="A múltban valamikor letöltötted a modunk egy lopott verzióját egy olyan oldalról, ami nem támogatja a modder közösséget és megsértette a minket illető szerzői jogokat, vagy letöltötted a mod nem végleges verzióját. Nagyra értékeljük az érdeklődésed, de a mentett állásod inkompatibilis a Seasons mod ezen verziójával. Arra kérünk, többe ne látogass olyan oldalakat a jövőben, amelyek a modderektől lopnak. Új játékot kell kezdened!" />
         <text name="warning_soilIsFrozen" text="A föld fagyott. Nem tudsz dolgozni rajta!" />
@@ -143,35 +141,35 @@
         <text name="ss_helpText_03_01" text="A napsütéses órák számát is befolyásolja a Seasons. Télen rövidebbek a nappalok (8 óra), míg a nyári időszakban ez 17 óra." />
         <text name="ss_helpText_03_02" text="Mind a silóbunkernek, mind a csomagolt bálának idő kell az erjedéshez. A teljes erjedés 1/3-ad szezon alatt megy végbe. A csomagolt szénabála nem fog megerjedni, de védve lesz az időjárástól. " />
         <text name="ss_helpText_03_03" text="Az évszakok változása kihat a fákra és a növényekre is. A fák az évszaknak megfelelően változnak - a levelek színt váltanak és lehullanak ősszel, télen pedig lecsupaszodnak. Tavasszal pedig világoszöld színben pompáznak." />
-       
+
         <text name="ss_helpTitle_04" text="Időjárás előrejelzés" />
         <text name="ss_helpText_04_01" text="Az időjárás előrejelzést bekapcsolhatod a Left Alt + F gombokkal." />
         <text name="ss_helpText_04_02" text="Az időjárás előrejelzés mutatja a várható hőmérsékletet és időjárást (napos, ködös, esős, havas, felhős) a következő 7 napra. A jégesőre nem figyelmeztet - akár a való életben, itt is váratlanul érkezik!" />
         <text name="ss_helpText_04_03" text="A időjárás előrejelzésnél a jobb oldalon található számok jelzik azt, hogy az adott nap a szezon hanyadik napja lesz." />
-       
+
         <text name="ss_helpTitle_05" text="Föld" />
         <text name="ss_helpText_05_01" text="A termőföld hőmérséklete termodinamikus számításokkal és korábbi adatokkal van modellezve. Ez azt jelenti, hogy a föld megfagy télen, ha a hőmérséklet egy bizonyos fok alá esik meghatározott ideig. Ez a fagyás tavasszal megszűnik, ha a levegő hőmérséklete elér egy bizonyos hőfokot egy meghatározott ideig." />
         <text name="ss_helpText_05_02" text="A termőföld nem művelhető ha fagyott. A növények nem fejlődnek a fagyott földön." />
         <text name="ss_helpText_05_03" text="A növények csak akkor hajtanak ki, ha a föld hőmérséklete a csírázási hő fölött van. Ezen hőfokokat a Seasons beállitási menü első oldala tartalmazza (Left Alt + S)." />
-       
+
         <text name="ss_helpTitle_06" text="Növények - bevezetés" />
         <text name="ss_helpText_06_01" text="Ha új játékot kezdesz, az összes növény a már betakarított állapotba kerül - tehát ősz óta a földek nem voltak művelve. Ha a Seasons-t már meglévő mentett álláson használod, lehetőséged van a növényeket alapállapotba tenni." />
         <text name="ss_helpText_06_02" text="Az alapértelmezett növekedési mintát felülírja a Seasons. A növények a valóságnak megfelelően fognak növekedni - hasonlóan a megfelelő vetési és aratási szezonhoz. Ez azt jelenti, hogy a tél kipusztítja majdnem az összes növényt, és ha rossz szezonban veted, nem fog növekedni." />
         <text name="ss_helpText_06_03" text="A növények csak a legutolsó növekedési fázisban arathatóak, kivéve az energiafűz és az olajretek. A növények az aratási fázisban maradnak mindaddig, amíg a tél ki nem pusztítja őket." />
-		<text name="ss_helpText_06_04" text="Bármelyik növény (kivéve cukkorrépa és burgonya) ha eléri az első betakarítási állapotát - a Növekedési áttekintésnek megfelelően (ESC menü) -, az kész a betakarításra. Ez a végső betakarítási állapot." />
+        <text name="ss_helpText_06_04" text="Bármelyik növény (kivéve cukkorrépa és burgonya) ha eléri az első betakarítási állapotát - a Növekedési áttekintésnek megfelelően (ESC menü) -, az kész a betakarításra. Ez a végső betakarítási állapot." />
         <text name="ss_helpText_06_05" text="Továbbra is tudsz zöld (ki nem fejlett) növényeket silózni." />
 
         <text name="ss_helpTitle_07" text=" Növények - szántóföld" />
         <text name="ss_helpText_07_01" text="A növények növekedése tovább tart. Közel fél, mire eléri a betakarítható állapotot." />
         <text name="ss_helpText_07_02" text="A tél majdnem az összes növényt elpusztítja, de van lehetőség téli és tavaszi növényekre. Búza, árpa, energiafűz, fű, olajretek és repce vethető ősszel. Légy biztos benne, hogy a föld elég meleg lesz a növények csírázásához!" />
         <text name="ss_helpText_07_03" text="A kukoricát, szójababot, napraforgót, cukorrépát és burgonyát tavasszal kell vetni. A Seasons menü növekedési áttekintés részén találod a csírázási hőre vonatkozó tájékoztatót, mert néhány növényt ha kora tavasszal vetsz, nem fog kihajtani - még akkor sem, ha a föld hőmérséklete a csírázási hőfok felett van." />
-       
+
         <text name="ss_helpTitle_08" text="Növények - széna, szalma, fű" />
         <text name="ss_helpText_08_01" text="Télen a fű visszaáll a lekaszált állapotba, hogy szimulálja a téli fagy fűre gyakorolt hatását." />
         <text name="ss_helpText_08_02" text="A fűbálákat be kell csomagolni a megfelelő minőségű silóhoz a kaszálás után, 2 napon belül. A második nap után elkezd rohadni és a bála eltűnik." />
         <text name="ss_helpText_08_03" text="A széna, szalma és fűrendek mérete elkezd csökkeni, és pár nap múlva eltűnnek. A fűrendek mérete éjjelente csökken. A széna és szalmarendek mérete pedig növekedési fázisonként, illetve eső után csökken." />
         <text name="ss_helpText_08_04" text="A szalmát és szénát be kell bálázni mielőtt beköszönt a fagy. A rossz minőségű szénáért és szalmáért nem fizetnek, de ingyen leadhatod. A fű - akár bála, akár rossz minőségű - nem eladható." />
-        
+
         <text name="ss_helpTitle_09" text="Növények - fák" />
         <text name="ss_helpText_09_01" text="A fáknak több idő kell, hogy elérjék a teljes kifejlettségüket. A facsemetéket akár 2 év után is kivághatod, de 5 játékbeli év elteltével érik el a teljes méretüket." />
         <text name="ss_helpText_09_02" text="A túl közel palántált facsemeték akadályozzák egymás növekedését. Hogy újra növekedésnek induljanak, el kell tüntetned ezeket a túl közel ültetett facsemetéket." />
@@ -181,22 +179,22 @@
         <text name="ss_helpText_10_02" text="Eső után a növényeidnek több idő kell a száradáshoz, ami függ az évszaktól és a levegő hőmérsékletétől is. Meleg időben a növények gyorsabban kiszáradnak, mint hidegben." />
         <text name="ss_helpText_10_03" text="Forgatót használva a szénán -miközben a növények nedvesek- nedves füvet fog eredményezni. Csak akkor használd a forgatót, ha a növények elég szárazak." />
         <text name="ss_helpText_10_04" text="Azokon a térképeken, ahol a készítő a hómaszkot elkészítette, és a széna- és szalmabálák ki vannak téve esőnek/hónak, elkezdenek romlani mindaddig, amíg fedett helyre nem kerülnek. Hómaszk nélkül a rossz idő nem befolyásolja a bálák minőségét." />
-        
+
         <text name="ss_helpTitle_11" text="Karbantartás" />
         <text name="ss_helpText_11_01" text="Járműveidet időnként karban kell tartanod a hibátlan működéshez. A karbantartási periódus minden 30 munkaóra után következik, vagy félévenként. Amely járműveket kihagyod a karbantartásból, nehezebben indulnak el, menet közben a motor is leállhat." />
         <text name="ss_helpText_11_02" text="A járműveidet a gépboltnál vagy elhelyezhető garázsnál is karbantarthatod. A karbantartáshoz vezesd a járműved a garázshoz vagy gépbolthoz és nyomd meg a Bal Alt + R gombokat. A gépboltnál kicsit drágább a javítás." />
         <text name="ss_helpText_11_03" text="A gépjárműved utolsó karbantartás óta. Ezt a Gépjármű áttekintésnél találod." />
         <text name="ss_helpText_11_04" text="Csak a vezethető járműveket kell időszakosan szervízelni. A munkaeszközöket szükség szerint automatikusan javítják." />
-     
+
         <text name="ss_helpTitle_12" text="Gazdasági rendszer" />
         <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltozott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
         <text name="ss_helpText_12_02" text="A küldetésekből származó jövedelem csökkentve. Nagyjából 5x keresel többet, mint egy bérmunkás ugyanazon a földön." />
         <text name="ss_helpText_12_03" text="A járműveid karbantartása (beleértve az időszakos szervízt) tartalmazza az adót, és függ attól is, hogy mennyit használod. A tiszta gépek karbantartása kevesebbe kerül. A nem használt gépeidnek természetesen kevesebb a karbantartási és javítási költsége." />
         <text name="ss_helpText_12_04" text="A termények árai ingadoznak a szezonnak megfelelően." />
-      
+
         <text name="ss_helpTitle_13" text="Bérmunkás segítők" />
         <text name="ss_helpText_13_01" text="A bérmunkásoknak esetlegesen túlórapénzt is kell fizetned. Ha reggel 6 előtt, vagy este 6 után, esetleg hétvégén veszel fel bérmunkást, a munkabére 50%-al többe kerül." />
-      
+
         <text name="ss_helpTitle_14" text="Állatok - bevezetés" />
         <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etető kapacitása 6 napról 3-ra csökkent." />
         <text name="ss_helpText_14_02" text="Az állatok szaporodása meghatározott időben történik. A disznók és birkák tavasszal, míg a tehenek nyáron szaporodnak." />
