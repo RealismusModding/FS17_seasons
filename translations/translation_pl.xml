@@ -203,7 +203,7 @@
 
         <text name="ss_helpTitle_15" text="Zwierzęta - produkcja" />
         <text name="ss_helpText_15_01" text="Produkcja mleka i wełny zależy od sezonu." />
-        <text name="ss_helpText_15_02" text="Wełna produkowana jest tylko wiosną." />
+        <text name="ss_helpText_15_02" text="Wełna produkowana jest tylko wiosną i latem." />
         <text name="ss_helpText_15_03" text="Mleko jest produkowane przez cały rok, ale produkcja jest zwiększana zimą i wiosną. Ponieważ zimą nie ma możliwości karmienia trawą, zmniejszyłoby to wydajność krów do co najwyżej 80%. Mod Seasons kompensuje brak trawy w tym czasie poprzez zwiększenie produkcji mleka." />
 
         <text name="ss_helpTitle_16" text="Menu modu Seasons" />
