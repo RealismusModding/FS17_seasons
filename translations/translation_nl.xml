@@ -187,7 +187,7 @@
         <text name="ss_helpText_11_04" text="Alleen rijbare voertuigen vereisen periodiek onderhoud. Gereedschappen en werktuigen worden automatisch gerepareerd." />
 
         <text name="ss_helpTitle_12" text="Economie" />
-        <text name="ss_helpText_12_01" text="De hoeveelheid dat geleend kan worden van de bank is veranderd van 200.000 tot 30% van uw eigen grond en plaatsbare gebouwwaardes. De minimale hoeveelheid dat geleend kan worden is 300.000 en de maximale hoeveelheid dat geleend kan worden is 1.500.000." />
+        <text name="ss_helpText_12_01" text="De hoeveelheid dat geleend kan worden van de bank is veranderd van $CURRENCY_SYMBOL200.000 tot 30% van uw eigen grond en plaatsbare gebouwwaardes. De minimale hoeveelheid dat geleend kan worden is $CURRENCY_SYMBOL300.000 en de maximale hoeveelheid dat geleend kan worden is $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="Inkomsten uit missies zijn verminderd. U verdient ongeveer 5 keer meer dan een ingehuurde werknemer die op hetzelfde terrein werkt." />
         <text name="ss_helpText_12_03" text="Kosten van alle voertuigen (naast het periodieke onderhoud) omvat onderhoudskosten en belastingen ten opzichte van de hoeveelheid van gebruik. Schone machines hebben verlaagde onderhoudskosten. Machines die niet worden gebruikt, hebben  ook verlaagde onderhoudskosten." />
         <text name="ss_helpText_12_04" text="Gewas prijzen fluctueren op een meer realistische manier met de veranderingen in de seizoenen." />

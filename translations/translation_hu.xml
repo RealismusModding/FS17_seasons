@@ -187,7 +187,7 @@
         <text name="ss_helpText_11_04" text="Csak a vezethető járműveket kell időszakosan szervízelni. A munkaeszközöket szükség szerint automatikusan javítják." />
 
         <text name="ss_helpTitle_12" text="Gazdasági rendszer" />
-        <text name="ss_helpText_12_01" text="A hitelkereted 200.000-ről megváltozott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa 300.000, az elérhető maximum keret 1.5000.000." />
+        <text name="ss_helpText_12_01" text="A hitelkereted $CURRENCY_SYMBOL200.000-ről megváltozott, a földjeid és elhelyezhető épületeid összértékének 30%-ára. A hitel legalsó határa $CURRENCY_SYMBOL300.000, az elérhető maximum keret $CURRENCY_SYMBOL1.5000.000." />
         <text name="ss_helpText_12_02" text="A küldetésekből származó jövedelem csökkentve. Nagyjából 5x keresel többet, mint egy bérmunkás ugyanazon a földön." />
         <text name="ss_helpText_12_03" text="A járműveid karbantartása (beleértve az időszakos szervízt) tartalmazza az adót, és függ attól is, hogy mennyit használod. A tiszta gépek karbantartása kevesebbe kerül. A nem használt gépeidnek természetesen kevesebb a karbantartási és javítási költsége." />
         <text name="ss_helpText_12_04" text="A termények árai ingadoznak a szezonnak megfelelően." />
