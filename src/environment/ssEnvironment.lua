@@ -433,7 +433,7 @@ end
 --
 
 function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
-    local season = g_seasons.util.seasonKeyToId[seasonName]
+    local season = g_seasons.util.seasonKeyToId[ssUtil.trim(seasonName)]
 
     if season == nil then
         logInfo("The supplied visual season does not exist")
