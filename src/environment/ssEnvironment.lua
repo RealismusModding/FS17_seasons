@@ -47,8 +47,8 @@ function ssEnvironment:preLoad()
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and
     -- in loadMap it is too late. (both crash)
-    Environment.new = Utils.overwrittenFunction(Environment.new, function (self, superFunc, xmlFilename)
-        local self = superFunc(self, xmlFilename)
+    Environment.new = Utils.overwrittenFunction(Environment.new, function (fSelf, superFunc, xmlFilename)
+        local self = superFunc(fSelf, xmlFilename)
 
         Environment.RAINTYPE_SNOW = "snow"
         self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0)
@@ -390,8 +390,6 @@ function ssEnvironment:getTransitionInSeason(currentDay)
     else
         return 1
     end
-
-    return nil
 end
 
 -- Called when the number of days in a season needs to be changed.
@@ -446,7 +444,7 @@ function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
     --     return season
     -- end
     local oldVSeason = self.currentVisualSeason
-    self.currentVisualSeason = function (self)
+    self.currentVisualSeason = function ()
         return season
     end
 

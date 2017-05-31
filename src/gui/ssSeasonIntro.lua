@@ -33,7 +33,7 @@ function ssSeasonIntro:update(dt)
 end
 
 function ssSeasonIntro:showIntro(season)
-    function cb(self, yesNo)
+    function cb(target, yesNo)
         if not yesNo then
             self.hideSeasonIntro = true
         end

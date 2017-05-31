@@ -71,8 +71,6 @@ function ssWeatherManager:load(savegame, key)
 end
 
 function ssWeatherManager:save(savegame, key)
-    local i = 0
-
     ssXMLUtil.setFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssXMLUtil.setFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)

@@ -172,7 +172,7 @@ function ssRepairable:ssRepair(showDialog, cost, vehicleName)
 
     if repairCost < 1 then return end
 
-    function performRepair(self)
+    function performRepair(vehicle)
         -- Deduct
         if g_currentMission:getIsServer() then
             g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
@@ -182,19 +182,19 @@ function ssRepairable:ssRepair(showDialog, cost, vehicleName)
         end
 
         -- Repair
-        if ssVehicle:repair(self, storeItem) then
+        if ssVehicle:repair(vehicle, storeItem) then
             -- Show that it was repaired
             local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
 
-            g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(self))
+            g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(vehicle))
         end
     end
 
     -- Callback for the Yes No Dialog
-    function doRepairCallback(self, yesNo)
+    function doRepairCallback(vehicle, yesNo)
         if yesNo then
-            performRepair(self)
+            performRepair(vehicle)
         end
 
         g_gui:closeDialogByName("YesNoDialog")

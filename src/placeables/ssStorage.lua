@@ -2,7 +2,7 @@
 -- STORAGE SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To change storage properties
--- Authors:  Rahkiin, reallogger, theSeb 
+-- Authors:  Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -14,7 +14,6 @@ ssStorage = {}
 function ssStorage:preLoad()
     Storage.load = Utils.overwrittenFunction(Storage.load, ssStorage.load)
     Storage.seasonLengthChanged = ssStorage.storageSeasonLengthChanged
-    
 end
 
 function ssStorage:loadMap()

@@ -81,7 +81,8 @@ end
 
 function ssVehicle:dayChanged()
     for i, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations)
+            and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
             self:repair(vehicle, storeItem)
         end
     end
@@ -205,7 +206,8 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
         return 0.025 * storeItem.price * (RF1 * (operatingTime / 5) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price * (RF1 * (lifetime / (5 * ssVehicle.LIFETIME_FACTOR)) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR) / (lifetime / 5) * 2) * powerMultiplier
+        return 0.025 * storeItem.price * (RF1 * (lifetime / (5 * ssVehicle.LIFETIME_FACTOR)) ^ RF2)
+                * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR) / (lifetime / 5) * 2) * powerMultiplier
     end
 end
 
@@ -314,7 +316,8 @@ function ssVehicle:calculateOverdueFactor(vehicle)
         local daysSinceLastRepair = g_currentMission.environment.currentDay - vehicle.ssLastRepairDay
 
         if daysSinceLastRepair >= ssVehicle.repairInterval or serviceInterval < 0 then
-            overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval, math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
+            overdueFactor = math.ceil(math.max(daysSinceLastRepair / ssVehicle.repairInterval,
+                                      math.abs(serviceInterval / ssVehicle.SERVICE_INTERVAL)))
         end
     end
 
@@ -338,7 +341,10 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
 
     local p1, p2, p3, p4, depFac, brandFac
 
-    if storeItem.category == "tractors" or storeItem.category == "wheelLoaders" or storeItem.category == "teleLoaders" or storeItem.category == "skidSteers" then
+    if     storeItem.category == "tractors"
+        or storeItem.category == "wheelLoaders"
+        or storeItem.category == "teleLoaders"
+        or storeItem.category == "skidSteers" then
         p1 = -0.015
         p2 = 0.42
         p3 = -4
@@ -346,7 +352,10 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
         brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep), 1.1)
 
-    elseif storeItem.category == "harvesters" or storeItem.category == "forageHarvesters" or storeItem.category == "potatoHarvesters" or storeItem.category == "beetHarvesters" then
+    elseif storeItem.category == "harvesters"
+        or storeItem.category == "forageHarvesters"
+        or storeItem.category == "potatoHarvesters"
+        or storeItem.category == "beetHarvesters" then
         p1 = 81
         p2 = -0.105
         depFac = (p1 * math.exp(p2 * age)) / 100
@@ -451,19 +460,22 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 end
 
 function ssVehicle:vehicleUpdateWheelTireFriction(wheel)
+    local function setFriction(factor)
+        setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness,
+            wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * factor)
+    end
+
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
             if wheel.tireType == WheelsUtil.getTireType("chains") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
+                setFriction(1.0)
             elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.5)
+                setFriction(0.5)
             elseif wheel.tireType == WheelsUtil.getTireType("studded") then
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.7)
+                setFriction(0.7)
             else
-                setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * 0.1)
+                setFriction(0.1)
             end
-        -- else
-        --     setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff)
         end
     end
 end
