@@ -15,7 +15,7 @@
             <item type="text" value="ss_helpText_01_01" />
             <item type="text" value="ss_helpText_01_02" />
             <item type="text" value="ss_helpText_01_03" />
-            <!-- <item type="image" value="resources/gui/helpLineImages/img_01_01.png"/> -->
+            <!-- <item type="image" value="resources/gui/helpLineImages/img_01_01.dds"/> -->
         </helpLine>
 
         <!-- Seasonal Effects (1) -->
