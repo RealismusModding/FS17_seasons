@@ -50,7 +50,7 @@ end
 
 function ssWeatherManagerHailEvent:run(connection)
     if connection:getIsServer() then
-        g_seasons.weatherManager.weather[1] = self.hail
+        g_seasons.weather.weather[1] = self.hail
 
         ssWeatherManager:overwriteRaintable()
     end
