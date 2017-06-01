@@ -853,6 +853,6 @@ function ssWeatherManager:updateHail(day)
         self.weather[1].startDay = self.forecast[1].day
         self.weather[1].endDay = self.forecast[1].day
 
-        g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(self.weather[1]))
+        g_server:broadcastEvent(ssWeatherManagerHailEvent:new(self.weather[1]))
     end
 end
