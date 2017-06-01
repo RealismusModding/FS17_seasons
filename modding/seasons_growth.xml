@@ -5,7 +5,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <growth>
-    <overwrite="true"/>
+    <overwrite="true"/>  <!--Leave as false, or leave out completely if you are only appending new fruits -->
     <defaultFruits>
         <defaultFruit fruitName="newFruit" maxSprayGrowthState="4"/>
     </defaultFruits>
