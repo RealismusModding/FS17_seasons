@@ -12,7 +12,7 @@ This is not required when using the only official published mod by Realismis Mod
 
 ## Making videos
 We have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
-- Do not share the GitHub link.
+- Do not share the GitHub link, if you are using a development version of the mod.
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
 - Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow).
