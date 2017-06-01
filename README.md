@@ -107,7 +107,7 @@ For a better game experience, custom maps should add one new density layer: Seas
   - They drink more water in summer than in winter
   - They need more straw in winter than in summer
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
-  - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+  - Milk and wool production depend on season (Wool only in spring and summer, milk spread, mostly in winter and spring)
 - Animals die when they have no food. (Disabled on 'Easy')
 - Max feeding capacity is lowered to 3 days
 
