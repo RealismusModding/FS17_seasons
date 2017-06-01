@@ -9,6 +9,6 @@ __pycache__
 # Build system
 dist/
 .buildrc
-FS17_seasons*.zip
+FS17*.zip
 node_modules/
 .cookies
