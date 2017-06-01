@@ -8,7 +8,7 @@ Please do give feedback on [Slack](http://slack.realismusmodding.com) and post a
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site, or file sharing site.
 The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
-This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
+This is not required when using the only official published mod by Realismis Modding, on Giants ModHub. It would be a nice gesture however.
 
 ## Making videos
 We have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
