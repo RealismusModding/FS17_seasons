@@ -1,7 +1,5 @@
 # FS17 Seasons
 
-***DO NOT SHARE THIS GITHUB LINK*** ***DO NOT UPLOAD ZIP FILES OF THIS MOD***
-
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
 
 Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
