@@ -205,7 +205,7 @@
 
         <text name="ss_helpTitle_15" text="Állatok - termelékenység" />
         <text name="ss_helpText_15_01" text="A tej és gyapjú termelés függ az évszaktól." />
-        <text name="ss_helpText_15_02" text="Gyapjút csak tavasszal adnak a birkák." />
+        <text name="ss_helpText_15_02" text="Gyapjút csak tavasszal és nyáron adnak a birkák." />
         <text name="ss_helpText_15_03" text="A tej egész évben termelődik. Mivel télen fűvel nem tudsz etetni, a tehenek termelékenysége visszaesik 80% körülire. Ez teljesen normális. A Seasons megnöveli a tejtermelést télen és tavasszal, hogy a fűhiány miatti kiesést kompenzálja." />
 
         <text name="ss_helpTitle_16" text="Seasons menü" />
