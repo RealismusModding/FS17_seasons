@@ -4,7 +4,7 @@
 
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
 
-***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
+Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site, or file sharing site.
