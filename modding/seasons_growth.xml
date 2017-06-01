@@ -4,7 +4,7 @@
 
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
-<growth overwrite="true"> <!--Leave as false, or leave out completely if you are only appending new fruits -->
+<growth overwrite="true"> <!--Leave as false, if you are only appending new fruits. If set to true, you must make sure to define the growth for all fruits. use growth.xml as a template -->
     <defaultFruits>
         <defaultFruit fruitName="newFruit" maxSprayGrowthState="4"/>
     </defaultFruits>
