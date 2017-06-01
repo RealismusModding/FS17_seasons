@@ -8,6 +8,11 @@
 ----------------------------------------------------------------------------------------------------
 
 ssMain = {}
+
+if g_seasons ~= nil then
+    error("Seasons seems to be loaded already, and is trying to be loaded again. Make sure you only have one (1) Seasons mod selected in your mod selection screen.")
+end
+
 getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
 
 g_seasons.lang = ssLang
@@ -55,7 +60,7 @@ end
 
 function ssMain:load(savegame, key)
     self.showControlsInHelpScreen = ssXMLUtil.getBool(savegame, key .. ".settings.showControlsInHelpScreen", true)
-    
+
     self.savegameVersion = ssXMLUtil.getInt(savegame, key .. ".version", self.SAVEGAME_VERSION)
     if self.savegameVersion > self.SAVEGAME_VERSION then
         error("Your savegame was created with a newer version of the Seasons mod and cannot be loaded")
