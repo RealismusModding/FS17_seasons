@@ -56,7 +56,7 @@ function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, default
 
     local file = loadXMLFile("xml", modMapDataPath)
     if file ~= nil then
-        local overWriteData = getXMLBool(file, rootKey .. "overwrite")
+        local overWriteData = getXMLBool(file, rootKey .. "#overwrite")
         if overWriteData == true then
             optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file)
             if optionalDefaultFruits ~= nil then
