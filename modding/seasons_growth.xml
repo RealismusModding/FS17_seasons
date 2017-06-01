@@ -1,5 +1,5 @@
 <!--Sample seasons_growth.xml file to customise growth in maps
-    This shows how to add a growth for a new custom fruit
+    This shows how to add a growth pattern for a new custom fruit
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
