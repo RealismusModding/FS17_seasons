@@ -203,7 +203,7 @@
 
         <text name="ss_helpTitle_15" text="Dieren - Productie" />
         <text name="ss_helpText_15_01" text="melk en wol productie is afhankelijk van het seizoen." />
-        <text name="ss_helpText_15_02" text="Wol wordt alleen geproduceerd in de lente." />
+        <text name="ss_helpText_15_02" text="Wol wordt alleen geproduceerd in de lente en zomer." />
         <text name="ss_helpText_15_03" text="Melk wordt het hele jaar door geproduceerd, maar wordt in de winter en in het voorjaar verhoogd. Terwijl gras niet in de winter kan worden gevoed, zou dit normaal gesproken de produktiviteit van de koeien ten hoogste tot 80% verminderen. Seasons verhoogt echter de melkproductie in de winter en lente om het gebrek aan gras te kunnen compenseren." />
 
         <text name="ss_helpTitle_16" text="Seasons Menu" />

@@ -56,10 +56,19 @@ function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, default
 
     local file = loadXMLFile("xml", modMapDataPath)
     if file ~= nil then
-        optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits)
-        if optionalDefaultFruits ~= nil then
-            optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
+        local overWriteData = getXMLBool(file, rootKey .. "#overwrite")
+        if overWriteData == true then
+            optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file)
+            if optionalDefaultFruits ~= nil then
+                optionalGrowthData = self:getGrowthData(rootKey, file)
+            end
+        else
+            optionalDefaultFruits = self:getDefaultFruitsData(rootKey, file, defaultFruits)
+            if optionalDefaultFruits ~= nil then
+                optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
+            end
         end
+        
         delete(file)
     else
         logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file: " .. modMapDataPath)

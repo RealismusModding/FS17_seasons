@@ -1,27 +1,21 @@
-# FS17 Seasons (Not yet released, work in progress)
-
-***DO NOT SHARE THIS GITHUB LINK*** ***DO NOT UPLOAD ZIP FILES OF THIS MOD***
-
-This mod is not complete and is actively being worked on. Nothing is guaranteed to work and the mod is in a state of constant flux.
+# FS17 Seasons
 
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
 
-***WARNING***: This mod is a Work in Progress. That means at any time your savegame might not work anymore. Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
+Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
 
 ## Publishing
 Only the Realismus Modding team is allowed to publish any of this code as a mod to any mod site, or file sharing site.
 The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
-This is not required when using the only official published mod by Realismis Modding, on ModHub. It would be a nice gesture however.
+This is not required when using the only official published mod by Realismis Modding, on Giants ModHub. It would be a nice gesture however.
 
 ## Making videos
-Because this mod is WIP and not yet released we have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
-- Do not share the GitHub link.
+We have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
+- Do not share the GitHub link, if you are using a development version of the mod.
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
-- Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow),
-  and link to the FS-UK WIP [topic](http://fs-uk.com/forum/index.php?topic=187664.0).
-- Make very clear to your viewers that this mod is a Work In Progress and is not yet released
+- Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow).
 - You do _not_ need to put the mod name in the video title, but you can if you want.
 
 - Join us on [Slack](http://slack.realismusmodding.com) and tell us all about your awesome video.
@@ -38,7 +32,7 @@ Please open a pull request to allow for merging back your adjustments. (See also
 Please join us on [Slack](http://slack.realismusmodding.com) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
 
 ## For map makers
-For a better game experience, custom maps should add two new density layers: one snow mask and one salt layer. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://slack.realismusmodding.com).
+For a better game experience, custom maps should add one new density layer: Seasons mask. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://slack.realismusmodding.com).
 
 ## Features
 
@@ -113,7 +107,7 @@ For a better game experience, custom maps should add two new density layers: one
   - They drink more water in summer than in winter
   - They need more straw in winter than in summer
   - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
-  - Milk and wool production depend on season (Wool only in spring, milk spread, mostly in winter and spring)
+  - Milk and wool production depend on season (Wool only in spring and summer, milk spread, mostly in winter and spring)
 - Animals die when they have no food. (Disabled on 'Easy')
 - Max feeding capacity is lowered to 3 days
 
