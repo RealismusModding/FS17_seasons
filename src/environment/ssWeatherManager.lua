@@ -847,9 +847,9 @@ function ssWeatherManager:updateHail(day)
         dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 
         self.weather[1].rainTypeId = "hail"
-        self.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart, ["mode"] = dayStart + 4, ["max"] = dayEnd}) * 60 * 60 * 1000
-        self.weather[1].endDayTime = self.weather[1].startDayTime + self.weather[1].duration
+        self.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart, ["mode"] = dayStart + 4, ["max"] = dayEnd - 6}) * 60 * 60 * 1000
         self.weather[1].duration = ssUtil.triDist({["min"] = 1, ["mode"] = 2, ["max"] = 3}) * 60 * 60 * 1000
+        self.weather[1].endDayTime = self.weather[1].startDayTime + self.weather[1].duration
         self.weather[1].startDay = self.forecast[1].day
         self.weather[1].endDay = self.forecast[1].day
 
