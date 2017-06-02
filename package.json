@@ -1,6 +1,6 @@
 {
   "name": "FS17_seasons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Farming Simulator 2017 mod adding Seasons",
   "main": "src/loader.lua",
   "repository": {
@@ -39,7 +39,7 @@
   },
   "fs": {
     "modDescRev": "37",
-    "modZipName": "FS17Contest_Seasons",
+    "modZipName": "FS17_RM_S0_Seasons",
     "simpleVersion": 1
   }
 }
