@@ -11,6 +11,7 @@ Weather forecast HUD -- ian898, blacky_BPG
 Bale fermentation & field job manager -- baron
 Tiny dedicated server warning fix -- Decker_MMIV
 In-game English help texts - leifege640
+Floating dust / pollen values according to season - BulletBill83
 
 ## Translations
 Polish - Dzi4d3k, KITT3000
