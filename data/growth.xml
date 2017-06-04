@@ -25,9 +25,9 @@
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
+            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="2"/>
+            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="2"/>
+            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="2"/>
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
             <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
         </gt>
@@ -116,9 +116,9 @@
             <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="9"> <!--mid autumn to late autumn-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="2"/>
+            <fruit fruitName="barley"  normalGrowthState="1" />
+            <fruit fruitName="wheat"   normalGrowthState="1" />
+            <fruit fruitName="rape"    normalGrowthState="1" />
             <fruit fruitName="maize" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="soybean" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
             <fruit fruitName="sunflower" setGrowthState="1"  desiredGrowthState="CUT"/>
