@@ -23,6 +23,7 @@ Czech - gorgona, DrewCZ
 Spanish - PromGames, Vanquish081
 Dutch - JoshvZeyl
 Hungarian - n0tr3adY
+Brazilian Portuguese - mayhem17
 
 ## Testers
 astro80
