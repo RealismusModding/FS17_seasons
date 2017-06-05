@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>
-        mayhem17
-    </translationContributors>
-
+    <translationContributors>mayhem17</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostrar previsão do tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Manutenção veicular" />
@@ -75,21 +72,20 @@
 
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Primavera chegou; flores e árvores floreiam. É tempo de cultivar e plantar seus campos." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_0" text="Primavera chegou; flores e árvores floreiam. É tempo de cultivar e plantar seus campos." />
         <text name="SS_SEASON_INTRO_1" text="Os dias são mais longos no verão. É tempo de fazer feno e olhar os cultivos crescerem." />
         <text name="SS_SEASON_INTRO_2" text="Folhas estão ficando laranja e está fazendo mais frio - Outono chegou. Não se esqueça de colher os grãos antes do inverno chegar." />
-        <text name="SS_SEASON_INTRO_3" text="Inverno caiu e os animais necessitam de mais atenção. O solo irá congelar e não será possível trabalhar neles. É tempo para cortar lenha e retirar neve." /> <!-- winter -->
+        <text name="SS_SEASON_INTRO_3" text="Inverno caiu e os animais necessitam de mais atenção. O solo irá congelar e não será possível trabalhar neles. É tempo para cortar lenha e retirar neve." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Não mostrar novamente" />
 
-        <text name ="ss_version" text="Você baixou uma cópia roubada de nosso mod de algum site que não respeita a comunidade e violou nosso Copyright, ou baixou uma versão incompleta deste mod de nosso repositório. Nós apreciamos o seu entusiasmo, porém infelizmente seu savegame é incompatível com esta versão do Seasons mod. Por favor não use sites que roubam de modders no futuro. Você precisará iniciar um novo jogo." />
+        <text name="ss_version" text="Você baixou uma cópia roubada de nosso mod de algum site que não respeita a comunidade e violou nosso Copyright, ou baixou uma versão incompleta deste mod de nosso repositório. Nós apreciamos o seu entusiasmo, porém infelizmente seu savegame é incompatível com esta versão do Seasons mod. Por favor não use sites que roubam de modders no futuro. Você precisará iniciar um novo jogo." />
         <text name="warning_soilIsFrozen" text="O solo está congelado. Você não pode trabalhar nele!" />
         <text name="warning_doNotThreshWithMoisture" text="Não debulhe quando os cultivos estão molhados!" />
         <text name="warning_animalsKilled" text="Animais morreram! (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="A capacidade máxima de sustentos foi atingida para 3 dias" />
         <text name="msg_welcome" text="Bem vindos ao Seasons mod por Realismus Modding. Por favor cheque nossa área de ajuda apertando Esc para saber como utilizar melhor este mod." />
 
-        <!-- GUI -->
         <text name="ui_pageOverview" text="Geral" />
         <text name="ui_pageSettings" text="Preferências" />
         <text name="ui_pageDebug" text="Ferramentas de debug" />
