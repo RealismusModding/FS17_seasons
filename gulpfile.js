@@ -61,8 +61,8 @@ function createVersionName() {
     const tag = git.tag();
 
     let versionName = "";
-    if (tag !== git.long()) {
-        versionName = tag;
+    if (!git.isTagDirty()) {
+        versionName = git.tag();
     } else {
         versionName = branch + "_" + short;
     }
