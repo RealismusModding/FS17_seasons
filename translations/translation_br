@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <translationContributors>
+        mayhem17
+    </translationContributors>
+
+    <texts>
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostrar previsão do tempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Manutenção veicular" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Abrir menu" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="Distância de plantagem (%d m)" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Pular noite" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Esconder previsão do tempo" />
+
+        <text name="SS_WEEKDAY_1" text="Segunda-feira" />
+        <text name="SS_WEEKDAY_2" text="Terça-feira" />
+        <text name="SS_WEEKDAY_3" text="Quarta-feira" />
+        <text name="SS_WEEKDAY_4" text="Quinta-feira" />
+        <text name="SS_WEEKDAY_5" text="Sexta-feira" />
+        <text name="SS_WEEKDAY_6" text="Sábado" />
+        <text name="SS_WEEKDAY_7" text="Domingo" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="Seg" />
+        <text name="SS_WEEKDAY_SHORT_2" text="Ter" />
+        <text name="SS_WEEKDAY_SHORT_3" text="Qua" />
+        <text name="SS_WEEKDAY_SHORT_4" text="Qui" />
+        <text name="SS_WEEKDAY_SHORT_5" text="Sex" />
+        <text name="SS_WEEKDAY_SHORT_6" text="Sab" />
+        <text name="SS_WEEKDAY_SHORT_7" text="Dom" />
+
+        <text name="SS_SEASON_0" text="Primavera" />
+        <text name="SS_SEASON_1" text="Verão" />
+        <text name="SS_SEASON_2" text="Outono" />
+        <text name="SS_SEASON_3" text="Inverno" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="Início de Primavera" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Meio de Primavera" />
+        <text name="SS_SEASON_FULL_NAME_3" text="Final de Primavera" />
+        <text name="SS_SEASON_FULL_NAME_4" text="Início de Verão" />
+        <text name="SS_SEASON_FULL_NAME_5" text="Meio de Verão" />
+        <text name="SS_SEASON_FULL_NAME_6" text="Final de Verão" />
+        <text name="SS_SEASON_FULL_NAME_7" text="Início de Outono" />
+        <text name="SS_SEASON_FULL_NAME_8" text="Meio de Outono" />
+        <text name="SS_SEASON_FULL_NAME_9" text="Final de Outono" />
+        <text name="SS_SEASON_FULL_NAME_10" text="Início de Inverno" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Meio de Inverno" />
+        <text name="SS_SEASON_FULL_NAME_12" text="Final de Inverno" />
+
+        <text name="SS_MONTH_SHORT_1" text="Jan" />
+        <text name="SS_MONTH_SHORT_2" text="Fev" />
+        <text name="SS_MONTH_SHORT_3" text="Mar" />
+        <text name="SS_MONTH_SHORT_4" text="Abr" />
+        <text name="SS_MONTH_SHORT_5" text="Mai" />
+        <text name="SS_MONTH_SHORT_6" text="Jun" />
+        <text name="SS_MONTH_SHORT_7" text="Jul" />
+        <text name="SS_MONTH_SHORT_8" text="Ago" />
+        <text name="SS_MONTH_SHORT_9" text="Set" />
+        <text name="SS_MONTH_SHORT_10" text="Out" />
+        <text name="SS_MONTH_SHORT_11" text="Nov" />
+        <text name="SS_MONTH_SHORT_12" text="Dez" />
+
+        <text name="SS_VEHICLE_TAXES" text="Imposto veicular" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Manutenção Veicular" />
+        <text name="SS_VEHICLE_REPAIRS" text="Reparo Veicular" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="Você não tem dinheiro suficiente para manutenção deste veículo" />
+        <text name="SS_VEHICLE_REPAIRED" text="Custo de manutenção para %s foi %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Manter %s foi %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Manutenção requirida" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas trabalhadas ou %d dias faltando para manutenção" />
+        <text name="SS_REPAIR_DIALOG" text="Você quer fazer manutenção no %s por %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Manutenção" />
+        <text name="warning_repairBrokenMachine" text="Falha de motor. Repare seu equipamento!" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
+
+        <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
+
+        <text name="SS_SEASON_INTRO_0" text="Primavera chegou; flores e árvores floreiam. É tempo de cultivar e plantar seus campos." /> <!-- spring -->
+        <text name="SS_SEASON_INTRO_1" text="Os dias são mais longos no verão. É tempo de fazer feno e olhar os cultivos crescerem." />
+        <text name="SS_SEASON_INTRO_2" text="Folhas estão ficando laranja e está fazendo mais frio - Outono chegou. Não se esqueça de colher os grãos antes do inverno chegar." />
+        <text name="SS_SEASON_INTRO_3" text="Inverno caiu e os animais necessitam de mais atenção. O solo irá congelar e não será possível trabalhar neles. É tempo para cortar lenha e retirar neve." /> <!-- winter -->
+        <text name="SS_BUTTON_OK" text="OK" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Não mostrar novamente" />
+
+        <text name ="ss_version" text="Você baixou uma cópia roubada de nosso mod de algum site que não respeita a comunidade e violou nosso Copyright, ou baixou uma versão incompleta deste mod de nosso repositório. Nós apreciamos o seu entusiasmo, porém infelizmente seu savegame é incompatível com esta versão do Seasons mod. Por favor não use sites que roubam de modders no futuro. Você precisará iniciar um novo jogo." />
+        <text name="warning_soilIsFrozen" text="O solo está congelado. Você não pode trabalhar nele!" />
+        <text name="warning_doNotThreshWithMoisture" text="Não debulhe quando os cultivos estão molhados!" />
+        <text name="warning_animalsKilled" text="Animais morreram! (%d)" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="A capacidade máxima de sustentos foi atingida para 3 dias" />
+        <text name="msg_welcome" text="Bem vindos ao Seasons mod por Realismus Modding. Por favor cheque nossa área de ajuda apertando Esc para saber como utilizar melhor este mod." />
+
+        <!-- GUI -->
+        <text name="ui_pageOverview" text="Geral" />
+        <text name="ui_pageSettings" text="Preferências" />
+        <text name="ui_pageDebug" text="Ferramentas de debug" />
+
+        <text name="ui_buttonSave" text="Aplicar" />
+        <text name="ui_snowOneLayer" text="1 camada apenas" />
+        <text name="ui_days" text="%i dias" />
+        <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
+        <text name="ui_temperatureCelcius" text="Celcius" />
+
+        <text name="ui_plantingSeason" text="Temporada de plantar" />
+        <text name="ui_harvestSeason" text="Temporada de colher" />
+
+        <text name="tooltip_seasonLength" text="A duração de uma estação em dias. Um ano são quatro estações" />
+        <text name="tooltip_seasonIntros" text="Mostre uma introdução a cada estação" />
+        <text name="tooltip_snow" text="Neve irá cair em invernos fortes e bloquear ruas" />
+        <text name="tooltip_controlsHelp" text="Mostre a previsão do tempo e a tecla de menu na caixa de ajuda" />
+        <text name="tooltip_snowTracks" text="Veículos esmagam a neve quando passam sobre ela" />
+        <text name="tooltip_controlsTemperature" text="Ajustar escala de temperatura a ser utilizada" />
+        <text name="tooltip_moisture" text="Não permitir debulhar cultivos quando estão molhados" />
+
+        <text name="setting_seasonIntros" text="Introduções das Estações" />
+        <text name="setting_seasonLength" text="Duração das Estações" />
+        <text name="setting_snow" text="Modo de neve" />
+        <text name="setting_controlsHelp" text="Teclas na caixa de ajuda" />
+        <text name="setting_snowTracks" text="Rastros de neve" />
+        <text name="setting_controlsTemperature" text="Escala de temperatura" />
+        <text name="setting_moisture" text="Cultivos molhados" />
+
+        <text name="dialog_applySettings" text="Você tem certeza que quer mudar as preferências? Mudanças na duração podem resultar em campos que somente serão reparados após um ano dentro do jogo." />
+        <text name="dialog_resetGrowth" text="Você carregou o Seasons em um jogo antigo. Seasons irá resetar todos os campos para seu estado original para sincronizar o tempo. Você perderá todos seus cultivos. Caso não queira resetar seus cultivos, o Seasons pode não funcionar como esperado." />
+        <text name="dialog_resetGrowth_title" text="Resetar cultivos" />
+        <text name="dialog_resetGrowth_no" text="Manter cultivos" />
+        <text name="dialog_resetGrowth_yes" text="Reseta" />
+        <text name="dialog_timeTravel" text="O jogo está sincronizando depois de passar o tempo" />
+        <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
+
+        <text name="fillType_snow" text="Neve" />
+
+        <text name="ss_helpCategory" text="Seasons" />
+
+        <text name="ss_helpTitle_01" text="Seasons" />
+        <text name="ss_helpText_01_01" text="Seasons é um mod que melhora o realismo no Farming Simulator ajustando quase todos os aspectos para um parâmetro mais realista. Tudo desde efeitos seasonais seasonal effects até crescimento de cultivos e produção de animais foi modificado para um padrão mais real." />
+        <text name="ss_helpText_01_02" text="O ano é dividido em 4 estações: primavera, verão, outono e inverno. Cada estação é quebrada em 3 partes: início, meio e fim. Estas partes são denominadas transições." />
+        <text name="ss_helpText_01_03" text="As suas atividades são ligadas com a época do ano em que elas acontecem na vida real." />
+
+        <text name="ss_helpTitle_02" text="Efeitos sazonais (1)" />
+        <text name="ss_helpText_02_01" text="Clima é aleatório de dia para dia, mas segue um padrão de estação para estação." />
+        <text name="ss_helpText_02_02" text="Primavera será chuvosa com neblina e chances de dias de sol. Verão será quente e seco. Chuvas de granizo podem ocorrer sem nenhum aviso. Outono será chuvoso com alguns dias de sol. Inverno terá chuvas, mas será frio suficiente para cair neve, talvez até não descongele e fique no solo." />
+        <text name="ss_helpText_02_03" text="Neve irá cair em caçambas e pás carregadeiras, a não ser que estejam sob cobertura ou cobertas com lona. Neve também irá reduzir a tração, fazendo os veículos mais lentos." />
+
+        <text name="ss_helpTitle_03" text="Efeitos sazonais (2)" />
+        <text name="ss_helpText_03_01" text="Horas de sol são afetadas de acordo com a estação. Invernos têm dias curtos (8 horas de sol) enquanto verões têm dias compridos (17 horas de sol)." />
+        <text name="ss_helpText_03_02" text="Estoques de silagem e fenos requerem tempo para fermentar. Demoram um terço da estação (1 transição) para completamente fermentar. Palha encapada não irá fermentar, mas serão protegidas do tempo." />
+        <text name="ss_helpText_03_03" text="Seasons também afetará árvores e folhas. As árvores irão mudar de estado de acordo com as mudanças de temperaturas sazonais. Folhas irão mudar de cor e cair no outono. Árvores irão hibernar no inverno e começarão a esverdear na primavera." />
+
+        <text name="ss_helpTitle_04" text="Previsão do tempo" />
+        <text name="ss_helpText_04_01" text="A previsão do tempo foi reintroduzida no Seasons e você pode vê-la apertando Alt esquerdo + F" />
+        <text name="ss_helpText_04_02" text="A previsão do tempo mostra as temperaturas máximas e mínimas e o clima do dia (sol, nevoeiro, chuvoso, neve, nublado) pelos próximos 7 dias. Chuvas de granizo não aparecerão na previsão do tempo, assim como são imprevisíveis na vida real." />
+        <text name="ss_helpText_04_03" text="O número à direita em cada previsão representa o dia da estação." />
+
+        <text name="ss_helpTitle_05" text="Solo" />
+        <text name="ss_helpText_05_01" text="A temperatura do solo é modelada usando equações termodinâmicas e dados históricos. Isto significa que o solo irá congelar no inverno quando a temperatura ambiente baixar a um certo patamar por um certo período de tempo. O solo então irá descongelar na primavera quando a temperatura subir por um certo período de tempo." />
+        <text name="ss_helpText_05_02" text="O solo não poderá ser modificado quando está congelado. Cultivos não irão crescer no solo congelado." />
+        <text name="ss_helpText_05_03" text="Cultivos somente germinarão quando o solo está em uma temperatura acima a temperatura de germinação de cada cultivo. As temperaturas de germinação estão incluídas na primeira página das opções do Seasons (Alt esquerdo + S)." />
+
+        <text name="ss_helpTitle_06" text="Cultivos - Introdução" />
+        <text name="ss_helpText_06_01" text="Quando começares um novo jogo todos os cultivos irão ser resetados ao estado de colhidos para simular o fato dos campos não serem trabalhados desde o outono passado. Quando utilizar o Seasons pela primeira vez num jogo já existente você terá a opção de resetar os cultivos ou não." />
+        <text name="ss_helpText_06_02" text="O padrão de crescimento dos cultivos foi substituído pelo do Seasons. Cultivos seguirão um padrão realístico conforme os seus padrões correspondentes na vida real. Isto também significa que no inverno os cultivos morrerão caso sejam plantados na época errada." />
+        <text name="ss_helpText_06_03" text="Cultivos estarão prontos para colher apenas em seus estágios finais, exceto pelo poplar e nabos forrageiros, e ficarão nestes estágios finais até morrerem no inverno." />
+        <text name="ss_helpText_06_04" text="Quando um cultivo sem raiz atinge o primeiro estágio de colheita de acordo com a tabela de crescimento do menu, é tempo de colher. Este é o estágio final da colheita." />
+        <text name="ss_helpText_06_05" text="Você ainda pode colher silagem de cultivos verdes." />
+
+        <text name="ss_helpTitle_07" text="Cultivos - Cultivos aráveis" />
+        <text name="ss_helpText_07_01" text="As fases de crescimento dos cultivos são maiores. Podem durar meio ano para um cultivo atingir o estado de colheita." />
+        <text name="ss_helpText_07_02" text="O Inverno irá matar a maioria dos cultivos, mas cultivos de inverno e primavera são possíveis. Trigo, cevada, poplar, grama, rabo forrageiro e canola podem ser plantados no outono para o inverno para colheita na primavera. Somente tenha certeza que o solo está aquecido o suficiente para germinação destes cultivos." />
+        <text name="ss_helpText_07_03" text="Milho, soja, girassol, beterraba e batata necessitam serem plantadas na primavera. Cheque a tabela de crescimento no menu do Seasons pois alguns cultivos não podem serem plantados no início da primavera ou morrerão, mesmo se o solo estiver com temperatura de germinação apropriada." />
+
+        <text name="ss_helpTitle_08" text="Cultivos - Feno, Palha e Grama" />
+        <text name="ss_helpText_08_01" text="No inverno a grama é resetada para seu estado de colhida para simular a morte delas devido ao frio." />
+        <text name="ss_helpText_08_02" text="Fardos de grama precisam serem utilizados ou encapados para silagem em até 2 dias depois de terem sido criados. Depois de 2 dias a grama irá apodrecer e o fardo desaparecerá." />
+        <text name="ss_helpText_08_03" text="Fardos de feno, grama e palha começarão a reduzir de tamanho, e eventualmente desaparecerão após alguns dias. Fardos de grama serão reduzidas a meia-noite de cada dia. Palha e feno serão reduzidos a cada transição de estação e também quando expostos a chuva." />
+        <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
+
+        <text name="ss_helpTitle_09" text="Cultivos - Árvores" />
+        <text name="ss_helpText_09_01" text="Árvores necessitam de mais tempo para atingir o seu tamanho máximo. Será necessário 5 anos de jogo para uma árvore atingir seu tamanho máximo e depois do segundo ano podem ser cortadas." />
+        <text name="ss_helpText_09_02" text="Árvores não crescerão se forem plantadas muito perto umas das outras. Para reiniciar um crescimento de uma árvore você terá que descartar as outras árvores." />
+
+        <text name="ss_helpTitle_10" text="Cultivos - Efeitos do clima" />
+        <text name="ss_helpText_10_01" text="Chuva, granizo e neve afetam o nível de umidade dos cultivos. Caso os cultivos estejam muito molhados por causa de mau tempo, você não conseguirá colher os cultivos. Noites de verão úmidas podem ocorrer sem avisos prévios." />
+        <text name="ss_helpText_10_02" text="Depois de chuvas seus cultivos necessitarão de tempo para secarem, e isto irá depender da temperatura ambiente e a época do ano. Climas quentes significam que os cultivos secarão mais rápido que no frio." />
+        <text name="ss_helpText_10_03" text="Utilizando um implemento de secagem no feno molhado produzirá grama molhada. Tenha certeza que os cultivos estão secos antes de utilizar os secadores." />
+        <text name="ss_helpText_10_04" text="Em um mod de mapa que já está com a snow mask instalada pelo criador o feno e a palha irão apodrecer se expostos a chuva ou neve, a não ser que estejam resguardados em cobertura com a snow mask. Chuva e neve não aferarão fardos em mapas sem a snow mask." />
+
+        <text name="ss_helpTitle_11" text="Manutenção" />
+        <text name="ss_helpText_11_01" text="Teus tratores e colheitadeiras requerem manutenção periódica para manterem a operação normal. O período de manutenção é a cada 30 horas ou meio ano, qualquer que atinja primeiro. Veículos que não estão com manutenção em dia podem ligar com dificuldades." />
+        <text name="ss_helpText_11_02" text="Você pode consertar seus veículos na concessionária ou em sua oficina. Para consertar um veículo, guie ele para a concessionária, ou sua oficina, e pressione Alt esquerdo + R. Note que é mais caro para consertar o seu veículo na concessionária." />
+        <text name="ss_helpText_11_03" text="A idade de seu veículo é a quantidade de dias desde a última manutenção." />
+        <text name="ss_helpText_11_04" text="Apenas veículos dirigíveis requerem manutenção periódica. Ferramentas e implementos serão reparados automaticamente conforme necessitam." />
+
+        <text name="ss_helpTitle_12" text="Economia" />
+        <text name="ss_helpText_12_01" text="A cota de empréstimo foi mudada de $CURRENCY_SYMBOL200,000 para 30% do valor de suas terras e áreas construídas. O empréstimo mínimo é de  $CURRENCY_SYMBOL300,000 e o máximo $CURRENCY_SYMBOL1,500,000." />
+        <text name="ss_helpText_12_02" text="Rendas com missões foram reduzidas. Você receberá o mesmo que 5 vezes a renda de um trabalhador temporário no mesmo campo." />
+        <text name="ss_helpText_12_03" text="Manutenção de todos os veículos (periódicas também inclusas) são a soma de todas as manutençoes e impostos relativos a quantos equipamentos estão sendo utilizados. Máquinas limpas reduzem os custos de manutenção. Máquinas que não estão sendo utilizadas também terão custos reduzidos de manutenção." />
+        <text name="ss_helpText_12_04" text="A tabela de preços dos cultivos varia de acordo com as mudanças nas estações para um padrão mais realista." />
+
+        <text name="ss_helpTitle_13" text="Ajuda Contratada" />
+        <text name="ss_helpText_13_01" text="Trabalhadores contratados ganharão horas extra. Caso um trabalhador é utilizado antes das 6h ou depois das 18h, ou então no fim de semana, seu pagamento será 50% mais alto." />
+
+        <text name="ss_helpTitle_14" text="Animais - Introdução" />
+        <text name="ss_helpText_14_01" text="Produção animal foi ajustada de acordo com a estação para um padrão realístico. Todos os animais beberão mais água no verão que no inverno. Gado e leitões consumirão mais palha no inverno. A capacidade máxima dos recipientes foi reduzida de 6 dias para 3 dias." />
+        <text name="ss_helpText_14_02" text="Animais cruzam apenas em certas épocas do ano. Porcos e ovelhas reproduzem na primavera, enquento gado se reproduz no verão." />
+        <text name="ss_helpText_14_03" text="Animais morrerão se não tiverem água ou comida. Isto é desabilitado no modo fácil." />
+        <text name="ss_helpText_14_04" text="Você não poderá repor grama no inverno. Use feno no lugar." />
+
+        <text name="ss_helpTitle_15" text="Animais - Produção" />
+        <text name="ss_helpText_15_01" text="Leite e lã dependem da estação." />
+        <text name="ss_helpText_15_02" text="Lã só é produzida na primavera e no verão." />
+        <text name="ss_helpText_15_03" text="Leite é produzido o ano inteiro, porém sua capacidade máxima de produção é atingida no inverno e na primavera. Enquanto grama não pode ser reposta no inverno, a produtividade das vacas estará reduzida a 80%. No entanto, Seasons aumenta a produção de leite no inverno e primavera para compensar a falta de grama na alimentação nestes meses." />
+
+        <text name="ss_helpTitle_16" text="Menu do Seasons" />
+        <text name="ss_helpText_16_01" text="O Menu do Seasons é utilizado com referência para plantar e alterar preferências. Este menu pode ser acessado pressionando Alt esquerdo + S." />
+        <text name="ss_helpText_16_02" text="Na primeira aba temos a tabela de crescimento. As temperaturas de germinação de todos os cultivos são mostradas na coluna esquerda. Case a temperatura de um cultivos esteja branco, está quente o suficiente para plantar aquele cultivo. Caso esteja azul, está muito frio." />
+        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3/6/9/12 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
+
+        <text name="ss_helpTitle_17" text="HUD" />
+        <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />
+        <text name="ss_helpText_17_02" text="Bem abaixo do relógio é mostrado a época de transição (início/meio/fim)e o dia da estação." />
+        <text name="ss_helpText_17_03" text="Quando ativada, a previsão de tempo irá aparecer embaixo do relógio no canto superior direito." />
+        <text name="ss_helpText_17_04" text="Quando a caixa de ajuda está ativada (F1) o timer de manutenção é mostrado. Este é apenas mostrado quando estás dentro de algum veículo." />
+
+        <text name="ss_helpTitle_18" text="Diversos" />
+        <text name="ss_helpText_18_01" text="Caso não queira trabalhar durante a noite, tens a opção de pular para a manhã. Caso a noite caia e estejas a pé, pressione Alt esquerdo  + N para pular para a próxima manhã." />
+        <text name="ss_helpText_18_02" text="Caso decida mudar a duração da estações no meio de um jogo salvo, é recomendado: 1) mude no inverno para diminuir efeitos não desejados em cultivos e 2) reinicie o jogo/servidor após mudar a duração." />
+        <text name="ss_helpText_18_03" text="O jogo é seu e você joga como queira, porém é sugestão para um desafio maior jogar em estações de 9 dias com aceleração de tempo 5x. Deste jeito você passa a primavera cultivando o solo e plantando, fertilizando e colhendo feno no verão, colhendo e arando no outono, e cuidando de animais, máquinas, florestas, e vendendo grãos no inverno." />
+        <text name="ss_helpText_18_04" text="Todos os veículos precisam serem ligados manualmente." />
+    </texts>
+</l10n>
