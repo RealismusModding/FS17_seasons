@@ -399,6 +399,8 @@ end
 -- A complex algorithm
 function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     local oldSeasonLength = self.daysInSeason -- 6 ELIM
+    if oldSeasonLength == newSeasonLength then return end
+
     local actualCurrentDay = self:currentDay() -- 9
 
     local year = self:currentYear(actualCurrentDay) -- 11 ELIM
