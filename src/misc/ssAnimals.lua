@@ -45,7 +45,7 @@ end
 function ssAnimals:loadFromXML()
     local elements = {
         ["seasons"] = {},
-        ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool"}
+        ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool", "dailyUpkeep"}
     }
 
     self.data = ssSeasonsXML:loadFile(g_seasons.modDir .. "data/animals.xml", "animals", elements)
@@ -104,6 +104,7 @@ function ssAnimals:adjustAnimals()
             desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0) * self.seasonLengthfactor
             desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0) * self.seasonLengthfactor
             desc.dailyUpkeep = ssSeasonsXML:getFloat(self.data, season, typ .. ".dailyUpkeep", 0) * self.seasonLengthfactor
+            g_currentMission.husbandries[typ].dailyUpkeep = desc.dailyUpkeep
         end
     end
 
