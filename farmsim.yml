@@ -6,6 +6,8 @@ zip_name: FS17_RM_S0_Seasons
 
 templates:
   simpleVersion: 1
+  debug: false
+  verbose: false
 
 translations:
   base: en
@@ -22,3 +24,8 @@ translations:
     - hu
 
 descversion: 37
+
+release:
+  templates:
+    debug: false
+    verbose: false
