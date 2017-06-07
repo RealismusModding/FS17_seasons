@@ -24,8 +24,3 @@ translations:
     - hu
 
 descversion: 37
-
-release:
-  templates:
-    debug: false
-    verbose: false
