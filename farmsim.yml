@@ -1,0 +1,24 @@
+name: Seasons
+version: 1.0.1.0
+main: src/loader.lua
+multiplayer: true
+zip_name: FS17_RM_S0_Seasons
+
+templates:
+  simpleVersion: 1
+
+translations:
+  base: en
+  languages:
+    - cz
+    - de
+    - en
+    - es
+    - fr
+    - it
+    - nl
+    - pl
+    - ru
+    - hu
+
+descversion: 37
