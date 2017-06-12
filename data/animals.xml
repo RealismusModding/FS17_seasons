@@ -32,10 +32,10 @@
                 <straw>15</straw>
                 <food>81</food>
                 <water>10</water>
-                <birthRate>0.066666667</birthRate>
+                <birthRate>0.03333333</birthRate>
                 <manure>27</manure>
                 <liquidManure>46</liquidManure>
-                <dailyUpkeep>30</dailyUpkeep>
+                <dailyUpkeep>20</dailyUpkeep>
             </properties>
         </spring>
 
@@ -94,10 +94,10 @@
                 <straw>20</straw>
                 <food>90</food>
                 <water>7.5</water>
-                <birthRate>0</birthRate>
+                <birthRate>0.03333333</birthRate>
                 <manure>30</manure>
                 <liquidManure>53</liquidManure>
-                <dailyUpkeep>8</dailyUpkeep>
+                <dailyUpkeep>30</dailyUpkeep>
             </properties>
         </autumn>
 
