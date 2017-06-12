@@ -1,5 +1,7 @@
 # FS17 Seasons
 
+***WARNING***: You are looking at the DEVELOPMENT VERSION of the Seasons mod. To play Seasons, download at the Giants ModHub: [https://farming-simulator.com/mod.php?mod_id=79288](https://farming-simulator.com/mod.php?mod_id=79288). The code here might break your savegame, and computer, and give a lot of pain.
+
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
 
 Please do give feedback on [Slack](http://slack.realismusmodding.com) and post any issues you find!
@@ -10,12 +12,12 @@ The code is open for your own use, but give credit where due.
 Thus, when building your own version of Seasons, give a credit notice to Realismus Modding when publishing screenshots or images.
 This is not required when using the only official published mod by Realismis Modding, on Giants ModHub. It would be a nice gesture however.
 
-## Making videos
+## Making videos of development version
 We have a couple of rules regarding videos to keep both our and our players experience the best. You are allowed to make videos with Seasons, under a couple of simple conditions:
 - Do not share the GitHub link, if you are using a development version of the mod.
 - Do not explain how to install this mod. (The mod might also change at any moment, making your video outdated)
 - Give credit to 'Realismus Modding' as creators of the mod.
-- Link to our [YouTube channel](https://www.youtube.com/channel/UCsuba_zBOv5YBpJZizLD2Ow).
+- Link to our [YouTube channel](https://www.youtube.com/c/realismusmodding).
 - You do _not_ need to put the mod name in the video title, but you can if you want.
 
 - Join us on [Slack](http://slack.realismusmodding.com) and tell us all about your awesome video.
@@ -32,7 +34,7 @@ Please open a pull request to allow for merging back your adjustments. (See also
 Please join us on [Slack](http://slack.realismusmodding.com) to discuss any changes you wish to make via pull requests, otherwise they are likely to be rejected, except for translations.
 
 ## For map makers
-For a better game experience, custom maps should add one new density layer: Seasons mask. See [here](https://github.com/RealismusModding/FS17_seasons/wiki/Info-for-Map-Makers) for more information, or join our [Slack](http://slack.realismusmodding.com).
+For a better game experience, custom maps should add one new density layer: Seasons mask. See [here](https://www.realismusmodding.com/mods/seasons/manual/modding/info-for-map-makers) for more information, or join our [Slack](http://slack.realismusmodding.com).
 
 ## Features
 
@@ -74,10 +76,10 @@ For a better game experience, custom maps should add one new density layer: Seas
 - Treshing can only be done when moisture content of the crop is sufficiently low. After rain the crop needs time and sunny weather to dry. Moist summer nights can also occur.
 - Custom fruits are handled gracefully by using barley's growth patterns. Map makers can choose to modify the growth patterns of vanilla fruits and also make the mod aware of custom fruits by supplying custom growth patterns for them
 - Crops are only harvestable in the final growth state, except for poplar, oilseedradish, sugarbeet and potato. Min forage growth state has not been modified.
-- Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage. 
+- Once a non-root crop reaches the first harvestable stage according to the growth overview in the esc menu, it is ready to harvest. This is the final harvestable stage.
 - Using a tedder when crops are wet or when it is raining, leaves wet grass, not dry grass.
 - Growth and withering settings are disabled as this mod overwrites this functionality
-- The mod also controls the growth of planted trees. It takes 5 years for trees to be fully grown, harvestable after 2 years. 
+- The mod also controls the growth of planted trees. It takes 5 years for trees to be fully grown, harvestable after 2 years.
 - Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees.
 
 ### Maintenance
@@ -115,7 +117,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - Do not fast forward faster than 6000x on singleplayer (preferable even slower)
 - Do not fast forward faster than 1200x on multiplayer (120x is even better)
 - The game will get out of sync with the extra load of Seasons
-- The released version of this mod does not work with save games created using any previous versions. Delete the old version and start a new save game. 
+- The released version of this mod does not work with save games created using any previous versions. Delete the old version and start a new save game.
 
 
 ## Mod conflicts
