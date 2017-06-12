@@ -778,10 +778,6 @@ function ssWeatherManager:loadFromXML(path)
             break
         end
 
-        if g_currentMission.missionDynamicInfo.isMultiplayer then
-            probHail = 0
-        end
-
         local config = {
             ["mu"] = mu,
             ["sigma"] = sigma,

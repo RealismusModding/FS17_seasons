@@ -27,21 +27,20 @@ end
 
 function ssWeatherManagerHailEvent:writeStream(streamId, connection)
     streamWriteInt16(streamId, self.hail.startDay)
-    streamWriteFloat32(streamId, self.hail.endDayTime)
-    streamWriteFloat32(streamId, self.hail.startDayTime)
-    streamWriteInt16(streamId, self.hail.endDay)
-    streamWriteFloat32(streamId, self.hail.duration)
+    streamWriteInt32(streamId, self.hail.endDayTime)
+    streamWriteInt32(streamId, self.hail.startDayTime)
+    streamWriteInt32(streamId, self.hail.duration)
 end
 
 function ssWeatherManagerHailEvent:readStream(streamId, connection)
     local hail = {}
 
     hail.startDay = streamReadInt16(streamId)
-    hail.endDayTime = streamReadFloat32(streamId)
-    hail.startDayTime = streamReadFloat32(streamId)
-    hail.endDay = streamReadInt16(streamId)
+    hail.endDayTime = streamReadInt32(streamId)
+    hail.startDayTime = streamReadInt32(streamId)
+    hail.duration = streamReadInt32(streamId)
+    hail.endDay = hail.startDay
     hail.rainTypeId = "hail"
-    hail.duration = streamReadFloat32(streamId)
 
     self.hail = hail
 
@@ -50,8 +49,15 @@ end
 
 function ssWeatherManagerHailEvent:run(connection)
     if connection:getIsServer() then
-        g_seasons.weather.weather[1] = self.hail
 
-        ssWeatherManager:overwriteRaintable()
+        -- Day sometimes (always?) mismatch when this event is called. So after day is updated,
+        -- the weather[1] is removed
+        if g_seasons.weather.weather[1].startDay == g_seasons.environment:currentDay() then
+            g_seasons.weather.weather[1] = self.hail
+        else
+            g_seasons.weather.weather[2] = self.hail
+        end
+
+        g_seasons.weather:overwriteRaintable()
     end
 end
