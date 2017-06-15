@@ -12,7 +12,7 @@
 ssStorage = {}
 
 function ssStorage:preLoad()
-    Storage.load = Utils.overwrittenFunction(Storage.load, ssStorage.load)
+    Storage.load = Utils.overwrittenFunction(Storage.load, ssStorage.storageLoad)
     Storage.seasonLengthChanged = ssStorage.storageSeasonLengthChanged
 end
 
@@ -20,7 +20,7 @@ function ssStorage:loadMap()
     g_seasons.environment:addSeasonLengthChangeListener(self)
 end
 
-function ssStorage:load(superFunc, ...)
+function ssStorage:storageLoad(superFunc, ...)
     local ret = superFunc(self, ...)
 
     self:calculateCosts()
