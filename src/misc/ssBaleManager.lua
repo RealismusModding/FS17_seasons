@@ -9,6 +9,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssBaleManager = {}
+g_seasons.baleManager = ssBaleManager
 
 source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 

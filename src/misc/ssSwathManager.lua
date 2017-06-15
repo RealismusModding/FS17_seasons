@@ -9,6 +9,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSwathManager = {}
+g_seasons.swathManager = ssSwathManager
 
 function ssSwathManager:load(savegame, key)
 end
