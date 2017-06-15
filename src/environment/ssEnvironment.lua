@@ -62,7 +62,7 @@ function ssEnvironment:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
     self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", 0)
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1)
-    self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", 0)
+    self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", -(g_currentMission.environment.currentDay - 1))
     self.latestGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", -1)
     self.latestVisualSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestVisualSeason", self.latestSeason)
 
