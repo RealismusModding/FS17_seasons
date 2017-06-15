@@ -273,12 +273,11 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local costs = ssVehicle:maintenanceRepairCost(vehicle, storeItem, true)
     local dealerMultiplier = atDealer and 1.1 or 1
-    local difficultyMultiplier = 1 -- FIXME * difficulty mutliplier
     local workCosts = atDealer and 45 or 35
 
     local overdueFactor = self:calculateOverdueFactor(vehicle)
 
-    return (costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * difficultyMultiplier * overdueFactor^2
+    return (costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2
 end
 
 -- all (guard)
