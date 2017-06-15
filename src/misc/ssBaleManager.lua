@@ -115,7 +115,7 @@ function ssBaleManager:removeBale()
         if object.item:isa(Bale) then
             local bale = object.item
 
-            if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+            if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
                 local volume = math.huge
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
@@ -169,7 +169,7 @@ function ssBaleManager:calculateBaleReduction(singleBale)
     local reductionFactor = 1
     local daysInSeason = g_seasons.environment.daysInSeason
 
-    if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+    if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
         reductionFactor = 0.99
 
     elseif singleBale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
