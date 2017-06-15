@@ -8,7 +8,6 @@ __pycache__
 
 # Build system
 dist/
-.buildrc
 FS17*.zip
-node_modules/
 .cookies
+.fsbuild.yml
