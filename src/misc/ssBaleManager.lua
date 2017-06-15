@@ -71,7 +71,7 @@ function ssBaleManager:reduceFillLevel()
 
                     -- check if the bale is outside
                     if density == 0 then
-                        if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass")[1] then
+                        if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
                             local origFillLevel = bale.fillLevel
                             local reductionFactor = self:calculateBaleReduction(bale)
 
