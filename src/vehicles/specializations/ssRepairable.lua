@@ -95,7 +95,7 @@ end
 
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
-    if self.isClient then
+    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
         local isPlayerInRange, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
 
         if isPlayerInRange then
