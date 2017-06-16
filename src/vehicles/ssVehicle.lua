@@ -197,7 +197,7 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
 
     local powerMultiplier = 1
     if storeItem.specs.power ~= nil then
-        powerMultiplier = dailyUpkeep / storeItem.specs.power
+        powerMultiplier = Utils.clamp(dailyUpkeep / storeItem.specs.power, 0.5, 2.5)
     end
 
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
@@ -296,7 +296,8 @@ function ssVehicle:vehicleGetDailyUpKeep(superFunc)
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false))
     else
-        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false) + ssVehicle:getRepairShopCost(self, storeItem, true)
+        -- not calling getRepairShopCost since it was unstable. ssLastRepairDay was sometimes equal to currentDay
+        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, true)
     end
 
     return costs
@@ -414,7 +415,7 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     -- only limit it if it works the ground and the ground is not frozen
     if not ssWeatherManager:isGroundFrozen()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
-       return vanillaSpeed, recalc
+        return vanillaSpeed, recalc
     end
 
     local isLowered = false
