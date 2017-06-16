@@ -2,7 +2,7 @@
 -- FieldJobManager SCRIPT
 ---------------------------------------------------------------------------------------------------------
 -- Purpose:  To manage fields owned by the NPC according to seasons
--- Authors:  theSeb, baron
+-- Authors:  baron, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 -- ANIMALS SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To adjust the animals
--- Authors:  Rahkiin, reallogger, theSeb (added mapDir loading), baron
+-- Authors:  baron, Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------

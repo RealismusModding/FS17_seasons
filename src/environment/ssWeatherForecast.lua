@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast and display the weather
--- Authors:  ian898, Rahkiin, theSeb, reallogger
+-- Authors:  ian898, Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------

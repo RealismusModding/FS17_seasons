@@ -2,7 +2,7 @@
 -- BALE FERMENT EVENT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Event when a new silage bale is created and fermentation starts
--- Authors:  reallogger (based on script by fatov)
+-- Authors:  reallogger (based on script by baron)
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------

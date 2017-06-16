@@ -2,7 +2,7 @@
 -- ssUtil SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Calculate current day of the week using gametime (Mon-Sun)
--- Authors:  Rahkiin, mrbear, reallogger, theSeb
+-- Authors:  mrbear, Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
