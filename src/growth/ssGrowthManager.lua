@@ -15,6 +15,7 @@ g_seasons.growthManager = ssGrowthManager
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates - 1 if you're incrementing
 ssGrowthManager.CUT = 200
 ssGrowthManager.WITHERED = 300
+ssGrowthManager.TMP_TRANSITION = 900
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
 ssGrowthManager.MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
@@ -98,6 +99,7 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
         addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
+        addConsoleCommand("ssChangeFruitGrowthState", "ssChangeFruitGrowthState fruit currentState desiredState", "consoleCommandChangeFruitGrowthState", self)
         
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
@@ -537,6 +539,19 @@ function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
     self:rebuildWillGerminateData()
+end
+
+function ssGrowthManager:consoleCommandChangeFruitGrowthState(input)
+    local inputs = {}
+    for input in string.gmatch("%w+") do table.insert(inputs, input) end
+    
+    local fruitName = inputs[1]
+   
+    self.growthData[self.TMP_TRANSITION] = {}
+    self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = inputs[2]
+    self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = inputs[3]
+    ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
+    
 end
 
 function ssGrowthManager:consoleCommandPrintDebugInfo()
