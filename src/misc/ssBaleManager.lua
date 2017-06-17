@@ -49,7 +49,7 @@ function ssBaleManager:reduceFillLevel()
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
                 -- if there has been rain during the day
-                if ssSnow.snowMaskId ~= nil and not isGrassBale then and g_currentMission.environment.timeSinceLastRain < 60 then
+                if ssSnow.snowMaskId ~= nil and not isGrassBale and g_currentMission.environment.timeSinceLastRain < 60 then
                     local x0 = bale.sendPosX - (ssBaleManager.MASK_RECT_WIDTH / 2)
                     local z0 = bale.sendPosZ - (ssBaleManager.MASK_RECT_WIDTH / 2)
                     local x1 = x0 + ssBaleManager.MASK_RECT_WIDTH
