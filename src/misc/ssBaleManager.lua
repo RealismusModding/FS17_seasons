@@ -37,10 +37,6 @@ function ssBaleManager:loadMap(name)
     end
 end
 
-function ssBaleManager:update(dt)
-    self:reduceFillLevel()
-end
-
 function ssBaleManager:reduceFillLevel()
     for _, object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
