@@ -11,6 +11,8 @@
 ssBaleManager = {}
 g_seasons.baleManager = ssBaleManager
 
+ssBaleManager.MASK_RECT_WIDTH = 2 --2x2m
+
 source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 
 function ssBaleManager:preLoad()
@@ -35,6 +37,10 @@ function ssBaleManager:loadMap(name)
     end
 end
 
+function ssBaleManager:update(dt)
+    self:reduceFillLevel()
+end
+
 function ssBaleManager:reduceFillLevel()
     for _, object in pairs(g_currentMission.itemsToSave) do
         -- only check bales
@@ -47,23 +53,13 @@ function ssBaleManager:reduceFillLevel()
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
                 -- if there has been rain during the day
-                if ssSnow.snowMaskId ~= nil and not isGrassBale and g_currentMission.environment.timeSinceLastRain < 60 then
-                    local dim = {}
-
-                    if bale.baleDiameter ~= nil then
-                        dim.width = bale.baleWidth
-                        dim.length = bale.baleDiameter
-                    else
-                        dim.width = bale.baleWidth
-                        dim.length = bale.baleLength
-                    end
-
-                    local x0 = bale.sendPosX + dim.width
-                    local x1 = bale.sendPosX - dim.width
-                    local x2 = bale.sendPosX + dim.width
-                    local z0 = bale.sendPosZ - dim.length
-                    local z1 = bale.sendPosZ - dim.length
-                    local z2 = bale.sendPosZ + dim.length
+                if ssSnow.snowMaskId ~= nil and not isGrassBale then and g_currentMission.environment.timeSinceLastRain < 60 then
+                    local x0 = bale.sendPosX - (ssBaleManager.MASK_RECT_WIDTH / 2)
+                    local z0 = bale.sendPosZ - (ssBaleManager.MASK_RECT_WIDTH / 2)
+                    local x1 = x0 + ssBaleManager.MASK_RECT_WIDTH
+                    local z1 = z0
+                    local x2 = x0
+                    local z2 = z0 + ssBaleManager.MASK_RECT_WIDTH
 
                     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
