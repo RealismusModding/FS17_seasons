@@ -71,9 +71,7 @@ function ssSnow:loadMap(name)
     end
 end
 
-function ssSnow:loadMapFinished(dt)
-    log("Loaded snowmask")
-
+function ssSnow:loadMapFinished()
     self.snowMaskId = ssUtil.getSnowMaskId()
 
     if self.snowMaskId ~= nil then
