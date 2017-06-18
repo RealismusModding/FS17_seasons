@@ -69,7 +69,21 @@ function ssSnow:loadMap(name)
         addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self)
         addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self)
     end
+end
 
+function ssSnow:loadMapFinished(dt)
+    log("Loaded snowmask")
+
+    self.snowMaskId = ssUtil.getSnowMaskId()
+
+    if self.snowMaskId ~= nil then
+        setVisibility(self.snowMaskId, false)
+    end
+
+    -- When no mask is available, limit to one layer
+    if self.snowMaskId == nil and not self.modeIsFromSave then
+        self.mode = self.MODE_ONE_LAYER
+    end
 end
 
 function ssSnow:readStream(streamId, connection)
@@ -198,23 +212,6 @@ function ssSnow:removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, h
 
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-end
-
-function ssSnow:update(dt)
-    if not self.loadedSnowMask then
-        self.loadedSnowMask = true
-
-        self.snowMaskId = ssUtil.getSnowMaskId()
-
-        if self.snowMaskId ~= nil then
-            setVisibility(self.snowMaskId, false)
-        end
-
-        -- When no mask is available, limit to one layer
-        if self.snowMaskId == nil and not self.modeIsFromSave then
-            self.mode = self.MODE_ONE_LAYER
-        end
-    end
 end
 
 --

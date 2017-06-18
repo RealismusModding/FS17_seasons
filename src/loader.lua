@@ -222,6 +222,17 @@ local function ssSeasonsModSaveToXML(self)
     end
 end
 
+-- Add a new mod event: loadMapFinished.
+function ssSeasonsMod.nullFinished(...)
+    for _, k in pairs(g_modClasses) do
+        if _G[k] ~= nil and _G[k].loadMapFinished ~= nil then
+            _G[k]:loadMapFinished()
+        end
+    end
+
+    return ssSeasonsMod.orig00Finished(...)
+end
+
 ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
 ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
 ssSeasonsMod.origDelete = FSBaseMission.delete
@@ -231,6 +242,9 @@ FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
 FSBaseMission.delete = ssSeasonsMod.delete
 
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
+
+ssSeasonsMod.orig00Finished = Mission00.loadMission00Finished
+Mission00.loadMission00Finished = ssSeasonsMod.nullFinished
 
 ------------------------------------------
 -- Fixes for Giants Vanilla game
