@@ -67,7 +67,7 @@ function ssBaleManager:reduceFillLevel()
 
                     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
-                    local density, _, _ = getDensityMaskedParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, ssSnow.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
+                    local density, _, _ = getDensityParallelogram(ssSnow.snowMaskId, x, z, widthX, widthZ, heightX, heightZ, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS)
 
                     -- check if the bale is outside
                     if density == 0 then
