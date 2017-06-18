@@ -107,7 +107,7 @@ local files = {
     -- Adjusted objects
     "objects/ssBunkerSilo",
     "placeables/ssPlaceable",
-    --"placeables/ssStorage",
+    "placeables/ssStorage",
 
     -- New objects
     "objects/ssSnowAdmirer",

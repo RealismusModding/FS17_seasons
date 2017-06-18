@@ -12,27 +12,38 @@
 ssStorage = {}
 
 function ssStorage:preLoad()
-    Storage.load = Utils.overwrittenFunction(Storage.load, ssStorage.storageLoad)
+    Storage.delete = Utils.appendedFunction(Storage.delete, ssStorage.storageDelete)
+    Storage.update = Utils.appendedFunction(Storage.update, ssStorage.storageUpdate)
+
     Storage.seasonLengthChanged = ssStorage.storageSeasonLengthChanged
+    Storage.ssUpdateCosts = ssStorage.ssUpdateCosts
 end
 
 function ssStorage:loadMap()
-    g_seasons.environment:addSeasonLengthChangeListener(self)
 end
 
-function ssStorage:storageLoad(superFunc, ...)
-    local ret = superFunc(self, ...)
+function ssStorage:storageUpdate()
+    if not self.ssLoadOnce then
+        self.ssLoadOnce = true
 
-    self:calculateCosts()
+        self.ssOriginalCost = self.costsPerFillLevelAndDay
 
-    return ret
+        self:ssUpdateCosts()
+
+        g_seasons.environment:addSeasonLengthChangeListener(self)
+    end
+end
+
+function ssStorage:storageDelete()
+    g_seasons.environment:removeSeasonLengthChangeListener(self)
 end
 
 function ssStorage:storageSeasonLengthChanged()
-    self:calculateCosts()
+    self:ssUpdateCosts()
 end
 
-function ssStorage:calculateCosts()
-    local difficultyFac = 1 - ( g_currentMission.missionInfo.difficulty - 2 ) * 0.1
-    self.costsPerFillLevelAndDay = 0.01 / g_seasons.environment.daysInSeason * difficultyFac
+function ssStorage:ssUpdateCosts()
+    local difficultyFac = 1 - (2 - g_currentMission.missionInfo.difficulty) * 0.1
+
+    self.costsPerFillLevelAndDay = self.ssOriginalCost / g_seasons.environment.daysInSeason * difficultyFac
 end

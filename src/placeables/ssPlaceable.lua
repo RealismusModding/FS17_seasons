@@ -43,7 +43,7 @@ function ssPlaceable:placeableDelete(superFunc)
 end
 
 function ssPlaceable:placeableSeasonLengthChanged()
-    local difficultyFac = 1 - ( g_currentMission.missionInfo.difficulty - 2 ) * 0.1
+    local difficultyFac = 1 - (2 - g_currentMission.missionInfo.difficulty) * 0.1
 
     self.incomePerHour = 6 / g_seasons.environment.daysInSeason * self.ssOriginalIncomePerHour * difficultyFac
 end
