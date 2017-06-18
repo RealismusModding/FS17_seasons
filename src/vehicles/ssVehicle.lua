@@ -58,6 +58,11 @@ function ssVehicle:loadMap()
         self.repairInterval = g_seasons.environment.daysInSeason * 2
     end
 
+    if g_addCheatCommands then
+        addConsoleCommand("ssRepairVehicle", "Repair vehicle you are entered", "consoleCommandRepairVehicle", self)
+        addConsoleCommand("ssRepairAllVehicles", "Repair all vehicles", "consoleCommandRepairAllVehicles", self)
+    end
+
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
@@ -78,9 +83,9 @@ function ssVehicle:writeStream(streamId, connection)
 end
 
 function ssVehicle:dayChanged()
-    for i, vehicle in pairs(g_currentMission.vehicles) do
+    for _, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            self:repair(vehicle, storeItem)
+            self:repair(vehicle)
         end
     end
 end
@@ -251,7 +256,7 @@ end
 
 -- repairable
 -- Repair by resetting the last repair day and operating time
-function ssVehicle:repair(vehicle, storeItem)
+function ssVehicle:repair(vehicle)
     --compared to game day since g_seasons.environment:currentDay() is shifted when changing season length
     vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssLastRepairOperatingTime = vehicle.operatingTime
@@ -510,4 +515,34 @@ function ssVehicle:aiVehicleUpdate(dt)
             self:setLightsTypesMask(0)
         end
     end
+end
+
+---------------------
+-- Console commands
+---------------------
+
+function ssVehicle:consoleCommandRepairVehicle()
+    local vehicle = g_currentMission.controlledVehicle
+
+    if vehicle == nil then
+        return "You are not in a vehicle"
+    end
+
+    -- Repair it, for free
+    if self:repair(vehicle) then
+        g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(vehicle))
+    end
+end
+
+function ssVehicle:consoleCommandRepairAllVehicles()
+    local n = 0
+
+    for _, vehicle in pairs(g_currentMission.vehicles) do
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+            self:repair(vehicle)
+            n = n + 1
+        end
+    end
+
+    return "Repaired " .. tostring(n) .. " vehicles"
 end

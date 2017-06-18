@@ -182,7 +182,7 @@ function ssRepairable:ssRepair(showDialog, cost, vehicleName)
         end
 
         -- Repair
-        if ssVehicle:repair(self, storeItem) then
+        if ssVehicle:repair(self) then
             -- Show that it was repaired
             local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
