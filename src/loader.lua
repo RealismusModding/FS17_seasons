@@ -148,11 +148,7 @@ end
 -- base mission encapsulation functions
 ------------------------------------------
 
-function ssSeasonsMod.loadMap(...)
-    return ssSeasonsMod.origLoadMap(...)
-end
-
-function noopFunction() end
+local function noopFunction() end
 
 function ssSeasonsMod.loadMapFinished(...)
     local requiredMethods = { "deleteMap", "mouseEvent", "keyEvent", "draw", "update" }
@@ -176,15 +172,9 @@ function ssSeasonsMod.loadMapFinished(...)
 
     -- Enable the mod
     g_seasons.enabled = true
-
-    return ssSeasonsMod.origLoadMapFinished(...)
 end
 
-function ssSeasonsMod.delete(...)
-    return ssSeasonsMod.origDelete(...)
-end
-
-function ssSeasonsMod:loadFromXML(...)
+function ssSeasonsMod.loadFromXML(...)
     if g_currentMission == nil or not g_currentMission:getIsServer() then return end
 
     local xmlFile = nil
@@ -205,7 +195,7 @@ function ssSeasonsMod:loadFromXML(...)
     end
 end
 
-local function ssSeasonsModSaveToXML(self)
+function ssSeasonsMod.saveToXML(self)
     if g_seasons.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
             local ssKey = self.xmlKey .. ".ssSeasons"
@@ -229,22 +219,11 @@ function ssSeasonsMod.nullFinished(...)
             _G[k]:loadMapFinished()
         end
     end
-
-    return ssSeasonsMod.orig00Finished(...)
 end
 
-ssSeasonsMod.origLoadMap = FSBaseMission.loadMap
-ssSeasonsMod.origLoadMapFinished = FSBaseMission.loadMapFinished
-ssSeasonsMod.origDelete = FSBaseMission.delete
-
-FSBaseMission.loadMap = ssSeasonsMod.loadMap
-FSBaseMission.loadMapFinished = ssSeasonsMod.loadMapFinished
-FSBaseMission.delete = ssSeasonsMod.delete
-
-FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsModSaveToXML)
-
-ssSeasonsMod.orig00Finished = Mission00.loadMission00Finished
-Mission00.loadMission00Finished = ssSeasonsMod.nullFinished
+FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
+FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
+Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
 
 ------------------------------------------
 -- Fixes for Giants Vanilla game
