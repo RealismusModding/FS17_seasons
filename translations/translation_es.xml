@@ -79,7 +79,6 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="No mostrar de nuevo" />
 
-        <text name="ss_version" text="Anteriormente has descargado una copia robada de nuestro mod de un sitio que no respeta la comunidad modding y ha violado nuestros derechos de autor, o descargado una versión incompleta de este mod de nuestro repositorio de código. Apreciamos su entusiasmo y emoción, pero por desgracia su partida guardada es incompatible con esta versión de Seasons. Por favor, no utilice sitios que roban a los modders en el futuro." />
         <text name="warning_soilIsFrozen" text="El terreno está congelado. No puede trabajar en él!" />
         <text name="warning_doNotThreshWithMoisture" text="No se puede cosechar con el cultivo mojado!" />
         <text name="warning_animalsKilled" text="%d ha muerto" />

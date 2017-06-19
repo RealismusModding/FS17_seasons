@@ -79,7 +79,6 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
 
-        <text name="ss_version" text="Diese Kopie von Seasons ist keine offizielle Version. Bitte vermeide aus Respekt an die Modding-Community das Herunterladen illegaler Beta-Versionen. Wir freuen uns natürlich riesig über das Interesse an unserem Mod, bitten Dich dennoch dich an die Regeln zu halten. Dein aktueller Spielstand ist mit dieser Version von Season inkompatibel. Bitte starte einen neuen Spielstand." />
         <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab!" />
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind!" />
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen" />
