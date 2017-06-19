@@ -205,11 +205,11 @@ function ssWeatherForecast:drawToday(forecast)
     -- TODO: Render black overlay (pixel)
 
     if ssWeatherManager:isGroundFrozen() then
-        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY + self.hud.dayHeight * 0.1, self.hud.dayHeight / g_screenAspectRatio * 0.8, self.hud.dayHeight * 0.8)
+        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY, self.hud.dayHeight / g_screenAspectRatio, self.hud.dayHeight)
     end
 
     if g_seasons.weather.moistureEnabled and not ssWeatherManager:isGroundFrozen() and ssWeatherManager:isCropWet() then
-        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY + self.hud.dayHeight * 0.1, self.hud.dayHeight / g_screenAspectRatio * 0.8, self.hud.dayHeight * 0.8)
+        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY, self.hud.dayHeight / g_screenAspectRatio, self.hud.dayHeight)
     end
 
     -- Render Season, cloud and ground icon
