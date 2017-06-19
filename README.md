@@ -82,7 +82,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - The mod also controls the growth of planted trees. It takes 5 years for trees to be fully grown, harvestable after 2 years.
 - Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees.
 
-### Maintenance
+### Vehicles and Maintenance
 - Age in maintenance GUI is now days since last repair
 - New maintenance algorithm with repair, maintenance and taxes
 - Keep your machine clean to lower daily maintenance costs
@@ -90,6 +90,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
 - If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may be very hard to start it.
 - Motor start setting is disabled as this mod overwrites the functionality
+- You can borrow vehicles for a free demo as long as it is returned within the same day with less than 0.5 engine hours
 
 ### Economy
 - Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000
