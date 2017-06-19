@@ -82,7 +82,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - The mod also controls the growth of planted trees. It takes 5 years for trees to be fully grown, harvestable after 2 years.
 - Trees inhibit the growth of other trees if they have been planted too close together. To restart the growth of the tree you will need to thin out the trees.
 
-### Vehicles and Maintenance
+### Vehicles and maintenance
 - Age in maintenance GUI is now days since last repair
 - New maintenance algorithm with repair, maintenance and taxes
 - Keep your machine clean to lower daily maintenance costs
