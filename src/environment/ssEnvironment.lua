@@ -272,7 +272,7 @@ end
 ----------------------------
 
 function ssEnvironment:dayChanged()
-    self:callListeners()    
+    self:callListeners()
 end
 
 ----------------------------
