@@ -365,7 +365,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
 
     end
 
-    if age == 0 and operatingTime < 2 then
+    if age == 0 and operatingTime < 0.5 then
         sellPrice = price
     else
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
