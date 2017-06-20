@@ -541,14 +541,13 @@ function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
     self:rebuildWillGerminateData()
 end
 
-function ssGrowthManager:consoleCommandChangeFruitGrowthState(input)
+function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
     local inputs = {}
-    logInfo("input:" .. input)
-    for input in string.gmatch("%w+") do table.insert(inputs, input) end
+    for input in string.gmatch(userInput, "%w+") do table.insert(inputs, input) end
     
     local fruitName = inputs[1]
-   
     self.growthData[self.TMP_TRANSITION] = {}
+    self.growthData[self.TMP_TRANSITION][fruitName] = {}
     self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
     self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
