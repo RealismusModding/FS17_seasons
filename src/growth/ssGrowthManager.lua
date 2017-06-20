@@ -543,13 +543,14 @@ end
 
 function ssGrowthManager:consoleCommandChangeFruitGrowthState(input)
     local inputs = {}
+    logInfo("input:" .. input)
     for input in string.gmatch("%w+") do table.insert(inputs, input) end
     
     local fruitName = inputs[1]
    
     self.growthData[self.TMP_TRANSITION] = {}
-    self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = inputs[2]
-    self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = inputs[3]
+    self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
+    self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
     
 end
