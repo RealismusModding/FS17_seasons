@@ -95,7 +95,7 @@ end
 
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
-    if self.isClient then
+    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
         local isPlayerInRange, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
 
         if isPlayerInRange then
@@ -182,7 +182,7 @@ function ssRepairable:ssRepair(showDialog, cost, vehicleName)
         end
 
         -- Repair
-        if ssVehicle:repair(self, storeItem) then
+        if ssVehicle:repair(self) then
             -- Show that it was repaired
             local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)

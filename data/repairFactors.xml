@@ -173,6 +173,18 @@
         <RF2 value="1.3" />
         <ssLifeTime value="1000" />
     </factor>
+    
+    <factor category="woodCrusherTrailerDrivable">
+        <RF1 value="0.025" />
+        <RF2 value="1.2" />
+        <ssLifeTime value="400" />
+    </factor>
+    
+    <factor category="woodCrusherTrailer">
+        <RF1 value="0.04" />
+        <RF2 value="1.3" />
+        <ssLifeTime value="300" />
+    </factor>
 
     <factor category="other">
         <RF1 value="0.2" />

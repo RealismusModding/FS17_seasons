@@ -63,27 +63,16 @@ function ssEnvironment:load(savegame, key)
     self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", 0)
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1)
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", -(g_currentMission.environment.currentDay - 1))
-    self.latestGrowthStage = ssXMLUtil.getInt(savegame, key .. ".environment.latestGrowthStage", -1)
     self.latestVisualSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestVisualSeason", self.latestSeason)
 
     self._doInitalDayEvent = savegame == nil
-
-    if self.latestGrowthStage >= self.SEASON_SPRING then
-        logInfo(ssLang.getText("ss_version"))
-    end
 end
 
 function ssEnvironment:save(savegame, key)
     ssXMLUtil.setInt(savegame, key .. ".settings.daysInSeason", self.daysInSeason)
     ssXMLUtil.setInt(savegame, key .. ".environment.latestSeason", self.latestSeason)
     ssXMLUtil.setInt(savegame, key .. ".environment.latestVisualSeason", self.latestVisualSeason)
-
-    if self.latestGrowthStage == self.SEASON_SPRING - 1 then
-        ssXMLUtil.setInt(savegame, key .. ".environment.latestTransition", self.latestTransition)
-    else
-        ssXMLUtil.setInt(savegame, key .. ".environment.latestGrowthStage", self.latestTransition)
-    end
-
+    ssXMLUtil.setInt(savegame, key .. ".environment.latestTransition", self.latestTransition)
     ssXMLUtil.setInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", self.currentDayOffset)
 end
 
@@ -120,11 +109,6 @@ end
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
-
-    if self.latestGrowthStage ~= nil and self.latestGrowthStage >= self.SEASON_SPRING then
-        g_currentMission.inGameMessage:showMessage("Seasons", ssLang.getText("ss_version"), 10000)
-        return
-    end
 
     if self._doInitalDayEvent then
         self.latestTransition = 0
@@ -288,9 +272,7 @@ end
 ----------------------------
 
 function ssEnvironment:dayChanged()
-    if self.latestGrowthStage == self.SEASON_SPRING - 1 then
-        self:callListeners()
-    end
+    self:callListeners()
 end
 
 ----------------------------

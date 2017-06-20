@@ -58,6 +58,11 @@ function ssVehicle:loadMap()
         self.repairInterval = g_seasons.environment.daysInSeason * 2
     end
 
+    if g_addCheatCommands then
+        addConsoleCommand("ssRepairVehicle", "Repair vehicle you are entered", "consoleCommandRepairVehicle", self)
+        addConsoleCommand("ssRepairAllVehicles", "Repair all vehicles", "consoleCommandRepairAllVehicles", self)
+    end
+
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
@@ -78,9 +83,9 @@ function ssVehicle:writeStream(streamId, connection)
 end
 
 function ssVehicle:dayChanged()
-    for i, vehicle in pairs(g_currentMission.vehicles) do
+    for _, vehicle in pairs(g_currentMission.vehicles) do
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            self:repair(vehicle, storeItem)
+            self:repair(vehicle)
         end
     end
 end
@@ -197,7 +202,7 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
 
     local powerMultiplier = 1
     if storeItem.specs.power ~= nil then
-        powerMultiplier = dailyUpkeep / storeItem.specs.power
+        powerMultiplier = Utils.clamp(dailyUpkeep / storeItem.specs.power, 0.5, 2.5)
     end
 
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
@@ -251,7 +256,7 @@ end
 
 -- repairable
 -- Repair by resetting the last repair day and operating time
-function ssVehicle:repair(vehicle, storeItem)
+function ssVehicle:repair(vehicle)
     --compared to game day since g_seasons.environment:currentDay() is shifted when changing season length
     vehicle.ssLastRepairDay = g_currentMission.environment.currentDay
     vehicle.ssLastRepairOperatingTime = vehicle.operatingTime
@@ -296,7 +301,8 @@ function ssVehicle:vehicleGetDailyUpKeep(superFunc)
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false))
     else
-        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, false) + ssVehicle:getRepairShopCost(self, storeItem, true)
+        -- not calling getRepairShopCost since it was unstable. ssLastRepairDay was sometimes equal to currentDay
+        costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, true)
     end
 
     return costs
@@ -359,7 +365,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
 
     end
 
-    if age == 0 and operatingTime < 2 then
+    if age == 0 and operatingTime < 0.5 then
         sellPrice = price
     else
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
@@ -414,7 +420,7 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
     -- only limit it if it works the ground and the ground is not frozen
     if not ssWeatherManager:isGroundFrozen()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
-       return vanillaSpeed, recalc
+        return vanillaSpeed, recalc
     end
 
     local isLowered = false
@@ -509,4 +515,34 @@ function ssVehicle:aiVehicleUpdate(dt)
             self:setLightsTypesMask(0)
         end
     end
+end
+
+---------------------
+-- Console commands
+---------------------
+
+function ssVehicle:consoleCommandRepairVehicle()
+    local vehicle = g_currentMission.controlledVehicle
+
+    if vehicle == nil then
+        return "You are not in a vehicle"
+    end
+
+    -- Repair it, for free
+    if self:repair(vehicle) then
+        g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(vehicle))
+    end
+end
+
+function ssVehicle:consoleCommandRepairAllVehicles()
+    local n = 0
+
+    for _, vehicle in pairs(g_currentMission.vehicles) do
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+            self:repair(vehicle)
+            n = n + 1
+        end
+    end
+
+    return "Repaired " .. tostring(n) .. " vehicles"
 end

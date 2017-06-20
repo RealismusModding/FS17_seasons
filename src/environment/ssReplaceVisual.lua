@@ -29,6 +29,13 @@ function ssReplaceVisual:loadMap(name)
     end
 end
 
+function ssReplaceVisual:loadMapFinished()
+    if g_currentMission:getIsClient() then
+        self:updateFoliageLayers()
+        self:updateTextures()
+    end
+end
+
 --
 -- XML
 --
@@ -149,15 +156,6 @@ end
 --
 -- Callbacks
 --
-
-function ssReplaceVisual:update(dt)
-    if self.once ~= true and g_currentMission:getIsClient() then
-        self:updateFoliageLayers()
-        self:updateTextures()
-
-        self.once = true
-    end
-end
 
 function ssReplaceVisual:visualSeasonChanged()
     self:updateTextures()

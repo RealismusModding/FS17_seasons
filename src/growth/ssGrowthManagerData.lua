@@ -68,12 +68,12 @@ function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, default
                 optionalGrowthData = self:getGrowthData(rootKey, file, growthData, true)
             end
         end
-        
+
         delete(file)
     else
         logInfo("ssGrowthManagerData:", "Failed to load additional XML growth data file: " .. modMapDataPath)
     end
-    
+
     return optionalDefaultFruits, optionalGrowthData
 end
 
@@ -190,12 +190,12 @@ function ssGrowthManagerData:getFruitsTransitionStates(transitionKey, file, tran
         if extraGrowthFactor ~= nil then
             growthData[transitionNum][fruitName].extraGrowthFactor = extraGrowthFactor
         end
-        
+
         local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
         if removeTransition == true then
             growthData[transitionNum][fruitName] = nil
         end
- 
+
         i = i + 1
     end
 

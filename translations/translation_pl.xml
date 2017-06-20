@@ -79,7 +79,6 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nie pokazuj ponownie" />
 
-        <text name="ss_version" text="W przeszłości pobrałeś/-aś skradzioną kopię naszego modu ze strony nie respektującej społeczności modderów, tym samym naruszając nasze prawa autorskie lub pobrałeś/-aś nieukończoną wersję tego modu z naszego repozytorium. Doceniamy twój zapał i podekscytowanie, ale niestety twój zapis stanu gry jest niekompatybilny z tą wersją modu Seasons. Proszę nie używaj już więcej stron, które okradają modderów. Musisz rozpocząć grę od nowa." />
         <text name="warning_soilIsFrozen" text="Gleba jest zamarznięta. Nie można jej uprawiać!" />
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />

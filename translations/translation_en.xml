@@ -84,7 +84,6 @@
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Don't show again" />
 
-        <text name ="ss_version" text="You have in the past downloaded a stolen copy of our mod from a site which doesn’t respect the modding community and has violated our copyright, or downloaded an incomplete version of this mod from our code repository. We appreciate your eagerness and excitement, but unfortunately your save game is incompatible with this version of the Seasons mod. Please do not use sites which steal from modders in the future. You will need to start a new game." />
         <text name="warning_soilIsFrozen" text="The soil is frozen. You can't work on it!" />
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />
         <text name="warning_animalsKilled" text="Animals died (%d)" />
