@@ -258,8 +258,8 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
 
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
     local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
-    setDensityCompareParams(fruit.id, "greater", -1)
-    setDensityMaskParams(fruit.id, "greater", -1) -- reset
+
+    setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
 --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
@@ -302,8 +302,8 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
             setDensityCompareParams(terrainDetailId, "greater", -1) -- reset
         end
     end
-    setDensityCompareParams(fruit.id, "greater", -1)
-    setDensityMaskParams(fruit.id, "greater", -1) -- reset
+
+    setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
@@ -324,8 +324,8 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
             local sprayResetResult = setDensityMaskedParallelogram(terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, 0)
         end
     end
-    setDensityCompareParams(fruit.id, "greater", -1)
-    setDensityMaskParams(fruit.id, "greater", -1) -- reset
+
+    setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
