@@ -134,7 +134,7 @@
         <text name="ss_helpTitle_02" text="Efekty sezonowe (1)" />
         <text name="ss_helpText_02_01" text="Pogoda jest przypadkowa z dnia na dzień, ale według wzoru z sezonu na sezonu." />
         <text name="ss_helpText_02_02" text="Wiosną będzie deszczowo i mglisto z szansą na słoneczną pogodę. Latem będzie cieplej i bardziej sucho. Mogą wystąpić nieoczekiwane gradobicia. Jesienią będzie dużo padać, ale pojawi się też słońce. Zimą będzie deszczowo, ale często wystarczająco zimno, aby spadł śnieg, który może nawet pozostać na ziemi." />
-        <text name="ss_helpText_02_03" text="Śnieg wypełni przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską śnieżną* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
+        <text name="ss_helpText_02_03" text="Śnieg wypełni przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską modu Seasons* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
         <text name="ss_helpTitle_03" text="Efekty sezonowe (2)" />
         <text name="ss_helpText_03_01" text="Długość dnia została również zmieniona w sezonach. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
@@ -177,7 +177,7 @@
         <text name="ss_helpText_10_01" text="Deszcz, grad i śnieg wpływają na poziom wilgotności zbóż. Jeżeli, z powodu złej pogody, wilgotność zbóż przekracza określoną wartość, nie będzie można ich zbierać. Wilgotne noce w trakcie lata mogą wystąpić bez ostrzeżenia." />
         <text name="ss_helpText_10_02" text="Po opadach deszczu zboża potrzebują czasu na wyschnięcie, którego ilość zależy od temperatury powietrza i sezonu. W cieplejszy dzień, zboża wyschną szybciej niż w chłodniejszy." />
         <text name="ss_helpText_10_03" text="Użycie przetrząsacza na sianie, gdy jest mokre spowoduje powstanie mokrej trawy. Należy upewnić się, że przetrząsanie wykonywane jest tylko wtedy, gdy uprawy są wystarczająco suche." />
-        <text name="ss_helpText_10_04" text="Na mod-mapie, do której dodano maskę śnieżną*, bele siana lub słomy wystawione na działanie deszczu lub śniegu, zaczną się gnić, chyba że bele są przechowywane w szopie z maską śnieżną. Zła pogoda nie wpływa na owinięte bele lub bele na mapie bez maski śnieżnej*. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
+        <text name="ss_helpText_10_04" text="Na mod-mapie, do której dodano maskę modu Seasons*, bele siana lub słomy wystawione na działanie deszczu lub śniegu, zaczną się gnić, chyba że bele są przechowywane w szopie z maską modu Seasons. Zła pogoda nie wpływa na owinięte bele lub bele na mapie bez maski modu Seasons*. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
         <text name="ss_helpTitle_11" text="Utrzymanie maszyn" />
         <text name="ss_helpText_11_01" text="Twoje maszyny wymagają regularnych przeglądów, aby były w pełni sprawne. Okres przeglądów to co 30 godzin roboczych lub co pół roku, w zależności co nastąpi wcześniej. Pojazdy, które przekroczą termin przeglądu mogą mieć problem z uruchomieniem." />
