@@ -29,7 +29,7 @@ function ssReplaceVisual:loadMap(name)
     end
 end
 
-function ssReplaceVisual:loadMapFinished()
+function ssReplaceVisual:loadGameFinished()
     if g_currentMission:getIsClient() then
         self:updateFoliageLayers()
         self:updateTextures()

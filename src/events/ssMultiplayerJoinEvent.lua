@@ -62,6 +62,10 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
             if _G[className].readStream ~= nil then
                 _G[className]:readStream(streamId, connection)
             end
+
+            if _G[className].loadGameFinished ~= nil then
+                _G[className]:loadGameFinished()
+            end
         end
 
         -- Variable to indicate 'everything' is loaded to keep objects working

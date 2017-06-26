@@ -214,9 +214,17 @@ end
 
 -- Add a new mod event: loadMapFinished.
 function ssSeasonsMod.nullFinished(...)
+    local isServer = g_currentMission:getIsServer()
+
     for _, k in pairs(g_modClasses) do
-        if _G[k] ~= nil and _G[k].loadMapFinished ~= nil then
-            _G[k]:loadMapFinished()
+        if _G[k] ~= nil then
+            if _G[k].loadMapFinished ~= nil then
+                _G[k]:loadMapFinished()
+            end
+
+            if isServer and _G[k].loadGameFinished ~= nil then
+                _G[k]:loadGameFinished()
+            end
         end
     end
 end

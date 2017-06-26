@@ -23,7 +23,7 @@ function ssMultiplayer:loadMap(name)
     for _, className in pairs(g_modClasses) do
         local class = _G[className]
 
-        if class.loadMap ~= nil and (class.readStream ~= nil or class.writeStream ~= nil) then
+        if class.loadMap ~= nil and (class.readStream ~= nil or class.writeStream ~= nil or class.loadGameFinished ~= nil) then
             table.insert(self.classes, className)
         end
     end
