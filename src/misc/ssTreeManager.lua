@@ -20,7 +20,7 @@ function ssTreeManager:loadMap()
         self:adjust()
     end
 
-    TreePlantUtil.plantTree = Utils.appendedFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
+    TreePlantUtil.plantTree = Utils.overwrittenFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
     ChainsawUtil.cutSplitShapeCallback = Utils.appendedFunction(ChainsawUtil.cutSplitShapeCallback, ssTreeManager.cutSplitShapeCallback)
 end
 
@@ -78,8 +78,16 @@ end
 -- This seems to be the function that is called when a tree is planted. If an existing savegame has
 -- planted trees, the function is called during loading as well.
 -- This code is roughly O(n)
-function ssTreeManager:plantTree(...)
-    local plantedTree = g_currentMission.plantedTrees.growingTrees[table.getn(g_currentMission.plantedTrees.growingTrees)]
+function ssTreeManager:plantTree(superFunc, ...)
+    local growingSize = table.getn(g_currentMission.plantedTrees.growingTrees)
+
+    -- Verify if an actual tree was placed
+    superFunc(self, ...)
+
+    local latestTreeIndex = table.getn(g_currentMission.plantedTrees.growingTrees)
+    if latestTreeIndex == 0 or growingSize == latestTreeIndex then return end
+
+    local plantedTree = g_currentMission.plantedTrees.growingTrees[latestTreeIndex]
 
     plantedTree.ssNear = {}
 
