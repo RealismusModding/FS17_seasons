@@ -176,8 +176,8 @@ function ssDensityMapScanner:run(job)
         job.z = 0
     else
         -- Done with the loop, call finalizer
-        if callback.callbackFinalizeFunction ~= nil then
-            callback.callbackFinalizeFunction(callback.callbackSelf, self.currentParameter)
+        if callback.finalizer ~= nil then
+            callback.finalizer(callback.target, job.parameter)
         end
 
         return false -- finished
