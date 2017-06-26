@@ -26,17 +26,10 @@ function ssAnimals:loadMap(name)
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
-
-        self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
-        -- Initial setup (it changed from nothing)
-        self:adjustAnimals()
     end
-
 end
 
-function ssAnimals:readStream()
-    -- Adjust the client as well.
+function ssAnimals:loadGameFinished()
     self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
     self:adjustAnimals()

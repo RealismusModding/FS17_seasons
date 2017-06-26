@@ -14,15 +14,9 @@ function ssPedestrianSystem:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
 
     PedestrianSystem.update = Utils.overwrittenFunction(PedestrianSystem.update, ssPedestrianSystem.psUpdate)
-
-    if g_currentMission:getIsServer() then
-        -- Initial setuo (it changed from nothing)
-        self:seasonChanged()
-    end
 end
 
-function ssPedestrianSystem:readStream(streamId, connection)
-    -- Load after data for seasonUtils is loaded
+function ssPedestrianSystem:loadGameFinished()
     self:seasonChanged()
 end
 

@@ -143,9 +143,6 @@ function ssWeatherManager:loadMap(name)
             self:buildForecast()
         end
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
-
-        self:overwriteRaintable()
-        self:setupStartValues()
     end
 end
 
@@ -190,9 +187,6 @@ function ssWeatherManager:readStream(streamId, connection)
 
         table.insert(self.weather, rain)
     end
-
-    self:overwriteRaintable()
-    self:setupStartValues()
 end
 
 function ssWeatherManager:writeStream(streamId, connection)
@@ -222,6 +216,11 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteString(streamId, rain.rainTypeId)
         streamWriteFloat32(streamId, rain.duration)
     end
+end
+
+function ssWeatherManager:loadGameFinished()
+    self:overwriteRaintable()
+    self:setupStartValues()
 end
 
 function ssWeatherManager:setupStartValues()

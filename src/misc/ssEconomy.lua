@@ -60,10 +60,6 @@ function ssEconomy:loadMap(name)
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
-
-    if g_currentMission:getIsServer() then
-        self:setup()
-    end
 end
 
 function ssEconomy:loadFactorsFromXML(file, key)
@@ -180,7 +176,7 @@ function ssEconomy:loadFromXML(path)
     delete(file)
 end
 
-function ssEconomy:setup()
+function ssEconomy:loadGameFinished()
     -- Some calculations to make the code faster on the hotpath
     ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
@@ -200,8 +196,6 @@ function ssEconomy:readStream(streamId, connection)
     self.loanMax = streamReadFloat32(streamId)
     self.baseLoanInterest = streamReadFloat32(streamId)
     self.fieldPriceFactor = streamReadFloat32(streamId)
-
-    self:setup()
 end
 
 function ssEconomy:writeStream(streamId, connection)
