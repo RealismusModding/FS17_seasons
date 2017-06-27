@@ -62,8 +62,7 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nie masz wystarczającej ilości pieniędzy, aby wykonać przegląd" />
         <text name="SS_VEHICLE_REPAIRED" text="Przegląd %s kosztował %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Nie ma potrzeby naprawiania %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Wykonaj przegląd %s za %s" />
         <text name="SS_REPAIR_REQUIRED" text="Wymagany jest przegląd" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
