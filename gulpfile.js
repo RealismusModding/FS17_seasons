@@ -49,10 +49,10 @@ function fillModDesc() {
 function templatedLua() {
     return gulp
         .src("src/**/*.lua", { base: "." })
-        .pipe(replace(/(false)?\-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
-        .pipe(replace(/(false)?\-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
-        .pipe(replace(/(false)?\-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
-        .pipe(replace(/(false)?\-\-<%=simpleVersion %>/g, package.fs.simpleVersion));
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=simpleVersion %>/g, package.fs.simpleVersion));
 }
 
 function createVersionName() {

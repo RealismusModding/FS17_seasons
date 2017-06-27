@@ -38,7 +38,12 @@ function ssMain:preLoad()
     self.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
     -- Simple version number for comparing minimum required version of seasons
-    self.simpleVersion = --<%=simpleVersion %>
+    self.simpleVersion = 1 --<%=simpleVersion %>
+
+    -- Set global settings
+    self.enabled = false -- will be enabled later in the loading process
+    self.verbose = false --<%=verbose %>
+    self.debug = false --<%=debug %>
 
     logInfo("Loading Seasons " .. self.version)
 
@@ -47,11 +52,6 @@ function ssMain:preLoad()
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
     TourIcons.showTourDialog = self.inj_disableShowTourDialog
-
-    -- Set global settings
-    self.enabled = false -- will be enabled later in the loading process
-    self.verbose = --<%=verbose %>
-    self.debug = --<%=debug %>
 end
 
 ----------------------------
