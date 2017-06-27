@@ -16,8 +16,8 @@
                 <!-- Crop data -->
                 <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
                     <GuiElement type="slider" profile="ssCropsSliderVertical" id="cropsSlider" onChanged="onSliderValueChanged">
-                        <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" />
-                        <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" />
+                        <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" focusChangeTop="1" focusChangeBottom="sliderDownCrops"/>
+                        <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />
                     </GuiElement>
 
                     <GuiElement type="empty" profile="ssOverview" id="overviewElement" onDraw="drawOverview" />
@@ -58,7 +58,7 @@
                     <!-- Column 2 -->
                     <GuiElement type="boxLayout" profile="settingsBox" position="347px 536px" id="settingsColumn2">
                         <!-- Season length -->
-                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="200" focusChangeBottom="221" onClick="updateApplySettingsButton">
+                        <GuiElement type="multiTextOption" profile="multiTextOptionSettings" onCreate="onCreateSeasonLength" toolTip="tooltip_seasonLength" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="220" focusChangeTop="212" focusChangeBottom="221" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
@@ -170,8 +170,8 @@
             </GuiElement>
 
             <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
-                <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="101" focusChangeRight="101" focusInit="onOpen"/>
-                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="101" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
+                <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="102" focusChangeRight="102" focusInit="onOpen"/>
+                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="100" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
             </GuiElement>
         </GuiElement>
     </GuiElement>

@@ -133,9 +133,9 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
 
     if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
-        -- self:setNavButtonsFocusChange(FocusManager:getElementById("10"), FocusManager:getElementById("41_1"))
+        self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpCrops"), FocusManager:getElementById("sliderDownCrops"))
     elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("200"), FocusManager:getElementById("221"))
+        self:setNavButtonsFocusChange(FocusManager:getElementById("210"), FocusManager:getElementById("223"))
     else
         self:setNavButtonsFocusChange(nil, nil)
     end
