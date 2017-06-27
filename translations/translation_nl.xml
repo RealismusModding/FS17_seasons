@@ -62,6 +62,8 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
         <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
+        <!-- Missing translation of "No repair needed for %s" -->
+        <text name="SS_NOTHING_TO_REPAIR" text="" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie is vereist over %.1f draaiuren of %d dagen" />

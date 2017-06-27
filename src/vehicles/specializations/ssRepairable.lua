@@ -139,10 +139,16 @@ end
 function ssRepairable:ssRepairUpdate(dt)
     local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
 
-    if repairCost < 1 then return end
-
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+    if repairCost < 1 then
+        if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
+            g_currentMission:showBlinkingWarning(string.format(g_i18n:getText("SS_NOTHING_TO_REPAIR"), vehicleName), 2000)
+        end
+
+        return
+    end
 
     -- Show repair button
     local storeItemName = storeItem.name

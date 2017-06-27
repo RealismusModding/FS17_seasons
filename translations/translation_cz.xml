@@ -62,6 +62,8 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nemáte dost peněz na zaplacení" />
         <text name="SS_VEHICLE_REPAIRED" text="Náklady na údržbu %s byly %s" />
+        <!-- Missing translation of "No repair needed for %s" -->
+        <text name="SS_NOTHING_TO_REPAIR" text="" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Opravit %s za %s" />
         <text name="SS_REPAIR_REQUIRED" text="Je nutná údržba" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f motohodin nebo %d dní do údržby" />

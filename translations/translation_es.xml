@@ -62,6 +62,8 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="No tienes suficiente para mantener esto" />
         <text name="SS_VEHICLE_REPAIRED" text="Coste de mantenimiento para %s fue %s" />
+        <!-- Missing translation of "No repair needed for %s" -->
+        <text name="SS_NOTHING_TO_REPAIR" text="" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Mantenimiento %s para %s" />
         <text name="SS_REPAIR_REQUIRED" text="Mantenimiento necesario" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas de trabajo o %d días hasta mantenimiento" />
