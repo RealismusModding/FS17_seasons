@@ -10,7 +10,7 @@
 ssTreeManager = {}
 g_seasons.treeManager = ssTreeManager
 
-ssTreeManager.MIN_DISTANCE = 4.0 -- meters
+ssTreeManager.MIN_DISTANCE = 9.5 -- meters
 ssTreeManager.MIN_DISTANCE_SQ = ssTreeManager.MIN_DISTANCE * ssTreeManager.MIN_DISTANCE
 
 function ssTreeManager:loadMap()
@@ -27,7 +27,7 @@ end
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
+        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 --* 24 * 5
     end
 end
 
@@ -50,13 +50,13 @@ function ssTreeManager:update(dt)
 
         -- capping growthState if the distance is too small for the tree to grown
         -- distances are somwehat larger than what should be expected in RL
-        if tree.ssNearestDistance < 1.0 and tree.growthState > 0.25 then
+        if tree.ssNearestDistance < 2.5 and tree.growthState > 0.25 then
             tree.growthState = 0.25
-        elseif tree.ssNearestDistance < 2.0 and tree.growthState > 0.45 then
+        elseif tree.ssNearestDistance < 4.5 and tree.growthState > 0.45 then
             tree.growthState = 0.45
-        elseif tree.ssNearestDistance < 3.0 and tree.growthState > 0.65 then
+        elseif tree.ssNearestDistance < 6.5 and tree.growthState > 0.65 then
             tree.growthState = 0.65
-        elseif tree.ssNearestDistance < 4.0 and tree.growthState > 0.85 then
+        elseif tree.ssNearestDistance < self.MIN_DISTANCE and tree.growthState > 0.85 then
             tree.growthState = 0.85
         end
     end
