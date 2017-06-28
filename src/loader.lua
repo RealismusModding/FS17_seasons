@@ -217,12 +217,14 @@ function ssSeasonsMod.nullFinished(...)
     local isServer = g_currentMission:getIsServer()
 
     for _, k in pairs(g_modClasses) do
-        if _G[k] ~= nil then
-            if _G[k].loadMapFinished ~= nil then
-                _G[k]:loadMapFinished()
-            end
+        if _G[k] ~= nil and _G[k].loadMapFinished ~= nil then
+            _G[k]:loadMapFinished()
+        end
+    end
 
-            if isServer and _G[k].loadGameFinished ~= nil then
+    if g_currentMission:getIsServer() then
+        for _, k in pairs(g_modClasses) do
+            if _G[k] ~= nil and _G[k].loadGameFinished ~= nil then
                 _G[k]:loadGameFinished()
             end
         end

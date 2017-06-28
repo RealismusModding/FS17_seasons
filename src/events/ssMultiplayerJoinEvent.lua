@@ -62,7 +62,9 @@ function ssMultiplayerJoinEvent:readStream(streamId, connection)
             if _G[className].readStream ~= nil then
                 _G[className]:readStream(streamId, connection)
             end
+        end
 
+        for _, className in pairs(ssMultiplayer.classes) do
             if _G[className].loadGameFinished ~= nil then
                 _G[className]:loadGameFinished()
             end

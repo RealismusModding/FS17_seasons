@@ -100,7 +100,11 @@ function ssGrowthManager:loadMap(name)
         addConsoleCommand("ssSetGrowthState", "Sets growth for test purposes", "consoleCommandSetGrowthState", self)
         addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
         addConsoleCommand("ssChangeFruitGrowthState", "ssChangeFruitGrowthState fruit currentState desiredState", "consoleCommandChangeFruitGrowthState", self)
+    end
+end
 
+function ssGrowthManager:loadMapFinished()
+    if g_currentMission:getIsServer() then
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
             self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
@@ -544,14 +548,14 @@ end
 function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
     local inputs = {}
     for input in string.gmatch(userInput, "%w+") do table.insert(inputs, input) end
-    
+
     local fruitName = inputs[1]
     self.growthData[self.TMP_TRANSITION] = {}
     self.growthData[self.TMP_TRANSITION][fruitName] = {}
     self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
     self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
-    
+
 end
 
 function ssGrowthManager:consoleCommandPrintDebugInfo()
