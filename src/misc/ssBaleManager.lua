@@ -162,7 +162,7 @@ function ssBaleManager:calculateBaleReduction(singleBale)
     local daysInSeason = g_seasons.environment.daysInSeason
 
     if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
-        reductionFactor = 0.99
+        reductionFactor = math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
 
     elseif singleBale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
         if singleBale.age == nil then
