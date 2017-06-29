@@ -94,11 +94,7 @@ function ssMain:loadMap()
     -- Call upon all 4th party mod functions
     for modName, isLoaded in pairs(g_modIsLoaded) do
         if isLoaded then
-            local modEnv = getfenv(0)[modName]
-
-            if modEnv ~= nil and modEnv.g_rm_seasons_load ~= nil then
-                modEnv.g_rm_seasons_load(self)
-            end
+            self:loadMod(modName)
         end
     end
 
@@ -160,6 +156,44 @@ end
 ----------------------------
 -- Registering other mods
 ----------------------------
+
+function ssMain:loadMod(modName)
+    local desc = ModsUtil.findModItemByModName(modName)
+    local xmlFile = loadXMLFile("ModFile", desc.modFile);
+
+    local modType = getXMLString(xmlFile, "modDesc.seasons.type");
+    local dataFolder = getXMLString(xmlFile, "modDesc.seasons.dataFolder");
+    local seasonsApiVersion = getXMLInt(xmlFile, "modDesc.seasons#version")
+
+    delete(xmlFile)
+
+    -- If it has a seasons block, use that
+    if seasonsApiVersion ~= nil then
+        if seasonsApiVersion > self.simpleVersion then
+            logInfo("Error: Version of Seasons is lower than version in mod", modName)
+            return
+        end
+
+        if modType == "geo" then
+            if self.hasGeoMod then
+                logInfo("Error: Multiple Seasons GEO mods are loaded. This is bad practice. Skipping to load", modName)
+                return
+            else
+                self.hasGeoMod = true
+            end
+        end
+
+        if dataFolder then
+            self:registerXMLDirectory(modName, desc.modDir .. dataFolder)
+        end
+    end
+
+    local modEnv = getfenv(0)[modName]
+
+    if modEnv ~= nil and modEnv.g_rm_seasons_load ~= nil then
+        modEnv.g_rm_seasons_load(self)
+    end
+end
 
 function ssMain:registerXMLDirectory(id, path)
     if id == nil or id == "" or path == nil or path == "" then
