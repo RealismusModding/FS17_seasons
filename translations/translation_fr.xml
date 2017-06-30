@@ -167,7 +167,7 @@
 
         <text name="ss_helpTitle_08" text="Cultures - Foin, Paille et Herbe" />
         <text name="ss_helpText_08_01" text="Durant l'hiver, l'herbe est réinitialisée à son état 'récolté' et ce, afin de simuler l'herbe qui s'affaiblie lorsqu'il gèle." />
-        <text name="ss_helpText_08_02" text="Laes balles d'herbe humide doivent être utilisées ou enrubannées dans les 2 jours. Sinon, après cela, l'herbe pourrira et la balle disparaîtra." />
+        <text name="ss_helpText_08_02" text="Les balles d'herbe humide doivent être utilisées ou enrubannées dans les 2 jours. Sinon après cela, l'herbe pourrira et la balle disparaîtra." />
         <text name="ss_helpText_08_03" text="Les andains de foin, d'herbe et de paille réduiront de volume et disparaîtront au fil du temps. Les andains d'herbe sont diminués à minuit tous les jours. Le foin et la paille sont diminués après chaque cycle de croissance ainsi que lors d'une pluie." />
         <text name="ss_helpText_08_04" text="La paille et le foin doivent être pressés avant de pouvoir être vendus - vendre de la paille ou du foin en vrac ne sera pas rémunéré. L'herbe, pressée ou en vrac ne pourra pas être vendue non plus." />
 
@@ -176,10 +176,10 @@
         <text name="ss_helpText_09_02" text="Les arbres se font concurrence en ce qui concerne leur développement s'ils sont plantés trop près les uns des autres. Il faudra procéder à des éclaircies dans les bois pour les aider à reprendre leur croissance normale." />
 
         <text name="ss_helpTitle_10" text="Cultures - Effets du temps" />
-        <text name="ss_helpText_10_01" text="La pluie, la grêle et la neige affectent l'humidité des cultures. Si cette humidité est trop élevée, il ne sera pas possible de récolter certaines cultures. Certaines nuits d'été peuvent être moîtes sans prévenir." />
+        <text name="ss_helpText_10_01" text="La pluie, la grêle et la neige affectent l'humidité des cultures. Si cette humidité est trop élevée, il ne sera pas possible de récolter certaines cultures. Certaines nuits d'été peuvent être moite sans prévenir." />
         <text name="ss_helpText_10_02" text="Après la pluie, il faudra un certain temps pour que la culture sèche (en fonction de la température ambiante et de la période de l'année). Plus il fait chaud, plus la récolte sèche vite." />
-        <text name="ss_helpText_10_03" text="Utiliser une faneuse sur du foin humide le rétrogadera en herbe humide. Il faudra donc être vigilant sur l'humidité avant toute intervention." />
-        <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le modder, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hanger bénéficant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
+        <text name="ss_helpText_10_03" text="Utiliser une faneuse sur du foin humide le rétrogradera en herbe humide. Il faudra donc être vigilant sur l'humidité avant toute intervention." />
+        <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le moddeur, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hangar bénéficiant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
         <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
