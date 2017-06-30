@@ -24,6 +24,14 @@ function ssDaylight:loadMap(name)
     for _, path in ipairs(g_seasons:getModPaths("daylight")) do
         self:loadFromXML(path)
     end
+
+    if g_currentMission:getIsServer() then
+        self:setupDayNight()
+    end
+end
+
+function ssDaylight:readStream()
+    self:setupDayNight()
 end
 
 function ssDaylight:loadFromXML(path)
@@ -90,7 +98,7 @@ end
 -- New day night system based on season
 ----------------------------
 
-function ssDaylight:loadGameFinished()
+function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
     self.pNight = 6 * math.pi / 180 -- Suns inclination below the horizon for 'civil twilight'
