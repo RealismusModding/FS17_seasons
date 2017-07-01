@@ -19,6 +19,7 @@ ssEnvironment.DAYS_IN_WEEK = 7
 ssEnvironment.SEASONS_IN_YEAR = 4
 ssEnvironment.MONTHS_IN_YEAR = 12
 ssEnvironment.TRANSITIONS_IN_YEAR = 12
+ssEnvironment.MAX_DAYS_IN_SEASON = 24
 
 ssEnvironment.SEASON_SPRING = 0 -- important to start at 0, not 1
 ssEnvironment.SEASON_SUMMER = 1
@@ -59,7 +60,7 @@ function ssEnvironment:preLoad()
 end
 
 function ssEnvironment:load(savegame, key)
-    self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, 12)
+    self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, self.MAX_DAYS_IN_SEASON)
     self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", 0)
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1)
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", -(g_currentMission.environment.currentDay - 1))

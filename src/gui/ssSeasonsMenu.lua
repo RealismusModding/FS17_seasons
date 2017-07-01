@@ -806,7 +806,7 @@ function ssSeasonsMenu:onCreateSeasonLength(element)
     self:replaceTexts(element)
 
     local texts = {}
-    for i = 1, 4 do
+    for i = 1, ssEnvironment.MAX_DAYS_IN_SEASON/3 do
         table.insert(texts, string.format(ssLang.getText("ui_days", "%i days"), i * 3))
     end
     element:setTexts(texts)
