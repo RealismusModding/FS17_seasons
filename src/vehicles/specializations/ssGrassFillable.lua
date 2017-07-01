@@ -97,8 +97,8 @@ end
 
 function ssGrassFillable:updateTick(dt)
     if self.isServer then
-        if (vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) or vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW))
-            and g_currentMission.environment.timeSinceLastRain < 60 then
+        if g_currentMission.environment.timeSinceLastRain < 60
+            and (vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) or vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW)) then
             reduceFill(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW)
             reduceFill(self, FillUtil.FILLTYPE_STRAW)
         elseif vehicleHasFillType(self, FillUtil.FILLTYPE_GRASS_WINDROW) then
