@@ -797,7 +797,7 @@ function ssSeasonsMenu:onCreateControlsTemperature(element)
     self.settingElements.controlsTemperature = element
     self:replaceTexts(element)
 
-    element:setTexts({ssLang.getText("ui_temperatureCelcius"), ssLang.getText("ui_temperatureFahrenheit")})
+    element:setTexts({ssLang.getText("ui_temperatureCelsius"), ssLang.getText("ui_temperatureFahrenheit")})
 end
 
 ------- SEASON LENGTH -------

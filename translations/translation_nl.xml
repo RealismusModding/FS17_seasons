@@ -95,7 +95,7 @@
         <text name="ui_snowOneLayer" text="Enkel één laag" />
         <text name="ui_days" text="%d dagen" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
-        <text name="ui_temperatureCelcius" text="Celcius" />
+        <text name="ui_temperatureCelsius" text="Celsius" />
 
         <text name="ui_plantingSeason" text="Plantseizoen" />
         <text name="ui_harvestSeason" text="Oogstseizoen" />

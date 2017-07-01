@@ -95,7 +95,7 @@
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
-        <text name="ui_temperatureCelcius" text="Celcius" />
+        <text name="ui_temperatureCelsius" text="Celsius" />
 
         <text name="ui_plantingSeason" text="Saison des semis" />
         <text name="ui_harvestSeason" text="Saison de récolte" />

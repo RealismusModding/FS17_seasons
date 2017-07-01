@@ -95,7 +95,7 @@
         <text name="ui_snowOneLayer" text="Einfache Schneeschicht" />
         <text name="ui_days" text="%i Tage" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
-        <text name="ui_temperatureCelcius" text="Celsius" />
+        <text name="ui_temperatureCelsius" text="Celsius" />
 
         <text name="ui_plantingSeason" text="Aussaat möglich" />
         <text name="ui_harvestSeason" text="Erntezeit" />

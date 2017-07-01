@@ -94,7 +94,7 @@
         <text name="ui_snowOneLayer" text="Только 1 слой" />
         <text name="ui_days" text="%i дн." />
         <text name="ui_temperatureFahrenheit" text="Фаренгейт" />
-        <text name="ui_temperatureCelcius" text="Цельсий" />
+        <text name="ui_temperatureCelsius" text="Цельсий" />
 
         <text name="ui_plantingSeason" text="Время посадки" />
         <text name="ui_harvestSeason" text="Время уборки" />

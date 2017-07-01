@@ -95,7 +95,7 @@
         <text name="ui_snowOneLayer" text="1 réteg csak" />
         <text name="ui_days" text="%i nap" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
-        <text name="ui_temperatureCelcius" text="Celsius" />
+        <text name="ui_temperatureCelsius" text="Celsius" />
 
         <text name="ui_plantingSeason" text="Vetési szezon" />
         <text name="ui_harvestSeason" text="Aratási szezon" />
