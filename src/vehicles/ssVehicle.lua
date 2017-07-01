@@ -23,6 +23,7 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
     SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
     SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
+    SpecializationUtil.registerSpecialization("grassfillable", "ssGrassFillable", g_seasons.modDir .. "src/vehicles/specializations/ssGrassFillable.lua")
     SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
     SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
@@ -104,6 +105,7 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(Fillable, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowfillable"))
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("grassfillable"))
             end
 
             if SpecializationUtil.hasSpecialization(Motorized, vehicleType.specializations) then

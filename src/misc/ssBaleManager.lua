@@ -45,7 +45,7 @@ function ssBaleManager:reduceFillLevel()
 
             -- wrapped bales are not affected
             if bale.wrappingState ~= 1 then
-                local isGrassBale = bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1]
+                local isGrassBale = bale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
                 -- if there has been rain during the day
@@ -63,7 +63,7 @@ function ssBaleManager:reduceFillLevel()
 
                     -- check if the bale is outside
                     if density == 0 then
-                        if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
+                        if bale.fillType == FillUtil.FILLTYPE_STRAW or bale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
                             local origFillLevel = bale.fillLevel
                             local reductionFactor = self:calculateBaleReduction(bale)
 
@@ -107,7 +107,7 @@ function ssBaleManager:removeBale()
         if object.item:isa(Bale) then
             local bale = object.item
 
-            if bale.fillType == FillUtil.getFillTypesByNames("straw")[1] or bale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
+            if bale.fillType == FillUtil.FILLTYPE_STRAW or bale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
                 local volume = math.huge
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
@@ -122,7 +122,7 @@ function ssBaleManager:removeBale()
                 end
 
             -- when grass bale is more than 2 days old it will be deleted
-            elseif bale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] and bale.wrappingState ~= 1 then
+            elseif bale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW and bale.wrappingState ~= 1 then
                 if bale.age > 2 then
                     self:delete(bale)
                 end
@@ -161,10 +161,10 @@ function ssBaleManager:calculateBaleReduction(singleBale)
     local reductionFactor = 1
     local daysInSeason = g_seasons.environment.daysInSeason
 
-    if singleBale.fillType == FillUtil.getFillTypesByNames("straw")[1] or singleBale.fillType == FillUtil.getFillTypesByNames("dryGrass_windrow")[1] then
+    if singleBale.fillType == FillUtil.FILLTYPE_STRAW or singleBale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
         reductionFactor = math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
 
-    elseif singleBale.fillType == FillUtil.getFillTypesByNames("grass_windrow")[1] then
+    elseif singleBale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW then
         if singleBale.age == nil then
             singleBale.age = 0
         end
