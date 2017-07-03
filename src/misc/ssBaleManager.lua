@@ -170,7 +170,7 @@ function ssBaleManager:calculateBaleReduction(singleBale)
         end
 
         local dayReductionFactor = 1 - ( (2.4 * singleBale.age / daysInSeason + 1.2 ) ^ 5.75) / 100
-        reductionFactor = 1 - (1 - dayReductionFactor) / 24
+        reductionFactor = math.max(1 - (1 - dayReductionFactor) / 24, 0.975)
     end
 
     return reductionFactor
