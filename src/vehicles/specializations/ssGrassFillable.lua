@@ -66,24 +66,25 @@ local function vehicleInShed(vehicle)
 end
 
 local function calculateBaleReduction(fillType)
-    local reductionFactor = 1
     local daysInSeason = g_seasons.environment.daysInSeason
 
     if fillType == FillUtil.FILLTYPE_STRAW or fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
-        return math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
+        return 1 - math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
     elseif fillType == FillUtil.FILLTYPE_GRASS_WINDROW then
         -- TODO(reallogger): Do something with days in season
         local dayReductionFactor = 1 - (1.2 ^ 5.75) / 100
 
-        return 1 - (1 - dayReductionFactor) / 24
+        return - (1 - dayReductionFactor) / 24
     else
-        return 1
+        return 0
     end
 end
 
 local function reduceFill(vehicle, fillType)
     local level = self:getFillLevel(fillType)
-    local diff = -0.05 * vehicle.sizeWidth * vehicle.sizeLength * 1000 / 60 / 60 * (dt / 1000) * temp
+
+    -- TODO(reallogger): adjust the algorithms
+    local diff = calculateBaleReduction(fillType) * vehicle.sizeWidth * vehicle.sizeLength * 1000 / 60 / 60 * (dt / 1000) * temp
 
     -- Update each unit
     local units = vehicle:getFillUnitsWithFillType(fillType)
@@ -97,10 +98,13 @@ end
 
 function ssGrassFillable:updateTick(dt)
     if self.isServer then
-        if g_currentMission.environment.timeSinceLastRain < 60
+        -- If it rained into the fillable with hay or straw, rot it a bit
+        if g_currentMission.environment.timeSinceLastRain < 60 and self:getAllowFillFromAir()
             and (vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) or vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW)) then
             reduceFill(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW)
             reduceFill(self, FillUtil.FILLTYPE_STRAW)
+
+        -- Always rot grass
         elseif vehicleHasFillType(self, FillUtil.FILLTYPE_GRASS_WINDROW) then
             reduceFill(self, FillUtil.FILLTYPE_GRASS_WINDROW)
         end
