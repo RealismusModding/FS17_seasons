@@ -213,17 +213,17 @@ function ssReplaceVisual:loadMissingPlaceableDefaults(searchBase)
     self:walkOverReplacements(false, false, function (seasonId, shapeName, secondaryNodeName)
         -- Original aterial may not be loaded yet, because, for example, a tree was not in the map
         -- but is in a Placeable
-        if self.textureReplacements.default[shapeName][secondaryNodeName].materialId == nil then
-            local materialId = ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNodeName)
+        if self.textureReplacements.default[shapeName][secondaryNodeName].materialIds == nil then
+            local materialIds = ssReplaceVisual:findOriginalMaterials(searchBase, shapeName, secondaryNodeName)
 
-            self.textureReplacements.default[shapeName][secondaryNodeName].materialId = materialId
+            self.textureReplacements.default[shapeName][secondaryNodeName].materialIds = materialIds
 
             -- Load an object to hold it as well to prevent garbage collect
-            if materialId ~= nil and self.tmpMaterialHolderNodeId ~= nil then
+            if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
                 local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
 
                 link(getRootNode(), nodeId)
-                setMaterial(nodeId, materialId, 0)
+                self:setShapeMaterials(nodeId, materialIds)
             end
         end
     end)
@@ -249,11 +249,11 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
 
         for shapeName, shapeNameTable in pairs(seasonTable) do
             for secondaryNodeName, secondaryNodeTable in pairs(shapeNameTable) do
-                local materialSrcId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
+                local sourceShapeId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
 
-                if materialSrcId ~= nil then -- Can be defined in an other I3D file.
+                if sourceShapeId ~= nil then -- Can be defined in an other I3D file.
                     -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
-                    self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialId = getMaterial(materialSrcId, 0)
+                    self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialIds = self:getShapeMaterials(sourceShapeId)
 
                     -- Load the current material
                     if self.textureReplacements.default[shapeName] == nil then
@@ -264,16 +264,16 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                         self.textureReplacements.default[shapeName][secondaryNodeName] = {}
                     end
 
-                    if self.textureReplacements.default[shapeName][secondaryNodeName].materialId == nil then
-                        local materialId = ssReplaceVisual:findOriginalMaterial(getRootNode(), shapeName, secondaryNodeName)
-                        self.textureReplacements.default[shapeName][secondaryNodeName].materialId = materialId
+                    if self.textureReplacements.default[shapeName][secondaryNodeName].materialIds == nil then
+                        local materialIds = ssReplaceVisual:findOriginalMaterials(getRootNode(), shapeName, secondaryNodeName)
+                        self.textureReplacements.default[shapeName][secondaryNodeName].materialIds = materialIds
 
                         -- Load an object to hold it as well to prevent garbage collect
-                        if materialId ~= nil and self.tmpMaterialHolderNodeId ~= nil then
+                        if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
                             local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
 
                             link(getRootNode(), nodeId)
-                            setMaterial(nodeId, materialId, 0)
+                            self:setShapeMaterials(nodeId, materialIds)
                         end
                     end
                 end
@@ -301,31 +301,49 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
     end
 end
 
+function ssReplaceVisual:getShapeMaterials(shape)
+    local list = {}
+
+    for i = 1, getNumMaterials(shape) do
+        table.insert(list, getMaterial(shape, i - 1))
+    end
+
+    return list
+end
+
+function ssReplaceVisual:setShapeMaterials(shape, materialIds)
+    local numMats = getNumMaterials(shape)
+
+    for i = 1, math.min(numMats, table.getn(materialIds)) do
+        setMaterial(shape, materialIds[i], i - 1)
+    end
+end
+
 -- Finds the material of the original Shape object
-function ssReplaceVisual:findOriginalMaterial(searchBase, shapeName, secondaryNodeName)
+function ssReplaceVisual:findOriginalMaterials(searchBase, shapeName, secondaryNodeName)
     -- print("Searching for object: " .. shapeName .. "/" .. secondaryNodeName .. " under " .. searchBase )
     local parentShapeId = self:findNodeByName(searchBase, shapeName)
     local childShapeId
-    local materialId
+    local materialIds
 
     -- print("DEBUG: " .. parentShapeId )
     if parentShapeId ~= nil then
         if secondaryNodeName == "" then
-            return getMaterial(parentShapeId, 0)
+            return self:getShapeMaterials(parentShapeId)
         end
 
         -- Look for children. (Children only)
         childShapeId = self:findNodeByName(parentShapeId, secondaryNodeName, true)
 
         if childShapeId ~= nil then
-            materialId = getMaterial(childShapeId, 0)
+            materialIds = self:getShapeMaterials(childShapeId)
         elseif getHasClassId(parentShapeId, ClassIds.SHAPE) then
             -- Use parent if child is not found, or if no LOD
-            materialId = getMaterial(parentShapeId, 0)
+            materialIds = self:getShapeMaterials(parentShapeId)
         end
     end
 
-    return materialId
+    return materialIds
 end
 
 -- Walks the node tree and replaces materials according to season as specified in self.textureReplacements
@@ -344,9 +362,9 @@ function ssReplaceVisual:updateTextures(nodeId)
                 secondaryNodeName = nodeName
             end
 
-            if secondaryNodeTable.materialId ~= nil then
+            if secondaryNodeTable.materialIds ~= nil then
                 -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
-                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
     elseif self.textureReplacements.default[nodeName] ~= nil then
@@ -357,9 +375,9 @@ function ssReplaceVisual:updateTextures(nodeId)
             end
 
             -- MATERIALID is NULL for birch
-            if secondaryNodeTable.materialId ~= nil then
+            if secondaryNodeTable.materialIds ~= nil then
                 -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
-                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialId)
+                self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
     end
@@ -375,17 +393,17 @@ function ssReplaceVisual:updateTextures(nodeId)
 end
 
 -- Does a specified replacement on subnodes of nodeId.
-function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcId)
+function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcIds)
     if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == shapeName then
         -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId))
-        setMaterial(nodeId, materialSrcId, 0)
+        self:setShapeMaterials(nodeId, materialSrcIds)
     end
 
     for i = 0, getNumOfChildren(nodeId) - 1 do
         local childId = getChildAt(nodeId, i)
 
         if childId ~= nil then
-            local tmp = self:updateTexturesSubNode(childId, shapeName, materialSrcId)
+            local tmp = self:updateTexturesSubNode(childId, shapeName, materialSrcIds)
 
             if tmp ~= nil then
                 return tmp
