@@ -80,33 +80,36 @@ local function calculateBaleReduction(fillType)
     end
 end
 
-local function reduceFill(vehicle, fillType)
-    local level = self:getFillLevel(fillType)
-
-    -- TODO(reallogger): adjust the algorithms
-    local diff = calculateBaleReduction(fillType) * vehicle.sizeWidth * vehicle.sizeLength * 1000 / 60 / 60 * (dt / 1000) * temp
-
-    -- Update each unit
-    local units = vehicle:getFillUnitsWithFillType(fillType)
-    for _, fillUnit in pairs(units) do
-        local unitLevel = vehicle:getUnitFillLevel(fillUnit.fillUnitIndex)
-
-        -- Add each compartment the same amount of snow (not based on capacity). Don't bother with the details.
-        vehicle:setUnitFillLevel(fillUnit.fillUnitIndex, unitLevel + diff / table.getn(units), fillType)
-    end
-end
-
 function ssGrassFillable:updateTick(dt)
     if self.isServer then
+        local fillToReduce = nil
+
         -- If it rained into the fillable with hay or straw, rot it a bit
-        if g_currentMission.environment.timeSinceLastRain < 60 and self:getAllowFillFromAir()
+        if g_currentMission.environment.timeSinceLastRain < 5 and self:getAllowFillFromAir()
             and (vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) or vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW)) then
-            reduceFill(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW)
-            reduceFill(self, FillUtil.FILLTYPE_STRAW)
+            fillToReduce = FillUtil.FILLTYPE_DRYGRASS_WINDROW
+            fillToReduce = FillUtil.FILLTYPE_STRAW
 
         -- Always rot grass
         elseif vehicleHasFillType(self, FillUtil.FILLTYPE_GRASS_WINDROW) then
-            reduceFill(self, FillUtil.FILLTYPE_GRASS_WINDROW)
+            fillToReduce = FillUtil.FILLTYPE_GRASS_WINDROW
+        end
+
+        if fillToReduce ~= nil then
+            local level = self:getFillLevel(fillType)
+
+            -- TODO(reallogger): adjust the algorithms
+
+            local diff = calculateBaleReduction(fillToReduce) * self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) * 10
+
+            -- Update each unit
+            local units = self:getFillUnitsWithFillType(fillToReduce)
+            for _, fillUnit in pairs(units) do
+                local unitLevel = self:getUnitFillLevel(fillUnit.fillUnitIndex)
+
+                -- Add each compartment the same amount of snow (not based on capacity). Don't bother with the details.
+                self:setUnitFillLevel(fillUnit.fillUnitIndex, unitLevel + diff / table.getn(units), fillToReduce)
+            end
         end
     end
 end
