@@ -60,21 +60,20 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Mantenimiento Vehículo" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparación Vehículo" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="No tienes suficiente para mantener esto" />
-        <text name="SS_VEHICLE_REPAIRED" text="Coste de mantenimiento para %s fue %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="No tienes dinero sufiente para el mantenimiento" />
+        <text name="SS_VEHICLE_REPAIRED" text="Coste de mantenimiento para %s fue de %s" />
+        <text name="SS_NOTHING_TO_REPAIR" text="No necesita mantenimiento un %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Mantenimiento %s para %s" />
         <text name="SS_REPAIR_REQUIRED" text="Mantenimiento necesario" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas de trabajo o %d días hasta mantenimiento" />
-        <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento el %s por %s?" />
+        <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento del %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
         <text name="warning_repairBrokenMachine" text="Motor roto. Repare su vehículo!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
         <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
 
-        <text name="SS_SEASON_INTRO_0" text="Un nuevo año, nuevo periodo de siembra." />
+        <text name="SS_SEASON_INTRO_0" text="Una nueva temporada, nuevo periodo de siembra." />
         <text name="SS_SEASON_INTRO_1" text="El sol está ha pleno rendimiento, sus cosechas crecen." />
         <text name="SS_SEASON_INTRO_2" text="La tempoprada de recolección ha llegado. Preparese para el invierno porque sus cosechas no sobrevivirán al frío." />
         <text name="SS_SEASON_INTRO_3" text="¡Está helando! El terreno está duro, posiblemente congelado. La cosecha no crecerá o incluso morirá." />
@@ -108,16 +107,16 @@
         <text name="tooltip_controlsTemperature" text="Define la escala de temperatura en el juego" />
         <text name="tooltip_moisture" text="No permite trabajar los cultivos caundo están húmedos" />
 
-        <text name="setting_seasonIntros" text="Introducción Estaciones" />
+        <text name="setting_seasonIntros" text="Introducción Seasons" />
         <text name="setting_seasonLength" text="Duración de la estación" />
         <text name="setting_snow" text="Modo nevando" />
         <text name="setting_controlsHelp" text="Teclas en menu de ayuda" />
         <text name="setting_snowTracks" text="Cadenas para la nieve" />
         <text name="setting_controlsTemperature" text="Escala de temperatura" />
-        <text name="setting_moisture" text="Cultivo Húmedo" />
+        <text name="setting_moisture" text="Cultivo húmedo" />
 
-        <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerá después de un año de juego." />
-        <text name="dialog_resetGrowth" text="Ha cargado una partida antigua. Estaciones debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Estaciones no funcionará como debiera." />
+        <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerán después de un año de juego." />
+        <text name="dialog_resetGrowth" text="Ha cargado una partida antigua. Seasons debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Seasons no funcionará como debiera." />
         <text name="dialog_resetGrowth_title" text="Resetear crecimiento" />
         <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
@@ -129,9 +128,9 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons es un mod que mejora el realismo en el juego Farming Simulator ajustando casi todos los aspectos a parámetros más realistas. Todo, desde los efectos estacionales hasta los patrones de crecimiento de los cultivos y la producción animal, se ha cambiado a un nivel más realista." />
-        <text name="ss_helpText_01_02" text="El año del juego se ha fraccionado en 4 estaciones: primavera, verano, otoño e invierno. Cada estacion se fracciona en 3 partes: principios, mediados y final. Estas partes se denominan transiciones." />
-        <text name="ss_helpText_01_03" text="Sus actividades están vinculadas a la época del año que tienen lugar en la vida real." />
+        <text name="ss_helpText_01_01" text="Seasons es un mod que mejora el realismo en el juego Farming Simulator ajustando casi todos los aspectos a parámetros más realistas, desde los efectos estacionales hasta los patrones de crecimiento de los cultivos y la producción animal." />
+        <text name="ss_helpText_01_02" text="El año de juego se ha fraccionado en 4 estaciones: primavera, verano, otoño e invierno. Cada estacion se fracciona en 3 partes: inicial, media y final. Estas partes se denominan transiciones." />
+        <text name="ss_helpText_01_03" text="Sus actividades estarán vinculadas a la época del año que tienen lugar en la vida real." />
 
         <text name="ss_helpTitle_02" text="Efectos Estacionales (1)" />
         <text name="ss_helpText_02_01" text="El tiempo es aleatorio de un dia para otro, pero sigue un patrón de estación a estación." />
@@ -139,66 +138,66 @@
         <text name="ss_helpText_02_03" text="La nieve llenará los remolques y palas, a menos que el volquete o la pala se cubra en un cobertizo adecuado para Seasons o una lona. La nieve también reducirá la tracción, haciendo así los vehículos más lentos." />
 
         <text name="ss_helpTitle_03" text="Efectos Estacionales (2)" />
-        <text name="ss_helpText_03_01" text="Las horas de luz del día también se ven afectadas por las estaciones. Los inviernos tienen días más cortos (8 horas) mientras que los veranos tienen días más largos (17 horas)." />
-        <text name="ss_helpText_03_02" text="Los silos de búnker y los fardos de ensilaje requieren tiempo para fermentar. Se necesita un tercio de las estaciones (1 transición) para fermentar completamente un silo de búnker o un fardo de ensilaje. El heno envuelto no fermentará, pero estará protegido contra el clima." />
-        <text name="ss_helpText_03_03" text="Las estaciones también afectarán a los árboles y al follaje. Los árboles cambiarán de estado según los cambios estacionales de temperatura. Las hojas se vuelven de color y caerán en otoño. Los árboles se ven desnudos en invierno y tendrán un verde claro en primavera." />
+        <text name="ss_helpText_03_01" text="Las horas de luz del día también se ven afectadas por Seasons. Los inviernos tienen días más cortos (8 horas) mientras que los veranos tienen días más largos (17 horas)." />
+        <text name="ss_helpText_03_02" text="Los silos de búnker y los fardos de ensilaje requieren tiempo para fermentar. Se necesita un tercio de la estación (1 transición) para fermentar completamente un bunker de ensilaje. El heno plastificado no fermentará, pero estará protegido contra el clima." />
+        <text name="ss_helpText_03_03" text="Seasons también afectarán a los árboles y al follaje. Los árboles cambiarán visualmente por los cambios estacionales y la temperatura. Las hojas no perennes marchitarán y caerán en otoño. Los árboles se verán desnudos en invierno y tendrán un verde claro en primavera." />
 
         <text name="ss_helpTitle_04" text="Pronóstico del tiempo" />
-        <text name="ss_helpText_04_01" text="El pronóstico del tiempo será reintroducido con Seasons y puede ser activado con Alt Izq. + F." />
-        <text name="ss_helpText_04_02" text="El pronóstico del tiempo mostrará las altas/bajas temperaturas y el tiempo (soleado, niebla, lluvia, nieve, nubaldo) para los siguientes 7 días. Las tormentas de granizo no se mostrarán en el pronóstico del tiempo, como en la vida real, es un acontecimiento inesperado." />
+        <text name="ss_helpText_04_01" text="El pronóstico del tiempo será modelado por Seasons y se hará visible con Alt Izq. + F." />
+        <text name="ss_helpText_04_02" text="El pronóstico del tiempo mostrará las temperatura maxima y minima y el pronóstico del tiempo (soleado, niebla, lluvia, nieve, nublado) para los siguientes 7 días. Las tormentas de granizo no se mostrarán en el pronóstico del tiempo, como en la vida real, es un acontecimiento inesperado." />
         <text name="ss_helpText_04_03" text="El número a la derecha de cada bloque de pronóstico representa el día de la estación." />
 
         <text name="ss_helpTitle_05" text="Suelo" />
-        <text name="ss_helpText_05_01" text="La temperatura del suelo se modela utilizando ecuaciones termodinámicas y datos históricos. Esto significa que el suelo se congelará en el invierno cuando la temperatura del aire caiga por debajo de un cierto punto y período de tiempo. El suelo se descongelará en primavera cuando la temperatura del aire se eleve por encima de un cierto umbral y tiempo." />
+        <text name="ss_helpText_05_01" text="La temperatura del suelo se modela utilizando ecuaciones termodinámicas y datos históricos. Esto significa que el suelo se congelará en invierno cuando la temperatura ambiente caiga por debajo de un cierto punto y durante período de tiempo. El suelo se descongelará en primavera cuando la temperatura del aire se eleve por encima de cierto umbral y el tiempo necesario." />
         <text name="ss_helpText_05_02" text="El suelo no podrá ser trabajado cuando este congelado. Los cultivos no crecerán en suelo congelado." />
-        <text name="ss_helpText_05_03" text="Los cultivos sólo germinan cuando la temperatura del suelo está por encima de sus temperaturas de germinación. Las temperaturas de germinación se incluyen en la primera página del menú de configuración de estaciones (Alt Izq. + S)." />
+        <text name="ss_helpText_05_03" text="Los cultivos sólo germinan cuando la temperatura del suelo está por encima de sus temperaturas de germinación. Las temperaturas de germinación se incluyen en la primera página del menú de configuración de Seasons (Alt Izq. + S)." />
 
         <text name="ss_helpTitle_06" text="Cultivos - Introducción" />
-        <text name="ss_helpText_06_01" text="Al comenzar un nuevo juego, todos los cultivos serán reajustados a sus etapas cosechadas para simular el hecho de que los campos no han sido trabajados desde el otoño. Cuando se usa Seasons por primera vez en una partida existente, tendrá la opción de reiniciar los cultivos o no." />
-        <text name="ss_helpText_06_02" text="Los patrones de crecimiento por defecto de los cultivos han sido reemplazados por este mod, Seasons. Los cultivos seguirán un patrón de crecimiento realista, después de los correspondientes períodos estacionales de siembra y cosecha. Esto también significa que el invierno matará a la mayoría de los cultivos y los cultivos plantados en el momento equivocado no crecerán." />
-        <text name="ss_helpText_06_03" text="Los cultivos sólo se pueden cosechar en su etapa de crecimiento final, excepto el álamo y el rábano oleaginoso, y permanecerán en esta etapa final hasta que mueran en el invierno." />
+        <text name="ss_helpText_06_01" text="Al comenzar un nuevo juego, todos los cultivos serán reajustados a sus status de cosechados para simular el hecho de que los campos no han sido trabajados desde el otoño. Cuando se usa Seasons por primera vez en una partida existente, tendrá la opción de reiniciar los cultivos o no." />
+        <text name="ss_helpText_06_02" text="Los patrones de crecimiento por defecto de los cultivos han sido reemplazados por Seasons. Los cultivos seguirán un patrón de crecimiento realista, con la correcta correspondencia entre los períodos estacionales y la siembra y cosecha. Esto significa que el invierno matará la mayoría de cultivos y aquellos plantados en el momento equivocado, no crecerán." />
+        <text name="ss_helpText_06_03" text="Los cultivos sólo se pueden cosechar en su etapa de crecimiento final y permanecerán en esta etapa final hasta que mueran en el invierno, excepto el álamo y el rábano oleaginoso" />
         <text name="ss_helpText_06_04" text="Una vez que un cultivo de cereal alcanza la primera etapa de cosecha de acuerdo con la visión general del crecimiento en el menú Esc, está listo para la cosecha. Esta es la etapa final de la cosecha." />
-        <text name="ss_helpText_06_05" text="Todavía puede ensilar cultivos verdes." />
+        <text name="ss_helpText_06_05" text="Es posible poder ensilar cultivos no-standard con corte prematuro." />
 
         <text name="ss_helpTitle_07" text="Cultivos - Cultivos Herbáceos" />
         <text name="ss_helpText_07_01" text="El crecimiento del cultivo ahora es más largo. Puede tardar medio año para llegar a la etapa de cosecha." />
-        <text name="ss_helpText_07_02" text="El invierno matará la mayoría de los cultivos, pero hay cultivos que aguantan el invierno y primavera. El trigo, la cebada, el álamo, el césped, los rábanos de semillas oleaginosas y la colza pueden ser plantados en otoño para cultivos de invierno o plantados en primavera para cultivos de primavera. Asegúrese de que el suelo está lo suficientemente caliente para la germinación de estos cultivos." />
-        <text name="ss_helpText_07_03" text="El maíz, la soja, el girasol, la remolacha y las patatas deben ser plantadas en primavera. Asegúrese de revisar la vista general del crecimiento en el menú Seasons debido a que algunos cultivos no pueden ser plantados en la primera transición de la primavera (principios de primavera) y morirán, incluso si la temperatura del suelo está por encima de la temperatura de germinación." />
+        <text name="ss_helpText_07_02" text="El invierno matará la mayoría de los cultivos, pero hay cultivos que aguantan el invierno y primavera. El trigo, la cebada, el álamo, la hierba, los rábanos de semillas oleaginosas y la colza pueden ser plantados en otoño para cultivos de invierno o ser plantados en el inicio de primavera para cultivos de primavera. Asegúrese de que el suelo está lo suficientemente caliente para la germinación de estos cultivos." />
+        <text name="ss_helpText_07_03" text="El maíz, la soja, el girasol, la remolacha y las patatas deben ser plantadas a mediados o finales de primavera. Asegúrese de revisar el cuadro de crecimiento del menú Seasons, algunos cultivos no pueden ser plantados en el inicio de primavera y morirán aunque la temperatura exterior esté por encima de la mínima de germinación." />
 
         <text name="ss_helpTitle_08" text="Cultivos - Hierba, Paja y Heno" />
-        <text name="ss_helpText_08_01" text="En invierno, la hierba se restablece a su etapa cosechada para simular el invierno, matando la hierba cuando se hace frío." />
-        <text name="ss_helpText_08_02" text="Los fardos de hierba necesitan ser consumidos o envueltos para el ensilaje en los siguientes 2 días a su empacado. Después de 2 días la hierba se pudrirá y el fardo desaparecerá." />
+        <text name="ss_helpText_08_01" text="En invierno, la hierba se restablece a su etapa cosechada para simular el invierno, matando la hierba cuando hace frío." />
+        <text name="ss_helpText_08_02" text="Los fardos de hierba necesitan ser consumidos o envueltos para utilizarlos como heno o ensilaje en los siguientes 2 días a su empacado. Después de 2 días la hierba se pudrirá y el fardo desaparecerá." />
         <text name="ss_helpText_08_03" text="Las hileras de heno, hierba y paja comenzarán a reducir su tamaño, y eventualmente desaparecerán después de varios días. Las franjas de hierba se reducen a medianoche todos los días. El heno y la hilera de paja se reducen después de cada etapa de crecimiento, así como después de haber estado expuestos a la lluvia." />
-        <text name="ss_helpText_08_04" text="La paja y el heno deben ser empacados antes de que puedan ser vendidos - la paja y el heno sueltos no pueden ser vendidos, no recibirás dinero a cambio. La hierba, embalada o suelta, no puede ser vendida tampoco." />
+        <text name="ss_helpText_08_04" text="La paja y el heno deben ser empacados para que tengan valor - la paja y el heno sueltos pueden ser vendidos pero no recibirás nada a cambio. La hierba, embalada o suelta, no puede ser vendida tampoco." />
 
         <text name="ss_helpTitle_09" text="Cultivos - Árboles" />
-        <text name="ss_helpText_09_01" text="Los árboles tardan más tiempo en llegar a su estado maduro. Se necesitarán 5 años de juego para crecer completamente los árboles plantados y después de 2 años se pueden cortar." />
-        <text name="ss_helpText_09_02" text="Los árboles inhiben el crecimiento de otros árboles si han sido plantados demasiado juntos. Para reiniciar el crecimiento del árbol necesitará delgadear los árboles." />
+        <text name="ss_helpText_09_01" text="Los árboles tardan más tiempo en llegar a su estado maduro. Se necesitarán 5 años de juego para crecer completamente, aunque se podrán empezar a cortar a partir de 2 años." />
+        <text name="ss_helpText_09_02" text="Los árboles inhiben el crecimiento de otros árboles si han sido plantados demasiado juntos. Para tener un crecimiento correcto, el árbol necesitará cierto espacio alrededor." />
 
-        <text name="ss_helpTitle_10" text="Cultivos - Efectos Climáticos" />
-        <text name="ss_helpText_10_01" text="Lluvia, tormenta y nieve afecta los niveles de humedad de los cultivos. Si la humedad en los cultivos está por encima de cierto punto debido al mal tiempo, no será capaz de cosechar sus cultivos. Las noches de verano húmedas pueden ocurrir sin previo aviso." />
-        <text name="ss_helpText_10_02" text="Después de la lluvia sus cosechas necesitarán tiempo para secarse, lo que depende de la temperatura del aire y la época del año. Un clima más cálido significa que los cultivos se secarán más rápido que en climas más fríos." />
-        <text name="ss_helpText_10_03" text="El uso de una henificadora en el heno mientras los cultivos están húmedos producirá hierba húmeda. Asegúrese de usar sólo una henificadora cuando los cultivos estén suficientemente secos." />
-        <text name="ss_helpText_10_04" text="En un mapa Mod que ha sido preparado con una máscara de nieve por el autor, el heno y los fardos de paja que han sido expuestos a la lluvia o la nieve comenzará a pudrirse, a menos que las pacas se almacenan en un cobertizo (adecuado para Seasons). El mal tiempo no afectará a las balas o fardos envueltos en un mapa sin una máscara de nieve." />
+        <text name="ss_helpTitle_10" text="Cultivos - Efectos climáticos" />
+        <text name="ss_helpText_10_01" text="Lluvia, tormenta y nieve afecta los niveles de humedad de los cultivos. Si la humedad en los cultivos está por encima de cierto punto debido al mal tiempo, no le será posible cosechar sus cultivos. Las noches de verano húmedas aparecerán sin previo aviso." />
+        <text name="ss_helpText_10_02" text="Después de llover, sus cosechas necesitarán tiempo para secarse, dependiendo de la temperatura del aire y de la época del año. Un clima más cálido significará que los cultivos se secarán más rápido que en climas más fríos." />
+        <text name="ss_helpText_10_03" text="El uso de una henificadora en el heno mientras los cultivos están húmedos producirá hierba y no heno. Asegúrese de usar sólo una henificadora cuando el aviso de cultivo humedo no esté visible." />
+        <text name="ss_helpText_10_04" text="Los mapas adaptados a Seasons tendrán una archivomáscara de nieve por el autor, el heno y los fardos de paja que han sido expuestos a la lluvia o la nieve comenzará a pudrirse, a menos que las pacas se almacenan en un cobertizo (adecuado para Seasons). El mal tiempo no afectará a las balas o fardos envueltos en un mapa sin una máscara de nieve." />
 
         <text name="ss_helpTitle_11" text="Mantenimiento" />
-        <text name="ss_helpText_11_01" text="Sus tractores y cosechadoras requieren mantenimiento periódico para mantenerlos operativos. El período de mantenimiento es cada 30 horas o medio año, lo que ocurra primero. Los vehículos que están atrasados debido a su mantenimiento pueden tardar más en comenzar." />
-        <text name="ss_helpText_11_02" text="Usted puede reparar sus vehículos en la tienda de vehículos o en el garaje colocable. Para reparar su vehículo diríjase a la tienda, o garaje colocable, y presione Alt Izq. + R. Ojo! Es más costoso reparar en la tienda de vehículos." />
+        <text name="ss_helpText_11_01" text="Sus tractores y cosechadoras requieren mantenimiento periódico para mantenerlos operativos. El período de mantenimiento es cada 30 horas o medio año, lo que ocurra primero. Los vehículos que están atrasados debido a su mantenimiento pueden tardar más en arrancar." />
+        <text name="ss_helpText_11_02" text="Usted puede reparar sus vehículos en el concesionario oficial de vehículos o en un taller privado colocable. Para reparar su vehículo diríjase al concesionario o a un taller privado colocable, y presione Alt Izq. + R. Ojo! Es más costoso reparar en el concesionario oficial." />
         <text name="ss_helpText_11_03" text="La edad de su vehículo son los días transcurridos desde su última reparación." />
-        <text name="ss_helpText_11_04" text="Sólo los vehículos conducibles requerirán mantenimiento periódico. Las herramientas e implementos se repararán automáticamente según sea necesario." />
+        <text name="ss_helpText_11_04" text="Sólo los vehículos conducibles requerirán mantenimiento periódico. Las herramientas y accesorios se repararán automáticamente cuando sea necesario." />
 
         <text name="ss_helpTitle_12" text="Economía" />
-        <text name="ss_helpText_12_01" text="El tope del préstamo se ha cambiado de $CURRENCY_SYMBOL200.000, 30% de su propiedad de terreno y los valores de construcción que se pueden colocar. El límite mínimo de préstamo es de $CURRENCY_SYMBOL300.000 y el límite máximo de préstamo es de $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_01" text="El tope del préstamo se ha cambiado de $CURRENCY_SYMBOL200.000, más el 30% del valor de terrenos en propiedad más el valor de sus construcciones colocables. El límite mínimo de préstamo es de $CURRENCY_SYMBOL300.000 y el límite máximo de préstamo es de $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="Los ingresos de las misiones se han reducido. Usted ganará aproximadamente 5 veces más que un trabajador contratado que trabaja en el mismo campo." />
-        <text name="ss_helpText_12_03" text="El mantenimiento de todos los vehículos (además del mantenimiento periódico) incluye el mantenimiento y los impuestos relativos a cuánto se está utilizando. Las máquinas limpias también reducirán los costos de mantenimiento. Las máquinas que no se usan también tendrán sus costos de mantenimiento reducidos." />
-        <text name="ss_helpText_12_04" text="Los precios de los cultivos fluctúan con los cambios en las estaciones de una manera más realista." />
+        <text name="ss_helpText_12_03" text="El mantenimiento de todos los vehículos (además del mantenimiento periódico) incluye el mantenimiento y los impuestos relativos a cuánto se está utilizando. Tener las máquinas limpias reducen el coste de mantenimiento, así como, las máquinas sin uso verán reducido su coste de mantenimiento." />
+        <text name="ss_helpText_12_04" text="Los precios de mercado de cultivos fluctúan con los cambios de estación de una forma más realista." />
 
         <text name="ss_helpTitle_13" text="Ayudante Contratado" />
-        <text name="ss_helpText_13_01" text="Los trabajadores contratados requieren pago de horas extras. Si un trabajador contratado es usado antes de las 6AM y después de las 6PM, o los fines de semana, su pago será 50% más alto." />
+        <text name="ss_helpText_13_01" text="Los trabajadores contratados requieren pago de horas extras. Si un trabajador contratado es usado antes de las 6AM y después de las 6PM, o los fines de semana, su pago será un 50% más alto." />
 
         <text name="ss_helpTitle_14" text="Animales - Introducción" />
-        <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en el verano que en el invierno. Vacas y cerdos requieren más paja en el invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />
-        <text name="ss_helpText_14_02" text="Los animales sólo dan crías en una determinada época del año. Los cerdos y ovejas producirán crías en primavera, mientras que las vacas producirán crías en verano." />
+        <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en verano que en invierno. Vacas y cerdos requieren más paja en invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />
+        <text name="ss_helpText_14_02" text="Los animales sólo dan crías en una determinada época del año. Las ovejas producirán crías en primavera, las vacas producirán crías en verano y los cerdos en primavera y en otoño." />
         <text name="ss_helpText_14_03" text="Los animales morirán si no tienen comida o agua. Esto está desactivado en dificultad fácil." />
         <text name="ss_helpText_14_04" text="En invierno no se podrá alimentar con hierba, deberás usar heno en su lugar." />
 
@@ -210,7 +209,7 @@
         <text name="ss_helpTitle_16" text="Menú Seasons" />
         <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
         <text name="ss_helpText_16_02" text="La primera página es una guía para plantar y cosechar. Las temperaturas de germinación de todos los cultivos se muestran a la izquierda del gráfico. Si la temperatura al lado de un cultivo es blanca, significa que es lo suficientemente caliente para plantar ese cultivo en particular. Si la temperatura es azul, hace demasiado frío." />
-        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3/6/9/12 días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
+        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3/6/9/12/ días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />
@@ -221,7 +220,7 @@
         <text name="ss_helpTitle_18" text="Varios" />
         <text name="ss_helpText_18_01" text="Si no quiere trabajar duro por la noche, tiene la opción de saltar a la mañana siguiente. Después de caer la noche y usted está fuera del vehículo, presione Alt Izq. + N para saltar a la mañana siguiente." />
         <text name="ss_helpText_18_02" text="Si usted decide cambiar la duración de la temporada en medio de una partida existente, se recomienda que primero cambie la duración de la temporada durante el invierno para reducir los efectos no deseados sobre los cultivos existentes y segundo reinicie el juego / servidor después de cambiar la duración de la temporada." />
-        <text name="ss_helpText_18_03" text="Es su juego y puede jugar como desee, pero Seasons se sugiere como un desafío para jugar sólo con una temporada de 9 días y en la aceleración del tiempo 5x. De esta manera se pasa la primavera sólo pasando cultivador y plantando cultivos, tendiendo cultivos y cortando heno en verano, cosechando y arando en el otoño, y atendiendo a los animales, las máquinas, los bosques y vendiendo cultivos durante el invierno." />
-        <text name="ss_helpText_18_04" text="Todos los vehículos necesitan ser arrancados manualmente." />
+        <text name="ss_helpText_18_03" text="Es su juego y puede jugar como desee, pero Seasons le sugiere como desafío, jugar con temporadas de 9 días y aceleración de tiempo a 5x. De esta manera , en primavera trabajará los campos y sembrará, cortará hierba y heno en verano, cosechará en otoño y sembrará los cereales de invierno, durante el cual, podrá atender a los animales, las máquinas, los bosques y vender sus cultivos con los mejores precios." />
+        <text name="ss_helpText_18_04" text="Todos los vehículos necesitan ser arrancados manualmente, a menos que se estén en Follow-me." />
     </texts>
 </l10n>
