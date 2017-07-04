@@ -35,7 +35,8 @@ function ssMain:preLoad()
     self.modDir = g_currentModDirectory
 
     local buildnumber = nil --<%=buildnumber %>
-    self.version = Utils.getNoNil(modItem.version, "?.?.?.?") .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
+    self.descVersion = Utils.getNoNil(modItem.version, "0.0.0.0")
+    self.version = self.descVersion .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
     -- Simple version number for comparing minimum required version of seasons
     self.simpleVersion = 1 --<%=simpleVersion %>
@@ -112,7 +113,7 @@ function ssMain:loadMap()
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id)
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
 
-    if ModsUtil.findModItemByModName(g_currentModName).version == "0.0.0.0" then
+    if self.descVersion == "0.0.0.0" then
         local w, h = getNormalizedScreenValues(384, 128)
         self.devOverlay = Overlay:new("devOverlay", Utils.getFilename("resources/gui/dev.dds", self.modDir), 0, 0, w, h)
         self.devOverlay:setPosition(0.5, 1 - h / 15)
