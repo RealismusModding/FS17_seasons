@@ -112,6 +112,14 @@ function ssMain:loadMap()
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id)
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
 
+    if ModsUtil.findModItemByModName(g_currentModName).version == "0.0.0.0" then
+        local w, h = getNormalizedScreenValues(384, 128)
+        self.devOverlay = Overlay:new("devOverlay", Utils.getFilename("resources/gui/dev.dds", self.modDir), 0, 0, w, h)
+        self.devOverlay:setPosition(0.5, 1 - h / 15)
+        self.devOverlay:setDimension(w / 2, h / 2)
+        self.devOverlay:setAlignment(Overlay.ALIGN_VERTICAL_TOP, Overlay.ALIGN_HORIZONTAL_CENTER)
+    end
+
     if g_currentMission:getIsServer() then
         self.loaded = true
     end
@@ -150,6 +158,12 @@ function ssMain:update(dt)
         })
 
         self.showedResetWarning = true
+    end
+end
+
+function ssMain:draw()
+    if self.devOverlay then
+        self.devOverlay:render()
     end
 end
 
