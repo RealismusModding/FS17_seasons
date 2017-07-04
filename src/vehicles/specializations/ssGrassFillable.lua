@@ -72,10 +72,10 @@ function ssGrassFillable:ssRotGrass(vehicle)
 
         local level = vehicle:getFillLevel(fillType)
         local capacity = vehicle:getCapacity()
-        local diff = 0 
+        local diff = 0
 
         local units = vehicle:getFillUnitsWithFillType(fillToReduce)
-        
+
         if level > capacity / 2 then
             diff = - level / 2
         elseif level < capacity / 4 then
@@ -83,11 +83,11 @@ function ssGrassFillable:ssRotGrass(vehicle)
         else
             diff = - capacity / 4
         end
-   
+
         -- Update each unit
         for _, fillUnit in pairs(units) do
             local unitLevel = vehicle:getUnitFillLevel(fillUnit.fillUnitIndex)
-            
+
             -- Add each compartment reduce the same amount (not based on capacity). Don't bother with the details.
             vehicle:setUnitFillLevel(fillUnit.fillUnitIndex, unitLevel + diff / table.getn(units), fillToReduce)
         end
@@ -99,13 +99,13 @@ function ssGrassFillable:updateTick(dt)
         local fillToReduce = nil
 
         -- If it rained into the fillable with hay or straw, rot it a bit
-        if g_currentMission.environment.timeSinceLastRain < 5 
-            and self:getAllowFillFromAir() 
+        if g_currentMission.environment.timeSinceLastRain < 5
+            and self:getAllowFillFromAir()
             and not vehicleInShed(self) then
-            
+
             if vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) then
                 fillToReduce = FillUtil.FILLTYPE_DRYGRASS_WINDROW
-            
+
             elseif vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW) then
                 fillToReduce = FillUtil.FILLTYPE_STRAW
             end
@@ -114,7 +114,7 @@ function ssGrassFillable:updateTick(dt)
         if fillToReduce ~= nil then
             local level = self:getFillLevel(fillType)
 
-            local diff = - self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) / 10 
+            local diff = - self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) / 10
 
             -- Update each unit
             local units = self:getFillUnitsWithFillType(fillToReduce)
