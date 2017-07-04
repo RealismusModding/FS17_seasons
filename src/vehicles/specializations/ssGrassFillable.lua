@@ -14,11 +14,9 @@ function ssGrassFillable:prerequisitesPresent(specializations)
 end
 
 function ssGrassFillable:load(savegame)
-    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssGrassFillable:delete()
-    g_currentMission.environment:removeDayChangeListener(self)
 end
 
 function ssGrassFillable:mouseEvent(posX, posY, isDown, isUp, button)
@@ -117,7 +115,4 @@ function ssGrassFillable:updateTick(dt)
 end
 
 function ssGrassFillable:draw()
-end
-
-function ssGrassFillable:dayChanged()
 end
