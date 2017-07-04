@@ -88,6 +88,9 @@ function ssVehicle:dayChanged()
         if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
             self:repair(vehicle)
         end
+        if SpecializationUtil.hasSpecialization(ssGrassFillable, vehicle.specializations) then
+            ssGrassFillable:ssRotGrass(vehicle)
+        end
     end
 end
 

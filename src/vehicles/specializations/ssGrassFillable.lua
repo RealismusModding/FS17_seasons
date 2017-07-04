@@ -14,11 +14,9 @@ function ssGrassFillable:prerequisitesPresent(specializations)
 end
 
 function ssGrassFillable:load(savegame)
-    g_currentMission.environment:addDayChangeListener(self)
 end
 
 function ssGrassFillable:delete()
-    g_currentMission.environment:removeDayChangeListener(self)
 end
 
 function ssGrassFillable:mouseEvent(posX, posY, isDown, isUp, button)
@@ -67,18 +65,32 @@ local function vehicleInShed(vehicle)
     end
 end
 
-local function calculateBaleReduction(fillType)
-    local daysInSeason = g_seasons.environment.daysInSeason
+-- Fillables with grass will be reduced every midnight
+function ssGrassFillable:ssRotGrass(vehicle)
+    if vehicleHasFillType(vehicle, FillUtil.FILLTYPE_GRASS_WINDROW) then
+        fillToReduce = FillUtil.FILLTYPE_GRASS_WINDROW
 
-    if fillType == FillUtil.FILLTYPE_STRAW or fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
-        return 1 - math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
-    elseif fillType == FillUtil.FILLTYPE_GRASS_WINDROW then
-        -- TODO(reallogger): Do something with days in season
-        local dayReductionFactor = 1 - (1.2 ^ 5.75) / 100
+        local level = vehicle:getFillLevel(fillType)
+        local capacity = vehicle:getCapacity()
+        local diff = 0 
 
-        return - (1 - dayReductionFactor) / 24
-    else
-        return 0
+        local units = vehicle:getFillUnitsWithFillType(fillToReduce)
+        
+        if level > capacity / 2 then
+            diff = - level / 2
+        elseif level < capacity / 4 then
+            diff = - level
+        else
+            diff = - capacity / 4
+        end
+   
+        -- Update each unit
+        for _, fillUnit in pairs(units) do
+            local unitLevel = vehicle:getUnitFillLevel(fillUnit.fillUnitIndex)
+            
+            -- Add each compartment reduce the same amount (not based on capacity). Don't bother with the details.
+            vehicle:setUnitFillLevel(fillUnit.fillUnitIndex, unitLevel + diff / table.getn(units), fillToReduce)
+        end
     end
 end
 
@@ -87,29 +99,29 @@ function ssGrassFillable:updateTick(dt)
         local fillToReduce = nil
 
         -- If it rained into the fillable with hay or straw, rot it a bit
-        if g_currentMission.environment.timeSinceLastRain < 5 and self:getAllowFillFromAir()
-            and (vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) or vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW)) then
-            fillToReduce = FillUtil.FILLTYPE_DRYGRASS_WINDROW
-            fillToReduce = FillUtil.FILLTYPE_STRAW
-
-        -- Always rot grass
-        elseif vehicleHasFillType(self, FillUtil.FILLTYPE_GRASS_WINDROW) then
-            fillToReduce = FillUtil.FILLTYPE_GRASS_WINDROW
+        if g_currentMission.environment.timeSinceLastRain < 5 
+            and self:getAllowFillFromAir() 
+            and not vehicleInShed(self) then
+            
+            if vehicleHasFillType(self, FillUtil.FILLTYPE_DRYGRASS_WINDROW) then
+                fillToReduce = FillUtil.FILLTYPE_DRYGRASS_WINDROW
+            
+            elseif vehicleHasFillType(self, FillUtil.FILLTYPE_STRAW) then
+                fillToReduce = FillUtil.FILLTYPE_STRAW
+            end
         end
 
         if fillToReduce ~= nil then
             local level = self:getFillLevel(fillType)
 
-            -- TODO(reallogger): adjust the algorithms
-
-            local diff = calculateBaleReduction(fillToReduce) * self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) * 10
+            local diff = - self.sizeWidth * self.sizeLength * 1000 / 60 / 60 * (dt / 1000) / 10 
 
             -- Update each unit
             local units = self:getFillUnitsWithFillType(fillToReduce)
             for _, fillUnit in pairs(units) do
                 local unitLevel = self:getUnitFillLevel(fillUnit.fillUnitIndex)
 
-                -- Add each compartment the same amount of snow (not based on capacity). Don't bother with the details.
+                -- Add each compartment reduce the same amount (not based on capacity). Don't bother with the details.
                 self:setUnitFillLevel(fillUnit.fillUnitIndex, unitLevel + diff / table.getn(units), fillToReduce)
             end
         end
@@ -117,7 +129,4 @@ function ssGrassFillable:updateTick(dt)
 end
 
 function ssGrassFillable:draw()
-end
-
-function ssGrassFillable:dayChanged()
 end
