@@ -14,6 +14,8 @@ function ssSnowFillable:prerequisitesPresent(specializations)
 end
 
 function ssSnowFillable:load(savegame)
+    self.resetFillLevelIfNeeded = Utils.appendedFunction(self.resetFillLevelIfNeeded , ssSnowFillable.resetFillLevelIfNeeded)
+    self.ssDelaySnowFill = 0
 end
 
 function ssSnowFillable:delete()
@@ -69,6 +71,12 @@ function ssSnowFillable:updateTick(dt)
     if self.isServer then
         local temp = g_seasons.weather:currentTemperature()
 
+        if g_currentMission.environment.timeSinceLastRain == 0 then
+            self.ssDelaySnowFill = self.ssDelaySnowFill + dt / 60 / 60
+        elseif g_currentMission.environment.timeSinceLastRain ~= 0 then
+            self.ssDelaySnowFill = 0
+        end
+
         -- Empty the fillable of snow when it is warm
         if vehicleHasFillType(self, FillUtil.FILLTYPE_SNOW) and temp > 0 then
             local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
@@ -89,6 +97,7 @@ function ssSnowFillable:updateTick(dt)
               and not vehicleInShed(self)
               and g_currentMission.environment.currentRain ~= nil
               and g_currentMission.environment.currentRain.rainTypeId == Environment.RAINTYPE_SNOW
+              and self.ssDelaySnowFill > 2
               and temp <= 0 then
 
             local level = self:getFillLevel(FillUtil.FILLTYPE_SNOW)
@@ -103,3 +112,6 @@ end
 function ssSnowFillable:draw()
 end
 
+function ssSnowFillable:resetFillLevelIfNeeded(fillLevel)
+    self.ssDelaySnowFill = 0
+end

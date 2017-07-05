@@ -1,0 +1,79 @@
+<!--------------------------------------------------------------------------------------------------
+-- VISUAL SEASON DATA
+----------------------------------------------------------------------------------------------------
+-- Purpose:  Setting visual seasons
+-- Authors:  reallogger
+--
+-- Copyright (c) Realismus Modding, 2017
+--------------------------------------------------------------------------------------------------->
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<!-----------------------------
+-- latCat = 1 --  0 to 45 deg N
+-- latCat = 2 -- 45 to 50 deg N
+-- latCat = 3 -- 50 to 60 deg N
+-- latCat = 4 -- 60 to 70 deg N
+------------------------------>
+
+<visualSeason>
+    <latitudeCategory type="1">
+        <visual transition="1">spring</visual>
+        <visual transition="2">summer</visual>
+        <visual transition="3">summer</visual>
+        <visual transition="4">summer</visual>
+        <visual transition="5">summer</visual>
+        <visual transition="6">summer</visual>
+        <visual transition="7">summer</visual>
+        <visual transition="8">autumn</visual>
+        <visual transition="9">autumnTemp</visual>
+        <visual transition="10">winter</visual>
+        <visual transition="11">winter</visual>
+        <visual transition="12">springTemp</visual>
+    </latitudeCategory>
+
+    <latitudeCategory type="2">
+        <visual transition="1">springTemp</visual>
+        <visual transition="2">spring</visual>
+        <visual transition="3">summer</visual>
+        <visual transition="4">summer</visual>
+        <visual transition="5">summer</visual>
+        <visual transition="6">summer</visual>
+        <visual transition="7">summer</visual>
+        <visual transition="8">autumn</visual>
+        <visual transition="9">autumnTemp</visual>
+        <visual transition="10">winter</visual>
+        <visual transition="11">winter</visual>
+        <visual transition="12">winter</visual>
+    </latitudeCategory>
+
+    <latitudeCategory type="3">
+        <visual transition="1">winter</visual>
+        <visual transition="2">springTemp</visual>
+        <visual transition="3">spring</visual>
+        <visual transition="4">summer</visual>
+        <visual transition="5">summer</visual>
+        <visual transition="6">summer</visual>
+        <visual transition="7">summer</visual>
+        <visual transition="8">autumn</visual>
+        <visual transition="9">autumnTemp</visual>
+        <visual transition="10">winter</visual>
+        <visual transition="11">winter</visual>
+        <visual transition="12">winter</visual>
+    </latitudeCategory>
+
+    <latitudeCategory type="4">
+        <visual transition="1">winter</visual>
+        <visual transition="2">winter</visual>
+        <visual transition="3">springTemp</visual>
+        <visual transition="4">spring</visual>
+        <visual transition="5">summer</visual>
+        <visual transition="6">summer</visual>
+        <visual transition="7">autumn</visual>
+        <visual transition="8">autumnTemp</visual>
+        <visual transition="9">winter</visual>
+        <visual transition="10">winter</visual>
+        <visual transition="11">winter</visual>
+        <visual transition="12">winter</visual>
+    </latitudeCategory>
+
+</visualSeason>
