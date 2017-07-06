@@ -23,10 +23,6 @@ g_seasons.xml = ssSeasonsXML
 ssMain.SAVEGAME_VERSION = 2
 
 ----------------------------
--- Constants
-----------------------------
-
-----------------------------
 -- Installing injections and globals
 ----------------------------
 

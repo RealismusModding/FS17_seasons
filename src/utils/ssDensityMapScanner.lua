@@ -123,10 +123,14 @@ function ssDensityMapScanner:queueJob(callbackId, parameter)
     if g_currentMission:getIsServer() then
         log("[ssDensityMapScanner] Enqued job:", callbackId, "(", parameter, ")")
 
-        self.queue:push({
+        local job = {
             callbackId = callbackId,
             parameter = parameter
-        })
+        }
+
+        if not self:foldNewJob(job) then
+            self.queue:push(job)
+        end
     end
 end
 
@@ -184,4 +188,87 @@ function ssDensityMapScanner:run(job)
     end
 
     return true -- not finished
+end
+
+----------------------------
+-- Folding
+-- NOTE(Rahkiin): What I dislike about this is the coupling.
+-- Now the DMS code contains stuff of classes that call the
+-- DMS. Is a bit nasty. Solution is to move these fold actions
+-- into the actual class that creates them.
+----------------------------
+
+--- Attempt to fold a job into the queue
+-- @param job job to fold
+-- @return true when folded, false when enqueueing is needed
+function ssDensityMapScanner:foldNewJob(job)
+    local folded = false
+
+    if job.callbackId == "ssSnowAddSnow" or job.callbackId == "ssSnowRemoveSnow" then
+        folded = self:foldSnow(job)
+    elseif job.callbackId == "ssReduceStrawHay" or job.callbackId == "ssReduceGrass" then
+        folded = self:foldSwath(job)
+    end
+
+    return folded
+end
+
+--- Fold a new snow job
+-- @param newJob new job to fold
+-- @return true when successfully folded, false otherwise
+function ssDensityMapScanner:foldSnow(newJob)
+    local folded = false
+
+    local newDiff = tonumber(newJob.parameter)
+    if newJob.callbackId == "ssSnowRemoveSnow" then
+        newDiff = -newDiff
+    end
+
+    -- Find first snow command and adjust it
+    self.queue:iteratePopOrder(function (job)
+        local layers = 0
+
+        if job.callbackId == "ssSnowAddSnow" then
+            layers = tonumber(job.parameter)
+        elseif job.callbackId == "ssSnowRemoveSnow" then
+            layers = -1 * tonumber(job.parameter)
+        end
+
+        if layers ~= 0 then
+            local newLayers = layers + newDiff
+
+            if newLayers == 0 then
+                self.queue:remove(job)
+            elseif newLayers < 0 then
+                job.parameter = tostring(-newLayers)
+                job.callbackId = "ssSnowRemoveSnow"
+            else
+                job.parameter = tostring(newLayers)
+                job.callbackId = "ssSnowAddSnow"
+            end
+
+            folded = true
+            return true -- break
+        end
+    end)
+
+    return folded
+end
+
+--- Attempt to fold a swath job
+-- @param newJob new job to fold
+-- @return true when successfully folded, false otherwise
+function ssDensityMapScanner:foldSwath(newJob)
+    local folded = false
+
+    self.queue:iteratePopOrder(function (job)
+        if job.callbackId == newJob.callbackId then
+            job.parameter = tostring(tonumber(job.parameter) + tonumber(newJob.parameter))
+
+            folded = true
+            return true -- break
+        end
+    end)
+
+    return folded
 end

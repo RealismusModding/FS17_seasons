@@ -105,9 +105,25 @@ function ssQueue:iteratePushOrder(func)
     local item = self.first
 
     while item ~= nil do
-        func(item, i)
+        if func(item, i) == true then
+            break
+        end
 
         i = i + 1
         item = item._next
+    end
+end
+
+function ssQueue:iteratePopOrder(func)
+    local i = 1
+    local item = self.last
+
+    while item ~= nil do
+        if func(item, i) == true then
+            break
+        end
+
+        i = i + 1
+        item = item._prev
     end
 end
