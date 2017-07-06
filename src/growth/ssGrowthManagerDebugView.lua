@@ -52,7 +52,7 @@ function ssGrowthManagerDebugView:draw()
         local cropsThatCanGrow = ""
 
         for fruitName in pairs(ssGrowthManager.willGerminateData) do
-            if ssGrowthManager.willGerminateData[fruitName] == true then
+            if ssGrowthManager.willGerminateData[transition][fruitName] == true then
                 cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
             end
         end
