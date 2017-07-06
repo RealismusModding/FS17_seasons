@@ -14,7 +14,10 @@ function ssSnowFillable:prerequisitesPresent(specializations)
 end
 
 function ssSnowFillable:load(savegame)
-    self.resetFillLevelIfNeeded = Utils.appendedFunction(self.resetFillLevelIfNeeded , ssSnowFillable.resetFillLevelIfNeeded)
+    if self.onEndTip ~= nil then
+        self.onEndTip = Utils.appendedFunction(self.onEndTip , ssSnowFillable.onEndTip)
+    end
+
     self.ssDelaySnowFill = 0
 end
 
@@ -112,6 +115,10 @@ end
 function ssSnowFillable:draw()
 end
 
-function ssSnowFillable:resetFillLevelIfNeeded(fillLevel)
-    self.ssDelaySnowFill = 0
+function ssSnowFillable:onEndTip()
+    log("On End Tip")
+    if self:getFillLevel(FillUtil.FILLTYPE_SNOW) == 0 then
+        log("Empty")
+        self.ssDelaySnowFill = 0
+    end
 end
