@@ -116,9 +116,7 @@ function ssSnowFillable:draw()
 end
 
 function ssSnowFillable:onEndTip()
-    log("On End Tip")
     if self:getFillLevel(FillUtil.FILLTYPE_SNOW) == 0 then
-        log("Empty")
         self.ssDelaySnowFill = 0
     end
 end
