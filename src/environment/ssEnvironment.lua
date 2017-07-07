@@ -83,6 +83,16 @@ function ssEnvironment:loadMap(name)
     self.seasonLengthChangeListeners = {}
     self.visualSeasonChangeListeners = {}
 
+    self.latitudeCategories = {}
+    self:loadLatitudeCategoriesFromXML(g_seasons.modDir .. "data/visualSeason.xml")
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do
+        self:loadLatitudeCategoriesFromXML(path)
+    end
+
+    print_r(self.latitudeCategories)
+
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
 
@@ -105,6 +115,46 @@ function ssEnvironment:writeStream(streamId, connection)
     streamWriteInt16(streamId, self.latestTransition)
     streamWriteInt16(streamId, self.latestVisualSeason)
     streamWriteInt16(streamId, self.currentDayOffset)
+end
+
+function ssEnvironment:loadLatitudeCategoriesFromXML(path)
+    local file = loadXMLFile("season", path)
+
+    local i = 0
+    while true do
+        local key = string.format("visualSeason.latitudeCategory(%i)", i)
+        if not ssXMLUtil.hasProperty(file, key) then break end
+
+        local type = ssXMLUtil.getInt(file, key .. "#type")
+        if type == nil then
+            logInfo("ssEnvironment: type of latitude category invalid")
+            break
+        end
+
+        if self.latitudeCategories[type] == nil then
+            self.latitudeCategories[type] = {}
+        end
+
+        local j = 0
+        while true do
+            local vkey = string.format("%s.visual(%i)", key, j)
+            if not ssXMLUtil.hasProperty(file, vkey) then break end
+
+            local gt = ssXMLUtil.getInt(file, vkey .. "#transition")
+            if gt == nil then
+                logInfo("ssEnvironment: invalid transition in latitude categories")
+                break
+            end
+
+            self.latitudeCategories[type][gt] = ssXMLUtil.getString(file, vkey)
+
+            j = j + 1
+        end
+
+        i = i + 1
+    end
+
+    delete(file)
 end
 
 function ssEnvironment:update(dt)
