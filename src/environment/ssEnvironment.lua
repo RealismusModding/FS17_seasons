@@ -285,6 +285,20 @@ end
 -- Visual season calc
 ----------------------------
 
+function ssEnvironment:latitudeCategory()
+    local lat = g_seasons.daylight.latitude
+
+    if lat <= 45 then
+        return 1
+    elseif lat <= 50 then
+        return 2
+    elseif lat <= 60 then
+        return 3
+    end
+
+    return 4
+end
+
 -- Only run once per day
 function ssEnvironment:calculateVisualSeason()
     local curSeason = self:currentSeason()
@@ -293,7 +307,7 @@ function ssEnvironment:calculateVisualSeason()
     local springLeavesTemp = 5
     local dropLeavesTemp = 0
 
-    local dataVisual = self.latitudeCategories[1][self:transitionAtDay()]
+    local dataVisual = self.latitudeCategories[self:latitudeCategory()][self:transitionAtDay()]
     local dataSeason = ssUtil.seasonKeyToId[dataVisual]
 
     -- Spring
