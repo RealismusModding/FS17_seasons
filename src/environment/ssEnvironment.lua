@@ -293,9 +293,8 @@ function ssEnvironment:calculateVisualSeason()
     local springLeavesTemp = 5
     local dropLeavesTemp = 0
 
-    local dataVisual = self.latitudeCategories[1][self.currentTransition]
+    local dataVisual = self.latitudeCategories[1][self:transitionAtDay()]
     local dataSeason = ssUtil.seasonKeyToId[dataVisual]
-    log("visual", dataVisual)
 
     -- Spring
     -- Keeping bare winter textures if the daily average temperature is below a treshold
