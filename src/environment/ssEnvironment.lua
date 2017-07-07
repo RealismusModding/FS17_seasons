@@ -291,27 +291,26 @@ function ssEnvironment:calculateVisualSeason()
     local avgAirTemp = (ssWeatherManager.forecast[2].highTemp * 8 + ssWeatherManager.forecast[2].lowTemp * 16) / 24
     local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
     local springLeavesTemp = 5
-    local autumnLeavesTemp = 5
     local dropLeavesTemp = 0
+
+    local dataVisual = self.latitudeCategories[1][self.currentTransition]
+    local dataSeason = ssUtil.seasonKeyToId[dataVisual]
+    log("visual", dataVisual)
 
     -- Spring
     -- Keeping bare winter textures if the daily average temperature is below a treshold
-    if curSeason == self.SEASON_SPRING and self.latestVisualSeason == self.SEASON_WINTER
+    if dataVisual == "springTemp" and self.latestVisualSeason == self.SEASON_WINTER
         and (avgAirTemp <= springLeavesTemp or g_seasons.snow.appliedSnowDepth > 0) then
         return self.SEASON_WINTER
 
-    -- Summer
-    -- Summer is never shorter, so if it is currently summer, always show summer (see else statement)
-
-    -- Autumn
-    -- Keeping summer textures until the daily low temperature is below a treshold
-    elseif curSeason == self.SEASON_AUTUMN and self.latestVisualSeason == self.SEASON_SUMMER and lowAirTemp >= autumnLeavesTemp then
-        return self.SEASON_SUMMER
-
     -- Winter
     -- Keeping autumn textures until the daily average temperature is below a treshold
-    elseif curSeason == self.SEASON_WINTER and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
+    elseif dataVisual == "winterTemp" and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
         return self.SEASON_AUTUMN
+
+    -- Get value from the data if available
+    elseif dataSeason ~= nil then
+        return dataSeason
 
     else
         return curSeason
