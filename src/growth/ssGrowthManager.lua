@@ -556,7 +556,7 @@ function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
     self.growthData[self.TMP_TRANSITION][fruitName] = {}
     self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
     self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
-    self.willGerminateData[self.TMP_TRANSITION] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()]) 
+    self.willGerminateData[g_seasons.environment:previousTransition(self.TMP_TRANSITION)] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()]) 
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
 end
 
