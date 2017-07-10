@@ -91,8 +91,6 @@ function ssEnvironment:loadMap(name)
         self:loadLatitudeCategoriesFromXML(path)
     end
 
-    print_r(self.latitudeCategories)
-
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
 
