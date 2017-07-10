@@ -25,7 +25,7 @@
         <visual transition="6">summer</visual>
         <visual transition="7">summer</visual>
         <visual transition="8">autumn</visual>
-        <visual transition="9">autumnTemp</visual>
+        <visual transition="9">winterTemp</visual>
         <visual transition="10">winter</visual>
         <visual transition="11">winter</visual>
         <visual transition="12">springTemp</visual>
@@ -40,7 +40,7 @@
         <visual transition="6">summer</visual>
         <visual transition="7">summer</visual>
         <visual transition="8">autumn</visual>
-        <visual transition="9">autumnTemp</visual>
+        <visual transition="9">winterTemp</visual>
         <visual transition="10">winter</visual>
         <visual transition="11">winter</visual>
         <visual transition="12">winter</visual>
@@ -55,7 +55,7 @@
         <visual transition="6">summer</visual>
         <visual transition="7">summer</visual>
         <visual transition="8">autumn</visual>
-        <visual transition="9">autumnTemp</visual>
+        <visual transition="9">winterTemp</visual>
         <visual transition="10">winter</visual>
         <visual transition="11">winter</visual>
         <visual transition="12">winter</visual>
@@ -69,7 +69,7 @@
         <visual transition="5">summer</visual>
         <visual transition="6">summer</visual>
         <visual transition="7">autumn</visual>
-        <visual transition="8">autumnTemp</visual>
+        <visual transition="8">winterTemp</visual>
         <visual transition="9">winter</visual>
         <visual transition="10">winter</visual>
         <visual transition="11">winter</visual>

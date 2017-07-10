@@ -83,6 +83,16 @@ function ssEnvironment:loadMap(name)
     self.seasonLengthChangeListeners = {}
     self.visualSeasonChangeListeners = {}
 
+    self.latitudeCategories = {}
+    self:loadLatitudeCategoriesFromXML(g_seasons.modDir .. "data/visualSeason.xml")
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do
+        self:loadLatitudeCategoriesFromXML(path)
+    end
+
+    print_r(self.latitudeCategories)
+
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
 
@@ -105,6 +115,46 @@ function ssEnvironment:writeStream(streamId, connection)
     streamWriteInt16(streamId, self.latestTransition)
     streamWriteInt16(streamId, self.latestVisualSeason)
     streamWriteInt16(streamId, self.currentDayOffset)
+end
+
+function ssEnvironment:loadLatitudeCategoriesFromXML(path)
+    local file = loadXMLFile("season", path)
+
+    local i = 0
+    while true do
+        local key = string.format("visualSeason.latitudeCategory(%i)", i)
+        if not ssXMLUtil.hasProperty(file, key) then break end
+
+        local type = ssXMLUtil.getInt(file, key .. "#type")
+        if type == nil then
+            logInfo("ssEnvironment: type of latitude category invalid")
+            break
+        end
+
+        if self.latitudeCategories[type] == nil then
+            self.latitudeCategories[type] = {}
+        end
+
+        local j = 0
+        while true do
+            local vkey = string.format("%s.visual(%i)", key, j)
+            if not ssXMLUtil.hasProperty(file, vkey) then break end
+
+            local gt = ssXMLUtil.getInt(file, vkey .. "#transition")
+            if gt == nil then
+                logInfo("ssEnvironment: invalid transition in latitude categories")
+                break
+            end
+
+            self.latitudeCategories[type][gt] = ssXMLUtil.getString(file, vkey)
+
+            j = j + 1
+        end
+
+        i = i + 1
+    end
+
+    delete(file)
 end
 
 function ssEnvironment:update(dt)
@@ -235,33 +285,45 @@ end
 -- Visual season calc
 ----------------------------
 
+function ssEnvironment:latitudeCategory()
+    local lat = g_seasons.daylight.latitude
+
+    if lat <= 45 then
+        return 1
+    elseif lat <= 50 then
+        return 2
+    elseif lat <= 60 then
+        return 3
+    end
+
+    return 4
+end
+
 -- Only run once per day
 function ssEnvironment:calculateVisualSeason()
     local curSeason = self:currentSeason()
     local avgAirTemp = (ssWeatherManager.forecast[2].highTemp * 8 + ssWeatherManager.forecast[2].lowTemp * 16) / 24
     local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
     local springLeavesTemp = 5
-    local autumnLeavesTemp = 5
     local dropLeavesTemp = 0
+
+    local dataVisual = self.latitudeCategories[self:latitudeCategory()][self:transitionAtDay()]
+    local dataSeason = ssUtil.seasonKeyToId[dataVisual]
 
     -- Spring
     -- Keeping bare winter textures if the daily average temperature is below a treshold
-    if curSeason == self.SEASON_SPRING and self.latestVisualSeason == self.SEASON_WINTER
+    if dataVisual == "springTemp" and self.latestVisualSeason == self.SEASON_WINTER
         and (avgAirTemp <= springLeavesTemp or g_seasons.snow.appliedSnowDepth > 0) then
         return self.SEASON_WINTER
 
-    -- Summer
-    -- Summer is never shorter, so if it is currently summer, always show summer (see else statement)
-
-    -- Autumn
-    -- Keeping summer textures until the daily low temperature is below a treshold
-    elseif curSeason == self.SEASON_AUTUMN and self.latestVisualSeason == self.SEASON_SUMMER and lowAirTemp >= autumnLeavesTemp then
-        return self.SEASON_SUMMER
-
     -- Winter
     -- Keeping autumn textures until the daily average temperature is below a treshold
-    elseif curSeason == self.SEASON_WINTER and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
+    elseif dataVisual == "winterTemp" and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
         return self.SEASON_AUTUMN
+
+    -- Get value from the data if available
+    elseif dataSeason ~= nil then
+        return dataSeason
 
     else
         return curSeason

@@ -131,7 +131,6 @@ Do not load multiple map mods. Only load the map you are using!
 - Some animal cleaning mods may not work correctly, especially during the winter
 
 Known:
-- Difficulties Improve by TyKonKet
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
