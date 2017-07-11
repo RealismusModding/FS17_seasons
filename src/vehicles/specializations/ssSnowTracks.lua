@@ -119,7 +119,9 @@ function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2
 end
 
 function ssSnowTracks:update(dt)
-    if not g_currentMission:getIsServer() or not g_seasons.vehicle.snowTracksEnabled then return end
+    if not g_currentMission:getIsServer()
+        or not g_seasons.vehicle.snowTracksEnabled
+        or not g_seasons.snow.mode == g_seasons.snow.MODE_ONE_LAYER then return end
 
     if self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
         applyTracks(self, dt)

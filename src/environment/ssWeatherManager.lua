@@ -149,6 +149,14 @@ function ssWeatherManager:loadMap(name)
     end
 end
 
+function ssWeatherManager:loadGameFinished()
+    if g_currentMission:getIsServer() then
+        if g_seasons.isNewSavegame and self.snowDepth > 0 then
+            g_seasons.snow:applySnow(self.snowDepth)
+        end
+    end
+end
+
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
@@ -227,10 +235,6 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
-
-        if g_seasons.isNewSavegame and self.snowDepth > 0 then
-            g_seasons.snow:applySnow(self.snowDepth)
-        end
     end
 end
 
