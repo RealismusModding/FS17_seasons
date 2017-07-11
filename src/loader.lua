@@ -249,7 +249,7 @@ if fileExists(path) then
     g_modIsLoaded["FS17Contest_Seasons"] = true
 
     g_gui:showInfoDialog({
-        title = "Seasons mod update",
-        text = "You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it.\n\nPlease remove it from your mods folder to hide this message."
+        title = ssLang.getText("SS_REMOVE_CONTEST_TITLE"),
+        text = ssLang.getText("SS_REMOVE_CONTEST_TEXT")
     })
 end

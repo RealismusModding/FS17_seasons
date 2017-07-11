@@ -74,6 +74,11 @@
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
+        <!-- Missing translation of "Seasons mod update" -->
+        <text name="SS_REMOVE_CONTEST_TITLE" text="" />
+        <!-- Missing translation of "You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." -->
+        <text name="SS_REMOVE_CONTEST_TEXT" text="" />
+
         <text name="SS_SEASON_INTRO_0" text="Ein neues Jahr hat begonnen. Der Frühling steht in den Startlöchern. Diese Zeit solltest Du für die Aussaat nutzen und mit der Düngung beginnen. Beachte die Aussaatzeiten, jede Pflanze hat einen anderen Zyklus." />
         <text name="SS_SEASON_INTRO_1" text="Der Sommer hat begonnen und die Pflanzen wachsen. Es ist ratsam während dieser Zeit die nötigen Düngearbeiten durchzuführen und Dich auf die kommende Erntezeit einzustellen. Beachte immer die möglichen Erntezeiten." />
         <text name="SS_SEASON_INTRO_2" text="Die Erntezeit ist bereits im vollen Gange. Bis zum Winter solltest Du alle Felder abgeerntet haben." />
