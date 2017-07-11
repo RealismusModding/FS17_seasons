@@ -62,8 +62,7 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nincs elég pénzed a karbantartásra!" />
         <text name="SS_VEHICLE_REPAIRED" text="A(z) %s gép karbantartásának összege: %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Nem szükséges a karbantartása a %s -nek." />
         <text name="SS_REPAIR_VEHICLE_COST" text="%s javítása: %s" />
         <text name="SS_REPAIR_REQUIRED" text="Karbantartást igényel!" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás" />
@@ -74,10 +73,8 @@
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
 
-        <!-- Missing translation of "Seasons mod update" -->
-        <text name="SS_REMOVE_CONTEST_TITLE" text="" />
-        <!-- Missing translation of "You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." -->
-        <text name="SS_REMOVE_CONTEST_TEXT" text="" />
+        <text name="SS_REMOVE_CONTEST_TITLE" text="Seasons mod frissítés" />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="A Seasons mod frissített verzióját futtatod. A játék érzékelte a contest verziót a mods könyvtáradban és deaktiválta azt. Kérjük töröld a contest verziót a mods könyvtáradból, hogy ne lásd többé ezt az üzenetet." />
 
         <text name="SS_SEASON_INTRO_0" text="Itt a tavasz! Nyílnak a virágok, a fák rügyeznek. Itt az idő, hogy megműveld és bevesd a földjeidet!" />
         <text name="SS_SEASON_INTRO_1" text="A napok hosszabbak és forróbbak nyáron. Készíts szalmát, közben figyeld hogyan fejlődnek a növényeid." />
