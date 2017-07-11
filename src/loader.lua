@@ -241,3 +241,24 @@ Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission0
 
 -- Giants engine does not copy this unit to the mod g_i18n version
 g_i18n.moneyUnit = getfenv(0)["g_i18n"].moneyUnit
+
+-- Make sure not both the contest and normal seasons mod is loaded
+local path = g_modsDirectory .. "FS17Contest_Seasons.zip"
+if fileExists(path) then
+    -- Delete old seasons from the contest
+    getfenv(0)["deleteFile"](path)
+    g_forceNeedsDlcsAndModsReload = true
+
+    local obj = {}
+    obj.dialogCallback = function ()
+        RestartManager:setStartScreen(RestartManager.START_SCREEN_MAIN);
+        restartApplication("")
+    end
+
+    g_gui:showInfoDialog({
+        title = g_i18n:getText("ui_modsChangedTitle"),
+        text = "Due to a conflict, the contest version of Seasons (FS17Contest_Seasons.zip) has been removed from your mods folder. The new version is now used.",
+        callback = obj.dialogCallback,
+        target = obj
+    })
+end
