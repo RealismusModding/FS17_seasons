@@ -15,8 +15,6 @@ It references textures in the game directory that the editor will not find and t
 
   <Files>
     <!-- Autumn -->
-    <File fileId="1" filename="autumn/pineBranch_diffuse.dds" relativePath="true"/>
-    <File fileId="2" filename="data/maps/trees/pineBranch_normal.png" relativePath="false"/>
     <File fileId="3" filename="autumn/treeBranch_diffuse.dds" relativePath="true"/>
     <File fileId="4" filename="data/maps/textures/goldcrestValley/treeBranch_normal.png" relativePath="false"/>
     <File fileId="5" filename="autumn/birchBranch_diffuse.png" relativePath="true"/>
