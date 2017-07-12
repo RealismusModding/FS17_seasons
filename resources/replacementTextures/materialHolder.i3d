@@ -521,7 +521,7 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="foliageGrassColor_mat" materialId="315" ambientColor="1 1 1" customShaderId="804" customShaderVariation="COLOR_MASK">
+        <Material name="foliageGrassColor_mat" materialId="316" ambientColor="1 1 1" customShaderId="804" customShaderVariation="COLOR_MASK">
             <Texture fileId="315" />
             <CustomParameter name="alphaBlendStartEnd" value="70 75 0 0" />
             <CustomParameter name="frequencyAndScale" value="0.3 0.1 0 0" />
@@ -664,6 +664,7 @@
         <Shape shapeId="1" name="poplar5LOD_spring" visibility="false" nodeId="112" materialIds="112" distanceBlending="false" />
         <Shape shapeId="1" name="poplarBranch_spring" visibility="false" nodeId="113" materialIds="113" distanceBlending="false" />
         <Shape shapeId="1" name="treeBranch_spring" visibility="false" nodeId="114" materialIds="114" distanceBlending="false" />
+        <Shape shapeId="1" name="bushes_spring" visibility="false" nodeId="115" materialIds="115" distanceBlending="false" />
 
         <!-- Autumn -->
         <Shape shapeId="1" name="birch1LOD_autumn" visibility="false" nodeId="201" materialIds="201" distanceBlending="false" />
@@ -680,6 +681,7 @@
         <Shape shapeId="1" name="poplar5LOD_autumn" visibility="false" nodeId="212" materialIds="212" distanceBlending="false" />
         <Shape shapeId="1" name="poplarBranch_autumn" visibility="false" nodeId="213" materialIds="213" distanceBlending="false" />
         <Shape shapeId="1" name="treeBranch_autumn" visibility="false" nodeId="214" materialIds="214" distanceBlending="false" />
+        <Shape shapeId="1" name="bushes_autumn" visibility="false" nodeId="215" materialIds="215" distanceBlending="false" />
 
         <!-- Winter -->
         <Shape shapeId="1" name="birch1LOD_winter" visibility="false" nodeId="301" materialIds="301" distanceBlending="false" />
@@ -696,8 +698,9 @@
         <Shape shapeId="1" name="poplar5LOD_winter" visibility="false" nodeId="312" materialIds="312" distanceBlending="false" />
         <Shape shapeId="1" name="poplarBranch_winter" visibility="false" nodeId="313" materialIds="313" distanceBlending="false" />
         <Shape shapeId="1" name="treeBranch_winter" visibility="false" nodeId="314" materialIds="314" distanceBlending="false" />
+        <Shape shapeId="1" name="bushes_winter" visibility="false" nodeId="315" materialIds="315" distanceBlending="false" />
 
-        <Shape shapeId="1" name="grass_winter" visibility="false" nodeId="315" materialIds="315" distanceBlending="false" />
+        <Shape shapeId="1" name="grass_winter" visibility="false" nodeId="316" materialIds="316" distanceBlending="false" />
 
         <!-- Summer -->
         <Shape shapeId="1" name="birch1LOD_summer" visibility="false" nodeId="401" materialIds="401" distanceBlending="false" />
@@ -714,8 +717,9 @@
         <Shape shapeId="1" name="poplar5LOD_summer" visibility="false" nodeId="412" materialIds="412" distanceBlending="false" />
         <Shape shapeId="1" name="poplarBranch_summer" visibility="false" nodeId="413" materialIds="413" distanceBlending="false" />
         <Shape shapeId="1" name="treeBranch_summer" visibility="false" nodeId="414" materialIds="414" distanceBlending="false" />
+        <Shape shapeId="1" name="bushes_summer" visibility="false" nodeId="415" materialIds="415" distanceBlending="false" />
 
-        <!-- Clone-able object for winter -->
+        <!-- Clone-able object for holding vanilla materials -->
         <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="201" distanceBlending="false" />
     </Scene>
 </i3D>
