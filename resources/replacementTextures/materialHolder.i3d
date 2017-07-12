@@ -622,7 +622,7 @@
         </Material>
     </Materials>
 
-    <Shapes externalShapesFile="replacementTexturesMaterialHolder.i3d.shapes">
+    <Shapes externalShapesFile="materialHolder.i3d.shapes">
     </Shapes>
 
     <Dynamics>
