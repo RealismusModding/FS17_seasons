@@ -1,0 +1,163 @@
+<!-- Any -->
+<File fileId="1" filename="any/birchTrunk_diffuse.dds" relativePath="true" />
+<File fileId="2" filename="any/birchTrunk_normal.dds" relativePath="true" />
+<File fileId="3" filename="any/mapleTrunk_diffuse.dds" relativePath="true" />
+<File fileId="4" filename="any/mapleTrunk_normal.dds" relativePath="true" />
+<File fileId="5" filename="any/oakTrunk_diffuse.dds" relativePath="true" />
+<File fileId="6" filename="any/oakTrunk_normal.dds" relativePath="true" />
+<File fileId="7" filename="any/pine1LOD_diffuse.dds" relativePath="true" />
+<File fileId="8" filename="any/pine1LOD_normal.dds" relativePath="true" />
+<File fileId="9" filename="any/pine2LOD_diffuse.dds" relativePath="true" />
+<File fileId="10" filename="any/pine2LOD_normal.dds" relativePath="true" />
+<File fileId="11" filename="any/pine3LOD_diffuse.dds" relativePath="true" />
+<File fileId="12" filename="any/pine3LOD_normal.dds" relativePath="true" />
+<File fileId="13" filename="any/pine4LOD_diffuse.dds" relativePath="true" />
+<File fileId="14" filename="any/pine4LOD_normal.dds" relativePath="true" />
+<File fileId="15" filename="any/pine5LOD_diffuse.dds" relativePath="true" />
+<File fileId="16" filename="any/pine5LOD_normal.dds" relativePath="true" />
+<File fileId="17" filename="any/pine6LOD_diffuse.dds" relativePath="true" />
+<File fileId="18" filename="any/pine6LOD_normal.dds" relativePath="true" />
+<File fileId="19" filename="any/pineBranch_diffuse.dds" relativePath="true" />
+<File fileId="20" filename="any/pineBranch_normal.dds" relativePath="true" />
+<File fileId="21" filename="any/pineTrunk_diffuse.dds" relativePath="true" />
+<File fileId="22" filename="any/pineTrunk_normal.dds" relativePath="true" />
+<File fileId="23" filename="any/pineTrunkDead_diffuse.dds" relativePath="true" />
+<File fileId="24" filename="any/pineTrunkDead_normal.dds" relativePath="true" />
+<File fileId="25" filename="any/spruce1LOD_diffuse.dds" relativePath="true" />
+<File fileId="26" filename="any/spruce1LOD_normal.dds" relativePath="true" />
+<File fileId="27" filename="any/spruce2LOD_diffuse.dds" relativePath="true" />
+<File fileId="28" filename="any/spruce2LOD_normal.dds" relativePath="true" />
+<File fileId="29" filename="any/spruce3LOD_diffuse.dds" relativePath="true" />
+<File fileId="30" filename="any/spruce3LOD_normal.dds" relativePath="true" />
+<File fileId="31" filename="any/spruce4LOD_diffuse.dds" relativePath="true" />
+<File fileId="32" filename="any/spruce4LOD_normal.dds" relativePath="true" />
+<File fileId="33" filename="any/spruce5LOD_diffuse.dds" relativePath="true" />
+<File fileId="34" filename="any/spruce5LOD_normal.dds" relativePath="true" />
+<File fileId="35" filename="any/spruceTrunk_diffuse.dds" relativePath="true" />
+<File fileId="36" filename="any/spruceTrunk_normal.dds" relativePath="true" />
+
+<!-- Spring -->
+<File fileId="101" filename="spring/birch1LOD_diffuse.dds" relativePath="true" />
+<File fileId="102" filename="spring/birch1LOD_normal.dds" relativePath="true" />
+<File fileId="103" filename="spring/birch2LOD_diffuse.dds" relativePath="true" />
+<File fileId="104" filename="spring/birch2LOD_normal.dds" relativePath="true" />
+<File fileId="105" filename="spring/birch3LOD_diffuse.dds" relativePath="true" />
+<File fileId="106" filename="spring/birch3LOD_normal.dds" relativePath="true" />
+<File fileId="107" filename="spring/birch4LOD_diffuse.dds" relativePath="true" />
+<File fileId="108" filename="spring/birch4LOD_normal.dds" relativePath="true" />
+<File fileId="109" filename="spring/birch5LOD_diffuse.dds" relativePath="true" />
+<File fileId="110" filename="spring/birch5LOD_normal.dds" relativePath="true" />
+<File fileId="111" filename="spring/birch6LOD_diffuse.dds" relativePath="true" />
+<File fileId="112" filename="spring/birch6LOD_normal.dds" relativePath="true" />
+<File fileId="113" filename="spring/birchBranch_diffuse.dds" relativePath="true" />
+<File fileId="114" filename="spring/birchBranch_normal.dds" relativePath="true" />
+<File fileId="115" filename="spring/maple5LOD_diffuse.dds" relativePath="true" />
+<File fileId="116" filename="spring/maple5LOD_normal.dds" relativePath="true" />
+<File fileId="117" filename="spring/mapleBranch_diffuse.dds" relativePath="true" />
+<File fileId="118" filename="spring/mapleBranch_normal.dds" relativePath="true" />
+<File fileId="119" filename="spring/oak4LOD_diffuse.dds" relativePath="true" />
+<File fileId="120" filename="spring/oak4LOD_normal.dds" relativePath="true" />
+<File fileId="121" filename="spring/oakBranch_diffuse.dds" relativePath="true" />
+<File fileId="122" filename="spring/oakBranch_normal.dds" relativePath="true" />
+<File fileId="123" filename="spring/poplar5LOD_diffuse.dds" relativePath="true" />
+<File fileId="124" filename="spring/poplar5LOD_normal.dds" relativePath="true" />
+<File fileId="125" filename="spring/poplarBranch_diffuse.dds" relativePath="true" />
+<File fileId="126" filename="spring/poplarBranch_normal.dds" relativePath="true" />
+<File fileId="127" filename="spring/treeBranch_diffuse.dds" relativePath="true" />
+
+<!-- Autumn -->
+<File fileId="201" filename="autumn/birch1LOD_diffuse.dds" relativePath="true" />
+<File fileId="202" filename="autumn/birch1LOD_normal.dds" relativePath="true" />
+<File fileId="203" filename="autumn/birch2LOD_diffuse.dds" relativePath="true" />
+<File fileId="204" filename="autumn/birch2LOD_normal.dds" relativePath="true" />
+<File fileId="205" filename="autumn/birch3LOD_diffuse.dds" relativePath="true" />
+<File fileId="206" filename="autumn/birch3LOD_normal.dds" relativePath="true" />
+<File fileId="207" filename="autumn/birch4LOD_diffuse.dds" relativePath="true" />
+<File fileId="208" filename="autumn/birch4LOD_normal.dds" relativePath="true" />
+<File fileId="209" filename="autumn/birch5LOD_diffuse.dds" relativePath="true" />
+<File fileId="210" filename="autumn/birch5LOD_normal.dds" relativePath="true" />
+<File fileId="211" filename="autumn/birch6LOD_diffuse.dds" relativePath="true" />
+<File fileId="212" filename="autumn/birch6LOD_normal.dds" relativePath="true" />
+<File fileId="213" filename="autumn/birchBranch_diffuse.dds" relativePath="true" />
+<File fileId="214" filename="autumn/birchBranch_normal.dds" relativePath="true" />
+<File fileId="215" filename="autumn/maple5LOD_diffuse.dds" relativePath="true" />
+<File fileId="216" filename="autumn/maple5LOD_normal.dds" relativePath="true" />
+<File fileId="217" filename="autumn/mapleBranch_diffuse.dds" relativePath="true" />
+<File fileId="218" filename="autumn/mapleBranch_normal.dds" relativePath="true" />
+<File fileId="219" filename="autumn/oak4LOD_diffuse.dds" relativePath="true" />
+<File fileId="220" filename="autumn/oak4LOD_normal.dds" relativePath="true" />
+<File fileId="221" filename="autumn/oakBranch_diffuse.dds" relativePath="true" />
+<File fileId="222" filename="autumn/oakBranch_normal.dds" relativePath="true" />
+<File fileId="223" filename="autumn/poplar5LOD_diffuse.dds" relativePath="true" />
+<File fileId="224" filename="autumn/poplar5LOD_normal.dds" relativePath="true" />
+<File fileId="225" filename="autumn/poplarBranch_diffuse.dds" relativePath="true" />
+<File fileId="226" filename="autumn/poplarBranch_normal.dds" relativePath="true" />
+<File fileId="227" filename="autumn/treeBranch_diffuse.dds" relativePath="true" />
+
+<!-- Winter -->
+<File fileId="301" filename="winter/birch1LOD_diffuse.dds" relativePath="true" />
+<File fileId="302" filename="winter/birch1LOD_normal.dds" relativePath="true" />
+<File fileId="303" filename="winter/birch2LOD_diffuse.dds" relativePath="true" />
+<File fileId="304" filename="winter/birch2LOD_normal.dds" relativePath="true" />
+<File fileId="305" filename="winter/birch3LOD_diffuse.dds" relativePath="true" />
+<File fileId="306" filename="winter/birch3LOD_normal.dds" relativePath="true" />
+<File fileId="307" filename="winter/birch4LOD_diffuse.dds" relativePath="true" />
+<File fileId="308" filename="winter/birch4LOD_normal.dds" relativePath="true" />
+<File fileId="309" filename="winter/birch5LOD_diffuse.dds" relativePath="true" />
+<File fileId="310" filename="winter/birch5LOD_normal.dds" relativePath="true" />
+<File fileId="311" filename="winter/birch6LOD_diffuse.dds" relativePath="true" />
+<File fileId="312" filename="winter/birch6LOD_normal.dds" relativePath="true" />
+<File fileId="313" filename="winter/birchBranch_diffuse.dds" relativePath="true" />
+<File fileId="314" filename="winter/birchBranch_normal.dds" relativePath="true" />
+<File fileId="315" filename="winter/birchLOD_diffuse.dds" relativePath="true" />
+<File fileId="316" filename="winter/grass_diffuse.dds" relativePath="true" />
+<File fileId="317" filename="winter/maple5LOD_diffuse.dds" relativePath="true" />
+<File fileId="318" filename="winter/maple5LOD_normal.dds" relativePath="true" />
+<File fileId="319" filename="winter/mapleBranch_diffuse.dds" relativePath="true" />
+<File fileId="320" filename="winter/mapleBranch_normal.dds" relativePath="true" />
+<File fileId="321" filename="winter/oak4LOD_diffuse.dds" relativePath="true" />
+<File fileId="322" filename="winter/oak4LOD_normal.dds" relativePath="true" />
+<File fileId="323" filename="winter/oakBranch_diffuse.dds" relativePath="true" />
+<File fileId="324" filename="winter/oakBranch_normal.dds" relativePath="true" />
+<File fileId="325" filename="winter/poplar5LOD_diffuse.dds" relativePath="true" />
+<File fileId="326" filename="winter/poplar5LOD_normal.dds" relativePath="true" />
+<File fileId="327" filename="winter/poplarBranch_diffuse.dds" relativePath="true" />
+<File fileId="328" filename="winter/poplarBranch_normal.dds" relativePath="true" />
+<File fileId="329" filename="winter/treeBranch_diffuse.dds" relativePath="true" />
+<File fileId="330" filename="winter/grass_diffuse.dds" relativePath="true"/>
+
+<!-- Summer -->
+<File fileId="401" filename="summer/birch1LOD_diffuse.dds" relativePath="true" />
+<File fileId="402" filename="summer/birch1LOD_normal.dds" relativePath="true" />
+<File fileId="403" filename="summer/birch2LOD_diffuse.dds" relativePath="true" />
+<File fileId="404" filename="summer/birch2LOD_normal.dds" relativePath="true" />
+<File fileId="405" filename="summer/birch3LOD_diffuse.dds" relativePath="true" />
+<File fileId="406" filename="summer/birch3LOD_normal.dds" relativePath="true" />
+<File fileId="407" filename="summer/birch4LOD_diffuse.dds" relativePath="true" />
+<File fileId="408" filename="summer/birch4LOD_normal.dds" relativePath="true" />
+<File fileId="409" filename="summer/birch5LOD_diffuse.dds" relativePath="true" />
+<File fileId="410" filename="summer/birch5LOD_normal.dds" relativePath="true" />
+<File fileId="411" filename="summer/birch6LOD_diffuse.dds" relativePath="true" />
+<File fileId="412" filename="summer/birch6LOD_normal.dds" relativePath="true" />
+<File fileId="413" filename="summer/birchBranch_diffuse.dds" relativePath="true" />
+<File fileId="414" filename="summer/birchBranch_normal.dds" relativePath="true" />
+<File fileId="415" filename="summer/maple5LOD_diffuse.dds" relativePath="true" />
+<File fileId="416" filename="summer/maple5LOD_normal.dds" relativePath="true" />
+<File fileId="417" filename="summer/mapleBranch_diffuse.dds" relativePath="true" />
+<File fileId="418" filename="summer/mapleBranch_normal.dds" relativePath="true" />
+<File fileId="419" filename="summer/oak4LOD_diffuse.dds" relativePath="true" />
+<File fileId="420" filename="summer/oak4LOD_normal.dds" relativePath="true" />
+<File fileId="421" filename="summer/oakBranch_diffuse.dds" relativePath="true" />
+<File fileId="422" filename="summer/oakBranch_normal.dds" relativePath="true" />
+<File fileId="423" filename="summer/poplar5LOD_diffuse.dds" relativePath="true" />
+<File fileId="424" filename="summer/poplar5LOD_normal.dds" relativePath="true" />
+<File fileId="425" filename="summer/poplarBranch_diffuse.dds" relativePath="true" />
+<File fileId="426" filename="summer/poplarBranch_normal.dds" relativePath="true" />
+<File fileId="427" filename="summer/treeBranch_diffuse.dds" relativePath="true" />
+
+<!-- Shaders -->
+<File fileId="801" filename="data/shaders/treeBranchShader.xml" relativePath="false"/>
+<File fileId="802" filename="data/shaders/windShader.xml" relativePath="false"/>
+<File fileId="803" filename="data/shaders/treeBillboardShader.xml" relativePath="false"/>
+<File fileId="804" filename="data/shaders/fruitGrowthFoliageShader.xml" relativePath="false"/>
+<File fileId="805" filename="data/shaders/bunkerSiloSilageShader.xml" relativePath="false"/>
