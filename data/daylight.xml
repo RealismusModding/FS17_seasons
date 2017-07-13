@@ -13,7 +13,7 @@
 
     <seasons>
         <spring>
-            <ambientColor>
+            <ambient>
                 <key values="0.010 0.010 0.016" />
                 <key values="0.010 0.010 0.016" />
                 <key values="0.020 0.020 0.032" />
@@ -30,7 +30,7 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.010 0.010 0.016" />
-            </ambientColor>
+            </ambient>
 
             <sunColor>
                 <key values="0.000 0.000 0.000" />
@@ -81,7 +81,7 @@
         </spring>
 
         <summer>
-            <ambientColor>
+            <ambient>
                 <key values="0.010 0.010 0.016" />
                 <key values="0.010 0.010 0.016" />
                 <key values="0.020 0.020 0.032" />
@@ -98,7 +98,7 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.010 0.010 0.016" />
-            </ambientColor>
+            </ambient>
 
             <sunColor>
                 <key values="0.000 0.000 0.000" />
@@ -149,7 +149,7 @@
         </summer>
 
         <autumn>
-            <ambientColor>
+            <ambient>
                 <key values="0.010 0.010 0.016" />
                 <key values="0.010 0.010 0.016" />
                 <key values="0.020 0.020 0.032" />
@@ -166,7 +166,7 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.010 0.010 0.016" />
-            </ambientColor>
+            </ambient>
 
             <sunColor>
                 <key values="0.000 0.000 0.000" />
@@ -217,7 +217,7 @@
         </autumn>
 
         <winter>
-            <ambientColor>
+            <ambient>
                 <key values="0.010 0.010 0.016" />
                 <key values="0.010 0.010 0.016" />
                 <key values="0.020 0.020 0.032" />
@@ -234,7 +234,7 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.010 0.010 0.016" />
-            </ambientColor>
+            </ambient>
 
             <sunColor>
                 <key values="0.000 0.000 0.000" />
