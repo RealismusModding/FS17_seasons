@@ -24,10 +24,6 @@ function ssAnimals:loadMap(name)
     -- Load parameters
     self:loadFromXML()
 
-    -- Load vanilla dirtification types
-    self.oldSheepDirt = self:getDirtType("sheep")
-    self.oldCowDirt = self:getDirtType("cow")
-
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
     end
@@ -112,6 +108,14 @@ end
 
 function ssAnimals:updateTroughs()
     local season = g_seasons.environment:currentSeason()
+
+    -- Load vanilla dirtification types at latest possible time
+    -- to allow other mods to override them
+    if self.oldSheepDirt == nil then
+        self.oldSheepDirt = self:getDirtType("sheep")
+        self.oldCowDirt = self:getDirtType("cow")
+    end
+
     if season == g_seasons.environment.SEASON_WINTER then
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
