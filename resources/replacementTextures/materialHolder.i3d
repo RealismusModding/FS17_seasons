@@ -99,7 +99,6 @@
         <File fileId="903" filename="winter/birch3LOD_normal.dds" relativePath="true" />
         <File fileId="904" filename="winter/birch4LOD_normal.dds" relativePath="true" />
         <File fileId="905" filename="winter/birch5LOD_normal.dds" relativePath="true" />
-        <File fileId="906" filename="winter/birch6LOD_normal.dds" relativePath="true" />
         <File fileId="907" filename="winter/birchBranch_normal.dds" relativePath="true" />
         <File fileId="908" filename="winter/maple5LOD_normal.dds" relativePath="true" />
         <File fileId="909" filename="winter/mapleBranch_normal.dds" relativePath="true" />
@@ -474,7 +473,7 @@
 
         <Material name="birch6LOD_mat" materialId="306" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="306" />
-            <Normalmap fileId="906" />
+            <Normalmap fileId="506" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
