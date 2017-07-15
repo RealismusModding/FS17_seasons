@@ -114,16 +114,16 @@
 
         <summer>
             <!-- Bushes and small trees -->
-            <texture shapeName="bush01" to="bushes_summer" />
-            <texture shapeName="bush02" to="bushes_summer" />
-            <texture shapeName="bush03" to="bushes_summer" />
-            <texture shapeName="bush04" to="bushes_summer" />
-            <texture shapeName="bush05" to="bushes_summer" />
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_summer" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_summer" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_summer" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_summer" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_summer" />
 
-            <texture shapeName="tree4m" to="treeBranch_summer" />
-            <texture shapeName="tree5m" to="treeBranch_summer" />
-            <texture shapeName="bush06" to="treeBranch_summer" />
-            <texture shapeName="bush07" to="treeBranch_summer" />
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_summer" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_summer" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_summer" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_summer" />
 
             <!-- Birch -->
             <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_summer" />
@@ -216,16 +216,16 @@
 
         <autumn>
             <!-- Bushes and small trees -->
-            <texture shapeName="bush01" to="bushes_autumn" />
-            <texture shapeName="bush02" to="bushes_autumn" />
-            <texture shapeName="bush03" to="bushes_autumn" />
-            <texture shapeName="bush04" to="bushes_autumn" />
-            <texture shapeName="bush05" to="bushes_autumn" />
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_autumn" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_autumn" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_autumn" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_autumn" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_autumn" />
 
-            <texture shapeName="tree4m" to="treeBranch_autumn" />
-            <texture shapeName="tree5m" to="treeBranch_autumn" />
-            <texture shapeName="bush06" to="treeBranch_autumn" />
-            <texture shapeName="bush07" to="treeBranch_autumn" />
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_autumn" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_autumn" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_autumn" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_autumn" />
 
             <!-- Birch -->
             <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_autumn" />
@@ -318,16 +318,16 @@
 
         <winter>
             <!-- Bushes and small trees -->
-            <texture shapeName="bush01" to="bushes_winter" />
-            <texture shapeName="bush02" to="bushes_winter" />
-            <texture shapeName="bush03" to="bushes_winter" />
-            <texture shapeName="bush04" to="bushes_winter" />
-            <texture shapeName="bush05" to="bushes_winter" />
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_winter" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_winter" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_winter" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_winter" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_winter" />
 
-            <texture shapeName="tree4m" to="treeBranch_winter" />
-            <texture shapeName="tree5m" to="treeBranch_winter" />
-            <texture shapeName="bush06" to="treeBranch_winter" />
-            <texture shapeName="bush07" to="treeBranch_winter" />
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_winter" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_winter" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_winter" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_winter" />
 
             <!-- Birch -->
             <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_winter" />
