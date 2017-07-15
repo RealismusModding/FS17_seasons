@@ -24,6 +24,10 @@ function ssAnimals:loadMap(name)
     -- Load parameters
     self:loadFromXML()
 
+    -- Load vanilla dirtification types
+    self.oldSheepDirt = self:getDirtType("sheep")
+    self.oldCowDirt = self:getDirtType("cow")
+
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
     end
@@ -118,9 +122,19 @@ function ssAnimals:updateTroughs()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
 
-        self:setDirtType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:setDirtType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:setDirtType("sheep", self.oldSheepDirt)
+        self:setDirtType("cow", self.oldCowDirt)
     end
+end
+
+function ssAnimals:getDirtType(animal)
+    local husbandry = g_currentMission.husbandries[animal]
+
+    if husbandry ~= nil then
+        return husbandry.dirtificationFillType
+    end
+
+    return nil
 end
 
 function ssAnimals:setDirtType(animal, fillType)
