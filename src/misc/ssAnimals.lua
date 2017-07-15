@@ -120,8 +120,13 @@ function ssAnimals:updateTroughs()
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
 
-        self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
-        self:setDirtType("cow", FillUtil.FILLTYPE_FORAGE)
+        if self.oldSheepDirt == FillUtil.FILLTYPE_GRASS_WINDROW then
+            self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
+        end
+
+        if self.oldCowDirt == FillUtil.FILLTYPE_GRASS_WINDROW then
+            self:setDirtType("cow", FillUtil.FILLTYPE_FORAGE)
+        end
     else
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
