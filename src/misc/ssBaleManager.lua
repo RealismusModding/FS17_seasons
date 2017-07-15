@@ -69,6 +69,8 @@ function ssBaleManager:reduceFillLevel()
                             local reductionFactor = self:calculateBaleReduction(bale)
 
                             bale.fillLevel = origFillLevel * reductionFactor
+
+                            ssBaleRotEvent:sendEvent(bale)
                         end
                     end
 
@@ -78,6 +80,8 @@ function ssBaleManager:reduceFillLevel()
                     local reductionFactor = self:calculateBaleReduction(bale)
 
                     bale.fillLevel = origFillLevel * reductionFactor
+
+                    ssBaleRotEvent:sendEvent(bale)
                 end
             end
         end

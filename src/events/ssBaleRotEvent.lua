@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------
--- BALE FERMENT EVENT
+-- BALE ROT EVENT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Event when a bale rots
 -- Authors:  rahkiin
@@ -32,9 +32,7 @@ function ssBaleRotEvent:writeStream(streamId, connection)
 end
 
 function ssBaleRotEvent:readStream(streamId, connection)
-    local objectId = streamReadInt32(streamId)
-
-    self.bale = networkGetObject(objectId)
+    self.bale = networkGetObject(streamReadInt32(streamId))
     self.fillLevel = streamReadFloat32(streamId)
 
     self:run(connection)
@@ -46,6 +44,6 @@ end
 
 function ssBaleRotEvent:sendEvent(bale)
     if g_server ~= nil then
-        g_server:broadcastEvent(ssBaleRotEvent:new(bale), nil, nil, bale)
+        g_server:broadcastEvent(ssBaleRotEvent:new(bale), false, nil, bale)
     end
 end
