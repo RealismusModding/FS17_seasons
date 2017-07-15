@@ -12,16 +12,16 @@
     <seasons>
         <spring>
             <!-- Bushes and small trees -->
-            <texture shapeName="bush01" to="bushes_spring" />
-            <texture shapeName="bush02" to="bushes_spring" />
-            <texture shapeName="bush03" to="bushes_spring" />
-            <texture shapeName="bush04" to="bushes_spring" />
-            <texture shapeName="bush05" to="bushes_spring" />
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_spring" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_spring" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_spring" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_spring" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_spring" />
 
-            <texture shapeName="tree4m" to="treeBranch_spring" />
-            <texture shapeName="tree5m" to="treeBranch_spring" />
-            <texture shapeName="bush06" to="treeBranch_spring" />
-            <texture shapeName="bush07" to="treeBranch_spring" />
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_spring" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_spring" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_spring" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_spring" />
 
             <!-- Birch -->
             <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_spring" />
