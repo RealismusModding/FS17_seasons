@@ -73,6 +73,9 @@
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
 
+        <text name="SS_REMOVE_CONTEST_TITLE" text="Aktualizacja modu Seasons" />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Używasz zaktualizowanej wersji modu Seasons. Gra wykryła wersję konkursową w folderze modów i ją wyłączyła. Usuń starszą wersję z folderu modów, aby ukryć ten komunikat." />
+
         <text name="SS_SEASON_INTRO_0" text="Rozpoczęła się wiosna, kwitną kwiaty i drzewa. To czas uprawy i zasiewu twoich pól." />
         <text name="SS_SEASON_INTRO_1" text="W lecie dni są długie i ciepłe. To odpowiedni czas, aby robić siano i obserwować wzrost zbóż." />
         <text name="SS_SEASON_INTRO_2" text="Liście żółkną i robi się chłodniej - nadeszła jesień. Zbierz swoje zboża przed nadejściem zimy." />

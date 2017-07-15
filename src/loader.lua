@@ -241,3 +241,15 @@ Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission0
 
 -- Giants engine does not copy this unit to the mod g_i18n version
 g_i18n.moneyUnit = getfenv(0)["g_i18n"].moneyUnit
+
+-- Make sure not both the contest and normal seasons mod is loaded
+local path = g_modsDirectory .. "FS17Contest_Seasons.zip"
+if fileExists(path) then
+    -- Act as if the contest mod is already loaded
+    g_modIsLoaded["FS17Contest_Seasons"] = true
+
+    g_gui:showInfoDialog({
+        title = ssLang.getText("SS_REMOVE_CONTEST_TITLE"),
+        text = ssLang.getText("SS_REMOVE_CONTEST_TEXT")
+    })
+end

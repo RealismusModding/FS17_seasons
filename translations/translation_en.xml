@@ -78,6 +78,9 @@
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
+        <text name="SS_REMOVE_CONTEST_TITLE" text="Seasons mod update" />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
+
         <text name="SS_SEASON_INTRO_0" text="Spring is here; flowers and trees blossom. It is time to cultivate and sow your fields." /> <!-- spring -->
         <text name="SS_SEASON_INTRO_1" text="The days are long and warm in summer. It is time to make hay and watch the crops grow." />
         <text name="SS_SEASON_INTRO_2" text="Leaves are getting brown and it is becoming colder - autumn has arrived. Make sure to harvest the crops before winter comes." />
