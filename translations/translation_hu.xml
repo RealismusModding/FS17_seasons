@@ -73,7 +73,6 @@
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
 
-        <text name="SS_REMOVE_CONTEST_TITLE" text="Seasons mod frissítés" />
         <text name="SS_REMOVE_CONTEST_TEXT" text="A Seasons mod frissített verzióját futtatod. A játék érzékelte a contest verziót a mods könyvtáradban és deaktiválta azt. Kérjük töröld a contest verziót a mods könyvtáradból, hogy ne lásd többé ezt az üzenetet." />
 
         <text name="SS_SEASON_INTRO_0" text="Itt a tavasz! Nyílnak a virágok, a fák rügyeznek. Itt az idő, hogy megműveld és bevesd a földjeidet!" />

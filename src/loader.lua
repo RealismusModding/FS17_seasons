@@ -253,3 +253,8 @@ if fileExists(path) then
         dialogType = DialogElement.TYPE_INFO
     })
 end
+
+
+InGameMenu.onClickVisitPlace = function (self, element)
+    log("Click Visit Place")
+end

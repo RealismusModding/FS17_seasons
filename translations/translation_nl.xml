@@ -73,7 +73,6 @@
 
         <text name="SS_SAVE_FAILED" text="Het is niet gelukt om Seasons op te slaan in je savegame. Probeer opnieuw!" />
 
-        <text name="SS_REMOVE_CONTEST_TITLE" text="Seasons mod update" />
         <text name="SS_REMOVE_CONTEST_TEXT" text="U gebruikt de geupdate versie van Seasons. Het spel heeft de  contest versie gedetecteerd in je mods-map en heeft het uitgeschakeld. Verwijder het alsjeblieft in uw Mods-map om dit bericht te verbergen." />
 
         <text name="SS_SEASON_INTRO_0" text="Een nieuwjaar, een nieuwe zaai periode. TODO" />

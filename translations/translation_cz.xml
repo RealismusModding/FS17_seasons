@@ -74,7 +74,6 @@
 
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
-        <text name="SS_REMOVE_CONTEST_TITLE" text="Mód Seasons aktualizace" />
         <text name="SS_REMOVE_CONTEST_TEXT" text="Spouštíte aktualizovanou verzi Seasons. Hra zjistila starší verzi módu ve složce mods a zakázala ji. Odstraňte jej ze složky modů, abyste tuto zprávu skryli." />
 
         <text name="SS_SEASON_INTRO_0" text="A je tu jaro! Začíná nové období setí." />

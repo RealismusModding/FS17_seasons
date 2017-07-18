@@ -78,7 +78,6 @@
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
-        <text name="SS_REMOVE_CONTEST_TITLE" text="Seasons mod update" />
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
 
         <text name="SS_SEASON_INTRO_0" text="Spring is here; flowers and trees blossom. It is time to cultivate and sow your fields." /> <!-- spring -->
