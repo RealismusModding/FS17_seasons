@@ -250,6 +250,6 @@ if fileExists(path) then
 
     g_gui:showInfoDialog({
         text = ssLang.getText("SS_REMOVE_CONTEST_TEXT"),
-        dialogType = DialogElement.TYPE_INFO)
+        dialogType = DialogElement.TYPE_INFO
     })
 end
