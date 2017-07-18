@@ -216,7 +216,7 @@
         <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." />
         <text name="ss_helpText_16_02" text="The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
-        <text name="ss_helpText_16_03" text="The second page is the settings menu. Here the season length (3/6/9/12 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." />
+        <text name="ss_helpText_16_03" text="The second page is the settings menu. Here the season length (3-24 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUD to the left of the clock in the upper right corner displays information relevant to Seasons. It shows the current air temperature on top and ground temperature on bottom. The state of the ground (wetcrops/frozen ground) is also displayed to the left of this HUD." />
