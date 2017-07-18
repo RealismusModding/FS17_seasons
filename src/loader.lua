@@ -249,7 +249,7 @@ if fileExists(path) then
     g_modIsLoaded["FS17Contest_Seasons"] = true
 
     g_gui:showInfoDialog({
-        title = ssLang.getText("SS_REMOVE_CONTEST_TITLE"),
-        text = ssLang.getText("SS_REMOVE_CONTEST_TEXT")
+        text = ssLang.getText("SS_REMOVE_CONTEST_TEXT"),
+        dialogType = DialogElement.TYPE_INFO)
     })
 end
