@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>Rahkiin, theSeb, JoshvZeyl</translationContributors>
+    <translationContributors>Rahkiin, theSeb, Belgian farmer, JoshvZeyl</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Laat weersvoorspelling zien" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repareer voertuig" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
+        <text name="input_SEASONS_SHOW_WF" text="Laat weersvoorspelling zien" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Herstel voertuig" />
+        <text name="input_SEASONS_SHOW_MENU" text="Open Seasons menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Plantafstand (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Sla nacht over" />
         <text name="SEASONS_HIDE_WF" text="Verberg weersvoorspelling" />
@@ -58,35 +58,35 @@
 
         <text name="SS_VEHICLE_TAXES" text="Voertuigbelasting" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
-        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparaties" />
+        <text name="SS_VEHICLE_REPAIRS" text="Voertuigherstellingen" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet genoeg geld om de reparatie te doen" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s is gerepareerd voor %s" />
-        <text name="SS_NOTHING_TO_REPAIR" text="Geen reparatie nodig voor %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Repareer %s voor %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Reparatie vereist" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatie is vereist over %.1f draaiuren of %d dagen" />
-        <text name="SS_REPAIR_DIALOG" text="Wil je de %s repareren voor %s?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Repareren" />
-        <text name="warning_repairBrokenMachine" text="Motor storing. Repareer je machines" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet voldoende geld om de herstelling uit te voeren." />
+        <text name="SS_VEHICLE_REPAIRED" text="%s is hersteld voor %s." />
+        <text name="SS_NOTHING_TO_REPAIR" text="Geen herstelling vereist voor %s." />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Herstel %s voor %s." />
+        <text name="SS_REPAIR_REQUIRED" text="Herstelling vereist!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Herstelling is vereist over %.1f draaiuren of %d dagen." />
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s herstellen voor %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Herstellen?" />
+        <text name="warning_repairBrokenMachine" text="Motorstoring! Herstel je voertuig." />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="Om middernacht" />
 
-        <text name="SS_SAVE_FAILED" text="Het is niet gelukt om Seasons op te slaan in je savegame. Probeer opnieuw!" />
+        <text name="SS_SAVE_FAILED" text="Het is niet gelukt de Seasons-mod op te slaan in je savegame. Probeer opnieuw!" />
 
-        <text name="SS_REMOVE_CONTEST_TEXT" text="U gebruikt de geupdate versie van Seasons. Het spel heeft de  contest versie gedetecteerd in je mods-map en heeft het uitgeschakeld. Verwijder het alsjeblieft in uw Mods-map om dit bericht te verbergen." />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Je gebruikt de ge?pdatete versie van de Seasons-mod. Het spel ontdekte de Modcontestversie tussen je mods en heeft ze uitgeschakeld. Verwijder de oude versie om dit bericht niet meer te laten zien." />
 
-        <text name="SS_SEASON_INTRO_0" text="Een nieuwjaar, een nieuwe zaai periode. TODO" />
-        <text name="SS_SEASON_INTRO_1" text="De zon staat hoog, gewassen groeien. TODO" />
-        <text name="SS_SEASON_INTRO_2" text="Oogst periode is aangebroken. Bereid voor op de winter als gewassen die mogelijk niet overleven. TODO" />
-        <text name="SS_SEASON_INTRO_3" text="Het is Koud. De aarde is hard, mogelijk bevroren. Gewassen groeien niet en gaan misschien zelfs dood. TODO" />
+        <text name="SS_SEASON_INTRO_0" text="Het is lente, de vogels fluiten. Het gras en de bomen beginnen weer te groeien. Breng je mest uit op de velden. Cultiveer je akkers en zaai of plant je gewassen." />
+        <text name="SS_SEASON_INTRO_1" text="De zon staat hoog, gewassen groeien. Het is zomer. Verzorg je gewassen en maai het gras." />
+        <text name="SS_SEASON_INTRO_2" text="De bomen worden stilaan bruin en het wordt koeler. De herfst is aangebroken. Oogst de laatste gewassen en bereid je voor op de winter." />
+        <text name="SS_SEASON_INTRO_3" text="Het is koud, de aarde is hard en bevroren. Je kan geen akkers bewerken in de winter. Een landbouwer trekt zich terug op zijn boerderij en verzorgt zijn dieren. " />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Laat niet meer zien" />
 
-        <text name="warning_soilIsFrozen" text="De aarde is bevroren. Je kan er niet op werken!" />
-        <text name="warning_doNotThreshWithMoisture" text="Oogst niet als de gewassen te nat zijn!" />
-        <text name="warning_animalsKilled" text="Dieren zijn dood gegaan (%d)" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren" />
-        <text name="msg_welcome" text="Welkom bij de Seasons Mod door Realismus Modding. Bekijk de helppagina’s in het Esc-menu voor meer informatie over het gebruik van deze mod." />
+        <text name="warning_soilIsFrozen" text="De bodem is bevroren. Je kan er niet op werken!" />
+        <text name="warning_doNotThreshWithMoisture" text="Je kan niet oogsten als je gewassen nog te vochtig zijn!" />
+        <text name="warning_animalsKilled" text="Dieren zijn gestorven (%d)." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
+        <text name="msg_welcome" text="Welkom bij de Seasons-mod door Realismus Modding. Bekijk de hulppagina’s in het hulpmenu voor meer informatie over de werking van deze mod." />
 
         <text name="ui_pageOverview" text="Overzicht" />
         <text name="ui_pageSettings" text="Instellingen" />
@@ -98,131 +98,131 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelsius" text="Celsius" />
 
-        <text name="ui_plantingSeason" text="Plantseizoen" />
-        <text name="ui_harvestSeason" text="Oogstseizoen" />
+        <text name="ui_plantingSeason" text="Zaaiperiode" />
+        <text name="ui_harvestSeason" text="Oogstperiode" />
 
-        <text name="tooltip_seasonLength" text="De lengte van één seizoen in dagen. Een jaar heeft vier seizoenen" />
-        <text name="tooltip_seasonIntros" text="Laat een introductie zien bij de start van een seizoen" />
-        <text name="tooltip_snow" text="Sneeuw zal vallen in koude winters en de weg blokkeren" />
-        <text name="tooltip_controlsHelp" text="Laat de weersvoorspellingen en menu controls zien in het help menu" />
-        <text name="tooltip_snowTracks" text="Voertuigen drukken sneeuw samen wanneer er overheen gereden word" />
-        <text name="tooltip_controlsTemperature" text="Zet de temperatuurschaal die gebruikt zal worden in het spel" />
-        <text name="tooltip_moisture" text="Weiger oogsten als de gewassen te nat of vochtig zijn" />
+        <text name="tooltip_seasonLength" text="De lengte van één seizoen in dagen. Een jaar heeft vier seizoenen." />
+        <text name="tooltip_seasonIntros" text="Laat een inleiding zien bij de start van elk seizoen." />
+        <text name="tooltip_snow" text="Sneeuw zal vallen in koude winters en de weg bedekken." />
+        <text name="tooltip_controlsHelp" text="Geeft de besturingsinformatie weer in het hulpvenster." />
+        <text name="tooltip_snowTracks" text="Voertuigen drukken sneeuw samen wanneer er overheen gereden wordt." />
+        <text name="tooltip_controlsTemperature" text="Bepaalt de in het spel gebruikte temperatuureenheid." />
+        <text name="tooltip_moisture" text="Gewassen zijn niet onmiddellijk oogstbaar na nat of vochtig weer." />
 
-        <text name="setting_seasonIntros" text="Seizoensintroductie" />
+        <text name="setting_seasonIntros" text="Seizoensinleiding" />
         <text name="setting_seasonLength" text="Seizoenslengte" />
         <text name="setting_snow" text="Sneeuw" />
-        <text name="setting_controlsHelp" text="Hulpmenu" />
+        <text name="setting_controlsHelp" text="Hulpvenster" />
         <text name="setting_snowTracks" text="Sneeuwsporen" />
-        <text name="setting_controlsTemperature" text="Temperatuurschaal" />
-        <text name="setting_moisture" text="Vochtigheid gewas" />
+        <text name="setting_controlsTemperature" text="Temperatuureenheid" />
+        <text name="setting_moisture" text="Gewasvochtigheid" />
 
         <text name="dialog_applySettings" text="Weet je zeker dat je de seizoensinstellingen wilt veranderen? Het veranderen van de seizoenslengte kan er voor zorgen dat je sommige velden pas na één jaar weer kan gebruiken." />
-        <text name="dialog_resetGrowth" text="Je hebt de Seasons mod op een oude savegame geladen. Seasons wil alle velden naar hun kale toestand brengen om synchroon te zijn met de speldag. Je zal alle gewassen verliezen. Als je de gewasgroei niet terug zet, zal Seasons niet werken zoals verwacht." />
-        <text name="dialog_resetGrowth_title" text="Reset gewasgroei" />
+        <text name="dialog_resetGrowth" text="Je hebt de Seasons-mod in een bestaande savegame geladen. De mod wil alle velden naar hun geoogste staat brengen om synchroon te lopen met het huidige seizoen. Je zal alle gewassen verliezen. Als je de gewasgroei niet herstart, zal de Seasons-mod niet werken zoals verwacht." />
+        <text name="dialog_resetGrowth_title" text="Gewasgroei herstarten" />
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />
-        <text name="dialog_resetGrowth_yes" text="Reset" />
-        <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd" />
-        <text name="dialog_sleeping" text="Aan het rusten voor de volgende werkdag op de boerderij... Zzzzz..." />
+        <text name="dialog_resetGrowth_yes" text="Herstart" />
+        <text name="dialog_timeTravel" text="Het spel synchroniseert na het vooruitspoelen van de tijd." />
+        <text name="dialog_sleeping" text="Aan het rusten voor een volgende werkdag op de boerderij... Zzz..." />
 
         <text name="fillType_snow" text="Sneeuw" />
 
-        <text name="ss_helpCategory" text="Seasons" />
+        <text name="ss_helpCategory" text="Seasons-mod" />
 
-        <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons is een mod die het realisme verbetert in het Farming Simulator spel door bijna alle aspecten aan te passen naar meer realistische parameters. Alles van seizoensgebonden effecten op gewasgroeipatronen en dierproductie is veranderd tot een meer realistisch niveau." />
-        <text name="ss_helpText_01_02" text="Het speljaar is opgebroken in 4 seizoenen: lente, zomer, herfst en winter. Elk seizoen is in 3 delen verdeeld: vroeg, midden en laat. Deze delen worden overgangen genoemd." />
-        <text name="ss_helpText_01_03" text="Uw activiteiten zijn gebonden aan de tijd van het jaar dat ze in het echte leven plaatsvinden." />
+        <text name="ss_helpTitle_01" text="Seasons-mod" />
+        <text name="ss_helpText_01_01" text="De Seasons-mod is een mod die het realisme verbetert in Farming Simulator door verschillende spelaspecten aan te passen naar een realistischere werking. Alles van weerseffecten tot seizoensgebonden invloed op gewasgroei en dierlijke productie is gewijzigd naar een meer realistisch niveau." />
+        <text name="ss_helpText_01_02" text="Een speljaar is opgedeeld in 4 seizoenen: lente, zomer, herfst en winter. Elk seizoen is in 3 delen verdeeld: vroeg, midden en laat. Deze delen worden overgangen genoemd." />
+        <text name="ss_helpText_01_03" text="Je landbouwactiviteiten zullen afhankelijk zijn van de seizoenen en de tijd van het jaar waarin ze in de realiteit gebeuren." />
 
-        <text name="ss_helpTitle_02" text="Seizoensgebonden effecten (1)" />
-        <text name="ss_helpText_02_01" text="Het weer is willekeurig van dag tot dag, maar volgt een patroon van seizoen tot seizoen." />
-        <text name="ss_helpText_02_02" text="De lente zal regenachtig en mistig zijn met enkele kansen op zonnig weer. De zomer wordt warmer en droger. Hagel kan optreden zonder enige waarschuwing. Herfst wordt regenachtig met zonnig weer. Winter zal regenachtig, maar vaak koud genoeg om sneeuw te vallen, misschien zelfs op de grond blijven liggen.De lente zal regenachtig en mistig zijn met enkele kansen op zonnig weer. De zomer wordt warmer en droger. Hagel kan optreden zonder enige waarschuwing. Herfst wordt regenachtig met zonnig weer. Winter zal regenachtig, maar vaak koud genoeg zijn om sneeuw te laten vallen. Wat misschien zelfs op de grond blijft liggen." />
-        <text name="ss_helpText_02_03" text="Sneeuw zal vullen kiepers en bak, tenzij de kieper of bak is bedekt met een schuur met een snowmask of een zeil. Sneeuw zal ook tractie verminderen, waardoor voertuigen langzamer worden." />
+        <text name="ss_helpTitle_02" text="Seizoensgebonden effecten - Deel 1" />
+        <text name="ss_helpText_02_01" text="Het weer verschilt van dag tot dag, maar wordt beïnvloed en bepaald door de eigenschappen van het huidige seizoen." />
+        <text name="ss_helpText_02_02" text="De lente is zonnig met nog vaak regen en mist. De zomer wordt warmer en droger. Hagel kan optreden zonder enige waarschuwing. De herfst is regenachtig met zonnige periodes. Winters zijn zeer regenachtig, maar soms is het koud genoeg om sneeuw te vormen. Die sneeuw zou wel eens op de grond kunnen blijven liggen." />
+        <text name="ss_helpText_02_03" text="Sneeuw zal aanhangers en kipbakken vullen als ze in de openlucht staan. Zet ze in een schuur of sluit het afdekzeil van de aanhanger.  Sneeuw vermindert de grip op de ondergrond, je rijdt dus best wat trager." />
 
-        <text name="ss_helpTitle_03" text="Seizoensgebonden effecten (2)" />
-        <text name="ss_helpText_03_01" text="Aantal uren daglicht wordt beïnvloed door het seizoen. Winters hebben kortere dagen (8 uren) terwijl zomers langere dagen hebben (17 uren)." />
-        <text name="ss_helpText_03_02" text="Bunker silo's en kuilvoer balen hebben tijd nodig om te fermenteren. Het duurt een derde van de seizoenen (1 overgang) om een bunker silo of een kuilvoer baal  volledig te laten fermenteren. Verpakte hooi zal niet fermenteren, maar zal worden beschermd tegen het weer." />
-        <text name="ss_helpText_03_03" text="Seasons beïnvloed zowel bomen en hun bladeren. De bomen zullen veranderen naargelang de seizoensgebonden temperatuursveranderingen. bladeren veranderen van kleur en zullen van de boom vallen in de herfst. Bomen zijn kaal in de winter en kleuren licht groen in de lente." />
+        <text name="ss_helpTitle_03" text="Seizoensgebonden effecten - Deel 2" />
+        <text name="ss_helpText_03_01" text="Het seizoen bepaalt wanneer de zon opkomt en weer ondergaat. Zomers hebben heel lange dagen met veel daglicht (17 uur), winters daarentegen hebben veel kortere dagen (8 uur)." />
+        <text name="ss_helpText_03_02" text="Kuilvoersilo's en kuilvoerbalen hebben tijd nodig om te fermenteren. Het duurt een derde van een seizoen (1 overgang) om een kuilvoersilo of -baal volledig te laten fermenteren. Gewikkelde hooibalen zullen niet fermenteren, maar zijn wel beschermd tegen slechte weersomstandigheden." />
+        <text name="ss_helpText_03_03" text="De seizoenen beïnvloeden de bomen en hun bladeren. Bomen en struiken zullen veranderen naargelang de temperatuursveranderingen doorheen de verschillende seizoenen. In de herfst verkleuren de bladeren en zullen ze van de bomen vallen. Bomen en struiken zijn kaal in de winter en kleuren weer groen in de lente." />
 
         <text name="ss_helpTitle_04" text="Weersvoorspellingen" />
-        <text name="ss_helpText_04_01" text="De weersverwachting is opnieuw geïntroduceerd met Seasons en kan geactiveerd worden door Left Alt + F." />
-        <text name="ss_helpText_04_02" text="De weersvoorspelling toont de hoge / lage temperaturen en het weer (zonnig, mistig, regenachtig, sneeuw, bewolkt) voor de komende 7 dagen. Hagelstormen verschijnen niet op de weersvoorspelling, omdat hagel in het echte leven vaak een onverwacht evenement is." />
-        <text name="ss_helpText_04_03" text="Het nummer rechts van elk voorspelde blok vertegenwoordigt de dag van het seizoen." />
+        <text name="ss_helpText_04_01" text="De weersverwachting is opnieuw ingevoerd met de Seasons-mod. Ze wordt getoond met de toetsencombinatie Links Alt + F." />
+        <text name="ss_helpText_04_02" text="De weersvoorspelling toont de dagelijkse maximum- en minimumtemperaturen samen met het weertype (zonnig, bewolkt, mistig, regen of sneeuw) voor de komende 7 dagen. Hagelstormen verschijnen niet op de weersvoorspelling, die zijn zoals in de realiteit moeilijker te voorspellen." />
+        <text name="ss_helpText_04_03" text="Het getal rechts van elke dagsvoorspelling geeft de dag van het seizoen weer." />
 
         <text name="ss_helpTitle_05" text="Bodem" />
-        <text name="ss_helpText_05_01" text="Bodemtemperatuur wordt gemodelleerd met behulp van thermodynamische vergelijkingen en historische gegevens. Dit betekent dat de bodem in de winter zal bevriezen wanneer de luchttemperatuur gedurende een bepaalde tijd onder een bepaald punt daalt. De bodem zal dan in het voorjaar ontdooien wanneer de luchttemperatuur gedurende een bepaalde tijdsduur boven een bepaalde drempel stijgt." />
-        <text name="ss_helpText_05_02" text="De bodem kan niet worden bewerkt als de bodem bevroren is. Gewassen zullen niet groeien in een bevroren bodem." />
-        <text name="ss_helpText_05_03" text="Gewassen zullen ontkiemen wanneer de bodemtemperatuur boven hun kiemtemperatuur is. De kiemtemperaturen zijn weergegeven op de eerste pagina van het seasons instellingen menu (Left Alt + S)." />
+        <text name="ss_helpText_05_01" text="De bodemtemperatuur wordt nagebootst aan de hand van historische gegevens en thermodynamische formules. Dit betekent dat de bodem in de winter zal bevriezen als de luchttemperatuur gedurende een langere tijd onder het vriespunt daalt. In het voorjaar zal de bodem weer ontdooien zodra de luchttemperatuur gedurende een bepaalde tijd boven het vriespunt stijgt." />
+        <text name="ss_helpText_05_02" text="Velden kunnen niet worden bewerkt als de bodem bevroren is. Gewassen groeien niet in een bevroren bodem." />
+        <text name="ss_helpText_05_03" text="Zaden kunnen ontkiemen wanneer de bodemtemperatuur gelijk aan of hoger is dan de kiemtemperatuur. De kiemtemperaturen worden per gewas weergegeven op de eerste pagina van het Seasons-menu (Links Alt + S)." />
 
-        <text name="ss_helpTitle_06" text="Gewassen - Introductie" />
-        <text name="ss_helpText_06_01" text="Bij het starten van een nieuw spel worden alle gewassen teruggezet naar hun geoogste fase om te simuleren dat de velden sinds het najaar niet zijn bewerkt. Als u Seasons voor het eerst gebruikt in een bestaande save game heb je de keuze om gewasgroei te resetten of om dat niet te doen." />
-        <text name="ss_helpText_06_02" text="De standaard groeipatronen van gewassen zijn vervangen door Seasons. Gewassen zullen nu een realistisch groeipatroon volgen volgens hun bijbehorende plant- en oogsttijden. Dit betekent ook dat de winter de meeste gewassen zal doden en gewassen die op de verkeerde tijd worden geplant, niet zullen groeien." />
-        <text name="ss_helpText_06_03" text="Gewassen kunnen alleen in hun laatste groeistadium worden geoogst, behalve populier en bladrammenas, en blijven in dit laatste stadium totdat ze in de winter worden gedood." />
-        <text name="ss_helpText_06_04" text="Zodra een niet-wortelgewas het eerste oogstgebied bereikt volgens het groei overzicht in het esc-menu, is het klaar om te oogsten. Dit is de laatste oogstfase." />
-        <text name="ss_helpText_06_05" text="Je kan nog steeds groene gewassen inkuilen." />
+        <text name="ss_helpTitle_06" text="Gewassen - Inleiding" />
+        <text name="ss_helpText_06_01" text="Bij het starten van een nieuw spel worden alle gewassen teruggebracht naar hun geoogste staat om na te bootsen dat de velden sinds het najaar niet meer bewerkt zijn. Als je de Seasons-mod voor het eerst gebruikt in een bestaande savegame, krijg je de mogelijkheid om de gewasgroei te herstarten." />
+        <text name="ss_helpText_06_02" text="De groeipatronen van de gewassen worden bestuurd door de Seasons-mod. Gewassen volgen nu een realistisch groeipatroon op basis van hun bijhorende zaai- en oogstperiodes. In de winter verdorren gewassen die niet bestand zijn tegen de koude. Gewassen die op een verkeerd tijdstip worden gezaaid of geplant, zullen helemaal niet groeien." />
+        <text name="ss_helpText_06_03" text="Gewassen, met uitzondering van populier en bladrammenas, kunnen alleen in hun laatste groeifase geoogst worden. Ze blijven in deze rijpe groeifase totdat ze in de winter verdorren." />
+        <text name="ss_helpText_06_04" text="Zodra een niet-wortelgewas de eerste oogstbare groeifase bereikt volgens het groei-overzicht, kan het geoogst worden. Dit is hun laatste groeifase." />
+        <text name="ss_helpText_06_05" text="Je kan nog steeds hakselgewassen inkuilen." />
 
         <text name="ss_helpTitle_07" text="Gewassen - Akkerbouwgewassen" />
-        <text name="ss_helpText_07_01" text="Gewasgroei duurt een stuk langer. Het duurt mogelijk een half jaar voordat een gewas de oogstbare status behaald." />
-        <text name="ss_helpText_07_02" text="De winter zal de meeste gewassen doden, maar winter- en lentegewassen zijn mogelijk. Tarwe, gerst, populier, gras, bladrammenas en koolzaad kunnen in de herfst worden geplant voor wintergewassen of in de lente geplant worden voor lentegewassen. Wees er zeker van dat de grond warm genoeg is voor de ontkieming van deze gewassen." />
-        <text name="ss_helpText_07_03" text="Maïs, sojabonen, zonnebloem, suikerbieten en aardappelen moeten in het voorjaar geplant worden. Zorg ervoor dat je het  groei overzicht in het menu Seasons controleert, omdat sommige gewassen niet in de eerste overgang van de lente (het vroege voorjaar) kunnen worden geplant en zullen sterven, zelfs als de bodemtemperatuur boven kiemtemperatuur is." />
+        <text name="ss_helpText_07_01" text="Je gewassen hebben veel meer tijd nodig om te groeien. Het duurt soms zelfs een half jaar voordat een gewas rijp is." />
+        <text name="ss_helpText_07_02" text="In de winter verdorren de meeste gewassen. Toch zijn er winter- en zomervarianten mogelijk bij bepaalde gewassen. Tarwe, gerst, koolzaad, gras, populier en bladrammenas kan al in de herfst worden gezaaid als wintergewassen. Zaai ze in de lente als je de zomervarianten wil telen. Zorg dat de bodem steeds warm genoeg is voor de ontkieming van de zaden." />
+        <text name="ss_helpText_07_03" text="Maïs, sojabonen, zonnebloemen, suikerbieten en aardappelen worden in het voorjaar gezaait en geplant. Bekijk het Seasons-menu om te controleren wanneer het tijd is voor deze gewassen." />
 
-        <text name="ss_helpTitle_08" text="Gewassen - Hooi, Stro en Gras" />
-        <text name="ss_helpText_08_01" text="In de winter gras wordt teruggezet naar het geoogste stadium om het doden van het gras in de winter te simuleren als het koud wordt." />
-        <text name="ss_helpText_08_02" text="Gras balen moeten gebruikt worden of worden ingepakt voor kuilvoer binnen 2 dagen naar balen persen. Na 2 dagen begint gras te rotten en zal de baal verdwijnen." />
-        <text name="ss_helpText_08_03" text="Zwaden van hooi, gras en stro zullen in omvang beginnen te verminderen en zullen na een paar dagen uiteindelijk verdwijnen. Gras zwaden worden elke dag om middernacht verminderd. Hooi- en stro zwaden worden na elke groeistadium verminderd en wanneer deze aan regen worden blootgesteld." />
-        <text name="ss_helpText_08_04" text="Stro en hooi moeten worden gebaald voordat het kan worden verkocht. Losse stro en hooi kunnen niet worden verkocht, alleen gratis weggegeven worden. Gras: balen of los, kan ook niet worden verkocht." />
+        <text name="ss_helpTitle_08" text="Gewassen - Hooi, stro en gras" />
+        <text name="ss_helpText_08_01" text="Zwaden van gras, hooi en stro zullen in omvang beginnen te verminderen en zullen na een paar dagen uiteindelijk helemaal verdwijnen. Graszwaden worden steeds om middernacht verminderd. Hooi- en strozwaden worden verminderd na elke groeifase of als ze aan regen of hagel worden blootgesteld." />
+        <text name="ss_helpText_08_02" text="Binnen 2 dagen na het balenpersen moeten grasbalen verbruikt of gewikkeld worden. Grasbalen beginnen te rotten en zullen na 2 speldagen vergaan zijn." />
+        <text name="ss_helpText_08_03" text="Hooi en stro moet tot balen geperst worden voordat je het kan verkopen. Los hooi of stro kan je niet verkopen, enkel gratis weggeven. Gras kan helemaal niet verkocht worden." />
+        <text name="ss_helpText_08_04" text="In de winter wordt gras teruggebracht naar de eerste groeifase om het afsterven van het gras in de winter na te bootsen." />
 
         <text name="ss_helpTitle_09" text="Bomen" />
-        <text name="ss_helpText_09_01" text="Bomen nemen meer tijd om hun volwassen stadium te bereiken. Het zal geplante bomen 5 speljaren tot volgroeide boom in beslag nemen en na 2 jaar kunnen ze worden omgehakt." />
-        <text name="ss_helpText_09_02" text="Bomen belemmeren de groei van andere bomen als ze te dicht bij elkaar zijn geplant.Om de groei van de boom te herstellen moet u het aantal bomen reduceren door een deel om te hakken." />
+        <text name="ss_helpText_09_01" text="Bomen hebben veel meer tijd nodig om te groeien. Na 2 speljaren kunnen zelfgeplante bomen omgehakt worden. Een boom is volledig volgroeid na 5 speljaren." />
+        <text name="ss_helpText_09_02" text="Bomen belemmeren de groei van andere bomen als ze te dicht bij elkaar geplant zijn. Om de groei van een boom te herstellen, moet je het aantal bomen verminderen door een deel ervan om te hakken." />
 
-        <text name="ss_helpTitle_10" text="Weer effecten" />
-        <text name="ss_helpText_10_01" text="Regen, hagel en sneeuw beïnvloeden het vochtgehalte van de gewassen. Als het vocht gehalte in de gewassen boven zekere punten is wegens slecht weer, kunt u uw gewassen niet oogsten. Vochtige zomernachten kunnen zonder waarschuwing optreden." />
-        <text name="ss_helpText_10_02" text="Na de regen zal uw gewas tijd nodig hebben om op te drogen, die afhankelijk is van de luchttemperatuur en de tijd van het jaar. Warmer weer betekent dat gewassen sneller op drogen dan in koeler weer." />
-        <text name="ss_helpText_10_03" text="Het gebruik van een schudder op hooi terwijl het gewas nat is, produceert nat gras. Zorg ervoor dat u alleen een schudder gebruikt als de gewassen droog genoeg zijn." />
-        <text name="ss_helpText_10_04" text="Op een mod-kaart die met een snowmask is voorbereid door de modder. Hooi en strobalen die blootgesteld zijn aan de regen of sneeuw, beginnen te rotten, tenzij de balen in een schuur met een snowmask worden opgeslagen. Slecht weer heeft geen effect op ingewikkelde balen of balen op een kaart zonder snowmask." />
+        <text name="ss_helpTitle_10" text="Weerseffecten" />
+        <text name="ss_helpText_10_01" text="Regen, hagel en sneeuw beïnvloeden het vochtgehalte van je gewassen. Als een gewas te nat wordt door het slechte weer, kan je het voorlopig niet oogsten. Vochtige zomernachten kunnen zich plots voordoen." />
+        <text name="ss_helpText_10_02" text="Na een regenbui zal je gewas tijd nodig hebben om op te drogen. Die tijd is afhankelijk van de luchttemperatuur en de tijd van het jaar. Bij warmer weer drogen gewassen sneller dan bij koeler weer." />
+        <text name="ss_helpText_10_03" text="Een schudder gebruiken in hooi dat nat is, levert weer nat gras op. Gebruik een schudder dus enkel bij droog weer." />
+        <text name="ss_helpText_10_04" text="Op een gedownloade kaart die van een Seasons-Snowmask voorzien is, beginnen hooi- en strobalen te vergaan bij regen, hagel of sneeuw. Verhinder dit door je balen op te bergen in een schuur. Gewikkelde balen kan je zonder problemen buiten laten liggen. Op kaarten die geen Seasons-Snowmask hebben, heeft slecht weer geen invloed op je balen." />
 
-        <text name="ss_helpTitle_11" text="Onderhoud" />
-        <text name="ss_helpText_11_01" text="Uw tractoren en harvesters vereisen periodiek onderhoud om ze operationeel te houden. De onderhoudsperiode is om de 30 uur of een half jaar, naargelang het eerste komt. Voertuigen die hun onderhoudsperiode overschrijden, kunnen langer nodig hebben om te starten." />
-        <text name="ss_helpText_11_02" text="U kunt uw voertuigen repareren bij de voertuigen winkel of bij de plaatsbare garage. Om uw voertuig te repareren, rijd uw voertuig naar de voertuigen winkel of een plaatsbare garage en druk op Alt + R. Opmerking dat het duurder zal zijn om uw voertuig bij de voertuigen winkel te laten repareren." />
-        <text name="ss_helpText_11_03" text="De leeftijd van uw voertuig is de dagen sinds uw laatste reparatie." />
-        <text name="ss_helpText_11_04" text="Alleen rijbare voertuigen vereisen periodiek onderhoud. Gereedschappen en werktuigen worden automatisch gerepareerd." />
+        <text name="ss_helpTitle_11" text="Voertuigonderhoud" />
+        <text name="ss_helpText_11_01" text="Je tractoren en oogstmachines vereisen regelmatig herstellingen om ze in werking te houden. Een herstelbeurt gebeurt elke 30 werkuren of om het half jaar. Voertuigen die niet worden onderhouden, kunnen mogelijks moelijker starten." />
+        <text name="ss_helpText_11_02" text="Je kan je voertuigen herstellen bij de voertuigwinkel of bij een plaatsbare voertuigwerkplaats. Om een voertuig te herstellen, rijd je het in het gemarkeerde gebied en gebruik je de toetsencombinatie Links Alt + R. Het is natuurlijk duurder om je voertuig te herstellen bij de voertuigwinkel dan in je eigen werkplaats." />
+        <text name="ss_helpText_11_03" text="De ouderdom van je voertuig is de dagen sinds je laatste herstelbeurt." />
+        <text name="ss_helpText_11_04" text="Enkel voertuigen vereisen regelmatig jouw onderhoud. Werktuigen, aanhangers en gewichten worden automatisch onderhouden." />
 
         <text name="ss_helpTitle_12" text="Economie" />
-        <text name="ss_helpText_12_01" text="De hoeveelheid dat geleend kan worden van de bank is veranderd van $CURRENCY_SYMBOL200.000 tot 30% van uw eigen grond en plaatsbare gebouwwaardes. De minimale hoeveelheid dat geleend kan worden is $CURRENCY_SYMBOL300.000 en de maximale hoeveelheid dat geleend kan worden is $CURRENCY_SYMBOL1.500.000." />
-        <text name="ss_helpText_12_02" text="Inkomsten uit missies zijn verminderd. U verdient ongeveer 5 keer meer dan een ingehuurde werknemer die op hetzelfde terrein werkt." />
-        <text name="ss_helpText_12_03" text="Kosten van alle voertuigen (naast het periodieke onderhoud) omvat onderhoudskosten en belastingen ten opzichte van de hoeveelheid van gebruik. Schone machines hebben verlaagde onderhoudskosten. Machines die niet worden gebruikt, hebben  ook verlaagde onderhoudskosten." />
-        <text name="ss_helpText_12_04" text="Gewas prijzen fluctueren op een meer realistische manier met de veranderingen in de seizoenen." />
+        <text name="ss_helpText_12_01" text="Het bedrag dat je kan lenen bij de bank is veranderd van $CURRENCY_SYMBOL300.000 naar 30% van de waarde van je landbouwgrond samen met de plaatsbare gebouwwaardes. De minimale geldsom die je kan lenen bedraagt $CURRENCY_SYMBOL300.000, de maximale som $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_02" text="Inkomsten uit missies zijn verminderd. Je verdient ongeveer 5 keer meer dan wat een ingehuurde arbeider zou verdienen op hetzelfde veld." />
+        <text name="ss_helpText_12_03" text="De kosten van je voertuigen (naast de regelmatige herstelbeurt) omvatten de onderhoudskosten en de belastingen. De belastingen worden bepaald door hoe vaak je het voertuig gebruikt. Schone machines hebben minder onderhoudskosten. Machines die niet worden gebruikt, hebben ook verminderde onderhoudskosten." />
+        <text name="ss_helpText_12_04" text="Gewasprijzen schommelen op een levensechte wijze onder invloed van hun aanbod doorheen de seizoenen." />
 
-        <text name="ss_helpTitle_13" text="Gehuurde hulp" />
-        <text name="ss_helpText_13_01" text="Gehuurde werknemers krijgen hun overuren betaald. Als een gehuurde werknemer vóór 6 uur en na 6 uur of in de weekenden wordt gebruikt, zal zijn / haar salaris 50% hoger zijn." />
+        <text name="ss_helpTitle_13" text="Ingehuurde arbeiders" />
+        <text name="ss_helpText_13_01" text="Ingehuurde arbeiders kunnen overuren werken. Als een arbeider wordt ingehuurd vóór 6 uur 's ochtends of na 18 uur, zal het loon 50% hoger liggen. Dit geldt ook tijdens weekends." />
 
-        <text name="ss_helpTitle_14" text="Dieren - Introductie" />
-        <text name="ss_helpText_14_01" text="Dier productie is aangepast met Seasons tot meer realistische parameters. Alle dieren zullen in de zomer meer water verbruiken dan in de winter. Koeien en varkens hebben in de winter meer stro nodig. De maximale voedingscapaciteit is verlaagd van 6 dagen naar 3 dagen." />
-        <text name="ss_helpText_14_02" text="Dieren geven alleen nakomelingen op een bepaald moment van het jaar. Varkens en schapen produceren nakomelingen in het voorjaar, terwijl koeien in de zomer nakomelingen produceren." />
-        <text name="ss_helpText_14_03" text="Dieren gaan dood als ze geen voer en water hebben. dit is uitgeschakeld op de easy moelijkheid." />
-        <text name="ss_helpText_14_04" text="Gras kan niet gevoerd worden in de winter. Je moet hooi gebruiken inplaats van gras." />
+        <text name="ss_helpTitle_14" text="Dieren - Inleiding" />
+        <text name="ss_helpText_14_01" text="Je dierlijke productie zal afhankelijk zijn van de seizoenen. Alle dieren verbruiken in de zomer meer water dan in de winter. Koeien en varkens hebben in de winter meer stro nodig. De maximale capaciteit van de voerbak kan je dieren 3 dagen voeren." />
+        <text name="ss_helpText_14_02" text="Dieren geven enkel nakomelingen op een vastgelegd tijdstip in het jaar. Varkens en schapen krijgen nakomelingen in het voorjaar, terwijl koeien in de zomer hun nakomelingen krijgen." />
+        <text name="ss_helpText_14_03" text="Dieren sterven als ze geen voer en water hebben. Dit is uitgeschakeld op de eenvoudigste moelijkheidsgraad." />
+        <text name="ss_helpText_14_04" text="Gras kan niet gevoerd worden in de winter. Gebruik hooi in plaats van gras." />
 
         <text name="ss_helpTitle_15" text="Dieren - Productie" />
-        <text name="ss_helpText_15_01" text="melk en wol productie is afhankelijk van het seizoen." />
-        <text name="ss_helpText_15_02" text="Wol wordt alleen geproduceerd in de lente en zomer." />
-        <text name="ss_helpText_15_03" text="Melk wordt het hele jaar door geproduceerd, maar wordt in de winter en in het voorjaar verhoogd. Terwijl gras niet in de winter kan worden gevoed, zou dit normaal gesproken de produktiviteit van de koeien ten hoogste tot 80% verminderen. Seasons verhoogt echter de melkproductie in de winter en lente om het gebrek aan gras te kunnen compenseren." />
+        <text name="ss_helpText_15_01" text="Melk- en wolproductie is afhankelijk van het seizoen." />
+        <text name="ss_helpText_15_02" text="Wol wordt enkel in de lente en de zomer geproduceerd." />
+        <text name="ss_helpText_15_03" text="Melk wordt het hele jaar door geleverd, maar wordt in de winter en in het voorjaar verhoogd. Omdat vers gras niet beschikbaar is in de winter, wordt de productiviteit van je koeien teruggebracht tot maximaal 80%. De Seasons-mod verhoogt echter de melkproductie in de winter en lente om het gebrek aan gras te compenseren." />
 
-        <text name="ss_helpTitle_16" text="Seasons Menu" />
-        <text name="ss_helpText_16_01" text="Het Seasons menu wordt gebruikt als referentiegids voor het planten en wijzigen van instellingen in verband met Seasons. Dit menu is geactiveerd door Left Alt + S." />
-        <text name="ss_helpText_16_02" text="De eerste pagina is uw gids voor de plant- en oogsttijden van uw gewassen. De ontkiemingstemperaturen van alle gewassen worden getoond aan de linkerkant van de grafiek. Als de temperatuur naast een gewas wit is, betekent het dat het warm genoeg is om dat gewas te planten. Als de temperatuur blauw is, is het te koud." />
-        <text name="ss_helpText_16_03" text="De tweede pagina is het instellingenmenu. Hier kunnen de seizoenlengte (seizoenen 3/6/9/12/12), seizoenmeldingen (aan / uit), sneeuwmodus (aan / uit / 1-laag, sporen aan / uit), vochtgewicht (aan / uit) en temperatuur Instellingen (C / F)  allemaal worden gewijzigd." />
+        <text name="ss_helpTitle_16" text="Seasons-menu" />
+        <text name="ss_helpText_16_01" text="Raadpleeg het Seasons-menu om te weten wanneer je kan zaaien en oogsten, of om de instellingen van je seizoenen te wijzingen. Dit menu activeer je met de toetsencombinatie Links Alt + S." />
+        <text name="ss_helpText_16_02" text="De eerste pagina van het menu helpt je met de zaai- en oogstperiodes van de verschillende gewassen. De ontkiemingstemperaturen worden aan de linkerkant van de grafiek getoond. Als een temperatuur naast een gewas wit is, wil dit zeggen dat het warm genoeg is om het gewas te zaaien of planten. Is de temperatuur blauw, dan is het nog te koud." />
+        <text name="ss_helpText_16_03" text="De tweede pagina is het instellingenmenu. Hier kan je de seizoenslengte (3/6/9/12/15/18/21/24 dagen per seizoen), seizoenmeldingen (aan/uit), sneeuwmodus (aan/uit/1-laag, sporen aan/uit), gewasvochtigheid (aan/uit) en temperatuureenheid (Celsius/Fahrenheit) wijzigen." />
 
         <text name="ss_helpTitle_17" text="HUD" />
-        <text name="ss_helpText_17_01" text="Een HUD links van de klok in de rechterbovenhoek toont informatie die relevant is voor Seasons. Het toont de huidige luchttemperatuur aan de bovenkant en grondtemperatuur aan de onderkant. De toestand van de grond (bevroren grond) en te vochtige gewassen (wetcrops) wordt ook links van deze HUD weergegeven." />
-        <text name="ss_helpText_17_02" text="Direct onder de klok is de seizoensperiode en de dag van het huidige seizoen weergegeven." />
-        <text name="ss_helpText_17_03" text="Wanneer geactiveerd, verschijnt de weersvoorspellings  HUD onder de klok in de rechterbovenhoek." />
-        <text name="ss_helpText_17_04" text="Wanneer het Help menu is geactiveerd (F1), wordt de onderhoudstimer bijna aan de onderkant weergegeven. Dit wordt alleen weergegeven wanneer u in een voertuig bent." />
+        <text name="ss_helpText_17_01" text="Een venster links van je klok in de rechterbovenhoek toont informatie over de temperatuur. De huidige luchttemperatuur lees je af aan de bovenkant, de bodemtemperatuur onderaan. Als de bodem bevroren is of je gewassen te vochtig zijn, verschijnen deze iconen links van dit venster." />
+        <text name="ss_helpText_17_02" text="Onmiddellijk onder de klok wordt de seizoensovergang en de dag van het huidige seizoen weergegeven." />
+        <text name="ss_helpText_17_03" text="Indien je de weersvoorspellingen activeert, worden ze getoond onder de klok in de rechterbovenhoek." />
+        <text name="ss_helpText_17_04" text="De onderhoudstimer van je voertuigen wordt onderaan het hulpvenster (F1) weergegeven." />
 
         <text name="ss_helpTitle_18" text="Diversen" />
-        <text name="ss_helpText_18_01" text="Als u niet in de nacht wilt werken, kunt u de nacht overslaan en gelijk naar de volgende morgen gaan. Nadat de avond valt en je bent te voet kunt u links Alt + N drukken om naar de ochtend over te slaan." />
-        <text name="ss_helpText_18_02" text="Als u besluit om de seizoenlengte te wijzigen in het midden van een bestaand spaarspel, wordt het aanbevolen 1) de seizoenlengte in de winter te wijzigen om ongewenste effecten op bestaande gewassen te verminderen en 2) het spel / de server opnieuw te starten na het seizoen te veranderen lengte." />
-        <text name="ss_helpText_18_03" text="Terwijl het is jouw spel om te spelen zoals je wilt, wordt het voorgesteld als een uitdaging om alleen te spelen met een 9-daags seizoen en 5x-versnelling.Op deze manier besteedt u de lente voor het cultiveren en planten van gewassen, verzorgen van gewassen en het maaien van gras in de zomer. Oogsten van gewassen en het ploegen van de velden in de herfst. Het verzorgen van dieren, machines, bossen en het verkopen van gewassen in de winter." />
+        <text name="ss_helpText_18_01" text="Als je 's nachts niet wil werken, kan je de nacht overslaan en doorgaan naar de volgende morgen. Nadat de avond valt, kan je met de toetsencombinatie Links Alt + N doorgaan naar de volgende dag." />
+        <text name="ss_helpText_18_02" text="Als je besluit om de seizoenslengte te wijzigen tijdens het spelen van een savegame, word je aanbevolen om dit in de winter te doen om ongewenste gevolgen op groeiende gewassen te verminderen. Het is ook aangeraden je spel of de multiplayerserver opnieuw op te starten." />
+        <text name="ss_helpText_18_03" text="Hoewel jij kiest hoe je het spel speelt, wordt er als uitdaging voorgesteld te spelen met een seizoen van 9 dagen en een 5x-tijdsversnelling. Zo besteed je de lente aan het cultiveren en zaaien of planten van gewassen. Het verzorgen van je gewassen en het grasmaaien gebeurt in de zomer. In de herfst oogst je en ploeg je de velden. Dieren, machines en bossen verzorgen vindt plaats in de winter, samen met het verkopen van je oogst." />
         <text name="ss_helpText_18_04" text="Alle voertuigen moeten handmatig gestart worden." />
     </texts>
 </l10n>
