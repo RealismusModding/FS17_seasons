@@ -248,13 +248,15 @@ if fileExists(path) then
     -- Act as if the contest mod is already loaded
     g_modIsLoaded["FS17Contest_Seasons"] = true
 
+    -- GameExtension overrides this function and tries to read from g_currentMission
+    -- which does not exist at this point.
+    local old = getfenv(0)["g_currentMission"]
+    getfenv(0)["g_currentMission"] = {}
+
     g_gui:showInfoDialog({
         text = ssLang.getText("SS_REMOVE_CONTEST_TEXT"),
         dialogType = DialogElement.TYPE_INFO
     })
-end
 
-
-InGameMenu.onClickVisitPlace = function (self, element)
-    log("Click Visit Place")
+    getfenv(0)["g_currentMission"] = old
 end
