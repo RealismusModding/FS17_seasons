@@ -73,8 +73,7 @@
 
         <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
 
-        <!-- Missing translation of "You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." -->
-        <text name="SS_REMOVE_CONTEST_TEXT" text="" />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Hemos detectado la presencia de la versión inicial de seasons en su carpeta de mods. Podrá evitar la repetición de este mensaje si la elimina" />
 
         <text name="SS_SEASON_INTRO_0" text="Una nueva temporada, nuevo periodo de siembra." />
         <text name="SS_SEASON_INTRO_1" text="El sol está ha pleno rendimiento, sus cosechas crecen." />
