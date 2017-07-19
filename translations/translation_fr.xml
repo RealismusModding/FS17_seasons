@@ -62,9 +62,8 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Solde insuffisant pour réparer!" />
         <text name="SS_VEHICLE_REPAIRED" text="%s Réparation effectuée %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
         <text name="SS_NOTHING_TO_REPAIR" text="Réparation nécessaire %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Réprarer %s pour %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Réparer %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Réparation requise" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Heures du moteur %.1f Heures L'entretien sera dans %d jours" />
         <text name="SS_REPAIR_DIALOG" text="Voulez-vous réparer %s le %s?" />
@@ -73,6 +72,8 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!" />
+
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Vous utilisez la version mise à jour de Seasons. Le jeu a detecté la version contest/concours dans votre dossier mod et l'a désactivé. Svp enlevez le de votre dossier mod pour ne plus voir ce message." />
 
         <text name="SS_SEASON_INTRO_0" text="Nouvelle année pour semer." />
         <text name="SS_SEASON_INTRO_1" text="Le soleil est haut, la récolte grandit." />

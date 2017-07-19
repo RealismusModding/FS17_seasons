@@ -14,6 +14,7 @@ g_seasons.baleManager = ssBaleManager
 ssBaleManager.MASK_RECT_WIDTH = 2 --2x2m
 
 source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
+source(g_seasons.modDir .. "src/events/ssBaleRotEvent.lua")
 
 function ssBaleManager:preLoad()
     Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
@@ -68,6 +69,8 @@ function ssBaleManager:reduceFillLevel()
                             local reductionFactor = self:calculateBaleReduction(bale)
 
                             bale.fillLevel = origFillLevel * reductionFactor
+
+                            ssBaleRotEvent:sendEvent(bale)
                         end
                     end
 
@@ -77,6 +80,8 @@ function ssBaleManager:reduceFillLevel()
                     local reductionFactor = self:calculateBaleReduction(bale)
 
                     bale.fillLevel = origFillLevel * reductionFactor
+
+                    ssBaleRotEvent:sendEvent(bale)
                 end
             end
         end

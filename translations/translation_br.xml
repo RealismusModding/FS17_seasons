@@ -59,11 +59,9 @@
         <text name="SS_VEHICLE_TAXES" text="Imposto veicular" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Manutenção Veicular" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparo Veicular" />
-
         <text name="SS_NOT_ENOUGH_MONEY" text="Você não tem dinheiro suficiente para manutenção deste veículo" />
         <text name="SS_VEHICLE_REPAIRED" text="Custo de manutenção para %s foi %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Nenhum veículo a ser reparado por %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Manter %s foi %s" />
         <text name="SS_REPAIR_REQUIRED" text="Manutenção requirida" />
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas trabalhadas ou %d dias faltando para manutenção" />
@@ -73,6 +71,8 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
 
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
+
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Você está rodando uma versão desatualizada do Seasons. Detectamos que a versão de ModConquest está em sua pasta de mods, e desativada. Por favor retire o arquivo da pasta de mods para apagar esta mensagem." />
 
         <text name="SS_SEASON_INTRO_0" text="Primavera chegou; flores e árvores floreiam. É tempo de cultivar e plantar seus campos." />
         <text name="SS_SEASON_INTRO_1" text="Os dias são mais longos no verão. É tempo de fazer feno e olhar os cultivos crescerem." />
@@ -210,7 +210,7 @@
         <text name="ss_helpTitle_16" text="Menu do Seasons" />
         <text name="ss_helpText_16_01" text="O Menu do Seasons é utilizado com referência para plantar e alterar preferências. Este menu pode ser acessado pressionando Alt esquerdo + S." />
         <text name="ss_helpText_16_02" text="Na primeira aba temos a tabela de crescimento. As temperaturas de germinação de todos os cultivos são mostradas na coluna esquerda. Case a temperatura de um cultivos esteja branco, está quente o suficiente para plantar aquele cultivo. Caso esteja azul, está muito frio." />
-        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3/6/9/12 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
+        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3-24 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />

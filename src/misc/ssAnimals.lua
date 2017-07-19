@@ -108,19 +108,42 @@ end
 
 function ssAnimals:updateTroughs()
     local season = g_seasons.environment:currentSeason()
+
+    -- Load vanilla dirtification types at latest possible time
+    -- to allow other mods to override them
+    if self.oldSheepDirt == nil then
+        self.oldSheepDirt = self:getDirtType("sheep")
+        self.oldCowDirt = self:getDirtType("cow")
+    end
+
     if season == g_seasons.environment.SEASON_WINTER then
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
 
-        self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
-        self:setDirtType("cow", FillUtil.FILLTYPE_FORAGE)
+        if self.oldSheepDirt == FillUtil.FILLTYPE_GRASS_WINDROW then
+            self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
+        end
+
+        if self.oldCowDirt == FillUtil.FILLTYPE_GRASS_WINDROW then
+            self:setDirtType("cow", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
+        end
     else
         self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
         self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
 
-        self:setDirtType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW)
-        self:setDirtType("cow", FillUtil.FILLTYPE_GRASS_WINDROW)
+        self:setDirtType("sheep", self.oldSheepDirt)
+        self:setDirtType("cow", self.oldCowDirt)
     end
+end
+
+function ssAnimals:getDirtType(animal)
+    local husbandry = g_currentMission.husbandries[animal]
+
+    if husbandry ~= nil then
+        return husbandry.dirtificationFillType
+    end
+
+    return nil
 end
 
 function ssAnimals:setDirtType(animal, fillType)

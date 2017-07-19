@@ -77,7 +77,6 @@
             <fruit fruitName="sunflower" normalGrowthState="2" normalGrowthMaxState="3" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="potato"    normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="6"> <!--mid summer to late summer-->
             <fruit fruitName="barley"  normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
@@ -89,7 +88,6 @@
             <fruit fruitName="potato"    normalGrowthState="3" normalGrowthMaxState="5" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="sugarBeet" normalGrowthState="3" normalGrowthMaxState="5" setGrowthState="1" desiredGrowthState="CUT"/>
             <fruit fruitName="grass" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="7"> <!--late summer to early autumn-->
             <fruit fruitName="barley"  normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>

@@ -73,6 +73,8 @@
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
 
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Używasz zaktualizowanej wersji modu Seasons. Gra wykryła wersję konkursową w folderze modów i ją wyłączyła. Usuń starszą wersję z folderu modów, aby ukryć ten komunikat." />
+
         <text name="SS_SEASON_INTRO_0" text="Rozpoczęła się wiosna, kwitną kwiaty i drzewa. To czas uprawy i zasiewu twoich pól." />
         <text name="SS_SEASON_INTRO_1" text="W lecie dni są długie i ciepłe. To odpowiedni czas, aby robić siano i obserwować wzrost zbóż." />
         <text name="SS_SEASON_INTRO_2" text="Liście żółkną i robi się chłodniej - nadeszła jesień. Zbierz swoje zboża przed nadejściem zimy." />
@@ -209,7 +211,7 @@
         <text name="ss_helpTitle_16" text="Menu modu Seasons" />
         <text name="ss_helpText_16_01" text="Menu modu Seasons zawiera przewodnik zasiewów oraz ustawienia modu Seasons. To menu otwierane jest za pomocą Lewego Alt + S." />
         <text name="ss_helpText_16_02" text="Pierwsza strona zawiera tabelę z okresami zasiewów i zbiorów. Temperatury kiełkowania wszystkich zbóż znajdują się po lewej stronie tabeli. Jeśli temperatura obok zboża jest w kolorze białym, oznacza to, że jest wystarczająco ciepło do jego zasiewu. Jeśli temperatura jest w kolorze niebieskim, znaczy, że jest za zimno." />
-        <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Zawiera ona długość sezonu (3/6/9/12 dniowy sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady na śniegu wł/wył), wilgotność zbóż (wł/wył) i skala temperatura (C/F), wszystkie te ustawienia można zmieniać." />
+        <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Zawiera ona długość sezonu (3-24 dni na sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady na śniegu wł/wył), wilgotność zbóż (wł/wył) i skala temperatura (C/F), wszystkie te ustawienia można zmieniać." />
 
         <text name="ss_helpTitle_17" text="Interfejs" />
         <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (wilgotne zboża - ikona Wet Crop/zamarznięta gleba - ikona  Frozen ground) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />

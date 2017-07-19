@@ -61,7 +61,7 @@ end
 
 function ssEnvironment:load(savegame, key)
     self.daysInSeason = Utils.clamp(ssXMLUtil.getInt(savegame, key .. ".settings.daysInSeason", 9), 3, self.MAX_DAYS_IN_SEASON)
-    self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", 0)
+    self.latestSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestSeason", self.SEASON_SPRING)
     self.latestTransition = ssXMLUtil.getInt(savegame, key .. ".environment.latestTransition", 1)
     self.currentDayOffset = ssXMLUtil.getInt(savegame, key .. ".environment.currentDayOffset_DO_NOT_CHANGE", -(g_currentMission.environment.currentDay - 1))
     self.latestVisualSeason = ssXMLUtil.getInt(savegame, key .. ".environment.latestVisualSeason", self.latestSeason)
@@ -90,8 +90,6 @@ function ssEnvironment:loadMap(name)
     for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do
         self:loadLatitudeCategoriesFromXML(path)
     end
-
-    print_r(self.latitudeCategories)
 
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)

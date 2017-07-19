@@ -62,8 +62,7 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu reparieren!" />
         <text name="SS_VEHICLE_REPAIRED" text="%s wurde repariert für %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur benötigt für %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparatur benötigt!" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen." />
@@ -74,6 +73,8 @@
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Du verwendest die aktualisierte Version von Seasons. Das Spiel erkannte die Contest-Version in Deinem Mods-Ordner und wurde deaktiviert. Bitte entferne sie aus Deinem Mods-Ordner, um diese Nachricht zu verbergen." />
+
         <text name="SS_SEASON_INTRO_0" text="Ein neues Jahr hat begonnen. Der Frühling steht in den Startlöchern. Diese Zeit solltest Du für die Aussaat nutzen und mit der Düngung beginnen. Beachte die Aussaatzeiten, jede Pflanze hat einen anderen Zyklus." />
         <text name="SS_SEASON_INTRO_1" text="Der Sommer hat begonnen und die Pflanzen wachsen. Es ist ratsam während dieser Zeit die nötigen Düngearbeiten durchzuführen und Dich auf die kommende Erntezeit einzustellen. Beachte immer die möglichen Erntezeiten." />
         <text name="SS_SEASON_INTRO_2" text="Die Erntezeit ist bereits im vollen Gange. Bis zum Winter solltest Du alle Felder abgeerntet haben." />
@@ -83,7 +84,7 @@
 
         <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab!" />
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind!" />
-        <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben in (%d) Tagen" />
+        <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben. (%d) Tiere sind bereits verstorben" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend" />
         <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
 
@@ -210,7 +211,7 @@
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
         <text name="ss_helpText_16_02" text="Die erste Seite beinhaltet alle wichtigen Daten zum Thema Aussaat- und Erntezeit. Auf der linken Seite hinter den jeweiligen Pflanzenarten werden die benötigten Bodentemperaturen für die Aussaat angegeben. Wird diese Zahl in 'blau' dargestellt, ist der Boden noch zu kalt. Ist die Temperatur in 'weiß' angegeben, hat der Boden die richtigen Temperatur und eine Aussaat ist möglich." />
-        <text name="ss_helpText_16_03" text="Auf der zweiten Seite befinden sich einige Einstellmöglichkeiten: Hilfefenster an/aus, Tastenbelegungen anzeigen an/aus, Temperatureinheit Celsius/Fahrenheit, Jahreszeit-Dauer 3/6/9/12 Tage, Schnee an/aus, Schneespuren an/aus, Ernten bei Feuchtigkeit an/aus." />
+        <text name="ss_helpText_16_03" text="Auf der zweiten Seite befinden sich einige Einstellmöglichkeiten: Hilfefenster an/aus, Tastenbelegungen anzeigen an/aus, Temperatureinheit Celsius/Fahrenheit, Jahreszeit-Dauer 3-24 Tage, Schnee an/aus, Schneespuren an/aus, Ernten bei Feuchtigkeit an/aus." />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />

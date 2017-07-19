@@ -2,113 +2,420 @@
 -- TEXTURE REPLACEMENTS
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  New textures for visual seasons
--- Authors:  mrbear, reallogger
+-- Authors:  mrbear, reallogger, Rahkiin
 --
 -- Copyright (c) Realismus Modding, 2017
 --------------------------------------------------------------------------------------------------->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
-<textures overwrite="true" materialHolder="../resources/replacementTextures/replacementTexturesMaterialHolder.i3d">
+<textures overwrite="true" materialHolder="../resources/replacementTextures/materialHolder.i3d">
     <seasons>
         <spring>
-            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_spring" />
-            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_spring" />
-            <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_spring" />
-            <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_spring" />
-            <texture shapeName="bush05" secondaryNodeName="bush05" to="ssTr_bushes_spring" />
-            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="ssTr_treeBranch_spring" />
-            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_spring" />
-            <texture shapeName="bush06" secondaryNodeName="bush06" to="ssTr_treeBranch_spring" />
-            <texture shapeName="bush07" secondaryNodeName="bush07" to="ssTr_treeBranch_spring" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage6" secondaryNodeName="attachments" to="ssTr_birchBranch_spring" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="ssTr_birch1LOD_spring" />
-            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="ssTr_birch2LOD_spring" />
-            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="ssTr_birch3LOD_spring" />
-            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="ssTr_birch4LOD_spring" />
-            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="ssTr_birch5LOD_spring" />
-            <texture shapeName="birch_stage6" secondaryNodeName="LOD1" to="ssTr_birch6LOD_spring" />
-            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="ssTr_oakBranch_spring" />
-            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="ssTr_oak4LOD_spring" />
-            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_spring" />
-            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_spring" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_spring" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_spring" />
-            
-            <!-- Sosnovka -->
-            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="ssTr_poplarBranch_spring" />
-            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_spring" />
+            <!-- Bushes and small trees -->
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_spring" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_spring" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_spring" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_spring" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_spring" />
+
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_spring" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_spring" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_spring" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_spring" />
+
+            <!-- Birch -->
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_spring" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="birch1LOD_spring" />
+
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="birchBranch_spring" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="birch2LOD_spring" />
+
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="birchBranch_spring" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="birch3LOD_spring" />
+
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="birchBranch_spring" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="birch4LOD_spring" />
+
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="birchBranch_spring" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="birch5LOD_spring" />
+
+            <texture shapeName="birch_stage6" secondaryNodeName="attachments" to="birchBranch_spring" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD1" to="birch6LOD_spring" />
+
+            <!-- Maple -->
+            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="mapleBranch_spring" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD0" to="mapleTrunk_any" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="maple5LOD_spring" />
+
+            <!-- Oak -->
+            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="oakBranch_spring" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="oak4LOD_spring" />
+
+            <!-- Pine -->
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD1" to="pine1LOD_any" />
+
+            <texture shapeName="pine_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD1" to="pine2LOD_any" />
+
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD1" to="pine3LOD_any" />
+
+            <texture shapeName="pine_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD1" to="pine4LOD_any" />
+
+            <texture shapeName="pine_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD1" to="pine5LOD_any" />
+
+            <texture shapeName="pine_stage6" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD0" to="pineTrunkDead_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD1" to="pine6LOD_any" />
+
+            <!-- Spruce -->
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD1" to="spruce1LOD_any" />
+
+            <texture shapeName="spruce_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD1" to="spruce2LOD_any" />
+
+            <texture shapeName="spruce_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD1" to="spruce3LOD_any" />
+
+            <texture shapeName="spruce_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD1" to="spruce4LOD_any" />
+
+            <texture shapeName="spruce_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD1" to="spruce5LOD_any" />
+
+            <!-- Poplar -->
+            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="poplarBranch_spring" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="poplar5LOD_spring" />
+
+            <!-- Poplar for old Goldcrest Valley -->
+            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="poplarBranch_spring" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="poplar5LOD_spring" />
         </spring>
 
         <summer>
+            <!-- Bushes and small trees -->
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_summer" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_summer" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_summer" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_summer" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_summer" />
+
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_summer" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_summer" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_summer" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_summer" />
+
+            <!-- Birch -->
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_summer" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="birch1LOD_summer" />
+
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="birchBranch_summer" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="birch2LOD_summer" />
+
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="birchBranch_summer" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="birch3LOD_summer" />
+
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="birchBranch_summer" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="birch4LOD_summer" />
+
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="birchBranch_summer" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="birch5LOD_summer" />
+
+            <texture shapeName="birch_stage6" secondaryNodeName="attachments" to="birchBranch_summer" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD1" to="birch6LOD_summer" />
+
+            <!-- Maple -->
+            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="mapleBranch_summer" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD0" to="mapleTrunk_any" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="maple5LOD_summer" />
+
+            <!-- Oak -->
+            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="oakBranch_summer" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="oak4LOD_summer" />
+
+            <!-- Pine -->
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD1" to="pine1LOD_any" />
+
+            <texture shapeName="pine_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD1" to="pine2LOD_any" />
+
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD1" to="pine3LOD_any" />
+
+            <texture shapeName="pine_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD1" to="pine4LOD_any" />
+
+            <texture shapeName="pine_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD1" to="pine5LOD_any" />
+
+            <texture shapeName="pine_stage6" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD0" to="pineTrunkDead_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD1" to="pine6LOD_any" />
+
+            <!-- Spruce -->
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD1" to="spruce1LOD_any" />
+
+            <texture shapeName="spruce_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD1" to="spruce2LOD_any" />
+
+            <texture shapeName="spruce_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD1" to="spruce3LOD_any" />
+
+            <texture shapeName="spruce_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD1" to="spruce4LOD_any" />
+
+            <texture shapeName="spruce_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD1" to="spruce5LOD_any" />
+
+            <!-- Poplar -->
+            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="poplarBranch_summer" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="poplar5LOD_summer" />
+
+            <!-- Poplar for old Goldcrest Valley -->
+            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="poplarBranch_summer" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="poplar5LOD_summer" />
         </summer>
 
         <autumn>
-            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_autumn" />
-            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_autumn" />
-            <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_autumn" />
-            <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_autumn" />
-            <texture shapeName="bush05" secondaryNodeName="bush05" to="ssTr_bushes_autumn" />
-            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="ssTr_treeBranch_autumn" />
-            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_autumn" />
-            <texture shapeName="bush06" secondaryNodeName="bush06" to="ssTr_treeBranch_autumn" />
-            <texture shapeName="bush07" secondaryNodeName="bush07" to="ssTr_treeBranch_autumn" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="ssTr_birchBranch_autumn" />
-            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
-            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
-            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
-            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="ssTr_birchBranch_autumn" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="ssTr_birch1LOD_autumn" />
-            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="ssTr_birch2LOD_autumn" />
-            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="ssTr_birch3LOD_autumn" />
-            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="ssTr_birch4LOD_autumn" />
-            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="ssTr_birch5LOD_autumn" />
-            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="ssTr_oakBranch_autumn" />
-            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="ssTr_oak4LOD_autumn" />
-            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_autumn" />
-            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_autumn" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_autumn" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_autumn" />
-            
-            <!-- Sosnovka -->
-            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="ssTr_poplarBranch_autumn" />
-            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_autumn" />
+            <!-- Bushes and small trees -->
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_autumn" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_autumn" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_autumn" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_autumn" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_autumn" />
+
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_autumn" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_autumn" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_autumn" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_autumn" />
+
+            <!-- Birch -->
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="birch1LOD_autumn" />
+
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="birch2LOD_autumn" />
+
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="birch3LOD_autumn" />
+
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="birch4LOD_autumn" />
+
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="birch5LOD_autumn" />
+
+            <texture shapeName="birch_stage6" secondaryNodeName="attachments" to="birchBranch_autumn" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD1" to="birch6LOD_autumn" />
+
+            <!-- Maple -->
+            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="mapleBranch_autumn" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD0" to="mapleTrunk_any" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="maple5LOD_autumn" />
+
+            <!-- Oak -->
+            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="oakBranch_autumn" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="oak4LOD_autumn" />
+
+            <!-- Pine -->
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD1" to="pine1LOD_any" />
+
+            <texture shapeName="pine_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD1" to="pine2LOD_any" />
+
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD1" to="pine3LOD_any" />
+
+            <texture shapeName="pine_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD1" to="pine4LOD_any" />
+
+            <texture shapeName="pine_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD1" to="pine5LOD_any" />
+
+            <texture shapeName="pine_stage6" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD0" to="pineTrunkDead_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD1" to="pine6LOD_any" />
+
+            <!-- Spruce -->
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD1" to="spruce1LOD_any" />
+
+            <texture shapeName="spruce_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD1" to="spruce2LOD_any" />
+
+            <texture shapeName="spruce_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD1" to="spruce3LOD_any" />
+
+            <texture shapeName="spruce_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD1" to="spruce4LOD_any" />
+
+            <texture shapeName="spruce_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD1" to="spruce5LOD_any" />
+
+            <!-- Poplar -->
+            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="poplarBranch_autumn" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="poplar5LOD_autumn" />
+
+            <!-- Poplar for old Goldcrest Valley -->
+            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="poplarBranch_autumn" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="poplar5LOD_autumn" />
         </autumn>
 
         <winter>
-            <texture shapeName="bush01" secondaryNodeName="bush01" to="ssTr_bushes_winter" />
-            <texture shapeName="bush02" secondaryNodeName="bush02" to="ssTr_bushes_winter" />
-            <texture shapeName="bush03" secondaryNodeName="bush03" to="ssTr_bushes_winter" />
-            <texture shapeName="bush04" secondaryNodeName="bush04" to="ssTr_bushes_winter" />
-            <texture shapeName="bush05" secondaryNodeName="bush05" to="ssTr_bushes_winter" />
-            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="ssTr_treeBranch_winter" />
-            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="ssTr_treeBranch_winter" />
-            <texture shapeName="bush06" secondaryNodeName="bush06" to="ssTr_treeBranch_winter" />
-            <texture shapeName="bush07" secondaryNodeName="bush07" to="ssTr_treeBranch_winter" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="ssTr_birchBranch_winter" />
-            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
-            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
-            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
-            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="ssTr_birchBranch_winter" />
-            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="ssTr_birch1LOD_winter" />
-            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="ssTr_birch2LOD_winter" />
-            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="ssTr_birch3LOD_winter" />
-            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="ssTr_birch4LOD_winter" />
-            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="ssTr_birch5LOD_winter" />
-            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="ssTr_oakBranch_winter" />
-            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="ssTr_oak4LOD_winter" />
-            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="ssTr_mapleBranch_winter" />
-            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="ssTr_maple5LOD_winter" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="ssTr_poplarBranch_winter" />
-            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_winter" />
-            
-            <!-- Sosnovka -->
-            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="ssTr_poplarBranch_winter" />
-            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="ssTr_poplar5LOD_winter" />
+            <!-- Bushes and small trees -->
+            <texture shapeName="bush01" secondaryNodeName="bush01" to="bushes_winter" />
+            <texture shapeName="bush02" secondaryNodeName="bush02" to="bushes_winter" />
+            <texture shapeName="bush03" secondaryNodeName="bush03" to="bushes_winter" />
+            <texture shapeName="bush04" secondaryNodeName="bush04" to="bushes_winter" />
+            <texture shapeName="bush05" secondaryNodeName="bush05" to="bushes_winter" />
+
+            <texture shapeName="tree4m" secondaryNodeName="tree4m" to="treeBranch_winter" />
+            <texture shapeName="tree5m" secondaryNodeName="tree5m" to="treeBranch_winter" />
+            <texture shapeName="bush06" secondaryNodeName="bush06" to="treeBranch_winter" />
+            <texture shapeName="bush07" secondaryNodeName="bush07" to="treeBranch_winter" />
+
+            <!-- Birch -->
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD0" to="birchBranch_winter" />
+            <texture shapeName="birch_stage1" secondaryNodeName="LOD1" to="birch1LOD_winter" />
+
+            <texture shapeName="birch_stage2" secondaryNodeName="attachments" to="birchBranch_winter" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage2" secondaryNodeName="LOD1" to="birch2LOD_winter" />
+
+            <texture shapeName="birch_stage3" secondaryNodeName="attachments" to="birchBranch_winter" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage3" secondaryNodeName="LOD1" to="birch3LOD_winter" />
+
+            <texture shapeName="birch_stage4" secondaryNodeName="attachments" to="birchBranch_winter" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage4" secondaryNodeName="LOD1" to="birch4LOD_winter" />
+
+            <texture shapeName="birch_stage5" secondaryNodeName="attachments" to="birchBranch_winter" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage5" secondaryNodeName="LOD1" to="birch5LOD_winter" />
+
+            <texture shapeName="birch_stage6" secondaryNodeName="attachments" to="birchBranch_winter" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD0" to="birchTrunk_any" />
+            <texture shapeName="birch_stage6" secondaryNodeName="LOD1" to="birch6LOD_winter" />
+
+            <!-- Maple -->
+            <texture shapeName="maple_stage5" secondaryNodeName="attachments" to="mapleBranch_winter" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD0" to="mapleTrunk_any" />
+            <texture shapeName="maple_stage5" secondaryNodeName="LOD1" to="maple5LOD_winter" />
+
+            <!-- Oak -->
+            <texture shapeName="oak_stage4" secondaryNodeName="attachments" to="oakBranch_winter" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="oak_stage4" secondaryNodeName="LOD1" to="oak4LOD_winter" />
+
+            <!-- Pine -->
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="pine_stage1" secondaryNodeName="LOD1" to="pine1LOD_any" />
+
+            <texture shapeName="pine_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage2" secondaryNodeName="LOD1" to="pine2LOD_any" />
+
+            <texture shapeName="pine_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage3" secondaryNodeName="LOD1" to="pine3LOD_any" />
+
+            <texture shapeName="pine_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage4" secondaryNodeName="LOD1" to="pine4LOD_any" />
+
+            <texture shapeName="pine_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD0" to="pineTrunk_any" />
+            <texture shapeName="pine_stage5" secondaryNodeName="LOD1" to="pine5LOD_any" />
+
+            <texture shapeName="pine_stage6" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD0" to="pineTrunkDead_any" />
+            <texture shapeName="pine_stage6" secondaryNodeName="LOD1" to="pine6LOD_any" />
+
+            <!-- Spruce -->
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD0" to="pineBranch_any" />
+            <texture shapeName="spruce_stage1" secondaryNodeName="LOD1" to="spruce1LOD_any" />
+
+            <texture shapeName="spruce_stage2" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage2" secondaryNodeName="LOD1" to="spruce2LOD_any" />
+
+            <texture shapeName="spruce_stage3" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage3" secondaryNodeName="LOD1" to="spruce3LOD_any" />
+
+            <texture shapeName="spruce_stage4" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage4" secondaryNodeName="LOD1" to="spruce4LOD_any" />
+
+            <texture shapeName="spruce_stage5" secondaryNodeName="attachments" to="pineBranch_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD0" to="spruceTrunk_any" />
+            <texture shapeName="spruce_stage5" secondaryNodeName="LOD1" to="spruce5LOD_any" />
+
+            <!-- Poplar -->
+            <texture shapeName="poplar_stage5" secondaryNodeName="attachments" to="poplarBranch_winter" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_stage5" secondaryNodeName="LOD1" to="poplar5LOD_winter" />
+
+            <!-- Poplar for old Goldcrest Valley -->
+            <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="poplarBranch_winter" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD0" to="oakTrunk_any" />
+            <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="poplar5LOD_winter" />
 
             <foliageLayer name="grass" to="grass_winter" />
         </winter>
