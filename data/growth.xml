@@ -41,7 +41,7 @@
             <fruit fruitName="potato"    normalGrowthState="1"/>
             <fruit fruitName="sugarBeet" normalGrowthState="1"/>
             <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="grass" normalGrowthState="1" setGrowthState="2" setGrowthMaxState="MAX_STATE" desiredGrowthState="3"/>
+            <fruit fruitName="grass" normalGrowthState="1" setGrowthState="2" desiredGrowthState="3"/>
             <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="3"> <!--mid spring to late spring-->
