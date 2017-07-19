@@ -212,7 +212,7 @@
         <text name="ss_helpTitle_16" text="Menú Seasons" />
         <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
         <text name="ss_helpText_16_02" text="La primera página es una guía para plantar y cosechar. Las temperaturas de germinación de todos los cultivos se muestran a la izquierda del gráfico. Si la temperatura al lado de un cultivo es blanca, significa que es lo suficientemente caliente para plantar ese cultivo en particular. Si la temperatura es azul, hace demasiado frío." />
-        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3/6/9/12/ días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
+        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3-24 días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />

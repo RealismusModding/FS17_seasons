@@ -211,7 +211,7 @@
         <text name="ss_helpTitle_16" text="Seasons-menu" />
         <text name="ss_helpText_16_01" text="Raadpleeg het Seasons-menu om te weten wanneer je kan zaaien en oogsten, of om de instellingen van je seizoenen te wijzingen. Dit menu activeer je met de toetsencombinatie Links Alt + S." />
         <text name="ss_helpText_16_02" text="De eerste pagina van het menu helpt je met de zaai- en oogstperiodes van de verschillende gewassen. De ontkiemingstemperaturen worden aan de linkerkant van de grafiek getoond. Als een temperatuur naast een gewas wit is, wil dit zeggen dat het warm genoeg is om het gewas te zaaien of planten. Is de temperatuur blauw, dan is het nog te koud." />
-        <text name="ss_helpText_16_03" text="De tweede pagina is het instellingenmenu. Hier kan je de seizoenslengte (3/6/9/12/15/18/21/24 dagen per seizoen), seizoenmeldingen (aan/uit), sneeuwmodus (aan/uit/1-laag, sporen aan/uit), gewasvochtigheid (aan/uit) en temperatuureenheid (Celsius/Fahrenheit) wijzigen." />
+        <text name="ss_helpText_16_03" text="De tweede pagina is het instellingenmenu. Hier kan je de seizoenslengte (3-24 dagen per seizoen), seizoenmeldingen (aan/uit), sneeuwmodus (aan/uit/1-laag, sporen aan/uit), gewasvochtigheid (aan/uit) en temperatuureenheid (Celsius/Fahrenheit) wijzigen." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Een venster links van je klok in de rechterbovenhoek toont informatie over de temperatuur. De huidige luchttemperatuur lees je af aan de bovenkant, de bodemtemperatuur onderaan. Als de bodem bevroren is of je gewassen te vochtig zijn, verschijnen deze iconen links van dit venster." />

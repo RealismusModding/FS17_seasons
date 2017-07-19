@@ -213,7 +213,7 @@
         <text name="ss_helpTitle_16" text="Menu do Seasons" />
         <text name="ss_helpText_16_01" text="O Menu do Seasons é utilizado com referência para plantar e alterar preferências. Este menu pode ser acessado pressionando Alt esquerdo + S." />
         <text name="ss_helpText_16_02" text="Na primeira aba temos a tabela de crescimento. As temperaturas de germinação de todos os cultivos são mostradas na coluna esquerda. Case a temperatura de um cultivos esteja branco, está quente o suficiente para plantar aquele cultivo. Caso esteja azul, está muito frio." />
-        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3/6/9/12 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
+        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3-24 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />

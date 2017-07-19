@@ -212,7 +212,7 @@
         <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="Menu Seasons se používá jako referenční příručka pro výsadbu a změnu nastavení souvisejících se sezónními obdobími. Toto menu je aktivováno levým Alt + S." />
         <text name="ss_helpText_16_02" text="První stránka je váš průvodce okno pro výsadbu a sklizeň.Teploty klíčení všech plodin jsou uvedeny vlevo od grafu. Pokud je teplota vedle plodiny bílá, znamená to, že je dostatečné teplo na to, aby jste tuto plodinu vypěstovali. Pokud je teplota modrá, je příliš chladno." />
-        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3/6/9/12 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstvá, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
+        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3-24 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstvá, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje aktuální teplotu vzduchu na horní a dolní teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />

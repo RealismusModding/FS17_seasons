@@ -211,7 +211,7 @@
         <text name="ss_helpTitle_16" text="Seasons menü" />
         <text name="ss_helpText_16_01" text="A Seasons menüben találhatsz leírást is, és megváltoztathatod a Seasons beállításait. Ezt a menüt a Left Alt + S gombbal tudod megnyitni." />
         <text name="ss_helpText_16_02" text="Az első oldal átvezet a vetési és aratási ablakokon. A növények csírázási hőmérsékletét a bal oldalon találod. Ha a hőmérséklet a növény mellett fehér, az megfelelő meleget jelent. Ha kék, a környezet túl hideg." />
-        <text name="ss_helpText_16_03" text="A második oldal a beállítások menüje. Itt tudod beállítani a szezon hosszát (3/6/9/12 napos szezon), szezon értesítéseket, a havazást (be / ki / 1-rétegű / keréknyomok be/ki), növény nedvességet (be/ki) és a hőmérséklet skálát (Celsius/Fahrenheit)." />
+        <text name="ss_helpText_16_03" text="A második oldal a beállítások menüje. Itt tudod beállítani a szezon hosszát (3-24 napos szezon), szezon értesítéseket, a havazást (be / ki / 1-rétegű / keréknyomok be/ki), növény nedvességet (be/ki) és a hőmérséklet skálát (Celsius/Fahrenheit)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUDot balra az órától a jobb felső sarokban találod, és a Seasons-al kapcsolatban látsz információkat. Felül mutatja a levegő, alul pedig a föld hőmérsékletét. A föld állapota (nedves növények / fagyott talaj) is itt van kiírva a bal oldalon." />
