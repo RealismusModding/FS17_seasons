@@ -48,7 +48,11 @@ function ssMain:preLoad()
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
-    TourIcons.showTourDialog = self.inj_disableShowTourDialog
+
+    -- Disable the tutorial by clearing showTourDialog
+    -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
+    -- is already called.
+    TourIcons.showTourDialog = function () end
 end
 
 ----------------------------
@@ -256,11 +260,4 @@ function ssMain.inj_disableMenuOptions(self)
 
     self.motorStartElement:setIsChecked(false)
     self.motorStartElement:setDisabled(true)
-end
-
--- Disable the tutorial by clearing showTourDialog
--- This has to be here so it is loaded early before the map is loaded. Otherwise the method
--- is already called.
-function ssMain.inj_disableShowTourDialog()
-    return
 end
