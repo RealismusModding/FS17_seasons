@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>fcelsa, theSeb, zed636</translationContributors>
+    <translationContributors>fcelsa, theSeb, zed636, *TurboStar*</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Mosta previsioni del tempo" />
-        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara Veicolo" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostra previsioni del tempo" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara veicolo" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distanza piantatrice (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Salta la notte" />
@@ -62,8 +62,7 @@
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Non hai abbastanza soldi per ripararlo" />
         <text name="SS_VEHICLE_REPAIRED" text="%s riparato per %s" />
-        <!-- Missing translation of "No repair needed for %s" -->
-        <text name="SS_NOTHING_TO_REPAIR" text="" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Nessuna riparazione necessaria per %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Ripara %s per %s" />
         <text name="SS_REPAIR_REQUIRED" text="Riparazioni necessarie" />
         <text name="SS_REPAIR_REQUIRED_IN" text="Manutenzione necessaria entro %.1f ore motore o %d giorni" />
@@ -74,13 +73,13 @@
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
-        <!-- Missing translation of "You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." -->
-        <text name="SS_REMOVE_CONTEST_TEXT" text="" />
 
-        <text name="SS_SEASON_INTRO_0" text="E' arrivata la primavera; fioriscono alberi e fiori. È il momento di coltivare e seminare i tuoi campi." />
-        <text name="SS_SEASON_INTRO_1" text="In estate i giorni diventano lunghi e caldi. Per le colture è tempo di fienagione e di crescita ." />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Stai utilizzando la versione aggiornata di Season. Il gioco ha rilevato e disattivato la versione del contest presente nella tua cartella mods. Si prega di eliminarla dalla cartella mods per nascondere questo messaggio." />
+
+        <text name="SS_SEASON_INTRO_0" text="È arrivata la primavera; fioriscono alberi e fiori. È il momento di coltivare e seminare i tuoi campi." />
+        <text name="SS_SEASON_INTRO_1" text="In estate i giorni diventano lunghi e caldi. Per le colture è tempo di fienagione e di crescita." />
         <text name="SS_SEASON_INTRO_2" text="Le foglie stanno ingiallendo e fa sempre più freddo, l'autunno è arrivato. Assicuratevi di raccogliere tutte le colture prima che arrivi l'inverno." />
-        <text name="SS_SEASON_INTRO_3" text="L'inverno è arrivato e gli animali hanno bisogno di più cure. Il terreno si ghiaccerà perciò non puoi lavorare i tuoi campi. E' tempo per la silvicoltura e per spalare la neve." />
+        <text name="SS_SEASON_INTRO_3" text="L'inverno è arrivato e gli animali hanno bisogno di più cure. Il terreno si ghiaccerà perciò non puoi lavorare i tuoi campi. È tempo per la silvicoltura e per spalare la neve." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Non visualizzarlo più" />
 
@@ -161,7 +160,7 @@
         <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. Le colture seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di semina e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture sono trebbiabili solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
         <text name="ss_helpText_06_04" text="Una volta che una coltura escluso radici raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menu Esc, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
-        <text name="ss_helpText_06_05" text="E' ancora possibile trinciare colture verdi." />
+        <text name="ss_helpText_06_05" text="È ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
         <text name="ss_helpText_07_01" text="La crescita delle colture ora è molto più lunga. Può essere necessario fino sei mesi per raggiungere la fase di raccolto." />
@@ -176,7 +175,7 @@
 
         <text name="ss_helpTitle_09" text="Colture - Piante" />
         <text name="ss_helpText_09_01" text="Gli alberi richiedono più tempo per raggiungere il loro stato di piena maturazione. Gli alberi piantabili richiederanno 5 anni di gioco per essere completamente maturi e dopo 2 anni possono essere tagliati." />
-        <text name="ss_helpText_09_02" text="Gli alberi inibiscono la crescita di altri alberi se sono stati piantati troppo vicini. Per riavviare la crescita dell'albero bisogna tagliare gli alberi." />
+        <text name="ss_helpText_09_02" text="Gli alberi inibiscono la crescita di altri alberi se sono stati piantati troppo vicini. Per riavviare la crescita dell'albero bisogna tagliare gli altri alberi." />
 
         <text name="ss_helpTitle_10" text="Colture - Effetti climatici" />
         <text name="ss_helpText_10_01" text="Pioggia, grandine e neve influenzano i livelli di umidità delle colture. Se l'umidità delle colture è al di sopra di un determinato punto a causa del maltempo, non sarai in grado di trebbiare i tuoi raccolti. Umidità nelle notti d'estate può verificarsi senza preavviso." />
@@ -192,7 +191,7 @@
 
         <text name="ss_helpTitle_12" text="Economia" />
         <text name="ss_helpText_12_01" text="Il limite di prestito è stato modificato da $CURRENCY_SYMBOL200.000 al 30% dei vostri valori di proprietà terriera e edifici posizionabili. Il limite di prestito minimo è di $CURRENCY_SYMBOL300.000 e il limite di prestito massimo è di $CURRENCY_SYMBOL1.500.000." />
-        <text name="ss_helpText_12_02" text="I redditi da missioni sono stati ridotti. Guadagnerai circa 5 volte di più rispetto all'aiutante che lavora nello stesso campo." />
+        <text name="ss_helpText_12_02" text="I redditi da missioni sono stati modificati. Guadagnerai circa 5 volte di più rispetto all'aiutante che lavora nello stesso campo." />
         <text name="ss_helpText_12_03" text="La manutenzione di tutti i veicoli (oltre alla manutenzione periodica) include la manutenzione e le tasse rispetto a quanto è stato usato. Pulire i macchinari ridurrà anche i costi di manutenzione. Macchinari non utilizzati avranno anche i loro costi di manutenzione ridotti." />
         <text name="ss_helpText_12_04" text="I prezzi delle colture fluttuano con i cambiamenti nelle stagioni in modo più realistico." />
 
@@ -210,10 +209,10 @@
         <text name="ss_helpText_15_02" text="La lana viene prodotta solo in primavera e in estate." />
         <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle vacche al massimo all'80%. Tuttavia, Seasons aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
 
-        <text name="ss_helpTitle_16" text="Menu' Seasons" />
+        <text name="ss_helpTitle_16" text="Menù Seasons" />
         <text name="ss_helpText_16_01" text="Il menu Seasons viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative a Seasons. Questo menu è attivato con Alt sinistro + S." />
         <text name="ss_helpText_16_02" text="La prima pagina è la tua guida per le finestre di piantagione e di trebbiatura. Le temperature di germinazione di tutte le colture sono mostrate sulla sinistra del grafico. Se il colore della temperatura accanto a una coltura è bianco, significa che è abbastanza caldo per piantare quella coltura particolare. Se invece la temperatura è blu, è troppo freddo." />
-        <text name="ss_helpText_16_03" text="La seconda pagina è il menu delle impostazioni. Qui si può cambiare la lunghezza della stagione (3-24 giorni stagione), le notifiche delle stagioni (attiva/disattiva), la modalità neve (attiva/disattiva/solo 1-strato, tracce attive/disattive), l'umidità della colture (attiva/disattiva) e scala termometrica (C/F)." />
+        <text name="ss_helpText_16_03" text="La seconda pagina è il menu delle impostazioni. Qui si può cambiare la lunghezza della stagione (da 3 a 24 giorni per stagione), le notifiche delle stagioni (attiva/disattiva), la modalità neve (attiva/disattiva/solo 1-strato, tracce attive/disattive), l'umidità della colture (attiva/disattiva) e scala termometrica (C/F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons. Mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno ghiacciato) verrà visualizzato a sinistra di questo HUD." />
