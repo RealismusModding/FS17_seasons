@@ -233,6 +233,8 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
                 self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
+        
+        self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] = {}
     end  -- end of for index, fruit in pairs(g_currentMission.fruits) do
 end
 
