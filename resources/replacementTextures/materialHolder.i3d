@@ -104,6 +104,8 @@
         <File fileId="909" filename="winter/mapleBranch_normal.dds" relativePath="true" />
         <File fileId="910" filename="winter/oak4LOD_normal.dds" relativePath="true" />
         <File fileId="911" filename="winter/oakBranch_normal.dds" relativePath="true" />
+        <File fileId="912" filename="winter/poplar5LOD_normal.dds" relativePath="true" />
+        <File fileId="913" filename="winter/poplarBranch_normal.dds" relativePath="true" />
 
         <!-- Summer -->
         <File fileId="401" filename="summer/birch1LOD_diffuse.dds" relativePath="true" />
@@ -509,13 +511,13 @@
 
         <Material name="poplar5LOD_mat" materialId="312" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="312" />
-            <Normalmap fileId="512" />
+            <Normalmap fileId="912" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
         <Material name="poplarBranch_mat" materialId="313" ambientColor="1 1 1" customShaderId="801">
             <Texture fileId="313" />
-            <Normalmap fileId="513" />
+            <Normalmap fileId="913" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
