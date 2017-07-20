@@ -4,11 +4,10 @@ SEASONS MOD CREDITS
 
 Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 
-Seasonal tree and hedge textures -- KimG
-Snow Weather, tree textures, Season Huds and logo -- FSModding_Gary
+Latest seasonal tree and hedge textures -- KimG & BulletBill83
+Snow Weather, original tree textures, Season Huds and logo -- FSModding_Gary
 Snow mask files -- Vasylko
 Weather forecast HUD -- ian898, blacky_BPG
-Bale fermentation & field job manager -- baron
 Tiny dedicated server warning fix -- Decker_MMIV
 In-game English help texts - leifege640
 Floating dust / pollen values according to season - BulletBill83
