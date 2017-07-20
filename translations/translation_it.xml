@@ -73,7 +73,6 @@
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
-
         <text name="SS_REMOVE_CONTEST_TEXT" text="Stai utilizzando la versione aggiornata di Season. Il gioco ha rilevato e disattivato la versione del contest presente nella tua cartella mods. Si prega di eliminarla dalla cartella mods per nascondere questo messaggio." />
 
         <text name="SS_SEASON_INTRO_0" text="È arrivata la primavera; fioriscono alberi e fiori. È il momento di coltivare e seminare i tuoi campi." />

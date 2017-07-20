@@ -59,6 +59,7 @@
         <text name="SS_VEHICLE_TAXES" text="Imposto veicular" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Manutenção Veicular" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparo Veicular" />
+
         <text name="SS_NOT_ENOUGH_MONEY" text="Você não tem dinheiro suficiente para manutenção deste veículo" />
         <text name="SS_VEHICLE_REPAIRED" text="Custo de manutenção para %s foi %s" />
         <text name="SS_NOTHING_TO_REPAIR" text="Nenhum veículo a ser reparado por %s" />
