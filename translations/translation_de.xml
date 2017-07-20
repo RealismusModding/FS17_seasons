@@ -65,7 +65,7 @@
         <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur benötigt für %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s" />
         <text name="SS_REPAIR_REQUIRED" text="Reparatur benötigt!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen." />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen oder %.1f  Betriebstunden." />
         <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s reparieren?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Reparatur erforderlich!" />
         <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine reparieren!" />
