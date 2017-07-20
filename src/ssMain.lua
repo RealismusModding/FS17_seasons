@@ -36,7 +36,7 @@ function ssMain:preLoad()
     self.version = self.descVersion .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
     -- Simple version number for comparing minimum required version of seasons
-    self.simpleVersion = 1 --<%=simpleVersion %>
+    self.simpleVersion = 2 --<%=simpleVersion %>
 
     -- Set global settings
     self.enabled = false -- will be enabled later in the loading process
