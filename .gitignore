@@ -12,3 +12,5 @@ dist/
 FS17*.zip
 node_modules/
 .cookies
+
+package-lock.json
