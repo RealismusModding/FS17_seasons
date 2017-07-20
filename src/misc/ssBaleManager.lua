@@ -22,6 +22,7 @@ function ssBaleManager:preLoad()
     Bale.updateTick = Utils.appendedFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
     Bale.readStream = Utils.appendedFunction(Bale.readStream, ssBaleManager.baleReadStream)
     Bale.writeStream = Utils.appendedFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
+    Bale.setFillType = ssBaleManager.baleSetFillType
     BaleWrapper.load = Utils.appendedFunction(BaleWrapper.load, ssBaleManager.baleWrapperLoad)
     BaleWrapper.getSaveAttributesAndNodes = Utils.overwrittenFunction(BaleWrapper.getSaveAttributesAndNodes, ssBaleManager.baleWrapperGetSaveAttributesAndNodes)
     BaleWrapper.doStateChange = Utils.appendedFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
@@ -46,7 +47,7 @@ function ssBaleManager:reduceFillLevel()
 
             -- wrapped bales are not affected
             if bale.wrappingState ~= 1 then
-                local isGrassBale = bale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW
+                local isGrassBale = bale:getFillType() == FillUtil.FILLTYPE_GRASS_WINDROW
 
                 -- with a snowmask only reduce hay and hay bales outside and grass bales inside/outside
                 -- if there has been rain during the day
@@ -64,23 +65,15 @@ function ssBaleManager:reduceFillLevel()
 
                     -- check if the bale is outside
                     if density == 0 then
-                        if bale.fillType == FillUtil.FILLTYPE_STRAW or bale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
-                            local origFillLevel = bale.fillLevel
-                            local reductionFactor = self:calculateBaleReduction(bale)
-
-                            bale.fillLevel = origFillLevel * reductionFactor
-
+                        if bale:getFillType() == FillUtil.FILLTYPE_STRAW or bale:getFillType() == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
+                            bale:setFillLevel(bale:getFillLevel() * self:calculateBaleReduction(bale))
                             ssBaleRotEvent:sendEvent(bale)
                         end
                     end
 
                 -- with or without a snowmask reduce only unwrapped grass bales
                 elseif isGrassBale then
-                    local origFillLevel = bale.fillLevel
-                    local reductionFactor = self:calculateBaleReduction(bale)
-
-                    bale.fillLevel = origFillLevel * reductionFactor
-
+                    bale:setFillLevel(bale:getFillLevel() * self:calculateBaleReduction(bale))
                     ssBaleRotEvent:sendEvent(bale)
                 end
             end
@@ -112,7 +105,7 @@ function ssBaleManager:removeBale()
         if object.item:isa(Bale) then
             local bale = object.item
 
-            if bale.fillType == FillUtil.FILLTYPE_STRAW or bale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
+            if bale:getFillType() == FillUtil.FILLTYPE_STRAW or bale:getFillType() == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
                 local volume = math.huge
 
                 -- when fillLevel is less than volume (i.e. uncompressed) the bale will be deleted
@@ -122,12 +115,12 @@ function ssBaleManager:removeBale()
                     volume = bale.baleWidth * bale.baleLength * bale.baleHeight * 1000
                 end
 
-                if bale.fillLevel < volume then
+                if bale:getFillLevel() < volume then
                     self:delete(bale)
                 end
 
             -- when grass bale is more than 2 days old it will be deleted
-            elseif bale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW and bale.wrappingState ~= 1 then
+            elseif bale:getFillType() == FillUtil.FILLTYPE_GRASS_WINDROW and bale.wrappingState ~= 1 then
                 if bale.age > 2 then
                     self:delete(bale)
                 end
@@ -166,10 +159,10 @@ function ssBaleManager:calculateBaleReduction(singleBale)
     local reductionFactor = 1
     local daysInSeason = g_seasons.environment.daysInSeason
 
-    if singleBale.fillType == FillUtil.FILLTYPE_STRAW or singleBale.fillType == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
+    if singleBale:getFillType() == FillUtil.FILLTYPE_STRAW or singleBale:getFillType() == FillUtil.FILLTYPE_DRYGRASS_WINDROW then
         reductionFactor = math.min(0.965 + math.sqrt(daysInSeason / 30000), 0.99)
 
-    elseif singleBale.fillType == FillUtil.FILLTYPE_GRASS_WINDROW then
+    elseif singleBale:getFillType() == FillUtil.FILLTYPE_GRASS_WINDROW then
         if singleBale.age == nil then
             singleBale.age = 0
         end
@@ -187,7 +180,7 @@ function ssBaleManager:setFermentationTime()
 end
 
 function ssBaleManager.isBaleFermenting(bale)
-    return bale.fermentingProcess ~= nil and bale.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and bale.fillType ~= FillUtil.FILLTYPE_STRAW
+    return bale.fermentingProcess ~= nil and bale:getFillType() ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW and bale:getFillType() ~= FillUtil.FILLTYPE_STRAW
 end
 
 --------------------------------------------------------
@@ -202,13 +195,19 @@ function ssBaleManager:baleUpdateTick(dt)
 
             if self.fermentingProcess >= 1 then
                 --finish fermenting process
-                self.fillType = FillUtil.FILLTYPE_SILAGE
+                self:setFillType(FillUtil.FILLTYPE_SILAGE)
                 self.fermentingProcess = nil
 
                 ssBaleFermentEvent:sendEvent(self)
             end
         end
     end
+end
+
+-- Bale.setFillType()
+function ssBaleManager:baleSetFillType(fillType)
+    self.fillType = fillType
+    self:setFillLevel(self:getFillLevel()) -- to trigger mass update
 end
 
 --------------------------------------------------------
@@ -221,9 +220,9 @@ function ssBaleManager:baleWrapperDoStateChange(id, nearestBaleServerId)
         if id == BaleWrapper.CHANGE_WRAPPER_BALE_DROPPED and self.lastDroppedBale ~= nil then
             local bale = self.lastDroppedBale
 
-           if bale.fillType == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
+           if bale:getFillType() == FillUtil.FILLTYPE_SILAGE and bale.wrappingState >= 1 then
                 --initiate fermenting process
-                bale.fillType = Utils.getNoNil(self.baleFillTypeSource, FillUtil.FILLTYPE_GRASS_WINDROW)
+                bale:setFillType(Utils.getNoNil(self.baleFillTypeSource, FillUtil.FILLTYPE_GRASS_WINDROW))
                 bale.fermentingProcess = 0
 
                 ssBaleFermentEvent:sendEvent(bale)
@@ -236,7 +235,7 @@ end
 
 -- prepended baleWrapper.pickupWrapperBale, to store fillTypeSource
 function ssBaleManager:baleWrapperPickupWrapperBale(bale, baleType)
-    self.baleFillTypeSource = bale.fillType
+    self.baleFillTypeSource = bale:getFillType()
 end
 
 
@@ -245,7 +244,7 @@ end
 --------------------------------------------------------
 
 function ssBaleManager:baleWriteStream(streamId, connection)
-    streamWriteUIntN(streamId, self.fillType, FillUtil.sendNumBits)
+    streamWriteUIntN(streamId, self:getFillType(), FillUtil.sendNumBits)
 end
 
 function ssBaleManager:baleReadStream(streamId, connection)
@@ -286,7 +285,7 @@ function ssBaleManager:baleLoadFromAttributesAndNodes(superFunc, xmlFile, key, r
     local fermentingFillTypeName = Utils.getNoNil(getXMLString(xmlFile, key .. "#fermentingFillType"), "grass_windrow")
 
     if self.fermentingProcess ~= nil then
-        self.fillType = FillUtil.getFillTypesByNames(fermentingFillTypeName)[1]
+        self:setFillType(FillUtil.getFillTypesByNames(fermentingFillTypeName)[1])
     end
 
     return state
@@ -301,7 +300,7 @@ function ssBaleManager:baleGetSaveAttributesAndNodes(superFunc, nodeIdent)
 
     if attributes ~= nil and self.fermentingProcess ~= nil then
         attributes = attributes .. ' fermentingProcess="' .. self.fermentingProcess .. '"'
-        attributes = attributes .. ' fermentingFillType="' .. Utils.getNoNil(FillUtil.fillTypeIntToName[self.fillType], "grass_windrow") .. '"'
+        attributes = attributes .. ' fermentingFillType="' .. Utils.getNoNil(FillUtil.fillTypeIntToName[self:getFillType()], "grass_windrow") .. '"'
     end
 
     return attributes, nodes

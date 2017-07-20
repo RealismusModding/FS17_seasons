@@ -21,7 +21,7 @@ function ssBaleFermentEvent:new(bale)
     local self = ssBaleFermentEvent:emptyNew()
 
     self.bale = bale
-    self.fillType = self.bale.fillType
+    self.fillType = self.bale:getFillType()
 
     return self
 end
@@ -41,7 +41,7 @@ function ssBaleFermentEvent:readStream(streamId, connection)
 end
 
 function ssBaleFermentEvent:run(connection)
-    self.bale.fillType = self.fillType
+    self.bale:setFillType(self.fillType)
 end
 
 function ssBaleFermentEvent:sendEvent(bale)
