@@ -90,7 +90,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - You can repair your vehicles at the vehicle workshop (placeable or on the map). It is more expensive at the dealer
 - If you don't maintain your vehicle, starting of the vehicle takes longer, and after a while it may be very hard to start it.
 - Motor start setting is disabled as this mod overwrites the functionality
-- You can borrow vehicles for a free demo as long as it is returned within the same day with less than 0.5 engine hours
+- You can borrow vehicles for a free demo as long as it is returned within the same day with less than 0.5 engine hours. This only works for base configuration vehicles
 
 ### Economy
 - Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000
