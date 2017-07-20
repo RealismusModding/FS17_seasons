@@ -150,7 +150,7 @@ function ssDensityMapScanner:run(job)
     if job == nil then return end
 
     local size = g_currentMission.terrainSize
-    local pixelSize = 0.5
+    local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
     local startWorldX = job.x * size / job.numSegments - size / 2 + (pixelSize / 2)
     local startWorldZ = -size / 2
     local widthWorldX = startWorldX + size / job.numSegments - pixelSize
