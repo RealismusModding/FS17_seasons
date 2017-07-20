@@ -405,6 +405,18 @@ function ssEnvironment:nextTransition()
     end
 end
 
+function ssEnvironment:previousTransition(transition)
+    if transition == nil then
+        transition = self:transitionAtDay()
+    end
+
+    if transition == self.TRANSITION_EARLY_SPRING then
+        return self.TRANSITIONS_IN_YEAR
+    else
+        return transition - 1
+    end
+end
+
 --uses currentDay if dayNumber not passed in
 function ssEnvironment:transitionAtDay(dayNumber)
     if (dayNumber == nil) then

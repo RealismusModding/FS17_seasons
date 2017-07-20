@@ -20,7 +20,8 @@ g_seasons.xmlUtil = ssXMLUtil
 g_seasons.multiplayer = ssMultiplayer
 g_seasons.xml = ssSeasonsXML
 
-ssMain.SAVEGAME_VERSION = 2
+ssMain.SAVEGAME_VERSION = 3
+ssMain.CONTEST_SAVEGAME_VERSION = 2
 
 ----------------------------
 -- Installing injections and globals

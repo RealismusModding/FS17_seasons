@@ -17,7 +17,7 @@ ssGrowthManager.CUT = 200
 ssGrowthManager.WITHERED = 300
 ssGrowthManager.TMP_TRANSITION = 900
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
-ssGrowthManager.fruitNameToCopyForUnknownFruits = "barley"
+ssGrowthManager.UNKNOWN_FRUIT_COPY_SOURCE = "barley"
 ssGrowthManager.MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
 
 -- data
@@ -26,7 +26,6 @@ ssGrowthManager.growthData = {}
 ssGrowthManager.canPlantData = {}
 ssGrowthManager.canHarvestData = {}
 ssGrowthManager.willGerminateData = {}
-ssGrowthManager.previousWillGerminateData = {}
 
 -- properties
 ssGrowthManager.fakeTransition = 1
@@ -41,15 +40,22 @@ function ssGrowthManager:load(savegame, key)
 
     if savegame == nil then return end
 
+    self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
     local i = 0
-    while true do
-        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
-        if not hasXMLProperty(savegame, fruitKey) then break end
 
-        local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
-        self.willGerminateData[fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+    if g_seasons.savegameVersion <= g_seasons.CONTEST_SAVEGAME_VERSION then --old save game
+        i = self:loadSavedGerminationData(savegame, string.format("%s.growthManager.willGerminate", key), g_seasons.environment:transitionAtDay())
+    else --current save game version
+        while true do
+            local transitionKey = string.format("%s.growthManager.willGerminate.transition(%i)", key, i)
+            if not hasXMLProperty(savegame, transitionKey) then break end
 
-        i = i + 1
+            local transitionNum = getXMLInt(savegame, transitionKey .. "#gt")
+            self.willGerminateData[transitionNum] = {}
+            self:loadSavedGerminationData(savegame, transitionKey, transitionNum)
+  
+            i = i + 1
+        end
     end
 
     if i == 0 then
@@ -57,18 +63,42 @@ function ssGrowthManager:load(savegame, key)
     end
 end
 
+function ssGrowthManager:loadSavedGerminationData(savegame, key, transitionNum)
+    local j = 0
+
+    while true do
+        local fruitKey = string.format("%s.fruit(%i)", key, j)
+        if not hasXMLProperty(savegame, fruitKey) then break end
+        
+        local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
+        self.willGerminateData[transitionNum][fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+        
+        j = j + 1
+    end
+
+    return j
+end
+
 function ssGrowthManager:save(savegame, key)
     ssXMLUtil.setBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
-
     local i = 0
-    for fruitName in pairs(self.willGerminateData) do
-        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
 
-        setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
-        setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[fruitName])
+    for transition, data in pairs(self.willGerminateData) do
+        local transitionKey = string.format("%s.growthManager.willGerminate.transition(%i)", key, i)
+        setXMLInt(savegame, transitionKey .. "#gt", transition)
+        local j = 0
+
+        for fruitName in pairs(data) do
+            local fruitKey = string.format("%s.fruit(%i)", transitionKey, j)
+
+            setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
+            setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[transition][fruitName])
+
+            j = j + 1
+        end
 
         i = i + 1
-    end
+    end 
 end
 
 function ssGrowthManager:loadMap(name)
@@ -107,13 +137,14 @@ function ssGrowthManager:loadMapFinished()
     if g_currentMission:getIsServer() then
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
-            self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+            self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+            --self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         else
-            self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
+            self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+            --self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         end
     end
 end
-
 
 -- load all growth data
 -- returns false, if error
@@ -163,7 +194,6 @@ function ssGrowthManager:transitionChanged()
         self.isNewSavegame = false
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
     else
-        self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
     end
@@ -192,11 +222,11 @@ end
 
 -- reset the willGerminateData and rebuild it based on the current transition
 function ssGrowthManager:rebuildWillGerminateData()
-    self.willGerminateData = {}
+    self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
 
     for fruitName, transition in pairs(self.canPlantData) do
         if self.canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
-            self.willGerminateData[fruitName] = ssWeatherManager:canSow(fruitName)
+            self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = ssWeatherManager:canSow(fruitName)
         end
     end
 end
@@ -270,14 +300,14 @@ end
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
     local useMaxState = false
     local minState = self.growthData[transition][fruitName].normalGrowthState
-    if minState == 1 and self.previousWillGerminateData[fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
+
+    if minState == 1 and self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
         return
     end
 
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
     if self.growthData[transition][fruitName].normalGrowthMaxState ~= nil then
-
         local maxState = self.growthData[transition][fruitName].normalGrowthMaxState
 
         if maxState == self.MAX_STATE then
@@ -308,6 +338,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     end
 
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
+    self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] = {}
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
@@ -477,29 +508,30 @@ function ssGrowthManager:unknownFruitFound(fruitName)
 end
 
 function ssGrowthManager:updateCanPlantData(fruitName)
-    self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.fruitNameToCopyForUnknownFruits])
+    self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[self.UNKNOWN_FRUIT_COPY_SOURCE])
 end
 
 function ssGrowthManager:updateCanHarvestData(fruitName)
-    self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[self.fruitNameToCopyForUnknownFruits])
+    self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[self.UNKNOWN_FRUIT_COPY_SOURCE])
 end
 
 function ssGrowthManager:updateDefaultFruitsData(fruitName)
     self.defaultFruitsData[fruitName] = {}
-    self.defaultFruitsData[fruitName].maxSprayGrowthState = self.defaultFruitsData[self.fruitNameToCopyForUnknownFruits].maxSprayGrowthState
+    self.defaultFruitsData[fruitName].maxSprayGrowthState = self.defaultFruitsData[self.UNKNOWN_FRUIT_COPY_SOURCE].maxSprayGrowthState
 end
 
 function ssGrowthManager:updateGrowthData(fruitName)
     for transition, fruit in pairs(self.growthData) do
-        if self.growthData[transition][self.fruitNameToCopyForUnknownFruits] ~= nil then
-            self.growthData[transition][fruitName] = Utils.copyTable(self.growthData[transition][self.fruitNameToCopyForUnknownFruits])
+        if self.growthData[transition][self.UNKNOWN_FRUIT_COPY_SOURCE] ~= nil then
+            self.growthData[transition][fruitName] = Utils.copyTable(self.growthData[transition][self.UNKNOWN_FRUIT_COPY_SOURCE])
             self.growthData[transition][fruitName].fruitName = fruitName
         end
     end
 end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
-    self.willGerminateData[fruitName] = self.willGerminateData[self.fruitNameToCopyForUnknownFruits]
+    self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = self.willGerminateData[g_seasons.environment:transitionAtDay()][self.UNKNOWN_FRUIT_COPY_SOURCE]
+    self.willGerminateData[g_seasons.environment:previousTransition()][fruitName] = self.willGerminateData[g_seasons.environment:previousTransition()][self.UNKNOWN_FRUIT_COPY_SOURCE]
 end
 
 -- growth gui functions
@@ -534,15 +566,15 @@ function ssGrowthManager:consoleCommandIncrementGrowthState()
     self.fakeTransition = self.fakeTransition + 1
     if self.fakeTransition > g_seasons.environment.TRANSITIONS_IN_YEAR then self.fakeTransition = 1 end
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
+    self.willGerminateData[self.fakeTransition] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
-    self:rebuildWillGerminateData()
 end
 
 function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
     self.fakeTransition = Utils.getNoNil(tonumber(newGrowthState), 1)
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
+    self.willGerminateData[self.fakeTransition] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
-    self:rebuildWillGerminateData()
 end
 
 function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
@@ -554,8 +586,8 @@ function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
     self.growthData[self.TMP_TRANSITION][fruitName] = {}
     self.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
     self.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
+    self.willGerminateData[g_seasons.environment:previousTransition(self.TMP_TRANSITION)] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.TMP_TRANSITION)
-
 end
 
 function ssGrowthManager:consoleCommandPrintDebugInfo()
@@ -571,8 +603,8 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     print("")
     local cropsThatCanGrow = ""
 
-    for fruitName in pairs(ssGrowthManager.willGerminateData) do
-        if ssGrowthManager.willGerminateData[fruitName] == true then
+    for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
+        if self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
             cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
         end
     end
@@ -580,12 +612,15 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
     print("")
     logInfo("Previous willGerminateData")
-    print_r(self.previousWillGerminateData)
+    print_r(self.willGerminateData[g_seasons.environment:previousTransition()])
     print("")
     logInfo("Current willGerminateData")
-    print_r(self.willGerminateData)
+    print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     print("")
     logInfo("Growth Data")
-    print_r(self.growthData)
+    print_r(self.willGerminateData)
     logInfo("------------------------------------------")
+    for transition, fruitName in pairs(self.willGerminateData) do
+        logInfo(transition)
+    end
 end
