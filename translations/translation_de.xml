@@ -60,15 +60,15 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Fahrzeugkosten" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparaturkosten" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu reparieren!" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s wurde repariert für %s" />
-        <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur benötigt für %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s" />
-        <text name="SS_REPAIR_REQUIRED" text="Reparatur benötigt!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Reparatur benötigt in %d Tagen." />
-        <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s reparieren?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Reparatur erforderlich!" />
-        <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine reparieren!" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu warten!" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s wurde für %s gewartet" />
+        <text name="SS_NOTHING_TO_REPAIR" text="Keine Wartung benötigt für %s" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Warte %s für %s" />
+        <text name="SS_REPAIR_REQUIRED" text="Wartung benötigt!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Wartung in %.1f Betriebstunden oder %d Tagen erforderlich." />
+        <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s warten?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
+        <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine warten!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
