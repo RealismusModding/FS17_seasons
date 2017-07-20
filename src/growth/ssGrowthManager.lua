@@ -42,14 +42,20 @@ function ssGrowthManager:load(savegame, key)
 
     self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
     local i = 0
-    while true do
-        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
-        if not hasXMLProperty(savegame, fruitKey) then break end
 
-        local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
-        self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+    if g_seasons.savegameVersion <= g_seasons.CONTEST_SAVEGAME_VERSION then --old save game
+        i = self:loadSavedGerminationData(savegame, string.format("%s.growthManager.willGerminate", key), g_seasons.environment:transitionAtDay())
+    else --current save game version
+        while true do
+            local transitionKey = string.format("%s.growthManager.willGerminate.transition(%i)", key, i)
+            if not hasXMLProperty(savegame, transitionKey) then break end
 
-        i = i + 1
+            local transitionNum = getXMLInt(savegame, transitionKey .. "#gt")
+            self.willGerminateData[transitionNum] = {}
+            self:loadSavedGerminationData(savegame, transitionKey, transitionNum)
+  
+            i = i + 1
+        end
     end
 
     if i == 0 then
@@ -57,18 +63,42 @@ function ssGrowthManager:load(savegame, key)
     end
 end
 
+function ssGrowthManager:loadSavedGerminationData(savegame, key, transitionNum)
+    local j = 0
+
+    while true do
+        local fruitKey = string.format("%s.fruit(%i)", key, j)
+        if not hasXMLProperty(savegame, fruitKey) then break end
+        
+        local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
+        self.willGerminateData[transitionNum][fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
+        
+        j = j + 1
+    end
+
+    return j
+end
+
 function ssGrowthManager:save(savegame, key)
     ssXMLUtil.setBool(savegame, key .. ".settings.growthManagerEnabled", self.growthManagerEnabled)
-
     local i = 0
-    for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
-        local fruitKey = string.format("%s.growthManager.willGerminate.fruit(%i)", key, i)
 
-        setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
-        setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName])
+    for transition, data in pairs(self.willGerminateData) do
+        local transitionKey = string.format("%s.growthManager.willGerminate.transition(%i)", key, i)
+        setXMLInt(savegame, transitionKey .. "#gt", transition)
+        local j = 0
+
+        for fruitName in pairs(data) do
+            local fruitKey = string.format("%s.fruit(%i)", transitionKey, j)
+
+            setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
+            setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[transition][fruitName])
+
+            j = j + 1
+        end
 
         i = i + 1
-    end
+    end 
 end
 
 function ssGrowthManager:loadMap(name)
@@ -233,8 +263,6 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
                 self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
-        
-        self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] = {}
     end  -- end of for index, fruit in pairs(g_currentMission.fruits) do
 end
 
@@ -310,6 +338,7 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     end
 
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
+    self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] = {}
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
@@ -589,6 +618,9 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     print("")
     logInfo("Growth Data")
-    --print_r(self.growthData)
+    print_r(self.willGerminateData)
     logInfo("------------------------------------------")
+    for transition, fruitName in pairs(self.willGerminateData) do
+        logInfo(transition)
+    end
 end
