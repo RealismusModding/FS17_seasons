@@ -118,12 +118,7 @@ end
 
 function ssSwathManager:transitionChanged()
     if g_currentMission:getIsServer() then
-        -- removing all swaths at beginning of winter
-        if g_seasons.environment:transitionAtDay() == g_seasons.environment.TRANSITION_EARLY_WINTER then
-            g_seasons.dms:queueJob("ssRemoveSwaths")
-        else
-            -- removing some every growth transition as it will rot if left too long on the ground
-            g_seasons.dms:queueJob("ssReduceStrawHay", 1)
-        end
+        -- removing some every growth transition as it will rot if left too long on the ground
+        g_seasons.dms:queueJob("ssReduceStrawHay", 1)
     end
 end

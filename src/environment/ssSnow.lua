@@ -142,6 +142,11 @@ function ssSnow:applySnow(targetSnowDepth)
 
             if targetSnowDepth > 0 then
                 -- log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
+
+                if self.appliedSnowDepth == 0 then
+                    ssDensityMapScanner:queueJob("ssRemoveSwaths")
+                end
+
                 ssDensityMapScanner:queueJob("ssSnowAddSnow", self.snowLayersDelta)
             end
 
