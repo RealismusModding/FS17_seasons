@@ -39,7 +39,9 @@ function ssBaleRotEvent:readStream(streamId, connection)
 end
 
 function ssBaleRotEvent:run(connection)
-    self.bale.fillLevel = self.fillLevel
+    if self.bale then
+        self.bale.fillLevel = self.fillLevel
+    end
 end
 
 function ssBaleRotEvent:sendEvent(bale)

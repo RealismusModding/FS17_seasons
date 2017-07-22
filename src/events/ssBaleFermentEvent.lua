@@ -41,7 +41,9 @@ function ssBaleFermentEvent:readStream(streamId, connection)
 end
 
 function ssBaleFermentEvent:run(connection)
-    self.bale:setFillType(self.fillType)
+    if self.bale then
+        self.bale:setFillType(self.fillType)
+    end
 end
 
 function ssBaleFermentEvent:sendEvent(bale)
