@@ -56,7 +56,7 @@ function ssVehicle:loadMap()
     g_currentMission:setAutomaticMotorStartEnabled(false)
 
     if g_currentMission:getIsServer() then
-        self.repairInterval = g_seasons.environment.daysInSeason * 2
+        self:updateRepairInterval()
     end
 
     if g_addCheatCommands then
@@ -74,13 +74,17 @@ function ssVehicle:loadMap()
 end
 
 function ssVehicle:readStream(streamId, connection)
-    self.repairInterval = g_seasons.environment.daysInSeason * 2
+    self:updateRepairInterval()
 
     self.snowTracksEnabled = streamReadBool(streamId)
 end
 
 function ssVehicle:writeStream(streamId, connection)
     streamWriteBool(streamId, self.snowTracksEnabled)
+end
+
+function ssVehicle:updateRepairInterval()
+    self.repairInterval = g_seasons.environment.daysInSeason * 4
 end
 
 function ssVehicle:dayChanged()
@@ -95,7 +99,7 @@ function ssVehicle:dayChanged()
 end
 
 function ssVehicle:seasonLengthChanged()
-    self.repairInterval = g_seasons.environment.daysInSeason * 2
+    self:updateRepairInterval()
 end
 
 function ssVehicle:installVehicleSpecializations()
