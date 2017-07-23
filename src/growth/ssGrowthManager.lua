@@ -53,7 +53,7 @@ function ssGrowthManager:load(savegame, key)
             local transitionNum = getXMLInt(savegame, transitionKey .. "#gt")
             self.willGerminateData[transitionNum] = {}
             self:loadSavedGerminationData(savegame, transitionKey, transitionNum)
-  
+
             i = i + 1
         end
     end
@@ -69,10 +69,10 @@ function ssGrowthManager:loadSavedGerminationData(savegame, key, transitionNum)
     while true do
         local fruitKey = string.format("%s.fruit(%i)", key, j)
         if not hasXMLProperty(savegame, fruitKey) then break end
-        
+
         local fruitName = getXMLString(savegame, fruitKey .. "#fruitName")
         self.willGerminateData[transitionNum][fruitName] = getXMLBool(savegame, fruitKey .. "#value", false)
-        
+
         j = j + 1
     end
 
@@ -88,17 +88,17 @@ function ssGrowthManager:save(savegame, key)
         setXMLInt(savegame, transitionKey .. "#gt", transition)
         local j = 0
 
-        for fruitName in pairs(data) do
+        for fruitName, value in pairs(data) do
             local fruitKey = string.format("%s.fruit(%i)", transitionKey, j)
 
             setXMLString(savegame, fruitKey .. "#fruitName", tostring(fruitName))
-            setXMLBool(savegame, fruitKey .. "#value", self.willGerminateData[transition][fruitName])
+            setXMLBool(savegame, fruitKey .. "#value", value)
 
             j = j + 1
         end
 
         i = i + 1
-    end 
+    end
 end
 
 function ssGrowthManager:loadMap(name)
