@@ -137,9 +137,6 @@ function ssGrowthManager:loadMapFinished()
     if g_currentMission:getIsServer() then
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
-            self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
-        else
-            self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
         end
     end
 end
@@ -212,10 +209,10 @@ function ssGrowthManager:update(dt)
         end
     end
 
-    if self.dayHasChanged == true then
-        self.dayHasChanged = false
-        self:rebuildWillGerminateData()
-    end
+    -- if self.dayHasChanged == true then
+    --     self.dayHasChanged = false
+    --     self:rebuildWillGerminateData()
+    -- end
 end
 
 -- reset the willGerminateData and rebuild it based on the current transition
@@ -232,7 +229,8 @@ end
 -- handle dayChanged event
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
-  self.dayHasChanged = true
+  --self.dayHasChanged = true
+  self:rebuildWillGerminateData()
 end
 
 -- called by ssDensityScanner to make fruit grow
@@ -265,7 +263,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
 end
 
 function ssGrowthManager:finishGrowth(transition)
-    self.willGerminateData[g_seasons.environment:previousTransition(g_seasons.environment:previousTransition(transition))] = nil
+    self.willGerminateData[g_seasons.environment:previousTransition(transition)] = nil
 end
 
 --set growth state of fruit to a particular state based on transition
@@ -532,7 +530,6 @@ end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
     self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = self.willGerminateData[g_seasons.environment:transitionAtDay()][self.UNKNOWN_FRUIT_COPY_SOURCE]
-    self.willGerminateData[g_seasons.environment:previousTransition()][fruitName] = self.willGerminateData[g_seasons.environment:previousTransition()][self.UNKNOWN_FRUIT_COPY_SOURCE]
 end
 
 -- growth gui functions
@@ -592,19 +589,13 @@ function ssGrowthManager:consoleCommandChangeFruitGrowthState(userInput)
 end
 
 function ssGrowthManager:consoleCommandPrintDebugInfo()
-    local transition = g_seasons.environment:transitionAtDay()
-    logInfo("------------------------------------------")
-    logInfo("Seasons Debug Info")
-    print("")
-    logInfo("Savegame version: " .. tostring(g_seasons.savegameVersion))
-    print("")
-    logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
-    logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
-    logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
-    print("")
-    local cropsThatCanGrow = ""
+    logInfo("Germinate Data")
+    print_r(self.willGerminateData)
 
-    for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
+    local transition = g_seasons.environment:transitionAtDay()
+    logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
+    local cropsThatCanGrow = ""
+     for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
         if self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
             cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
         end
@@ -612,13 +603,34 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
 
     logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
     print("")
-    logInfo("Previous willGerminateData")
-    print_r(self.willGerminateData[g_seasons.environment:previousTransition()])
-    print("")
-    logInfo("Current willGerminateData")
-    print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
-    print("")
-    logInfo("Germinate Data")
-    print_r(self.willGerminateData)
-    logInfo("------------------------------------------")
+
+    -- local transition = g_seasons.environment:transitionAtDay()
+    -- logInfo("------------------------------------------")
+    -- logInfo("Seasons Debug Info")
+    -- print("")
+    -- logInfo("Savegame version: " .. tostring(g_seasons.savegameVersion))
+    -- print("")
+    -- logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
+    -- logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
+    -- logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
+    -- print("")
+    -- local cropsThatCanGrow = ""
+
+    -- for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
+    --     if self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
+    --         cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+    --     end
+    -- end
+
+    -- logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+    -- print("")
+    -- logInfo("Previous willGerminateData")
+    -- print_r(self.willGerminateData[g_seasons.environment:previousTransition()])
+    -- print("")
+    -- logInfo("Current willGerminateData")
+    -- print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+    -- print("")
+    -- logInfo("Germinate Data")
+    -- print_r(self.willGerminateData)
+    -- logInfo("------------------------------------------")
 end
