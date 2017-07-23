@@ -123,7 +123,7 @@ function ssGrowthManager:loadMap(name)
         g_currentMission.environment:addDayChangeListener(self)
         g_seasons.environment:addTransitionChangeListener(self)
 
-        ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth)
+        ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth, self.finishGrowth)
 
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
         addConsoleCommand("ssIncrementGrowth", "Increments growth for test purposes", "consoleCommandIncrementGrowthState", self)
@@ -138,10 +138,8 @@ function ssGrowthManager:loadMapFinished()
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
             self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
-            --self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         else
             self.willGerminateData[g_seasons.environment:previousTransition()] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
-            --self.previousWillGerminateData = Utils.copyTable(self.willGerminateData)
         end
     end
 end
@@ -264,6 +262,10 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
     end  -- end of for index, fruit in pairs(g_currentMission.fruits) do
+end
+
+function ssGrowthManager:finishGrowth(transition)
+    self.willGerminateData[g_seasons.environment:previousTransition(g_seasons.environment:previousTransition(transition))] = nil
 end
 
 --set growth state of fruit to a particular state based on transition
@@ -616,10 +618,7 @@ function ssGrowthManager:consoleCommandPrintDebugInfo()
     logInfo("Current willGerminateData")
     print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     print("")
-    logInfo("Growth Data")
+    logInfo("Germinate Data")
     print_r(self.willGerminateData)
     logInfo("------------------------------------------")
-    for transition, fruitName in pairs(self.willGerminateData) do
-        logInfo(transition)
-    end
 end
