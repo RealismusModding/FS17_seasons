@@ -131,6 +131,18 @@ function ssDensityMapScanner:queueJob(callbackId, parameter)
     end
 end
 
+-- Register a new DMS callback
+--
+-- A callback is bound to the callbackId: the name of the DMS action.
+-- When a job with given callbackId is queued, func is called on target,
+-- with the job parameter as last argument, after world parallelogram.
+-- After the job finished, a possible finalizer is called on the target,
+-- also with the job paramater.
+--
+-- @param callbackId String, name of jobrunner
+-- @param target table, contains func and finalizer functions
+-- @param func function to run for each segment of the world
+-- @param finalizer function to run after all segments are run, optional
 function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer)
     log("[ssDensityMapScanner] Registering callback: " .. callbackId)
 
