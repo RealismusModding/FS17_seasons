@@ -338,7 +338,6 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     end
 
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
-    self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] = {}
 end
 
 --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
