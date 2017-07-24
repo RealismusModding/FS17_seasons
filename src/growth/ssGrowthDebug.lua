@@ -39,7 +39,7 @@ function ssGrowthDebug:draw()
         renderText(0.44, 0.78, 0.01, "GM enabled: " .. tostring(g_seasons.growthManager.growthManagerEnabled))
         local transition = g_seasons.environment:transitionAtDay()
 
-        renderText(0.44, 0.76, 0.01, "Growth Transition: " .. transition .. " " .. self.transitionIndexToName[transition])
+        renderText(0.44, 0.76, 0.01, "Growth Transition: " .. transition .. " " .. ssUtil.fullSeasonName(transition))
 
         local cropsThatCanGrow = ""
 
