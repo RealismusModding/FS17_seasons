@@ -31,7 +31,7 @@
         <text name="SS_SEASON_3" text="Hiver" />
 
         <text name="SS_SEASON_FULL_NAME_1" text="Début du printemps" />
-        <text name="SS_SEASON_FULL_NAME_2" text="Mi-Printemps" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mi-printemps" />
         <text name="SS_SEASON_FULL_NAME_3" text="Fin du printemps" />
         <text name="SS_SEASON_FULL_NAME_4" text="Début d'été" />
         <text name="SS_SEASON_FULL_NAME_5" text="Mi-été" />
@@ -40,7 +40,7 @@
         <text name="SS_SEASON_FULL_NAME_8" text="Mi-automne" />
         <text name="SS_SEASON_FULL_NAME_9" text="Fin d'automne" />
         <text name="SS_SEASON_FULL_NAME_10" text="Début d'hiver" />
-        <text name="SS_SEASON_FULL_NAME_11" text="Mi'hiver" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mi-hiver" />
         <text name="SS_SEASON_FULL_NAME_12" text="Fin d'hiver" />
 
         <text name="SS_MONTH_SHORT_1" text="janv" />
@@ -86,7 +86,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
         <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
-        <text name="msg_welcome" text="Bienvenue sur le Saisons mod créé par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
+        <text name="msg_welcome" text="Bienvenue sur le mod Saisons crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
