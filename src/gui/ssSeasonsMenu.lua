@@ -379,8 +379,8 @@ end
 function ssSeasonsMenu:updateOverview()
     self.overviewData = {}
 
-    local canPlant = g_seasons.growthManager:getCanPlantData()
-    local canHarvest = g_seasons.growthManager:getCanHarvestData()
+    local canPlant = g_seasons.growthGUI:getCanPlantData()
+    local canHarvest = g_seasons.growthGUI:getCanHarvestData()
 
     function generateBlocks(blocks, fruitName, data, type)
         if data == nil or data[fruitName] == nil then return end
