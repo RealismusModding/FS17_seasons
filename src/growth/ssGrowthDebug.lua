@@ -75,14 +75,14 @@ function ssGrowthDebug:consoleCommandIncrementGrowthState()
     self.fakeTransition = self.fakeTransition + 1
     if self.fakeTransition > g_seasons.environment.TRANSITIONS_IN_YEAR then self.fakeTransition = 1 end
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
-    self.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+    g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = Utils.copyTable(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
 end
 
 function ssGrowthDebug:consoleCommandSetGrowthState(newGrowthState)
     self.fakeTransition = Utils.getNoNil(tonumber(newGrowthState), 1)
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
-    g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = g_seasons.growthManager.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+    g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = Utils.copyTable(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
 end
 
@@ -100,48 +100,33 @@ function ssGrowthDebug:consoleCommandChangeFruitGrowthState(userInput)
 end
 
 function ssGrowthDebug:consoleCommandPrintDebugInfo()
-    -- logInfo("Germinate Data")
-    -- print_r(self.willGerminateData)
+    local transition = g_seasons.environment:transitionAtDay()
+    logInfo("------------------------------------------")
+    logInfo("Seasons Debug Info")
+    print("")
+    logInfo("Savegame version: " .. tostring(g_seasons.savegameVersion))
+    print("")
+    logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
+    logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
+    logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
+    print("")
+    local cropsThatCanGrow = ""
 
-    -- local transition = g_seasons.environment:transitionAtDay()
-    -- logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
-    -- local cropsThatCanGrow = ""
-    --  for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
-    --     if self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
-    --         cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-    --     end
-    -- end
+    for fruitName in pairs(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()]) do
+        if g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
+            cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+        end
+    end
 
-    -- logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
-    -- print("")
-
-    -- local transition = g_seasons.environment:transitionAtDay()
-    -- logInfo("------------------------------------------")
-    -- logInfo("Seasons Debug Info")
-    -- print("")
-    -- logInfo("Savegame version: " .. tostring(g_seasons.savegameVersion))
-    -- print("")
-    -- logInfo("Growth Transition: " .. tostring(transition) .. " " .. ssUtil.fullSeasonName(transition))
-    -- logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
-    -- logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
-    -- print("")
-    -- local cropsThatCanGrow = ""
-
-    -- for fruitName in pairs(self.willGerminateData[g_seasons.environment:transitionAtDay()]) do
-    --     if self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
-    --         cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-    --     end
-    -- end
-
-    -- logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
-    -- print("")
-    -- logInfo("Previous willGerminateData")
-    -- print_r(self.willGerminateData[g_seasons.environment:previousTransition()])
-    -- print("")
-    -- logInfo("Current willGerminateData")
-    -- print_r(self.willGerminateData[g_seasons.environment:transitionAtDay()])
-    -- print("")
-    -- logInfo("Germinate Data")
-    -- print_r(self.willGerminateData)
-    -- logInfo("------------------------------------------")
+    logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+    print("")
+    logInfo("Previous willGerminateData")
+    print_r(g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition()])
+    print("")
+    logInfo("Current willGerminateData")
+    print_r(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()])
+    print("")
+    logInfo("Full germinate Data")
+    print_r(g_seasons.growthManager.willGerminateData)
+    logInfo("------------------------------------------")
 end
