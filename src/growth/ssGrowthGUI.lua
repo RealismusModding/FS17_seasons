@@ -19,7 +19,7 @@ ssGrowthGUI.canPlantData = {}
 ssGrowthGUI.canHarvestData = {}
 
 --methods
-function ssGrowthManager:loadMap(name)
+function ssGrowthGUI:loadMap(name)
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
@@ -157,19 +157,19 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
     return newGrowthState
 end
 
-function ssGrowthManager:updateCanPlantData(fruitName)
+function ssGrowthGUI:updateCanPlantData(fruitName)
     self.canPlantData[fruitName] = Utils.copyTable(self.canPlantData[g_seasons.growthManager.UNKNOWN_FRUIT_COPY_SOURCE])
 end
 
-function ssGrowthManager:updateCanHarvestData(fruitName)
+function ssGrowthGUI:updateCanHarvestData(fruitName)
     self.canHarvestData[fruitName] = Utils.copyTable(self.canHarvestData[g_seasons.growthManager.UNKNOWN_FRUIT_COPY_SOURCE])
 end
 
-function ssGrowthManager:getCanPlantData()
+function ssGrowthGUI:getCanPlantData()
     return self.canPlantData
 end
 
-function ssGrowthManager:canFruitBePlanted(fruitName, transition)
+function ssGrowthGUI:canFruitBePlanted(fruitName, transition)
     if self.canPlantData[fruitName][transition] ~= nil then
         return self.canPlantData[fruitName][transition]
     else
@@ -177,11 +177,11 @@ function ssGrowthManager:canFruitBePlanted(fruitName, transition)
     end
 end
 
-function ssGrowthManager:getCanHarvestData()
+function ssGrowthGUI:getCanHarvestData()
     return self.canHarvestData
 end
 
-function ssGrowthManager:canFruitBeHarvested(fruitName, transition)
+function ssGrowthGUI:canFruitBeHarvested(fruitName, transition)
     if self.canHarvestData[fruitName][transition] ~= nil then
         return self.canHarvestData[fruitName][transition]
     else

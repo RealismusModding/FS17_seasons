@@ -196,9 +196,9 @@ end
 -- reset the willGerminateData and rebuild it based on the current transition
 function ssGrowthManager:rebuildWillGerminateData()
     self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
-
-    for fruitName, transition in pairs(self.canPlantData) do
-        if self.canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
+    local canPlantData = g_seasons.growthGUI:getCanPlantData()
+    for fruitName, transition in pairs(canPlantData) do
+        if canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
             self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = ssWeatherManager:canSow(fruitName)
         end
     end

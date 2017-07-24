@@ -9,6 +9,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthDebug = {}
+g_seasons.growthDebug = ssGrowthDebug
 
 --constants
 ssGrowthDebug.TMP_TRANSITION = 900
