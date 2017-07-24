@@ -20,7 +20,7 @@ function ssCropDestruction:loadMap(name)
 end
 
 function ssCropDestruction:seasonsDestroyFruitArea(superFunc, x0, z0, x1, z1, x2, z2)
-    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(nil, x0, z0, x1, z1, x2, z2);
+    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(nil, x0, z0, x1, z1, x2, z2)
 
     for index, entry in pairs(g_currentMission.fruits) do
 
@@ -47,9 +47,9 @@ function ssCropDestruction:seasonsDestroyFruitArea(superFunc, x0, z0, x1, z1, x2
                 -- oilseed, no destruction
             else
                 -- all other/normal fruits
-                setDensityCompareParams(entry.id, "greater", 2);
-                setDensityMaskedParallelogram(entry.id, x,z, widthX,widthZ, heightX,heightZ, 0, g_currentMission.numFruitDensityMapChannels, detailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, desc.cutState+1);
-                setDensityCompareParams(entry.id, "greater", -1);
+                setDensityCompareParams(entry.id, "greater", 2)
+                setDensityMaskedParallelogram(entry.id, x, z, widthX, widthZ, heightX, heightZ, 0, g_currentMission.numFruitDensityMapChannels, detailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, desc.cutState + 1)
+                setDensityCompareParams(entry.id, "greater", -1)
             end
         end
     end
