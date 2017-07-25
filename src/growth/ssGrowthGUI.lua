@@ -25,6 +25,8 @@ end
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
     for fruitName, value in pairs(fruitData) do
+        if FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates == nil then return end
+
         if fruitName ~= "dryGrass" then
             local transitionTable = {}
             for transition, v in pairs(growthData) do
@@ -70,6 +72,8 @@ end
 -- simulates growth based on canPlantData to find out when a fruit will be harvestable
 function ssGrowthGUI:buildCanHarvestData(growthData)
     for fruitName, transition in pairs(self.canPlantData) do
+        if FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates == nil then return end
+        
         local transitionTable = {}
         local plantedTransition = 1
         local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
