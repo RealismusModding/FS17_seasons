@@ -567,14 +567,14 @@ function ssGrowthManager:consoleCommandIncrementGrowthState()
     self.fakeTransition = self.fakeTransition + 1
     if self.fakeTransition > g_seasons.environment.TRANSITIONS_IN_YEAR then self.fakeTransition = 1 end
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
-    self.willGerminateData[self.fakeTransition] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+    self.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
 end
 
 function ssGrowthManager:consoleCommandSetGrowthState(newGrowthState)
     self.fakeTransition = Utils.getNoNil(tonumber(newGrowthState), 1)
     logInfo("ssGrowthManager:", "enabled - growthStateChanged to: " .. self.fakeTransition)
-    self.willGerminateData[self.fakeTransition] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
+    self.willGerminateData[g_seasons.environment:previousTransition(self.fakeTransition)] = Utils.copyTable(self.willGerminateData[g_seasons.environment:transitionAtDay()])
     ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.fakeTransition)
 end
 

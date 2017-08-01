@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>thierry62, Marxtai, theSeb, dural, Anonymous</translationContributors>
+    <translationContributors>thierry62, Marxtai, theSeb, dural, Anonymous, Farmer1602</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Afficher les prévisions" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Réparation de véhicule" />
@@ -31,7 +31,7 @@
         <text name="SS_SEASON_3" text="Hiver" />
 
         <text name="SS_SEASON_FULL_NAME_1" text="Début du printemps" />
-        <text name="SS_SEASON_FULL_NAME_2" text="Mi-Printemps" />
+        <text name="SS_SEASON_FULL_NAME_2" text="Mi-printemps" />
         <text name="SS_SEASON_FULL_NAME_3" text="Fin du printemps" />
         <text name="SS_SEASON_FULL_NAME_4" text="Début d'été" />
         <text name="SS_SEASON_FULL_NAME_5" text="Mi-été" />
@@ -40,7 +40,7 @@
         <text name="SS_SEASON_FULL_NAME_8" text="Mi-automne" />
         <text name="SS_SEASON_FULL_NAME_9" text="Fin d'automne" />
         <text name="SS_SEASON_FULL_NAME_10" text="Début d'hiver" />
-        <text name="SS_SEASON_FULL_NAME_11" text="Mi'hiver" />
+        <text name="SS_SEASON_FULL_NAME_11" text="Mi-hiver" />
         <text name="SS_SEASON_FULL_NAME_12" text="Fin d'hiver" />
 
         <text name="SS_MONTH_SHORT_1" text="janv" />
@@ -65,7 +65,7 @@
         <text name="SS_NOTHING_TO_REPAIR" text="Réparation nécessaire %s" />
         <text name="SS_REPAIR_VEHICLE_COST" text="Réparer %s pour %s" />
         <text name="SS_REPAIR_REQUIRED" text="Réparation requise" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Heures du moteur %.1f Heures L'entretien sera dans %d jours" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Heures du moteur %.1f Heures. L'entretien sera dans %d jours" />
         <text name="SS_REPAIR_DIALOG" text="Voulez-vous réparer %s le %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
         <text name="warning_repairBrokenMachine" text="Panne de moteur. Veuillez réparer votre machine!" />
@@ -86,7 +86,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Ne battez pas quand la récolte est trop humide!" />
         <text name="warning_animalsKilled" text="%d Des animaux sont morts" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
-        <text name="msg_welcome" text="Bienvenue sur le Saisons mod créé par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
+        <text name="msg_welcome" text="Bienvenue sur le Seasons mod crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
         <text name="ui_pageOverview" text="Aperçu" />
         <text name="ui_pageSettings" text="Paramètres" />
@@ -99,11 +99,11 @@
         <text name="ui_temperatureCelsius" text="Celsius" />
 
         <text name="ui_plantingSeason" text="Saison des semis" />
-        <text name="ui_harvestSeason" text="Saison de récolte" />
+        <text name="ui_harvestSeason" text="Saison des récoltes" />
 
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons" />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci" />
-        <text name="tooltip_snow" text="La neige chutera dans les hivers froids et bloquera des routes" />
+        <text name="tooltip_snow" text="La neige tombera dans les hivers froids et bloquera des routes" />
         <text name="tooltip_controlsHelp" text="Montrer la prévision et le bouton menu dans le menu d'aide" />
         <text name="tooltip_snowTracks" text="Les véhicules tassent la neige lorsqu'ils roulent dessus" />
         <text name="tooltip_controlsTemperature" text="Contrôle de la temperature utilisée dans le jeu" />
@@ -114,12 +114,12 @@
         <text name="setting_snow" text="Mode neige" />
         <text name="setting_controlsHelp" text="Boutons dans le menu d'aide" />
         <text name="setting_snowTracks" text="Traces de neige" />
-        <text name="setting_controlsTemperature" text="Unité de la temperature" />
-        <text name="setting_moisture" text="L'humidité des cultures" />
+        <text name="setting_controlsTemperature" text="Unité de  température" />
+        <text name="setting_moisture" text="Humidité des cultures" />
 
         <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
-        <text name="dialog_resetGrowth" text="Vous avez chargé des Saisons sur une vieille sauvegarde. Les saisons veulent remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, les Saisons ne pourraient pas marcher comme attendu." />
-        <text name="dialog_resetGrowth_title" text="Remise a zéro de la croissance" />
+        <text name="dialog_resetGrowth" text="Vous avez chargé Seasons sur une vieille sauvegarde. Seasons veut remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, Seasons pourrait ne marcher pas comme attendu." />
+        <text name="dialog_resetGrowth_title" text="Remise à zéro de la croissance" />
         <text name="dialog_resetGrowth_no" text="Maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="Réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
@@ -130,14 +130,14 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons est un mod qui améliore le réalisme de Farming Simulator en ajustant presque tous les aspects avec des parametres plus réalistes. A peu près tout, en partant des effets des saisons, en passant par la croissance des cultures et jusqu'à la production animale a été changé à un niveau plus réaliste." />
+        <text name="ss_helpText_01_01" text="Seasons est un mod qui améliore le réalisme de Farming Simulator en ajustant presque tous les aspects avec des paramètres plus réalistes. A peu près tout, en partant des effets des saisons, en passant par la croissance des cultures et jusqu'à la production animale a été changé à un niveau plus réaliste." />
         <text name="ss_helpText_01_02" text="Une année dans le jeu a été découpée en 4 saisons : printemps, été, automne et hiver. Chaque saison est ensuite découpée en 3 parties : début, milieu et fin. Ces parties sont appelées des transitions." />
         <text name="ss_helpText_01_03" text="Vos activités sont liées à la période de l'année durant laquelle elles se produisent dans la vie réelle." />
 
         <text name="ss_helpTitle_02" text="Effets saisonniers (1)" />
         <text name="ss_helpText_02_01" text="Le temps est aléatoire au jour le jour mais suit une certaine mouvance saison après saison." />
         <text name="ss_helpText_02_02" text="Le printemps sera pluvieux et brumeux avec quelques apparitions du soleil. L'été sera plus chaud et sec. Des orages pourront survenir sans avertissement. L'automne sera pluvieux et parfois ensoleillée. L'hiver sera pluvieux, mais souvent assez froid pour que de la neige tombe et parfois reste au sol." />
-        <text name="ss_helpText_02_03" text="La neige remplira les remorques et godets, à moins que ceux-ci soit couvert par une bâche ou à l'abri sous un hangar (adapté au mod Seasons avec un 'snow mask'). La neige réduira la force de traction, ralentissant les véhicules." />
+        <text name="ss_helpText_02_03" text="La neige remplira les remorques et godets, à moins que ceux-ci soient couverts par une bâche ou à l'abri sous un hangar (adapté au mod Seasons avec un 'snow mask'). La neige réduira la force de traction, ralentissant les véhicules." />
 
         <text name="ss_helpTitle_03" text="Effets saisonniers (2)" />
         <text name="ss_helpText_03_01" text="La journée est aussi affectée par la saison. En hiver, les jours seront plus courts (8 heures) alors qu'en été ils seront plus longs (17 Heures)." />
@@ -155,8 +155,8 @@
         <text name="ss_helpText_05_03" text="Les cultures ne pourront germer que si la température du sol est supérieure à leur température de germination requise. Ces températures sont consultables sur la première page du menu paramètres du mod Seasons (Alt + S)." />
 
         <text name="ss_helpTitle_06" text="Cultures - Intro" />
-        <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
-        <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques cultures semées à la mauvaise période ne pourront pas pousser." />
+        <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod Seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
+        <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques les cultures semées à la mauvaise période ne pourront pas pousser." />
         <text name="ss_helpText_06_03" text="La récolte des cultures ne sera possible que pendant leur dernier cylce de croissance, mis à part les peupliers et les radis oléagineux. Elles resteront à cette étape jusqu'à ce que l'hiver les détruise." />
         <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu Esc, elle est prête à être récolté. C'est la phase finale de récolte." />
         <text name="ss_helpText_06_05" text="Il est toujours possible d'ensiler une culture sur pied." />
@@ -177,7 +177,7 @@
         <text name="ss_helpText_09_02" text="Les arbres se font concurrence en ce qui concerne leur développement s'ils sont plantés trop près les uns des autres. Il faudra procéder à des éclaircies dans les bois pour les aider à reprendre leur croissance normale." />
 
         <text name="ss_helpTitle_10" text="Cultures - Effets du temps" />
-        <text name="ss_helpText_10_01" text="La pluie, la grêle et la neige affectent l'humidité des cultures. Si cette humidité est trop élevée, il ne sera pas possible de récolter certaines cultures. Certaines nuits d'été peuvent être moite sans prévenir." />
+        <text name="ss_helpText_10_01" text="La pluie, la grêle et la neige affectent l'humidité des cultures. Si cette humidité est trop élevée, il ne sera pas possible de récolter certaines cultures. Certaines nuits d'été peuvent être moites sans prévenir." />
         <text name="ss_helpText_10_02" text="Après la pluie, il faudra un certain temps pour que la culture sèche (en fonction de la température ambiante et de la période de l'année). Plus il fait chaud, plus la récolte sèche vite." />
         <text name="ss_helpText_10_03" text="Utiliser une faneuse sur du foin humide le rétrogradera en herbe humide. Il faudra donc être vigilant sur l'humidité avant toute intervention." />
         <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le moddeur, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hangar bénéficiant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
@@ -186,7 +186,7 @@
         <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
         <text name="ss_helpText_11_02" text="Vos véhicules peuvent être réparés soit à la concession, soit avec le garage plaçable. Une fois sur place avec votre véhicule, il suffit d'appuyer sur 'Alt + R'. Bien sûr, c'est plus cher à la concession que dans votre propre garage." />
         <text name="ss_helpText_11_03" text="L'âge affiché de votre véhicule correspond au nombre de jours depuis la dernière réparation." />
-        <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessite de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
+        <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
 
         <text name="ss_helpTitle_12" text="Economie" />
         <text name="ss_helpText_12_01" text="Le montant maximum de l'emprunt à la banque a été modifié de $CURRENCY_SYMBOL200 000 à 30% de la valeur de vos terres et de vos batiments plaçables. Le montant minimum est de $CURRENCY_SYMBOL300 000, et le montant maximum est de $CURRENCY_SYMBOL1 500 000." />
@@ -198,8 +198,8 @@
         <text name="ss_helpText_13_01" text="On doit maintenant payer les heures supplémentaires de l'ouvrier. Si celui-ci travaille avant 6h du matin ou après 6h du soir, ou encore les week-ends, sa paie sera majorée de 50%." />
 
         <text name="ss_helpTitle_14" text="Animaux - Intro" />
-        <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 jours à 3 jours." />
-        <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons et les moutons, c'est au printemps alors que pour les vaches, c'est durant l'été." />
+        <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 à 3 jours." />
+        <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons et les moutons c'est au printemps, alors que pour les vaches c'est durant l'été." />
         <text name="ss_helpText_14_03" text="Les animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
         <text name="ss_helpText_14_04" text="Il n'est pas possible de nourrir les animaux avec de l'herbe l'hiver, il faut utiliser du foin." />
 
