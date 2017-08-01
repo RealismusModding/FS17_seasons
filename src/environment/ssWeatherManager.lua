@@ -25,6 +25,7 @@ function ssWeatherManager:load(savegame, key)
     self.soilTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTemp")
     self.prevHighTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
+    self.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
     self.moistureEnabled = ssXMLUtil.getBool(savegame, key .. ".weather.moistureEnabled", true)
 
     -- load forecast
@@ -77,6 +78,7 @@ function ssWeatherManager:save(savegame, key)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
     ssXMLUtil.setFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
     ssXMLUtil.setFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
+    ssXMLUtil.setFloat(savegame, key .. ".weather.soilWaterContent", self.soilWaterContent)
     ssXMLUtil.setBool(savegame, key .. ".weather.moistureEnabled", self.moistureEnabled)
 
     for i = 0, table.getn(self.forecast) - 1 do
@@ -105,6 +107,8 @@ function ssWeatherManager:save(savegame, key)
 end
 
 function ssWeatherManager:loadMap(name)
+    Environment.calculateGroundWetness = Utils.overwrittenFunction(Environment.calculateGroundWetness, ssWeatherManager.calculateSoilWetness)
+    
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
@@ -377,6 +381,7 @@ function ssWeatherManager:hourChanged()
     if g_currentMission:getIsServer() then
         local oldSnow = self.snowDepth
 
+        self.meltedSnow = 0
         self:calculateSnowAccumulation()
 
         if math.abs(oldSnow - self.snowDepth) > 0.01 then
@@ -387,6 +392,10 @@ function ssWeatherManager:hourChanged()
         end
 
         self:updateCropMoistureContent()
+        
+        if not self:isGroundFrozen() then
+            self:updateSoilWaterContent()
+        end
 
         g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth))
     end
@@ -461,17 +470,20 @@ function ssWeatherManager:calculateSnowAccumulation()
 
     elseif currentRain.rainTypeId == "snow" and currentTemp >= 0 then
         -- warm hail acts as rain
-        self.snowDepth = self.snowDepth - math.max((currentTemp + 1) * 3 / 1000, 0) * meltFactor
+        self.meltedSnow = math.max((currentTemp + 1) * 3 / 1000, 0) * meltFactor
+        self.snowDepth = self.snowDepth - self.meltedSnow
         --g_currentMission.environment.currentRain.rainTypeId = nil
         --currentRain.rainTypeId = "rain"
 
     elseif currentRain.rainTypeId == "cloudy" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.snowDepth = self.snowDepth - math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
+        self.meltedSnow = math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
+        self.snowDepth = self.snowDepth - self.meltedSnow
 
     elseif currentRain.rainTypeId == "fog" and currentTemp > 0 then
         -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.snowDepth = self.snowDepth - math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
+        self.meltedSnow = math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
+        self.snowDepth = self.snowDepth - self.meltedSnow
 
     end
 
@@ -828,8 +840,8 @@ function ssWeatherManager:updateCropMoistureContent()
     local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
 
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
-    -- added effect of some wind drying crops
-    local deltaMoisture = 0.3 + solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt(math.max(9 / g_seasons.environment.daysInSeason, 1))
+    -- added effect of some wind drying crops. Reduced for normal and hard difficulty
+    local deltaMoisture = (0.3 - 0.1 * g_currentMission.missionInfo.difficulty) + solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt(math.max(9 / g_seasons.environment.daysInSeason, 1))
 
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
@@ -858,5 +870,74 @@ function ssWeatherManager:updateHail(day)
         self.weather[1].endDay = self.forecast[1].day
 
         g_server:broadcastEvent(ssWeatherManagerHailEvent:new(self.weather[1]))
+    end
+end
+
+function ssWeatherManager:updateSoilWaterContent()
+    --Soil moisture bucket model
+    --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
+    --Water Resour. Res., 38(9), 1166, doi:10.1029/2001WR000826, 2002
+
+    -- every hour with rain add 10 mm of waterInfriltation
+    -- every hour snow melts: add 30% of melted snowDepth as waterInfriltation
+    -- every hour air temperature < 5 deg, or solarRadiation < 1.5, no transpiration
+
+
+    -- constants
+    local depthRootZone = 20 -- cm
+    local Ksat = 109.8 / 24 -- saturated conductivity cm/day | divided by 24 due to update every hour
+    local Sfc = 0.29 -- field capacity, gravity drainage becomes negligible compared to evotranspiration when saturation is above
+    local beta = 9.0 -- drainage curve parameter
+    local soilPorosity = 0.42
+    local stomatalSaturation = 0.105 -- evotranspiration reaches maximum when saturation is above this value
+    local wiltingSaturation = 0.036 -- if saturation is below this value the plant wilts
+    local hygroscopicSaturation = 0.02 -- if saturation is below this value evaporation stops
+    local maxEvaporation = 0.15 / g_seasons.environment.daysInSeason -- cm/day | gameification with daysInSeason
+    local maxTranspiration = 0.325 / g_seasons.environment.daysInSeason -- cm/day | gameification with daysInSeason
+
+    -- update variables
+    local relativeHumidity = self:calculateRelativeHumidity()
+    local currentTemp = self:currentTemperature()
+    local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
+    local prevSoilWaterCont = self.soilWaterContent
+    local soilWaterInfiltration = 0 
+
+    -- calculate evaporation, if relativeHumidity > 90% or snow on the ground, no evaporation
+    if prevSoilWaterCont <= hygroscopicSaturation or relativeHumidity > 90 or self.snowDepth > 0 then
+        soilWaterEvaporation = 0
+    elseif prevSoilWaterCont >= stomatalSaturation then
+        soilWaterEvaporation = maxEvaporation
+    else
+        soilWaterEvaporation = (prevSoilWaterCont - hygroscopicSaturation) / (stomatalSaturation - hygroscopicSaturation) * maxEvaporation / 24
+    end
+
+    -- calculate transpiration, if air temperature < 5 deg, or solarRadiation < 1.5, no transpiration
+    if prevSoilWaterCont <= wiltingSaturation or currentTemp < 5 or solarRadiation < 1.5 then
+        soilWaterTranspiration = 0
+    elseif prevSoilWaterCont >= stomatalSaturation then
+        soilWaterTranspiration = maxTranspiration
+    else
+        soilWaterTranspiration = (prevSoilWaterCont - wiltingSaturation) / (stomatalSaturation - wiltingSaturation) * maxTranspiration / 24
+    end
+
+    -- add water if it rains or if snow melts
+    if g_currentMission.environment.timeSinceLastRain == 0 then
+        soilWaterInfiltration = 1 -- 10 mm/hr infiltration
+    elseif self.meltedSnow ~= 0 then
+        -- 30% of melted snow infiltrates, meltedSnow in meter, snow density 400 kg/m3
+        soilWaterInfiltration = 0.3 * self.meltedSnow * 1000 * 0.4
+    end
+
+    soilWaterLeakage = math.max(Ksat * (math.exp(beta*(prevSoilWaterCont - Sfc)) - 1) / (math.exp(beta*(1 - Sfc)) - 1),0)
+    self.soilWaterContent = prevSoilWaterCont + 1 / (soilPorosity * depthRootZone) * (soilWaterInfiltration - soilWaterLeakage - soilWaterTranspiration - soilWaterEvaporation)
+
+end
+
+function ssWeatherManager:calculateSoilWetness()
+
+    if ssWeatherManager:isGroundFrozen() then
+        return 0
+    else
+        return ssWeatherManager.soilWaterContent
     end
 end
