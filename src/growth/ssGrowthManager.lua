@@ -246,6 +246,7 @@ end
 
 --set growth state of fruit to a particular state based on transition
 function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+    local useMaxState = false
     local minState = self.growthData[transition][fruitName].setGrowthState
     local desiredGrowthState = self.growthData[transition][fruitName].desiredGrowthState
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
@@ -264,12 +265,27 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
         end
 
         setDensityMaskParams(fruit.id, "between", minState, maxState)
+        useMaxState = true
     else -- else only use minState
         setDensityMaskParams(fruit.id, "equals", minState)
     end
 
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
     local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
+    if growthResult ~= 0 then
+        local terrainDetailId = g_currentMission.terrainDetailId
+        if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthState then
+            if useMaxState == true then
+                setDensityMaskParams(fruit.id, "between", minState, self.defaultFruitsData[fruitName].maxSprayGrowthState)
+            end
+            local sprayResetResult = setDensityMaskedParallelogram(terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.sprayFirstChannel, g_currentMission.sprayNumChannels, fruit.id, 0, numFruitStateChannels, 0)
+        end
+        if fruitTypeGrowth.groundTypeChanged > 0 then --grass
+            setDensityCompareParams(terrainDetailId, "greater", 0)
+            local sum = setDensityMaskedParallelogram(terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, fruit.id, fruitTypeGrowth.groundTypeChangeGrowthState, numFruitStateChannels, fruitTypeGrowth.groundTypeChanged)
+            setDensityCompareParams(terrainDetailId, "greater", -1) -- reset
+        end
+    end
 
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
