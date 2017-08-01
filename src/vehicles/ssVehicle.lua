@@ -335,8 +335,8 @@ end
 
 function ssVehicle:vehicleGetSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-    local price = storeItem.price
-    local minSellPrice = storeItem.price * 0.03
+    local price = ssVehicle:getFullBuyPrice(self,storeItem)
+    local minSellPrice = price * 0.03
     local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
     local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR) -- year
@@ -554,4 +554,16 @@ function ssVehicle:consoleCommandRepairAllVehicles()
     end
 
     return "Repaired " .. tostring(n) .. " vehicles"
+end
+
+function ssVehicle:getFullBuyPrice(vehicle,storeItem)
+    local priceConfig = 0
+
+    for name , boughtConfigs in pairs(vehicle.boughtConfigurations) do
+        for num , _ in pairs(boughtConfigs) do
+            priceConfig = priceConfig + storeItem.configurations[name][num].price
+        end
+    end
+
+    return storeItem.price + priceConfig
 end
