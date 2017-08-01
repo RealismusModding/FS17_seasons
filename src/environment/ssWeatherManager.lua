@@ -698,7 +698,7 @@ function ssWeatherManager:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:canSow(fruit)
-    return self.soilTemp >= self:germinationTemperature(fruit)
+    return self.soilTemp >= self:germinationTemperature(fruit) and g_currentMission.groundWetness > 0.15
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)
