@@ -10,6 +10,8 @@
 ssSC = {}
 g_seasons.sc = ssSC
 
+ssSC.cultivatorDecompactionValue = 1 --set to this value where compaction is greater
+
 function ssSC:preLoad()
 end
 
@@ -21,6 +23,10 @@ end
 
 function ssSC:loadMap()
     Utils.cutFruitArea = Utils.overwrittenFunction(Utils.cutFruitArea, ssSC.updateCutFruitArea)
+    Utils.updateCultivatorArea = Utils.overwrittenFunction(Utils.updateCultivatorArea, function(self, superFunc, x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
+        ssSC.decompactCultivatorArea(self, x, z, x1, z1, x2, z2, limitToField)
+        return superFunc(self, x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
+    end)    
 end
 
 function ssSC:readStream(streamId, connection)
@@ -37,4 +43,21 @@ function ssSC:updateCutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, w
     g_currentMission.ploughCounterNumChannels = tmpNumChannels
 
     return volume, area, sprayFactor, ploughFactor, growthState, growthStateArea
+end
+
+function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
+    local detailId = g_currentMission.terrainDetailId
+    local compactFirstChannel = g_currentMission.ploughCounterFirstChannel
+    local compactNumChannels = g_currentMission.ploughCounterNumChannels
+    local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, x, z, x1, z1, x2, z2)
+
+    -- Set compaction to decompaction value where compaction is greater
+    setDensityCompareParams(detailId, "between", 0, ssSC.cultivatorDecompactionValue)
+    setDensityParallelogram(
+        detailId,
+        x0, z0, widthX, widthZ, heightX, heightZ,
+        compactFirstChannel, compactNumChannels,
+        ssSC.cultivatorDecompactionValue
+    )
+    setDensityCompareParams(detailId, "greater", -1)
 end
