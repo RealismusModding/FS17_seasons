@@ -27,6 +27,7 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
     SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    SpecializationUtil.registerSpecialization("scspec", "ssSCspec", g_seasons.modDir .. "src/vehicles/specializations/ssSCspec.lua")
 
     ssVehicle:registerWheelTypes()
 end
@@ -108,6 +109,7 @@ function ssVehicle:installVehicleSpecializations()
             if SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("scspec"))
             end
 
             if SpecializationUtil.hasSpecialization(Fillable, vehicleType.specializations) then
@@ -460,6 +462,16 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             g_currentMission:showBlinkingWarning(ssLang.getText("warning_soilIsFrozen"), 2000)
         end
     end
+
+    if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
+        for i, wheel in pairs(self.wheels) do
+            renderText(0.3, 0.22 - 0.02 * i, 0.01, "Ground Pressure: " .. wheel.groundPressure)
+            renderText(0.4, 0.22 - 0.02 * i, 0.01, "fwdC: " .. wheel.fwdTireCLayers)
+            renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
+            renderText(0.5, 0.22 - 0.02 * i, 0.01, "index: " .. wheel.soilBulkDensity)
+        end
+    end
+
 end
 
 -- Add wheel types for special snow wheels that have more friction in snow but less on other surfaces (e.g. chains)
