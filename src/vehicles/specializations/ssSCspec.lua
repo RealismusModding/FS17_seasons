@@ -30,7 +30,7 @@ local function applySC(self)
 
     for _, wheel in pairs(self.wheels) do
 
-        if wheel.hasGroundContact then
+        if wheel.hasGroundContact and not wheel.mrNotAWheel then
             local x0, y0, z0
             local x1, y1, z1
             local x2, y2, z2

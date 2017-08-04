@@ -42,6 +42,10 @@ function ssSC:updateCutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, w
     local volume, area, sprayFactor, ploughFactor, growthState, growthStateArea = superFunc(self, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
     g_currentMission.ploughCounterNumChannels = tmpNumChannels
 
+    local densityC, areaC, _ = getDensityParallelogram(g_currentMission.terrainDetailId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
+    local CLayers = densityC / areaC
+    ploughFactor = 2 * CLayers - 5
+    
     return volume, area, sprayFactor, ploughFactor, growthState, growthStateArea
 end
 
