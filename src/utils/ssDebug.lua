@@ -57,7 +57,7 @@ function ssDebug:setEnabled(enabled)
     end
 end
 
-function ssDebug.drawDensityParallelogram(x, z, wX, wZ, hX, hZ, offsetY, r, g, b)
+function ssDebug:drawDensityParallelogram(x, z, wX, wZ, hX, hZ, offsetY, r, g, b)
     local node = g_currentMission.terrainRootNode
 
     drawDebugLine(  x,          getTerrainHeightAtWorldPos(node, x     ,        0, z            ) + offsetY, z          , r, g, b,

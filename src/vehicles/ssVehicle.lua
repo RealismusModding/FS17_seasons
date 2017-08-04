@@ -465,10 +465,12 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         for i, wheel in pairs(self.wheels) do
-            renderText(0.3, 0.22 - 0.02 * i, 0.01, "Ground Pressure: " .. wheel.groundPressure)
-            renderText(0.4, 0.22 - 0.02 * i, 0.01, "fwdC: " .. wheel.fwdTireCLayers)
-            renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
-            renderText(0.5, 0.22 - 0.02 * i, 0.01, "index: " .. wheel.soilBulkDensity)
+            if wheel.groundPressure ~= nil or wheel.fwdTireCLayers ~= nil or wheel.underTireCLayers ~= nil or wheel.soilBulkDensity ~= nil then
+                renderText(0.3, 0.22 - 0.02 * i, 0.01, "Ground Pressure: " .. wheel.groundPressure)
+                renderText(0.4, 0.22 - 0.02 * i, 0.01, "fwdC: " .. wheel.fwdTireCLayers)
+                renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
+                renderText(0.5, 0.22 - 0.02 * i, 0.01, "index: " .. wheel.soilBulkDensity)
+            end
         end
     end
 
