@@ -53,10 +53,12 @@ function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
 
     -- Set compaction to decompaction value where compaction is greater
     setDensityCompareParams(detailId, "between", 0, ssSC.cultivatorDecompactionValue)
-    setDensityParallelogram(
+    setDensityMaskedParallelogram(
         detailId,
         x0, z0, widthX, widthZ, heightX, heightZ,
         compactFirstChannel, compactNumChannels,
+        detailId,
+        g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
         ssSC.cultivatorDecompactionValue
     )
     setDensityCompareParams(detailId, "greater", -1)
