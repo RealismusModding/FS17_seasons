@@ -69,6 +69,7 @@ function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
 
     -- Apply decompaction delta where ground is field but not yet cultivated
     setDensityMaskParams(detailId, "greater", g_currentMission.cultivatorValue);
+    setDensityCompareParams(detailId, "greater", 0)
     addDensityMaskedParallelogram(
         detailId,
         x0, z0, widthX, widthZ, heightX, heightZ,
@@ -78,6 +79,7 @@ function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
         ssSC.cultivatorDecompactionDelta
     )
     setDensityMaskParams(detailId, "greater", 0)
+    setDensityCompareParams(detailId, "greater", -1)
 end
 
 -- Draw all the different states of compaction in overlay menu
