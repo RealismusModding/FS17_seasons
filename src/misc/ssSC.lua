@@ -10,7 +10,7 @@
 ssSC = {}
 g_seasons.sc = ssSC
 
-ssSC.cultivatorDecompactionValue = 1 -- Set to this value where compaction is greater
+ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
 ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)   
 ssSC.overlayColor[false] =  {
                         {0.6172, 0.0510, 0.0510, 1},
@@ -67,17 +67,17 @@ function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
     local compactNumChannels = g_currentMission.ploughCounterNumChannels
     local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, x, z, x1, z1, x2, z2)
 
-    -- Set compaction to decompaction value where compaction is greater
-    setDensityCompareParams(detailId, "between", 0, ssSC.cultivatorDecompactionValue)
-    setDensityMaskedParallelogram(
+    -- Apply decompaction delta where ground is field but not yet cultivated
+    setDensityMaskParams(detailId, "greater", g_currentMission.cultivatorValue);
+    addDensityMaskedParallelogram(
         detailId,
         x0, z0, widthX, widthZ, heightX, heightZ,
         compactFirstChannel, compactNumChannels,
         detailId,
         g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
-        ssSC.cultivatorDecompactionValue
+        ssSC.cultivatorDecompactionDelta
     )
-    setDensityCompareParams(detailId, "greater", -1)
+    setDensityMaskParams(detailId, "greater", 0)
 end
 
 -- Draw all the different states of compaction in overlay menu
