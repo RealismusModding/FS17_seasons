@@ -117,13 +117,13 @@
         <text name="setting_controlsTemperature" text="Unité de  température" />
         <text name="setting_moisture" text="Humidité des cultures" />
 
-        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Saisons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
-        <text name="dialog_resetGrowth" text="Vous avez chargé Seasons sur une vieille sauvegarde. Seasons veut remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toute la récolte. Si vous ne remettez pas de croissance, Seasons pourrait ne marcher pas comme attendu." />
+        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Seasons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
+        <text name="dialog_resetGrowth" text="Vous avez chargé Seasons sur une vieille sauvegarde. Seasons veut remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toutes les récoltes. Si vous ne réinitialisez pas la croissance, Seasons pourrait ne pas fonctionner comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise à zéro de la croissance" />
         <text name="dialog_resetGrowth_no" text="Maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="Réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
-        <text name="dialog_sleeping" text="Se reposer pendant un autre jour à la ferme... Zzz.." />
+        <text name="dialog_sleeping" text="Se reposer un autre jour à la ferme... Zzz.." />
 
         <text name="fillType_snow" text="Neige" />
 
@@ -156,7 +156,7 @@
 
         <text name="ss_helpTitle_06" text="Cultures - Intro" />
         <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod Seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
-        <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et ques les cultures semées à la mauvaise période ne pourront pas pousser." />
+        <text name="ss_helpText_06_02" text="Les cycles de croissance par défaut ont été remplacés avec le mod Seasons. Les cultures suivent maintenant un cycle réaliste correspondant à leurs périodes de semis et de récolte. Cela implique aussi que la plupart des cultures seront anéanties par l'hiver et que les cultures semées à la mauvaise période ne pourront pas pousser." />
         <text name="ss_helpText_06_03" text="La récolte des cultures ne sera possible que pendant leur dernier cylce de croissance, mis à part les peupliers et les radis oléagineux. Elles resteront à cette étape jusqu'à ce que l'hiver les détruise." />
         <text name="ss_helpText_06_04" text="Une fois qu'une culture non racinaire atteint le premier stade récoltable selon la vue d'ensemble de la croissance dans le menu Esc, elle est prête à être récolté. C'est la phase finale de récolte." />
         <text name="ss_helpText_06_05" text="Il est toujours possible d'ensiler une culture sur pied." />
@@ -208,8 +208,8 @@
         <text name="ss_helpText_15_02" text="La laine est seulement produite au printemps." />
         <text name="ss_helpText_15_03" text="La production de lait se fait toute l'année mais elle est augmentée en hiver et au printemps. Comme on ne peut pas donner d'herbe pendant l'hiver, normalement, la productivité des vaches ne pourrait être que de 80% au mieux. Cependant, le mod Seasons augmente la production pour compenser cette perte de productivité." />
 
-        <text name="ss_helpTitle_16" text="Menu Saisons" />
-        <text name="ss_helpText_16_01" text="Le menu Saisons est utilisé comme guide de référence pour les semis et les modifications à apporter aux mod Seasons. Ce menu est activé avec les touches 'Alt + S'." />
+        <text name="ss_helpTitle_16" text="Menu Seasons" />
+        <text name="ss_helpText_16_01" text="Le menu Seasons est utilisé comme guide de référence pour les semis et les modifications à apporter aux mod Seasons. Ce menu est activé avec les touches 'Alt + S'." />
         <text name="ss_helpText_16_02" text="La première page est votre guide de période de semis et de récolte. Les températures de germination de toutes les cultures sont affichées sur la gauche du graphique. Si la température d'une culture est en blanc, cela veut dire que la température actuelle est assez douce pour semer cette plante. Si la température est bleue, c'est que le sol est trop froid." />
         <text name="ss_helpText_16_03" text="La deuxième page regroupe les paramètres du mod Seasons. Dans celle-ci, il est possible de modifier la durée d'une saison, d'activer ou non les notifications concernant les saisons, le mode neige, la prise en compte de l'humidité des cultures et enfin l'unité d'affichage des températures." />
 
