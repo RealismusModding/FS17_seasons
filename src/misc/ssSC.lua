@@ -10,6 +10,7 @@
 ssSC = {}
 g_seasons.sc = ssSC
 
+ssSC.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
 ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
 ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)   
 ssSC.overlayColor[false] =  {
@@ -33,12 +34,14 @@ function ssSC:save(savegame, key)
 end
 
 function ssSC:loadMap()
+    -- Overwritten functions
     InGameMenu.generateFruitOverlay = Utils.overwrittenFunction(InGameMenu.generateFruitOverlay, ssSC.generateFruitOverlay)
-    Utils.cutFruitArea = Utils.overwrittenFunction(Utils.cutFruitArea, ssSC.updateCutFruitArea)
-    Utils.updateCultivatorArea = Utils.overwrittenFunction(Utils.updateCultivatorArea, function(self, superFunc, x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
-        ssSC.decompactCultivatorArea(self, x, z, x1, z1, x2, z2, limitToField)
-        return superFunc(self, x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
-    end)  
+    
+    -- Since we can not use overwrittenFunction() properly for Utils, simply store the pointer before overwriting
+    self.superFunc.cutFruitArea = Utils.cutFruitArea
+    self.superFunc.updateCultivatorArea = Utils.updateCultivatorArea
+    Utils.cutFruitArea = ssSC.cutFruitArea
+    Utils.updateCultivatorArea = ssSC.updateCultivatorArea
 end
 
 function ssSC:readStream(streamId, connection)
@@ -47,21 +50,22 @@ end
 function ssSC:writeStream(streamId, connection)
 end
 
-function ssSC:updateCutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
+function ssSC.cutFruitArea(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
     local tmpNumChannels = g_currentMission.ploughCounterNumChannels
 
     g_currentMission.ploughCounterNumChannels = 0
-    local volume, area, sprayFactor, ploughFactor, growthState, growthStateArea = superFunc(self, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
+    local volume, area, sprayFactor, ploughFactor, growthState, growthStateArea = ssSC.superFunc.cutFruitArea(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
     g_currentMission.ploughCounterNumChannels = tmpNumChannels
 
-    local densityC, areaC, _ = getDensityParallelogram(g_currentMission.terrainDetailId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
+    local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+    local densityC, areaC, _ = getDensityParallelogram(g_currentMission.terrainDetailId, x0, z0, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
     local CLayers = densityC / areaC
     ploughFactor = 2 * CLayers - 5
     
     return volume, area, sprayFactor, ploughFactor, growthState, growthStateArea
 end
 
-function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
+function ssSC.updateCultivatorArea(x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
     local detailId = g_currentMission.terrainDetailId
     local compactFirstChannel = g_currentMission.ploughCounterFirstChannel
     local compactNumChannels = g_currentMission.ploughCounterNumChannels
@@ -80,6 +84,8 @@ function ssSC.decompactCultivatorArea(x, z, x1, z1, x2, z2, limitToField)
     )
     setDensityMaskParams(detailId, "greater", 0)
     setDensityCompareParams(detailId, "greater", -1)
+    
+    return ssSC.superFunc.updateCultivatorArea(x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
 end
 
 -- Draw all the different states of compaction in overlay menu
