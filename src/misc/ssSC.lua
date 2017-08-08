@@ -2,7 +2,7 @@
 -- SSC SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To add sc
--- Authors:  
+-- Authors:  reallogger
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ g_seasons.sc = ssSC
 
 ssSC.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
 ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
-ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)   
+ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)
 ssSC.overlayColor[false] =  {
                         {0.6172, 0.0510, 0.0510, 1},
                         {0.6400, 0.1710, 0.1710, 1},
@@ -36,12 +36,9 @@ end
 function ssSC:loadMap()
     -- Overwritten functions
     InGameMenu.generateFruitOverlay = Utils.overwrittenFunction(InGameMenu.generateFruitOverlay, ssSC.generateFruitOverlay)
-    
-    -- Since we can not use overwrittenFunction() properly for Utils, simply store the pointer before overwriting
-    self.superFunc.cutFruitArea = Utils.cutFruitArea
-    self.superFunc.updateCultivatorArea = Utils.updateCultivatorArea
-    Utils.cutFruitArea = ssSC.cutFruitArea
-    Utils.updateCultivatorArea = ssSC.updateCultivatorArea
+
+    Utils.cutFruitArea = ssUtil.overwrittenStaticFunction(Utils.cutFruitArea, ssSC.cutFruitArea)
+    Utils.updateCultivatorArea = ssUtil.overwrittenStaticFunction(Utils.updateCultivatorArea, ssSC.updateCultivatorArea)
 end
 
 function ssSC:readStream(streamId, connection)
@@ -50,22 +47,22 @@ end
 function ssSC:writeStream(streamId, connection)
 end
 
-function ssSC.cutFruitArea(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
+function ssSC.cutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
     local tmpNumChannels = g_currentMission.ploughCounterNumChannels
 
     g_currentMission.ploughCounterNumChannels = 0
-    local volume, area, sprayFactor, ploughFactor, growthState, growthStateArea = ssSC.superFunc.cutFruitArea(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
+    local volume, area, sprayFactor, ploughFactor, growthState, growthStateArea = superFunc(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)
     g_currentMission.ploughCounterNumChannels = tmpNumChannels
 
     local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     local densityC, areaC, _ = getDensityParallelogram(g_currentMission.terrainDetailId, x0, z0, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
     local CLayers = densityC / areaC
     ploughFactor = 2 * CLayers - 5
-    
+
     return volume, area, sprayFactor, ploughFactor, growthState, growthStateArea
 end
 
-function ssSC.updateCultivatorArea(x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
+function ssSC.updateCultivatorArea(superFunc, x, z, x1, z1, x2, z2, ...)
     local detailId = g_currentMission.terrainDetailId
     local compactFirstChannel = g_currentMission.ploughCounterFirstChannel
     local compactNumChannels = g_currentMission.ploughCounterNumChannels
@@ -84,13 +81,12 @@ function ssSC.updateCultivatorArea(x, z, x1, z1, x2, z2, limitToField, limitGras
     )
     setDensityMaskParams(detailId, "greater", 0)
     setDensityCompareParams(detailId, "greater", -1)
-    
-    return ssSC.superFunc.updateCultivatorArea(x, z, x1, z1, x2, z2, limitToField, limitGrassDestructionToField, angle)
+
+    return superFunc(x, z, x1, z1, x2, z2, ...)
 end
 
 -- Draw all the different states of compaction in overlay menu
 function ssSC:generateFruitOverlay(superFunc)
-
     -- If ploughing overlay is selected we override everything being drawn
     if self.mapNeedsPlowing and self.mapSelectorMapping[self.mapOverviewSelector:getState()] == InGameMenu.MAP_SOIL then
         if g_currentMission ~= nil and g_currentMission.terrainDetailId ~= 0 then
@@ -112,7 +108,7 @@ function ssSC:generateFruitOverlay(superFunc)
             self:checkFoliageStateOverlayReady()
         end
     -- Else if ploughing is not selected use vanilla functionality
-    else 
+    else
         superFunc(self)
     end
 end
