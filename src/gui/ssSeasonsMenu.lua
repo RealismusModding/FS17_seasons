@@ -736,8 +736,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
 end
 
 function ssSeasonsMenu:onClickSaveSettings()
-    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
-       or self.settingElements.snow:getState() ~= ssSnow.mode then
+    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text = text, callback = self.onYesNoSaveSettings, target = self})
     else

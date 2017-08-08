@@ -294,15 +294,14 @@ end
 function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
     local useMaxState = false
     local minState = self.growthData[transition][fruitName].normalGrowthState
-
-    if minState == 1 and self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] == false then --check if the fruit has just been planted and delay growth if germination temp not reached
-        return
-    end
-
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
     if self.growthData[transition][fruitName].normalGrowthMaxState ~= nil then
         local maxState = self.growthData[transition][fruitName].normalGrowthMaxState
+
+        if minState == 1 and self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] == false then
+            minState = 2
+        end
 
         if maxState == self.MAX_STATE then
             maxState = fruitTypeGrowth.numGrowthStates - 1
@@ -310,6 +309,9 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
         setDensityMaskParams(fruit.id, "between", minState, maxState)
         useMaxState = true
     else
+        if minState == 1 and self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] == false then
+            return
+        end
         setDensityMaskParams(fruit.id, "equals", minState)
     end
 

@@ -6,8 +6,8 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Napraw pojazd" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Otwórz menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Odległość sadzenia (%d m)" />
-        <text name="input_SEASONS_SKIP_NIGHT" text="Pomiń noc" />
-        <text name="SEASONS_HIDE_WF" text="Sezony: Ukryj prognozę pogody" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Seasons: Pomiń noc" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Ukryj prognozę pogody" />
 
         <text name="SS_WEEKDAY_1" text="Poniedziałek" />
         <text name="SS_WEEKDAY_2" text="Wtorek" />
@@ -140,9 +140,9 @@
         <text name="ss_helpText_02_03" text="Śnieg wypełni przyczepy i łychy, chyba że przyczepa lub łycha jest schowana w szopie z maską modu Seasons* lub przykryta plandeką. Śnieg zmniejszy również trakcję, tym samym spowalniając pojazdy. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
         <text name="ss_helpTitle_03" text="Efekty sezonowe (2)" />
-        <text name="ss_helpText_03_01" text="Długość dnia została również zmieniona w sezonach. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
+        <text name="ss_helpText_03_01" text="Mod Seasons zmienia również długość dnia. Zimą dni są krótsze (8 godzin), a latem dłuższe (17 godzin)." />
         <text name="ss_helpText_03_02" text="Silosy z kiszoną i bele kiszonki potrzebują czasu na fermentację. Pełna fermentacja silosu lub beli kiszonki trwa jedną trzecią sezonu (1 przejście). Bele siana owinięte folią nie sfermentują, ale będą chronione przed wpływem pogody." />
-        <text name="ss_helpText_03_03" text="Sezony mają również wpływ na drzewa i rośliny. Drzewa zmieniają wygląd wraz ze zmianą temperatur sezonowych. Liście zmienią kolor i opadną jesienią. Zimą drzewa będą gołe, a wiosną pokryją się jasną zielenią." />
+        <text name="ss_helpText_03_03" text="Mod Seasons ma również wpływ na drzewa i rośliny. Drzewa zmieniają wygląd wraz ze zmianą temperatur sezonowych. Liście zmienią kolor i opadną jesienią. Zimą drzewa będą gołe, a wiosną pokryją się jasną zielenią." />
 
         <text name="ss_helpTitle_04" text="Prognoza pogody" />
         <text name="ss_helpText_04_01" text="Prognoza pogody została ponownie wprowadzona w modzie Seasons i może być aktywowana przy użyciu Lewego Alt + F." />
@@ -168,7 +168,7 @@
 
         <text name="ss_helpTitle_08" text="Uprawy - siano, słoma i trawa" />
         <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do fazy zebranej, aby odwzorować sytuację, w której trawa usycha, gdy robi się zimno." />
-        <text name="ss_helpText_08_02" text="Bele z trawy muszą być wykorzystane lub owinięte w folię w ciągu 2 dni od belowania. Inaczej po 2 dniach trawa zgnije, a bela zniknie." />
+        <text name="ss_helpText_08_02" text="Bele z trawy będą stopniowo gnić i znikną po dwóch dniach niezależnie od tego gdzie są przechowywane. Aby temu zapobiec należy je wykorzystać lub owinąć folią. Po owinięciu sfermetują w kiszonką w ciągu 1/3 długości sezonu." />
         <text name="ss_helpText_08_03" text="Pokosy siana, trawy i słomy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy traw zmniejszają się o północy każdego dnia. Pokosy siana i słomy zmniejszają się wraz z każdym etapem wzrostu upraw (przejściem), jak również po wystawieniu na działanie deszczu." />
         <text name="ss_helpText_08_04" text="Słoma i siano muszą być belowane zanim zostaną sprzedane - luzem słomy i siana nie wolno sprzedawać, jedynie oddać bezpłatnie. Trawa, belowana lub luźna, również nie może być sprzedawana." />
 
@@ -214,14 +214,14 @@
         <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Zawiera ona długość sezonu (3-24 dni na sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady na śniegu wł/wył), wilgotność zbóż (wł/wył) i skala temperatura (C/F), wszystkie te ustawienia można zmieniać." />
 
         <text name="ss_helpTitle_17" text="Interfejs" />
-        <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (wilgotne zboża - ikona Wet Crop/zamarznięta gleba - ikona  Frozen ground) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />
+        <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (ikona wilgotnego zboża/ikona zamarzniętej gleby) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />
         <text name="ss_helpText_17_02" text="Bezpośrednio poniżej zegara znajduje się dzień i pora obecnego sezonu." />
         <text name="ss_helpText_17_03" text="Po aktywacji interfejsu prognozy pogody pojawi się on poniżej zegara w prawym górnym rogu." />
         <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne (F1), na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
 
         <text name="ss_helpTitle_18" text="Różne" />
         <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Po nadejściu nocy, gdy jesteś pieszo możesz nacisnąć Lewy Alt + N, aby przejść do rana." />
-        <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakcie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Zrestartować grę/serwer po zmianie długość sezonu." />
+        <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakcie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Zrestartować grę/serwer po zmianie długości sezonu." />
         <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie polegające na grze tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając ziemię i siejąc zboża, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />
     </texts>

@@ -387,7 +387,7 @@ end
 -- Replace the visual age with the age since last repair, because actual age is useless
 function ssVehicle.vehicleGetSpecValueAge(superFunc, storeItem, realItem) -- storeItem, realItem
     if realItem ~= nil and realItem.ssLastRepairDay ~= nil and SpecializationUtil.hasSpecialization(Motorized, realItem.specializations) then
-        local daysUntil = math.max(g_seasons.environment.daysInSeason * 2 - (g_seasons.environment:currentDay() - realItem.ssLastRepairDay), 0)
+        local daysUntil = math.max(ssVehicle.repairInterval - (g_seasons.environment:currentDay() - realItem.ssLastRepairDay), 0)
 
         return string.format(g_i18n:getText("shop_age"), daysUntil)
     elseif realItem ~= nil and realItem.age ~= nil then

@@ -146,7 +146,7 @@
 
         <text name="ss_helpTitle_03" text="Seasonal Effects (2)" />
         <text name="ss_helpText_03_01" text="Daylight hours are also affected with the seasons. Winters have shorter days (8 hours) while summers have longer days (17 hours)." />
-        <text name="ss_helpText_03_02" text="Bunker silos and silage bales require time to ferment. It takes one third of a seasons (1 transition) to fully ferment either a bunker silo or a silage bale. Wrapped hay will not ferment, but they will be protected against the weather." />
+        <text name="ss_helpText_03_02" text="Bunker silos and silage bales require time to ferment. It takes one third of a season (1 transition) to fully ferment either a bunker silo or a silage bale. Wrapped hay will not ferment, but they will be protected against the weather." />
         <text name="ss_helpText_03_03" text="Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." />
 
         <text name="ss_helpTitle_04" text="Weather Forecast" />
@@ -173,7 +173,7 @@
 
         <text name="ss_helpTitle_08" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_08_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
-        <text name="ss_helpText_08_02" text="Grass bales need to be used or wrapped for silage within 2 days of baling. After 2 days the grass will rot and the bale will disappear." />
+        <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days no matter where they are placed. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
         <text name="ss_helpText_08_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
         <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
 
