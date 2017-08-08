@@ -466,10 +466,15 @@ function ssVehicle:vehicleDraw(superFunc, dt)
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         for i, wheel in pairs(self.wheels) do
             if wheel.groundPressure ~= nil or wheel.fwdTireCLayers ~= nil or wheel.underTireCLayers ~= nil or wheel.soilBulkDensity ~= nil then
-                renderText(0.3, 0.22 - 0.02 * i, 0.01, "Ground Pressure: " .. wheel.groundPressure)
-                renderText(0.4, 0.22 - 0.02 * i, 0.01, "fwdC: " .. wheel.fwdTireCLayers)
+                --local dx, dy, dz = getWorldRotation(wheel.node)
+                local dx, dy, dz = worldDirectionToLocal(wheel.node, wheel.positionX, wheel.positionY, wheel.positionZ)
+                
+                renderText(0.3, 0.22 - 0.02 * i, 0.01, "Tire load: " .. mathRound(wheel.load,2))
+                renderText(0.4, 0.22 - 0.02 * i, 0.01, "Max load: " .. mathRound(wheel.ssMaxLoad,2))
                 renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
-                renderText(0.5, 0.22 - 0.02 * i, 0.01, "index: " .. wheel.soilBulkDensity)
+                renderText(0.5, 0.22 - 0.02 * i, 0.01, "directionX: " .. mathRound(dx * 180 / math.pi,1))
+                renderText(0.6, 0.22 - 0.02 * i, 0.01, "directionY: " .. mathRound(dy * 180 / math.pi,1))
+                renderText(0.7, 0.22 - 0.02 * i, 0.01, "directionZ: " .. mathRound(dz * 180 / math.pi,1))
             end
         end
     end
