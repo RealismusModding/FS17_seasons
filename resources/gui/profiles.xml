@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <GUIProfiles>
     <Presets>
+        <Preset name="colorWhite" value="1 1 1 1" />
+        <Preset name="colorGreen" value="0.2122 0.5271 0.0307 1" />
+        <Preset name="colorDarkGrey3" value="0.0194 0.0194 0.0194 1"/>
+        <Preset name="colorGreen_50" value="0.2122 0.5271 0.0307 0.5" />
     </Presets>
 
     <Profile name="ssSettingsText" parent="textDefault">
@@ -25,5 +29,59 @@
     <Profile name="ssOverview" parent="baseReference">
         <Value name="size" value="984px 560px" />
         <Value name="position" value="0px 0px" />
+    </Profile>
+
+    <Profile name="ssEconomyGraph" parent="baseReference">
+        <Value name="size" value="584px 360px"/>
+        <Value name="position" value="393px 115px" />
+        <Value name="alignmentX" value="left" />
+        <Value name="alignmentY" value="top" />
+    </Profile>
+
+    <Profile name="ssEconomySlider" parent="serverDetailSlider">
+        <Value name="size" value="16px 458px"/>
+        <Value name="alignmentX" value="left" />
+        <Value name="alignmentY" value="top" />
+        <Value name="position" value="350px 15px" />
+        <Value name="screenAlign" value="middleLeft" />
+        <Value name="positionOrigin" value="middleLeft" />
+    </Profile>
+
+    <Profile name="ssEconomyList" parent="list">
+        <Value name="screenAlign" value="middleRight" />
+        <Value name="positionOrigin" value="middleRight" />
+        <Value name="isHorizontalList" value="false" />
+        <Value name="visibleItems" value="14" />
+        <Value name="position" value="-16px 0"/>
+        <Value name="listItemHeight" value="37px" />
+        <Value name="size" value="350px 530px" />
+    </Profile>
+
+    <Profile name="ssEconomyListItem" parent="listItem">
+        <Value name="imageColor" value="$preset_colorDarkGrey3"/>
+        <Value name="imageFocusedColor" value="$preset_colorGreen_50"/>
+        <Value name="imageSelectedColor" value="$preset_colorGreen"/>
+        <Value name="size" value="346px 35px" />
+        <Value name="position" value="2px 0px" />
+    </Profile>
+
+    <Profile name="ssEconomyListItemText" parent="textDefault">
+        <Value name="textSize" value="13px" />
+        <Value name="position" value="0px 0px" />
+        <Value name="textOffset" value="30px 13px" />
+        <Value name="textFocusedOffset" value="60px 13px" />
+    </Profile>
+
+    <Profile name="ssEconomyListItemTick" parent="baseReference">
+        <Value name="screenAlign" value="middleLeft" />
+        <Value name="positionOrigin" value="middleLeft" />
+        <Value name="position" value="15px 0px" />
+        <Value name="size" value="8px 8px" />
+        <Value name="offset" value="0px 0px" />
+        <Value name="focusedOffset" value="30px 0px" />
+        <Value name="imageUVs" value="824px 901px 12px 12px" />
+        <Value name="imageColor" value="$preset_colorGreen" />
+        <Value name="imageFocusedColor" value="$preset_colorWhite" />
+        <Value name="imageSelectedColor" value="$preset_colorWhite" />
     </Profile>
 </GUIProfiles>

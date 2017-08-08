@@ -94,6 +94,7 @@
         <text name="msg_welcome" text="Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." />
 
         <text name="ui_pageOverview" text="Overview" />
+        <text name="ui_pageEconomy" text="Economy" />
         <text name="ui_pageSettings" text="Settings" />
         <text name="ui_pageDebug" text="Debug Tools" />
 
