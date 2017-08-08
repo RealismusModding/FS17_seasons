@@ -12,6 +12,7 @@
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
+        <text name="input_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -75,7 +76,9 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Maintenance" />
         <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
-
+        
+        <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
+        
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
