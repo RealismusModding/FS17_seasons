@@ -138,7 +138,7 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
         self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpCrops"), FocusManager:getElementById("sliderDownCrops"))
     elseif pageId == ssSeasonsMenu.PAGE_ECONOMY then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpEconomy"), FocusManager:getElementById("sliderDownEconomy"))
+        self:setNavButtonsFocusChange(FocusManager:getElementById("300"), FocusManager:getElementById("300"))
     elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
         self:setNavButtonsFocusChange(FocusManager:getElementById("210"), FocusManager:getElementById("223"))
     else
