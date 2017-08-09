@@ -15,20 +15,24 @@ ssTirePressure.PRESSURE_NORMAL = 2
 ssTirePressure.PRESSURE_MAX = ssTirePressure.PRESSURE_NORMAL
 
 ssTirePressure.PRESSURES = { 80, 180 }
-ssTirePressure.NORMAL_PRESURE = 180 -- vanilla
+ssTirePressure.NORMAL_PRESSURE = 180 -- vanilla
 
 function ssTirePressure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
-           SpecializationUtil.hasSpecialization(ssAtWorkshop, specializations)
+           SpecializationUtil.hasSpecialization(ssAtWorkshop, specializations) and
+           SpecializationUtil.hasSpecialization(ssSCspec, specializations)
 end
 
 function ssTirePressure:preLoad()
     self.updateInflationPressure = ssTirePressure.updateInflationPressure
+    self.getInflationPressure = ssTirePressure.getInflationPressure
 end
 
 function ssTirePressure:load(savegame)
+    self.ssInflationPressure = ssTirePressure.PRESSURE_NORMAL
+
     if savegame ~= nil then
-        self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", ssTirePressure.PRESSURE_NORMAL)
+        self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", self.ssInflationPressure)
     end
 end
 
@@ -53,10 +57,10 @@ function ssTirePressure:getSaveAttributesAndNodes(nodeIdent)
     return attributes, ""
 end
 
-function ssAtWorkshop:readStream(streamId, connection)
+function ssTirePressure:readStream(streamId, connection)
 end
 
-function ssAtWorkshop:writeStream(streamId, connection)
+function ssTirePressure:writeStream(streamId, connection)
 end
 
 function ssTirePressure:updateInflationPressure()
@@ -68,8 +72,14 @@ function ssTirePressure:updateInflationPressure()
     local pressure = ssTirePressure.PRESSURES[self.ssInflationPressure]
 
     for _, wheel in pairs(self.wheels) do
+        if wheel.ssMaxDeformation == nil then
+            wheel.ssMaxDeformation = wheel.maxDeformation
+        end
+
         wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
-        wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESURE / pressure
+        wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESSURE / pressure
+
+        log("max", wheel.maxDeformation, "orig", wheel.ssMaxDeformation)
     end
 
     -- TODO(Jos) send event with new pressure for vehicle
@@ -92,4 +102,11 @@ function ssTirePressure:update(dt)
             self:updateInflationPressure()
         end
     end
+end
+
+function ssTirePressure:draw()
+end
+
+function ssTirePressure:getInflationPressure()
+    return ssTirePressure.PRESSURES[self.ssInflationPressure]
 end

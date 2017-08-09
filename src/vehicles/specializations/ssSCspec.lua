@@ -14,7 +14,7 @@ end
 
 function ssSCspec:preLoad(savegame)
     self.applySC = ssSCspec.applySC
-    self.getCLayers = ssSCSpec.getCLayers
+    self.getCLayers = ssSCspec.getCLayers
     self.getTireMaxLoad = ssSCspec.getTireMaxLoad
 end
 
@@ -50,14 +50,14 @@ function ssSCspec:applySC()
             if oldPressure == nil then oldPressure = 10 end
             if wheel.load == nil then wheel.load = 0 end
 
-            local inflationPressure = ssSCspec.NORMAL_INFLATION_PRESSURE
-            if self.ssInflationPressure == "Low" then
-                inflationPressure = ssSCspec.LOW_INFLATION_PRESSURE
+            local inflationPressure = 180
+            if self.getInflationPressure then
+                inflationPressure = self:getInflationPressure()
             end
 
             if wheel.ssMaxLoad == nil then
                 wheel.ssMaxDeformation = wheel.maxDeformation
-                wheel.ssMaxLoad = ssSCspec:getTireMaxLoad(wheel, inflationPressure)
+                wheel.ssMaxLoad = self:getTireMaxLoad(wheel, inflationPressure)
             end
 
             wheel.contactArea = 0.38 * wheel.load^0.7 * math.sqrt(width / (radius * 2)) / inflationPressure^0.45
@@ -135,7 +135,7 @@ function ssSCspec:applySC()
     end
 end
 
-function ssSCspec:getTireMaxLoad(wheel,inflationPressure)
+function ssSCspec:getTireMaxLoad(wheel, inflationPressure)
     local tireLoadIndex = 981 * wheel.ssMaxDeformation + 73
     local inflationFac = 0.56 + 0.002 * inflationPressure
 

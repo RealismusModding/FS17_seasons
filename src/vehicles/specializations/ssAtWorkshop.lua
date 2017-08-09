@@ -99,7 +99,7 @@ function ssAtWorkshop:isAtWorkshop()
 end
 
 function ssAtWorkshop:getWorkshop()
-    return ss.ssInRangeOfWorkshop
+    return self.ssInRangeOfWorkshop
 end
 
 function ssAtWorkshop:canPlayerInteractInWorkshop(player)
@@ -109,7 +109,7 @@ end
 -- Tell a vehicle when it is in the area of a workshop. This information is
 -- then used in ssRepairable to show or hide the repair option
 function ssAtWorkshop:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-    if otherShapeId ~= nil and (onEnter or onLeave) and Speci then
+    if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
             local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
 

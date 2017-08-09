@@ -17,8 +17,8 @@ function ssRepairable:prerequisitesPresent(specializations)
 end
 
 function ssRepairable:load(savegame)
-    self.ssRepairUpdate = SpecializationUtil.callSpecializationsFunction("ssRepairUpdate")
-    self.ssRepair = SpecializationUtil.callSpecializationsFunction("ssRepair")
+    self.ssRepairUpdate = ssRepairable.ssRepairUpdate
+    self.repair = ssRepairable.repair
 
     self.ssLastRepairDay = g_currentMission.environment.currentDay
     self.ssLastRepairOperatingTime = self.operatingTime
@@ -126,7 +126,7 @@ function ssRepairable:ssRepairUpdate(dt)
 
     if InputBinding.hasEvent(InputBinding.SEASONS_REPAIR_VEHICLE) then
         if g_currentMission:getTotalMoney() >= repairCost then
-            self:ssRepair(true, repairCost, vehicleName)
+            self:repair(true, repairCost, vehicleName)
         else
             g_currentMission:showBlinkingWarning(g_i18n:getText("SS_NOT_ENOUGH_MONEY"), 2000)
         end
@@ -137,7 +137,7 @@ end
 -- @param showDialog True if you want a confirmation dialog shown
 -- @param cost Different cost. Keep nil for auto cost calculations
 -- @note This must only be called from an Update function.
-function ssRepairable:ssRepair(showDialog, cost, vehicleName)
+function ssRepairable:repair(showDialog, cost, vehicleName)
     local repairCost = cost
     if cost == nil then
         cost = ssVehicle:getRepairShopCost(self, nil, not self:getWorkshop().ownWorkshop)
