@@ -59,6 +59,10 @@ function ssSC.cutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWo
     local CLayers = densityC / areaC
     ploughFactor = 2 * CLayers - 5
 
+    if fruitId == FruitUtil.FRUITTYPE_GRASS then
+      volume = volume * ploughFactor
+    end
+
     return volume, area, sprayFactor, ploughFactor, growthState, growthStateArea
 end
 
