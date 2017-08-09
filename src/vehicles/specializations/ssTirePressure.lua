@@ -15,6 +15,7 @@ ssTirePressure.PRESSURE_NORMAL = 2
 ssTirePressure.PRESSURE_MAX = ssTirePressure.PRESSURE_NORMAL
 
 ssTirePressure.PRESSURES = { 80, 180 }
+ssTirePressure.NORMAL_PRESURE = 180 -- vanilla
 
 function ssTirePressure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
@@ -52,7 +53,11 @@ function ssTirePressure:getSaveAttributesAndNodes(nodeIdent)
     return attributes, ""
 end
 
-function ssTirePressure:readStream(streamId, connection)
+function ssAtWorkshop:readStream(streamId, connection)
+end
+
+function ssAtWorkshop:writeStream(streamId, connection)
+end
 
 function ssTirePressure:updateInflationPressure()
     self.ssInflationPressure = self.ssInflationPressure + 1
@@ -63,8 +68,8 @@ function ssTirePressure:updateInflationPressure()
     local pressure = ssTirePressure.PRESSURES[self.ssInflationPressure]
 
     for _, wheel in pairs(self.wheels) do
-        wheel.ssMaxLoad = self:getTireMaxLoad(wheel, )
-        wheel.maxDeformation = wheel.ssMaxDeformation * ssSCspec.NORMAL_INFLATION_PRESSURE / wantedInflationPressure
+        wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
+        wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESURE / pressure
     end
 
     -- TODO(Jos) send event with new pressure for vehicle
@@ -77,8 +82,8 @@ function ssTirePressure:update(dt)
 
         -- Show text for changing inflation pressure
         local storeItemName = storeItem.name
-        if string.len(storeItemName) > ssSCspec.MAX_CHARS_TO_DISPLAY then
-            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSCspec.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
+        if string.len(storeItemName) > ssTirePressure.MAX_CHARS_TO_DISPLAY then
+            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssTirePressure.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
         end
 
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
