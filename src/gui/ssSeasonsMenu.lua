@@ -341,10 +341,14 @@ function ssSeasonsMenu:createOverviewValues(element)
     o.maxContentHeight = math.floor(o.contentHeight / fruitElementHeight) * fruitElementHeight - o.fruitSpacerHeight
 
     o.seasons = {}
-    o.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_spring.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_summer.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_autumn.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_winter.dds", g_seasons.modDir), 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_SPRING]:setUVs(getNormalizedUVs({8, 216, 128, 128}))
+    o.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_SUMMER]:setUVs(getNormalizedUVs({144, 216, 128, 128}))
+    o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_AUTUMN]:setUVs(getNormalizedUVs({280, 216, 128, 128}))
+    o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
+    o.seasons[ssEnvironment.SEASON_WINTER]:setUVs(getNormalizedUVs({416, 216, 128, 128}))
 
     -- Set up the slider
     local numTotalItems = table.getn(self.overviewData)
