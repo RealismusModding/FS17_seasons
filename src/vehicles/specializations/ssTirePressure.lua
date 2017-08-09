@@ -63,7 +63,7 @@ end
 function ssTirePressure:writeStream(streamId, connection)
 end
 
-function ssTirePressure:updateInflationPressure()
+function ssTirePressure:updateInflationPressure(self)
     self.ssInflationPressure = self.ssInflationPressure + 1
     if self.ssInflationPressure > ssTirePressure.PRESSURE_MAX then
         self.ssInflationPressure = ssTirePressure.PRESSURE_LOW
@@ -99,7 +99,7 @@ function ssTirePressure:update(dt)
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 
         if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
-            self:updateInflationPressure()
+            ssTirePressure:updateInflationPressure(self)
         end
     end
 end
