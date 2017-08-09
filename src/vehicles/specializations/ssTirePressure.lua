@@ -10,7 +10,11 @@ ssTirePressure = {}
 
 ssTirePressure.MAX_CHARS_TO_DISPLAY = 20
 
-source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
+ssTirePressure.PRESSURE_LOW = 1
+ssTirePressure.PRESSURE_NORMAL = 2
+ssTirePressure.PRESSURE_MAX = ssTirePressure.PRESSURE_NORMAL
+
+ssTirePressure.PRESSURES = { 80, 180 }
 
 function ssTirePressure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
@@ -18,6 +22,13 @@ function ssTirePressure:prerequisitesPresent(specializations)
 end
 
 function ssTirePressure:preLoad()
+    self.updateInflationPressure = ssTirePressure.updateInflationPressure
+end
+
+function ssTirePressure:load(savegame)
+    if savegame ~= nil then
+        self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", ssTirePressure.PRESSURE_NORMAL)
+    end
 end
 
 function ssTirePressure:delete()
@@ -36,7 +47,44 @@ end
 function ssTirePressure:getSaveAttributesAndNodes(nodeIdent)
     local attributes = ""
 
+    attributes = attributes .. "ssInflationPressure=\"" .. self.ssInflationPressure ..  "\" "
+
     return attributes, ""
 end
 
 function ssTirePressure:readStream(streamId, connection)
+
+function ssTirePressure:updateInflationPressure()
+    self.ssInflationPressure = self.ssInflationPressure + 1
+    if self.ssInflationPressure > ssTirePressure.PRESSURE_MAX then
+        self.ssInflationPressure = ssTirePressure.PRESSURE_LOW
+    end
+
+    local pressure = ssTirePressure.PRESSURES[self.ssInflationPressure]
+
+    for _, wheel in pairs(self.wheels) do
+        wheel.ssMaxLoad = self:getTireMaxLoad(wheel, )
+        wheel.maxDeformation = wheel.ssMaxDeformation * ssSCspec.NORMAL_INFLATION_PRESSURE / wantedInflationPressure
+    end
+
+    -- TODO(Jos) send event with new pressure for vehicle
+end
+
+function ssTirePressure:update(dt)
+    if self.isClient and self:canPlayerInteractInWorkshop() then
+        local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+        local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+        -- Show text for changing inflation pressure
+        local storeItemName = storeItem.name
+        if string.len(storeItemName) > ssSCspec.MAX_CHARS_TO_DISPLAY then
+            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSCspec.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
+        end
+
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
+
+        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
+            self:updateInflationPressure()
+        end
+    end
+end

@@ -8,11 +8,6 @@
 
 ssSCspec = {}
 
-ssSCspec.MAX_CHARS_TO_DISPLAY = 20
-ssSCspec.inflationPressures = {"Low","Normal"}
-ssSCspec.LOW_INFLATION_PRESSURE = 80
-ssSCspec.NORMAL_INFLATION_PRESSURE = 180
-
 function ssSCspec:prerequisitesPresent(specializations)
     return true
 end
@@ -20,17 +15,10 @@ end
 function ssSCspec:preLoad(savegame)
     self.applySC = ssSCspec.applySC
     self.getCLayers = ssSCSpec.getCLayers
+    self.getTireMaxLoad = ssSCspec.getTireMaxLoad
 end
 
 function ssSCspec:load(savegame)
-    self.ssPlayerInRangeTire = false
-    self.ssInRangeOfWorkshop = nil
-    self.ssTireLoadExceed = false
-
-    if savegame ~= nil then
-        -- TODO: save setting
-        self.ssInflationPressure = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssInflationPressure", "Normal")
-    end
 end
 
 function ssSCspec:delete()
@@ -148,13 +136,11 @@ function ssSCspec:applySC()
 end
 
 function ssSCspec:getTireMaxLoad(wheel,inflationPressure)
-
     local tireLoadIndex = 981 * wheel.ssMaxDeformation + 73
     local inflationFac = 0.56 + 0.002 * inflationPressure
 
     -- in kN
     return 44 * math.exp(0.0288 * tireLoadIndex) * inflationFac / 100
-
 end
 
 function ssSCspec:getCLayers(wheel, width, length, radius, delta0, delta2)
@@ -181,23 +167,6 @@ function ssSCspec:getCLayers(wheel, width, length, radius, delta0, delta2)
     return x0, z0, x1, z1, x2, z2, CLayers
 end
 
-local function updateInflationPressure(self)
-    --TODO: Probably needs an event
-    local wantedInflationPressure = ssSCspec.NORMAL_INFLATION_PRESSURE
-
-    if self.ssInflationPressure == "Normal" then
-        self.ssInflationPressure = "Low"
-        wantedInflationPressure = ssSCspec.LOW_INFLATION_PRESSURE
-    else
-        self.ssInflationPressure = "Normal"
-    end
-
-    for _, wheel in pairs(self.wheels) do
-        wheel.ssMaxLoad = ssSCspec:getTireMaxLoad(wheel, wantedInflationPressure)
-        wheel.maxDeformation = wheel.ssMaxDeformation * ssSCspec.NORMAL_INFLATION_PRESSURE / wantedInflationPressure
-    end
-end
-
 function ssSCspec:update(dt)
     if not g_currentMission:getIsServer() then
         return
@@ -208,67 +177,15 @@ function ssSCspec:update(dt)
         self:applySC()
     end
 
+    self.ssTireLoadExceed = nil
     for _, wheel in pairs(self.wheels) do
         if wheel.hasGroundContact and not wheel.mrNotAWheel and wheel.load ~= nil and wheel.ssMaxLoad ~= nil then
             -- only exceed rated tire load for low tire pressure
-            if wheel.load > wheel.ssMaxLoad and self.ssInflationPressure == "Low" then
-                self.ssTireLoadExceed = true
-            else
-                self.ssTireLoadExceed = false
+            if wheel.load > wheel.ssMaxLoad and self.ssInflationPressure == ssTirePressure.PRESSURE_LOW then
+                self.ssTireLoadExceed = wheel
+                break -- already a value, no need to look at others
             end
         end
-    end
-
-    if self.isClient and self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
-        local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-        local vehicleName = storeItem.brand .. " " .. storeItem.name
-
-        -- Show text for changing inflation pressure
-        local storeItemName = storeItem.name
-        if string.len(storeItemName) > ssSCspec.MAX_CHARS_TO_DISPLAY then
-            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSCspec.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
-        end
-
-        if self.ssPlayerInRangeTire ~= nil and self.ssInRangeOfWorkshop ~= nil then
-            g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
-        end
-
-        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
-            updateInflationPressure(self)
-        end
-    end
-
-end
-
--- from ssRepairable
-local function isInDistance(self, player, maxDistance, refNode)
-    local vx, _, vz = getWorldTranslation(player.rootNode)
-    local sx, _, sz = getWorldTranslation(refNode)
-
-    local dist = Utils.vector2Length(vx - sx, vz - sz)
-
-    return dist <= maxDistance
-end
-
--- from ssRepairable
-local function getIsPlayerInRange(self, distance, player)
-    if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Washable, self.specializations) then
-        return isInDistance(self, player, distance, self.rootNode), player
-    end
-
-    return false, nil
-end
-
-function ssSCspec:updateTick(dt)
-    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
-        local isPlayerInRangeTire, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
-
-        if isPlayerInRangeTire then
-            self.ssPlayerInRangeTire = player
-        else
-            self.ssPlayerInRangeTire = nil
-        end
-
     end
 end
 
@@ -278,5 +195,4 @@ function ssSCspec:draw()
     if self.isEntered and self.ssTireLoadExceed then
         g_currentMission:showBlinkingWarning(string.format(g_i18n:getText("warning_tireload"), storeItem.name), 2000)
     end
-
 end

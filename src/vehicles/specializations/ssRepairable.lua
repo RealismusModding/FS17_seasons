@@ -13,15 +13,12 @@ ssRepairable.MAX_CHARS_TO_DISPLAY = 20
 source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
 
 function ssRepairable:prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(ssTirePressure, specializations)
+    return SpecializationUtil.hasSpecialization(ssAtWorkshop, specializations)
 end
 
 function ssRepairable:load(savegame)
     self.ssRepairUpdate = SpecializationUtil.callSpecializationsFunction("ssRepairUpdate")
     self.ssRepair = SpecializationUtil.callSpecializationsFunction("ssRepair")
-
-    self.ssPlayerInRange = false
-    self.ssInRangeOfWorkshop = nil
 
     self.ssLastRepairDay = g_currentMission.environment.currentDay
     self.ssLastRepairOperatingTime = self.operatingTime
@@ -85,7 +82,7 @@ end
 
 function ssRepairable:update(dt)
     -- Show a message about the repairing
-    if self.isClient and self.ssPlayerInRange == g_currentMission.player and self.ssInRangeOfWorkshop ~= nil then
+    if self.isClient and self:canPlayerInteractInWorkshop() then
         self:ssRepairUpdate(dt)
     end
 
@@ -107,7 +104,7 @@ function ssRepairable:update(dt)
 end
 
 function ssRepairable:ssRepairUpdate(dt)
-    local repairCost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
+    local repairCost = ssVehicle:getRepairShopCost(self, nil, not self:getWorkshop().ownWorkshop)
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
@@ -143,7 +140,7 @@ end
 function ssRepairable:ssRepair(showDialog, cost, vehicleName)
     local repairCost = cost
     if cost == nil then
-        cost = ssVehicle:getRepairShopCost(self, nil, not self.ssInRangeOfWorkshop.ownWorkshop)
+        cost = ssVehicle:getRepairShopCost(self, nil, not self:getWorkshop().ownWorkshop)
     end
 
     if repairCost < 1 then return end

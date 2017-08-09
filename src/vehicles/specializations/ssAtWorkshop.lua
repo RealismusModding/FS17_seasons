@@ -1,14 +1,13 @@
 ----------------------------------------------------------------------------------------------------
 -- AT WORKSHOP SPECIALIZATION
 ----------------------------------------------------------------------------------------------------
--- Authors:  Rahkiin
+-- Purpose: Detect if a player is in walking range of a vehicle and vehicle is int he workshop
+-- Authors: Rahkiin
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
 ssAtWorkshop = {}
-
-source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
 
 ssAtWorkshop.RANGE = 4.0
 
@@ -17,6 +16,13 @@ function ssAtWorkshop:prerequisitesPresent(specializations)
 end
 
 function ssAtWorkshop:preLoad()
+    self.isPlayerInRange = ssAtWorkshop.isPlayerInRange
+    self.isAtWorkshop = ssAtWorkshop.isAtWorkshop
+    self.getWorkshop = ssAtWorkshop.getWorkshop
+    self.canPlayerInteractInWorkshop = ssAtWorkshop.canPlayerInteractInWorkshop
+end
+
+function ssAtWorkshop:load(savegame)
 end
 
 function ssAtWorkshop:delete()
@@ -33,8 +39,6 @@ function ssAtWorkshop:loadFromAttributesAndNodes(xmlFile, key)
 end
 
 function ssAtWorkshop:getSaveAttributesAndNodes(nodeIdent)
-    local attributes = ""
-
     return attributes, ""
 end
 
@@ -46,7 +50,6 @@ end
 
 function ssAtWorkshop:draw()
 end
-
 
 local function isInDistance(self, player, maxDistance, refNode)
     local vx, _, vz = getWorldTranslation(player.rootNode)
@@ -82,3 +85,45 @@ function ssAtWorkshop:updateTick(dt)
         end
     end
 end
+
+function ssAtWorkshop:isPlayerInRange(player)
+    if player == nil then
+        player = g_currentMission.player
+    end
+
+    return self.ssPlayerInRange == player
+end
+
+function ssAtWorkshop:isAtWorkshop()
+    return self.ssInRangeOfWorkshop ~= nil
+end
+
+function ssAtWorkshop:getWorkshop()
+    return ss.ssInRangeOfWorkshop
+end
+
+function ssAtWorkshop:canPlayerInteractInWorkshop(player)
+    return self:isAtWorkshop() and self:isPlayerInRange(player)
+end
+
+-- Tell a vehicle when it is in the area of a workshop. This information is
+-- then used in ssRepairable to show or hide the repair option
+function ssAtWorkshop:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
+    if otherShapeId ~= nil and (onEnter or onLeave) and Speci then
+        if onEnter then
+            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+
+            if vehicle ~= nil then
+                vehicle.ssInRangeOfWorkshop = self
+            end
+        elseif onLeave then
+            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
+
+            if vehicle ~= nil then
+                vehicle.ssInRangeOfWorkshop = nil
+            end
+        end
+    end
+end
+
+VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssAtWorkshop.sellAreaTriggerCallback)

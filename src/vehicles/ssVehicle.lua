@@ -54,8 +54,6 @@ function ssVehicle:loadMap()
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
 
-    VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
-
     g_currentMission:setAutomaticMotorStartEnabled(false)
 
     if g_currentMission:getIsServer() then
@@ -405,26 +403,6 @@ function ssVehicle.vehicleGetSpecValueAge(superFunc, storeItem, realItem) -- sto
     return nil
 end
 
--- Tell a vehicle when it is in the area of a workshop. This information is
--- then used in ssRepairable to show or hide the repair option
-function ssVehicle:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-    if otherShapeId ~= nil and (onEnter or onLeave) then
-        if onEnter then
-            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
-
-            if vehicle ~= nil then
-                vehicle.ssInRangeOfWorkshop = self
-            end
-        elseif onLeave then
-            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
-
-            if vehicle ~= nil then
-                vehicle.ssInRangeOfWorkshop = nil
-            end
-        end
-    end
-end
-
 -- Limit the speed of working implements and machine on land to 4kmh or 0.25 their normal speed.
 -- Only in the winter
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
@@ -470,7 +448,7 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             if wheel.groundPressure ~= nil or wheel.fwdTireCLayers ~= nil or wheel.underTireCLayers ~= nil or wheel.soilBulkDensity ~= nil then
                 --local dx, dy, dz = getWorldRotation(wheel.node)
                 local dx, dy, dz = worldDirectionToLocal(wheel.node, wheel.positionX, wheel.positionY, wheel.positionZ)
-                
+
                 renderText(0.3, 0.22 - 0.02 * i, 0.01, "Tire load: " .. mathRound(wheel.load,2))
                 renderText(0.4, 0.22 - 0.02 * i, 0.01, "Max load: " .. mathRound(wheel.ssMaxLoad,2))
                 renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
