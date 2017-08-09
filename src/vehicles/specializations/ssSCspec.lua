@@ -118,17 +118,20 @@ function ssSCspec:applySC()
             --penetrationResistance = 0
 
             if wheel.groundPressure > penetrationResistance and self:getLastSpeed() > 0 and self.isEntered then
-                local dx, dy, dz = getWorldRotation(wheel.node)
-                local x0, z0, x1, z1, x2, z2, underLayers = ssSCspec:getCLayers(wheel, math.max(0.1,width-0.1), length, radius, length, length)
+
+                local dx,_,dz = localDirectionToWorld(wheel.node, 0, 0, 1)
+                local angle = Utils.convertToDensityMapAngle(Utils.getYRotationFromDirection(dx, dz), g_currentMission.terrainDetailAngleMaxValue)
+
+                local x0, z0, x1, z1, x2, z2, underLayers = ssSCspec:getCLayers(wheel, math.max(0.1,width-0.15), length, radius, length, length)
                 local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
+                -- TODO: not working
                 setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
                     g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
                     g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, g_currentMission.ploughValue)
-                --angle not working well atm
                 setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
                     g_currentMission.terrainDetailAngleFirstChannel, g_currentMission.terrainDetailAngleNumChannels,
-                    g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, dx * 180 / math.pi)
+                    g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, angle)
 
             end
         end
