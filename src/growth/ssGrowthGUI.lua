@@ -25,9 +25,7 @@ end
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
     for fruitName, value in pairs(fruitData) do
-        if FruitUtil.fruitTypeGrowths[fruitName] == nil then return end
-
-        if fruitName ~= "dryGrass" then
+        if FruitUtil.fruitTypeGrowths[fruitName] ~= nil and fruitName ~= "dryGrass" then
             local transitionTable = {}
             for transition, v in pairs(growthData) do
                 if transition == g_seasons.growthManager.FIRST_LOAD_TRANSITION then
@@ -72,45 +70,45 @@ end
 -- simulates growth based on canPlantData to find out when a fruit will be harvestable
 function ssGrowthGUI:buildCanHarvestData(growthData)
     for fruitName, transition in pairs(self.canPlantData) do
-        if FruitUtil.fruitTypeGrowths[fruitName] == nil then return end
+        if FruitUtil.fruitTypeGrowths[fruitName] ~= nil then
+            local transitionTable = {}
+            local plantedTransition = 1
+            local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
-        local transitionTable = {}
-        local plantedTransition = 1
-        local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
+            for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
+                if self.canPlantData[fruitName][plantedTransition] == true and fruitName ~= "poplar" and fruitName ~= "grass" then
+                    local growthState = 1
+                    local transitionToCheck = plantedTransition + 1
+                    if plantedTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
+                        transitionToCheck = 1
+                    end
+                    local safetyCheck = 1
+                    while growthState <= fruitNumStates do
+                        growthState = self:simulateGrowth(fruitName, transitionToCheck, growthState, growthData)
+                        if growthState == fruitNumStates then
+                            transitionTable[transitionToCheck] = true
+                        end
 
-        for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
-             if self.canPlantData[fruitName][plantedTransition] == true and fruitName ~= "poplar" and fruitName ~= "grass" then
-                local growthState = 1
-                local transitionToCheck = plantedTransition + 1
-                if plantedTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
-                    transitionToCheck = 1
-                end
-                local safetyCheck = 1
-                while growthState <= fruitNumStates do
-                    growthState = self:simulateGrowth(fruitName, transitionToCheck, growthState, growthData)
-                    if growthState == fruitNumStates then
-                        transitionTable[transitionToCheck] = true
+                        transitionToCheck = transitionToCheck + 1
+                        safetyCheck = safetyCheck + 1
+                        if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
+                        if safetyCheck > 15 then break end --so we don't end up in infinite loop if growth pattern is not correct
                     end
 
-                    transitionToCheck = transitionToCheck + 1
-                    safetyCheck = safetyCheck + 1
-                    if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
-                    if safetyCheck > 15 then break end --so we don't end up in infinite loop if growth pattern is not correct
                 end
-
             end
-        end
-        --fill in the gaps
-        for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
-            if fruitName == "poplar" then --hardcoding for poplar
-                transitionTable[plantedTransition] = true
-            elseif fruitName == "grass" and plantedTransition > g_seasons.environment.TRANSITION_EARLY_SPRING and plantedTransition < g_seasons.environment.TRANSITION_EARLY_WINTER then
-                transitionTable[plantedTransition] = true
-            elseif transitionTable[plantedTransition] ~= true then
-                transitionTable[plantedTransition] = false
+            --fill in the gaps
+            for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
+                if fruitName == "poplar" then --hardcoding for poplar
+                    transitionTable[plantedTransition] = true
+                elseif fruitName == "grass" and plantedTransition > g_seasons.environment.TRANSITION_EARLY_SPRING and plantedTransition < g_seasons.environment.TRANSITION_EARLY_WINTER then
+                    transitionTable[plantedTransition] = true
+                elseif transitionTable[plantedTransition] ~= true then
+                    transitionTable[plantedTransition] = false
+                end
             end
+            self.canHarvestData[fruitName] = transitionTable
         end
-        self.canHarvestData[fruitName] = transitionTable
     end
 end
 
