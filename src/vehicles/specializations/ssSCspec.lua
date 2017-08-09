@@ -14,11 +14,15 @@ ssSCspec.LOW_INFLATION_PRESSURE = 80
 ssSCspec.NORMAL_INFLATION_PRESSURE = 180
 
 function ssSCspec:prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(Motorized, specializations)
+    return true
+end
+
+function ssSCspec:preLoad(savegame)
+    self.applySC = ssSCspec.applySC
+    self.getCLayers = ssSCSpec.getCLayers
 end
 
 function ssSCspec:load(savegame)
-
     self.ssPlayerInRangeTire = false
     self.ssInRangeOfWorkshop = nil
     self.ssTireLoadExceed = false
@@ -27,7 +31,6 @@ function ssSCspec:load(savegame)
         -- TODO: save setting
         self.ssInflationPressure = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssInflationPressure", "Normal")
     end
-
 end
 
 function ssSCspec:delete()
@@ -39,12 +42,10 @@ end
 function ssSCspec:keyEvent(unicode, sym, modifier, isDown)
 end
 
-local function applySC(self)
-
+function ssSCspec:applySC()
     local soilWater = g_currentMission.environment.groundWetness
 
     for _, wheel in pairs(self.wheels) do
-
         if wheel.hasGroundContact and not wheel.mrNotAWheel then
             local x0, y0, z0
             local x1, y1, z1
@@ -99,7 +100,7 @@ local function applySC(self)
             local wantedC = 3
 
             -- TODO: 2 lines below can be local and no need to store CLayers in wheel
-            local x0, z0, x1, z1, x2, z2, fwdLayers = ssSCspec:getCLayers(wheel, width, length, radius, radius * wheelRotDir * -1, 2 * radius * wheelRotDir)
+            local x0, z0, x1, z1, x2, z2, fwdLayers = self:getCLayers(wheel, width, length, radius, radius * wheelRotDir * -1, 2 * radius * wheelRotDir)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
             ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 255, 0)
 
@@ -113,7 +114,7 @@ local function applySC(self)
             if wheel.underTireCLayers ==  3 and soilBulkDensityRef > -0.15 then
                 wantedC = 2
 
-            elseif wheel.underTireCLayers == 2 and wheel.fwdTireCLayers == 2 
+            elseif wheel.underTireCLayers == 2 and wheel.fwdTireCLayers == 2
                 and soilBulkDensityRef > 0.0 and soilBulkDensityRef <= 0.15 then
                 wantedC = 1
 
@@ -133,12 +134,12 @@ local function applySC(self)
                 local x0, z0, x1, z1, x2, z2, underLayers = ssSCspec:getCLayers(wheel, math.max(0.1,width-0.1), length, radius, length, length)
                 local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
-                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, 
-                    g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, 
+                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
+                    g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
                     g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, g_currentMission.ploughValue)
                 --angle not working well atm
-                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, 
-                    g_currentMission.terrainDetailAngleFirstChannel, g_currentMission.terrainDetailAngleNumChannels, 
+                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
+                    g_currentMission.terrainDetailAngleFirstChannel, g_currentMission.terrainDetailAngleNumChannels,
                     g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, dx * 180 / math.pi)
 
             end
@@ -183,7 +184,7 @@ end
 local function updateInflationPressure(self)
     --TODO: Probably needs an event
     local wantedInflationPressure = ssSCspec.NORMAL_INFLATION_PRESSURE
-        
+
     if self.ssInflationPressure == "Normal" then
         self.ssInflationPressure = "Low"
         wantedInflationPressure = ssSCspec.LOW_INFLATION_PRESSURE
@@ -198,14 +199,13 @@ local function updateInflationPressure(self)
 end
 
 function ssSCspec:update(dt)
-    
-    if not g_currentMission:getIsServer() then 
-        return 
+    if not g_currentMission:getIsServer() then
+        return
     end
     --    or not g_seasons.vehicle.ssSCEnabled -- TODO: Make toggle
 
     if self.lastSpeedReal ~= 0 and not ssWeatherManager:isGroundFrozen() then
-        applySC(self)
+        self:applySC()
     end
 
     for _, wheel in pairs(self.wheels) do
@@ -229,7 +229,7 @@ function ssSCspec:update(dt)
             storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSCspec.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
         end
 
-        if self.ssPlayerInRangeTire ~= nil and self.ssInRangeOfWorkshop ~= nil then 
+        if self.ssPlayerInRangeTire ~= nil and self.ssInRangeOfWorkshop ~= nil then
             g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
         end
 

@@ -9,7 +9,7 @@
 ssSnowTracks = {}
 
 function ssSnowTracks:prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(Washable, specializations)
+    return true
 end
 
 function ssSnowTracks:load(savegame)

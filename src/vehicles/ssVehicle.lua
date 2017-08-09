@@ -28,6 +28,8 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
     SpecializationUtil.registerSpecialization("scspec", "ssSCspec", g_seasons.modDir .. "src/vehicles/specializations/ssSCspec.lua")
+    SpecializationUtil.registerSpecialization("tirePressure", "ssTirePressure", g_seasons.modDir .. "src/vehicles/specializations/ssTirePressure.lua")
+    SpecializationUtil.registerSpecialization("atWorkshop", "ssAtWorkshop", g_seasons.modDir .. "src/vehicles/specializations/ssAtWorkshop.lua")
 
     ssVehicle:registerWheelTypes()
 end
@@ -106,11 +108,10 @@ end
 function ssVehicle:installVehicleSpecializations()
     for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
         if vehicleType ~= nil then
-            if SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
-                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
-                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
-                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("scspec"))
-            end
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("scspec"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("atWorkshop"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
 
             if SpecializationUtil.hasSpecialization(Fillable, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowfillable"))
@@ -119,6 +120,7 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(Motorized, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("motorFailure"))
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("tirePressure"))
             end
 
             if SpecializationUtil.hasSpecialization(Tedder, vehicleType.specializations) then

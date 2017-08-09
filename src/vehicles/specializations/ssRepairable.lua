@@ -13,7 +13,7 @@ ssRepairable.MAX_CHARS_TO_DISPLAY = 20
 source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
 
 function ssRepairable:prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(Washable, specializations)
+    return SpecializationUtil.hasSpecialization(ssTirePressure, specializations)
 end
 
 function ssRepairable:load(savegame)
@@ -74,37 +74,7 @@ end
 function ssRepairable:draw()
 end
 
-local function isInDistance(self, player, maxDistance, refNode)
-    local vx, _, vz = getWorldTranslation(player.rootNode)
-    local sx, _, sz = getWorldTranslation(refNode)
-
-    local dist = Utils.vector2Length(vx - sx, vz - sz)
-
-    return dist <= maxDistance
-end
-
--- Jos: Don't ask me why, but putting them inside Repairable breaks all, even with
--- callSpecializationsFunction...
-local function getIsPlayerInRange(self, distance, player)
-    if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
-        return isInDistance(self, player, distance, self.rootNode), player
-    end
-
-    return false, nil
-end
-
 function ssRepairable:updateTick(dt)
-    -- Calculate if vehicle is in range for message about repairing
-    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
-        local isPlayerInRange, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
-
-        if isPlayerInRange then
-            self.ssPlayerInRange = player
-        else
-            self.ssPlayerInRange = nil
-        end
-    end
-
     -- Calculate cumulative dirt
     if self.getDirtAmount ~= nil then
         local factor = self:getIsOperating() and 1 or 0.1
