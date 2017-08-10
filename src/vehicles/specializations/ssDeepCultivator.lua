@@ -67,6 +67,11 @@ function ssDeepCultivator:updateCultivationDepth(self)
 end
 
 function ssDeepCultivator:update(dt)
+    if not g_currentMission:getIsServer() 
+        or not g_seasons.soilCompaction.compactionEnabled then
+        return 
+    end
+
 end
 
 function ssDeepCultivator:draw()
