@@ -171,10 +171,10 @@ function ssSCspec:getCLayers(wheel, width, length, radius, delta0, delta2)
 end
 
 function ssSCspec:update(dt)
-    if not g_currentMission:getIsServer() then
-        return
+    if not g_currentMission:getIsServer() 
+        or not  g_seasons.soilCompaction.compactionEnabled then
+        return 
     end
-    --    or not g_seasons.vehicle.ssSCEnabled -- TODO: Make toggle
 
     if self.lastSpeedReal ~= 0 and not ssWeatherManager:isGroundFrozen() then
         self:applySC()
