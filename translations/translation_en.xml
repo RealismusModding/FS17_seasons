@@ -77,6 +77,8 @@
         <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
+        <text name="TIRE_PRESSURE_1" text="Low" />
+        <text name="TIRE_PRESSURE_2" text="Normal" />
         <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />

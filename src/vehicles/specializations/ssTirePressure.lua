@@ -78,8 +78,6 @@ function ssTirePressure:updateInflationPressure(self)
 
         wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
         wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESSURE / pressure
-
-        log("max", wheel.maxDeformation, "orig", wheel.ssMaxDeformation)
     end
 
     -- TODO(Jos) send event with new pressure for vehicle
@@ -96,7 +94,8 @@ function ssTirePressure:update(dt)
             storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssTirePressure.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
         end
 
-        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
+        local pressureText = g_i18n:getText("TIRE_PRESSURE_" .. tostring(self.ssInflationPressure))
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 
         if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
             ssTirePressure:updateInflationPressure(self)
