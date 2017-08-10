@@ -23,26 +23,47 @@ function ssDeepCultivator:preLoad()
 end
 
 function ssDeepCultivator:load(savegame)
-    self.ssCultivationDepth = ssDeepCultivator.DEPTH_DEEP
+    self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
 
     if savegame ~= nil then
         self.ssCultivationDepth = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssCultivationDepth", self.ssCultivationDepth)
     end
 
-   self.validDeepCultivator = true
+   self.ssValidDeepCultivator = false
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local workingWidth = storeItem.specs.workingWidth
     local maxForce = self.powerConsumer.maxForce
+    self.ssShallowMaxForce = maxForce * 0.7 --70% force required for shallow cultivation
+    self.ssOrigMaxForce = maxForce
+
+    self.ssDeepCultivatorMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#deep")
+    self.ssSubsoilerMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#subsoiler")
+
+    --print(storeItem.name .. " " .. self.ssDeepCultivatorMod .. " " .. self.ssSubsoilerMod)
+
+    if self.ssDeepCultivatorMod and self.ssSubsoilerMod then
+        logInfo("ssDeepCultivator:", storeItem.name .. " cannot be both a subsoiler and a deep cultivator. Subsoiler applied.")
+        self.ssDeepCultivatorMod = false
+    end
 
     -- hard coded fix since it does not fit criteria of maxForce / workingWidth > 6
-    if storeItem.name == "CULTIMER L 300" then
-        self.validDeepCultivator = true
-    
-    -- subsoilers already act deep
-    elseif self.typeName == "subsoiler" or maxForce / workingWidth < 6 then
-        self.validDeepCultivator = false
+    if storeItem.name == "CULTIMER L 300" 
+        or self.ssDeepCultivatorMod or maxForce / workingWidth > 6 then
+        self.ssValidDeepCultivator = true
     end
+
+    -- subsoilers already act deep
+    if self.typeName == "subsoiler" or self.ssSubsoilerMod then
+        self.ssValidDeepCultivator = false
+        self.ssCultivationDepth = 3
+    end
+
+    if self.ssCultivationDepth == ssDeepCultivator.DEPTH_SHALLOW then
+        self.powerConsumer.maxForce = self.ssShallowMaxForce
+    end
+
+    print_r(storeItem.name .. " " .. self.ssCultivationDepth .. " " .. tostring(self.ssValidDeepCultivator))
 
 end
 
@@ -75,8 +96,11 @@ end
 
 function ssDeepCultivator:updateCultivationDepth(self)
     self.ssCultivationDepth = self.ssCultivationDepth + 1
+    self.powerConsumer.maxForce = self.ssOrigMaxForce
+
     if self.ssCultivationDepth > ssDeepCultivator.DEPTH_MAX then
         self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
+        self.powerConsumer.maxForce = self.ssShallowMaxForce
     end
 
     -- TOOD Need to set cultivatorDecompactionDelta for ssSC
@@ -87,7 +111,7 @@ end
 function ssDeepCultivator:update(dt)
     if not g_currentMission:getIsServer() 
         or not g_seasons.soilCompaction.compactionEnabled 
-        or not self.validDeepCultivator then
+        or not self.ssValidDeepCultivator then
         return end
 
     if self:getIsActiveForInput(true) then

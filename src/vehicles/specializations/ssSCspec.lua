@@ -46,8 +46,7 @@ function ssSCspec:applySC()
             local penetrationResistance = 4e5 / (20 + (g_currentMission.environment.groundWetness * 100 + 5)^2)
 
             wheel.load = getWheelShapeContactForce(wheel.node, wheel.wheelShape)
-            local oldPressure = wheel.groundPressure
-            if oldPressure == nil then oldPressure = 10 end
+            local oldPressure = Utils.getNoNil(wheel.groundPressure,10)
             if wheel.load == nil then wheel.load = 0 end
 
             local inflationPressure = 180
@@ -56,7 +55,7 @@ function ssSCspec:applySC()
             end
 
             if wheel.ssMaxLoad == nil then
-                wheel.ssMaxDeformation = wheel.maxDeformation
+                wheel.ssMaxDeformation = Utils.getNoNil(wheel.maxDeformation,0)
                 wheel.ssMaxLoad = self:getTireMaxLoad(wheel, inflationPressure)
             end
 
