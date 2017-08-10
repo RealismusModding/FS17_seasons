@@ -75,10 +75,10 @@ end
 
 function ssAtWorkshop:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
-    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
+    if self.isClient and g_currentMission.player ~= nil then
         local isPlayerInRange, player = getIsPlayerInRange(self, ssAtWorkshop.RANGE, g_currentMission.player)
 
-        if isPlayerInRange then
+        if isPlayerInRange and g_currentMission.controlPlayer then
             self.ssPlayerInRange = player
         else
             self.ssPlayerInRange = nil
