@@ -116,6 +116,7 @@
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops are wet of moisture" />
+        <text name="tooltip_soilCompaction" text="Compact soil when driving over it. Compaction affects crop yields" />
 
         <text name="setting_seasonIntros" text="Season Introductions" />
         <text name="setting_seasonLength" text="Season Length" />
@@ -124,6 +125,7 @@
         <text name="setting_snowTracks" text="Snow Tracks" />
         <text name="setting_controlsTemperature" text="Temperature Scale" />
         <text name="setting_moisture" text="Crop Moisture" />
+        <text name="setting_soilCompaction" text="Soil Compaction" />
 
         <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />

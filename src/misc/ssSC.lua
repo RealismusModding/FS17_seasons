@@ -8,7 +8,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSC = {}
-g_seasons.sc = ssSC
+g_seasons.soilCompaction = ssSC
 
 ssSC.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
 ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
@@ -28,9 +28,11 @@ function ssSC:preLoad()
 end
 
 function ssSC:load(savegame, key)
+    self.compactionEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.soilCompactionEnabled", true)
 end
 
 function ssSC:save(savegame, key)
+    ssXMLUtil.setBool(savegame, key .. ".settings.soilCompactionEnabled", self.compactionEnabled)
 end
 
 function ssSC:loadMap()
@@ -42,9 +44,11 @@ function ssSC:loadMap()
 end
 
 function ssSC:readStream(streamId, connection)
+    self.compactionEnabled = streamReadBool(streamId)
 end
 
 function ssSC:writeStream(streamId, connection)
+    streamWriteBool(streamId, self.compactionEnabled)
 end
 
 function ssSC.cutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, destroySpray, destroySeedingWidth, useMinForageState)

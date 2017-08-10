@@ -85,11 +85,20 @@
                         </GuiElement>
 
                         <!-- Moisture -->
-                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateMoistureToggle" toolTip="tooltip_moisture" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateMoistureToggle" toolTip="tooltip_moisture" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="223" focusChangeTop="222" focusChangeBottom="224" onClick="updateApplySettingsButton">
                             <GuiElement type="button" profile="multiTextOptionLeft" />
                             <GuiElement type="button" profile="multiTextOptionRight"/>
                             <GuiElement type="text"   profile="multiTextOptionText" />
                             <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_moisture"/>
+                            <GuiElement type="bitmap" profile="multiTextOptionBg" />
+                        </GuiElement>
+
+                        <!-- Soil Compaction -->
+                        <GuiElement type="toggleButton2" profile="multiTextOptionSettings" onCreate="onCreateSoilCompactionToggle" toolTip="tooltip_soilCompaction" onFocus="onFocusSettingsBox" onLeave="onLeaveSettingsBox" focusId="224" focusChangeTop="223" focusChangeBottom="100" onClick="updateApplySettingsButton">
+                            <GuiElement type="button" profile="multiTextOptionLeft" />
+                            <GuiElement type="button" profile="multiTextOptionRight"/>
+                            <GuiElement type="text"   profile="multiTextOptionText" />
+                            <GuiElement type="text"   profile="multiTextOptionTitle" text="setting_soilCompaction"/>
                             <GuiElement type="bitmap" profile="multiTextOptionBg" />
                         </GuiElement>
                     </GuiElement>
