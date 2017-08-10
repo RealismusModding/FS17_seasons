@@ -27,6 +27,7 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
     SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    SpecializationUtil.registerSpecialization("deepCultivator", "ssDeepCultivator", g_seasons.modDir .. "src/vehicles/specializations/ssDeepCultivator.lua")
     SpecializationUtil.registerSpecialization("scspec", "ssSCspec", g_seasons.modDir .. "src/vehicles/specializations/ssSCspec.lua")
     SpecializationUtil.registerSpecialization("tirePressure", "ssTirePressure", g_seasons.modDir .. "src/vehicles/specializations/ssTirePressure.lua")
     SpecializationUtil.registerSpecialization("atWorkshop", "ssAtWorkshop", g_seasons.modDir .. "src/vehicles/specializations/ssAtWorkshop.lua")
@@ -127,6 +128,10 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
+            end
+
+            if SpecializationUtil.hasSpecialization(Cultivator, vehicleType.specializations) then
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("deepCultivator"))
             end
         end
     end

@@ -28,6 +28,22 @@ function ssDeepCultivator:load(savegame)
     if savegame ~= nil then
         self.ssCultivationDepth = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssCultivationDepth", self.ssCultivationDepth)
     end
+
+   self.validDeepCultivator = true
+
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+    local workingWidth = storeItem.specs.workingWidth
+    local maxForce = self.powerConsumer.maxForce
+
+    -- hard coded fix since it does not fit criteria of maxForce / workingWidth > 6
+    if storeItem.name == "CULTIMER L 300" then
+        self.validDeepCultivator = true
+    
+    -- subsoilers already act deep
+    elseif self.typeName == "subsoiler" or maxForce / workingWidth < 6 then
+        self.validDeepCultivator = false
+    end
+
 end
 
 function ssDeepCultivator:delete()
@@ -63,15 +79,35 @@ function ssDeepCultivator:updateCultivationDepth(self)
         self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
     end
 
+    -- TOOD Need to set cultivatorDecompactionDelta for ssSC
+
     -- TODO(Jos) send event with new cultivation depth
 end
 
 function ssDeepCultivator:update(dt)
     if not g_currentMission:getIsServer() 
-        or not g_seasons.soilCompaction.compactionEnabled then
-        return 
-    end
+        or not g_seasons.soilCompaction.compactionEnabled 
+        or not self.validDeepCultivator then
+        return end
 
+    if self:getIsActiveForInput(true) then
+        local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+        local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+        -- Show text for changing cultivation depth
+        local storeItemName = storeItem.name
+        if string.len(storeItemName) > ssDeepCultivator.MAX_CHARS_TO_DISPLAY then
+            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssDeepCultivator.MAX_CHARS_TO_DISPLAY - 5)) .. "..."
+        end
+
+        local cultivationDepthText = g_i18n:getText("CULTIVATION_DEPTH_" .. tostring(self.ssCultivationDepth))
+        -- need to set a new inputBinding
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_CULTIVATION_DEPTH"), cultivationDepthText), InputBinding.IMPLEMENT_EXTRA4, nil, GS_PRIO_HIGH)
+
+        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA4) then
+            ssDeepCultivator:updateCultivationDepth(self)
+        end
+    end
 end
 
 function ssDeepCultivator:draw()
