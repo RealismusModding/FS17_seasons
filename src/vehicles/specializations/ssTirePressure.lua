@@ -84,7 +84,7 @@ function ssTirePressure:updateInflationPressure(self)
 end
 
 function ssTirePressure:update(dt)
-    if self.isClient and self:canPlayerInteractInWorkshop() and g_seasons.soilCompaction.compactionEnabled then
+    if self.isClient and self:canPlayerInteractInWorkshop() then
         local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
         local vehicleName = storeItem.brand .. " " .. storeItem.name
 
