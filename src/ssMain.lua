@@ -47,7 +47,7 @@ function ssMain:preLoad()
 
     ssMain.xmlDirectories = {}
 
-    self.baseUIFilename = Utils.getFilename("resources/huds/hud.dds", g_seasons.modDir)
+    self.baseUIFilename = Utils.getFilename("resources/gui/hud.dds", g_seasons.modDir)
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
