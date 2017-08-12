@@ -188,22 +188,7 @@ function ssSCspec:update(dt)
         self:applySC()
     end
 
-    self.ssTireLoadExceed = nil
-    for _, wheel in pairs(self.wheels) do
-        if wheel.hasGroundContact and not wheel.mrNotAWheel and wheel.load ~= nil and wheel.ssMaxLoad ~= nil then
-            -- only exceed rated tire load for low tire pressure
-            if wheel.load > wheel.ssMaxLoad and self.ssInflationPressure == ssTirePressure.PRESSURE_LOW then
-                self.ssTireLoadExceed = wheel
-                break -- already a value, no need to look at others
-            end
-        end
-    end
 end
 
 function ssSCspec:draw()
-    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-
-    if self.isEntered and self.ssTireLoadExceed then
-        g_currentMission:showBlinkingWarning(string.format(g_i18n:getText("warning_tireload"), storeItem.name), 2000)
-    end
 end
