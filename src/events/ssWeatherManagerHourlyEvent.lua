@@ -15,12 +15,13 @@ function ssWeatherManagerHourlyEvent:emptyNew()
     return self
 end
 
-function ssWeatherManagerHourlyEvent:new(cropMoistureContent, snowDepth)
+function ssWeatherManagerHourlyEvent:new(cropMoistureContent, snowDepth, soilWaterContent)
     local self = ssWeatherManagerHourlyEvent:emptyNew()
 
     self.cropMoistureContent = cropMoistureContent
     self.snowDepth = snowDepth
     self.soilTemp = soilTemp
+    self.soilWaterContent = soilWaterContent
 
     return self
 end
@@ -28,11 +29,13 @@ end
 function ssWeatherManagerHourlyEvent:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteFloat32(streamId, self.snowDepth)
+    streamWriteFloat32(streamId, self.soilWaterContent)
 end
 
 function ssWeatherManagerHourlyEvent:readStream(streamId, connection)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.snowDepth = streamReadFloat32(streamId)
+    self.soilWaterContent = streamReadFloat32(streamId)
 
     self:run(connection)
 end
@@ -42,6 +45,7 @@ function ssWeatherManagerHourlyEvent:run(connection)
         local oldSnow = ssWeatherManager.snowDepth
 
         ssWeatherManager.cropMoistureContent = self.cropMoistureContent
+        ssWeatherManager.soilWaterContent = self.soilWaterContent
         ssWeatherManager.snowDepth = self.snowDepth
 
         if math.abs(oldSnow - self.snowDepth) > 0.01 then
