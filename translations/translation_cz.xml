@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
         <text name="msg_welcome" text="Vítejte na Seasons módu realistické modifikaci. Další informace naleznete v nabídce Nápovědy ve hře (ESC) se dozvíte, jak používat tento mód." />
 
-        <text name="ui_pageOverview" text="Přehled" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Nastavení" />
         <text name="ui_pageDebug" text="Ladicí nástroje" />
 

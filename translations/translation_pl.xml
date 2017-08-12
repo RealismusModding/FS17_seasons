@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
         <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
 
-        <text name="ui_pageOverview" text="Opis" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Ustawienia" />
         <text name="ui_pageDebug" text="Narzędzia debugowania" />
 

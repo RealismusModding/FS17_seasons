@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días" />
         <text name="msg_welcome" text="Bienvenido al Mod Seasons hecho por Realismus Modding. Por favor, consulte la ayuda en el menú Esc para obtener más información sobre cómo utilizar este mod." />
 
-        <text name="ui_pageOverview" text="General" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Configuración" />
         <text name="ui_pageDebug" text="Herramientas Desarrollo" />
 

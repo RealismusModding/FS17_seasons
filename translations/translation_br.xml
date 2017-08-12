@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="A capacidade máxima de sustentos foi atingida para 3 dias" />
         <text name="msg_welcome" text="Bem vindos ao Seasons mod por Realismus Modding. Por favor cheque nossa área de ajuda apertando Esc para saber como utilizar melhor este mod." />
 
-        <text name="ui_pageOverview" text="Geral" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Preferências" />
         <text name="ui_pageDebug" text="Ferramentas de debug" />
 

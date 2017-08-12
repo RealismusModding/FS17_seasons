@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
         <text name="msg_welcome" text="Bienvenue sur le Seasons mod crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
-        <text name="ui_pageOverview" text="Aperçu" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
 

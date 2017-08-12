@@ -88,7 +88,8 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetővájú maximális kapacitása 3 napra elegendő élelmet biztosít az állataidnak" />
         <text name="msg_welcome" text="A Realismus Modding nevében üdvözlünk a Seasons modban. Kérlek olvasd át az Áttekintést az ESC menüben, hogy megismerkedj a mod használatával." />
 
-        <text name="ui_pageOverview" text="Áttekintés" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Beállítások" />
         <text name="ui_pageDebug" text="Hibakeresés" />
 

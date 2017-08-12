@@ -90,7 +90,7 @@ function ssSeasonsMenu:onOpen(element)
     self:updateDebugValues()
 
     -- Todo: get these values from the XML file. This is messy
-    local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageEconomy"), ssLang.getText("ui_pageSettings")}
+    local titles = {ssLang.getText("ui_pageCalender"), ssLang.getText("ui_pageEconomy"), ssLang.getText("ui_pageSettings")}
     if g_seasons.debug then
         table.insert(titles, ssLang.getText("ui_pageDebug"))
     end
