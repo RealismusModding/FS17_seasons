@@ -34,7 +34,7 @@ function ssSCspec:applySC()
     local soilWater = g_currentMission.environment.groundWetness
 
     for _, wheel in pairs(self.wheels) do
-        if wheel.hasGroundContact and not wheel.mrNotAWheel then
+        if wheel.hasGroundContact and not wheel.mrNotAWheel and wheel.isSynchronized then
             local x0, y0, z0
             local x1, y1, z1
             local x2, y2, z2
