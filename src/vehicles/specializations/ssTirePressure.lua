@@ -34,6 +34,16 @@ function ssTirePressure:load(savegame)
     if savegame ~= nil then
         self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", self.ssInflationPressure)
     end
+
+    self.ssAllWheelsCrawlers = true
+    for _, wheel in pairs(self.wheels) do
+        local tireTypeCrawler = WheelsUtil.getTireType("crawler")
+
+        if wheel.tireType ~= tireTypeCrawler then
+            self.ssAllWheelsCrawlers = true
+        end
+    end
+
 end
 
 function ssTirePressure:delete()
@@ -70,21 +80,25 @@ function ssTirePressure:updateInflationPressure(self)
     end
 
     local pressure = ssTirePressure.PRESSURES[self.ssInflationPressure]
+    local tireTypeCrawler = WheelsUtil.getTireType("crawler")
 
     for _, wheel in pairs(self.wheels) do
-        if wheel.ssMaxDeformation == nil then
-            wheel.ssMaxDeformation = wheel.maxDeformation
-        end
+        if wheel.tireType ~= tireTypeCrawler then  
+        
+            if wheel.ssMaxDeformation == nil then
+                wheel.ssMaxDeformation = wheel.maxDeformation
+            end
 
-        wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
-        wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESSURE / pressure
+            wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
+            wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESSURE / pressure
+        end
     end
 
     -- TODO(Jos) send event with new pressure for vehicle
 end
 
 function ssTirePressure:update(dt)
-    if self.isClient and self:canPlayerInteractInWorkshop() then
+    if self.isClient and self:canPlayerInteractInWorkshop() or not self.ssAllWheelsCrawlers then
         local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
         local vehicleName = storeItem.brand .. " " .. storeItem.name
 

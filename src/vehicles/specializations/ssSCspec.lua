@@ -41,13 +41,14 @@ function ssSCspec:applySC()
 
             local width = wheel.width
             local radius = wheel.radius
-            local length = math.max(0.1, 0.35 * radius);
-            local contactArea = length * width
+            local length = math.max(0.1, 0.35 * radius)
+            
+            --local contactArea = length * width
             local penetrationResistance = 4e5 / (20 + (g_currentMission.environment.groundWetness * 100 + 5)^2)
 
             wheel.load = getWheelShapeContactForce(wheel.node, wheel.wheelShape)
             local oldPressure = Utils.getNoNil(wheel.groundPressure,10)
-            if wheel.load == nil then wheel.load = 0 end
+            if wheel.load == nil then wheel.load = 0.01 end
 
             local inflationPressure = 180
             if self.getInflationPressure then
@@ -61,8 +62,17 @@ function ssSCspec:applySC()
 
             wheel.contactArea = 0.38 * wheel.load^0.7 * math.sqrt(width / (radius * 2)) / inflationPressure^0.45
 
+            local tireTypeCrawler = WheelsUtil.getTireType("crawler")
+            if wheel.tireType == tireTypeCrawler then
+                length = radius
+                wheel.contactArea = length * width
+            end
+
             -- TODO: No need to store groundPressure, but for display
             wheel.groundPressure = oldPressure * 999 / 1000 +  wheel.load / wheel.contactArea / 1000
+            if wheel.contactArea == 0 then
+                wheel.groundPressure = oldPressure
+            end
 
             -- soil saturation index 0.2
             -- c index Cp 0.7
