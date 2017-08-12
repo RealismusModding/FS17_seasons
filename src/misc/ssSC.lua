@@ -11,7 +11,7 @@ ssSC = {}
 g_seasons.soilCompaction = ssSC
 
 ssSC.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
-ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
+ssSC.cultivatorDecompactionDelta = 3 -- Cultivators additive effect on the compaction layer
 ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)
 ssSC.overlayColor[false] =  {
                         {0.6172, 0.0510, 0.0510, 1},
@@ -64,6 +64,11 @@ function ssSC.cutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWo
     ploughFactor = 2 * CLayers - 5
 
     if fruitId == FruitUtil.FRUITTYPE_GRASS then
+      local sprayRatio = g_currentMission.harvestSprayScaleRatio
+      local ploughRatio = g_currentMission.harvestPloughScaleRatio
+      local oldPloughFactor = ploughFactor
+
+      ploughFactor = (1 + oldPloughFactor * ploughRatio + sprayFactor * sprayRatio) / (1 + ploughRatio + sprayFactor * sprayRatio)
       volume = volume * ploughFactor
     end
 
