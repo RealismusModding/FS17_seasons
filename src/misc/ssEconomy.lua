@@ -219,7 +219,7 @@ function ssEconomy:calculateLoanInterestRate()
 end
 
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
-    if self:getIsActive() then
+    if self:getIsActive() and self.pricePerMS ~= 0 then
         self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
     end
 
