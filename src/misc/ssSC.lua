@@ -11,7 +11,7 @@ ssSC = {}
 g_seasons.soilCompaction = ssSC
 
 ssSC.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
-ssSC.cultivatorDecompactionDelta = 3 -- Cultivators additive effect on the compaction layer
+ssSC.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
 ssSC.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)
 ssSC.overlayColor[false] =  {
                         {0.6172, 0.0510, 0.0510, 1},
