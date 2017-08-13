@@ -21,10 +21,6 @@ function ssEconomy:load(savegame, key)
     self.aiDayEnd = ssXMLUtil.getFloat(savegame, key .. ".settings.aiDayEnd", 18)
     self.loanMax = ssXMLUtil.getFloat(savegame, key .. ".settings.loanMax", 1500000)
     self.baseLoanInterest = ssXMLUtil.getFloat(savegame, key .. ".settings.baseLoanInterest", 10)
-
-    -- Factors used to convert vanilla AI prices to Seasons AI prices
-    self.aiPriceFactor = self.aiPricePerHourWork / ssEconomy.VANILLA_AI_PER_HOUR
-    self.aiPriceOverworkFactor = self.aiPricePerHourOverwork / ssEconomy.VANILLA_AI_PER_HOUR
 end
 
 function ssEconomy:save(savegame, key)
@@ -62,6 +58,10 @@ function ssEconomy:loadMap(name)
     for _, path in ipairs(g_seasons:getModPaths("economy")) do
         self:loadFromXML(path)
     end
+
+    -- Factors used to convert vanilla AI prices to Seasons AI prices
+    self.aiPriceFactor = self.aiPricePerHourWork / ssEconomy.VANILLA_AI_PER_HOUR
+    self.aiPriceOverworkFactor = self.aiPricePerHourOverwork / ssEconomy.VANILLA_AI_PER_HOUR
 
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
