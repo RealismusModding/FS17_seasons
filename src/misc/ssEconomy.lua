@@ -236,12 +236,7 @@ function ssEconomy.aiUpdateTick(self, superFunc, dt)
 
     		-- Only apply the multiplier when price is positive, to avoid increase in 'worker income' in overtime
     		if self.ssOriginalPricePerMS >= 0 then
-    			local factor;
-    			if ssUtil.isWorkHours() then
-    				factor = g_seasons.economy.aiPriceFactor
-    			else
-    				factor = g_seasons.economy.aiPriceOverworkFactor
-    			end
+    			local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor;
     			self.pricePerMS = self.ssOriginalPricePerMS * factor;
     		end
     	else
