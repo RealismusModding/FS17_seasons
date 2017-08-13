@@ -16,7 +16,7 @@ ssEconomy.DEFAULT_FACTOR = 1
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
     self.aiPricePerHourOverwork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
-    self.aiOverworkMultiplier = ssXMLUtil.getFloat(savegame, key .. ".settings.aiOverworkMultiplier", 1.5)
+    self.aiOverworkMultiplier = ssXMLUtil.getFloat(savegame, key .. ".settings.aiOverworkMultiplier", self.aiPricePerHourOverwork / self.aiPricePerHourWork)
     self.aiDayStart = ssXMLUtil.getFloat(savegame, key .. ".settings.aiDayStart", 6)
     self.aiDayEnd = ssXMLUtil.getFloat(savegame, key .. ".settings.aiDayEnd", 18)
     self.loanMax = ssXMLUtil.getFloat(savegame, key .. ".settings.loanMax", 1500000)
