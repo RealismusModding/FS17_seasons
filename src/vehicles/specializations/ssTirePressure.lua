@@ -20,7 +20,7 @@ ssTirePressure.NORMAL_PRESSURE = 180 -- vanilla
 function ssTirePressure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
            SpecializationUtil.hasSpecialization(ssAtWorkshop, specializations) and
-           SpecializationUtil.hasSpecialization(ssSCspec, specializations)
+           SpecializationUtil.hasSpecialization(ssSoilCompaction, specializations)
 end
 
 function ssTirePressure:preLoad()

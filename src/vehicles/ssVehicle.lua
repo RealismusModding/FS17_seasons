@@ -28,7 +28,7 @@ function ssVehicle:preLoad()
     SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
     SpecializationUtil.registerSpecialization("deepCultivator", "ssDeepCultivator", g_seasons.modDir .. "src/vehicles/specializations/ssDeepCultivator.lua")
-    SpecializationUtil.registerSpecialization("scspec", "ssSCspec", g_seasons.modDir .. "src/vehicles/specializations/ssSCspec.lua")
+    SpecializationUtil.registerSpecialization("soilCompaction", "ssSoilCompaction", g_seasons.modDir .. "src/vehicles/specializations/ssSoilCompaction.lua")
     SpecializationUtil.registerSpecialization("tirePressure", "ssTirePressure", g_seasons.modDir .. "src/vehicles/specializations/ssTirePressure.lua")
     SpecializationUtil.registerSpecialization("atWorkshop", "ssAtWorkshop", g_seasons.modDir .. "src/vehicles/specializations/ssAtWorkshop.lua")
 
@@ -107,7 +107,7 @@ end
 function ssVehicle:installVehicleSpecializations()
     for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
         if vehicleType ~= nil then
-            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("scspec"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("soilCompaction"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("atWorkshop"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
@@ -450,10 +450,10 @@ function ssVehicle:vehicleDraw(superFunc, dt)
 
     if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         for i, wheel in pairs(self.wheels) do
-            if wheel.groundPressure ~= nil or wheel.fwdTireCLayers ~= nil or wheel.underTireCLayers ~= nil or wheel.soilBulkDensity ~= nil then
-                renderText(0.3, 0.22 - 0.02 * i, 0.01, "Tire load: " .. mathRound(wheel.load,2))
-                renderText(0.4, 0.22 - 0.02 * i, 0.01, "Max load: " .. mathRound(wheel.ssMaxLoad,2))
-                renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCLayers)
+            if wheel.groundPressure ~= nil or wheel.fwdTireCompaction ~= nil or wheel.underTireCompaction ~= nil or wheel.soilBulkDensity ~= nil then
+                renderText(0.3, 0.22 - 0.02 * i, 0.01, "Wheel load: " .. mathRound(wheel.load,2))
+                renderText(0.4, 0.22 - 0.02 * i, 0.01, "sBD: " .. mathRound(wheel.soilBulkDensity,2))
+                renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCompaction)
             end
         end
     end
