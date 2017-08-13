@@ -150,8 +150,7 @@ function ssWeatherForecast:setForecastVisible(visible)
     self.visible = visible
 
     if visible then
-        -- No idea what the /2 is for but it works
-        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.forecastHeight / 2
+        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.forecastHeight
     else
         g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset
     end
