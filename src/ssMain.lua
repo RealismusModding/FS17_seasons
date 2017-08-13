@@ -117,8 +117,9 @@ function ssMain:loadMap()
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
 
     if self.descVersion == "0.0.0.0" then
-        local w, h = getNormalizedScreenValues(512, 128)
-        self.devOverlay = Overlay:new("devOverlay", Utils.getFilename("resources/gui/dev.dds", self.modDir), 0, 0, w, h)
+        local w, h = getNormalizedScreenValues(384, 128)
+        self.devOverlay = Overlay:new("devOverlay", self.baseUIFilename, 0, 0, w, h)
+        self.devOverlay:setUVs(getNormalizedUVs({552, 216, 384, 128}))
         self.devOverlay:setPosition(0.5, 1 - h / 15)
         self.devOverlay:setDimension(w / 4, h / 4)
         self.devOverlay:setAlignment(Overlay.ALIGN_VERTICAL_TOP, Overlay.ALIGN_HORIZONTAL_CENTER)
