@@ -12,6 +12,7 @@ g_seasons.economy = ssEconomy
 
 ssEconomy.EQUITY_LOAN_RATIO = 0.3
 ssEconomy.DEFAULT_FACTOR = 1
+ssEconomy.VANILLA_AI_PER_HOUR = 2000
 
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
@@ -37,6 +38,7 @@ function ssEconomy:loadMap(name)
     EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
     EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
 
+    AIVehicle.load = Utils.appendedFunction(AIVehicle.load, ssEconomy.aiLoad)
     AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
     FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
 
@@ -56,6 +58,10 @@ function ssEconomy:loadMap(name)
     for _, path in ipairs(g_seasons:getModPaths("economy")) do
         self:loadFromXML(path)
     end
+
+    -- Factors used to convert vanilla AI prices to Seasons AI prices
+    self.aiPriceFactor = self.aiPricePerHourWork / ssEconomy.VANILLA_AI_PER_HOUR
+    self.aiPriceOverworkFactor = self.aiPricePerHourOverwork / ssEconomy.VANILLA_AI_PER_HOUR
 
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
@@ -218,9 +224,25 @@ function ssEconomy:calculateLoanInterestRate()
     g_currentMission.missionStats.loanAnnualInterestRate = seasonsYearInterest
 end
 
+function ssEconomy:aiLoad(savegame)
+
+	-- After loading the aiVehicle, store original pricePerMS in a variable, so pricePerMS can be altered without losing the original value.
+	self.ssOriginalPricePerMS = self.pricePerMS 
+end
+
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
-    if self:getIsActive() and self.pricePerMS ~= 0 then
-        self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
+    if self:getIsActive() then
+    	if self.ssOriginalPricePerMS ~= nil then
+
+    		-- Only apply the multiplier when price is positive, to avoid increase in 'worker income' in overtime
+    		if self.ssOriginalPricePerMS >= 0 then
+    			local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor;
+    			self.pricePerMS = self.ssOriginalPricePerMS * factor;
+    		end
+    	else
+    		-- In case self.originalPricePerMS is nil (should never happen), revert to the old system.
+        	self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
+        end
     end
 
     return superFunc(self, dt)
