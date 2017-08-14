@@ -25,7 +25,6 @@ ssGrowthManager.growthData = {}
 ssGrowthManager.willGerminateData = {}
 
 -- properties
-ssGrowthManager.additionalFruitsChecked = false
 ssGrowthManager.dayHasChanged = false
 ssGrowthManager.isActivatedOnOldSave = false
 
@@ -124,9 +123,21 @@ function ssGrowthManager:loadMap(name)
 end
 
 function ssGrowthManager:loadMapFinished()
-    if g_currentMission:getIsServer() then
-        if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
-            self:rebuildWillGerminateData()
+    if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
+        self:rebuildWillGerminateData()
+        self:checkAndAddNewFruits(true)
+    else
+        self:checkAndAddNewFruits(false)
+    end
+end
+
+function ssGrowthManager:checkAndAddNewFruits(updateGerminationData)
+    for index, fruit in pairs(g_currentMission.fruits) do
+        local fruitName = FruitUtil.fruitIndexToDesc[index].name
+        --handling new unknown fruits
+        if self.defaultFruitsData[fruitName] == nil then
+            log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
+            self:unknownFruitFound(fruitName, updateGerminationData)
         end
     end
 end
@@ -177,29 +188,14 @@ function ssGrowthManager:transitionChanged()
     end
 end
 
-function ssGrowthManager:update(dt)
-    if self.growthManagerEnabled == false then return end
-
-    if self.additionalFruitsChecked == false then
-        self.additionalFruitsChecked = true
-        for index, fruit in pairs(g_currentMission.fruits) do
-            local fruitName = FruitUtil.fruitIndexToDesc[index].name
-            --handling new unknown fruits
-            if self.defaultFruitsData[fruitName] == nil then
-                log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
-                self:unknownFruitFound(fruitName)
-            end
-        end
-    end
-end
-
 -- reset the willGerminateData and rebuild it based on the current transition
 function ssGrowthManager:rebuildWillGerminateData()
-    self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
+    local currentGT = g_seasons.environment:transitionAtDay()
+    self.willGerminateData[currentGT] = {}
     local canPlantData = g_seasons.growthGUI:getCanPlantData()
     for fruitName, transition in pairs(canPlantData) do
-        if canPlantData[fruitName][g_seasons.environment:transitionAtDay()] == true then
-            self.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] = ssWeatherManager:canSow(fruitName)
+        if canPlantData[fruitName][currentGT] == true then
+            self.willGerminateData[currentGT][fruitName] = ssWeatherManager:canSow(fruitName)
         end
     end
 end
@@ -207,8 +203,7 @@ end
 -- handle dayChanged event
 -- check if canSow and update willGerminate accordingly
 function ssGrowthManager:dayChanged()
-  --self.dayHasChanged = true
-  self:rebuildWillGerminateData()
+    self:rebuildWillGerminateData()
 end
 
 -- called by ssDensityScanner to make fruit grow
@@ -358,17 +353,16 @@ function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, width
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
-function ssGrowthManagerWillGerminate(transition, fruitName)
-    
-end
-
 -- update all GM data for a custom unknown fruit
-function ssGrowthManager:unknownFruitFound(fruitName)
+function ssGrowthManager:unknownFruitFound(fruitName, updateGerminationData)
     self:updateDefaultFruitsData(fruitName)
     self:updateGrowthData(fruitName)
     g_seasons.growthGUI:updateCanPlantData(fruitName)
     g_seasons.growthGUI:updateCanHarvestData(fruitName)
-    self:updateWillGerminateData(fruitName)
+
+    if updateGerminationData == true then
+        self:updateWillGerminateData(fruitName)
+    end
 end
 
 function ssGrowthManager:updateDefaultFruitsData(fruitName)
@@ -387,8 +381,10 @@ end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
     local currentTransition = g_seasons.environment:transitionAtDay()
-    logInfo("Updating will germinate data")
-    logInfo("fruitName: " .. fruitName .. "transition: " .. currentTransition)
-    print_r(self.willGerminateData)
-    self.willGerminateData[currentTransition][fruitName] = self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE]
+    -- logInfo("Updating will germinate data")
+    -- logInfo("fruitName: " .. fruitName .. "transition: " .. currentTransition)
+    -- print_r(self.willGerminateData)
+    if self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE] ~= nil then
+        self.willGerminateData[currentTransition][fruitName] = self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE]
+    end
 end
