@@ -13,6 +13,7 @@
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
         <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
+        <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation Depth (%s)" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -81,6 +82,14 @@
         <text name="TIRE_PRESSURE_2" text="Normal" />
         <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
 
+        <text name="CULTIVATION_DEPTH_1" text="Shallow" />
+        <text name="CULTIVATION_DEPTH_2" text="Deep" />
+
+        <text name="COMPACTION_0" text="&s causes heavy compaction" />
+        <text name="COMPACTION_1" text="&s causes medium compaction" />
+        <text name="COMPACTION_2" text="&s causes light compaction" />
+        <text name="COMPACTION_3" text="&s causes no compaction" />
+        
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
