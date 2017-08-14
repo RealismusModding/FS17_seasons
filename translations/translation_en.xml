@@ -85,10 +85,10 @@
         <text name="CULTIVATION_DEPTH_1" text="Shallow" />
         <text name="CULTIVATION_DEPTH_2" text="Deep" />
 
-        <text name="COMPACTION_0" text="&s causes heavy compaction" />
-        <text name="COMPACTION_1" text="&s causes medium compaction" />
-        <text name="COMPACTION_2" text="&s causes light compaction" />
-        <text name="COMPACTION_3" text="&s causes no compaction" />
+        <text name="COMPACTION_0" text="%s causes heavy compaction" />
+        <text name="COMPACTION_1" text="%s causes medium compaction" />
+        <text name="COMPACTION_2" text="%s causes light compaction" />
+        <text name="COMPACTION_3" text="%s causes no compaction" />
         
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
 
