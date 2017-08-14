@@ -33,10 +33,10 @@ function ssGrowthManager:load(savegame, key)
     self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
-
+    self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
+    
     if savegame == nil then return end
 
-    self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
     local i = 0
 
     if g_seasons.savegameVersion <= g_seasons.CONTEST_SAVEGAME_VERSION then --old save game
