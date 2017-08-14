@@ -381,9 +381,6 @@ end
 
 function ssGrowthManager:updateWillGerminateData(fruitName)
     local currentTransition = g_seasons.environment:transitionAtDay()
-    -- logInfo("Updating will germinate data")
-    -- logInfo("fruitName: " .. fruitName .. "transition: " .. currentTransition)
-    -- print_r(self.willGerminateData)
     if self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE] ~= nil then
         self.willGerminateData[currentTransition][fruitName] = self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE]
     end
