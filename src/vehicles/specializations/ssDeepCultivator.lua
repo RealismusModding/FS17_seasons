@@ -62,9 +62,6 @@ function ssDeepCultivator:load(savegame)
     if self.ssCultivationDepth == ssDeepCultivator.DEPTH_SHALLOW then
         self.powerConsumer.maxForce = self.ssShallowMaxForce
     end
-
-    print_r(storeItem.name .. " " .. self.ssCultivationDepth .. " " .. tostring(self.ssValidDeepCultivator))
-
 end
 
 function ssDeepCultivator:delete()

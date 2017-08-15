@@ -8,6 +8,8 @@
 
 ssSoilCompaction = {}
 
+ssSoilCompaction.MAX_CHARS_TO_DISPLAY = 20
+
 function ssSoilCompaction:prerequisitesPresent(specializations)
     return true
 end
@@ -78,7 +80,17 @@ function ssSoilCompaction:applySoilCompaction()
             -- reference pressure 100 kPa
             -- reference saturation Sk 50%
             local soilBulkDensityRef = 0.2 * (soilWater - 0.5) + 0.7 * math.log10(wheel.groundPressure / 100)
+            
+            wheel.possibleCompaction = 3
+            if soilBulkDensityRef > -0.15 and soilBulkDensityRef <= 0.0 then
+                wheel.possibleCompaction = 2
 
+            elseif soilBulkDensityRef > 0.0 and soilBulkDensityRef <= 0.15 then
+                wheel.possibleCompaction = 1
+
+            elseif soilBulkDensityRef > 0.15 then
+                wheel.possibleCompaction = 0
+            end
             --below only for debug print. TODO: remove when done
             wheel.soilBulkDensity = soilBulkDensityRef
 
@@ -188,6 +200,26 @@ function ssSoilCompaction:update(dt)
         self:applySoilCompaction()
     end
 
+    -- text in menu will not be correct before the tractor has driven a few seconds
+    -- TODO: only works for tractors you have been sitting in at the moment
+    if self:isPlayerInRange() then
+        local worstCompaction = 4
+        for _, wheel in pairs(self.wheels) do
+            -- fallback to 'no compaction'
+            worstCompaction = math.min(worstCompaction,Utils.getNoNil(wheel.possibleCompaction,4))
+        end
+
+        if worstCompaction < 4 then
+            local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
+            local storeItemName = storeItem.name
+            if string.len(storeItemName) > ssSoilCompaction.MAX_CHARS_TO_DISPLAY then
+                storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSoilCompaction.MAX_CHARS_TO_DISPLAY - 5)) .. "..."
+            end
+
+            local compactionText = string.format(g_i18n:getText("COMPACTION_" .. tostring(worstCompaction)), storeItemName)
+            g_currentMission:addExtraPrintText(compactionText)
+        end
+    end
 end
 
 function ssSoilCompaction:draw()
