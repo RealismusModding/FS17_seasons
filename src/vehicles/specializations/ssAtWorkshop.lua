@@ -63,7 +63,7 @@ end
 -- Jos: Don't ask me why, but putting them inside Repairable breaks all, even with
 -- callSpecializationsFunction...
 local function getIsPlayerInRange(self, distance, player)
-    if self.rootNode ~= 0 and SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
+    if self.rootNode ~= 0 then
         return isInDistance(self, player, distance, self.rootNode), player
     end
 

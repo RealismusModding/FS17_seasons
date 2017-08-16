@@ -48,8 +48,8 @@ function ssSoilCompaction:applySoilCompaction()
             local penetrationResistance = 4e5 / (20 + (g_currentMission.environment.groundWetness * 100 + 5)^2)
 
             wheel.load = getWheelShapeContactForce(wheel.node, wheel.wheelShape)
-            local oldPressure = Utils.getNoNil(wheel.groundPressure,10)
-            if wheel.load == nil then wheel.load = 0 end
+            local oldPressure = Utils.getNoNil(wheel.groundPressure,15)
+            if wheel.load == nil then wheel.load = wheel.restLoad end
 
             local inflationPressure = 180
             if self.getInflationPressure then
@@ -70,7 +70,7 @@ function ssSoilCompaction:applySoilCompaction()
             end
 
             -- TODO: No need to store groundPressure, but for display
-            wheel.groundPressure = oldPressure * 999 / 1000 +  wheel.load / wheel.contactArea / 1000
+            wheel.groundPressure = oldPressure * 99 / 100 +  wheel.load / wheel.contactArea / 100
             if wheel.contactArea == 0 then
                 wheel.groundPressure = oldPressure
             end
