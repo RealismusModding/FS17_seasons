@@ -130,6 +130,22 @@ function ssMain:loadMap()
     end
 end
 
+function ssMain:loadGameFinished()
+    self:validateDensityMaps()
+end
+
+function ssMain:validateDensityMaps()
+    local mapSize = getDensityMapSize(g_currentMission.terrainDetailHeightId)
+
+    if getDensityMapSize(g_currentMission.fruits[1].id) ~= mapSize then
+        logInfo("Warning: Density map size of terrain is not the same as terrain")
+    end
+
+    if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
+        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain")
+    end
+end
+
 function ssMain:update(dt)
     if self.showControlsInHelpScreen then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_MENU"), InputBinding.SEASONS_SHOW_MENU, nil, GS_PRIO_VERY_LOW)
