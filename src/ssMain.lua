@@ -137,8 +137,10 @@ end
 function ssMain:validateDensityMaps()
     local mapSize = getDensityMapSize(g_currentMission.terrainDetailHeightId)
 
-    if getDensityMapSize(g_currentMission.fruits[1].id) ~= mapSize then
-        logInfo("Warning: Density map size of terrain is not the same as terrain")
+    for i, fruit in ipairs(g_currentMission.fruits) do
+        if getDensityMapSize(fruit.id) ~= mapSize then
+            logInfo("Warning: Density map size of fruit '" .. FruitUtil.fruitIndexToDesc[i].name .. "' is not the same as terrain")
+        end
     end
 
     if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
