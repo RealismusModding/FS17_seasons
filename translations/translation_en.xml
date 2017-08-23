@@ -132,6 +132,8 @@
 
         <text name="fillType_snow" text="Snow" />
 
+        <text name="function_measureTool" text="Using a measurement tool, you can get information on the soil, trees, bales, and other objects." />
+
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />

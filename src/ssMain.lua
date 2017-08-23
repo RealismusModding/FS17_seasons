@@ -49,6 +49,11 @@ function ssMain:preLoad()
 
     self.baseUIFilename = Utils.getFilename("resources/gui/hud.dds", g_seasons.modDir)
 
+    -- Add brand for the measure tool: before mods are loaded
+    if not BrandUtil["WOPSTR"] then
+        BrandUtil.registerBrand("WOPSTR", "Wopstr", self.modDir .. "resources/handtools/wopstr420/brand_wopstr.dds", "")
+    end
+
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
 
