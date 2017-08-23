@@ -9,7 +9,7 @@
             <function>$l10n_function_measureTool</function>
         </functions>
         <image>resources/handtools/wopstr420/store.png</image>
-        <price>1000</price>
+        <price>3500</price>
         <dailyUpkeep>5</dailyUpkeep>
         <lifetime>600</lifetime>
         <rotation>0</rotation>

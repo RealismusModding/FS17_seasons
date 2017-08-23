@@ -7,6 +7,7 @@ ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
 ssMeasureTool.MEASURE_TIMEOUT = 1000
+ssMeasureTool.MEASURE_DISTANCE = 10
 
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
@@ -125,26 +126,65 @@ end
 
 function ssMeasureTool:onActivate(allowInput)
     ssMeasureTool:superClass().onActivate(self)
-
-    -- self.player:setEquipmentUVs(self.equipmentUVs)
-
-    if self.isClient and allowInput then
-    end
 end
 
 function ssMeasureTool:onDeactivate(allowInput)
     ssMeasureTool:superClass().onDeactivate(self)
 
     self.player.walkingIsLocked = false
-
-    if self.isClient then
-    end
 end
 
 function ssMeasureTool:executeMeasure()
-    -- Did the measure
+    -- Raycast from the player
+    local x, y, z = localToWorld(self.player.cameraNode, 0, 0, 0.5)
+    local dx, dy, dz = localDirectionToWorld(self.player.cameraNode, 0, 0, -1)
 
-    log("Raycast + show gui")
+    raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE + 1.0, self)
+    -- raycastAll(x, y, z, dx, dy, dz, "raycastCallback", Player.MAX_PICKABLE_OBJECT_DISTANCE + 1.0, self)
+end
+
+function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
+    log("callback", hitObjectId, x, y, z, distance)
+    log("terrain", g_currentMission.terrainDetailId)
+
+    if distance > 0.5 and distance <= ssMeasureTool.MEASURE_DISTANCE then
+        if hitObjectId == g_currentMission.terrainDetailId then
+            self:showTerrainInfo(x, y, z)
+        else
+            local type = getRigidBodyType(hitObjectId)
+            log("type", type)
+
+            -- Skip vehicles
+            if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
+                self:showNoInfo()
+            else
+                print_r(ObjectIds.getObjectClassById(hitObjectId))
+
+                local object = g_currentMission:getNodeObject(hitObjectId);
+                print_r(object)
+            end
+        end
+    else
+        self:showFailed()
+    end
+
+    return true
+end
+
+function ssMeasureTool:showFailed()
+    log("Measurement failed")
+end
+
+function ssMeasureTool:showNoInfo()
+    log("Measurement failed: no info")
+end
+
+function ssMeasureTool:showBaleInfo(bale)
+    log("Bale")
+end
+
+function ssMeasureTool:showTerrainInfo(x, y, z)
+    log("Terrain")
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)

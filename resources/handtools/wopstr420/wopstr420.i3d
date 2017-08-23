@@ -24,7 +24,7 @@
   </Shapes>
 
   <Scene>
-    <Shape name="wopstr420_vis" translation="0 0 2.98023e-08" shapeId="1" castsShadows="true" receiveShadows="true" materialIds="1" clipDistance="200" nodeId="1">
+    <Shape name="wopstr420_vis" translation="0 0 2.98023e-08" shapeId="1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="200" nodeId="1">
       <TransformGroup name="handNode" translation="0 0 -2.98023e-08" nodeId="2"/>
     </Shape>
   </Scene>
