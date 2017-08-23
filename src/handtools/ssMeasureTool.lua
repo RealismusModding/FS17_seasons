@@ -6,10 +6,14 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
+<<<<<<< HEAD
 ssMeasureTool.MEASURE_TIMEOUT = 1000 --3000
 ssMeasureTool.MEASURE_DISTANCE = 10
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = 2000
+=======
+ssMeasureTool.MEASURE_TIMEOUT = 1000
+>>>>>>> Add handtool for measuring all the things.
 
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
