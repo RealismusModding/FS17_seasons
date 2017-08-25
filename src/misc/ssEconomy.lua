@@ -10,7 +10,7 @@
 ssEconomy = {}
 g_seasons.economy = ssEconomy
 
-ssEconomy.EQUITY_LOAN_RATIO = 0.3
+ssEconomy.EQUITY_LOAN_RATIO = 0.8
 ssEconomy.DEFAULT_FACTOR = 1
 ssEconomy.VANILLA_AI_PER_HOUR = 2000
 
