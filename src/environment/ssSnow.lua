@@ -48,7 +48,7 @@ end
 
 function ssSnow:loadMap(name)
     -- Register Snow as a fill and Tip type
-    local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/huds/hud_fill_snow.png", g_seasons.modDir .. "resources/huds/hud_fill_snow_sml.png", 0.00016, math.rad(50))
+    local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
     TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.dds", g_seasons.modDir .. "resources/environment/snow_normal.dds", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.dds")
     loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
 
@@ -177,44 +177,47 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
     -- Fix for broken vanilla game: when swath is very near the south border, the game crashes
     heightWorldZ = math.min(heightWorldZ, (g_currentMission.terrainSize / 2.0) - 18.0)
 
-    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+    local terrainId = g_currentMission.terrainDetailHeightId
+    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(terrainId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     if self.snowMaskId ~= nil then
         -- Set snow type where we have no other heaps or masked areas on the map.
-        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-        setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, self.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
-        setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+        setDensityMaskParams(terrainId, "equals", 0)
+        setDensityCompareParams(terrainId, "equals", 0)
+        setDensityMaskedParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, self.snowMaskId, ssSnow.SNOW_MASK_FIRST_CHANNEL, ssSnow.SNOW_MASK_NUM_CHANNELS, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+        setDensityMaskParams(terrainId, "greater", -1)
+        setDensityCompareParams(terrainId, "greater", -1)
     else
         -- No snowmask provided by maps, so only mask for heaps
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-        setDensityParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
-        setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+        setDensityCompareParams(terrainId, "equals", 0)
+        setDensityParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+        setDensityCompareParams(terrainId, "greater", -1)
     end
     -- Add snow where type is snow.
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
-    addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, layers)
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+    setDensityMaskParams(terrainId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
+    addDensityMaskedParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, terrainId, 0, 5, layers)
+    setDensityMaskParams(terrainId, "greater", -1)
 end
 
 -- Must be defined before being registered with ssDensityMapScanner.
 function ssSnow:removeSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     layers = tonumber(layers)
-    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+
+    local terrainId = g_currentMission.terrainDetailHeightId
+    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(terrainId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     -- Remove snow where type is snow.
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
-    addDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, -layers)
+    setDensityMaskParams(terrainId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
+    setDensityCompareParams(terrainId, "greater", 0)
+    addDensityMaskedParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, terrainId, 0, 5, -layers)
 
     -- Remove snow type where we have no snow.
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", 0)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
-    setDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, g_currentMission.terrainDetailHeightId, 5, 6, 0)
+    setDensityMaskParams(terrainId, "equals", 0)
+    setDensityCompareParams(terrainId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW].index)
+    setDensityMaskedParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 0, 5, terrainId, 5, 6, 0)
 
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+    setDensityMaskParams(terrainId, "greater", -1)
+    setDensityCompareParams(terrainId, "greater", -1)
 end
 
 --
@@ -306,16 +309,17 @@ function ssSnow:removeSnowLayer(objectInSnow, dim)
     local z1 = objectInSnow.sendPosZ - dim.length * scale
     local z2 = objectInSnow.sendPosZ + dim.length * scale
 
-    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
+    local terrainId = g_currentMission.terrainDetailHeightId
+    local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(terrainId, x0, z0, x1, z1, x2, z2)
 
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+    setDensityMaskParams(terrainId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+    setDensityCompareParams(terrainId, "greater", 0)
 
-    local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
+    local density, area, _ = getDensityMaskedParallelogram(terrainId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, terrainId, 0, 5, 0)
     local snowLayers = density / area
 
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+    setDensityCompareParams(terrainId, "greater", -1)
+    setDensityMaskParams(terrainId, "greater", -1)
 
     if snowLayers > 1 then
         self:removeSnow(x0, z0, x1, z1, x2, z2, 1)

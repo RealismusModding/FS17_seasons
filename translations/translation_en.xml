@@ -76,7 +76,7 @@
         <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
-        <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
+        <text name="SS_SAVE_FAILED" text="Failed to save Seasons to your savegame. Please try again!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
 

@@ -2,7 +2,7 @@
 -- WEATHER FORECAST SCRIPT
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  to forecast and display the weather
--- Authors:  ian898, Rahkiin, reallogger, theSeb
+-- Authors:  Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -14,93 +14,127 @@ local screenAspectRatio = g_screenAspectRatio / (16 / 9)
 ssWeatherForecast.hud = {}
 
 function ssWeatherForecast:loadMap(name)
-    if g_currentMission:getIsClient() then
-        self.guiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
-        self.hud.width, self.hud.height = getNormalizedScreenValues(60 * 7 * self.guiScale, 60 * self.guiScale)
-        self.hud.widthSmall, _ = getNormalizedScreenValues(60 * 4 * self.guiScale, 0)
-        --self.hud.widthSmall = (0.1 * self.guiScale * 4) / g_screenAspectRatio * screenAspectRatio
-        self.hud.posX = g_currentMission.infoBarBgOverlay.x - self.hud.width * (0.915)
-        self.hud.posXSmall = 1 - self.hud.widthSmall
-        self.hud.posY = g_currentMission.infoBarBgOverlay.y - self.hud.height * 1.1
-        self.hud.posYSmall = g_currentMission.infoBarBgOverlay.y
-        self.hud.iconWidth, self.hud.iconHeight = getNormalizedScreenValues(28 * self.guiScale, 28 * self.guiScale)
-        self.hud.iconWidthSmall, self.hud.iconHeightSmall = getNormalizedScreenValues(14 * self.guiScale, 14 * self.guiScale)
-        self.hud.textSize = g_currentMission.timeScaleTextSize
+    if not g_currentMission:getIsClient() then return end
 
-        -- Set position clock overlay
-        _, self.hud.clockPosY = getNormalizedScreenValues(0, 2 * self.guiScale)
-        self.hud.clockPosY = self.hud.clockPosY + g_currentMission.timeBgOverlay.y
-        self.hud.clockWidth, self.hud.clockHeight = getNormalizedScreenValues(100 * self.guiScale, 35* self.guiScale)
+    local uiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
+    self.guiScale = uiScale
 
-        -- Set position day overlay
-        --self.hud.dayPosX = self.hud.posX + self.hud.width * (1 - 0.915)
-        self.hud.dayPosY = g_currentMission.infoBarBgOverlay.y
-        self.hud.dayHeight = g_currentMission.infoBarBgOverlay.height
-        --self.hud.dayWidth = g_currentMission.infoBarBgOverlay.height / g_screenAspectRatio * screenAspectRatio
-        self.hud.dayWidth = self.hud.width / 6.5
+    self.borderWidth, self.borderHeight = getNormalizedScreenValues(4 * uiScale, 4 * uiScale)
 
-        self.hud.overlays = {}
+    -- Forecast basics
+    self.forecastDayWidth, self.forecastDayHeight = getNormalizedScreenValues(50 * uiScale, 50 * uiScale)
+    self.forecastSpacingWidth, self.forecastSpacingHeight = self.borderWidth, self.borderHeight
+    self.forecastWidth = 7 * self.forecastDayWidth + 8 * self.forecastSpacingWidth
+    self.forecastHeight = self.forecastDayHeight + 2 * self.forecastSpacingHeight
 
-        -- Forecast hud
-        local width, height = getNormalizedScreenValues(1024, 128)
-        self.hud.overlays.forecast_hud = Overlay:new("hud_forecast", Utils.getFilename("resources/huds/hud_forecast.dds", g_seasons.modDir), 0, 0, width, height)
+    self.marginX, self.marginY = getNormalizedScreenValues(2 * uiScale, 2 * uiScale)
 
-        -- Current day hud
-        local width, height = getNormalizedScreenValues(256, 128)
-        self.hud.overlays.day_hud = Overlay:new("hud_day",  Utils.getFilename("resources/huds/hud_day.dds", g_seasons.modDir), 0, 0, height, height)
+    self.forecastY = g_currentMission.infoBarBgOverlay.y - self.forecastHeight - self.forecastSpacingHeight
+    self.forecastX = g_currentMission.infoBarBgOverlay.x - self.forecastWidth
 
-        -- clock overlay and cloud and ground for day hud
-        local width, height = getNormalizedScreenValues(64, 64)
-        local _, y = getNormalizedScreenValues(0, 5)
-        g_currentMission.timeOffsetY = g_currentMission.timeOffsetY + y
-        g_currentMission.timeIconOverlay.y = g_currentMission.timeIconOverlay.y + y
+    -- Weather icon
+    self.iconWidth, self.iconHeight = getNormalizedScreenValues(28 * uiScale, 28 * uiScale)
 
-        self.hud.overlays.ground_symbol = Overlay:new("ground_symbol",  Utils.getFilename("resources/huds/ground_symbol.dds", g_seasons.modDir), 0, 0, height, height)
-        self.hud.overlays.cloud_symbol = Overlay:new("cloud_symbol",  Utils.getFilename("resources/huds/cloud_symbol.dds", g_seasons.modDir), 0, 0, height, height)
+    -- Season icons, air/soil icon
+    self.iconWidthSmall, self.iconHeightSmall = getNormalizedScreenValues(16 * uiScale, 16 * uiScale)
 
-        -- Seasons "White" Icons
-        local width, height = getNormalizedScreenValues(128, 128)
+    self.textSize = g_currentMission.timeScaleTextSize
 
-        -- Seasons "Color" Icons
-        self.hud.overlays.seasons = {}
-        self.hud.overlays.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", Utils.getFilename("resources/huds/hud_Season_Color/hud_spring_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", Utils.getFilename("resources/huds/hud_Season_Color/hud_summer_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", Utils.getFilename("resources/huds/hud_Season_Color/hud_autumn_Color.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", Utils.getFilename("resources/huds/hud_Season_Color/hud_winter_Color.dds", g_seasons.modDir), 0, 0, width, height)
+    -- Set position day overlay
+    self.todayPosY = g_currentMission.infoBarBgOverlay.y
+    self.todayHeight = g_currentMission.infoBarBgOverlay.height
+    self.separatorWidth, self.separatorHeight = getNormalizedScreenValues(1 * uiScale, 1 * uiScale)
 
-        self.hud.overlays.frozen_hud = Overlay:new("hud_frozen", Utils.getFilename("resources/huds/frozenground.dds", g_seasons.modDir), 0, 0, width, height)
-        self.hud.overlays.wetcrop_hud = Overlay:new("hud_wetcrop", Utils.getFilename("resources/huds/wetcrop.dds", g_seasons.modDir), 0, 0, width, height)
+    self.todayTextWidth, _ = getNormalizedScreenValues(24 * uiScale, 0)
+    self.todayWidth = self.borderWidth * 2 + self.marginX * 4 + self.separatorWidth + self.iconWidth + self.iconWidthSmall + self.todayTextWidth
 
-        -- Seasons Weather Icons
-        self.hud.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
-        self.hud.overlays.cloudy = g_currentMission.weatherForecastIconOverlays.cloudy
-        self.hud.overlays.fog = g_currentMission.weatherForecastIconOverlays.fog
-        self.hud.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
-        self.hud.overlays.snow = Overlay:new("hud_snow", Utils.getFilename("resources/huds/hud_snow.dds", g_seasons.modDir), 0, 0, width, height)
+    self.todayIconOffsetX = self.borderWidth + self.marginX * 3 + self.iconWidth + self.separatorWidth
+    self.todayTempOffsetX = self.todayIconOffsetX + self.iconWidthSmall + self.separatorWidth
 
-        g_currentMission.weatherForecastIconOverlays.snow = self.hud.overlays.snow
-        self.hud.overlays.hail = self.hud.overlays.snow
+    self.todayAirOffsetY = (self.todayHeight - 2 * self.borderHeight) * 3 / 4 - self.iconHeightSmall / 2 + self.borderHeight
+    self.todaySoilOffsetY = (self.todayHeight - 2 * self.borderHeight) / 4 - self.iconHeightSmall / 2 + self.borderHeight
 
-        self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
-        self:setForecastVisible(self.hud.visible)
-    end
+    self.todaySeasonOffsetY = self.todayHeight / 2 - self.iconHeight / 2
+    self.todayVerticalSeparatorOffsetX = self.borderWidth + 2 * self.marginX + self.iconWidth
+
+    self.todayHorizontalSeparatorY = self.todayPosY + (self.todayHeight - self.separatorHeight) / 2
+    self.todayHorizontalSeparatorWidth = self.iconWidthSmall + self.todayTextWidth
+
+    self.todayTextOffset = self.todayWidth - self.borderWidth - self.marginX
+    self.todayAirTextY = self.todayPosY + (self.todayHeight - 2 * self.borderHeight) * 3 / 4 - self.textSize * 1.1 / 2 + self.borderHeight
+    self.todaySoilTextY = self.todayPosY + (self.todayHeight - 2 * self.borderHeight) / 4 - self.textSize * 1.1 / 2 + self.borderHeight
+
+
+    -- Rect for drawing the backgrounds
+    width, height = getNormalizedScreenValues(1, 1)
+    self.rect = Overlay:new("pixel", g_baseUIFilename, 0, 0, width, height)
+    self.rect:setUVs(g_colorBgUVs)
+
+    -- Season
+    local _, y = getNormalizedScreenValues(0, 5)
+    g_currentMission.timeOffsetY = g_currentMission.timeOffsetY + y
+    g_currentMission.timeIconOverlay.y = g_currentMission.timeIconOverlay.y + y
+
+    self.overlays = {}
+
+    self.overlays.soilSymbol = Overlay:new("soilSymbol",  g_seasons.baseUIFilename, 0, 0, self.iconWidthSmall, self.iconHeightSmall)
+    self.overlays.soilSymbol:setUVs(getNormalizedUVs({80, 8, 64, 64}))
+    self.overlays.airSymbol = Overlay:new("airSymbol",  g_seasons.baseUIFilename, 0, 0, self.iconWidthSmall, self.iconHeightSmall)
+    self.overlays.airSymbol:setUVs(getNormalizedUVs({8, 8, 64, 64}))
+
+    -- Seasons Icons
+    self.overlays.seasons = {}
+    self.overlays.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", g_seasons.baseUIFilename, 0, 0, 0, 0)
+    self.overlays.seasons[ssEnvironment.SEASON_SPRING]:setUVs(getNormalizedUVs({8, 216, 128, 128}))
+    self.overlays.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", g_seasons.baseUIFilename, 0, 0, 0, 0)
+    self.overlays.seasons[ssEnvironment.SEASON_SUMMER]:setUVs(getNormalizedUVs({144, 216, 128, 128}))
+    self.overlays.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", g_seasons.baseUIFilename, 0, 0, 0, 0)
+    self.overlays.seasons[ssEnvironment.SEASON_AUTUMN]:setUVs(getNormalizedUVs({280, 216, 128, 128}))
+    self.overlays.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", g_seasons.baseUIFilename, 0, 0, 0, 0)
+    self.overlays.seasons[ssEnvironment.SEASON_WINTER]:setUVs(getNormalizedUVs({416, 216, 128, 128}))
+
+    -- State icons
+    self.stateWidth, self.stateHeight = getNormalizedScreenValues(50 * uiScale, 50 * uiScale)
+    self.stateIconWidth, self.stateIconHeight = self.stateWidth - 2 * self.borderWidth, self.stateHeight - 2 * self.borderHeight
+    self.statePosY = self.todayPosY
+
+    self.overlays.frozen = Overlay:new("hud_frozen", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.frozen:setUVs(getNormalizedUVs({8, 352, 204, 204}))
+    self.overlays.wetcrop = Overlay:new("hud_wetcrop", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.wetcrop:setUVs(getNormalizedUVs({220, 352, 204, 204}))
+
+    -- New snow icon
+    g_currentMission.weatherForecastIconOverlays.snow = Overlay:new("hud_snow", g_seasons.baseUIFilename, 0, 0, 0, 0)
+    g_currentMission.weatherForecastIconOverlays.snow:setUVs(getNormalizedUVs({552, 80, 128, 128}))
+
+    -- Seasons Weather Icons
+    self.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
+    self.overlays.cloudy = g_currentMission.weatherForecastIconOverlays.cloudy
+    self.overlays.fog = g_currentMission.weatherForecastIconOverlays.fog
+    self.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
+    self.overlays.snow = g_currentMission.weatherForecastIconOverlays.snow
+    self.overlays.hail = self.overlays.snow
+
+    self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
+
+    self:setForecastVisible(self.visible)
 end
 
 function ssWeatherForecast:load(savegame, key)
-    self.hud.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
+    self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
     self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
 end
 
 function ssWeatherForecast:save(savegame, key)
     if g_currentMission:getIsServer() == true then
-        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.hud.visible)
+        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
         ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
     end
 end
 
 function ssWeatherForecast:update(dt)
     if g_seasons.showControlsInHelpScreen then
-        if not self.hud.visible then
+        if not self.visible then
             g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
         else
             g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
@@ -108,16 +142,15 @@ function ssWeatherForecast:update(dt)
     end
 
     if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
-        self:setForecastVisible(not self.hud.visible)
+        self:setForecastVisible(not self.visible)
     end
 end
 
 function ssWeatherForecast:setForecastVisible(visible)
-    self.hud.visible = visible
+    self.visible = visible
 
     if visible then
-        -- No idea what the /2 is for but it works
-        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.hud.overlays.forecast_hud.height / 2
+        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.forecastHeight
     else
         g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset
     end
@@ -131,7 +164,7 @@ function ssWeatherForecast:draw()
         setTextColor(1, 1, 1, .9)
         setTextAlignment(RenderText.ALIGN_CENTER)
 
-        if self.hud.visible then
+        if self.visible then
             self:drawForecast(ssWeatherManager.forecast)
         end
 
@@ -144,35 +177,57 @@ function ssWeatherForecast:draw()
 end
 
 function ssWeatherForecast:drawForecast(forecast)
-    -- Render Background
-    renderOverlay(self.hud.overlays.forecast_hud.overlayId, self.hud.posX, self.hud.posY, self.hud.width, self.hud.height)
+    -- Draw grey border background
+    self.rect:setPosition(self.forecastX, self.forecastY)
+    self.rect:setDimension(self.forecastWidth, self.forecastHeight)
+    self.rect:setColor(unpack(g_colorBg))
+    self.rect:render()
 
-    -- Set firstDayPos
-    local daysPosOffset = self.hud.width / 8.5
+    -- Draw square background
+    self.rect:setColor(0.0075, 0.0075, 0.0075, 1)
+    self.rect:setDimension(self.forecastDayWidth, self.forecastDayHeight)
+    for i = 1, 7 do
+        self.rect:setPosition(self.forecastX + i * self.forecastSpacingWidth + (i - 1) * self.forecastDayWidth, self.forecastY + self.forecastSpacingHeight)
+        self.rect:render()
+    end
+
+    local dayOffsetY = self.forecastY + self.forecastSpacingHeight
 
     for n = 2, ssWeatherManager.forecastLength do
-        local dayOffset = (daysPosOffset * (n - 2))
-        local posXOffset, posYOffset = getNormalizedScreenValues(40 * self.guiScale, 6 * self.guiScale)
+        -- X of the day
+        local dayOffsetX = self.forecastX + self.forecastSpacingWidth + (n - 2) * (self.forecastDayWidth + self.forecastSpacingWidth)
+
         local weatherIcon = forecast[n].weatherState
 
         -- Render Season Icon
-        renderOverlay(self.hud.overlays.seasons[forecast[n].season].overlayId, self.hud.posX + posXOffset + self.hud.iconWidth + self.hud.iconWidthSmall / 4 + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall * 0.8, self.hud.iconWidthSmall, self.hud.iconHeightSmall)
+        local seasonIcon = self.overlays.seasons[forecast[n].season]
+        seasonIcon:setDimension(self.iconWidthSmall, self.iconHeightSmall)
+        -- Top right corner
+        seasonIcon:setPosition(dayOffsetX + self.forecastDayWidth - self.iconWidthSmall - self.marginX, dayOffsetY + self.forecastDayHeight - self.iconHeightSmall - self.marginY)
+        seasonIcon:render()
 
         -- Render Weather Icon
-        renderOverlay(self.hud.overlays[weatherIcon].overlayId, self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeight * 1.4, self.hud.iconWidth, self.hud.iconHeight)
+        local weatherIcon = self.overlays[weatherIcon]
+        weatherIcon:setDimension(self.iconWidth, self.iconHeight)
+        weatherIcon:setPosition(dayOffsetX + self.marginX, dayOffsetY + (self.forecastDayHeight - self.iconHeight) / 2)
+        weatherIcon:render()
 
         -- Render Season Days
+        -- setTextAlignment(RenderText.ALIGN_RIGHT)
+        -- renderText(dayOffsetX + self.forecastDayWidth - self.marginX, dayOffsetY + (self.forecastDayHeight - self.textSize * 1.2) / 2, self.textSize * 1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
         setTextAlignment(RenderText.ALIGN_CENTER)
-        renderText(self.hud.posX + posXOffset + self.hud.iconWidth + self.hud.iconWidthSmall * 3 / 4 + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeight, self.hud.textSize * 1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
+        renderText(dayOffsetX + self.forecastDayWidth - self.marginX - self.iconWidthSmall / 2, dayOffsetY + (self.forecastDayHeight - self.textSize * 1.2) / 2, self.textSize * 1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
 
         -- Render Hi/Lo Temperatures
-        local tempString = self:getTemperatureHighLowString(forecast[n])
+        local hiLoTemp = self:getTemperatureHighLowString(forecast[n])
 
         setTextAlignment(RenderText.ALIGN_LEFT)
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + posYOffset, self.hud.textSize * 1.2, tempString)
+        renderText(dayOffsetX + self.marginX, dayOffsetY + self.marginY, self.textSize * 1.2, hiLoTemp)
 
         -- Render Day of The Week
-        renderText(self.hud.posX + posXOffset + dayOffset, self.hud.posY + self.hud.height - posYOffset - self.hud.iconHeightSmall / 2, self.hud.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1)))
+        -- renderText(self.forecastX + posXOffset + dayOffset, self.forecastY + self.height - posYOffset - self.iconHeightSmall / 2, self.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1)))
+        local dayName = ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1))
+        renderText(dayOffsetX + self.marginX, dayOffsetY + self.forecastDayHeight - self.textSize * 1.2 - self.marginY, self.textSize * 1.2, dayName)
     end
 end
 
@@ -189,41 +244,86 @@ function ssWeatherForecast:getTemperatureHighLowString(data)
 end
 
 function ssWeatherForecast:drawToday(forecast)
-    -- x-position of overlays has to be dynamically defined
-    self.hud.dayPosX = g_currentMission.infoBarBgOverlay.x - 0.10 * self.guiScale / g_screenAspectRatio * screenAspectRatio
-    self.hud.clockPosX = g_currentMission.moneyIconOverlay.x - self.hud.clockWidth * 1.42 -- 1.45
-
-    -- Render clock
+    -- Render day and season below the clock
+    local clockText = string.format("%02d/%s", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.fullSeasonName(g_seasons.environment:transitionAtDay(forecast[1].day)))
+    local clockX = g_currentMission.timeBgOverlay.x + g_currentMission.timeSeparatorOffsetX / 2
     setTextAlignment(RenderText.ALIGN_CENTER)
+    renderText(clockX, g_currentMission.timeBgOverlay.y + 2 * self.marginY, self.textSize * 1.5, clockText)
 
-    -- Render day and season
-    renderText(self.hud.clockPosX + self.hud.clockWidth / 2, self.hud.clockPosY, self.hud.textSize * 1.5, string.format("%02d/%s", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.fullSeasonName(g_seasons.environment:transitionAtDay(forecast[1].day))))
+    -- Create the today backdrop
+    self.todayPosX = g_currentMission.infoBarBgOverlay.x - self.borderWidth - self.todayWidth
 
-    -- Render Background
-    renderOverlay(self.hud.overlays.day_hud.overlayId, self.hud.dayPosX , self.hud.dayPosY, self.hud.dayWidth, self.hud.dayHeight)
-    -- TODO: Render gray overlay (pixel)
-    -- TODO: Render black overlay (pixel)
+    -- Render border
+    self.rect:setPosition(self.todayPosX, self.todayPosY)
+    self.rect:setDimension(self.todayWidth, self.todayHeight)
+    self.rect:setColor(unpack(g_colorBg))
+    self.rect:render()
 
-    if ssWeatherManager:isGroundFrozen() then
-        renderOverlay(self.hud.overlays.frozen_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY, self.hud.dayHeight / g_screenAspectRatio, self.hud.dayHeight)
-    end
+    -- Render black-ish background
+    self.rect:setPosition(self.todayPosX + self.borderWidth, self.todayPosY + self.borderHeight)
+    self.rect:setDimension(self.todayWidth - 2 * self.borderWidth, self.todayHeight - 2 * self.borderHeight)
+    self.rect:setColor(0.0075, 0.0075, 0.0075, 1)
+    self.rect:render()
 
-    if g_seasons.weather.moistureEnabled and not ssWeatherManager:isGroundFrozen() and ssWeatherManager:isCropWet() then
-        renderOverlay(self.hud.overlays.wetcrop_hud.overlayId, self.hud.dayPosX - self.hud.dayHeight * 0.6, self.hud.dayPosY, self.hud.dayHeight / g_screenAspectRatio, self.hud.dayHeight)
-    end
+    -- Draw line between air and soil temp
+    self.rect:setColor(unpack(g_colorBg))
+
+    self.rect:setPosition(self.todayPosX + self.todayVerticalSeparatorOffsetX, g_currentMission.infoBarSeparatorOverlay.y)
+    self.rect:setDimension(g_currentMission.infoBarSeparatorOverlay.width, g_currentMission.infoBarSeparatorOverlay.height)
+    self.rect:render()
+
+    self.rect:setPosition(self.todayPosX + self.todayIconOffsetX, self.todayHorizontalSeparatorY)
+    self.rect:setDimension(self.todayHorizontalSeparatorWidth, self.separatorHeight)
+    self.rect:render()
 
     -- Render Season, cloud and ground icon
-    renderOverlay(self.hud.overlays.seasons[forecast[1].season].overlayId, self.hud.dayPosX + self.hud.iconWidthSmall * 0.3, self.hud.dayPosY + self.hud.dayHeight / 2 - self.hud.iconHeightSmall / 2 * 1.5, self.hud.iconWidthSmall * 1.5, self.hud.iconHeightSmall * 1.5)
-    renderOverlay(self.hud.overlays.cloud_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth / 2 - self.hud.iconWidthSmall * 0.6, self.hud.dayPosY + self.hud.dayHeight - self.hud.iconHeightSmall * 1.7, self.hud.iconWidthSmall, self.hud.iconHeightSmall)
-    renderOverlay(self.hud.overlays.ground_symbol.overlayId, self.hud.dayPosX + self.hud.dayWidth / 2 - self.hud.iconWidthSmall * 0.6, self.hud.dayPosY + self.hud.iconHeightSmall * 0.7, self.hud.iconWidthSmall, self.hud.iconHeightSmall)
+    local seasonIcon = self.overlays.seasons[forecast[1].season]
+    seasonIcon:setDimension(self.iconWidth, self.iconHeight)
+    seasonIcon:setPosition(self.todayPosX + self.borderWidth + self.marginX, self.todayPosY + self.todaySeasonOffsetY)
+    seasonIcon:render()
+
+    self.overlays.airSymbol:setPosition(self.todayPosX + self.todayIconOffsetX, self.todayPosY + self.todayAirOffsetY)
+    self.overlays.airSymbol:render()
+
+    self.overlays.soilSymbol:setPosition(self.todayPosX + self.todayIconOffsetX, self.todayPosY + self.todaySoilOffsetY)
+    self.overlays.soilSymbol:render()
 
     -- Render current air temperature
-    setTextAlignment(RenderText.ALIGN_RIGHT)
     local airTemp = mathRound(ssWeatherManager:currentTemperature(), 0)
-    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall * 0.4, self.hud.dayPosY + self.hud.dayHeight * 0.65, self.hud.textSize * 1.1, ssLang.formatTemperature(airTemp))
-
-    -- Render current soil temperature
-    setTextAlignment(RenderText.ALIGN_RIGHT)
     local soilTemp = math.floor(ssWeatherManager.soilTemp, 0)
-    renderText(self.hud.dayPosX + self.hud.dayWidth - self.hud.iconWidthSmall * 0.4, self.hud.dayPosY + self.hud.dayHeight * 0.25, self.hud.textSize * 1.1, ssLang.formatTemperature(soilTemp))
+
+    setTextAlignment(RenderText.ALIGN_RIGHT)
+    renderText(self.todayPosX + self.todayTextOffset, self.todayAirTextY, self.textSize * 1.1, ssLang.formatTemperature(airTemp))
+    renderText(self.todayPosX + self.todayTextOffset, self.todaySoilTextY, self.textSize * 1.1, ssLang.formatTemperature(soilTemp))
+
+    -- Render any states
+    if ssWeatherManager:isGroundFrozen() then
+        self:renderState(self.overlays.frozen)
+    elseif g_seasons.weather.moistureEnabled and ssWeatherManager:isCropWet() then
+        self:renderState(self.overlays.wetcrop)
+    end
+end
+
+function ssWeatherForecast:renderState(stateIcon)
+    local posX = self.todayPosX - self.borderWidth - self.stateWidth
+
+    -- Render border
+    self.rect:setPosition(posX, self.statePosY)
+    self.rect:setDimension(self.stateWidth, self.stateHeight)
+    self.rect:setColor(unpack(g_colorBg))
+    self.rect:render()
+
+    -- Render black-ish background
+    local innerWidth, innerHeight = self.stateWidth - 2 * self.borderWidth, self.stateHeight - 2 * self.borderHeight
+    local innerX, innerY = posX + self.borderWidth, self.statePosY + self.borderWidth
+
+    self.rect:setPosition(innerX, innerY)
+    self.rect:setDimension(innerWidth, innerHeight)
+    self.rect:setColor(0.0075, 0.0075, 0.0075, 1)
+    self.rect:render()
+
+    -- Render icon
+    stateIcon:setPosition(innerX, innerY)
+    stateIcon:setDimension(innerWidth, innerHeight)
+    stateIcon:render()
 end
