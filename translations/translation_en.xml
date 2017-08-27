@@ -78,6 +78,7 @@
         <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
+<<<<<<< HEAD
         <text name="TIRE_PRESSURE_1" text="Low" />
         <text name="TIRE_PRESSURE_2" text="Normal" />
         <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
@@ -91,6 +92,9 @@
         <text name="COMPACTION_3" text="%s causes no compaction" />
         
         <text name="SS_SAVE_FAILED" text="Failed to save Seaons to your savegame. Please try again!" />
+=======
+        <text name="SS_SAVE_FAILED" text="Failed to save Seasons to your savegame. Please try again!" />
+>>>>>>> develop
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
 

@@ -47,6 +47,8 @@ function ssMain:preLoad()
 
     ssMain.xmlDirectories = {}
 
+    self.baseUIFilename = Utils.getFilename("resources/gui/hud.dds", g_seasons.modDir)
+
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
 
@@ -115,8 +117,9 @@ function ssMain:loadMap()
     StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
 
     if self.descVersion == "0.0.0.0" then
-        local w, h = getNormalizedScreenValues(512, 128)
-        self.devOverlay = Overlay:new("devOverlay", Utils.getFilename("resources/gui/dev.dds", self.modDir), 0, 0, w, h)
+        local w, h = getNormalizedScreenValues(384, 128)
+        self.devOverlay = Overlay:new("devOverlay", self.baseUIFilename, 0, 0, w, h)
+        self.devOverlay:setUVs(getNormalizedUVs({552, 216, 384, 128}))
         self.devOverlay:setPosition(0.5, 1 - h / 15)
         self.devOverlay:setDimension(w / 4, h / 4)
         self.devOverlay:setAlignment(Overlay.ALIGN_VERTICAL_TOP, Overlay.ALIGN_HORIZONTAL_CENTER)
@@ -124,6 +127,24 @@ function ssMain:loadMap()
 
     if g_currentMission:getIsServer() then
         self.loaded = true
+    end
+end
+
+function ssMain:loadGameFinished()
+    self:validateDensityMaps()
+end
+
+function ssMain:validateDensityMaps()
+    local mapSize = getDensityMapSize(g_currentMission.terrainDetailHeightId)
+
+    for i, fruit in ipairs(g_currentMission.fruits) do
+        if getDensityMapSize(fruit.id) ~= mapSize then
+            logInfo("Warning: Density map size of fruit '" .. FruitUtil.fruitIndexToDesc[i].name .. "' is not the same as terrain")
+        end
+    end
+
+    if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
+        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain")
     end
 end
 
