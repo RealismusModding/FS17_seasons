@@ -110,11 +110,15 @@ function ssSoilCompaction:applySoilCompaction()
             -- TODO: 2 lines below can be local and no need to store CLayers in wheel
             local x0, z0, x1, z1, x2, z2, fwdLayers = self:getCLayers(wheel, width, length, radius, radius * wheelRotDir * -1, 2 * radius * wheelRotDir)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
-            ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 255, 0)
+            
+            -- debug print
+            --ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 255, 0)
 
             local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCLayers(wheel, width, length, radius, length, length)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
-            ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 0, 0)
+            
+            -- debug print
+            --ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 0, 0)
 
             wheel.underTireCompaction = mathRound(underLayers,0)
             wheel.fwdTireCompaction = mathRound(fwdLayers,0)
@@ -196,7 +200,8 @@ function ssSoilCompaction:update(dt)
         return 
     end
 
-    if self.lastSpeedReal ~= 0 and not ssWeatherManager:isGroundFrozen() then
+    if self.lastSpeedReal ~= 0 and not ssWeatherManager:isGroundFrozen()
+        and not SpecializationUtil.hasSpecialization(Cultivator, self.specializations) then
         self:applySoilCompaction()
     end
 
