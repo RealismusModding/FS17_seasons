@@ -613,6 +613,7 @@ function ssSeasonsMenu:drawEconomyGraph(element)
         self.firstEconomyDraw = false
     end
 
+    self.economy.graph:setCurrentDay(g_seasons.environment:dayInYear())
     self.economy.graph:draw()
 end
 

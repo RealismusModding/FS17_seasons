@@ -15,6 +15,8 @@ ssGraph.LINE_COLOR = {1, 1, 1, 1} --{0.0742, 0.4341, 0.6939, 1}
 ssGraph.AXIS_COLOR = {0.2122, 0.5271, 0.0307, 1}
 ssGraph.TEXT_COLOR = {0.2122, 0.5271, 0.0307, 1}
 ssGraph.GRID_COLOR = {0.2122, 0.5271, 0.0307, 0.2}
+ssGraph.TODAY_COLOR = {0.8069, 0.0097, 0.0097, 1}
+ssGraph.MAX_ROUNDOFF = 50
 
 function ssGraph:new(parentElement)
     local self = {}
@@ -67,7 +69,7 @@ function ssGraph:draw()
     self.pixel:setDimension(self.parent.size[1] - marginX, lineHeight)
     self.pixel:render()
 
-    -- Zero
+    -- Bottom value
 
 
     -- Top value
@@ -104,23 +106,39 @@ function ssGraph:draw()
         self.pixel:render()
     end
 
+    -- Day line
+    self.pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (self.currentDay - 1), self.parent.absPosition[2] + marginY)
+    self.pixel:setDimension(lineWidth, self.parent.size[2] - marginY)
+    self.pixel:setColor(unpack(self.TODAY_COLOR))
+    self.pixel:render()
 end
 
 function ssGraph:setData(data)
     self.data = data
 
     self.maxValue = 1
+    self.minValue = 5000
     for _, value in ipairs(data) do
         self.maxValue = math.max(self.maxValue, value.price)
+        self.minValue = math.min(self.minValue, value.price)
     end
 
-    log("Data")
-    print_r(self.data)
+    -- Don't round off too much
+    local roundoff = math.floor(math.min(self.maxValue / 5, ssGraph.MAX_ROUNDOFF))
+
+    self.maxValue = math.ceil(self.maxValue / roundoff) * roundoff
+    self.minValue = math.floor(self.minValue / roundoff) * roundoff
+
     log("max", self.maxValue)
+    log("min", self.minValue)
 end
 
 function ssGraph:setYUnit(unit)
     self.yUnit = unit
+end
+
+function ssGraph:setCurrentDay(day)
+    self.currentDay = day
 end
 
 --[[

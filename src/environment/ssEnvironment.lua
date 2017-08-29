@@ -377,13 +377,21 @@ end
 
 -- Returns 1-daysInSeason
 function ssEnvironment:dayInSeason(currentDay)
-    if (currentDay == nil) then
+    if currentDay == nil then
         currentDay = self:currentDay()
     end
 
     local season = self:seasonAtDay(currentDay) -- 0-3
-    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1 -- 1+
-    return (dayInYear - 1 - season * self.daysInSeason) + 1 -- 1 - daysInSeason
+    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1
+    return (dayInYear - 1 - season * self.daysInSeason) + 1
+end
+
+function ssEnvironment:dayInYear(currentDay)
+    if currentDay == nil then
+        currentDay = self:currentDay()
+    end
+
+    return math.fmod(currentDay - 1, self.SEASONS_IN_YEAR * self.daysInSeason) + 1
 end
 
 -- Starts with 0

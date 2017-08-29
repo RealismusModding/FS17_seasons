@@ -35,7 +35,7 @@ function ssEconomyHistory:load(savegame, key)
 
             table.insert(values, {
                 price = ssXMLUtil.getFloat(savegame, datKey),
-                day = ssXMLUtil.getInt(savegame, datKey .. "day")
+                day = ssXMLUtil.getInt(savegame, datKey .. ".day")
             })
 
             j = j + 1
@@ -48,13 +48,21 @@ function ssEconomyHistory:load(savegame, key)
 end
 
 function ssEconomyHistory:save(savegame, key)
-
-
     local i = 0
     for index, data in pairs(self.data) do
-        local fillKey = key .. string.format(".economy.history.fill(%i)", i)
+        local fillKey = string.format("%s.economy.history.fill(%i)", key, i)
 
-        ssXMLUtil.setString(savegame, fillKey, "hallo")
+        ssXMLUtil.setInt(savegame, fillKey .. "#fillType", index)
+
+        local j = 0
+        for _, val in ipairs(data) do
+            local k = string.format("%s.value(%i)", key, j)
+
+            ssXMLUtil.setFloat(savegame, k, val.price)
+            ssXMLUtil.setInt(savegame, k .. ".day", val.day)
+
+            j = j + 1
+        end
 
         i = i + 1
     end
@@ -63,6 +71,8 @@ end
 function ssEconomyHistory:loadMap(name)
     g_seasons.environment:addSeasonLengthChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+
+    local currentDay = g_seasons.environment:dayInYear()
 
     for index, fillDesc in ipairs(FillUtil.fillTypeIndexToDesc) do
         fillDesc.ssEconomyType = self:getEconomyType(fillDesc)
@@ -74,8 +84,16 @@ function ssEconomyHistory:loadMap(name)
             -- Create values for a whole year
             for i = 1, g_seasons.environment.daysInSeason * 4 do
                 if values[i] == nil then
+                    local value
+
+                    if i == currentDay then
+                        value = self:getPrice(fillDesc)
+                    else
+                        value = self:getSimulatedPrice(fillDesc, i),
+                    end
+
                     values[i] = {
-                        price = self:getSimulatedPrice(fillDesc, i),
+                        price = value
                         day = i
                     }
                 end
@@ -84,24 +102,33 @@ function ssEconomyHistory:loadMap(name)
             self.data[index] = values
         end
     end
-
-    log("Economy data")
-    print_r(self.data)
 end
 
+-- Copy all data into new set, possibly interpolated or truncated
 function ssEconomyHistory:seasonLengthChanged()
     -- This might cause all data to be odd, so stuff needs to be 'fixed'
 end
 
--- Add all values of the previous day to the historic data
--- Also remove the first item
+-- Set all values of the previous day to the historic data to current day (% year, no offset)
 function ssEconomyHistory:dayChanged()
+    local day = g_seasons.environment:dayInYear(g_seasons.environment:currentDay() - 1)
+
+    for index, fillDesc in ipairs(FillUtil.fillTypeIndexToDesc) do
+        if fillDesc.ssEconomyType then
+            local value = self:getPrice(fillDesc)
+
+            log("Set value of fruit", fillDesc.name, "for day", day, "to", value)
+
+            self.data[fillDesc.index][day].price = value
+        end
+    end
+
+    print_r(self.data)
 end
 
 function ssEconomyHistory:getHistory(fillDesc)
     local data = {}
     local unit = "1000 l"
-    local currentDay = g_seasons.environment:currentDay()
 
     if fillDesc.ssEconomyType == self.ECONOMY_TYPE_ANIMAL then
         unit = "p" -- TODO i18n
@@ -138,13 +165,9 @@ function ssEconomyHistory:getEconomyType(fillDesc)
     return nil
 end
 
-function ssEconomyHistory:getPriceForDay(fillDesc, day)
-    if fillDesc.ssEconomyType == self.ECONOMY_TYPE_FILL then
-    elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_ANIMAL then
-    elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_BALE then
-    end
-
-    return self:getSimulatedPrice(fillDesc, day)
+-- TODO: IMPLEMENT
+function ssEconomyHistory:getPrice(fillDesc)
+    return 4
 end
 
 -- If no historic data is saved, create a price using the default price and the factors
