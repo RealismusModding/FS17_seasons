@@ -3,11 +3,13 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
 -- InitStaticObjectClass(ssMeasureTool, "ssMeasureTool", ObjectIds.OBJECT_CHAINSAW)
 
-ssMeasureTool.MEASURE_TIME = 10--1500 -- ms
+ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
 ssMeasureTool.MEASURE_TIMEOUT = 1000 --3000
 ssMeasureTool.MEASURE_DISTANCE = 10
+
+ssMeasureTool.BLINKING_MESSAGE_DURATION = 2000
 
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
@@ -30,7 +32,6 @@ function ssMeasureTool:load(xmlFilename, player)
     self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "handTool.measureTool.pricePerSecond"), 50) / 1000
 
     if self.isClient then
-
         -- self.handNode = Utils.getNoNil(Utils.indexToObject(self.rootNode, getXMLString(xmlFile, "handTool.chainsaw.handNode#index")), self.rootNode)
         -- self.handNodeRotation = Utils.getRadiansFromString(Utils.getNoNil(getXMLString(xmlFile, "handTool.chainsaw.handNode#rotation"), "0 0 0"), 3)
     end
@@ -57,7 +58,6 @@ function ssMeasureTool:update(dt, allowInput)
     end
 
     if allowInput then
-
         if InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL) and self.measuringTimeoutStart == nil then
             if self.measuringStart == nil then
                 self.measuringStart = g_currentMission.time
@@ -65,8 +65,6 @@ function ssMeasureTool:update(dt, allowInput)
             end
         else
             self.measuringStart = nil
-
-
         end
 
         -- Timers for scanning and timeout
@@ -91,7 +89,6 @@ function ssMeasureTool:draw()
     if self.player:getIsInputAllowed() then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_ACTIVATE_HANDTOOL"), InputBinding.ACTIVATE_HANDTOOL)
 
-
         -- Draw pointer, which is also a measure indicator
         local scale = 0.3
         if self.measuringStart ~= nil then
@@ -104,6 +101,14 @@ function ssMeasureTool:draw()
         self.player.pickedUpObjectOverlay:setDimension(self.player.pickedUpObjectWidth * scale, self.player.pickedUpObjectHeight * scale)
         self.player.pickedUpObjectOverlay:setUVs(self.player.pickedUpObjectAimingUVs)
         self.player.pickedUpObjectOverlay:render()
+    end
+
+    if self.blinkingMessage then
+        g_currentMission:showBlinkingWarning(self.blinkingMessage)
+
+        if self.blinkingMessageUntil > g_currentMission.time then
+            self.blinkingMessage = nil
+        end
     end
 end
 
@@ -215,11 +220,13 @@ function ssMeasureTool:findTree(objectId)
 end
 
 function ssMeasureTool:showFailed()
-    log("Measurement failed")
+    self.blinkingMessage = "Measurement failed"
+    self.blinkingMessageUntil = g_currentMission.time + ssMeasureTool.BLINKING_MESSAGE_DURATION
 end
 
 function ssMeasureTool:showNoInfo()
-    log("Measurement failed: no info")
+    self.blinkingMessage = "Measurement failed: no info"
+    self.blinkingMessageUntil = g_currentMission.time + ssMeasureTool.BLINKING_MESSAGE_DURATION
 end
 
 function ssMeasureTool:showBaleInfo(bale)
