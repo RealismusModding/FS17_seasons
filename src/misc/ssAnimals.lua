@@ -54,22 +54,17 @@ end
 
 function ssAnimals:load(savegame, key)
     -- Load or set default values
-    self.averageProduction = {}
+    ssAnimals.averageProduction = {}
 
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         local typ = husbandry.typeName
-        avgProd = ssXMLUtil.getFloat(savegame, key .. ".averageProduction." .. typ)
 
-        -- set averageProduction == productivity for existing saves that have animals
-        if avgProd == nil and husbandry.totalNumAnimals ~= 0 then
-            self.averageProduction[typ] = husbandry.productivity
+        -- defaulting to 0% average productivity
+        -- TODO: If starting Seasons on an exising save, the average productivity
+        --       should be set to for instance 80%
+        local avgProd = ssXMLUtil.getFloat(savegame, key .. ".averageProduction." .. typ, 0.0)
 
-        elseif avgProd == nil and husbandry.totalNumAnimals == 0 then
-            self.averageProduction[typ] = 0.0
-
-        else
-            self.averageProduction[typ] = avgProd
-        end
+        self.averageProduction[typ] = avgProd
     end
 end
 
@@ -314,7 +309,7 @@ function ssAnimals:AddAnimalsAddition(num, subType)
 end
 
 -- reset productivity to zero if there are no animals
-function ssAnimals:resetAvgProductivity(num, subType)
+function ssAnimals:resetAvgProductivity()
     if self.totalNumAnimals == 0 then
         local typ = self.typeName
         ssAnimals.averageProduction[typ] = 0
@@ -323,7 +318,7 @@ end
 
 -- TODO: remove after testing
 --function ssAnimals:draw()
-    --renderText(0.44, 0.72, 0.01, "Cows: " .. tostring(self.averageProduction["cow"]))
-    --renderText(0.44, 0.70, 0.01, "Pigs: " .. tostring(self.averageProduction["pig"]))
-    --renderText(0.44, 0.68, 0.01, "Sheep: " .. tostring(self.averageProduction["sheep"]))
+--    renderText(0.44, 0.72, 0.01, "Cows: " .. tostring(self.averageProduction["cow"]))
+--    renderText(0.44, 0.70, 0.01, "Pigs: " .. tostring(self.averageProduction["pig"]))
+--    renderText(0.44, 0.68, 0.01, "Sheep: " .. tostring(self.averageProduction["sheep"]))
 --end
