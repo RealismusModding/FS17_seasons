@@ -11,7 +11,7 @@ ssGraph = {}
 local ssGraph_mt = Class(ssGraph)
 
 ssGraph.BG_COLOR = {0, 0, 0, 0}
-ssGraph.LINE_COLOR = {0.0742, 0.4341, 0.6939, 1}
+ssGraph.LINE_COLOR = {1, 1, 1, 1} --{0.0742, 0.4341, 0.6939, 1}
 ssGraph.AXIS_COLOR = {0.2122, 0.5271, 0.0307, 1}
 ssGraph.TEXT_COLOR = {0.2122, 0.5271, 0.0307, 1}
 ssGraph.GRID_COLOR = {0.2122, 0.5271, 0.0307, 0.2}
