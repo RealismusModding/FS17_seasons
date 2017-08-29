@@ -16,6 +16,7 @@ function ssAnimals:loadMap(name)
 
     AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
     AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
+    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.AddAnimalsAddition)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -26,6 +27,7 @@ function ssAnimals:loadMap(name)
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
+        g_currentMission.environment:addHourChangeListener(self)
     end
 end
 
@@ -47,6 +49,26 @@ function ssAnimals:loadFromXML()
     for _, path in ipairs(g_seasons:getModPaths("animals")) do
         self.data = ssSeasonsXML:loadFile(path, "animals", elements, self.data, true)
     end
+end
+
+function ssAnimals:load(savegame, key)
+    -- Load or set default values
+    self.averageProduction = {}
+
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local animal = husbandry.typeName
+        self.averageProduction[animal] = ssXMLUtil.getFloat(savegame, key .. "." .. animal .. ".averageProduction", 0.8)
+    end
+
+end
+
+function ssAnimals:save(savegame, key)
+
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local animal = husbandry.typeName
+        ssXMLUtil.setFloat(savegame, key .. "." .. animal .. ".averageProduction", self.averageProduction[animal])
+    end
+
 end
 
 function ssAnimals:seasonChanged()
@@ -77,6 +99,18 @@ function ssAnimals:dayChanged()
         if numKilled > 0 then
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, string.format(ssLang.getText("warning_animalsKilled"), numKilled))
         end
+    end
+end
+
+function ssAnimals:hourChanged()
+
+    AnimalHusbandry:addAnimals()
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local animal = husbandry.typeName
+        local avgProd = self.averageProduction[animal]
+        local currentProd = self.averageProduction[animal].productivity
+
+        self.averageProduction[animal] = self:getAverageProductivity(avgProd, currentProd, animal)
     end
 end
 
@@ -232,4 +266,30 @@ function ssAnimals:husbandryCapacityWrapper(superFunc, fillType, _)
     self.animalDesc.strawPerDay = oldStraw
 
     return ret
+end
+
+function ssAnimals:getAverageProductivity(avgProd, currentProd, animal)
+    local seasonFac = g_seasons.environment.daysInSeason * 24 * 3
+    local reductionFac = 0.1
+
+    if currentProd < 0.75 and currentProd < avgProd then
+        seasonFac = seasonFac * reductionFac
+    end
+
+    return avgProd / (seasonFac - 1) + currentProd / seasonFac
+end
+
+function ssAnimals:addAnimalProductivity(currentAnimals, addedAnimals, avgProd)
+    if currentAnimals == 0 then
+        return 0.8
+    else
+        return (avgProd * currentAnimals + 0.8 * addedAnimals) / (currentAnimals + addedAnimals)
+    end
+end
+
+function ssAnimals:AddAnimalsAddition(num, subType)
+    local currentAnimals = g_currentMission.husbandries[subType].totalNumAnimals
+
+    ssAnimals.averageProduction[animal] = ssAnimals:addAnimalProductivity(currentAnimals, num, ssAnimals.averageProduction[animal])
+
 end
