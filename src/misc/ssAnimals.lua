@@ -54,7 +54,7 @@ end
 
 function ssAnimals:load(savegame, key)
     -- Load or set default values
-    ssAnimals.averageProduction = {}
+    self.averageProduction = {}
 
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         local typ = husbandry.typeName
