@@ -700,7 +700,7 @@ function ssWeatherManager:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:canSow(fruit)
-    return self.soilTemp >= self:germinationTemperature(fruit) and g_currentMission.groundWetness > 0.15
+    return self.soilTemp >= self:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)
@@ -876,6 +876,10 @@ function ssWeatherManager:updateHail(day)
 end
 
 function ssWeatherManager:updateSoilWaterContent()
+    if g_currentMission.environment.currentRain ~= nil then
+        currentRainId = g_currentMission.environment.currentRain.rainTypeId
+    end
+    
     --Soil moisture bucket model
     --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
     --Water Resour. Res., 38(9), 1166, doi:10.1029/2001WR000826, 2002
@@ -913,8 +917,8 @@ function ssWeatherManager:updateSoilWaterContent()
         soilWaterEvaporation = (prevSoilWaterCont - hygroscopicSaturation) / (stomatalSaturation - hygroscopicSaturation) * maxEvaporation / 24
     end
 
-    -- calculate transpiration, if air temperature < 5 deg, or solarRadiation < 1.5, no transpiration
-    if prevSoilWaterCont <= wiltingSaturation or currentTemp < 5 or solarRadiation < 1.5 then
+    -- calculate transpiration, if air temperature < 5 deg, no transpiration
+    if prevSoilWaterCont <= wiltingSaturation or currentTemp < 5 then
         soilWaterTranspiration = 0
     elseif prevSoilWaterCont >= stomatalSaturation then
         soilWaterTranspiration = maxTranspiration
@@ -923,8 +927,12 @@ function ssWeatherManager:updateSoilWaterContent()
     end
 
     -- add water if it rains or if snow melts
-    if g_currentMission.environment.timeSinceLastRain == 0 then
+    if g_currentMission.environment.timeSinceLastRain == 0 and currentRainId == 'rain' then
         soilWaterInfiltration = 1 -- 10 mm/hr infiltration
+
+    elseif g_currentMission.environment.timeSinceLastRain == 0 and currentRainId == 'hail' then
+        soilWaterInfiltration = 1.5 -- 15 mm/hr infiltration
+
     elseif self.meltedSnow ~= 0 then
         -- 30% of melted snow infiltrates, meltedSnow in meter, snow density 400 kg/m3
         soilWaterInfiltration = 0.3 * self.meltedSnow * 1000 * 0.4
