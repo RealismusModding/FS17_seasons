@@ -876,7 +876,9 @@ function ssWeatherManager:updateHail(day)
 end
 
 function ssWeatherManager:updateSoilWaterContent()
-    currentRainId = g_currentMission.environment.currentRain.rainTypeId == "rain"
+    if g_currentMission.environment.currentRain ~= nil then
+        currentRainId = g_currentMission.environment.currentRain.rainTypeId
+    end
     
     --Soil moisture bucket model
     --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
