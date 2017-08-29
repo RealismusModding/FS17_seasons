@@ -3,10 +3,10 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
 -- InitStaticObjectClass(ssMeasureTool, "ssMeasureTool", ObjectIds.OBJECT_CHAINSAW)
 
-ssMeasureTool.MEASURE_TIME = 1500 -- ms
+ssMeasureTool.MEASURE_TIME = 10--1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
-ssMeasureTool.MEASURE_TIMEOUT = 1000
+ssMeasureTool.MEASURE_TIMEOUT = 1000 --3000
 ssMeasureTool.MEASURE_DISTANCE = 10
 
 function ssMeasureTool:new(isServer, isClient, customMt)
@@ -26,7 +26,8 @@ function ssMeasureTool:load(xmlFilename, player)
 
     local xmlFile = loadXMLFile("TempXML", xmlFilename)
 
-    self.pricePerSecond = Utils.getNoNil(getXMLFloat(xmlFile, "handTool.chainsaw.pricePerMinute"), 50) / 1000
+    self.objectNode = getChildAt(self.rootNode, 0)
+    self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "handTool.measureTool.pricePerSecond"), 50) / 1000
 
     if self.isClient then
 
@@ -49,7 +50,7 @@ function ssMeasureTool:update(dt, allowInput)
     ssMeasureTool:superClass().update(self, dt, allowInput)
 
     if self.isServer then
-        local price = self.pricePerSecond * (dt / 1000)
+        local price = self.pricePerMilliSecond * (dt / 1000)
 
         g_currentMission.missionStats:updateStats("expenses", price)
         g_currentMission:addSharedMoney(-price, "vehicleRunningCost")
@@ -140,35 +141,77 @@ function ssMeasureTool:executeMeasure()
     local dx, dy, dz = localDirectionToWorld(self.player.cameraNode, 0, 0, -1)
 
     raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE + 1.0, self)
-    -- raycastAll(x, y, z, dx, dy, dz, "raycastCallback", Player.MAX_PICKABLE_OBJECT_DISTANCE + 1.0, self)
 end
 
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     log("callback", hitObjectId, x, y, z, distance)
-    log("terrain", g_currentMission.terrainDetailId)
 
-    if distance > 0.5 and distance <= ssMeasureTool.MEASURE_DISTANCE then
-        if hitObjectId == g_currentMission.terrainDetailId then
-            self:showTerrainInfo(x, y, z)
-        else
-            local type = getRigidBodyType(hitObjectId)
-            log("type", type)
+    -- Too close or too far away
+    if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE then
+        self:showFailed()
 
-            -- Skip vehicles
-            if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
-                self:showNoInfo()
+    -- We did only hit the terrain
+    elseif hitObjectId == g_currentMission.terrainRootNode then
+        self:showTerrainInfo(x, y, z)
+
+    -- Some other object
+    else
+        local type = getRigidBodyType(hitObjectId)
+
+        -- Skip vehicles
+        if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
+            self:showNoInfo()
+        else -- Any object, either static or dynamic
+            local object = g_currentMission:getNodeObject(hitObjectId)
+            print_r(object)
+
+            if object then
+                if object:isa(Bale) then
+                    self:showBaleInfo(object)
+                elseif object:isa(FillablePallet) then
+                    self:showFillablePallet(object)
+                end
             else
-                print_r(ObjectIds.getObjectClassById(hitObjectId))
+                local tree = self:findTree(hitObjectId)
 
-                local object = g_currentMission:getNodeObject(hitObjectId);
-                print_r(object)
+                if tree then
+                    self:showPlantedTreeInfo(tree)
+                elseif getSplitType(hitObjectId) ~= 0 then
+                    self:showStaticTreeInfo({type = getSplitType(hitObjectId)})
+                else
+                    self:showNoInfo()
+                end
             end
         end
-    else
-        self:showFailed()
     end
 
     return true
+end
+
+function ssMeasureTool:findTree(objectId)
+    if getRigidBodyType(objectId) ~= "Static" then
+        return nil
+    end
+
+    local treeId = getParent(getParent(objectId))
+
+    for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
+        if tree.node == treeId then
+            tree.growing = true
+
+            return tree
+        end
+    end
+
+    for _, tree in pairs(g_currentMission.plantedTrees.splitTrees) do
+        if tree.node == treeId then
+            tree.growing = false
+
+            return tree
+        end
+    end
+
+    return nil
 end
 
 function ssMeasureTool:showFailed()
@@ -180,11 +223,31 @@ function ssMeasureTool:showNoInfo()
 end
 
 function ssMeasureTool:showBaleInfo(bale)
-    log("Bale")
+    log("Bale", bale)
+
+    print_r(bale)
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
-    log("Terrain")
+    log("Terrain", x, y, z)
+end
+
+function ssMeasureTool:showPlantedTreeInfo(tree)
+    log("Planted Tree", tree)
+
+    print_r(tree)
+end
+
+function ssMeasureTool:showStaticTreeInfo(tree)
+    log("Static Tree", tree)
+
+    print_r(tree)
+end
+
+function ssMeasureTool:showFillablePallet(pallet)
+    log("FIllable pallet", pallet)
+
+    print_r(pallet)
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)
