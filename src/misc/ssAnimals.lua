@@ -56,23 +56,39 @@ function ssAnimals:load(savegame, key)
     -- Load or set default values
     self.averageProduction = {}
 
+    local i = 0
+    while true do
+        local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
+        if not hasXMLProperty(savegame, animalKey) then break end
+
+        local typ = getXMLString(savegame, animalKey .. "#animalName")
+        self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+        g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
+
+        i = i + 1
+    end
+
+    -- defaulting to 0% average productivity
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         local typ = husbandry.typeName
-
-        -- defaulting to 0% average productivity
-        -- TODO: If starting Seasons on an exising save, the average productivity
-        --       should be set to for instance 80%
-        local avgProd = ssXMLUtil.getFloat(savegame, key .. ".averageProduction." .. typ, 0.0)
-
-        self.averageProduction[typ] = avgProd
+        if self.averageProduction[typ] == nil then
+            self.averageProduction[typ] = 0.0
+        end
     end
 end
 
 function ssAnimals:save(savegame, key)
 
+    local i = 0
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         local typ = husbandry.typeName
-        ssXMLUtil.setFloat(savegame, key .. ".averageProduction." .. typ, self.averageProduction[typ])
+        local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
+
+        setXMLString(savegame, animalKey .. "#animalName", typ)
+        setXMLFloat(savegame, animalKey .. "#averageProduction", self.averageProduction[typ])
+        setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
+
+        i = i + 1
     end
 
 end
