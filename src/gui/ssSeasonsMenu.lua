@@ -585,6 +585,8 @@ end
 function ssSeasonsMenu:createEconomyGraph(element)
     local graph = ssGraph:new(element)
     self.economy.graph = graph
+
+    self:onEconomyListSelectionChanged(1)
 end
 
 function ssSeasonsMenu:drawEconomyGraph(element)
