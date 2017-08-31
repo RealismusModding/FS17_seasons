@@ -88,10 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni" />
         <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
 
+        <!-- Missing translation of "Calendar" -->
+        <text name="ui_pageCalender" text="" />
         <!-- Missing translation of "Economy" -->
         <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Impostazioni" />
         <text name="ui_pageDebug" text="Tool di Debug" />
+
+        <!-- Missing translation of "animal" -->
+        <text name="ui_economy_animal" text="" />
+        <!-- Missing translation of "1000 l" -->
+        <text name="ui_economy_thousand" text="" />
 
         <text name="ui_buttonSave" text="Applica Impostazioni" />
         <text name="ui_snowOneLayer" text="1 solo layer" />

@@ -88,10 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
         <text name="msg_welcome" text="Welkom bij de Seasons-mod door Realismus Modding. Bekijk de hulppagina’s in het hulpmenu voor meer informatie over de werking van deze mod." />
 
+        <!-- Missing translation of "Calendar" -->
+        <text name="ui_pageCalender" text="" />
         <!-- Missing translation of "Economy" -->
         <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Instellingen" />
         <text name="ui_pageDebug" text="Debug" />
+
+        <!-- Missing translation of "animal" -->
+        <text name="ui_economy_animal" text="" />
+        <!-- Missing translation of "1000 l" -->
+        <text name="ui_economy_thousand" text="" />
 
         <text name="ui_buttonSave" text="Instellingen toepassen" />
         <text name="ui_snowOneLayer" text="Enkel één laag" />

@@ -88,10 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней" />
         <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню Esc, чтобы узнать больше о том, как использовать этот мод." />
 
+        <!-- Missing translation of "Calendar" -->
+        <text name="ui_pageCalender" text="" />
         <!-- Missing translation of "Economy" -->
         <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Настройки" />
         <text name="ui_pageDebug" text="Инструменты отладки" />
+
+        <!-- Missing translation of "animal" -->
+        <text name="ui_economy_animal" text="" />
+        <!-- Missing translation of "1000 l" -->
+        <text name="ui_economy_thousand" text="" />
 
         <text name="ui_buttonSave" text="Применить" />
         <text name="ui_snowOneLayer" text="Только 1 слой" />
