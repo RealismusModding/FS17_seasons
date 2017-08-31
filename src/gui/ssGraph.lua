@@ -66,12 +66,6 @@ function ssGraph:draw()
 
     setTextColor(unpack(ssGraph.TEXT_COLOR))
 
-    -- Background
-    -- pixel:setPosition(unpack(self.parent.absPosition))
-    -- pixel:setDimension(unpack(self.parent.size))
-    -- pixel:setColor(unpack(self.BG_COLOR))
-    -- pixel:render()
-
     local marginX, marginY = getNormalizedScreenValues(20, 20)
     local lineWidth, lineHeight = getNormalizedScreenValues(1, 1)
     local axisWidth, axisHeight = getNormalizedScreenValues(2, 2)
