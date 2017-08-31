@@ -98,6 +98,9 @@
         <text name="ui_pageSettings" text="Settings" />
         <text name="ui_pageDebug" text="Debug Tools" />
 
+        <text name="ui_economy_animal" text="animal" />
+        <text name="ui_economy_thousand" text="1000 l" />
+
         <text name="ui_buttonSave" text="Apply Settings" />
         <text name="ui_snowOneLayer" text="1 layer only" />
         <text name="ui_days" text="%i days" />

@@ -170,10 +170,10 @@ end
 
 function ssEconomyHistory:getHistory(fillDesc)
     local data = {}
-    local unit = "1000 l"
+    local unit = ssLang.getText("ui_economy_thousand")
 
     if fillDesc.ssEconomyType == self.ECONOMY_TYPE_ANIMAL then
-        unit = "p" -- TODO i18n
+        unit = ssLang.getText("ui_economy_animal")
     end
 
     return {

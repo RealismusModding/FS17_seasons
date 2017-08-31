@@ -294,25 +294,6 @@ function ssSeasonsMenu:createOverviewValues(element)
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
-function ssSeasonsMenu:getTransitionHeaders()
-    local transitionsDisplayData = {}
-    local data = ssUtil.calcDaysPerTransition()
-
-    for index, value in pairs(data) do
-        if index % 2 == 1 then
-            local putIndex = index - ((index - 1) / 2)
-
-            if value == data[index + 1] then
-                transitionsDisplayData[putIndex] = tostring(value)
-            else
-                transitionsDisplayData[putIndex] = value .. "-" .. data[index + 1]
-            end
-        end
-    end
-
-    return transitionsDisplayData
-end
-
 function ssSeasonsMenu:updateOverview()
     self.overviewData = {}
 
@@ -370,7 +351,7 @@ function ssSeasonsMenu:updateOverview()
     end
 
     -- Create the headers
-    self.overview.transitionHeaders = self:getTransitionHeaders()
+    self.overview.transitionHeaders = ssUtil.getTransitionHeaders()
 end
 
 function ssSeasonsMenu:drawOverview(element)
@@ -625,6 +606,7 @@ function ssSeasonsMenu:onEconomyListSelectionChanged(rowIndex)
 
     self.economy.graph:setData(data.data)
     self.economy.graph:setYUnit(data.unit)
+    self.economy.graph:setTitle(fillDesc.nameI18N)
 end
 
 ------------------------------------------
