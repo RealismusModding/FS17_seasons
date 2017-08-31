@@ -16,8 +16,9 @@ function ssAnimals:loadMap(name)
 
     AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
     AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.AddAnimalsAddition)
-    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.resetAvgProductivity)
+    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
+    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
+    AnimalHusbandry.getDataAttributes = Utils.overwrittenFunction(AnimalHusbandry.getDataAttributes, ssAnimals.husbandryGetDataAttributes)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -283,6 +284,17 @@ function ssAnimals:husbandryCapacityWrapper(superFunc, fillType, _)
     return ret
 end
 
+function ssAnimals:husbandryGetDataAttributes(superFunc)
+    local tmpProductivity = self.productivity
+    self.productivity = ssAnimals.averageProduction[self.typeName]
+
+    local ret = { superFunc(self) }
+
+    self.productivity = tmpProductivity
+	
+    return unpack(ret)
+end
+
 function ssAnimals:updateAverageProductivity()
     local seasonFac = g_seasons.environment.daysInSeason * 24 * 3
     local reductionFac = 0.1
@@ -316,7 +328,7 @@ function ssAnimals:addAnimalProductivity(currentAnimals, addedAnimals, avgProd)
     end
 end
 
-function ssAnimals:AddAnimalsAddition(num, subType)
+function ssAnimals:husbandryAddAnimals(num, subType)
     local typ = self.typeName
     local currentAnimals = self.totalNumAnimals - num
 
@@ -325,7 +337,7 @@ function ssAnimals:AddAnimalsAddition(num, subType)
 end
 
 -- reset productivity to zero if there are no animals
-function ssAnimals:resetAvgProductivity()
+function ssAnimals:husbandryRemoveAnimals()
     if self.totalNumAnimals == 0 then
         local typ = self.typeName
         ssAnimals.averageProduction[typ] = 0
