@@ -18,6 +18,7 @@ function ssAnimals:loadMap(name)
     AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
     AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
     AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
+    AnimalHusbandry.getDataAttributes = Utils.overwrittenFunction(AnimalHusbandry.getDataAttributes, ssAnimals.husbandryGetDataAttributes)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -281,6 +282,17 @@ function ssAnimals:husbandryCapacityWrapper(superFunc, fillType, _)
     self.animalDesc.strawPerDay = oldStraw
 
     return ret
+end
+
+function ssAnimals:husbandryGetDataAttributes(superFunc)
+    local tmpProductivity = self.productivity
+    self.productivity = ssAnimals.averageProduction[self.typeName]
+
+    local ret = { superFunc(self) }
+
+    self.productivity = tmpProductivity
+	
+    return unpack(ret)
 end
 
 function ssAnimals:updateAverageProductivity()
