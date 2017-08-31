@@ -48,11 +48,10 @@ function ssGraph:delete()
 end
 
 function ssGraph:draw()
+    -- Background
     self.pixel:setPosition(unpack(self.parent.absPosition))
     self.pixel:setDimension(unpack(self.parent.size))
-    -- self.pixel:setAlignment(Overlay.ALIGN_VERTICAL_BOTTOM, Overlay.ALIGN_HORIZONTAL_RIGHT)
     self.pixel:setColor(unpack(self.BG_COLOR))
-
     self.pixel:render()
 
     local marginX, marginY = getNormalizedScreenValues(20, 20)
@@ -62,7 +61,7 @@ function ssGraph:draw()
     local nudgeWidth, nudgeHeight = getNormalizedScreenValues(8, 8)
 
     -- Left axis
-    self.pixel:setPosition(self.parent.absPosition[1] + marginX, self.parent.absPosition[2] + marginY)
+    self.pixel:setPosition(self.parent.absPosition[1] + marginX - axisWidth, self.parent.absPosition[2] + marginY)
     self.pixel:setDimension(axisWidth, self.parent.size[2] - marginY)
     self.pixel:setColor(unpack(self.AXIS_COLOR))
     self.pixel:render()
@@ -72,62 +71,42 @@ function ssGraph:draw()
     self.pixel:setDimension(self.parent.size[1] - marginX, axisHeight)
     self.pixel:render()
 
-    -- Bottom value
-    -- setTextColor(0.5, 0.5, 0.5, 1)
-    setTextAlignment(RenderText.ALIGN_RIGHT)
-    renderText(
-        self.parent.absPosition[1] + marginX - nudgeWidth * 1.5,
-        self.parent.absPosition[2] + marginY - getTextHeight(self.axisTextSize, "0") / 2,
-        self.axisTextSize, "0")
-
-    -- Top value
-    renderText(
-        self.parent.absPosition[1] + marginX - nudgeWidth * 1.5,
-        self.parent.absPosition[2] + self.parent.size[2] - getTextHeight(self.axisTextSize, tostring(self.maxValue)) / 2,
-        self.axisTextSize, tostring(self.maxValue))
-
-
     -- Segments
     self.pixel:setColor(unpack(self.GRID_COLOR))
     self.pixel:setDimension(nudgeWidth, lineHeight)
+    setTextAlignment(RenderText.ALIGN_RIGHT)
+
     local segmentHeight = (self.parent.size[2] - marginY) / 5
+    local segmentValue = self.maxValue / 5
 
-    for i = 1, 5 do
-        self.pixel:setPosition(self.parent.absPosition[1] + marginX - nudgeWidth, self.parent.absPosition[2] + marginY + i * segmentHeight)
-
+    for i = 0, 5 do
+        self.pixel:setPosition(
+            self.parent.absPosition[1] + marginX - nudgeWidth,
+            self.parent.absPosition[2] + marginY + i * segmentHeight)
         self.pixel:render()
+
+        renderText(
+            self.parent.absPosition[1] + marginX - nudgeWidth * 1.5,
+            self.parent.absPosition[2] + marginY + i * segmentHeight - getTextHeight(self.axisTextSize, tostring(self.maxValue)) / 2,
+            self.axisTextSize, tostring(math.ceil(i * segmentValue)))
     end
 
     -- Values
-    -- self.pixel:setDimension(valueWidth, lineHeight)
-    self.pixel:setColor(unpack(self.LINE_COLOR))
-
     local valueFactor = (self.parent.size[2] - marginY - lineHeight) / self.maxValue
 
-    for i, value in ipairs(self.data) do
-        self.pixel:setDimension(valueWidth - lineWidth, value.price * valueFactor)
-        self.pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (i - 1),
+    for day, price in ipairs(self.data) do
+        self.pixel:setDimension(valueWidth - lineWidth, price * valueFactor)
+        self.pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (day - 1),
                                self.parent.absPosition[2] + marginY + lineHeight)
 
-        -- self.pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (i - 1), self.parent.absPosition[2] + marginY + lineHeight + value.price * valueFactor)
-
-        local today = i == self.currentDay
-        if today then
+        if day == self.currentDay then
             self.pixel:setColor(unpack(self.TODAY_COLOR))
+        else
+            self.pixel:setColor(unpack(self.LINE_COLOR))
         end
 
         self.pixel:render()
-
-        if today then
-            self.pixel:setColor(unpack(self.LINE_COLOR))
-        end
     end
-
-    -- Day line
-    -- self.pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (self.currentDay - 1) - lineWidth, self.parent.absPosition[2] + marginY)
-    -- self.pixel:setDimension(axisWidth, self.parent.size[2] - marginY)
-    -- self.pixel:setColor(unpack(self.TODAY_COLOR))
-    -- self.pixel:render()
 
     -- Reset
     setTextAlignment(RenderText.ALIGN_LEFT)
@@ -139,8 +118,8 @@ function ssGraph:setData(data)
     self.maxValue = 1
     self.minValue = 5000
     for _, value in ipairs(data) do
-        self.maxValue = math.max(self.maxValue, value.price)
-        self.minValue = math.min(self.minValue, value.price)
+        self.maxValue = math.max(self.maxValue, value)
+        self.minValue = math.min(self.minValue, value)
     end
 
     -- Don't round off too much
@@ -148,9 +127,6 @@ function ssGraph:setData(data)
 
     self.maxValue = (math.ceil(self.maxValue / roundoff) + 1) * roundoff
     self.minValue = (math.floor(self.minValue / roundoff) - 1) * roundoff
-
-    log("max", self.maxValue)
-    log("min", self.minValue)
 end
 
 function ssGraph:setYUnit(unit)

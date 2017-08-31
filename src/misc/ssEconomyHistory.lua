@@ -33,10 +33,7 @@ function ssEconomyHistory:load(savegame, key)
             local dayKey = string.format("%s.value(%i)", fillKey, j)
             if not ssXMLUtil.hasProperty(savegame, dayKey) then break end
 
-            table.insert(values, {
-                price = ssXMLUtil.getFloat(savegame, datKey),
-                day = ssXMLUtil.getInt(savegame, datKey .. ".day")
-            })
+            values[ssXMLUtil.getInt(savegame, datKey .. ".day")] = ssXMLUtil.getFloat(savegame, datKey)
 
             j = j + 1
         end
@@ -55,11 +52,11 @@ function ssEconomyHistory:save(savegame, key)
         ssXMLUtil.setInt(savegame, fillKey .. "#fillType", index)
 
         local j = 0
-        for _, val in ipairs(data) do
+        for day, price in ipairs(data) do
             local k = string.format("%s.value(%i)", fillKey, j)
 
-            ssXMLUtil.setFloat(savegame, k, val.price)
-            ssXMLUtil.setInt(savegame, k .. ".day", val.day)
+            ssXMLUtil.setFloat(savegame, k, price)
+            ssXMLUtil.setInt(savegame, k .. ".day", day)
 
             j = j + 1
         end
@@ -92,10 +89,7 @@ function ssEconomyHistory:loadMap(name)
                         value = self:getSimulatedPrice(fillDesc, i)
                     end
 
-                    values[i] = {
-                        price = value,
-                        day = i
-                    }
+                    values[i] = value
                 end
             end
 
@@ -130,14 +124,11 @@ function ssEconomyHistory:expandedArray(list, newSize)
         -- Interpolate value
         local location = (i - 1) * expansionFactor + 1
 
-        local left = list[math.max(math.floor(location), 1)].price
-        local right = list[math.min(math.ceil(location), oldSize)].price
+        local left = list[math.max(math.floor(location), 1)]
+        local right = list[math.min(math.ceil(location), oldSize)]
         local alpha = location % 1
 
-        data[i] = {
-            price = (right - left) * alpha + left,
-            day = i
-        }
+        data[i] = (right - left) * alpha + left
     end
 
     return data
@@ -155,13 +146,10 @@ function ssEconomyHistory:contractedArray(list, newSize)
 
         local sum = 0
         for j = left, right do
-            sum = sum + list[j].price
+            sum = sum + list[j]
         end
 
-        data[i] = {
-            price = sum / (right - left + 1),
-            day = i
-        }
+        data[i] = sum / (right - left + 1)
     end
 
     return data
@@ -175,7 +163,7 @@ function ssEconomyHistory:dayChanged()
         if fillDesc.ssEconomyType then
             local value = self:getPrice(fillDesc)
 
-            self.data[fillDesc.index][day].price = value
+            self.data[fillDesc.index][day] = value
         end
     end
 end
