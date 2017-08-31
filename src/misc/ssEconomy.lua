@@ -294,8 +294,8 @@ end
 function ssEconomy:getTransitionAndAlpha(day)
     local currentTransition = g_seasons.environment:transitionAtDay(day)
 
-    local dayInTransition = (g_seasons.environment:dayInSeason(day) - 1) % 3 + 1
     local transitionLength = g_seasons.environment.daysInSeason / 3
+    local dayInTransition = (g_seasons.environment:dayInSeason(day) - 1) % transitionLength + 1
 
     return currentTransition, (dayInTransition - 1) / transitionLength
 end
@@ -368,10 +368,17 @@ function ssEconomy:baleGetValue(superFunc)
 end
 
 function ssEconomy:ttGetEffectiveFillTypePrice(superFunc, fillType)
-    local price = superFunc(self, fillType)
+    -- local price = superFunc(self, fillType)
 
     if self.isServer then
-        return price * g_seasons.economy:getFillFactor(fillType)
+        local factor = g_seasons.economy:getFillFactor(fillType)
+
+        -- Omit random delta when factor is 0
+        if factor == 0 then
+            return 0
+        else
+            return ((self.fillTypePrices[fillType] * factor + self.fillTypePriceRandomDelta[fillType] * 0.5) * self.priceMultipliers[fillType])
+        end
     else
         return price
     end

@@ -82,7 +82,6 @@ local files = {
 
     "environment/ssDaylight",
     "misc/ssEconomy",
-    "misc/ssEconomyHistory",
     "environment/ssWeatherManager",
     "environment/ssWeatherForecast",
     "vehicles/ssVehicle",
@@ -116,6 +115,8 @@ local files = {
     "objects/ssSnowAdmirer",
     "objects/ssSeasonAdmirer",
     "objects/ssIcePlane",
+
+    "misc/ssEconomyHistory",
 
     -- GUI
     "gui/ssHelpLines",

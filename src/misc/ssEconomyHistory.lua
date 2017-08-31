@@ -56,7 +56,7 @@ function ssEconomyHistory:save(savegame, key)
 
         local j = 0
         for _, val in ipairs(data) do
-            local k = string.format("%s.value(%i)", key, j)
+            local k = string.format("%s.value(%i)", fillKey, j)
 
             ssXMLUtil.setFloat(savegame, k, val.price)
             ssXMLUtil.setInt(savegame, k .. ".day", val.day)
@@ -74,7 +74,7 @@ function ssEconomyHistory:loadMap(name)
 
     local currentDay = g_seasons.environment:dayInYear()
 
-    for index, fillDesc in ipairs(FillUtil.fillTypeIndexToDesc) do
+    for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
         fillDesc.ssEconomyType = self:getEconomyType(fillDesc)
 
         if fillDesc.ssEconomyType then
@@ -89,11 +89,11 @@ function ssEconomyHistory:loadMap(name)
                     if i == currentDay then
                         value = self:getPrice(fillDesc)
                     else
-                        value = self:getSimulatedPrice(fillDesc, i),
+                        value = self:getSimulatedPrice(fillDesc, i)
                     end
 
                     values[i] = {
-                        price = value
+                        price = value,
                         day = i
                     }
                 end
@@ -106,24 +106,78 @@ end
 
 -- Copy all data into new set, possibly interpolated or truncated
 function ssEconomyHistory:seasonLengthChanged()
-    -- This might cause all data to be odd, so stuff needs to be 'fixed'
+    local newSize = g_seasons.environment.daysInSeason * 4
+
+    for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
+        if fillDesc.ssEconomyType then
+            local oldSize = table.getn(self.data[index])
+
+            if newSize > oldSize then
+                self.data[index] = self:expandedArray(self.data[index], newSize)
+            elseif newSize < oldSize then
+                self.data[index] = self:contractedArray(self.data[index], newSize)
+            end
+        end
+    end
+end
+
+function ssEconomyHistory:expandedArray(list, newSize)
+    local data = {}
+    local oldSize = table.getn(list)
+    local expansionFactor = oldSize / newSize
+
+    for i = 1, newSize do
+        -- Interpolate value
+        local location = (i - 1) * expansionFactor + 1
+
+        local left = list[math.max(math.floor(location), 1)].price
+        local right = list[math.min(math.ceil(location), oldSize)].price
+        local alpha = location % 1
+
+        data[i] = {
+            price = (right - left) * alpha + left,
+            day = i
+        }
+    end
+
+    return data
+end
+
+function ssEconomyHistory:contractedArray(list, newSize)
+    local data = {}
+    local oldSize = table.getn(list)
+    local contractionFactor = oldSize / newSize
+
+    for i = 1, newSize do
+        -- Get average value of section this value replaces
+        local left = math.max(math.floor((i - 1) * contractionFactor + 1), 1)
+        local right = math.min(math.ceil(i * contractionFactor), oldSize)
+
+        local sum = 0
+        for j = left, right do
+            sum = sum + list[j].price
+        end
+
+        data[i] = {
+            price = sum / (right - left + 1),
+            day = i
+        }
+    end
+
+    return data
 end
 
 -- Set all values of the previous day to the historic data to current day (% year, no offset)
 function ssEconomyHistory:dayChanged()
-    local day = g_seasons.environment:dayInYear(g_seasons.environment:currentDay() - 1)
+    local day = g_seasons.environment:dayInYear(g_seasons.environment:currentDay())
 
-    for index, fillDesc in ipairs(FillUtil.fillTypeIndexToDesc) do
+    for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
         if fillDesc.ssEconomyType then
             local value = self:getPrice(fillDesc)
-
-            log("Set value of fruit", fillDesc.name, "for day", day, "to", value)
 
             self.data[fillDesc.index][day].price = value
         end
     end
-
-    print_r(self.data)
 end
 
 function ssEconomyHistory:getHistory(fillDesc)
@@ -165,23 +219,50 @@ function ssEconomyHistory:getEconomyType(fillDesc)
     return nil
 end
 
--- TODO: IMPLEMENT
+-- Get the current average price of given fill.
+-- Average is over all tiptriggers that accept given fill.
+-- Animals is per animal, everything else is per 1000 liters.
 function ssEconomyHistory:getPrice(fillDesc)
+    local fillType = fillDesc.index
+
+    if fillDesc.ssEconomyType == self.ECONOMY_TYPE_FILL then
+        local sum, num = 0, 0
+
+        for _, tipTrigger in pairs(g_currentMission.tipTriggers) do
+            if tipTrigger.isSellingPoint and tipTrigger.acceptedFillTypes[fillType] then
+                sum = sum + tipTrigger:getEffectiveFillTypePrice(fillType)
+                num = num + 1
+            end
+        end
+
+        if num == 0 then
+            return 0
+        else
+            return 1000 * sum / num -- 1000 liter
+        end
+    elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_ANIMAL then
+        local animalDesc = AnimalUtil.animalIndexToDesc[AnimalUtil.fillTypeToAnimal[fillType]]
+
+        return animalDesc.price
+    elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_BALE then
+        --1000 * fillDesc.pricePerLiter * g_seasons.economy:getBaleFactor(fillDesc.index)
+    end
+
     return 4
 end
 
 -- If no historic data is saved, create a price using the default price and the factors
 -- of Seasons. This does not include demands from the vanilla game.
 function ssEconomyHistory:getSimulatedPrice(fillDesc, day)
-    if fillDesc.ssEconomyType == self.ECONOMY_TYPE_FILL then
-        return 1000 * fillDesc.pricePerLiter * g_seasons.economy:getFillFactor(fillDesc.index, day)
+    local multiplier = EconomyManager.getPriceMultiplier()
 
+    if fillDesc.ssEconomyType == self.ECONOMY_TYPE_FILL then
+        return 1000 * fillDesc.pricePerLiter * g_seasons.economy:getFillFactor(fillDesc.index, day) * multiplier
     elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_ANIMAL then
         local animalDesc = AnimalUtil.animalIndexToDesc[AnimalUtil.fillTypeToAnimal[fillDesc.index]]
 
         return Utils.getNoNil(animalDesc.ssOriginalPrice, animalDesc.price) * g_seasons.economy:getAnimalFactor(animalDesc.name, day)
-
     elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_BALE then
-        return 1000 * fillDesc.pricePerLiter * g_seasons.economy:getBaleFactor(fillDesc.index, day)
+        return 1000 * fillDesc.pricePerLiter * g_seasons.economy:getBaleFactor(fillDesc.index, day) * multiplier
     end
 end
