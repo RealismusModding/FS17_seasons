@@ -99,34 +99,36 @@ function ssGraph:draw()
     local segmentHeight = (self.parent.size[2] - marginY) / 5
     local segmentValue = self.maxValue / 5
 
-    for i = 0, 5 do
-        pixel:setPosition(
-            self.parent.absPosition[1] + marginX - nudgeWidth,
-            self.parent.absPosition[2] + marginY + i * segmentHeight)
-        pixel:render()
+    if self.maxValue > 0 then
+        for i = 0, 5 do
+            pixel:setPosition(
+                self.parent.absPosition[1] + marginX - nudgeWidth,
+                self.parent.absPosition[2] + marginY + i * segmentHeight)
+            pixel:render()
 
-        renderText(
-            self.parent.absPosition[1] + marginX - nudgeWidth * 1.5,
-            self.parent.absPosition[2] + marginY + i * segmentHeight - getTextHeight(self.axisTextSize, tostring(self.maxValue)) / 2.3,
-            self.axisTextSize,
-            tostring(math.ceil(g_i18n:getCurrencyFactor() * i * segmentValue)))
-    end
-
-    -- Values
-    local valueFactor = (self.parent.size[2] - marginY - lineHeight) / self.maxValue
-
-    for day, price in ipairs(self.data) do
-        pixel:setDimension(valueWidth - lineWidth, price * valueFactor)
-        pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (day - 1),
-                               self.parent.absPosition[2] + marginY + lineHeight)
-
-        if day == self.currentDay then
-            pixel:setColor(unpack(self.TODAY_COLOR))
-        else
-            pixel:setColor(unpack(self.LINE_COLOR))
+            renderText(
+                self.parent.absPosition[1] + marginX - nudgeWidth * 1.5,
+                self.parent.absPosition[2] + marginY + i * segmentHeight - getTextHeight(self.axisTextSize, tostring(self.maxValue)) / 2.3,
+                self.axisTextSize,
+                tostring(math.ceil(g_i18n:getCurrencyFactor() * i * segmentValue)))
         end
 
-        pixel:render()
+        -- Values
+        local valueFactor = (self.parent.size[2] - marginY - lineHeight) / self.maxValue
+
+        for day, price in ipairs(self.data) do
+            pixel:setDimension(valueWidth - lineWidth, price * valueFactor)
+            pixel:setPosition(self.parent.absPosition[1] + marginX + valueWidth * (day - 1),
+                                   self.parent.absPosition[2] + marginY + lineHeight)
+
+            if day == self.currentDay then
+                pixel:setColor(unpack(self.TODAY_COLOR))
+            else
+                pixel:setColor(unpack(self.LINE_COLOR))
+            end
+
+            pixel:render()
+        end
     end
 
     ------ Draw footer
@@ -192,7 +194,7 @@ end
 function ssGraph:setData(data)
     self.data = data
 
-    self.maxValue = 1
+    self.maxValue = 0
     self.minValue = 5000
     for _, value in ipairs(data) do
         self.maxValue = math.max(self.maxValue, value)

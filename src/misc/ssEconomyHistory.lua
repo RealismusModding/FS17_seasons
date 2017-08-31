@@ -70,7 +70,9 @@ function ssEconomyHistory:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
 
     local currentDay = g_seasons.environment:dayInYear()
+end
 
+function ssEconomyHistory:loadGameFinished(name)
     for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
         fillDesc.ssEconomyType = self:getEconomyType(fillDesc)
 
