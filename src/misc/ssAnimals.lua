@@ -16,8 +16,8 @@ function ssAnimals:loadMap(name)
 
     AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
     AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.AddAnimalsAddition)
-    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.resetAvgProductivity)
+    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
+    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -316,7 +316,7 @@ function ssAnimals:addAnimalProductivity(currentAnimals, addedAnimals, avgProd)
     end
 end
 
-function ssAnimals:AddAnimalsAddition(num, subType)
+function ssAnimals:husbandryAddAnimals(num, subType)
     local typ = self.typeName
     local currentAnimals = self.totalNumAnimals - num
 
@@ -325,7 +325,7 @@ function ssAnimals:AddAnimalsAddition(num, subType)
 end
 
 -- reset productivity to zero if there are no animals
-function ssAnimals:resetAvgProductivity()
+function ssAnimals:husbandryRemoveAnimals()
     if self.totalNumAnimals == 0 then
         local typ = self.typeName
         ssAnimals.averageProduction[typ] = 0
