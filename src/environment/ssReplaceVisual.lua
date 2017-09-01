@@ -8,10 +8,11 @@
 ----------------------------------------------------------------------------------------------------
 
 ssReplaceVisual = {}
-g_seasons.replaceVisual = ssReplaceVisual
 
 function ssReplaceVisual:preLoad()
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.placeableUpdatePlacableOnCreation)
+    g_seasons.replaceVisual = self
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssReplaceVisual.placeableUpdatePlacableOnCreation)
 end
 
 function ssReplaceVisual:loadMap(name)
@@ -26,6 +27,12 @@ function ssReplaceVisual:loadMap(name)
         for _, replacements in ipairs(self.modReplacements) do
             self:loadTextureIdTable(replacements)
         end
+    end
+end
+
+function ssReplaceVisual:deleteMap()
+    if g_currentMission:getIsClient() then
+        g_seasons.environment:removeVisualSeasonChangeListener(self)
     end
 end
 

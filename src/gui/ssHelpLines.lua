@@ -7,12 +7,16 @@
 ----------------------------------------------------------------------------------------------------
 
 ssHelpLines = {}
-g_seasons.help = ssHelpLines
+
+function ssHelpLines:preLoad()
+    g_seasons.help = self
+end
 
 function ssHelpLines:loadMap()
     self:loadFromXML(g_seasons.modDir .. "resources/gui/helpLine.xml")
 end
 
+-- TODO(console): reverse
 function ssHelpLines:loadI18NIntoGlobal(key)
     g_i18n.globalI18N:setText(key, ssLang.getText(key))
 end

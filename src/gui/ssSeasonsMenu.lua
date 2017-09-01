@@ -52,6 +52,10 @@ function ssSeasonsMenu:new(target, custom_mt)
     return self
 end
 
+function ssSeasonsMenu:delete()
+    -- TODO(console): delete all used resources
+end
+
 function ssSeasonsMenu:onCreate(gui)
 end
 

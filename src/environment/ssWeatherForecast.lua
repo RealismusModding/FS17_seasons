@@ -8,10 +8,22 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherForecast = {}
-g_seasons.forecast = ssWeatherForecast
 
-local screenAspectRatio = g_screenAspectRatio / (16 / 9)
-ssWeatherForecast.hud = {}
+function ssWeatherForecast:preLoad()
+    g_seasons.forecast = self
+end
+
+function ssWeatherForecast:load(savegame, key)
+    self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
+    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
+end
+
+function ssWeatherForecast:save(savegame, key)
+    if g_currentMission:getIsServer() == true then
+        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
+        ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
+    end
+end
 
 function ssWeatherForecast:loadMap(name)
     if not g_currentMission:getIsClient() then return end
@@ -120,16 +132,7 @@ function ssWeatherForecast:loadMap(name)
     self:setForecastVisible(self.visible)
 end
 
-function ssWeatherForecast:load(savegame, key)
-    self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
-    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
-end
-
-function ssWeatherForecast:save(savegame, key)
-    if g_currentMission:getIsServer() == true then
-        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
-        ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
-    end
+function ssWeatherForecast:deleteMap()
 end
 
 function ssWeatherForecast:update(dt)

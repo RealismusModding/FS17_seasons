@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssEnvironment = {}
-g_seasons.environment = ssEnvironment
 
 ----------------------------
 -- Constants
@@ -45,10 +44,12 @@ ssEnvironment.TRANSITION_LATE_WINTER = 12
 source(g_seasons.modDir .. "src/events/ssVisualSeasonChangedEvent.lua")
 
 function ssEnvironment:preLoad()
+    g_seasons.environment = self
+
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and
     -- in loadMap it is too late. (both crash)
-    Environment.new = Utils.overwrittenFunction(Environment.new, function (self, superFunc, xmlFilename)
+    ssUtil.overwrittenFunction(Environment, "new", function (self, superFunc, xmlFilename)
         local self = superFunc(self, xmlFilename)
 
         Environment.RAINTYPE_SNOW = "snow"

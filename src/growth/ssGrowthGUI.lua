@@ -3,23 +3,23 @@
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To calculate when it is possible to plant and harvest
 -- Authors:  theSeb
--- Credits:  
+-- Credits:
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthGUI = {}
-g_seasons.growthGUI = ssGrowthGUI
 
 -- constants
 ssGrowthGUI.MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
 
--- data
-ssGrowthGUI.canPlantData = {}
-ssGrowthGUI.canHarvestData = {}
+function ssGrowthGUI:preLoad()
+    g_seasons.growthGUI = self
+end
 
---methods
 function ssGrowthGUI:loadMap(name)
+    self.canPlantData = {}
+    self.canHarvestData = {}
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'

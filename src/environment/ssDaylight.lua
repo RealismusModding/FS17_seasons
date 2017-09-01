@@ -8,7 +8,10 @@
 ----------------------------------------------------------------------------------------------------
 
 ssDaylight = {}
-g_seasons.daylight = ssDaylight
+
+function ssDaylight:preLoad()
+    g_seasons.daylight = self
+end
 
 function ssDaylight:loadMap(name)
     -- Add day change listener to handle new dayNight system and new events

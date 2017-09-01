@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  to help debug growth
 -- Authors:  theSeb
--- Credits:  
+-- Credits:
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -27,6 +27,17 @@ function ssGrowthDebug:loadMap(name)
         addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
         addConsoleCommand("ssChangeFruitGrowthState", "ssChangeFruitGrowthState fruit currentState desiredState", "consoleCommandChangeFruitGrowthState", self)
         addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
+    end
+end
+
+function ssGrowthDebug:deleteMap()
+    if g_currentMission:getIsServer() then
+        removeConsoleCommand("ssResetGrowth")
+        removeConsoleCommand("ssIncrementGrowth")
+        removeConsoleCommand("ssSetGrowthState")
+        removeConsoleCommand("ssPrintDebugInfo")
+        removeConsoleCommand("ssChangeFruitGrowthState")
+        removeConsoleCommand("ssGrowthDebugView");
     end
 end
 

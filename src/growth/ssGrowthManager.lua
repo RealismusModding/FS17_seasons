@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthManager = {}
-g_seasons.growthManager = ssGrowthManager
 
 -- constants
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates - 1 if you're incrementing
@@ -19,21 +18,17 @@ ssGrowthManager.TMP_TRANSITION = 900
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.UNKNOWN_FRUIT_COPY_SOURCE = "barley"
 
--- data
-ssGrowthManager.defaultFruitsData = {}
-ssGrowthManager.growthData = {}
-ssGrowthManager.willGerminateData = {}
-
--- properties
-ssGrowthManager.dayHasChanged = false
-ssGrowthManager.isActivatedOnOldSave = false
+function ssGrowthManager:preLoad()
+    g_seasons.growthManager = self
+end
 
 function ssGrowthManager:load(savegame, key)
+    self.willGerminateData = {}
     self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
     self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
-    
+
     if savegame == nil then return end
 
     local i = 0
@@ -102,6 +97,9 @@ function ssGrowthManager:loadMap(name)
         return
     end
 
+    self.defaultFruitsData = {}
+    self.growthData = {}
+
     --lock changing the growth speed option and set growth rate to 1 (no growth)
     g_currentMission:setPlantGrowthRate(1, nil)
     g_currentMission:setPlantGrowthRateLocked(true)
@@ -122,8 +120,15 @@ function ssGrowthManager:loadMap(name)
     end
 end
 
+function ssGrowthManager:deleteMap()
+    if g_currentMission:getIsServer() then
+        g_currentMission.environment:removeDayChangeListener(self)
+        g_seasons.environment:removeTransitionChangeListener(self)
+    end
+end
+
 function ssGrowthManager:loadMapFinished()
-    if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
+    if self.isNewSavegame or self.isActivatedOnOldSave then --if new game or mod enabled on existing save
         self:rebuildWillGerminateData()
         self:checkAndAddNewFruits(true)
     else
@@ -177,7 +182,7 @@ function ssGrowthManager:transitionChanged()
 
     local transition = g_seasons.environment:transitionAtDay()
     g_seasons.growthDebug:setFakeTransition(transition)
-    
+
     if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
         logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
         self.isNewSavegame = false

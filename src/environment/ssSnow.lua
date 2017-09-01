@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSnow = {}
-g_seasons.snow = ssSnow
 
 ssSnow.LAYER_HEIGHT = 0.06
 ssSnow.MAX_HEIGHT = 0.48
@@ -20,8 +19,10 @@ ssSnow.MODE_ONE_LAYER = 2
 ssSnow.MODE_ON = 3
 
 function ssSnow:preLoad()
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.placeableFinalizePlacement)
-    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.placeableOnSell)
+    g_seasons.snow = self
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssSnow.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "onSell", ssSnow.placeableOnSell)
 end
 
 function ssSnow:load(savegame, key)
@@ -48,9 +49,11 @@ end
 
 function ssSnow:loadMap(name)
     -- Register Snow as a fill and Tip type
-    local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
-    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.dds", g_seasons.modDir .. "resources/environment/snow_normal.dds", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.dds")
-    loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
+    if FillUtil.FILLTYPE_SNOW ~= nil then
+        local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
+        TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.dds", g_seasons.modDir .. "resources/environment/snow_normal.dds", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.dds")
+        self.snowMaterialHolder = loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
+    end
 
     -- Load overlay icon, properly
     local uiScale = g_gameSettings:getValue("uiScale")
@@ -68,6 +71,16 @@ function ssSnow:loadMap(name)
         addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self)
         addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self)
         addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self)
+    end
+end
+
+function ssSnow:deleteMap()
+    if g_currentMission:getIsServer() then
+        g_currentMission.environment:removeHourChangeListener(self)
+
+        removeConsoleCommand("ssAddSnow")
+        removeConsoleCommand("ssRemoveSnow")
+        removeConsoleCommand("ssResetSnow")
     end
 end
 
