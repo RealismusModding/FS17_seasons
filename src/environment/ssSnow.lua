@@ -188,7 +188,7 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
     layers = tonumber(layers)
 
     -- Fix for broken vanilla game: when swath is very near the south border, the game crashes
-    heightWorldZ = math.min(heightWorldZ, (g_currentMission.terrainSize / 2.0) - 18.0)
+    heightWorldZ = math.min(heightWorldZ, g_currentMission.terrainSize / 2.0)
 
     local terrainId = g_currentMission.terrainDetailHeightId
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(terrainId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
