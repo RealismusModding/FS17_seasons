@@ -89,18 +89,18 @@
         <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
 
         <!-- Missing translation of "Calendar" -->
-        <text name="ui_pageCalender" text="" />
+        <text name="ui_pageCalender" text="Kalender" />
         <!-- Missing translation of "Economy" -->
-        <text name="ui_pageEconomy" text="" />
+        <text name="ui_pageEconomy" text="Preise" />
         <text name="ui_pageSettings" text="Einstellungen" />
         <text name="ui_pageDebug" text="Entwickler" />
 
         <!-- Missing translation of "animal" -->
-        <text name="ui_economy_animal" text="" />
+        <text name="ui_economy_animal" text="Tiere" />
         <!-- Missing translation of "1000 l" -->
-        <text name="ui_economy_thousand" text="" />
+        <text name="ui_economy_thousand" text="1000 l" />
         <!-- Missing translation of "Bale" -->
-        <text name="ui_economy_bale" text="" />
+        <text name="ui_economy_bale" text="Ballen" />
 
         <text name="ui_buttonSave" text="Speichern" />
         <text name="ui_snowOneLayer" text="Einfache Schneeschicht" />
