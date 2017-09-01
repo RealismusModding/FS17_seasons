@@ -8,9 +8,12 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSkipNight = {}
-g_seasons.skipNight = ssSkipNight
 
 ssSkipNight.SPEED = 6000
+
+function ssSkipNight:preLoad()
+    g_seasons.skipNight = self
+end
 
 function ssSkipNight:loadMap()
     self.skippingNight = false

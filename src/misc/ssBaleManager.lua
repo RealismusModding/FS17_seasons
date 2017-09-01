@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssBaleManager = {}
-g_seasons.baleManager = ssBaleManager
 
 ssBaleManager.MASK_RECT_WIDTH = 2 --2x2m
 
@@ -17,16 +16,18 @@ source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
 source(g_seasons.modDir .. "src/events/ssBaleRotEvent.lua")
 
 function ssBaleManager:preLoad()
-    Bale.loadFromAttributesAndNodes = Utils.overwrittenFunction(Bale.loadFromAttributesAndNodes, ssBaleManager.baleLoadFromAttributesAndNodes)
-    Bale.getSaveAttributesAndNodes = Utils.overwrittenFunction(Bale.getSaveAttributesAndNodes, ssBaleManager.baleGetSaveAttributesAndNodes)
-    Bale.updateTick = Utils.appendedFunction(Bale.updateTick, ssBaleManager.baleUpdateTick)
-    Bale.readStream = Utils.appendedFunction(Bale.readStream, ssBaleManager.baleReadStream)
-    Bale.writeStream = Utils.appendedFunction(Bale.writeStream, ssBaleManager.baleWriteStream)
+    g_seasons.baleManager = self
+
+    ssUtil.overwrittenFunction(Bale, "loadFromAttributesAndNodes", ssBaleManager.baleLoadFromAttributesAndNodes)
+    ssUtil.overwrittenFunction(Bale, "getSaveAttributesAndNodes", ssBaleManager.baleGetSaveAttributesAndNodes)
+    ssUtil.appendedFunction(Bale, "updateTick", ssBaleManager.baleUpdateTick)
+    ssUtil.appendedFunction(Bale, "readStream", ssBaleManager.baleReadStream)
+    ssUtil.appendedFunction(Bale, "writeStream", ssBaleManager.baleWriteStream)
     Bale.setFillType = ssBaleManager.baleSetFillType
-    BaleWrapper.load = Utils.appendedFunction(BaleWrapper.load, ssBaleManager.baleWrapperLoad)
-    BaleWrapper.getSaveAttributesAndNodes = Utils.overwrittenFunction(BaleWrapper.getSaveAttributesAndNodes, ssBaleManager.baleWrapperGetSaveAttributesAndNodes)
-    BaleWrapper.doStateChange = Utils.appendedFunction(BaleWrapper.doStateChange, ssBaleManager.baleWrapperDoStateChange)
-    BaleWrapper.pickupWrapperBale = Utils.prependedFunction(BaleWrapper.pickupWrapperBale, ssBaleManager.baleWrapperPickupWrapperBale)
+    ssUtil.appendedFunction(BaleWrapper, "load", ssBaleManager.baleWrapperLoad)
+    ssUtil.overwrittenFunction(BaleWrapper, "getSaveAttributesAndNodes", ssBaleManager.baleWrapperGetSaveAttributesAndNodes)
+    ssUtil.appendedFunction(BaleWrapper, "doStateChange", ssBaleManager.baleWrapperDoStateChange)
+    ssUtil.prependedFunction(BaleWrapper, "pickupWrapperBale", ssBaleManager.baleWrapperPickupWrapperBale)
 end
 
 function ssBaleManager:loadMap(name)
@@ -37,6 +38,14 @@ function ssBaleManager:loadMap(name)
     if g_currentMission:getIsServer() then
         self:setFermentationTime()
     end
+end
+
+function ssBaleManager:deleteMap()
+    g_currentMission.environment:removeHourChangeListener(self)
+    g_currentMission.environment:removeDayChangeListener(self)
+    g_seasons.environment:removeSeasonLengthChangeListener(self)
+
+    Bale.setFillType = nil
 end
 
 function ssBaleManager:reduceFillLevel()

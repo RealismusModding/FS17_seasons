@@ -17,15 +17,15 @@ function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
-    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
-    AnimalHusbandry.getDataAttributes = Utils.overwrittenFunction(AnimalHusbandry.getDataAttributes, ssAnimals.husbandryGetDataAttributes)
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getCapacity", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.overwrittenFunction(AnimalHusbandry , "getHasSpaceForTipping", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.appendedFunction(AnimalHusbandry,  "addAnimals", ssAnimals.husbandryAddAnimals)
+    ssUtil.appendedFunction(AnimalHusbandry, "removeAnimals", ssAnimals.husbandryRemoveAnimals)
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getDataAttributes", ssAnimals.husbandryGetDataAttributes)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
-    getfenv(0)["g_i18n"].texts["warning_inAdvanceFeedingLimitReached"] = ssLang.getText("warning_inAdvanceFeedingLimitReached3")
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_inAdvanceFeedingLimitReached", ssLang.getText("warning_inAdvanceFeedingLimitReached3"))
 
     -- Load parameters
     self:loadFromXML()
@@ -33,6 +33,13 @@ function ssAnimals:loadMap(name)
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
         g_currentMission.environment:addHourChangeListener(self)
+    end
+end
+
+function ssAnimals:deleteMap()
+    if g_currentMission:getIsServer() then
+        g_currentMission.environment:removeDayChangeListener(self)
+        g_currentMission.environment:removeHourChangeListener(self)
     end
 end
 
@@ -84,7 +91,6 @@ function ssAnimals:load(savegame, key)
 end
 
 function ssAnimals:save(savegame, key)
-
     local i = 0
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         local typ = husbandry.typeName
@@ -96,7 +102,6 @@ function ssAnimals:save(savegame, key)
 
         i = i + 1
     end
-
 end
 
 function ssAnimals:seasonChanged()
@@ -339,7 +344,6 @@ function ssAnimals:husbandryAddAnimals(num, subType)
     local currentAnimals = self.totalNumAnimals - num
 
     ssAnimals.averageProduction[typ] = ssAnimals:addAnimalProductivity(currentAnimals, num, ssAnimals.averageProduction[typ])
-
 end
 
 -- reset productivity to zero if there are no animals
@@ -349,10 +353,3 @@ function ssAnimals:husbandryRemoveAnimals()
         ssAnimals.averageProduction[typ] = 0
     end
 end
-
--- TODO: remove after testing
---function ssAnimals:draw()
---    renderText(0.44, 0.72, 0.01, "Cows: " .. tostring(self.averageProduction["cow"]))
---    renderText(0.44, 0.70, 0.01, "Pigs: " .. tostring(self.averageProduction["pig"]))
---    renderText(0.44, 0.68, 0.01, "Sheep: " .. tostring(self.averageProduction["sheep"]))
---end

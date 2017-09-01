@@ -15,7 +15,7 @@ end
 
 function ssSnowFillable:load(savegame)
     if self.onEndTip ~= nil then
-        self.onEndTip = Utils.appendedFunction(self.onEndTip , ssSnowFillable.onEndTip)
+        self.onEndTip = Utils.appendedFunction(self.onEndTip, ssSnowFillable.onEndTip)
     end
 
     self.ssDelaySnowFill = 0

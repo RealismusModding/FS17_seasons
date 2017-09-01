@@ -8,12 +8,13 @@
 ----------------------------------------------------------------------------------------------------
 
 ssFieldJobManager = {}
-g_seasons.fieldJobManager = ssFieldJobManager
 
 function ssFieldJobManager:preLoad()
-    FieldJob.init = Utils.overwrittenFunction(FieldJob.init, ssFieldJobManager.fieldJobInit)
-    FieldJob.finish = Utils.overwrittenFunction(FieldJob.finish, ssFieldJobManager.fieldJobFinish)
-    FieldJobManager.update = Utils.overwrittenFunction(FieldJobManager.update, ssFieldJobManager.fieldJobManagerUpdate)
+    g_seasons.fieldJobManager = self
+
+    ssUtil.overwrittenFunction(FieldJob, "init", ssFieldJobManager.fieldJobInit)
+    ssUtil.overwrittenFunction(FieldJob, "finish", ssFieldJobManager.fieldJobFinish)
+    ssUtil.overwrittenFunction(FieldJobManager, "update", ssFieldJobManager.fieldJobManagerUpdate)
 end
 
 function ssFieldJobManager:loadMap(name)

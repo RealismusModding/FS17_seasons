@@ -12,8 +12,8 @@
 ssStorage = {}
 
 function ssStorage:preLoad()
-    Storage.delete = Utils.appendedFunction(Storage.delete, ssStorage.storageDelete)
-    Storage.update = Utils.appendedFunction(Storage.update, ssStorage.storageUpdate)
+    ssUtil.appendedFunction(Storage, "delete", ssStorage.storageDelete)
+    ssUtil.appendedFunction(Storage, "update", ssStorage.storageUpdate)
 
     Storage.seasonLengthChanged = ssStorage.storageSeasonLengthChanged
     Storage.ssUpdateCosts = ssStorage.ssUpdateCosts

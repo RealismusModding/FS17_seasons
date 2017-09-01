@@ -10,11 +10,12 @@
 ssPlaceable = {}
 
 function ssPlaceable:preLoad()
-    Placeable.getDailyUpKeep = Utils.overwrittenFunction(Placeable.getDailyUpKeep, ssPlaceable.placeableGetDailyUpkeep)
-    Placeable.getSellPrice = Utils.overwrittenFunction(Placeable.getSellPrice, ssPlaceable.placeableGetSellPrice)
+    ssUtil.overwrittenFunction(Placeable, "getDailyUpKeep", ssPlaceable.placeableGetDailyUpkeep)
+    ssUtil.overwrittenFunction(Placeable, "getSellPrice", ssPlaceable.placeableGetSellPrice)
 
-    Placeable.finalizePlacement = Utils.overwrittenFunction(Placeable.finalizePlacement, ssPlaceable.placeableFinalizePlacement)
-    Placeable.delete = Utils.overwrittenFunction(Placeable.delete, ssPlaceable.placeableDelete)
+    ssUtil.overwrittenFunction(Placeable, "finalizePlacement", ssPlaceable.placeableFinalizePlacement)
+    ssUtil.overwrittenFunction(Placeable, "delete", ssPlaceable.placeableDelete)
+
     Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
 

@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssVehicle = {}
-g_seasons.vehicle = ssVehicle
 
 ssVehicle.LIFETIME_FACTOR = 5
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
@@ -20,15 +19,26 @@ ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
 function ssVehicle:preLoad()
-    SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
-    SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
-    SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
-    SpecializationUtil.registerSpecialization("grassfillable", "ssGrassFillable", g_seasons.modDir .. "src/vehicles/specializations/ssGrassFillable.lua")
-    SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
-    SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
-    SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    g_seasons.vehicle = ssVehicle
+
+    ssUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
+    ssUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
+    ssUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
+    ssUtil.registerSpecialization("grassfillable", "ssGrassFillable", g_seasons.modDir .. "src/vehicles/specializations/ssGrassFillable.lua")
+    ssUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
+    ssUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
+    ssUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
 
     ssVehicle:registerWheelTypes()
+
+    ssUtis.overwrittenFunction(Vehicle, "getDailyUpKeep", ssVehicle.vehicleGetDailyUpKeep)
+    ssUtil.overwrittenFunction(Vehicle, "getSellPrice", ssVehicle.vehicleGetSellPrice)
+    ssUtil.overwrittenFunction(Vehicle, "getSpecValueAge", ssVehicle.vehicleGetSpecValueAge)
+    ssUtil.overwrittenFunction(Vehicle, "getSpeedLimit", ssVehicle.getSpeedLimit)
+    ssUtil.overwrittenFunction(Vehicle, "draw", ssVehicle.vehicleDraw)
+    ssUtil.overwrittenFunction(Combine, "getIsThreshingAllowed", ssVehicle.getIsThreshingAllowed)
+    ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
+    ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
 end
 
 function ssVehicle:load(savegame, key)
@@ -43,16 +53,6 @@ function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.vehicleGetDailyUpKeep)
-    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.vehicleGetSellPrice)
-    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.vehicleGetSpecValueAge)
-    Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
-    Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
-    Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
-    AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
-
-    VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
-
     g_currentMission:setAutomaticMotorStartEnabled(false)
 
     if g_currentMission:getIsServer() then
@@ -66,11 +66,21 @@ function ssVehicle:loadMap()
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
-    getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_doNotThreshDuringRainOrHail", ssLang.getText("warning_doNotThreshWithMoisture"))
 
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
+end
+
+function ssVehicle:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self)
+    g_seasons.environment:removeSeasonLengthChangeListener(self)
+
+    if g_addCheatCommands then
+        removeConsoleCommand("ssRepairVehicle")
+        removeConsoleCommand("ssRepairAllVehicles")
+    end
 end
 
 function ssVehicle:readStream(streamId, connection)
@@ -489,8 +499,8 @@ function ssVehicle:registerWheelTypes()
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.05
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.95
 
-    WheelsUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
-    WheelsUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
+    ssUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
+    ssUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
 end
 
 -- Override the threshing for the moisture system

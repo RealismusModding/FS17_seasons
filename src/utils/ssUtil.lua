@@ -247,50 +247,123 @@ end
 
 ------------- Console compoatibilty -------------
 
-local ssUtil_originalFunction = {}
+if GS_IS_CONSOLE_VERSION or true then
+    local ssUtil_originalFunctions = {}
+    local ssUtil_originalConstants = {}
+    local ssUtil_specializations = {}
+    local ssUtil_tireTypes = {}
 
--- Store the original function, if not done yet (otherwise it was already changed)
-local function storeOriginalFunction(target, name)
-   if ssUtil_originalFunction[target] == nil then
-        ssUtil_originalFunction[target] = {}
-    end
+    -- Store the original function, if not done yet (otherwise it was already changed)
+    local function storeOriginalFunction(target, name)
+        if ssUtil_originalFunctions[target] == nil then
+            ssUtil_originalFunctions[target] = {}
+        end
 
-    -- Store the original function
-    if ssUtil_originalFunction[target][name] == nil then
-        ssUtil_originalFunction[target][name] = target[name]
-    end
-end
-
-function ssUtil.overwrittenFunction(target, name, newFunc)
-    storeOriginalFunction(target, name)
-
-    target[name] = Utils.overwrittenFunction(target[name], newFunc)
-end
-
-function ssUtil.overwrittenStaticFunction(target, name, newFunc)
-    storeOriginalFunction(target, name)
-
-    -- TODO
-end
-
-function ssUtil.appendedFunction(target, name, newFunc)
-    storeOriginalFunction(target, name)
-
-    target[name] = Utils.appendedFunction(target[name], newFunc)
-end
-
-function ssUtil.prependedFunction(target, name, newFunc)
-    storeOriginalFunction(target, name)
-
-    target[name] = Utils.prependedFunction(target[name], newFunc)
-end
-
-function ssUtil.unregisterAdjustedFunction()
-    for target, functions in pairs(ssUtil.ssUtil_originalFunction) do
-        for name, func in pairs(functions) do
-            target[name] = func
+        -- Store the original function
+        if ssUtil_originalFunctions[target][name] == nil then
+            ssUtil_originalFunctions[target][name] = target[name]
         end
     end
+
+    function ssUtil.overwrittenFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.overwrittenFunction(target[name], newFunc)
+    end
+
+    function ssUtil.overwrittenStaticFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        -- TODO
+    end
+
+    function ssUtil.appendedFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.appendedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.prependedFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.prependedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.unregisterAdjustedFunction()
+        for target, functions in pairs(ssUtil_originalFunctions) do
+            for name, func in pairs(functions) do
+                target[name] = func
+            end
+        end
+    end
+
+    function ssUtil.overwrittenConstant(target, name, newVal)
+        if ssUtil_originalConstants[target] == nil then
+            ssUtil_originalConstants[target] = {}
+        end
+
+        if ssUtil_originalConstants[target][name] == nil then
+            ssUtil_originalConstants[target][name] = target[name]
+        end
+
+        target[name] = newVal
+    end
+
+    function ssUtil.unregisterConstants()
+        for target, constants in pairs(ssUtil_originalConstants) do
+            for name, const in pairs(constants) do
+                target[name] = const
+            end
+        end
+    end
+
+    function ssUtil.registerSpecialization(name, class, path)
+        table.insert(ssUtil_specializations, name)
+
+        SpecializationUtil.registerSpecialization(name, class, path)
+    end
+
+    function ssUtil.unregisterSpecialization(name)
+        local spec = SpecializationUtil.getSpecialization(name)
+
+        if spec ~= nil then
+            for _, vehicle in pairs(VehicleTypeUtil.vehicleTypes) do
+                if vehicle ~= nil then
+                    for i, specI in ipairs(vehicle.specializations) do
+                        if specI == spec then
+                            table.remove(vehicle.specializations, i)
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    function ssUtil.unregisterSpecializations()
+        for _, name in ipairs(ssUtil_specializations) do
+            ssUtil.unregisterSpecialization(name)
+        end
+    end
+
+    function ssutil.registerTireType(name, coeffs, wetCoeffs)
+        table.insert(ssUtil_tireTypes, name)
+
+        WheelsUtil.registerTireType(name, coeffs, wetCoeffs)
+    end
+
+    function ssUtil.unregisterTireTypes()
+        for _, name in ipairs(ssUtil_tireTypes) do
+            for i, type in ipairs(WheelsUtil.tireTypes) do
+                if type.name == name then
+                    table.remove(WheelsUtil.tireTypes, i)
+                    break
+                end
+            end
+        end
+    end
+else
+
 end
 
 ------------- Useful global functions ---------------

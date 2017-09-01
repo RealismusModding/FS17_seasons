@@ -8,9 +8,12 @@
 ----------------------------------------------------------------------------------------------------
 
 ssDensityMapScanner = {}
-g_seasons.dms = ssDensityMapScanner
 
 ssDensityMapScanner.TIMESPLIT = 25 -- ms
+
+function ssDensityMapScanner:preLoad()
+    g_seasons.dms = self
+end
 
 function ssDensityMapScanner:load(savegame, key)
     if ssXMLUtil.hasProperty(savegame, key .. ".densityMapScanner.currentJob") then

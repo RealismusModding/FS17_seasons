@@ -9,12 +9,9 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSwathManager = {}
-g_seasons.swathManager = ssSwathManager
 
-function ssSwathManager:load(savegame, key)
-end
-
-function ssSwathManager:save(savegame, key)
+function ssSwathManager:preLoad()
+    g_seasons.swathManager = self
 end
 
 function ssSwathManager:loadMap(name)
@@ -27,6 +24,12 @@ function ssSwathManager:loadMap(name)
         g_seasons.dms:registerCallback("ssReduceStrawHay", self, self.reduceStrawHay)
         g_seasons.dms:registerCallback("ssRemoveSwaths", self, self.removeSwaths)
     end
+end
+
+function ssSwathManager:deleteMap()
+    g_seasons.environment:removeTransitionChangeListener(self)
+    g_currentMission.environment:removeDayChangeListener(self)
+    g_currentMission.environment:removeHourChangeListener(self)
 end
 
 function ssSwathManager:reduceGrass(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)

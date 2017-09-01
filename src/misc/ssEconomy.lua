@@ -8,11 +8,27 @@
 ----------------------------------------------------------------------------------------------------
 
 ssEconomy = {}
-g_seasons.economy = ssEconomy
 
 ssEconomy.EQUITY_LOAN_RATIO = 0.8
 ssEconomy.DEFAULT_FACTOR = 1
 ssEconomy.VANILLA_AI_PER_HOUR = 2000
+
+function ssEconomy:preLoad()
+    g_seasons.economy = self
+
+    ssUtil.appendedFunction(AIVehicle, "load", ssEconomy.aiLoad)
+    ssUtil.overwrittenFunction(AIVehicle, "updateTick", ssEconomy.aiUpdateTick)
+    ssUtil.overwrittenFunction(FieldDefinition, "setFieldOwnedByPlayer", ssEconomy.setFieldOwnedByPlayer)
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssEconomy.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "onSell", ssEconomy.placeablenOnSell)
+
+    -- Price changes with seasons
+    ssUtil.overwrittenFunction(EconomyManager, "getPricePerLiter", ssEconomy.emGetPricePerLiter)
+    ssUtil.overwrittenFunction(EconomyManager, "getCostPerLiter", ssEconomy.emGetCostPerLiter)
+    ssUtil.overwrittenFunction(Bale, "getValue", ssEconomy.baleGetValue)
+    ssUtil.overwrittenFunction(TipTrigger, "getEffectiveFillTypePrice", ssEconomy.ttGetEffectiveFillTypePrice)
+end
 
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
@@ -34,22 +50,9 @@ end
 
 function ssEconomy:loadMap(name)
     -- Update leasing costs
-    EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
-
-    AIVehicle.load = Utils.appendedFunction(AIVehicle.load, ssEconomy.aiLoad)
-    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
-    FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
-
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssEconomy.placeableFinalizePlacement)
-    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssEconomy.placeablenOnSell)
-
-    -- Price changes with seasons
-    EconomyManager.getPricePerLiter = Utils.overwrittenFunction(EconomyManager.getPricePerLiter, ssEconomy.emGetPricePerLiter)
-    EconomyManager.getCostPerLiter = Utils.overwrittenFunction(EconomyManager.getCostPerLiter, ssEconomy.emGetCostPerLiter)
-    Bale.getValue = Utils.overwrittenFunction(Bale.getValue, ssEconomy.baleGetValue)
-    TipTrigger.getEffectiveFillTypePrice = Utils.overwrittenFunction(TipTrigger.getEffectiveFillTypePrice, ssEconomy.ttGetEffectiveFillTypePrice)
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_LEASING_DEPOSIT_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_RUNNING_LEASING_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "PER_DAY_LEASING_FACTOR", 0.008) -- factor of price (vanilla: 0.01)
 
     -- Load economy price changes data
     self.repricing = {}
@@ -66,6 +69,11 @@ function ssEconomy:loadMap(name)
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
+end
+
+function ssEconomy:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self)
+    g_seasons.environment:removeSeasonLengthChangeListener(self)
 end
 
 function ssEconomy:loadFactorsFromXML(file, key)
@@ -227,7 +235,7 @@ end
 function ssEconomy:aiLoad(savegame)
 
 	-- After loading the aiVehicle, store original pricePerMS in a variable, so pricePerMS can be altered without losing the original value.
-	self.ssOriginalPricePerMS = self.pricePerMS 
+	self.ssOriginalPricePerMS = self.pricePerMS
 end
 
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
