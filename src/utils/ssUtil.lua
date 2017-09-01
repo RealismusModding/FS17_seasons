@@ -271,15 +271,6 @@ function deepCopy(obj, seen)
     return res
 end
 
--- TODO replace with table.getn()
-function arrayLength(arr)
-    local n = 0
-    for i = 1, #arr do
-        n = n + 1
-    end
-    return n
-end
-
 function print_r(t)
     local print_r_cache = {}
     local function sub_print_r(t, indent)
