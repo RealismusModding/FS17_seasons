@@ -56,9 +56,9 @@
         <text name="SS_MONTH_SHORT_11" text="Lis" />
         <text name="SS_MONTH_SHORT_12" text="Pro" />
 
-        <text name="SS_VEHICLE_TAXES" text="Vozidlo daně" />
-        <text name="SS_VEHICLE_MAINTENANCE" text="Vozidlo údržba" />
-        <text name="SS_VEHICLE_REPAIRS" text="Vozidlo opravy" />
+        <text name="SS_VEHICLE_TAXES" text="Vozidla daně" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="Vozidla údržba" />
+        <text name="SS_VEHICLE_REPAIRS" text="Vozidla opravy" />
 
         <text name="SS_NOT_ENOUGH_MONEY" text="Nemáte dost peněz na zaplacení" />
         <text name="SS_VEHICLE_REPAIRED" text="Náklady na údržbu %s byly %s" />
@@ -83,24 +83,19 @@
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
-        <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizeň je příliš mokrá!" />
+        <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizená plodina je příliš mokrá!" />
         <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
         <text name="msg_welcome" text="Vítejte na Seasons módu realistické modifikaci. Další informace naleznete v nabídce Nápovědy ve hře (ESC) se dozvíte, jak používat tento mód." />
 
-        <!-- Missing translation of "Calendar" -->
-        <text name="ui_pageCalender" text="" />
-        <!-- Missing translation of "Economy" -->
-        <text name="ui_pageEconomy" text="" />
+        <text name="ui_pageCalender" text="Kalendář" />
+        <text name="ui_pageEconomy" text="Ekonomika" />
         <text name="ui_pageSettings" text="Nastavení" />
         <text name="ui_pageDebug" text="Ladicí nástroje" />
 
-        <!-- Missing translation of "animal" -->
-        <text name="ui_economy_animal" text="" />
-        <!-- Missing translation of "1000 l" -->
-        <text name="ui_economy_thousand" text="" />
-        <!-- Missing translation of "Bale" -->
-        <text name="ui_economy_bale" text="" />
+        <text name="ui_economy_animal" text="Zvířata" />
+        <text name="ui_economy_thousand" text="1000 l" />
+        <text name="ui_economy_bale" text="Balíky" />
 
         <text name="ui_buttonSave" text="Použít nastavení" />
         <text name="ui_snowOneLayer" text="Pouze jedna vrstva" />
@@ -208,7 +203,7 @@
         <text name="ss_helpText_13_01" text="Najímaní pracovníci vyžadují odměnu za přesčas. Pokud je zaměstnanec zaměstnán před 6:00 a po 18:00 nebo o víkendech, bude jeho plat 50% vyšší." />
 
         <text name="ss_helpTitle_14" text="Zvířata - úvod" />
-        <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se sezónními parametry na realističtější parametry.Všechny druhy zvířat budou v létě konzumovat více vody než v zimě.V zimních měsících budou krávy a prasata vyžadovat více slámy Maximální kapacity krmení byly sníženy ze 6 dnů na 3 Dny." />
+        <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se sezónními parametry na realističtější parametry.Všechny druhy zvířat budou v létě konzumovat více vody než v zimě.V zimních měsících budou krávy a prasata vyžadovat více slámy Maximální kapacita krmení byla snížena ze 6 dnů na 3 Dny." />
         <text name="ss_helpText_14_02" text="Zvířata pouze produkují potomky v určitém čase roku. Prasata a ovce budou produkovat potomky na jaře, zatímco krávy produkují potomky v létě." />
         <text name="ss_helpText_14_03" text="Zvířata uhynou, pokud nemají krmivo nebo vodu. Toto je zakázáno v případě obtížnosti Easy." />
         <text name="ss_helpText_14_04" text="Tráva nemůžete krmit v zimě. Místo toho byste měli používat seno." />
@@ -221,7 +216,7 @@
         <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="Menu Seasons se používá jako referenční příručka pro výsadbu a změnu nastavení souvisejících se sezónními obdobími. Toto menu je aktivováno levým Alt + S." />
         <text name="ss_helpText_16_02" text="První stránka je váš průvodce okno pro výsadbu a sklizeň.Teploty klíčení všech plodin jsou uvedeny vlevo od grafu. Pokud je teplota vedle plodiny bílá, znamená to, že je dostatečné teplo na to, aby jste tuto plodinu vypěstovali. Pokud je teplota modrá, je příliš chladno." />
-        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3-24 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstvá, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
+        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3-24 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstva, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje aktuální teplotu vzduchu na horní a dolní teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />
@@ -231,7 +226,7 @@
 
         <text name="ss_helpTitle_18" text="Různé" />
         <text name="ss_helpText_18_01" text="Pokud nechcete pracovat v noci, máte možnost přeskočit na ráno.Po setmění, můžete stisknout levý Alt + N přeskočit na ráno." />
-        <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry pro uložení, doporučuje se 1) změnit zimní období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně sezóny restartujte hru / sezónar délka." />
+        <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry pro uložení, doporučuje se 1) změnit zimní období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně sezóny restartujte hru / sezóna délka." />
         <text name="ss_helpText_18_03" text="Zatímco se jedná o hru, kterou chcete hrát, jak chcete, je navržena jako výzva pouze na hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte jaro pouze pěstováním a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a zacházením se zvířaty, stroji, lesy a prodejem plodin v zimě." />
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být spuštěna manuálně." />
     </texts>
