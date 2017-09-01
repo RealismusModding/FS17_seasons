@@ -55,7 +55,7 @@ function ssAnimals:loadFromXML()
         ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool", "dailyUpkeep"}
     }
 
-    self.data = ssSeasonsXML:loadFile(g_seasons.modDir .. "data/animals.xml", "animals", elements)
+    self.data = ssSeasonsXML:loadFile(g_seasons:getDataPath("animals"), "animals", elements)
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("animals")) do

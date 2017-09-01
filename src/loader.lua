@@ -75,9 +75,10 @@ local files = {
 
     -- Main system
     "ssMultiplayer",
-    "ssMain",
 
     "utils/ssUtil",
+    "ssMain",
+
     "environment/ssEnvironment",
 
     "environment/ssDaylight",

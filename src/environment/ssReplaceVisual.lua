@@ -53,7 +53,7 @@ function ssReplaceVisual:loadFromXML()
     self.modReplacements = {}
 
     -- Default
-    self:loadTextureReplacementsFromXMLFile(g_seasons.modDir .. "data/textures.xml")
+    self:loadTextureReplacementsFromXMLFile(g_seasons:getDataPath("textures"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("textures")) do

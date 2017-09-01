@@ -142,7 +142,7 @@ end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", g_seasons.modDir .. "data/repairFactors.xml")
+    local file = loadXMLFile("factors", g_seasons:getDataPath("repairFactors"))
 
     ssVehicle.repairFactors = {}
 

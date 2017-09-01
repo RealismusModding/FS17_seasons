@@ -85,7 +85,7 @@ function ssEnvironment:loadMap(name)
     self.visualSeasonChangeListeners = {}
 
     self.latitudeCategories = {}
-    self:loadLatitudeCategoriesFromXML(g_seasons.modDir .. "data/visualSeason.xml")
+    self:loadLatitudeCategoriesFromXML(g_seasons:getDataPath("visualSeason"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do

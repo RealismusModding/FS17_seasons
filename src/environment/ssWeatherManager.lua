@@ -125,7 +125,7 @@ function ssWeatherManager:loadMap(name)
     self.temperatureData = {}
     self.rainData = {}
     self.startValues = {}
-    self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
+    self:loadFromXML(g_seasons:getDataPath("weather"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("weather")) do
@@ -137,7 +137,7 @@ function ssWeatherManager:loadMap(name)
 
     -- Load germination temperatures
     self.germinateTemp = {}
-    self:loadGerminateTemperature(g_seasons.modDir .. "data/growth.xml")
+    self:loadGerminateTemperature(g_seasons:getDataPath("growth"))
 
     for _, path in ipairs(g_seasons:getModPaths("growth")) do
         self:loadGerminateTemperature(path)

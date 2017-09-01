@@ -9,17 +9,6 @@
 
 ssMain = {}
 
-if g_seasons ~= nil then
-    error("Seasons seems to be loaded already, and is trying to be loaded again. Make sure you only have one (1) Seasons mod selected in your mod selection screen.")
-end
-
-getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
-
-g_seasons.lang = ssLang
-g_seasons.xmlUtil = ssXMLUtil
-g_seasons.multiplayer = ssMultiplayer
-g_seasons.xml = ssSeasonsXML
-
 ssMain.SAVEGAME_VERSION = 3
 ssMain.CONTEST_SAVEGAME_VERSION = 2
 
@@ -28,6 +17,20 @@ ssMain.CONTEST_SAVEGAME_VERSION = 2
 ----------------------------
 
 function ssMain:preLoad()
+    if g_seasons ~= nil then
+        error("Seasons seems to be loaded already, and is trying to be loaded again. Make sure you only have one (1) Seasons mod selected in your mod selection screen.")
+    end
+
+    -- Load in superglobal scope, so other mods can talk with us
+    getfenv(0)["g_seasons"] = ssMain
+
+    -- These classes are loaded before ssMain and can't put themselves in global scope
+    self.lang = ssLang
+    self.xmlUtil = ssXMLUtil
+    self.multiplayer = ssMultiplayer
+    self.xml = ssSeasonsXML
+    self.util = ssUtil
+
     local modItem = ModsUtil.findModItemByModName(g_currentModName)
     self.modDir = g_currentModDirectory
 
@@ -50,12 +53,12 @@ function ssMain:preLoad()
     self.baseUIFilename = Utils.getFilename("resources/gui/hud.dds", g_seasons.modDir)
 
     -- Do injections
-    InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
+    ssUtil.appendedFunction(InGameMenu, "updateGameSettings", self.inj_disableMenuOptions)
 
     -- Disable the tutorial by clearing showTourDialog
     -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
     -- is already called.
-    TourIcons.showTourDialog = function () end
+    ssUtil.overwrittenFunction(TourIcons, "showTourDialog", function () end)
 end
 
 ----------------------------
@@ -128,6 +131,10 @@ function ssMain:loadMap()
     if g_currentMission:getIsServer() then
         self.loaded = true
     end
+end
+
+function ssMain:deleteMap()
+    getfenv(0)["g_seasons"] = nil
 end
 
 function ssMain:loadGameFinished()
@@ -267,6 +274,10 @@ function ssMain:getModPaths(name)
     end
 
     return ret
+end
+
+function ssMain:getDataPath(name)
+    return string.format("%sdata/%s.xml", self.modDir, name)
 end
 
 ----------------------------

@@ -21,7 +21,7 @@ function ssDaylight:loadMap(name)
     self.data = {}
     self.latitude = 51.9
 
-    self:loadFromXML(g_seasons.modDir .. "data/daylight.xml")
+    self:loadFromXML(g_seasons:getDataPath("daylight"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("daylight")) do

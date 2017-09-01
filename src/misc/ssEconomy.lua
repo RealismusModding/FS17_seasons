@@ -56,7 +56,7 @@ function ssEconomy:loadMap(name)
 
     -- Load economy price changes data
     self.repricing = {}
-    self:loadFromXML(g_seasons.modDir .. "data/economy.xml")
+    self:loadFromXML(g_seasons:getDataPath("economy"))
 
     for _, path in ipairs(g_seasons:getModPaths("economy")) do
         self:loadFromXML(path)
@@ -233,23 +233,22 @@ function ssEconomy:calculateLoanInterestRate()
 end
 
 function ssEconomy:aiLoad(savegame)
-
-	-- After loading the aiVehicle, store original pricePerMS in a variable, so pricePerMS can be altered without losing the original value.
-	self.ssOriginalPricePerMS = self.pricePerMS
+    -- After loading the aiVehicle, store original pricePerMS in a variable, so pricePerMS can be altered without losing the original value.
+    self.ssOriginalPricePerMS = self.pricePerMS
 end
 
 function ssEconomy.aiUpdateTick(self, superFunc, dt)
     if self:getIsActive() then
-    	if self.ssOriginalPricePerMS ~= nil then
+        if self.ssOriginalPricePerMS ~= nil then
 
-    		-- Only apply the multiplier when price is positive, to avoid increase in 'worker income' in overtime
-    		if self.ssOriginalPricePerMS >= 0 then
-    			local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor;
-    			self.pricePerMS = self.ssOriginalPricePerMS * factor;
-    		end
-    	else
-    		-- In case self.originalPricePerMS is nil (should never happen), revert to the old system.
-        	self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
+            -- Only apply the multiplier when price is positive, to avoid increase in 'worker income' in overtime
+            if self.ssOriginalPricePerMS >= 0 then
+                local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor;
+                self.pricePerMS = self.ssOriginalPricePerMS * factor;
+            end
+        else
+            -- In case self.originalPricePerMS is nil (should never happen), revert to the old system.
+            self.pricePerMS = ssUtil.isWorkHours() and g_seasons.economy.aiPricePerMSWork or g_seasons.economy.aiPricePerMSOverwork
         end
     end
 
@@ -296,7 +295,8 @@ end
 function ssEconomy:setFieldOwnedByPlayer(superFunc, fieldDef, isOwned)
     local ret = superFunc(self, fieldDef, isOwned)
 
-    g_seasons.economy:updateLoan()
+    -- TODO(console) fix
+    -- g_seasons.economy:updateLoan()
 
     return ret
 end

@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssUtil = {}
-g_seasons.util = ssUtil
 
 ssUtil.seasonKeyToId = {
     ["spring"] = 0,
@@ -346,7 +345,7 @@ if GS_IS_CONSOLE_VERSION or true then
         end
     end
 
-    function ssutil.registerTireType(name, coeffs, wetCoeffs)
+    function ssUtil.registerTireType(name, coeffs, wetCoeffs)
         table.insert(ssUtil_tireTypes, name)
 
         WheelsUtil.registerTireType(name, coeffs, wetCoeffs)

@@ -9,11 +9,9 @@
 
 ssGrowthManagerData = {}
 
- ssGrowthManagerData.DEFAULT_FILE_PATH = "data/growth.xml"
-
 function ssGrowthManagerData:loadAllData()
     local growthData = {}
-    local path = g_seasons.modDir .. self.DEFAULT_FILE_PATH
+    local path = g_seasons:getDataPath("growth")
     local rootKey = "growth"
 
     local file = loadXMLFile("xml", path)
