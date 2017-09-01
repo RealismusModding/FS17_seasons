@@ -133,6 +133,19 @@ function ssWeatherForecast:loadMap(name)
 end
 
 function ssWeatherForecast:deleteMap()
+    self.rect:delete()
+
+    self.overlays.soilSymbol:delete()
+    self.overlays.airSymbol:delete()
+
+    for _, overlay in pairs(self.overlays.seasons) do
+        overlay:delete()
+    end
+
+    self.overlays.frozen:delete()
+    self.overlays.wetcrop:delete()
+
+    g_currentMission.weatherForecastIconOverlays.snow:delete()
 end
 
 function ssWeatherForecast:update(dt)

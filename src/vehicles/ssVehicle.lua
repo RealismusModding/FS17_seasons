@@ -31,7 +31,7 @@ function ssVehicle:preLoad()
 
     ssVehicle:registerWheelTypes()
 
-    ssUtis.overwrittenFunction(Vehicle, "getDailyUpKeep", ssVehicle.vehicleGetDailyUpKeep)
+    ssUtil.overwrittenFunction(Vehicle, "getDailyUpKeep", ssVehicle.vehicleGetDailyUpKeep)
     ssUtil.overwrittenFunction(Vehicle, "getSellPrice", ssVehicle.vehicleGetSellPrice)
     ssUtil.overwrittenFunction(Vehicle, "getSpecValueAge", ssVehicle.vehicleGetSpecValueAge)
     ssUtil.overwrittenFunction(Vehicle, "getSpeedLimit", ssVehicle.getSpeedLimit)

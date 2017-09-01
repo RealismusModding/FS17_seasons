@@ -247,6 +247,8 @@ end
 ------------- Console compoatibilty -------------
 
 if GS_IS_CONSOLE_VERSION or true then
+    -- On the console version, we need to reset all vanilla values we change
+
     local ssUtil_originalFunctions = {}
     local ssUtil_originalConstants = {}
     local ssUtil_specializations = {}
@@ -288,7 +290,7 @@ if GS_IS_CONSOLE_VERSION or true then
         target[name] = Utils.prependedFunction(target[name], newFunc)
     end
 
-    function ssUtil.unregisterAdjustedFunction()
+    function ssUtil.unregisterAdjustedFunctions()
         for target, functions in pairs(ssUtil_originalFunctions) do
             for name, func in pairs(functions) do
                 target[name] = func
@@ -361,8 +363,31 @@ if GS_IS_CONSOLE_VERSION or true then
             end
         end
     end
-else
 
+    -- ssUtil.unregisterAdjustedFunctions()
+    -- ssUtil.unregisterConstants()
+    -- ssUtil.unregisterSpecializations()
+    -- ssUtil.unregisterTireTypes()
+
+else
+    function ssUtil.overwrittenFunction(target, name, newFunc)
+        target[name] = Utils.overwrittenFunction(target[name], newFunc)
+    end
+
+    function ssUtil.appendedFunction(target, name, newFunc)
+        target[name] = Utils.appendedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.prependedFunction(target, name, newFunc)
+        target[name] = Utils.prependedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.overwrittenConstant(target, name, newVal)
+        target[name] = newVal
+    end
+
+    ssUtil.registerSpecialization = SpecializationUtil.registerSpecialization
+    ssUtil.registerTireType = WheelsUtil.registerTireType
 end
 
 ------------- Useful global functions ---------------
