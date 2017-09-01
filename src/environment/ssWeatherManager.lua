@@ -112,6 +112,8 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
+    self.forecastLength = 8
+
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
     g_currentMission.environment.maxRainInterval = 1
@@ -120,8 +122,6 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment.autoRain = false
 
     -- Load data from the mod and from a map
-    self.forecastLength = 8
-    self.weather = {}
     self.temperatureData = {}
     self.rainData = {}
     self.startValues = {}

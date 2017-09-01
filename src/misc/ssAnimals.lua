@@ -8,7 +8,10 @@
 ----------------------------------------------------------------------------------------------------
 
 ssAnimals = {}
-g_seasons.animals = ssAnimals
+
+function ssAnimals:preLoad()
+    g_seasons.animals = self
+end
 
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
@@ -294,7 +297,7 @@ function ssAnimals:husbandryGetDataAttributes(superFunc)
     local ret = { superFunc(self) }
 
     self.productivity = tmpProductivity
-	
+
     return unpack(ret)
 end
 
