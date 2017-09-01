@@ -150,8 +150,7 @@ function ssWeatherForecast:setForecastVisible(visible)
     self.visible = visible
 
     if visible then
-        -- No idea what the /2 is for but it works
-        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.forecastHeight / 2
+        g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset - self.forecastHeight
     else
         g_currentMission.ingameNotificationOffsetY = self.vanillaNotificationOffset
     end
@@ -316,7 +315,7 @@ function ssWeatherForecast:renderState(stateIcon)
 
     -- Render black-ish background
     local innerWidth, innerHeight = self.stateWidth - 2 * self.borderWidth, self.stateHeight - 2 * self.borderHeight
-    local innerX, innerY = posX + self.borderWidth, self.statePosY + self.borderWidth
+    local innerX, innerY = posX + self.borderWidth, self.statePosY + self.borderHeight
 
     self.rect:setPosition(innerX, innerY)
     self.rect:setDimension(innerWidth, innerHeight)
