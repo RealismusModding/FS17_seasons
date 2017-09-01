@@ -245,6 +245,54 @@ function Set(list)
     return set
 end
 
+------------- Console compoatibilty -------------
+
+local ssUtil_originalFunction = {}
+
+-- Store the original function, if not done yet (otherwise it was already changed)
+local function storeOriginalFunction(target, name)
+   if ssUtil_originalFunction[target] == nil then
+        ssUtil_originalFunction[target] = {}
+    end
+
+    -- Store the original function
+    if ssUtil_originalFunction[target][name] == nil then
+        ssUtil_originalFunction[target][name] = target[name]
+    end
+end
+
+function ssUtil.overwrittenFunction(target, name, newFunc)
+    storeOriginalFunction(target, name)
+
+    target[name] = Utils.overwrittenFunction(target[name], newFunc)
+end
+
+function ssUtil.overwrittenStaticFunction(target, name, newFunc)
+    storeOriginalFunction(target, name)
+
+    -- TODO
+end
+
+function ssUtil.appendedFunction(target, name, newFunc)
+    storeOriginalFunction(target, name)
+
+    target[name] = Utils.appendedFunction(target[name], newFunc)
+end
+
+function ssUtil.prependedFunction(target, name, newFunc)
+    storeOriginalFunction(target, name)
+
+    target[name] = Utils.prependedFunction(target[name], newFunc)
+end
+
+function ssUtil.unregisterAdjustedFunction()
+    for target, functions in pairs(ssUtil.ssUtil_originalFunction) do
+        for name, func in pairs(functions) do
+            target[name] = func
+        end
+    end
+end
+
 ------------- Useful global functions ---------------
 
 -- Yep, LUA does not have a math.round. It's a first.

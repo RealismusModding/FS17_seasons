@@ -97,6 +97,12 @@ function ssEnvironment:loadMap(name)
     addConsoleCommand("ssSetVisualSeason", "Set visual season", "consoleCommandSetVisualSeason", self)
 end
 
+function ssEnvironment:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self)
+
+    removeConsoleCommand("ssSetVisualSeason")
+end
+
 function ssEnvironment:readStream(streamId, connection)
     g_currentMission.environment.currentDay = streamReadInt16(streamId)
     self.daysInSeason = streamReadInt16(streamId)
@@ -213,69 +219,55 @@ function ssEnvironment:callListeners()
     end
 end
 
-local function removeItemFromTable(tbl, item)
-    local i
-
-    for j, v in ipairs(tbl) do
-        if v == item then
-            i = j
-        end
-    end
-
-    if i ~= nil then
-        table.remove(tbl, i)
-    end
-end
-
 -- Listeners for a change of season
 function ssEnvironment:addSeasonChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.seasonChangeListeners, listener)
+        Utils.addElementToTable(self.seasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.seasonChangeListeners, listener)
+        Utils.removeElementToTable(self.seasonChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of transition
 function ssEnvironment:addTransitionChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.transitionChangeListeners, listener)
+        Utils.addElementToTable(self.transitionChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeTransitionChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.transitionChangeListeners, listener)
+        Utils.removeElementToTable(self.transitionChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of season length
 function ssEnvironment:addSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.seasonLengthChangeListeners, listener)
+        Utils.addElementToTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.seasonLengthChangeListeners, listener)
+        Utils.removeElementToTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
 -- Listeners for the change of the visual season (not aligned with actual seasons)
 function ssEnvironment:addVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.visualSeasonChangeListeners, listener)
+        Utils.addElementToTable(self.visualSeasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.visualSeasonChangeListeners, listener)
+        Utils.removeElementToTable(self.visualSeasonChangeListeners, listener)
     end
 end
 

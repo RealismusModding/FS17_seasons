@@ -30,6 +30,11 @@ function ssDaylight:loadMap(name)
     end
 end
 
+function ssDaylight:deleteMap()
+    g_currentMission.environment:removeDayChangeListener(self)
+    g_seasons.environment:removeVisualSeasonChangeListener(self)
+end
+
 function ssDaylight:readStream()
     self:setupDayNight()
 end
@@ -158,15 +163,15 @@ function ssDaylight:calculateStartEndOfDay(julianDay)
     local dayStart, dayEnd, theta, eta
 
     -- Calculate the day
-    dayStart, dayEnd = self:_calculateDay(self.pDay, julianDay)
+    dayStart, dayEnd = self:calculateDay(self.pDay, julianDay)
 
     -- True blackness
-    nightStart, nightEnd = self:_calculateDay(self.pNight, julianDay)
+    nightStart, nightEnd = self:calculateDay(self.pNight, julianDay)
 
     return dayStart, dayEnd, nightStart, nightEnd
 end
 
-function ssDaylight:_calculateDay(p, julianDay)
+function ssDaylight:calculateDay(p, julianDay)
     local timeStart, timeEnd
     local D = 0, offset, hasDST
     local eta = self:calculateSunDeclination(julianDay)
