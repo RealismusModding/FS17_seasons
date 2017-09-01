@@ -99,6 +99,8 @@
         <text name="ui_economy_animal" text="" />
         <!-- Missing translation of "1000 l" -->
         <text name="ui_economy_thousand" text="" />
+        <!-- Missing translation of "Bale" -->
+        <text name="ui_economy_bale" text="" />
 
         <text name="ui_buttonSave" text="Applica Impostazioni" />
         <text name="ui_snowOneLayer" text="1 solo layer" />

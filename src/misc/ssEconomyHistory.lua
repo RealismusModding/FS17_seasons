@@ -189,6 +189,12 @@ end
 
 function ssEconomyHistory:getEconomyType(fillDesc)
     if fillDesc.showOnPriceTable then
+        if  fillDesc.index == FillUtil.FILLTYPE_GRASS_WINDROW
+         or fillDesc.index == FillUtil.FILLTYPE_DRYGRASS_WINDROW
+         or fillDesc.index == FillUtil.FILLTYPE_STRAW then
+            return self.ECONOMY_TYPE_BALE
+        end
+
         return self.ECONOMY_TYPE_FILL
     end
 
@@ -198,11 +204,6 @@ function ssEconomyHistory:getEconomyType(fillDesc)
 
     if ssEconomy.repricing.animals[fillDesc.name] ~= nil then
         return self.ECONOMY_TYPE_ANIMAL
-    end
-
-    -- ssEconomy.repricing.bales
-    if false then
-        return self.ECONOMY_TYPE_BALE
     end
 
     return nil
@@ -234,10 +235,10 @@ function ssEconomyHistory:getPrice(fillDesc)
 
         return animalDesc.price
     elseif fillDesc.ssEconomyType == self.ECONOMY_TYPE_BALE then
-        --1000 * fillDesc.pricePerLiter * g_seasons.economy:getBaleFactor(fillDesc.index)
+        return 1000 * g_currentMission.economyManager:getPricePerLiter(fillType, true)
     end
 
-    return 4
+    return 0
 end
 
 -- If no historic data is saved, create a price using the default price and the factors

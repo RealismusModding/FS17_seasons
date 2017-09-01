@@ -100,6 +100,7 @@
 
         <text name="ui_economy_animal" text="animal" />
         <text name="ui_economy_thousand" text="1000 l" />
+        <text name="ui_economy_bale" text="Bale" />
 
         <text name="ui_buttonSave" text="Apply Settings" />
         <text name="ui_snowOneLayer" text="1 layer only" />

@@ -565,7 +565,7 @@ function ssSeasonsMenu:loadEconomyItems()
 
             local new = self.economyListItemTemplate:clone(self.economyList)
 
-            new.elements[1]:setText(fillDesc.nameI18N)
+            new.elements[1]:setText(self:economyGetFillTitle(fillDesc))
             new:updateAbsolutePosition()
         end
     end
@@ -600,6 +600,16 @@ function ssSeasonsMenu:drawEconomyGraph(element)
     self.economy.graph:draw()
 end
 
+function ssSeasonsMenu:economyGetFillTitle(fillDesc)
+    local title = fillDesc.nameI18N
+
+    if fillDesc.ssEconomyType == g_seasons.economyHistory.ECONOMY_TYPE_BALE then
+        title = string.format("%s (%s)", title, ssLang.getText("ui_economy_bale"))
+    end
+
+    return title
+end
+
 function ssSeasonsMenu:onEconomyListSelectionChanged(rowIndex)
     if rowIndex < 1 or self.economy.graph == nil then return end
 
@@ -608,7 +618,7 @@ function ssSeasonsMenu:onEconomyListSelectionChanged(rowIndex)
 
     self.economy.graph:setData(data.data)
     self.economy.graph:setYUnit(data.unit)
-    self.economy.graph:setTitle(fillDesc.nameI18N)
+    self.economy.graph:setTitle(self:economyGetFillTitle(fillDesc))
 end
 
 ------------------------------------------
