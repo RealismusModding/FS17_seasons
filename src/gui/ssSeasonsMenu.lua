@@ -80,6 +80,9 @@ function ssSeasonsMenu:onOpen(element)
     -- overview
     self:updateOverview()
 
+    -- economy
+    self:updateEconomy()
+
     -- settings
     self:updateGameSettings()
     self:updateApplySettingsButton()
@@ -87,7 +90,7 @@ function ssSeasonsMenu:onOpen(element)
     self:updateDebugValues()
 
     -- Todo: get these values from the XML file. This is messy
-    local titles = {ssLang.getText("ui_pageOverview"), ssLang.getText("ui_pageSettings")}
+    local titles = {ssLang.getText("ui_pageCalender"), ssLang.getText("ui_pageEconomy"), ssLang.getText("ui_pageSettings")}
     if g_seasons.debug then
         table.insert(titles, ssLang.getText("ui_pageDebug"))
     end
@@ -134,6 +137,8 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
 
     if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
         self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpCrops"), FocusManager:getElementById("sliderDownCrops"))
+    elseif pageId == ssSeasonsMenu.PAGE_ECONOMY then
+        self:setNavButtonsFocusChange(FocusManager:getElementById("300"), FocusManager:getElementById("300"))
     elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
         self:setNavButtonsFocusChange(FocusManager:getElementById("210"), FocusManager:getElementById("223"))
     else
@@ -225,78 +230,6 @@ end
 -- OVERVIEW PAGE
 ------------------------------------------
 
-ssRectOverlay = {}
-local ssRectOverlay_mt = Class(ssRectOverlay)
-
-function ssRectOverlay:new(parentElement)
-    local self = {}
-    setmetatable(self, ssRectOverlay_mt)
-
-    self.parent = parentElement
-
-    if ssRectOverlay.g_overlay == nil then
-        local width, height = getNormalizedScreenValues(1, 1)
-        ssRectOverlay.g_overlay = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
-    end
-
-    return self
-end
-
-function ssRectOverlay:render(x, y, width, height, color, boxHeight)
-    if color ~= nil then
-        ssRectOverlay.g_overlay:setColor(unpack(color))
-    else
-        ssRectOverlay.g_overlay:setColor(1, 1, 1, 1)
-    end
-
-    if boxHeight ~= nil then
-        y = y + (boxHeight - height) / 2
-    end
-
-    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
-    x = x + self.parent.absPosition[1]
-    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
-
-    renderOverlay(ssRectOverlay.g_overlay.overlayId, x, y, width, height)
-end
-
-function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight, boxWidth)
-    local height = getTextHeight(fontSize, text)
-
-    if boxHeight ~= nil then
-        y = y + (boxHeight - height) / 2
-    end
-
-    if boxWidth ~= nil then
-        local width = getTextWidth(fontSize, text)
-        x = x + (boxWidth - width) / 2
-    end
-
-    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
-    x = x + self.parent.absPosition[1]
-    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
-
-    renderText(x, y, fontSize, text)
-end
-
-function ssRectOverlay:renderOverlay(overlay, x, y, width, height, boxHeight, boxWidth)
-    if boxHeight ~= nil then
-        y = y + (boxHeight - height) / 2
-    end
-
-    if boxWidth ~= nil then
-        x = x + (boxWidth - width) / 2
-    end
-
-    -- Change the origin from bottom-left to top-left because we draw from left to right, top to bottom
-    x = x + self.parent.absPosition[1]
-    y = self.parent.absPosition[2] + self.parent.size[2] - height - y
-
-    renderOverlay(overlay.overlayId, x, y, width, height)
-end
-
-------------------------------------------
-
 function ssSeasonsMenu:onCreatePageOverview(element)
     ssSeasonsMenu.PAGE_OVERVIEW = self.pagingElement:getPageIdByElement(element)
 
@@ -361,25 +294,6 @@ function ssSeasonsMenu:createOverviewValues(element)
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
 
-function ssSeasonsMenu:getTransitionHeaders()
-    local transitionsDisplayData = {}
-    local data = ssUtil.calcDaysPerTransition()
-
-    for index, value in pairs(data) do
-        if index % 2 == 1 then
-            local putIndex = index - ((index - 1) / 2)
-
-            if value == data[index + 1] then
-                transitionsDisplayData[putIndex] = tostring(value)
-            else
-                transitionsDisplayData[putIndex] = value .. "-" .. data[index + 1]
-            end
-        end
-    end
-
-    return transitionsDisplayData
-end
-
 function ssSeasonsMenu:updateOverview()
     self.overviewData = {}
 
@@ -437,7 +351,7 @@ function ssSeasonsMenu:updateOverview()
     end
 
     -- Create the headers
-    self.overview.transitionHeaders = self:getTransitionHeaders()
+    self.overview.transitionHeaders = ssUtil.getTransitionHeaders()
 end
 
 function ssSeasonsMenu:drawOverview(element)
@@ -623,12 +537,88 @@ function ssSeasonsMenu:drawOverview(element)
     )
 end
 
-function ssSeasonsMenu:onSliderValueChanged()
+function ssSeasonsMenu:onCropSliderValueChanged()
     self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
 end
 
 function ssSeasonsMenu:deleteOverview()
     self.overview.testOverlay:delete()
+end
+
+------------------------------------------
+-- ECONOMY PAGE
+------------------------------------------
+
+function ssSeasonsMenu:onCreatePageEconomy(element)
+    ssSeasonsMenu.PAGE_ECONOMY = self.pagingElement:getPageIdByElement(element)
+
+    self.economy = {}
+
+    self.economyList:deleteListItems()
+    self.economy.fills = {}
+end
+
+function ssSeasonsMenu:loadEconomyItems()
+    for index, fillDesc in ipairs(FillUtil.fillTypeIndexToDesc) do
+        if fillDesc.ssEconomyType ~= nil then
+            table.insert(self.economy.fills, fillDesc)
+
+            local new = self.economyListItemTemplate:clone(self.economyList)
+
+            new.elements[1]:setText(self:economyGetFillTitle(fillDesc))
+            new:updateAbsolutePosition()
+        end
+    end
+
+    self.economyList:setSelectedRow(1)
+    self:onEconomyListSelectionChanged(1)
+end
+
+function ssSeasonsMenu:updateEconomy()
+    if table.getn(self.economy.fills) == 0 then
+        self:loadEconomyItems()
+    end
+
+    self:onEconomyListSelectionChanged(1)
+end
+
+function ssSeasonsMenu:createEconomyGraph(element)
+    local graph = ssGraph:new(element)
+    self.economy.graph = graph
+
+    self:onEconomyListSelectionChanged(1)
+end
+
+function ssSeasonsMenu:drawEconomyGraph(element)
+    if self.firstEconomyDraw == nil then
+        self:createEconomyGraph(element)
+
+        self.firstEconomyDraw = false
+    end
+
+    self.economy.graph:setCurrentDay(g_seasons.environment:dayInYear())
+    self.economy.graph:draw()
+end
+
+function ssSeasonsMenu:economyGetFillTitle(fillDesc)
+    local title = fillDesc.nameI18N
+
+    if fillDesc.ssEconomyType == g_seasons.economyHistory.ECONOMY_TYPE_BALE then
+        title = string.format("%s (%s)", title, ssLang.getText("ui_economy_bale"))
+    end
+
+    return title
+end
+
+function ssSeasonsMenu:onEconomyListSelectionChanged(rowIndex)
+    if rowIndex < 1 or self.economy.graph == nil then return end
+
+    local fillDesc = self.economy.fills[rowIndex]
+    local data = g_seasons.economyHistory:getHistory(fillDesc)
+
+    self.economy.graph:setData(data.data)
+    self.economy.graph:setYUnit(data.unit)
+    self.economy.graph:setTitle(self:economyGetFillTitle(fillDesc))
 end
 
 ------------------------------------------

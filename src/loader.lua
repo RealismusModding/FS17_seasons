@@ -86,7 +86,6 @@ local files = {
     "environment/ssWeatherForecast",
     "vehicles/ssVehicle",
     "misc/ssFieldJobManager",
-    "growth/ssCropDestruction",
     "growth/ssFruitManager",
     "growth/ssGrowthManagerData",
     "growth/ssGrowthGUI",
@@ -116,8 +115,12 @@ local files = {
     "objects/ssSeasonAdmirer",
     "objects/ssIcePlane",
 
+    "misc/ssEconomyHistory",
+
     -- GUI
     "gui/ssHelpLines",
+    "gui/ssRectOverlay",
+    "gui/ssGraph",
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp",
 

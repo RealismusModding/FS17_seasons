@@ -36,6 +36,10 @@ function ssTedder:draw()
 end
 
 function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaValues)
+    if self.mrIsMrVehicle and not g_seasons.weather:isCropWet() then
+        return Tedder.mrProcessTedderAreas(self, workAreas, accumulatedWorkAreaValues)
+    end
+
     local numAreas = table.getn(workAreas)
 
     local retWorkAreas = {}

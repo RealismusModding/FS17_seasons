@@ -88,9 +88,19 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetővájú maximális kapacitása 3 napra elegendő élelmet biztosít az állataidnak" />
         <text name="msg_welcome" text="A Realismus Modding nevében üdvözlünk a Seasons modban. Kérlek olvasd át az Áttekintést az ESC menüben, hogy megismerkedj a mod használatával." />
 
-        <text name="ui_pageOverview" text="Áttekintés" />
+        <!-- Missing translation of "Calendar" -->
+        <text name="ui_pageCalender" text="" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Beállítások" />
         <text name="ui_pageDebug" text="Hibakeresés" />
+
+        <!-- Missing translation of "animal" -->
+        <text name="ui_economy_animal" text="" />
+        <!-- Missing translation of "1000 l" -->
+        <text name="ui_economy_thousand" text="" />
+        <!-- Missing translation of "Bale" -->
+        <text name="ui_economy_bale" text="" />
 
         <text name="ui_buttonSave" text="Beállítások mentése" />
         <text name="ui_snowOneLayer" text="1 réteg csak" />

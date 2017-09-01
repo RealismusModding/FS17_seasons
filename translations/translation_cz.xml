@@ -88,9 +88,19 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
         <text name="msg_welcome" text="Vítejte na Seasons módu realistické modifikaci. Další informace naleznete v nabídce Nápovědy ve hře (ESC) se dozvíte, jak používat tento mód." />
 
-        <text name="ui_pageOverview" text="Přehled" />
+        <!-- Missing translation of "Calendar" -->
+        <text name="ui_pageCalender" text="" />
+        <!-- Missing translation of "Economy" -->
+        <text name="ui_pageEconomy" text="" />
         <text name="ui_pageSettings" text="Nastavení" />
         <text name="ui_pageDebug" text="Ladicí nástroje" />
+
+        <!-- Missing translation of "animal" -->
+        <text name="ui_economy_animal" text="" />
+        <!-- Missing translation of "1000 l" -->
+        <text name="ui_economy_thousand" text="" />
+        <!-- Missing translation of "Bale" -->
+        <text name="ui_economy_bale" text="" />
 
         <text name="ui_buttonSave" text="Použít nastavení" />
         <text name="ui_snowOneLayer" text="Pouze jedna vrstva" />
