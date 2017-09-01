@@ -33,7 +33,7 @@ function ssEconomyHistory:load(savegame, key)
             local dayKey = string.format("%s.value(%i)", fillKey, j)
             if not ssXMLUtil.hasProperty(savegame, dayKey) then break end
 
-            values[ssXMLUtil.getInt(savegame, datKey .. ".day")] = ssXMLUtil.getFloat(savegame, datKey)
+            values[j + 1] = ssXMLUtil.getInt(savegame, dayKey)
 
             j = j + 1
         end
@@ -55,8 +55,7 @@ function ssEconomyHistory:save(savegame, key)
         for day, price in ipairs(data) do
             local k = string.format("%s.value(%i)", fillKey, j)
 
-            ssXMLUtil.setFloat(savegame, k, price)
-            ssXMLUtil.setInt(savegame, k .. ".day", day)
+            ssXMLUtil.setInt(savegame, k, price)
 
             j = j + 1
         end
