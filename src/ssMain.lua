@@ -134,6 +134,8 @@ function ssMain:loadMap()
 end
 
 function ssMain:deleteMap()
+    log("DELETE SSMAIN!")
+
     getfenv(0)["g_seasons"] = nil
 end
 

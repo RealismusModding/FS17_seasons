@@ -246,7 +246,7 @@ end
 
 ------------- Console compoatibilty -------------
 
-if GS_IS_CONSOLE_VERSION or true then
+if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
     -- On the console version, we need to reset all vanilla values we change
 
     local ssUtil_originalFunctions = {}
@@ -363,12 +363,6 @@ if GS_IS_CONSOLE_VERSION or true then
             end
         end
     end
-
-    -- ssUtil.unregisterAdjustedFunctions()
-    -- ssUtil.unregisterConstants()
-    -- ssUtil.unregisterSpecializations()
-    -- ssUtil.unregisterTireTypes()
-
 else
     function ssUtil.overwrittenFunction(target, name, newFunc)
         target[name] = Utils.overwrittenFunction(target[name], newFunc)

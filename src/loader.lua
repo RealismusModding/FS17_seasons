@@ -9,6 +9,8 @@
 
 local ssSeasonsMod = {}
 
+getfenv(0)["g_testConsoleVersion"] = true
+
 ------------------------------------------
 -- quickly needed utility functions
 ------------------------------------------
@@ -59,6 +61,10 @@ local function split(str, pat)
     end
 
     return t
+end
+
+local function isSeasonsActive()
+    return g_modIsLoaded["FS17_RM_Seasons"]
 end
 
 ------------------------------------------
@@ -155,6 +161,8 @@ end
 ------------------------------------------
 
 function ssSeasonsMod.loadMapFinished(...)
+    if not isSeasonsActive() then return end
+
     local requiredMethods = { "deleteMap", "mouseEvent", "keyEvent", "draw", "update" }
     local function noopFunction() end
 
@@ -201,6 +209,8 @@ function ssSeasonsMod.loadFromXML(...)
 end
 
 function ssSeasonsMod.saveToXML(self)
+    if not isSeasonsActive() then return end
+
     if g_seasons.enabled and self.isValid and self.xmlKey ~= nil then
         if self.xmlFile ~= nil then
             local ssKey = self.xmlKey .. ".ssSeasons"
@@ -219,6 +229,8 @@ end
 
 -- Add a new mod event: loadMapFinished.
 function ssSeasonsMod.nullFinished(...)
+    if not isSeasonsActive() then return end
+
     local isServer = g_currentMission:getIsServer()
 
     for _, k in pairs(g_modClasses) do
@@ -236,7 +248,35 @@ function ssSeasonsMod.nullFinished(...)
     end
 end
 
+function removeModEventListener(listener)
+    for i, listnr in ipairs(g_modEventListeners) do
+        if listnr == listener then
+            table.remove(g_modEventListeners, i)
+            break
+        end
+    end
+end
+
+function ssSeasonsMod.delete()
+    log("Delete")
+    if not isSeasonsActive() then return end
+
+    if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
+        log("unregister")
+
+        ssUtil.unregisterAdjustedFunctions()
+        ssUtil.unregisterConstants()
+        ssUtil.unregisterSpecialization()
+        ssUtil.unregisterTireTypes()
+
+        for _, mod in ipairs(g_modClasses) do
+            -- removeModEventListener(_G[k])
+        end
+    end
+end
+
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
+FSBaseMission.delete = Utils.prependedFunction(FSBaseMission.delete, ssSeasonsMod.delete)
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
 Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
 
