@@ -6,14 +6,10 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
-<<<<<<< HEAD
 ssMeasureTool.MEASURE_TIMEOUT = 1000 --3000
 ssMeasureTool.MEASURE_DISTANCE = 10
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = 2000
-=======
-ssMeasureTool.MEASURE_TIMEOUT = 1000
->>>>>>> Add handtool for measuring all the things.
 
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
@@ -76,7 +72,7 @@ function ssMeasureTool:update(dt, allowInput)
             self.measuringStart = nil
             self.measuringTimeoutStart = g_currentMission.time
 
-            self:executeMeasure()
+            self:executeMeasurement()
         elseif self.measuringTimeoutStart ~= nil and g_currentMission.time - self.measuringTimeoutStart >= ssMeasureTool.MEASURE_TIMEOUT then
             self.measuringTimeoutStart = nil
         end
@@ -144,7 +140,7 @@ function ssMeasureTool:onDeactivate(allowInput)
     self.player.walkingIsLocked = false
 end
 
-function ssMeasureTool:executeMeasure()
+function ssMeasureTool:executeMeasurement()
     -- Raycast from the player
     local x, y, z = localToWorld(self.player.cameraNode, 0, 0, 0.5)
     local dx, dy, dz = localDirectionToWorld(self.player.cameraNode, 0, 0, -1)
@@ -153,8 +149,6 @@ function ssMeasureTool:executeMeasure()
 end
 
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
-    log("callback", hitObjectId, x, y, z, distance)
-
     -- Too close or too far away
     if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE then
         self:showFailed()
@@ -172,7 +166,6 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
             self:showNoInfo()
         else -- Any object, either static or dynamic
             local object = g_currentMission:getNodeObject(hitObjectId)
-            print_r(object)
 
             if object then
                 if object:isa(Bale) then

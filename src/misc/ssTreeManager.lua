@@ -12,7 +12,6 @@ g_seasons.treeManager = ssTreeManager
 
 ssTreeManager.MIN_DISTANCE = 9.5 -- meters
 ssTreeManager.MIN_DISTANCE_SQ = ssTreeManager.MIN_DISTANCE * ssTreeManager.MIN_DISTANCE
-ssTreeManager.GROWTH_TIME = g_seasons.environment.daysInSeason * 4 * 24 * 5 -- in days
 
 function ssTreeManager:loadMap()
     if g_currentMission:getIsServer() then
@@ -28,7 +27,7 @@ end
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        TreePlantUtil.treeTypes[i].growthTimeHours = ssTreeManager.GROWTH_TIME
+        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5 -- in days
     end
 end
 
