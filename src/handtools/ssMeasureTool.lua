@@ -148,6 +148,7 @@ function ssMeasureTool:executeMeasurement()
     raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE + 1.0, self)
 end
 
+-- Called by the raycast: handles finding the object that was scanned
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Too close or too far away
     if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE then
@@ -172,6 +173,16 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
                     self:showBaleInfo(object)
                 elseif object:isa(FillablePallet) then
                     self:showFillablePallet(object)
+                elseif object:isa(TreePlaceable) then
+                    local nameI18N = nil
+                    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[object.configFileName:lower()]
+                    if storeItem then
+                        nameI18N = storeItem.name
+                    end
+
+                    self:showStaticTreeInfo({
+                        nameI18N = nameI18N
+                    })
                 end
             else
                 local tree = self:findTree(hitObjectId)
@@ -179,7 +190,7 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
                 if tree then
                     self:showPlantedTreeInfo(tree)
                 elseif getSplitType(hitObjectId) ~= 0 then
-                    self:showStaticTreeInfo({type = getSplitType(hitObjectId)})
+                    self:showStaticTreeInfo({treeType = getSplitType(hitObjectId)})
                 else
                     self:showNoInfo()
                 end
@@ -227,31 +238,68 @@ function ssMeasureTool:showNoInfo()
 end
 
 function ssMeasureTool:showBaleInfo(bale)
-    log("Bale", bale)
+    log("Bale")
+    log("Fill:", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N)
+    log("Volume:", bale.fillLevel, "l")
+    log("Wrapped:", bale.wrappingState == 1 and "Yes" or "No")
 
-    print_r(bale)
+    if bale.wrappingState == 0 or bale.fermentingProcess ~= nil then
+        log("Fermentation:", string.format("%.2f", bale.fermentingProcess * 100), "%,", g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess, "hours to go")
+    end
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
     log("Terrain", x, y, z)
+
+    --[[
+    Read height
+    Read detail
+    Read growth information:
+    - crop type
+    - crop height
+
+    Read soil compaction / plough needed
+    Read weed info
+    Read fermentation
+    ]]
 end
 
 function ssMeasureTool:showPlantedTreeInfo(tree)
     log("Planted Tree", tree)
 
-    print_r(tree)
+    --[[
+    Type: tree.treeType, TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N
+    Length: if tree.isGrowing and growthState * l_p_gs or fulllength
+    Nearest tree: tree.ssNearestDistance
+    ]]
+
+    log("Planted Tree")
+    log("Type:", TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N)
+    log("Length:", (tree.growing and tree.growthState or 1) * 100, "%")
+    log("Nearest tree:", tree.ssNearestDistance, "m")
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
-    log("Static Tree", tree)
+    log("Tree")
 
-    print_r(tree)
+    local treeTypeDesc = TreePlantUtil.treeTypeIndexToDesc[tree.treeType]
+    if treeTypeDesc then
+        log("Type:", treeTypeDesc.nameI18N)
+    elseif tree.nameI18N then
+        log("Type:", tree.nameI18N)
+    else
+        log("Type:", "Unknown (", tree.treeType, ")")
+    end
+
+    log("Length:", "100%")
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
-    log("FIllable pallet", pallet)
-
-    print_r(pallet)
+    log("Pallet")
+    log("Contents:", FillUtil.fillTypeIndexToDesc[pallet.fillType].nameI18N, "(", pallet.fillLevel, ")")
+    if pallet.fillType == FillUtil.FILLTYPE_TREESAPLINGS then
+        log("Sapling type:", TreePlantUtil.treeTypeIndexToDesc[pallet.treeType].nameI18N)
+    end
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)
