@@ -33,7 +33,7 @@ function ssGrowthManager:load(savegame, key)
 
     self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
     self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
-    
+
     if savegame == nil then return end
 
     local i = 0
@@ -177,7 +177,7 @@ function ssGrowthManager:transitionChanged()
 
     local transition = g_seasons.environment:transitionAtDay()
     g_seasons.growthDebug:setFakeTransition(transition)
-    
+
     if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
         logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
         self.isNewSavegame = false

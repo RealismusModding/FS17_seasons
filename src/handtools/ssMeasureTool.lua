@@ -110,6 +110,10 @@ function ssMeasureTool:draw()
             self.blinkingMessage = nil
         end
     end
+
+    if self.drawDebugPara then
+        DebugUtil.drawDebugParallelogram(unpack(self.drawDebugPara))
+    end
 end
 
 function ssMeasureTool:setHandNode(handNode)
@@ -145,13 +149,13 @@ function ssMeasureTool:executeMeasurement()
     local x, y, z = localToWorld(self.player.cameraNode, 0, 0, 0.5)
     local dx, dy, dz = localDirectionToWorld(self.player.cameraNode, 0, 0, -1)
 
-    raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE + 1.0, self)
+    raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE, self)
 end
 
 -- Called by the raycast: handles finding the object that was scanned
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Too close or too far away
-    if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE then
+    if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE or hitObjectId == 0 then
         self:showFailed()
 
     -- We did only hit the terrain
@@ -165,6 +169,8 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
         -- Skip vehicles
         if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
             self:showNoInfo()
+        elseif type == "NoRigidBody" then
+            self:showFailed()
         else -- Any object, either static or dynamic
             local object = g_currentMission:getNodeObject(hitObjectId)
 
@@ -243,25 +249,79 @@ function ssMeasureTool:showBaleInfo(bale)
     log("Volume:", bale.fillLevel, "l")
     log("Wrapped:", bale.wrappingState == 1 and "Yes" or "No")
 
-    if bale.wrappingState == 0 or bale.fermentingProcess ~= nil then
+    if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
         log("Fermentation:", string.format("%.2f", bale.fermentingProcess * 100), "%,", g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess, "hours to go")
     end
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
-    log("Terrain", x, y, z)
+    -- Calculate area
+    local areaSize = 1.0
+    local halfArea = areaSize / 2.0
 
-    --[[
-    Read height
-    Read detail
-    Read growth information:
-    - crop type
-    - crop height
+    local worldX, worldZ = x - halfArea, z - halfArea
+    local worldWidthX, worldWidthZ = areaSize, 0
+    local worldHeightX, worldHeightZ = 0, areaSize
 
-    Read soil compaction / plough needed
-    Read weed info
-    Read fermentation
-    ]]
+    self.drawDebugPara = { worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ, 0, 1, 0, 0, 1 }
+
+    -- Read height
+    local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z)
+
+    local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels)
+    local terrainType = a / b
+
+    -- Get spray level
+    local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.sprayLevelFirstChannel, g_currentMission.sprayLevelNumChannels)
+    local sprayLevel = a / b
+
+    -- Get plough counter
+    local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
+    local ploughCounter = a / b
+
+    -- Tips
+    -- local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailHeightId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.terrainDetailHeightTypeFirstChannel, g_currentMission.terrainDetailHeightTypeNumChannels)
+    -- log("tip type", a, b, c)
+
+    -- Get fruit and fruit height
+    local fruits = {}
+    for index, fruit in pairs(g_currentMission.fruits) do
+        local fruitDesc = FruitUtil.fruitIndexToDesc[index]
+        local a, b, c = getDensityParallelogram(fruit.id, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  0, g_currentMission.numFruitDensityMapChannels)
+
+        if a > 0 then
+            table.insert(fruits, {
+                desc = fruitDesc,
+                id = fruit.id,
+                stage = a / b
+            })
+        end
+    end
+    print_r(fruits)
+
+    local terrainTypes = { [0] = "no field", "cultivated", "ploughed", "sowed", "sowingWidth?", "grass"}
+
+    log("Terrain")
+    log("Type:", terrainTypes[terrainType], "(", terrainType ,")")
+    log("Coordinates:", string.format("(%.1f, %.1f)", x, z))
+    log("Elevation:", string.format("%.1f", terrainHeight), "m")
+
+    local crop = fruits[1] -- TODO: multiple possible?
+    if crop then
+        log("Crop:", crop.desc.name)
+        log("Crop stage:", crop.stage)
+        -- find fill for i18n
+    end
+
+    log("Fertilization:", sprayLevel)
+
+    if false then
+        log("Soil compaction:")
+        log("Weeds:")
+    else
+        log("Ploughing needed (counter):", ploughCounter)
+    end
+
 end
 
 function ssMeasureTool:showPlantedTreeInfo(tree)
@@ -275,8 +335,9 @@ function ssMeasureTool:showPlantedTreeInfo(tree)
 
     log("Planted Tree")
     log("Type:", TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N)
-    log("Length:", (tree.growing and tree.growthState or 1) * 100, "%")
-    log("Nearest tree:", tree.ssNearestDistance, "m")
+    log("Length:", string.format("%.1f%%", (tree.growing and tree.growthState or 1) * 100))
+    log("Growth:", string.format("%.1f", tree.growthState))
+    log("Nearest tree:", string.format("%.1f m", tree.ssNearestDistance))
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
