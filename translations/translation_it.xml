@@ -93,8 +93,8 @@
         <text name="ui_pageSettings" text="Impostazioni" />
         <text name="ui_pageDebug" text="Tool di Debug" />
 
-        <text name="ui_economy_animal" text="animali" />
-        <text name="ui_economy_thousand" text="1 chilolitro" />
+        <text name="ui_economy_animal" text="animale" />
+        <text name="ui_economy_thousand" text="1000 L" />
         <text name="ui_economy_bale" text="Balle" />
 
         <text name="ui_buttonSave" text="Applica Impostazioni" />
@@ -117,7 +117,7 @@
         <text name="setting_seasonIntros" text="Introduzioni Season" />
         <text name="setting_seasonLength" text="Durata Season" />
         <text name="setting_snow" text="Modalità neve" />
-        <text name="setting_controlsHelp" text="Tasti in Help menu" />
+        <text name="setting_controlsHelp" text="Tasti in Help menù" />
         <text name="setting_snowTracks" text="Tracce nella neve" />
         <text name="setting_controlsTemperature" text="Scala termometrica" />
         <text name="setting_moisture" text="Umidità del raccolto" />
