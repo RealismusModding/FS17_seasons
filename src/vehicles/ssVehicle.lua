@@ -18,6 +18,10 @@ ssVehicle.SERVICE_INTERVAL = 30
 ssVehicle.repairFactors = {}
 ssVehicle.allowedInWinter = {}
 
+-- This must be loaded at once, during source-time.
+source(ssSeasonsMod.directory .. "src/events/ssRepairVehicleEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssVariableTreePlanterEvent.lua")
+
 function ssVehicle:preLoad()
     g_seasons.vehicle = ssVehicle
 

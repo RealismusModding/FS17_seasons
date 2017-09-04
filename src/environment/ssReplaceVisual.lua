@@ -32,6 +32,10 @@ end
 
 function ssReplaceVisual:deleteMap()
     if g_currentMission:getIsClient() then
+        for _, id in pairs(self.modReplacements) do
+            -- TODO(console) this probably needs deleting, but throws errors when I do
+            -- delete(id)
+        end
     end
 end
 
