@@ -165,6 +165,7 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Some other object
     else
         local type = getRigidBodyType(hitObjectId)
+        log("type", type)
 
         -- Skip vehicles
         if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
@@ -252,6 +253,8 @@ function ssMeasureTool:showBaleInfo(bale)
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
         log("Fermentation:", string.format("%.2f", bale.fermentingProcess * 100), "%,", g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess, "hours to go")
     end
+
+    log("-----------------------------------------")
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
@@ -284,20 +287,20 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     -- log("tip type", a, b, c)
 
     -- Get fruit and fruit height
-    local fruits = {}
+    local crop = nil
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitDesc = FruitUtil.fruitIndexToDesc[index]
         local a, b, c = getDensityParallelogram(fruit.id, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  0, g_currentMission.numFruitDensityMapChannels)
 
         if a > 0 then
-            table.insert(fruits, {
+            fruit = {
                 desc = fruitDesc,
                 id = fruit.id,
                 stage = a / b
-            })
+            }
+            break
         end
     end
-    print_r(fruits)
 
     local terrainTypes = { [0] = "no field", "cultivated", "ploughed", "sowed", "sowingWidth?", "grass"}
 
@@ -306,7 +309,6 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     log("Coordinates:", string.format("(%.1f, %.1f)", x, z))
     log("Elevation:", string.format("%.1f", terrainHeight), "m")
 
-    local crop = fruits[1] -- TODO: multiple possible?
     if crop then
         log("Crop:", crop.desc.name)
         log("Crop stage:", crop.stage)
@@ -322,22 +324,17 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         log("Ploughing needed (counter):", ploughCounter)
     end
 
+    log("-----------------------------------------")
 end
 
 function ssMeasureTool:showPlantedTreeInfo(tree)
-    log("Planted Tree", tree)
-
-    --[[
-    Type: tree.treeType, TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N
-    Length: if tree.isGrowing and growthState * l_p_gs or fulllength
-    Nearest tree: tree.ssNearestDistance
-    ]]
-
     log("Planted Tree")
     log("Type:", TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N)
     log("Length:", string.format("%.1f%%", (tree.growing and tree.growthState or 1) * 100))
     log("Growth:", string.format("%.1f", tree.growthState))
     log("Nearest tree:", string.format("%.1f m", tree.ssNearestDistance))
+
+    log("-----------------------------------------")
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
@@ -353,6 +350,8 @@ function ssMeasureTool:showStaticTreeInfo(tree)
     end
 
     log("Length:", "100%")
+
+    log("-----------------------------------------")
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
@@ -361,6 +360,8 @@ function ssMeasureTool:showFillablePallet(pallet)
     if pallet.fillType == FillUtil.FILLTYPE_TREESAPLINGS then
         log("Sapling type:", TreePlantUtil.treeTypeIndexToDesc[pallet.treeType].nameI18N)
     end
+
+    log("-----------------------------------------")
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)
