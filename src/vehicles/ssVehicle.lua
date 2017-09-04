@@ -43,6 +43,10 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Combine, "getIsThreshingAllowed", ssVehicle.getIsThreshingAllowed)
     ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
     ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
+
+    -- Functions for ssMotorFailure, needs to be reloaded every game
+    ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
+    ssUtil.overwrittenConstant(Motorized, "stopMotor", ssMotorFailure.stopMotor)
 end
 
 function ssVehicle:load(savegame, key)

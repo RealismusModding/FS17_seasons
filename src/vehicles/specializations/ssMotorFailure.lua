@@ -225,7 +225,3 @@ function ssMotorFailure:stopMotor(noEventSend)
 
     Motorized.turnOffImplement(self)
 end
-
--- TODO(console) fix
-Motorized.startMotor = ssMotorFailure.startMotor
-Motorized.stopMotor = ssMotorFailure.stopMotor

@@ -68,7 +68,7 @@ local function split(str, pat)
 end
 
 local function isSeasonsActive()
-    return g_modIsLoaded["FS17_RM_Seasons"]
+    return g_modIsLoaded["FS17_RM_Seasons"] == true
 end
 
 ------------------------------------------
@@ -159,8 +159,7 @@ end
 ------------------------------------------
 
 function ssSeasonsMod.load()
-    log("Load!")
-    log("Is seasons active:", isSeasonsActive())
+    if not isSeasonsActive() then return end
 
     -- Preload all files: setting up overwritten functions, possibly more
     -- This needs to be re-done on every game load.
@@ -274,7 +273,6 @@ function removeModEventListener(listener)
 end
 
 function ssSeasonsMod.delete()
-    log("Delete")
     if not isSeasonsActive() then return end
 
     if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
