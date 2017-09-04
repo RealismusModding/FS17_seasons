@@ -15,9 +15,6 @@ ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
 ssVehicle.SERVICE_INTERVAL = 30
 
-ssVehicle.repairFactors = {}
-ssVehicle.allowedInWinter = {}
-
 -- This must be loaded at once, during source-time.
 source(ssSeasonsMod.directory .. "src/events/ssRepairVehicleEvent.lua")
 source(ssSeasonsMod.directory .. "src/events/ssVariableTreePlanterEvent.lua")
@@ -62,6 +59,9 @@ function ssVehicle:loadMap()
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
     g_currentMission:setAutomaticMotorStartEnabled(false)
+
+    ssVehicle.repairFactors = {}
+    ssVehicle.allowedInWinter = {}
 
     if g_currentMission:getIsServer() then
         self:updateRepairInterval()

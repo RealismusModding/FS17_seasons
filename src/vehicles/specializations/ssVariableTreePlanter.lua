@@ -9,7 +9,7 @@
 
 ssVariableTreePlanter = {}
 
-ssVariableTreePlanter.plantingDistances = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+ssVariableTreePlanter.PLANTING_DISTANCES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 
 function ssVariableTreePlanter:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(TreePlanter, specializations)
@@ -66,13 +66,13 @@ function ssVariableTreePlanter:update(dt)
         if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
             local currentDistance = self.treePlanterMinDistance
             local newDistance = 0
-            local n = table.getn(ssVariableTreePlanter.plantingDistances)
+            local n = table.getn(ssVariableTreePlanter.PLANTING_DISTANCES)
 
-            for i, dist in pairs(ssVariableTreePlanter.plantingDistances) do
+            for i, dist in pairs(ssVariableTreePlanter.PLANTING_DISTANCES) do
                 if dist == currentDistance and i ~= n then
-                    newDistance = ssVariableTreePlanter.plantingDistances[i + 1]
+                    newDistance = ssVariableTreePlanter.PLANTING_DISTANCES[i + 1]
                 elseif dist == currentDistance and i == n then
-                    newDistance = ssVariableTreePlanter.plantingDistances[1]
+                    newDistance = ssVariableTreePlanter.PLANTING_DISTANCES[1]
                 end
             end
 
