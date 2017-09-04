@@ -145,7 +145,8 @@ function ssWeatherForecast:deleteMap()
     self.overlays.frozen:delete()
     self.overlays.wetcrop:delete()
 
-    g_currentMission.weatherForecastIconOverlays.snow:delete()
+    -- Do not delete: it is automatically done by the game
+    -- g_currentMission.weatherForecastIconOverlays.snow:delete()
 end
 
 function ssWeatherForecast:update(dt)

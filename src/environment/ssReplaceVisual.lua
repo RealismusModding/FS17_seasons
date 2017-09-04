@@ -32,7 +32,6 @@ end
 
 function ssReplaceVisual:deleteMap()
     if g_currentMission:getIsClient() then
-        g_seasons.environment:removeVisualSeasonChangeListener(self)
     end
 end
 

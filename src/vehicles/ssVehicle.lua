@@ -74,9 +74,6 @@ function ssVehicle:loadMap()
 end
 
 function ssVehicle:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_seasons.environment:removeSeasonLengthChangeListener(self)
-
     if g_addCheatCommands then
         removeConsoleCommand("ssRepairVehicle")
         removeConsoleCommand("ssRepairAllVehicles")

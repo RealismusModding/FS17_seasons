@@ -120,13 +120,6 @@ function ssGrowthManager:loadMap(name)
     end
 end
 
-function ssGrowthManager:deleteMap()
-    if g_currentMission:getIsServer() then
-        g_currentMission.environment:removeDayChangeListener(self)
-        g_seasons.environment:removeTransitionChangeListener(self)
-    end
-end
-
 function ssGrowthManager:loadMapFinished()
     if self.isNewSavegame or self.isActivatedOnOldSave then --if new game or mod enabled on existing save
         self:rebuildWillGerminateData()

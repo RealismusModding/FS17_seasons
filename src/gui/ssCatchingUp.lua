@@ -21,6 +21,7 @@ end
 function ssCatchingUp:loadMap()
     self.showWarning = false
     self.didFfwd = false
+    self.dialog = nil
 end
 
 function ssCatchingUp:update(dt)

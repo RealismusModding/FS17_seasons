@@ -74,11 +74,6 @@ function ssEconomyHistory:loadMap(name)
     local currentDay = g_seasons.environment:dayInYear()
 end
 
-function ssEconomyHistory:deleteMap()
-    g_seasons.environment:removeSeasonLengthChangeListener(self)
-    g_currentMission.environment:removeDayChangeListener(self)
-end
-
 function ssEconomyHistory:loadGameFinished(name)
     for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
         fillDesc.ssEconomyType = self:getEconomyType(fillDesc)

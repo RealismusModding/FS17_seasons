@@ -71,11 +71,6 @@ function ssEconomy:loadMap(name)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 end
 
-function ssEconomy:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_seasons.environment:removeSeasonLengthChangeListener(self)
-end
-
 function ssEconomy:loadFactorsFromXML(file, key)
     local factors = {}
 

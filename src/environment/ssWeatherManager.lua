@@ -10,9 +10,9 @@
 ssWeatherManager = {}
 
 -- Load events
-source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerDailyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHourlyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHailEvent.lua")
 
 function ssWeatherManager:preLoad()
     g_seasons.weather = self
@@ -152,12 +152,6 @@ function ssWeatherManager:loadMap(name)
         self:overwriteRaintable()
         self:setupStartValues()
     end
-end
-
-function ssWeatherManager:deleteMap()
-    g_currentMission.environment:removeHourChangeListener(self)
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_seasons.environment:removeSeasonLengthChangeListener(self)
 end
 
 function ssWeatherManager:loadGameFinished()

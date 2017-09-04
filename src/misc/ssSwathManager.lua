@@ -26,12 +26,6 @@ function ssSwathManager:loadMap(name)
     end
 end
 
-function ssSwathManager:deleteMap()
-    g_seasons.environment:removeTransitionChangeListener(self)
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_currentMission.environment:removeHourChangeListener(self)
-end
-
 function ssSwathManager:reduceGrass(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, layers)
     layers = tonumber(layers)
 

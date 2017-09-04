@@ -12,8 +12,8 @@ ssBaleManager = {}
 
 ssBaleManager.MASK_RECT_WIDTH = 2 --2x2m
 
-source(g_seasons.modDir .. "src/events/ssBaleFermentEvent.lua")
-source(g_seasons.modDir .. "src/events/ssBaleRotEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssBaleFermentEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssBaleRotEvent.lua")
 
 function ssBaleManager:preLoad()
     g_seasons.baleManager = self
@@ -41,10 +41,6 @@ function ssBaleManager:loadMap(name)
 end
 
 function ssBaleManager:deleteMap()
-    g_currentMission.environment:removeHourChangeListener(self)
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_seasons.environment:removeSeasonLengthChangeListener(self)
-
     Bale.setFillType = nil
 end
 

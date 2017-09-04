@@ -8,16 +8,15 @@
 ----------------------------------------------------------------------------------------------------
 
 ssPedestrianSystem = {}
-g_seasons.pedestrianSystem = ssPedestrianSystem
+
+function ssPedestrianSystem:preLoad()
+    g_seasons.pedestrianSystem = self
+end
 
 function ssPedestrianSystem:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
 
     ssUtil.overwrittenFunction(PedestrianSystem, "update", ssPedestrianSystem.psUpdate)
-end
-
-function ssPedestrianSystem:deleteMap()
-    g_seasons.environment:removeSeasonChangeListener(self)
 end
 
 function ssPedestrianSystem:loadGameFinished()

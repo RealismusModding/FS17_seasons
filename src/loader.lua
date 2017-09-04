@@ -7,16 +7,20 @@
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
-local ssSeasonsMod = {}
-
 getfenv(0)["g_testConsoleVersion"] = true
+
+ssSeasonsMod = {}
+
+-- Do not reset this variable, we can't re-set it again
+ssSeasonsMod.directory = g_currentModDirectory
+ssSeasonsMod.name = g_currentModName
 
 ------------------------------------------
 -- quickly needed utility functions
 ------------------------------------------
 
 function log(...)
-    if not g_seasons.verbose then return end
+    if g_seasons and not g_seasons.verbose then return end
 
     local str = "[Seasons]"
     for i = 1, select("#", ...) do
@@ -148,19 +152,31 @@ end
 -- Load all scripts
 for i, path in pairs(files) do
     source(srcFolder .. path .. ".lua")
-
-    local class = g_modClasses[i]
-
-    if _G[class] ~= nil and _G[class].preLoad ~= nil then
-        _G[class]:preLoad()
-    end
 end
 
 ------------------------------------------
--- BaseMission encapsulation functions
+-- Setting up and shutting down seasons
 ------------------------------------------
 
-function ssSeasonsMod.loadMapFinished(...)
+function ssSeasonsMod.load()
+    log("Load!")
+    log("Is seasons active:", isSeasonsActive())
+
+    -- Preload all files: setting up overwritten functions, possibly more
+    -- This needs to be re-done on every game load.
+    -- The things done in here need to be reversed either in ssSeasonsMod.delete()
+    -- or inside class:deleteMap().
+    for i, path in pairs(files) do
+        local class = g_modClasses[i]
+
+        if _G[class] ~= nil and _G[class].preLoad ~= nil then
+            _G[class]:preLoad()
+        end
+    end
+end
+
+
+function ssSeasonsMod.loadMapFinished()
     if not isSeasonsActive() then return end
 
     local requiredMethods = { "deleteMap", "mouseEvent", "keyEvent", "draw", "update" }
@@ -187,7 +203,7 @@ function ssSeasonsMod.loadMapFinished(...)
     g_seasons.enabled = true
 end
 
-function ssSeasonsMod.loadFromXML(...)
+function ssSeasonsMod.loadFromXML()
     if g_currentMission == nil or not g_currentMission:getIsServer() then return end
 
     local xmlFile = nil
@@ -228,7 +244,7 @@ function ssSeasonsMod.saveToXML(self)
 end
 
 -- Add a new mod event: loadMapFinished.
-function ssSeasonsMod.nullFinished(...)
+function ssSeasonsMod.nullFinished()
     if not isSeasonsActive() then return end
 
     local isServer = g_currentMission:getIsServer()
@@ -262,23 +278,31 @@ function ssSeasonsMod.delete()
     if not isSeasonsActive() then return end
 
     if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
-        log("unregister")
-
         ssUtil.unregisterAdjustedFunctions()
         ssUtil.unregisterConstants()
-        ssUtil.unregisterSpecialization()
+        ssUtil.unregisterSpecializations()
         ssUtil.unregisterTireTypes()
+    end
+end
 
-        for _, mod in ipairs(g_modClasses) do
-            -- removeModEventListener(_G[k])
+function ssSeasonsMod:deleteFinished()
+    if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
+        for _, k in ipairs(g_modClasses) do
+            removeModEventListener(_G[k])
         end
     end
 end
 
+-- TODO: undo this? How? Mod would not load anymore. So guard with if loaded
+Mission00.load = Utils.prependedFunction(Mission00.load, ssSeasonsMod.load)
+
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
-FSBaseMission.delete = Utils.prependedFunction(FSBaseMission.delete, ssSeasonsMod.delete)
-FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
 Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
+
+FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
+
+FSBaseMission.delete = Utils.prependedFunction(FSBaseMission.delete, ssSeasonsMod.delete)
+FSBaseMission.delete = Utils.appendedFunction(FSBaseMission.delete, ssSeasonsMod.deleteFinished)
 
 ------------------------------------------
 -- Fixes for Giants Vanilla game

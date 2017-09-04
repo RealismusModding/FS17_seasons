@@ -10,7 +10,7 @@ ssRepairable = {}
 
 ssRepairable.MAX_CHARS_TO_DISPLAY = 20
 
-source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssRepairVehicleEvent.lua")
 
 function ssRepairable:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Washable, specializations)

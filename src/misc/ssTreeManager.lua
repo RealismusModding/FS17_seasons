@@ -27,12 +27,6 @@ function ssTreeManager:loadMap()
     ssUtil.appendedFunction(ChainsawUtil, "cutSplitShapeCallback", ssTreeManager.cutSplitShapeCallback)
 end
 
-function ssTreeManager:deleteMap()
-    if g_currentMission:getIsServer() then
-        g_seasons.environment:removeSeasonLengthChangeListener(self)
-    end
-end
-
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years

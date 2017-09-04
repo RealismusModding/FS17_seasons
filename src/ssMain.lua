@@ -22,7 +22,8 @@ function ssMain:preLoad()
     end
 
     -- Load in superglobal scope, so other mods can talk with us
-    getfenv(0)["g_seasons"] = ssMain
+    log("Set g_seasons")
+    getfenv(0)["g_seasons"] = self
 
     -- These classes are loaded before ssMain and can't put themselves in global scope
     self.lang = ssLang
@@ -31,10 +32,12 @@ function ssMain:preLoad()
     self.xml = ssSeasonsXML
     self.util = ssUtil
 
-    local modItem = ModsUtil.findModItemByModName(g_currentModName)
-    self.modDir = g_currentModDirectory
+    self.modDir = ssSeasonsMod.directory
+
+    log("self.modDir", self.modDir)
 
     local buildnumber = nil --<%=buildnumber %>
+    local modItem = ModsUtil.findModItemByModName(ssSeasonsMod.name)
     self.descVersion = Utils.getNoNil(modItem.version, "0.0.0.0")
     self.version = self.descVersion .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
@@ -116,8 +119,8 @@ function ssMain:loadMap()
     FocusManager:setGui("MPLoadingScreen")
 
     -- Remove the (hacked) store items
-    StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id)
-    StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
+    self:removeStoreItem("resources/fakeStoreItem/item.xml")
+    self:removeStoreItem("resources/fakeStoreItem/item2.xml")
 
     if self.descVersion == "0.0.0.0" then
         local w, h = getNormalizedScreenValues(384, 128)
@@ -134,8 +137,6 @@ function ssMain:loadMap()
 end
 
 function ssMain:deleteMap()
-    log("DELETE SSMAIN!")
-
     getfenv(0)["g_seasons"] = nil
 end
 
@@ -154,6 +155,16 @@ function ssMain:validateDensityMaps()
 
     if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
         logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain")
+    end
+end
+
+function ssMain:removeStoreItem(path)
+    path = string.lower(self.modDir .. path)
+
+    local item = StoreItemsUtil.storeItemsByXMLFilename[path]
+
+    if item then
+        StoreItemsUtil.removeStoreItem(item.id)
     end
 end
 

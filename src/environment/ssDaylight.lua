@@ -33,11 +33,6 @@ function ssDaylight:loadMap(name)
     end
 end
 
-function ssDaylight:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self)
-    g_seasons.environment:removeVisualSeasonChangeListener(self)
-end
-
 function ssDaylight:readStream()
     self:setupDayNight()
 end

@@ -53,7 +53,11 @@ function ssSeasonsMenu:new(target, custom_mt)
 end
 
 function ssSeasonsMenu:delete()
-    -- TODO(console): delete all used resources
+    self:deleteOverview()
+
+    if self.economy.graph then
+        self.economy.graph:delete()
+    end
 end
 
 function ssSeasonsMenu:onCreate(gui)
@@ -296,6 +300,16 @@ function ssSeasonsMenu:createOverviewValues(element)
     self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
     self.cropsSlider:setValue(self.cropsSlider.maxValue)
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
+end
+
+function ssSeasonsMenu:deleteOverview()
+    local o = self.overview
+
+    o.rect:delete()
+
+    for _, overlay in pairs(o.seasons) do
+        overlay:delete()
+    end
 end
 
 function ssSeasonsMenu:updateOverview()

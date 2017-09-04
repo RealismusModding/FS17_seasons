@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthDebug = {}
-g_seasons.growthDebug = ssGrowthDebug
 
 --constants
 ssGrowthDebug.TMP_TRANSITION = 900
@@ -18,7 +17,10 @@ ssGrowthDebug.TMP_TRANSITION = 900
 ssGrowthDebug.debugView = false
 ssGrowthDebug.fakeTransition = 1
 
---functions
+function ssGrowthDebug:preLoad()
+    g_seasons.growthDebug = self
+end
+
 function ssGrowthDebug:loadMap(name)
     if g_currentMission:getIsServer() then
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)

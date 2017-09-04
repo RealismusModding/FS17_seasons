@@ -76,8 +76,6 @@ end
 
 function ssSnow:deleteMap()
     if g_currentMission:getIsServer() then
-        g_currentMission.environment:removeHourChangeListener(self)
-
         removeConsoleCommand("ssAddSnow")
         removeConsoleCommand("ssRemoveSnow")
         removeConsoleCommand("ssResetSnow")

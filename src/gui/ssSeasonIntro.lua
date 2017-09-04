@@ -27,10 +27,6 @@ function ssSeasonIntro:loadMap(name)
     self.showSeasonChanged = false
 end
 
-function ssSeasonIntro:deleteMap()
-    g_seasons.environment:removeSeasonChangeListener(self)
-end
-
 function ssSeasonIntro:update(dt)
     if self.showSeasonChanged == true and g_gui.currentGui == nil then
         self.showSeasonChanged = false

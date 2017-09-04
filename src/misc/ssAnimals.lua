@@ -36,13 +36,6 @@ function ssAnimals:loadMap(name)
     end
 end
 
-function ssAnimals:deleteMap()
-    if g_currentMission:getIsServer() then
-        g_currentMission.environment:removeDayChangeListener(self)
-        g_currentMission.environment:removeHourChangeListener(self)
-    end
-end
-
 function ssAnimals:loadGameFinished()
     self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 

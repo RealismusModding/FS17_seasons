@@ -41,7 +41,7 @@ ssEnvironment.TRANSITION_EARLY_WINTER = 10
 ssEnvironment.TRANSITION_MID_WINTER = 11
 ssEnvironment.TRANSITION_LATE_WINTER = 12
 
-source(g_seasons.modDir .. "src/events/ssVisualSeasonChangedEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssVisualSeasonChangedEvent.lua")
 
 function ssEnvironment:preLoad()
     g_seasons.environment = self
@@ -99,8 +99,6 @@ function ssEnvironment:loadMap(name)
 end
 
 function ssEnvironment:deleteMap()
-    g_currentMission.environment:removeDayChangeListener(self)
-
     removeConsoleCommand("ssSetVisualSeason")
 end
 
@@ -229,7 +227,7 @@ end
 
 function ssEnvironment:removeSeasonChangeListener(listener)
     if listener ~= nil then
-        Utils.removeElementToTable(self.seasonChangeListeners, listener)
+        Utils.removeElementFromTable(self.seasonChangeListeners, listener)
     end
 end
 
@@ -242,7 +240,7 @@ end
 
 function ssEnvironment:removeTransitionChangeListener(listener)
     if listener ~= nil then
-        Utils.removeElementToTable(self.transitionChangeListeners, listener)
+        Utils.removeElementFromTable(self.transitionChangeListeners, listener)
     end
 end
 
@@ -255,7 +253,7 @@ end
 
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        Utils.removeElementToTable(self.seasonLengthChangeListeners, listener)
+        Utils.removeElementFromTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
@@ -268,7 +266,7 @@ end
 
 function ssEnvironment:removeVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        Utils.removeElementToTable(self.visualSeasonChangeListeners, listener)
+        Utils.removeElementFromTable(self.visualSeasonChangeListeners, listener)
     end
 end
 
