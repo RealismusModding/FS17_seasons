@@ -107,6 +107,25 @@ function ssUtil.calcDaysPerTransition()
     return {earlyStart, earlyEnd, midStart, midEnd, lateStart, lateEnd}
 end
 
+function ssUtil.getTransitionHeaders()
+    local transitionsDisplayData = {}
+    local data = ssUtil.calcDaysPerTransition()
+
+    for index, value in pairs(data) do
+        if index % 2 == 1 then
+            local putIndex = index - ((index - 1) / 2)
+
+            if value == data[index + 1] then
+                transitionsDisplayData[putIndex] = tostring(value)
+            else
+                transitionsDisplayData[putIndex] = value .. "-" .. data[index + 1]
+            end
+        end
+    end
+
+    return transitionsDisplayData
+end
+
 --Outputs a random sample from a triangular distribution
 function ssUtil.triDist(m)
     local pmode = {}

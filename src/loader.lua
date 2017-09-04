@@ -116,8 +116,12 @@ local files = {
     "objects/ssSeasonAdmirer",
     "objects/ssIcePlane",
 
+    "misc/ssEconomyHistory",
+
     -- GUI
     "gui/ssHelpLines",
+    "gui/ssRectOverlay",
+    "gui/ssGraph",
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp"
 }

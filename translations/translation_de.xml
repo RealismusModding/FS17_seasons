@@ -88,9 +88,14 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend" />
         <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
 
-        <text name="ui_pageOverview" text="Übersicht" />
+        <text name="ui_pageCalender" text="Kalender" />
+        <text name="ui_pageEconomy" text="Wirtschaft" />
         <text name="ui_pageSettings" text="Einstellungen" />
         <text name="ui_pageDebug" text="Entwickler" />
+
+        <text name="ui_economy_animal" text="Tier" />
+        <text name="ui_economy_thousand" text="1000 l" />
+        <text name="ui_economy_bale" text="Ballen" />
 
         <text name="ui_buttonSave" text="Speichern" />
         <text name="ui_snowOneLayer" text="Einfache Schneeschicht" />

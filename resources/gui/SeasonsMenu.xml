@@ -15,12 +15,29 @@
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
                 <!-- Crop data -->
                 <GuiElement type="empty" profile="page" name="pageOverview" onCreate="onCreatePageOverview">
-                    <GuiElement type="slider" profile="ssCropsSliderVertical" id="cropsSlider" onChanged="onSliderValueChanged">
+                    <GuiElement type="slider" profile="ssCropsSliderVertical" id="cropsSlider" onChanged="onCropSliderValueChanged">
                         <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" focusChangeTop="1" focusChangeBottom="sliderDownCrops"/>
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />
                     </GuiElement>
 
                     <GuiElement type="empty" profile="ssOverview" id="overviewElement" onDraw="drawOverview" />
+                </GuiElement>
+
+                <!-- Economy -->
+                <GuiElement type="empty" profile="page" name="pageEconomy" onCreate="onCreatePageEconomy">
+                    <GuiElement type="slider" profile="ssEconomySlider">
+                        <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpEconomy" focusChangeTop="1" focusChangeBottom="sliderDownEconomy"/>
+                        <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownEconomy" focusChangeTop="sliderUpEconomy" focusChangeBottom="100" />
+
+                        <GuiElement type="list" profile="ssEconomyList" onScroll="onEconomySliderValueChanged" onSelectionChanged="onEconomyListSelectionChanged" id="economyList" focusId="300" focusChangeTop="1" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1">
+                            <GuiElement type="listItem" profile="ssEconomyListItem" id="economyListItemTemplate" >
+                                <GuiElement type="text" profile="ssEconomyListItemText" text="FillType" />
+                                <GuiElement type="bitmap" profile="ssEconomyListItemTick" />
+                            </GuiElement>
+                        </GuiElement>
+                    </GuiElement>
+
+                    <GuiElement type="empty" profile="ssEconomyGraph" id="economyGraph" onDraw="drawEconomyGraph" />
                 </GuiElement>
 
                 <!-- Settings -->
