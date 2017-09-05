@@ -57,16 +57,18 @@ function ssAnimals:load(savegame, key)
     -- Load or set default values
     self.averageProduction = {}
 
-    local i = 0
-    while true do
-        local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
-        if not hasXMLProperty(savegame, animalKey) then break end
+    if savegame ~= nil then
+        local i = 0
+        while true do
+            local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
+            if not hasXMLProperty(savegame, animalKey) then break end
 
-        local typ = getXMLString(savegame, animalKey .. "#animalName")
-        self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
-        g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
+            local typ = getXMLString(savegame, animalKey .. "#animalName")
+            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
-        i = i + 1
+            i = i + 1
+        end
     end
 
     -- defaulting to 0% average productivity
