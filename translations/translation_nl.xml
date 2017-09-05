@@ -94,7 +94,7 @@
         <text name="ui_pageDebug" text="Debug" />
 
 
-        <text name="ui_economy_animal" text="Dier" />
+        <text name="ui_economy_animal" text="dier" />
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Baal" />
 
