@@ -125,6 +125,7 @@ local files = {
     "objects/ssSnowAdmirer",
     "objects/ssSeasonAdmirer",
     "objects/ssIcePlane",
+    "objects/ssAdmirerRegistration",
 
     "misc/ssEconomyHistory",
 
