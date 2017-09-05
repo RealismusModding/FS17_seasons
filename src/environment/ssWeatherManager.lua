@@ -384,7 +384,7 @@ function ssWeatherManager:hourChanged()
         local oldSnow = self.snowDepth
 
         self.meltedSnow = 0
-        self:calculateSnowAccumulation()
+        self:updateSnowDepth()
 
         if math.abs(oldSnow - self.snowDepth) > 0.01 then
             -- Call a weather change
@@ -435,58 +435,43 @@ end
 
 --- function to keep track of snow accumulation
 --- snowDepth in meters
-function ssWeatherManager:calculateSnowAccumulation()
+function ssWeatherManager:updateSnowDepth()
     local currentRain = g_currentMission.environment.currentRain
     local currentTemp = self:currentTemperature()
-    local currentSnow = self.snowDepth
+    local effectiveMeltTemp = math.max(currentTemp, 0) + math.max(self.soilTemp, 0)
 
     -- calculating snow melt as a function of radiation
-    local meltFactor = g_seasons.daylight:calculateSolarRadiation() * math.max(6 / g_seasons.environment.daysInSeason, 1)
+    local snowMelt = math.max(0.001 * effectiveMeltTemp ) * (1 + g_seasons.daylight:calculateSolarRadiation() / 5) * 9 / g_seasons.environment.daysInSeason
 
-    if currentRain == nil then
-        if currentTemp > -1 then
-        -- snow melts at -1 if the sun is shining
-        self.snowDepth = self.snowDepth - math.max((currentTemp + 1) / 1000, 0) * meltFactor
+    -- melting snow
+    if currentTemp >= 0 then
+        if currentRain == nil then
+            -- snow melts at faster if the sun is shining
+            self.meltedSnow = snowMelt 
+
+        elseif currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
+            -- assume snow melts 50% faster if it rains. Warm snow acts as rain.
+            self.meltedSnow = snowMelt * 1.5
+
+        elseif currentRain.rainTypeId == "cloudy" or currentRain.rainTypeId == "fog" then
+            self.meltedSnow = snowMelt
         end
 
-    elseif currentRain.rainTypeId == "rain" and currentTemp > 0 then
-        -- assume snow melts three times as fast if it rains
-        self.snowDepth = self.snowDepth - math.max((currentTemp + 1) * 3 / 1000, 0) * meltFactor
+        self.snowDepth = self.snowDepth - self.meltedSnow
 
-    elseif currentRain.rainTypeId == "rain" and currentTemp <= 0 then
-        -- cold rain acts as hail
-        if self.snowDepth < 0 then
-            self.snowDepth = 0
+    -- accumulating snow
+    elseif currentTemp < 0 and currentRain ~= nil then
+        if currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
+            -- cold rain acts as snow
+            -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
+            if self.snowDepth < 0 then
+                self.snowDepth = 0
+            elseif self.snowDepth > 0.06 then
+                self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
+            else
+                self.snowDepth = self.snowDepth + 31 / 1000
+            end
         end
-        self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
-
-    elseif currentRain.rainTypeId == "snow" and currentTemp < 0 then
-        -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
-        if self.snowDepth < 0 then
-            self.snowDepth = 0
-        elseif self.snowDepth > 0.06 then
-            self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
-        else
-            self.snowDepth = self.snowDepth + 30 / 1000
-        end
-
-    elseif currentRain.rainTypeId == "snow" and currentTemp >= 0 then
-        -- warm hail acts as rain
-        self.meltedSnow = math.max((currentTemp + 1) * 3 / 1000, 0) * meltFactor
-        self.snowDepth = self.snowDepth - self.meltedSnow
-        --g_currentMission.environment.currentRain.rainTypeId = nil
-        --currentRain.rainTypeId = "rain"
-
-    elseif currentRain.rainTypeId == "cloudy" and currentTemp > 0 then
-        -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.meltedSnow = math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
-        self.snowDepth = self.snowDepth - self.meltedSnow
-
-    elseif currentRain.rainTypeId == "fog" and currentTemp > 0 then
-        -- 75% melting (compared to clear conditions) when there is cloudy and fog
-        self.meltedSnow = math.max((currentTemp + 1) * 0.75 / 1000, 0) * meltFactor
-        self.snowDepth = self.snowDepth - self.meltedSnow
-
     end
 
     return self.snowDepth
