@@ -9,6 +9,9 @@
 ssSoilCompaction = {}
 
 ssSoilCompaction.MAX_CHARS_TO_DISPLAY = 20
+ssSoilCompaction.LIGHT_COMPACTION = -0.15
+ssSoilCompaction.MEDIUM_COMPACTION = 0.05
+ssSoilCompaction.HEAVY_COMPACTION = 0.2
 
 function ssSoilCompaction:prerequisitesPresent(specializations)
     return true
@@ -82,13 +85,13 @@ function ssSoilCompaction:applySoilCompaction()
             local soilBulkDensityRef = 0.2 * (soilWater - 0.5) + 0.7 * math.log10(wheel.groundPressure / 100)
             
             wheel.possibleCompaction = 3
-            if soilBulkDensityRef > -0.15 and soilBulkDensityRef <= 0.0 then
+            if soilBulkDensityRef > ssSoilCompaction.LIGHT_COMPACTION and soilBulkDensityRef <= ssSoilCompaction.MEDIUM_COMPACTION then
                 wheel.possibleCompaction = 2
 
-            elseif soilBulkDensityRef > 0.0 and soilBulkDensityRef <= 0.15 then
+            elseif soilBulkDensityRef > ssSoilCompaction.MEDIUM_COMPACTION and soilBulkDensityRef <= ssSoilCompaction.HEAVY_COMPACTION then
                 wheel.possibleCompaction = 1
 
-            elseif soilBulkDensityRef > 0.15 then
+            elseif soilBulkDensityRef > ssSoilCompaction.HEAVY_COMPACTION then
                 wheel.possibleCompaction = 0
             end
             --below only for debug print. TODO: remove when done
@@ -123,14 +126,14 @@ function ssSoilCompaction:applySoilCompaction()
             wheel.underTireCompaction = mathRound(underLayers,0)
             wheel.fwdTireCompaction = mathRound(fwdLayers,0)
 
-            if wheel.underTireCompaction ==  3 and soilBulkDensityRef > -0.15 then
+            if wheel.underTireCompaction ==  3 and soilBulkDensityRef > ssSoilCompaction.LIGHT_COMPACTION then
                 wantedC = 2
 
             elseif wheel.underTireCompaction == 2 and wheel.fwdTireCompaction == 2
-                and soilBulkDensityRef > 0.0 and soilBulkDensityRef <= 0.15 then
+                and soilBulkDensityRef > ssSoilCompaction.MEDIUM_COMPACTION and soilBulkDensityRef <= ssSoilCompaction.HEAVY_COMPACTION then
                 wantedC = 1
 
-            elseif wheel.underTireCompaction == 1 and wheel.fwdTireCompaction == 1 and soilBulkDensityRef > 0.15 then
+            elseif wheel.underTireCompaction == 1 and wheel.fwdTireCompaction == 1 and soilBulkDensityRef > ssSoilCompaction.HEAVY_COMPACTION then
                 wantedC = 0
             end
 
