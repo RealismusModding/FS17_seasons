@@ -918,13 +918,15 @@ function ssWeatherManager:updateSoilWaterContent()
     elseif g_currentMission.environment.timeSinceLastRain == 0 and currentRainId == 'hail' then
         soilWaterInfiltration = 1.5 -- 15 mm/hr infiltration
 
-    elseif self.meltedSnow ~= 0 then
+    -- not add water from melted snow if only piles are melting or if the ground is not frozen
+    elseif self.meltedSnow ~= 0 and self.snowDepth > 0 and not self:isGroundFrozen() then
         -- 30% of melted snow infiltrates, meltedSnow in meter, snow density 400 kg/m3
-        soilWaterInfiltration = 0.3 * self.meltedSnow * 1000 * 0.4
+        -- dividing by 10 due to unit cm
+        soilWaterInfiltration = 0.3 * self.meltedSnow * 400 / 10
     end
 
     soilWaterLeakage = math.max(Ksat * (math.exp(beta*(prevSoilWaterCont - Sfc)) - 1) / (math.exp(beta*(1 - Sfc)) - 1),0)
-    self.soilWaterContent = prevSoilWaterCont + 1 / (soilPorosity * depthRootZone) * (soilWaterInfiltration - soilWaterLeakage - soilWaterTranspiration - soilWaterEvaporation)
+    self.soilWaterContent = math.min(prevSoilWaterCont + 1 / (soilPorosity * depthRootZone) * (soilWaterInfiltration - soilWaterLeakage - soilWaterTranspiration - soilWaterEvaporation), 1)
 end
 
 function ssWeatherManager:calculateSoilWetness()
