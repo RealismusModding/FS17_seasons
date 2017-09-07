@@ -290,12 +290,7 @@ function ssMain:getModPaths(name)
 end
 
 function ssMain:getDataPath(name)
-    -- TODO(console) if on console, point to the mod folder.
-    if GS_IS_CONSOLE_VERSION then
-
-    else
-        return string.format("%sdata/%s.xml", self.modDir, name)
-    end
+    return string.format("%sdata/%s.xml", self.modDir, name)
 end
 
 ----------------------------
