@@ -190,6 +190,11 @@
                 <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="102" focusChangeRight="102" focusInit="onOpen"/>
                 <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="100" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
             </GuiElement>
+
+            <GuiElement type="flowLayout" profile="buttonBoxConsole" id="buttonsConsole" >
+                <GuiElement type="button" profile="buttonCircle"    size="333px 40px" text="$l10n_button_back" id="backButtonConsole"/>
+                <GuiElement type="button" profile="buttonRectangle" size="334px 40px" text="$l10n_button_saveGame" id="saveButtonConsole"/>
+            </GuiElement>
         </GuiElement>
     </GuiElement>
 </GUI>
