@@ -96,7 +96,12 @@ function ssDensityMapScanner:update(dt)
                 self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
             else
                 -- Must be evenly dividable with mapsize.
-                self.currentJob.numSegments = math.min(g_currentMission.terrainSize,16*16)
+                local minNumSegments = 16 * 16
+                if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
+                    minNumSegments = 32 * 32
+                end
+
+                self.currentJob.numSegments = math.min(g_currentMission.terrainSize, minNumSegments)
             end
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
