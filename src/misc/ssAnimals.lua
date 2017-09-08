@@ -130,6 +130,7 @@ end
 
 function ssAnimals:hourChanged()
     self:updateAverageProductivity()
+    self:adjustAnimals()
 end
 
 function ssAnimals:adjustAnimals()
