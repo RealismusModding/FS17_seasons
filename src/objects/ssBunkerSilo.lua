@@ -10,11 +10,9 @@
 ssBunkerSilo = {}
 
 function ssBunkerSilo:preLoad()
-    BunkerSilo.loadFromAttributesAndNodes = Utils.overwrittenFunction(BunkerSilo.loadFromAttributesAndNodes, ssBunkerSilo.bunkerSiloLoadFromAttributesAndNodes)
-
-    BunkerSilo.delete = Utils.overwrittenFunction(BunkerSilo.delete, ssBunkerSilo.bunkerSiloDelete)
-
-    BunkerSilo.seasonLengthChanged = ssBunkerSilo.bunkerSiloSeasonLengthChanged
+    ssUtil.overwrittenFunction(BunkerSilo, "loadFromAttributesAndNodes", ssBunkerSilo.bunkerSiloLoadFromAttributesAndNodes)
+    ssUtil.overwrittenFunction(BunkerSilo, "delete", ssBunkerSilo.bunkerSiloDelete)
+    ssUtil.overwrittenConstant(BunkerSilo, "seasonLengthChanged", ssBunkerSilo.bunkerSiloSeasonLengthChanged)
 end
 
 function ssBunkerSilo:loadMap()
