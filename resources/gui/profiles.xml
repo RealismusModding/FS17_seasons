@@ -2,6 +2,7 @@
 <GUIProfiles>
     <Presets>
         <Preset name="colorWhite" value="1 1 1 1" />
+        <Preset name="colorWhite_0" value="1 1 1 0" />
         <Preset name="colorGreen" value="0.2122 0.5271 0.0307 1" />
         <Preset name="colorDarkGrey3" value="0.0194 0.0194 0.0194 1"/>
         <Preset name="colorGreen_50" value="0.2122 0.5271 0.0307 0.5" />
@@ -84,4 +85,66 @@
         <Value name="imageFocusedColor" value="$preset_colorWhite" />
         <Value name="imageSelectedColor" value="$preset_colorWhite" />
     </Profile>
+
+    <!-- Measurement dialog -->
+    <Profile name="ssMeasureToolDialogBg" parent="dialogBg">
+        <Value name="size" value="430px 640px" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogMainBg" parent="uiElementMainBg">
+        <Value name="size" value="390px 600px" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogHeader" parent="uiElementBaseHeader">
+        <Value name="size" value="390px 40px" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogTitle" parent="headerText">
+        <Value name="size" value="390px 40px" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogContentBox" parent="baseReference">
+        <Value name="size" value="390px 520px"/>
+
+        <Value name="positionOrigin" value="topLeft" />
+        <Value name="position" value="0px 560px" />
+
+        <Value name="alignmentX" value="left" />
+        <Value name="alignmentY" value="top" />
+
+        <Value name="imageColor" value="$preset_colorWhite_0" />
+        <Value name="useFullVisibility" value="false" />
+        <Value name="autoValidateLayout" value="true" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogItem" prarent="baseReference">
+        <Value name="size" value="390px 60px" />
+        <Value name="position" value="0px 0px" />
+
+        <!-- <Value name="imageColor" value="$preset_colorWhite" /> -->
+        <Value name="imageColor" value="$preset_colorGreen" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogItemIcon" parent="baseReference">
+        <Value name="screenAlign" value="topLeft" />
+        <Value name="positionOrigin" value="topLeft" />
+
+        <Value name="position" value="0px 0px" />
+        <Value name="size" value="60px 60px" />
+
+        <!-- <Value name="offset" value="0px 0px" /> -->
+        <!-- <Value name="focusedOffset" value="30px 0px" /> -->
+
+        <Value name="imageUVs" value="824px 901px 12px 12px" />
+
+        <Value name="imageColor" value="$preset_colorWhite" />
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogItemText" parent="baseReference">
+        <Value name="textSize" value="16px" />
+        <Value name="position" value="70px 0px" />
+        <!-- <Value name="textOffset" value="30px 13px" /> -->
+        <!-- <Value name="textFocusedOffset" value="60px 13px" /> -->
+    </Profile>
+
 </GUIProfiles>

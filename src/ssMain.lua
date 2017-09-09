@@ -109,12 +109,16 @@ function ssMain:loadMap()
 
     -- Create the GUI
     self.mainMenu = ssSeasonsMenu:new()
+    self.measureToolDialog = ssMeasureToolDialog:new()
 
     -- Load additional GUI profiles
     g_gui:loadProfiles(self.modDir .. "resources/gui/profiles.xml")
 
     -- Load the GUI configurations
     g_gui:loadGui(self.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", self.mainMenu)
+    g_gui:loadGui(self.modDir .. "resources/gui/MeasureToolDialog.xml", "MeasureToolDialog", self.measureToolDialog)
+
+    -- Correct the focus
     FocusManager:setGui("MPLoadingScreen")
 
     -- Remove the (hacked) store items

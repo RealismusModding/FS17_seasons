@@ -110,10 +110,6 @@ function ssMeasureTool:draw()
             self.blinkingMessage = nil
         end
     end
-
-    if self.drawDebugPara then
-        DebugUtil.drawDebugParallelogram(unpack(self.drawDebugPara))
-    end
 end
 
 function ssMeasureTool:setHandNode(handNode)
@@ -266,8 +262,6 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local worldWidthX, worldWidthZ = areaSize, 0
     local worldHeightX, worldHeightZ = 0, areaSize
 
-    self.drawDebugPara = { worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ, 0, 1, 0, 0, 1 }
-
     -- Read height
     local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z)
 
@@ -338,20 +332,37 @@ function ssMeasureTool:showPlantedTreeInfo(tree)
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
-    log("Tree")
-
+    local data = {}
     local treeTypeDesc = TreePlantUtil.treeTypeIndexToDesc[tree.treeType]
+    local typeName
+
     if treeTypeDesc then
-        log("Type:", treeTypeDesc.nameI18N)
+        typeName = treeTypeDesc.nameI18N
     elseif tree.nameI18N then
-        log("Type:", tree.nameI18N)
+        typeName = tree.nameI18N
     else
-        log("Type:", "Unknown (", tree.treeType, ")")
+        typeName = "Unknown (", tree.treeType, ")"
     end
 
+    table.insert(data, {
+        iconUVs = {688, 8, 128, 128},
+        text = typeName
+    })
+
+    table.insert(data, {
+        iconUVs = {552, 144, 128, 128},
+        text = "100%"
+    })
+
+    self:openDialog("Tree", {})
+
+
+    log("Tree")
+    log("Type:", typeName)
     log("Length:", "100%")
 
     log("-----------------------------------------")
+
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
@@ -362,6 +373,17 @@ function ssMeasureTool:showFillablePallet(pallet)
     end
 
     log("-----------------------------------------")
+end
+
+function ssMeasureTool:openDialog(title, contents)
+    local dialog = g_gui:showDialog("MeasureToolDialog")
+
+    dialog.target:setTitle(title)
+    dialog.target:setCallback(self.dialogClose, self, true)
+    dialog.target:setData(contents)
+end
+
+function ssMeasureTool:dialogClose()
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)

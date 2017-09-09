@@ -123,6 +123,7 @@ local files = {
     "gui/ssGraph",
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp",
+    "gui/ssMeasureToolDialog",
 
     "handtools/ssMeasureTool"
 }
