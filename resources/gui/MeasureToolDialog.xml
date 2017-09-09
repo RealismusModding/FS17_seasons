@@ -8,10 +8,12 @@
                 <GuiElement type="text" profile="ssMeasureToolDialogTitle" text="title" id="dialogTitleElement" />
             </GuiElement>
 
-            <GuiElement type="boxLayout" profile="ssMeasureToolDialogContentBox" id="contentBox" >
-                <GuiElement type="boxLayout" id="itemTemplate" profile="ssMeasureToolDialogItem">
-                    <!-- <GuiElement type="bitmap" profile="ssMeasureToolDialogItemIcon" /> -->
-                    <!-- <GuiElement type="text" profile="ssMeasureToolDialogItemText" text="text" /> -->
+            <GuiElement type="list" profile="ssMeasureToolDialogContentList" id="contentList">
+                <GuiElement type="listItem" id="contentItemTemplate" profile="ssMeasureToolDialogItem" onCreate="onCreateItem">
+                    <GuiElement type="flowLayout" profile="ssMeasureToolDialogItemBox">
+                        <GuiElement type="bitmap" profile="ssMeasureToolDialogItemIcon" onCreate="onCreateItemIcon" />
+                        <GuiElement type="text" profile="ssMeasureToolDialogItemText" text="text" onCreate="onCreateItemText" />
+                    </GuiElement>
                 </GuiElement>
 
                 <!-- ... -->

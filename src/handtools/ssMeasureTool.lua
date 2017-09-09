@@ -161,7 +161,6 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Some other object
     else
         local type = getRigidBodyType(hitObjectId)
-        log("type", type)
 
         -- Skip vehicles
         if type == "Dynamic" and g_currentMission.nodeToVehicle[hitObjectId] ~= nil then
@@ -354,15 +353,7 @@ function ssMeasureTool:showStaticTreeInfo(tree)
         text = "100%"
     })
 
-    self:openDialog("Tree", {})
-
-
-    log("Tree")
-    log("Type:", typeName)
-    log("Length:", "100%")
-
-    log("-----------------------------------------")
-
+    self:openDialog("Tree", data)
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
