@@ -114,7 +114,7 @@ end
 function ssMeasureToolDialog:onCreateItem(element)
     if self.currentItem ~= nil then
         if self.currentItemIsOdd then
-            -- element:applyProfile(element.profile .. "Odd")
+            element:applyProfile(element.profile .. "Odd")
         end
     end
 end
@@ -124,8 +124,8 @@ function ssMeasureToolDialog:onCreateItemIcon(element)
 
         log("do icon")
 
-        -- element:setImageFilename(g_seasons.modDir .. "resources/gui/measureTool.dds")
-        -- element:setImageUVs(GuiOverlay.STATE_NORMAL, unpack(getNormalizedUVs(self.currentItem.iconUVs)))
+        element:setImageFilename(g_seasons.modDir .. "resources/gui/measureTool.dds")
+        element:setImageUVs(GuiOverlay.STATE_NORMAL, unpack(getNormalizedUVs(self.currentItem.iconUVs)))
     end
 end
 

@@ -11,6 +11,20 @@ ssMeasureTool.MEASURE_DISTANCE = 10
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = 2000
 
+ssMeasureTool.UVS_COMPACTION    = {   8,   8, 128, 128 }
+ssMeasureTool.UVS_COMPASS       = { 144,   8, 128, 128 }
+ssMeasureTool.UVS_CONTENTS      = { 280,   8, 128, 128 }
+ssMeasureTool.UVS_CROP_HEIGHT   = { 416,   8, 128, 128 }
+ssMeasureTool.UVS_TREE_DISTANCE = { 552,   8, 128, 128 }
+ssMeasureTool.UVS_TREE_TYPE     = { 688,   8, 128, 128 }
+ssMeasureTool.UVS_ELEVATION     = {   8, 144, 128, 128 }
+ssMeasureTool.UVS_FERMENTATION  = { 144, 144, 128, 128 }
+ssMeasureTool.UVS_FERTILIZATION = { 280, 144, 128, 128 }
+ssMeasureTool.UVS_CROP_TYPE     = { 416, 144, 128, 128 }
+ssMeasureTool.UVS_TREE_HEIGHT   = { 552, 144, 128, 128 }
+
+ssMeasureTool.UVS_PLOUGHCOUNTER = { 552, 144, 128, 128 }
+
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
     if mt == nil then
@@ -240,16 +254,22 @@ function ssMeasureTool:showNoInfo()
 end
 
 function ssMeasureTool:showBaleInfo(bale)
-    log("Bale")
-    log("Fill:", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N)
-    log("Volume:", bale.fillLevel, "l")
-    log("Wrapped:", bale.wrappingState == 1 and "Yes" or "No")
+    local data = {}
+
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_CONTENTS,
+        text = FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N .. " (" .. bale.fillLevel .. " l)"
+    })
 
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
-        log("Fermentation:", string.format("%.2f", bale.fermentingProcess * 100), "%,", g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess, "hours to go")
+        local hours = g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_FERMENTATION,
+            text = string.format("%.2f%% (%d hours to go)", bale.fermentingProcess * 100, hours)
+        })
     end
 
-    log("-----------------------------------------")
+    self:openDialog("Bale", data)
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
@@ -275,10 +295,6 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
     local ploughCounter = a / b
 
-    -- Tips
-    -- local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailHeightId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.terrainDetailHeightTypeFirstChannel, g_currentMission.terrainDetailHeightTypeNumChannels)
-    -- log("tip type", a, b, c)
-
     -- Get fruit and fruit height
     local crop = nil
     for index, fruit in pairs(g_currentMission.fruits) do
@@ -295,39 +311,69 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         end
     end
 
-    local terrainTypes = { [0] = "no field", "cultivated", "ploughed", "sowed", "sowingWidth?", "grass"}
+    local data = {}
 
-    log("Terrain")
-    log("Type:", terrainTypes[terrainType], "(", terrainType ,")")
-    log("Coordinates:", string.format("(%.1f, %.1f)", x, z))
-    log("Elevation:", string.format("%.1f", terrainHeight), "m")
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_COMPASS,
+        text = string.format("%.1fN %.1fE", x, z)
+    })
+
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_ELEVATION,
+        text = string.format("%.1f m", terrainHeight)
+    })
 
     if crop then
-        log("Crop:", crop.desc.name)
-        log("Crop stage:", crop.stage)
-        -- find fill for i18n
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_CROP_TYPE,
+            text = crop.desc.name
+        })
+
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_CROP_HEIGHT,
+            text = crop.stage
+        })
+
+        -- TODO: find fill for i18n
     end
 
-    log("Fertilization:", sprayLevel)
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_FERTILIZATION,
+        text = string.format("%.0f%%", sprayLevel / 3 * 100)
+    })
 
-    if false then
-        log("Soil compaction:")
-        log("Weeds:")
-    else
-        log("Ploughing needed (counter):", ploughCounter)
-    end
+    -- table.insert(data, {
+    --     iconUVs = ssMeasureTool.UVS_PLOUGHCOUNTER,
+    --     text = ploughCounter
+    -- })
 
-    log("-----------------------------------------")
+    self:openDialog("Terrain", data)
 end
 
 function ssMeasureTool:showPlantedTreeInfo(tree)
-    log("Planted Tree")
-    log("Type:", TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N)
-    log("Length:", string.format("%.1f%%", (tree.growing and tree.growthState or 1) * 100))
-    log("Growth:", string.format("%.1f", tree.growthState))
-    log("Nearest tree:", string.format("%.1f m", tree.ssNearestDistance))
+    local data = {}
 
-    log("-----------------------------------------")
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_TREE_TYPE,
+        text = TreePlantUtil.treeTypeIndexToDesc[tree.treeType].nameI18N
+    })
+
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_TREE_HEIGHT,
+        text = string.format("%.0f%%", (tree.growing and tree.growthState or 1) * 100)
+    })
+
+    -- table.insert(data, {
+    --     iconUVs = {552, 144, 128, 128},
+    --     text = string.format("%.1f", tree.growthState)
+    -- })
+
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_TREE_DISTANCE,
+        text = string.format("%.1f m", tree.ssNearestDistance)
+    })
+
+    self:openDialog("Tree", data)
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
@@ -344,12 +390,12 @@ function ssMeasureTool:showStaticTreeInfo(tree)
     end
 
     table.insert(data, {
-        iconUVs = {688, 8, 128, 128},
+        iconUVs = ssMeasureTool.UVS_TREE_TYPE,
         text = typeName
     })
 
     table.insert(data, {
-        iconUVs = {552, 144, 128, 128},
+        iconUVs = ssMeasureTool.UVS_TREE_HEIGHT,
         text = "100%"
     })
 
@@ -357,13 +403,21 @@ function ssMeasureTool:showStaticTreeInfo(tree)
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
-    log("Pallet")
-    log("Contents:", FillUtil.fillTypeIndexToDesc[pallet.fillType].nameI18N, "(", pallet.fillLevel, ")")
+    local data = {}
+
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_CONTENTS,
+        text = string.format("%s (%d)", FillUtil.fillTypeIndexToDesc[pallet.fillType].nameI18N, pallet.fillLevel)
+    })
+
     if pallet.fillType == FillUtil.FILLTYPE_TREESAPLINGS then
-        log("Sapling type:", TreePlantUtil.treeTypeIndexToDesc[pallet.treeType].nameI18N)
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_TREE_TYPE,
+            text = TreePlantUtil.treeTypeIndexToDesc[pallet.treeType].nameI18N
+        })
     end
 
-    log("-----------------------------------------")
+    self:openDialog("Pallet", data)
 end
 
 function ssMeasureTool:openDialog(title, contents)
@@ -378,3 +432,7 @@ function ssMeasureTool:dialogClose()
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)
+
+-- TODO:
+-- translations
+-- conversion meter - feet

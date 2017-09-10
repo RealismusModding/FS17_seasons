@@ -92,11 +92,11 @@
 
     <!-- Measurement dialog -->
     <Profile name="ssMeasureToolDialogBg" parent="dialogBg">
-        <Value name="size" value="430px 640px" />
+        <Value name="size" value="430px 520px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogMainBg" parent="uiElementMainBg">
-        <Value name="size" value="390px 600px" />
+        <Value name="size" value="390px 480px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogHeader" parent="uiElementBaseHeader">
@@ -108,7 +108,7 @@
     </Profile>
 
     <Profile name="ssMeasureToolDialogContentList" parent="list">
-        <Value name="size" value="390px 520px"/>
+        <Value name="size" value="390px 400px"/>
 
         <Value name="screenAlign" value="middleRight"/>
         <Value name="positionOrigin" value="middleRight"/>
@@ -117,7 +117,7 @@
 
         <Value name="listItemHeight" value="60px"/>
         <Value name="isHorizontalList" value="false"/>
-        <Value name="visibleItems" value="9"/>
+        <Value name="visibleItems" value="7"/>
 
         <Value name="imageColor" value="$preset_colorGreen"/>
     </Profile>
@@ -132,27 +132,27 @@
         <Value name="imageSelectedColor" value="$preset_colorGreen"/> -->
     </Profile>
 
-    <Profile name="ssMeasureToolDialogItemOdd" parent="ssMeasureToolDialogItem" >
+    <Profile name="ssMeasureToolDialogItemOdd" parent="ssMeasureToolDialogItem">
         <Value name="imageColor" value="$preset_colorDarkGrey3"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemIcon" parent="baseReference">
-        <Value name="screenAlign" value="topLeft" />
-        <Value name="positionOrigin" value="topLeft" />
+        <!-- <Value name="screenAlign" value="topLeft" /> -->
+        <!-- <Value name="positionOrigin" value="topLeft" /> -->
 
         <Value name="position" value="0px 0px" />
         <Value name="size" value="58px 58px" />
-        <Value name="margin" value="5px 5px 5px 5px" />
+        <!-- <Value name="margin" value="5px 5px 5px 5px" /> -->
 
         <Value name="imageColor" value="$preset_colorWhite" />
     </Profile>
 
-    <Profile name="ssMeasureToolDialogItemText" parent="baseReference">
+    <Profile name="ssMeasureToolDialogItemText" parent="textDefault">
         <Value name="textAlignment" value="left"/>
         <Value name="textBold" value="true"/>
 
         <Value name="textSize" value="20px" />
-        <Value name="position" value="70px 0px" />
+        <Value name="position" value="60px 0px" />
     </Profile>
 
 </GUIProfiles>
