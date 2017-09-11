@@ -323,17 +323,16 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local data = {}
 
 
-    log("size", g_currentMission.terrainSize)
     local worldSize = g_currentMission.terrainSize
-    local normalizedPlayerPosX = Utils.clamp((math.floor(x) + worldSize * 0.5) / worldSize, 0, 1)
-    local normalizedPlayerPosZ = Utils.clamp((math.floor(z) + worldSize * 0.5) / worldSize, 0, 1)
+    local normalizedPlayerPosX = Utils.clamp((x + worldSize * 0.5) / worldSize, 0, 1)
+    local normalizedPlayerPosZ = Utils.clamp((z + worldSize * 0.5) / worldSize, 0, 1)
 
-    local posX = (normalizedPlayerPosX - 0.5) * worldSize
-    local posZ = (normalizedPlayerPosZ - 0.5) * worldSize
+    local posX = normalizedPlayerPosX * worldSize
+    local posZ = normalizedPlayerPosZ * worldSize
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_COMPASS,
-        text = string.format("%.2fX, %.2fZ", posX / 100, posZ / 100)
+        text = string.format("%.2fX, %.2fZ", posX, posZ)
     })
 
     table.insert(data, {
