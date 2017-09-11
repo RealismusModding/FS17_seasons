@@ -102,7 +102,7 @@ function ssMeasureToolDialog:updateContent()
     self.currentItem = nil
 end
 
-function ssMeasureToolDialog:onCreateItem(element)
+function ssMeasureToolDialog:onCreateItemBg(element)
     if self.currentItem ~= nil then
         if self.currentItemIsOdd == true then
             element:applyProfile(element.profile .. "Odd")

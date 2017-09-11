@@ -122,6 +122,7 @@
         <Value name="visibleItems" value="7"/>
 
         <Value name="imageColor" value="$preset_colorGreen"/>
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
 
@@ -136,10 +137,32 @@
         <Value name="imageColor" value="$preset_colorWhite"/>
         <!-- <Value name="imageFocusedColor" value="$preset_colorWhite_0"/>
         <Value name="imageSelectedColor" value="$preset_colorWhite_0"/> -->
+
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
-    <Profile name="ssMeasureToolDialogItemOdd" parent="ssMeasureToolDialogItem">
-        <!-- <Value name="imageColor" value="$preset_colorDarkGrey3"/> -->
+    <Profile name="ssMeasureToolDialogItemBg" parent="baseReference">
+        <Value name="size" value="390px 58px" />
+
+        <Value name="screenAlign" value="bottomLeft"/>
+        <Value name="positionOrigin" value="bottomLeft"/>
+
+        <Value name="position" value="0px 0px"/>
+
+        <Value name="imageColor" value="$preset_colorDarkGrey6" />
+        <Value name="imageFocusedColor" value="$preset_colorDarkGrey2_50" />
+        <Value name="imageSelectedColor" value="$preset_colorDarkGrey2" />
+
+        <Value name="margin" value="0px 0px 2px 0px"/>
+        <Value name="disabled" value="true"/>
+
+        <!-- <Value name="imageColor" value="$preset_acolorDarkGrey3"/> -->
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogItemBgOdd" parent="ssMeasureToolDialogItemBg">
+        <Value name="imageColor" value="$preset_colorGreen"/>
+
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemBox" parent="baseReference">
@@ -147,6 +170,8 @@
         <!-- <Value name="imageColor" value="$preset_colorDarkGrey2"/> -->
 
         <Value name="imageColor" value="$preset_colorGreen"/>
+
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemIcon" parent="baseReference">
@@ -158,6 +183,8 @@
         <!-- <Value name="margin" value="5px 5px 5px 5px" /> -->
 
         <!-- <Value name="imageColor" value="$preset_colorWhite" /> -->
+
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemText" parent="baseReference">
@@ -168,9 +195,13 @@
         <!-- <Value name="textOffset" value="0px 5px" /> -->
         <Value name="size" value="330px 58px" />
 
-        <!-- <Value name="screenAlign" value="middleLeft" /> -->
-        <!-- <Value name="positionOrigin" value="middleLeft" /> -->
-        <Value name="position" value="65px 29px" /><!-- 30*2 + 5 -->
+        <Value name="screenAlign" value="middleLeft" />
+        <Value name="positionOrigin" value="middleLeft" />
+
+        <Value name="position" value="0px 0px" />
+        <!-- <Value name="position" value="65px 29px" /><!-- 30*2 + 5 -->
+
+        <Value name="debugEnabled" value="true"/>
     </Profile>
 
 </GUIProfiles>
