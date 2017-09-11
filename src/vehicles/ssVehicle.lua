@@ -243,7 +243,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local maintenanceCost = 0
 
     if daysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
-        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
+        maintenanceCost = math.min((newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2), storeItem.price * 1.5)
     end
 
     return maintenanceCost
