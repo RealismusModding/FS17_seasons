@@ -133,7 +133,7 @@
         <Value name="imageFocusedColor" value="$preset_colorGreen_50"/>
         <Value name="imageSelectedColor" value="$preset_colorGreen"/> -->
 
-        <Value name="imageColor" value="$preset_colorWhite_0"/>
+        <Value name="imageColor" value="$preset_colorWhite"/>
         <!-- <Value name="imageFocusedColor" value="$preset_colorWhite_0"/>
         <Value name="imageSelectedColor" value="$preset_colorWhite_0"/> -->
     </Profile>
