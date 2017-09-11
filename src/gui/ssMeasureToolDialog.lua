@@ -55,8 +55,6 @@ function ssMeasureToolDialog:onClose()
 
     self.contentList:deleteListItems()
     self:setTitle("")
-
-    self:resizeDialog(0)
 end
 
 function ssMeasureToolDialog:onClickBack(forceBack, usedMenuButton)
@@ -88,13 +86,6 @@ end
 function ssMeasureToolDialog:setData(data)
     self.data = data
     self:updateContent()
-
-    -- self:resizeDialog(60 * table.getn(data))
-end
-
-function ssMeasureToolDialog:resizeDialog(heightOffset)
-    self.dialogElement:setSize(nil, self.defaultDialogHeight + heightOffset)
-    self.dialogBgElement:setSize(nil, self.defaultDialogBgHeight + heightOffset)
 end
 
 function ssMeasureToolDialog:updateContent()
@@ -113,7 +104,7 @@ end
 
 function ssMeasureToolDialog:onCreateItem(element)
     if self.currentItem ~= nil then
-        if self.currentItemIsOdd then
+        if self.currentItemIsOdd == true then
             element:applyProfile(element.profile .. "Odd")
         end
     end
@@ -121,9 +112,6 @@ end
 
 function ssMeasureToolDialog:onCreateItemIcon(element)
     if self.currentItem ~= nil then
-
-        log("do icon")
-
         element:setImageFilename(g_seasons.modDir .. "resources/gui/measureTool.dds")
         element:setImageUVs(GuiOverlay.STATE_NORMAL, unpack(getNormalizedUVs(self.currentItem.iconUVs)))
     end

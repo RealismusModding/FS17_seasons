@@ -258,14 +258,16 @@ function ssMeasureTool:showBaleInfo(bale)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_CONTENTS,
-        text = FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N .. " (" .. bale.fillLevel .. " l)"
+        text = string.format("%s (%.1f l)", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N, bale.fillLevel)
     })
 
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
-        local hours = g_seasons.environment.daysInSeason / 3 * 24 * bale.fermentingProcess
+        local hours = g_seasons.environment.daysInSeason / 3 * 24 * (1 - bale.fermentingProcess)
+
+        -- TODO: "less than 1 hour to go" text
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_FERMENTATION,
-            text = string.format("%.2f%% (%d hours to go)", bale.fermentingProcess * 100, hours)
+            text = string.format("%.2f%% (" .. ssLang.getText("measuretool_fermentation_time") .. ")", bale.fermentingProcess * 100, hours)
         })
     end
 
@@ -315,12 +317,12 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_COMPASS,
-        text = string.format("%.1fN %.1fE", x, z)
+        text = string.format("%.3fX, %.3fZ", x / 100, z / 100)
     })
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_ELEVATION,
-        text = string.format("%.1f m", terrainHeight)
+        text = ssLang.formatLength(terrainHeight)
     })
 
     if crop then
@@ -370,7 +372,7 @@ function ssMeasureTool:showPlantedTreeInfo(tree)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_TREE_DISTANCE,
-        text = string.format("%.1f m", tree.ssNearestDistance)
+        text = ssLang.formatLength(tree.ssNearestDistance)
     })
 
     self:openDialog("Tree", data)
@@ -423,7 +425,7 @@ end
 function ssMeasureTool:openDialog(title, contents)
     local dialog = g_gui:showDialog("MeasureToolDialog")
 
-    dialog.target:setTitle(title)
+    dialog.target:setTitle(ssLang.getText("measuretool_title"))
     dialog.target:setCallback(self.dialogClose, self, true)
     dialog.target:setData(contents)
 end
@@ -434,5 +436,4 @@ end
 registerHandTool("ssMeasureTool", ssMeasureTool)
 
 -- TODO:
--- translations
--- conversion meter - feet
+-- fermentation time correctly
