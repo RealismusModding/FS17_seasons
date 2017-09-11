@@ -332,7 +332,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_COMPASS,
-        text = string.format("%.2fX, %.2fZ", posX, posZ)
+        text = string.format("%.2f, %.2f", posX, posZ)
     })
 
     table.insert(data, {
