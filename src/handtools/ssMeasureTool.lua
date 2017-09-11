@@ -6,10 +6,10 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
 ssMeasureTool.MEASURE_PULSE = 400
-ssMeasureTool.MEASURE_TIMEOUT = 1000 --3000
+ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_DISTANCE = 10
 
-ssMeasureTool.BLINKING_MESSAGE_DURATION = 2000
+ssMeasureTool.BLINKING_MESSAGE_DURATION = ssMeasureTool.MEASURE_TIMEOUT
 
 ssMeasureTool.UVS_COMPACTION    = {   8,   8, 128, 128 }
 ssMeasureTool.UVS_COMPASS       = { 144,   8, 128, 128 }
@@ -23,6 +23,7 @@ ssMeasureTool.UVS_FERTILIZATION = { 280, 144, 128, 128 }
 ssMeasureTool.UVS_CROP_TYPE     = { 416, 144, 128, 128 }
 ssMeasureTool.UVS_TREE_HEIGHT   = { 552, 144, 128, 128 }
 
+ssMeasureTool.UVS_MOISTURE      = { 688, 144, 128, 128 }
 ssMeasureTool.UVS_PLOUGHCOUNTER = { 552, 144, 128, 128 }
 
 function ssMeasureTool:new(isServer, isClient, customMt)
@@ -258,16 +259,22 @@ function ssMeasureTool:showBaleInfo(bale)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_CONTENTS,
-        text = string.format("%s (%.1f l)", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N, bale.fillLevel)
+        text = string.format("%s (%.0f l)", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N, bale.fillLevel)
     })
 
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
         local hours = g_seasons.environment.daysInSeason / 3 * 24 * (1 - bale.fermentingProcess)
 
-        -- TODO: "less than 1 hour to go" text
+        local text
+        if hours <= 1 then
+            text = ssLang.getText("measuretool_fermentation_time_low")
+        else
+            text = string.format(ssLang.getText("measuretool_fermentation_time"), hours)
+        end
+
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_FERMENTATION,
-            text = string.format("%.2f%% (" .. ssLang.getText("measuretool_fermentation_time") .. ")", bale.fermentingProcess * 100, hours)
+            text = string.format("%.2f%% (%s)", bale.fermentingProcess * 100, text)
         })
     end
 
@@ -304,7 +311,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         local a, b, c = getDensityParallelogram(fruit.id, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  0, g_currentMission.numFruitDensityMapChannels)
 
         if a > 0 then
-            fruit = {
+            crop = {
                 desc = fruitDesc,
                 id = fruit.id,
                 stage = a / b
@@ -315,9 +322,18 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
 
     local data = {}
 
+
+    log("size", g_currentMission.terrainSize)
+    local worldSize = g_currentMission.terrainSize
+    local normalizedPlayerPosX = Utils.clamp((math.floor(x) + worldSize * 0.5) / worldSize, 0, 1)
+    local normalizedPlayerPosZ = Utils.clamp((math.floor(z) + worldSize * 0.5) / worldSize, 0, 1)
+
+    local posX = (normalizedPlayerPosX - 0.5) * worldSize
+    local posZ = (normalizedPlayerPosZ - 0.5) * worldSize
+
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_COMPASS,
-        text = string.format("%.3fX, %.3fZ", x / 100, z / 100)
+        text = string.format("%.2fX, %.2fZ", posX / 100, posZ / 100)
     })
 
     table.insert(data, {
@@ -326,17 +342,22 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     })
 
     if crop then
+        local fillType = FruitUtil.fruitTypeToFillType[crop.desc.index]
+        local length = 0
+        local densityState = crop.stage - 1
+        if densityState <= crop.desc.maxHarvestingGrowthState then
+            length = Utils.clamp(densityState / crop.desc.maxHarvestingGrowthState, 0, 1)
+        end
+
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_CROP_TYPE,
-            text = crop.desc.name
+            text = FillUtil.fillTypeIndexToDesc[fillType].nameI18N
         })
 
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_CROP_HEIGHT,
-            text = crop.stage
+            text = string.format("%.0f%%", length * 100)
         })
-
-        -- TODO: find fill for i18n
     end
 
     table.insert(data, {
@@ -347,6 +368,12 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     -- table.insert(data, {
     --     iconUVs = ssMeasureTool.UVS_PLOUGHCOUNTER,
     --     text = ploughCounter
+    -- })
+
+    -- local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
+    -- table.insert(data, {
+    --     iconUVs = ssMeasureTool.UVS_MOISTURE,
+    --     text = string.format("%.0f%%", moisture * 100)
     -- })
 
     self:openDialog("Terrain", data)
@@ -434,6 +461,3 @@ function ssMeasureTool:dialogClose()
 end
 
 registerHandTool("ssMeasureTool", ssMeasureTool)
-
--- TODO:
--- fermentation time correctly

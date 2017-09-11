@@ -92,11 +92,11 @@
 
     <!-- Measurement dialog -->
     <Profile name="ssMeasureToolDialogBg" parent="dialogBg">
-        <Value name="size" value="430px 520px" />
+        <Value name="size" value="430px 540px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogMainBg" parent="uiElementMainBg">
-        <Value name="size" value="390px 480px" />
+        <Value name="size" value="390px 500px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogHeader" parent="uiElementBaseHeader">
@@ -108,7 +108,7 @@
     </Profile>
 
     <Profile name="ssMeasureToolDialogContentList" parent="list">
-        <Value name="size" value="390px 400px"/>
+        <Value name="size" value="390px 420px"/>
 
         <Value name="screenAlign" value="middleRight"/>
         <Value name="positionOrigin" value="middleRight"/>
@@ -120,29 +120,14 @@
 
         <Value name="isHorizontalList" value="false"/>
         <Value name="visibleItems" value="7"/>
-
-        <Value name="imageColor" value="$preset_colorGreen"/>
-        <Value name="debugEnabled" value="true"/>
     </Profile>
 
-
     <Profile name="ssMeasureToolDialogItem" prarent="listItem">
-        <Value name="size" value="390px 58px" />
-
-        <!-- <Value name="imageColor" value="$preset_colorGreen" /> -->
-        <!-- <Value name="imageColor" value="$preset_colorDarkGrey_0"/>
-        <Value name="imageFocusedColor" value="$preset_colorGreen_50"/>
-        <Value name="imageSelectedColor" value="$preset_colorGreen"/> -->
-
-        <Value name="imageColor" value="$preset_colorWhite"/>
-        <!-- <Value name="imageFocusedColor" value="$preset_colorWhite_0"/>
-        <Value name="imageSelectedColor" value="$preset_colorWhite_0"/> -->
-
-        <Value name="debugEnabled" value="true"/>
+        <Value name="size" value="390px 60px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemBg" parent="baseReference">
-        <Value name="size" value="390px 58px" />
+        <Value name="size" value="390px 60px" />
 
         <Value name="screenAlign" value="bottomLeft"/>
         <Value name="positionOrigin" value="bottomLeft"/>
@@ -153,38 +138,19 @@
         <Value name="imageFocusedColor" value="$preset_colorDarkGrey2_50" />
         <Value name="imageSelectedColor" value="$preset_colorDarkGrey2" />
 
-        <Value name="margin" value="0px 0px 2px 0px"/>
         <Value name="disabled" value="true"/>
-
-        <!-- <Value name="imageColor" value="$preset_acolorDarkGrey3"/> -->
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemBgOdd" parent="ssMeasureToolDialogItemBg">
-        <Value name="imageColor" value="$preset_colorGreen"/>
-
-        <Value name="debugEnabled" value="true"/>
-    </Profile>
-
-    <Profile name="ssMeasureToolDialogItemBox" parent="baseReference">
-        <!-- <Value name="imageColor" value="$preset_colorWhite_0"/> -->
-        <!-- <Value name="imageColor" value="$preset_colorDarkGrey2"/> -->
-
-        <Value name="imageColor" value="$preset_colorGreen"/>
-
-        <Value name="debugEnabled" value="true"/>
+        <Value name="imageColor" value="$preset_colorDarkGrey3" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemIcon" parent="baseReference">
-        <Value name="screenAlign" value="middleCenter" />
-        <Value name="positionOrigin" value="middleCenter" />
+        <Value name="screenAlign" value="bottomLeft" />
+        <Value name="positionOrigin" value="bottomLeft" />
 
-        <Value name="position" value="30px 29px" />
+        <Value name="position" value="10px 10px" />
         <Value name="size" value="40px 40px" />
-        <!-- <Value name="margin" value="5px 5px 5px 5px" /> -->
-
-        <!-- <Value name="imageColor" value="$preset_colorWhite" /> -->
-
-        <Value name="debugEnabled" value="true"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemText" parent="baseReference">
@@ -192,16 +158,12 @@
         <Value name="textBold" value="true"/>
         <Value name="textSize" value="16px" />
 
-        <!-- <Value name="textOffset" value="0px 5px" /> -->
-        <Value name="size" value="330px 58px" />
+        <Value name="screenAlign" value="bottomLeft" />
+        <Value name="positionOrigin" value="bottomLeft" />
 
-        <Value name="screenAlign" value="middleLeft" />
-        <Value name="positionOrigin" value="middleLeft" />
+        <Value name="position" value="70px 22px" />
 
-        <Value name="position" value="0px 0px" />
-        <!-- <Value name="position" value="65px 29px" /><!-- 30*2 + 5 -->
-
-        <Value name="debugEnabled" value="true"/>
+        <!-- <Value name="debugEnabled" value="true"/> -->
     </Profile>
 
 </GUIProfiles>
