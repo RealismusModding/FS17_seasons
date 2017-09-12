@@ -109,18 +109,27 @@ function ssAnimals:seasonLengthChanged()
     self:adjustAnimals()
 end
 
+-- Returns a table of factors per animal, and a general factor for other animals
+function ssAnimals:getDeathFactors()
+    return {
+        ["cow"] = 0.15, -- can live approx 4 weeks without food
+        ["sheep"] = 0.1, -- can probably live longer than cows without food
+        ["pig"] = 0.25, -- can live approx 2 weeks without food
+    }, 0.1
+end
+
 function ssAnimals:dayChanged()
     if g_currentMission:getIsServer() and g_currentMission.missionInfo.difficulty ~= 0 then
+        local factors, generic = self:getDeathFactors()
+
         local numKilled = 0
-        -- percentages for base season length = 6 days
-        -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-        numKilled = numKilled + self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
 
-        -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-        numKilled = numKilled + self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        for  _, husbandry in pairs(g_currentMission.husbandries) do
+            local typ = husbandry.typeName
+            local factor = Utils.getNoNil(factors[typ], generic)
 
-        -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-        numKilled = numKilled + self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+            numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        end
 
         if numKilled > 0 then
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, string.format(ssLang.getText("warning_animalsKilled"), numKilled))
@@ -294,7 +303,7 @@ function ssAnimals:husbandryGetDataAttributes(superFunc)
     local ret = { superFunc(self) }
 
     self.productivity = tmpProductivity
-	
+
     return unpack(ret)
 end
 
