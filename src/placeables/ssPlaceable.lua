@@ -13,7 +13,7 @@ function ssPlaceable:preLoad()
     Placeable.getDailyUpKeep = Utils.overwrittenFunction(Placeable.getDailyUpKeep, ssPlaceable.placeableGetDailyUpkeep)
     Placeable.getSellPrice = Utils.overwrittenFunction(Placeable.getSellPrice, ssPlaceable.placeableGetSellPrice)
 
-    Placeable.finalizePlacement = Utils.overwrittenFunction(Placeable.finalizePlacement, ssPlaceable.placeableFinalizePlacement)
+    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssPlaceable.placeableFinalizePlacement)
     Placeable.delete = Utils.overwrittenFunction(Placeable.delete, ssPlaceable.placeableDelete)
     Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
@@ -23,14 +23,10 @@ end
 
 -- When placing, add listener and update income value
 function ssPlaceable:placeableFinalizePlacement(superFunc)
-    local ret = superFunc(self)
-
     self.ssOriginalIncomePerHour = self.incomePerHour
 
     g_seasons.environment:addSeasonLengthChangeListener(self)
     self:seasonLengthChanged()
-
-    return ret
 end
 
 -- When deleting, also remove listener
