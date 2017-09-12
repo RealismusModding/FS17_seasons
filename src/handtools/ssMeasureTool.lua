@@ -5,9 +5,11 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
 ssMeasureTool.MEASURE_TIME = 1500 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
-ssMeasureTool.MEASURE_PULSE = 400
+ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_DISTANCE = 10
+
+ssMeasureTool.BREATH_TIME = 4400
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = ssMeasureTool.MEASURE_TIMEOUT
 
@@ -44,14 +46,15 @@ function ssMeasureTool:load(xmlFilename, player)
     local xmlFile = loadXMLFile("TempXML", xmlFilename)
 
     self.objectNode = getChildAt(self.rootNode, 0)
+
     self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "handTool.measureTool.pricePerSecond"), 50) / 1000
+    self.moveCounter = 0
 
     if self.isClient then
-        -- self.handNode = Utils.getNoNil(Utils.indexToObject(self.rootNode, getXMLString(xmlFile, "handTool.chainsaw.handNode#index")), self.rootNode)
-        -- self.handNodeRotation = Utils.getRadiansFromString(Utils.getNoNil(getXMLString(xmlFile, "handTool.chainsaw.handNode#rotation"), "0 0 0"), 3)
-    end
+        self.sampleMeasure = SoundUtil.loadSample(xmlFile, {}, "handTool.measureTool.measureSound", nil, self.baseDirectory)
 
-    self.currentHandNode = nil
+        SoundUtil.setSampleVolume(self.sampleMeasure, 0.1)
+    end
 
     delete(xmlFile)
 
@@ -60,6 +63,10 @@ end
 
 function ssMeasureTool:delete()
     ssMeasureTool:superClass().delete(self)
+
+    if self.isClient then
+        sampleMeasure(self.sampleMeasure)
+    end
 end
 
 function ssMeasureTool:update(dt, allowInput)
@@ -72,20 +79,32 @@ function ssMeasureTool:update(dt, allowInput)
         g_currentMission:addSharedMoney(-price, "vehicleRunningCost")
     end
 
+    self.moveCounter = (self.moveCounter + dt) % ssMeasureTool.BREATH_TIME
+    local pulse = math.sin(self.moveCounter / ssMeasureTool.BREATH_TIME * math.pi)
+    setTranslation(self.rootNode, self.position[1], self.position[2] + pulse * 0.003 - 0.0015, self.position[3])
+    setRotation(self.rootNode, self.rotation[1] - pulse * math.rad(4) + math.rad(2), self.rotation[2], self.rotation[3])
+
     if allowInput then
         if InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL) and self.measuringTimeoutStart == nil then
             if self.measuringStart == nil then
                 self.measuringStart = g_currentMission.time
                 self.measureDuration = math.random(ssMeasureTool.MEASURE_TIME - ssMeasureTool.MEASURE_TIME_VAR, ssMeasureTool.MEASURE_TIME + ssMeasureTool.MEASURE_TIME_VAR)
             end
+
+            if not SoundUtil.isSamplePlaying(self.sampleMeasure, 0) then
+                SoundUtil.playSample(self.sampleMeasure, 0, 0, nil)
+            end
         else
             self.measuringStart = nil
+            SoundUtil.stopSample(self.sampleMeasure, true)
         end
 
         -- Timers for scanning and timeout
         if self.measuringStart ~= nil and g_currentMission.time - self.measuringStart >= self.measureDuration then
             self.measuringStart = nil
             self.measuringTimeoutStart = g_currentMission.time
+
+            SoundUtil.stopSample(self.sampleMeasure, true)
 
             self:executeMeasurement()
         elseif self.measuringTimeoutStart ~= nil and g_currentMission.time - self.measuringTimeoutStart >= ssMeasureTool.MEASURE_TIMEOUT then

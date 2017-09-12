@@ -26,9 +26,10 @@
     <rotation value="80 160 0"/>
 
     <measureTool>
-        <handNode index="0>0" rotation="-50 0 0"/>
-        <!-- <equipment uvs="0.5 0.5"/> -->
-        <!-- <workSound file="shared/Axe.wav" pitchOffset="1" volume="1"/> -->
+        <handNode index="0>0" rotation="-50 0 0" />
+
+        <measureSound file="resources/handtools/wopstr420/beep.wav" pitchOffset="1" volume="1" />
+
         <pricePerSecond>0</pricePerSecond>
     </measureTool>
 </handTool>
