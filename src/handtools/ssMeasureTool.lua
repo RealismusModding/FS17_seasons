@@ -3,13 +3,13 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
 -- InitStaticObjectClass(ssMeasureTool, "ssMeasureTool", ObjectIds.OBJECT_CHAINSAW)
 
-ssMeasureTool.MEASURE_TIME = 1500 -- ms
+ssMeasureTool.MEASURE_TIME = 1600 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 300
-ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.MEASURE_TIMEOUT = 2000
-ssMeasureTool.MEASURE_DISTANCE = 10
-
+ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.BREATH_TIME = 4400
+
+ssMeasureTool.MEASURE_DISTANCE = 4 -- meters
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = ssMeasureTool.MEASURE_TIMEOUT
 
@@ -96,7 +96,8 @@ function ssMeasureTool:update(dt, allowInput)
             end
         else
             self.measuringStart = nil
-            SoundUtil.stopSample(self.sampleMeasure, true)
+
+            SoundUtil.stopSample(self.sampleMeasure)
         end
 
         -- Timers for scanning and timeout
@@ -104,7 +105,7 @@ function ssMeasureTool:update(dt, allowInput)
             self.measuringStart = nil
             self.measuringTimeoutStart = g_currentMission.time
 
-            SoundUtil.stopSample(self.sampleMeasure, true)
+            SoundUtil.stopSample(self.sampleMeasure)
 
             self:executeMeasurement()
         elseif self.measuringTimeoutStart ~= nil and g_currentMission.time - self.measuringTimeoutStart >= ssMeasureTool.MEASURE_TIMEOUT then
@@ -410,14 +411,10 @@ function ssMeasureTool:showPlantedTreeInfo(tree)
         text = string.format("%.0f%%", (tree.growing and tree.growthState or 1) * 100)
     })
 
-    -- table.insert(data, {
-    --     iconUVs = {552, 144, 128, 128},
-    --     text = string.format("%.1f", tree.growthState)
-    -- })
-
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_TREE_DISTANCE,
-        text = ssLang.formatLength(tree.ssNearestDistance)
+        text = ssLang.formatLength(tree.ssNearestDistance),
+        hasIssue = g_seasons.treeManager:isTreeGrowthLimited(tree)
     })
 
     self:openDialog("Tree", data)

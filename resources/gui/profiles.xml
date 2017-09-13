@@ -6,6 +6,7 @@
         <Preset name="colorGreen" value="0.2122 0.5271 0.0307 1" />
         <Preset name="colorDarkGrey3" value="0.0194 0.0194 0.0194 1"/>
         <Preset name="colorGreen_50" value="0.2122 0.5271 0.0307 0.5" />
+        <Preset name="colorRed" value="0.8069 0.0097 0.0097 1" />
 
         <Preset name="colorDarkGrey2" value="0.0630 0.0630 0.0630 1"/>
         <Preset name="colorDarkGrey2_50" value="0.0630 0.0630 0.0630 0.5"/>
@@ -164,6 +165,12 @@
         <Value name="position" value="70px 22px" />
 
         <!-- <Value name="debugEnabled" value="true"/> -->
+    </Profile>
+
+    <Profile name="ssMeasureToolDialogItemTextIssue" parent="ssMeasureToolDialogItemText">
+        <Value name="textColor" value="$preset_colorRed" />
+        <Value name="textSelectedColor" value="$preset_colorRed"/>
+        <Value name="textPreSelectedColor" value="$preset_colorRed"/>
     </Profile>
 
 </GUIProfiles>

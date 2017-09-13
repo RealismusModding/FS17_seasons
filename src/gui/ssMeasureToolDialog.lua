@@ -120,5 +120,9 @@ end
 function ssMeasureToolDialog:onCreateItemText(element)
     if self.currentItem ~= nil then
         element:setText(self.currentItem.text)
+
+        if self.currentItem.hasIssue == true then
+            element:applyProfile(element.profile .. "Issue")
+        end
     end
 end
