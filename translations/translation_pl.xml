@@ -89,7 +89,7 @@
         <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
 
         <text name="measuretool_title" text="Pomiar" />
-        <text name="measuretool_fermentation_time" text="Pozostało %d godzin" />
+        <text name="measuretool_fermentation_time" text="Pozostało %d godzin(y)" />
         <text name="measuretool_fermentation_time_low" text="pozostało mniej niż 1 godzina" />
         <text name="measuretool_failed" text="Pomiar nieudany" />
         <text name="measuretool_no_info" text="Pomiar nieudany: brak informacji" />
