@@ -88,6 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
         <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
 
+        <!-- Missing translation of "Measurement" -->
+        <text name="measuretool_title" text="" />
+        <!-- Missing translation of "%d hours to go" -->
+        <text name="measuretool_fermentation_time" text="" />
+        <!-- Missing translation of "less than 1 hour to go" -->
+        <text name="measuretool_fermentation_time_low" text="" />
+        <!-- Missing translation of "Measurement failed" -->
+        <text name="measuretool_failed" text="" />
+        <!-- Missing translation of "Measurement failed: no information" -->
+        <text name="measuretool_no_info" text="" />
+
         <text name="ui_pageCalender" text="Kalendarz" />
         <text name="ui_pageEconomy" text="Ekonomia" />
         <text name="ui_pageSettings" text="Ustawienia" />
@@ -131,6 +142,9 @@
         <text name="dialog_sleeping" text="Odpoczynek przed kolejnym dniem pracy na farmie... Zzz..." />
 
         <text name="fillType_snow" text="Śnieg" />
+
+        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
+        <text name="function_measureTool" text="" />
 
         <text name="ss_helpCategory" text="Seasons" />
 

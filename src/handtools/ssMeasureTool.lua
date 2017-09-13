@@ -3,8 +3,8 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
 -- InitStaticObjectClass(ssMeasureTool, "ssMeasureTool", ObjectIds.OBJECT_CHAINSAW)
 
-ssMeasureTool.MEASURE_TIME = 1600 -- ms
-ssMeasureTool.MEASURE_TIME_VAR = 300
+ssMeasureTool.MEASURE_TIME = 2100 -- ms
+ssMeasureTool.MEASURE_TIME_VAR = 1000
 ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.BREATH_TIME = 4400
@@ -89,6 +89,8 @@ function ssMeasureTool:update(dt, allowInput)
             if self.measuringStart == nil then
                 self.measuringStart = g_currentMission.time
                 self.measureDuration = math.random(ssMeasureTool.MEASURE_TIME - ssMeasureTool.MEASURE_TIME_VAR, ssMeasureTool.MEASURE_TIME + ssMeasureTool.MEASURE_TIME_VAR)
+
+                self.measureDuration = self.measureDuration - self.measureDuration % ssMeasureTool.MEASURE_PULSE
             end
 
             if not SoundUtil.isSamplePlaying(self.sampleMeasure, 0) then
@@ -131,6 +133,10 @@ function ssMeasureTool:draw()
             local pulse = math.abs(math.sin(timeLapsed / ssMeasureTool.MEASURE_PULSE * math.pi))
 
             scale = pulse * 0.6 + 0.1
+        elseif self.measuringTimeoutStart ~= nil then
+            self.player.pickedUpObjectOverlay:setColor(0.6514, 0.0399, 0.0399, 1)
+        else
+            self.player.pickedUpObjectOverlay:setColor(1, 1, 1, 1)
         end
 
         self.player.pickedUpObjectOverlay:setDimension(self.player.pickedUpObjectWidth * scale, self.player.pickedUpObjectHeight * scale)
@@ -171,6 +177,8 @@ end
 
 function ssMeasureTool:onDeactivate(allowInput)
     ssMeasureTool:superClass().onDeactivate(self)
+
+    self.player.pickedUpObjectOverlay:setColor(1, 1, 1, 1)
 
     self.player.walkingIsLocked = false
 end
@@ -265,12 +273,12 @@ function ssMeasureTool:findTree(objectId)
 end
 
 function ssMeasureTool:showFailed()
-    self.blinkingMessage = "Measurement failed"
+    self.blinkingMessage = ssLang.getText("measuretool_failed")
     self.blinkingMessageUntil = g_currentMission.time + ssMeasureTool.BLINKING_MESSAGE_DURATION
 end
 
 function ssMeasureTool:showNoInfo()
-    self.blinkingMessage = "Measurement failed: no info"
+    self.blinkingMessage = ssLang.getText("measuretool_no_info")
     self.blinkingMessageUntil = g_currentMission.time + ssMeasureTool.BLINKING_MESSAGE_DURATION
 end
 
@@ -285,16 +293,19 @@ function ssMeasureTool:showBaleInfo(bale)
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
         local hours = g_seasons.environment.daysInSeason / 3 * 24 * (1 - bale.fermentingProcess)
 
-        local text
-        if hours <= 1 then
-            text = ssLang.getText("measuretool_fermentation_time_low")
-        else
-            text = string.format(ssLang.getText("measuretool_fermentation_time"), hours)
+        local text = ""
+        if bale.fillType ~= FillUtil.FILLTYPE_DRYGRASS_WINDROW then
+            if hours <= 1 then
+                text = ssLang.getText("measuretool_fermentation_time_low")
+            else
+                text = string.format(ssLang.getText("measuretool_fermentation_time"), math.ceil(hours))
+            end
+            text = "(" .. text .. ")"
         end
 
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_FERMENTATION,
-            text = string.format("%.2f%% (%s)", bale.fermentingProcess * 100, text)
+            text = string.format("%.2f%% %s", bale.fermentingProcess * 100, text)
         })
     end
 

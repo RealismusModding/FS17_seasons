@@ -96,6 +96,8 @@
         <text name="measuretool_title" text="Measurement" />
         <text name="measuretool_fermentation_time" text="%d hours to go" />
         <text name="measuretool_fermentation_time_low" text="less than 1 hour to go" />
+        <text name="measuretool_failed" text="Measurement failed" />
+        <text name="measuretool_no_info" text="Measurement failed: no information" />
 
         <text name="ui_pageCalender" text="Calendar" />
         <text name="ui_pageEconomy" text="Economy" />
