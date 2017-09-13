@@ -65,7 +65,7 @@ function ssMeasureTool:delete()
     ssMeasureTool:superClass().delete(self)
 
     if self.isClient then
-        sampleMeasure(self.sampleMeasure)
+        SoundUtil.deleteSample(self.sampleMeasure)
     end
 end
 
