@@ -88,18 +88,13 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
         <text name="msg_welcome" text="Bienvenue sur le Seasons mod crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
-        <!-- Missing translation of "Calendar" -->
         <text name="ui_pageCalender" text="Calendrier" />
-        <!-- Missing translation of "Economy" -->
         <text name="ui_pageEconomy" text="Economie" />
         <text name="ui_pageSettings" text="Paramètres" />
         <text name="ui_pageDebug" text="Outils de débogage" />
 
-        <!-- Missing translation of "animal" -->
         <text name="ui_economy_animal" text="Animal" />
-        <!-- Missing translation of "1000 l" -->
         <text name="ui_economy_thousand" text="1000 l" />
-        <!-- Missing translation of "Bale" -->
         <text name="ui_economy_bale" text="Balle" />
 
         <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
@@ -133,7 +128,7 @@
         <text name="dialog_resetGrowth_no" text="Maintenir la croissance" />
         <text name="dialog_resetGrowth_yes" text="Réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
-        <text name="dialog_sleeping" text="Se reposer un autre jour à la ferme... Zzz.." />
+        <text name="dialog_sleeping" text="Se reposer pour un autre jour à la ferme... Zzz.." />
 
         <text name="fillType_snow" text="Neige" />
 

@@ -88,19 +88,14 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni" />
         <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
 
-        <!-- Missing translation of "Calendar" -->
-        <text name="ui_pageCalender" text="" />
-        <!-- Missing translation of "Economy" -->
-        <text name="ui_pageEconomy" text="" />
+        <text name="ui_pageCalender" text="Calendario" />
+        <text name="ui_pageEconomy" text="Economia" />
         <text name="ui_pageSettings" text="Impostazioni" />
         <text name="ui_pageDebug" text="Tool di Debug" />
 
-        <!-- Missing translation of "animal" -->
-        <text name="ui_economy_animal" text="" />
-        <!-- Missing translation of "1000 l" -->
-        <text name="ui_economy_thousand" text="" />
-        <!-- Missing translation of "Bale" -->
-        <text name="ui_economy_bale" text="" />
+        <text name="ui_economy_animal" text="animale" />
+        <text name="ui_economy_thousand" text="1000 L" />
+        <text name="ui_economy_bale" text="Balle" />
 
         <text name="ui_buttonSave" text="Applica Impostazioni" />
         <text name="ui_snowOneLayer" text="1 solo layer" />
@@ -122,7 +117,7 @@
         <text name="setting_seasonIntros" text="Introduzioni Season" />
         <text name="setting_seasonLength" text="Durata Season" />
         <text name="setting_snow" text="Modalità neve" />
-        <text name="setting_controlsHelp" text="Tasti in Help menu" />
+        <text name="setting_controlsHelp" text="Tasti in Help menù" />
         <text name="setting_snowTracks" text="Tracce nella neve" />
         <text name="setting_controlsTemperature" text="Scala termometrica" />
         <text name="setting_moisture" text="Umidità del raccolto" />
