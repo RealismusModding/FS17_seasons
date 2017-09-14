@@ -112,10 +112,8 @@
         <text name="ui_plantingSeason" text="Okres zasiewów" />
         <text name="ui_harvestSeason" text="Okres zbiorów" />
 
-        <!-- Missing translation of "m" -->
-        <text name="unit_meterShort" text="" />
-        <!-- Missing translation of "ft" -->
-        <text name="unit_feetShort" text="" />
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony" />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu" />
