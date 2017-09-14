@@ -287,7 +287,7 @@ function ssMeasureTool:showBaleInfo(bale)
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_CONTENTS,
-        text = string.format("%s (%.0f l)", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N, bale.fillLevel)
+        text = string.format("%s (%.0f %s)", FillUtil.fillTypeIndexToDesc[bale.fillType].nameI18N, bale.fillLevel, ssLang.getText("unit_literShort"))
     })
 
     if bale.wrappingState == 1 and bale.fermentingProcess ~= nil then
@@ -434,20 +434,20 @@ end
 function ssMeasureTool:showStaticTreeInfo(tree)
     local data = {}
     local treeTypeDesc = TreePlantUtil.treeTypeIndexToDesc[tree.treeType]
-    local typeName
+    local typeName = nil
 
     if treeTypeDesc then
         typeName = treeTypeDesc.nameI18N
     elseif tree.nameI18N then
         typeName = tree.nameI18N
-    else
-        typeName = "Unknown (", tree.treeType, ")"
     end
 
-    table.insert(data, {
-        iconUVs = ssMeasureTool.UVS_TREE_TYPE,
-        text = typeName
-    })
+    if typeName then
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_TREE_TYPE,
+            text = typeName
+        })
+    end
 
     table.insert(data, {
         iconUVs = ssMeasureTool.UVS_TREE_HEIGHT,
