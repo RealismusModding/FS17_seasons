@@ -215,7 +215,7 @@
 
         <text name="ss_helpTitle_14" text="Animali" />
         <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le vacche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
-        <text name="ss_helpText_14_02" text="Gli animali si moltiplicheranno solo in un certo periodo dell'anno. Maiali e pecore si riprodurranno solo in primavera, mentre le vacche solo in estate." />
+        <text name="ss_helpText_14_02" text="Gli animali si moltiplicheranno solo in un certo periodo dell'anno. I suini si riproduranno in primavera e in autunno, le pecore solamente in primavera mentre le vacche solo in estate." />
         <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata con difficoltà Facile." />
         <text name="ss_helpText_14_04" text="L'erba non può alimentare gli animali in inverno, dovrai usare il fieno." />
 
