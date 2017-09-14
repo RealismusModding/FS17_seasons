@@ -117,6 +117,9 @@
         <text name="ui_plantingSeason" text="Planting season" />
         <text name="ui_harvestSeason" text="Harvest season" />
 
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
+
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons" />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season" />
         <text name="tooltip_snow" text="Snow will fall in cold winters and block roads" />

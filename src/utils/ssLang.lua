@@ -33,8 +33,8 @@ end
 
 function ssLang.formatLength(meters)
     if g_i18n.useMiles then
-        return string.format("%.1f ft", meters * 3.2808)
+        return string.format("%.1f %s", meters * 3.2808, ssLang.getText("unit_feetShort"))
     else
-        return string.format("%.1f m", meters)
+        return string.format("%.1f %s", meters, ssLang.getText("unit_meterShort"))
     end
 end
