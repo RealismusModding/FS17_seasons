@@ -88,6 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni" />
         <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
 
+        <!-- Missing translation of "Measurement" -->
+        <text name="measuretool_title" text="" />
+        <!-- Missing translation of "%d hours to go" -->
+        <text name="measuretool_fermentation_time" text="" />
+        <!-- Missing translation of "less than 1 hour to go" -->
+        <text name="measuretool_fermentation_time_low" text="" />
+        <!-- Missing translation of "Measurement failed" -->
+        <text name="measuretool_failed" text="" />
+        <!-- Missing translation of "Measurement failed: no information" -->
+        <text name="measuretool_no_info" text="" />
+
         <text name="ui_pageCalender" text="Calendario" />
         <text name="ui_pageEconomy" text="Economia" />
         <text name="ui_pageSettings" text="Impostazioni" />
@@ -131,6 +142,9 @@
         <text name="dialog_sleeping" text="Riposando prima di un altro giorno in fattoria... Zzz.." />
 
         <text name="fillType_snow" text="Neve" />
+
+        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
+        <text name="function_measureTool" text="" />
 
         <text name="ss_helpCategory" text="Seasons" />
 

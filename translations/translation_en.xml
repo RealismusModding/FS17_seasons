@@ -93,6 +93,12 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="The maximum capacity of the feeding trough suffices to feed the animals for 3 days" />
         <text name="msg_welcome" text="Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." />
 
+        <text name="measuretool_title" text="Measurement" />
+        <text name="measuretool_fermentation_time" text="%d hours to go" />
+        <text name="measuretool_fermentation_time_low" text="less than 1 hour to go" />
+        <text name="measuretool_failed" text="Measurement failed" />
+        <text name="measuretool_no_info" text="Measurement failed: no information" />
+
         <text name="ui_pageCalender" text="Calendar" />
         <text name="ui_pageEconomy" text="Economy" />
         <text name="ui_pageSettings" text="Settings" />
@@ -136,6 +142,8 @@
         <text name="dialog_sleeping" text="Resting for another day at the farm... Zzz..." />
 
         <text name="fillType_snow" text="Snow" />
+
+        <text name="function_measureTool" text="Using a measurement tool, you can get information on the soil, trees, bales, and other objects." />
 
         <text name="ss_helpCategory" text="Seasons" />
 

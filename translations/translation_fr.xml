@@ -88,6 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
         <text name="msg_welcome" text="Bienvenue sur le Seasons mod crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
+        <!-- Missing translation of "Measurement" -->
+        <text name="measuretool_title" text="" />
+        <!-- Missing translation of "%d hours to go" -->
+        <text name="measuretool_fermentation_time" text="" />
+        <!-- Missing translation of "less than 1 hour to go" -->
+        <text name="measuretool_fermentation_time_low" text="" />
+        <!-- Missing translation of "Measurement failed" -->
+        <text name="measuretool_failed" text="" />
+        <!-- Missing translation of "Measurement failed: no information" -->
+        <text name="measuretool_no_info" text="" />
+
         <text name="ui_pageCalender" text="Calendrier" />
         <text name="ui_pageEconomy" text="Economie" />
         <text name="ui_pageSettings" text="Paramètres" />
@@ -131,6 +142,9 @@
         <text name="dialog_sleeping" text="Se reposer pour un autre jour à la ferme... Zzz.." />
 
         <text name="fillType_snow" text="Neige" />
+
+        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
+        <text name="function_measureTool" text="" />
 
         <text name="ss_helpCategory" text="Seasons" />
 

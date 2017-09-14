@@ -88,6 +88,17 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней" />
         <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню Esc, чтобы узнать больше о том, как использовать этот мод." />
 
+        <!-- Missing translation of "Measurement" -->
+        <text name="measuretool_title" text="" />
+        <!-- Missing translation of "%d hours to go" -->
+        <text name="measuretool_fermentation_time" text="" />
+        <!-- Missing translation of "less than 1 hour to go" -->
+        <text name="measuretool_fermentation_time_low" text="" />
+        <!-- Missing translation of "Measurement failed" -->
+        <text name="measuretool_failed" text="" />
+        <!-- Missing translation of "Measurement failed: no information" -->
+        <text name="measuretool_no_info" text="" />
+
         <text name="ui_pageCalender" text="Календарь" />
         <text name="ui_pageEconomy" text="Экономика" />
         <text name="ui_pageSettings" text="Настройки" />
@@ -131,6 +142,9 @@
         <text name="dialog_sleeping" text="Вы отдыхаете до следующего дня на ферме... Хр-р-р..." />
 
         <text name="fillType_snow" text="Снег" />
+
+        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
+        <text name="function_measureTool" text="" />
 
         <text name="ss_helpCategory" text="Seasons" />
 

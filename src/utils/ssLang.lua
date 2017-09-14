@@ -30,3 +30,11 @@ end
 function ssLang.convertTempToFahrenheit(tempCelcius)
     return mathRound(tempCelcius * 1.8 + 32, 0)
 end
+
+function ssLang.formatLength(meters)
+    if g_i18n.useMiles then
+        return string.format("%.1f ft", meters * 3.2808)
+    else
+        return string.format("%.1f m", meters)
+    end
+end

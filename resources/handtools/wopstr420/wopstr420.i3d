@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="wopstr420" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+
+  <Files>
+    <File fileId="1" filename="wopstr420_diffuse.dds" relativePath="true"/>
+    <File fileId="2" filename="wopstr420_normal.dds" relativePath="true"/>
+    <File fileId="4" filename="wopstr420_specular.dds" relativePath="true"/>
+    <File fileId="3" filename="rough_cube.dds" relativePath="true"/>
+    <File fileId="5" filename="data/shaders/vehicleShader.xml" relativePath="false"/>
+  </Files>
+
+  <Materials>
+    <Material name="wopstr420_mat" materialId="1" cosPower="30" specularColor="1 1 1" ambientColor="1 1 1" customShaderId="5">
+      <CustomParameter name="RDT" value="1.0 0 30.0 30.0"/>
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Reflectionmap fileId="3" type="cube" wrap="false" refractiveIndex="1" bumpScale="0.1"/>
+      <Glossmap fileId="4"/>
+    </Material>
+  </Materials>
+
+  <Shapes externalShapesFile="wopstr420.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="wopstr420_vis" translation="0 0 2.98023e-08" shapeId="1" castsShadows="false" receiveShadows="true" materialIds="1" clipDistance="200" nodeId="1">
+      <TransformGroup name="handNode" translation="0 0 -2.98023e-08" nodeId="2"/>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+  </UserAttributes>
+</i3D>
