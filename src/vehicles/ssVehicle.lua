@@ -556,12 +556,14 @@ function ssVehicle:consoleCommandRepairAllVehicles()
     return "Repaired " .. tostring(n) .. " vehicles"
 end
 
-function ssVehicle:getFullBuyPrice(vehicle,storeItem)
+function ssVehicle:getFullBuyPrice(vehicle, storeItem)
     local priceConfig = 0
 
-    for name , boughtConfigs in pairs(vehicle.boughtConfigurations) do
-        for num , _ in pairs(boughtConfigs) do
-            priceConfig = priceConfig + storeItem.configurations[name][num].price
+    if storeItem.configurations ~= nil then
+        for name, boughtConfigs in pairs(vehicle.boughtConfigurations) do
+            for num , _ in pairs(boughtConfigs) do
+                priceConfig = priceConfig + storeItem.configurations[name][num].price
+            end
         end
     end
 
