@@ -138,8 +138,7 @@
 
         <text name="fillType_snow" text="Neige" />
 
-        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
-        <text name="function_measureTool" text="" />
+        <text name="function_measureTool" text="En utilisant un outil de mesure, vous pouvez obtenir des informations sur le sol, les arbres, les balles et d'autres objets." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
