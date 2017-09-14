@@ -117,6 +117,11 @@
         <text name="ui_plantingSeason" text="Periodo di semina" />
         <text name="ui_harvestSeason" text="Periodo di raccolto" />
 
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
+
         <text name="tooltip_seasonLength" text="La durata di una stagione in giorni. Un anno è quattro stagioni" />
         <text name="tooltip_seasonIntros" text="Mostra l'introduzione all'inizio della stagione" />
         <text name="tooltip_snow" text="Negli inverni freddi cadrà la neve e bloccherà le strade" />

@@ -112,6 +112,11 @@
         <text name="ui_plantingSeason" text="Saison des semis" />
         <text name="ui_harvestSeason" text="Saison des récoltes" />
 
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
+
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons" />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci" />
         <text name="tooltip_snow" text="La neige tombera dans les hivers froids et bloquera des routes" />

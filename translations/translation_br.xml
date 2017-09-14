@@ -122,6 +122,11 @@
         <text name="ui_plantingSeason" text="Temporada de plantar" />
         <text name="ui_harvestSeason" text="Temporada de colher" />
 
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
+
         <text name="tooltip_seasonLength" text="A duração de uma estação em dias. Um ano são quatro estações" />
         <text name="tooltip_seasonIntros" text="Mostre uma introdução a cada estação" />
         <text name="tooltip_snow" text="Neve irá cair em invernos fortes e bloquear ruas" />

@@ -117,6 +117,11 @@
         <text name="ui_plantingSeason" text="Zaaiperiode" />
         <text name="ui_harvestSeason" text="Oogstperiode" />
 
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
+
         <text name="tooltip_seasonLength" text="De lengte van één seizoen in dagen. Een jaar heeft vier seizoenen." />
         <text name="tooltip_seasonIntros" text="Laat een inleiding zien bij de start van elk seizoen." />
         <text name="tooltip_snow" text="Sneeuw zal vallen in koude winters en de weg bedekken." />
