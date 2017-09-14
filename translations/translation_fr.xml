@@ -88,11 +88,11 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La nouriture est suffisante pour 3 jours" />
         <text name="msg_welcome" text="Bienvenue sur le Seasons mod crée par Realismus Modding. Vérifiez s'il vous plaît l'aide dans le menu avec Esc pour découvrir plus de façon d'utiliser ce mod." />
 
-        <text name="measuretool_title" text="Mesures." />
-        <text name="measuretool_fermentation_time" text="%d heures restantes." />
-        <text name="measuretool_fermentation_time_low" text="Moins d'une heure restante." />
-        <text name="measuretool_failed" text="La mesure a échoué." />
-        <text name="measuretool_no_info" text="La mesure a échoué: aucune information." />
+        <text name="measuretool_title" text="Mesures" />
+        <text name="measuretool_fermentation_time" text="%d heures restantes" />
+        <text name="measuretool_fermentation_time_low" text="Moins d'une heure restante" />
+        <text name="measuretool_failed" text="La mesure a échoué" />
+        <text name="measuretool_no_info" text="La mesure a échoué: aucune information" />
 
         <text name="ui_pageCalender" text="Calendrier" />
         <text name="ui_pageEconomy" text="Economie" />
