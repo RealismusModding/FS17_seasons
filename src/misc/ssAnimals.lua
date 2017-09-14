@@ -115,6 +115,7 @@ function ssAnimals:getDeathFactors()
         ["cow"] = 0.15, -- can live approx 4 weeks without food
         ["sheep"] = 0.1, -- can probably live longer than cows without food
         ["pig"] = 0.25, -- can live approx 2 weeks without food
+        ["chicken"] = 0
     }, 0.1
 end
 
@@ -129,7 +130,7 @@ function ssAnimals:dayChanged()
             local factor = Utils.getNoNil(factors[typ], generic)
 
             -- Skip chicken and other odd animald that don't need food
-            if husbandry.animalDesc.canBeBought ~= false and husbandry.animalDesc.foodPerDay ~= 0 then
+            if husbandry.animalDesc.canBeBought ~= false then
                 numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
             end
         end
