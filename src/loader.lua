@@ -125,7 +125,7 @@ local files = {
     "gui/ssCatchingUp",
     "gui/ssMeasureToolDialog",
 
-    "handtools/ssMeasureTool"
+    "handtools/ssMeasureTool",
 }
 
 local isDebug = false --<%=debug %>
