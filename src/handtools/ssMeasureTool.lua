@@ -1,9 +1,9 @@
 ssMeasureTool = {}
 local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 
--- InitStaticObjectClass(ssMeasureTool, "ssMeasureTool", ObjectIds.OBJECT_CHAINSAW)
+InitObjectClass(ssMeasureTool, "ssMeasureTool")
 
-ssMeasureTool.MEASURE_TIME = 2100 -- ms
+ssMeasureTool.MEASURE_TIME = 1700 -- ms
 ssMeasureTool.MEASURE_TIME_VAR = 1000
 ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_PULSE = 483
@@ -156,19 +156,19 @@ end
 function ssMeasureTool:setHandNode(handNode)
     ssMeasureTool:superClass().setHandNode(self, handNode)
 
-    if self.currentHandNode ~= handNode then
-        if g_currentMission.player ~= self.player then
-            link(handNode, self.rootNode)
-            self.currentHandNode = handNode
+    -- if self.currentHandNode ~= handNode then
+    --     if g_currentMission.player ~= self.player then
+    --         link(handNode, self.rootNode)
+    --         self.currentHandNode = handNode
 
-            local x,y,z = getWorldTranslation(self.handNode)
-            x,y,z = worldToLocal(getParent(self.rootNode), x,y,z)
+    --         local x,y,z = getWorldTranslation(self.handNode)
+    --         x,y,z = worldToLocal(getParent(self.rootNode), x,y,z)
 
-            local a,b,c = getTranslation(self.rootNode)
+    --         local a,b,c = getTranslation(self.rootNode)
 
-            setTranslation(self.rootNode, a - x, b - y, c - z)
-        end
-    end
+    --         setTranslation(self.rootNode, a - x, b - y, c - z)
+    --     end
+    -- end
 end
 
 function ssMeasureTool:onActivate(allowInput)

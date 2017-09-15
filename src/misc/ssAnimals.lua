@@ -10,6 +10,47 @@
 ssAnimals = {}
 g_seasons.animals = ssAnimals
 
+function ssAnimals:load(savegame, key)
+    -- Load or set default values
+    self.averageProduction = {}
+
+    if savegame ~= nil then
+        local i = 0
+        while true do
+            local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
+            if not hasXMLProperty(savegame, animalKey) then break end
+
+            local typ = getXMLString(savegame, animalKey .. "#animalName")
+            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
+
+            i = i + 1
+        end
+    end
+
+    -- defaulting to 0% average productivity
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local typ = husbandry.typeName
+        if self.averageProduction[typ] == nil then
+            self.averageProduction[typ] = 0.0
+        end
+    end
+end
+
+function ssAnimals:save(savegame, key)
+    local i = 0
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local typ = husbandry.typeName
+        local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
+
+        setXMLString(savegame, animalKey .. "#animalName", typ)
+        setXMLFloat(savegame, animalKey .. "#averageProduction", self.averageProduction[typ])
+        setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
+
+        i = i + 1
+    end
+end
+
 function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
@@ -39,6 +80,22 @@ function ssAnimals:loadGameFinished()
     self:adjustAnimals()
 end
 
+function ssAnimals:writeStream(streamId, connection)
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        streamWriteString(streamId, husbandry.typeName)
+        streamWriteFloat32(streamId, self.averageProduction[husbandry.typeName])
+    end
+end
+
+function ssAnimals:readStream(streamId, connection)
+    self.averageProduction = {}
+
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local typ = streamReadString(streamId)
+        self.averageProduction[typ] = streamReadFloat32(streamId)
+    end
+end
+
 function ssAnimals:loadFromXML()
     local elements = {
         ["seasons"] = {},
@@ -51,49 +108,6 @@ function ssAnimals:loadFromXML()
     for _, path in ipairs(g_seasons:getModPaths("animals")) do
         self.data = ssSeasonsXML:loadFile(path, "animals", elements, self.data, true)
     end
-end
-
-function ssAnimals:load(savegame, key)
-    -- Load or set default values
-    self.averageProduction = {}
-
-    if savegame ~= nil then
-        local i = 0
-        while true do
-            local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
-            if not hasXMLProperty(savegame, animalKey) then break end
-
-            local typ = getXMLString(savegame, animalKey .. "#animalName")
-            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
-            g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
-
-            i = i + 1
-        end
-    end
-
-    -- defaulting to 0% average productivity
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local typ = husbandry.typeName
-        if self.averageProduction[typ] == nil then
-            self.averageProduction[typ] = 0.0
-        end
-    end
-end
-
-function ssAnimals:save(savegame, key)
-
-    local i = 0
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local typ = husbandry.typeName
-        local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
-
-        setXMLString(savegame, animalKey .. "#animalName", typ)
-        setXMLFloat(savegame, animalKey .. "#averageProduction", self.averageProduction[typ])
-        setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
-
-        i = i + 1
-    end
-
 end
 
 function ssAnimals:seasonChanged()

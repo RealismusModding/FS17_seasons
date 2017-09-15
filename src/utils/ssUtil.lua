@@ -271,13 +271,14 @@ function deepCopy(obj, seen)
     return res
 end
 
--- TODO replace with table.getn()
-function arrayLength(arr)
-    local n = 0
-    for i = 1, #arr do
-        n = n + 1
+function tableLength(table)
+    local count = 0
+
+    for _ in pairs(table) do
+        count = count + 1
     end
-    return n
+
+    return count
 end
 
 function print_r(t)
