@@ -112,10 +112,8 @@
         <text name="ui_plantingSeason" text="Saison des semis" />
         <text name="ui_harvestSeason" text="Saison des récoltes" />
 
-        <!-- Missing translation of "m" -->
-        <text name="unit_meterShort" text="" />
-        <!-- Missing translation of "ft" -->
-        <text name="unit_feetShort" text="" />
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons" />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci" />
@@ -217,7 +215,7 @@
 
         <text name="ss_helpTitle_14" text="Animaux - Intro" />
         <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 à 3 jours." />
-        <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons et les moutons c'est au printemps, alors que pour les vaches c'est durant l'été." />
+        <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons c'est au printemps et à l'automne, les moutons seulement au printemps, tandis que pour les vaches c'est durant l'été." />
         <text name="ss_helpText_14_03" text="Les animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
         <text name="ss_helpText_14_04" text="Il n'est pas possible de nourrir les animaux avec de l'herbe l'hiver, il faut utiliser du foin." />
 
