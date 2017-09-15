@@ -363,7 +363,6 @@ function ssAnimals:husbandryAddAnimals(num, subType)
     local currentAnimals = self.totalNumAnimals - num
 
     ssAnimals.averageProduction[typ] = ssAnimals:addAnimalProductivity(currentAnimals, num, ssAnimals.averageProduction[typ])
-
 end
 
 -- reset productivity to zero if there are no animals
@@ -373,10 +372,3 @@ function ssAnimals:husbandryRemoveAnimals()
         ssAnimals.averageProduction[typ] = 0
     end
 end
-
--- TODO: remove after testing
---function ssAnimals:draw()
---    renderText(0.44, 0.72, 0.01, "Cows: " .. tostring(self.averageProduction["cow"]))
---    renderText(0.44, 0.70, 0.01, "Pigs: " .. tostring(self.averageProduction["pig"]))
---    renderText(0.44, 0.68, 0.01, "Sheep: " .. tostring(self.averageProduction["sheep"]))
---end

@@ -43,7 +43,7 @@ function ssMeasureTool:load(xmlFilename, player)
         return false
     end
 
-    local xmlFile = loadXMLFile("TempXML", xmlFilename)
+    local xmlFile = loadXMLFile("handtool", xmlFilename)
 
     self.objectNode = getChildAt(self.rootNode, 0)
 

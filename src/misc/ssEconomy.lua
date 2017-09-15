@@ -225,7 +225,6 @@ function ssEconomy:calculateLoanInterestRate()
 end
 
 function ssEconomy:aiLoad(savegame)
-
     -- After loading the aiVehicle, store original pricePerMS in a variable, so pricePerMS can be altered without losing the original value.
     self.ssOriginalPricePerMS = self.pricePerMS
 end
