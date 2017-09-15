@@ -98,7 +98,7 @@ end
 
 function ssGrowthManager:loadMap(name)
     if self.growthManagerEnabled == false then
-        logInfo("ssGrowthManager:", "disabled")
+        logInfo("ssGrowthManager: disabled")
         return
     end
 
@@ -107,7 +107,7 @@ function ssGrowthManager:loadMap(name)
     g_currentMission:setPlantGrowthRateLocked(true)
 
     if not self:getGrowthData() then
-        logInfo("ssGrowthManager:" , "required data not loaded. ssGrowthManager disabled")
+        logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
         return
     end
 
@@ -123,11 +123,13 @@ function ssGrowthManager:loadMap(name)
 end
 
 function ssGrowthManager:loadMapFinished()
-    if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
-        self:rebuildWillGerminateData()
-        self:checkAndAddNewFruits(true)
-    else
-        self:checkAndAddNewFruits(false)
+    if g_currentMission:getIsServer() then
+        if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
+            self:rebuildWillGerminateData()
+            self:checkAndAddNewFruits(true)
+        else
+            self:checkAndAddNewFruits(false)
+        end
     end
 end
 
