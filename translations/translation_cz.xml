@@ -73,20 +73,26 @@
 
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
-        <text name="SS_REMOVE_CONTEST_TEXT" text="Spouštíte aktualizovanou verzi Seasons. Hra zjistila starší verzi módu ve složce mods a zakázala ji. Odstraňte jej ze složky modů, abyste tuto zprávu skryli." />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Spouštíte aktualizovanou verzi Seasons. Hra zjistila starší verzi módu ve složce mods a zakázala ji. Odstraňte ji ze složky modů, abyste tuto zprávu skryli." />
 
         <text name="SS_SEASON_INTRO_0" text="A je tu jaro! Začíná nové období setí." />
-        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, plodiny rostou." />
-        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu protože plodiny nemusí přežít zimu." />
+        <text name="SS_SEASON_INTRO_1" text="Slunce je vysoko, plodiny rostou a některé dozrávají." />
+        <text name="SS_SEASON_INTRO_2" text="Doba sklizně je tady. Připravte se na zimu, protože plodiny nemusí zimu přežít." />
         <text name="SS_SEASON_INTRO_3" text="Je chladno. Půda je tvrdá, možná zmrzlá. Plodiny nerostou, nebo dokonce odumírají." />
         <text name="SS_BUTTON_OK" text="OK" />
         <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Znovu neukazovat" />
 
         <text name="warning_soilIsFrozen" text="Půda je zmrzlá. Nemůžete na ní pracovat!" />
         <text name="warning_doNotThreshWithMoisture" text="Zanechte mlácení, sklizená plodina je příliš mokrá!" />
-        <text name="warning_animalsKilled" text="Zvířata uhynou za %d dní" />
+        <text name="warning_animalsKilled" text="Hlady uhynulo %d zvířat" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Největší kapacita žlabů stačí na 3 dny" />
-        <text name="msg_welcome" text="Vítejte na Seasons módu realistické modifikaci. Další informace naleznete v nabídce Nápovědy ve hře (ESC) se dozvíte, jak používat tento mód." />
+        <text name="msg_welcome" text="Vítejte v Seasons modu! Realistické modifikaci, rozšiřující hru. Důležité informace najdete v nabídce Nápovědy ve hře (ESC). Tam se dozvíte, jak používat tento mód." />
+
+        <text name="measuretool_title" text="Měření" />
+        <text name="measuretool_fermentation_time" text="%d jde hodin" />
+        <text name="measuretool_fermentation_time_low" text="méně než 1 hodinu" />
+        <text name="measuretool_failed" text="Měření selhalo" />
+        <text name="measuretool_no_info" text="Měření selhalo: žádné informace" />
 
         <text name="ui_pageCalender" text="Kalendář" />
         <text name="ui_pageEconomy" text="Ekonomika" />
@@ -105,6 +111,11 @@
 
         <text name="ui_plantingSeason" text="Sezóna výsadby" />
         <text name="ui_harvestSeason" text="Sezóna sklizně" />
+
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
 
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
@@ -128,106 +139,108 @@
         <text name="dialog_resetGrowth_no" text="Ponechat" />
         <text name="dialog_resetGrowth_yes" text="Resetovat" />
         <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
-        <text name="dialog_sleeping" text="Čas jít spát a odpočinout si po práci ... Zzz ..." />
+        <text name="dialog_sleeping" text="Je čas jít spát a odpočinout si po práci ... Zzz ..." />
 
         <text name="fillType_snow" text="Sníh" />
+
+        <text name="function_measureTool" text="Pomocí nástroje pro měření můžete získat informace o půdě, stromech, balících a jiných objektech." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons je mod udělaný pro zlepšení realismu ve hře Farming Simulator úpravou téměř všech aspektů do realističtějších parametrů. Vše od sezónních vlivů na růstu produkce modelů v živočišné výrobě byla změněna na realističtější úroveň." />
-        <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: rané, střední a pozdní. Tyto díly jsou označovány jako přechody." />
-        <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu odehrávající se v reálném životě." />
+        <text name="ss_helpText_01_01" text="Seasons je mod pro zlepšení realismu ve hře Farming Simulator. Upravuje téměř všechny aspekty hry do realističtějších parametrů. Více realistické je vše, od sezónních vlivů na růst plodin, po změny v živočišné výrobě." />
+        <text name="ss_helpText_01_02" text="Rok hry byl rozdělen do čtyř ročních období: jaro, léto, podzim a zima. Každá sezóna je rozdělena do tří částí: brzké, střední a pozdní. Předěly mezi těmito částmi jsou označovány jako přechody." />
+        <text name="ss_helpText_01_03" text="Vaše aktivity jsou vázány na roční dobu, podobně jako v reálném životě." />
 
         <text name="ss_helpTitle_02" text="Sezónní efekty (1)" />
         <text name="ss_helpText_02_01" text="Předpověď je náhodná ze dne na den, ale sleduje vzor sezónu od sezóny." />
-        <text name="ss_helpText_02_02" text="Jaro bude deštivé a mlhavé s možností na slunečné počasí. Léto bude teplejší a sušší. Kroupy bouře může přjít bez varování. Podzim bude deštivý s nějakým slunečného počasí. Zima bude deštivo, ale často dost studená, bude padat sníh, možná dokonce zůstane na zemi." />
-        <text name="ss_helpText_02_03" text="Sníh bude naplňovat sklápěče a lopaty, pokud není sklápěč nebo lopata ukryta v kůlně se sněhovou maskou nebo plachtou. Sníh také sníží trakci, čímž se vozidlo zpomalí." />
+        <text name="ss_helpText_02_02" text="Jaro bude deštivé a mlhavé s možností slunečného počasí. Léto bude teplejší a sušší. Krupobití může přjít kdykoliv a bez varování. Podzim bude deštivý s trochou slunečného počasí. Zima bude deštivá, ale často dost studená, bude padat sníh, možná dokonce zůstane na zemi." />
+        <text name="ss_helpText_02_03" text="Sníh bude naplňovat sklápěče a lopaty, pokud nejsou ukryté pod střechou (se sněhovou maskou) a nebo pod plachtou. Sníh také sníží trakci, čímž se vozidlo zpomalí." />
 
         <text name="ss_helpTitle_03" text="Sezónní efekty (2)" />
         <text name="ss_helpText_03_01" text="Denní světlo je také ovlivňováno ročním obdobím. Zimy mají kratší dny (8 hodin), zatímco léto má delší dny (17 hodin)." />
-        <text name="ss_helpText_03_02" text="Silážn sila a silážní balíky vyžadují čas k fermentaci. Trvá jednu třetinu ročních období (1 přechod) k úplnému zkvašení buď silážního sila nebo siláž bal. Obalené seno nebude kvasit, ale bude chráněno proti počasí." />
+        <text name="ss_helpText_03_02" text="Silážní sila a silážní balíky vyžadují čas k fermentaci. Fermentace trvá jednu třetinu ročních období (1 přechod) k úplnému zkvašení. Pokud obalíte seno, nebude kvasit, ale bude chráněno proti počasí." />
         <text name="ss_helpText_03_03" text="Roční období také ovlivní stromy a listí. Stromy změní stav podle sezónních teplotních změn. Listy změní barvu a opadnou na podzim. Stromy budou v zimě holé a na jaře budou světlezelené." />
 
         <text name="ss_helpTitle_04" text="Předpověď počasí" />
-        <text name="ss_helpText_04_01" text="Předpověď počasí byla znovu zavedena se sezónním obdobím a může být aktivována levý  Alt + F." />
-        <text name="ss_helpText_04_02" text="Předpověď počasí ukazuje vysoké / nízké teploty a počasí (slunečné, mlhavé, deštivé, zasněžené, oblačno) po dobu dalších 7 dnů. Krupobití se na předpovědi počasí nezobrazí, protože krupobití v reálném životě je často nečekanou událostí." />
+        <text name="ss_helpText_04_01" text="Se Season modem byla obnovena předpověď počasí a může být aktivována pomocí levý Alt + F." />
+        <text name="ss_helpText_04_02" text="Předpověď počasí ukazuje vysoké / nízké teploty a typ počasí (slunečné, mlhavé, deštivé, sněžení, oblačno) pro následujících 7 dnů. Krupobití se na předpovědi počasí nezobrazí, protože krupobití v reálném životě je často nečekanou událostí." />
         <text name="ss_helpText_04_03" text="Číslo na pravé straně každého bloku předpovědi představuje den sezóny." />
 
         <text name="ss_helpTitle_05" text="Půda" />
-        <text name="ss_helpText_05_01" text="Teplota půdy je modelována pomocí termodynamických rovnic a historických dat. To znamená, že půda zmrzne v zimě, kdy teplota vzduchu klesne pod určitou hodnotu po určitou dobu. Půda se pak rozmrzá na jaře, když teplota vzduchu stoupne nad určitou prahovou hodnotu po určitou dobu." />
-        <text name="ss_helpText_05_02" text="Půda nemůže být zpracována, když je půda zmrzlá. Plodiny nebudou růst v zmrzlé půdě." />
+        <text name="ss_helpText_05_01" text="Teplota půdy je modelována pomocí termodynamických rovnic a historických dat. To znamená, že půda zmrzne v zimě, kdy teplota vzduchu klesne pod určitou hodnotu po určitou dobu. Půda pak rozmrzá na jaře, když teplota vzduchu stoupne nad určitou prahovou hodnotu po určitou dobu." />
+        <text name="ss_helpText_05_02" text="Půda nemůže být zpracována, pokud je zmrzlá. Plodiny ve zmrzlé půdě nerostou." />
         <text name="ss_helpText_05_03" text="Plodiny budou klíčit pouze tehdy, když teplota půdy přesáhne jejich klíčivost. Teploty klíčení jsou uvedeny na první stránce nabídky Nastavení sezóny (Left Alt + S)." />
 
         <text name="ss_helpTitle_06" text="Plodiny - úvod" />
-        <text name="ss_helpText_06_01" text="Při spuštění nové hry budou všechny plodiny vynulovány na sklizené etapy, aby se simulovala skutečnost, že na polích nebylo pracováno od podzimu. Pokud používáte Seasons poprvé v existující hře, máte možnost buď obnovit plodiny, nebo ne." />
-        <text name="ss_helpText_06_02" text="Standardní doby růstu plodin byly nahrazeny obdobími. Plodiny budou nyní sledovat realistický růst odpovídající sezónní výsadbě a době sklizně. To také znamená, že zima zničí většinu plodin a plodiny vysazené v nesprávné době nebudou růst." />
-        <text name="ss_helpText_06_03" text="Plodiny jsou sklízeny až v konečné fázi růstu, s výjimkou topolu a řepky olejky, a zůstanou v této poslední fázi, dokud nebudou v zimě zničeny." />
-        <text name="ss_helpText_06_04" text="Jakmile obiloviny dosáhnou prvního stupně zralosti podle přehledu růstu v menu esc, jsou připraveny na sklizeň. To je také závěrečná fáze jejich růstu a připravenost na sklizeň." />
-        <text name="ss_helpText_06_05" text="Stále můžete silážovat zelené plodiny." />
+        <text name="ss_helpText_06_01" text="Při spuštění nové hry budou všechny plodiny vynulovány do stavu Sklizeno, aby se simulovala skutečnost, že na polích nebylo pracováno od podzimu. Pokud aktivujete Seasons poprvé v již existující hře, máte možnost buď obnovit plodiny, nebo ne." />
+        <text name="ss_helpText_06_02" text="Standardní doby růstu plodin byly nahrazeny obdobími. Plodiny budou nyní sledovat realistický růst odpovídající sezónní výsadbě a době sklizně. To také znamená, že zima zničí většinu plodin a plodiny vysazené v nesprávné době neporostou." />
+        <text name="ss_helpText_06_03" text="Plodiny se dají sklízet jen v konečné fázi růstu, s výjimkou topolu a řepky olejky, a zůstanou v této poslední fázi, dokud nebudou zničeny zimou." />
+        <text name="ss_helpText_06_04" text="Jakmile obiloviny dosáhnou prvního stupně zralosti podle přehledu růstu v menu hry (klávesa ESC), jsou připraveny na sklizeň. To je také závěrečná fáze jejich růstu a připravenost na sklizeň, druhá a třetí fáze zralosti se nepoužívá." />
+        <text name="ss_helpText_06_05" text="Stále můžete silážovat zelené (nezralé) plodiny." />
 
         <text name="ss_helpTitle_07" text="Plodiny - Plodiny na orné půdě" />
         <text name="ss_helpText_07_01" text="Růst plodin je nyní mnohem delší. Může trvat půl roku, než plodina dosáhne zralosti." />
-        <text name="ss_helpText_07_02" text="Zima zničí většinu plodin, ale jsou možné i zimní a jarní plodiny. Pšenice, ječmen, topol, tráva, řepky olejky a řepka mohou být vysazeny na podzim jako zimní plodiny nebo vysázeny na jaře jako jarní plodiny. Ujistěte se, že půda je dost teplá pro klíčení těchto plodin." />
-        <text name="ss_helpText_07_03" text="Kukuřice, sója, slunečnice, cukrová řepa a brambory musí být vysázeny na jaře. Nezapomeňte zkontrolovat přehled růstu v nabídce sezón, protože některé plodiny nelze vysadit při prvním přechodu jara (brzy na jaře) a uhynou, i když je teplota půdy vyšší než klíčivost." />
+        <text name="ss_helpText_07_02" text="Zima zničí většinu plodin, ale jsou možné i zimní a jarní plodiny. Pšenice, ječmen, topol, tráva, řepka olejka a řepka mohou být vysazeny na podzim jako zimní plodiny nebo vysázeny na jaře jako jarní plodiny. Ujistěte se, že půda je dost teplá pro klíčení těchto plodin." />
+        <text name="ss_helpText_07_03" text="Kukuřice, sója, slunečnice, cukrová řepa a brambory musí být vysázeny na jaře. Nezapomeňte zkontrolovat přehled růstu v nabídce Season (levý Alt+S), protože některé plodiny nelze vysadit v období Brzké Jaro (první období jara) a uhynou, i když je teplota půdy vyšší než klíčivost." />
 
         <text name="ss_helpTitle_08" text="Plodiny - seno, sláma a tráva" />
-        <text name="ss_helpText_08_01" text="V zimě se tráva vynuluje na sklizenou plochu, aby simulovala zimní uvadání trávy, když se ochladí." />
-        <text name="ss_helpText_08_02" text="Balíky trávy je třeba použít nebo zabalit do fólie do 2 dnů od balicího procesu. Po 2 dnech bude tráva hnit a balík zmizí." />
-        <text name="ss_helpText_08_03" text="Řádky sena, trávy a slámy se začnou zmenšovat a nakonec zmizí po několika dnech. Řádek trávy se každý den zmenší o půlnoci. Řádek slámy a sena se zmenší po každém růstovém stádiu i po vystavení dešti." />
-        <text name="ss_helpText_08_04" text="Sláma a seno musí být baleny před tím, než mohou být prodány - sypaná sláma a seno nemohou být prodávány, protože jejich cena je 0. Tráva, balená nebo volná, nemůže být prodána, neboť jejich cena je také 0. Před prodejem balíky trávy obalte." />
+        <text name="ss_helpText_08_01" text="V zimě se růst trávy vynuluje na Sklizeno, aby simulovala zimní uvadání trávy, když se ochladí." />
+        <text name="ss_helpText_08_02" text="Balíky trávy je třeba použít nebo zabalit do fólie do 2 dnů od balicího procesu. Po 2 dnech začne tráva hnít a balíky postupně zmizí." />
+        <text name="ss_helpText_08_03" text="Řádky sena, trávy a slámy se začnou zmenšovat a nakonec zmizí po několika dnech. Řádek trávy se každý den zmenší o půlnoci. Řádek slámy a sena se zmenší po každém růstovém stádiu a také po vystavení dešti." />
+        <text name="ss_helpText_08_04" text="Sláma a seno musí být baleny do balíků před tím, než mohou být prodány. Sypaná sláma a seno nemohou být prodávány, pouze je můžete odvézt a vysypat zdarma. Tráva, v balících, nebo volná, také nemůže být prodána. Před prodejem balíky trávy obalte folií." />
 
         <text name="ss_helpTitle_09" text="Plodiny - stromy" />
-        <text name="ss_helpText_09_01" text="Stromy rostou déle, než dosáhnou své plné velikosti.Doba růstu od výsadby do konečné velikosti 5 let, po 2 letech je možné stromy řezat." />
+        <text name="ss_helpText_09_01" text="Stromy rostou déle, než dosáhnou své plné velikosti. Doba růstu od výsadby do konečné velikosti je 5 let. Po 2 letech růstu už je možné stromy kácet." />
         <text name="ss_helpText_09_02" text="Stromy zabraňují růstu ostatních stromů, pokud byly vysazeny příliš blízko sebe. Chcete-li znovu spustit růst stromu, budete muset stromy prořezat." />
 
         <text name="ss_helpTitle_10" text="Plodiny - účinky počasí" />
-        <text name="ss_helpText_10_01" text="Déšť, krupobití a sníh ovlivňují hladinu vlhkosti plodin.Pokud je vlhkost plodiny nad určitým bodem kvůli špatnému počasí, nebudete moci sklízet plodiny.Vlhké letní noci mohou nastat bez varování." />
+        <text name="ss_helpText_10_01" text="Déšť, krupobití a sníh ovlivňují hladinu vlhkosti plodin. Pokud je vlhkost plodiny nad určitým bodem kvůli špatnému počasí, nebudete moci sklízet plodiny. Vlhké letní noci mohou nastat bez varování." />
         <text name="ss_helpText_10_02" text="Po dešti budou vaše plodiny potřebovat čas na vyschnutí, což závisí na teplotě vzduchu a na ročním období. Teplejší počasí znamená, že plodiny vyschnou rychleji než v chladnějším počasí." />
-        <text name="ss_helpText_10_03" text="Použitím obraceče na seno, zatímco plodiny jsou mokré, vytvoříte mokrou trávu. Ujistěte se, že používáte pouze obraceč, když jsou plodiny dostatečně suché." />
-        <text name="ss_helpText_10_04" text="Na mapě mod, která byla připravena se sněhovou maskou modifikovaného sena a balíků slámy, které byly vystaveny dešti nebo sněhu, začne hnit, pokud nejsou balíky uloženy v kůlně se sněhovou maskou. Špatné počasí neovlivní zabalené balíky nebo balíky na mapě bez sněhové masky." />
+        <text name="ss_helpText_10_03" text="Použitím obraceče na seno, zatímco plodiny jsou mokré, vytvoříte mokrou trávu. Ujistěte se, že používáte obraceč pouze, když jsou plodiny dostatečně suché." />
+        <text name="ss_helpText_10_04" text="Na mapě, která byla připravena pro Season mod (se sněhovou maskou), je potřeba ukládat balíky sena a slámy do přístřešků, jinak začnou hnít, pokud jsou vystaveny dešti nebo sněhu. Déšť ani sníh neovlivní balíky zabalené ve folii, nebo balíky na mapě bez sněhové masky." />
 
         <text name="ss_helpTitle_11" text="Údržba" />
-        <text name="ss_helpText_11_01" text="Vaše traktory a kombajny vyžadují pravidelnou údržbu, aby byly funkční. Perioda údržby je každých 30 hodin nebo půl roku, podle toho, co nastane dříve. Vozidla, která jsou po jejich údržbě vydrží déle " />
-        <text name="ss_helpText_11_02" text="Vaše vozidla můžete opravit buď ve vozidle, nebo ve vozidlové garáži. Chcete-li opravit své vozidlo, jeďte s vozidlem do garáže nebo umístěte do garáže a stiskněte levou klávesu Alt + R. Uvědomte si, že bude opravovat dražší ve vozidle." />
-        <text name="ss_helpText_11_03" text="Věk vašeho vozidla je dnů od poslední opravy." />
-        <text name="ss_helpText_11_04" text="Pouze jízdní vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
+        <text name="ss_helpText_11_01" text="Vaše traktory a kombajny vyžadují pravidelnou údržbu, aby byly funkční. Perioda údržby je každých 30 hodin nebo půl roku, podle toho, co nastane dříve. Vozidla, která jsou udržována, vydrží déle " />
+        <text name="ss_helpText_11_02" text="Vaše vozidla můžete opravit buď u prodejce, nebo ve vlastní dílně (pokud ji máte). Chcete-li opravit své vozidlo, jeďte s vozidlem k prodejci,nebo zastavte v dílně. Pak stiskněte levou klávesu Alt + R. Uvědomte si, že oprava u prodejce bude dražší o práci mechanika." />
+        <text name="ss_helpText_11_03" text="Věk vašeho vozidla je počet dnů od poslední opravy." />
+        <text name="ss_helpText_11_04" text="Pouze řiditelná vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
         <text name="ss_helpTitle_12" text="Ekonomika" />
         <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z $CURRENCY_SYMBOL200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je $CURRENCY_SYMBOL300 000 a maximální výše úvěru je $CURRENCY_SYMBOL1 500 000." />
         <text name="ss_helpText_12_02" text="Výnosy z misí byly sníženy. Vyděláte zhruba pětkrát více než najatý pracovník pracující na stejném poli." />
-        <text name="ss_helpText_12_03" text="Údržba všech vozidel (kromě pravidelné údržby) zahrnuje údržbu a daně ve vztahu k tomu, kolik se používají. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, také sníží náklady na údržbu." />
-        <text name="ss_helpText_12_04" text="Ceny úrody kolísají se změnami v ročních obdobích realisticky." />
+        <text name="ss_helpText_12_03" text="Náklady na údržbu všech vozidel (kromě pravidelné údržby) zahrnují poplatky a daně ve vztahu k tomu, jak moc se vozidlo používá. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, mají snížené náklady na údržbu." />
+        <text name="ss_helpText_12_04" text="Ceny výkupu kolísají realisticky podle ročních období." />
 
         <text name="ss_helpTitle_13" text="Najatá pomoc" />
         <text name="ss_helpText_13_01" text="Najímaní pracovníci vyžadují odměnu za přesčas. Pokud je zaměstnanec zaměstnán před 6:00 a po 18:00 nebo o víkendech, bude jeho plat 50% vyšší." />
 
         <text name="ss_helpTitle_14" text="Zvířata - úvod" />
-        <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se sezónními parametry na realističtější parametry.Všechny druhy zvířat budou v létě konzumovat více vody než v zimě.V zimních měsících budou krávy a prasata vyžadovat více slámy Maximální kapacita krmení byla snížena ze 6 dnů na 3 Dny." />
-        <text name="ss_helpText_14_02" text="Zvířata pouze produkují potomky v určitém čase roku. Prasata a ovce budou produkovat potomky na jaře, zatímco krávy produkují potomky v létě." />
-        <text name="ss_helpText_14_03" text="Zvířata uhynou, pokud nemají krmivo nebo vodu. Toto je zakázáno v případě obtížnosti Easy." />
-        <text name="ss_helpText_14_04" text="Tráva nemůžete krmit v zimě. Místo toho byste měli používat seno." />
+        <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se Season modem na realističtější parametry. Všechny druhy zvířat budou v létě konzumovat více vody než v zimě. V zimních měsících budou krávy a prasata vyžadovat více slámy. Maximální kapacita krmení byla snížena ze 6 dnů na 3 dny." />
+        <text name="ss_helpText_14_02" text="Zvířata mají mláďata pouze v určitém čase roku. Prasata a ovce budou mít mladé na jaře, zatímco krávy se otelí v létě." />
+        <text name="ss_helpText_14_03" text="Zvířata uhynou, pokud nemají v průběhu herního dne krmivo nebo vodu. Toto neplatí v případě nastavené obtížnosti Easy." />
+        <text name="ss_helpText_14_04" text="Trávou nemůžete krmit v zimě. Volně uložená tráva na začátku zimy zmizí. Místo toho byste měli používat seno." />
 
         <text name="ss_helpTitle_15" text="Zvířata - produkce" />
-        <text name="ss_helpText_15_01" text="Výroba mléka a vlny závisí na sezóně." />
+        <text name="ss_helpText_15_01" text="Výroba mléka a vlny závisí na roční době." />
         <text name="ss_helpText_15_02" text="Vlna se produkuje pouze na jaře." />
-        <text name="ss_helpText_15_03" text="Mléko je vyráběno celoročně, ale v zimě a na jaře se zvyšuje. Zatímco tráva nemůže být krmena v zimě, normálně by se snížila produktivita krav na maximálně 80%. Seasons však zvyšuje produkci mléka v zimě a na jaře, aby vyrovnal nedostatek trávy v těchto měsících." />
+        <text name="ss_helpText_15_03" text="Mléko je vyráběno celoročně, ale v zimě a na jaře se produkce zvyšuje. Produkce krav by se v zimě snížila na nejvýše 80%, protože tráva nemůže být v zimě zkrmena. Seasons však zvyšuje produkci mléka v zimě a na jaře, aby vyrovnal nedostatek trávy v těchto měsících." />
 
         <text name="ss_helpTitle_16" text="Seasons Menu" />
         <text name="ss_helpText_16_01" text="Menu Seasons se používá jako referenční příručka pro výsadbu a změnu nastavení souvisejících se sezónními obdobími. Toto menu je aktivováno levým Alt + S." />
-        <text name="ss_helpText_16_02" text="První stránka je váš průvodce okno pro výsadbu a sklizeň.Teploty klíčení všech plodin jsou uvedeny vlevo od grafu. Pokud je teplota vedle plodiny bílá, znamená to, že je dostatečné teplo na to, aby jste tuto plodinu vypěstovali. Pokud je teplota modrá, je příliš chladno." />
-        <text name="ss_helpText_16_03" text="Druhou stránka je nabídka nastavení. Zde je délka sezóny (3-24 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstva, stopy zapnuto / vypnuto) Nastavení (C / F) je možné změnit." />
+        <text name="ss_helpText_16_02" text="První stránka je váš průvodce pro výsadbu a sklizeň. Teploty klíčení všech plodin jsou uvedeny vlevo od grafu, za názvem plodiny. Pokud je teplota vedle plodiny bílá, znamená to, že je dostatečné teplo na to, aby jste tuto plodinu vypěstovali. Pokud je teplota modrá, je příliš chladno." />
+        <text name="ss_helpText_16_03" text="Druhá stránka menu je nabídka nastavení. Zde se dá nastavovat délka sezóny (3-24 denní sezóny), sezónní oznámení (zapnuto / vypnuto), režim sněhu (zapnuto / vypnuto / 1-vrstva, stopy zapnuto / vypnuto) Nastavení (C / F)." />
 
         <text name="ss_helpTitle_17" text="HUD" />
-        <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje aktuální teplotu vzduchu na horní a dolní teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />
+        <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje nahoře aktuální teplotu vzduchu a dole teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />
         <text name="ss_helpText_17_02" text="Přímo pod časem se zobrazuje sezónní období a den aktuální sezóny." />
-        <text name="ss_helpText_17_03" text="Po aktivaci se prognóza HUD objeví pod hodinami v levém horním rohu." />
-        <text name="ss_helpText_17_04" text="Pokud je aktivována nabídka nápovědy (F1), časovač údržby se zobrazí v dolní části. Zobrazuje se pouze tehdy, když jste ve vozidle." />
+        <text name="ss_helpText_17_03" text="Po aktivaci předpovědi se celá předpověď na dalších 7 herních dnů objeví pod hodinami v levém horním rohu." />
+        <text name="ss_helpText_17_04" text="Pokud je aktivována nabídka nápovědy (F1), a jste ve vozidle, jako poslední řádek nápovědy se zobrazí časovač údržby vozidla." />
 
         <text name="ss_helpTitle_18" text="Různé" />
-        <text name="ss_helpText_18_01" text="Pokud nechcete pracovat v noci, máte možnost přeskočit na ráno.Po setmění, můžete stisknout levý Alt + N přeskočit na ráno." />
-        <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry pro uložení, doporučuje se 1) změnit zimní období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně sezóny restartujte hru / sezóna délka." />
-        <text name="ss_helpText_18_03" text="Zatímco se jedná o hru, kterou chcete hrát, jak chcete, je navržena jako výzva pouze na hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte jaro pouze pěstováním a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a zacházením se zvířaty, stroji, lesy a prodejem plodin v zimě." />
-        <text name="ss_helpText_18_04" text="Všechna vozidla musí být spuštěna manuálně." />
+        <text name="ss_helpText_18_01" text="Pokud nechcete pracovat v noci, máte možnost noc přeskočit na ráno. Po setmění můžete stisknout levý Alt + N a přeskočit na ráno." />
+        <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry, doporučuje se 1) změnit délku období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně délky období hru uložte a restartujte hru / server." />
+        <text name="ss_helpText_18_03" text="Samozřejmě se jedná o hru, kterou můžete hrát, jak chcete. Jako doporučená výzva je navrženo hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte čas na jaře pouze přípravou a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a v zimě se věnujete zvířatům, údržbě strojů, práci v lese a prodeji plodin." />
+        <text name="ss_helpText_18_04" text="Všechna vozidla musí být nastartována manuálně." />
     </texts>
 </l10n>

@@ -24,14 +24,10 @@ end
 
 -- When placing, add listener and update income value
 function ssPlaceable:placeableFinalizePlacement(superFunc)
-    local ret = superFunc(self)
-
     self.ssOriginalIncomePerHour = self.incomePerHour
 
     g_seasons.environment:addSeasonLengthChangeListener(self)
     self:seasonLengthChanged()
-
-    return ret
 end
 
 -- When deleting, also remove listener

@@ -65,6 +65,24 @@ function ssTreeManager:update(dt)
     end
 end
 
+function ssTreeManager:isTreeGrowthLimited(tree)
+    local limits = {
+        [2.5] = 0.25,
+        [4.5] = 0.45,
+        [6.5] = 0.65,
+        [self.MIN_DISTANCE] = 0.85,
+    }
+    local eps = 0.02
+
+    for distance, state in pairs(limits) do
+        if tree.ssNearestDistance < distance and tree.growthState < state + eps and tree.growthState > state - eps then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Find the nearest in the small set
 function ssTreeManager:updateNearest(tree)
     tree.ssNearestDistance = self.MIN_DISTANCE_SQ + 1

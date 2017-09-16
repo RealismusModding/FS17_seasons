@@ -410,6 +410,16 @@ function deepCopy(obj, seen)
     return res
 end
 
+function tableLength(table)
+    local count = 0
+
+    for _ in pairs(table) do
+        count = count + 1
+    end
+
+    return count
+end
+
 function print_r(t)
     local print_r_cache = {}
     local function sub_print_r(t, indent)

@@ -134,7 +134,10 @@ local files = {
     "gui/ssRectOverlay",
     "gui/ssGraph",
     "gui/ssSeasonsMenu",
-    "gui/ssCatchingUp"
+    "gui/ssCatchingUp",
+    "gui/ssMeasureToolDialog",
+
+    "handtools/ssMeasureTool",
 }
 
 local isDebug = false --<%=debug %>
@@ -296,7 +299,8 @@ end
 Mission00.load = Utils.prependedFunction(Mission00.load, ssSeasonsMod.load)
 
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
-Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
+FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
+Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
 
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
 

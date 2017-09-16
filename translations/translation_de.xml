@@ -88,6 +88,12 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend" />
         <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
 
+        <text name="measuretool_title" text="Messung" />
+        <text name="measuretool_fermentation_time" text="Noch %d Stunden erforderlich" />
+        <text name="measuretool_fermentation_time_low" text="Weniger als 1 Stunde erforderlich" />
+        <text name="measuretool_failed" text="Messung fehlgeschlagen" />
+        <text name="measuretool_no_info" text="Messung fehlgeschlagen: Keine Information" />
+
         <text name="ui_pageCalender" text="Kalender" />
         <text name="ui_pageEconomy" text="Wirtschaft" />
         <text name="ui_pageSettings" text="Einstellungen" />
@@ -105,6 +111,9 @@
 
         <text name="ui_plantingSeason" text="Aussaat möglich" />
         <text name="ui_harvestSeason" text="Erntezeit" />
+
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="Die Dauer einer Jahreszeit in Tagen. Ein Jahr beinhaltet vier Jahreszeiten: Frühjahr, Sommer, Herbst und Winter" />
         <text name="tooltip_seasonIntros" text="Hilfe-Fenster beinhalten wichtige Informationen und Erklärungen zum Jahreszeiten-Mod" />
@@ -131,6 +140,8 @@
         <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
 
         <text name="fillType_snow" text="Schnee" />
+
+        <text name="function_measureTool" text="Mit einem Messgerät kannst du Informationen über den Boden, Bäume, Ballen und andere Objekte erhalten." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
@@ -204,7 +215,7 @@
 
         <text name="ss_helpTitle_14" text="Tiere - Einführung" />
         <text name="ss_helpText_14_01" text="Der Tierbereich wurde durch Seasons erheblich angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine mögen es im Winter etwas wärmer und verbrauchen daher mehr Stroh. Die max. Kapazität der Futtertröge wurde von 6 auf 3 Tage verringert." />
-        <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Zeiten für Nachwuchs. Schweine und Schafe bekommen ihren Nachwuchs im Frühjahr, während Kühe ihren Nachwuchs im Sommer bekommen." />
+        <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Die Lämmerzeit für Schafe ist das Frühjahr. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst, während Kühe nur im Sommer kalben." />
         <text name="ss_helpText_14_03" text="Deine Tiere versterben wenn diese kein Futter oder Wasser bekommen. Diese Option ist bei Schwierigkeitsstufe 'einfach' deaktiviert." />
         <text name="ss_helpText_14_04" text="Gras kann im Winter nicht verfüttert werden! Gras kann ja über längere Zeit wie im wahren Leben nicht eingelagert werden. Nutze daher Heu!" />
 

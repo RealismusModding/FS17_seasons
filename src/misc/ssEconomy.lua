@@ -62,10 +62,6 @@ function ssEconomy:loadMap(name)
         self:loadFromXML(path)
     end
 
-    -- Factors used to convert vanilla AI prices to Seasons AI prices
-    self.aiPriceFactor = self.aiPricePerHourWork / ssEconomy.VANILLA_AI_PER_HOUR
-    self.aiPriceOverworkFactor = self.aiPricePerHourOverwork / ssEconomy.VANILLA_AI_PER_HOUR
-
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
@@ -190,6 +186,10 @@ function ssEconomy:loadGameFinished()
     ssEconomy.aiPricePerMSWork = ssEconomy.aiPricePerHourWork / (60 * 60 * 1000)
     ssEconomy.aiPricePerMSOverwork = ssEconomy.aiPricePerHourOverwork / (60 * 60 * 1000)
 
+    -- Factors used to convert vanilla AI prices to Seasons AI prices
+    self.aiPriceFactor = self.aiPricePerHourWork / ssEconomy.VANILLA_AI_PER_HOUR
+    self.aiPriceOverworkFactor = self.aiPricePerHourOverwork / ssEconomy.VANILLA_AI_PER_HOUR
+
     g_currentMission.missionStats.loanMax = self:getLoanCap()
 
     self:calculateLoanInterestRate()
@@ -238,8 +238,8 @@ function ssEconomy.aiUpdateTick(self, superFunc, dt)
 
             -- Only apply the multiplier when price is positive, to avoid increase in 'worker income' in overtime
             if self.ssOriginalPricePerMS >= 0 then
-                local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor;
-                self.pricePerMS = self.ssOriginalPricePerMS * factor;
+                local factor = ssUtil.isWorkHours() and g_seasons.economy.aiPriceFactor or g_seasons.economy.aiPriceOverworkFactor
+                self.pricePerMS = self.ssOriginalPricePerMS * factor
             end
         else
             -- In case self.originalPricePerMS is nil (should never happen), revert to the old system.
@@ -387,13 +387,21 @@ function ssEconomy:emGetCostPerLiter(superFunc, fillType, isBale)
 end
 
 function ssEconomy:baleGetValue(superFunc)
-    local pricePerLiter = g_currentMission.economyManager:getPricePerLiter(self.fillType, true)
+    local orig = g_currentMission.economyManager.getPricePerLiter
 
-    return self.fillLevel * pricePerLiter * self.baleValueScale
+    g_currentMission.economyManager.getPricePerLiter = function (self, ...)
+        return orig(self, ..., true)
+    end
+
+    local pricePerLiter = superFunc(self)
+
+    g_currentMission.economyManager.getPricePerLiter = orig
+
+    return pricePerLiter
 end
 
 function ssEconomy:ttGetEffectiveFillTypePrice(superFunc, fillType)
-    -- local price = superFunc(self, fillType)
+    local price = superFunc(self, fillType)
 
     if self.isServer then
         local factor = g_seasons.economy:getFillFactor(fillType)
@@ -402,7 +410,7 @@ function ssEconomy:ttGetEffectiveFillTypePrice(superFunc, fillType)
         if factor == 0 then
             return 0
         else
-            return ((self.fillTypePrices[fillType] * factor + self.fillTypePriceRandomDelta[fillType] * 0.5) * self.priceMultipliers[fillType])
+            return ((self.fillTypePrices[fillType] * factor + self.fillTypePriceRandomDelta[fillType] * 0.2) * self.priceMultipliers[fillType])
         end
     else
         return price

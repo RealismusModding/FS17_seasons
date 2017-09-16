@@ -13,49 +13,6 @@ function ssAnimals:preLoad()
     g_seasons.animals = self
 end
 
-function ssAnimals:loadMap(name)
-    g_seasons.environment:addSeasonChangeListener(self)
-    g_seasons.environment:addSeasonLengthChangeListener(self)
-
-    ssUtil.overwrittenFunction(AnimalHusbandry, "getCapacity", ssAnimals.husbandryCapacityWrapper)
-    ssUtil.overwrittenFunction(AnimalHusbandry , "getHasSpaceForTipping", ssAnimals.husbandryCapacityWrapper)
-    ssUtil.appendedFunction(AnimalHusbandry,  "addAnimals", ssAnimals.husbandryAddAnimals)
-    ssUtil.appendedFunction(AnimalHusbandry, "removeAnimals", ssAnimals.husbandryRemoveAnimals)
-    ssUtil.overwrittenFunction(AnimalHusbandry, "getDataAttributes", ssAnimals.husbandryGetDataAttributes)
-
-    -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
-    -- Show the same warning when the moisture system is disabled.
-    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_inAdvanceFeedingLimitReached", ssLang.getText("warning_inAdvanceFeedingLimitReached3"))
-
-    -- Load parameters
-    self:loadFromXML()
-
-    if g_currentMission:getIsServer() then
-        g_currentMission.environment:addDayChangeListener(self)
-        g_currentMission.environment:addHourChangeListener(self)
-    end
-end
-
-function ssAnimals:loadGameFinished()
-    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
-
-    self:adjustAnimals()
-end
-
-function ssAnimals:loadFromXML()
-    local elements = {
-        ["seasons"] = {},
-        ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool", "dailyUpkeep"}
-    }
-
-    self.data = ssSeasonsXML:loadFile(g_seasons:getDataPath("animals"), "animals", elements)
-
-    -- Modded
-    for _, path in ipairs(g_seasons:getModPaths("animals")) do
-        self.data = ssSeasonsXML:loadFile(path, "animals", elements, self.data, true)
-    end
-end
-
 function ssAnimals:load(savegame, key)
     -- Load or set default values
     self.averageProduction = {}
@@ -97,6 +54,65 @@ function ssAnimals:save(savegame, key)
     end
 end
 
+function ssAnimals:loadMap(name)
+    g_seasons.environment:addSeasonChangeListener(self)
+    g_seasons.environment:addSeasonLengthChangeListener(self)
+
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getCapacity", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.overwrittenFunction(AnimalHusbandry , "getHasSpaceForTipping", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.appendedFunction(AnimalHusbandry,  "addAnimals", ssAnimals.husbandryAddAnimals)
+    ssUtil.appendedFunction(AnimalHusbandry, "removeAnimals", ssAnimals.husbandryRemoveAnimals)
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getDataAttributes", ssAnimals.husbandryGetDataAttributes)
+
+    -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
+    -- Show the same warning when the moisture system is disabled.
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_inAdvanceFeedingLimitReached", ssLang.getText("warning_inAdvanceFeedingLimitReached3"))
+
+    -- Load parameters
+    self:loadFromXML()
+
+    if g_currentMission:getIsServer() then
+        g_currentMission.environment:addDayChangeListener(self)
+        g_currentMission.environment:addHourChangeListener(self)
+    end
+end
+
+function ssAnimals:loadGameFinished()
+    self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
+
+    self:adjustAnimals()
+end
+
+function ssAnimals:writeStream(streamId, connection)
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        streamWriteString(streamId, husbandry.typeName)
+        streamWriteFloat32(streamId, self.averageProduction[husbandry.typeName])
+    end
+end
+
+function ssAnimals:readStream(streamId, connection)
+    self.averageProduction = {}
+
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local typ = streamReadString(streamId)
+        self.averageProduction[typ] = streamReadFloat32(streamId)
+    end
+end
+
+function ssAnimals:loadFromXML()
+    local elements = {
+        ["seasons"] = {},
+        ["properties"] = { "straw", "food", "water", "birthRate", "milk", "manure", "liquidManure", "wool", "dailyUpkeep"}
+    }
+
+    self.data = ssSeasonsXML:loadFile(g_seasons.modDir .. "data/animals.xml", "animals", elements)
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("animals")) do
+        self.data = ssSeasonsXML:loadFile(path, "animals", elements, self.data, true)
+    end
+end
+
 function ssAnimals:seasonChanged()
     self:updateTroughs()
 
@@ -110,18 +126,31 @@ function ssAnimals:seasonLengthChanged()
     self:adjustAnimals()
 end
 
+-- Returns a table of factors per animal, and a general factor for other animals
+function ssAnimals:getDeathFactors()
+    return {
+        ["cow"] = 0.15, -- can live approx 4 weeks without food
+        ["sheep"] = 0.1, -- can probably live longer than cows without food
+        ["pig"] = 0.25, -- can live approx 2 weeks without food
+        ["chicken"] = 0
+    }, 0.1
+end
+
 function ssAnimals:dayChanged()
     if g_currentMission:getIsServer() and g_currentMission.missionInfo.difficulty ~= 0 then
+        local factors, generic = self:getDeathFactors()
+
         local numKilled = 0
-        -- percentages for base season length = 6 days
-        -- kill 15% of cows if they are not fed (can live approx 4 weeks without food)
-        numKilled = numKilled + self:killAnimals("cow", 0.15 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
 
-        -- kill 10% of sheep if they are not fed (can probably live longer than cows without food)
-        numKilled = numKilled + self:killAnimals("sheep", 0.1 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+        for  _, husbandry in pairs(g_currentMission.husbandries) do
+            local typ = husbandry.typeName
+            local factor = Utils.getNoNil(factors[typ], generic)
 
-        -- kill 25% of pigs if they are not fed (can live approx 2 weeks without food)
-        numKilled = numKilled + self:killAnimals("pig", 0.25 * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+            -- Skip chicken and other odd animald that don't need food
+            if husbandry.animalDesc.canBeBought ~= false then
+                numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+            end
+        end
 
         if numKilled > 0 then
             g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_CRITICAL, string.format(ssLang.getText("warning_animalsKilled"), numKilled))
