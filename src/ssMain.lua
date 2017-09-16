@@ -22,7 +22,6 @@ function ssMain:preLoad()
     end
 
     -- Load in superglobal scope, so other mods can talk with us
-    log("Set g_seasons")
     getfenv(0)["g_seasons"] = self
 
     -- These classes are loaded before ssMain and can't put themselves in global scope
@@ -33,8 +32,6 @@ function ssMain:preLoad()
     self.util = ssUtil
 
     self.modDir = ssSeasonsMod.directory
-
-    log("self.modDir", self.modDir)
 
     local buildnumber = nil --<%=buildnumber %>
     local modItem = ModsUtil.findModItemByModName(ssSeasonsMod.name)
