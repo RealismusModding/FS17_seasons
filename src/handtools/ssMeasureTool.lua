@@ -4,7 +4,7 @@ local ssMeasureTool_mt = Class(ssMeasureTool, HandTool)
 InitObjectClass(ssMeasureTool, "ssMeasureTool")
 
 ssMeasureTool.MEASURE_TIME = 1700 -- ms
-ssMeasureTool.MEASURE_TIME_VAR = 1000
+ssMeasureTool.MEASURE_TIME_VAR = 600
 ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.BREATH_TIME = 4400

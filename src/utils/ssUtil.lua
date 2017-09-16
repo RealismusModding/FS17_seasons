@@ -363,6 +363,16 @@ if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
             end
         end
     end
+
+    function ssUtil.unregisterBrand(name)
+        -- TODO: we can't remove the brand num because of the platinum dlc
+        -- BrandUtil.brandIndexToDesc[BrandUtil[name].index] = nil
+        -- BrandUtil[name] = nil
+        -- BrandUtil.brands[name] = nil
+
+        -- -- Assume we are the only one capable of unregistering a brand
+        -- BrandUtil.NUM_BRANDS = BrandUtil.NUM_BRANDS - 1
+    end
 else
     function ssUtil.overwrittenFunction(target, name, newFunc)
         target[name] = Utils.overwrittenFunction(target[name], newFunc)

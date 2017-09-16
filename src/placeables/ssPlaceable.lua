@@ -13,8 +13,8 @@ function ssPlaceable:preLoad()
     ssUtil.overwrittenFunction(Placeable, "getDailyUpKeep", ssPlaceable.placeableGetDailyUpkeep)
     ssUtil.overwrittenFunction(Placeable, "getSellPrice", ssPlaceable.placeableGetSellPrice)
 
-    ssUtil.overwrittenFunction(Placeable, "finalizePlacement", ssPlaceable.placeableFinalizePlacement)
-    ssUtil.overwrittenFunction(Placeable, "delete", ssPlaceable.placeableDelete)
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssPlaceable.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "delete", ssPlaceable.placeableDelete)
 
     Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
@@ -23,7 +23,7 @@ function ssPlaceable:loadMap()
 end
 
 -- When placing, add listener and update income value
-function ssPlaceable:placeableFinalizePlacement(superFunc)
+function ssPlaceable:placeableFinalizePlacement()
     self.ssOriginalIncomePerHour = self.incomePerHour
 
     g_seasons.environment:addSeasonLengthChangeListener(self)
@@ -31,9 +31,7 @@ function ssPlaceable:placeableFinalizePlacement(superFunc)
 end
 
 -- When deleting, also remove listener
-function ssPlaceable:placeableDelete(superFunc)
-    superFunc(self)
-
+function ssPlaceable:placeableDelete()
     if g_seasons ~= nil and g_seasons.environment ~= nil then
         g_seasons.environment:removeSeasonLengthChangeListener(self)
     end

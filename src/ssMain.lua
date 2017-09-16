@@ -144,6 +144,8 @@ end
 
 function ssMain:deleteMap()
     getfenv(0)["g_seasons"] = nil
+
+    ssUtil.unregisterBrand("WOPSTR")
 end
 
 function ssMain:loadGameFinished()
