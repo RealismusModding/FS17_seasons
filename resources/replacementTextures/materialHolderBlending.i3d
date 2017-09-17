@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<i3D name="materialHolder" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+<i3D name="materialHolderBlending" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
     <Asset>
         <Export program="GIANTS Editor 64bit" version="7.0.5" />
     </Asset>
@@ -168,37 +168,37 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine1LOD_mat" materialId="7" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine1LOD_mat" materialId="7" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="7" />
             <Normalmap fileId="8" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine2LOD_mat" materialId="9" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine2LOD_mat" materialId="9" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="9" />
             <Normalmap fileId="10" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine3LOD_mat" materialId="11" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine3LOD_mat" materialId="11" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="11" />
             <Normalmap fileId="12" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine4LOD_mat" materialId="13" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine4LOD_mat" materialId="13" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="13" />
             <Normalmap fileId="14" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine5LOD_mat" materialId="15" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine5LOD_mat" materialId="15" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="15" />
             <Normalmap fileId="16" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="pine6LOD_mat" materialId="17" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="pine6LOD_mat" materialId="17" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="17" />
             <Normalmap fileId="18" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -222,31 +222,31 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="spruce1LOD_mat" materialId="25" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="spruce1LOD_mat" materialId="25" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="25" />
             <Normalmap fileId="26" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="spruce2LOD_mat" materialId="27" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="spruce2LOD_mat" materialId="27" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="27" />
             <Normalmap fileId="28" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="spruce3LOD_mat" materialId="29" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="spruce3LOD_mat" materialId="29" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="29" />
             <Normalmap fileId="30" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="spruce4LOD_mat" materialId="31" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="spruce4LOD_mat" materialId="31" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="31" />
             <Normalmap fileId="32" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="spruce5LOD_mat" materialId="33" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="spruce5LOD_mat" materialId="33" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="33" />
             <Normalmap fileId="34" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -259,37 +259,37 @@
         </Material>
 
         <!-- Spring -->
-        <Material name="birch1LOD_mat" materialId="101" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch1LOD_mat" materialId="101" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="101" />
             <Normalmap fileId="501" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch2LOD_mat" materialId="102" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch2LOD_mat" materialId="102" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="102" />
             <Normalmap fileId="502" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch3LOD_mat" materialId="103" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch3LOD_mat" materialId="103" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="103" />
             <Normalmap fileId="503" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch4LOD_mat" materialId="104" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch4LOD_mat" materialId="104" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="104" />
             <Normalmap fileId="504" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch5LOD_mat" materialId="105" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch5LOD_mat" materialId="105" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="105" />
             <Normalmap fileId="505" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch6LOD_mat" materialId="106" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch6LOD_mat" materialId="106" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="106" />
             <Normalmap fileId="506" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -301,7 +301,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="maple5LOD_mat" materialId="108" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="maple5LOD_mat" materialId="108" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="108" />
             <Normalmap fileId="508" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -313,7 +313,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="oak4LOD_mat" materialId="110" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="oak4LOD_mat" materialId="110" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="110" />
             <Normalmap fileId="510" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -325,7 +325,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="poplar5LOD_mat" materialId="112" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="poplar5LOD_mat" materialId="112" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="112" />
             <Normalmap fileId="512" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -351,37 +351,37 @@
         </Material>
 
         <!-- Autumn -->
-        <Material name="birch1LOD_mat" materialId="201" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch1LOD_mat" materialId="201" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="201" />
             <Normalmap fileId="501" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch2LOD_mat" materialId="202" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch2LOD_mat" materialId="202" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="202" />
             <Normalmap fileId="502" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch3LOD_mat" materialId="203" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch3LOD_mat" materialId="203" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="203" />
             <Normalmap fileId="503" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch4LOD_mat" materialId="204" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch4LOD_mat" materialId="204" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="204" />
             <Normalmap fileId="504" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch5LOD_mat" materialId="205" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch5LOD_mat" materialId="205" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="205" />
             <Normalmap fileId="505" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch6LOD_mat" materialId="206" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch6LOD_mat" materialId="206" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="206" />
             <Normalmap fileId="506" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -393,7 +393,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="maple5LOD_mat" materialId="208" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="maple5LOD_mat" materialId="208" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="208" />
             <Normalmap fileId="508" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -405,7 +405,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="oak4LOD_mat" materialId="210" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="oak4LOD_mat" materialId="210" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="210" />
             <Normalmap fileId="510" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -417,7 +417,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="poplar5LOD_mat" materialId="212" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="poplar5LOD_mat" materialId="212" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="212" />
             <Normalmap fileId="512" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -443,37 +443,37 @@
         </Material>
 
         <!-- Winter -->
-        <Material name="birch1LOD_mat" materialId="301" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch1LOD_mat" materialId="301" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="301" />
             <Normalmap fileId="901" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch2LOD_mat" materialId="302" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch2LOD_mat" materialId="302" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="302" />
             <Normalmap fileId="902" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch3LOD_mat" materialId="303" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch3LOD_mat" materialId="303" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="303" />
             <Normalmap fileId="903" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch4LOD_mat" materialId="304" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch4LOD_mat" materialId="304" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="304" />
             <Normalmap fileId="904" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch5LOD_mat" materialId="305" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch5LOD_mat" materialId="305" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="305" />
             <Normalmap fileId="905" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch6LOD_mat" materialId="306" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch6LOD_mat" materialId="306" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="306" />
             <Normalmap fileId="506" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -485,7 +485,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="maple5LOD_mat" materialId="308" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="maple5LOD_mat" materialId="308" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="308" />
             <Normalmap fileId="908" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -497,7 +497,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="oak4LOD_mat" materialId="310" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="oak4LOD_mat" materialId="310" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="310" />
             <Normalmap fileId="910" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -509,7 +509,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="poplar5LOD_mat" materialId="312" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="poplar5LOD_mat" materialId="312" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="312" />
             <Normalmap fileId="912" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -543,37 +543,37 @@
         </Material>
 
         <!-- Summer -->
-        <Material name="birch1LOD_mat" materialId="401" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch1LOD_mat" materialId="401" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="401" />
             <Normalmap fileId="501" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch2LOD_mat" materialId="402" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch2LOD_mat" materialId="402" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="402" />
             <Normalmap fileId="502" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch3LOD_mat" materialId="403" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch3LOD_mat" materialId="403" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="403" />
             <Normalmap fileId="503" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch4LOD_mat" materialId="404" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch4LOD_mat" materialId="404" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="404" />
             <Normalmap fileId="504" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch5LOD_mat" materialId="405" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch5LOD_mat" materialId="405" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="405" />
             <Normalmap fileId="505" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="birch6LOD_mat" materialId="406" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="birch6LOD_mat" materialId="406" ambientColor="1 1 1" customShaderId="803" alphaBlending="true" customShaderVariation="billboard180">
             <Texture fileId="406" />
             <Normalmap fileId="506" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -585,7 +585,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="maple5LOD_mat" materialId="408" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="maple5LOD_mat" materialId="408" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="408" />
             <Normalmap fileId="508" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -597,7 +597,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="oak4LOD_mat" materialId="410" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="oak4LOD_mat" materialId="410" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="410" />
             <Normalmap fileId="510" />
             <CustomParameter name="windScale" value="1 0 0 0" />
@@ -609,7 +609,7 @@
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
-        <Material name="poplar5LOD_mat" materialId="412" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
+        <Material name="poplar5LOD_mat" materialId="412" ambientColor="1 1 1" alphaBlending="true" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="412" />
             <Normalmap fileId="512" />
             <CustomParameter name="windScale" value="1 0 0 0" />
