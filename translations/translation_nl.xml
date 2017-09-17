@@ -58,17 +58,16 @@
 
         <text name="SS_VEHICLE_TAXES" text="Voertuigbelasting" />
         <text name="SS_VEHICLE_MAINTENANCE" text="Voertuigonderhoud" />
-        <text name="SS_VEHICLE_REPAIRS" text="Voertuigherstellingen" />
+        <text name="SS_VEHICLE_REPAIRS" text="Voertuigreparatie" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet voldoende geld om de herstelling uit te voeren." />
-        <text name="SS_VEHICLE_REPAIRED" text="%s is hersteld voor %s." />
-        <text name="SS_NOTHING_TO_REPAIR" text="Geen herstelling vereist voor %s." />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Herstel %s voor %s." />
-        <text name="SS_REPAIR_REQUIRED" text="Herstelling vereist!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Herstelling is vereist over %.1f draaiuren of %d dagen." />
-        <text name="SS_REPAIR_DIALOG" text="Wil je de %s herstellen voor %s?" />
-        <text name="SS_REPAIR_DIALOG_TITLE" text="Herstellen?" />
-        <text name="warning_repairBrokenMachine" text="Motorstoring! Herstel je voertuig." />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Je hebt niet voldoende geld om het onderhoud uit te voeren." />
+        <text name="SS_VEHICLE_REPAIRED" text="%s is onderhouden voor %s." />
+        <text name="SS_NOTHING_TO_REPAIR" text="Geen onderhoud vereist voor %s." />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Onderhoud %s voor %s." />
+        <text name="SS_REPAIR_REQUIRED" text="Onderhoud vereist!" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Onderhoud is vereist over %.1f draaiuren of %d dagen." />
+        <text name="SS_REPAIR_DIALOG" text="Wil je de %s onderhouden voor %s?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="Onderhoud" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="Om middernacht" />
 
         <text name="SS_SAVE_FAILED" text="Het is niet gelukt de Seasons-mod op te slaan in je savegame. Probeer opnieuw!" />
@@ -88,16 +87,11 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="De maximale capaciteit van de voerbak is voldoende om de dieren drie dagen te voeren." />
         <text name="msg_welcome" text="Welkom bij de Seasons-mod door Realismus Modding. Bekijk de hulppagina’s in het hulpmenu voor meer informatie over de werking van deze mod." />
 
-        <!-- Missing translation of "Measurement" -->
-        <text name="measuretool_title" text="" />
-        <!-- Missing translation of "%d hours to go" -->
-        <text name="measuretool_fermentation_time" text="" />
-        <!-- Missing translation of "less than 1 hour to go" -->
-        <text name="measuretool_fermentation_time_low" text="" />
-        <!-- Missing translation of "Measurement failed" -->
-        <text name="measuretool_failed" text="" />
-        <!-- Missing translation of "Measurement failed: no information" -->
-        <text name="measuretool_no_info" text="" />
+        <text name="measuretool_title" text="Meting" />
+        <text name="measuretool_fermentation_time" text="Nog %d uren te gaan" />
+        <text name="measuretool_fermentation_time_low" text="Minder dan 1 uur te gaan" />
+        <text name="measuretool_failed" text="Meting mislukt" />
+        <text name="measuretool_no_info" text="Meting mislukt: geen informatie" />
 
         <text name="ui_pageCalender" text="Kalender" />
         <text name="ui_pageEconomy" text="Economie" />
@@ -117,10 +111,8 @@
         <text name="ui_plantingSeason" text="Zaaiperiode" />
         <text name="ui_harvestSeason" text="Oogstperiode" />
 
-        <!-- Missing translation of "m" -->
-        <text name="unit_meterShort" text="" />
-        <!-- Missing translation of "ft" -->
-        <text name="unit_feetShort" text="" />
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="De lengte van één seizoen in dagen. Een jaar heeft vier seizoenen." />
         <text name="tooltip_seasonIntros" text="Laat een inleiding zien bij de start van elk seizoen." />
@@ -207,9 +199,9 @@
         <text name="ss_helpText_10_04" text="Op een gedownloade kaart die van een Seasons-Snowmask voorzien is, beginnen hooi- en strobalen te vergaan bij regen, hagel of sneeuw. Verhinder dit door je balen op te bergen in een schuur. Gewikkelde balen kan je zonder problemen buiten laten liggen. Op kaarten die geen Seasons-Snowmask hebben, heeft slecht weer geen invloed op je balen." />
 
         <text name="ss_helpTitle_11" text="Voertuigonderhoud" />
-        <text name="ss_helpText_11_01" text="Je tractoren en oogstmachines vereisen regelmatig herstellingen om ze in werking te houden. Een herstelbeurt gebeurt elke 30 werkuren of om het half jaar. Voertuigen die niet worden onderhouden, kunnen mogelijks moelijker starten." />
-        <text name="ss_helpText_11_02" text="Je kan je voertuigen herstellen bij de voertuigwinkel of bij een plaatsbare voertuigwerkplaats. Om een voertuig te herstellen, rijd je het in het gemarkeerde gebied en gebruik je de toetsencombinatie Links Alt + R. Het is natuurlijk duurder om je voertuig te herstellen bij de voertuigwinkel dan in je eigen werkplaats." />
-        <text name="ss_helpText_11_03" text="De ouderdom van je voertuig is de dagen sinds je laatste herstelbeurt." />
+        <text name="ss_helpText_11_01" text="Je tractoren en oogstmachines vereisen regelmatig onderhoud om ze in werking te houden. Een onderhoudsbeurt gebeurt elke 30 werkuren of om het jaar. Voertuigen die niet worden onderhouden, kunnen mogelijks moelijker starten." />
+        <text name="ss_helpText_11_02" text="Je kan je voertuigen onderhouden bij de voertuigwinkel of bij een plaatsbare voertuigwerkplaats. Om een voertuig te onderhouden, rijd je het in het gemarkeerde gebied en gebruik je de toetsencombinatie Links Alt + R. Het is natuurlijk duurder om je voertuig te repareren bij de voertuigwinkel dan in je eigen werkplaats." />
+        <text name="ss_helpText_11_03" text="De ouderdom van je voertuig is de dagen sinds je laatste onderhoudsbeurt." />
         <text name="ss_helpText_11_04" text="Enkel voertuigen vereisen regelmatig jouw onderhoud. Werktuigen, aanhangers en gewichten worden automatisch onderhouden." />
 
         <text name="ss_helpTitle_12" text="Economie" />

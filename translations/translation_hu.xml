@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás" />
         <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
-        <text name="warning_repairBrokenMachine" text="A motor meghibásodott. Javítsd meg a gépedet!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />

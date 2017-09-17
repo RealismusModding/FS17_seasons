@@ -73,7 +73,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f engine hours or %d days until maintenance is required" />
         <text name="SS_REPAIR_DIALOG" text="Do you want to perform maintenance on the %s for %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Maintenance" />
-        <text name="warning_repairBrokenMachine" text="Engine breakdown. Repair your machinery!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
         <text name="SS_SAVE_FAILED" text="Failed to save Seasons to your savegame. Please try again!" />

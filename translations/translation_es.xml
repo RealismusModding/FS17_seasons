@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas de trabajo o %d días hasta mantenimiento" />
         <text name="SS_REPAIR_DIALOG" text="¿Quiere hacer el mantenimiento del %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
-        <text name="warning_repairBrokenMachine" text="Motor roto. Repare su vehículo!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
         <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
@@ -88,7 +87,6 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacidad del comedero es suficiente para alimentar estos animales durante 3 días" />
         <text name="msg_welcome" text="Bienvenido al Mod Seasons hecho por Realismus Modding. Por favor, consulte la ayuda en el menú Esc para obtener más información sobre cómo utilizar este mod." />
 
-        
         <text name="measuretool_title" text="Medición" />
         <text name="measuretool_fermentation_time" text=" quedan %d horas " />
         <text name="measuretool_fermentation_time_low" text=" queda menos de una hora" />

@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f motohodin nebo %d dní do údržby" />
         <text name="SS_REPAIR_DIALOG" text="Chcete provést údržbu %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
-        <text name="warning_repairBrokenMachine" text="Varování: oprav poškozený stroj!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
 
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
