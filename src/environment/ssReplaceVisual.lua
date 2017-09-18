@@ -21,6 +21,7 @@ function ssReplaceVisual:loadMap(name)
 
         self.loadedPlaceableDefaults = {}
         self.materialHolders = {}
+        self.useAlphaBlending = false
 
         self:loadFromXML()
         self:loadMaterialHolders()
@@ -183,7 +184,7 @@ function ssReplaceVisual:loadMaterialHolders()
         local filePath
 
         -- Only use blending if supplied and enabled
-        if info.blending ~= nil and self.useAlphaBlending then
+        if info.blending ~= nil and self.useAlphaBlending and not GS_IS_CONSOLE_VERSION then
             filePath = info.blending
         else
             filePath = info.default
