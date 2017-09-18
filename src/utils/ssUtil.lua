@@ -390,6 +390,9 @@ else
         target[name] = newVal
     end
 
+    function ssUtil.unregisterBrand(name)
+    end
+
     ssUtil.registerSpecialization = SpecializationUtil.registerSpecialization
     ssUtil.registerTireType = WheelsUtil.registerTireType
 end
