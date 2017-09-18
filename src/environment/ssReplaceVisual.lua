@@ -71,7 +71,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         self.useAlphaBlending = nil
     end
 
-    local useAlphaBlending = getXMLBool(file, "textures#alpheBlending")
+    local useAlphaBlending = getXMLBool(file, "textures#alphaBlending")
     if useAlphaBlending ~= nil then
         -- Only overwrite if actual value is supplied
         self.useAlphaBlending = useAlphaBlending
