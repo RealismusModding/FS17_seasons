@@ -32,6 +32,11 @@
         <Value name="size" value="16px 458px" />
     </Profile>
 
+    <Profile name="consoles_ssCropsSliderVertical" parent="ssCropsSliderVertical">
+        <Value name="size" value="16px 530px" />
+        <value name="position" value="0px 0px" />
+    </Profile>
+
     <Profile name="ssOverview" parent="baseReference">
         <Value name="size" value="984px 560px" />
         <Value name="position" value="0px 0px" />
@@ -51,6 +56,11 @@
         <Value name="position" value="350px 15px" />
         <Value name="screenAlign" value="middleLeft" />
         <Value name="positionOrigin" value="middleLeft" />
+    </Profile>
+
+    <Profile name="consoles_ssEconomySlider" parent="ssEconomySlider">
+        <Value name="size" value="16px 530px" />
+        <value name="position" value="350px 0px" />
     </Profile>
 
     <Profile name="ssEconomyList" parent="list">
