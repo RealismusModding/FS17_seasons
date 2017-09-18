@@ -20,8 +20,10 @@ function ssReplaceVisual:loadMap(name)
         g_seasons.environment:addVisualSeasonChangeListener(self)
 
         self.loadedPlaceableDefaults = {}
+        self.materialHolders = {}
 
         self:loadFromXML()
+        self:loadMaterialHolders()
 
         self:loadTextureIdTable(getRootNode()) -- Built into map
         for _, replacements in ipairs(self.modReplacements) do
@@ -75,20 +77,33 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     if Utils.getNoNil(getXMLBool(file, "textures#overwrite"), false) then
         self.textureReplacements = {}
         self.textureReplacements.default = {}
+        self.materialHolders = {}
+        self.useAlphaBlending = nil
+    end
+
+    local useAlphaBlending = getXMLBool(file, "textures#alphaBlending")
+    if useAlphaBlending ~= nil then
+        -- Only overwrite if actual value is supplied
+        self.useAlphaBlending = useAlphaBlending
     end
 
     -- If there is a material holder, load that first
     local matHolder = getXMLString(file, "textures#materialHolder")
     if matHolder ~= nil then
-        local normPath = ssUtil.normalizedPath(ssUtil.basedir(path) .. matHolder)
+        local baseDir = ssUtil.basedir(path)
 
-        local replacements = loadI3DFile(normPath)
+        -- The default xml file also supplies a blending file that might be used
+        local blendingMatHolder = getXMLString(file, "textures#blendingMaterialHolder")
+        local blendingFile = nil
 
-        table.insert(self.modReplacements, replacements)
-
-        if self.tmpMaterialHolderNodeId == nil then
-            self.tmpMaterialHolderNodeId = self:findNodeByName(replacements, "summer_material_holder")
+        if blendingMatHolder ~= nil then
+            blendingFile = ssUtil.normalizedPath(Utils.getFilename(blendingMatHolder, baseDir))
         end
+
+        table.insert(self.materialHolders, {
+            ["default"] = ssUtil.normalizedPath(Utils.getFilename(matHolder, baseDir)),
+            ["blending"] = blendingFile
+        })
     end
 
     -- Load seasons replacements
@@ -161,6 +176,26 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
     end
 
     delete(file)
+end
+
+function ssReplaceVisual:loadMaterialHolders()
+    for _, info in ipairs(self.materialHolders) do
+        local filePath
+
+        -- Only use blending if supplied and enabled
+        if info.blending ~= nil and self.useAlphaBlending then
+            filePath = info.blending
+        else
+            filePath = info.default
+        end
+
+        local replacements = loadI3DFile(filePath)
+        table.insert(self.modReplacements, replacements)
+
+        if self.tmpMaterialHolderNodeId == nil then
+            self.tmpMaterialHolderNodeId = self:findNodeByName(replacements, "summer_material_holder")
+        end
+    end
 end
 
 --

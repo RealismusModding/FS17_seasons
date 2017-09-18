@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f моточасов или %d дн. до ТО" />
         <text name="SS_REPAIR_DIALOG" text="Вы желаете выполнить тех. обслуживание %s за %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
-        <text name="warning_repairBrokenMachine" text="Двигатель неисправен. Отремонтируйте вашу технику!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
 
         <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seasons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />

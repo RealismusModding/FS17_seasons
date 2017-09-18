@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Wartung in %.1f Betriebstunden oder %d Tagen erforderlich." />
         <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s warten?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
-        <text name="warning_repairBrokenMachine" text="Es ist eine Systemstörung aufgetreten. Du solltest diese Maschine warten!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />

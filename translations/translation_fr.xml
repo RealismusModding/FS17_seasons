@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Heures du moteur %.1f Heures. L'entretien sera dans %d jours" />
         <text name="SS_REPAIR_DIALOG" text="Voulez-vous réparer %s le %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
-        <text name="warning_repairBrokenMachine" text="Panne de moteur. Veuillez réparer votre machine!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!" />

@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Manutenzione necessaria entro %.1f ore motore o %d giorni" />
         <text name="SS_REPAIR_DIALOG" text="Vuoi riparare %s per %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
-        <text name="warning_repairBrokenMachine" text="Motore danneggiato. Ripara il macchinario!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="alla mezzanotte" />
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />

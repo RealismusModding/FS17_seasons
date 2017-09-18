@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas trabalhadas ou %d dias faltando para manutenção" />
         <text name="SS_REPAIR_DIALOG" text="Você quer fazer manutenção no %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Manutenção" />
-        <text name="warning_repairBrokenMachine" text="Falha de motor. Repare seu equipamento!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
 
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />

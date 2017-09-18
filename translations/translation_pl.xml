@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
         <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
-        <text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
