@@ -47,6 +47,6 @@ function ssSnowAdmirer:updateVisibility()
     setCollisionMask(self.id, visible and self.collisionMask or 0)
 end
 
-function ssSnowAdmirer:updateTick(dt)
+function ssSnowAdmirer:update(dt)
     self:updateVisibility()
 end
