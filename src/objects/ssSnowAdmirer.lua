@@ -24,6 +24,7 @@ function ssSnowAdmirer:new(id)
 
     -- If attribute is set to false, it will only show when there is NO snow
     self.showWhenSnow = Utils.getNoNil(getUserAttribute(id, "snow"), true)
+    self.minimumLevel = tonumber(Utils.getNoNil(getUserAttribute(id, "level"), 1))
 
     g_currentMission.environment:addWeatherChangeListener(self)
 
@@ -38,7 +39,7 @@ end
 
 function ssSnowAdmirer:updateVisibility()
     -- Use applied snow depth: weather can state it is > 0 even though nothing is visible
-    local visible = g_seasons.weather.snowDepth >= g_seasons.snow.LAYER_HEIGHT
+    local visible = g_seasons.weather.snowDepth >= g_seasons.snow.LAYER_HEIGHT * self.minimumLevel
 
     if not self.showWhenSnow then
         visible = not visible
