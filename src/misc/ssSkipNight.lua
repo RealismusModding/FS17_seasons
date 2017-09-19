@@ -9,7 +9,11 @@
 
 ssSkipNight = {}
 
-ssSkipNight.SPEED = 6000
+if GS_IS_CONSOLE_VERSION then
+    ssSkipNight.SPEED = 1200
+else
+    ssSkipNight.SPEED = 6000
+end
 
 function ssSkipNight:preLoad()
     g_seasons.skipNight = self
