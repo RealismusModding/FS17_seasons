@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f munkaóra vagy %d nap, amíg szükséges lesz a karbantartás" />
         <text name="SS_REPAIR_DIALOG" text="El akarod végezni a karbantartást a(z) %s gépen ennyiért: %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
-        <text name="warning_repairBrokenMachine" text="A motor meghibásodott. Javítsd meg a gépedet!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
@@ -88,6 +87,12 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Az etetővájú maximális kapacitása 3 napra elegendő élelmet biztosít az állataidnak" />
         <text name="msg_welcome" text="A Realismus Modding nevében üdvözlünk a Seasons modban. Kérlek olvasd át az Áttekintést az ESC menüben, hogy megismerkedj a mod használatával." />
 
+        <text name="measuretool_title" text="Mérés" />
+        <text name="measuretool_fermentation_time" text="%d óra múlva kész" />
+        <text name="measuretool_fermentation_time_low" text="kevesebb mint egy óra" />
+        <text name="measuretool_failed" text="Mérés nem sikerült" />
+        <text name="measuretool_no_info" text="Mérés nem sikerült : nincs információ" />
+
         <text name="ui_pageCalender" text="Naptár" />
         <text name="ui_pageEconomy" text="Gazdaság" />
         <text name="ui_pageSettings" text="Beállítások" />
@@ -105,6 +110,11 @@
 
         <text name="ui_plantingSeason" text="Vetési szezon" />
         <text name="ui_harvestSeason" text="Aratási szezon" />
+
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
 
         <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll" />
         <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén" />
@@ -131,6 +141,8 @@
         <text name="dialog_sleeping" text="Pihenés a következő napig... Zzz..." />
 
         <text name="fillType_snow" text="Hó" />
+
+        <text name="function_measureTool" text="Ezt a mérőeszközt használva információt kapsz a talajról, fákról, bálákról és egyéb dolgokról." />
 
         <text name="ss_helpCategory" text="Seasons" />
 

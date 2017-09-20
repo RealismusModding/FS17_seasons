@@ -27,7 +27,7 @@ end
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
+        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5 -- in days
     end
 end
 
@@ -60,6 +60,24 @@ function ssTreeManager:update(dt)
             tree.growthState = 0.85
         end
     end
+end
+
+function ssTreeManager:isTreeGrowthLimited(tree)
+    local limits = {
+        [2.5] = 0.25,
+        [4.5] = 0.45,
+        [6.5] = 0.65,
+        [self.MIN_DISTANCE] = 0.85,
+    }
+    local eps = 0.02
+
+    for distance, state in pairs(limits) do
+        if tree.ssNearestDistance < distance and tree.growthState < state + eps and tree.growthState > state - eps then
+            return true
+        end
+    end
+
+    return false
 end
 
 -- Find the nearest in the small set

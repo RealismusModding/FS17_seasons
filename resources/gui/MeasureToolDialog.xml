@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement type="empty" profile="newLayer" />
+
+    <GuiElement type="bitmap" profile="ssMeasureToolDialogBg" id="dialogElement">
+        <GuiElement type="bitmap" profile="ssMeasureToolDialogMainBg" id="dialogBgElement">
+            <GuiElement type="bitmap" profile="ssMeasureToolDialogHeader">
+                <GuiElement type="text" profile="ssMeasureToolDialogTitle" text="title" id="dialogTitleElement" />
+            </GuiElement>
+
+            <GuiElement type="list" profile="ssMeasureToolDialogContentList" id="contentList" focusId="100" focusChangeBottom="1" focusChangeTop="1">
+                <GuiElement type="listItem" id="contentItemTemplate" profile="ssMeasureToolDialogItem">
+                    <GuiElement type="bitmap" profile="ssMeasureToolDialogItemBg" onCreate="onCreateItemBg">
+                        <GuiElement type="bitmap" profile="ssMeasureToolDialogItemIcon" onCreate="onCreateItemIcon" />
+                        <GuiElement type="text" profile="ssMeasureToolDialogItemText" text="text" onCreate="onCreateItemText" />
+                    </GuiElement>
+                </GuiElement>
+            </GuiElement>
+
+            <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
+                <GuiElement type="button" profile="buttonBack" size="390px 40px" text="$l10n_button_back" onClick="onClickBack" id="backButton" focusId="1" focusInit="onOpen" focusChangeTop="100" focusChangeBottom="100" />
+            </GuiElement>
+
+            <GuiElement type="flowLayout" profile="buttonBoxConsole" size="590px 40px" id="buttonsConsole" visible="false">
+                <GuiElement type="button" profile="buttonCircle"  size="390px 40px" text="$l10n_button_back" id="backButtonConsole" />
+            </GuiElement>
+        </GuiElement>
+    </GuiElement>
+</GUI>

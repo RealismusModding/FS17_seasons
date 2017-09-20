@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="Przegląd będzie wymagany za %.1f roboczogodzin lub %d dni" />
         <text name="SS_REPAIR_DIALOG" text="Czy chcesz wykonać przegląd %s za %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
-        <text name="warning_repairBrokenMachine" text="Awaria silnika. Napraw pojazd!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
@@ -88,6 +87,12 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
         <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
 
+        <text name="measuretool_title" text="Pomiar" />
+        <text name="measuretool_fermentation_time" text="Pozostało %d godzin(y)" />
+        <text name="measuretool_fermentation_time_low" text="pozostało mniej niż 1 godzina" />
+        <text name="measuretool_failed" text="Pomiar nieudany" />
+        <text name="measuretool_no_info" text="Pomiar nieudany: brak informacji" />
+
         <text name="ui_pageCalender" text="Kalendarz" />
         <text name="ui_pageEconomy" text="Ekonomia" />
         <text name="ui_pageSettings" text="Ustawienia" />
@@ -105,6 +110,9 @@
 
         <text name="ui_plantingSeason" text="Okres zasiewów" />
         <text name="ui_harvestSeason" text="Okres zbiorów" />
+
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony" />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu" />
@@ -131,6 +139,8 @@
         <text name="dialog_sleeping" text="Odpoczynek przed kolejnym dniem pracy na farmie... Zzz..." />
 
         <text name="fillType_snow" text="Śnieg" />
+
+        <text name="function_measureTool" text="Za pomocą narzędzia pomiarowego można uzyskać informacje o glebie, drzewach, belach oraz innych obiektach." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
@@ -204,7 +214,7 @@
 
         <text name="ss_helpTitle_14" text="Zwierzęta - wprowadzenie" />
         <text name="ss_helpText_14_01" text="Produkcja zwierzęca została zmieniona na bardziej realistyczną. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej ścielenia słomą w zimie. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />
-        <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko w określonych sezonach. Świnie i owce będą rozmnażać się wiosną, a krowy latem." />
+        <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko w określonych sezonach. Świnie będą rozmnażać się wiosną i jesienią, owce tylko wiosną, a krowy latem." />
         <text name="ss_helpText_14_03" text="Zwierzęta będą zdychać, gdy nie będą miały jedzenia lub wody. Funkcjonalność ta jest wyłączona na Łatwym poziomie trudności gry." />
         <text name="ss_helpText_14_04" text="Zimą nie można karmić zwierząt trawą. Należy wówczas karmić je sianem." />
 

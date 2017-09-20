@@ -33,7 +33,7 @@ function ssGrowthManager:load(savegame, key)
 
     self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
     self.willGerminateData[g_seasons.environment:transitionAtDay()] = {}
-    
+
     if savegame == nil then return end
 
     local i = 0
@@ -98,7 +98,7 @@ end
 
 function ssGrowthManager:loadMap(name)
     if self.growthManagerEnabled == false then
-        logInfo("ssGrowthManager:", "disabled")
+        logInfo("ssGrowthManager: disabled")
         return
     end
 
@@ -107,7 +107,7 @@ function ssGrowthManager:loadMap(name)
     g_currentMission:setPlantGrowthRateLocked(true)
 
     if not self:getGrowthData() then
-        logInfo("ssGrowthManager:" , "required data not loaded. ssGrowthManager disabled")
+        logInfo("ssGrowthManager: required data not loaded. ssGrowthManager disabled")
         return
     end
 
@@ -123,11 +123,13 @@ function ssGrowthManager:loadMap(name)
 end
 
 function ssGrowthManager:loadMapFinished()
-    if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
-        self:rebuildWillGerminateData()
-        self:checkAndAddNewFruits(true)
-    else
-        self:checkAndAddNewFruits(false)
+    if g_currentMission:getIsServer() then
+        if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
+            self:rebuildWillGerminateData()
+            self:checkAndAddNewFruits(true)
+        else
+            self:checkAndAddNewFruits(false)
+        end
     end
 end
 
@@ -177,7 +179,7 @@ function ssGrowthManager:transitionChanged()
 
     local transition = g_seasons.environment:transitionAtDay()
     g_seasons.growthDebug:setFakeTransition(transition)
-    
+
     if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
         logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
         self.isNewSavegame = false

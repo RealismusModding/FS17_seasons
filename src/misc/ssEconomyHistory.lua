@@ -67,11 +67,42 @@ end
 function ssEconomyHistory:loadMap(name)
     g_seasons.environment:addSeasonLengthChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
+end
 
-    local currentDay = g_seasons.environment:dayInYear()
+function ssEconomyHistory:readStream(streamId, connection)
+    self.data = {}
+
+    local n = streamReadInt16(streamId)
+    for i = 1, n do
+        local typ = streamReadInt8(streamId)
+
+        local m = streamReadInt8(streamId)
+        local values = {}
+
+        for j = 1, m do
+            values[j] = streamReadFloat32(streamId)
+        end
+
+        self.data[typ] = values
+    end
+end
+
+function ssEconomyHistory:writeStream(streamId, connection)
+    streamWriteInt16(streamId, tableLength(self.data))
+
+    for index, values in pairs(self.data) do
+        streamWriteInt8(streamId, index)
+        streamWriteInt8(streamId, table.getn(values))
+
+        for j, price in ipairs(values) do
+            streamWriteFloat32(streamId, price)
+        end
+    end
 end
 
 function ssEconomyHistory:loadGameFinished(name)
+    local currentDay = g_seasons.environment:dayInYear()
+
     for index, fillDesc in pairs(FillUtil.fillTypeIndexToDesc) do
         fillDesc.ssEconomyType = self:getEconomyType(fillDesc)
 

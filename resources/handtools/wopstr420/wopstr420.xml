@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+
+<handTool>
+    <storeData>
+        <name>
+            <en>M 420</en>
+        </name>
+        <functions>
+            <function>$l10n_function_measureTool</function>
+        </functions>
+        <image>resources/handtools/wopstr420/store.png</image>
+        <price>3500</price>
+        <dailyUpkeep>5</dailyUpkeep>
+        <lifetime>600</lifetime>
+        <rotation>0</rotation>
+        <brand>WOPSTR</brand>
+        <category>misc</category>
+        <species>handTool</species>
+    </storeData>
+
+    <handToolType>ssMeasureTool</handToolType>
+    <filename>resources/handtools/wopstr420/wopstr420.i3d</filename>
+
+    <!-- Horizontal -->
+    <position value="-0.2 -0.16 0.4"/>
+    <rotation value="80 160 0"/>
+
+    <measureTool>
+        <handNode index="0>0" rotation="-50 0 0" />
+
+        <measureSound file="resources/handtools/wopstr420/beep.wav" pitchOffset="1" volume="1" />
+
+        <pricePerSecond>0</pricePerSecond>
+    </measureTool>
+</handTool>

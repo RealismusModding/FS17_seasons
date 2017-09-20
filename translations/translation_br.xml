@@ -68,7 +68,6 @@
         <text name="SS_REPAIR_REQUIRED_IN" text="%.1f horas trabalhadas ou %d dias faltando para manutenção" />
         <text name="SS_REPAIR_DIALOG" text="Você quer fazer manutenção no %s por %s?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Manutenção" />
-        <text name="warning_repairBrokenMachine" text="Falha de motor. Repare seu equipamento!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
 
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
@@ -87,6 +86,17 @@
         <text name="warning_animalsKilled" text="Animais morreram! (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="A capacidade máxima de sustentos foi atingida para 3 dias" />
         <text name="msg_welcome" text="Bem vindos ao Seasons mod por Realismus Modding. Por favor cheque nossa área de ajuda apertando Esc para saber como utilizar melhor este mod." />
+
+        <!-- Missing translation of "Measurement" -->
+        <text name="measuretool_title" text="" />
+        <!-- Missing translation of "%d hours to go" -->
+        <text name="measuretool_fermentation_time" text="" />
+        <!-- Missing translation of "less than 1 hour to go" -->
+        <text name="measuretool_fermentation_time_low" text="" />
+        <!-- Missing translation of "Measurement failed" -->
+        <text name="measuretool_failed" text="" />
+        <!-- Missing translation of "Measurement failed: no information" -->
+        <text name="measuretool_no_info" text="" />
 
         <!-- Missing translation of "Calendar" -->
         <text name="ui_pageCalender" text="" />
@@ -110,6 +120,11 @@
 
         <text name="ui_plantingSeason" text="Temporada de plantar" />
         <text name="ui_harvestSeason" text="Temporada de colher" />
+
+        <!-- Missing translation of "m" -->
+        <text name="unit_meterShort" text="" />
+        <!-- Missing translation of "ft" -->
+        <text name="unit_feetShort" text="" />
 
         <text name="tooltip_seasonLength" text="A duração de uma estação em dias. Um ano são quatro estações" />
         <text name="tooltip_seasonIntros" text="Mostre uma introdução a cada estação" />
@@ -136,6 +151,9 @@
         <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
 
         <text name="fillType_snow" text="Neve" />
+
+        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
+        <text name="function_measureTool" text="" />
 
         <text name="ss_helpCategory" text="Seasons" />
 

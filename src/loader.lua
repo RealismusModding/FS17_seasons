@@ -123,7 +123,10 @@ local files = {
     "gui/ssRectOverlay",
     "gui/ssGraph",
     "gui/ssSeasonsMenu",
-    "gui/ssCatchingUp"
+    "gui/ssCatchingUp",
+    "gui/ssMeasureToolDialog",
+
+    "handtools/ssMeasureTool",
 }
 
 local isDebug = false --<%=debug %>
@@ -239,7 +242,7 @@ end
 
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
-Mission00.loadMission00Finished = Utils.prependedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
+Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
 
 ------------------------------------------
 -- Fixes for Giants Vanilla game
