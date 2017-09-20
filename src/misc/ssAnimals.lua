@@ -72,6 +72,9 @@ function ssAnimals:loadMap(name)
     -- Load parameters
     self:loadFromXML()
 
+    -- Backup the animal desc
+    self.origAnimalDesc = deepCopy(AnimalUtil.animals)
+
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
         g_currentMission.environment:addHourChangeListener(self)
@@ -82,6 +85,10 @@ function ssAnimals:loadGameFinished()
     self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
     self:adjustAnimals()
+end
+
+function ssAnimals:deleteMap()
+    AnimalUtil.animals = self.origAnimalDesc
 end
 
 function ssAnimals:writeStream(streamId, connection)
