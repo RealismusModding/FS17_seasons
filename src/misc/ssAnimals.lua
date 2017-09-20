@@ -100,7 +100,7 @@ end
 -- What is read and written in the animal husbandry depends on the values
 -- of that animal. We need to be up to date
 function ssAnimals:husbandryReadStream(streamId, connection)
-    self:adjustAnimals()
+    g_seasons.animals:adjustAnimals()
 end
 
 function ssAnimals:loadFromXML()
