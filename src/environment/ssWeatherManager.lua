@@ -245,6 +245,7 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
+        self.soilTempMax = self.soilTemp
     end
 end
 
