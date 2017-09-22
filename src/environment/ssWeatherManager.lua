@@ -24,6 +24,7 @@ function ssWeatherManager:load(savegame, key)
     -- Load or set default values
     self.snowDepth = ssXMLUtil.getFloat(savegame, key .. ".weather.snowDepth")
     self.soilTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTemp")
+    self.soilTempMax = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTempMax",self.soilTemp)
     self.prevHighTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
@@ -77,6 +78,7 @@ function ssWeatherManager:save(savegame, key)
 
     ssXMLUtil.setFloat(savegame, key .. ".weather.snowDepth", self.snowDepth)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilTemp", self.soilTemp)
+    ssXMLUtil.setFloat(savegame, key .. ".weather.soilTempMax", self.soilTempMax)
     ssXMLUtil.setFloat(savegame, key .. ".weather.prevHighTemp", self.prevHighTemp)
     ssXMLUtil.setFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilWaterContent", self.soilWaterContent)
@@ -165,6 +167,7 @@ end
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
+    self.soilTempMax = streamReadFloat32(streamId)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.moistureEnabled = streamReadBool(streamId)
     self.prevHighTemp = streamReadFloat32(streamId)
@@ -212,6 +215,7 @@ end
 function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
+    streamWriteFloat32(streamId, self.soilTempMax)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteBool(streamId, self.moistureEnabled)
     streamWriteFloat32(streamId, self.prevHighTemp)
@@ -242,6 +246,7 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
+        self.soilTempMax = self.soilTemp
     end
 end
 
@@ -362,6 +367,9 @@ function ssWeatherManager:seasonLengthChanged()
 
         -- The new forecast is sent with the ssSettings event.
     end
+
+    self.soilTempMax = self.soilTemp
+
 end
 
 function ssWeatherManager:dayChanged()
@@ -377,6 +385,11 @@ function ssWeatherManager:dayChanged()
             end
         end
     end
+
+    if self.soilTemp > self.soilTempMax then
+        self.soilTempMax = self.soilTemp
+    end
+
 end
 
 -- Jos note: no randomness here. Must run on client for snow.
@@ -686,7 +699,7 @@ function ssWeatherManager:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:canSow(fruit)
-    return self.soilTemp >= self:germinationTemperature(fruit)
+    return self.soilTempMax >= self:germinationTemperature(fruit)
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)

@@ -162,7 +162,7 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
         </cz>
     </description>
 
-    <iconFilename>icon.dds</iconFilename>
+    <iconFilename>icon.png</iconFilename>
 
     <multiplayer supported="true"/>
 
@@ -178,6 +178,10 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
         <input name="SEASONS_SHOW_MENU" category="ONFOOT" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse=""/>
         <input name="SEASONS_SKIP_NIGHT" category="ONFOOT" key1="KEY_lalt KEY_n" key2="" button="" device="" mouse=""/>
     </inputBindings>
+
+    <brands>
+        <brand name="WOPSTR" title="Wopstr" image="resources/handtools/wopstr420/brand_wopstr.png" />
+    </brands>
 
     <storeItems>
         <storeItem xmlFilename="resources/fakeStoreItem/item.xml"/>
