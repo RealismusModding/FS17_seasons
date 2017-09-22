@@ -13,36 +13,6 @@
         <File fileId="4" filename="data/maps/trees/mapleTrunk_normal.png" relativePath="false" />
         <File fileId="5" filename="any/oakTrunk_diffuse.png" relativePath="true" />
         <File fileId="6" filename="data/maps/trees/oakTrunk_normal.png" relativePath="false" />
-        <File fileId="7" filename="any/pine1LOD_diffuse.png" relativePath="true" />
-        <File fileId="8" filename="data/maps/trees/pine1LOD_normal.png" relativePath="false" />
-        <File fileId="9" filename="any/pine2LOD_diffuse.png" relativePath="true" />
-        <File fileId="10" filename="data/maps/trees/pine2LOD_normal.png" relativePath="false" />
-        <File fileId="11" filename="any/pine3LOD_diffuse.png" relativePath="true" />
-        <File fileId="12" filename="data/maps/trees/pine3LOD_normal.png" relativePath="false" />
-        <File fileId="13" filename="any/pine4LOD_diffuse.png" relativePath="true" />
-        <File fileId="14" filename="data/maps/trees/pine4LOD_normal.png" relativePath="false" />
-        <File fileId="15" filename="any/pine5LOD_diffuse.png" relativePath="true" />
-        <File fileId="16" filename="data/maps/trees/pine5LOD_normal.png" relativePath="false" />
-        <File fileId="17" filename="any/pine6LOD_diffuse.png" relativePath="true" />
-        <File fileId="18" filename="data/maps/trees/pine6LOD_normal.png" relativePath="false" />
-        <File fileId="19" filename="any/pineBranch_diffuse.png" relativePath="true" />
-        <File fileId="20" filename="data/maps/trees/pineBranch_normal.png" relativePath="false" />
-        <File fileId="21" filename="any/pineTrunk_diffuse.png" relativePath="true" />
-        <File fileId="22" filename="data/maps/trees/pineTrunk_normal.png" relativePath="false" />
-        <File fileId="23" filename="any/pineTrunkDead_diffuse.png" relativePath="true" />
-        <File fileId="24" filename="data/maps/trees/pineTrunkDead_normal.png" relativePath="false" />
-        <File fileId="25" filename="any/spruce1LOD_diffuse.png" relativePath="true" />
-        <File fileId="26" filename="data/maps/trees/spruce1LOD_normal.png" relativePath="false" />
-        <File fileId="27" filename="any/spruce2LOD_diffuse.png" relativePath="true" />
-        <File fileId="28" filename="data/maps/trees/spruce2LOD_normal.png" relativePath="false" />
-        <File fileId="29" filename="any/spruce3LOD_diffuse.png" relativePath="true" />
-        <File fileId="30" filename="data/maps/trees/spruce3LOD_normal.png" relativePath="false" />
-        <File fileId="31" filename="any/spruce4LOD_diffuse.png" relativePath="true" />
-        <File fileId="32" filename="data/maps/trees/spruce4LOD_normal.png" relativePath="false" />
-        <File fileId="33" filename="any/spruce5LOD_diffuse.png" relativePath="true" />
-        <File fileId="34" filename="data/maps/trees/spruce5LOD_normal.png" relativePath="false" />
-        <File fileId="35" filename="any/spruceTrunk_diffuse.png" relativePath="true" />
-        <File fileId="36" filename="data/maps/trees/spruceTrunk_normal.png" relativePath="false" />
 
         <!-- Spring -->
         <File fileId="101" filename="spring/birch1LOD_diffuse.png" relativePath="true" />
@@ -165,96 +135,6 @@
         <Material name="oakTrunk_mat" materialId="5" ambientColor="1 1 1" customShaderId="806">
             <Texture fileId="5" />
             <Normalmap fileId="6" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine1LOD_mat" materialId="7" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="7" />
-            <Normalmap fileId="8" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine2LOD_mat" materialId="9" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="9" />
-            <Normalmap fileId="10" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine3LOD_mat" materialId="11" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="11" />
-            <Normalmap fileId="12" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine4LOD_mat" materialId="13" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="13" />
-            <Normalmap fileId="14" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine5LOD_mat" materialId="15" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="15" />
-            <Normalmap fileId="16" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pine6LOD_mat" materialId="17" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="17" />
-            <Normalmap fileId="18" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pineBranch_mat" materialId="19" ambientColor="1 1 1" customShaderId="801">
-            <Texture fileId="19" />
-            <Normalmap fileId="20" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pineTrunk_mat" materialId="21" ambientColor="1 1 1" customShaderId="806">
-            <Texture fileId="21" />
-            <Normalmap fileId="22" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="pineTrunkDead_mat" materialId="23" ambientColor="1 1 1" customShaderId="806">
-            <Texture fileId="23" />
-            <Normalmap fileId="24" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruce1LOD_mat" materialId="25" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="25" />
-            <Normalmap fileId="26" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruce2LOD_mat" materialId="27" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="27" />
-            <Normalmap fileId="28" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruce3LOD_mat" materialId="29" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="29" />
-            <Normalmap fileId="30" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruce4LOD_mat" materialId="31" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="31" />
-            <Normalmap fileId="32" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruce5LOD_mat" materialId="33" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
-            <Texture fileId="33" />
-            <Normalmap fileId="34" />
-            <CustomParameter name="windScale" value="1 0 0 0" />
-        </Material>
-
-        <Material name="spruceTrunk_mat" materialId="35" ambientColor="1 1 1" customShaderId="806">
-            <Texture fileId="35" />
-            <Normalmap fileId="36" />
             <CustomParameter name="windScale" value="1 0 0 0" />
         </Material>
 
@@ -646,21 +526,6 @@
         <Shape shapeId="1" name="birchTrunk_any" visibility="false" nodeId="1" materialIds="1" distanceBlending="false" />
         <Shape shapeId="1" name="mapleTrunk_any" visibility="false" nodeId="3" materialIds="3" distanceBlending="false" />
         <Shape shapeId="1" name="oakTrunk_any" visibility="false" nodeId="5" materialIds="5" distanceBlending="false" />
-        <Shape shapeId="1" name="pine1LOD_any" visibility="false" nodeId="7" materialIds="7" distanceBlending="false" />
-        <Shape shapeId="1" name="pine2LOD_any" visibility="false" nodeId="9" materialIds="9" distanceBlending="false" />
-        <Shape shapeId="1" name="pine3LOD_any" visibility="false" nodeId="11" materialIds="11" distanceBlending="false" />
-        <Shape shapeId="1" name="pine4LOD_any" visibility="false" nodeId="13" materialIds="13" distanceBlending="false" />
-        <Shape shapeId="1" name="pine5LOD_any" visibility="false" nodeId="15" materialIds="15" distanceBlending="false" />
-        <Shape shapeId="1" name="pine6LOD_any" visibility="false" nodeId="17" materialIds="17" distanceBlending="false" />
-        <Shape shapeId="1" name="pineBranch_any" visibility="false" nodeId="19" materialIds="19" distanceBlending="false" />
-        <Shape shapeId="1" name="pineTrunk_any" visibility="false" nodeId="21" materialIds="21" distanceBlending="false" />
-        <Shape shapeId="1" name="pineTrunkDead_any" visibility="false" nodeId="23" materialIds="23" distanceBlending="false" />
-        <Shape shapeId="1" name="spruce1LOD_any" visibility="false" nodeId="25" materialIds="25" distanceBlending="false" />
-        <Shape shapeId="1" name="spruce2LOD_any" visibility="false" nodeId="27" materialIds="27" distanceBlending="false" />
-        <Shape shapeId="1" name="spruce3LOD_any" visibility="false" nodeId="29" materialIds="29" distanceBlending="false" />
-        <Shape shapeId="1" name="spruce4LOD_any" visibility="false" nodeId="31" materialIds="31" distanceBlending="false" />
-        <Shape shapeId="1" name="spruce5LOD_any" visibility="false" nodeId="33" materialIds="33" distanceBlending="false" />
-        <Shape shapeId="1" name="spruceTrunk_any" visibility="false" nodeId="35" materialIds="35" distanceBlending="false" />
 
         <!-- Spring -->
         <Shape shapeId="1" name="birch1LOD_spring" visibility="false" nodeId="101" materialIds="101" distanceBlending="false" />
