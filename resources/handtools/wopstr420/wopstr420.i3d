@@ -3,10 +3,10 @@
 <i3D name="wopstr420" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
 
   <Files>
-    <File fileId="1" filename="wopstr420_diffuse.dds" relativePath="true"/>
-    <File fileId="2" filename="wopstr420_normal.dds" relativePath="true"/>
-    <File fileId="4" filename="wopstr420_specular.dds" relativePath="true"/>
-    <File fileId="3" filename="rough_cube.dds" relativePath="true"/>
+    <File fileId="1" filename="wopstr420_diffuse.png" relativePath="true"/>
+    <File fileId="2" filename="wopstr420_normal.png" relativePath="true"/>
+    <File fileId="4" filename="wopstr420_specular.png" relativePath="true"/>
+    <File fileId="3" filename="rough_cube.png" relativePath="true"/>
     <File fileId="5" filename="data/shaders/vehicleShader.xml" relativePath="false"/>
   </Files>
 

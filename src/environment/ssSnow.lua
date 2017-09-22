@@ -49,7 +49,7 @@ end
 function ssSnow:loadMap(name)
     -- Register Snow as a fill and Tip type
     local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
-    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.dds", g_seasons.modDir .. "resources/environment/snow_normal.dds", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.dds")
+    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.png", g_seasons.modDir .. "resources/environment/snow_normal.png", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.png")
     loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
 
     -- Load overlay icon, properly
