@@ -114,6 +114,7 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
+    g_seasons.environment:addTransitionChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
@@ -366,9 +367,6 @@ function ssWeatherManager:seasonLengthChanged()
 
         -- The new forecast is sent with the ssSettings event.
     end
-
-    self.soilTempMax = self.soilTemp
-
 end
 
 function ssWeatherManager:dayChanged()
@@ -388,7 +386,10 @@ function ssWeatherManager:dayChanged()
     if self.soilTemp > self.soilTempMax then
         self.soilTempMax = self.soilTemp
     end
+end
 
+function ssWeatherManager:transitionChanged()
+    self.soilTempMax = self.soilTemp
 end
 
 -- Jos note: no randomness here. Must run on client for snow.
@@ -460,7 +461,7 @@ function ssWeatherManager:updateSnowDepth()
     if currentTemp >= 0 then
         if currentRain == nil then
             -- snow melts at faster if the sun is shining
-            self.meltedSnow = snowMelt 
+            self.meltedSnow = snowMelt
 
         elseif currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
             -- assume snow melts 50% faster if it rains. Warm snow acts as rain.
@@ -877,7 +878,7 @@ function ssWeatherManager:updateSoilWaterContent()
     if g_currentMission.environment.currentRain ~= nil then
         currentRainId = g_currentMission.environment.currentRain.rainTypeId
     end
-    
+
     --Soil moisture bucket model
     --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
     --Water Resour. Res., 38(9), 1166, doi:10.1029/2001WR000826, 2002
