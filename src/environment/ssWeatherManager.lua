@@ -167,7 +167,6 @@ end
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
-    self.soilTempMax = streamReadFloat32(streamId)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.moistureEnabled = streamReadBool(streamId)
     self.prevHighTemp = streamReadFloat32(streamId)
@@ -215,7 +214,6 @@ end
 function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
-    streamWriteFloat32(streamId, self.soilTempMax)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteBool(streamId, self.moistureEnabled)
     streamWriteFloat32(streamId, self.prevHighTemp)
@@ -246,7 +244,6 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
-        self.soilTempMax = self.soilTemp
     end
 end
 
@@ -382,14 +379,12 @@ function ssWeatherManager:dayChanged()
             end
         end
     end
-
-    if self.soilTemp > self.soilTempMax then
-        self.soilTempMax = self.soilTemp
-    end
 end
 
 function ssWeatherManager:transitionChanged()
-    self.soilTempMax = self.soilTemp
+    if g_currentMission:getIsServer() then
+        self.soilTempMax = self.soilTemp
+    end
 end
 
 -- Jos note: no randomness here. Must run on client for snow.
@@ -513,6 +508,10 @@ function ssWeatherManager:updateSoilTemp()
 
     self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
     --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
+
+    if self.soilTemp > self.soilTempMax then
+        self.soilTempMax = self.soilTemp
+    end
 end
 
 --- function for predicting when soil is frozen
@@ -698,8 +697,14 @@ function ssWeatherManager:germinationTemperature(fruit)
     return Utils.getNoNil(self.germinateTemp[fruit], self.germinateTemp["barley"])
 end
 
+-- On server this uses the max temp.
+-- Otherwise, returns nil
 function ssWeatherManager:canSow(fruit)
-    return self.soilTempMax >= self:germinationTemperature(fruit)
+    if g_currentMission:getIsServer() then
+        return self.soilTempMax >= self:germinationTemperature(fruit)
+    else
+        return nil
+    end
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)
