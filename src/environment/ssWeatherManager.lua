@@ -23,7 +23,7 @@ function ssWeatherManager:load(savegame, key)
     -- Load or set default values
     self.snowDepth = ssXMLUtil.getFloat(savegame, key .. ".weather.snowDepth")
     self.soilTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTemp")
-    self.soilTempMax = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTempMax",self.soilTemp)
+    self.soilTempMax = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTempMax", self.soilTemp)
     self.prevHighTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
@@ -244,6 +244,7 @@ end
 function ssWeatherManager:setupStartValues()
     if g_currentMission:getIsClient() then
         self.soilTemp = Utils.getNoNil(self.soilTemp, self.startValues.soilTemp)
+        self.soilTempMax = self.soilTemp
     end
 end
 
