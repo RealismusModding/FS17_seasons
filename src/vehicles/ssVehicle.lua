@@ -574,9 +574,9 @@ end
 function ssVehicle:getFullBuyPrice(vehicle, storeItem)
     local priceConfig = 0
 
-    if storeItem.configurations ~= nil then
-        for name, boughtConfigs in pairs(vehicle.boughtConfigurations) do
-            for num , _ in pairs(boughtConfigs) do
+    for name, boughtConfigs in pairs(vehicle.boughtConfigurations) do
+        for num , _ in pairs(boughtConfigs) do
+            if storeItem.configurations[name] then
                 priceConfig = priceConfig + storeItem.configurations[name][num].price
             end
         end

@@ -157,7 +157,7 @@ function ssMain:validateDensityMaps()
     end
 
     if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
-        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain")
+        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain. See https://www.realismusmodding.com/mods/seasons/manual/modding/maps/seasons-mask#warning-for-density-size")
     end
 end
 

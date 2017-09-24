@@ -28,6 +28,9 @@ function ssSnowAdmirer:new(id)
     return self
 end
 
+function ssSnowAdmirer:delete()
+end
+
 function ssSnowAdmirer:updateVisibility()
     -- On a game server we have access to the applied snow depth. Use it. Otherwise fall back to weather value
     -- which might not be in sync with what you see as player
