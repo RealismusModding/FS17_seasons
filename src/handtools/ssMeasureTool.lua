@@ -51,6 +51,15 @@ function ssMeasureTool:load(xmlFilename, player)
     self.moveCounter = 0
 
     if self.isClient then
+        local uiScale = g_gameSettings:getValue("uiScale")
+
+        self.selectionOverlayWidth, self.selectionOverlayHeight = getNormalizedScreenValues(46 * uiScale, 40 * uiScale)
+        self.selectionOverlay = Overlay:new("selectionOverlay", g_baseUIFilename, 0.5, 0.5, self.selectionOverlayWidth, self.selectionOverlayHeight)
+        self.selectionOverlay:setAlignment(Overlay.ALIGN_VERTICAL_MIDDLE, Overlay.ALIGN_HORIZONTAL_CENTER)
+        self.selectionOverlay:setDimension(0.3 * self.selectionOverlayWidth, 0.3 * self.selectionOverlayHeight)
+        self.selectionOverlay:setUVs(getNormalizedUVs({870, 280, 69, 60}))
+        self.selectionOverlay:setColor(1, 1, 1, 0.3)
+
         self.sampleMeasure = SoundUtil.loadSample(xmlFile, {}, "handTool.measureTool.measureSound", nil, self.baseDirectory)
 
         SoundUtil.setSampleVolume(self.sampleMeasure, 0.1)
@@ -65,6 +74,8 @@ function ssMeasureTool:delete()
     ssMeasureTool:superClass().delete(self)
 
     if self.isClient then
+        self.selectionOverlay:delete()
+
         SoundUtil.deleteSample(self.sampleMeasure)
     end
 end
@@ -134,14 +145,14 @@ function ssMeasureTool:draw()
 
             scale = pulse * 0.6 + 0.1
         elseif self.measuringTimeoutStart ~= nil then
-            self.player.pickedUpObjectOverlay:setColor(0.6514, 0.0399, 0.0399, 1)
+            self.selectionOverlay:setColor(0.6514, 0.0399, 0.0399, 1)
         else
-            self.player.pickedUpObjectOverlay:setColor(1, 1, 1, 1)
+            self.selectionOverlay:setColor(1, 1, 1, 1)
         end
 
-        self.player.pickedUpObjectOverlay:setDimension(self.player.pickedUpObjectWidth * scale, self.player.pickedUpObjectHeight * scale)
-        self.player.pickedUpObjectOverlay:setUVs(self.player.pickedUpObjectAimingUVs)
-        self.player.pickedUpObjectOverlay:render()
+        self.selectionOverlay:setDimension(self.selectionOverlayWidth * scale, self.selectionOverlayHeight * scale)
+    else
+        self.selectionOverlay:setDimension(self.selectionOverlayWidth * 0.3, self.selectionOverlayHeight * 0.3)
     end
 
     if self.blinkingMessage then
@@ -150,6 +161,8 @@ function ssMeasureTool:draw()
         if self.blinkingMessageUntil > g_currentMission.time then
             self.blinkingMessage = nil
         end
+    else
+        self.selectionOverlay:render()
     end
 end
 
@@ -177,8 +190,6 @@ end
 
 function ssMeasureTool:onDeactivate(allowInput)
     ssMeasureTool:superClass().onDeactivate(self)
-
-    self.player.pickedUpObjectOverlay:setColor(1, 1, 1, 1)
 
     self.player.walkingIsLocked = false
 end
