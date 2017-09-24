@@ -24,7 +24,6 @@ function ssReplaceVisual:loadMap(name)
         self:loadFromXML()
         self:loadMaterialHolders()
 
-        self:loadTextureIdTable(getRootNode()) -- Built into map
         for _, replacements in ipairs(self.modReplacements) do
             self:loadTextureIdTable(replacements)
         end

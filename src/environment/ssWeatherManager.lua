@@ -23,7 +23,7 @@ function ssWeatherManager:load(savegame, key)
     -- Load or set default values
     self.snowDepth = ssXMLUtil.getFloat(savegame, key .. ".weather.snowDepth")
     self.soilTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTemp")
-    self.soilTempMax = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTempMax",self.soilTemp)
+    self.soilTempMax = ssXMLUtil.getFloat(savegame, key .. ".weather.soilTempMax", self.soilTemp)
     self.prevHighTemp = ssXMLUtil.getFloat(savegame, key .. ".weather.prevHighTemp")
     self.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
@@ -114,6 +114,7 @@ function ssWeatherManager:loadMap(name)
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
+    g_seasons.environment:addTransitionChangeListener(self)
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
@@ -166,7 +167,6 @@ end
 function ssWeatherManager:readStream(streamId, connection)
     self.snowDepth = streamReadFloat32(streamId)
     self.soilTemp = streamReadFloat32(streamId)
-    self.soilTempMax = streamReadFloat32(streamId)
     self.cropMoistureContent = streamReadFloat32(streamId)
     self.moistureEnabled = streamReadBool(streamId)
     self.prevHighTemp = streamReadFloat32(streamId)
@@ -214,7 +214,6 @@ end
 function ssWeatherManager:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.snowDepth)
     streamWriteFloat32(streamId, self.soilTemp)
-    streamWriteFloat32(streamId, self.soilTempMax)
     streamWriteFloat32(streamId, self.cropMoistureContent)
     streamWriteBool(streamId, self.moistureEnabled)
     streamWriteFloat32(streamId, self.prevHighTemp)
@@ -366,9 +365,6 @@ function ssWeatherManager:seasonLengthChanged()
 
         -- The new forecast is sent with the ssSettings event.
     end
-
-    self.soilTempMax = self.soilTemp
-
 end
 
 function ssWeatherManager:dayChanged()
@@ -384,11 +380,12 @@ function ssWeatherManager:dayChanged()
             end
         end
     end
+end
 
-    if self.soilTemp > self.soilTempMax then
+function ssWeatherManager:transitionChanged()
+    if g_currentMission:getIsServer() then
         self.soilTempMax = self.soilTemp
     end
-
 end
 
 -- Jos note: no randomness here. Must run on client for snow.
@@ -460,7 +457,7 @@ function ssWeatherManager:updateSnowDepth()
     if currentTemp >= 0 then
         if currentRain == nil then
             -- snow melts at faster if the sun is shining
-            self.meltedSnow = snowMelt 
+            self.meltedSnow = snowMelt
 
         elseif currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
             -- assume snow melts 50% faster if it rains. Warm snow acts as rain.
@@ -512,6 +509,10 @@ function ssWeatherManager:updateSoilTemp()
 
     self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
     --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
+
+    if self.soilTemp > self.soilTempMax then
+        self.soilTempMax = self.soilTemp
+    end
 end
 
 --- function for predicting when soil is frozen
@@ -697,8 +698,14 @@ function ssWeatherManager:germinationTemperature(fruit)
     return Utils.getNoNil(self.germinateTemp[fruit], self.germinateTemp["barley"])
 end
 
+-- On server this uses the max temp.
+-- Otherwise, returns nil
 function ssWeatherManager:canSow(fruit)
-    return self.soilTempMax >= self:germinationTemperature(fruit)
+    if g_currentMission:getIsServer() then
+        return self.soilTempMax >= self:germinationTemperature(fruit)
+    else
+        return nil
+    end
 end
 
 function ssWeatherManager:loadGerminateTemperature(path)
@@ -877,7 +884,7 @@ function ssWeatherManager:updateSoilWaterContent()
     if g_currentMission.environment.currentRain ~= nil then
         currentRainId = g_currentMission.environment.currentRain.rainTypeId
     end
-    
+
     --Soil moisture bucket model
     --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
     --Water Resour. Res., 38(9), 1166, doi:10.1029/2001WR000826, 2002

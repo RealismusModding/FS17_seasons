@@ -47,12 +47,7 @@ function ssMain:preLoad()
 
     ssMain.xmlDirectories = {}
 
-    self.baseUIFilename = Utils.getFilename("resources/gui/hud.dds", g_seasons.modDir)
-
-    -- Add brand for the measure tool: before mods are loaded
-    if not BrandUtil["WOPSTR"] then
-        BrandUtil.registerBrand("WOPSTR", "Wopstr", self.modDir .. "resources/handtools/wopstr420/brand_wopstr.dds", "")
-    end
+    self.baseUIFilename = Utils.getFilename("resources/gui/hud.png", g_seasons.modDir)
 
     -- Do injections
     InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
@@ -153,7 +148,7 @@ function ssMain:validateDensityMaps()
     end
 
     if g_seasons.snow.snowMaskId ~= nil and getDensityMapSize(g_seasons.snow.snowMaskId) ~= mapSize then
-        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain")
+        logInfo("Warning: Density map size of Seasons snow mask is not the same as terrain. See https://www.realismusmodding.com/mods/seasons/manual/modding/maps/seasons-mask#warning-for-density-size")
     end
 end
 
