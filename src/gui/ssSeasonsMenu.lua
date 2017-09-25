@@ -196,17 +196,27 @@ function ssSeasonsMenu:update(dt)
 end
 
 function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
-    if targetElementTop ~= nil and targetElementBottom ~= nil then
-        local buttonBack = FocusManager:getElementById("100")
-        local pageSelector = FocusManager:getElementById("1")
-        buttonBack.focusChangeData[FocusManager.TOP] = targetElementBottom.focusId
-        pageSelector.focusChangeData[FocusManager.BOTTOM] = targetElementTop.focusId
+    if not GS_IS_CONSOLE_VERSION then
+        if targetElementTop ~= nil and targetElementBottom ~= nil then
+            local buttonBack = FocusManager:getElementById("100")
+            local pageSelector = FocusManager:getElementById("1")
+            buttonBack.focusChangeData[FocusManager.TOP] = targetElementBottom.focusId
+            pageSelector.focusChangeData[FocusManager.BOTTOM] = targetElementTop.focusId
+        end
+
+        local focusElement = FocusManager:getFocusedElement()
+
+        FocusManager:unsetFocus(focusElement)
+        FocusManager:setFocus(focusElement)
+    else
+        local focusElement = FocusManager:getFocusedElement()
+        if focusElement ~= nil then
+            FocusManager:unsetFocus(focusElement)
+        end
+        if targetElementTop ~= nil then
+            FocusManager:setFocus(targetElementTop)
+        end
     end
-
-    local focusElement = FocusManager:getFocusedElement()
-
-    FocusManager:unsetFocus(focusElement)
-    FocusManager:setFocus(focusElement)
 end
 
 ------------------------------------------
