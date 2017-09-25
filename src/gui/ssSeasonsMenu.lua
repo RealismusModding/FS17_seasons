@@ -61,6 +61,11 @@ function ssSeasonsMenu:delete()
 end
 
 function ssSeasonsMenu:onCreate(gui)
+    if GS_IS_CONSOLE_VERSION and gui ~= nil then
+        self:removeNavigationItems(gui.elements, {"1", "2", "100", "101", "102"});
+    else
+        self.backButton = FocusManager:getElementById("100")
+    end
 end
 
 function ssSeasonsMenu:onCreatePageState(element)
@@ -205,14 +210,17 @@ function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementB
         end
 
         local focusElement = FocusManager:getFocusedElement()
-
-        FocusManager:unsetFocus(focusElement)
-        FocusManager:setFocus(focusElement)
+        if focusElement ~= nil then
+            FocusManager:unsetFocus(focusElement)
+            FocusManager:setFocus(focusElement)
+        end
     else
         local focusElement = FocusManager:getFocusedElement()
+
         if focusElement ~= nil then
             FocusManager:unsetFocus(focusElement)
         end
+
         if targetElementTop ~= nil then
             FocusManager:setFocus(targetElementTop)
         end
