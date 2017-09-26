@@ -140,8 +140,7 @@
 
         <text name="fillType_snow" text="Sneeuw" />
 
-        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
-        <text name="function_measureTool" text="" />
+        <text name="function_measureTool" text="Met een meetinstrument kan je informatie verkrijgen over de grond, bomen, balen en andere objecten." />
 
         <text name="ss_helpCategory" text="Seasons-mod" />
 
