@@ -90,6 +90,10 @@ function ssVehicle:deleteMap()
         removeConsoleCommand("ssRepairVehicle")
         removeConsoleCommand("ssRepairAllVehicles")
     end
+
+    if g_seasons.debug then
+        removeConsoleCommand("ssTestVehicle")
+    end
 end
 
 function ssVehicle:readStream(streamId, connection)
