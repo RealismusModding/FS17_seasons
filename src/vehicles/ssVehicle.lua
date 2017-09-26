@@ -66,6 +66,10 @@ function ssVehicle:loadMap()
         addConsoleCommand("ssRepairAllVehicles", "Repair all vehicles", "consoleCommandRepairAllVehicles", self)
     end
 
+    if g_seasons.debug then
+        addConsoleCommand("ssTestVehicle", "Test vehicle", "consoleCommandTestVehicle", self)
+    end
+
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
@@ -554,15 +558,40 @@ function ssVehicle:consoleCommandRepairAllVehicles()
     return "Repaired " .. tostring(n) .. " vehicles"
 end
 
+function ssVehicle:consoleCommandTestVehicle()
+    local vehicle = g_currentMission.controlledVehicle
+
+    if vehicle == nil then
+        return "You are not in a vehicle"
+    end
+
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+
+    log("configs")
+    print_r(storeItem.configurations)
+
+    log("bought configs")
+    print_r(vehicle.boughtConfigurations)
+
+    return ""
+end
+
 function ssVehicle:getFullBuyPrice(vehicle, storeItem)
     local priceConfig = 0
 
-    for name, boughtConfigs in pairs(vehicle.boughtConfigurations) do
-        for num , _ in pairs(boughtConfigs) do
-            if storeItem.configurations[name] then
-                priceConfig = priceConfig + storeItem.configurations[name][num].price
+    if storeItem.configurations ~= nil then
+        for configName, configIds in pairs(vehicle.boughtConfigurations) do
+            local configItem = storeItem.configurations[configName]
+
+            if configItem ~= nil then
+                for id, _ in pairs(configIds) do
+                    if configItem[id] then
+                        priceConfig = priceConfig + configItem[id].price
+                    end
+                end
             end
         end
+
     end
 
     return storeItem.price + priceConfig
