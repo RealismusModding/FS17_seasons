@@ -145,9 +145,9 @@ function ssMeasureTool:draw()
 
             scale = pulse * 0.6 + 0.1
         elseif self.measuringTimeoutStart ~= nil then
-            self.selectionOverlay:setColor(0.6514, 0.0399, 0.0399, 1)
+            self.selectionOverlay:setColor(0.6514, 0.0399, 0.0399, 0.3)
         else
-            self.selectionOverlay:setColor(1, 1, 1, 1)
+            self.selectionOverlay:setColor(1, 1, 1, 0.3)
         end
 
         self.selectionOverlay:setDimension(self.selectionOverlayWidth * scale, self.selectionOverlayHeight * scale)
@@ -164,24 +164,6 @@ function ssMeasureTool:draw()
     else
         self.selectionOverlay:render()
     end
-end
-
-function ssMeasureTool:setHandNode(handNode)
-    ssMeasureTool:superClass().setHandNode(self, handNode)
-
-    -- if self.currentHandNode ~= handNode then
-    --     if g_currentMission.player ~= self.player then
-    --         link(handNode, self.rootNode)
-    --         self.currentHandNode = handNode
-
-    --         local x,y,z = getWorldTranslation(self.handNode)
-    --         x,y,z = worldToLocal(getParent(self.rootNode), x,y,z)
-
-    --         local a,b,c = getTranslation(self.rootNode)
-
-    --         setTranslation(self.rootNode, a - x, b - y, c - z)
-    --     end
-    -- end
 end
 
 function ssMeasureTool:onActivate(allowInput)
