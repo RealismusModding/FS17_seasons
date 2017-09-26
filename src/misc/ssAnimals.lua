@@ -351,7 +351,7 @@ function ssAnimals:updateAverageProductivity()
             seasonFac = seasonFac * reductionFac
         end
 
-        self.averageProduction[typ] = avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac
+        self.averageProduction[typ] = math.max(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01)
     end
 end
 
