@@ -361,10 +361,6 @@ function ssAnimals:addAnimalProductivity(currentAnimals, addedAnimals, avgProd)
     if currentAnimals == 0 then
         return avgProd
 
-    -- 80% productivity of newly bought/born animals
-    --elseif currentAnimals == 0 and avgProd == 0 then
-    --    return 0.8
-
     --update average productivity
     else
         return (avgProd * currentAnimals + 0.8 * addedAnimals) / (currentAnimals + addedAnimals)
