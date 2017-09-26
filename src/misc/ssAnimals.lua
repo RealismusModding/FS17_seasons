@@ -60,7 +60,6 @@ function ssAnimals:loadMap(name)
     AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
     AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
     AnimalHusbandry.getDataAttributes = Utils.overwrittenFunction(AnimalHusbandry.getDataAttributes, ssAnimals.husbandryGetDataAttributes)
-    AnimalHusbandry.readStream = Utils.prependedFunction(AnimalHusbandry.readStream, ssAnimals.husbandryReadStream)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -95,12 +94,6 @@ function ssAnimals:readStream(streamId, connection)
         local typ = streamReadString(streamId)
         self.averageProduction[typ] = streamReadFloat32(streamId)
     end
-end
-
--- What is read and written in the animal husbandry depends on the values
--- of that animal. We need to be up to date
-function ssAnimals:husbandryReadStream(streamId, connection)
-    g_seasons.animals:adjustAnimals()
 end
 
 function ssAnimals:loadFromXML()
