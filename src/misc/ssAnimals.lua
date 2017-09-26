@@ -169,8 +169,8 @@ function ssAnimals:adjustAnimals()
             local husbandry = g_currentMission.husbandries[typ]
             local desc = husbandry.animalDesc
             local prod = 1
-            if self.productivity ~= nil and self.productivity ~= 0 then
-                prod = self.productivity
+            if husbandry.productivity ~= nil and husbandry.productivity ~= 0 then
+                prod = husbandry.productivity
             end
 
             desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) * self.seasonLengthfactor * husbandry.averageProduction
