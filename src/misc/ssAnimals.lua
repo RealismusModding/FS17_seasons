@@ -13,9 +13,11 @@ function ssAnimals:preLoad()
     g_seasons.animals = self
 end
 
+ssAnimals.PRODUCTIVITY_START = 0.8
+
 function ssAnimals:load(savegame, key)
     -- Load or set default values
-    self.averageProduction = {}
+    local averageProduction = {}
 
     if savegame ~= nil then
         local i = 0
@@ -24,7 +26,9 @@ function ssAnimals:load(savegame, key)
             if not hasXMLProperty(savegame, animalKey) then break end
 
             local typ = getXMLString(savegame, animalKey .. "#animalName")
-            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+
+            -- Load early for calculations
             g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
             i = i + 1
@@ -33,10 +37,7 @@ function ssAnimals:load(savegame, key)
 
     -- defaulting to 80% average productivity when loading using an older version of Seasons
     for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local typ = husbandry.typeName
-        if self.averageProduction[typ] == nil then
-            self.averageProduction[typ] = 0.8
-        end
+        husbandry.averageProduction = Utils.getNoNil(averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
     end
 end
 
@@ -47,7 +48,7 @@ function ssAnimals:save(savegame, key)
         local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
 
         setXMLString(savegame, animalKey .. "#animalName", typ)
-        setXMLFloat(savegame, animalKey .. "#averageProduction", self.averageProduction[typ])
+        setXMLFloat(savegame, animalKey .. "#averageProduction", husbandry.averageProduction)
         setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
 
         i = i + 1
@@ -63,6 +64,8 @@ function ssAnimals:loadMap(name)
     ssUtil.appendedFunction(AnimalHusbandry,  "addAnimals", ssAnimals.husbandryAddAnimals)
     ssUtil.appendedFunction(AnimalHusbandry, "removeAnimals", ssAnimals.husbandryRemoveAnimals)
     ssUtil.overwrittenFunction(AnimalHusbandry, "getDataAttributes", ssAnimals.husbandryGetDataAttributes)
+    ssUtil.appendedFunction(AnimalHusbandry, "readStream", ssAnimals.husbandryReadStream)
+    ssUtil.appendedFunction(AnimalHusbandry, "writeStream", ssAnimals.husbandryWriteStream)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
@@ -76,8 +79,8 @@ function ssAnimals:loadMap(name)
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
-        g_currentMission.environment:addHourChangeListener(self)
     end
+    g_currentMission.environment:addHourChangeListener(self)
 end
 
 function ssAnimals:loadGameFinished()
@@ -90,19 +93,15 @@ function ssAnimals:deleteMap()
     AnimalUtil.animals = self.origAnimalDesc
 end
 
-function ssAnimals:writeStream(streamId, connection)
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        streamWriteString(streamId, husbandry.typeName)
-        streamWriteFloat32(streamId, self.averageProduction[husbandry.typeName])
+function ssAnimals:husbandryWriteStream(streamId, connection)
+    if not connection:getIsServer() then
+        streamWriteFloat32(streamId, self.averageProduction)
     end
 end
 
-function ssAnimals:readStream(streamId, connection)
-    self.averageProduction = {}
-
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local typ = streamReadString(streamId)
-        self.averageProduction[typ] = streamReadFloat32(streamId)
+function ssAnimals:husbandryReadStream(streamId, connection)
+    if connection:getIsServer() then
+        self.averageProduction = streamReadFloat32(streamId)
     end
 end
 
@@ -129,7 +128,6 @@ end
 function ssAnimals:seasonLengthChanged()
     self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
-    self:updateAverageProductivity()
     self:adjustAnimals()
 end
 
@@ -176,22 +174,24 @@ function ssAnimals:adjustAnimals()
 
     for _, typ in pairs(types) do
         if g_currentMission.husbandries[typ] ~= nil then
-            local desc = g_currentMission.husbandries[typ].animalDesc
+            local husbandry = g_currentMission.husbandries[typ]
+            local desc = husbandry.animalDesc
             local prod = 1
             if self.productivity ~= nil and self.productivity ~= 0 then
                 prod = self.productivity
             end
 
-            desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) * self.seasonLengthfactor * self.averageProduction[typ]
+            desc.birthRatePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".birthRate", 0) * self.seasonLengthfactor * husbandry.averageProduction
             desc.foodPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".food", 0) * self.seasonLengthfactor
             desc.liquidManurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".liquidManure", 0) * self.seasonLengthfactor
             desc.manurePerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".manure", 0) * self.seasonLengthfactor
-            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0) * self.seasonLengthfactor * self.averageProduction[typ] / prod
-            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0) * self.seasonLengthfactor * self.averageProduction[typ] / prod
+            desc.milkPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".milk", 0) * self.seasonLengthfactor * husbandry.averageProduction / prod
+            desc.palletFillLevelPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".wool", 0) * self.seasonLengthfactor * husbandry.averageProduction / prod
             desc.strawPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".straw", 0) * self.seasonLengthfactor
             desc.waterPerDay = ssSeasonsXML:getFloat(self.data, season, typ .. ".water", 0) * self.seasonLengthfactor
             desc.dailyUpkeep = ssSeasonsXML:getFloat(self.data, season, typ .. ".dailyUpkeep", 0) * self.seasonLengthfactor
-            g_currentMission.husbandries[typ].dailyUpkeep = desc.dailyUpkeep
+
+            husbandry.dailyUpkeep = desc.dailyUpkeep
         end
     end
 
@@ -331,7 +331,7 @@ end
 function ssAnimals:husbandryGetDataAttributes(superFunc)
     local tmpProductivity = self.productivity
     if self.totalNumAnimals ~= 0 then
-        self.productivity = ssAnimals.averageProduction[self.typeName]
+        self.productivity = self.averageProduction
     end
 
     local ret = { superFunc(self) }
@@ -346,20 +346,18 @@ function ssAnimals:updateAverageProductivity()
     local reductionFac = 0.1
 
     for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local typ = husbandry.typeName
         local currentProd = husbandry.productivity
-        local avgProd = self.averageProduction[typ]
+        local avgProd = husbandry.averageProduction
 
         if currentProd < 0.75 and currentProd < avgProd then
             seasonFac = seasonFac * reductionFac
         end
 
-        self.averageProduction[typ] = math.max(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01)
+        husbandry.averageProduction = math.max(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01)
     end
 end
 
 function ssAnimals:addAnimalProductivity(currentAnimals, addedAnimals, avgProd)
-
     --when loading savegame use the value from the savegame
     if currentAnimals == 0 then
         return avgProd
@@ -374,13 +372,12 @@ function ssAnimals:husbandryAddAnimals(num, subType)
     local typ = self.typeName
     local currentAnimals = self.totalNumAnimals - num
 
-    ssAnimals.averageProduction[typ] = ssAnimals:addAnimalProductivity(currentAnimals, num, ssAnimals.averageProduction[typ])
+    self.averageProduction = g_seasons.animals:addAnimalProductivity(currentAnimals, num, self.averageProduction)
 end
 
 -- reset productivity to zero if there are no animals
 function ssAnimals:husbandryRemoveAnimals()
     if self.totalNumAnimals == 0 then
-        local typ = self.typeName
-        ssAnimals.averageProduction[typ] = 0.8
+        self.averageProduction = ssAnimals.PRODUCTIVITY_START
     end
 end
