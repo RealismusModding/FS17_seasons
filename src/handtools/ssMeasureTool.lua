@@ -65,6 +65,10 @@ function ssMeasureTool:load(xmlFilename, player)
         SoundUtil.setSampleVolume(self.sampleMeasure, 0.1)
     end
 
+    if g_currentMission.player ~= player then
+        setVisibility(self.rootNode, false)
+    end
+
     delete(xmlFile)
 
     return true
@@ -168,6 +172,8 @@ end
 
 function ssMeasureTool:onActivate(allowInput)
     ssMeasureTool:superClass().onActivate(self)
+
+    setVisibility(self.rootNode, g_currentMission.player == self.player)
 end
 
 function ssMeasureTool:onDeactivate(allowInput)

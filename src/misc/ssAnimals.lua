@@ -15,6 +15,7 @@ ssAnimals.PRODUCTIVITY_START = 0.8
 function ssAnimals:load(savegame, key)
     -- Load or set default values
     local averageProduction = {}
+    local productivities = {}
 
     if savegame ~= nil then
         local i = 0
@@ -26,7 +27,7 @@ function ssAnimals:load(savegame, key)
             averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
 
             -- Load early for calculations
-            g_currentMission.husbandries[typ].productivity = getXMLFloat(savegame, animalKey .. "#currentProduction")
+            productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
             i = i + 1
         end
@@ -35,6 +36,7 @@ function ssAnimals:load(savegame, key)
     -- defaulting to 80% average productivity when loading using an older version of Seasons
     for  _, husbandry in pairs(g_currentMission.husbandries) do
         husbandry.averageProduction = Utils.getNoNil(averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
+        husbandry.productivity = Utils.getNoNil(productivities[husbandry.typeName], husbandry.productivity)
     end
 end
 
