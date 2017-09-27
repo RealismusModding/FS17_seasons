@@ -64,6 +64,10 @@ function ssReplaceVisual:loadFromXML()
     for _, path in ipairs(g_seasons:getModPaths("textures")) do
         self:loadTextureReplacementsFromXMLFile(path)
     end
+
+    if self.textureReplacements.default._foliageLayers == nil then
+        self.textureReplacements.default._foliageLayers = {}
+    end
 end
 
 function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
@@ -284,11 +288,6 @@ end
 function ssReplaceVisual:loadTextureIdTable(searchBase)
     -- Go over each texture (season, shape, secShape), find the material in the game
     -- and store its ID
-
-    if self.textureReplacements.default._foliageLayers == nil then
-        self.textureReplacements.default._foliageLayers = {}
-    end
-
     for seasonId, seasonTable in pairs(self.textureReplacements) do
         if seasonId ~= "default" then
 

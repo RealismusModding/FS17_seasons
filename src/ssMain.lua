@@ -236,6 +236,8 @@ function ssMain:loadMod(modName)
                 return
             else
                 self.hasGeoMod = true
+
+                logInfo("Loading GEO mod '" .. modName .. "'")
             end
         end
 
