@@ -113,7 +113,6 @@ function ssGrowthManager:loadMap(name)
     g_seasons.growthGUI:buildCanHarvestData(self.growthData)
 
     if g_currentMission:getIsServer() then
-        g_currentMission.environment:addDayChangeListener(self)
         g_seasons.environment:addTransitionChangeListener(self)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth, self.finishGrowth)
@@ -198,12 +197,6 @@ function ssGrowthManager:rebuildWillGerminateData()
             self.willGerminateData[currentGT][fruitName] = ssWeatherManager:canSow(fruitName)
         end
     end
-end
-
--- handle dayChanged event
--- check if canSow and update willGerminate accordingly
-function ssGrowthManager:dayChanged()
-    self:rebuildWillGerminateData()
 end
 
 -- called by ssDensityScanner to make fruit grow
