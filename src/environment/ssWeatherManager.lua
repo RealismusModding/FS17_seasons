@@ -379,6 +379,7 @@ function ssWeatherManager:dayChanged()
                 listener:weatherChanged()
             end
         end
+    g_seasons.growthManager:dayChanged()
     end
 end
 
