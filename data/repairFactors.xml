@@ -1,14 +1,14 @@
-<!--------------------------------------------------------------------------------------------------
--- REPAIR FACTORS
-----------------------------------------------------------------------------------------------------
--- Purpose:  Data for repair factors
--- Authors:  reallogger
---
--- Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter
--- Life time divided by 20
---
--- Copyright (c) Realismus Modding, 2017
---------------------------------------------------------------------------------------------------->
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–– REPAIR FACTORS
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–– Purpose:  Data for repair factors
+–– Authors:  reallogger
+––
+–– Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter
+–– Life time divided by 20
+––
+–– Copyright (c) Realismus Modding, 2017
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <factors>
@@ -173,13 +173,13 @@
         <RF2 value="1.3" />
         <ssLifeTime value="1000" />
     </factor>
-    
+
     <factor category="woodCrusherTrailerDrivable">
         <RF1 value="0.025" />
         <RF2 value="1.2" />
         <ssLifeTime value="400" />
     </factor>
-    
+
     <factor category="woodCrusherTrailer">
         <RF1 value="0.04" />
         <RF2 value="1.3" />
@@ -191,7 +191,7 @@
         <RF2 value="1.3" />
         <ssLifeTime value="400" />
     </factor>
-    
+
     <factor category="conveyorTrailerHireable">
         <RF1 value="0.13" />
         <RF2 value="1.2" />
