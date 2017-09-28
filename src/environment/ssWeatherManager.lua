@@ -379,6 +379,8 @@ function ssWeatherManager:dayChanged()
                 listener:weatherChanged()
             end
         end
+
+        g_seasons.growthManager:rebuildWillGerminateData()
     end
 end
 

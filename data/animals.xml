@@ -1,11 +1,11 @@
-<!--------------------------------------------------------------------------------------------------
--- ANIMAL DATA
-----------------------------------------------------------------------------------------------------
--- Purpose:  Data for adjusted animals
--- Authors:  Rahkiin, reallogger
---
--- Copyright (c) Realismus Modding, 2017
---------------------------------------------------------------------------------------------------->
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–– ANIMAL DATA
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–– Purpose:  Data for adjusted animals
+–– Authors:  Rahkiin, reallogger
+––
+–– Copyright (c) Realismus Modding, 2017
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <animals>
@@ -32,10 +32,10 @@
                 <straw>15</straw>
                 <food>81</food>
                 <water>10</water>
-                <birthRate>0.03333333</birthRate>
+                <birthRate>0.04</birthRate>
                 <manure>27</manure>
                 <liquidManure>46</liquidManure>
-                <dailyUpkeep>15</dailyUpkeep>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
         </spring>
 
@@ -94,10 +94,10 @@
                 <straw>20</straw>
                 <food>90</food>
                 <water>7.5</water>
-                <birthRate>0.03333333</birthRate>
+                <birthRate>0.04</birthRate>
                 <manure>30</manure>
                 <liquidManure>53</liquidManure>
-                <dailyUpkeep>15</dailyUpkeep>
+                <dailyUpkeep>10</dailyUpkeep>
             </properties>
         </autumn>
 
