@@ -115,7 +115,7 @@ function ssGrowthManager:loadMap(name)
     g_seasons.growthGUI:buildCanHarvestData(self.growthData)
 
     if g_currentMission:getIsServer() then
-        g_currentMission.environment:addDayChangeListener(self)
+        --g_currentMission.environment:addDayChangeListener(self)
         g_seasons.environment:addTransitionChangeListener(self)
 
         ssDensityMapScanner:registerCallback("ssGrowthManagerHandleGrowth", self, self.handleGrowth, self.finishGrowth)
