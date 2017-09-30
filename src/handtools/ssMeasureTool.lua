@@ -187,7 +187,7 @@ function ssMeasureTool:executeMeasurement()
     local x, y, z = localToWorld(self.player.cameraNode, 0, 0, 0.5)
     local dx, dy, dz = localDirectionToWorld(self.player.cameraNode, 0, 0, -1)
 
-    raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE, self)
+    raycastClosest(x, y, z, dx, dy, dz, "raycastCallback", ssMeasureTool.MEASURE_DISTANCE, self, 32+64+128+256+4096)
 end
 
 -- Called by the raycast: handles finding the object that was scanned
