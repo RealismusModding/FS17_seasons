@@ -14,6 +14,13 @@ ssEconomy.EQUITY_LOAN_RATIO = 0.8
 ssEconomy.DEFAULT_FACTOR = 1
 ssEconomy.VANILLA_AI_PER_HOUR = 2000
 
+function ssEconomy:preLoad()
+    -- Update leasing costs
+    EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
+    EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
+    EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
+end
+
 function ssEconomy:load(savegame, key)
     self.aiPricePerHourWork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourWork", 1650)
     self.aiPricePerHourOverwork = ssXMLUtil.getFloat(savegame, key .. ".settings.aiPricePerHourOverwork", 2475)
@@ -33,11 +40,6 @@ function ssEconomy:save(savegame, key)
 end
 
 function ssEconomy:loadMap(name)
-    -- Update leasing costs
-    EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
-
     AIVehicle.load = Utils.appendedFunction(AIVehicle.load, ssEconomy.aiLoad)
     AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
     FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
