@@ -28,6 +28,11 @@ function ssEconomy:preLoad()
     ssUtil.overwrittenFunction(EconomyManager, "getCostPerLiter", ssEconomy.emGetCostPerLiter)
     ssUtil.overwrittenFunction(Bale, "getValue", ssEconomy.baleGetValue)
     ssUtil.overwrittenFunction(TipTrigger, "getEffectiveFillTypePrice", ssEconomy.ttGetEffectiveFillTypePrice)
+
+    -- Update leasing costs
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_LEASING_DEPOSIT_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_RUNNING_LEASING_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "PER_DAY_LEASING_FACTOR", 0.008) -- factor of price (vanilla: 0.01)
 end
 
 function ssEconomy:load(savegame, key)
@@ -49,11 +54,6 @@ function ssEconomy:save(savegame, key)
 end
 
 function ssEconomy:loadMap(name)
-    -- Update leasing costs
-    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_LEASING_DEPOSIT_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
-    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_RUNNING_LEASING_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
-    ssUtil.overwrittenConstant(EconomyManager, "PER_DAY_LEASING_FACTOR", 0.008) -- factor of price (vanilla: 0.01)
-
     -- Load economy price changes data
     self.repricing = {}
     self:loadFromXML(g_seasons:getDataPath("economy"))
