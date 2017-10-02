@@ -9,6 +9,10 @@
 
 ssDaylight = {}
 
+ssDaylight.DST_OFF = 0
+ssDaylight.DST_ON = 1
+ssDaylight.DST_ALWAYS = 2
+
 function ssDaylight:preLoad()
     g_seasons.daylight = self
 end
@@ -40,8 +44,25 @@ end
 function ssDaylight:loadFromXML(path)
     local file = loadXMLFile("daylight", path)
 
-    self.latitude = Utils.clamp(ssXMLUtil.getFloat(file, "daylight.latitude", self.latitude), 0, 70)
+    -- New format
+    local latitude = ssXMLUtil.getFloat(file, "daylight#latitude")
+    if latitude == nil then
+        latitude = ssXMLUtil.getFloat(file, "daylight.latitude")
+    end
 
+    latitude = Utils.clamp(Utils.getNoNil(latitude, self.latitude), -70, 70)
+
+    -- DST properties
+    local dst = ssXMLUtil.getString(file, "daylight#dst", "always"):lower() -- default to always, which is v1.1-
+    if dst == "yes" then
+        self.dst = ssDaylight.DST_ON
+    elseif dst == "no" then
+        self.dst = ssDaylight.DST_OFF
+    else
+        self.dst = ssDaylight.DST_ALWAYS
+    end
+
+    -- Curve configuration
     local curves = {
         ["ambient"] = {3, 16},
         ["sunColor"] = {3, 18},
@@ -171,7 +192,7 @@ end
 
 function ssDaylight:calculateDay(p, julianDay)
     local timeStart, timeEnd
-    local D = 0, offset, hasDST
+    local D = 0, offset = 1, hasDST
     local eta = self:calculateSunDeclination(julianDay)
 
     local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta))
@@ -186,9 +207,16 @@ function ssDaylight:calculateDay(p, julianDay)
     end
 
     -- Daylight saving between 1 April and 31 October as an approcimation
-    -- local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
-    -- offset = hasDST and 1 or 0
-    offset = 1
+    if self.dst == ssDaylight.DST_ON then
+        local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        offset = hasDST and 1 or 0
+    elseif self.dst == ssDaylight.DST_OFF then
+        offset = 0
+    end
+
+    if self.latitude < 0 then
+        offset = offset * -1
+    end
 
     timeStart = 12 - D / 2 + offset
     timeEnd = 12 + D / 2 + offset
@@ -199,11 +227,11 @@ end
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
     local sunHeightAngle = self:calculateSunDeclination(julianDay - 176) - (90 - self.latitude) * math.pi / 180
-    
+
     if sunHeightAngle < math.pi / 2 then
         sunHeightAngle = (math.pi + sunHeightAngle) * -1
     end
-    
+
     return sunHeightAngle
 end
 
