@@ -218,8 +218,8 @@ function ssDaylight:calculateDay(p, julianDay)
         offset = offset * -1
     end
 
-    timeStart = 12 - D / 2 + offset
-    timeEnd = 12 + D / 2 + offset
+    timeStart = math.max(12 - D / 2 + offset, 0.01)
+    timeEnd = math.min(12 + D / 2 + offset, 23.99)
 
     return timeStart, timeEnd
 end
