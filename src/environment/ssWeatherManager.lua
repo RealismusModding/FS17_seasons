@@ -28,6 +28,7 @@ function ssWeatherManager:load(savegame, key)
     self.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     self.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
     self.moistureEnabled = ssXMLUtil.getBool(savegame, key .. ".weather.moistureEnabled", true)
+    self.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 2.0)
 
     -- load forecast
     self.forecast = {}
@@ -82,6 +83,7 @@ function ssWeatherManager:save(savegame, key)
     ssXMLUtil.setFloat(savegame, key .. ".weather.cropMoistureContent", self.cropMoistureContent)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilWaterContent", self.soilWaterContent)
     ssXMLUtil.setBool(savegame, key .. ".weather.moistureEnabled", self.moistureEnabled)
+    ssXMLUtil.setFloat(savegame, key .. ".weather.windSpeed", self.windSpeed)
 
     for i = 0, table.getn(self.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)
@@ -265,6 +267,9 @@ function ssWeatherManager:update(dt)
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
+
+    -- updating visual wind
+    setSharedShaderParameter(0, self.windSpeed / 15)
 end
 
 -- Only run this the very first time or if season length changes
@@ -413,6 +418,8 @@ function ssWeatherManager:hourChanged()
 
         g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth, self.soilWaterContent))
     end
+
+    self:updateWindSpeed()
 end
 
 -- function to output the temperature during the day and night
@@ -838,7 +845,7 @@ function ssWeatherManager:calculateRelativeHumidity()
         relativeHumidity = 95
     end
 
-    return relativeHumidity
+    return math.min(relativeHumidity,100)
 end
 
 function ssWeatherManager:updateCropMoistureContent()
@@ -848,18 +855,17 @@ function ssWeatherManager:updateCropMoistureContent()
     local relativeHumidity = self:calculateRelativeHumidity()
     local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
 
-    local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
-    -- added effect of some wind drying crops. Reduced for normal and hard difficulty
-    local deltaMoisture = (0.3 - 0.1 * g_currentMission.missionInfo.difficulty) + solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt(math.max(9 / g_seasons.environment.daysInSeason, 1))
+    local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist - 10) / 25
+    local deltaMoisture = math.min(self.windSpeed * (1.1 - 0.3 * g_currentMission.missionInfo.difficulty) + solarRadiation / 1.5 * (tmpMoisture - 10), self.cropMoistureContent - 13, 5)
 
-    self.cropMoistureContent = tmpMoisture - deltaMoisture
+    self.cropMoistureContent = math.min(tmpMoisture - deltaMoisture, 40)
 
-    -- increase crop Moisture in the first hour after rain has started
-    if g_currentMission.environment.timeSinceLastRain == 0 and self.cropMoistureContent < 25 then
-        if dayTime > self.weather[1].startDayTime and (dayTime - 60) > self.weather[1].startDayTime then
-            self.cropMoistureContent = 25
-        end
+    -- increase crop Moisture when it rains with 4% every hour it rains, with cap at 40%
+    if g_currentMission.environment.timeSinceLastRain == 0 then
+        self.cropMoistureContent = math.min(self.cropMoistureContent + 4, 40)
     end
+
+    logInfo(self.cropMoistureContent)
 end
 
 -- inserting a hail event
@@ -957,4 +963,37 @@ function ssWeatherManager:calculateSoilWetness()
     else
         return ssWeatherManager.soilWaterContent
     end
+end
+
+function ssWeatherManager:getMeanWindSpeed()
+
+end
+
+function ssWeatherManager:updateWindSpeed()
+    local deltaWindSpeed = self:calculateDeltaWindSpeed()
+
+    self.windSpeed = self:calculateWindSpeed()
+end
+
+function ssWeatherManager:calculateDeltaWindSpeed()
+
+end
+
+function ssWeatherManager:calculateWindSpeed()
+    -- wind speed is related to changing barometric pressure
+    -- simulated as a change in weather
+    -- weibull distribution for wind speed for 10 min average wind speed
+    -- assumed shape parameter for all locations
+    -- if using hourly average multiply all values with 1.5
+    local shape = 2.0
+
+    local scale = self:getMeanWindSpeed(gt)
+    if scale == nil then
+        scale = 4.4 -- mean wind speed for Yeovilton, Somerset (default)
+    end
+
+    --local pressureGradient = math.abs(pPrev - p)^0.35
+    local pressureGradient = 0.5
+
+    return scale * (-1 * math.log(1 - pressureGradient)) ^ (1 / shape)
 end
