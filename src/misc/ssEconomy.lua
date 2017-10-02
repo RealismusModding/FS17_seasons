@@ -61,6 +61,14 @@ function ssEconomy:loadMap(name)
         self:loadFromXML(path)
     end
 
+    -- Re set the leasing factors of all store items
+    for _, item in pairs(StoreItemsUtil.storeItems) do
+        -- Only change if it uses the vanilla default factor
+        if item.runningLeasingFactor == 0.05 then
+            item.runningLeasingFactor = EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR
+        end
+    end
+
     -- Change info every day
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
