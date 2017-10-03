@@ -10,17 +10,17 @@
 ssWeatherManager = {}
 g_seasons.weather = ssWeatherManager
 
-ssWeatherManager.weatherTypeId = "sun"
-ssWeatherManager.weatherTypeId = "partly_cloudy"
-ssWeatherManager.weatherTypeId = "rain_showers"
-ssWeatherManager.weatherTypeId = "snow_showers"
-ssWeatherManager.weatherTypeId = "sleet"
-ssWeatherManager.weatherTypeId = "cloudy"
-ssWeatherManager.weatherTypeId = "rain"
-ssWeatherManager.weatherTypeId = "snow"
-ssWeatherManager.weatherTypeId = "fog"
-ssWeatherManager.weatherTypeId = "thunder"
-ssWeatherManager.weatherTypeId = "hail"
+ssWeatherManager.WEATHERTYPE_SUN = "sun"
+ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY = "partly_cloudy"
+ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS = "rain_showers"
+ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS = "snow_showers"
+ssWeatherManager.WEATHERTYPE_SLEET = "sleet"
+ssWeatherManager.WEATHERTYPE_CLOUDY = "cloudy"
+ssWeatherManager.WEATHERTYPE_RAIN = "rain"
+ssWeatherManager.WEATHERTYPE_SNOW = "snow"
+ssWeatherManager.WEATHERTYPE_FOG = "fog"
+ssWeatherManager.WEATHERTYPE_THUNDER = "thunder"
+ssWeatherManager.WEATHERTYPE_HAIL = "hail"
 
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
