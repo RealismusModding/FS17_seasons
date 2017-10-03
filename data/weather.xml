@@ -106,4 +106,19 @@
             <probHail value="0.01" />
         </s>
     </rain>
+
+    <windSpeeds>
+        <windSpeed period="11">5.0</windSpeed>
+        <windSpeed period="12">4.7</windSpeed>
+        <windSpeed period="1">5.2</windSpeed>
+        <windSpeed period="2">4.6</windSpeed>
+        <windSpeed period="3">4.4</windSpeed>
+        <windSpeed period="4">3.8</windSpeed>
+        <windSpeed period="5">3.7</windSpeed>
+        <windSpeed period="6">3.6</windSpeed>
+        <windSpeed period="7">3.9</windSpeed>
+        <windSpeed period="8">4.0</windSpeed>
+        <windSpeed period="9">4.6</windSpeed>
+        <windSpeed period="10">5.3</windSpeed>
+    </windSpeeds>
 </weather>
