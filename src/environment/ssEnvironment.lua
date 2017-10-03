@@ -277,15 +277,19 @@ end
 function ssEnvironment:latitudeCategory()
     local lat = math.abs(g_seasons.daylight.latitude)
 
-    if lat <= 45 then
+    if lat <= 30 then
         return 1
-    elseif lat <= 50 then
+    elseif lat <= 35 then
         return 2
-    elseif lat <= 60 then
+    elseif lat <= 45 then
         return 3
+    elseif lat <= 50 then
+        return 4
+    elseif lat <= 60 then
+        return 5
     end
 
-    return 4
+    return 6
 end
 
 -- Only run once per day
