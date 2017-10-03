@@ -22,6 +22,7 @@
         <defaultFruit fruitName="grass" maxSprayGrowthState="4"/>
         <defaultFruit fruitName="oilseedRadish" />
         <defaultFruit fruitName="dryGrass" />
+        <defaultFruit fruitName="sugarCane" />
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->
@@ -166,5 +167,6 @@
         <fruit fruitName="grass" germinateTemp="3" />
         <fruit fruitName="oilseedRadish" germinateTemp="7" />
         <fruit fruitName="poplar" germinateTemp="5" />
+        <fruit fruitName="sugarCane" germinateTemp="12" />
     </germination>
 </growth>
