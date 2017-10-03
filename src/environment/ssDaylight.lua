@@ -192,7 +192,7 @@ end
 
 function ssDaylight:calculateDay(p, julianDay)
     local timeStart, timeEnd
-    local D = 0, offset = 1, hasDST
+    local D, offset, hasDST = 0, 1
     local eta = self:calculateSunDeclination(julianDay)
 
     local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta))
