@@ -10,6 +10,18 @@
 ssWeatherManager = {}
 g_seasons.weather = ssWeatherManager
 
+ssWeatherManager.weatherTypeId = "sun"
+ssWeatherManager.weatherTypeId = "partly_cloudy"
+ssWeatherManager.weatherTypeId = "rain_showers"
+ssWeatherManager.weatherTypeId = "snow_showers"
+ssWeatherManager.weatherTypeId = "sleet"
+ssWeatherManager.weatherTypeId = "cloudy"
+ssWeatherManager.weatherTypeId = "rain"
+ssWeatherManager.weatherTypeId = "snow"
+ssWeatherManager.weatherTypeId = "fog"
+ssWeatherManager.weatherTypeId = "thunder"
+ssWeatherManager.weatherTypeId = "hail"
+
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.weather = {}
