@@ -32,11 +32,11 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
                     break
                 end
 
-                if transition == g_seasons.environment.TRANSITION_EARLY_WINTER
-                        or transition == g_seasons.environment.TRANSITION_MID_WINTER
-                        or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
-                    table.insert(transitionTable, transition , false)
-                else
+                -- if transition == g_seasons.environment.TRANSITION_EARLY_WINTER
+                --         or transition == g_seasons.environment.TRANSITION_MID_WINTER
+                --         or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
+                --     table.insert(transitionTable, transition , false)
+                -- else
                     local plantedTransition = transition
                     local currentGrowthState = 1
 
@@ -60,7 +60,7 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
                     else
                         table.insert(transitionTable, plantedTransition , false)
                     end
-                end
+                -- end
             end
             self.canPlantData[fruitName] = transitionTable
         end
