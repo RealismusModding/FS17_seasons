@@ -82,8 +82,9 @@ local files = {
 
     "environment/ssDaylight",
     "misc/ssEconomy",
-    "environment/ssWeatherManager",
-    "environment/ssWeatherForecast",
+    "weather/ssWeatherData",
+    "weather/ssWeatherManager",
+    "weather/ssWeatherForecast",
     "vehicles/ssVehicle",
     "misc/ssCompactionManager",
     "misc/ssFieldJobManager",
@@ -125,6 +126,7 @@ local files = {
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp",
     "gui/ssMeasureToolDialog",
+    "gui/ssWeatherGUI",
 
     "handtools/ssMeasureTool",
 }

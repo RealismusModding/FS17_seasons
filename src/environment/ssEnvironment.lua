@@ -300,8 +300,8 @@ end
 -- Only run once per day
 function ssEnvironment:calculateVisualSeason()
     local curSeason = self:currentSeason()
-    local avgAirTemp = (ssWeatherManager.forecast[2].highTemp * 8 + ssWeatherManager.forecast[2].lowTemp * 16) / 24
-    local lowAirTemp = ssWeatherManager.forecast[2].lowTemp
+    local avgAirTemp = (ssWeatherForecast.forecast[2].highTemp * 8 + ssWeatherForecast.forecast[2].lowTemp * 16) / 24
+    local lowAirTemp = ssWeatherForecast.forecast[2].lowTemp
     local springLeavesTemp = 5
     local dropLeavesTemp = 0
 

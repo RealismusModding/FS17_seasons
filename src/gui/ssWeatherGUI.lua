@@ -7,13 +7,13 @@
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
-ssWeatherForecast = {}
-g_seasons.forecast = ssWeatherForecast
+ssWeatherGUI = {}
+g_seasons.forecastGUI = ssWeatherGUI
 
 local screenAspectRatio = g_screenAspectRatio / (16 / 9)
-ssWeatherForecast.hud = {}
+ssWeatherGUI.hud = {}
 
-function ssWeatherForecast:loadMap(name)
+function ssWeatherGUI:loadMap(name)
     if not g_currentMission:getIsClient() then return end
 
     local uiScale = Utils.getNoNil(g_gameSettings:getValue("uiScale"), 1)
@@ -120,19 +120,19 @@ function ssWeatherForecast:loadMap(name)
     self:setForecastVisible(self.visible)
 end
 
-function ssWeatherForecast:load(savegame, key)
+function ssWeatherGUI:load(savegame, key)
     self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
     self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
 end
 
-function ssWeatherForecast:save(savegame, key)
+function ssWeatherGUI:save(savegame, key)
     if g_currentMission:getIsServer() == true then
         ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
         ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
     end
 end
 
-function ssWeatherForecast:update(dt)
+function ssWeatherGUI:update(dt)
     if g_seasons.showControlsInHelpScreen then
         if not self.visible then
             g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
@@ -146,7 +146,7 @@ function ssWeatherForecast:update(dt)
     end
 end
 
-function ssWeatherForecast:setForecastVisible(visible)
+function ssWeatherGUI:setForecastVisible(visible)
     self.visible = visible
 
     if visible then
@@ -156,7 +156,7 @@ function ssWeatherForecast:setForecastVisible(visible)
     end
 end
 
-function ssWeatherForecast:draw()
+function ssWeatherGUI:draw()
     if (g_currentMission.fieldJobManager == nil or not g_currentMission.fieldJobManager:isFieldJobActive())
         and g_currentMission.showHudEnv then
 
@@ -165,10 +165,10 @@ function ssWeatherForecast:draw()
         setTextAlignment(RenderText.ALIGN_CENTER)
 
         if self.visible then
-            self:drawForecast(ssWeatherManager.forecast)
+            self:drawForecast(ssWeatherForecast.forecast)
         end
 
-        self:drawToday(ssWeatherManager.forecast)
+        self:drawToday(ssWeatherForecast.forecast)
 
         -- Clean up after us, text render after this will be affected otherwise.
         setTextColor(1, 1, 1, 1)
@@ -176,7 +176,7 @@ function ssWeatherForecast:draw()
     end
 end
 
-function ssWeatherForecast:drawForecast(forecast)
+function ssWeatherGUI:drawForecast(forecast)
     -- Draw grey border background
     self.rect:setPosition(self.forecastX, self.forecastY)
     self.rect:setDimension(self.forecastWidth, self.forecastHeight)
@@ -193,7 +193,7 @@ function ssWeatherForecast:drawForecast(forecast)
 
     local dayOffsetY = self.forecastY + self.forecastSpacingHeight
 
-    for n = 2, ssWeatherManager.forecastLength do
+    for n = 2, ssWeatherForecast.forecastLength do
         -- X of the day
         local dayOffsetX = self.forecastX + self.forecastSpacingWidth + (n - 2) * (self.forecastDayWidth + self.forecastSpacingWidth)
 
@@ -231,7 +231,7 @@ function ssWeatherForecast:drawForecast(forecast)
     end
 end
 
-function ssWeatherForecast:getTemperatureHighLowString(data)
+function ssWeatherGUI:getTemperatureHighLowString(data)
     local highTemp = math.floor(data.highTemp)
     local lowTemp = math.floor(data.lowTemp)
 
@@ -243,7 +243,7 @@ function ssWeatherForecast:getTemperatureHighLowString(data)
     return tostring(highTemp) .. " / " .. tostring(lowTemp)
 end
 
-function ssWeatherForecast:drawToday(forecast)
+function ssWeatherGUI:drawToday(forecast)
     -- Render day and season below the clock
     local clockText = string.format("%02d/%s", g_seasons.environment:dayInSeason(forecast[1].day), ssUtil.fullSeasonName(g_seasons.environment:transitionAtDay(forecast[1].day)))
     local clockX = g_currentMission.timeBgOverlay.x + g_currentMission.timeSeparatorOffsetX / 2
@@ -304,7 +304,7 @@ function ssWeatherForecast:drawToday(forecast)
     end
 end
 
-function ssWeatherForecast:renderState(stateIcon)
+function ssWeatherGUI:renderState(stateIcon)
     local posX = self.todayPosX - self.borderWidth - self.stateWidth
 
     -- Render border
