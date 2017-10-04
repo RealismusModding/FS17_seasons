@@ -850,7 +850,7 @@ function ssWeatherManager:updateCropMoistureContent()
 
     local tmpMoisture = prevCropMoist + (relativeHumidity - prevCropMoist) / 1000
     -- added effect of some wind drying crops. Reduced for normal and hard difficulty
-    local deltaMoisture = (0.3 - 0.1 * g_currentMission.missionInfo.difficulty) + solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt(math.max(9 / g_seasons.environment.daysInSeason, 1))
+    local deltaMoisture = 0.2 + solarRadiation / 40 * (tmpMoisture - 10) * math.sqrt(math.max(9 / g_seasons.environment.daysInSeason, 1))
 
     self.cropMoistureContent = tmpMoisture - deltaMoisture
 
