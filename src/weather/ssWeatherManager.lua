@@ -364,24 +364,27 @@ end
 
 -- function to calculate relative humidity
 -- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
-function ssWeatherManager:calculateRelativeHumidity()
-    local dewPointTemp = ssWeatherForecast.forecast[1].lowTemp - 2
-    local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
+function ssWeatherManager:calculateRelativeHumidity(currentTemp, lowTemp)
+    if currentTemp == nil then
+        currentTemp = self:currentTemperature()
+    end
+
+    if lowTemp == nil then
+        lowTemp = ssWeatherForecast.forecast[1].lowTemp
+    end
+
     local relativeHumidity = 80
-    local currentTemp = self:currentTemperature()
+    local dewPointTemp = lowTemp - 2
+    local es = 6.1078 - math.exp(17.2669 * dewPointTemp / ( dewPointTemp + 237.3 ) )
     local e = 6.1078 - math.exp(17.2669 * currentTemp / ( currentTemp + 237.3 ) )
 
     relativeHumidity = 100 * e / es
-
-    if relativeHumidity < 5 then
-        relativeHumidity = 5
-    end
 
     if g_currentMission.environment.timeSinceLastRain == 0 then
         relativeHumidity = 95
     end
 
-    return math.min(relativeHumidity,100)
+    return Utils.clamp(relativeHumidity, 5, 100)
 end
 
 function ssWeatherManager:updateCropMoistureContent()
