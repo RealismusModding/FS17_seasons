@@ -22,6 +22,12 @@ ssWeatherManager.WEATHERTYPE_FOG = "fog"
 ssWeatherManager.WEATHERTYPE_THUNDER = "thunder"
 ssWeatherManager.WEATHERTYPE_HAIL = "hail"
 
+ssWeatherManager.RAINTYPE_CLOUDY = "cloudy"
+ssWeatherManager.RAINTYPE_RAIN = "rain"
+ssWeatherManager.RAINTYPE_SNOW = "snow"
+ssWeatherManager.RAINTYPE_FOG = "fog"
+ssWeatherManager.RAINTYPE_HAIL = "hail"
+
 ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
 ssWeatherManager.forecastLength = 8
 ssWeatherManager.weather = {}
@@ -138,13 +144,14 @@ function ssWeatherManager:update(dt)
         local currentTemp = mathRound(self:currentTemperature(), 0)
 
         -- If temperature is 1 or higher and it would be snowing, rain instead. Same for other way around
-        if currentTemp > 1 and currentRain.rainTypeId == "snow" then
+        if currentTemp > 1 and currentRain.rainTypeId == self.RAINTYPE_SNOW then
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, false)
-            currentRain.rainTypeId = "rain"
+            currentRain.rainTypeId = self.RAINTYPE_RAIN
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, true)
-        elseif currentTemp < 0 and currentRain.rainTypeId == "rain" then
+
+        elseif currentTemp < 0 and currentRain.rainTypeId == self.RAINTYPE_RAIN then
             setVisibility(g_currentMission.environment.rainTypeIdToType.rain.rootNode, false)
-            currentRain.rainTypeId = "snow"
+            currentRain.rainTypeId = self.RAINTYPE_SNOW
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
     end
@@ -260,11 +267,11 @@ function ssWeatherManager:updateSnowDepth()
         if currentRain == nil then
             self.meltedSnow = snowMelt
 
-        elseif currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
+        elseif currentRain.rainTypeId == self.RAINTYPE_RAIN or currentRain.rainTypeId == self.RAINTYPE_SNOW then
             -- assume snow melts 50% faster if it rains. Warm snow acts as rain.
             self.meltedSnow = snowMelt * 1.5
 
-        elseif currentRain.rainTypeId == "cloudy" or currentRain.rainTypeId == "fog" then
+        elseif currentRain.rainTypeId == self.RAINTYPE_CLOUDY or currentRain.rainTypeId == self.RAINTYPE_FOG then
             self.meltedSnow = snowMelt
         end
 
@@ -272,7 +279,7 @@ function ssWeatherManager:updateSnowDepth()
 
     -- accumulating snow
     elseif currentTemp < 0 and currentRain ~= nil then
-        if currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
+        if currentRain.rainTypeId == self.RAINTYPE_RAIN or currentRain.rainTypeId == self.RAINTYPE_SNOW then
             -- cold rain acts as snow
             -- Initial value of 10 mm/hr accumulation rate. Higher rate when there is little snow to get the visual effect
             if self.snowDepth < 0 then
@@ -402,18 +409,11 @@ function ssWeatherManager:updateCropMoistureContent()
 end
 
 function ssWeatherManager:updateSoilWaterContent()
-    if g_currentMission.environment.currentRain ~= nil then
-        currentRainId = g_currentMission.environment.currentRain.rainTypeId
-    end
-
     --Soil moisture bucket model
     --Guswa, A. J., M. A. Celia, and I. Rodriguez-Iturbe, Models of soil moisture dynamics in ecohydrology: A comparative study,
     --Water Resour. Res., 38(9), 1166, doi:10.1029/2001WR000826, 2002
 
-    -- every hour with rain add 10 mm of waterInfriltation
-    -- every hour snow melts: add 30% of melted snowDepth as waterInfriltation
     -- every hour air temperature < 5 deg, or solarRadiation < 1.5, no transpiration
-
 
     -- constants
     local depthRootZone = 20 -- cm
@@ -432,7 +432,7 @@ function ssWeatherManager:updateSoilWaterContent()
     local currentTemp = self:currentTemperature()
     local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
     local prevSoilWaterCont = self.soilWaterContent
-    local soilWaterInfiltration = 0
+    local soilWaterInfiltration = self:calculateWaterInfiltration()
 
     -- calculate evaporation, if relativeHumidity > 90% or snow on the ground, no evaporation
     if prevSoilWaterCont <= hygroscopicSaturation or relativeHumidity > 90 or self.snowDepth > 0 then
@@ -452,22 +452,50 @@ function ssWeatherManager:updateSoilWaterContent()
         soilWaterTranspiration = (prevSoilWaterCont - wiltingSaturation) / (stomatalSaturation - wiltingSaturation) * maxTranspiration / 24
     end
 
-    -- add water if it rains or if snow melts
-    if g_currentMission.environment.timeSinceLastRain == 0 and currentRainId == 'rain' then
-        soilWaterInfiltration = 1 -- 10 mm/hr infiltration
-
-    elseif g_currentMission.environment.timeSinceLastRain == 0 and currentRainId == 'hail' then
-        soilWaterInfiltration = 1.5 -- 15 mm/hr infiltration
-
-    -- not add water from melted snow if only piles are melting or if the ground is not frozen
-    elseif self.meltedSnow ~= 0 and self.snowDepth > 0 and not self:isGroundFrozen() then
-        -- 30% of melted snow infiltrates, meltedSnow in meter, snow density 400 kg/m3
-        -- dividing by 10 due to unit cm
-        soilWaterInfiltration = 0.3 * self.meltedSnow * 400 / 10
-    end
-
     soilWaterLeakage = math.max(Ksat * (math.exp(beta*(prevSoilWaterCont - Sfc)) - 1) / (math.exp(beta*(1 - Sfc)) - 1),0)
     self.soilWaterContent = math.min(prevSoilWaterCont + 1 / (soilPorosity * depthRootZone) * (soilWaterInfiltration - soilWaterLeakage - soilWaterTranspiration - soilWaterEvaporation), 1)
+end
+
+function ssWeatherManager:calculateRainAmount()
+    local amount = 0
+    local seasonsLengthFactor = (3.0 * g_seasons.environment.daysInSeason)^0.1
+    local weatherTypeFactor = 1
+
+    -- less intensity with "all day" rain
+    if self.currentWeatherType == self.WEATHERTYPE_RAIN then
+        weatherTypeFactor = 0.5
+    -- strong rain when thunder
+    elseif self.currentWeatherType = self.WEATHERTYPE_THUNDER then
+        weatherTypeFactor = 2
+    end
+
+    if g_currentMission.environment.currentRain ~= nil then
+        currentRainId = g_currentMission.environment.currentRain.rainTypeId
+
+        if currentRainId == self.RAINTYPE_RAIN then
+            amount = 0.5
+        elseif currentRainId == self.RAINTYPE_HAIL then
+            amount = 0.75
+        end
+
+        return amount * weatherTypeFactor * seasonLengthFactor
+    else
+        return 0
+    end
+end
+
+function ssWeatherManager:calculateWaterInfiltration()
+    local snowMelt = 0
+    local rainAmount = self:calculateRainAmount()
+
+    -- not add water from melted snow if only piles are melting or if the ground is not frozen
+    if self.meltedSnow ~= 0 and self.snowDepth > 0 and not self:isGroundFrozen() then
+        -- 30% of melted snow infiltrates, meltedSnow in meter, snow density 400 kg/m3
+        -- dividing by 10 due to unit cm
+        snowMelt = 0.3 * self.meltedSnow * 400 / 10
+    end
+
+    return snowMelt + rainAmount
 end
 
 function ssWeatherManager:calculateSoilWetness()
