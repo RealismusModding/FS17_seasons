@@ -175,6 +175,7 @@ function ssWeatherManager:dayChanged()
         local isFrozen = self:isGroundFrozen()
 
         ssWeatherForecast:updateForecast()
+        self:updateSoilTemp()
 
         if isFrozen ~= self:isGroundFrozen() then
             -- Call a weather change
@@ -299,7 +300,6 @@ function ssWeatherManager:updateSoilTemp()
     local avgAirTemp = (ssWeatherForecast.forecast[1].highTemp * 8 + ssWeatherForecast.forecast[1].lowTemp * 16) / 24
     local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
     local soilTemp = self.soilTemp
-    local snowDamp = 1
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
     local facKT = 0.6
@@ -308,13 +308,7 @@ function ssWeatherManager:updateSoilTemp()
     -- empirical snow damping parameter, unit 1/m, typical values -2 - -7
     local facfs = -5
 
-    -- dampening effect of snow cover
-    if self.snowDepth > 0 then
-        snowDamp = math.exp(facfs * self.snowDepth)
-    end
-
-    self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
-    --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
+    self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * math.exp(facfs * self.snowDepth)
 
     if self.soilTemp > self.soilTempMax then
         self.soilTempMax = self.soilTemp
