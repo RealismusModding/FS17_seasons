@@ -247,16 +247,17 @@ end
 --- snowDepth in meters
 function ssWeatherManager:updateSnowDepth()
     local currentRain = g_currentMission.environment.currentRain
+    local seasonLengthFactor = math.max(9 / g_seasons.environment.daysInSeason, 1.0)
     local currentTemp = self:currentTemperature()
     local effectiveMeltTemp = math.max(currentTemp, 0) + math.max(self.soilTemp, 0)
+    local windMeltFactor = 1 + max(self.windSpeed - 5, 0) / 25
 
     -- calculating snow melt as a function of radiation
-    local snowMelt = math.max(0.001 * effectiveMeltTemp ) * (1 + g_seasons.daylight:calculateSolarRadiation() / 5) * 9 / g_seasons.environment.daysInSeason
+    local snowMelt = math.max(0.001 * effectiveMeltTemp ) * (1 + g_seasons.daylight:calculateSolarRadiation() / 5) * seasonLengthFactor * windMeltFactor
 
     -- melting snow
     if currentTemp >= 0 then
         if currentRain == nil then
-            -- snow melts at faster if the sun is shining
             self.meltedSnow = snowMelt
 
         elseif currentRain.rainTypeId == "rain" or currentRain.rainTypeId == "snow" then
@@ -277,14 +278,12 @@ function ssWeatherManager:updateSnowDepth()
             if self.snowDepth < 0 then
                 self.snowDepth = 0
             elseif self.snowDepth > 0.06 then
-                self.snowDepth = self.snowDepth + 20 / 1000 * math.max(9 / g_seasons.environment.daysInSeason, 1)
+                self.snowDepth = self.snowDepth + 10 / 1000 * seasonLengthFactor
             else
                 self.snowDepth = self.snowDepth + 31 / 1000
             end
         end
     end
-
-    return self.snowDepth
 end
 
 --- function for calculating soil temperature
