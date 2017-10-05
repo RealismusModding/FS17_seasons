@@ -127,13 +127,13 @@ function ssWeatherForecast:switchRainSnow()
 
                 local tempStartRain = ssWeatherManager:diurnalTemp(hour, minute, fCast.lowTemp, fCast.highTemp, fCast.lowTemp)
 
-                if tempStartRain < -1 and rain.rainTypeId == "rain" then
-                    g_currentMission.environment.rains[index].rainTypeId = "snow"
-                    self.forecast[jndex].weatherState = "snow"
+                if tempStartRain < -1 and rain.rainTypeId == ssWeatherManager.RAINTYPE_RAIN then
+                    g_currentMission.environment.rains[index].rainTypeId = ssWeatherManager.RAINTYPE_SNOW
+                    self.forecast[jndex].weatherState = ssWeatherManager.RAINTYPE_SNOW
 
-                elseif tempStartRain >= -1 and rain.rainTypeId == "snow" then
-                    g_currentMission.environment.rains[index].rainTypeId = "rain"
-                    self.forecast[jndex].weatherState = "rain"
+                elseif tempStartRain >= -1 and rain.rainTypeId == ssWeatherManager.RAINTYPE_SNOW then
+                    g_currentMission.environment.rains[index].rainTypeId = ssWeatherManager.RAINTYPE_RAIN
+                    self.forecast[jndex].weatherState = ssWeatherManager.RAINTYPE_.RAIN
                 end
             end
         end
@@ -161,14 +161,14 @@ function ssWeatherForecast:updateRain(oneDayForecast, endRainTime)
         oneRainEvent = self:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
 
         if oneDayForecast.lowTemp < 1 then
-            oneRainEvent.rainTypeId = "snow" -- forecast snow if temp < 1
+            oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_SNOW -- forecast snow if temp < 1
         else
-            oneRainEvent.rainTypeId = "rain"
+            oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_RAIN
         end
 
     elseif p > rainFactors.probRain and p < rainFactors.probClouds then
         oneRainEvent = self:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
-        oneRainEvent.rainTypeId = "cloudy"
+        oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_CLOUDY
     elseif oneDayForecast.lowTemp > -1 and oneDayForecast.lowTemp < 4 and endRainTime < 10800000 then
         -- morning fog
         oneRainEvent.startDay = oneDayForecast.day
@@ -243,7 +243,7 @@ function ssWeatherForecast:overwriteRaintable()
     local tmpWeather = {}
 
     for index = 1, self.forecastLength do
-        if ssWeatherManager.weather[index].rainTypeId ~= "sun" then
+        if ssWeatherManager.weather[index].rainTypeId ~= ssWeatherManager.RAINTYPE_SUN then
             local tmpSingleWeather = deepCopy(ssWeatherManager.weather[index])
             table.insert(tmpWeather, tmpSingleWeather)
         end
@@ -269,11 +269,11 @@ function ssWeatherForecast:updateHail(day)
     local rainFactors = ssWeatherData.rainData[self.forecast[1].season]
     local p = math.random()
 
-    if p < rainFactors.probHail and self.forecast[1].weatherState == "sun" then
+    if p < rainFactors.probHail and self.forecast[1].weatherState == ssWeatherManager.RAINTYPE_SUN then
         local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
         dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 
-        ssWeatherManager.weather[1].rainTypeId = "hail"
+        ssWeatherManager.weather[1].rainTypeId = ssWeatherManager.RAINTYPE_HAIL
         ssWeatherManager.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart, ["mode"] = dayStart + 4, ["max"] = dayEnd - 6}) * 60 * 60 * 1000
         ssWeatherManager.weather[1].duration = ssUtil.triDist({["min"] = 1, ["mode"] = 2, ["max"] = 3}) * 60 * 60 * 1000
         ssWeatherManager.weather[1].endDayTime = ssWeatherManager.weather[1].startDayTime + ssWeatherManager.weather[1].duration
