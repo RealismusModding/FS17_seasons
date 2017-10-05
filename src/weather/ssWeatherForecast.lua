@@ -113,7 +113,6 @@ function ssWeatherForecast:updateForecast()
 
     self:updateHail()
     self:overwriteRaintable()
-    ssWeatherManager:updateSoilTemp()
 
     g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, ssWeatherManager.prevHighTemp, ssWeatherManager.soilTemp))
 end
