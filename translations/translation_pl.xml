@@ -204,7 +204,7 @@
         <text name="ss_helpText_11_04" text="Tylko pojazdy kierowane wymagają okresowych przeglądów. Pozostałe maszyny będą przechodziły przegląd automatyczny w razie potrzeby." />
 
         <text name="ss_helpTitle_12" text="Ekonomia" />
-        <text name="ss_helpText_12_01" text="Limit pożyczki został zmieniony z $CURRENCY_SYMBOL200 000 na 30% sumy wartości posiadanej ziemi oraz postawionych budynków. Jednakże najniższy limit pożyczki to $CURRENCY_SYMBOL300 000, a najwyższy to $CURRENCY_SYMBOL1 500 000." />
+        <text name="ss_helpText_12_01" text="Limit pożyczki został zmieniony z $CURRENCY_SYMBOL200 000 na 80% sumy wartości posiadanej ziemi oraz postawionych budynków. Jednakże najniższy limit pożyczki to $CURRENCY_SYMBOL300 000, a najwyższy to $CURRENCY_SYMBOL1 500 000." />
         <text name="ss_helpText_12_02" text="Dochody z misji zostały obniżone. Obecny zarobek to około pięciokrotność tego, co zarobiłby pracownik na takim samym polu." />
         <text name="ss_helpText_12_03" text="Koszty pojazdów, oprócz okresowych przeglądów, uwzględniają również koszty utrzymania i podatki zależne do stopnia w jakim maszyny są wykorzystywane. Czyste maszyny będą tańsze w utrzymaniu. Maszyny, które nie będą używane, również będą miały niższe koszty utrzymania." />
         <text name="ss_helpText_12_04" text="Ceny zbóż zmieniają się pomiędzy sezonami w bardziej realistyczny sposób." />

@@ -204,7 +204,7 @@
         <text name="ss_helpText_11_04" text="Pouze řiditelná vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
         <text name="ss_helpTitle_12" text="Ekonomika" />
-        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z $CURRENCY_SYMBOL200 000 na 30% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je $CURRENCY_SYMBOL300 000 a maximální výše úvěru je $CURRENCY_SYMBOL1 500 000." />
+        <text name="ss_helpText_12_01" text="Limit úvěru byl změněn z $CURRENCY_SYMBOL200 000 na 80% hodnoty vašich pozemků a umístěných stavebních budov. Minimální výše úvěru je $CURRENCY_SYMBOL300 000 a maximální výše úvěru je $CURRENCY_SYMBOL1 500 000." />
         <text name="ss_helpText_12_02" text="Výnosy z misí byly sníženy. Vyděláte zhruba pětkrát více než najatý pracovník pracující na stejném poli." />
         <text name="ss_helpText_12_03" text="Náklady na údržbu všech vozidel (kromě pravidelné údržby) zahrnují poplatky a daně ve vztahu k tomu, jak moc se vozidlo používá. Čisté stroje také sníží náklady na údržbu. Stroje, které se nepoužívají, mají snížené náklady na údržbu." />
         <text name="ss_helpText_12_04" text="Ceny výkupu kolísají realisticky podle ročních období." />
