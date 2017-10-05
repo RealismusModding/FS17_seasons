@@ -22,6 +22,7 @@ ssWeatherManager.WEATHERTYPE_FOG = "fog"
 ssWeatherManager.WEATHERTYPE_THUNDER = "thunder"
 ssWeatherManager.WEATHERTYPE_HAIL = "hail"
 
+ssWeatherManager.RAINTYPE_SUN = "sun"
 ssWeatherManager.RAINTYPE_CLOUDY = "cloudy"
 ssWeatherManager.RAINTYPE_RAIN = "rain"
 ssWeatherManager.RAINTYPE_SNOW = "snow"
