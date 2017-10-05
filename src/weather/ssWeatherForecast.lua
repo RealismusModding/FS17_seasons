@@ -283,3 +283,20 @@ function ssWeatherForecast:updateHail(day)
         g_server:broadcastEvent(ssWeatherManagerHailEvent:new(ssWeatherManager.weather[1]))
     end
 end
+
+function ssWeatherForecast:getRainType(hour, day)
+    local rainType = ssWeatherManager.RAINTYPE_SUN
+
+    for _, rain in ipairs(ssWeatherManager.weather) do
+        local startHour = mathRound(rain.startDayTime / 60 / 60 / 1000, 0)
+        local endHour = mathRound((rain.endDayTime) / 60 / 60 / 1000 , 0)
+        
+        if rain.startDay == day and startHour <= hour and endHour > hour then
+            rainType = rain.rainTypeId
+        elseif rain.startDay + 1 == day and rain.endDay == day and endHour > hour then
+            rainType = rain.rainTypeId
+        end
+    end
+    
+    return rainType
+end
