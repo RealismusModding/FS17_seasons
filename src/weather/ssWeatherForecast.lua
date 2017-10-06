@@ -345,3 +345,26 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
     return wType
 
 end
+
+function ssWeatherForecast:calculateAverageTransitionTemp(gt, deterministic)
+    local meanMaxTemp = ssWeatherData.temperatureData[gt]
+    local avgTemp = meanMaxTemp.mode
+
+    if not deterministic then
+        avgTemp = ssUtil.triDist(meanMaxTemp)
+    end
+    
+    return avgTemp
+end
+
+function ssWeatherForecast:calculateTemp(meanMaxTemp, deterministic)
+    local highTemp = meanMaxTemp
+    local lowTemp = 0.75 * meanMaxTemp - 5
+
+    if not deterministic then
+        highTemp = ssUtil.normDist(meanMaxTemp, 2.5)
+        lowTemp = ssUtil.normDist(0, 2) + 0.75 * meanMaxTemp - 5
+    end
+    
+    return lowTemp, highTemp
+end
