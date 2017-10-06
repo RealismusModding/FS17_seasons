@@ -315,30 +315,32 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
     local tempLimit = 3
     local wType = ssWeatherManager.WEATHERTYPE_SUN
 
-    if p <= probPartlyCloudy and p > probCloudy:
+    if p <= probPartlyCloudy and p > probCloudy then
         wType = ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY
 
-    elif p <= probCloudy and p > probShowers and temp >= tempLimit:
+    elseif p <= probCloudy and p > probShowers and temp >= tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_CLOUDY
 
-    elif p <= probShowers and p > probRain and temp >= tempLimit:
+    elseif p <= probShowers and p > probRain and temp >= tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS
 
-    elif p <= probRain and temp >= tempLimit:
+    elseif p <= probRain and temp >= tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_RAIN
 
-    elif p <= probShowers and temp >= -tempLimit and temp < tempLimit:
+    elseif p <= probShowers and temp >= -tempLimit and temp < tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_SLEET
 
-    elif p <= probShowers and p > probRain and temp < -tempLimit:
+    elseif p <= probShowers and p > probRain and temp < -tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS
 
-    elif p <= probRain and temp < -tempLimit:
+    elseif p <= probRain and temp < -tempLimit then
         wType = ssWeatherManager.WEATHERTYPE_SNOW
 
-    elif p > probPartlyCloudy and avgTemp >= -tempLimit and temp < tempLimit and windSpeed < 3.0:
-        if random.random > 0.3:
+    elseif p > probPartlyCloudy and avgTemp >= -tempLimit and temp < tempLimit and windSpeed < 3.0 then
+        if random.random > 0.3 then
             wType = ssWeatherManager.WEATHERTYPE_FOG
+        end
+    end
 
     return wType
 
