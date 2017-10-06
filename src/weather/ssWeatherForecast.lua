@@ -62,7 +62,7 @@ function ssWeatherForecast:buildForecast()
             end
         end
 
-        oneDayForecast.weatherState = oneDayRain.rainTypeId
+        oneDayForecast.weatherType = oneDayRain.rainTypeId
 
         table.insert(self.forecast, oneDayForecast)
         table.insert(ssWeatherManager.weather, oneDayRain)
@@ -105,7 +105,7 @@ function ssWeatherForecast:updateForecast()
         oneDayRain = self:updateRain(oneDayForecast, 0)
     end
 
-    oneDayForecast.weatherState = oneDayRain.rainTypeId
+    oneDayForecast.weatherType = oneDayRain.rainTypeId
 
     table.insert(self.forecast, oneDayForecast)
     table.insert(ssWeatherManager.weather, oneDayRain)
@@ -129,11 +129,11 @@ function ssWeatherForecast:switchRainSnow()
 
                 if tempStartRain < -1 and rain.rainTypeId == ssWeatherManager.RAINTYPE_RAIN then
                     g_currentMission.environment.rains[index].rainTypeId = ssWeatherManager.RAINTYPE_SNOW
-                    self.forecast[jndex].weatherState = ssWeatherManager.RAINTYPE_SNOW
+                    self.forecast[jndex].weatherType = ssWeatherManager.RAINTYPE_SNOW
 
                 elseif tempStartRain >= -1 and rain.rainTypeId == ssWeatherManager.RAINTYPE_SNOW then
                     g_currentMission.environment.rains[index].rainTypeId = ssWeatherManager.RAINTYPE_RAIN
-                    self.forecast[jndex].weatherState = ssWeatherManager.RAINTYPE_.RAIN
+                    self.forecast[jndex].weatherType = ssWeatherManager.RAINTYPE_.RAIN
                 end
             end
         end
@@ -269,7 +269,7 @@ function ssWeatherForecast:updateHail(day)
     local rainFactors = ssWeatherData.rainData[self.forecast[1].season]
     local p = math.random()
 
-    if p < rainFactors.probHail and self.forecast[1].weatherState == ssWeatherManager.RAINTYPE_SUN then
+    if p < rainFactors.probHail and self.forecast[1].weatherType == ssWeatherManager.RAINTYPE_SUN then
         local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
         dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 

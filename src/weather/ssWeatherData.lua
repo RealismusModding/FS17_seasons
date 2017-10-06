@@ -21,6 +21,7 @@ function ssWeatherData:loadMap(name)
     -- Load data from the mod and from a map
     self.temperatureData = {}
     self.rainData = {}
+    self.windData = {}
     self.startValues = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
 
@@ -76,7 +77,8 @@ function ssWeatherData:load(savegame, key)
         day.day = getXMLInt(savegame, dayKey .. "#day")
         day.season = g_seasons.environment:seasonAtDay(day.day)
 
-        day.weatherState = getXMLString(savegame, dayKey .. "#weatherState")
+        -- keeing name weatherState in savegame for compatibility
+        day.weatherType = getXMLString(savegame, dayKey .. "#weatherState")
         day.highTemp = getXMLFloat(savegame, dayKey .. "#highTemp")
         day.lowTemp = getXMLFloat(savegame, dayKey .. "#lowTemp")
 
@@ -124,7 +126,8 @@ function ssWeatherData:save(savegame, key)
         local day = ssWeatherForecast.forecast[i + 1]
 
         setXMLInt(savegame, dayKey .. "#day", day.day)
-        setXMLString(savegame, dayKey .. "#weatherState", day.weatherState)
+        -- keeing name weatherState in savegame for compatibility
+        setXMLString(savegame, dayKey .. "#weatherState", day.weatherType)
         setXMLFloat(savegame, dayKey .. "#highTemp", day.highTemp)
         setXMLFloat(savegame, dayKey .. "#lowTemp", day.lowTemp)
     end
@@ -153,14 +156,14 @@ function ssWeatherData:loadGerminateTemperature(path)
 
         local fruitName = getXMLString(file, key .. "#fruitName")
         if fruitName == nil then
-            logInfo("ssWeatherManager:", "Fruit in growth.xml:germination is invalid")
+            logInfo("ssWeatherData:", "Fruit in growth.xml:germination is invalid")
             break
         end
 
         local germinateTemp = getXMLFloat(file, key .. "#germinateTemp")
 
         if germinateTemp == nil then
-            logInfo("ssWeatherManager:", "Temperature data in growth.xml:germination is invalid")
+            logInfo("ssWeatherData:", "Temperature data in growth.xml:germination is invalid")
             break
         end
 
@@ -189,7 +192,7 @@ function ssWeatherData:loadFromXML(path)
 
         local period = getXMLInt(file, key .. "#period")
         if period == nil then
-            logInfo("ssWeatherManager:", "Period in weather.xml is invalid")
+            logInfo("ssWeatherData:", "Period in weather.xml is invalid")
             break
         end
 
@@ -198,7 +201,7 @@ function ssWeatherData:loadFromXML(path)
         local max = getXMLFloat(file, key .. ".max#value")
 
         if min == nil or mode == nil or max == nil then
-            logInfo("ssWeatherManager:", "Temperature data in weather.xml is invalid")
+            logInfo("ssWeatherData:", "Temperature data in weather.xml is invalid")
             break
         end
 
@@ -221,7 +224,7 @@ function ssWeatherData:loadFromXML(path)
 
         local season = getXMLInt(file, key .. "#season")
         if season == nil then
-            logInfo("ssWeatherManager:", "Season in weather.xml is invalid")
+            logInfo("ssWeatherData:", "Season in weather.xml is invalid")
             break
         end
 
@@ -232,7 +235,7 @@ function ssWeatherData:loadFromXML(path)
         local probHail = getXMLFloat(file, key .. ".probHail#value")
 
         if mu == nil or sigma == nil or probRain == nil or probClouds == nil or probHail == nil then
-            logInfo("ssWeatherManager:", "Rain data in weather.xml is invalid")
+            logInfo("ssWeatherData:", "Rain data in weather.xml is invalid")
             break
         end
 

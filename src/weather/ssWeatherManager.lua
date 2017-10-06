@@ -81,7 +81,7 @@ function ssWeatherManager:readStream(streamId, connection)
         day.day = streamReadInt16(streamId)
         day.season = streamReadUInt8(streamId)
 
-        day.weatherState = streamReadString(streamId)
+        day.weatherType = streamReadString(streamId)
         day.highTemp = streamReadFloat32(streamId)
         day.lowTemp = streamReadFloat32(streamId)
 
@@ -123,7 +123,7 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteInt16(streamId, day.day)
         streamWriteUInt8(streamId, day.season)
 
-        streamWriteString(streamId, day.weatherState)
+        streamWriteString(streamId, day.weatherType)
         streamWriteFloat32(streamId, day.highTemp)
         streamWriteFloat32(streamId, day.lowTemp)
     end
@@ -502,10 +502,6 @@ function ssWeatherManager:calculateSoilWetness()
     else
         return ssWeatherManager.soilWaterContent
     end
-end
-
-function ssWeatherManager:getMeanWindSpeed()
-
 end
 
 function ssWeatherManager:updateWindSpeed()
