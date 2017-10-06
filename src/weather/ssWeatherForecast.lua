@@ -300,3 +300,46 @@ function ssWeatherForecast:getRainType(hour, day)
     
     return rainType
 end
+
+function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
+    local season = ssEnvironment:seasonAtDay(day)
+    local rainFactors = assWeatherData.rainData[season]
+
+    local pRain = rainFactors.probRain
+    local pClouds = rainFactors.probClouds
+    local probPartlyCloudy = math.min(pClouds + 0.2, (1 - pClouds) / 2 + pClouds)
+    local probCloudy = max(pClouds - 0.1, pClouds - (pClouds - pRain) / 2)
+    local probShowers = min(pRain + 0.1, probCloudy - 0.15)
+    local probRain = pRain / 2
+
+    local tempLimit = 3
+    local wType = ssWeatherManager.WEATHERTYPE_SUN
+
+    if p <= probPartlyCloudy and p > probCloudy:
+        wType = ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY
+
+    elif p <= probCloudy and p > probShowers and temp >= tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_CLOUDY
+
+    elif p <= probShowers and p > probRain and temp >= tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS
+
+    elif p <= probRain and temp >= tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_RAIN
+
+    elif p <= probShowers and temp >= -tempLimit and temp < tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_SLEET
+
+    elif p <= probShowers and p > probRain and temp < -tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS
+
+    elif p <= probRain and temp < -tempLimit:
+        wType = ssWeatherManager.WEATHERTYPE_SNOW
+
+    elif p > probPartlyCloudy and avgTemp >= -tempLimit and temp < tempLimit and windSpeed < 3.0:
+        if random.random > 0.3:
+            wType = ssWeatherManager.WEATHERTYPE_FOG
+
+    return wType
+
+end
