@@ -93,7 +93,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - You can borrow vehicles for a free demo as long as it is returned within the same day with less than 0.5 engine hours. This only works for base configuration vehicles
 
 ### Economy
-- Loan cap is set to 30% of your total owned land + placeable buildings value  with a minimum of 300,000
+- Loan cap is set to 80% of your total owned land + placeable buildings value  with a minimum of 300,000
 - The interest has been adjusted to the new year length.
 - Prices of almost everything changes during a year, realistically.
 - You can't sell grass/hay/straw in an unbaled form. (Price is 0)
@@ -109,7 +109,7 @@ For a better game experience, custom maps should add one new density layer: Seas
 - Animals have been adjusted to the seasons
   - They drink more water in summer than in winter
   - They need more straw in winter than in summer
-  - They only give birth to offspring in spring (pigs and sheep) or summer (cows)
+  - They only give birth to offspring at certain times of year. Sheep in spring, pigs in spring and autumn, cows in summer
   - Milk and wool production depend on season (Wool only in spring and summer, milk spread, mostly in winter and spring)
 - Animals die when they have no food. (Disabled on 'Easy')
 - Max feeding capacity is lowered to 3 days
@@ -129,8 +129,6 @@ Do not load multiple map mods. Only load the map you are using!
 - Any mod that changes animals
 - Any 'season manager' type mods
 - Some animal cleaning mods may not work correctly, especially during the winter
-
-Known:
 
 ## Contributing
 You are free to contribute any code. But by doing this you transfer your copyright to the Realismus
