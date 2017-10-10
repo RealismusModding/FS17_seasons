@@ -204,7 +204,7 @@
         <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
 
         <text name="ss_helpTitle_12" text="Economie" />
-        <text name="ss_helpText_12_01" text="Le montant maximum de l'emprunt à la banque a été modifié de $CURRENCY_SYMBOL200 000 à 30% de la valeur de vos terres et de vos batiments plaçables. Le montant minimum est de $CURRENCY_SYMBOL300 000, et le montant maximum est de $CURRENCY_SYMBOL1 500 000." />
+        <text name="ss_helpText_12_01" text="Le montant maximum de l'emprunt à la banque a été modifié de $CURRENCY_SYMBOL200 000 à 80% de la valeur de vos terres et de vos batiments plaçables. Le montant minimum est de $CURRENCY_SYMBOL300 000, et le montant maximum est de $CURRENCY_SYMBOL1 500 000." />
         <text name="ss_helpText_12_02" text="L'argent gagné en faisant les missions a été réduit. On gagne maintenant environ 5 fois plus qu'un ouvrier dans le jeu." />
         <text name="ss_helpText_12_03" text="La maintenance générale (en plus de l'entretien périodique) se rapporte à la maintenance et aux taxes relatives à l'utilisation. Les machines propres ainsi que les machines peu utilisées coûtent moins cher en maintenance." />
         <text name="ss_helpText_12_04" text="Les prix de vente des cultures changent aussi de manière plus réaliste en tenant compte de la saison." />

@@ -225,7 +225,7 @@
         <text name="ss_helpText_11_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
 
         <text name="ss_helpTitle_12" text="Economy" />
-        <text name="ss_helpText_12_01" text="The loan cap has been changed from $CURRENCY_SYMBOL200,000 to 30% of your owned land and placeable building values. The minimum loan cap is $CURRENCY_SYMBOL300,000 and the maximum loan cap is $CURRENCY_SYMBOL1,500,000." />
+        <text name="ss_helpText_12_01" text="The loan cap has been changed from $CURRENCY_SYMBOL200,000 to 80% of your owned land and placeable building values. The minimum loan cap is $CURRENCY_SYMBOL300,000 and the maximum loan cap is $CURRENCY_SYMBOL1,500,000." />
         <text name="ss_helpText_12_02" text="Income from missions have been reduced. You will earn roughly 5 times more than a hired worker working on the same field." />
         <text name="ss_helpText_12_03" text="Maintenance of all vehicles (in addition to the periodic maintenance) includes maintenance and taxes relative to how much it is being used. Clean machines will also reduce maintenance costs. Machines that are not used will also have their maintenance costs reduced." />
         <text name="ss_helpText_12_04" text="Crop prices fluctuate with the changes in the seasons in a more realistic manner." />

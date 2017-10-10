@@ -204,7 +204,7 @@
         <text name="ss_helpText_11_04" text="Enkel voertuigen vereisen regelmatig jouw onderhoud. Werktuigen, aanhangers en gewichten worden automatisch onderhouden." />
 
         <text name="ss_helpTitle_12" text="Economie" />
-        <text name="ss_helpText_12_01" text="Het bedrag dat je kan lenen bij de bank is veranderd van $CURRENCY_SYMBOL300.000 naar 30% van de waarde van je landbouwgrond samen met de plaatsbare gebouwwaardes. De minimale geldsom die je kan lenen bedraagt $CURRENCY_SYMBOL300.000, de maximale som $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_01" text="Het bedrag dat je kan lenen bij de bank is veranderd van $CURRENCY_SYMBOL300.000 naar 80% van de waarde van je landbouwgrond samen met de plaatsbare gebouwwaardes. De minimale geldsom die je kan lenen bedraagt $CURRENCY_SYMBOL300.000, de maximale som $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="Inkomsten uit missies zijn verminderd. Je verdient ongeveer 5 keer meer dan wat een ingehuurde arbeider zou verdienen op hetzelfde veld." />
         <text name="ss_helpText_12_03" text="De kosten van je voertuigen (naast de regelmatige herstelbeurt) omvatten de onderhoudskosten en de belastingen. De belastingen worden bepaald door hoe vaak je het voertuig gebruikt. Schone machines hebben minder onderhoudskosten. Machines die niet worden gebruikt, hebben ook verminderde onderhoudskosten." />
         <text name="ss_helpText_12_04" text="Gewasprijzen schommelen op een levensechte wijze onder invloed van hun aanbod doorheen de seizoenen." />

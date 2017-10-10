@@ -204,6 +204,12 @@
         <ssLifeTime value="600" />
     </factor>
 
+    <factor category="frontLoaders">
+        <RF1 value="0.08" />
+        <RF2 value="1.2" />
+        <ssLifeTime value="300" />
+    </factor>
+
     <factor category="other">
         <RF1 value="0.2" />
         <RF2 value="1.7" />

@@ -217,7 +217,7 @@
         <text name="ss_helpText_11_04" text="Apenas veículos dirigíveis requerem manutenção periódica. Ferramentas e implementos serão reparados automaticamente conforme necessitam." />
 
         <text name="ss_helpTitle_12" text="Economia" />
-        <text name="ss_helpText_12_01" text="A cota de empréstimo foi mudada de $CURRENCY_SYMBOL200,000 para 30% do valor de suas terras e áreas construídas. O empréstimo mínimo é de  $CURRENCY_SYMBOL300,000 e o máximo $CURRENCY_SYMBOL1,500,000." />
+        <text name="ss_helpText_12_01" text="A cota de empréstimo foi mudada de $CURRENCY_SYMBOL200,000 para 80% do valor de suas terras e áreas construídas. O empréstimo mínimo é de  $CURRENCY_SYMBOL300,000 e o máximo $CURRENCY_SYMBOL1,500,000." />
         <text name="ss_helpText_12_02" text="Rendas com missões foram reduzidas. Você receberá o mesmo que 5 vezes a renda de um trabalhador temporário no mesmo campo." />
         <text name="ss_helpText_12_03" text="Manutenção de todos os veículos (periódicas também inclusas) são a soma de todas as manutençoes e impostos relativos a quantos equipamentos estão sendo utilizados. Máquinas limpas reduzem os custos de manutenção. Máquinas que não estão sendo utilizadas também terão custos reduzidos de manutenção." />
         <text name="ss_helpText_12_04" text="A tabela de preços dos cultivos varia de acordo com as mudanças nas estações para um padrão mais realista." />

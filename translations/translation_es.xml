@@ -204,7 +204,7 @@
         <text name="ss_helpText_11_04" text="Sólo los vehículos conducibles requerirán mantenimiento periódico. Las herramientas y accesorios se repararán automáticamente cuando sea necesario." />
 
         <text name="ss_helpTitle_12" text="Economía" />
-        <text name="ss_helpText_12_01" text="El tope del préstamo se ha cambiado de $CURRENCY_SYMBOL200.000, más el 30% del valor de terrenos en propiedad más el valor de sus construcciones colocables. El límite mínimo de préstamo es de $CURRENCY_SYMBOL300.000 y el límite máximo de préstamo es de $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_01" text="El tope del préstamo se ha cambiado de $CURRENCY_SYMBOL200.000, más el 80% del valor de terrenos en propiedad más el valor de sus construcciones colocables. El límite mínimo de préstamo es de $CURRENCY_SYMBOL300.000 y el límite máximo de préstamo es de $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="Los ingresos de las misiones se han reducido. Usted ganará aproximadamente 5 veces más que un trabajador contratado que trabaja en el mismo campo." />
         <text name="ss_helpText_12_03" text="El mantenimiento de todos los vehículos (además del mantenimiento periódico) incluye el mantenimiento y los impuestos relativos a cuánto se está utilizando. Tener las máquinas limpias reducen el coste de mantenimiento, así como, las máquinas sin uso verán reducido su coste de mantenimiento." />
         <text name="ss_helpText_12_04" text="Los precios de mercado de cultivos fluctúan con los cambios de estación de una forma más realista." />
