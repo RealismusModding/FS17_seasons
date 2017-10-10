@@ -10,7 +10,7 @@
 ssVehicle = {}
 g_seasons.vehicle = ssVehicle
 
-ssVehicle.LIFETIME_FACTOR = 5
+ssVehicle.LIFETIME_FACTOR = 3
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
@@ -219,9 +219,9 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
     end
 
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
-        return 0.025 * storeItem.price * (RF1 * (operatingTime / 5) ^ RF2) * powerMultiplier
+        return 0.025 * storeItem.price * (RF1 * (operatingTime / ssVehicle.LIFETIME_FACTOR) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR) / (lifetime / 5) * 2) * powerMultiplier
+        return 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier
     end
 end
 
@@ -343,7 +343,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
     local minSellPrice = price * 0.03
     local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
-    local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR) -- year
+    local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR * 4) -- year
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
@@ -359,13 +359,13 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         p2 = 0.42
         p3 = -4
         p4 = 85
-        depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
+        depFac = math.max(p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4, 0) / 100
         brandFac = math.min(math.sqrt(power / storeItem.dailyUpkeep), 1.1)
 
     elseif storeItem.category == "harvesters" or storeItem.category == "forageHarvesters" or storeItem.category == "potatoHarvesters" or storeItem.category == "beetHarvesters" then
         p1 = 81
         p2 = -0.105
-        depFac = (p1 * math.exp(p2 * age)) / 100
+        depFac = math.max(p1 * math.exp(p2 * age), 0) / 100
         brandFac = 1
 
     else
@@ -373,7 +373,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         p2 = 0.45
         p3 = -7
         p4 = 65
-        depFac = (p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4) / 100
+        depFac = math.max(p1 * age ^ 3 + p2 * age ^ 2 + p3 * age + p4, 0) / 100
         brandFac = 1
 
     end
@@ -382,7 +382,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         sellPrice = price
     else
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * brandFac / (overdueFactor ^ 0.1), minSellPrice)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / (lifetime / ssVehicle.LIFETIME_FACTOR)) * brandFac / (overdueFactor ^ 0.1), minSellPrice)
     end
 
     return sellPrice
