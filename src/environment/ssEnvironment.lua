@@ -499,6 +499,10 @@ end
 --
 
 function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
+    if seasonName == nil then
+        return "Usage: ssSetVisualSeason spring|summer|autumn|winter"
+    end
+
     local season = g_seasons.util.seasonKeyToId[ssUtil.trim(seasonName)]
 
     if season == nil then
