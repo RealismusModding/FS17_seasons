@@ -8,6 +8,7 @@
 ----------------------------------------------------------------------------------------------------
 
 ssDaylight = {}
+g_seasons.daylight = ssDaylight
 
 ssDaylight.DST_OFF = 0
 ssDaylight.DST_ON = 1
