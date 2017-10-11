@@ -153,7 +153,6 @@ function ssWeatherManager:loadMap(name)
 
         self:overwriteRaintable()
         self:setupStartValues()
-        self:soilTooColdForGrowth()
     end
 end
 
