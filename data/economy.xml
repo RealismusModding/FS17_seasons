@@ -319,35 +319,35 @@
     <bales>
         <bale type="straw">
             <factors>
-                <factor transition="11">1.62</factor>
-                <factor transition="12">1.65</factor>
-                <factor transition="1">1.59</factor>
-                <factor transition="2">1.59</factor>
-                <factor transition="3">1.55</factor>
-                <factor transition="4">1.46</factor>
-                <factor transition="5">1.37</factor>
-                <factor transition="6">1.34</factor>
-                <factor transition="7">1.37</factor>
-                <factor transition="8">1.47</factor>
-                <factor transition="9">1.58</factor>
-                <factor transition="10">1.61</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
         <bale type="dryGrass_windrow">
             <factors>
-                <factor transition="11">1.76</factor>
-                <factor transition="12">1.79</factor>
-                <factor transition="1">1.73</factor>
-                <factor transition="2">1.73</factor>
-                <factor transition="3">1.68</factor>
-                <factor transition="4">1.56</factor>
-                <factor transition="5">1.48</factor>
-                <factor transition="6">1.45</factor>
-                <factor transition="7">1.48</factor>
-                <factor transition="8">1.59</factor>
-                <factor transition="9">1.71</factor>
-                <factor transition="10">1.74</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
