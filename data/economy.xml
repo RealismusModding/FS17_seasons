@@ -319,52 +319,52 @@
     <bales>
         <bale type="straw">
             <factors>
-                <factor transition="11">3.24</factor>
-                <factor transition="12">3.3</factor>
-                <factor transition="1">3.18</factor>
-                <factor transition="2">3.18</factor>
-                <factor transition="3">3.09</factor>
-                <factor transition="4">2.91</factor>
-                <factor transition="5">2.73</factor>
-                <factor transition="6">2.67</factor>
-                <factor transition="7">2.73</factor>
-                <factor transition="8">2.94</factor>
-                <factor transition="9">3.15</factor>
-                <factor transition="10">3.21</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
         <bale type="dryGrass_windrow">
             <factors>
-                <factor transition="11">3.51</factor>
-                <factor transition="12">3.58</factor>
-                <factor transition="1">3.45</factor>
-                <factor transition="2">3.45</factor>
-                <factor transition="3">3.35</factor>
-                <factor transition="4">3.15</factor>
-                <factor transition="5">2.96</factor>
-                <factor transition="6">2.89</factor>
-                <factor transition="7">2.96</factor>
-                <factor transition="8">3.18</factor>
-                <factor transition="9">3.41</factor>
-                <factor transition="10">3.48</factor>
+                <factor transition="11">1.08</factor>
+                <factor transition="12">1.10</factor>
+                <factor transition="1">1.06</factor>
+                <factor transition="2">1.06</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.97</factor>
+                <factor transition="5">0.91</factor>
+                <factor transition="6">0.89</factor>
+                <factor transition="7">0.91</factor>
+                <factor transition="8">0.98</factor>
+                <factor transition="9">1.05</factor>
+                <factor transition="10">1.07</factor>
             </factors>
         </bale>
 
         <bale type="silage">
             <factors>
-                <factor transition="11">1.11</factor>
-                <factor transition="12">1.11</factor>
-                <factor transition="1">1.06</factor>
-                <factor transition="2">1.03</factor>
-                <factor transition="3">0.97</factor>
-                <factor transition="4">0.92</factor>
-                <factor transition="5">0.89</factor>
-                <factor transition="6">0.89</factor>
-                <factor transition="7">0.93</factor>
-                <factor transition="8">0.98</factor>
-                <factor transition="9">1.05</factor>
-                <factor transition="10">1.08</factor>
+                <factor transition="11">0.37</factor>
+                <factor transition="12">0.37</factor>
+                <factor transition="1">0.35</factor>
+                <factor transition="2">0.34</factor>
+                <factor transition="3">0.32</factor>
+                <factor transition="4">0.31</factor>
+                <factor transition="5">0.30</factor>
+                <factor transition="6">0.30</factor>
+                <factor transition="7">0.31</factor>
+                <factor transition="8">0.33</factor>
+                <factor transition="9">0.35</factor>
+                <factor transition="10">0.36</factor>
             </factors>
         </bale>
 
