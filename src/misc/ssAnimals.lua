@@ -24,10 +24,10 @@ function ssAnimals:load(savegame, key)
             if not hasXMLProperty(savegame, animalKey) then break end
 
             local typ = getXMLString(savegame, animalKey .. "#animalName")
-            averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
 
             -- Load early for calculations
-            productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
+            self.productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
             i = i + 1
         end
@@ -40,11 +40,13 @@ function ssAnimals:save(savegame, key)
         local typ = husbandry.typeName
         local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
 
-        setXMLString(savegame, animalKey .. "#animalName", typ)
-        setXMLFloat(savegame, animalKey .. "#averageProduction", husbandry.averageProduction)
-        setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
+        if typ ~= nil then
+            setXMLString(savegame, animalKey .. "#animalName", typ)
+            setXMLFloat(savegame, animalKey .. "#averageProduction", husbandry.averageProduction)
+            setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
 
-        i = i + 1
+            i = i + 1
+        end
     end
 end
 
