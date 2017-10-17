@@ -505,13 +505,17 @@ function ssWeatherManager:calculateSoilWetness()
 end
 
 function ssWeatherManager:updateWindSpeed()
-    local deltaWindSpeed = self:calculateDeltaWindSpeed()
+    --local deltaWindSpeed = self:calculateDeltaWindSpeed()
 
     self.windSpeed = self:calculateWindSpeed()
 end
 
 function ssWeatherManager:calculateDeltaWindSpeed()
-
+    local speedNow = g_seasons.forecast[1].windSpeed
+    local speedNext = g_seasons.forecast[2].windSpeed 
+    local deltaTime = 24 - g_seasons.forecast[1].startTimeIndication + g_seasons.forecast[2].startTimeIndication
+    
+    return = (speedNext - speedNow) / deltaTime
 end
 
 function ssWeatherManager:calculateWindSpeed()
