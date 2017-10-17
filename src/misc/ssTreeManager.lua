@@ -41,18 +41,16 @@ function ssTreeManager:update(dt)
     for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do
         --thanks to Dogface at fs-uk.com for finding these values
         --growthStatel         growthState
-        --    1             0.0000 to 0.1999
-        --    2             0.2000 to 0.3999 minimum cutable
-        --    3             0.4000 to 0.5999
-        --    4             0.6000 to 0.7999
-        --    5             0.8000 to 0.9999
-        --    6                    1.0000
+        --    1             0.0000 to 0.1999 > sapling
+        --    2             0.2000 to 0.3999 > stage 1
+        --    3             0.4000 to 0.5999 > stage 2 and minimum cutable
+        --    4             0.6000 to 0.7999 > stage 3
+        --    5             0.8000 to 0.9999 > stage 4
+        --    6                    1.0000    > stage 5 and fully grown
 
         -- capping growthState if the distance is too small for the tree to grown
         -- distances are somwehat larger than what should be expected in RL
-        if tree.ssNearestDistance < 2.5 and tree.growthState > 0.25 then
-            tree.growthState = 0.25
-        elseif tree.ssNearestDistance < 4.5 and tree.growthState > 0.45 then
+        if tree.ssNearestDistance < 4.5 and tree.growthState > 0.45 then
             tree.growthState = 0.45
         elseif tree.ssNearestDistance < 6.5 and tree.growthState > 0.65 then
             tree.growthState = 0.65
@@ -64,7 +62,6 @@ end
 
 function ssTreeManager:isTreeGrowthLimited(tree)
     local limits = {
-        [2.5] = 0.25,
         [4.5] = 0.45,
         [6.5] = 0.65,
         [self.MIN_DISTANCE] = 0.85,
