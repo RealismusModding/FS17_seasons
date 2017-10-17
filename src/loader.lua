@@ -267,15 +267,6 @@ function ssSeasonsMod.nullFinished()
     end
 end
 
-function removeModEventListener(listener)
-    for i, listnr in ipairs(g_modEventListeners) do
-        if listnr == listener then
-            table.remove(g_modEventListeners, i)
-            break
-        end
-    end
-end
-
 function ssSeasonsMod.delete()
     if not isSeasonsActive() then return end
 
