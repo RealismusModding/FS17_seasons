@@ -106,10 +106,14 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             self.textureReplacements[seasonId] = {}
         end
 
+        local season = self.textureReplacements[seasonId]
+
+        if season._foliageLayers == nil then
+            season._foliageLayers = {}
+        end
+
         local seasonKey = "textures.seasons." .. seasonName
         if hasXMLProperty(file, seasonKey) then
-            local season = self.textureReplacements[seasonId]
-
             -- Read each texture replacement
             local i = 0
             while true do
@@ -141,9 +145,6 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             end
 
             i = 0
-            if season._foliageLayers == nil then
-                season._foliageLayers = {}
-            end
 
             while true do
                 local foliageKey = string.format("%s.foliageLayer(%i)", seasonKey, i)
