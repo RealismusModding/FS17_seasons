@@ -17,8 +17,8 @@ ssAnimals.PRODUCTIVITY_START = 0.8
 
 function ssAnimals:load(savegame, key)
     -- Load or set default values
-    local averageProduction = {}
-    local productivities = {}
+    self.averageProduction = {}
+    self.productivities = {}
 
     if savegame ~= nil then
         local i = 0
@@ -27,19 +27,13 @@ function ssAnimals:load(savegame, key)
             if not hasXMLProperty(savegame, animalKey) then break end
 
             local typ = getXMLString(savegame, animalKey .. "#animalName")
-            averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
 
             -- Load early for calculations
-            productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
+            self.productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
             i = i + 1
         end
-    end
-
-    -- defaulting to 80% average productivity when loading using an older version of Seasons
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        husbandry.averageProduction = Utils.getNoNil(averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
-        husbandry.productivity = Utils.getNoNil(productivities[husbandry.typeName], husbandry.productivity)
     end
 end
 
@@ -49,11 +43,13 @@ function ssAnimals:save(savegame, key)
         local typ = husbandry.typeName
         local animalKey = string.format("%s.animalProduction.animal(%i)", key, i)
 
-        setXMLString(savegame, animalKey .. "#animalName", typ)
-        setXMLFloat(savegame, animalKey .. "#averageProduction", husbandry.averageProduction)
-        setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
+        if typ ~= nil then
+            setXMLString(savegame, animalKey .. "#animalName", typ)
+            setXMLFloat(savegame, animalKey .. "#averageProduction", husbandry.averageProduction)
+            setXMLFloat(savegame, animalKey .. "#currentProduction", husbandry.productivity)
 
-        i = i + 1
+            i = i + 1
+        end
     end
 end
 
@@ -83,6 +79,15 @@ function ssAnimals:loadMap(name)
         g_currentMission.environment:addDayChangeListener(self)
     end
     g_currentMission.environment:addHourChangeListener(self)
+end
+
+function ssAnimals:loadMapFinished()
+    
+    -- defaulting to 80% average productivity when loading using an older version of Seasons
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        husbandry.averageProduction = Utils.getNoNil(self.averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
+        husbandry.productivity = Utils.getNoNil(self.productivities[husbandry.typeName], husbandry.productivity)
+    end
 end
 
 function ssAnimals:loadGameFinished()
@@ -348,7 +353,7 @@ function ssAnimals:updateAverageProductivity()
     local reductionFac = 0.1
 
     for  _, husbandry in pairs(g_currentMission.husbandries) do
-        local currentProd = husbandry.productivity
+        local currentProd = Utils.getNoNil(husbandry.productivity, 0.0)
         local avgProd = husbandry.averageProduction
 
         if currentProd < 0.75 and currentProd < avgProd then

@@ -9,7 +9,9 @@
 
 ssVariableTreePlanter = {}
 
-ssVariableTreePlanter.PLANTING_DISTANCES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+ssVariableTreePlanter.PLANTING_DISTANCES = {2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+source(g_seasons.modDir .. "src/events/ssVariableTreePlanterEvent.lua")
 
 function ssVariableTreePlanter:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(TreePlanter, specializations)

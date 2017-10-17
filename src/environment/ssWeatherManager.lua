@@ -353,7 +353,7 @@ function ssWeatherManager:updateForecast()
 
     self:updateHail()
     self:overwriteRaintable()
-    self:updateSoilTemp()
+    self.soilTemp, self.soilTempMax = self:calculateSoilTemp(self.forecast[1].lowTemp, self.forecast[1].highTemp, g_seasons.environment.daysInSeason, self.soilTemp, self.soilTempMax, self.snowDepth)
 
     g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, self.prevHighTemp, self.soilTemp))
 end
@@ -492,10 +492,9 @@ end
 
 --- function for calculating soil temperature
 --- Based on Rankinen et al. (2004), A simple model for predicting soil temperature in snow-covered and seasonally frozen soil: model description and testing
-function ssWeatherManager:updateSoilTemp()
-    local avgAirTemp = (self.forecast[1].highTemp * 8 + self.forecast[1].lowTemp * 16) / 24
-    local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / g_seasons.environment.daysInSeason / 2
-    local soilTemp = self.soilTemp
+function ssWeatherManager:calculateSoilTemp(lowTemp, highTemp, days, soilTemp, soilTempMax, snowDepth)
+    local avgAirTemp = (highTemp * 8 + lowTemp * 16) / 24
+    local deltaT = 365 / g_seasons.environment.SEASONS_IN_YEAR / days / 2
     local snowDamp = 1
 
     -- average soil thermal conductivity, unit: kW/m/deg C, typical value s0.4-0.8
@@ -506,16 +505,18 @@ function ssWeatherManager:updateSoilTemp()
     local facfs = -5
 
     -- dampening effect of snow cover
-    if self.snowDepth > 0 then
-        snowDamp = math.exp(facfs * self.snowDepth)
+    if snowDepth > 0 then
+        snowDamp = math.exp(facfs * snowDepth)
     end
 
-    self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
+    soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
     --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
 
-    if self.soilTemp > self.soilTempMax then
-        self.soilTempMax = self.soilTemp
+    if soilTemp > soilTempMax then
+        soilTempMax = soilTemp
     end
+
+    return soilTemp, soilTempMax
 end
 
 --- function for predicting when soil is frozen
@@ -958,4 +959,44 @@ function ssWeatherManager:calculateSoilWetness()
     else
         return ssWeatherManager.soilWaterContent
     end
+end
+
+function ssWeatherManager:soilTooColdForGrowth()
+    local tooColdSoil = {}
+    local lowSoilTemp = {}
+    local soilTemp = {}
+
+    local daysInSeason = 9
+    local tempLimit = 4.89
+
+    for i=1,12 do
+        lowSoilTemp[i] = -math.huge
+    end
+
+    -- run after loading data from xml so self.soilTemp will be initial value at this point
+    soilTemp[1] = self.soilTemp
+    -- building table with hard coded 9 day season
+    for i = 2, 4 * 9 do
+        local gt = g_seasons.environment:transitionAtDay(i)
+        local gtPrevDay = g_seasons.environment:transitionAtDay(i - 1)
+
+        local ssTmax = self.temperatureData[gt]
+        local highTemp = ssTmax.mode
+        local lowTemp = 0.75 * ssTmax.mode - 5
+
+        soilTemp[i], _ = self:calculateSoilTemp(lowTemp, highTemp, 9, soilTemp[i - 1], 0, 0)
+        if soilTemp[i] > lowSoilTemp[gt] then
+            lowSoilTemp[gt] = soilTemp[i]
+        end
+
+        if gt > gtPrevDay and soilTemp[i] > soilTemp[i - 1] then
+            lowSoilTemp[gt - 1] = soilTemp[i]
+        end
+    end
+
+    for i = 1, 12 do
+        tooColdSoil[i] = lowSoilTemp[i] < tempLimit
+    end
+
+    return tooColdSoil
 end
