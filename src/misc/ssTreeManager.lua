@@ -50,8 +50,6 @@ function ssTreeManager:update(dt)
 
         -- capping growthState if the distance is too small for the tree to grown
         -- distances are somwehat larger than what should be expected in RL
-        --if tree.ssNearestDistance < 2.5 and tree.growthState > 0.25 then
-        --    tree.growthState = 0.25
         if tree.ssNearestDistance < 4.5 and tree.growthState > 0.45 then
             tree.growthState = 0.45
         elseif tree.ssNearestDistance < 6.5 and tree.growthState > 0.65 then
