@@ -87,30 +87,20 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="A capacidade máxima de sustentos foi atingida para 3 dias" />
         <text name="msg_welcome" text="Bem vindos ao Seasons mod por Realismus Modding. Por favor cheque nossa área de ajuda apertando Esc para saber como utilizar melhor este mod." />
 
-        <!-- Missing translation of "Measurement" -->
-        <text name="measuretool_title" text="" />
-        <!-- Missing translation of "%d hours to go" -->
-        <text name="measuretool_fermentation_time" text="" />
-        <!-- Missing translation of "less than 1 hour to go" -->
-        <text name="measuretool_fermentation_time_low" text="" />
-        <!-- Missing translation of "Measurement failed" -->
-        <text name="measuretool_failed" text="" />
-        <!-- Missing translation of "Measurement failed: no information" -->
-        <text name="measuretool_no_info" text="" />
+        <text name="measuretool_title" text="Medição" />
+        <text name="measuretool_fermentation_time" text="%d para terminar" />
+        <text name="measuretool_fermentation_time_low" text="Menos de 1 hora para terminar" />
+        <text name="measuretool_failed" text="Medição falhou" />
+        <text name="measuretool_no_info" text="Medição falhou: sem informação" />
 
-        <!-- Missing translation of "Calendar" -->
-        <text name="ui_pageCalender" text="" />
-        <!-- Missing translation of "Economy" -->
-        <text name="ui_pageEconomy" text="" />
+        <text name="ui_pageCalender" text="Calendário" />
+        <text name="ui_pageEconomy" text="Economia" />
         <text name="ui_pageSettings" text="Preferências" />
         <text name="ui_pageDebug" text="Ferramentas de debug" />
 
-        <!-- Missing translation of "animal" -->
-        <text name="ui_economy_animal" text="" />
-        <!-- Missing translation of "1000 l" -->
-        <text name="ui_economy_thousand" text="" />
-        <!-- Missing translation of "Bale" -->
-        <text name="ui_economy_bale" text="" />
+        <text name="ui_economy_animal" text="Animal" />
+        <text name="ui_economy_thousand" text="1000l" />
+        <text name="ui_economy_bale" text="Fardos" />
 
         <text name="ui_buttonSave" text="Aplicar" />
         <text name="ui_snowOneLayer" text="1 camada apenas" />
@@ -121,10 +111,8 @@
         <text name="ui_plantingSeason" text="Temporada de plantar" />
         <text name="ui_harvestSeason" text="Temporada de colher" />
 
-        <!-- Missing translation of "m" -->
-        <text name="unit_meterShort" text="" />
-        <!-- Missing translation of "ft" -->
-        <text name="unit_feetShort" text="" />
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
 
         <text name="tooltip_seasonLength" text="A duração de uma estação em dias. Um ano são quatro estações" />
         <text name="tooltip_seasonIntros" text="Mostre uma introdução a cada estação" />
@@ -151,9 +139,7 @@
         <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
 
         <text name="fillType_snow" text="Neve" />
-
-        <!-- Missing translation of "Using a measurement tool, you can get information on the soil, trees, bales, and other objects." -->
-        <text name="function_measureTool" text="" />
+        <text name="function_measureTool" text="Usando uma ferramenta de medição, você consegue informações sobre o solo, árvores, fardos de feno, e outros objetos." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
