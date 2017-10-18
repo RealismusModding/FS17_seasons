@@ -181,19 +181,19 @@
         </fill>
 
         <fill name="sunflower">
-            <factors all="1">
-                <factor transition="11"></factor>
-                <factor transition="12"></factor>
-                <factor transition="1"></factor>
-                <factor transition="2"></factor>
-                <factor transition="3"></factor>
-                <factor transition="4"></factor>
-                <factor transition="5"></factor>
-                <factor transition="6"></factor>
-                <factor transition="7"></factor>
-                <factor transition="8"></factor>
-                <factor transition="9"></factor>
-                <factor transition="10"></factor>
+            <factors>
+                <factor transition="11">1.23</factor>
+                <factor transition="12">1.24</factor>
+                <factor transition="1">1.04</factor>
+                <factor transition="2">0.96</factor>
+                <factor transition="3">0.99</factor>
+                <factor transition="4">1.07</factor>
+                <factor transition="5">1.11</factor>
+                <factor transition="6">0.94</factor>
+                <factor transition="7">0.72</factor>
+                <factor transition="8">0.62</factor>
+                <factor transition="9">0.88</factor>
+                <factor transition="10">1.21</factor>
             </factors>
         </fill>
 
