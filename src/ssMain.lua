@@ -98,6 +98,9 @@ end
 ----------------------------
 
 function ssMain:loadMap()
+    self.hasGeoMod = false
+    self.showedResetWarning = false
+
     -- Call upon all 4th party mod functions
     for modName, isLoaded in pairs(g_modIsLoaded) do
         if isLoaded then
@@ -232,7 +235,7 @@ function ssMain:loadMod(modName)
 
         if modType == "geo" then
             if self.hasGeoMod then
-                logInfo("Error: Multiple Seasons GEO mods are loaded. This is bad practice. Skipping to load", modName)
+                logInfo("Error: Multiple Seasons GEO mods are loaded. This is bad practice. Skipping", modName)
                 return
             else
                 self.hasGeoMod = true
