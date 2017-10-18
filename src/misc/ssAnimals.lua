@@ -331,7 +331,7 @@ end
 function ssAnimals:husbandryGetDataAttributes(superFunc)
     local tmpProductivity = self.productivity
     if self.totalNumAnimals ~= 0 then
-        self.productivity = self.averageProduction
+        self.productivity = mathRound(self.averageProduction,3)
     end
 
     local ret = { superFunc(self) }
