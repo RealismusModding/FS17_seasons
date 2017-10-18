@@ -78,11 +78,12 @@ function ssAnimals:loadMap(name)
 end
 
 function ssAnimals:loadMapFinished()
-    
-    -- defaulting to 80% average productivity when loading using an older version of Seasons
-    for  _, husbandry in pairs(g_currentMission.husbandries) do
-        husbandry.averageProduction = Utils.getNoNil(self.averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
-        husbandry.productivity = Utils.getNoNil(self.productivities[husbandry.typeName], husbandry.productivity)
+    if g_currentMission:getIsServer() then
+        -- defaulting to 80% average productivity when loading using an older version of Seasons
+        for  _, husbandry in pairs(g_currentMission.husbandries) do
+            husbandry.averageProduction = Utils.getNoNil(self.averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
+            husbandry.productivity = Utils.getNoNil(self.productivities[husbandry.typeName], husbandry.productivity)
+        end
     end
 end
 
@@ -330,7 +331,7 @@ end
 function ssAnimals:husbandryGetDataAttributes(superFunc)
     local tmpProductivity = self.productivity
     if self.totalNumAnimals ~= 0 then
-        self.productivity = self.averageProduction
+        self.productivity = mathRound(self.averageProduction,3)
     end
 
     local ret = { superFunc(self) }
