@@ -164,19 +164,19 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
 
     <iconFilename>icon.png</iconFilename>
 
-    <multiplayer supported="true"/>
+    <multiplayer supported="true" />
 
-    <l10n filenamePrefix="translations/translation"/>
+    <l10n filenamePrefix="translations/translation" />
 
     <extraSourceFiles>
-        <sourceFile filename="src/loader.lua"/>
+        <sourceFile filename="src/loader.lua" />
     </extraSourceFiles>
 
     <inputBindings>
-        <input name="SEASONS_SHOW_WF" category="ONFOOT" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse=""/>
-        <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse=""/>
-        <input name="SEASONS_SHOW_MENU" category="ONFOOT" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse=""/>
-        <input name="SEASONS_SKIP_NIGHT" category="ONFOOT" key1="KEY_lalt KEY_n" key2="" button="" device="" mouse=""/>
+        <input name="SEASONS_SHOW_WF" category="ONFOOT" key1="KEY_lalt KEY_f" key2="" button="" device="" mouse="" />
+        <input name="SEASONS_REPAIR_VEHICLE" category="ONFOOT" key1="KEY_lalt KEY_r" key2="" button="" device="" mouse="" />
+        <input name="SEASONS_SHOW_MENU" category="ONFOOT" key1="KEY_lalt KEY_s" key2="" button="" device="" mouse="" />
+        <input name="SEASONS_SKIP_NIGHT" category="ONFOOT" key1="KEY_lalt KEY_n" key2="" button="" device="" mouse="" />
     </inputBindings>
 
     <brands>
@@ -184,9 +184,9 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
     </brands>
 
     <storeItems>
-        <storeItem xmlFilename="resources/fakeStoreItem/item.xml"/>
-        <storeItem xmlFilename="resources/fakeStoreItem/item2.xml"/>
+        <storeItem xmlFilename="resources/fakeStoreItem/item.xml" />
+        <storeItem xmlFilename="resources/fakeStoreItem/item2.xml" />
 
-        <storeItem rootNode="handTool" xmlFilename="resources/handtools/wopstr420/wopstr420.xml"/>
+        <storeItem rootNode="handTool" xmlFilename="resources/handtools/wopstr420/wopstr420.xml" />
     </storeItems>
 </modDesc>
