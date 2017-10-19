@@ -114,6 +114,11 @@ function ssWeatherGUI:loadMap(name)
     self.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
     self.overlays.snow = g_currentMission.weatherForecastIconOverlays.snow
     self.overlays.hail = self.overlays.snow
+    -- replace with proper icons
+    self.overlays.partly_cloudy = self.overlays.cloudy
+    self.overlays.rain_showers = self.overlays.rain
+    self.overlays.snow_showers = self.overlays.snow
+    self.overlays.sleet = self.overlays.rain
 
     self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
 
@@ -197,7 +202,7 @@ function ssWeatherGUI:drawForecast(forecast)
         -- X of the day
         local dayOffsetX = self.forecastX + self.forecastSpacingWidth + (n - 2) * (self.forecastDayWidth + self.forecastSpacingWidth)
 
-        local weatherIcon = forecast[n].weatherState
+        local weatherIcon = forecast[n].weatherType
 
         -- Render Season Icon
         local seasonIcon = self.overlays.seasons[forecast[n].season]

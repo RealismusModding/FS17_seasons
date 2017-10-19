@@ -223,23 +223,14 @@ function ssWeatherManager:hourChanged()
 end
 
 -- function to output the temperature during the day and night
-function ssWeatherManager:diurnalTemp(hour, minute, lowTemp, highTemp, lowTempNext)
-    local highTempPrev = 0
+function ssWeatherManager:diurnalTemp(currentTime, highTempPrev, lowTemp, highTemp, lowTempNext)
 
-    -- need to have the high temp of the previous day
-    -- hour is hour in the day from 0 to 23
-    -- minute is minutes from 0 to 59
-
-    if lowTemp == nil and highTemp == nil and lowTempNext == nil then
+    if highTempPrev == nil or lowTemp == nil or highTemp == nil or lowTempNext == nil then
         lowTemp = ssWeatherForecast.forecast[1].lowTemp
         highTemp = ssWeatherForecast.forecast[1].highTemp
         lowTempNext = ssWeatherForecast.forecast[2].lowTemp
         highTempPrev = ssWeatherManager.prevHighTemp
-    else
-        highTempPrev = highTemp
     end
-
-    local currentTime = hour + minute / 60
 
     if currentTime < 7 then
         currentTemp = (math.cos(((currentTime + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
@@ -259,7 +250,7 @@ function ssWeatherManager:updateSnowDepth()
     local seasonLengthFactor = math.max(9 / g_seasons.environment.daysInSeason, 1.0)
     local currentTemp = self:currentTemperature()
     local effectiveMeltTemp = math.max(currentTemp, 0) + math.max(self.soilTemp, 0)
-    local windMeltFactor = 1 + max(self.windSpeed - 5, 0) / 25
+    local windMeltFactor = 1 + math.max(self.windSpeed - 5, 0) / 25
 
     -- calculating snow melt as a function of radiation
     local snowMelt = math.max(0.001 * effectiveMeltTemp ) * (1 + g_seasons.daylight:calculateSolarRadiation() / 5) * seasonLengthFactor * windMeltFactor
@@ -364,13 +355,21 @@ end
 
 -- function to calculate relative humidity
 -- http://onlinelibrary.wiley.com/doi/10.1002/met.258/pdf
-function ssWeatherManager:calculateRelativeHumidity(currentTemp, lowTemp)
+function ssWeatherManager:calculateRelativeHumidity(currentTemp, lowTemp, rainType)
     if currentTemp == nil then
         currentTemp = self:currentTemperature()
     end
 
     if lowTemp == nil then
         lowTemp = ssWeatherForecast.forecast[1].lowTemp
+    end
+
+    if rainType == nil then
+        if g_currentMission.environment.currentRain ~= nil then
+            rainType = g_currentMission.environment.currentRain.rainTypeId
+        else
+            rainType = ssWeatherManager.RAINTYPE_SUN
+        end
     end
 
     local relativeHumidity = 80
@@ -380,7 +379,7 @@ function ssWeatherManager:calculateRelativeHumidity(currentTemp, lowTemp)
 
     relativeHumidity = 100 * e / es
 
-    if g_currentMission.environment.timeSinceLastRain == 0 then
+    if rainType == ssWeatherManager.RAINTYPE_RAIN or rainType == ssWeatherManager.RAINTYPE_FOG or rainType == ssWeatherManager.RAINTYPE_HAIL then
         relativeHumidity = 95
     end
 
@@ -463,7 +462,7 @@ function ssWeatherManager:calculateRainAmount()
     if self.currentWeatherType == self.WEATHERTYPE_RAIN then
         weatherTypeFactor = 0.5
     -- strong rain when thunder
-    elseif self.currentWeatherType = self.WEATHERTYPE_THUNDER then
+    elseif self.currentWeatherType == self.WEATHERTYPE_THUNDER then
         weatherTypeFactor = 2
     end
 
@@ -515,7 +514,7 @@ function ssWeatherManager:calculateDeltaWindSpeed()
     local speedNext = g_seasons.forecast[2].windSpeed 
     local deltaTime = 24 - g_seasons.forecast[1].startTimeIndication + g_seasons.forecast[2].startTimeIndication
     
-    return = (speedNext - speedNow) / deltaTime
+    return (speedNext - speedNow) / deltaTime
 end
 
 function ssWeatherManager:calculateWindSpeed()
@@ -526,7 +525,7 @@ function ssWeatherManager:calculateWindSpeed()
     -- if using hourly average multiply all values with 1.5
     local shape = 2.0
 
-    local scale = self:getMeanWindSpeed(gt)
+    --local scale = self:getMeanWindSpeed(gt)
     if scale == nil then
         scale = 4.4 -- mean wind speed for Yeovilton, Somerset (default)
     end
