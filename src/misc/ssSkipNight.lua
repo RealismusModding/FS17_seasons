@@ -31,7 +31,7 @@ function ssSkipNight:update(dt)
     local isEvening = time >= math.max(g_currentMission.environment.nightStart, 20 * 60)
     local isMorning = time >= math.min(g_currentMission.environment.nightEnd, 6 * 60) and time < (12 * 60)
 
-    if isEvening then
+    if isEvening and g_currentMission.controlledVehicle == nil then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SKIP_NIGHT"), InputBinding.SEASONS_SKIP_NIGHT)
 
         -- When a player wants to skip the night, fast forward, securily

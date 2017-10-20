@@ -150,16 +150,18 @@ function ssWeatherForecast:deleteMap()
 end
 
 function ssWeatherForecast:update(dt)
-    if g_seasons.showControlsInHelpScreen then
-        if not self.visible then
-            g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
-        else
-            g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+    if g_currentMission.controlledVehicle == nil or not GS_IS_CONSOLE_VERSION then
+        if g_seasons.showControlsInHelpScreen then
+            if not self.visible then
+                g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+            else
+                g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+            end
         end
-    end
 
-    if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
-        self:setForecastVisible(not self.visible)
+        if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
+            self:setForecastVisible(not self.visible)
+        end
     end
 end
 
