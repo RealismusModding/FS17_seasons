@@ -319,7 +319,7 @@ function ssSeasonsMenu:createOverviewValues(element)
 
     o.scrollVisible = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
     self.cropsSlider:setMinValue(o.scrollVisible)
-    self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
+    self.cropsSlider:setMaxValue(numTotalItems)
     self.cropsSlider:setValue(self.cropsSlider.maxValue)
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
 end
