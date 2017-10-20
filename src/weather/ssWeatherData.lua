@@ -62,7 +62,7 @@ function ssWeatherData:load(savegame, key)
     ssWeatherManager.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     ssWeatherManager.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
     ssWeatherManager.moistureEnabled = ssXMLUtil.getBool(savegame, key .. ".weather.moistureEnabled", true)
-    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 2.0)
+    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeed", 2.0)
 
     -- load forecast
     ssWeatherForecast.forecast = {}
@@ -81,6 +81,9 @@ function ssWeatherData:load(savegame, key)
         day.weatherType = getXMLString(savegame, dayKey .. "#weatherState")
         day.highTemp = getXMLFloat(savegame, dayKey .. "#highTemp")
         day.lowTemp = getXMLFloat(savegame, dayKey .. "#lowTemp")
+        day.windSpeed = getXMLFloat(savegame, dayKey .. "#windSpeed")
+        day.p = getXMLFloat(savegame, dayKey .. "#p")
+        day.numEvents = getXMLInt(savegame, dayKey .. "#numEvents")
 
         table.insert(ssWeatherForecast.forecast, day)
         i = i + 1
@@ -130,6 +133,9 @@ function ssWeatherData:save(savegame, key)
         setXMLString(savegame, dayKey .. "#weatherState", day.weatherType)
         setXMLFloat(savegame, dayKey .. "#highTemp", day.highTemp)
         setXMLFloat(savegame, dayKey .. "#lowTemp", day.lowTemp)
+        setXMLFloat(savegame, dayKey .. "#windSpeed", day.windSpeed)
+        setXMLFloat(savegame, dayKey .. "#p", day.p)
+        setXMLInt(savegame, dayKey .. "#numEvents", day.numEvents)
     end
 
     for i = 0, table.getn(ssWeatherManager.weather) - 1 do
