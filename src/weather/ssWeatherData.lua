@@ -79,6 +79,7 @@ function ssWeatherData:load(savegame, key)
 
         -- keeing name weatherState in savegame for compatibility
         day.weatherType = getXMLString(savegame, dayKey .. "#weatherState")
+        day.startTimeIndication = getXMLFloat(savegame, startTimeIndication .. "#startTimeIndication")
         day.ssTmax = getXMLFloat(savegame, dayKey .. "#ssTmax")
         day.highTemp = getXMLFloat(savegame, dayKey .. "#highTemp")
         day.lowTemp = getXMLFloat(savegame, dayKey .. "#lowTemp")
@@ -132,6 +133,7 @@ function ssWeatherData:save(savegame, key)
         setXMLInt(savegame, dayKey .. "#day", day.day)
         -- keeing name weatherState in savegame for compatibility
         setXMLString(savegame, dayKey .. "#weatherState", day.weatherType)
+        setXMLFloat(savegame, dayKey .. "#startTimeIndication", day.startTimeIndication)
         setXMLFloat(savegame, dayKey .. "#ssTmax", day.ssTmax)
         setXMLFloat(savegame, dayKey .. "#highTemp", day.highTemp)
         setXMLFloat(savegame, dayKey .. "#lowTemp", day.lowTemp)
