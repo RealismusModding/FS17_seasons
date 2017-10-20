@@ -132,6 +132,7 @@ local files = {
     -- GUI
     "gui/ssHelpLines",
     "gui/ssRectOverlay",
+    "gui/ssGuiSeasonsHeader",
     "gui/ssGraph",
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp",

@@ -12,9 +12,14 @@
         <Preset name="colorDarkGrey2_50" value="0.0630 0.0630 0.0630 0.5"/>
         <Preset name="colorDarkGrey6" value="0.03 0.03 0.03 1"/>
 
+        <Preset name="colorBlack3" value="0.013 0.013 0.013 1" />
+        <Preset name="colorBlack3_97" value="0.013 0.013 0.013 0.97" />
+        <Preset name="colorBlack3_70" value="0.013 0.013 0.013 0.7" />
         <Preset name="colorBlack3_0" value="0.013 0.013 0.013 0" />
 
         <Preset name="colorBlue" value="0.0742 0.4341 0.6939 1" />
+
+        <Preset name="colorLightGrey" value="0.0482 0.0482 0.0482 1" />
     </Presets>
 
     <!-- Settings -->
@@ -45,61 +50,95 @@
     </Profile>
 
     <Profile name="ssCalendarHeader" parent="baseReference">
-        <Value name="size" value="800px 50px" />
+        <Value name="size" value="540px 50px" />
+        <Value name="position" value="-607px 424px" />
     </Profile>
 
     <Profile name="ssCalendarList" parent="list">
-        <Value name="size" value="800px 560px" />
-        <Value name="position" value="-480px 0px" />
+        <Value name="size" value="850px 402px" />
+        <Value name="position" value="-500px 22px" />
 
-        <Value name="listItemHeight" value="36px" />
-        <Value name="listItemWidth" value="800px" />
+        <Value name="listItemHeight" value="37px" />
+        <Value name="listItemWidth" value="850px" />
         <Value name="isHorizontalList" value="false" />
         <Value name="visibleItems" value="11" />
+
+        <Value name="imageColor" value="$preset_colorBlue" />
     </Profile>
 
     <Profile name="ssCalendarListItem" parent="listItem">
-        <Value name="size" value="800px 32px" />
+        <Value name="size" value="850px 32px" />
 
-        <!-- <Value name="position" value="2px 0px" /> -->
+        <Value name="position" value="0px 0px" />
+        <Value name="offset" value="0px 0px" />
+
+        <Value name="imageColor" value="$preset_colorBlack3_0" />
+        <Value name="imageFocusedColor" value="$preset_colorBlack3_0" />
+        <Value name="imageSelectedColor" value="$preset_colorBlack3_0" />
     </Profile>
 
-    <Profile name="ssCalendarItemFruitBg" parent="baseReference">
-        <Value name="imageColor" value="$preset_colorBlack3_0" />
-        <Value name="size" value="800px 32px" />
+    <Profile name="ssCalendarBg" parent="baseReference">
+        <Value name="imageColor" value="$preset_colorBlack3" />
+        <Value name="imageFocusedColor" value="$preset_colorDarkGrey2_50" />
+        <Value name="imageSelectedColor" value="$preset_colorDarkGrey2" />
+    </Profile>
+
+    <Profile name="ssCalendarItemFruitBg" parent="ssCalendarBg">
+        <Value name="size" value="230px 32px" />
     </Profile>
 
     <Profile name="ssCalendarItemFruitIcon" parent="baseReference">
-        <Value name="screenAlign" value="middleLeft" />
-        <Value name="positionOrigin" value="middleLeft" />
-        <Value name="size" value="25px 25px" />
-        <Value name="margin" value="0px 0px 0px 0px" />
+        <Value name="size" value="24px 24px" />
+        <Value name="position" value="4px 4px" />
+
         <Value name="imageColor" value="$preset_colorDescriptionText" />
         <Value name="imageUVs" value="0 0 1 1" />
     </Profile>
 
     <Profile name="ssCalendarItemFruitName" parent="textDefault">
+        <Value name="size" value="230px 32px" />
+        <Value name="position" value="37px 9px" /> <!-- 32 + 5 -->
+
         <Value name="textSize" value="14px" />
     </Profile>
 
-    <Profile name="ssCalendarItemGerminationBg" parent="baseReference">
-        <Value name="imageColor" value="$preset_colorBlack3_0" />
+    <Profile name="ssCalendarItemGerminationBg" parent="ssCalendarBg">
+        <Value name="size" value="70px 32px" />
+        <Value name="position" value="235px 0px" />
     </Profile>
 
     <Profile name="ssCalendarItemGermination" parent="textDefault">
-        <Value name="textColor" value="$preset_colorWhite" />
+        <Value name="size" value="70px 32px" />
+        <Value name="position" value="0px 9px" />
+
+        <Value name="textAlignment" value="center" />
         <Value name="textSize" value="14px" />
     </Profile>
 
     <Profile name="ssCalendarItemGerminationFrigid" parent="ssCalendarItemGermination">
         <Value name="textColor" value="$preset_colorBlue" />
+        <Value name="textFocusedColor" value="$preset_colorBlue" />
+        <Value name="textSelectedColor" value="$preset_colorBlue" />
+        <Value mame="textPreSelectedColor" value="$preset_colorBlue" />
     </Profile>
 
-    <Profile name="ssCalendarItemData" parent="baseReference">
+    <Profile name="ssCalendarItemData" parent="ssCalendarBg">
+        <Value name="size" value="540px 32px" />
+        <Value name="position" value="310px 0px" />
+
+        <Value name="imageColor" value="$preset_colorBlack3_0" />
     </Profile>
 
     <Profile name="ssCalendarFooter" parent="baseReference">
-        <Value name="size" value="800px 80px" />
+        <Value name="size" value="850px 37px" />
+        <Value name="position" value="-917px -25px" />
+    </Profile>
+
+    <Profile name="ssCalendarToday" parent="baseReference">
+        <Value name="screenAlign" value="bottomCenter"/>
+        <Value name="positionOrigin" value="bottomCenter"/>
+        <Value name="size" value="850px 402px" />
+        <Value name="position" value="-500px 17px" />
     </Profile>
 
     <!-- Economy -->

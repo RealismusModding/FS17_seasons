@@ -19,7 +19,7 @@
                         <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" focusChangeTop="1" focusChangeBottom="sliderDownCrops"/>
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />
 
-                        <GuiElement type="empty" profile="ssCalendarHeader" id="calendarHeader" onDraw="onDrawCalendarHeader" />
+                        <GuiElement type="empty" profile="ssCalendarHeader" id="calendarHeader" onCreate="onCreateCalendarHeader" onDraw="onDrawCalendarHeader" />
 
                         <GuiElement type="list" profile="ssCalendarList" id="calendarList" focusId="200" focusChangeTop="1" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1">
                             <GuiElement type="listItem" profile="ssCalendarListItem" id="calendarListItemTemplate" onCreate="onCreateCalendarListItem">
@@ -37,9 +37,9 @@
                         </GuiElement>
 
                         <GuiElement type="empty" profile="ssCalendarFooter" id="calendarHeader" onDraw="onDrawCalendarFooter" />
-                    </GuiElement>
 
-                    <GuiElement type="empty" profile="ssCalendar" id="overviewElement" onDraw="drawOverview" />
+                        <GuiElement type="empty" profile="ssCalendarToday" onDraw="onDrawCalendarToday" />
+                    </GuiElement>
                 </GuiElement>
 
                 <!-- Economy -->
