@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
-    <GuiElement type="bitmap" profile="backgroundImageIngame" />
+    <GuiElement type="bitmap" profile="BgImageIngame" />
 
     <GuiElement type="bitmap" profile="uiElementBg">
         <GuiElement type="bitmap" profile="uiElementMainBg">
@@ -15,9 +15,28 @@
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
                 <!-- Crop data -->
                 <GuiElement type="empty" profile="page" name="pageCalendar" onCreate="onCreatePageOverview">
-                    <GuiElement type="slider" profile="ssCropsSliderVertical" id="cropsSlider" onChanged="onCropSliderValueChanged">
+                    <GuiElement type="slider" profile="ssCropsSlider">
                         <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" focusChangeTop="1" focusChangeBottom="sliderDownCrops"/>
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />
+
+                        <GuiElement type="empty" profile="ssCalendarHeader" id="calendarHeader" onDraw="onDrawCalendarHeader" />
+
+                        <GuiElement type="list" profile="ssCalendarList" id="calendarList" focusId="200" focusChangeTop="1" focusChangeBottom="100" focusChangeRight="100" focusChangeLeft="1">
+                            <GuiElement type="listItem" profile="ssCalendarListItem" id="calendarListItemTemplate" onCreate="onCreateCalendarListItem">
+                                <GuiElement type="bitmap" profile="ssCalendarItemFruitBg">
+                                    <GuiElement type="bitmap" profile="ssCalendarItemFruitIcon" onCreate="onCreateCalendarItemFruitIcon" />
+                                    <GuiElement type="text" profile="ssCalendarItemFruitName" onCreate="onCreateCalendarItemFruitName" />
+                                </GuiElement>
+
+                                <GuiElement type="bitmap" profile="ssCalendarItemGerminationBg">
+                                    <GuiElement type="text" profile="ssCalendarItemGermination" onCreate="onCreateCalendarItemGermination" />
+                                </GuiElement>
+
+                                <GuiElement type="bitmap" profile="ssCalendarItemData" onCreate="onCreateCalendarItemData" onDraw="onDrawCalendarItemData" />
+                            </GuiElement>
+                        </GuiElement>
+
+                        <GuiElement type="empty" profile="ssCalendarFooter" id="calendarHeader" onDraw="onDrawCalendarFooter" />
                     </GuiElement>
 
                     <GuiElement type="empty" profile="ssCalendar" id="overviewElement" onDraw="drawOverview" />

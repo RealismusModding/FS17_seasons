@@ -268,6 +268,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 end
 
 function ssSeasonsMenu:createOverviewValues(element)
+    --[[
     local o = self.overview
     local _ = nil
 
@@ -322,21 +323,10 @@ function ssSeasonsMenu:createOverviewValues(element)
     self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
     self.cropsSlider:setValue(self.cropsSlider.maxValue)
     self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
-end
-
-function ssSeasonsMenu:deleteOverview()
-    local o = self.overview
-
-    o.rect:delete()
-
-    for _, overlay in pairs(o.seasons) do
-        overlay:delete()
-    end
+    ]]
 end
 
 function ssSeasonsMenu:updateOverview()
-    self.overviewData = {}
-
     local canPlant = g_seasons.growthGUI:getCanPlantData()
     local canHarvest = g_seasons.growthGUI:getCanHarvestData()
 
@@ -367,34 +357,37 @@ function ssSeasonsMenu:updateOverview()
         if currentBlock ~= nil then table.insert(blocks, currentBlock) end --handle case where there is no false (like poplar)
     end
 
+    self.calendarList:deleteListItems()
+
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
         if fruitDesc.allowsSeeding then -- must be in list
             local item = {}
-            local fillTypeDesc = FillUtil.fillTypeIndexToDesc[FruitUtil.fruitTypeToFillType[index]]
+            local fillTypeDesc = FillUtil.fillTypeIndexToDesc[FruitUtil.fruitTypeToFillType[index] ]
 
             item.name = fruitDesc.name
             item.i18Name = fillTypeDesc.nameI18N
+            item.fillTypeDesc = fillTypeDesc
 
             item.temperature = g_seasons.weather:germinationTemperature(fruitDesc.name)
-
-            if self.overview.iconCache[index] == nil then
-                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilenameSmall, 0, 0, 40, 40)
-            end
-            item.icon = self.overview.iconCache[index]
 
             item.blocks = {}
             generateBlocks(item.blocks, fruitDesc.name, canPlant, self.BLOCK_TYPE_PLANTABLE)
             generateBlocks(item.blocks, fruitDesc.name, canHarvest, self.BLOCK_TYPE_HARVESTABLE)
 
-            table.insert(self.overviewData, item)
+            self.currentItem = item
+            -- self.currentItemIsOdd = i % 2 == 0
+
+            local row = self.calendarListItemTemplate:clone(self.calendarList)
+            row:updateAbsolutePosition()
+
         end
     end
 
-    -- Create the headers
-    self.overview.transitionHeaders = ssUtil.getTransitionHeaders()
+    self.currentItem = nil
 end
 
 function ssSeasonsMenu:drawOverview(element)
+    --[[
     if self.overview.fruitSpacerHeight == nil then
         self:createOverviewValues(element)
     end
@@ -575,14 +568,66 @@ function ssSeasonsMenu:drawOverview(element)
         ssLang.getText("ui_harvestSeason"),
         o.transitionHeight
     )
+    ]]
 end
 
 function ssSeasonsMenu:onCropSliderValueChanged()
-    self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
+    -- self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
 end
 
 function ssSeasonsMenu:deleteOverview()
-    self.overview.testOverlay:delete()
+    --[[
+    local o = self.overview
+
+    o.rect:delete()
+
+    for _, overlay in pairs(o.seasons) do
+        overlay:delete()
+    end
+    ]]
+end
+
+function ssSeasonsMenu:onCreateCalendarListItem(element)
+    if self.currentItem ~= nil then
+        log("create list item")
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemFruitIcon(element)
+    if self.currentItem ~= nil then
+        element:setImageFilename(self.currentItem.fillTypeDesc.hudOverlayFilenameSmall)
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemFruitName(element)
+    if self.currentItem ~= nil then
+        element:setText(self.currentItem.nameI18N)
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemGermination(element)
+    if self.currentItem ~= nil then
+        element:setText(ssLang.formatTemperature(self.currentItem.temperature))
+
+        if math.floor(ssWeatherManager.soilTemp, 0) < self.currentItem.temperature then
+            element:applyProfile(element.profile .. "Frigid")
+        end
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemData(element)
+    if self.currentItem ~= nil then
+        log("create data")
+    end
+end
+
+function ssSeasonsMenu:onDrawCalendarItemData(element)
+end
+
+function ssSeasonsMenu:onDrawCalendarFooter(element)
+end
+
+function ssSeasonsMenu:onDrawCalendarHeader(element)
 end
 
 ------------------------------------------
@@ -767,7 +812,7 @@ function ssSeasonsMenu:updateApplySettingsButton()
     end
 
     self.saveButton:setDisabled(not hasChanges)
-    self.saveButtonConsole:setVisible(not hasChanges)
+    self.saveButtonConsole:setVisible(hasChanges)
 end
 
 function ssSeasonsMenu:onClickActivate()
