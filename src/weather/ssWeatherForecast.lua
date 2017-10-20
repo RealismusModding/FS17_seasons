@@ -248,9 +248,9 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
         oneRainEvent.duration = oneRainEvent.endRainTime - oneRainEvent.startRainTime
     end
 
-    if endRainTime > 24 * self.UNITTIME then
-        endRainTime = endRainTime - 24 * UNITTIME
-        endDay = endDay + 1
+    if oneRainEvent.endRainTime > 24 * self.UNITTIME then
+        oneRainEvent.endRainTime = oneRainEvent.endRainTime - 24 * UNITTIME
+        oneRainEvent.endDay = oneRainEvent.endDay + 1
     end
 
     local tempIndication = ssWeatherManager:diurnalTemp((startRainTime + endRainTime)/2, highTemp, lowTemp, highTemp, lowTemp)
@@ -360,6 +360,45 @@ function ssWeatherForecast:foggyMorning()
             --table.insert(weather, pos, oneFogEvent)
         end
     end
+end
+
+function ssWeatherForecast:_getFogEvent()
+    local oneFogEvent = {}
+    local lowTemp = self.forecast[2].lowTemp
+    local highTemp = self.forecast[2].highTemp
+    local lowTempPrev= self.forecast[1].lowTemp
+    local highTempPrev = self.forecast[1].highTemp
+    local lowTempNext = self.forecast[3].lowTemp
+
+    local rhPrev, rh, temp = 0
+
+    local startFogTime = 2
+    local endFogTime = 10
+
+    oneFogEvent.startDay = self.forecast[2].day
+    oneFogEvent.endDay = self.forecast[2].day
+
+
+    for hour = 1, 11 do
+        temp = ssWeatherManager:diurnalTemperature(hour, highTempPrev,lowTemp,highTemp, lowTempNext)
+        rh = ssWeatherManager:calculateRelativeHumidity(temp, (lowTemp + lowTempPrev) * 0.5, ssWeatherManager.RAINTYPE_SUN)
+
+        -- fog if the relative humidity is above 95%
+        if rh >= 95 and rhPrev < 95 then
+            startFogTime = hour
+        elseif rh <= 95 and rhPrev > 95 then
+            endFogTime = hour
+        end
+
+        rhPrev = rh
+    end
+
+    oneFogEvent.startRainTime = startFogTime * self.UNITTIME
+    oneFogEvent.endRainTime = endFogTime * self.UNITTIME
+    oneFogEvent.duration = oneFogEvent.endRainTime - oneFogEvent.startRainTime
+    oneFogEvent.rainType = ssWeatherManager.RAINTYPE_FOG
+
+    return oneFogEvent
 end
 
 -- Overwrite the vanilla rains table using our own forecast
