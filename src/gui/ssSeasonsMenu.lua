@@ -581,10 +581,6 @@ function ssSeasonsMenu:onCropSliderValueChanged()
     self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
 end
 
-function ssSeasonsMenu:deleteOverview()
-    self.overview.testOverlay:delete()
-end
-
 ------------------------------------------
 -- ECONOMY PAGE
 ------------------------------------------
