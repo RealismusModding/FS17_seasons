@@ -20,7 +20,7 @@
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />
                     </GuiElement>
 
-                    <GuiElement type="empty" profile="ssOverview" id="overviewElement" onDraw="drawOverview" />
+                    <GuiElement type="empty" profile="ssCalendar" id="overviewElement" onDraw="drawOverview" />
                 </GuiElement>
 
                 <!-- Economy -->
@@ -188,12 +188,12 @@
 
             <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
                 <GuiElement type="button" profile="buttonBack" size="333px 40px" text="$l10n_button_back" onClick="onClickBack" focusId="100" focusChangeTop="41_1" focusChangeBottom="102" focusChangeRight="102" focusInit="onOpen"/>
-                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickSaveSettings" focusId="102" focusChangeTop="100" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
+                <GuiElement type="button" profile="buttonSave" size="333px 40px" text="$l10n_button_saveGame" onClick="onClickActivate" focusId="102" focusChangeTop="100" focusChangeBottom="1" focusChangeLeft="101" id="saveButton" onCreate="onCreateSaveButton" />
             </GuiElement>
 
             <GuiElement type="flowLayout" profile="buttonBoxConsole" id="buttonsConsole" >
                 <GuiElement type="button" profile="buttonCircle"    size="333px 40px" text="$l10n_button_back" id="backButtonConsole"/>
-                <GuiElement type="button" profile="buttonRectangle" size="334px 40px" text="$l10n_button_saveGame" id="saveButtonConsole"/>
+                <GuiElement type="button" profile="buttonRectangle" size="334px 40px" text="$l10n_button_saveGame" id="saveButtonConsole" onCreate="onCreateSaveButton" />
             </GuiElement>
         </GuiElement>
     </GuiElement>

@@ -146,7 +146,11 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     self.currentPageMappingIndex = pageMappingIndex
     self:updatePageStates()
 
-    self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
+    if GS_IS_CONSOLE_VERSION then
+        self.saveButtonConsole:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
+    else
+        self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
+    end
 
     if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
         self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpCrops"), FocusManager:getElementById("sliderDownCrops"))
@@ -763,9 +767,10 @@ function ssSeasonsMenu:updateApplySettingsButton()
     end
 
     self.saveButton:setDisabled(not hasChanges)
+    self.saveButtonConsole:setVisible(not hasChanges)
 end
 
-function ssSeasonsMenu:onClickSaveSettings()
+function ssSeasonsMenu:onClickActivate()
     if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason then
         local text = ssLang.getText("dialog_applySettings")
         g_gui:showYesNoDialog({text = text, callback = self.onYesNoSaveSettings, target = self})

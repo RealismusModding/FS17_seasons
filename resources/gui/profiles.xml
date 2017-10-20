@@ -34,10 +34,9 @@
 
     <Profile name="consoles_ssCropsSliderVertical" parent="ssCropsSliderVertical">
         <Value name="size" value="16px 530px" />
-        <value name="position" value="0px 0px" />
     </Profile>
 
-    <Profile name="ssOverview" parent="baseReference">
+    <Profile name="ssCalendar" parent="baseReference">
         <Value name="size" value="984px 560px" />
         <Value name="position" value="0px 0px" />
     </Profile>
@@ -49,36 +48,31 @@
         <Value name="alignmentY" value="top" />
     </Profile>
 
-    <Profile name="ssEconomySlider" parent="serverDetailSlider">
+    <Profile name="ssEconomySlider" parent="sliderVertical">
         <Value name="size" value="16px 458px"/>
-        <Value name="alignmentX" value="left" />
-        <Value name="alignmentY" value="top" />
-        <Value name="position" value="350px 15px" />
-        <Value name="screenAlign" value="middleLeft" />
-        <Value name="positionOrigin" value="middleLeft" />
+        <Value name="position" value="-634px 15px" />
     </Profile>
 
     <Profile name="consoles_ssEconomySlider" parent="ssEconomySlider">
         <Value name="size" value="16px 530px" />
-        <value name="position" value="350px 0px" />
     </Profile>
 
-    <Profile name="ssEconomyList" parent="list">
-        <Value name="screenAlign" value="middleRight" />
-        <Value name="positionOrigin" value="middleRight" />
-        <Value name="isHorizontalList" value="false" />
+    <Profile name="ssEconomyList" parent="helpLineList">
+        <!-- <Value name="screenAlign" value="middleRight" /> -->
+        <!-- <Value name="positionOrigin" value="middleRight" /> -->
+        <!-- <Value name="isHorizontalList" value="false" /> -->
         <Value name="visibleItems" value="14" />
         <Value name="position" value="-16px 0"/>
-        <Value name="listItemHeight" value="37px" />
-        <Value name="size" value="350px 530px" />
+        <!-- <Value name="listItemHeight" value="37px" /> -->
+        <!-- <Value name="size" value="350px 530px" /> -->
     </Profile>
 
-    <Profile name="ssEconomyListItem" parent="listItem">
-        <Value name="imageColor" value="$preset_colorDarkGrey3"/>
+    <Profile name="ssEconomyListItem" parent="helpLineListItem">
+        <!-- <Value name="imageColor" value="$preset_colorDarkGrey3"/>
         <Value name="imageFocusedColor" value="$preset_colorGreen_50"/>
         <Value name="imageSelectedColor" value="$preset_colorGreen"/>
         <Value name="size" value="346px 35px" />
-        <Value name="position" value="2px 0px" />
+        <Value name="position" value="2px 0px" /> -->
     </Profile>
 
     <Profile name="ssEconomyListItemText" parent="textDefault">
