@@ -184,7 +184,7 @@
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
         <text name="ss_helpText_08_01" text="In inverno l'erba viene ripristinata nella sua fase falciata per simulare che l'inverno uccide l'erba con il freddo." />
         <text name="ss_helpText_08_02" text="Le balle di erba gradualmente marciranno e scompariranno dopo due giorni, in qualsiasi posto siano collocate. Per evitare la decomposizione le balle devono essere usate o fasciate. Una volta fasciate diventeranno silato dopo un terzo della stagione." />
-        <text name="ss_helpText_08_03" text="Le andane di fieno, erba e paglia cominceranno a ridursi di dimensioni e eventualmente scompariranno dopo diversi giorni. Le andane d'erba vengono ridotte alla mezzanotte di ogni giorno. Il fieno e la paglia vengono ridotti dopo ogni fase di crescita e dopo essere stati esposti alla pioggia." />
+        <text name="ss_helpText_08_03" text="Andane e mucchi di fieno, erba e paglia cominceranno a ridursi di dimensioni ed eventualmente scompariranno dopo diversi giorni. Andane e mucchi d'erba vengono ridotte alla mezzanotte di ogni giorno. Il fieno e la paglia vengono ridotti dopo ogni fase di crescita o dopo essere stati esposti alla pioggia." />
         <text name="ss_helpText_08_04" text="La paglia e il fieno devono essere compresse in balle prima di poter essere vendute - la paglia e il fieno non imballati non possono essere venduti, solo date gratuitamente. Erba, in balle o non, non può essere venduta." />
 
         <text name="ss_helpTitle_09" text="Colture - Piante" />
