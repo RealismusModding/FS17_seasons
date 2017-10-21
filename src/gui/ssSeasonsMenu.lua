@@ -16,20 +16,14 @@ source(g_currentModDirectory .. "src/events/ssSettingsEvent.lua")
 ssSeasonsMenu.BLOCK_TYPE_PLANTABLE = 1
 ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE = 2
 
--- Colorblind = false
 ssSeasonsMenu.BLOCK_COLORS = {}
 ssSeasonsMenu.BLOCK_COLORS[false] = {
-    -- [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.5271, 0.0307, 1},
-    -- [self.BLOCK_TYPE_HARVESTABLE] = {0.9301, 0.6404, 0.0439, 1}
     [ssSeasonsMenu.BLOCK_TYPE_PLANTABLE] = {0.0143, 0.2582, 0.0126, 1},
-    -- 0.1454, 0.5583, 0.0341
     [ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE] = {0.8308, 0.5841, 0.0529, 1}
 }
 
--- Colorblind = true
 ssSeasonsMenu.BLOCK_COLORS[true] = {
     [ssSeasonsMenu.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.1779, 0.0027, 1},
-    -- 1.0000, 0.9046, 0.0130
     [ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE] = {0.3372, 0.4397, 0.9911, 1}
 }
 
