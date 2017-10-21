@@ -211,9 +211,6 @@ function ssAnimals:updateTroughs()
     end
 
     if season == g_seasons.environment.SEASON_WINTER then
-        self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, false)
-        self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, false)
-
         if self.oldSheepDirt == FillUtil.FILLTYPE_GRASS_WINDROW then
             self:setDirtType("sheep", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
         end
@@ -222,9 +219,6 @@ function ssAnimals:updateTroughs()
             self:setDirtType("cow", FillUtil.FILLTYPE_DRYGRASS_WINDROW)
         end
     else
-        self:toggleFillType("sheep", FillUtil.FILLTYPE_GRASS_WINDROW, true)
-        self:toggleFillType("cow", FillUtil.FILLTYPE_GRASS_WINDROW, true)
-
         self:setDirtType("sheep", self.oldSheepDirt)
         self:setDirtType("cow", self.oldCowDirt)
     end
@@ -245,20 +239,6 @@ function ssAnimals:setDirtType(animal, fillType)
 
     if husbandry ~= nil then
         husbandry.dirtificationFillType = fillType
-    end
-end
-
--- animal: string, filltype: int, enabled: bool
--- Fill must be installed
-function ssAnimals:toggleFillType(animal, fillType, enabled)
-    if g_currentMission.husbandries[animal] == nil then return end
-
-    local trough = g_currentMission.husbandries[animal].tipTriggersFillLevels[fillType]
-
-    for _, p in pairs(trough) do -- Jos: not sure what p actually is.
-        if p.tipTrigger.acceptedFillTypes[fillType] ~= nil then
-            p.tipTrigger.acceptedFillTypes[fillType] = enabled
-        end
     end
 end
 
@@ -331,7 +311,7 @@ end
 function ssAnimals:husbandryGetDataAttributes(superFunc)
     local tmpProductivity = self.productivity
     if self.totalNumAnimals ~= 0 then
-        self.productivity = self.averageProduction
+        self.productivity = mathRound(self.averageProduction,3)
     end
 
     local ret = { superFunc(self) }
