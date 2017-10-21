@@ -477,8 +477,6 @@ function ssSeasonsMenu:updateEconomy()
     if table.getn(self.economy.fills) == 0 then
         self:loadEconomyItems()
     end
-
-    self:onEconomyListSelectionChanged(1)
 end
 
 function ssSeasonsMenu:createEconomyGraph(element)
