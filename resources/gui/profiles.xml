@@ -51,14 +51,11 @@
 
     <Profile name="ssCalendarHeader" parent="baseReference">
         <Value name="size" value="540px 50px" />
-        <Value name="position" value="-607px 424px" />
+        <Value name="position" value="-607px 221px" />
 
-        <Value name="debugEnabled" value="true" />
+        <Value name="screenAlign" value="middleLeft"/>
+        <Value name="positionOrigin" value="middleLeft"/>
     </Profile>
-
-<Profile name="consoles_ssCalendarHeader" parent="ssCalendarHeader">
-    <Value name="position" value="-607px 460px" />
-</Profile>
 
     <Profile name="ssCalendarList" parent="list">
         <Value name="size" value="850px 407px" />
@@ -68,15 +65,11 @@
         <Value name="listItemWidth" value="850px" />
         <Value name="isHorizontalList" value="false" />
         <Value name="visibleItems" value="11" />
-
-        <Value name="imageColor" value="$preset_colorBlue" />
-
-        <Value name="debugEnabled" value="true" />
     </Profile>
 
-<Profile name="consoles_ssCalendarList" parent="ssCalendarList">
-    <Value name="position" value="-500px 53px" />
-</Profile>
+    <Profile name="consoles_ssCalendarList" parent="ssCalendarList">
+        <Value name="position" value="-500px 53px" />
+    </Profile>
 
     <Profile name="ssCalendarListItem" parent="listItem">
         <Value name="size" value="850px 32px" />
@@ -143,25 +136,18 @@
 
     <Profile name="ssCalendarFooter" parent="baseReference">
         <Value name="size" value="850px 37px" />
-        <Value name="position" value="-917px -25px" />
+        <Value name="position" value="-917px -235px" />
 
-        <Value name="debugEnabled" value="true" />
+        <Value name="screenAlign" value="middleLeft"/>
+        <Value name="positionOrigin" value="middleLeft"/>
     </Profile>
-
-<Profile name="consoles_ssCalendarFooter" parent="ssCalendarFooter">
-    <Value name="position" value="-917px 11px" />
-</Profile>
 
     <Profile name="ssCalendarToday" parent="baseReference">
-        <Value name="screenAlign" value="topRight"/>
-        <Value name="positionOrigin" value="topRight"/>
+        <Value name="screenAlign" value="middleRight"/>
+        <Value name="positionOrigin" value="middleRight"/>
         <Value name="size" value="540px 402px" />
-        <Value name="position" value="-83px -39px" />
+        <Value name="position" value="-83px -11px" />
     </Profile>
-
-<Profile name="consoles_ssCalendarToday" parent="ssCalendarToday">
-    <Value name="position" value="-83px -75px" />
-</Profile>
 
     <!-- Economy -->
 
