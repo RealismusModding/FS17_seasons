@@ -80,7 +80,7 @@ function ssSeasonsMenu:onOpen(element)
     self:updateServerSettingsVisibility()
 
     -- overview
-    self:updateOverview()
+    self:updateCalendar()
 
     -- economy
     self:updateEconomy()
@@ -254,9 +254,11 @@ function ssSeasonsMenu:onCreatePageOverview(element)
 
     local width, height = getNormalizedScreenValues(1, 1)
     self.pixel = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
+
+    self.lastSoilTemperature = math.floor(ssWeatherManager.soilTemp, 0)
 end
 
-function ssSeasonsMenu:updateOverview()
+function ssSeasonsMenu:updateCalendar()
     local canPlant = g_seasons.growthGUI:getCanPlantData()
     local canHarvest = g_seasons.growthGUI:getCanHarvestData()
 
@@ -288,6 +290,7 @@ function ssSeasonsMenu:updateOverview()
     end
 
     self.calendarList:deleteListItems()
+    self.calendarTemps = {}
 
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
         if fruitDesc.allowsSeeding then -- must be in list
@@ -341,6 +344,8 @@ end
 function ssSeasonsMenu:onCreateCalendarItemGermination(element)
     if self.currentItem ~= nil then
         element:setText(ssLang.formatTemperature(self.currentItem.temperature))
+
+        table.insert(self.calendarTemps, { element, self.currentItem.temperature })
 
         if math.floor(ssWeatherManager.soilTemp, 0) < self.currentItem.temperature then
             element:applyProfile(element.profile .. "Frigid")
@@ -436,6 +441,21 @@ function ssSeasonsMenu:onDrawCalendarFooter(element)
         textSize,
         ssLang.getText("ui_harvestSeason")
     )
+end
+
+function ssSeasonsMenu:onDrawPageCalendar()
+    local curTemp = math.floor(ssWeatherManager.soilTemp, 0)
+    if curTemp ~= self.lastSoilTemperature then
+        self.lastSoilTemperature = curTemp
+
+        for i, data in pairs(self.calendarTemps) do
+            if curTemp < data[2] then
+                data[1]:applyProfile("ssCalendarItemGerminationFrigid")
+            else
+                data[1]:applyProfile("ssCalendarItemGermination")
+            end
+        end
+    end
 end
 
 ------------------------------------------
@@ -647,7 +667,12 @@ function ssSeasonsMenu:onYesNoSaveSettings(yes)
             g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
 
             self:updateApplySettingsButton()
-            self.economy.graph:settingsChanged()
+
+            -- Change header numbers
+            if self.economy.graph then
+                self.economy.graph:settingsChanged()
+                self:onEconomyListSelectionChanged(self.economyList.selectedRow)
+            end
             self.calendarHeader:settingsChanged()
 
             -- Sync new data to all the clients

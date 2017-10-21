@@ -14,7 +14,7 @@
 
             <GuiElement type="paging" onPageChange="onPageChange" onPageUpdate="onPageUpdate" onCreate="onCreatePaging" id="pagingElement">
                 <!-- Crop data -->
-                <GuiElement type="empty" profile="page" name="pageCalendar" onCreate="onCreatePageOverview">
+                <GuiElement type="empty" profile="page" name="pageCalendar" onCreate="onCreatePageOverview" onDraw="onDrawPageCalendar">
                     <GuiElement type="slider" profile="ssCropsSlider">
                         <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUpCrops" focusChangeTop="1" focusChangeBottom="sliderDownCrops"/>
                         <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDownCrops" focusChangeTop="sliderUpCrops" focusChangeBottom="100" />

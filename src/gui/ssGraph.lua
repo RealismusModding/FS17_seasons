@@ -51,7 +51,7 @@ function ssGraph:delete()
 end
 
 function ssGraph:settingsChanged()
-    self.transitionHeaders = ssUtil.getTransitionHeaders()
+    self.footer:settingsChanged()
 end
 
 function ssGraph:draw()
