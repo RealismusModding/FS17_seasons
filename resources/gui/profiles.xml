@@ -52,11 +52,13 @@
     <Profile name="ssCalendarHeader" parent="baseReference">
         <Value name="size" value="540px 50px" />
         <Value name="position" value="-607px 424px" />
+
+        <Value name="debugEnabled" value="true" />
     </Profile>
 
     <Profile name="ssCalendarList" parent="list">
-        <Value name="size" value="850px 402px" />
-        <Value name="position" value="-500px 22px" />
+        <Value name="size" value="850px 407px" />
+        <Value name="position" value="-500px 17px" />
 
         <Value name="listItemHeight" value="37px" />
         <Value name="listItemWidth" value="850px" />
@@ -64,6 +66,8 @@
         <Value name="visibleItems" value="11" />
 
         <Value name="imageColor" value="$preset_colorBlue" />
+
+        <Value name="debugEnabled" value="true" />
     </Profile>
 
     <Profile name="ssCalendarListItem" parent="listItem">
@@ -132,6 +136,8 @@
     <Profile name="ssCalendarFooter" parent="baseReference">
         <Value name="size" value="850px 37px" />
         <Value name="position" value="-917px -25px" />
+
+        <Value name="debugEnabled" value="true" />
     </Profile>
 
     <Profile name="ssCalendarToday" parent="baseReference">
@@ -139,6 +145,8 @@
         <Value name="positionOrigin" value="topRight"/>
         <Value name="size" value="540px 402px" />
         <Value name="position" value="-83px -39px" />
+
+
     </Profile>
 
     <!-- Economy -->
