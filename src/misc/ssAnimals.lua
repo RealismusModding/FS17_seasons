@@ -17,8 +17,8 @@ ssAnimals.PRODUCTIVITY_START = 0.8
 
 function ssAnimals:load(savegame, key)
     -- Load or set default values
-    self.averageProduction = {}
-    self.productivities = {}
+    local averageProduction = {}
+    local productivities = {}
 
     if savegame ~= nil then
         local i = 0
@@ -27,13 +27,19 @@ function ssAnimals:load(savegame, key)
             if not hasXMLProperty(savegame, animalKey) then break end
 
             local typ = getXMLString(savegame, animalKey .. "#animalName")
-            self.averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
+            averageProduction[typ] = getXMLFloat(savegame, animalKey .. "#averageProduction")
 
             -- Load early for calculations
-            self.productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
+            productivities[typ] = getXMLFloat(savegame, animalKey .. "#currentProduction")
 
             i = i + 1
         end
+    end
+
+    -- defaulting to 80% average productivity when loading using an older version of Seasons
+    for  _, husbandry in pairs(g_currentMission.husbandries) do
+        husbandry.averageProduction = Utils.getNoNil(averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
+        husbandry.productivity = Utils.getNoNil(productivities[husbandry.typeName], husbandry.productivity)
     end
 end
 
@@ -79,16 +85,6 @@ function ssAnimals:loadMap(name)
         g_currentMission.environment:addDayChangeListener(self)
     end
     g_currentMission.environment:addHourChangeListener(self)
-end
-
-function ssAnimals:loadMapFinished()
-    if g_currentMission:getIsServer() then
-        -- defaulting to 80% average productivity when loading using an older version of Seasons
-        for  _, husbandry in pairs(g_currentMission.husbandries) do
-            husbandry.averageProduction = Utils.getNoNil(self.averageProduction[husbandry.typeName], ssAnimals.PRODUCTIVITY_START)
-            husbandry.productivity = Utils.getNoNil(self.productivities[husbandry.typeName], husbandry.productivity)
-        end
-    end
 end
 
 function ssAnimals:loadGameFinished()
@@ -159,8 +155,8 @@ function ssAnimals:dayChanged()
             local typ = husbandry.typeName
             local factor = Utils.getNoNil(factors[typ], generic)
 
-            -- Skip chicken and other odd animald that don't need food
-            if husbandry.animalDesc.canBeBought ~= false then
+            -- Skip chicken and other odd animals that don't need food
+            if husbandry.animalDesc ~= nil and husbandry.animalDesc.canBeBought ~= false then
                 numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
             end
         end
