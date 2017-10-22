@@ -56,11 +56,8 @@ end
 function ssEconomy:loadMap(name)
     -- Load economy price changes data
     self.repricing = {}
-    self:loadFromXML(g_seasons:getDataPath("economy"))
 
-    for _, path in ipairs(g_seasons:getModPaths("economy")) do
-        self:loadFromXML(path)
-    end
+    self:loadAllFromXML()
 
     -- Re set the leasing factors of all store items
     for _, item in pairs(StoreItemsUtil.storeItems) do
@@ -75,38 +72,16 @@ function ssEconomy:loadMap(name)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 end
 
-function ssEconomy:loadFactorsFromXML(file, key)
-    local factors = {}
+function ssEconomy:loadAllFromXML()
+    self.shifts = {}
 
-    -- shortcut for setting all values to 1 or 0
-    local allVal = getXMLFloat(file, key .. "#all")
-    if allVal ~= nil then
-        for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
-            factors[i] = allVal
-        end
+    self:loadFromXML(g_seasons:getDataPath("economy"))
 
-        return factors
+    for _, path in ipairs(g_seasons:getModPaths("economy")) do
+        self:loadFromXML(path)
     end
 
-    -- Load for each
-    local i = 0
-    while true do
-        local fKey = string.format("%s.factor(%d)", key, i)
-        if not hasXMLProperty(file, fKey) then break end
-
-        local transition = getXMLInt(file, fKey .. "#transition")
-        local value = getXMLFloat(file, fKey)
-
-        factors[transition] = value
-
-        i = i + 1
-    end
-
-    if table.getn(factors) ~= g_seasons.environment.TRANSITIONS_IN_YEAR then
-        logInfo("ssEconomy:", "Problem in economy data: not all transitions are configured in " .. key)
-    end
-
-    return factors
+    -- something something
 end
 
 function ssEconomy:loadFromXML(path)
@@ -129,7 +104,7 @@ function ssEconomy:loadFromXML(path)
         end
 
         local id = FillUtil.getFillTypesByNames(name)[1]
-        local factors = self:loadFactorsFromXML(file, key .. ".factors")
+        local factors = self:loadFactorsFromXML(file, key .. ".factors", id)
 
         self.repricing.fills[id] = factors
 
@@ -153,7 +128,7 @@ function ssEconomy:loadFromXML(path)
         end
 
         local id = FillUtil.getFillTypesByNames(type)[1]
-        local factors = self:loadFactorsFromXML(file, key .. ".factors")
+        local factors = self:loadFactorsFromXML(file, key .. ".factors", id)
 
         self.repricing.bales[id] = factors
 
@@ -176,7 +151,7 @@ function ssEconomy:loadFromXML(path)
             break
         end
 
-        local factors = self:loadFactorsFromXML(file, key .. ".factors")
+        local factors = self:loadFactorsFromXML(file, key .. ".factors", name)
 
         self.repricing.animals[name] = factors
 
@@ -187,6 +162,56 @@ function ssEconomy:loadFromXML(path)
     self.fieldPriceFactor = ssXMLUtil.getFloat(file, "economy.fieldPriceFactor", 1.0)
 
     delete(file)
+end
+
+
+function ssEconomy:loadFactorsFromXML(file, key, name)
+    local factors = {}
+    local yearLength = g_seasons.environment.TRANSITIONS_IN_YEAR
+
+    -- shortcut for setting all values to 1 or 0
+    local allVal = getXMLFloat(file, key .. "#all")
+    if allVal ~= nil then
+        for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
+            factors[i] = allVal
+        end
+
+        return factors
+    end
+
+    local shift = Utils.getNoNil(getXMLInt(file, key .. "#shift"), 0)
+
+    -- Load for each
+    local i = 0
+    while true do
+        local fKey = string.format("%s.factor(%d)", key, i)
+        if not hasXMLProperty(file, fKey) then break end
+
+        local transition = getXMLInt(file, fKey .. "#transition")
+        local value = getXMLFloat(file, fKey)
+
+        factors[transition] = value
+
+        i = i + 1
+    end
+
+    if table.getn(factors) ~= yearLength then
+        logInfo("ssEconomy:", "Problem in economy data: not all transitions are configured in " .. key)
+    end
+
+    -- Rotate
+    if shift ~= 0 then
+        local shiftedFactors = {}
+        for i = 1, yearLength do
+            local j = ((i + shift - 1) % yearLength) + 1
+
+            shiftedFactors[j] = factors[i]
+        end
+
+        factors = shiftedFactors
+    end
+
+    return factors
 end
 
 function ssEconomy:loadGameFinished()
