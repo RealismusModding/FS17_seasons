@@ -62,7 +62,7 @@
 
     <fills>
         <fill name="wheat">
-            <factors>
+            <factors shift="1">
                 <factor transition="11">1.08</factor>
                 <factor transition="12">1.00</factor>
                 <factor transition="1">1.07</factor>
@@ -79,7 +79,7 @@
         </fill>
 
         <fill name="barley">
-            <factors>
+            <factors shift="1">
                 <factor transition="11">1.08</factor>
                 <factor transition="12">1.00</factor>
                 <factor transition="1">1.07</factor>
@@ -96,7 +96,7 @@
         </fill>
 
         <fill name="rape"> <!-- canola -->
-            <factors>
+            <factors shift="1">
                 <factor transition="11">1.08</factor>
                 <factor transition="12">1.00</factor>
                 <factor transition="1">1.07</factor>
