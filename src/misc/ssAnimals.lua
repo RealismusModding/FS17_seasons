@@ -151,9 +151,11 @@ function ssAnimals:dayChanged()
             local typ = husbandry.typeName
             local factor = Utils.getNoNil(factors[typ], generic)
 
-            -- Skip chicken and other odd animald that don't need food
-            if husbandry.animalDesc.canBeBought ~= false then
-                numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+            -- Skip chicken and other odd animals that don't need food
+            if husbandry.animalDesc ~= nil then
+                if husbandry.animalDesc.canBeBought ~= false then
+                    numKilled = numKilled + self:killAnimals(typ, factor * self.seasonLengthfactor * 0.5 * g_currentMission.missionInfo.difficulty)
+                end
             end
         end
 
