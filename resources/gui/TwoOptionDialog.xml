@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement type="empty" profile="newLayer" />
+    <GuiElement type="bitmap" profile="yesNoDialogBg" id="dialogElement">
+        <GuiElement type="bitmap" profile="yesNoDialogMainBg" id="dialogBgElement">
+            <GuiElement type="bitmap" profile="dialogCircle" id="dialogCircle">
+                <GuiElement type="animation" profile="dialogLoading"  id="iconLoadingElement" visible="false" />
+                <GuiElement type="bitmap"    profile="dialogQuestion" id="iconQuestionElement"/>
+                <GuiElement type="bitmap"    profile="dialogWarning"  id="iconWarningElement"/>
+                <GuiElement type="bitmap"    profile="dialogKey"      id="iconKeyElement"/>
+                <GuiElement type="bitmap"    profile="dialogInfo"     id="iconInfoElement"/>
+            </GuiElement>
+            <GuiElement type="text" profile="dialogTitle"         text="" id="dialogTitleElement" />
+            <GuiElement type="text" profile="dialogTextWithTitle" text=""  id="dialogTextElement" />
+
+            <GuiElement type="flowLayout" profile="buttonBox" id="buttonsPC" >
+                <GuiElement type="button" profile="buttonOK"     size="200px 40px" text="$l10n_button_yes" onClick="onClickOk"  id="firstButton" focusId="1" focusChangeRight="2" focusInit="onOpen" />
+                <GuiElement type="button" profile="buttonOK"     size="200px 40px" text="$l10n_button_no"  onClick="onClickCancel" id="secondButton"  focusId="2" focusChangeLeft="1" focusChangeRight="3" />
+                <GuiElement type="button" profile="buttonDelete" size="190px 40px" text="$l10n_button_back"  onClick="onClickBack" id="backButton"  focusId="3" focusChangeLeft="2" />
+            </GuiElement>
+
+            <GuiElement type="flowLayout" profile="buttonBoxConsole" size="590px 40px" id="buttonsConsole" visible="false">
+                <GuiElement type="button" profile="buttonCross"  size="200px 40px" text="$l10n_button_yes" id="firstButtonConsole" />
+                <GuiElement type="button" profile="buttonTriangle" size="200px 40px" text="$l10n_button_no"  id="secondButtonConsole"/>
+                <GuiElement type="button" profile="buttonCircle" size="190px 40px" text="$l10n_button_back"  id="backButtonConsole"/>
+            </GuiElement>
+        </GuiElement>
+    </GuiElement>
+</GUI>
