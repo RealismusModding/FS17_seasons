@@ -9,11 +9,9 @@
 
 ssSkipNight = {}
 
-if GS_IS_CONSOLE_VERSION then
-    ssSkipNight.SPEED = 1200
-else
-    ssSkipNight.SPEED = 6000
-end
+ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 1200 or 6000
+ssSkipNight.MODE_MORNING = 1
+ssSkipNight.MODE_DAWN = 2
 
 function ssSkipNight:preLoad()
     g_seasons.skipNight = self
@@ -21,6 +19,7 @@ end
 
 function ssSkipNight:loadMap()
     self.skippingNight = false
+    self.mode = ssSkipNight.MODE_MORNING
 end
 
 function ssSkipNight:update(dt)
@@ -28,32 +27,57 @@ function ssSkipNight:update(dt)
     if g_currentMission.missionDynamicInfo.isMultiplayer then return end
 
     local time = g_currentMission.environment.dayTime / 60 / 1000 -- minutes
-    local isEvening = time >= math.max(g_currentMission.environment.nightStart, 20 * 60)
-    local isMorning = time >= math.min(g_currentMission.environment.nightEnd, 6 * 60) and time < (12 * 60)
+
+    local isEvening = time >= math.min(g_currentMission.environment.nightStart, 20 * 60)
+    local isMorning = false
+
+    if time < (12 * 60) then
+        if self.mode == ssSkipNight.MODE_DAWN then
+            isMorning = time >= g_currentMission.environment.nightEnd
+        else
+            isMorning = time >= (6 * 60)
+        end
+    end
 
     if isEvening and g_currentMission.controlledVehicle == nil then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SKIP_NIGHT"), InputBinding.SEASONS_SKIP_NIGHT)
 
         -- When a player wants to skip the night, fast forward, securily
         if InputBinding.hasEvent(InputBinding.SEASONS_SKIP_NIGHT) then
-            self.skippingNight = true
-            self.minuteCount = g_currentMission.environment.currentMinute
+            function result(confirm, option)
+                if not confirm then return end
 
-            g_currentMission.environment:addMinuteChangeListener(self)
-            g_currentMission.environment:addHourChangeListener(self)
+                self.mode = option == 1 and ssSkipNight.MODE_MORNING or ssSkipNight.MODE_DAWN
 
-            self.oldTimeScale = g_currentMission.missionInfo.timeScale
-            g_currentMission:setTimeScale(ssSkipNight.SPEED)
+                self.skippingNight = true
+                self.minuteCount = g_currentMission.environment.currentMinute
 
-            -- Close all dialogs and show a sleeping window
-            g_gui:closeAllDialogs()
+                g_currentMission.environment:addMinuteChangeListener(self)
+                g_currentMission.environment:addHourChangeListener(self)
 
-            self.dialog = g_gui:showDialog("MessageDialog")
-            if self.dialog ~= nil then
-                self.dialog.target:setDialogType(DialogElement.TYPE_LOADING)
-                self.dialog.target:setIsCloseAllowed(false)
-                self.dialog.target:setText(ssLang.getText("dialog_sleeping"))
+                self.oldTimeScale = g_currentMission.missionInfo.timeScale
+                g_currentMission:setTimeScale(ssSkipNight.SPEED)
+
+                -- Close all dialogs and show a sleeping window
+                g_gui:closeAllDialogs()
+
+                self.dialog = g_gui:showDialog("MessageDialog")
+                if self.dialog ~= nil then
+                    self.dialog.target:setDialogType(DialogElement.TYPE_LOADING)
+                    self.dialog.target:setIsCloseAllowed(false)
+                    self.dialog.target:setText(ssLang.getText("dialog_sleeping"))
+                end
             end
+
+            local nightEnd = g_currentMission.environment.nightEnd
+            local dawnTime = string.format("%0.2d:%0.2d", math.floor(nightEnd / 60), nightEnd % 60)
+            local dialog = g_gui:showDialog("TwoOptionDialog")
+
+            dialog.target:setText(string.format(ssLang.getText("dialog_skipNight_text"), dawnTime))
+            dialog.target:setDialogType(DialogElement.TYPE_QUESTION)
+            dialog.target:setCallback(result, nil)
+            dialog.target:setButtonTexts(ssLang.getText("dialog_skipNight_morning"),
+                                         string.format(ssLang.getText("dialog_skipNight_dawn"), dawnTime))
         end
     end
 
