@@ -138,6 +138,13 @@
         <text name="dialog_timeTravel" text="Hra se synchronizuje po rychlém přehrávání" />
         <text name="dialog_sleeping" text="Je čas jít spát a odpočinout si po práci ... Zzz ..." />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Sníh" />
 
         <text name="function_measureTool" text="Pomocí nástroje pro měření můžete získat informace o půdě, stromech, balících a jiných objektech." />

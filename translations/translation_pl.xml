@@ -137,7 +137,7 @@
         <text name="dialog_resetGrowth_yes" text="Zresetuj" />
         <text name="dialog_timeTravel" text="Gra jest synchronizowana po przewinięciu czasu" />
         <text name="dialog_sleeping" text="Odpoczynek przed kolejnym dniem pracy na farmie... Zzz..." />
-        
+
         <text name="dialog_skipNight_text" text="Chcesz pominąć noc do poranka (6:00) czy do świtu (%s)?" />
         <text name="dialog_skipNight_morning" text="Poranek (6:00)" />
         <text name="dialog_skipNight_dawn" text="Świt (%s)" />

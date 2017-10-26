@@ -138,7 +138,15 @@
         <text name="dialog_timeTravel" text="O jogo está sincronizando depois de passar o tempo" />
         <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Neve" />
+
         <text name="function_measureTool" text="Usando uma ferramenta de medição, você consegue informações sobre o solo, árvores, fardos de feno, e outros objetos." />
 
         <text name="ss_helpCategory" text="Seasons" />
