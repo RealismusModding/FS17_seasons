@@ -124,6 +124,7 @@ local files = {
     "gui/ssSeasonsMenu",
     "gui/ssCatchingUp",
     "gui/ssMeasureToolDialog",
+    "gui/ssTwoOptionDialog",
 
     "handtools/ssMeasureTool",
 }
