@@ -7,7 +7,7 @@
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Repair vehicle" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
-        <text name="input_SEASONS_SKIP_NIGHT" text="Sleep" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -139,7 +139,7 @@
         <text name="dialog_timeTravel" text="The game is synchronizing after the fast-forward" />
         <text name="dialog_sleeping" text="Resting for another day at the farm... Zzz..." />
 
-        <text name="dialog_skipNight_text" text="Do you want to sleep until morning (6:00) or dawn (%s)?" />
+        <text name="dialog_skipNight_text" text="Do you want to skip night until morning (6:00) or dawn (%s)?" />
         <text name="dialog_skipNight_morning" text="Morning (6:00)" />
         <text name="dialog_skipNight_dawn" text="Dawn (%s)" />
 
@@ -240,7 +240,7 @@
         <text name="ss_helpText_17_04" text="When the help menu is activated (F1) the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." />
 
         <text name="ss_helpTitle_18" text="Miscellaneous" />
-        <text name="ss_helpText_18_01" text="If you do not wish to work during the night, you have the option to sleep to the morning. You can only do this outside a vehicle." />
+        <text name="ss_helpText_18_01" text="If you do not wish to work during the night, you have the option to skip to the morning. You can only do this outside a vehicle." />
         <text name="ss_helpText_18_02" text="If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." />
         <text name="ss_helpText_18_03" text="While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." />
         <text name="ss_helpText_18_04" text="All vehicles need to be started manually." />
