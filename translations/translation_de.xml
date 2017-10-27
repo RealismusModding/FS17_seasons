@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />
         <text name="ss_helpText_17_02" text="Direkt unter der Uhr befinden sich die Anzeigen für die aktuelle Jahreszeit und den aktuellen Tag dieser Jahreszeit." />
         <text name="ss_helpText_17_03" text="Wenn die Wettervorhersage aktiviert ist, erscheint die Prognose direkt unter der Uhr auf der rechten Seite." />
-        <text name="ss_helpText_17_04" text="Wenn das Hilfefenster F1 aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
+        <text name="ss_helpText_17_04" text="Wenn das Hilfefenster aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
 
         <text name="ss_helpTitle_18" text="Verschiedenes" />
         <text name="ss_helpText_18_01" text="Wenn Du nachts nicht arbeiten möchtest, nutze die Funktion 'Nacht überspringen'. Einfach am Anfang der Nacht die standardmäßig einstellte Tastenkombination Alt links + N drücken und automatisch zum nächsten Morgen vorspulen. Du musst dabei aber außerhalb eines Fahrzeuges stehen." />

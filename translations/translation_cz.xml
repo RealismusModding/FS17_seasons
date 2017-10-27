@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="HUD vlevo od hodin v levém horním rohu zobrazuje informace týkající se sezón. Ukazuje nahoře aktuální teplotu vzduchu a dole teplotu země. Stav země (mokrá / zmrzlá půda) je také zobrazen vlevo od tohoto HUD." />
         <text name="ss_helpText_17_02" text="Přímo pod časem se zobrazuje sezónní období a den aktuální sezóny." />
         <text name="ss_helpText_17_03" text="Po aktivaci předpovědi se celá předpověď na dalších 7 herních dnů objeví pod hodinami v levém horním rohu." />
-        <text name="ss_helpText_17_04" text="Pokud je aktivována nabídka nápovědy (F1), a jste ve vozidle, jako poslední řádek nápovědy se zobrazí časovač údržby vozidla." />
+        <text name="ss_helpText_17_04" text="Pokud je aktivována nabídka nápovědy, a jste ve vozidle, jako poslední řádek nápovědy se zobrazí časovač údržby vozidla." />
 
         <text name="ss_helpTitle_18" text="Různé" />
         <text name="ss_helpText_18_01" text="Pokud nechcete pracovat v noci, máte možnost noc přeskočit na ráno. Po setmění můžete stisknout levý Alt + N a přeskočit na ráno." />

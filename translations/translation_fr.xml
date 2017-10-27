@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="Une interface utilisateur à gauche de l'horloge du jeu, dans le coin en haut à droite, affiche les informations relatives au mod Seasons. On peut y voir la température ambiante actuelle sur le dessus, et celle du sol en dessous. L'état du sol (culture humide, sol gelé) est aussi affiché sur la gauche de cette interface." />
         <text name="ss_helpText_17_02" text="Juste en dessous de l'horloge, la période actuelle ainsi que le jour de la saison sont affichés." />
         <text name="ss_helpText_17_03" text="Lorsqu'il est activé, le panneau d'affichage des prévisions météo apparaît sous l'horloge, dans le coin supérieur droit." />
-        <text name="ss_helpText_17_04" text="Quand le menu d'aide est activé ('F1'), le temps restant jusqu'à la prochaine maintenance est affiché près du bas de ce menu. Cela n'est visible que lorsque l'on est dans un véhicule." />
+        <text name="ss_helpText_17_04" text="Quand le menu d'aide est activé, le temps restant jusqu'à la prochaine maintenance est affiché près du bas de ce menu. Cela n'est visible que lorsque l'on est dans un véhicule." />
 
         <text name="ss_helpTitle_18" text="Divers" />
         <text name="ss_helpText_18_01" text="Si vous ne souhaitez pas travailler pendant la nuit, vous pouvez aller directement au matin. Une fois la nuit tombée, il faut sortir de votre véhicule et appuyer sur 'Alt + N'." />

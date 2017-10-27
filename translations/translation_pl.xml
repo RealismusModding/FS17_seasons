@@ -235,7 +235,7 @@
         <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (ikona wilgotnego zboża/ikona zamarzniętej gleby) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />
         <text name="ss_helpText_17_02" text="Bezpośrednio poniżej zegara znajduje się dzień i pora obecnego sezonu." />
         <text name="ss_helpText_17_03" text="Po aktywacji interfejsu prognozy pogody pojawi się on poniżej zegara w prawym górnym rogu." />
-        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne (F1), na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
+        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne, na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
 
         <text name="ss_helpTitle_18" text="Różne" />
         <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Można to zrobić tylko po wyjściu z pojazdu." />

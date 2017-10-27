@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />
         <text name="ss_helpText_17_02" text="Bem abaixo do relógio é mostrado a época de transição (início/meio/fim)e o dia da estação." />
         <text name="ss_helpText_17_03" text="Quando ativada, a previsão de tempo irá aparecer embaixo do relógio no canto superior direito." />
-        <text name="ss_helpText_17_04" text="Quando a caixa de ajuda está ativada (F1) o timer de manutenção é mostrado. Este é apenas mostrado quando estás dentro de algum veículo." />
+        <text name="ss_helpText_17_04" text="Quando a caixa de ajuda está ativada o timer de manutenção é mostrado. Este é apenas mostrado quando estás dentro de algum veículo." />
 
         <text name="ss_helpTitle_18" text="Diversos" />
         <text name="ss_helpText_18_01" text="Caso não queira trabalhar durante a noite, tens a opção de pular para a manhã. Caso a noite caia e estejas a pé, pressione Alt esquerdo  + N para pular para a próxima manhã." />

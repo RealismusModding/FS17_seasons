@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="Een venster links van je klok in de rechterbovenhoek toont informatie over de temperatuur. De huidige luchttemperatuur lees je af aan de bovenkant, de bodemtemperatuur onderaan. Als de bodem bevroren is of je gewassen te vochtig zijn, verschijnen deze iconen links van dit venster." />
         <text name="ss_helpText_17_02" text="Onmiddellijk onder de klok wordt de seizoensovergang en de dag van het huidige seizoen weergegeven." />
         <text name="ss_helpText_17_03" text="Indien je de weersvoorspellingen activeert, worden ze getoond onder de klok in de rechterbovenhoek." />
-        <text name="ss_helpText_17_04" text="De onderhoudstimer van je voertuigen wordt onderaan het hulpvenster (F1) weergegeven." />
+        <text name="ss_helpText_17_04" text="De onderhoudstimer van je voertuigen wordt onderaan het hulpvenster weergegeven." />
 
         <text name="ss_helpTitle_18" text="Diversen" />
         <text name="ss_helpText_18_01" text="Als je 's nachts niet wil werken, kan je de nacht overslaan en doorgaan naar de volgende morgen. Nadat de avond valt, kan je met de toetsencombinatie Links Alt + N doorgaan naar de volgende dag." />

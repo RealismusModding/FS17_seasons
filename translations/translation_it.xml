@@ -238,7 +238,7 @@
         <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons. Mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno ghiacciato) verrà visualizzato a sinistra di questo HUD." />
         <text name="ss_helpText_17_02" text="Direttamente sotto l'orologio è indicato il periodo stagionale e il giorno della stagione corrente." />
         <text name="ss_helpText_17_03" text="Quando è attiva, l'indicatore HUD apparirà sotto l'orologio nell'angolo in alto a destra." />
-        <text name="ss_helpText_17_04" text="Quando il menu di aiuto è attivato (F1), il timer di manutenzione viene visualizzato al fondo del menù. Questo viene visualizzato solo quando sei in un veicolo." />
+        <text name="ss_helpText_17_04" text="Quando il menu di aiuto è attivato, il timer di manutenzione viene visualizzato al fondo del menù. Questo viene visualizzato solo quando sei in un veicolo." />
 
         <text name="ss_helpTitle_18" text="Altre impostazioni" />
         <text name="ss_helpText_18_01" text="Se non vuoi lavorare durante la notte, hai la possibilità di passare direttamente alla mattina successiva. Dopo che è scesa la notte e sei a piedi puoi premere Alt sinistro + N per saltare alla mattina." />
