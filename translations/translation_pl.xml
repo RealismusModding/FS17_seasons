@@ -220,7 +220,6 @@
         <text name="ss_helpText_14_01" text="Produkcja zwierzęca została zmieniona na bardziej realistyczną. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej ścielenia słomą w zimie. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />
         <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko w określonych sezonach. Świnie będą rozmnażać się wiosną i jesienią, owce tylko wiosną, a krowy latem." />
         <text name="ss_helpText_14_03" text="Zwierzęta będą zdychać, gdy nie będą miały jedzenia lub wody. Funkcjonalność ta jest wyłączona na Łatwym poziomie trudności gry." />
-        <text name="ss_helpText_14_04" text="Zimą nie można karmić zwierząt trawą. Należy wówczas karmić je sianem." />
 
         <text name="ss_helpTitle_15" text="Zwierzęta - produkcja" />
         <text name="ss_helpText_15_01" text="Produkcja mleka i wełny zależy od sezonu." />

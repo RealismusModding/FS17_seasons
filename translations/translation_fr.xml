@@ -223,7 +223,6 @@
         <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 à 3 jours." />
         <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons c'est au printemps et à l'automne, les moutons seulement au printemps, tandis que pour les vaches c'est durant l'été." />
         <text name="ss_helpText_14_03" text="Les animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
-        <text name="ss_helpText_14_04" text="Il n'est pas possible de nourrir les animaux avec de l'herbe l'hiver, il faut utiliser du foin." />
 
         <text name="ss_helpTitle_15" text="Animaux - Production" />
         <text name="ss_helpText_15_01" text="La production de lait et de laine dépend de la saison." />

@@ -223,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se Season modem na realističtější parametry. Všechny druhy zvířat budou v létě konzumovat více vody než v zimě. V zimních měsících budou krávy a prasata vyžadovat více slámy. Maximální kapacita krmení byla snížena ze 6 dnů na 3 dny." />
         <text name="ss_helpText_14_02" text="Zvířata mají mláďata pouze v určitém čase roku. Prasata a ovce budou mít mladé na jaře, zatímco krávy se otelí v létě." />
         <text name="ss_helpText_14_03" text="Zvířata uhynou, pokud nemají v průběhu herního dne krmivo nebo vodu. Toto neplatí v případě nastavené obtížnosti Easy." />
-        <text name="ss_helpText_14_04" text="Trávou nemůžete krmit v zimě. Volně uložená tráva na začátku zimy zmizí. Místo toho byste měli používat seno." />
 
         <text name="ss_helpTitle_15" text="Zvířata - produkce" />
         <text name="ss_helpText_15_01" text="Výroba mléka a vlny závisí na roční době." />

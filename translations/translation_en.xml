@@ -221,7 +221,6 @@
         <text name="ss_helpText_14_01" text="Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." />
         <text name="ss_helpText_14_02" text="Animals only give offspring at a certain time of the year. Pigs will produce offspring in the spring and in the autumn, sheep only in the spring, while cows will produce offspring in the summer." />
         <text name="ss_helpText_14_03" text="Animals will die if they do not have food or water. This is disabled on Easy difficulty." />
-        <text name="ss_helpText_14_04" text="Grass cannot be fed in the winter. You should use hay instead." />
 
         <text name="ss_helpTitle_15" text="Animals - Production" />
         <text name="ss_helpText_15_01" text="Milk and wool production is dependent upon the season." />

@@ -223,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Produção animal foi ajustada de acordo com a estação para um padrão realístico. Todos os animais beberão mais água no verão que no inverno. Gado e leitões consumirão mais palha no inverno. A capacidade máxima dos recipientes foi reduzida de 6 dias para 3 dias." />
         <text name="ss_helpText_14_02" text="Animais cruzam apenas em certas épocas do ano. Porcos e ovelhas reproduzem na primavera, enquento gado se reproduz no verão." />
         <text name="ss_helpText_14_03" text="Animais morrerão se não tiverem água ou comida. Isto é desabilitado no modo fácil." />
-        <text name="ss_helpText_14_04" text="Você não poderá repor grama no inverno. Use feno no lugar." />
 
         <text name="ss_helpTitle_15" text="Animais - Produção" />
         <text name="ss_helpText_15_01" text="Leite e lã dependem da estação." />

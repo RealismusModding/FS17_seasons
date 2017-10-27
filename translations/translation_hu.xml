@@ -220,7 +220,6 @@
         <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etető kapacitása 6 napról 3-ra csökkent." />
         <text name="ss_helpText_14_02" text="Az állatok szaporodása meghatározott időben történik. A disznók és birkák tavasszal, míg a tehenek nyáron szaporodnak." />
         <text name="ss_helpText_14_03" text="Az állatok elpusztulnak, ha nincs vizük vagy élelmük. Ez az opció ki van kapcsolva Könnyű nehézségi fokozaton." />
-        <text name="ss_helpText_14_04" text="Télen nem etethetsz fűvel. Használj helyette inkább szénát." />
 
         <text name="ss_helpTitle_15" text="Állatok - termelékenység" />
         <text name="ss_helpText_15_01" text="A tej és gyapjú termelés függ az évszaktól." />

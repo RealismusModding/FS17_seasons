@@ -223,7 +223,6 @@
         <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en verano que en invierno. Vacas y cerdos requieren más paja en invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />
         <text name="ss_helpText_14_02" text="Los animales sólo dan crías en una determinada época del año. Las ovejas producirán crías en primavera, las vacas producirán crías en verano y los cerdos en primavera y en otoño." />
         <text name="ss_helpText_14_03" text="Los animales morirán si no tienen comida o agua. Esto está desactivado en dificultad fácil." />
-        <text name="ss_helpText_14_04" text="En invierno no se podrá alimentar con hierba, deberás usar heno en su lugar." />
 
         <text name="ss_helpTitle_15" text="Animales - Producción" />
         <text name="ss_helpText_15_01" text="La producción de leche y lana depende de la estación." />

@@ -223,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Der Tierbereich wurde durch Seasons erheblich angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine mögen es im Winter etwas wärmer und verbrauchen daher mehr Stroh. Die max. Kapazität der Futtertröge wurde von 6 auf 3 Tage verringert." />
         <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Die Lämmerzeit für Schafe ist das Frühjahr. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst, während Kühe nur im Sommer kalben." />
         <text name="ss_helpText_14_03" text="Deine Tiere versterben wenn diese kein Futter oder Wasser bekommen. Diese Option ist bei Schwierigkeitsstufe 'einfach' deaktiviert." />
-        <text name="ss_helpText_14_04" text="Gras kann im Winter nicht verfüttert werden! Gras kann ja über längere Zeit wie im wahren Leben nicht eingelagert werden. Nutze daher Heu!" />
 
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
         <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion verändern sich mit den jeweiligen Jahreszeiten." />
