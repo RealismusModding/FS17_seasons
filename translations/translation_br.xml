@@ -138,7 +138,15 @@
         <text name="dialog_timeTravel" text="O jogo está sincronizando depois de passar o tempo" />
         <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Neve" />
+
         <text name="function_measureTool" text="Usando uma ferramenta de medição, você consegue informações sobre o solo, árvores, fardos de feno, e outros objetos." />
 
         <text name="ss_helpCategory" text="Seasons" />
@@ -215,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Produção animal foi ajustada de acordo com a estação para um padrão realístico. Todos os animais beberão mais água no verão que no inverno. Gado e leitões consumirão mais palha no inverno. A capacidade máxima dos recipientes foi reduzida de 6 dias para 3 dias." />
         <text name="ss_helpText_14_02" text="Animais cruzam apenas em certas épocas do ano. Porcos e ovelhas reproduzem na primavera, enquento gado se reproduz no verão." />
         <text name="ss_helpText_14_03" text="Animais morrerão se não tiverem água ou comida. Isto é desabilitado no modo fácil." />
-        <text name="ss_helpText_14_04" text="Você não poderá repor grama no inverno. Use feno no lugar." />
 
         <text name="ss_helpTitle_15" text="Animais - Produção" />
         <text name="ss_helpText_15_01" text="Leite e lã dependem da estação." />
@@ -224,14 +231,18 @@
 
         <text name="ss_helpTitle_16" text="Menu do Seasons" />
         <text name="ss_helpText_16_01" text="O Menu do Seasons é utilizado com referência para plantar e alterar preferências. Este menu pode ser acessado pressionando Alt esquerdo + S." />
-        <text name="ss_helpText_16_02" text="Na primeira aba temos a tabela de crescimento. As temperaturas de germinação de todos os cultivos são mostradas na coluna esquerda. Case a temperatura de um cultivos esteja branco, está quente o suficiente para plantar aquele cultivo. Caso esteja azul, está muito frio." />
-        <text name="ss_helpText_16_03" text="A segunda aba mostra as preferências. Podes mudar a duração da estação (estações de 3-24 dias), notificações entre as estações (ligado/desligado), modo de neve (ligado/desligado/1 camada, rastros ligado/desligado), umidade de cultivos (ligado/desligado) e a escala de temperatura (C/F)." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />
         <text name="ss_helpText_17_02" text="Bem abaixo do relógio é mostrado a época de transição (início/meio/fim)e o dia da estação." />
         <text name="ss_helpText_17_03" text="Quando ativada, a previsão de tempo irá aparecer embaixo do relógio no canto superior direito." />
-        <text name="ss_helpText_17_04" text="Quando a caixa de ajuda está ativada (F1) o timer de manutenção é mostrado. Este é apenas mostrado quando estás dentro de algum veículo." />
+        <text name="ss_helpText_17_04" text="Quando a caixa de ajuda está ativada o timer de manutenção é mostrado. Este é apenas mostrado quando estás dentro de algum veículo." />
 
         <text name="ss_helpTitle_18" text="Diversos" />
         <text name="ss_helpText_18_01" text="Caso não queira trabalhar durante a noite, tens a opção de pular para a manhã. Caso a noite caia e estejas a pé, pressione Alt esquerdo  + N para pular para a próxima manhã." />

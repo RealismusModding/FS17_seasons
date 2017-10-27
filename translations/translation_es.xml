@@ -138,6 +138,13 @@
         <text name="dialog_timeTravel" text="El juego se sincronizará después del avance rápido" />
         <text name="dialog_sleeping" text="Descansando para otro dia en la granja... ZzZzz...." />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Nieve" />
 
         <text name="function_measureTool" text="Utilizando una herramienta de medición, puede obtener información sobre el suelo, los árboles, las pacas y otros objetos." />
@@ -216,7 +223,6 @@
         <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en verano que en invierno. Vacas y cerdos requieren más paja en invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />
         <text name="ss_helpText_14_02" text="Los animales sólo dan crías en una determinada época del año. Las ovejas producirán crías en primavera, las vacas producirán crías en verano y los cerdos en primavera y en otoño." />
         <text name="ss_helpText_14_03" text="Los animales morirán si no tienen comida o agua. Esto está desactivado en dificultad fácil." />
-        <text name="ss_helpText_14_04" text="En invierno no se podrá alimentar con hierba, deberás usar heno en su lugar." />
 
         <text name="ss_helpTitle_15" text="Animales - Producción" />
         <text name="ss_helpText_15_01" text="La producción de leche y lana depende de la estación." />
@@ -225,14 +231,18 @@
 
         <text name="ss_helpTitle_16" text="Menú Seasons" />
         <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
-        <text name="ss_helpText_16_02" text="La primera página es una guía para plantar y cosechar. Las temperaturas de germinación de todos los cultivos se muestran a la izquierda del gráfico. Si la temperatura al lado de un cultivo es blanca, significa que es lo suficientemente caliente para plantar ese cultivo en particular. Si la temperatura es azul, hace demasiado frío." />
-        <text name="ss_helpText_16_03" text="La segunda página es el menú de configuración. Aquí la temporada (3-24 días por estación), notificaciones de Seasons (on/off), modo de nieve (on/off/1-layer, huellas on/off), humedad del cultivo (on/off) y ajustes de temperatura (C/F), todos pueden ser cambiados." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />
         <text name="ss_helpText_17_02" text="Justo debajo del reloj es donde se muestra el período de temporada y el día de la temporada actual." />
         <text name="ss_helpText_17_03" text="Cuando se activa, el HUD del pronóstico aparecerá debajo del reloj en la esquina superior derecha." />
-        <text name="ss_helpText_17_04" text="Cuando se activa el menú de ayuda (F1), el temporizador de mantenimiento aparece cerca de la parte inferior. Esto sólo se muestra cuando está en un vehículo." />
+        <text name="ss_helpText_17_04" text="Cuando se activa el menú de ayuda, el temporizador de mantenimiento aparece cerca de la parte inferior. Esto sólo se muestra cuando está en un vehículo." />
 
         <text name="ss_helpTitle_18" text="Varios" />
         <text name="ss_helpText_18_01" text="Si no quiere trabajar duro por la noche, tiene la opción de saltar a la mañana siguiente. Después de caer la noche y usted está fuera del vehículo, presione Alt Izq. + N para saltar a la mañana siguiente." />

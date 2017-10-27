@@ -138,6 +138,13 @@
         <text name="dialog_timeTravel" text="После перемотки времени происходит синхронизация игровых процессов" />
         <text name="dialog_sleeping" text="Вы отдыхаете до следующего дня на ферме... Хр-р-р..." />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Снег" />
 
         <text name="function_measureTool" text="Используя этот измерительный инструмент, вы можете получить информацию о почве, деревьях, тюках и других объектах." />
@@ -216,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Производительность животных было настроено с помощью Seasons на более реалистичные параметры. Все животные летом будут потреблять больше воды, чем зимой. Зимой коровы и свиньи будут нуждаться в большем количестве соломы. Максимальная возможная загрузка кормушек кормом была снижена с 6 до 3 дней." />
         <text name="ss_helpText_14_02" text="Животные дают потомство только в определенное время года. Овцы производят потомство весной, свиньи весной и осенью, а коровы - летом." />
         <text name="ss_helpText_14_03" text="Животные умирают, если у них нет еды или воды. Но эта функция отключена, если вы играете на низком уровне сложности." />
-        <text name="ss_helpText_14_04" text="Так как теперь зимой травой кормить нет возможности, вместо неё вам придётся использовать сено." />
 
         <text name="ss_helpTitle_15" text="Животные - Производительность" />
         <text name="ss_helpText_15_01" text="Производство молока и шерсти также зависят от сезона." />
@@ -225,14 +231,18 @@
 
         <text name="ss_helpTitle_16" text="Меню Seasons" />
         <text name="ss_helpText_16_01" text="Меню Seasons используется в качестве справочного руководства по посадке и для изменения настроек Seasons. Это меню можно вызвать по Left Alt + S." />
-        <text name="ss_helpText_16_02" text="Первая страница - это ваш путеводитель по временным периодам посадки и уборки. Температура почвы для прорастания каждой культуры показана слева от графика. Если температура почвы рядом с культурой отображается белым цветом, это означает, что почва достаточно прогрелась для посадки определенного урожая, а если синим - ещё слишком холодно." />
-        <text name="ss_helpText_16_03" text="Вторая страница - это меню настроек. Здесь устанавливается/изменяется продолжительность сезона (3-24-дневный сезон), уведомления о начале нового сезона (Вкл/Выкл), режим снега (Вкл/Выкл/1 ​​слой, следы: Вкл/Выкл), влажность урожая (Вкл/Выкл) и температурная шкала (C/F)." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="HUD слева от часов в правом верхнем углу отображает информацию, относящуюся к Seasons. Сверху он показывает текущую температуру воздуха, а внизу температуру почвы. Слева от этого HUD отображается состояние грунта (мокрый/замёрзший)." />
         <text name="ss_helpText_17_02" text="Непосредственно ниже часов отображается текущий период и день сезона." />
         <text name="ss_helpText_17_03" text="Когда активирована панель прогноза погоды, она появится ниже часов в верхнем правом углу." />
-        <text name="ss_helpText_17_04" text="Если Вы находитесь в технике и активировано меню справки (F1), тогда в нижней строчке отображается время до её технического обслуживания." />
+        <text name="ss_helpText_17_04" text="Если Вы находитесь в технике и активировано меню справки, тогда в нижней строчке отображается время до её технического обслуживания." />
 
         <text name="ss_helpTitle_18" text="Разное" />
         <text name="ss_helpText_18_01" text="Если вы не хотите работать ночью, тогда у вас есть возможность пропустить ночь до утра. После того, как наступила ночь и вы находитесь не в технике, вы можете нажать Left Alt + N, чтобы пропустить время до утра." />
