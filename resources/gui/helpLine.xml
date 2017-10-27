@@ -124,6 +124,7 @@
             <item type="text" value="ss_helpText_16_01" />
             <item type="text" value="ss_helpText_16_02" />
             <item type="text" value="ss_helpText_16_03" />
+            <item type="text" value="ss_helpText_16_04" />
         </helpLine>
 
         <!-- HUD -->

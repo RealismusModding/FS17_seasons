@@ -231,8 +231,6 @@
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
-        <text name="ss_helpText_16_02" text="Die erste Seite beinhaltet alle wichtigen Daten zum Thema Aussaat- und Erntezeit. Auf der linken Seite hinter den jeweiligen Pflanzenarten werden die benötigten Bodentemperaturen für die Aussaat angegeben. Wird diese Zahl in 'blau' dargestellt, ist der Boden noch zu kalt. Ist die Temperatur in 'weiß' angegeben, hat der Boden die richtigen Temperatur und eine Aussaat ist möglich." />
-        <text name="ss_helpText_16_03" text="Auf der zweiten Seite befinden sich einige Einstellmöglichkeiten: Hilfefenster an/aus, Tastenbelegungen anzeigen an/aus, Temperatureinheit Celsius/Fahrenheit, Jahreszeit-Dauer 3-24 Tage, Schnee an/aus, Schneespuren an/aus, Ernten bei Feuchtigkeit an/aus." />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />
