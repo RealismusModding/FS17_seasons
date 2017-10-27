@@ -228,12 +228,9 @@
 
         <text name="ss_helpTitle_16" text="Seasons menü" />
         <text name="ss_helpText_16_01" text="A Seasons menüben találhatsz leírást is, és megváltoztathatod a Seasons beállításait. Ezt a menüt a Left Alt + S gombbal tudod megnyitni." />
-        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
-        <text name="ss_helpText_16_03" text="" />
-        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
-        <text name="ss_helpText_16_04" text="" />
+        <text name="ss_helpText_16_02" text="Az első oldal a vetési és aratási naptár. A növények csírázási hőmérsékletét a grafikon bal oldalán találod. Ha a hőmérséklet a növény mellett fehér, az azt jelenti, hogy megfelelő a hőmérséklet a vetéshez. Ha a hőmérséklet kék, akkor túl hideg." />
+        <text name="ss_helpText_16_03" text="A második oldalon a múlt évi árakról találsz adatokat. Az adat minden nap frissül. A jövőbeli árak természetesen csak kalkuláltak, így eltérések előfordulhatnak." />
+        <text name="ss_helpText_16_04" text="A harmadik oldal a beállitások menü. Ezen az oldalon személyre szabhatod a Seasons-t, a játékstílusodnak megfelelően." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUDot balra az órától a jobb felső sarokban találod, és a Seasons-al kapcsolatban látsz információkat. Felül mutatja a levegő, alul pedig a föld hőmérsékletét. A föld állapota (nedves növények / fagyott talaj) is itt van kiírva a bal oldalon." />
