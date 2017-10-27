@@ -50,6 +50,7 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
+    Washable.updateTick = Utils.overwrittenFunction(Washable.updateTick, ssVehicle.washableUpdateTick)
 
     VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
 
@@ -503,7 +504,44 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
         return superFunc(self, earlyWarning)
     end
 
-    if self.allowThreshingDuringRain then
+    local rootCropHarvester = false
+    local rootCropCutter = false
+    local rootCropTrailedHarvester = false
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")
+
+    -- trailed harvesters
+    if self.attacherVehicle ~= nil then
+        for _ , item in pairs(self.attacherVehicle.attachedImplements) do
+            for _ , object in pairs(item) do
+                if type(object) == "table" then
+                    if object.fruitPreparer ~= nil then
+                        if object.fruitPreparer.fruitType == potatoId[1] or object.fruitPreparer.fruitType == beetId[1] then
+                            rootCropTrailedHarvester = true
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- self propelled with integrated cutter
+    if self.fruitPreparer ~= nil then
+        if self.fruitPreparer.fruitType == potatoId[1] or self.fruitPreparer.fruitType == beetId[1] then
+            rootCropHarvester = true
+        end
+    end
+
+    -- self propelled with mounted cutter 
+    for object,_ in pairs(self.attachedCutters) do
+        if object.fruitPreparer ~= nil then
+            if object.fruitPreparer.fruitType == potatoId[1] or object.fruitPreparer.fruitType == beetId[1] then
+                rootCropCutter = true
+            end
+        end
+    end
+
+    if self.allowThreshingDuringRain or rootCropHarvester or rootCropCutter or rootCropTrailedHarvester then
         return true
     end
 
@@ -597,4 +635,38 @@ function ssVehicle:getFullBuyPrice(vehicle, storeItem)
     end
 
     return storeItem.price + priceConfig
+end
+
+function ssVehicle:washableUpdateTick(superFunc, dt)
+    if self.washableNodes ~= nil then
+        if self.isServer then
+            local env = g_currentMission.environment;
+            local currentRainTypeId = nil
+            local amount = self:getDirtAmount()
+
+            if env.currentRain ~= nil then
+                if env.currentRain.rainTypeId == "rain" then
+                    currentRainTypeId = env.currentRain.rainTypeId
+                end
+            end
+
+            -- only rain cleaning vehicles, but rain has a minor effect when vehicles are very dirty
+            if currentRainTypeId == "rain" and env.lastRainScale > 0.1 and env.timeSinceLastRain < 30 and amount > 0.9 then
+                self:setDirtAmount(amount - (dt/self.washDuration))
+
+            -- if ground is frozen the vehicles don't get dirty
+            elseif not ssWeatherManager:isGroundFrozen() then
+                -- dirt accumulation rate dependent on ground wetness
+                -- 0.0 wetness: 30% rate, 0.5 wetness: ~100% rate, 0.75 wetness: 200% rate, 1.0 wetness: 330% rate
+                local wetnessMultiplier = (env.groundWetness^2 + 0.1) * 3
+
+                if self:getIsActive() or self.isActive then
+                    local dirtMultiplier = self:getDirtMultiplier()
+                    if dirtMultiplier ~= 0 then
+                        self:setDirtAmount(self:getDirtAmount() + dt * self.dirtDuration * wetnessMultiplier * dirtMultiplier * Washable.getIntervalMultiplier())
+                    end
+                end
+            end
+        end
+    end
 end
