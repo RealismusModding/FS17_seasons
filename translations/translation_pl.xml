@@ -228,6 +228,12 @@
 
         <text name="ss_helpTitle_16" text="Menu modu Seasons" />
         <text name="ss_helpText_16_01" text="Menu modu Seasons zawiera przewodnik zasiewów oraz ustawienia modu Seasons." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "The second page is where the economy information resides. Here you can find data on the prices of products in the last year. The data is updated every day and is only an estimation for current year." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="Interfejs" />
         <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (ikona wilgotnego zboża/ikona zamarzniętej gleby) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />

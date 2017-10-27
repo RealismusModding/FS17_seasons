@@ -231,6 +231,12 @@
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "The second page is where the economy information resides. Here you can find data on the prices of products in the last year. The data is updated every day and is only an estimation for current year." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />

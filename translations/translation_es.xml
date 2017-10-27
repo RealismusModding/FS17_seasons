@@ -231,6 +231,12 @@
 
         <text name="ss_helpTitle_16" text="Menú Seasons" />
         <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "The second page is where the economy information resides. Here you can find data on the prices of products in the last year. The data is updated every day and is only an estimation for current year." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />
