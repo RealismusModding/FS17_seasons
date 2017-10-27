@@ -197,7 +197,7 @@
             </factors>
         </fill>
 
-         <fill name="sugarCane">
+        <fill name="sugarCane">
             <factors>
                 <factor transition="11">0.97</factor>
                 <factor transition="12">0.94</factor>
