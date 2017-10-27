@@ -12,8 +12,8 @@ ssSkipNight = {}
 ssSkipNight.MODE_MORNING = 1
 ssSkipNight.MODE_DAWN = 2
 
-source(g_seasons.modDir .. "src/events/ssSkipNightEvent.lua")
-source(g_seasons.modDir .. "src/events/ssSkipNightFinishedEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssSkipNightEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssSkipNightFinishedEvent.lua")
 
 function ssSkipNight:preLoad()
     g_seasons.skipNight = self
