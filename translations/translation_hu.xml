@@ -117,7 +117,7 @@
         <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll" />
         <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén" />
         <text name="tooltip_snow" text="Télen esni fog a hó és belepi az utakat" />
-        <text name="tooltip_controlsHelp" text="Mutatja az előrejelzés -és menügömböt a help (F1) menüben" />
+        <text name="tooltip_controlsHelp" text="Mutatja az előrejelzés -és menügömböt a help menüben" />
         <text name="tooltip_snowTracks" text="A gépek letapossák a havat" />
         <text name="tooltip_controlsTemperature" text="Beállítja a hőmérséklet mértékegységét a játékban" />
         <text name="tooltip_moisture" text="A betakarítást nem engedélyezi, ha túl nedves a növény" />
@@ -137,6 +137,10 @@
         <text name="dialog_resetGrowth_yes" text="alaphelyzetbe" />
         <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után" />
         <text name="dialog_sleeping" text="Pihenés a következő napig... Zzz..." />
+
+        <text name="dialog_skipNight_text" text="Át akarod ugrani az éjszakát reggelig (6:00) vagy pirkadatig (%s)?" />
+        <text name="dialog_skipNight_morning" text="Reggel (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Pirkadat (%s)" />
 
         <text name="fillType_snow" text="Hó" />
 
@@ -216,7 +220,6 @@
         <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etető kapacitása 6 napról 3-ra csökkent." />
         <text name="ss_helpText_14_02" text="Az állatok szaporodása meghatározott időben történik. A disznók és birkák tavasszal, míg a tehenek nyáron szaporodnak." />
         <text name="ss_helpText_14_03" text="Az állatok elpusztulnak, ha nincs vizük vagy élelmük. Ez az opció ki van kapcsolva Könnyű nehézségi fokozaton." />
-        <text name="ss_helpText_14_04" text="Télen nem etethetsz fűvel. Használj helyette inkább szénát." />
 
         <text name="ss_helpTitle_15" text="Állatok - termelékenység" />
         <text name="ss_helpText_15_01" text="A tej és gyapjú termelés függ az évszaktól." />
@@ -225,8 +228,12 @@
 
         <text name="ss_helpTitle_16" text="Seasons menü" />
         <text name="ss_helpText_16_01" text="A Seasons menüben találhatsz leírást is, és megváltoztathatod a Seasons beállításait. Ezt a menüt a Left Alt + S gombbal tudod megnyitni." />
-        <text name="ss_helpText_16_02" text="Az első oldal átvezet a vetési és aratási ablakokon. A növények csírázási hőmérsékletét a bal oldalon találod. Ha a hőmérséklet a növény mellett fehér, az megfelelő meleget jelent. Ha kék, a környezet túl hideg." />
-        <text name="ss_helpText_16_03" text="A második oldal a beállítások menüje. Itt tudod beállítani a szezon hosszát (3-24 napos szezon), szezon értesítéseket, a havazást (be / ki / 1-rétegű / keréknyomok be/ki), növény nedvességet (be/ki) és a hőmérséklet skálát (Celsius/Fahrenheit)." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUDot balra az órától a jobb felső sarokban találod, és a Seasons-al kapcsolatban látsz információkat. Felül mutatja a levegő, alul pedig a föld hőmérsékletét. A föld állapota (nedves növények / fagyott talaj) is itt van kiírva a bal oldalon." />

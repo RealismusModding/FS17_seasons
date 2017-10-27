@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
-    <translationContributors>
-        Rahkiin
-        theSeb
-        reallogger
-    </translationContributors>
+    <translationContributors>Rahkiin, theSeb, reallogger</translationContributors>
 
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
@@ -176,7 +172,7 @@
         <text name="ss_helpTitle_05" text="Soil" />
         <text name="ss_helpText_05_01" text="Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." />
         <text name="ss_helpText_05_02" text="The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." />
-        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons settings menu." />
+        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included in the calendar, on the first page of the Seasons menu." />
 
         <text name="ss_helpTitle_06" text="Crops - Intro" />
         <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." />
@@ -225,7 +221,6 @@
         <text name="ss_helpText_14_01" text="Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." />
         <text name="ss_helpText_14_02" text="Animals only give offspring at a certain time of the year. Pigs will produce offspring in the spring and in the autumn, sheep only in the spring, while cows will produce offspring in the summer." />
         <text name="ss_helpText_14_03" text="Animals will die if they do not have food or water. This is disabled on Easy difficulty." />
-        <text name="ss_helpText_14_04" text="Grass cannot be fed in the winter. You should use hay instead." />
 
         <text name="ss_helpTitle_15" text="Animals - Production" />
         <text name="ss_helpText_15_01" text="Milk and wool production is dependent upon the season." />
@@ -233,15 +228,16 @@
         <text name="ss_helpText_15_03" text="Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." />
 
         <text name="ss_helpTitle_16" text="Seasons Menu" />
-        <text name="ss_helpText_16_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons." />
-        <text name="ss_helpText_16_02" text="The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
-        <text name="ss_helpText_16_03" text="The second page is the settings menu. Here the season length (3-24 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." />
+        <text name="ss_helpText_16_01" text="The Seasons Menu is used as a reference guide for planting and the economy, and to change settings related to Seasons." />
+        <text name="ss_helpText_16_02" text="The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
+        <text name="ss_helpText_16_03" text="On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." />
+        <text name="ss_helpText_16_04" text="The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUD to the left of the clock in the upper right corner displays information relevant to Seasons. It shows the current air temperature on top and ground temperature on bottom. The state of the ground (wetcrops/frozen ground) is also displayed to the left of this HUD." />
         <text name="ss_helpText_17_02" text="Directly below the clock is where the seasonal period and day of the current season is displayed." />
         <text name="ss_helpText_17_03" text="When activated, the forecast HUD will appear below the clock in the upper right corner." />
-        <text name="ss_helpText_17_04" text="When the help menu is activated (F1) the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." />
+        <text name="ss_helpText_17_04" text="When the help menu is activated the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." />
 
         <text name="ss_helpTitle_18" text="Miscellaneous" />
         <text name="ss_helpText_18_01" text="If you do not wish to work during the night, you have the option to skip to the morning. You can only do this outside a vehicle." />

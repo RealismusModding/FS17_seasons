@@ -138,6 +138,13 @@
         <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen" />
         <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
 
+        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
+        <text name="dialog_skipNight_text" text="" />
+        <!-- Missing translation of "Morning (6:00)" -->
+        <text name="dialog_skipNight_morning" text="" />
+        <!-- Missing translation of "Dawn (%s)" -->
+        <text name="dialog_skipNight_dawn" text="" />
+
         <text name="fillType_snow" text="Schnee" />
 
         <text name="function_measureTool" text="Mit einem Messgerät kannst du Informationen über den Boden, Bäume, Ballen und andere Objekte erhalten." />
@@ -216,7 +223,6 @@
         <text name="ss_helpText_14_01" text="Der Tierbereich wurde durch Seasons erheblich angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine mögen es im Winter etwas wärmer und verbrauchen daher mehr Stroh. Die max. Kapazität der Futtertröge wurde von 6 auf 3 Tage verringert." />
         <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Die Lämmerzeit für Schafe ist das Frühjahr. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst, während Kühe nur im Sommer kalben." />
         <text name="ss_helpText_14_03" text="Deine Tiere versterben wenn diese kein Futter oder Wasser bekommen. Diese Option ist bei Schwierigkeitsstufe 'einfach' deaktiviert." />
-        <text name="ss_helpText_14_04" text="Gras kann im Winter nicht verfüttert werden! Gras kann ja über längere Zeit wie im wahren Leben nicht eingelagert werden. Nutze daher Heu!" />
 
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
         <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion verändern sich mit den jeweiligen Jahreszeiten." />
@@ -225,14 +231,18 @@
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
-        <text name="ss_helpText_16_02" text="Die erste Seite beinhaltet alle wichtigen Daten zum Thema Aussaat- und Erntezeit. Auf der linken Seite hinter den jeweiligen Pflanzenarten werden die benötigten Bodentemperaturen für die Aussaat angegeben. Wird diese Zahl in 'blau' dargestellt, ist der Boden noch zu kalt. Ist die Temperatur in 'weiß' angegeben, hat der Boden die richtigen Temperatur und eine Aussaat ist möglich." />
-        <text name="ss_helpText_16_03" text="Auf der zweiten Seite befinden sich einige Einstellmöglichkeiten: Hilfefenster an/aus, Tastenbelegungen anzeigen an/aus, Temperatureinheit Celsius/Fahrenheit, Jahreszeit-Dauer 3-24 Tage, Schnee an/aus, Schneespuren an/aus, Ernten bei Feuchtigkeit an/aus." />
+        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
+        <text name="ss_helpText_16_02" text="" />
+        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
+        <text name="ss_helpText_16_03" text="" />
+        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
+        <text name="ss_helpText_16_04" text="" />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />
         <text name="ss_helpText_17_02" text="Direkt unter der Uhr befinden sich die Anzeigen für die aktuelle Jahreszeit und den aktuellen Tag dieser Jahreszeit." />
         <text name="ss_helpText_17_03" text="Wenn die Wettervorhersage aktiviert ist, erscheint die Prognose direkt unter der Uhr auf der rechten Seite." />
-        <text name="ss_helpText_17_04" text="Wenn das Hilfefenster F1 aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
+        <text name="ss_helpText_17_04" text="Wenn das Hilfefenster aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
 
         <text name="ss_helpTitle_18" text="Verschiedenes" />
         <text name="ss_helpText_18_01" text="Wenn Du nachts nicht arbeiten möchtest, nutze die Funktion 'Nacht überspringen'. Einfach am Anfang der Nacht die standardmäßig einstellte Tastenkombination Alt links + N drücken und automatisch zum nächsten Morgen vorspulen. Du musst dabei aber außerhalb eines Fahrzeuges stehen." />
