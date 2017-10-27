@@ -68,7 +68,8 @@ function ssSkipNight:update(dt)
 
             -- Calculate dawn of next day
             local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay() + 1)
-            local _, _, nightEnd, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
+            local dayStart, _, nightEnd, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
+            nightEnd = Utils.lerp(nightEnd, dayStart, 0.35) * 60 -- convert to environment var
 
             local dawnTime = string.format("%0.2d:%0.2d", math.floor(nightEnd / 60), nightEnd % 60)
             local dialog = g_gui:showDialog("TwoOptionDialog")
