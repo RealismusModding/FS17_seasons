@@ -182,35 +182,35 @@
 
         <fill name="sunflower">
             <factors>
-                <factor transition="11">1.23</factor>
-                <factor transition="12">1.24</factor>
-                <factor transition="1">1.04</factor>
-                <factor transition="2">0.96</factor>
-                <factor transition="3">0.99</factor>
-                <factor transition="4">1.07</factor>
-                <factor transition="5">1.11</factor>
-                <factor transition="6">0.94</factor>
-                <factor transition="7">0.72</factor>
-                <factor transition="8">0.62</factor>
-                <factor transition="9">0.88</factor>
-                <factor transition="10">1.21</factor>
+                <factor transition="11">0.84</factor>
+                <factor transition="12">1.07</factor>
+                <factor transition="1">1.13</factor>
+                <factor transition="2">1.11</factor>
+                <factor transition="3">1.03</factor>
+                <factor transition="4">0.92</factor>
+                <factor transition="5">0.96</factor>
+                <factor transition="6">0.99</factor>
+                <factor transition="7">1.06</factor>
+                <factor transition="8">1.07</factor>
+                <factor transition="9">1.04</factor>
+                <factor transition="10">0.78</factor>
             </factors>
         </fill>
 
-        <fill name="sugarCane">
+         <fill name="sugarCane">
             <factors>
-                <factor transition="11">1.02</factor>
-                <factor transition="12">1.23</factor>
-                <factor transition="1">1.37</factor>
-                <factor transition="2">1.15</factor>
-                <factor transition="3">0.89</factor>
-                <factor transition="4">0.73</factor>
-                <factor transition="5">0.88</factor>
-                <factor transition="6">0.84</factor>
-                <factor transition="7">1</factor>
-                <factor transition="8">1.06</factor>
-                <factor transition="9">0.91</factor>
-                <factor transition="10">0.97</factor>
+                <factor transition="11">0.97</factor>
+                <factor transition="12">0.94</factor>
+                <factor transition="1">0.94</factor>
+                <factor transition="2">0.96</factor>
+                <factor transition="3">1.01</factor>
+                <factor transition="4">1.01</factor>
+                <factor transition="5">1.05</factor>
+                <factor transition="6">1.04</factor>
+                <factor transition="7">1.05</factor>
+                <factor transition="8">1.04</factor>
+                <factor transition="9">1.02</factor>
+                <factor transition="10">1.01</factor>
             </factors>
         </fill>
 
