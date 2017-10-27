@@ -26,7 +26,7 @@ function ssSkipNight:loadMap()
     self.mode = ssSkipNight.MODE_MORNING
     self.oldTimeScale = 1
 
-    if g_currentMission.missionDynamicInfo.isMultiplayer then
+    if g_currentMission.missionDynamicInfo.isMultiplayer and not GS_IS_CONSOLE_VERSION then
         ssSkipNight.SPEED = 3000
     end
 end
