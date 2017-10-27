@@ -138,12 +138,9 @@
         <text name="dialog_timeTravel" text="Szinkronizálás az időgyorsítás után" />
         <text name="dialog_sleeping" text="Pihenés a következő napig... Zzz..." />
 
-        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
-        <text name="dialog_skipNight_text" text="" />
-        <!-- Missing translation of "Morning (6:00)" -->
-        <text name="dialog_skipNight_morning" text="" />
-        <!-- Missing translation of "Dawn (%s)" -->
-        <text name="dialog_skipNight_dawn" text="" />
+        <text name="dialog_skipNight_text" text="Át akarod ugrani az éjszakát reggelig (6:00) vagy pirkadatig (%s)?" />
+        <text name="dialog_skipNight_morning" text="Reggel (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Pirkadat (%s)" />
 
         <text name="fillType_snow" text="Hó" />
 
