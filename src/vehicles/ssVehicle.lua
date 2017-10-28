@@ -504,48 +504,42 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
         return superFunc(self, earlyWarning)
     end
 
-    local rootCropHarvester = false
-    local rootCropCutter = false
-    local rootCropTrailedHarvester = false
-    local potatoId = FruitUtil.getFruitTypesByNames("potato")
-    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")
+    if self.allowThreshingDuringRain or g_seasons.vehicle:isRootCropRelated(self) then
+        return true
+    end
+
+    return not g_seasons.weather:isCropWet()
+end
+
+function ssVehicle:isRootCropRelated(vehicle)
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
 
     -- trailed harvesters
-    if self.attacherVehicle ~= nil then
-        for _ , item in pairs(self.attacherVehicle.attachedImplements) do
-            for _ , object in pairs(item) do
-                if type(object) == "table" then
-                    if object.fruitPreparer ~= nil then
-                        if object.fruitPreparer.fruitType == potatoId[1] or object.fruitPreparer.fruitType == beetId[1] then
-                            rootCropTrailedHarvester = true
-                        end
-                    end
+    if vehicle.attacherVehicle ~= nil then
+        for _, item in pairs(vehicle.attacherVehicle.attachedImplements) do
+            for _, object in pairs(item) do
+                if type(object) == "table" and object.fruitPreparer ~= nil
+                   and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
+                    return true
                 end
             end
         end
     end
 
-    -- self propelled with integrated cutter
-    if self.fruitPreparer ~= nil then
-        if self.fruitPreparer.fruitType == potatoId[1] or self.fruitPreparer.fruitType == beetId[1] then
-            rootCropHarvester = true
-        end
-    end
-
-    -- self propelled with mounted cutter
-    for object,_ in pairs(self.attachedCutters) do
-        if object.fruitPreparer ~= nil then
-            if object.fruitPreparer.fruitType == potatoId[1] or object.fruitPreparer.fruitType == beetId[1] then
-                rootCropCutter = true
-            end
-        end
-    end
-
-    if self.allowThreshingDuringRain or rootCropHarvester or rootCropCutter or rootCropTrailedHarvester then
+    -- try self propelled with integrated cutter
+    if vehicle.fruitPreparer ~= nil and (vehicle.fruitPreparer.fruitType == potatoId or vehicle.fruitPreparer.fruitType == beetId) then
         return true
     end
 
-    return not g_seasons.weather:isCropWet()
+    -- try self propelled with mounted cutter
+    for object, _ in pairs(vehicle.attachedCutters) do
+        if object.fruitPreparer ~= nil and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
+            return true
+        end
+    end
+
+    return false
 end
 
 function ssVehicle:aiVehicleUpdate(dt)
