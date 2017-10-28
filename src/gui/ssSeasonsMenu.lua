@@ -255,7 +255,7 @@ function ssSeasonsMenu:onCreatePageOverview(element)
     local width, height = getNormalizedScreenValues(1, 1)
     self.pixel = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
 
-    self.lastSoilTemperature = math.floor(ssWeatherManager.soilTemp, 0)
+    self.lastSoilTemperature = math.floor(Utils.getNoNil(ssWeatherManager.soilTemp, 0), 0)
 end
 
 function ssSeasonsMenu:updateCalendar()
@@ -347,7 +347,7 @@ function ssSeasonsMenu:onCreateCalendarItemGermination(element)
 
         table.insert(self.calendarTemps, { element, self.currentItem.temperature })
 
-        if math.floor(ssWeatherManager.soilTemp, 0) < self.currentItem.temperature then
+        if math.floor(Utils.getNoNil(ssWeatherManager.soilTemp, 0), 0) < self.currentItem.temperature then
             element:applyProfile(element.profile .. "Frigid")
         end
     end
