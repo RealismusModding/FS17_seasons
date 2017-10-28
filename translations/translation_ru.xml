@@ -2,7 +2,7 @@
 <l10n>
     <translationContributors>Gonimy_Vetrom(Vasyl'ko), theSeb</translationContributors>
     <texts>
-        <text name="input_SEASONS_SHOW_WF" text="Seasons: Прогноз погоды" />
+        <text name="input_SEASONS_SHOW_WF" text="Seasons: Показать прогноз погоды" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Открыть меню" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Расстояние посадки (%d м)" />
@@ -117,7 +117,7 @@
         <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Игровой год состоит из четырёх сезонов" />
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона" />
         <text name="tooltip_snow" text="Холодной зимой будет падать снег и перекрывать дороги" />
-        <text name="tooltip_controlsHelp" text="Показывать сочетание клавиш для прогноза погоды и вызова этого меню в меню справки." />
+        <text name="tooltip_controlsHelp" text="Отображать сочетание клавиш для прогноза погоды и вызова этого меню в меню справки." />
         <text name="tooltip_snowTracks" text="Транспортные средства при движении по снегу будут его уплотнять и оставлять колеи" />
         <text name="tooltip_controlsTemperature" text="Изменение единицы измерения температуры, используемой в игре" />
         <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
