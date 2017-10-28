@@ -532,7 +532,7 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
         end
     end
 
-    -- self propelled with mounted cutter 
+    -- self propelled with mounted cutter
     for object,_ in pairs(self.attachedCutters) do
         if object.fruitPreparer ~= nil then
             if object.fruitPreparer.fruitType == potatoId[1] or object.fruitPreparer.fruitType == beetId[1] then
@@ -565,6 +565,58 @@ function ssVehicle:aiVehicleUpdate(dt)
         if self.lightsTypesMask ~= 0 then
             self:setLightsTypesMask(0)
         end
+    end
+end
+
+function ssVehicle:getFullBuyPrice(vehicle, storeItem)
+    local priceConfig = 0
+
+    if storeItem.configurations ~= nil then
+        for configName, configIds in pairs(vehicle.boughtConfigurations) do
+            local configItem = storeItem.configurations[configName]
+
+            if configItem ~= nil then
+                for id, _ in pairs(configIds) do
+                    if configItem[id] then
+                        priceConfig = priceConfig + configItem[id].price
+                    end
+                end
+            end
+        end
+
+    end
+
+    return storeItem.price + priceConfig
+end
+
+function ssVehicle:washableUpdateTick(superFunc, dt)
+    if self.washableNodes ~= nil and self.isServer then
+        local env = g_currentMission.environment;
+
+        -- Work the scale to affect rain-cleaning
+        local oldScale = env.lastRainScale
+        if env.currentRain == nil or env.currentRain ~= "rain" then
+            -- If event is not rain, do not clean
+            env.lastRainScale = 0
+        end
+
+        -- Work the duration to add more factors
+        local oldDuration = self.dirtDuration
+        local wetnessMultiplier = 0
+        if not ssWeatherManager:isGroundFrozen() then
+            wetnessMultiplier = (env.groundWetness ^ 2 + 0.1) * 3
+        end
+
+        -- If ground is frozen, no dirtification: multi is 0. Otherwise mult regarding wetness
+        self.dirtDuration = self.dirtDuration * wetnessMultiplier
+
+        -- Call the actual function
+        superFunc(self, dt)
+
+        self.dirtDuration = oldDuration
+        env.lastRainScale = oldScale
+    else
+        return superFunc(self, dt)
     end
 end
 
@@ -614,59 +666,4 @@ function ssVehicle:consoleCommandTestVehicle()
     print_r(vehicle.boughtConfigurations)
 
     return ""
-end
-
-function ssVehicle:getFullBuyPrice(vehicle, storeItem)
-    local priceConfig = 0
-
-    if storeItem.configurations ~= nil then
-        for configName, configIds in pairs(vehicle.boughtConfigurations) do
-            local configItem = storeItem.configurations[configName]
-
-            if configItem ~= nil then
-                for id, _ in pairs(configIds) do
-                    if configItem[id] then
-                        priceConfig = priceConfig + configItem[id].price
-                    end
-                end
-            end
-        end
-
-    end
-
-    return storeItem.price + priceConfig
-end
-
-function ssVehicle:washableUpdateTick(superFunc, dt)
-    if self.washableNodes ~= nil then
-        if self.isServer then
-            local env = g_currentMission.environment;
-            local currentRainTypeId = nil
-            local amount = self:getDirtAmount()
-
-            if env.currentRain ~= nil then
-                if env.currentRain.rainTypeId == "rain" then
-                    currentRainTypeId = env.currentRain.rainTypeId
-                end
-            end
-
-            -- only rain cleaning vehicles, but rain has a minor effect when vehicles are very dirty
-            if currentRainTypeId == "rain" and env.lastRainScale > 0.1 and env.timeSinceLastRain < 30 and amount > 0.9 then
-                self:setDirtAmount(amount - (dt/self.washDuration))
-
-            -- if ground is frozen the vehicles don't get dirty
-            elseif not ssWeatherManager:isGroundFrozen() then
-                -- dirt accumulation rate dependent on ground wetness
-                -- 0.0 wetness: 30% rate, 0.5 wetness: ~100% rate, 0.75 wetness: 200% rate, 1.0 wetness: 330% rate
-                local wetnessMultiplier = (env.groundWetness^2 + 0.1) * 3
-
-                if self:getIsActive() or self.isActive then
-                    local dirtMultiplier = self:getDirtMultiplier()
-                    if dirtMultiplier ~= 0 then
-                        self:setDirtAmount(self:getDirtAmount() + dt * self.dirtDuration * wetnessMultiplier * dirtMultiplier * Washable.getIntervalMultiplier())
-                    end
-                end
-            end
-        end
-    end
 end
