@@ -197,6 +197,29 @@ gulp.task("build", () => {
         .pipe(gulp.dest("."));
 });
 
+gulp.task("build:console-data", () => {
+    const sourceStream = gulp.src(zipSources, { base: "." });
+    const outputZipName = `${modZipName}_${createVersionName()}_console.zip`;
+
+    return merge(sourceStream, fillModDesc())
+        .pipe(size())
+        .pipe(zip(outputZipName))
+        .pipe(size())
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("build:console-src", () => {
+    const outputZipName = `${modZipName}_${createVersionName()}_internalMod.zip`;
+
+    return merge(templatedLua())
+        .pipe(size())
+        .pipe(zip(outputZipName))
+        .pipe(size())
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("build:console", ["build:console-data", "build:console-src"], () => {});
+
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build", "clean:mods"], () => {
     const outputZipName = `${modZipName}_${createVersionName()}.zip`;
