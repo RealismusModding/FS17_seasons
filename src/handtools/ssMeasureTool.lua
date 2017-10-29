@@ -321,7 +321,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local worldHeightX, worldHeightZ = 0, areaSize
 
     -- Read height
-    local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z)
+    local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z) - g_currentMission.waterY
 
     local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels)
     local terrainType = a / b
