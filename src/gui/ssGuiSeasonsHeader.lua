@@ -32,7 +32,6 @@ function ssGuiSeasonsHeader:new(parentElement)
     self.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", g_seasons.baseUIFilename, 0, 0, self.seasonIconWidth, self.seasonIconHeight)
     self.seasons[ssEnvironment.SEASON_WINTER]:setUVs(getNormalizedUVs({416, 216, 128, 128}))
 
-    self.transitionHeaders = ssUtil.getTransitionHeaders()
     self.margin = {0, 0}
 
     return self
@@ -51,6 +50,11 @@ function ssGuiSeasonsHeader:settingsChanged()
 end
 
 function ssGuiSeasonsHeader:draw()
+    if self.transitionHeaders == nil then
+        -- Move here. :new is called when game starts, and in an MP game, data is not readily availabl
+        self.transitionHeaders = ssUtil.getTransitionHeaders()
+    end
+
     local pixel = self.pixel
 
     local _, footerHeight = getNormalizedScreenValues(0, 50)
