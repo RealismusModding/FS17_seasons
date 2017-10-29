@@ -79,11 +79,12 @@ function ssSeasonsMenu:onOpen(element)
 
     self:updateServerSettingsVisibility()
 
-    -- overview
-    self:updateCalendar()
+    if not self.createPageContent then
+        self.createPageContent = true
 
-    -- economy
-    self:updateEconomy()
+        self:updateCalendar()
+        self:updateEconomy()
+    end
 
     -- settings
     self:updateGameSettings()
