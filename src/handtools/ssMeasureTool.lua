@@ -399,11 +399,11 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     --     text = ploughCounter
     -- })
 
-    -- local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
-    -- table.insert(data, {
-    --     iconUVs = ssMeasureTool.UVS_MOISTURE,
-    --     text = string.format("%.0f%%", moisture * 100)
-    -- })
+    local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_MOISTURE,
+        text = string.format("%.0f%%", moisture * 100)
+    })
 
     self:openDialog("Terrain", data)
 end
