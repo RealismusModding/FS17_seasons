@@ -373,7 +373,7 @@ function ssSeasonsMenu:onDrawCalendarToday(element)
 end
 
 function ssSeasonsMenu:onDrawCalendarItemData(element)
-    if element.alpha == 0 then return end
+    if not element:getIsVisible() then return end
 
     local transitionWidth, _ = getNormalizedScreenValues(45, 0)
     local pixel = self.pixel
