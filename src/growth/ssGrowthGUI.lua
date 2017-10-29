@@ -20,11 +20,12 @@ ssGrowthGUI.canHarvestData = {}
 
 --methods
 function ssGrowthGUI:loadMap(name)
-    self.tooColdTransitions = g_seasons.weather:soilTooColdForGrowth()
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
+    local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth()
+
     for fruitName, value in pairs(fruitData) do
         if FruitUtil.fruitTypeGrowths[fruitName] ~= nil and fruitName ~= "dryGrass" then
             local transitionTable = {}
@@ -33,7 +34,7 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
                     break
                 end
 
-                if self.tooColdTransitions[transition] then
+                if tooColdTransitions[transition] then
                     table.insert(transitionTable, transition , false)
                 else
                     local plantedTransition = transition

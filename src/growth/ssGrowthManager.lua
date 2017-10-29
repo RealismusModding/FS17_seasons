@@ -111,9 +111,6 @@ function ssGrowthManager:loadMap(name)
         return
     end
 
-    g_seasons.growthGUI:buildCanPlantData(self.defaultFruitsData, self.growthData)
-    g_seasons.growthGUI:buildCanHarvestData(self.growthData)
-
     if g_currentMission:getIsServer() then
         g_seasons.environment:addTransitionChangeListener(self)
 
@@ -121,7 +118,10 @@ function ssGrowthManager:loadMap(name)
     end
 end
 
-function ssGrowthManager:loadMapFinished()
+function ssGrowthManager:loadGameFinished()
+    g_seasons.growthGUI:buildCanPlantData(self.defaultFruitsData, self.growthData)
+    g_seasons.growthGUI:buildCanHarvestData(self.growthData)
+
     if g_currentMission:getIsServer() then
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
