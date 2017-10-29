@@ -11,7 +11,7 @@
 
 ssCatchingUp = {}
 
-ssCatchingUp.LIMIT = 3
+ssCatchingUp.LIMIT = GS_IS_CONSOLE_VERSION and 2 or 3
 ssCatchingUp.FFWD = 300
 
 function ssCatchingUp:preLoad()
