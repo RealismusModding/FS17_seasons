@@ -50,7 +50,7 @@ function ssDaylight:loadFromXML(path)
         latitude = ssXMLUtil.getFloat(file, "daylight.latitude")
     end
 
-    latitude = Utils.clamp(Utils.getNoNil(latitude, self.latitude), -70, 70)
+    self.latitude = Utils.clamp(Utils.getNoNil(latitude, self.latitude), -70, 70)
 
     -- DST properties
     local dst = ssXMLUtil.getString(file, "daylight#dst", "always"):lower() -- default to always, which is v1.1-
