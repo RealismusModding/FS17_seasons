@@ -138,12 +138,10 @@
         <text name="dialog_timeTravel" text="El juego se sincronizará después del avance rápido" />
         <text name="dialog_sleeping" text="Descansando para otro dia en la granja... ZzZzz...." />
 
-        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
-        <text name="dialog_skipNight_text" text="" />
-        <!-- Missing translation of "Morning (6:00)" -->
-        <text name="dialog_skipNight_morning" text="" />
-        <!-- Missing translation of "Dawn (%s)" -->
-        <text name="dialog_skipNight_dawn" text="" />
+        
+        <text name="dialog_skipNight_text" text="¿Desea omitir la noche hasta la mañana (6:00) o amanecer (% s)?" />
+        <text name="dialog_skipNight_morning" text="Mañana (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Amanecer (% s)" />
 
         <text name="fillType_snow" text="Nieve" />
 
@@ -231,12 +229,9 @@
 
         <text name="ss_helpTitle_16" text="Menú Seasons" />
         <text name="ss_helpText_16_01" text="El menú Seasons sirve como guía de referencia para plantar y cambiar los ajustes relacionados con Seasons. Este menú se activa con Alt Izq. + S." />
-        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
-        <text name="ss_helpText_16_03" text="" />
-        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
-        <text name="ss_helpText_16_04" text="" />
+        <text name="ss_helpText_16_02" text="La primera página es el calendario de siembra y cosecha. Las temperaturas de germinación de todos los cultivos se muestran a la izquierda del gráfico. Si la temperatura al lado de un cultivo es blanca, significa que es lo suficientemente cálida para sembrar ese cultivo en particular. Si la temperatura es azul, está demasiado fría." />
+        <text name="ss_helpText_16_03" text="En la segunda página se pueden encontrar datos sobre los precios de los productos en el último año." Los datos se actualizan todos los días. El precio futuro es solamente una estimación así que las desviaciones pueden ocurrir." />
+        <text name="ss_helpText_16_04" text="La tercera página es el menú Settings. En esta página están disponibles varias opciones para ajustar seasons en cómo desea jugar" />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Un HUD a la izquierda del reloj en la esquina superior derecha muestra información relevante para Seasons. Muestra la temperatura actual del aire en la parte superior y la temperatura del suelo en la parte inferior. El estado del suelo (cultivos mojados/suelo congelado) también se muestra a la izquierda de este HUD." />

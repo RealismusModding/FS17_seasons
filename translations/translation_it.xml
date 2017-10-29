@@ -4,7 +4,7 @@
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostra previsioni del tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ripara veicolo" />
-        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menu" />
+        <text name="input_SEASONS_SHOW_MENU" text="Seasons: Apri menù" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Seasons: Distanza piantatrice (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Seasons: Salta la notte" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Nascondi previsioni del tempo" />
@@ -85,7 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Non trebbiare quando le colture sono troppo umide!" />
         <text name="warning_animalsKilled" text="Animali deceduti (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="La capacità massima della mangiatoia è sufficiente per alimentare gli animali per 3 giorni" />
-        <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menu Esc per saperne di più su come utilizzare questa mod." />
+        <text name="msg_welcome" text="Benvenuti nella Seasons Mod di Realismus Modding. Controlla l'aiuto nel menù per saperne di più su come utilizzare questa mod." />
 
         <text name="measuretool_title" text="Misurazione" />
         <text name="measuretool_fermentation_time" text="%d ore rimanenti" />
@@ -117,7 +117,7 @@
         <text name="tooltip_seasonLength" text="La durata di una stagione in giorni. Un anno è quattro stagioni" />
         <text name="tooltip_seasonIntros" text="Mostra l'introduzione all'inizio della stagione" />
         <text name="tooltip_snow" text="Negli inverni freddi cadrà la neve e bloccherà le strade" />
-        <text name="tooltip_controlsHelp" text="Mostra la previsione ed i tasti nel menu di aiuto" />
+        <text name="tooltip_controlsHelp" text="Mostra i tasti della previsione meteo e del menù nella finestra di aiuto" />
         <text name="tooltip_snowTracks" text="I veicoli comprimono la neve quando ci si guida sopra" />
         <text name="tooltip_controlsTemperature" text="Impostare la scala termometrica utilizzata nel gioco" />
         <text name="tooltip_moisture" text="Disattivare la trebbiatura quando i raccolti sono bagnati dall'umidità" />
@@ -125,7 +125,7 @@
         <text name="setting_seasonIntros" text="Introduzioni Season" />
         <text name="setting_seasonLength" text="Durata Season" />
         <text name="setting_snow" text="Modalità neve" />
-        <text name="setting_controlsHelp" text="Tasti in Help menù" />
+        <text name="setting_controlsHelp" text="Tasti nella finestra di aiuto" />
         <text name="setting_snowTracks" text="Tracce nella neve" />
         <text name="setting_controlsTemperature" text="Scala termometrica" />
         <text name="setting_moisture" text="Umidità del raccolto" />
@@ -138,12 +138,9 @@
         <text name="dialog_timeTravel" text="Il gioco si sta sincronizzando dopo l'avanzamento veloce" />
         <text name="dialog_sleeping" text="Riposando prima di un altro giorno in fattoria... Zzz.." />
 
-        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
-        <text name="dialog_skipNight_text" text="" />
-        <!-- Missing translation of "Morning (6:00)" -->
-        <text name="dialog_skipNight_morning" text="" />
-        <!-- Missing translation of "Dawn (%s)" -->
-        <text name="dialog_skipNight_dawn" text="" />
+        <text name="dialog_skipNight_text" text="Vuoi saltare la notte fino al mattino (6:00) o fino all'alba (%s)?" />
+        <text name="dialog_skipNight_morning" text="Mattino (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Alba (%s)" />
 
         <text name="fillType_snow" text="Neve" />
 
@@ -167,26 +164,26 @@
         <text name="ss_helpText_03_03" text="Seasons influenzerà anche gli alberi e le chiome. Gli alberi cambieranno lo stato secondo le variazioni stagionali della temperatura. In autunno le foglie cambieranno colore e cadranno. In inverno gli alberi si spoglieranno e in primavera si tingeranno di verde." />
 
         <text name="ss_helpTitle_04" text="Tempo metereologico" />
-        <text name="ss_helpText_04_01" text="La previsione meteo è stata reintrodotta con Seasons e può essere attivata da Alt Sinistro + F." />
+        <text name="ss_helpText_04_01" text="La previsione meteo per i prossimi 7 giorni è visibile nell'angolo superiore destro dello schermo. La sua visibilità può essere cambiata." />
         <text name="ss_helpText_04_02" text="La previsione meteo mostra la temperatura massima/minima e il meteo (soleggiato, nebbioso, piovoso, nevoso, nuvoloso) per i prossimi 7 giorni. Le grandinate non appaiono sulle previsioni meteorologiche, come nella vita reale la grandine è spesso un evento inaspettato." />
         <text name="ss_helpText_04_03" text="Il numero a destra di ogni riquadro della previsione rappresenta il giorno della stagione." />
 
         <text name="ss_helpTitle_05" text="Terreno" />
         <text name="ss_helpText_05_01" text="La temperatura del suolo è modellata usando equazioni termodinamiche e dati storici. Ciò significa che il suolo si gelerà in inverno solo quando la temperatura dell'aria scende al di sotto di una certa gradazione per un determinato periodo di tempo. Il terreno si scongelerà in primavera quando la temperatura dell'aria salirà al di sopra una determinata soglia per un certo periodo di tempo." />
         <text name="ss_helpText_05_02" text="Il suolo non può essere lavorato quando il terreno è ghiacciato. Le colture non crescono nel terreno ghiacciato." />
-        <text name="ss_helpText_05_03" text="Le colture germineranno solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nella prima pagina del menù 'Impostazioni Seasons' (Alt sinistro + S)." />
+        <text name="ss_helpText_05_03" text="Le colture germineranno solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nel calendario, visibile nella prima pagina del menù Seasons." />
 
         <text name="ss_helpTitle_06" text="Colture" />
         <text name="ss_helpText_06_01" text="All'avvio di una nuova partita tutte le colture saranno ripristinate alla loro fase mietuta per simulare il fatto che i campi non sono stati lavorati dall'autunno. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
         <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. Le colture seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di semina e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture sono trebbiabili solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
-        <text name="ss_helpText_06_04" text="Una volta che una coltura escluso radici raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menu Esc, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
+        <text name="ss_helpText_06_04" text="Una volta che una coltura escluso radici raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menù, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
         <text name="ss_helpText_06_05" text="È ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
         <text name="ss_helpText_07_01" text="La crescita delle colture ora è molto più lunga. Può essere necessario fino sei mesi per raggiungere la fase di raccolto." />
         <text name="ss_helpText_07_02" text="L'inverno ucciderà la maggior parte delle colture, ma sono possibili colture invernali e primaverili. Grano, orzo, pioppo, erba, rafano oleifero e colza possono essere piantati in autunno per raccolti invernali o in primavera per raccolti primaverili. Assicurati che il terreno sia abbastanza caldo per la germinazione di queste colture." />
-        <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menu Seasons la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
+        <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menù Seasons la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
 
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
         <text name="ss_helpText_08_01" text="In inverno l'erba viene ripristinata nella sua fase falciata per simulare che l'inverno uccide l'erba con il freddo." />
@@ -206,7 +203,7 @@
 
         <text name="ss_helpTitle_11" text="Manutenzione" />
         <text name="ss_helpText_11_01" text="I tuoi trattori e raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o metà anno, qualunque arrivi prima. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
-        <text name="ss_helpText_11_02" text="Puoi riparare i tuoi veicoli presso il concessionario o il garage posizionabile. Per riparare il tuo veicolo avvicinalo al punto di vendita, o al garage posizionabile, e premi Alt sinistro + R. Ricordati che sarà più costoso riparare i veicoli presso il concessionario." />
+        <text name="ss_helpText_11_02" text="Puoi riparare i tuoi veicoli presso il concessionario o il garage posizionabile. Per riparare il tuo veicolo avvicinalo al punto di vendita, o al garage posizionabile, e attiva la riparazione. Ricordati che sarà più costoso riparare i veicoli presso il concessionario." />
         <text name="ss_helpText_11_03" text="L'età del tuo veicolo è il giorno dopo l'ultima riparazione." />
         <text name="ss_helpText_11_04" text="Solo i veicoli richiederanno una manutenzione periodica. Strumenti e utensili verranno automaticamente riparati a seconda delle necessità." />
 
@@ -230,22 +227,19 @@
         <text name="ss_helpText_15_03" text="Il latte viene prodotto tutto l'anno, ma maggiormente in inverno e in primavera. Dato che l'erba non può essere somministrata in inverno, questo riduce normalmente la produttività delle vacche al massimo all'80%. Tuttavia, Seasons aumenta la produzione di latte in inverno e in primavera per compensare la mancanza di erba in questi mesi." />
 
         <text name="ss_helpTitle_16" text="Menù Seasons" />
-        <text name="ss_helpText_16_01" text="Il menu Seasons viene utilizzato come guida di riferimento per la piantagione e per modificare le impostazioni relative a Seasons. Questo menu è attivato con Alt sinistro + S." />
-        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
-        <text name="ss_helpText_16_03" text="" />
-        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
-        <text name="ss_helpText_16_04" text="" />
+        <text name="ss_helpText_16_01" text="Il menù Seasons viene utilizzato come guida di riferimento per la semina, per l'economia e per modificare le impostazioni relative a Seasons." />
+        <text name="ss_helpText_16_02" text="La prima pagina corrisponde al calendario di semina e trebbiatura. Le temperature di germinazione di tutte le colture sono visualizzate sulla sinistra del grafico. Se la temperatura accanto ad una coltura è bianca, significa che il clima è abbastanza caldo per piantarla. Se la temperatura è blu, è troppo freddo." />
+        <text name="ss_helpText_16_03" text="Sulla seconda pagina puoi trovare dati sui prezzi dei prodotti nell'ultimo anno. I dati sono aggiornati annualmente. Il prezzo futuro è solo una stima e quindi potrebbero verificarsi scostamenti." />
+        <text name="ss_helpText_16_04" text="La terza pagina contiene le impostazioni. Su questa pagina varie opzioni sono disponibili per adattare Seasons al tuo stile di gioco." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons. Mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno ghiacciato) verrà visualizzato a sinistra di questo HUD." />
         <text name="ss_helpText_17_02" text="Direttamente sotto l'orologio è indicato il periodo stagionale e il giorno della stagione corrente." />
         <text name="ss_helpText_17_03" text="Quando è attiva, l'indicatore HUD apparirà sotto l'orologio nell'angolo in alto a destra." />
-        <text name="ss_helpText_17_04" text="Quando il menu di aiuto è attivato, il timer di manutenzione viene visualizzato al fondo del menù. Questo viene visualizzato solo quando sei in un veicolo." />
+        <text name="ss_helpText_17_04" text="Quando il menù di aiuto è attivato, il timer di manutenzione viene visualizzato al fondo del menù. Questo viene visualizzato solo quando sei in un veicolo." />
 
         <text name="ss_helpTitle_18" text="Altre impostazioni" />
-        <text name="ss_helpText_18_01" text="Se non vuoi lavorare durante la notte, hai la possibilità di passare direttamente alla mattina successiva. Dopo che è scesa la notte e sei a piedi puoi premere Alt sinistro + N per saltare alla mattina." />
+        <text name="ss_helpText_18_01" text="Se non desideri lavorare durante la notte, hai la possibilità di passare direttamente alla mattina successiva. Puoi farlo solamente fuori da un veicolo." />
         <text name="ss_helpText_18_02" text="Se decidi di modificare la lunghezza della stagione nel mezzo di un salvataggio esistente, è raccomandato 1) cambiare la lunghezza della stagione durante l'inverno per ridurre gli effetti indesiderati sulle colture esistenti e 2) riavviare il gioco/server dopo la modifica della lunghezza della stagione." />
         <text name="ss_helpText_18_03" text="Sebbene è il tuo gioco e giochi come vuoi, come una sfida per giocare da solo è suggerito una stagione di 9 giorni e con accelerazione a 5x. In questo modo si utilizza la primavera solo coltivando e seminando le colture, tagliando il fieno e curando le colture in estate, raccogliendo e arando in autunno e prendendo cura degli animali, delle macchine, delle foreste e vendendo i raccolti durante l'inverno." />
         <text name="ss_helpText_18_04" text="Tutti i veicoli devono essere avviati manualmente." />

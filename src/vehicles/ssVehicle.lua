@@ -40,6 +40,7 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Combine, "getIsThreshingAllowed", ssVehicle.getIsThreshingAllowed)
     ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
     ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
+    ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
 
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
@@ -522,11 +523,42 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
         return superFunc(self, earlyWarning)
     end
 
-    if self.allowThreshingDuringRain then
+    if self.allowThreshingDuringRain or g_seasons.vehicle:isRootCropRelated(self) then
         return true
     end
 
     return not g_seasons.weather:isCropWet()
+end
+
+function ssVehicle:isRootCropRelated(vehicle)
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
+
+    -- trailed harvesters
+    if vehicle.attacherVehicle ~= nil then
+        for _, item in pairs(vehicle.attacherVehicle.attachedImplements) do
+            for _, object in pairs(item) do
+                if type(object) == "table" and object.fruitPreparer ~= nil
+                   and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
+                    return true
+                end
+            end
+        end
+    end
+
+    -- try self propelled with integrated cutter
+    if vehicle.fruitPreparer ~= nil and (vehicle.fruitPreparer.fruitType == potatoId or vehicle.fruitPreparer.fruitType == beetId) then
+        return true
+    end
+
+    -- try self propelled with mounted cutter
+    for object, _ in pairs(vehicle.attachedCutters) do
+        if object.fruitPreparer ~= nil and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
+            return true
+        end
+    end
+
+    return false
 end
 
 function ssVehicle:aiVehicleUpdate(dt)
@@ -546,6 +578,58 @@ function ssVehicle:aiVehicleUpdate(dt)
         if self.lightsTypesMask ~= 0 then
             self:setLightsTypesMask(0)
         end
+    end
+end
+
+function ssVehicle:getFullBuyPrice(vehicle, storeItem)
+    local priceConfig = 0
+
+    if storeItem.configurations ~= nil then
+        for configName, configIds in pairs(vehicle.boughtConfigurations) do
+            local configItem = storeItem.configurations[configName]
+
+            if configItem ~= nil then
+                for id, _ in pairs(configIds) do
+                    if configItem[id] then
+                        priceConfig = priceConfig + configItem[id].price
+                    end
+                end
+            end
+        end
+
+    end
+
+    return storeItem.price + priceConfig
+end
+
+function ssVehicle:washableUpdateTick(superFunc, dt)
+    if self.washableNodes ~= nil and self.isServer then
+        local env = g_currentMission.environment;
+
+        -- Work the scale to affect rain-cleaning
+        local oldScale = env.lastRainScale
+        if env.currentRain == nil or env.currentRain ~= "rain" then
+            -- If event is not rain, do not clean
+            env.lastRainScale = 0
+        end
+
+        -- Work the duration to add more factors
+        local oldDuration = self.dirtDuration
+        local wetnessMultiplier = 0
+        if not ssWeatherManager:isGroundFrozen() then
+            wetnessMultiplier = (env.groundWetness ^ 2 + 0.1) * 3
+        end
+
+        -- If ground is frozen, no dirtification: multi is 0. Otherwise mult regarding wetness
+        self.dirtDuration = self.dirtDuration * wetnessMultiplier
+
+        -- Call the actual function
+        superFunc(self, dt)
+
+        self.dirtDuration = oldDuration
+        env.lastRainScale = oldScale
+    else
+        return superFunc(self, dt)
     end
 end
 
@@ -595,25 +679,4 @@ function ssVehicle:consoleCommandTestVehicle()
     print_r(vehicle.boughtConfigurations)
 
     return ""
-end
-
-function ssVehicle:getFullBuyPrice(vehicle, storeItem)
-    local priceConfig = 0
-
-    if storeItem.configurations ~= nil then
-        for configName, configIds in pairs(vehicle.boughtConfigurations) do
-            local configItem = storeItem.configurations[configName]
-
-            if configItem ~= nil then
-                for id, _ in pairs(configIds) do
-                    if configItem[id] then
-                        priceConfig = priceConfig + configItem[id].price
-                    end
-                end
-            end
-        end
-
-    end
-
-    return storeItem.price + priceConfig
 end
