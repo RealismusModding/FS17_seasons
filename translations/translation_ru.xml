@@ -85,7 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Нельзя молотить, когда культуры слишком влажные!" />
         <text name="warning_animalsKilled" text="У вас умерло животное (%d шт.)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней" />
-        <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню Esc, чтобы узнать больше о том, как использовать этот мод." />
+        <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню игры, чтобы узнать больше о том, как использовать этот мод." />
 
         <text name="measuretool_title" text="Измерение" />
         <text name="measuretool_fermentation_time" text="созреет через %d ч" />
