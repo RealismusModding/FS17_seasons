@@ -85,7 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
-        <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
+        <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry, aby dowiedzieć się jak używać tego modu." />
 
         <text name="measuretool_title" text="Pomiar" />
         <text name="measuretool_fermentation_time" text="Pozostało %d godzin(y)" />
@@ -144,12 +144,12 @@
 
         <text name="fillType_snow" text="Śnieg" />
 
-        <text name="function_measureTool" text="Za pomocą narzędzia pomiarowego można uzyskać informacje o glebie, drzewach, belach oraz innych obiektach." />
+        <text name="function_measureTool" text="Za pomocą urządzenia pomiarowego można uzyskać informacje o glebie, drzewach, belach oraz innych obiektach." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych poprzez wzrost upraw aż do produkcji zwierzęcej zostało przeniesione na bardziej realistyczny poziom." />
+        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty gry do bardziej realistycznych parametrów. Wszystko od efektów sezonowych poprzez wzrost upraw aż do produkcji zwierzęcej zostało przeniesione na bardziej realistyczny poziom." />
         <text name="ss_helpText_01_02" text="Rok w grze został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 pory: wczesną, środkową i późną. Te pory są określane mianem przejść." />
         <text name="ss_helpText_01_03" text="Twoje prace są powiązane z porą roku tak, jak ma to miejsce w prawdziwym życiu." />
 
