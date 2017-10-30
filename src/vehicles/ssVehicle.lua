@@ -517,7 +517,22 @@ function ssVehicle:isRootCropRelated(vehicle)
         return true
     end
 
-    -- Detect trailed harvesters
+    -- Detect trailed harvesters by looking at their fill types.
+    -- If they only accept either potatoes or sugarBeets, then allow them to harvest
+    local fillTypes = vehicle.ssFillTypes
+    if fillTypes == nil then
+        local item = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+        fillTypes = StoreItemsUtil.storeItemSpecsNameToDesc["fillTypes"].getValueFunc(item)
+
+        vehicle.ssFillTypes = fillTypes
+    end
+
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
+
+    if table.getn(vehicle.ssFillTypes) == 1 and (vehicle.ssFillTypes[1] == potatoId or vehicle.ssFillTypes[1] == beetId) then
+        return true
+    end
 
     return false
 end
