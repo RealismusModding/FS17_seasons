@@ -515,7 +515,7 @@ function ssVehicle:isRootCropRelated(vehicle)
     local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
     local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
 
-    -- trailed harvesters
+    -- attached toppers
     if vehicle.attacherVehicle ~= nil then
         for _, item in pairs(vehicle.attacherVehicle.attachedImplements) do
             for _, object in pairs(item) do
