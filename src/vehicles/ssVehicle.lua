@@ -512,32 +512,12 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
 end
 
 function ssVehicle:isRootCropRelated(vehicle)
-    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
-    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
-
-    -- attached toppers
-    if vehicle.attacherVehicle ~= nil then
-        for _, item in pairs(vehicle.attacherVehicle.attachedImplements) do
-            for _, object in pairs(item) do
-                if type(object) == "table" and object.fruitPreparer ~= nil
-                   and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
-                    return true
-                end
-            end
-        end
-    end
-
-    -- try self propelled with integrated cutter
-    if vehicle.fruitPreparer ~= nil and (vehicle.fruitPreparer.fruitType == potatoId or vehicle.fruitPreparer.fruitType == beetId) then
+    -- Self propelled harvesters, either with or without a topper are detected using this fruitPreparer
+    if vehicle.fruitPreparer ~= nil then
         return true
     end
 
-    -- try self propelled with mounted cutter
-    for object, _ in pairs(vehicle.attachedCutters) do
-        if object.fruitPreparer ~= nil and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
-            return true
-        end
-    end
+    -- Detect trailed harvesters
 
     return false
 end
