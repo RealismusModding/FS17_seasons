@@ -129,6 +129,15 @@ function ssGrowthManager:loadGameFinished()
         else
             self:checkAndAddNewFruits(false)
         end
+    else
+        for index, fruit in pairs(g_currentMission.fruits) do
+            local fruitName = FruitUtil.fruitIndexToDesc[index].name
+            --handling new unknown fruits
+            if self.defaultFruitsData[fruitName] == nil then
+                g_seasons.growthGUI:updateCanPlantData(fruitName)
+                g_seasons.growthGUI:updateCanHarvestData(fruitName)
+            end
+        end
     end
 end
 
