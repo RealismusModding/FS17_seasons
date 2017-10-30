@@ -24,11 +24,13 @@ end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'
 function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
-    local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth()
-
     for fruitName, value in pairs(fruitData) do
         if FruitUtil.fruitTypeGrowths[fruitName] ~= nil and fruitName ~= "dryGrass" then
             local transitionTable = {}
+
+            local germTemp = g_seasons.weather:germinationTemperature(fruitName)
+            local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth(germTemp)
+
             for transition, v in pairs(growthData) do
                 if transition == g_seasons.growthManager.FIRST_LOAD_TRANSITION then
                     break
