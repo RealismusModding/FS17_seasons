@@ -961,13 +961,13 @@ function ssWeatherManager:calculateSoilWetness()
     end
 end
 
-function ssWeatherManager:soilTooColdForGrowth()
+function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
     local tooColdSoil = {}
     local lowSoilTemp = {}
     local soilTemp = {}
 
     local daysInSeason = 9
-    local tempLimit = 4.89
+    local tempLimit = germinationTemperature - 0.11
 
     for i=1,12 do
         lowSoilTemp[i] = -math.huge

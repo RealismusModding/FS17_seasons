@@ -109,9 +109,6 @@ function ssGrowthManager:loadMap(name)
         return
     end
 
-    g_seasons.growthGUI:buildCanPlantData(self.defaultFruitsData, self.growthData)
-    g_seasons.growthGUI:buildCanHarvestData(self.growthData)
-
     if g_currentMission:getIsServer() then
         g_seasons.environment:addTransitionChangeListener(self)
 
@@ -119,13 +116,25 @@ function ssGrowthManager:loadMap(name)
     end
 end
 
-function ssGrowthManager:loadMapFinished()
+function ssGrowthManager:loadGameFinished()
+    g_seasons.growthGUI:buildCanPlantData(self.defaultFruitsData, self.growthData)
+    g_seasons.growthGUI:buildCanHarvestData(self.growthData)
+
     if g_currentMission:getIsServer() then
         if self.isNewSavegame == true or self.isActivatedOnOldSave == true then --if new game or mod enabled on existing save
             self:rebuildWillGerminateData()
             self:checkAndAddNewFruits(true)
         else
             self:checkAndAddNewFruits(false)
+        end
+    else
+        for index, fruit in pairs(g_currentMission.fruits) do
+            local fruitName = FruitUtil.fruitIndexToDesc[index].name
+            --handling new unknown fruits
+            if self.defaultFruitsData[fruitName] == nil then
+                g_seasons.growthGUI:updateCanPlantData(fruitName)
+                g_seasons.growthGUI:updateCanHarvestData(fruitName)
+            end
         end
     end
 end

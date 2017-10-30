@@ -27,16 +27,18 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
     for fruitName, value in pairs(fruitData) do
         if FruitUtil.fruitTypeGrowths[fruitName] ~= nil and fruitName ~= "dryGrass" then
             local transitionTable = {}
+
+            local germTemp = g_seasons.weather:germinationTemperature(fruitName)
+            local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth(germTemp)
+
             for transition, v in pairs(growthData) do
                 if transition == g_seasons.growthManager.FIRST_LOAD_TRANSITION then
                     break
                 end
 
-                -- if transition == g_seasons.environment.TRANSITION_EARLY_WINTER
-                --         or transition == g_seasons.environment.TRANSITION_MID_WINTER
-                --         or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
-                --     table.insert(transitionTable, transition , false)
-                -- else
+                if tooColdTransitions[transition] then
+                    table.insert(transitionTable, transition , false)
+                else
                     local plantedTransition = transition
                     local currentGrowthState = 1
 
@@ -60,7 +62,7 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
                     else
                         table.insert(transitionTable, plantedTransition , false)
                     end
-                -- end
+                end
             end
             self.canPlantData[fruitName] = transitionTable
         end
