@@ -512,31 +512,26 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
 end
 
 function ssVehicle:isRootCropRelated(vehicle)
-    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
-    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
-
-    -- trailed harvesters
-    if vehicle.attacherVehicle ~= nil then
-        for _, item in pairs(vehicle.attacherVehicle.attachedImplements) do
-            for _, object in pairs(item) do
-                if type(object) == "table" and object.fruitPreparer ~= nil
-                   and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
-                    return true
-                end
-            end
-        end
-    end
-
-    -- try self propelled with integrated cutter
-    if vehicle.fruitPreparer ~= nil and (vehicle.fruitPreparer.fruitType == potatoId or vehicle.fruitPreparer.fruitType == beetId) then
+    -- Self propelled harvesters, either with or without a topper are detected using this fruitPreparer
+    if vehicle.fruitPreparer ~= nil then
         return true
     end
 
-    -- try self propelled with mounted cutter
-    for object, _ in pairs(vehicle.attachedCutters) do
-        if object.fruitPreparer ~= nil and (object.fruitPreparer.fruitType == potatoId or object.fruitPreparer.fruitType == beetId) then
-            return true
-        end
+    -- Detect trailed harvesters by looking at their fill types.
+    -- If they only accept either potatoes or sugarBeets, then allow them to harvest
+    local fillTypes = vehicle.ssFillTypes
+    if fillTypes == nil then
+        local item = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+        fillTypes = StoreItemsUtil.storeItemSpecsNameToDesc["fillTypes"].getValueFunc(item)
+
+        vehicle.ssFillTypes = fillTypes
+    end
+
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
+
+    if table.getn(vehicle.ssFillTypes) == 1 and (vehicle.ssFillTypes[1] == potatoId or vehicle.ssFillTypes[1] == beetId) then
+        return true
     end
 
     return false
