@@ -85,7 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind!" />
         <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben. (%d) Tiere sind bereits verstorben" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend" />
-        <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
+        <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü." />
 
         <text name="measuretool_title" text="Messung" />
         <text name="measuretool_fermentation_time" text="Noch %d Stunden erforderlich" />
@@ -138,12 +138,9 @@
         <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen" />
         <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
 
-        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
-        <text name="dialog_skipNight_text" text="" />
-        <!-- Missing translation of "Morning (6:00)" -->
-        <text name="dialog_skipNight_morning" text="" />
-        <!-- Missing translation of "Dawn (%s)" -->
-        <text name="dialog_skipNight_dawn" text="" />
+        <text name="dialog_skipNight_text" text="Möchtest du die Nacht bis zum Morgen (6:00h) oder bis zum  Sonnenaufgang (% s) überspringen." />
+        <text name="dialog_skipNight_morning" text="Morgens (6:00h)" />
+        <text name="dialog_skipNight_dawn" text="Sonnenaufgang (%s)" />
 
         <text name="fillType_snow" text="Schnee" />
 
@@ -231,12 +228,9 @@
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
-        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
-        <text name="ss_helpText_16_03" text="" />
-        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
-        <text name="ss_helpText_16_04" text="" />
+        <text name="ss_helpText_16_02" text="Die erste Seite enthält den Pflanz- und Erntekalender. Die Keimtemperaturen aller Kulturen sind links im Diagramm angegeben. Wenn die Temperatur neben einer Pflanze weiß ist, bedeutet dies, dass sie warm genug ist, um diese bestimmte Pflanze zu säen bzw. zu pflanzen. Wenn die Temperatur blau ist, ist es noch zu kalt." />
+        <text name="ss_helpText_16_03" text="Auf der zweiten Seite findest du Daten zu den Produktpreisen im ganzen Jahr. Die Daten werden jeden Tag aktualisiert. Der zukünftige Preis ist dabei nur eine Schätzung. Es können also Abweichungen auftreten." />
+        <text name="ss_helpText_16_04" text="Die dritte Seite beinhaltet ein Einstellungsmenü. Auf dieser Seite stehen verschiedene Optionen zur Verfügung. Mit deinen Einstellungen kannst du mit Seasons so spielen wie du möchtest." />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
         <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />
