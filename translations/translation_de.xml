@@ -164,18 +164,18 @@
         <text name="ss_helpText_03_03" text="Seasons verändert das Aussehen der Bäume und Pflanzen passend zur aktuellen Jahreszeit. Im Frühjahr wirkt die Umgebung dementsprechend grüner, im Herbst werden die Bäume typisch braun und verlieren ihre Blätter. Im Winter wird es allgemein etwas dunkler, alleine schon aufgrund der wenigen Sonnenstunden." />
 
         <text name="ss_helpTitle_04" text="Wettervorhersage" />
-        <text name="ss_helpText_04_01" text="Die Wettervorhersage ist nun wieder fester Bestandteil des Spieles und kann standardmäßig mit der Tastenkombination ALT links + F ein- und ausgeblendet werden." />
+        <text name="ss_helpText_04_01" text="Die Wettervorhersage für die nächsten 7 Tage ist in der oberen rechten Ecke des Bildschirms zu sehen. Die Sichtbarkeit kann abgeschaltet werden." />
         <text name="ss_helpText_04_02" text="Die Vorhersage zeigt die aktuellen Temperaturen und Wetterprognosen (Sonne, Nebel, Regen, Schnee ...) für die nächsten kommenden 7 Tage an. Achtung! Schlagartige Hagel- bzw. Regenschauer können wie im wahren Leben nicht immer vorhergesagt werden!" />
         <text name="ss_helpText_04_03" text="Die rechte Zahl zeigt den jeweiligen Tag der aktuellen Jahreszeit an." />
 
         <text name="ss_helpTitle_05" text="Boden" />
         <text name="ss_helpText_05_01" text="Die Bodentemperaturen verändern sich während der Jahreszeiten. Die Daten wurden versucht so realistisch wie möglich zu gestalten. Bleibt es im Winter eine gewisse Zeit kalt genug, kommt es zu Bodenfrost, welcher erst wieder im Frühling auftaut. Beachtet hierzu die Anzeige oberhalb rechts im Blick." />
         <text name="ss_helpText_05_02" text="Während Bodenfrost können die Felder/Böden nicht bearbeitet werden. Die Pflanzen werden während dieser Zeit nicht wachsen ggf. sogar absterben." />
-        <text name="ss_helpText_05_03" text="Pflanzen werden nur bei der dementsprechenden Bodentemperatur keimen. Wann welche Pflanze ihre ideale Wachstumszeit hat, kannst Du dem Hilfemenü ALT links + S entnehmen." />
+        <text name="ss_helpText_05_03" text="Kulturen keimen nur dann, wenn die Bodentemperatur über ihren Keimtemperaturen liegt. Die Temperaturen für die Keimung sind im Kalender auf der ersten Seite des Seasons-Menüs enthalten." />
 
         <text name="ss_helpTitle_06" text="Pflanzen - Einführung" />
         <text name="ss_helpText_06_01" text="Wird ein neuer Spielstand gestartet, werden zu Beginn sämtliche Wachstumsstufen zurückgesetzt um den Übergang vom Herbst zum Frühling zu simulieren. Wird ein bestehender Spielstand gestartet kann man das Zurücksetzen der Wachstumsstufen ablehnen." />
-        <text name="ss_helpText_06_02" text="Seasons verändert das gesamte Pflanzenwachstum. Die Pflanzen folgen nun ihrem natürlichen Zyklus und wachsen nur während ihrer typischen Zeiten. Ebenso sind nun die richtigen Aussaatzeiten von Bedeutung. Eine Übersicht erhältst Du im Hilfefenster ALT links + S  Beachte: Im Winter werden die meisten Pflanzen absterben! Beende die Ernte also rechtzeitig. Wird eine Pflanze zur falschen Zeit gesät kann es zu erheblichen Ernteausfällen kommen." />
+        <text name="ss_helpText_06_02" text="Die im Spiel standardmäßigen Wachstumsmuster von Kulturpflanzen wurden durch Seasons ersetzt. Die Ernte folgt nun einem realistischen Wachstumsmuster nach den entsprechenden saisonalen Pflanz- und Erntezeiten. Dies bedeutet auch, dass im Winter die meisten Kulturen abtötet werden und dass die zum falschen Zeitpunkt ausgebrachten/gesäten Pflanzen nicht wachsen." />
         <text name="ss_helpText_06_03" text="Pflanzen sind nur in der letzten Wachstumsstufe erntbar." />
         <text name="ss_helpText_06_04" text="Sobald eine Nicht-Wurzelpflanze laut Anzeige in der Wachstumsübersicht die erste Erntestufe erreicht hat, ist diese Pflanze uneingeschränkt erntereif. Eine weitere Erntestufe gibt es dann nicht mehr." />
         <text name="ss_helpText_06_05" text="Grüne Pflanzen können weiterhin zur Silage benutzt werden." />
@@ -239,7 +239,7 @@
         <text name="ss_helpText_17_04" text="Wenn das Hilfefenster aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
 
         <text name="ss_helpTitle_18" text="Verschiedenes" />
-        <text name="ss_helpText_18_01" text="Wenn Du nachts nicht arbeiten möchtest, nutze die Funktion 'Nacht überspringen'. Einfach am Anfang der Nacht die standardmäßig einstellte Tastenkombination Alt links + N drücken und automatisch zum nächsten Morgen vorspulen. Du musst dabei aber außerhalb eines Fahrzeuges stehen." />
+        <text name="ss_helpText_18_01" text="Wenn du während der Nacht nicht arbeiten möchtest, hast du die Möglichkeit zum nächsten Morgen zu springen. Du kannst dies aber nur außerhalb eines Fahrzeugs tun." />
         <text name="ss_helpText_18_02" text="Möchtest Du die Länge der Jahreszeiten während eines aktiven Spielstandes verändern, solltest Du 1.) die Veränderung während des Winters vornehmen, damit Du keine ungewollten Probleme mit dem aktuellen Pflanzenwachstum bekommst oder 2.) sollte das Spiel bzw. der Onlineserver neu gestartet werden." />
         <text name="ss_helpText_18_03" text="Seasons verändert die Spielweise in vielen Punkten. Die meisten Tester konnten mit der 9-Tage-Jahreszeit und einer Zeitskalierung von 5x das beste Spielerlebnis erreichen. Natürlich hat jeder seine eigenen Vorlieben und eigene Spielweise. Der Frühling sollte dennoch zum Pflügen/Grubbern/Säen genutzt werden. Der Sommer ist für den Pflanzenschutz (Dünger ausbringen etc.), den ersten Gras-Schnitt und/oder die Heuproduktion vorgesehen. Danach kommt die Ernte der Pflanzen bis in den späten Herbst. Die erste Aussaat (Wintergetreide) ist danach schon möglich. Da der Boden im Winter vermutlich zu kalt und gefroren sein wird, kannst Du Dich nun verstärkt um die Tiere oder die Forstwirtschaft kümmern. Dein Fuhrpark sollte natürlich auch regelmäßig gewartet werden. Also nutze die freie Zeit im Winter!" />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
