@@ -966,7 +966,7 @@ function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
     local soilTemp = {}
 
     local daysInSeason = 9
-    local tempLimit = germinationTemperature - 0.11
+    local tempLimit = germinationTemperature - 1
 
     for i=1,12 do
         lowSoilTemp[i] = -math.huge
