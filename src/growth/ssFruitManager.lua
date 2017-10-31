@@ -29,6 +29,10 @@ function ssFruitManager:deleteMap()
         if item.ssOriginalMinHarvestingGrowthState ~= nil then
             item.minHarvestingGrowthState = item.ssOriginalMinHarvestingGrowthState
         end
+
+        if item.ssOriginalMinPreparingGrowthState ~= nil then
+            item.minPreparingGrowthState = item.ssOriginalMinPreparingGrowthState
+        end
     end
 end
 
@@ -41,16 +45,22 @@ end
 
 function ssFruitManager:updateHarvestStates()
     for index, fruit in pairs(g_currentMission.fruits) do
-        local item = FruitUtil.fruitIndexToDesc[index]
-        local fruitName = item.name
+        local desc = FruitUtil.fruitIndexToDesc[index]
 
         if self:fruitShouldBeUpdated(index) == true then
             -- Minimize the time a crop can be harvested (1 state, not ~3)
-            if item.ssOriginalMinHarvestingGrowthState == nil then
-                item.ssOriginalMinHarvestingGrowthState = item.minHarvestingGrowthState
+            if desc.ssOriginalMinHarvestingGrowthState == nil then
+                desc.ssOriginalMinHarvestingGrowthState = desc.minHarvestingGrowthState
             end
 
-            FruitUtil.fruitIndexToDesc[index].minHarvestingGrowthState = FruitUtil.fruitIndexToDesc[index].maxHarvestingGrowthState
+            desc.minHarvestingGrowthState = desc.maxHarvestingGrowthState
+        end
+
+        -- Sugarcane is a very special fruit
+        if index == FruitUtil.FRUITTYPE_SUGARCANE then
+            desc.ssOriginalMinPreparingGrowthState = desc.minPreparingGrowthState
+
+            desc.minPreparingGrowthState = desc.maxPreparingGrowthState
         end
     end
 end
