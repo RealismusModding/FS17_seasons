@@ -216,6 +216,10 @@
         <Value name="position" value="0px 0px" />
     </Profile>
 
+    <Profile name="consoles_ssMeasureToolDialogSlider" parent="ssMeasureToolDialogSlider">
+        <Value name="size" value="16px 420px" />
+    </Profile>
+
     <Profile name="ssMeasureToolDialogContentList" parent="list">
         <Value name="size" value="373px 420px"/>
 
