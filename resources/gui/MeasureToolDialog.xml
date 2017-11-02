@@ -8,11 +8,16 @@
                 <GuiElement type="text" profile="ssMeasureToolDialogTitle" text="title" id="dialogTitleElement" />
             </GuiElement>
 
-            <GuiElement type="list" profile="ssMeasureToolDialogContentList" id="contentList" focusId="100" focusChangeBottom="1" focusChangeTop="1">
-                <GuiElement type="listItem" id="contentItemTemplate" profile="ssMeasureToolDialogItem">
-                    <GuiElement type="bitmap" profile="ssMeasureToolDialogItemBg" onCreate="onCreateItemBg">
-                        <GuiElement type="bitmap" profile="ssMeasureToolDialogItemIcon" onCreate="onCreateItemIcon" />
-                        <GuiElement type="text" profile="ssMeasureToolDialogItemText" text="text" onCreate="onCreateItemText" />
+            <GuiElement type="slider" profile="ssMeasureToolDialogSlider">
+                <GuiElement type="button" profile="sliderButtonUp" focusId="sliderUp" />
+                <GuiElement type="button" profile="sliderButtonDown" focusId="sliderDown" />
+
+                <GuiElement type="list" profile="ssMeasureToolDialogContentList" id="contentList" focusId="100" focusChangeBottom="1" focusChangeTop="1">
+                    <GuiElement type="listItem" id="contentItemTemplate" profile="ssMeasureToolDialogItem">
+                        <GuiElement type="bitmap" profile="ssMeasureToolDialogItemBg" onCreate="onCreateItemBg">
+                            <GuiElement type="bitmap" profile="ssMeasureToolDialogItemIcon" onCreate="onCreateItemIcon" />
+                            <GuiElement type="text" profile="ssMeasureToolDialogItemText" text="text" onCreate="onCreateItemText" />
+                        </GuiElement>
                     </GuiElement>
                 </GuiElement>
             </GuiElement>

@@ -108,27 +108,32 @@
         <Value name="size" value="390px 40px" />
     </Profile>
 
+    <Profile name="ssMeasureToolDialogSlider" parent="sliderVertical">
+        <Value name="size" value="16px 348px" />
+        <Value name="position" value="0px 0px" />
+    </Profile>
+
     <Profile name="ssMeasureToolDialogContentList" parent="list">
-        <Value name="size" value="390px 420px"/>
+        <Value name="size" value="373px 420px"/>
 
         <Value name="screenAlign" value="middleRight"/>
         <Value name="positionOrigin" value="middleRight"/>
 
-        <Value name="position" value="0px 0px" />
+        <Value name="position" value="-17px 0px" />
 
         <Value name="listItemHeight" value="60px"/>
-        <Value name="listItemWidth" value="390px" />
+        <Value name="listItemWidth" value="373px" />
 
         <Value name="isHorizontalList" value="false"/>
         <Value name="visibleItems" value="7"/>
     </Profile>
 
     <Profile name="ssMeasureToolDialogItem" prarent="listItem">
-        <Value name="size" value="390px 60px" />
+        <Value name="size" value="373px 60px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogItemBg" parent="baseReference">
-        <Value name="size" value="390px 60px" />
+        <Value name="size" value="374px 60px" />
 
         <Value name="screenAlign" value="bottomLeft"/>
         <Value name="positionOrigin" value="bottomLeft"/>
