@@ -374,8 +374,9 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         local fillType = FruitUtil.fruitTypeToFillType[crop.desc.index]
         local length = 0
         local densityState = crop.stage - 1
-        if densityState <= crop.desc.maxHarvestingGrowthState then
-            length = Utils.clamp(densityState / crop.desc.maxHarvestingGrowthState, 0, 1)
+        local numStates = FruitUtil.fruitTypeGrowths[crop.desc.name].numGrowthStates - 1
+        if densityState <= numStates then
+            length = Utils.clamp(densityState / numStates, 0, 1)
         end
 
         table.insert(data, {
