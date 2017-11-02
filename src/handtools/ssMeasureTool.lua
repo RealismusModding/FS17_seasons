@@ -407,7 +407,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
 
     local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
     table.insert(data, {
-        iconUVs = ssMeasureTool.UVS_SOIL_MOISTURE,
+        iconUVs = ssMeasureTool.UVS_MOISTURE,
         text = string.format("%.0f%%", moisture * 100)
     })
 
