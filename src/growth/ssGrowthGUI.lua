@@ -30,6 +30,7 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
 
             local germTemp = g_seasons.weather:germinationTemperature(fruitName)
             local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth(germTemp)
+            local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
             for transition, v in pairs(growthData) do
                 if transition == g_seasons.growthManager.FIRST_LOAD_TRANSITION then
@@ -44,7 +45,6 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
 
                     local maxAllowedCounter = 0
                     local transitionToCheck = plantedTransition + 1 -- need to start checking from the next transition after planted transition
-                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
                     while currentGrowthState < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
                         if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
@@ -74,27 +74,27 @@ function ssGrowthGUI:buildCanHarvestData(growthData)
             local transitionTable = {}
             local plantedTransition = 1
             local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
+            local fruitDesc = FruitUtil.fruitTypes[fruitName]
 
-            local skipFruit = fruitName == "poplar" or fruitName == "grass" or fruitName == "sugarCane"
+            local skipFruit = fruitName == "poplar" --or fruitName == "grass"
 
             for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
                 if self.canPlantData[fruitName][plantedTransition] == true and not skipFruit then
                     local growthState = 1
 
                     local transitionToCheck = plantedTransition + 1
-                    if plantedTransition >= 12 then
+                    if plantedTransition > 12 then
                         transitionToCheck = transitionToCheck - 12
-
-                        if transitionToCheck == 12 then
-                            transitionToCheck = 1
-                        end
+                    end
+                    if transitionToCheck == 12 then
+                        transitionToCheck = 1
                     end
 
                     local safetyCheck = 1
                     while growthState <= fruitNumStates do
                         growthState = self:simulateGrowth(fruitName, transitionToCheck, growthState, growthData)
 
-                        if growthState == fruitNumStates then
+                        if growthState == fruitNumStates or (growthState >= fruitDesc.minHarvestingGrowthState + 1 and growthState <= fruitDesc.maxHarvestingGrowthState + 1) then
                             transitionTable[transitionToCheck] = true
                         end
 
@@ -108,16 +108,14 @@ function ssGrowthGUI:buildCanHarvestData(growthData)
             end
 
             --fill in the gaps
-            for plantedTransition = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
-                if fruitName == "poplar" or fruitName == "sugarCane" then --hardcoding for poplar and sugarcane. No withering
+            for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
+                if fruitName == "poplar" then --hardcoding for poplar. No withering
                     transitionTable[plantedTransition] = true
-                elseif fruitName == "grass" and plantedTransition > g_seasons.environment.TRANSITION_EARLY_SPRING and plantedTransition < g_seasons.environment.TRANSITION_EARLY_WINTER then
-                    transitionTable[plantedTransition] = true
-                elseif fruitName == "sugarCane" then
                 elseif transitionTable[plantedTransition] ~= true then
                     transitionTable[plantedTransition] = false
                 end
             end
+
             self.canHarvestData[fruitName] = transitionTable
         end
     end
@@ -131,8 +129,6 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
         transitionToCheck = transitionToCheck - 12
     end
 
-    -- log('find', transitionToCheck, fruitName)
-    -- print_r(growthData)
     if growthData[transitionToCheck][fruitName] ~= nil then
         --setGrowthState
         if growthData[transitionToCheck][fruitName].setGrowthState ~= nil

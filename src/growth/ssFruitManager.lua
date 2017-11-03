@@ -36,11 +36,8 @@ function ssFruitManager:deleteMap()
     end
 end
 
-function ssFruitManager:update(dt)
-    if ssFruitManager.harvestStatesUpdated == false then
-        self:updateHarvestStates()
-        self.harvestStatesUpdated = true
-    end
+function ssFruitManager:loadMapFinished()
+    self:updateHarvestStates()
 end
 
 function ssFruitManager:updateHarvestStates()
