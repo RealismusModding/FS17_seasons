@@ -975,15 +975,15 @@ function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
     -- run after loading data from xml so self.soilTemp will be initial value at this point
     soilTemp[1] = self.soilTemp
     -- building table with hard coded 9 day season
-    for i = 2, 4 * 9 do
-        local gt = g_seasons.environment:transitionAtDay(i)
-        local gtPrevDay = g_seasons.environment:transitionAtDay(i - 1)
+    for i = 2, 4 * daysInSeason do
+        local gt = g_seasons.environment:transitionAtDay(i, daysInSeason)
+        local gtPrevDay = g_seasons.environment:transitionAtDay(i - 1, daysInSeason)
 
         local ssTmax = self.temperatureData[gt]
         local highTemp = ssTmax.mode
         local lowTemp = 0.75 * ssTmax.mode - 5
 
-        soilTemp[i], _ = self:calculateSoilTemp(lowTemp, highTemp, 9, soilTemp[i - 1], 0, 0)
+        soilTemp[i], _ = self:calculateSoilTemp(lowTemp, highTemp, daysInSeason, soilTemp[i - 1], 0, 0)
         if soilTemp[i] > lowSoilTemp[gt] then
             lowSoilTemp[gt] = soilTemp[i]
         end

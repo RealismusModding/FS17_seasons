@@ -21,11 +21,15 @@ function ssFruitManager:loadMap(name)
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POTATO] = true
 end
 
-function ssFruitManager:update(dt)
-    if ssFruitManager.harvestStatesUpdated == false then
-        self:updateHarvestStates()
-        self.harvestStatesUpdated = true
-    end
+-- function ssFruitManager:update(dt)
+--     if ssFruitManager.harvestStatesUpdated == false then
+--         self:updateHarvestStates()
+--         self.harvestStatesUpdated = true
+--     end
+-- end
+
+function ssFruitManager:loadMapFinished()
+    self:updateHarvestStates()
 end
 
 function ssFruitManager:updateHarvestStates()
