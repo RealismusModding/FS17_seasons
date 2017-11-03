@@ -129,25 +129,27 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
         transitionToCheck = transitionToCheck - 12
     end
 
-    if growthData[transitionToCheck][fruitName] ~= nil then
+    local data = growthData[transitionToCheck][fruitName]
+
+    if data ~= nil then
         --setGrowthState
-        if growthData[transitionToCheck][fruitName].setGrowthState ~= nil
-            and growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
-            if growthData[transitionToCheck][fruitName].setGrowthMaxState ~= nil then
-                if currentGrowthState >= growthData[transitionToCheck][fruitName].setGrowthState and currentGrowthState <= growthData[transitionToCheck][fruitName].setGrowthMaxState then
-                    newGrowthState = growthData[transitionToCheck][fruitName].desiredGrowthState
+        if data.setGrowthState ~= nil
+            and data.desiredGrowthState ~= nil then
+            if data.setGrowthMaxState ~= nil then
+                if currentGrowthState >= data.setGrowthState and currentGrowthState <= data.setGrowthMaxState then
+                    newGrowthState = data.desiredGrowthState
                 end
             else
-                if currentGrowthState == growthData[transitionToCheck][fruitName].setGrowthState then
-                    newGrowthState = growthData[transitionToCheck][fruitName].desiredGrowthState
+                if currentGrowthState == data.setGrowthState then
+                    newGrowthState = data.desiredGrowthState
                 end
             end
         end
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-        if growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
-            local normalGrowthState = growthData[transitionToCheck][fruitName].normalGrowthState
-            if growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
-                local normalGrowthMaxState = growthData[transitionToCheck][fruitName].normalGrowthMaxState
+        if data.normalGrowthState ~= nil then
+            local normalGrowthState = data.normalGrowthState
+            if data.normalGrowthMaxState ~= nil then
+                local normalGrowthMaxState = data.normalGrowthMaxState
                 if currentGrowthState >= normalGrowthState and currentGrowthState <= normalGrowthMaxState then
                     newGrowthState = newGrowthState + 1
                 end
@@ -158,17 +160,18 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
             end
         end
         --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-        if growthData[transitionToCheck][fruitName].extraGrowthMinState ~= nil
-                and growthData[transitionToCheck][fruitName].extraGrowthMaxState ~= nil
-                and growthData[transitionToCheck][fruitName].extraGrowthFactor ~= nil then
-            local extraGrowthMinState = growthData[transitionToCheck][fruitName].extraGrowthMinState
-            local extraGrowthMaxState = growthData[transitionToCheck][fruitName].extraGrowthMaxState
+        if data.extraGrowthMinState ~= nil
+                and data.extraGrowthMaxState ~= nil
+                and data.extraGrowthFactor ~= nil then
+            local extraGrowthMinState = data.extraGrowthMinState
+            local extraGrowthMaxState = data.extraGrowthMaxState
 
             if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
-                newGrowthState = newGrowthState + growthData[transitionToCheck][fruitName].extraGrowthFactor
+                newGrowthState = newGrowthState + data.extraGrowthFactor
             end
         end
     end
+
     return newGrowthState
 end
 
