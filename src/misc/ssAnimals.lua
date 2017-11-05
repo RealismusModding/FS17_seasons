@@ -326,10 +326,10 @@ function ssAnimals:husbandryGetDataAttributes(superFunc)
 end
 
 function ssAnimals:updateAverageProductivity()
-    local seasonFac = g_seasons.environment.daysInSeason * 24 * 3
     local reductionFac = 0.1
 
     for  _, husbandry in pairs(g_currentMission.husbandries) do
+        local seasonFac = g_seasons.environment.daysInSeason * 24 * 3
         local currentProd = Utils.getNoNil(husbandry.productivity, 0.0)
         local avgProd = husbandry.averageProduction
 
@@ -337,7 +337,7 @@ function ssAnimals:updateAverageProductivity()
             seasonFac = seasonFac * reductionFac
         end
 
-        husbandry.averageProduction = math.max(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01)
+        husbandry.averageProduction = Utils.clamp(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01, 1)
     end
 end
 
