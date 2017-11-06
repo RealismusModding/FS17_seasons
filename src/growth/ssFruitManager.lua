@@ -34,6 +34,7 @@ function ssFruitManager:deleteMap()
             item.minPreparingGrowthState = item.ssOriginalMinPreparingGrowthState
         end
     end
+end
 
 function ssFruitManager:loadMapFinished()
     self:updateHarvestStates()
