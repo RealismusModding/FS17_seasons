@@ -17,6 +17,10 @@ function ssDaylight:preLoad()
     g_seasons.daylight = self
 end
 
+ssDaylight.DST_OFF = 0
+ssDaylight.DST_ON = 1
+ssDaylight.DST_ALWAYS = 2
+
 function ssDaylight:loadMap(name)
     -- Add day change listener to handle new dayNight system and new events
     g_currentMission.environment:addDayChangeListener(self)
