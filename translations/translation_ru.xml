@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>Gonimy_Vetrom(Vasyl'ko), theSeb</translationContributors>
+    <translationContributors>Gonimy_Vetrom, theSeb</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Показать прогноз погоды" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Ремонтировать технику" />
