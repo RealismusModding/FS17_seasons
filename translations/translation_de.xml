@@ -208,7 +208,7 @@
         <text name="ss_helpText_11_04" text="Nur Fahrzeuge und fahrbare Geräte benötigen eine Reparatur. Alle anderen Geräte reparieren sich automatisch." />
 
         <text name="ss_helpTitle_12" text="Wirtschaft" />
-        <text name="ss_helpText_12_01" text="Die Kreditobergrenze wurde von $ CURRENCY_SYMBOL200.000 auf 80% deines Landbesitzes und der Werte (platzierbare Gebäude) geändert. Die minimale Kreditgrenze liegt jetzt bei $CURRENCY_SYMBOL300.000, die Maximalgrenze bei $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_01" text="Die Kreditobergrenze wurde von $CURRENCY_SYMBOL200.000 auf 80% deines Landbesitzes und der Werte (platzierbare Gebäude) geändert. Die minimale Kreditgrenze liegt jetzt bei $CURRENCY_SYMBOL300.000, die Maximalgrenze bei $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="Die Belohnung für erfolgreiche Missionen wurde stark verringert. Diese entspricht nur noch ca. dem 5-fachen Wert eines eingestellten Helfers." />
         <text name="ss_helpText_12_03" text="Die Unterhaltskosten aller Fahrzeuge beinhalten bereits die laufenden Kosten wie z.B. Steuern und Versicherungen, ändern sich jedoch mit dem Nutzungsgrad der Maschinen. Saubere Maschinen unterliegen weniger einem Verschleiß und sind in den Unterhaltskosten dementsprechend etwas günstiger. Halte deine Geräte und Fahrzeuge also schön sauber! Fahrzeuge, welche wenig benutzt werden, produzieren auch geringere Unterhaltskosten." />
         <text name="ss_helpText_12_04" text="Die Verkaufspreise für Erntegüter variieren nunmehr in Abhängigkeit der Jahreszeit." />

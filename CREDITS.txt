@@ -6,7 +6,7 @@ Sincere thanks to the following modders for helping us build the 'Seasons' mod.
 
 Latest seasonal tree and hedge textures -- KimG & BulletBill83
 Snow Weather, original tree textures, Season Huds and logo -- FSModding_Gary
-Snow mask files -- Vasylko
+Snow mask files -- Gonimy_Vetrom
 Weather forecast HUD -- ian898, blacky_BPG
 Tiny dedicated server warning fix -- Decker_MMIV
 In-game English help texts - leifege640
@@ -17,7 +17,7 @@ Polish - Dzi4d3k, KITT3000
 German - tobiasgo, Oekobauer, ItZzShady, WieSeLfLinK, Amadeo
 Italian - fcelsa, zed636, *TurboStar*
 French - thierry62, Marxtai, dural, Anonymous, Farmer1602
-Russian - Vasil'ko
+Russian - Gonimy_Vetrom
 Czech - gorgona, DrewCZ
 Spanish - PromGames, Vanquish081
 Dutch - JoshvZeyl, Belgian farmer
@@ -36,7 +36,7 @@ leifege640
 masseyharris
 Mike3650 (and everybody else on his server)
 thierry62
-Vasil'ko
+Gonimy_Vetrom
 WBF
 
 and anybody else who submitted issues
