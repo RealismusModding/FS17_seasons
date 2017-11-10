@@ -10,5 +10,7 @@
 
 <surface numberOfSounds="1">
     <material type="wheel" file="resources/environment/sounds/snowWheelCompaction.wav" materialId="99" name="snow" volume="1.10"
-              indoorVolumeFactor="0.55" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0"/>
+              indoorVolumeFactor="0.55" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.01"/>
+    <material type="player" file="resources/environment/sounds/snowFootsteps.wav" materialId="99" name="snowFootsteps" volume="1.10"
+              indoorVolumeFactor="0.55" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.01"/>
 </surface>
