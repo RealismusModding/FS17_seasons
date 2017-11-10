@@ -8,7 +8,7 @@
 
 ssSnowTracks = {}
 
-ssSnowTracks.SNOW_RGBA = { 1, 1, 1, 1 }
+ssSnowTracks.SNOW_RGBA = { 0.98, 0.98, 0.98, 1 }
 
 function ssSnowTracks:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Washable, specializations)
@@ -50,7 +50,6 @@ local function applyTracks(self, dt)
                 wheelRotDir = 1
             end
 
-            -- Todo: lookup what todo with these local variables.
             local _, _, _, _, _, _, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
             local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
 
@@ -64,6 +63,14 @@ local function applyTracks(self, dt)
 
             if wheel.inSnow then
                 wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) } -- = ssSnowTracks.SNOW_RGBA doesn't affect the rgb somehow
+
+                if self.isEntered and g_currentMission.surfaceNameToSurfaceSound ~= nil then
+                    local sound = g_currentMission.surfaceNameToSurfaceSound["snow"]
+
+                    if sound ~= nil then
+                        sound.impactCount = sound.impactCount + 1
+                    end
+                end
             elseif oldInSnow and not wheel.inSnow then
                 local circumference = math.pi * (2 * math.pi * radius)
                 local maxTrackLength = circumference * (1 + g_currentMission.environment.groundWetness)
@@ -100,7 +107,6 @@ local function applyTracks(self, dt)
 end
 
 function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2)
-    -- Todo: optimize
     local x0, y0, z0
     local x1, y1, z1
     local x2, y2, z2
@@ -129,8 +135,16 @@ function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2
 end
 
 function ssSnowTracks:update(dt)
-    if not g_currentMission:getIsServer() or not g_seasons.vehicle.snowTracksEnabled or not g_seasons.snow.mode == g_seasons.snow.MODE_ONE_LAYER then
+    if not g_currentMission:getIsServer()
+            or not g_seasons.vehicle.snowTracksEnabled
+            or not g_seasons.snow.mode == g_seasons.snow.MODE_ONE_LAYER then
         return
+    end
+
+    local surfaceSound = g_currentMission.surfaceNameToSurfaceSound["snow"]
+
+    if surfaceSound ~= nil then
+        surfaceSound.impactCount = 0
     end
 
     if self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
@@ -154,6 +168,11 @@ function ssSnowTracks:update(dt)
             setLinearDamping(wheel.node, 0)
         end
     end
+
+    if self.isEntered then
+        local lastSpeed = self:getLastSpeed()
+        ssEnvironment:playSurfaceSound(dt, surfaceSound, #self.wheels, lastSpeed, math.abs(lastSpeed) < 1)
+    end
 end
 
 function ssSnowTracks:updateTick(dt)
@@ -163,7 +182,6 @@ function ssSnowTracks:draw()
 end
 
 function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
-    -- Todo: accessing non local value?
     local function setFriction(factor)
         setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness,
             wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * factor)
