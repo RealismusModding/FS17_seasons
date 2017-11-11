@@ -78,6 +78,7 @@ function ssSkipNight:update(dt)
             local dawnTime = string.format("%0.2d:%0.2d", math.floor(nightEnd / 60), nightEnd % 60)
             local dialog = g_gui:showDialog("TwoOptionDialog")
 
+            dialog.target:setTitle(ssLang.getText("input_SEASONS_SKIP_NIGHT"))
             dialog.target:setText(string.format(ssLang.getText("dialog_skipNight_text"), dawnTime))
             dialog.target:setDialogType(DialogElement.TYPE_QUESTION)
             dialog.target:setCallback(result, nil)
