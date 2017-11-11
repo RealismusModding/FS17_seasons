@@ -9,7 +9,7 @@ ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.BREATH_TIME = 4400
 
-ssMeasureTool.MEASURE_DISTANCE = 4 -- meters
+ssMeasureTool.MEASURE_DISTANCE = 5 -- meters
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = ssMeasureTool.MEASURE_TIMEOUT
 
@@ -193,7 +193,7 @@ end
 -- Called by the raycast: handles finding the object that was scanned
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Too close or too far away
-    if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE or hitObjectId == 0 then
+    if hitObjectId == 0 then
         self:showFailed()
 
     -- We did only hit the terrain
