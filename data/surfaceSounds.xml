@@ -9,8 +9,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <surface numberOfSounds="1">
-    <material type="wheel" file="resources/environment/sounds/snowWheelCompaction.wav" materialId="99" name="snow" volume="1.10"
-              indoorVolumeFactor="0.55" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.01"/>
-    <material type="player" file="resources/environment/sounds/snowFootsteps.wav" materialId="99" name="snowFootsteps" volume="1.10"
-              indoorVolumeFactor="0.55" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.01"/>
+    <material type="wheel" file="resources/environment/sounds/snowWheelCompaction.wav" materialId="99" name="snow" volume="1.25"
+              indoorVolumeFactor="0.6" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.01"/>
+    <material type="player" file="resources/environment/sounds/snowFootsteps.wav" materialId="100" name="snowFootsteps" volume="1"
+              indoorVolumeFactor="0.5" pitchOffset="0.75" indoorLowpassGain="0.75" pitchScale="0.02"/>
 </surface>

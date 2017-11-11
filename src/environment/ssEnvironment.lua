@@ -180,6 +180,7 @@ function ssEnvironment:loadSurfaceSoundsFromXML(path)
             sample = SoundUtil.loadSample(file, {}, key, nil, g_seasons.modDir, nil),
             pitchScale = getXMLFloat(file, key .. "#pitchScale"),
             currentVolume = 0,
+            impactCount = 0
         }
 
         table.insert(g_currentMission.surfaceSounds, entry)
