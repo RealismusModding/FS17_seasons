@@ -11,8 +11,8 @@
   </Files>
 
   <Materials>
-    <Material name="wopstr420_mat" materialId="1" cosPower="30" specularColor="1 1 1" ambientColor="1 1 1" customShaderId="5">
-      <CustomParameter name="RDT" value="1.0 0 30.0 30.0"/>
+    <Material name="wopstr420_mat" materialId="1" cosPower="20" specularColor="1 1 1" ambientColor="1 1 1" customShaderId="5">
+      <CustomParameter name="RDT" value="1.0 0 20.0 20.0"/>
       <Texture fileId="1"/>
       <Normalmap fileId="2"/>
       <Reflectionmap fileId="3" type="cube" wrap="false" refractiveIndex="1" bumpScale="0.1"/>
