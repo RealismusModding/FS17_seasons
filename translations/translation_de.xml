@@ -203,7 +203,7 @@
 
         <text name="ss_helpTitle_11" text="Instandhaltung" />
         <text name="ss_helpText_11_01" text="Deine Fahrzeuge benötigen nun regelmäßig eine Wartung, um den reibungslosen Betrieb zu gewährleisten. Der Zeitraum zwischen zwei aufeinanderfolgenden Wartungen (Wartungsintervall) beträgt 30 Tage oder ein halbes Jahr, je nachdem was zuerst eintrifft. Bei Überschreitung des Wartungsereignisses kann es zu längeren Startzeiten der Fahrzeuge kommen." />
-        <text name="ss_helpText_11_02" text="Die Fahrzeuge können beim Fahrzeughändler oder in jeder Reparaturwerkstatt instandgesetzt werden. Die Tastenkombination lautet ALT links + R. Beachte: Die Reparatur beim Fahrzeughändler ist aber wesentlich teurer!" />
+        <text name="ss_helpText_11_02" text="Du kannst deine Fahrzeuge entweder im Kfz-Shop, der Hofwerkstatt oder einer platzierten Garage reparieren. Um dein Fahrzeug zu reparieren, fährst du es in den Kfz-Shop, die Hofwerkstatt oder platzierte Garage und aktivierst den Reparatur-Button. Beachte, dass eine Reparatur im Kfz-Shop teurer ist." />
         <text name="ss_helpText_11_03" text="Das Alter Deiner Fahrzeuge entspricht der Angabe zur letzten Reparatur in Tagen." />
         <text name="ss_helpText_11_04" text="Nur Fahrzeuge und fahrbare Geräte benötigen eine Reparatur. Alle anderen Geräte reparieren sich automatisch." />
 
