@@ -224,7 +224,7 @@
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
         <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion verändern sich mit den jeweiligen Jahreszeiten." />
         <text name="ss_helpText_15_02" text="Wolle wird ausschliesslich im Frühjahr produziert." />
-        <text name="ss_helpText_15_03" text="Milch wird über das gesamte Jahr produziert. Die Produktivität verringert sich jedoch zum Frühling und Winter. Während der Wintersaison kann kein frisches Gras gefüttert werden. Die Produktivität wird dementsprechend massiv sinken. Seasons reduziert die Milchproduktion im Winter künstlich, um den Grasmangel zu simulieren." />
+        <text name="ss_helpText_15_03" text="Milch wird über das gesamte Jahr produziert. Die Produktivität verringert sich jedoch zum Frühling und Winter. Weil Gras im Winter nicht gefüttert werden kann, würde dies normalerweise die Produktivität der Kühe auf einen Wert von 80% reduzieren. Allerdings erhöht Seasons die Milchproduktion im Winter und Frühjahr, um den Mangel an Gras in dieser Zeit auszugleichen." />
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
         <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
