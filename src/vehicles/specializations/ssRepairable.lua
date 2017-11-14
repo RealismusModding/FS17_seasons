@@ -73,8 +73,6 @@ function ssRepairable:draw()
 end
 
 function ssRepairable:updateTick(dt)
-<<<<<<< HEAD
-=======
     -- Calculate if vehicle is in range for message about repairing
     if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
         local isPlayerInRange, player = getIsPlayerInRange(self, ssRepairable.PLAYER_RANGE, g_currentMission.player)
@@ -86,7 +84,6 @@ function ssRepairable:updateTick(dt)
         end
     end
 
->>>>>>> develop
     -- Calculate cumulative dirt
     if self.getDirtAmount ~= nil then
         local factor = self:getIsOperating() and 1 or 0.1
