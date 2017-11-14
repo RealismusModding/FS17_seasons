@@ -136,13 +136,6 @@ function ssDaylight:adaptTime()
 
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
 
-    -- Restrict the values to prevent errors
-    nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
-    if dayStart == dayEnd then
-        dayEnd = dayEnd + 0.01
-    end
-    nightStart = math.min(nightStart, 22.99) -- nightStart < 23
-
     -- GIANTS values:
     -- nightEnd: 4
     --  - nightEnd (sun): 5.5
@@ -182,6 +175,13 @@ function ssDaylight:calculateStartEndOfDay(julianDay)
 
     -- True blackness
     nightStart, nightEnd = self:_calculateDay(self.pNight, julianDay)
+
+        -- Restrict the values to prevent errors
+    nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
+    if dayStart == dayEnd then
+        dayEnd = dayEnd + 0.01
+    end
+    nightStart = math.min(nightStart, 22.99) -- nightStart < 23
 
     return dayStart, dayEnd, nightStart, nightEnd
 end
