@@ -9,7 +9,7 @@
 
 ssAtWorkshop = {}
 
-ssAtWorkshop.RANGE = 4.0
+ssAtWorkshop.RANGE = 5.0
 
 function ssAtWorkshop:prerequisitesPresent(specializations)
     return true
