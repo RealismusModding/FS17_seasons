@@ -74,7 +74,7 @@ function ssPlaceable:placeableGetSellPrice(superFunc)
         local annualProfitPriceRatio = ( annualIncome - annualCost ) / self.price
 
         if annualProfitPriceRatio > 0.1 then
-            priceMultiplier = annualProfitPriceRatio
+            priceMultiplier = math.min(annualProfitPriceRatio, 0.5)
         else
             priceMultiplier = -0.05
         end

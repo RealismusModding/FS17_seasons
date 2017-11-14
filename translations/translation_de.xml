@@ -60,36 +60,36 @@
         <text name="SS_VEHICLE_MAINTENANCE" text="Fahrzeugkosten" />
         <text name="SS_VEHICLE_REPAIRS" text="Reparaturkosten" />
 
-        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld um das Fahrzeug zu warten!" />
-        <text name="SS_VEHICLE_REPAIRED" text="%s wurde für %s gewartet" />
-        <text name="SS_NOTHING_TO_REPAIR" text="Keine Wartung benötigt für %s" />
-        <text name="SS_REPAIR_VEHICLE_COST" text="Warte %s für %s" />
+        <text name="SS_NOT_ENOUGH_MONEY" text="Du hast nicht genug Geld, um dieses Fahrzeug zu warten!" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s wurde für %s gewartet." />
+        <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur für %s benötigt." />
+        <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s." />
         <text name="SS_REPAIR_REQUIRED" text="Wartung benötigt!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="Wartung in %.1f Betriebstunden oder %d Tagen erforderlich." />
-        <text name="SS_REPAIR_DIALOG" text="Möchtest Du das Fahrzeug %s für %s warten?" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f Motorstunden oder %d Tage bis Wartungsarbeiten erforderlich sind." />
+        <text name="SS_REPAIR_DIALOG" text="Möchtest du das Fahrzeug %s für %s warten?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
-        <text name="SS_REMOVE_CONTEST_TEXT" text="Du verwendest die aktualisierte Version von Seasons. Das Spiel erkannte die Contest-Version in Deinem Mods-Ordner und wurde deaktiviert. Bitte entferne sie aus Deinem Mods-Ordner, um diese Nachricht zu verbergen." />
+        <text name="SS_REMOVE_CONTEST_TEXT" text="Du verwendest die aktualisierte Version von Seasons. Das Spiel erkannte die Contest-Version in deinem Modordner und wurde deaktiviert. Bitte entferne sie aus deinem Modordner, um diese Nachricht zu verbergen." />
 
-        <text name="SS_SEASON_INTRO_0" text="Ein neues Jahr hat begonnen. Der Frühling steht in den Startlöchern. Diese Zeit solltest Du für die Aussaat nutzen und mit der Düngung beginnen. Beachte die Aussaatzeiten, jede Pflanze hat einen anderen Zyklus." />
-        <text name="SS_SEASON_INTRO_1" text="Der Sommer hat begonnen und die Pflanzen wachsen. Es ist ratsam während dieser Zeit die nötigen Düngearbeiten durchzuführen und Dich auf die kommende Erntezeit einzustellen. Beachte immer die möglichen Erntezeiten." />
-        <text name="SS_SEASON_INTRO_2" text="Die Erntezeit ist bereits im vollen Gange. Bis zum Winter solltest Du alle Felder abgeerntet haben." />
-        <text name="SS_SEASON_INTRO_3" text="Der Winter, die kalte Jahreszeit, hat begonnen. Die Pflanzen ziehen sich zurück, die Böden sind teilweise unbefahrbar oder gefroren. Die Feldbearbeitung ist während dieser Zeit nicht möglich. Es ist Zeit für viele andere Beschäftigungen auf dem Hof." />
+        <text name="SS_SEASON_INTRO_0" text="Der Frühling ist da, Blumen und Bäume blühen. Es ist Zeit, deine Felder zu bearbeiten und zu säen." />
+        <text name="SS_SEASON_INTRO_1" text="Im Sommer ist da und die Tage werden länger. Es ist an der Zeit Heu zu machen und das Reifen der Feldfrüchte zu beobachten." />
+        <text name="SS_SEASON_INTRO_2" text="Blätter werden braun und es wird kälter - der Herbst ist da. Achten darauf, die Ernte einzubringen, bevor der Winter kommt." />
+        <text name="SS_SEASON_INTRO_3" text="Der Winter ist gekommen und die Tiere brauchen jetzt mehr Pflege. Der Boden ist gefroren und du kannst deine Felder nicht bearbeiten. Es ist Zeit für die Forstwirtschaft und um Schnee zu schieben." />
         <text name="SS_BUTTON_OK" text="OK" />
-        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="Nicht wieder zeigen." />
 
-        <text name="warning_soilIsFrozen" text="Die Bodentemperaturen lassen eine Bearbeitung derzeit nicht zu, warte etwas wärmere Tage ab!" />
-        <text name="warning_doNotThreshWithMoisture" text="Du solltest nicht ernten wenn die Pflanzen zu nass sind!" />
-        <text name="warning_animalsKilled" text="Achtung! Deine Tiere haben kein Futter und versterben. (%d) Tiere sind bereits verstorben" />
-        <text name="warning_inAdvanceFeedingLimitReached3" text="Der Futtertrog hat seine maximale Kapazität erreicht. Der Inhalt ist bei gleichbleibendem Tierbestand für die nächsten 3 Tage ausreichend" />
-        <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Benötigst Du Hilfe oder eine Erklärung nutze das Hilfemenü (per ESC erreichbar)." />
+        <text name="warning_soilIsFrozen" text="Der Boden ist gefroren. Du kannst keine Feldarbeit machen!" />
+        <text name="warning_doNotThreshWithMoisture" text="Dresche nicht, wenn das Getreide zu nass ist!" />
+        <text name="warning_animalsKilled" text="(%d) Tiere sind gestorben." />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="Die maximale Kapazität des Futtertroges reicht aus, um damit die Tiere für 3 Tage zu füttern." />
+        <text name="msg_welcome" text="Willkommen zum Seasons Mod by Realismus Modding. Bitte schaue die Hilfe im Menü an, um mehr über die Verwendung dieses Mods zu erfahren." />
 
         <text name="measuretool_title" text="Messung" />
-        <text name="measuretool_fermentation_time" text="Noch %d Stunden erforderlich" />
-        <text name="measuretool_fermentation_time_low" text="Weniger als 1 Stunde erforderlich" />
+        <text name="measuretool_fermentation_time" text="Noch %d Stunden erforderlich." />
+        <text name="measuretool_fermentation_time_low" text="Weniger als 1 Stunde erforderlich." />
         <text name="measuretool_failed" text="Messung fehlgeschlagen" />
         <text name="measuretool_no_info" text="Messung fehlgeschlagen: Keine Information" />
 
@@ -108,19 +108,19 @@
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
         <text name="ui_temperatureCelsius" text="Celsius" />
 
-        <text name="ui_plantingSeason" text="Aussaat möglich" />
+        <text name="ui_plantingSeason" text="Zeit zum Pflanzen und die Aussaat" />
         <text name="ui_harvestSeason" text="Erntezeit" />
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <text name="tooltip_seasonLength" text="Die Dauer einer Jahreszeit in Tagen. Ein Jahr beinhaltet vier Jahreszeiten: Frühjahr, Sommer, Herbst und Winter" />
-        <text name="tooltip_seasonIntros" text="Hilfe-Fenster beinhalten wichtige Informationen und Erklärungen zum Jahreszeiten-Mod" />
-        <text name="tooltip_snow" text="Im Winter kann es zu Schneefällen kommen. Hier hast Du die Möglichkeit diese Funktion an- und abzuschalten" />
-        <text name="tooltip_controlsHelp" text="Zeigt die Jahreszeiten-Tastenkombination im Hilfe-Fenster" />
-        <text name="tooltip_snowTracks" text="Fahrzeugen hinterlassen Spuren im Schnee" />
-        <text name="tooltip_controlsTemperature" text="Wähle zwischen 'Celcius' und 'Fahrenheit'" />
-        <text name="tooltip_moisture" text="Dreschen bei zu hohem Feuchtegehalt deaktivieren" />
+        <text name="tooltip_seasonLength" text="Die Länge einer Saison in Tagen. Ein Jahr ist in vier Jahreszeiten eingeteilt." />
+        <text name="tooltip_seasonIntros" text="Es wird zu Beginn eine Erklärung zu dieser Jahreszeit angezeigt." />
+        <text name="tooltip_snow" text="In kalten Wintern wird Schnee fallen und Straßen blockieren." />
+        <text name="tooltip_controlsHelp" text="Zeigt die Prognose- und Menütasten im Hilfemenü an." />
+        <text name="tooltip_snowTracks" text="Fahrzeugen hinterlassen Spuren im Schnee." />
+        <text name="tooltip_controlsTemperature" text="Stelle die Temperaturskala ein, die im Spiel verwendet werden soll." />
+        <text name="tooltip_moisture" text="Dreschen bei nassem Getreide nicht zulassen." />
 
         <text name="setting_seasonIntros" text="Jahreszeiten Hilfe-Fenster" />
         <text name="setting_seasonLength" text="Jahreszeit Dauer" />
@@ -130,13 +130,17 @@
         <text name="setting_controlsTemperature" text="Temperatureinheit" />
         <text name="setting_moisture" text="Ernten bei Feuchtigkeit" />
 
-        <text name="dialog_applySettings" text="Willst du wirklich die Einstellungen der Jahreszeiten überschreiben? Änderungen an der Dauer der Jahreszeiten und am Wachstum können erst nach einem Ingame-Jahr geändert werden." />
-        <text name="dialog_resetGrowth" text="Du hast einen bestehenden Speicherstand geladen. Wir empfehlen das Zurücksetzen aller Wachstumsstufen zur besseren Funktionalität. Solltest Du diesen Schritt nicht wünschen, lehne ihn ab. Wir weisen darauf hin, dass Seasons dann eventuell nicht korrekt funktioniert." />
-        <text name="dialog_resetGrowth_title" text="Neustart mit dem Seasons-Mod. Wachstum zurücksetzen?" />
-        <text name="dialog_resetGrowth_no" text="Wachstum beibehalten" />
-        <text name="dialog_resetGrowth_yes" text="Alle Wachstumsstufen zurücksetzen" />
-        <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen" />
+        <text name="dialog_applySettings" text="Möchtest du die Jahreszeiteneinstellungen wirklich ändern? Änderungen an der Länge der Jahreszeiten können zu Feldzuständen führen, die erst nach einem Ingame-Jahr repariert werden." />
+        <text name="dialog_resetGrowth" text="Du hast Seasons in einem alten Savegame geladen. Seasons möchte alle Felder auf ihren Urzustand zurücksetzen, um sie mit dem Spieltag zu synchronisieren. Du wirst alle Zustände der Früchte auf den Feldern verlieren. Wenn du das Wachstum aber nicht zurücksetzt, funktioniert Seasons möglicherweise nicht wie erwartet." />
+        <text name="dialog_resetGrowth_title" text="Wachstum zurückgesetzt." />
+        <text name="dialog_resetGrowth_no" text="Alle Wachstumsstufen beibehalten." />
+        <text name="dialog_resetGrowth_yes" text="Zurücksetzen" />
+        <text name="dialog_timeTravel" text="Das Spiel synchronisiert sich nach dem schnellen Vorspulen." />
         <text name="dialog_sleeping" text="Zeit zum Schlafen ...oO ZzZzZzz" />
+
+        <text name="dialog_skipNight_text" text="Möchtest du die Nacht bis zum Morgen (6:00h) oder bis zum Sonnenaufgang (%s) überspringen." />
+        <text name="dialog_skipNight_morning" text="Morgens (6:00h)" />
+        <text name="dialog_skipNight_dawn" text="Sonnenaufgang (%s)" />
 
         <text name="fillType_snow" text="Schnee" />
 
@@ -145,99 +149,99 @@
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons versucht wesentlich mehr Realismus in das Spiel zu bringen. Um dies zu ermöglichen wurden erhebliche Veränderungen am Spielgeschehen vorgenommen. Wie genau Seasons funktioniert und welche Veränderungen mit diesem Mod einhergehen, erfährst Du auf den folgenden Hilfe-Seiten." />
-        <text name="ss_helpText_01_02" text="Das Spiel wird nun in die 4 bekannten Jahreszeiten eingeteilt: Frühjahr, Sommer, Herbst und Winter. Jede dieser Jahreszeiten ist noch einmal unterteilt in Früh-, Mitte- und Spätzeit." />
-        <text name="ss_helpText_01_03" text="Deine täglichen Arbeiten sollten nun wie im wahren Leben auf die aktuelle Jahreszeit angepasst werden." />
+        <text name="ss_helpText_01_01" text="Seasons ist ein Mod, der den Realismus im Farming Simulator verbessert, indem er fast alle Aspekte an realistischere Parameter anpasst. Alles von saisonalen Effekten über Wachstumsmuster und Tierproduktion wurde auf ein realistischeres Niveau gebracht." />
+        <text name="ss_helpText_01_02" text="Das Spieljahr ist in die 4 Jahreszeiten aufgeteilt: Frühling, Sommer, Herbst und Winter. Jede Saison ist zudem in drei Teile unterteilt: früh, mittel und spät. Diese Teile werden als Übergänge bezeichnet." />
+        <text name="ss_helpText_01_03" text="Deine Aktivitäten sind an die jeweilige Jahreszeit gebunden, in der sie auch im wirklichen Leben stattfinden." />
 
         <text name="ss_helpTitle_02" text="Saisonale Veränderungen (1)" />
-        <text name="ss_helpText_02_01" text="Das Wetter entspricht den Jahreszeiten, bleibt aber dennoch wie im wahren Leben unbeständig und kann sich in kurzer Zeit schlagartig verändern." />
-        <text name="ss_helpText_02_02" text="Der Frühling ist eher verregnet und oftmals sehr nebelig, manchmal kommt die Sonne für wenige Stunden dennoch durch. Der Sommer wird wesentlich wärmer und es bleibt über einen längeren Zeitraum sehr trocken. Achtung! Spontane Regen- und Hagelschauer sind jederzeit möglich. Der Herbst ist typisch verregnet mit eher weniger Sonne. Im Winter bleibt es sehr regnerisch, solange die Temperaturen nicht so weit sinken, dass es zu spontanen Schnellfällen kommt." />
-        <text name="ss_helpText_02_03" text="Der gefallene Schnee füllt Schaufeln und Kipper, sofern diese ohne Plane und nicht in einer Halle (mit snowMask) stehen. Der Schnee verschlechtert die Traktion erheblich und macht die Fahrzeuge langsamer." />
+        <text name="ss_helpText_02_01" text="Wetter ist von Tag zu Tag zufällig, aber folgt einem Muster von Jahreszeit zu Jahreszeit." />
+        <text name="ss_helpText_02_02" text="Der Frühling wird regnerisch und neblig sein, mit einigen Chancen auf sonnige Tage. Der Sommer wird wärmer und trockener. Hagelstürme können ohne Vorwarnung auftreten. Der Herbst wird mit etwas sonnigem Wetter eher regnerisch sein. Der Winter ist regnerisch. Er ist aber oft kalt genug, damit Schnee fällt, der vielleicht sogar auf dem Boden liegen bleibt." />
+        <text name="ss_helpText_02_03" text="Kipper und Schaufeln werden mit Schnee gefüllt, es sei denn, diese stehen in einem Schuppen, der mit einer Schneemaske (snowMask) ausgestattet wurde. Oder aber der Kipper ist mit einer Plane abgedeckt. Schnee wird auch die Traktion reduzieren, wodurch Fahrzeuge langsamer werden." />
 
         <text name="ss_helpTitle_03" text="Saisonale Veränderungen (2)" />
-        <text name="ss_helpText_03_01" text="Seasons beeinflusst auch das Tageslicht. Die Wintertage (8 Stunden) sind wesentlich kürzer als Sommertage (17 Stunden)." />
-        <text name="ss_helpText_03_02" text="Bunker-Silos und Silageballen benötigen nun eine gewisse Zeit zum Fermentieren. Die Zeit entspricht ca. 1/3 einer Jahreszeit bzw. einer Übergangszeit (Früh/Mitte/Spät). Gepresstes Heu wird nicht fermentiert, muss allerdings vor äußeren Einflüssen geschützt werden." />
-        <text name="ss_helpText_03_03" text="Seasons verändert das Aussehen der Bäume und Pflanzen passend zur aktuellen Jahreszeit. Im Frühjahr wirkt die Umgebung dementsprechend grüner, im Herbst werden die Bäume typisch braun und verlieren ihre Blätter. Im Winter wird es allgemein etwas dunkler, alleine schon aufgrund der wenigen Sonnenstunden." />
+        <text name="ss_helpText_03_01" text="Die Tagesstunden sind auch von den Jahreszeiten abhängig. Der Winter hat kürzere Tage (8 Stunden), während der Sommer längere Tage (17 Stunden) hat." />
+        <text name="ss_helpText_03_02" text="Bunkersilos und Silageballen benötigen Zeit zum Vergären. Es dauert ein Drittel einer Saison (1 Übergang), um entweder ein Bunkersilo oder einen Silageballen vollständig zu gären. Eingewickeltes Heu gärt nicht, aber es ist gegen schlechtes Wetter geschützt." />
+        <text name="ss_helpText_03_03" text="Die Jahreszeiten wirken sich auch auf Bäume und Laub aus. Die Bäume ändern ihren Zustand entsprechend den jahreszeitlichen Temperaturänderungen. Blätter werden im Herbst farbig und fallen ab. Bäume werden im Winter kahl und tragen im Frühling helles Grün." />
 
         <text name="ss_helpTitle_04" text="Wettervorhersage" />
-        <text name="ss_helpText_04_01" text="Die Wettervorhersage ist nun wieder fester Bestandteil des Spieles und kann standardmäßig mit der Tastenkombination ALT links + F ein- und ausgeblendet werden." />
-        <text name="ss_helpText_04_02" text="Die Vorhersage zeigt die aktuellen Temperaturen und Wetterprognosen (Sonne, Nebel, Regen, Schnee ...) für die nächsten kommenden 7 Tage an. Achtung! Schlagartige Hagel- bzw. Regenschauer können wie im wahren Leben nicht immer vorhergesagt werden!" />
-        <text name="ss_helpText_04_03" text="Die rechte Zahl zeigt den jeweiligen Tag der aktuellen Jahreszeit an." />
+        <text name="ss_helpText_04_01" text="Die Wettervorhersage für die nächsten 7 Tage ist in der oberen rechten Ecke des Bildschirms zu sehen. Die Sichtbarkeit kann abgeschaltet werden." />
+        <text name="ss_helpText_04_02" text="Die Wettervorhersage zeigt die Hoch- / Tiefsttemperaturen und das Wetter (sonnig, neblig, regnerisch, verschneit, bewölkt) für die nächsten 7 Tage an. Hagelschauer werden nicht auf der Wettervorhersage erscheinen, da Hagel im realen Leben oft ein unerwartetes Ereignis ist." />
+        <text name="ss_helpText_04_03" text="Die Zahl rechts eines jeden Vorhersageblocks zeigt den Tag der Jahreszeit." />
 
         <text name="ss_helpTitle_05" text="Boden" />
-        <text name="ss_helpText_05_01" text="Die Bodentemperaturen verändern sich während der Jahreszeiten. Die Daten wurden versucht so realistisch wie möglich zu gestalten. Bleibt es im Winter eine gewisse Zeit kalt genug, kommt es zu Bodenfrost, welcher erst wieder im Frühling auftaut. Beachtet hierzu die Anzeige oberhalb rechts im Blick." />
-        <text name="ss_helpText_05_02" text="Während Bodenfrost können die Felder/Böden nicht bearbeitet werden. Die Pflanzen werden während dieser Zeit nicht wachsen ggf. sogar absterben." />
-        <text name="ss_helpText_05_03" text="Pflanzen werden nur bei der dementsprechenden Bodentemperatur keimen. Wann welche Pflanze ihre ideale Wachstumszeit hat, kannst Du dem Hilfemenü ALT links + S entnehmen." />
+        <text name="ss_helpText_05_01" text="Die Bodentemperatur wird mithilfe von thermodynamischen Gleichungen und historischen Daten modelliert. Das bedeutet, dass der Boden im Winter gefriert, wenn die Lufttemperatur für einen bestimmten Zeitraum unter einen bestimmten Punkt fällt. Der Boden wird dann im Frühjahr auftauen, wenn die Lufttemperatur eine gewisse Zeit lang über eine bestimmte Schwelle ansteigt." />
+        <text name="ss_helpText_05_02" text="Der Boden kann nicht bearbeitet werden, wenn der Boden gefroren ist. Kulturen wachsen nicht in gefrorenem Boden." />
+        <text name="ss_helpText_05_03" text="Kulturen keimen nur dann, wenn die Bodentemperatur über ihren Keimtemperaturen liegt. Die Temperaturen für die Keimung sind im Kalender auf der ersten Seite des Jahreszeiten-Menüs enthalten." />
 
         <text name="ss_helpTitle_06" text="Pflanzen - Einführung" />
-        <text name="ss_helpText_06_01" text="Wird ein neuer Spielstand gestartet, werden zu Beginn sämtliche Wachstumsstufen zurückgesetzt um den Übergang vom Herbst zum Frühling zu simulieren. Wird ein bestehender Spielstand gestartet kann man das Zurücksetzen der Wachstumsstufen ablehnen." />
-        <text name="ss_helpText_06_02" text="Seasons verändert das gesamte Pflanzenwachstum. Die Pflanzen folgen nun ihrem natürlichen Zyklus und wachsen nur während ihrer typischen Zeiten. Ebenso sind nun die richtigen Aussaatzeiten von Bedeutung. Eine Übersicht erhältst Du im Hilfefenster ALT links + S  Beachte: Im Winter werden die meisten Pflanzen absterben! Beende die Ernte also rechtzeitig. Wird eine Pflanze zur falschen Zeit gesät kann es zu erheblichen Ernteausfällen kommen." />
-        <text name="ss_helpText_06_03" text="Pflanzen sind nur in der letzten Wachstumsstufe erntbar." />
-        <text name="ss_helpText_06_04" text="Sobald eine Nicht-Wurzelpflanze laut Anzeige in der Wachstumsübersicht die erste Erntestufe erreicht hat, ist diese Pflanze uneingeschränkt erntereif. Eine weitere Erntestufe gibt es dann nicht mehr." />
-        <text name="ss_helpText_06_05" text="Grüne Pflanzen können weiterhin zur Silage benutzt werden." />
+        <text name="ss_helpText_06_01" text="Beim Start eines neuen Spiels werden alle Feldfrüchte auf ihre geernteten Stufen zurückgesetzt, um zu simulieren, dass die Felder seit dem Herbst nicht mehr bearbeitet wurden. Wenn du Seasons zum ersten Mal in einem bestehenden Spiel verwenden, hast du die Möglichkeit, die Feldfrüchte entweder zurückzusetzen oder nicht." />
+        <text name="ss_helpText_06_02" text="Die standardmäßigen Wachstumsmuster von Kulturpflanzen wurden durch Seasons ersetzt. Die Ernte folgt nun einem realistischen Wachstumsmuster nach den entsprechenden saisonalen Pflanz- und Erntezeiten. Dies bedeutet auch, dass der Winter die meisten Kulturen abtötet und die zum falschen Zeitpunkt ausgesäten bzw. gelegten Feldfrüchte nicht wachsen." />
+        <text name="ss_helpText_06_03" text="Feldfrüchte sind nur in ihrer letzten Wachstumsphase erntbar, mit Ausnahme von Pappeln und Ölsamenrettich, und bleiben in dieser letzten Phase, bis sie im Winter abgetötet werden." />
+        <text name="ss_helpText_06_04" text="Sobald eine nicht wurzelnde Pflanze die erste erntbare Phase gemäß der Wachstumsübersicht im Esc-Menü erreicht, ist sie reif für die Ernte. Dies ist die letzte Erntephase." />
+        <text name="ss_helpText_06_05" text="Du kannst immer noch grüne Pflanzen silieren." />
 
-        <text name="ss_helpTitle_07" text="Acker-Pflanzen" />
-        <text name="ss_helpText_07_01" text="Die Wachstumszeiten sind nun wesentlich länger. Das Erreichen einer erntereifen Stufe kann bis zu einem halben Jahr dauern." />
-        <text name="ss_helpText_07_02" text="Der Winter wird die meisten Pflanzen aufgrund der Temperaturen vernichten. Doch es gibt auch Winterpflanzen: Im Herbst können Weizen, Gerste, Raps gesät und im nächsten Sommer geerntet werden. Jetzt können auch Ölrettich und Gras gesät sowie Pappelsetzlinge gepflanzt werden, mit Ernte schon im Frühjahr. Beachte hierbei jedoch die richtigen Bodentemperaturen!" />
-        <text name="ss_helpText_07_03" text="Im Frühjahr müssen Körnermais, Sojabohnen, Sonnenblumen und Zuckerrüben gesät und Kartoffeln gelegt werden. Kontrolliere vor der Aussaat ob die jeweilige Pflanze bereits im Frühjahr gesät werden darf. Nicht alle Pflanzen können direkt am Anfang des Frühlings ausgesät werden; zu früh ausgesäte Pflanzen werden absterben!" />
+        <text name="ss_helpTitle_07" text="Kulturen - Ackerkulturen" />
+        <text name="ss_helpText_07_01" text="Das Pflanzenwachstum ist jetzt viel länger. Es kann ein halbes Jahr dauern, bis eine Kultur das erntbare Stadium erreicht hat." />
+        <text name="ss_helpText_07_02" text="Der Winter wird die meisten Feldfrüchte abtöten, aber Winter- und Frühjahrskulturen sind möglich. Weizen, Gerste, Pappel, Gras, Ölrettich und Raps können im Herbst als Winterfrüchte oder im Frühling zu Frühlingsfrüchten ausgesät werden. Stelle sicher, dass der Boden warm genug für die Keimung dieser Kulturen ist." />
+        <text name="ss_helpText_07_03" text="Mais, Sojabohnen, Sonnenblumen, Zuckerrüben und Kartoffeln müssen im Frühjahr ausgesät bzw. gelegt werden. Achte darauf, die Wachstumsübersicht im Jahreszeiten-Menü zu überprüfen, da einige Feldfrüchte im ersten Frühlingsübergang (früher Frühling) nicht gesät bzw. gepflanzt werden können und sterben, auch wenn die Bodentemperatur über der Keimtemperatur liegt." />
 
-        <text name="ss_helpTitle_08" text="Heu, Stroh und Gras" />
-        <text name="ss_helpText_08_01" text="Im Winter wird die Wachstumsstufe von Gras zurückgesetzt um den natürlich Rückgang im Winter zu simulieren." />
-        <text name="ss_helpText_08_02" text="Grasballen müssen nach dem Erstellen innerhalb der nächsten 2 Tagen verbraucht oder gewickelt werden. Lässt Du die 2 Tage verstreichen, werden die Ballen anfangen zu verrotten und verschwinden irgendwann vollständig." />
-        <text name="ss_helpText_08_03" text="Heu-, Gras- und Strohhaufen verkleinern sich und verschwinden nach einiger Zeit komplett. So reduzieren Grashaufen ihr Volumen jeden Tag um Mitternacht. Heu- und Strohhaufen verringern sich nach jeder Wachstumsstufe, besonders wenn diese Haufen dem Regen ausgesetzt werden." />
-        <text name="ss_helpText_08_04" text="Stroh und Heu muss vor dem Verkauf zu Ballen verarbeitet werden. Loses Stroh/Heu erzielt keinen Verkaufswert, kann jedoch verschenkt werden. Gras, egal ob in Ballenform oder lose, erzielt ebenfalls keinen Verkaufswert." />
+        <text name="ss_helpTitle_08" text="Kulturen - Heu, Stroh und Gras" />
+        <text name="ss_helpText_08_01" text="Im Winter wird das Gras auf seine abgeerntete Stufe zurückgesetzt. Damit wird simuliert, dass das Gras abtötet wurde wenn es kalt wird." />
+        <text name="ss_helpText_08_02" text="Grasballen verrotten allmählich und verschwinden nach zwei Tagen, egal wo sie sich befinden. Um den Zerfall zu verhindern, müssen die Ballen verbraucht oder gewickelt werden. Einmal eingewickelt werden sie nach 1/3 einer Saison zu Silageballen fermentiert." />
+        <text name="ss_helpText_08_03" text="Schwaden und Haufen von Heu, Gras und Stroh beginnen sich zu verkleinern und verschwinden schließlich nach einigen Tagen. Grasschwaden und Haufen werden jeden Tag um Mitternacht reduziert. Heu- sowie Strohschwaden und -haufen werden nach jeder Wachstumsphase sowie nach Regeneinwirkung reduziert." />
+        <text name="ss_helpText_08_04" text="Stroh und Heu müssen gepresst werden, bevor diese verkauft werden können - loses Stroh und Heu können nicht verkauft sondern nur kostenlos abgegeben werden. Gras, gebündelt oder lose, kann dagegen nicht verkauft werden." />
 
-        <text name="ss_helpTitle_09" text="Bäume" />
-        <text name="ss_helpText_09_01" text="Bäume benötigen nun mehr Zeit um vollständig auszuwachsen. Ein selber gepflanzter Baum ist erst in 5 Jahren ausgewachsen. Er kann aber bereits nach 2 Jahren gefällt werden." />
-        <text name="ss_helpText_09_02" text="Zu nah aneinander gepflanzte Bäume hemmen ihr Wachstum gegenseitig. Um dem entgegenzuwirken, ist das Auslichten innerhalb der Fläche notwendig. Dafür einfach einige Bäume fällen, um den restlichen Bäumen ein normales Wachstum zu ermöglichen." />
+        <text name="ss_helpTitle_09" text="Kulturen - Bäume" />
+        <text name="ss_helpText_09_01" text="Bäume brauchen mehr Zeit, um ihren ausgewachsenen Zustand zu erreichen. Gepflanzte Bäume brauchen 5 Jahre, um voll ausgewachsen zu sein. Nach 2 Jahren können sie erstmals gefällt werden." />
+        <text name="ss_helpText_09_02" text="Bäume hemmen das Wachstum untereinander, wenn sie zu nahe beieinander stehen. Um das Wachstum der Bäume nicht zu unterbrechen, musst du den Bestand auslichten." />
 
-        <text name="ss_helpTitle_10" text="Wetter-Effekte" />
-        <text name="ss_helpText_10_01" text="Regen, Hagel und Schnee beeinflussen den Feuchtigkeitsgehalt der Pflanzen. Sind die Pflanzen durch anhaltenden Regen, Hagel oder Schnee zu feucht, ist das Ernten nicht möglich. Beachte: Feuchte Sommernächte können ohne Vorwarnung auftreten." />
-        <text name="ss_helpText_10_02" text="Nach einem Regenschauer benötigen die Pflanzen eine gewisse Zeit zum Trocknen, wobei Außentemperaturen und Jahreszeit diesen Vorgang beeinflussen." />
-        <text name="ss_helpText_10_03" text="Ist das gemähte Gras nass und Du benutzt einen Heuwender, wird daraus nur feuchtes Gras. Achte daher bei Verwendung des Heuwenders, dass Dein gemähtes Gras beim Wenden trocken genug sind!." />
-        <text name="ss_helpText_10_04" text="Bei Verwendung einer Mod-Map mit Vorbereitung für den Seasons Mod (mit snowMask) werden Heu- und Strohballen, welche Regen/Feuchtigkeit ausgesetzt werden, auch in wenigen Tagen verrotten. Werden die Ballen aber z.B. in einer Halle (mit snowMask) abgestellt, bleiben sie als Futtermittel erhalten. Schlechtes Wetter hat keinen Einfluss auf gewickelte Ballen auch auf einer Mod-Map ohne Seasons-Vorbereitung (fehlende snowMask)." />
+        <text name="ss_helpTitle_10" text="Kulturen - Wetter-Effekte" />
+        <text name="ss_helpText_10_01" text="Regen, Hagel und Schnee beeinflussen den Feuchtigkeitsgehalt der Pflanzen. Wenn die Feuchtigkeit in den Feldfrüchten aufgrund des schlechten Wetters über dem bestimmten Punkt liegt, kannst du deine Feldfrüchte nicht ernten. Feuchte Sommernächte können ohne Vorwarnung auftreten." />
+        <text name="ss_helpText_10_02" text="Nach dem Regen brauchen deine Pflanzen Zeit zum Austrocknen, was von der Lufttemperatur und der Jahreszeit abhängig ist. Wärmeres Wetter bedeutet, dass die Kultur schneller austrocknet als bei kühlerem Wetter." />
+        <text name="ss_helpText_10_03" text="Ist das gemähte Gras nass und du benutzt einen Heuwender, bleibt nur feuchtes Gras. Achte daher bei Verwendung des Zetters, dass dein gemähtes Gras beim Wenden trocken genug sind!" />
+        <text name="ss_helpText_10_04" text="Auf einer Mod-Map, die vom Modder mit einer Schneemaske vorbereitet wurde, beginnen Heu- und Strohballen, die dem Regen oder Schnee ausgesetzt wurden, zu faulen, es sei denn, die Ballen werden in einem Schuppen mit einer Schneemaske gelagert. Schlechtes Wetter hat auf einer Karte ohne Schneemaske keine Auswirkungen auf Ballen oder gewickelte Ballen." />
 
         <text name="ss_helpTitle_11" text="Instandhaltung" />
-        <text name="ss_helpText_11_01" text="Deine Fahrzeuge benötigen nun regelmäßig eine Wartung, um den reibungslosen Betrieb zu gewährleisten. Der Zeitraum zwischen zwei aufeinanderfolgenden Wartungen (Wartungsintervall) beträgt 30 Tage oder ein halbes Jahr, je nachdem was zuerst eintrifft. Bei Überschreitung des Wartungsereignisses kann es zu längeren Startzeiten der Fahrzeuge kommen." />
-        <text name="ss_helpText_11_02" text="Die Fahrzeuge können beim Fahrzeughändler oder in jeder Reparaturwerkstatt instandgesetzt werden. Die Tastenkombination lautet ALT links + R. Beachte: Die Reparatur beim Fahrzeughändler ist aber wesentlich teurer!" />
-        <text name="ss_helpText_11_03" text="Das Alter Deiner Fahrzeuge entspricht der Angabe zur letzten Reparatur in Tagen." />
+        <text name="ss_helpText_11_01" text="Deine Traktoren und Erntemaschinen müssen regelmäßig gewartet werden, um sie betriebsbereit zu halten. Die Wartungszeit (Wartungsinterval) beträgt alle 30 Stunden oder ein halbes Jahr, je nachdem, was zuerst eintritt. Fahrzeuge, deren Wartungen versäumt wurden, können länger brauchen, um zu starten." />
+        <text name="ss_helpText_11_02" text="Du kannst deine Fahrzeuge entweder im Kfz-Shop, der Hofwerkstatt oder einer platzierten Garage reparieren. Um dein Fahrzeug zu reparieren, fährst du es in den Kfz-Shop, die Hofwerkstatt oder platzierte Garage und aktivierst den Reparatur-Button. Beachte, dass eine Reparatur im Kfz-Shop teurer ist." />
+        <text name="ss_helpText_11_03" text="Das Alter deiner Fahrzeuge entspricht der Angabe zur letzten Reparatur in Tagen." />
         <text name="ss_helpText_11_04" text="Nur Fahrzeuge und fahrbare Geräte benötigen eine Reparatur. Alle anderen Geräte reparieren sich automatisch." />
 
         <text name="ss_helpTitle_12" text="Wirtschaft" />
-        <text name="ss_helpText_12_01" text="Die alte Kreditobergrenze von $CURRENCY_SYMBOL200.000 wurde abgeschafft. Der maximal mögliche Kreditrahmen richtig sich nun nach Deinen eigenen Vermögenswerten wie Landbesitz, Gebäude usw. Die minimale Kreditgrenze liegt jetzt bei $CURRENCY_SYMBOL300.000, die Maximalgrenze bei $CURRENCY_SYMBOL1.500.000." />
-        <text name="ss_helpText_12_02" text="Die Belohnung für erfolgreiche Missionen wurde stark verringert. Diese entspricht nur noch ca. dem 5-fachen Wert eines eingestellten Helfers." />
-        <text name="ss_helpText_12_03" text="Die Unterhaltskosten aller Fahrzeuge beinhalten bereits die laufenden Kosten wie z.B. Steuern und Versicherungen, ändern sich jedoch mit dem Nutzungsgrad der Maschinen. Saubere Maschinen unterliegen weniger einem Verschleiß und sind in den Unterhaltskosten dementsprechend etwas günstiger. Halte deine Geräte und Fahrzeuge also schön sauber! Fahrzeuge, welche wenig benutzt werden, produzieren auch geringere Unterhaltskosten." />
-        <text name="ss_helpText_12_04" text="Die Verkaufspreise für Erntegüter variieren nunmehr in Abhängigkeit der Jahreszeit." />
+        <text name="ss_helpText_12_01" text="Die Kreditobergrenze wurde von $CURRENCY_SYMBOL200.000 auf 80% deines Landbesitzes und der Werte (platzierbare Gebäude) geändert. Die minimale Kreditgrenze liegt jetzt bei $CURRENCY_SYMBOL300.000, die Maximalgrenze bei $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_02" text="Die Einkünfte aus Missionen wurden reduziert. Du verdienst ungefähr 5x mehr als ein Helfer, der auf dem gleichen Feld arbeitet." />
+        <text name="ss_helpText_12_03" text="Die Wartung aller Fahrzeuge (zusätzlich zur periodischen Wartung) umfasst Wartung und Steuern in Bezug auf die Nutzungsmenge. Saubere Maschinen reduzieren aber auch die Wartungskosten. Maschinen, die nicht in Benutzung sind, werden auch in ihren Wartungskosten reduziert." />
+        <text name="ss_helpText_12_04" text="Erntepreise schwanken mit den Veränderungen der Jahreszeiten auf realistischere Weise." />
 
         <text name="ss_helpTitle_13" text="Helfer" />
-        <text name="ss_helpText_13_01" text="Eingestellte Helfer verlangen Überstundenzuschläge! Wird ein Helfer vor 6 Uhr morgens und nach 18 Uhr abends beschäftigt, erhält dieser einen Zuschlag von 50%. Dieser Zuschlag gilt ebenso für das gesamte Wochenende." />
+        <text name="ss_helpText_13_01" text="Helfer verlangen einen Überstunden-Zuschuss. Wenn ein Mitarbeiter vor 6 Uhr und nach 18 Uhr oder an Wochenenden arbeitet, ist sein Lohn um 50% höher." />
 
         <text name="ss_helpTitle_14" text="Tiere - Einführung" />
-        <text name="ss_helpText_14_01" text="Der Tierbereich wurde durch Seasons erheblich angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine mögen es im Winter etwas wärmer und verbrauchen daher mehr Stroh. Die max. Kapazität der Futtertröge wurde von 6 auf 3 Tage verringert." />
-        <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Die Lämmerzeit für Schafe ist das Frühjahr. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst, während Kühe nur im Sommer kalben." />
-        <text name="ss_helpText_14_03" text="Deine Tiere versterben wenn diese kein Futter oder Wasser bekommen. Diese Option ist bei Schwierigkeitsstufe 'einfach' deaktiviert." />
-        <text name="ss_helpText_14_04" text="Gras kann im Winter nicht verfüttert werden! Gras kann ja über längere Zeit wie im wahren Leben nicht eingelagert werden. Nutze daher Heu!" />
+        <text name="ss_helpText_14_01" text="Die Tierproduktion wurde mit Seasons an realistischere Parameter angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine benötigen im Winter mehr Stroh. Die maximalen Fütterungskapazitäten wurden von 6 Tage auf 3 Tage reduziert." />
+        <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst. Die Lämmerzeit für Schafe ist das Frühjahr, während Kühe nur im Sommer kalben." />
+        <text name="ss_helpText_14_03" text="Tiere sterben, wenn sie kein Futter oder Wasser haben. Dies ist im Schwierigkeitsgrad 'Einfach' deaktiviert." />
 
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
-        <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion verändern sich mit den jeweiligen Jahreszeiten." />
-        <text name="ss_helpText_15_02" text="Wolle wird ausschliesslich im Frühjahr produziert." />
+        <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion ist abhängig von der Jahreszeit." />
+        <text name="ss_helpText_15_02" text="Wolle wird nur im Frühjahr und Sommer produziert." />
         <text name="ss_helpText_15_03" text="Milch wird über das gesamte Jahr produziert. Die Produktivität verringert sich jedoch zum Frühling und Winter. Während der Wintersaison kann kein frisches Gras gefüttert werden. Die Produktivität wird dementsprechend massiv sinken. Seasons reduziert die Milchproduktion im Winter künstlich, um den Grasmangel zu simulieren." />
 
         <text name="ss_helpTitle_16" text="Seasons - Menü" />
-        <text name="ss_helpText_16_01" text="Das Seasons Menü beinhaltet alle relevanten Daten zu Aussaat- und Erntezeiten. Weiterhin sind auf der zweiten Seite einige Einstellmöglichkeiten. Die Tastenkombination zum Menü ist ALT links + S." />
-        <text name="ss_helpText_16_02" text="Die erste Seite beinhaltet alle wichtigen Daten zum Thema Aussaat- und Erntezeit. Auf der linken Seite hinter den jeweiligen Pflanzenarten werden die benötigten Bodentemperaturen für die Aussaat angegeben. Wird diese Zahl in 'blau' dargestellt, ist der Boden noch zu kalt. Ist die Temperatur in 'weiß' angegeben, hat der Boden die richtigen Temperatur und eine Aussaat ist möglich." />
-        <text name="ss_helpText_16_03" text="Auf der zweiten Seite befinden sich einige Einstellmöglichkeiten: Hilfefenster an/aus, Tastenbelegungen anzeigen an/aus, Temperatureinheit Celsius/Fahrenheit, Jahreszeit-Dauer 3-24 Tage, Schnee an/aus, Schneespuren an/aus, Ernten bei Feuchtigkeit an/aus." />
+        <text name="ss_helpText_16_01" text="Das Seasons-Menü dient als Nachschlagewerk für die Pflanzung, die Wirtschaft (Produktpreise) und zum Ändern der Jahreszeiten." />
+        <text name="ss_helpText_16_02" text="Die erste Seite ist der Pflanz- und Erntekalender. Die Keimtemperaturen aller Kulturen sind links im Diagramm dargestellt. Wenn die Temperatur neben einer Pflanze weiß ist, ist es warm genug, um diese bestimmte Kultur zu sähen bzw. zu pflanzen. Wenn die Temperatur blau ist, ist es dazu noch zu kalt." />
+        <text name="ss_helpText_16_03" text="Auf der zweiten Seite findest du Daten zu den Produktpreisen des letzten Jahres. Die Daten werden jeden Tag aktualisiert. Der zukünftige Preis ist nur eine Schätzung, so dass Abweichungen auftreten können." />
+        <text name="ss_helpText_16_04" text="Die dritte Seite ist das Einstellungsmenü. Auf dieser Seite stehen verschiedene Optionen zur Verfügung, mit denen du Seasons so einstellen kannst, wie du spielen möchtest." />
 
         <text name="ss_helpTitle_17" text="Anzeigen" />
-        <text name="ss_helpText_17_01" text="Das Anzeigefeld links neben der Uhr zeigt die aktuellen Tages-Informationen an. In dieser Anzeige befindet sich oberhalb die aktuelle Außentemperatur, darunter die Temperatur des Bodens. Auf der linken Seite der Anzeige wird der Zustand der Pflanzen (Pflanzen, feucht/gefrorener Boden) angezeigt." />
-        <text name="ss_helpText_17_02" text="Direkt unter der Uhr befinden sich die Anzeigen für die aktuelle Jahreszeit und den aktuellen Tag dieser Jahreszeit." />
+        <text name="ss_helpText_17_01" text="Ein HUD links von der Uhr in der oberen rechten Ecke zeigt Informationen an, die für Seasons relevant sind. Es zeigt die aktuelle Lufttemperatur oben und die Bodentemperatur darunter an. Der Zustand des Bodens (Fechtegehalt der Kultur / gefrorener Boden) wird ebenfalls links von diesem HUD angezeigt." />
+        <text name="ss_helpText_17_02" text="Direkt unter der Uhr wird die Jahreszeit und der Tag dieser aktuellen Saison angezeigt." />
         <text name="ss_helpText_17_03" text="Wenn die Wettervorhersage aktiviert ist, erscheint die Prognose direkt unter der Uhr auf der rechten Seite." />
-        <text name="ss_helpText_17_04" text="Wenn das Hilfefenster F1 aktiv ist und Du in einem Fahrzeug sitzt, werden die verbleibenden Tage bis zur Reparatur dieses Fahrzeuges unten im Fenster angezeigt." />
+        <text name="ss_helpText_17_04" text="Wenn das Hilfemenü aktiviert ist, wird der Wartungstimer unten angezeigt. Dies wird aber nur angezeigt, wenn du dich in einem Fahrzeug befindest." />
 
         <text name="ss_helpTitle_18" text="Verschiedenes" />
-        <text name="ss_helpText_18_01" text="Wenn Du nachts nicht arbeiten möchtest, nutze die Funktion 'Nacht überspringen'. Einfach am Anfang der Nacht die standardmäßig einstellte Tastenkombination Alt links + N drücken und automatisch zum nächsten Morgen vorspulen. Du musst dabei aber außerhalb eines Fahrzeuges stehen." />
-        <text name="ss_helpText_18_02" text="Möchtest Du die Länge der Jahreszeiten während eines aktiven Spielstandes verändern, solltest Du 1.) die Veränderung während des Winters vornehmen, damit Du keine ungewollten Probleme mit dem aktuellen Pflanzenwachstum bekommst oder 2.) sollte das Spiel bzw. der Onlineserver neu gestartet werden." />
-        <text name="ss_helpText_18_03" text="Seasons verändert die Spielweise in vielen Punkten. Die meisten Tester konnten mit der 9-Tage-Jahreszeit und einer Zeitskalierung von 5x das beste Spielerlebnis erreichen. Natürlich hat jeder seine eigenen Vorlieben und eigene Spielweise. Der Frühling sollte dennoch zum Pflügen/Grubbern/Säen genutzt werden. Der Sommer ist für den Pflanzenschutz (Dünger ausbringen etc.), den ersten Gras-Schnitt und/oder die Heuproduktion vorgesehen. Danach kommt die Ernte der Pflanzen bis in den späten Herbst. Die erste Aussaat (Wintergetreide) ist danach schon möglich. Da der Boden im Winter vermutlich zu kalt und gefroren sein wird, kannst Du Dich nun verstärkt um die Tiere oder die Forstwirtschaft kümmern. Dein Fuhrpark sollte natürlich auch regelmäßig gewartet werden. Also nutze die freie Zeit im Winter!" />
+        <text name="ss_helpText_18_01" text="Wenn du während der Nacht nicht arbeiten möchtest, hast du die Möglichkeit, zum Morgen zu springen. Du kannst dies nur außerhalb eines Fahrzeugs tun." />
+        <text name="ss_helpText_18_02" text="Wenn du dich entscheidest, die Länge der Saison mitten in einem bestehenden Spiel zu ändern, wird empfohlen 1) die Saisonlänge im Winter zu ändern, um unerwünschte Auswirkungen auf bestehende Zustände der Pflanzen zu reduzieren und 2) das Spiel / den Server nach dem Wechsel der Saison neu zu starten." />
+        <text name="ss_helpText_18_03" text="Spiele wie du möchtest. Aber es wird als Herausforderung vorgeschlagen, mit einer 9-Tage-Saison und mit 5facher Zeitbeschleunigung zu spielen. Auf diese Weise verbringst du den Frühling nur mit dem Anbau und der Anpflanzung von Feldfrüchten, der Ernte und das Heueinholen im Sommer, der Ernte und dem Pflügen im Herbst und der Pflege der Tiere, Maschinen, Wälder und dem Verkauf von Feldfrüchten im Winter." />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
     </texts>
 </l10n>

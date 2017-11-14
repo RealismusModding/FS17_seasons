@@ -9,7 +9,7 @@ ssMeasureTool.MEASURE_TIMEOUT = 2000
 ssMeasureTool.MEASURE_PULSE = 483
 ssMeasureTool.BREATH_TIME = 4400
 
-ssMeasureTool.MEASURE_DISTANCE = 4 -- meters
+ssMeasureTool.MEASURE_DISTANCE = 5 -- meters
 
 ssMeasureTool.BLINKING_MESSAGE_DURATION = ssMeasureTool.MEASURE_TIMEOUT
 
@@ -19,14 +19,14 @@ ssMeasureTool.UVS_CONTENTS      = { 280,   8, 128, 128 }
 ssMeasureTool.UVS_CROP_HEIGHT   = { 416,   8, 128, 128 }
 ssMeasureTool.UVS_TREE_DISTANCE = { 552,   8, 128, 128 }
 ssMeasureTool.UVS_TREE_TYPE     = { 688,   8, 128, 128 }
+ssMeasureTool.UVS_CROP_MOISTURE = { 824,   8, 128, 128 }
 ssMeasureTool.UVS_ELEVATION     = {   8, 144, 128, 128 }
 ssMeasureTool.UVS_FERMENTATION  = { 144, 144, 128, 128 }
 ssMeasureTool.UVS_FERTILIZATION = { 280, 144, 128, 128 }
 ssMeasureTool.UVS_CROP_TYPE     = { 416, 144, 128, 128 }
 ssMeasureTool.UVS_TREE_HEIGHT   = { 552, 144, 128, 128 }
-
 ssMeasureTool.UVS_MOISTURE      = { 688, 144, 128, 128 }
-ssMeasureTool.UVS_PLOUGHCOUNTER = { 552, 144, 128, 128 }
+ssMeasureTool.UVS_SOIL_MOISTURE = { 824, 144, 128, 128 }
 
 function ssMeasureTool:new(isServer, isClient, customMt)
     local mt = customMt
@@ -193,7 +193,7 @@ end
 -- Called by the raycast: handles finding the object that was scanned
 function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
     -- Too close or too far away
-    if distance < 0.5 or distance > ssMeasureTool.MEASURE_DISTANCE or hitObjectId == 0 then
+    if hitObjectId == 0 then
         self:showFailed()
 
     -- We did only hit the terrain
@@ -308,7 +308,7 @@ function ssMeasureTool:showBaleInfo(bale)
         })
     end
 
-    self:openDialog("Bale", data)
+    self:openDialog(data)
 end
 
 function ssMeasureTool:showTerrainInfo(x, y, z)
@@ -321,7 +321,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local worldHeightX, worldHeightZ = 0, areaSize
 
     -- Read height
-    local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z)
+    local terrainHeight = getTerrainHeightAtWorldPos(g_currentMission.terrainRootNode, x, y, z) - g_currentMission.waterY
 
     local a, b, c = getDensityParallelogram(g_currentMission.terrainDetailId, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels)
     local terrainType = a / b
@@ -374,8 +374,9 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         local fillType = FruitUtil.fruitTypeToFillType[crop.desc.index]
         local length = 0
         local densityState = crop.stage - 1
-        if densityState <= crop.desc.maxHarvestingGrowthState then
-            length = Utils.clamp(densityState / crop.desc.maxHarvestingGrowthState, 0, 1)
+        local numStates = FruitUtil.fruitTypeGrowths[crop.desc.name].numGrowthStates - 1
+        if densityState <= numStates then
+            length = Utils.clamp(densityState / numStates, 0, 1)
         end
 
         table.insert(data, {
@@ -386,6 +387,12 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
         table.insert(data, {
             iconUVs = ssMeasureTool.UVS_CROP_HEIGHT,
             text = string.format("%.0f%%", length * 100)
+        })
+
+        local moisture = math.max(math.min(g_seasons.weather.cropMoistureContent, 100), 0)
+        table.insert(data, {
+            iconUVs = ssMeasureTool.UVS_CROP_MOISTURE,
+            text = string.format("%.0f%%", moisture)
         })
     end
 
@@ -399,13 +406,13 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     --     text = ploughCounter
     -- })
 
-    -- local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
-    -- table.insert(data, {
-    --     iconUVs = ssMeasureTool.UVS_MOISTURE,
-    --     text = string.format("%.0f%%", moisture * 100)
-    -- })
+    local moisture = math.max(math.min(g_currentMission.environment.groundWetness, 1), 0)
+    table.insert(data, {
+        iconUVs = ssMeasureTool.UVS_MOISTURE,
+        text = string.format("%.0f%%", moisture * 100)
+    })
 
-    self:openDialog("Terrain", data)
+    self:openDialog(data)
 end
 
 function ssMeasureTool:showPlantedTreeInfo(tree)
@@ -427,7 +434,7 @@ function ssMeasureTool:showPlantedTreeInfo(tree)
         hasIssue = g_seasons.treeManager:isTreeGrowthLimited(tree)
     })
 
-    self:openDialog("Tree", data)
+    self:openDialog(data)
 end
 
 function ssMeasureTool:showStaticTreeInfo(tree)
@@ -453,7 +460,7 @@ function ssMeasureTool:showStaticTreeInfo(tree)
         text = "100%"
     })
 
-    self:openDialog("Tree", data)
+    self:openDialog(data)
 end
 
 function ssMeasureTool:showFillablePallet(pallet)
@@ -471,10 +478,10 @@ function ssMeasureTool:showFillablePallet(pallet)
         })
     end
 
-    self:openDialog("Pallet", data)
+    self:openDialog(data)
 end
 
-function ssMeasureTool:openDialog(title, contents)
+function ssMeasureTool:openDialog(contents)
     local dialog = g_gui:showDialog("MeasureToolDialog")
 
     dialog.target:setTitle(ssLang.getText("measuretool_title"))

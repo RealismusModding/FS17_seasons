@@ -9,6 +9,7 @@
 ssRepairable = {}
 
 ssRepairable.MAX_CHARS_TO_DISPLAY = 20
+ssRepairable.PLAYER_RANGE = 5.0
 
 source(g_seasons.modDir .. "src/events/ssRepairVehicleEvent.lua")
 
@@ -72,6 +73,20 @@ function ssRepairable:draw()
 end
 
 function ssRepairable:updateTick(dt)
+<<<<<<< HEAD
+=======
+    -- Calculate if vehicle is in range for message about repairing
+    if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
+        local isPlayerInRange, player = getIsPlayerInRange(self, ssRepairable.PLAYER_RANGE, g_currentMission.player)
+
+        if isPlayerInRange then
+            self.ssPlayerInRange = player
+        else
+            self.ssPlayerInRange = nil
+        end
+    end
+
+>>>>>>> develop
     -- Calculate cumulative dirt
     if self.getDirtAmount ~= nil then
         local factor = self:getIsOperating() and 1 or 0.1

@@ -7,7 +7,7 @@
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Afficher le menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Distance de plantation (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Passer la nuit" />
-        <text name="SEASONS_HIDE_WF" text="Seasons: Cacher les prévisions" />
+        <text name="SEASONS_HIDE_WF" text="Seasons: Cacher les prévisions météo" />
 
         <text name="SS_WEEKDAY_1" text="Lundi" />
         <text name="SS_WEEKDAY_2" text="Mardi" />
@@ -122,7 +122,7 @@
         <text name="tooltip_controlsTemperature" text="Contrôle de la temperature utilisée dans le jeu" />
         <text name="tooltip_moisture" text="Ne pas autoriser le battage lorsque les récoltes sont mouillées" />
 
-        <text name="setting_seasonIntros" text="Introductions de saison" />
+        <text name="setting_seasonIntros" text="Introductions de Seasons" />
         <text name="setting_seasonLength" text="Durée de la saison" />
         <text name="setting_snow" text="Mode neige" />
         <text name="setting_controlsHelp" text="Boutons dans le menu d'aide" />
@@ -137,6 +137,10 @@
         <text name="dialog_resetGrowth_yes" text="Réinitialisation" />
         <text name="dialog_timeTravel" text="Le jeu synchronise après avoir avancer rapidement" />
         <text name="dialog_sleeping" text="Se reposer pour un autre jour à la ferme... Zzz.." />
+
+        <text name="dialog_skipNight_text" text="Voulez-vous passer la nuit jusqu'à demain matin (6h00) ou à l'aube (% s)?" />
+        <text name="dialog_skipNight_morning" text="Matin (6h00)" />
+        <text name="dialog_skipNight_dawn" text="Aube (%s)" />
 
         <text name="fillType_snow" text="Neige" />
 
@@ -160,14 +164,14 @@
         <text name="ss_helpText_03_03" text="Le mod Seasons affectera aussi les arbres et la végétation. Les arbres changeront d'état en fonction des changements de température saisonniers. Les feuilles changeront de couleur et tomberont en automne. Les arbres seront nus en hiver et vert clair au printemps." />
 
         <text name="ss_helpTitle_04" text="Prévisions météo" />
-        <text name="ss_helpText_04_01" text="Les prévisions météo ont été réintroduites avec le mod Seasons et peuvent être activées en utilisant le raccourci clavier 'Alt + F'." />
+        <text name="ss_helpText_04_01" text="Les prévisions météo pour les 7 prochains jours peuvent être affichées dans le coin supérieur droit de l'écran. L'affichage peut être masqué." />
         <text name="ss_helpText_04_02" text="Les prévisions météo montrent les températures mini/maxi et le temps (ensoleillé, brumeux, pluvieux, neigeux, nuageux) pour les 7 prochains jours. Les orages de grêle n'apparaitront pas sur les prévisions, car ils restent imprévisibles comme dans la réalité." />
         <text name="ss_helpText_04_03" text="Le chiffre apparaissant à droite des prévisions représente le jour de la saison." />
 
         <text name="ss_helpTitle_05" text="Sol" />
         <text name="ss_helpText_05_01" text="La température du sol est modèlisée à partir d'équations thermodynamiques et de données historiques. Cela veut dire que le sol pourra geler en hiver si les températures sont trop basses pendant une certaine période. Au printemps, à partir d'une certaine température ambiante, le sol pourra dégeler." />
         <text name="ss_helpText_05_02" text="Le sol ne peut être travaillé lorsqu'il est gelé. Les cultures ne pousseront pas." />
-        <text name="ss_helpText_05_03" text="Les cultures ne pourront germer que si la température du sol est supérieure à leur température de germination requise. Ces températures sont consultables sur la première page du menu paramètres du mod Seasons (Alt + S)." />
+        <text name="ss_helpText_05_03" text="Les cultures ne germeront que lorsque la température du sol est supérieure à leur température de germination. Les températures de germination sont incluses dans le calendrier, sur la première page du menu Seasons." />
 
         <text name="ss_helpTitle_06" text="Cultures - Intro" />
         <text name="ss_helpText_06_01" text="Lors du commencement d'une nouvelle partie, toutes les cultures seront réinitialisées à leur état 'récolté' afin de simuler le fait que les champs n'ont pas été travaillés depuis l'automne. En utilisant le mod Seasons pour la première fois dans une partie existante, vous aurez la possibilité d'effectuer ou non cette réinitialisation." />
@@ -199,7 +203,7 @@
 
         <text name="ss_helpTitle_11" text="Maintenance" />
         <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
-        <text name="ss_helpText_11_02" text="Vos véhicules peuvent être réparés soit à la concession, soit avec le garage plaçable. Une fois sur place avec votre véhicule, il suffit d'appuyer sur 'Alt + R'. Bien sûr, c'est plus cher à la concession que dans votre propre garage." />
+        <text name="ss_helpText_11_02" text="Vous pouvez réparer vos véhicules soit à la concession, soit dans un garage plaçable. Pour réparer votre véhicule, conduisez le à la concession  ou dans un garage plaçable, et activez la réparation. Notez que ce sera plus coûteux de réparer à la concession." />
         <text name="ss_helpText_11_03" text="L'âge affiché de votre véhicule correspond au nombre de jours depuis la dernière réparation." />
         <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
 
@@ -216,7 +220,6 @@
         <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 à 3 jours." />
         <text name="ss_helpText_14_02" text="Les naissances d'animaux ne se produisent qu'à certains moments de l'année. Pour les cochons c'est au printemps et à l'automne, les moutons seulement au printemps, tandis que pour les vaches c'est durant l'été." />
         <text name="ss_helpText_14_03" text="Les animaux peuvent mourir s'ils manquent d'eau ou de nourriture. (désactivé en mode facile)" />
-        <text name="ss_helpText_14_04" text="Il n'est pas possible de nourrir les animaux avec de l'herbe l'hiver, il faut utiliser du foin." />
 
         <text name="ss_helpTitle_15" text="Animaux - Production" />
         <text name="ss_helpText_15_01" text="La production de lait et de laine dépend de la saison." />
@@ -224,18 +227,19 @@
         <text name="ss_helpText_15_03" text="La production de lait se fait toute l'année mais elle est augmentée en hiver et au printemps. Comme on ne peut pas donner d'herbe pendant l'hiver, normalement, la productivité des vaches ne pourrait être que de 80% au mieux. Cependant, le mod Seasons augmente la production pour compenser cette perte de productivité." />
 
         <text name="ss_helpTitle_16" text="Menu Seasons" />
-        <text name="ss_helpText_16_01" text="Le menu Seasons est utilisé comme guide de référence pour les semis et les modifications à apporter aux mod Seasons. Ce menu est activé avec les touches 'Alt + S'." />
-        <text name="ss_helpText_16_02" text="La première page est votre guide de période de semis et de récolte. Les températures de germination de toutes les cultures sont affichées sur la gauche du graphique. Si la température d'une culture est en blanc, cela veut dire que la température actuelle est assez douce pour semer cette plante. Si la température est bleue, c'est que le sol est trop froid." />
-        <text name="ss_helpText_16_03" text="La deuxième page regroupe les paramètres du mod Seasons. Dans celle-ci, il est possible de modifier la durée d'une saison, d'activer ou non les notifications concernant les saisons, le mode neige, la prise en compte de l'humidité des cultures et enfin l'unité d'affichage des températures." />
+        <text name="ss_helpText_16_01" text="Le menu Seasons est utilisé comme guide de référence pour les plantations et l'économie, et pour modifier les paramètres liés à Seasons." />
+        <text name="ss_helpText_16_02" text="La première page est le calendrier de plantation et de récolte. Les températures de germination des cultures sont indiquées sur la gauche du graphique. Si la température à côté d'une culture est blanche, cela signifie qu'il fait assez chaud pour planter cette culture. Si la température est bleue, il fait trop froid." />
+        <text name="ss_helpText_16_03" text="Sur la deuxième page, vous pouvez trouver des données sur les prix des produits de la dernière année. Les données sont mises à jour tous les jours. Le prix futur n'est qu'une estimation, donc des écarts peuvent survenir." />
+        <text name="ss_helpText_16_04" text="La troisième page est le menu des paramètres. Sur cette page, diverses options sont disponibles pour ajuster Seasons à votre façon de jouer." />
 
         <text name="ss_helpTitle_17" text="GUI" />
         <text name="ss_helpText_17_01" text="Une interface utilisateur à gauche de l'horloge du jeu, dans le coin en haut à droite, affiche les informations relatives au mod Seasons. On peut y voir la température ambiante actuelle sur le dessus, et celle du sol en dessous. L'état du sol (culture humide, sol gelé) est aussi affiché sur la gauche de cette interface." />
         <text name="ss_helpText_17_02" text="Juste en dessous de l'horloge, la période actuelle ainsi que le jour de la saison sont affichés." />
         <text name="ss_helpText_17_03" text="Lorsqu'il est activé, le panneau d'affichage des prévisions météo apparaît sous l'horloge, dans le coin supérieur droit." />
-        <text name="ss_helpText_17_04" text="Quand le menu d'aide est activé ('F1'), le temps restant jusqu'à la prochaine maintenance est affiché près du bas de ce menu. Cela n'est visible que lorsque l'on est dans un véhicule." />
+        <text name="ss_helpText_17_04" text="Quand le menu d'aide est activé, le temps restant jusqu'à la prochaine maintenance est affiché près du bas de ce menu. Cela n'est visible que lorsque l'on est dans un véhicule." />
 
         <text name="ss_helpTitle_18" text="Divers" />
-        <text name="ss_helpText_18_01" text="Si vous ne souhaitez pas travailler pendant la nuit, vous pouvez aller directement au matin. Une fois la nuit tombée, il faut sortir de votre véhicule et appuyer sur 'Alt + N'." />
+        <text name="ss_helpText_18_01" text="Si vous ne souhaitez pas travailler pendant la nuit, vous pouvez aller directement au matin. Vous ne pouvez le faire qu'en dehors d'un véhicule." />
         <text name="ss_helpText_18_02" text="Si vous souhaitez modifier la durée des saisons pour une partie en cours, il est recommandé de : 1) procéder au changement seulement pendant l'hiver afin de minimiser les effets indésirables sur les cultures en place. 2) redémarrer le jeu ensuite (sur le serveur le cas échéant)." />
         <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représente un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
         <text name="ss_helpText_18_04" text="Tous les véhicules doivent être démarrés manuellement." />

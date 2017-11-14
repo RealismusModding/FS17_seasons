@@ -85,7 +85,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Nie wolno kosić, gdy zboże jest zbyt mokre!" />
         <text name="warning_animalsKilled" text="%d zwierząt padło" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="Maksymalna pojemność koryta wystarczająca do nakarmienia zwierząt przez 3 dni" />
-        <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry (klawisz Esc), aby dowiedzieć się jak używać tego modu." />
+        <text name="msg_welcome" text="Witamy w modzie Seasons autorstwa Realismus Modding. Prosimy o zapoznanie się z pomocą w menu gry, aby dowiedzieć się jak używać tego modu." />
 
         <text name="measuretool_title" text="Pomiar" />
         <text name="measuretool_fermentation_time" text="Pozostało %d godzin(y)" />
@@ -138,14 +138,18 @@
         <text name="dialog_timeTravel" text="Gra jest synchronizowana po przewinięciu czasu" />
         <text name="dialog_sleeping" text="Odpoczynek przed kolejnym dniem pracy na farmie... Zzz..." />
 
+        <text name="dialog_skipNight_text" text="Chcesz pominąć noc do poranka (6:00) czy do świtu (%s)?" />
+        <text name="dialog_skipNight_morning" text="Poranek (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Świt (%s)" />
+
         <text name="fillType_snow" text="Śnieg" />
 
-        <text name="function_measureTool" text="Za pomocą narzędzia pomiarowego można uzyskać informacje o glebie, drzewach, belach oraz innych obiektach." />
+        <text name="function_measureTool" text="Za pomocą urządzenia pomiarowego można uzyskać informacje o glebie, drzewach, belach oraz innych obiektach." />
 
         <text name="ss_helpCategory" text="Seasons" />
 
         <text name="ss_helpTitle_01" text="Seasons" />
-        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty do bardziej realistycznych parametrów. Wszystko od efektów sezonowych poprzez wzrost upraw aż do produkcji zwierzęcej zostało przeniesione na bardziej realistyczny poziom." />
+        <text name="ss_helpText_01_01" text="Seasons to mod, który poprawia realizm w grze Farming Simulator, dostosowując niemal wszystkie aspekty gry do bardziej realistycznych parametrów. Wszystko od efektów sezonowych poprzez wzrost upraw aż do produkcji zwierzęcej zostało przeniesione na bardziej realistyczny poziom." />
         <text name="ss_helpText_01_02" text="Rok w grze został podzielony na 4 sezony: wiosna, lato, jesień i zima. Każdy sezon podzielony jest na 3 pory: wczesną, środkową i późną. Te pory są określane mianem przejść." />
         <text name="ss_helpText_01_03" text="Twoje prace są powiązane z porą roku tak, jak ma to miejsce w prawdziwym życiu." />
 
@@ -160,14 +164,14 @@
         <text name="ss_helpText_03_03" text="Mod Seasons ma również wpływ na drzewa i rośliny. Drzewa zmieniają wygląd wraz ze zmianą temperatur sezonowych. Liście zmienią kolor i opadną jesienią. Zimą drzewa będą gołe, a wiosną pokryją się jasną zielenią." />
 
         <text name="ss_helpTitle_04" text="Prognoza pogody" />
-        <text name="ss_helpText_04_01" text="Prognoza pogody została ponownie wprowadzona w modzie Seasons i może być aktywowana przy użyciu Lewego Alt + F." />
+        <text name="ss_helpText_04_01" text="Prognoza pogody na kolejne 7 dni wyświetlana jest w górnym prawym rogu ekranu. Może być wyświetlana lub ukryta." />
         <text name="ss_helpText_04_02" text="Prognoza pogody pokazuje najwyższą/najniższą temperaturę i pogodę (słonecznie, mglisto, deszczowo, opady śniegu, pochmurno) dla kolejnych 7 dni. Gradobicie nie pojawia się w prognozie pogody, ponieważ w rzeczywistości grad jest niespodziewanym zjawiskiem pogodowym." />
         <text name="ss_helpText_04_03" text="Numer po prawej stronie prognozowanego dnia to dzień sezonu." />
 
         <text name="ss_helpTitle_05" text="Gleba" />
         <text name="ss_helpText_05_01" text="Temperatura gleby jest modelowana za pomocą równań termodynamicznych i danych historycznych. Oznacza to, że gleba zamarznie zimą, gdy temperatura powietrza spadnie poniżej pewnego progu przez pewien czas. Wiosną gleba rozmarznie, gdy temperatura powietrza powietrza odpowiednio się podniesie." />
         <text name="ss_helpText_05_02" text="Gleba nie może być uprawiana, gdy grunt jest zamarznięty. Uprawy nie rosną w zamarzniętej glebie." />
-        <text name="ss_helpText_05_03" text="Rośliny kiełkują tylko wtedy, gdy temperatura gleby przekracza temperaturę kiełkowania. Temperatury kiełkowania znajdują się na pierwszej stronie menu ustawień modu Seasons (Lewy Alt + S)." />
+        <text name="ss_helpText_05_03" text="Rośliny kiełkują tylko wtedy, gdy temperatura gleby przekracza temperaturę kiełkowania. Temperatury kiełkowania znajdują się na pierwszej stronie menu ustawień modu Seasons." />
 
         <text name="ss_helpTitle_06" text="Uprawy - wprowadzenie" />
         <text name="ss_helpText_06_01" text="Rozpoczynając nową grę wszystkie uprawy zostaną zresetowane do stanu zebranych, aby symulować sytuację, w której pola nie były uprawiane od jesieni. Uruchomienie modu Seasons po raz pierwszy w istniejącym zapisie gry pozwoli wybrać opcję zresetowania lub pozostawienia upraw." />
@@ -199,7 +203,7 @@
 
         <text name="ss_helpTitle_11" text="Utrzymanie maszyn" />
         <text name="ss_helpText_11_01" text="Twoje maszyny wymagają regularnych przeglądów, aby były w pełni sprawne. Okres przeglądów to co 30 godzin roboczych lub co pół roku, w zależności co nastąpi wcześniej. Pojazdy, które przekroczą termin przeglądu mogą mieć problem z uruchomieniem." />
-        <text name="ss_helpText_11_02" text="Przegląd można wykonać w warsztacie sklepu z maszynami lub we własnym postawionym garażu. Aby wykonać przegląd należy wjechać pojazdem do warsztatu lub garażu i wcisnąć Lewy Alt + R. Należy pamiętać, że przegląd w warsztacie sklepowym jest droższy." />
+        <text name="ss_helpText_11_02" text="Przegląd można wykonać w warsztacie sklepu z maszynami lub we własnym postawionym garażu. Aby wykonać przegląd należy wjechać pojazdem do warsztatu lub garażu i wykonać naprawę. Należy pamiętać, że przegląd w warsztacie sklepowym jest droższy." />
         <text name="ss_helpText_11_03" text="Wiek pojazdu podawany jest w dniach od ostatniego przeglądu." />
         <text name="ss_helpText_11_04" text="Tylko pojazdy kierowane wymagają okresowych przeglądów. Pozostałe maszyny będą przechodziły przegląd automatyczny w razie potrzeby." />
 
@@ -216,7 +220,6 @@
         <text name="ss_helpText_14_01" text="Produkcja zwierzęca została zmieniona na bardziej realistyczną. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej ścielenia słomą w zimie. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />
         <text name="ss_helpText_14_02" text="Zwierzęta rozmnażają się tylko w określonych sezonach. Świnie będą rozmnażać się wiosną i jesienią, owce tylko wiosną, a krowy latem." />
         <text name="ss_helpText_14_03" text="Zwierzęta będą zdychać, gdy nie będą miały jedzenia lub wody. Funkcjonalność ta jest wyłączona na Łatwym poziomie trudności gry." />
-        <text name="ss_helpText_14_04" text="Zimą nie można karmić zwierząt trawą. Należy wówczas karmić je sianem." />
 
         <text name="ss_helpTitle_15" text="Zwierzęta - produkcja" />
         <text name="ss_helpText_15_01" text="Produkcja mleka i wełny zależy od sezonu." />
@@ -224,18 +227,19 @@
         <text name="ss_helpText_15_03" text="Mleko jest produkowane przez cały rok, ale produkcja jest zwiększana zimą i wiosną. Ponieważ zimą nie ma możliwości karmienia trawą, zmniejszyłoby to wydajność krów do co najwyżej 80%. Mod Seasons kompensuje brak trawy w tym czasie poprzez zwiększenie produkcji mleka." />
 
         <text name="ss_helpTitle_16" text="Menu modu Seasons" />
-        <text name="ss_helpText_16_01" text="Menu modu Seasons zawiera przewodnik zasiewów oraz ustawienia modu Seasons. To menu otwierane jest za pomocą Lewego Alt + S." />
-        <text name="ss_helpText_16_02" text="Pierwsza strona zawiera tabelę z okresami zasiewów i zbiorów. Temperatury kiełkowania wszystkich zbóż znajdują się po lewej stronie tabeli. Jeśli temperatura obok zboża jest w kolorze białym, oznacza to, że jest wystarczająco ciepło do jego zasiewu. Jeśli temperatura jest w kolorze niebieskim, znaczy, że jest za zimno." />
-        <text name="ss_helpText_16_03" text="Druga strona to menu ustawień. Zawiera ona długość sezonu (3-24 dni na sezon), powiadomienia sezonowe (wł/wył), tryb śniegu (wł/wył/jednowarstwowy, ślady na śniegu wł/wył), wilgotność zbóż (wł/wył) i skala temperatura (C/F), wszystkie te ustawienia można zmieniać." />
+        <text name="ss_helpText_16_01" text="Menu modu Seasons zawiera przewodnik zasiewów oraz ustawienia modu Seasons." />
+        <text name="ss_helpText_16_02" text="Pierwsza strona to kalendarz zasiewów i zbiorów. Temperatury kiełkowania wszystkich upraw znajdują się po lewej stronie wykresu. Jeżeli temperatura wyświetlana obok uprawy ma biały kolor, oznacza to, że jest wystarczająco ciepło, aby ją zasiać. Jeżeli temperatura jest w kolorze niebieskim, znaczy, że jest za zimno." />
+        <text name="ss_helpText_16_03" text="Na drugiej stronie znajdują się ceny produktów w ciągu ostatniego roku. Dane aktualizują się codziennie. Cena prognozowana jest tylko przybliżona, więc może się zmienić." />
+        <text name="ss_helpText_16_04" text="Trzecia strona to menu ustawień. Można na niej dostosować różne opcje modu Seasons w zależności od tego jak chcesz grać." />
 
         <text name="ss_helpTitle_17" text="Interfejs" />
         <text name="ss_helpText_17_01" text="Interfejs po lewej stronie zegara w prawym górnym rogu zawiera informacje dotyczące modu Seasons. Pokazuje on aktualną temperaturę powietrza (na górze) i gleby (na dole). Stan gleby (ikona wilgotnego zboża/ikona zamarzniętej gleby) jest wyświetlany jako dodatkowe ikony po lewej stronie interfejsu." />
         <text name="ss_helpText_17_02" text="Bezpośrednio poniżej zegara znajduje się dzień i pora obecnego sezonu." />
         <text name="ss_helpText_17_03" text="Po aktywacji interfejsu prognozy pogody pojawi się on poniżej zegara w prawym górnym rogu." />
-        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne (F1), na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
+        <text name="ss_helpText_17_04" text="Gdy okno pomocy jest aktywne, na samym jego dole wyświetlany jest licznik do przeglądu pojazdu. Jest on wyświetlany tylko będąc w pojeździe." />
 
         <text name="ss_helpTitle_18" text="Różne" />
-        <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Po nadejściu nocy, gdy jesteś pieszo możesz nacisnąć Lewy Alt + N, aby przejść do rana." />
+        <text name="ss_helpText_18_01" text="Jeśli nie chcesz pracować w nocy, możesz ją pominąć. Można to zrobić tylko po wyjściu z pojazdu." />
         <text name="ss_helpText_18_02" text="Jeśli zdecydujesz się zmienić długość sezonu w trakcie gry na istniejącym zapisie, zaleca się, aby: 1) Zmienić długość sezonu zimą, aby zmniejszyć niepożądane skutki dla istniejących upraw; 2) Zrestartować grę/serwer po zmianie długości sezonu." />
         <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie polegające na grze tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając ziemię i siejąc zboża, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />

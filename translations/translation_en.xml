@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <l10n>
-    <translationContributors>
-        Rahkiin
-        theSeb
-        reallogger
-    </translationContributors>
+    <translationContributors>Rahkiin, theSeb, reallogger</translationContributors>
 
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Show weather forecast" />
@@ -104,7 +100,7 @@
         <text name="warning_doNotThreshWithMoisture" text="Do not thresh when the crops are too wet!" />
         <text name="warning_animalsKilled" text="Animals died (%d)" />
         <text name="warning_inAdvanceFeedingLimitReached3" text="The maximum capacity of the feeding trough suffices to feed the animals for 3 days" />
-        <text name="msg_welcome" text="Welcome to the Seasons mod by Realismus Modding. Please check out the help in the Esc menu to find out more about how to use this mod." />
+        <text name="msg_welcome" text="Welcome to the Seasons mod by Realismus Modding. Please check out the help in the menu to find out more about how to use this mod." />
 
         <text name="measuretool_title" text="Measurement" />
         <text name="measuretool_fermentation_time" text="%d hours to go" />
@@ -136,7 +132,7 @@
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons" />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season" />
         <text name="tooltip_snow" text="Snow will fall in cold winters and block roads" />
-        <text name="tooltip_controlsHelp" text="Show the forecast and menu key in the help menu" />
+        <text name="tooltip_controlsHelp" text="Show the forecast and menu keys in the help menu" />
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops are wet of moisture" />
@@ -158,6 +154,10 @@
         <text name="dialog_resetGrowth_yes" text="Reset" />
         <text name="dialog_timeTravel" text="The game is synchronizing after the fast-forward" />
         <text name="dialog_sleeping" text="Resting for another day at the farm... Zzz..." />
+
+        <text name="dialog_skipNight_text" text="Do you want to skip night until morning (6:00) or dawn (%s)?" />
+        <text name="dialog_skipNight_morning" text="Morning (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Dawn (%s)" />
 
         <text name="fillType_snow" text="Snow" />
 
@@ -181,14 +181,14 @@
         <text name="ss_helpText_03_03" text="Seasons will also affect trees and foliage. The trees will change state according to seasonal temperature changes. Leaves will turn color and drop in the autumn. Trees will go bare in winter and will be lighter green in the spring." />
 
         <text name="ss_helpTitle_04" text="Weather Forecast" />
-        <text name="ss_helpText_04_01" text="The weather forecast has been reintroduced with Seasons and can activated by Left Alt + F." />
+        <text name="ss_helpText_04_01" text="The weather forecast for the next 7 days can be seen in the upper right corner of the screen. It's visibility can be toggled." />
         <text name="ss_helpText_04_02" text="The weather forecast shows the high/low temperatures and the weather (sunny, foggy, rainy, snowy, cloudy) for the next 7 days. Hailstorms will not appear on the weather forecast, as hail in real life is often an unexpected event." />
         <text name="ss_helpText_04_03" text="The number on the right of each forecast block represents the day of the season." />
 
         <text name="ss_helpTitle_05" text="Soil" />
         <text name="ss_helpText_05_01" text="Soil temperature is modeled using thermodynamic equations and historical data. This means the soil will freeze in the winter when the air temperature drops below a certain point for a certain length of time. The soil will then thaw in the spring when the air temperature rises above a certain threshold for a certain of length of time." />
         <text name="ss_helpText_05_02" text="The soil cannot be worked when the ground is frozen. Crops will not grow in frozen soil." />
-        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included on the first page of the Seasons Settings Menu (Left Alt + S)." />
+        <text name="ss_helpText_05_03" text="Crops will only germinate when the soil temperature is above their germination temperatures. The germinations temperatures are included in the calendar, on the first page of the Seasons menu." />
 
         <text name="ss_helpTitle_06" text="Crops - Intro" />
         <text name="ss_helpText_06_01" text="When starting a new game all crops will be reset to their harvested stages to simulate the fact the fields have not been worked since the autumn. When using Seasons for the first time in an existing save game you will have the option to either reset the crops or not." />
@@ -222,7 +222,7 @@
 
         <text name="ss_helpTitle_11" text="Maintenance" />
         <text name="ss_helpText_11_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
-        <text name="ss_helpText_11_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and press Left Alt + R. Note that it will be more expensive to repair at the vehicle shop." />
+        <text name="ss_helpText_11_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and activate the repair. Note that it will be more expensive to repair at the vehicle shop." />
         <text name="ss_helpText_11_03" text="The age of your vehicle is the days since your last repair." />
         <text name="ss_helpText_11_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
 
@@ -239,7 +239,6 @@
         <text name="ss_helpText_14_01" text="Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." />
         <text name="ss_helpText_14_02" text="Animals only give offspring at a certain time of the year. Pigs will produce offspring in the spring and in the autumn, sheep only in the spring, while cows will produce offspring in the summer." />
         <text name="ss_helpText_14_03" text="Animals will die if they do not have food or water. This is disabled on Easy difficulty." />
-        <text name="ss_helpText_14_04" text="Grass cannot be fed in the winter. You should use hay instead." />
 
         <text name="ss_helpTitle_15" text="Animals - Production" />
         <text name="ss_helpText_15_01" text="Milk and wool production is dependent upon the season." />
@@ -247,18 +246,19 @@
         <text name="ss_helpText_15_03" text="Milk is produced year round, but is increased in the winter and the spring. While grass cannot be fed in the winter, this would normally reduce the cows productivity to at most 80%. However, Seasons increases milk production in the winter and spring to make up for the lack of grass in these months." />
 
         <text name="ss_helpTitle_16" text="Seasons Menu" />
-        <text name="ss_helpText_16_01" text="The Seasons Menu is used as a reference guide for planting and to change settings related to Seasons. This menu is activated by Left Alt + S." />
-        <text name="ss_helpText_16_02" text="The first page is your guide to planting and harvesting windows. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
-        <text name="ss_helpText_16_03" text="The second page is the settings menu. Here the season length (3-24 day seasons), season notifications (on/off), snow mode (on/off/1-layer, tracks on/off), crop moisture (on/off) and temperature settings (C/F) can all be changed." />
+        <text name="ss_helpText_16_01" text="The Seasons Menu is used as a reference guide for planting and the economy, and to change settings related to Seasons." />
+        <text name="ss_helpText_16_02" text="The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." />
+        <text name="ss_helpText_16_03" text="On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." />
+        <text name="ss_helpText_16_04" text="The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A HUD to the left of the clock in the upper right corner displays information relevant to Seasons. It shows the current air temperature on top and ground temperature on bottom. The state of the ground (wetcrops/frozen ground) is also displayed to the left of this HUD." />
         <text name="ss_helpText_17_02" text="Directly below the clock is where the seasonal period and day of the current season is displayed." />
         <text name="ss_helpText_17_03" text="When activated, the forecast HUD will appear below the clock in the upper right corner." />
-        <text name="ss_helpText_17_04" text="When the help menu is activated (F1) the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." />
+        <text name="ss_helpText_17_04" text="When the help menu is activated the maintenance timer is displayed near the bottom. This is only displayed when you are in a vehicle." />
 
         <text name="ss_helpTitle_18" text="Miscellaneous" />
-        <text name="ss_helpText_18_01" text="If you do not wish to work during the night, you have the option to skip to the morning. After the night falls and you are on foot you can press Left Alt + N to skip to the morning." />
+        <text name="ss_helpText_18_01" text="If you do not wish to work during the night, you have the option to skip to the morning. You can only do this outside a vehicle." />
         <text name="ss_helpText_18_02" text="If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." />
         <text name="ss_helpText_18_03" text="While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." />
         <text name="ss_helpText_18_04" text="All vehicles need to be started manually." />

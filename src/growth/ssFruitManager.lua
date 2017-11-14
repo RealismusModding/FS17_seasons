@@ -21,20 +21,30 @@ function ssFruitManager:loadMap(name)
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POTATO] = true
 end
 
-function ssFruitManager:update(dt)
-    if ssFruitManager.harvestStatesUpdated == false then
-        self:updateHarvestStates()
-        self.harvestStatesUpdated = true
-    end
+-- function ssFruitManager:update(dt)
+--     if ssFruitManager.harvestStatesUpdated == false then
+--         self:updateHarvestStates()
+--         self.harvestStatesUpdated = true
+--     end
+-- end
+
+function ssFruitManager:loadMapFinished()
+    self:updateHarvestStates()
 end
 
 function ssFruitManager:updateHarvestStates()
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
+        local desc = FruitUtil.fruitIndexToDesc[index]
 
         if self:fruitShouldBeUpdated(index) == true then
             -- Minimize the time a crop can be harvested (1 state, not ~3)
-            FruitUtil.fruitIndexToDesc[index].minHarvestingGrowthState = FruitUtil.fruitIndexToDesc[index].maxHarvestingGrowthState
+            desc.minHarvestingGrowthState = desc.maxHarvestingGrowthState
+        end
+
+        -- Sugarcane is a very special fruit
+        if index == FruitUtil.FRUITTYPE_SUGARCANE then
+            desc.minPreparingGrowthState = desc.maxPreparingGrowthState
         end
     end
 end

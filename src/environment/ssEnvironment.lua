@@ -213,69 +213,55 @@ function ssEnvironment:callListeners()
     end
 end
 
-local function removeItemFromTable(tbl, item)
-    local i
-
-    for j, v in ipairs(tbl) do
-        if v == item then
-            i = j
-        end
-    end
-
-    if i ~= nil then
-        table.remove(tbl, i)
-    end
-end
-
 -- Listeners for a change of season
 function ssEnvironment:addSeasonChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.seasonChangeListeners, listener)
+        Utils.addElementToTable(self.seasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.seasonChangeListeners, listener)
+        Utils.removeElementFromTable(self.seasonChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of transition
 function ssEnvironment:addTransitionChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.transitionChangeListeners, listener)
+        Utils.addElementToTable(self.transitionChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeTransitionChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.transitionChangeListeners, listener)
+        Utils.removeElementFromTable(self.transitionChangeListeners, listener)
     end
 end
 
 -- Listeners for a change of season length
 function ssEnvironment:addSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.seasonLengthChangeListeners, listener)
+        Utils.addElementToTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeSeasonLengthChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.seasonLengthChangeListeners, listener)
+        Utils.removeElementFromTable(self.seasonLengthChangeListeners, listener)
     end
 end
 
 -- Listeners for the change of the visual season (not aligned with actual seasons)
 function ssEnvironment:addVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        table.insert(self.visualSeasonChangeListeners, listener)
+        Utils.addElementToTable(self.visualSeasonChangeListeners, listener)
     end
 end
 
 function ssEnvironment:removeVisualSeasonChangeListener(listener)
     if listener ~= nil then
-        removeItemFromTable(self.visualSeasonChangeListeners, listener)
+        Utils.removeElementFromTable(self.visualSeasonChangeListeners, listener)
     end
 end
 
@@ -284,17 +270,21 @@ end
 ----------------------------
 
 function ssEnvironment:latitudeCategory()
-    local lat = g_seasons.daylight.latitude
+    local lat = math.abs(g_seasons.daylight.latitude)
 
-    if lat <= 45 then
+    if lat <= 30 then
         return 1
-    elseif lat <= 50 then
+    elseif lat <= 35 then
         return 2
-    elseif lat <= 60 then
+    elseif lat <= 45 then
         return 3
+    elseif lat <= 50 then
+        return 4
+    elseif lat <= 60 then
+        return 5
     end
 
-    return 4
+    return 6
 end
 
 -- Only run once per day
@@ -357,8 +347,9 @@ function ssEnvironment:currentVisualSeason()
 end
 
 -- Starts with 0
-function ssEnvironment:seasonAtDay(dayNumber)
-    return math.fmod(math.floor((dayNumber - 1) / self.daysInSeason), self.SEASONS_IN_YEAR)
+function ssEnvironment:seasonAtDay(dayNumber, seasonLength)
+    if seasonLength == nil then seasonLength = self.daysInSeason end
+    return math.fmod(math.floor((dayNumber - 1) / seasonLength), self.SEASONS_IN_YEAR)
 end
 
 -- Retuns month number based on dayNumber
@@ -376,14 +367,18 @@ function ssEnvironment:monthAtTransitionNumber(transitionNumber)
 end
 
 -- Returns 1-daysInSeason
-function ssEnvironment:dayInSeason(currentDay)
+function ssEnvironment:dayInSeason(currentDay, seasonLength)
     if currentDay == nil then
         currentDay = self:currentDay()
     end
 
-    local season = self:seasonAtDay(currentDay) -- 0-3
-    local dayInYear = math.fmod(currentDay - 1, self.daysInSeason * self.SEASONS_IN_YEAR) + 1
-    return (dayInYear - 1 - season * self.daysInSeason) + 1
+    if seasonLength == nil then
+        seasonLength = self.daysInSeason
+    end
+
+    local season = self:seasonAtDay(currentDay, seasonLength) -- 0-3
+    local dayInYear = math.fmod(currentDay - 1, seasonLength * self.SEASONS_IN_YEAR) + 1
+    return (dayInYear - 1 - season * seasonLength) + 1
 end
 
 function ssEnvironment:dayInYear(currentDay)
@@ -426,26 +421,31 @@ function ssEnvironment:previousTransition(transition)
 end
 
 --uses currentDay if dayNumber not passed in
-function ssEnvironment:transitionAtDay(dayNumber)
+-- can also use the optional seasonLength for simulations
+function ssEnvironment:transitionAtDay(dayNumber, seasonLength)
     if (dayNumber == nil) then
         dayNumber = self:currentDay()
     end
 
-    local season = self:seasonAtDay(dayNumber)
-    local seasonTransition = self:getTransitionInSeason(dayNumber)
+    local season = self:seasonAtDay(dayNumber, seasonLength)
+    local seasonTransition = self:getTransitionInSeason(dayNumber, seasonLength)
     return (seasonTransition + (season * 3))
 end
 
 --this funtion returns the transition within a season (1, 2, 3)
 --most functions should not call this directly. use transitionAtDay instead to get the current transition
-function ssEnvironment:getTransitionInSeason(currentDay)
+function ssEnvironment:getTransitionInSeason(currentDay, seasonLength)
     if (currentDay == nil) then
         currentDay = self:currentDay()
     end
 
+    if seasonLength == nil then
+        seasonLength = self.daysInSeason
+    end
+
     -- Length of a state
-    local l = self.daysInSeason / 3.0
-    local dayInSeason = self:dayInSeason(currentDay)
+    local l = seasonLength / 3.0
+    local dayInSeason = self:dayInSeason(currentDay, seasonLength)
 
     if dayInSeason >= mathRound(2 * l) + 1 then -- Turn 3
         return 3

@@ -105,6 +105,7 @@ function ssMain:loadMap()
     -- Create the GUI
     self.mainMenu = ssSeasonsMenu:new()
     self.measureToolDialog = ssMeasureToolDialog:new()
+    self.twoOptionDialog = ssTwoOptionDialog:new()
 
     -- Load additional GUI profiles
     g_gui:loadProfiles(self.modDir .. "resources/gui/profiles.xml")
@@ -112,6 +113,7 @@ function ssMain:loadMap()
     -- Load the GUI configurations
     g_gui:loadGui(self.modDir .. "resources/gui/SeasonsMenu.xml", "SeasonsMenu", self.mainMenu)
     g_gui:loadGui(self.modDir .. "resources/gui/MeasureToolDialog.xml", "MeasureToolDialog", self.measureToolDialog)
+    g_gui:loadGui(self.modDir .. "resources/gui/TwoOptionDialog.xml", "TwoOptionDialog", self.twoOptionDialog)
 
     -- Correct the focus
     FocusManager:setGui("MPLoadingScreen")

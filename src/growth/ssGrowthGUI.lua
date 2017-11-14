@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  To calculate when it is possible to plant and harvest
 -- Authors:  theSeb
--- Credits:  
+-- Credits:
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ ssGrowthGUI = {}
 g_seasons.growthGUI = ssGrowthGUI
 
 -- constants
-ssGrowthGUI.MAX_ALLOWABLE_GROWTH_PERIOD = 12 -- max growth for any fruit = 1 year
+ssGrowthGUI.MAX_ALLOWABLE_GROWTH_PERIOD = 12 * 2 -- max growth for any fruit = 2 years
 
 -- data
 ssGrowthGUI.canPlantData = {}
@@ -27,22 +27,24 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
     for fruitName, value in pairs(fruitData) do
         if FruitUtil.fruitTypeGrowths[fruitName] ~= nil and fruitName ~= "dryGrass" then
             local transitionTable = {}
+
+            local germTemp = g_seasons.weather:germinationTemperature(fruitName)
+            local tooColdTransitions = g_seasons.weather:soilTooColdForGrowth(germTemp)
+            local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
+
             for transition, v in pairs(growthData) do
                 if transition == g_seasons.growthManager.FIRST_LOAD_TRANSITION then
                     break
                 end
 
-                -- if transition == g_seasons.environment.TRANSITION_EARLY_WINTER
-                --         or transition == g_seasons.environment.TRANSITION_MID_WINTER
-                --         or transition == g_seasons.environment.TRANSITION_LATE_WINTER then --hack for winter planting
-                --     table.insert(transitionTable, transition , false)
-                -- else
+                if tooColdTransitions[transition] then
+                    table.insert(transitionTable, transition, false)
+                else
                     local plantedTransition = transition
                     local currentGrowthState = 1
 
                     local maxAllowedCounter = 0
                     local transitionToCheck = plantedTransition + 1 -- need to start checking from the next transition after planted transition
-                    local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
 
                     while currentGrowthState < fruitNumStates and maxAllowedCounter < self.MAX_ALLOWABLE_GROWTH_PERIOD do
                         if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
@@ -55,13 +57,11 @@ function ssGrowthGUI:buildCanPlantData(fruitData, growthData)
                         transitionToCheck = transitionToCheck + 1
                         maxAllowedCounter = maxAllowedCounter + 1
                     end
-                    if currentGrowthState == fruitNumStates then
-                        table.insert(transitionTable, plantedTransition , true)
-                    else
-                        table.insert(transitionTable, plantedTransition , false)
-                    end
-                -- end
+
+                    table.insert(transitionTable, plantedTransition, currentGrowthState == fruitNumStates)
+                end
             end
+
             self.canPlantData[fruitName] = transitionTable
         end
     end
@@ -74,39 +74,48 @@ function ssGrowthGUI:buildCanHarvestData(growthData)
             local transitionTable = {}
             local plantedTransition = 1
             local fruitNumStates = FruitUtil.fruitTypeGrowths[fruitName].numGrowthStates
+            local fruitDesc = FruitUtil.fruitTypes[fruitName]
+
+            local skipFruit = fruitName == "poplar" --or fruitName == "grass"
 
             for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
-                if self.canPlantData[fruitName][plantedTransition] == true and fruitName ~= "poplar" and fruitName ~= "grass" then
+                if self.canPlantData[fruitName][plantedTransition] == true and not skipFruit then
                     local growthState = 1
+
                     local transitionToCheck = plantedTransition + 1
-                    if plantedTransition == self.MAX_ALLOWABLE_GROWTH_PERIOD then
+                    if plantedTransition > 12 then
+                        transitionToCheck = transitionToCheck - 12
+                    end
+                    if transitionToCheck == 12 then
                         transitionToCheck = 1
                     end
+
                     local safetyCheck = 1
                     while growthState <= fruitNumStates do
                         growthState = self:simulateGrowth(fruitName, transitionToCheck, growthState, growthData)
-                        if growthState == fruitNumStates then
+
+                        if growthState == fruitNumStates or (growthState >= fruitDesc.minHarvestingGrowthState + 1 and growthState <= fruitDesc.maxHarvestingGrowthState + 1) then
                             transitionTable[transitionToCheck] = true
                         end
 
                         transitionToCheck = transitionToCheck + 1
                         safetyCheck = safetyCheck + 1
                         if transitionToCheck > g_seasons.environment.TRANSITIONS_IN_YEAR then transitionToCheck = 1 end
-                        if safetyCheck > 15 then break end --so we don't end up in infinite loop if growth pattern is not correct
+                        if safetyCheck > self.MAX_ALLOWABLE_GROWTH_PERIOD then break end --so we don't end up in infinite loop if growth pattern is not correct
                     end
 
                 end
             end
+
             --fill in the gaps
             for plantedTransition = 1, self.MAX_ALLOWABLE_GROWTH_PERIOD do
-                if fruitName == "poplar" then --hardcoding for poplar
-                    transitionTable[plantedTransition] = true
-                elseif fruitName == "grass" and plantedTransition > g_seasons.environment.TRANSITION_EARLY_SPRING and plantedTransition < g_seasons.environment.TRANSITION_EARLY_WINTER then
+                if fruitName == "poplar" then --hardcoding for poplar. No withering
                     transitionTable[plantedTransition] = true
                 elseif transitionTable[plantedTransition] ~= true then
                     transitionTable[plantedTransition] = false
                 end
             end
+
             self.canHarvestData[fruitName] = transitionTable
         end
     end
@@ -116,25 +125,31 @@ end
 function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthState, growthData)
     local newGrowthState = currentGrowthState
 
-    if growthData[transitionToCheck][fruitName] ~= nil then
+    if transitionToCheck > 12 then
+        transitionToCheck = transitionToCheck - 12
+    end
+
+    local data = growthData[transitionToCheck][fruitName]
+
+    if data ~= nil then
         --setGrowthState
-        if growthData[transitionToCheck][fruitName].setGrowthState ~= nil
-            and growthData[transitionToCheck][fruitName].desiredGrowthState ~= nil then
-            if growthData[transitionToCheck][fruitName].setGrowthMaxState ~= nil then
-                if currentGrowthState >= growthData[transitionToCheck][fruitName].setGrowthState and currentGrowthState <= growthData[transitionToCheck][fruitName].setGrowthMaxState then
-                    newGrowthState = growthData[transitionToCheck][fruitName].desiredGrowthState
+        if data.setGrowthState ~= nil
+            and data.desiredGrowthState ~= nil then
+            if data.setGrowthMaxState ~= nil then
+                if currentGrowthState >= data.setGrowthState and currentGrowthState <= data.setGrowthMaxState then
+                    newGrowthState = data.desiredGrowthState
                 end
             else
-                if currentGrowthState == growthData[transitionToCheck][fruitName].setGrowthState then
-                    newGrowthState = growthData[transitionToCheck][fruitName].desiredGrowthState
+                if currentGrowthState == data.setGrowthState then
+                    newGrowthState = data.desiredGrowthState
                 end
             end
         end
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-        if growthData[transitionToCheck][fruitName].normalGrowthState ~= nil then
-            local normalGrowthState = growthData[transitionToCheck][fruitName].normalGrowthState
-            if growthData[transitionToCheck][fruitName].normalGrowthMaxState ~= nil then
-                local normalGrowthMaxState = growthData[transitionToCheck][fruitName].normalGrowthMaxState
+        if data.normalGrowthState ~= nil then
+            local normalGrowthState = data.normalGrowthState
+            if data.normalGrowthMaxState ~= nil then
+                local normalGrowthMaxState = data.normalGrowthMaxState
                 if currentGrowthState >= normalGrowthState and currentGrowthState <= normalGrowthMaxState then
                     newGrowthState = newGrowthState + 1
                 end
@@ -145,17 +160,18 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
             end
         end
         --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-        if growthData[transitionToCheck][fruitName].extraGrowthMinState ~= nil
-                and growthData[transitionToCheck][fruitName].extraGrowthMaxState ~= nil
-                and growthData[transitionToCheck][fruitName].extraGrowthFactor ~= nil then
-            local extraGrowthMinState = growthData[transitionToCheck][fruitName].extraGrowthMinState
-            local extraGrowthMaxState = growthData[transitionToCheck][fruitName].extraGrowthMaxState
+        if data.extraGrowthMinState ~= nil
+                and data.extraGrowthMaxState ~= nil
+                and data.extraGrowthFactor ~= nil then
+            local extraGrowthMinState = data.extraGrowthMinState
+            local extraGrowthMaxState = data.extraGrowthMaxState
 
             if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
-                newGrowthState = newGrowthState + growthData[transitionToCheck][fruitName].extraGrowthFactor
+                newGrowthState = newGrowthState + data.extraGrowthFactor
             end
         end
     end
+
     return newGrowthState
 end
 

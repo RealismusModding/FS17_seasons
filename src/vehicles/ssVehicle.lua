@@ -54,6 +54,7 @@ function ssVehicle:loadMap()
     Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
     Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
     AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
+    Washable.updateTick = Utils.overwrittenFunction(Washable.updateTick, ssVehicle.washableUpdateTick)
 
     g_currentMission:setAutomaticMotorStartEnabled(false)
 
@@ -225,10 +226,12 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
         powerMultiplier = Utils.clamp(dailyUpkeep / storeItem.specs.power, 0.5, 2.5)
     end
 
+    local endOfLifeRepairCost = 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * powerMultiplier
+
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
         return 0.025 * storeItem.price * (RF1 * (operatingTime / ssVehicle.LIFETIME_FACTOR) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier
+        return 0.025 * storeItem.price  * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier + endOfLifeRepairCost
     end
 end
 
@@ -501,11 +504,37 @@ function ssVehicle:getIsThreshingAllowed(superFunc, earlyWarning)
         return superFunc(self, earlyWarning)
     end
 
-    if self.allowThreshingDuringRain then
+    if self.allowThreshingDuringRain or g_seasons.vehicle:isRootCropRelated(self) then
         return true
     end
 
     return not g_seasons.weather:isCropWet()
+end
+
+function ssVehicle:isRootCropRelated(vehicle)
+    -- Self propelled harvesters, either with or without a topper are detected using this fruitPreparer
+    if vehicle.fruitPreparer ~= nil then
+        return true
+    end
+
+    -- Detect trailed harvesters by looking at their fill types.
+    -- If they only accept either potatoes or sugarBeets, then allow them to harvest
+    local fillTypes = vehicle.ssFillTypes
+    if fillTypes == nil then
+        local item = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+        fillTypes = StoreItemsUtil.storeItemSpecsNameToDesc["fillTypes"].getValueFunc(item)
+
+        vehicle.ssFillTypes = fillTypes
+    end
+
+    local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
+
+    if table.getn(vehicle.ssFillTypes) == 1 and (vehicle.ssFillTypes[1] == potatoId or vehicle.ssFillTypes[1] == beetId) then
+        return true
+    end
+
+    return false
 end
 
 function ssVehicle:aiVehicleUpdate(dt)
@@ -525,6 +554,58 @@ function ssVehicle:aiVehicleUpdate(dt)
         if self.lightsTypesMask ~= 0 then
             self:setLightsTypesMask(0)
         end
+    end
+end
+
+function ssVehicle:getFullBuyPrice(vehicle, storeItem)
+    local priceConfig = 0
+
+    if storeItem.configurations ~= nil then
+        for configName, configIds in pairs(vehicle.boughtConfigurations) do
+            local configItem = storeItem.configurations[configName]
+
+            if configItem ~= nil then
+                for id, _ in pairs(configIds) do
+                    if configItem[id] then
+                        priceConfig = priceConfig + configItem[id].price
+                    end
+                end
+            end
+        end
+
+    end
+
+    return storeItem.price + priceConfig
+end
+
+function ssVehicle:washableUpdateTick(superFunc, dt)
+    if self.washableNodes ~= nil and self.isServer then
+        local env = g_currentMission.environment;
+
+        -- Work the scale to affect rain-cleaning
+        local oldScale = env.lastRainScale
+        if env.currentRain == nil or env.currentRain ~= "rain" then
+            -- If event is not rain, do not clean
+            env.lastRainScale = 0
+        end
+
+        -- Work the duration to add more factors
+        local oldDuration = self.dirtDuration
+        local wetnessMultiplier = 0
+        if not ssWeatherManager:isGroundFrozen() then
+            wetnessMultiplier = (env.groundWetness ^ 2 + 0.1) * 3
+        end
+
+        -- If ground is frozen, no dirtification: multi is 0. Otherwise mult regarding wetness
+        self.dirtDuration = self.dirtDuration * wetnessMultiplier
+
+        -- Call the actual function
+        superFunc(self, dt)
+
+        self.dirtDuration = oldDuration
+        env.lastRainScale = oldScale
+    else
+        return superFunc(self, dt)
     end
 end
 
@@ -574,25 +655,4 @@ function ssVehicle:consoleCommandTestVehicle()
     print_r(vehicle.boughtConfigurations)
 
     return ""
-end
-
-function ssVehicle:getFullBuyPrice(vehicle, storeItem)
-    local priceConfig = 0
-
-    if storeItem.configurations ~= nil then
-        for configName, configIds in pairs(vehicle.boughtConfigurations) do
-            local configItem = storeItem.configurations[configName]
-
-            if configItem ~= nil then
-                for id, _ in pairs(configIds) do
-                    if configItem[id] then
-                        priceConfig = priceConfig + configItem[id].price
-                    end
-                end
-            end
-        end
-
-    end
-
-    return storeItem.price + priceConfig
 end
