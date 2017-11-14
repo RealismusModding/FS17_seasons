@@ -122,8 +122,8 @@ end
 function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
-    self.pNight = 18 * math.pi / 180 -- Suns inclination below the horizon for 'astronomical twilight'
-    self.pDay = -1 * math.pi / 180 -- Suns inclination above the horizon for 'daylight' assumed to be one degree above horizon
+    self.pNight = 5 * math.pi / 180 -- Suns inclination below the horizon for complete 'darkness'
+    self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for full 'daylight'
 
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()

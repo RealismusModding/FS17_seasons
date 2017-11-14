@@ -219,10 +219,12 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
         powerMultiplier = Utils.clamp(dailyUpkeep / storeItem.specs.power, 0.5, 2.5)
     end
 
+    local endOfLifeRepairCost = 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * powerMultiplier
+
     if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
         return 0.025 * storeItem.price * (RF1 * (operatingTime / ssVehicle.LIFETIME_FACTOR) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier
+        return 0.025 * storeItem.price  * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier + endOfLifeRepairCost
     end
 end
 
