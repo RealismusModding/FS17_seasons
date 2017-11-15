@@ -1,12 +1,14 @@
 ----------------------------------------------------------------------------------------------------
 -- SNOW TRACKS SPECIALIZATION
 ----------------------------------------------------------------------------------------------------
--- Author:  reallogger
+-- Author:  reallogger, Wopster
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
 ssSnowTracks = {}
+
+ssSnowTracks.SNOW_RGBA = { 0.98, 0.98, 0.98, 1 }
 
 function ssSnowTracks:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Washable, specializations)
@@ -35,15 +37,10 @@ local function applyTracks(self, dt)
         local newSnowDepth
 
         if wheel.hasGroundContact then
-            local x0, y0, z0
-            local x1, y1, z1
-            local x2, y2, z2
+            local width = 0.5 * wheel.width
+            local length = math.min(0.2, 0.35 * wheel.width)
 
-            local width = 0.5 * wheel.width;
-            local length = math.min(0.2, 0.35 * wheel.width);
             local radius = wheel.radius
-            local underTireSnowLayers = 0
-            local sinkage = 0.7 * targetSnowDepth
             local wheelRot = getWheelShapeAxleSpeed(wheel.node, wheel.wheelShape)
             local wheelRotDir
 
@@ -53,11 +50,8 @@ local function applyTracks(self, dt)
                 wheelRotDir = 1
             end
 
-            local underTireSnowLayers = 0
-            local fwdTireSnowLayers = 0
-            x0, z0, x1, z1, x2, z2, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
-            x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
-            local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100  --fwdTireSnowDepth in m
+            local _, _, _, _, _, _, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
+            local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
 
             -- If the wheel is in snow, update its traction
             local oldInSnow = wheel.inSnow
@@ -67,10 +61,33 @@ local function applyTracks(self, dt)
                 self:updateWheelTireFriction(wheel)
             end
 
+            if wheel.inSnow then
+                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) } -- = ssSnowTracks.SNOW_RGBA doesn't affect the rgb somehow
+
+                if self.isEntered and g_currentMission.surfaceNameToSurfaceSound ~= nil then
+                    local sound = g_currentMission.surfaceNameToSurfaceSound["snow"]
+
+                    if sound ~= nil then
+                        sound.impactCount = sound.impactCount + 1
+                    end
+                end
+            elseif oldInSnow and not wheel.inSnow then
+                local circumference = math.pi * (2 * math.pi * radius)
+                local maxTrackLength = circumference * (1 + g_currentMission.environment.groundWetness)
+                local speedFactor = math.min(self:getLastSpeed(), 20) / 20
+
+                maxTrackLength = maxTrackLength * (2 - speedFactor)
+                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
+                wheel.dirtAmount = math.max(wheel.dirtAmount - self.lastMovedDistance / maxTrackLength, 0)
+            end
+
             local reduceSnow = snowLayers == fwdTireSnowLayers
+            local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100 -- fwdTireSnowDepth in m
 
             if fwdTireSnowLayers > 1 and reduceSnow then
-                sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT), fwdTireSnowLayers)
+                local sinkage = 0.7 * targetSnowDepth
+                local sinkageLayers = math.min(math.modf(sinkage / ssSnow.LAYER_HEIGHT), fwdTireSnowLayers)
+
                 ssSnow:removeSnow(x0, z0, x1, z1, x2, z2, sinkageLayers)
 
                 if fwdTireSnowDepth <= radius then
@@ -80,7 +97,6 @@ local function applyTracks(self, dt)
                 elseif fwdTireSnowDepth > 2 * radius then
                     setLinearDamping(wheel.node, 0.95)
                 end
-
             elseif fwdTireSnowDepth > 2 * radius then
                 setLinearDamping(wheel.node, 0.95)
             else
@@ -120,8 +136,16 @@ end
 
 function ssSnowTracks:update(dt)
     if not g_currentMission:getIsServer()
-        or not g_seasons.vehicle.snowTracksEnabled
-        or not g_seasons.snow.mode == g_seasons.snow.MODE_ONE_LAYER then return end
+            or not g_seasons.vehicle.snowTracksEnabled
+            or not g_seasons.snow.mode == g_seasons.snow.MODE_ONE_LAYER then
+        return
+    end
+
+    local surfaceSound = g_currentMission.surfaceNameToSurfaceSound["snow"]
+
+    if surfaceSound ~= nil then
+        surfaceSound.impactCount = 0
+    end
 
     if self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
         applyTracks(self, dt)
@@ -129,7 +153,6 @@ function ssSnowTracks:update(dt)
         for _, wheel in pairs(self.wheels) do
             if wheel.inSnow then
                 wheel.inSnow = false
-
                 self:updateWheelTireFriction(wheel)
             end
 
@@ -144,6 +167,11 @@ function ssSnowTracks:update(dt)
 
             setLinearDamping(wheel.node, 0)
         end
+    end
+
+    if self.isEntered then
+        local lastSpeed = self:getLastSpeed()
+        ssEnvironment:playSurfaceSound(dt, surfaceSound, #self.wheels, lastSpeed, math.abs(lastSpeed) < 1)
     end
 end
 
