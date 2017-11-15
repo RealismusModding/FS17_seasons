@@ -9,6 +9,10 @@
 ssSnowTracks = {}
 
 ssSnowTracks.SNOW_RGBA = { 0.98, 0.98, 0.98, 1 }
+ssSnowTracks.KEEP_SNOW_ON_WHEELS_THRESHOLD = 750 -- ms
+
+local PARAM_GREATER = "greater"
+local PARAM_EQUAL = "equal"
 
 function ssSnowTracks:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Washable, specializations)
@@ -27,7 +31,7 @@ end
 function ssSnowTracks:keyEvent(unicode, sym, modifier, isDown)
 end
 
-local function applyTracks(self, dt)
+local function applyWheelSnowTracks(self, dt)
     local snowDepth = ssSnow.appliedSnowDepth
     local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.48
     local snowLayers = math.modf(targetSnowDepth / ssSnow.LAYER_HEIGHT)
@@ -55,14 +59,14 @@ local function applyTracks(self, dt)
 
             -- If the wheel is in snow, update its traction
             local oldInSnow = wheel.inSnow
-            wheel.inSnow = underTireSnowLayers >= 1
+            wheel.inSnow = isNumeric(underTireSnowLayers) and underTireSnowLayers >= 1
 
             if oldInSnow ~= wheel.inSnow then
                 self:updateWheelTireFriction(wheel)
             end
 
             if wheel.inSnow then
-                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) } -- = ssSnowTracks.SNOW_RGBA doesn't affect the rgb somehow
+                wheel.keepSnowTracksLimit = g_currentMission.time + ssSnowTracks.KEEP_SNOW_ON_WHEELS_THRESHOLD
 
                 if self.isEntered and g_currentMission.surfaceNameToSurfaceSound ~= nil then
                     local sound = g_currentMission.surfaceNameToSurfaceSound["snow"]
@@ -77,8 +81,16 @@ local function applyTracks(self, dt)
                 local speedFactor = math.min(self:getLastSpeed(), 20) / 20
 
                 maxTrackLength = maxTrackLength * (2 - speedFactor)
-                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
+                wheel.keepSnowTracksLimit = g_currentMission.time + ssSnowTracks.KEEP_SNOW_ON_WHEELS_THRESHOLD
                 wheel.dirtAmount = math.max(wheel.dirtAmount - self.lastMovedDistance / maxTrackLength, 0)
+            end
+
+            if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
+                if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
+                    wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
+                end
+
+                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
             end
 
             local reduceSnow = snowLayers == fwdTireSnowLayers
@@ -106,6 +118,26 @@ local function applyTracks(self, dt)
     end
 end
 
+local function resetWheelSnowTracks(self, dt)
+    for _, wheel in pairs(self.wheels) do
+        if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
+            if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
+                wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
+            end
+
+            wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
+        end
+
+        if wheel.inSnow then
+            wheel.inSnow = false
+
+            self:updateWheelTireFriction(wheel)
+        end
+
+        setLinearDamping(wheel.node, 0)
+    end
+end
+
 function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2)
     local x0, y0, z0
     local x1, y1, z1
@@ -124,12 +156,12 @@ function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2
 
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "equals", TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", 0)
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, PARAM_EQUAL, TipUtil.fillTypeToHeightType[FillUtil.FILLTYPE_SNOW]["index"])
+    setDensityCompareParams(g_currentMission.terrainDetailHeightId, PARAM_GREATER, 0)
     local density, area, _ = getDensityMaskedParallelogram(g_currentMission.terrainDetailHeightId, x, z, widthX, widthZ, heightX, heightZ, 5, 6, g_currentMission.terrainDetailHeightId, 0, 5, 0)
     local snowLayers = density / area
-    setDensityMaskParams(g_currentMission.terrainDetailHeightId, "greater", -1)
-    setDensityCompareParams(g_currentMission.terrainDetailHeightId, "greater", -1)
+    setDensityMaskParams(g_currentMission.terrainDetailHeightId, PARAM_GREATER, -1)
+    setDensityCompareParams(g_currentMission.terrainDetailHeightId, PARAM_GREATER, -1)
 
     return x0, z0, x1, z1, x2, z2, snowLayers
 end
@@ -148,25 +180,11 @@ function ssSnowTracks:update(dt)
     end
 
     if self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
-        applyTracks(self, dt)
+        applyWheelSnowTracks(self, dt)
     elseif self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth <= ssSnow.LAYER_HEIGHT then
-        for _, wheel in pairs(self.wheels) do
-            if wheel.inSnow then
-                wheel.inSnow = false
-                self:updateWheelTireFriction(wheel)
-            end
-
-            setLinearDamping(wheel.node, 0)
-        end
+        resetWheelSnowTracks(self, dt)
     else
-        for _, wheel in pairs(self.wheels) do
-            if wheel.inSnow then
-                wheel.inSnow = false
-                self:updateWheelTireFriction(wheel)
-            end
-
-            setLinearDamping(wheel.node, 0)
-        end
+        resetWheelSnowTracks(self, dt) -- whats the reason behind this? Why reset every frame.. the elseif doesn't make sense that way.
     end
 
     if self.isEntered then

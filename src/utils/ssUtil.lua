@@ -281,6 +281,10 @@ function tableLength(table)
     return count
 end
 
+function isNumeric(value)
+    return type(value) == "number"
+end
+
 function print_r(t)
     local print_r_cache = {}
     local function sub_print_r(t, indent)

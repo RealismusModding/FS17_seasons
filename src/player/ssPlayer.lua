@@ -65,5 +65,5 @@ function ssPlayer:getIsInSnowLayers(player, width, length)
     setDensityMaskParams(g_currentMission.terrainDetailHeightId, PARAM_GREATER, -1)
     setDensityCompareParams(g_currentMission.terrainDetailHeightId, PARAM_GREATER, -1)
 
-    return snowLayers >= 1
+    return isNumeric(snowLayers) and snowLayers >= 1
 end
