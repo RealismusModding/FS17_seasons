@@ -11,6 +11,12 @@ ssSnowTracks = {}
 ssSnowTracks.SNOW_RGBA = { 0.98, 0.98, 0.98, 1 }
 ssSnowTracks.KEEP_SNOW_ON_WHEELS_THRESHOLD = 750 -- ms
 
+ssSnowTracks.FRICTION_TIRETYPE_SETTINGS = {
+    ["chains"] = 1.0,
+    ["crawler"] = 0.5,
+    ["studded"] = 0.7
+}
+
 local PARAM_GREATER = "greater"
 local PARAM_EQUAL = "equal"
 
@@ -25,13 +31,13 @@ end
 function ssSnowTracks:delete()
 end
 
-function ssSnowTracks:mouseEvent(posX, posY, isDown, isUp, button)
+function ssSnowTracks:mouseEvent(...)
 end
 
-function ssSnowTracks:keyEvent(unicode, sym, modifier, isDown)
+function ssSnowTracks:keyEvent(...)
 end
 
-local function applyWheelSnowTracks(self, dt)
+local function applyWheelSnowTracks(self)
     local snowDepth = ssSnow.appliedSnowDepth
     local targetSnowDepth = math.min(0.48, snowDepth) -- Target snow depth in meters. Never higher than 0.48
     local snowLayers = math.modf(targetSnowDepth / ssSnow.LAYER_HEIGHT)
@@ -54,8 +60,8 @@ local function applyWheelSnowTracks(self, dt)
                 wheelRotDir = 1
             end
 
-            local _, _, _, _, _, _, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, length, length)
-            local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, radius, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
+            local _, _, _, _, _, _, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, length)
+            local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
 
             -- If the wheel is in snow, update its traction
             local oldInSnow = wheel.inSnow
@@ -118,7 +124,7 @@ local function applyWheelSnowTracks(self, dt)
     end
 end
 
-local function resetWheelSnowTracks(self, dt)
+local function resetWheelSnowTracks(self)
     for _, wheel in pairs(self.wheels) do
         if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
             if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
@@ -132,13 +138,12 @@ local function resetWheelSnowTracks(self, dt)
             wheel.inSnow = false
 
             self:updateWheelTireFriction(wheel)
+            setLinearDamping(wheel.node, 0)
         end
-
-        setLinearDamping(wheel.node, 0)
     end
 end
 
-function ssSnowTracks:getSnowLayers(wheel, width, length, radius, delta0, delta2)
+function ssSnowTracks:getSnowLayers(wheel, width, delta0, delta2)
     local x0, y0, z0
     local x1, y1, z1
     local x2, y2, z2
@@ -180,20 +185,15 @@ function ssSnowTracks:update(dt)
     end
 
     if self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth > ssSnow.LAYER_HEIGHT then
-        applyWheelSnowTracks(self, dt)
+        applyWheelSnowTracks(self)
     elseif self.lastSpeedReal ~= 0 and ssSnow.appliedSnowDepth <= ssSnow.LAYER_HEIGHT then
-        resetWheelSnowTracks(self, dt)
-    else
-        resetWheelSnowTracks(self, dt) -- whats the reason behind this? Why reset every frame.. the elseif doesn't make sense that way.
+        resetWheelSnowTracks(self)
     end
 
     if self.isEntered then
         local lastSpeed = self:getLastSpeed()
         ssEnvironment:playSurfaceSound(dt, surfaceSound, #self.wheels, lastSpeed, math.abs(lastSpeed) < 1)
     end
-end
-
-function ssSnowTracks:updateTick(dt)
 end
 
 function ssSnowTracks:draw()
@@ -207,12 +207,10 @@ function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
 
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
-            if wheel.tireType == WheelsUtil.getTireType("chains") then
-                setFriction(1.0)
-            elseif wheel.tireType == WheelsUtil.getTireType("crawler") then
-                setFriction(0.5)
-            elseif wheel.tireType == WheelsUtil.getTireType("studded") then
-                setFriction(0.7)
+            local friction = ssSnowTracks.FRICTION_TIRETYPE_SETTINGS[WheelsUtil.tireTypes[wheel.tireType].name]
+
+            if friction ~= nil then
+                setFriction(friction)
             else
                 setFriction(0.2)
             end
