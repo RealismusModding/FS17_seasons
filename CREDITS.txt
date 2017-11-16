@@ -22,7 +22,7 @@ Czech - gorgona, DrewCZ
 Spanish - PromGames, Vanquish081
 Dutch - JoshvZeyl, Belgian farmer
 Hungarian - n0tr3adY
-Brazilian Portuguese - mayhem17
+Brazilian Portuguese - mayhem17, RodrigoCompai
 
 ## Testers
 astro80
