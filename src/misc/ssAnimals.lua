@@ -69,6 +69,8 @@ function ssAnimals:loadMap(name)
     AnimalHusbandry.readStream = Utils.appendedFunction(AnimalHusbandry.readStream, ssAnimals.husbandryReadStream)
     AnimalHusbandry.writeStream = Utils.appendedFunction(AnimalHusbandry.writeStream, ssAnimals.husbandryWriteStream)
 
+    AnimalScreen.updateData = Utils.overwrittenFunction(AnimalScreen.updateData, ssAnimals.animalScreenUpdateData)
+
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_inAdvanceFeedingLimitReached"] = ssLang.getText("warning_inAdvanceFeedingLimitReached3")
@@ -356,4 +358,36 @@ function ssAnimals:husbandryRemoveAnimals()
     if self.totalNumAnimals == 0 then
         self.averageProduction = ssAnimals.PRODUCTIVITY_START
     end
+end
+
+function ssAnimals:animalScreenUpdateData(superFunc)
+    local animalDesc = self.currentAnimalList[self.selectedAnimalIndex]
+    local origPrice = animalDesc.price
+
+    if self.transferData.right.numOfAnimals >= self.transferData.right.baseNumOfAnimals then
+        local health = 0.8
+        local factor = 1
+
+        for _, husbandry in pairs(g_currentMission.husbandries) do
+            if husbandry.animalDesc == animalDesc then
+                health = husbandry.averageProduction
+                break
+            end
+        end
+
+        if health <= 0.8 then
+            factor = 1.40625 * health ^ 2 + 0.1
+        else
+            factor = 5 * (health - 0.8) ^ 2 + 1
+        end
+
+        animalDesc.price = animalDesc.price * factor
+
+        -- to remove 40% factor for vanilla
+        animalDesc.price = animalDesc.price / 0.4
+    end
+
+    superFunc(self)
+
+    animalDesc.price = origPrice
 end
