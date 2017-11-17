@@ -93,8 +93,7 @@
         <text name="measuretool_failed" text="Misurazione fallita" />
         <text name="measuretool_no_info" text="Misurazione fallita: nessuna informazione" />
 
-        <!-- Missing translation of "Health" -->
-        <text name="statistic_health" text="" />
+        <text name="statistic_health" text="Salute" />
 
         <text name="ui_pageCalender" text="Calendario" />
         <text name="ui_pageEconomy" text="Economia" />
@@ -134,7 +133,7 @@
         <text name="setting_moisture" text="Umidità del raccolto" />
 
         <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora le impostazioni di Seasons? Cambiamenti nella durata delle stagioni possono avere sui campi conseguenze rimediabili solo dopo un anno/gioco." />
-        <text name="dialog_resetGrowth" text="Hai caricato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivato, per la sincronizzazione con il giorno di gioco. Perderai tutti i raccolti. Senza un reset della crescita, Seasons potrebbe non funzionare come previsto." />
+        <text name="dialog_resetGrowth" text="Hai caricato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivata, per la sincronizzazione con il giorno di gioco. Perderai tutti i raccolti. Senza un reset della crescita, Seasons potrebbe non funzionare come previsto." />
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
         <text name="dialog_resetGrowth_yes" text="Reset" />
@@ -211,7 +210,7 @@
         <text name="ss_helpText_11_04" text="Solo i veicoli richiederanno una manutenzione periodica. Strumenti e utensili verranno automaticamente riparati a seconda delle necessità." />
 
         <text name="ss_helpTitle_12" text="Economia" />
-        <text name="ss_helpText_12_01" text="Il limite di prestito è stato modificato da $CURRENCY_SYMBOL200.000 al 80% dei vostri valori di proprietà terriera e edifici posizionabili. Il limite di prestito minimo è di $CURRENCY_SYMBOL300.000 e il limite di prestito massimo è di $CURRENCY_SYMBOL1.500.000." />
+        <text name="ss_helpText_12_01" text="Il limite di prestito della banca è stato modificato da $CURRENCY_SYMBOL200.000 all'80% del valore della vostra proprietà terriera e degli edifici posizionabili. Il limite di prestito minimo è di $CURRENCY_SYMBOL300.000 e il limite di prestito massimo è di $CURRENCY_SYMBOL1.500.000." />
         <text name="ss_helpText_12_02" text="I redditi da missioni sono stati modificati. Guadagnerai circa 5 volte di più rispetto all'aiutante che lavora nello stesso campo." />
         <text name="ss_helpText_12_03" text="La manutenzione di tutti i veicoli (oltre alla manutenzione periodica) include la manutenzione e le tasse rispetto a quanto è stato usato. Pulire i macchinari ridurrà anche i costi di manutenzione. Macchinari non utilizzati avranno anche i loro costi di manutenzione ridotti." />
         <text name="ss_helpText_12_04" text="I prezzi delle colture fluttuano con i cambiamenti nelle stagioni in modo più realistico." />
@@ -244,7 +243,7 @@
         <text name="ss_helpTitle_18" text="Altre impostazioni" />
         <text name="ss_helpText_18_01" text="Se non desideri lavorare durante la notte, hai la possibilità di passare direttamente alla mattina successiva. Puoi farlo solamente fuori da un veicolo." />
         <text name="ss_helpText_18_02" text="Se decidi di modificare la lunghezza della stagione nel mezzo di un salvataggio esistente, è raccomandato 1) cambiare la lunghezza della stagione durante l'inverno per ridurre gli effetti indesiderati sulle colture esistenti e 2) riavviare il gioco/server dopo la modifica della lunghezza della stagione." />
-        <text name="ss_helpText_18_03" text="Sebbene è il tuo gioco e giochi come vuoi, come una sfida per giocare da solo è suggerito una stagione di 9 giorni e con accelerazione a 5x. In questo modo si utilizza la primavera solo coltivando e seminando le colture, tagliando il fieno e curando le colture in estate, raccogliendo e arando in autunno e prendendo cura degli animali, delle macchine, delle foreste e vendendo i raccolti durante l'inverno." />
+        <text name="ss_helpText_18_03" text="Sebbene è la tua partita e giochi come vuoi, è suggerita una stagione di 9 giorni con accelerazione a 5x. In questo modo si utilizza la primavera solo coltivando e seminando le colture, tagliando il fieno e curando le colture in estate, raccogliendo e arando in autunno e prendendo cura degli animali, delle macchine, delle foreste e vendendo i raccolti durante l'inverno." />
         <text name="ss_helpText_18_04" text="Tutti i veicoli devono essere avviati manualmente." />
     </texts>
 </l10n>
