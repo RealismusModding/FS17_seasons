@@ -22,7 +22,10 @@ function ssPlayer:preLoad()
 end
 
 function ssPlayer:playerUpdateTick(dt)
-    if self.isEntered and self.isClient and not g_gui:getIsGuiVisible() then
+    if not g_gui:getIsGuiVisible()
+            and self.isEntered
+            and self.isClient
+            and ssSnow.appliedSnowDepth >= ssSnow.LAYER_HEIGHT then
         local surfaceSound = g_currentMission.surfaceNameToSurfaceSound["snowFootsteps"]
 
         if surfaceSound ~= nil then
