@@ -72,6 +72,7 @@ function ssAnimals:loadMap(name)
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
     getfenv(0)["g_i18n"].texts["warning_inAdvanceFeedingLimitReached"] = ssLang.getText("warning_inAdvanceFeedingLimitReached3")
+    getfenv(0)["g_i18n"].texts["statistic_productivity"] = ssLang.getText("statistic_health")
 
     -- Load parameters
     self:loadFromXML()

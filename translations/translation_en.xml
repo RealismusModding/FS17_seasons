@@ -94,6 +94,8 @@
         <text name="measuretool_failed" text="Measurement failed" />
         <text name="measuretool_no_info" text="Measurement failed: no information" />
 
+        <text name="statistic_health" text="Health" />
+
         <text name="ui_pageCalender" text="Calendar" />
         <text name="ui_pageEconomy" text="Economy" />
         <text name="ui_pageSettings" text="Settings" />

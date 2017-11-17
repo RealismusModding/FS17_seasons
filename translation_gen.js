@@ -29,6 +29,7 @@ function createXML(data, language) {
         const trValue = data[language].translations[key];
 
         if (language != "en" && !trValue) {
+            console.log("Missing translation of '" + key + "' for", language);
             result.push({
                 "#comment": `Missing translation of "${data["en"].translations[key]}"`
             });

@@ -93,6 +93,9 @@
         <text name="measuretool_failed" text="La mesure a échoué" />
         <text name="measuretool_no_info" text="La mesure a échoué: aucune information" />
 
+        <!-- Missing translation of "Health" -->
+        <text name="statistic_health" text="" />
+
         <text name="ui_pageCalender" text="Calendrier" />
         <text name="ui_pageEconomy" text="Economie" />
         <text name="ui_pageSettings" text="Paramètres" />
