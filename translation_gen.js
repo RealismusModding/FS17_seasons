@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const xmlbuilder = require("xmlbuilder");
-const _map = require("lodash.map");
+// const _map = require("lodash.map");
 const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
@@ -28,7 +28,7 @@ function createXML(data, language) {
     const xmlTexts = _.reduce(data["en"].translations, (result, value, key) => {
         const trValue = data[language].translations[key];
 
-        if (language != "en" && !trValue) {
+        if (language !== "en" && !trValue) {
             console.log("Missing translation of '" + key + "' for", language);
             result.push({
                 "#comment": `Missing translation of "${data["en"].translations[key]}"`
@@ -40,7 +40,7 @@ function createXML(data, language) {
                 "@name": key,
                 "@text": !!trValue ? trValue : ""
             }
-        })
+        });
 
         return result
     }, []);
@@ -60,7 +60,7 @@ function createXML(data, language) {
     const root = xmlbuilder.create("l10n", xmlHeader, {}, xmlOptions);
 
     root.ele("translationContributors", {}, data[language].contributors.join(", "));
-    root.ele("texts").ele(xmlTexts)
+    root.ele("texts").ele(xmlTexts);
 
     let text = root.end({
         pretty: true,
@@ -70,12 +70,13 @@ function createXML(data, language) {
     // Re-add newlines from _en
     let newlines = data["en"].newlines;
     const searchReg = new RegExp(/^\s*<text\s+name=\"(.*)\"\s+text=\"(.*)\"\s*\/>$\n/, "igm");
+    const padding = " ".repeat(8);
 
     text = text.replace(searchReg, (match, name, value, offset, string) => {
         if (newlines.includes(name)) {
-            return "        <text name=\"" + name + "\" text=\"" + value + "\" />\n\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n\n";
         } else {
-            return "        <text name=\"" + name + "\" text=\"" + value + "\" />\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n";
         }
     });
 
@@ -112,13 +113,13 @@ function loadXML(language) {
 
     return readXML(pathForTranslation(language)).then((xml) => {
         // pp(xml)
-        console.log(`Read XML file for '${language}'`)
+        console.log(`Read XML file for '${language}'`);
 
         let data = {
             translations: {},
             contributors: [],
             newlines: [],
-        }
+        };
 
         if (!xml.l10n) {
             return data;
@@ -135,13 +136,13 @@ function loadXML(language) {
             }
 
             return result;
-        }, {})
+        }, {});
 
         // Find all extra newlines in the file
         const fileText = fs.readFileSync(pathForTranslation(language), "utf8");
         const reg = new RegExp(/^\s*<text\s+name=\"(.*)\"\s+text=\".*\"\s*\/>$\n\n/, "igm");
 
-        let match = reg.exec(fileText)
+        let match = reg.exec(fileText);
         while (match !== null) {
             data.newlines.push(match[1]);
 
@@ -181,7 +182,7 @@ function main(args) {
     }, {})
 
     .then((data) => Promise.map(languages, (language) => {
-        if (language == "en") {
+        if (language === "en") {
             return Promise.resolve();
         }
 
@@ -203,4 +204,4 @@ function main(args) {
     })
 }
 
-main(process.argv)
+main(process.argv);
