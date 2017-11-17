@@ -382,9 +382,6 @@ function ssAnimals:animalScreenUpdateData(superFunc)
         end
 
         animalDesc.price = animalDesc.price * factor
-
-        -- to remove 40% factor for vanilla
-        animalDesc.price = animalDesc.price / 0.4
     end
 
     superFunc(self)
