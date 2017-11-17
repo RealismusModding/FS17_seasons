@@ -93,8 +93,7 @@
         <text name="measuretool_failed" text="Ошибка измерения" />
         <text name="measuretool_no_info" text="Ошибка измерения: нет информации" />
 
-        <!-- Missing translation of "Health" -->
-        <text name="statistic_health" text="" />
+        <text name="statistic_health" text="Здоровье" />
 
         <text name="ui_pageCalender" text="Календарь" />
         <text name="ui_pageEconomy" text="Экономика" />
