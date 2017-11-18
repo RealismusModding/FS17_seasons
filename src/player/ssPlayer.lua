@@ -9,8 +9,6 @@
 
 ssPlayer = {}
 
-g_seasons.player = ssPlayer
-
 ssPlayer.RUN_TRESHOLD = 0.4
 ssPlayer.PARALLELOGRAM_SIZE = 0.01
 
@@ -18,7 +16,9 @@ local PARAM_GREATER = "greater"
 local PARAM_EQUAL = "equal"
 
 function ssPlayer:preLoad()
-    Player.updateTick = Utils.appendedFunction(Player.updateTick, ssPlayer.playerUpdateTick)
+    g_seasons.player = self
+
+    ssUtil.appendedFunction(Player, "updateTick", ssPlayer.playerUpdateTick)
 end
 
 function ssPlayer:playerUpdateTick(dt)
