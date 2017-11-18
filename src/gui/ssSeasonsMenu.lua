@@ -38,6 +38,8 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.settingElements = {}
 
+    ssUtil.overwrittenFunction(InGameMenu, "onAdminLoginSuccess", ssSeasonsMenu.ingameOnAdminLoginSuccess)
+
     return self
 end
 
@@ -577,8 +579,6 @@ function ssSeasonsMenu:ingameOnAdminLoginSuccess(superFunc)
         superFunc(self)
     end
 end
-
-InGameMenu.onAdminLoginSuccess = Utils.overwrittenFunction(InGameMenu.onAdminLoginSuccess, ssSeasonsMenu.ingameOnAdminLoginSuccess)
 
 ------------------------------------------
 -- SETTINGS PAGE

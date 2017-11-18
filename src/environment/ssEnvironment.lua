@@ -86,7 +86,7 @@ function ssEnvironment:loadMap(name)
 
     self.latitudeCategories = {}
     self:loadLatitudeCategoriesFromXML(g_seasons:getDataPath("visualSeason"))
-    self:loadSurfaceSoundsFromXML(g_seasons:getDataPath("data/surfaceSounds.xml"))
+    self:loadSurfaceSoundsFromXML(g_seasons:getDataPath("surfaceSounds"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do

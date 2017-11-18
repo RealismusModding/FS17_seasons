@@ -290,7 +290,6 @@ function ssSeasonsMod:deleteFinished()
     end
 end
 
--- TODO: undo this? How? Mod would not load anymore. So guard with if loaded
 Mission00.load = Utils.prependedFunction(Mission00.load, ssSeasonsMod.load)
 
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
