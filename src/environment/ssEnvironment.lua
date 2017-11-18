@@ -2,7 +2,7 @@
 -- ssEnvironment
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  Adjust day/night system and implement seasons
---           Definition of a season and  transitions
+--           Definition of a season and transitions
 -- Authors:  Rahkiin, reallogger, theSeb
 --
 -- Copyright (c) Realismus Modding, 2017
@@ -49,12 +49,12 @@ function ssEnvironment:preLoad()
     -- Install the snow raintype. This needs to be just after the vanilla
     -- environment did it, because in here (preLoad) it is too early, and
     -- in loadMap it is too late. (both crash)
-    ssUtil.overwrittenFunction(Environment, "new", function (self, superFunc, xmlFilename)
+    ssUtil.overwrittenFunction(Environment, "new", function(self, superFunc, xmlFilename)
         local self = superFunc(self, xmlFilename)
 
         Environment.RAINTYPE_SNOW = "snow"
         self:loadRainType(Environment.RAINTYPE_SNOW, 1, g_seasons.modDir .. "resources/environment/snow.i3d", false, 0, 0)
-        self.rainFogColor[Environment.RAINTYPE_SNOW] = {0.07074, 0.07074, 0.07074, 0.01}
+        self.rainFogColor[Environment.RAINTYPE_SNOW] = { 0.07074, 0.07074, 0.07074, 0.01 }
 
         return self
     end)
@@ -86,6 +86,7 @@ function ssEnvironment:loadMap(name)
 
     self.latitudeCategories = {}
     self:loadLatitudeCategoriesFromXML(g_seasons:getDataPath("visualSeason"))
+    self:loadSurfaceSoundsFromXML(g_seasons:getDataPath("data/surfaceSounds.xml"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("visualSeason")) do
@@ -160,6 +161,57 @@ function ssEnvironment:loadLatitudeCategoriesFromXML(path)
     delete(file)
 end
 
+function ssEnvironment:loadSurfaceSoundsFromXML(path)
+    if not g_currentMission:getIsClient() then
+        return
+    end
+
+    local file = loadXMLFile("surfaceSounds", path)
+
+    local baseKey = "surface"
+    local numberOfSounds = Utils.getNoNil(getXMLInt(file, baseKey .. "#numberOfSounds"), 0)
+
+    for i = 0, numberOfSounds do
+        local key = ("%s.material(%d)"):format(baseKey, i)
+
+        if not hasXMLProperty(file, key) then
+            break
+        end
+
+        local entry = {
+            type = Utils.getNoNil(getXMLString(file, key .. "#type"), "wheel"),
+            materialId = getXMLInt(file, key .. "#materialId"),
+            name = getXMLString(file, key .. "#name"),
+            sample = SoundUtil.loadSample(file, {}, key, nil, g_seasons.modDir, nil),
+            pitchScale = getXMLFloat(file, key .. "#pitchScale"),
+            currentVolume = 0,
+            impactCount = 0
+        }
+
+        table.insert(g_currentMission.surfaceSounds, entry)
+
+        if entry.materialId ~= nil then
+            if g_currentMission.materialIdToSurfaceSound[entry.materialId] ~= nil then
+                logInfo("ssEnvironment:", ("Found multiple surface sounds with materialId %s !"):format(entry.materialId))
+            end
+        else
+            if entry.name == nil then
+                logInfo("ssEnvironment:", "Surface sounds need either a valid 'materialId' or a 'name'")
+            end
+        end
+
+        if entry.materialId ~= nil then
+            g_currentMission.materialIdToSurfaceSound[entry.materialId] = entry
+        end
+
+        if entry.name ~= nil then
+            g_currentMission.surfaceNameToSurfaceSound[entry.name] = entry
+        end
+    end
+
+    delete(file)
+end
+
 function ssEnvironment:update(dt)
     -- The first day has already started with a new savegame
     -- Call all the event handlers to update growth, time and anything else
@@ -177,7 +229,6 @@ end
 ----------------------------
 -- Seasons events
 ----------------------------
-
 function ssEnvironment:callListeners()
     if not g_seasons.enabled then return end
 
@@ -273,7 +324,6 @@ end
 ----------------------------
 -- Visual season calc
 ----------------------------
-
 function ssEnvironment:latitudeCategory()
     local lat = math.abs(g_seasons.daylight.latitude)
 
@@ -306,15 +356,15 @@ function ssEnvironment:calculateVisualSeason()
     -- Spring
     -- Keeping bare winter textures if the daily average temperature is below a treshold
     if dataVisual == "springTemp" and self.latestVisualSeason == self.SEASON_WINTER
-        and (avgAirTemp <= springLeavesTemp or g_seasons.snow.appliedSnowDepth > 0) then
+            and (avgAirTemp <= springLeavesTemp or g_seasons.snow.appliedSnowDepth > 0) then
         return self.SEASON_WINTER
 
-    -- Winter
-    -- Keeping autumn textures until the daily average temperature is below a treshold
+        -- Winter
+        -- Keeping autumn textures until the daily average temperature is below a treshold
     elseif dataVisual == "winterTemp" and self.latestVisualSeason == self.SEASON_AUTUMN and avgAirTemp >= dropLeavesTemp then
         return self.SEASON_AUTUMN
 
-    -- Get value from the data if available
+        -- Get value from the data if available
     elseif dataSeason ~= nil then
         return dataSeason
 
@@ -326,7 +376,6 @@ end
 ----------------------------
 -- Events
 ----------------------------
-
 function ssEnvironment:dayChanged()
     self:callListeners()
 end
@@ -499,6 +548,43 @@ function ssEnvironment:changeDaysInSeason(newSeasonLength) --15
     end
 end
 
+function ssEnvironment:playSurfaceSound(dt, surfaceSound, impactCount, pitchOffset, noSound)
+    if surfaceSound == nil or surfaceSound.sample == nil then
+        return
+    end
+
+    local currentVolume = surfaceSound.currentVolume
+    local targetVolume = surfaceSound.sample.volume * (surfaceSound.impactCount / impactCount)
+
+    if not noSound then
+        if currentVolume < targetVolume then
+            currentVolume = math.min(targetVolume, currentVolume + surfaceSound.sample.volume * dt / 125)
+        elseif currentVolume > targetVolume then
+            currentVolume = math.max(targetVolume, currentVolume - surfaceSound.sample.volume * dt / 125)
+        end
+    else
+        currentVolume = 0
+    end
+
+    if currentVolume > 0 then
+        if not SoundUtil.isSamplePlaying(surfaceSound.sample) then
+            SoundUtil.playSample(surfaceSound.sample, 0, 0, 0)
+        end
+        if surfaceSound.pitchScale ~= nil then
+            local pitch = surfaceSound.sample.pitchOffset + pitchOffset * surfaceSound.pitchScale
+            SoundUtil.setSamplePitch(surfaceSound.sample, pitch)
+        end
+    elseif SoundUtil.isSamplePlaying(surfaceSound.sample) then
+        SoundUtil.stopSample(surfaceSound.sample)
+    end
+
+    if currentVolume ~= surfaceSound.currentVolume then
+        SoundUtil.setSampleVolume(surfaceSound.sample, currentVolume)
+    end
+
+    surfaceSound.currentVolume = currentVolume
+end
+
 --
 -- Console command for debugging and map makers
 --
@@ -521,7 +607,7 @@ function ssEnvironment:consoleCommandSetVisualSeason(seasonName)
     --     return season
     -- end
     local oldVSeason = self.currentVisualSeason
-    self.currentVisualSeason = function (self)
+    self.currentVisualSeason = function(self)
         return season
     end
 

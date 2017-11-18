@@ -38,7 +38,7 @@ function fillModDesc() {
         value: packageVersion
     }, {
         xpath: "/modDesc/@descVersion",
-        value: package.fs.modDescRev
+        value: packageJson.fs.modDescRev
     }];
 
     return gulp
@@ -52,7 +52,7 @@ function templatedLua() {
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
-        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=simpleVersion %>/g, package.fs.simpleVersion));
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=simpleVersion %>/g, packageJson.fs.simpleVersion));
 }
 
 function createVersionName() {
@@ -98,7 +98,7 @@ function dediStart() {
 }
 
 function dediLogin() {
-    const url = dediUrl()
+    const url = dediUrl();
     const command = `curl -X POST -v -c .cookies --data "username=${buildConfig.get("server.web.username")}&password=${buildConfig.get("server.web.password")}&login=Login" -H "Origin: ${url}" ${url}index.html &> /dev/null`;
 
     return run(command, { silent: true }).exec()
@@ -115,8 +115,8 @@ function developTask(tasks) {
         // Reload package info
         const filename = path.basename(event.path);
         if (filename === "package.json") {
-            package = JSON.parse(fs.readFileSync("package.json"));
-            packageVersion = package.version + ".0";
+            packageJson = JSON.parse(fs.readFileSync("package.json"));
+            packageVersion = packageJson.version + ".0";
         }
     });
 }
@@ -126,10 +126,10 @@ function developTask(tasks) {
  */
 class BuildConfig {
     constructor() {
-        const userData = this.loadFromFile(process.env.HOME + "/.rm_buildrc");
-        const projectData = this.loadFromFile(".buildrc");
+        const userData = BuildConfig.loadFromFile(process.env.HOME + "/.rm_buildrc");
+        const projectData = BuildConfig.loadFromFile(".buildrc");
 
-        this.data = {}
+        this.data = {};
         _defaults(this.data, projectData, userData);
 
         if (!this.isValid()) {
@@ -137,7 +137,7 @@ class BuildConfig {
         }
     }
 
-    loadFromFile(filename) {
+    static loadFromFile(filename) {
         try {
             const data = fs.readFileSync(filename);
             return JSON.parse(data);
@@ -164,10 +164,10 @@ class BuildConfig {
 /// Tasks
 /////////////////////////////////////////////////////
 
-var buildConfig = new BuildConfig();
-var package = JSON.parse(fs.readFileSync("package.json"));
-var packageVersion = package.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
-var modZipName = package.fs.modZipName;
+const buildConfig = new BuildConfig();
+let packageJson = JSON.parse(fs.readFileSync("package.json"));
+let packageVersion = packageJson.version + ".0"; // npm wants 3, modhub wants 4 items. Last one could be build number.
+const modZipName = packageJson.fs.modZipName;
 
 const zipSources = [
     "translations/translation_*.xml",
@@ -254,9 +254,10 @@ gulp.task("server:log", () => {
         }));
 
     task.on("data", function (chunk) {
-        var contents = chunk.contents.toString().trim();
-        var bufLength = process.stdout.columns;
-        var hr = '\n\n' + Array(bufLength).join("_") + '\n\n'
+        let contents = chunk.contents.toString().trim();
+        let bufLength = process.stdout.columns;
+        let hr = '\n\n' + new Array(bufLength).join("_") + '\n\n';
+
         if (contents.length > 1) {
             process.stdout.write(chunk.path + '\n' + contents + '\n');
             process.stdout.write(chunk.path + hr);

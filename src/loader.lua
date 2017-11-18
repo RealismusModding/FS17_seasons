@@ -140,6 +140,8 @@ local files = {
     "gui/ssTwoOptionDialog",
 
     "handtools/ssMeasureTool",
+
+    "player/ssPlayer",
 }
 
 local isDebug = false --<%=debug %>

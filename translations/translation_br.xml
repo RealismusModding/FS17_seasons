@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <l10n>
-    <translationContributors>mayhem17</translationContributors>
+    <translationContributors>mayhem17, RodrigoCompai</translationContributors>
     <texts>
         <text name="input_SEASONS_SHOW_WF" text="Seasons: Mostrar previsão do tempo" />
         <text name="input_SEASONS_REPAIR_VEHICLE" text="Seasons: Manutenção veicular" />
@@ -93,6 +93,9 @@
         <text name="measuretool_failed" text="Medição falhou" />
         <text name="measuretool_no_info" text="Medição falhou: sem informação" />
 
+        <!-- Missing translation of "Health" -->
+        <text name="statistic_health" text="" />
+
         <text name="ui_pageCalender" text="Calendário" />
         <text name="ui_pageEconomy" text="Economia" />
         <text name="ui_pageSettings" text="Preferências" />
@@ -138,12 +141,9 @@
         <text name="dialog_timeTravel" text="O jogo está sincronizando depois de passar o tempo" />
         <text name="dialog_sleeping" text="Descanso após outro dia de trabalho... Zzz..." />
 
-        <!-- Missing translation of "Do you want to skip night until morning (6:00) or dawn (%s)?" -->
-        <text name="dialog_skipNight_text" text="" />
-        <!-- Missing translation of "Morning (6:00)" -->
-        <text name="dialog_skipNight_morning" text="" />
-        <!-- Missing translation of "Dawn (%s)" -->
-        <text name="dialog_skipNight_dawn" text="" />
+        <text name="dialog_skipNight_text" text="Você deseja pular a noite até a manhã (06:00) ou amanhecer?" />
+        <text name="dialog_skipNight_morning" text="Manhã (6:00)" />
+        <text name="dialog_skipNight_dawn" text="Amanhecer (%s)" />
 
         <text name="fillType_snow" text="Neve" />
 
@@ -231,12 +231,9 @@
 
         <text name="ss_helpTitle_16" text="Menu do Seasons" />
         <text name="ss_helpText_16_01" text="O Menu do Seasons é utilizado com referência para plantar e alterar preferências. Este menu pode ser acessado pressionando Alt esquerdo + S." />
-        <!-- Missing translation of "The first page is the planting and harvesting calendar. The germination temperatures of all crops are shown on the left of the graph. If the temperature next to a crop is white, it means it is warm enough to plant that particular crop. If the temperature is blue, it is too cold." -->
-        <text name="ss_helpText_16_02" text="" />
-        <!-- Missing translation of "On the second page you can find data on the prices of products in the last year. The data is updated every day. The future price is only an estimation so deviations can occur." -->
-        <text name="ss_helpText_16_03" text="" />
-        <!-- Missing translation of "The third page is the settings menu. On this page various options are available to adjust Seasons into how you want to play." -->
-        <text name="ss_helpText_16_04" text="" />
+        <text name="ss_helpText_16_02" text="A primeira pagina é o calendário de plantio e colheita. A temperatura de germinação de todos os cultivos são mostrados a esquerda do gráfico. Se a temperatura próxima ao cultivo está branca, significa que está quente o suficiente para o cultivo em particular. Se a temperatura estiver azul está muito frio." />
+        <text name="ss_helpText_16_03" text="Na segunda página você pode encontrar dados relativos aos preços dos produtos no ultimo ano. Os dados são atualizados anualmente. O preço futuro é apenas uma estimação e variações podem ocorrer." />
+        <text name="ss_helpText_16_04" text="A terceira pagina é o menu de opções. Nessa página várias opções estão disponíveis para ajustar o Seasons como você deseja jogá-lo." />
 
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="Um HUD à esquerda do relógio no canto superior direito da tela mostra as informações relevantes do Seasons. São mostradas a temperatura ambiente atual no topo e a temperatura do solo embaixo. O estado atual do solo (molhado/congelado) também é mostrados à esquerda deste HUD." />

@@ -9,6 +9,7 @@
 ssRepairable = {}
 
 ssRepairable.MAX_CHARS_TO_DISPLAY = 20
+ssRepairable.PLAYER_RANGE = 5.0
 
 function ssRepairable:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Washable, specializations)
@@ -94,7 +95,7 @@ end
 function ssRepairable:updateTick(dt)
     -- Calculate if vehicle is in range for message about repairing
     if self.isClient and g_currentMission.controlPlayer and g_currentMission.player ~= nil then
-        local isPlayerInRange, player = getIsPlayerInRange(self, 4.0, g_currentMission.player)
+        local isPlayerInRange, player = getIsPlayerInRange(self, ssRepairable.PLAYER_RANGE, g_currentMission.player)
 
         if isPlayerInRange then
             self.ssPlayerInRange = player

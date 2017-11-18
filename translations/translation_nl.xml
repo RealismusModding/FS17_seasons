@@ -93,6 +93,8 @@
         <text name="measuretool_failed" text="Meting mislukt" />
         <text name="measuretool_no_info" text="Meting mislukt: geen informatie" />
 
+        <text name="statistic_health" text="Gezondheid" />
+
         <text name="ui_pageCalender" text="Kalender" />
         <text name="ui_pageEconomy" text="Economie" />
         <text name="ui_pageSettings" text="Instellingen" />

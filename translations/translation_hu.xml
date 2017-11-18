@@ -93,6 +93,8 @@
         <text name="measuretool_failed" text="Mérés nem sikerült" />
         <text name="measuretool_no_info" text="Mérés nem sikerült : nincs információ" />
 
+        <text name="statistic_health" text="Egészség" />
+
         <text name="ui_pageCalender" text="Naptár" />
         <text name="ui_pageEconomy" text="Gazdaság" />
         <text name="ui_pageSettings" text="Beállítások" />
