@@ -1,0 +1,36 @@
+name: Seasons
+zip_name: FS17_RM_Seasons
+version: 1.2.1.0
+type: script
+
+code: src/
+main: src/loader.lua
+
+resources:
+  - resources/
+  - data/
+  - CREDITS.txt
+
+base_translation: en
+translations:
+  - cz
+  - de
+  - en
+  - es
+  - fr
+  - it
+  - nl
+  - pl
+  - ru
+  - hu
+  - br
+
+templates:
+  debug: true
+  verbose: true
+
+release:
+  clean_translations: true
+  templates:
+    debug: false
+    verbose: false
