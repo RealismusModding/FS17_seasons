@@ -22,10 +22,15 @@ function ssPlayer:preLoad()
 end
 
 function ssPlayer:playerUpdateTick(dt)
+    local snowDepth = g_seasons.weather.snowDepth
+    if g_currentMission:getIsServer() then
+        snowDepth = ssSnow.appliedSnowDepth
+    end
+
     if not g_gui:getIsGuiVisible()
             and self.isEntered
             and self.isClient
-            and ssSnow.appliedSnowDepth >= ssSnow.LAYER_HEIGHT then
+            and snowDepth >= ssSnow.LAYER_HEIGHT then
         local surfaceSound = g_currentMission.surfaceNameToSurfaceSound["snowFootsteps"]
 
         if surfaceSound ~= nil then
