@@ -212,6 +212,10 @@ gulp.task("build", () => {
 });
 
 gulp.task("build:console-data", () => {
+    // Skip fake items
+    zipSources.push("!resources/fakeStoreItem");
+    zipSources.push("!resources/fakeStoreItem/**");
+
     const sourceStream = gulp.src(zipSources, { base: "." });
     const outputZipName = `${modZipName}_console.zip`;
 
