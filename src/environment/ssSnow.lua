@@ -360,12 +360,24 @@ end
 -- Commands
 --
 
-function ssSnow:consoleCommandAddSnow()
-    self:applySnow(self.appliedSnowDepth + ssSnow.LAYER_HEIGHT)
+function ssSnow:consoleCommandAddSnow(layers)
+    if layers == nil then
+        layers = 1
+    else
+        layers = tonumber(layers)
+    end
+
+    self:applySnow(self.appliedSnowDepth + layers * ssSnow.LAYER_HEIGHT)
 end
 
-function ssSnow:consoleCommandRemoveSnow()
-    self:applySnow(self.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
+function ssSnow:consoleCommandRemoveSnow(layers)
+    if layers == nil then
+        layers = 1
+    else
+        layers = tonumber(layers)
+    end
+
+    self:applySnow(self.appliedSnowDepth - layers * ssSnow.LAYER_HEIGHT)
 end
 
 function ssSnow:consoleCommandResetSnow()
