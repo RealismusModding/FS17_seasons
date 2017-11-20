@@ -68,7 +68,7 @@ local function split(str, pat)
 end
 
 local function isSeasonsActive()
-    return g_modIsLoaded["FS17_RM_Seasons"] == true
+    return g_modIsLoaded["FS17_RM_Seasons"] == true or (GS_IS_CONSOLE_VERSION and g_modIsLoaded["FS17_RM_Seasons_console"])
 end
 
 ------------------------------------------
