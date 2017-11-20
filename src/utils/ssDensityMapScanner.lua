@@ -95,12 +95,7 @@ function ssDensityMapScanner:update(dt)
                 self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
             else
                 -- Must be evenly dividable with mapsize.
-                local minNumSegments = 16
-                if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
-                    minNumSegments = 32
-                end
-
-                self.currentJob.numSegments = math.min(g_currentMission.terrainSize, minNumSegments)
+                self.currentJob.numSegments = 16 -- 16*16 on a 1x map, is squares of 64px
             end
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
@@ -165,17 +160,24 @@ function ssDensityMapScanner:run(job)
         return self:runLine(job)
     end
 
+    -- 64 on 1x, 128 on 2x
+    local width = math.floor(g_currentMission.terrainSize / 2048) * 64
+    local height = 64
+
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
-    local startWorldX = job.x * size / job.numSegments - size / 2 + (pixelSize / 2)
-    local startWorldZ = job.z * size / job.numSegments - size / 2 + (pixelSize / 2)
-    local widthWorldX = startWorldX + size / job.numSegments - pixelSize
+
+    local startWorldX = job.x * width - size / 2 + (pixelSize / 2)
+    local startWorldZ = job.z * height - size / 2 + (pixelSize / 2)
+
+    local widthWorldX = startWorldX + width - pixelSize
     local widthWorldZ = startWorldZ
+
     local heightWorldX = startWorldX
 
     -- Should be -2* ?!?
-    local heightWorldZ = startWorldZ + size / job.numSegments + 1 * (pixelSize / 2)
-    -- local heightWorldZ = startWorldZ + size / job.numSegments - 2 * (pixelSize / 2)
+    local heightWorldZ = startWorldZ + height + 1 * (pixelSize / 2)
+    -- local heightWorldZ = startWorldZ + height - 2 * (pixelSize / 2)
 
     log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
@@ -190,10 +192,10 @@ function ssDensityMapScanner:run(job)
     callback.func(callback.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
 
     -- Update current job
-    if job.x < job.numSegments - 1 then -- Starting with row 0
+    if job.x < (g_currentMission.terrainSize / width) - 1 then -- Starting with row 0
         -- Next row
         job.x = job.x + 1
-    elseif job.z < job.numSegments - 1 then
+    elseif job.z < (g_currentMission.terrainSize / height) - 1 then
         job.z = job.z + 1
         job.x = 0
     else
