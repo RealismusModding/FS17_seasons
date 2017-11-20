@@ -141,7 +141,6 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
     <storeItems>
         <storeItem xmlFilename="resources/fakeStoreItem/item.xml" />
         <storeItem xmlFilename="resources/fakeStoreItem/item2.xml" />
-
         <storeItem rootNode="handTool" xmlFilename="resources/handtools/wopstr420/wopstr420.xml" />
     </storeItems>
 </modDesc>

@@ -32,7 +32,7 @@ function toLuaString(value) {
  * Add updated values to the modDesc
  * @return {Vinyl} Stream containing updated modDesc
  */
-function fillModDesc() {
+function fillModDesc(cons) {
     const replacements = [{
         xpath: "/modDesc/version",
         value: packageVersion
@@ -40,6 +40,20 @@ function fillModDesc() {
         xpath: "/modDesc/@descVersion",
         value: packageJson.fs.modDescRev
     }];
+
+    if (cons) {
+        replacements.push({
+            xpath: "/modDesc/storeItems/storeItem",
+            value: (xml) => {
+                if (xml.attributes['0'].nodeValue.startsWith("resources/fakeStoreItem")) {
+                    xml.parentNode.removeChild(xml);
+                    xml.parentNode.removeChild(xml.parentNode.firstChild);
+                } else {
+                    return "";
+                }
+            }
+        });
+    }
 
     return gulp
         .src("modDesc.xml")
@@ -201,7 +215,7 @@ gulp.task("build:console-data", () => {
     const sourceStream = gulp.src(zipSources, { base: "." });
     const outputZipName = `${modZipName}_console.zip`;
 
-    return merge(sourceStream, fillModDesc())
+    return merge(sourceStream, fillModDesc(true))
         .pipe(size())
         .pipe(zip(outputZipName))
         .pipe(size())
