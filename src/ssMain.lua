@@ -125,8 +125,10 @@ function ssMain:loadMap()
     FocusManager:setGui("MPLoadingScreen")
 
     -- Remove the (hacked) store items
-    self:removeStoreItem("resources/fakeStoreItem/item.xml")
-    self:removeStoreItem("resources/fakeStoreItem/item2.xml")
+    if not GS_IS_CONSOLE_VERSION then
+        self:removeStoreItem("resources/fakeStoreItem/item.xml")
+        self:removeStoreItem("resources/fakeStoreItem/item2.xml")
+    end
 
     if self.descVersion == "0.0.0.0" then
         local w, h = getNormalizedScreenValues(384, 128)
