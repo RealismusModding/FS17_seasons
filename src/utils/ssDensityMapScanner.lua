@@ -9,8 +9,6 @@
 
 ssDensityMapScanner = {}
 
-ssDensityMapScanner.TIMESPLIT = 25 -- ms
-
 function ssDensityMapScanner:preLoad()
     g_seasons.dms = self
 end
@@ -20,6 +18,7 @@ function ssDensityMapScanner:load(savegame, key)
         local job = {}
 
         job.x = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.x", 0)
+        job.z = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.z", -1)
         job.callbackId = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
         job.parameter = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.parameter")
         job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
@@ -55,6 +54,7 @@ function ssDensityMapScanner:save(savegame, key)
 
     if self.currentJob ~= nil then
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
+        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
@@ -77,8 +77,6 @@ function ssDensityMapScanner:loadMap(name)
         if self.queue == nil then
             self.queue = ssQueue:new()
         end
-
-        self.timeCounter = 0
     end
 end
 
@@ -91,14 +89,15 @@ function ssDensityMapScanner:update(dt)
         -- A new job has started
         if self.currentJob then
             self.currentJob.x = 0
+            self.currentJob.z = 0
 
             if g_dedicatedServerInfo ~= nil then
                 self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
             else
                 -- Must be evenly dividable with mapsize.
-                local minNumSegments = 16 * 16
+                local minNumSegments = 16
                 if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
-                    minNumSegments = 32 * 32
+                    minNumSegments = 32
                 end
 
                 self.currentJob.numSegments = math.min(g_currentMission.terrainSize, minNumSegments)
@@ -109,17 +108,8 @@ function ssDensityMapScanner:update(dt)
     end
 
     if self.currentJob ~= nil then
-        self.timeCounter = self.timeCounter + dt
-
-        -- Use a timer to spread updates: only on SP, as it would only lag on MP
-        -- due to density map synchronization
-        if g_dedicatedServerInfo ~= nil or self.timeCounter >= ssDensityMapScanner.TIMESPLIT then
-            if not self:run(self.currentJob) then
-                self.currentJob = nil
-            end
-
-            -- Reset timer
-            self.timeCounter = 0
+        if not self:run(self.currentJob) then
+            self.currentJob = nil
         end
     end
 end
@@ -167,6 +157,59 @@ end
 
 -- Returns: true when new cycle needed. false when done
 function ssDensityMapScanner:run(job)
+    if job == nil then return end
+
+    -- z is used for the squares since 1.3. If not available in savegame, it defaults to -1
+    -- This means the job started running and should finish. New jobs don't need this.
+    if job.z == -1 then
+        return self:runLine(job)
+    end
+
+    local size = g_currentMission.terrainSize
+    local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
+    local startWorldX = job.x * size / job.numSegments - size / 2 + (pixelSize / 2)
+    local startWorldZ = job.z * size / job.numSegments - size / 2 + (pixelSize / 2)
+    local widthWorldX = startWorldX + size / job.numSegments - pixelSize
+    local widthWorldZ = startWorldZ
+    local heightWorldX = startWorldX
+    local heightWorldZ = startWorldZ + size / job.numSegments + 1 * (pixelSize / 2)
+
+    -- Should be -2* ?!?
+    local heightWorldZ = startWorldZ + size / job.numSegments + 1 * (pixelSize / 2)
+
+    log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+
+    -- Run the callback
+    local callback = self.callbacks[job.callbackId]
+    if callback == nil then
+        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
+
+        return false
+    end
+
+    callback.func(callback.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
+
+    -- Update current job
+    if job.x < job.numSegments - 1 then -- Starting with row 0
+        -- Next row
+        job.x = job.x + 1
+    elseif job.z < job.numSegments - 1 then
+        job.z = job.z + 1
+        job.x = 0
+    else
+        -- Done with the loop, call finalizer
+        if callback.finalizer ~= nil then
+            callback.finalizer(callback.target, job.parameter)
+        end
+
+        return false -- finished
+    end
+
+    return true -- not finished
+end
+
+-- Legacy version, for compatibility with existing savegames
+function ssDensityMapScanner:runLine(job)
     if job == nil then return end
 
     local size = g_currentMission.terrainSize
