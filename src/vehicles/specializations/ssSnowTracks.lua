@@ -212,7 +212,7 @@ function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
             if friction ~= nil then
                 setFriction(friction)
             else
-                setFriction(0.2)
+                setFriction(0.4)
             end
         end
     end
