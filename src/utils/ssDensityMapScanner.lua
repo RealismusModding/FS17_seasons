@@ -172,10 +172,10 @@ function ssDensityMapScanner:run(job)
     local widthWorldX = startWorldX + size / job.numSegments - pixelSize
     local widthWorldZ = startWorldZ
     local heightWorldX = startWorldX
-    local heightWorldZ = startWorldZ + size / job.numSegments + 1 * (pixelSize / 2)
 
     -- Should be -2* ?!?
     local heightWorldZ = startWorldZ + size / job.numSegments + 1 * (pixelSize / 2)
+    -- local heightWorldZ = startWorldZ + size / job.numSegments - 2 * (pixelSize / 2)
 
     log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
