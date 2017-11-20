@@ -188,7 +188,7 @@ gulp.task("clean:mods", () => {
 // Build the mod zipfile
 gulp.task("build", () => {
     const sourceStream = gulp.src(zipSources, { base: "." });
-    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}.zip`;
 
     return merge(sourceStream, fillModDesc(), templatedLua())
         .pipe(size())
@@ -199,7 +199,7 @@ gulp.task("build", () => {
 
 gulp.task("build:console-data", () => {
     const sourceStream = gulp.src(zipSources, { base: "." });
-    const outputZipName = `${modZipName}_${createVersionName()}_console.zip`;
+    const outputZipName = `${modZipName}_console.zip`;
 
     return merge(sourceStream, fillModDesc())
         .pipe(size())
@@ -209,7 +209,7 @@ gulp.task("build:console-data", () => {
 });
 
 gulp.task("build:console-src", () => {
-    const outputZipName = `${modZipName}_${createVersionName()}_internalMod.zip`;
+    const outputZipName = `${modZipName}_internalMod.zip`;
 
     return merge(templatedLua())
         .pipe(size())
@@ -222,7 +222,7 @@ gulp.task("build:console", ["build:console-data", "build:console-src"], () => {}
 
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build", "clean:mods"], () => {
-    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}.zip`;
 
     return gulp
         .src(outputZipName, { base: "." })
