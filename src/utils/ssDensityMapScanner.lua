@@ -204,7 +204,7 @@ function ssDensityMapScanner:run(job)
     local heightWorldZ = startWorldZ + height + 1 * (pixelSize / 2)
     -- local heightWorldZ = startWorldZ + height - 2 * (pixelSize / 2)
 
-    log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+    -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     -- Run the callback
     local callback = self.callbacks[job.callbackId]
