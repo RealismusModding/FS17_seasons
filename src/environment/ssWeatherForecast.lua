@@ -15,7 +15,7 @@ end
 
 function ssWeatherForecast:load(savegame, key)
     self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
-    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
+    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", g_gameSettings.useMiles)
 end
 
 function ssWeatherForecast:save(savegame, key)
