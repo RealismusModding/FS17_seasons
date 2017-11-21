@@ -91,12 +91,17 @@ function ssMotorFailure:update(dt)
             self.ssHasMotorBrokenDown = false
         end
     end
+
+    self.ssShowEngineStartWarning = not self.isMotorStarted and self.axisForward ~= 0
 end
 
 function ssMotorFailure:updateTick(dt)
 end
 
 function ssMotorFailure:draw()
+    if self.ssShowEngineStartWarning then
+        g_currentMission:showBlinkingWarning(g_i18n:getText("warning_motorNotStarted"))
+    end
 end
 
 -- Code from GDN, adjusted to add (semi-)broken motor mechanics
