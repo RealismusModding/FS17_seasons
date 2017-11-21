@@ -18,7 +18,7 @@ source(ssSeasonsMod.directory .. "src/events/ssSkipNightFinishedEvent.lua")
 function ssSkipNight:preLoad()
     g_seasons.skipNight = self
 
-    ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 1200 or 6000
+    ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 1200 or 24000
 end
 
 function ssSkipNight:loadMap()
@@ -95,7 +95,7 @@ function ssSkipNight:update(dt)
     -- The ssCatchingUp code will synchronize
     if self.skippingNight and isMorning then
         -- The server might be behind. To prevent a big jump, make the client stop the time as well
-        g_currentMission:setTimeScale(self.oldTimeScale, not g_currentMission:getIsServer())
+        g_currentMission:setTimeScale(1, not g_currentMission:getIsServer())
 
         -- The rest is only for the server. The client removes the listeners and dialogs
         -- when receiving the finished event, so that clients wait for the server to catch up.
@@ -105,11 +105,7 @@ function ssSkipNight:update(dt)
             g_currentMission.environment:removeMinuteChangeListener(self)
             g_currentMission.environment:removeHourChangeListener(self)
 
-            g_gui:closeDialog(self.dialog)
-            self.dialog = nil
-
-            g_server:broadcastEvent(EnvironmentTimeEvent:new(g_currentMission.environment.currentDay, g_currentMission.environment.dayTime));
-            ssSkipNightFinishedEvent.sendEvent()
+            -- Not closing the gui overlay until the DMS is empty
         end
     end
 
@@ -122,6 +118,18 @@ function ssSkipNight:update(dt)
     -- This can occur when the player just joined
     if self.skippingNight and g_currentMission:getIsClient() and self.dialog == nil then
         self:showSkippingDialog()
+    end
+
+    -- Close dialog only once the DMS is empty. Then send events to the clients to close as well.
+    if g_currentMission:getIsServer() and not self.skippingNight and self.dialog ~= nil and not g_seasons.dms:isBusy() then
+        -- Now reset to the time the player had before
+        g_currentMission:setTimeScale(self.oldTimeScale, not g_currentMission:getIsServer())
+
+        g_gui:closeDialog(self.dialog)
+        self.dialog = nil
+
+        g_server:broadcastEvent(EnvironmentTimeEvent:new(g_currentMission.environment.currentDay, g_currentMission.environment.dayTime));
+        ssSkipNightFinishedEvent.sendEvent()
     end
 end
 

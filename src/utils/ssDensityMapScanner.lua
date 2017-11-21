@@ -22,6 +22,7 @@ function ssDensityMapScanner:load(savegame, key)
         job.callbackId = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
         job.parameter = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.parameter")
         job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
+        job.width = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.width", -1)
 
         self.currentJob = job
 
@@ -57,7 +58,8 @@ function ssDensityMapScanner:save(savegame, key)
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
-        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
+        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments or -1)
+        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.width", self.currentJob.width or -1)
     end
 
     -- Save queue
@@ -91,22 +93,43 @@ function ssDensityMapScanner:update(dt)
             self.currentJob.x = 0
             self.currentJob.z = 0
 
-            if g_dedicatedServerInfo ~= nil then
-                self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
-            else
-                -- Must be evenly dividable with mapsize.
-                self.currentJob.numSegments = 16 -- 16*16 on a 1x map, is squares of 64px
+            -- 64 on 1x, 128 on 2x
+            local width = math.floor(g_currentMission.terrainSize / 2048) * 64
+            if not GS_IS_CONSOLE_VERSION then
+                width = width * 4
             end
+
+            if g_dedicatedServerInfo ~= nil then
+                width = g_currentMission.terrainSize
+            else
+                -- Limit to 512px, even on 16x maps
+                width = math.min(width, 512)
+            end
+
+            self.currentJob.width = width
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
     end
 
     if self.currentJob ~= nil then
-        if not self:run(self.currentJob) then
-            self.currentJob = nil
+        local num = 1
+
+        -- When skipping night, do a bit more per frame, the player can't move anyways.
+        if g_seasons.skipNight.skippingNight then
+            num = 8
+        end
+
+        for i = 1, num do
+            if not self:run(self.currentJob) then
+                self.currentJob = nil
+            end
         end
     end
+end
+
+function ssDensityMapScanner:isBusy()
+    return self.queue.size > 0 or self.currentJob ~= nil
 end
 
 function ssDensityMapScanner:queueJob(callbackId, parameter)
@@ -160,9 +183,9 @@ function ssDensityMapScanner:run(job)
         return self:runLine(job)
     end
 
-    -- 64 on 1x, 128 on 2x
-    local width = math.floor(g_currentMission.terrainSize / 2048) * 64
+    -- Row height (64px for caching)
     local height = 64
+    local width = job.width
 
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
