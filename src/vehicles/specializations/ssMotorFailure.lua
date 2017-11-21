@@ -99,7 +99,7 @@ function ssMotorFailure:updateTick(dt)
 end
 
 function ssMotorFailure:draw()
-    if self.ssShowEngineStartWarning then
+    if self.ssShowEngineStartWarning and not self.showWaterWarning then
         g_currentMission:showBlinkingWarning(g_i18n:getText("warning_motorNotStarted"))
     end
 end
