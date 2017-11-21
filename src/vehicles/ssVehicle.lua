@@ -59,7 +59,9 @@ function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    g_currentMission:setAutomaticMotorStartEnabled(false)
+    if not GS_IS_CONSOLE_VERSION then
+        g_currentMission:setAutomaticMotorStartEnabled(false)
+    end
 
     ssVehicle.repairFactors = {}
     ssVehicle.allowedInWinter = {}

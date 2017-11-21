@@ -56,7 +56,7 @@ function ssMotorFailure:update(dt)
             local breakdownLoadFactor = Utils.clamp((self.ssSmoothLoadPercentage - 0.5) * 20, 0, 10)
             local p = math.max(2 - overdueFactor ^ 0.001 , 0.2) ^ (1 / 1000 * overdueFactor ^ (2.5 + breakdownLoadFactor))
 
-            if math.random() > p then
+            if (not GS_IS_CONSOLE_VERSION or not g_currentMission.missionInfo.automaticMotorStartEnabled) and math.random() > p then
                 self.ssHasMotorBrokenDown = true
 
                 if self:getIsHired() then
@@ -142,6 +142,9 @@ function ssMotorFailure:startMotor(noEventSend)
 
             local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - (overdueFactor - 1)) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
             local willStart = math.random() < p
+            if GS_IS_CONSOLE_VERSION and g_currentMission.missionInfo.automaticMotorStartEnabled then
+                willStart = true
+            end
 
             self.ssMotorStartTries = overdueFactor
             self.ssMotorStartSoundTime = g_currentMission.time
