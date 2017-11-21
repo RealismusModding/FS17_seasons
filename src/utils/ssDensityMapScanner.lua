@@ -123,6 +123,8 @@ function ssDensityMapScanner:update(dt)
         for i = 1, num do
             if not self:run(self.currentJob) then
                 self.currentJob = nil
+
+                break
             end
         end
     end
