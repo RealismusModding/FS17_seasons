@@ -18,7 +18,7 @@ source(ssSeasonsMod.directory .. "src/events/ssSkipNightFinishedEvent.lua")
 function ssSkipNight:preLoad()
     g_seasons.skipNight = self
 
-    ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 1200 or 24000
+    ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 3000 or 12000
 end
 
 function ssSkipNight:loadMap()
