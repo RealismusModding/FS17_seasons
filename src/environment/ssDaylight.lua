@@ -99,7 +99,7 @@ function ssDaylight:loadCurveFromXML(file, key, numDims, numKeys)
 
         -- TV adjusted colors
         if GS_IS_CONSOLE_VERSION then
-            local consoleValues = ssXMLUtil.getString(file, skey .. "#values", nil)
+            local consoleValues = ssXMLUtil.getString(file, skey .. "#consoleValues", nil)
             if consoleValues ~= nil then
                 values = Utils.splitString(" ", consoleValues)
             end
