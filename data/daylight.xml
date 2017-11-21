@@ -12,8 +12,8 @@
     <seasons>
         <spring>
             <ambient>
-                <key values="0.010 0.010 0.016" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.035 0.035 0.040" />
                 <key values="0.040 0.040 0.060" />
@@ -24,15 +24,17 @@
                 <key values="0.160 0.140 0.160" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.048 0.048 0.072" />
-                <key values="0.072 0.072 0.088" />
-                <key values="0.072 0.072 0.088" />
+
+                <key values="0.072 0.072 0.088" consoleValues="0.048 0.048 0.072" />
+                <key values="0.072 0.072 0.088" consoleValues="0.048 0.048 0.072" />
+
                 <key values="0.020 0.020 0.032" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
             </ambient>
 
             <sunColor>
-                <key values="0.000 0.000 0.000" />
-                <key values="0.000 0.000 0.000" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
                 <key values="0.010 0.010 0.010" />
                 <key values="0.025 0.025 0.025" />
                 <key values="0.050 0.050 0.030" />
@@ -47,8 +49,8 @@
                 <key values="0.025 0.030 0.050" />
                 <key values="0.015 0.015 0.015" />
                 <key values="0.010 0.010 0.010" />
-                <key values="0.005 0.005 0.005" />
-                <key values="0.005 0.005 0.005" />
+                <key values="0.005 0.005 0.005" consoleValues="0.010 0.010 0.010" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
             </sunColor>
 
             <distanceFog>
@@ -80,8 +82,8 @@
 
         <summer>
             <ambient>
-                <key values="0.010 0.010 0.016" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.035 0.035 0.040" />
                 <key values="0.040 0.040 0.060" />
@@ -95,12 +97,12 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
             </ambient>
 
             <sunColor>
-                <key values="0.000 0.000 0.000" />
-                <key values="0.000 0.000 0.000" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
                 <key values="0.010 0.010 0.010" />
                 <key values="0.025 0.025 0.025" />
                 <key values="0.050 0.050 0.030" />
@@ -115,8 +117,8 @@
                 <key values="0.025 0.030 0.050" />
                 <key values="0.015 0.015 0.015" />
                 <key values="0.010 0.010 0.010" />
-                <key values="0.005 0.005 0.005" />
-                <key values="0.005 0.005 0.005" />
+                <key values="0.005 0.005 0.005" consoleValues="0.010 0.010 0.010" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
             </sunColor>
 
             <distanceFog>
@@ -148,8 +150,8 @@
 
         <autumn>
             <ambient>
-                <key values="0.010 0.010 0.016" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.035 0.035 0.040" />
                 <key values="0.040 0.040 0.060" />
@@ -163,12 +165,12 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
             </ambient>
 
             <sunColor>
-                <key values="0.000 0.000 0.000" />
-                <key values="0.000 0.000 0.000" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
                 <key values="0.010 0.010 0.010" />
                 <key values="0.025 0.025 0.025" />
                 <key values="0.050 0.050 0.030" />
@@ -183,8 +185,8 @@
                 <key values="0.025 0.030 0.050" />
                 <key values="0.015 0.015 0.015" />
                 <key values="0.010 0.010 0.010" />
-                <key values="0.005 0.005 0.005" />
-                <key values="0.005 0.005 0.005" />
+                <key values="0.005 0.005 0.005" consoleValues="0.010 0.010 0.010" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
             </sunColor>
 
             <distanceFog>
@@ -216,8 +218,8 @@
 
         <winter>
             <ambient>
-                <key values="0.010 0.010 0.016" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
                 <key values="0.020 0.020 0.032" />
                 <key values="0.035 0.035 0.040" />
                 <key values="0.040 0.040 0.060" />
@@ -231,12 +233,12 @@
                 <key values="0.072 0.072 0.088" />
                 <key values="0.072 0.072 0.088" />
                 <key values="0.020 0.020 0.032" />
-                <key values="0.010 0.010 0.016" />
+                <key values="0.010 0.010 0.016" consoleValues="0.015 0.015 0.024" />
             </ambient>
 
             <sunColor>
-                <key values="0.000 0.000 0.000" />
-                <key values="0.000 0.000 0.000" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
                 <key values="0.010 0.010 0.010" />
                 <key values="0.025 0.025 0.025" />
                 <key values="0.050 0.050 0.030" />
@@ -251,8 +253,8 @@
                 <key values="0.025 0.030 0.050" />
                 <key values="0.015 0.015 0.015" />
                 <key values="0.010 0.010 0.010" />
-                <key values="0.005 0.005 0.005" />
-                <key values="0.005 0.005 0.005" />
+                <key values="0.005 0.005 0.005" consoleValues="0.010 0.010 0.010" />
+                <key values="0.000 0.000 0.000" consoleValues="0.025 0.030 0.060" />
             </sunColor>
 
             <distanceFog>
