@@ -54,6 +54,16 @@ function ssPlayer:playerUpdateTick(dt)
             ssEnvironment:playSurfaceSound(dt, surfaceSound, surfaceSound.impactCount, pitchOffset, not inSnowLayers or not moved or self.deltaWater < 0)
         end
     end
+
+    -- Prevent player from getting stuck in a high level of snow
+    local px, py, pz = getTranslation(self.rootNode)
+    local dy, delta = getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, px, py, pz)
+    local heightOffset =  0.5 * self.height -- for root node origin to terrain
+    if py - heightOffsett < dy - 0.2 then
+        py = dy + heightOffset
+
+        setTranslation(self.rootNode, px, py, pz)
+    end
 end
 
 function ssPlayer:getIsInSnowLayers(player, width, length)
