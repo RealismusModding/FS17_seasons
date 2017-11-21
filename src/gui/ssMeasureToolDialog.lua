@@ -43,7 +43,11 @@ function ssMeasureToolDialog:onOpen()
 
     self.inputDelay = self.time + 250
 
-    FocusManager:setFocus(self.backButton)
+    if GS_IS_CONSOLE_VERSION then
+        FocusManager:setFocus(self.contentList)
+    else
+        FocusManager:setFocus(self.backButton)
+    end
 
     if self.backButtonConsole ~= nil then
         FocusManager:setFocus(self.backButtonConsole)
