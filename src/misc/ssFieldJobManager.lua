@@ -14,44 +14,37 @@ function ssFieldJobManager:preLoad()
 
     ssUtil.overwrittenFunction(FieldJob, "init", ssFieldJobManager.fieldJobInit)
     ssUtil.overwrittenFunction(FieldJob, "finish", ssFieldJobManager.fieldJobFinish)
-    ssUtil.overwrittenFunction(FieldJobManager, "update", ssFieldJobManager.fieldJobManagerUpdate)
+    ssUtil.appendedFunction(FieldJobManager, "update", ssFieldJobManager.fieldJobManagerUpdate)
 end
 
 function ssFieldJobManager:loadMap(name)
+    -- TODO: determine crop to grow
 end
 
 -- Filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
-    if self.coverCounter == nil then self.coverCounter = 0 end
+    -- Check if field job was started by NPC, terminate if not appropriate for current season
+    if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
+        local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
+        local paramSetState         = self.fieldStatusParametersToSet[5] --FieldJobManager.FIELDSTATE_*
 
-    if self.coverCounter > 500 or self.currentFieldPartitionIndex ~= nil or self:isFieldJobActive() then
-        superFunc(self, dt + self.coverCounter)
-        self.coverCounter = 0
+        local stateToJob = {[FieldJobManager.FIELDSTATE_CULTIVATED] = FieldJob.TYPE_CULTIVATING,
+                            [FieldJobManager.FIELDSTATE_PLOUGHED] = FieldJob.TYPE_PLOUGHING,
+                            [FieldJobManager.FIELDSTATE_HARVESTED] = FieldJob.TYPE_HARVESTING,
+                            [FieldJobManager.FIELDSTATE_GROWING] = FieldJob.TYPE_SOWING}
 
-        -- Check if field job was started by NPC, terminate if not appropriate for current season
-        if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
-            local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
-            -- local paramFruitType        = self.fieldStatusParametersToSet[1].missionFruitType --current growing fruit
-            -- local paramFruitType         = self.fieldStatusParametersToSet[4] -- not filltype
-            local paramSetState         = self.fieldStatusParametersToSet[5] --FieldJobManager.FIELDSTATE_*
+        local fruitIndex = self.fieldStatusParametersToSet[4]
 
-            local stateToJob = {[FieldJobManager.FIELDSTATE_CULTIVATED] = FieldJob.TYPE_CULTIVATING,
-                                [FieldJobManager.FIELDSTATE_PLOUGHED] = FieldJob.TYPE_PLOUGHING,
-                                [FieldJobManager.FIELDSTATE_HARVESTED] = FieldJob.TYPE_HARVESTING,
-                                [FieldJobManager.FIELDSTATE_GROWING] = FieldJob.TYPE_SOWING}
-
-            if not g_seasons.fieldJobManager.isFieldJobAllowed(stateToJob[paramSetState], true) then
-                self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update
-            end
+        if not g_seasons.fieldJobManager.isFieldJobAllowed(stateToJob[paramSetState], true, fruitIndex) then
+            self.fieldStatusParametersToSet = nil -- This makes FieldJobManager never begin work and will check next field on next update
         end
-    else -- Use cover counter to prevent the FieldJobManager to initiate a job on every update
-        self.coverCounter = self.coverCounter + dt
     end
 end
 
 -- Filter mission assignments to the player
-function ssFieldJobManager:fieldJobInit(superFunc, ...)
-    local initFieldJob = superFunc(self, ...)
+function ssFieldJobManager:fieldJobInit(superFunc, fieldDef, jobType, sprayFactor, fieldSpraySet, fieldState, growthState, fieldPloughFactor)
+    local initFieldJob = superFunc(self, fieldDef, jobType, sprayFactor, fieldSpraySet, fieldState, growthState, fieldPloughFactor)
+    local fruitIndex = fieldDef.missionFruitType
 
     -- If superFunc has reset snow, we need to re-apply it
     if ssSnow.appliedSnowDepth > 0 then
@@ -59,7 +52,7 @@ function ssFieldJobManager:fieldJobInit(superFunc, ...)
     end
 
     if initFieldJob then
-        if not ssFieldJobManager.isFieldJobAllowed(self.jobType, false) then
+        if not ssFieldJobManager.isFieldJobAllowed(self.jobType, false, fruitIndex) then
             initFieldJob = false
         else
             -- Update income
@@ -95,12 +88,49 @@ function ssFieldJobManager:fieldJobFinish(superFunc, ...)
     return returnValue
 end
 
+function ssFieldJobManager:fruitIndexToName(fruitIndex)
+    return FruitUtil.fruitIndexToDesc[fruitIndex].name
+end
+
+function ssFieldJobManager:allowNPCPlough()
+    return true
+end
+
+function ssFieldJobManager:allowNPCPlant(fruitIndex)
+    local fruitName = self:fruitIndexToName(fruitIndex)
+    local currentGT = g_seasons.environment:transitionAtDay()
+
+    if not g_seasons.growthGUI:canFruitBePlanted(fruitName, currentGT) then
+        return false
+    end
+
+    -- Only plant if next GT cant plant
+    return not g_seasons.growthGUI:canFruitBePlanted(fruitName, ssEnvironment:nextTransition())
+end
+
+function ssFieldJobManager:allowNPCHarvest(fruitIndex)
+    local fruitName = self:fruitIndexToName(fruitIndex)
+    local currentGT = g_seasons.environment:transitionAtDay()
+
+    if not g_seasons.growthGUI:canFruitBeHarvested(fruitName, currentGT) then
+        return false
+    end
+
+    -- Only auto-harvest if next GT it can't be
+    return not g_seasons.growthGUI:canFruitBeHarvested(fruitName, ssEnvironment:nextTransition())
+        or currentGT == ssEnvironment.TRANSITION_LATE_AUTUMN
+end
+
+function ssFieldJobManager:allowPlayerPlant(fruitIndex)
+    local fruitName = self:fruitIndexToName(fruitIndex)
+    local currentGT = g_seasons.environment:transitionAtDay()
+
+    return g_seasons.growthGUI:canFruitBePlanted(fruitName, currentGT)
+end
+
 -- fieldJob: FieldJob.TYPE_*
 -- isNPC:    bool
-function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
-    local currentGT = g_seasons.environment:transitionAtDay()
-    local env = g_seasons.environment
-
+function ssFieldJobManager.isFieldJobAllowed(fieldJobType, isNPC, fruitIndex)
     -- Use vanilla FieldJobManager if not using seasons growthManager
     if not g_seasons.growthManager.growthManagerEnabled then return true end
 
@@ -108,36 +138,36 @@ function ssFieldJobManager.isFieldJobAllowed(fieldJob, isNPC)
     if g_seasons.weather:isGroundFrozen() or g_seasons.snow.appliedSnowDepth > 0 then return false end
 
     -- Always allow fertilizing missions
-    if fieldJob == FieldJob.TYPE_FERTILIZING_GROWING or fieldJob == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJob == FieldJob.TYPE_FERTILIZING_SOWN then
+    if fieldJobType == FieldJob.TYPE_FERTILIZING_GROWING or fieldJobType == FieldJob.TYPE_FERTILIZING_HARVESTED or fieldJobType == FieldJob.TYPE_FERTILIZING_SOWN then
         return true
     -- Always allow user assigned missions to cultivate
     -- NPC only cultivates in spring
-    elseif fieldJob == FieldJob.TYPE_PLOUGHING or fieldJob == FieldJob.TYPE_CULTIVATING then
+    elseif fieldJobType == FieldJob.TYPE_PLOUGHING or fieldJobType == FieldJob.TYPE_CULTIVATING then
         if isNPC then
-            return currentGT >= env.TRANSITION_EARLY_SPRING and currentGT <= env.TRANSITION_LATE_SPRING
+            return ssFieldJobManager:allowNPCPlough()
         else
             return true
         end
     -- Never allow harvesting wet crop
     -- NPC only harvests in late autumn
     -- Always allow user assigned missions to harvest
-    elseif fieldJob == FieldJob.TYPE_HARVESTING then
+    elseif fieldJobType == FieldJob.TYPE_HARVESTING then
         if g_seasons.weather:isCropWet() then
             return false
         end
 
         if isNPC then
-            return currentGT == env.TRANSITION_LATE_AUTUMN
+            return ssFieldJobManager:allowNPCHarvest(fruitIndex)
         else
             return true
         end
     -- Only allow seeding in spring - early summer
     -- NPC only seeds in late spring
-    elseif fieldJob == FieldJob.TYPE_SOWING then
+    elseif fieldJobType == FieldJob.TYPE_SOWING then
         if isNPC then
-            return currentGT == env.TRANSITION_LATE_SPRING
+            return ssFieldJobManager:allowNPCPlant(fruitIndex)
         else
-            return currentGT >= env.TRANSITION_EARLY_SPRING and currentGT <= env.TRANSITION_EARLY_SUMMER
+            return ssFieldJobManager:allowPlayerPlant(fruitIndex)
         end
     end
 
