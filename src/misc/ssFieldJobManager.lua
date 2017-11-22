@@ -100,25 +100,11 @@ function ssFieldJobManager:allowNPCPlant(fruitIndex)
     local fruitName = self:fruitIndexToName(fruitIndex)
     local currentGT = g_seasons.environment:transitionAtDay()
 
-    if not g_seasons.growthGUI:canFruitBePlanted(fruitName, currentGT) then
-        return false
-    end
-
-    -- Only plant if next GT cant plant
-    return not g_seasons.growthGUI:canFruitBePlanted(fruitName, ssEnvironment:nextTransition())
+    return g_seasons.growthGUI:canFruitBePlanted(fruitName, currentGT)
 end
 
 function ssFieldJobManager:allowNPCHarvest(fruitIndex)
-    local fruitName = self:fruitIndexToName(fruitIndex)
-    local currentGT = g_seasons.environment:transitionAtDay()
-
-    if not g_seasons.growthGUI:canFruitBeHarvested(fruitName, currentGT) then
-        return false
-    end
-
-    -- Only auto-harvest if next GT it can't be
-    return not g_seasons.growthGUI:canFruitBeHarvested(fruitName, ssEnvironment:nextTransition())
-        or currentGT == ssEnvironment.TRANSITION_LATE_AUTUMN
+    return true
 end
 
 function ssFieldJobManager:allowPlayerPlant(fruitIndex)
