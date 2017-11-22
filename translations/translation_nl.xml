@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Onderhoud" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="Om middernacht" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="Onderhoud" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Onderhoud of verkoop" />
 
         <text name="SS_SAVE_FAILED" text="Het is niet gelukt de Seasons-mod op te slaan in je savegame. Probeer opnieuw!" />
 
