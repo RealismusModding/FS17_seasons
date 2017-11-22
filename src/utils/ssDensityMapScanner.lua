@@ -116,7 +116,7 @@ function ssDensityMapScanner:update(dt)
         local num = 1
 
         -- When skipping night, do a bit more per frame, the player can't move anyways.
-        if g_seasons.skipNight.skippingNight then
+        if g_seasons.skipNight.skippingNight or g_seasons.catchingUp.showWarning then
             num = 8
         end
 

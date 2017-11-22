@@ -392,12 +392,12 @@ end
 
 -- With vanilla growth turned off, this value turns 0, breaking missions. Use a value which is ~ once per day.
 function ssGrowthManager:missionGrowthStateTimeMultiplier()
-    local mult = 4
+    local mult = 3.5
     local daysInSeason = ssEnvironment.daysInSeason
-    if daysInSeason ~= nil then
-        multi = daysInSeason / 3
+    if daysInSeason == 3 then
+        mult = 2
     end
 
-    return 4 / self.missionInfo.timeScale
+    return mult / self.missionInfo.timeScale
 end
 
