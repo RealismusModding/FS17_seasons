@@ -43,7 +43,6 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
 
     ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
-    ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
 
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
@@ -651,8 +650,8 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
         end
     end
 
-    if self.sellButton["onClickCallback"] ~= ssVehicle.directSellDialogOnClickOk then
-        ssUtil.overwrittenConstant(self.sellButton, "onClickCallback", ssVehicle.directSellDialogOnClickOk)
+    if self.sellButton["onClickCallback"] == DirectSellDialog.onClickOk then
+        ssUtil.overwrittenFunction(self.sellButton, "onClickCallback", ssVehicle.directSellDialogOnClickOk)
     end
 
     if vehicle ~= nil and vehicle.propertyState == Vehicle.PROPERTY_STATE_OWNED then
@@ -661,14 +660,19 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
         -- Otherwise do vanilla behaviour (sell button)
         local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
 
-        if repairCost >= 1 then
-            setSellButtonState(false, ssLang.getText("ui_doRepair"))
+        if ownWorkshop or repairCost >= 1 then
+            setSellButtonState(repairCost < 1, ssLang.getText("ui_doRepair"))
             self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
-        elseif repairCost < 1 and ownWorkshop then
-            setSellButtonState(true, ssLang.getText("ui_doRepair"))
-            self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
+
+            if self.sellButton ~= nil then
+                self.sellButton:applyProfile("buttonRepair")
+            end
         else
             self.headerText:setText(g_i18n:getText("ui_sellOrCustomizeVehicleTitle"))
+
+            if self.sellButton ~= nil then
+                self.sellButton:applyProfile("buttonSell")
+            end
         end
     end
 end

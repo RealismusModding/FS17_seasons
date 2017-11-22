@@ -285,4 +285,9 @@
         <Value name="textPreSelectedColor" value="$preset_colorRed"/>
     </Profile>
 
+    <Profile name="buttonRepair" parent="buttonSell">
+        <Value name="iconUVs" value="884px 989px 27px 27px"/>
+        <Value name="iconColor" value="$preset_colorGreen"/>
+    </Profile>
+
 </GUIProfiles>
