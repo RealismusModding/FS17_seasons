@@ -639,10 +639,7 @@ end
 ---------------------
 
 function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
-    log("Set vehicle")
     function setSellButtonState(disabled, text)
-        log("button", disabled, text)
-
         if self.sellButton ~= nil then
             self.sellButton:setText(text)
             self.sellButton:setDisabled(disabled);
