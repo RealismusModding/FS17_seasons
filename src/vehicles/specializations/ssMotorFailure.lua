@@ -21,6 +21,7 @@ function ssMotorFailure:load(savegame)
     self.ssMotorStartSoundTime = 0
     self.ssMotorStartMustFail = false
     self.ssSmoothLoadPercentage = 0
+    self.ssShowEngineStartWarningTimer = 0
 end
 
 function ssMotorFailure:delete()
@@ -92,7 +93,16 @@ function ssMotorFailure:update(dt)
         end
     end
 
-    self.ssShowEngineStartWarning = not self.isMotorStarted and self.axisForward ~= 0
+    if not self.isMotorStarted and self.axisForward ~= 0 then
+        self.ssShowEngineStartWarningTimer = self.ssShowEngineStartWarningTimer + dt
+
+        if self.ssShowEngineStartWarningTimer > 600 then
+            self.ssShowEngineStartWarning = true
+            self.ssShowEngineStartWarningTimer = 0
+        end
+    else
+        self.ssShowEngineStartWarning = false
+    end
 end
 
 function ssMotorFailure:updateTick(dt)
