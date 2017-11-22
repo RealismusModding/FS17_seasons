@@ -74,6 +74,17 @@ function ssRepairable:updateTick(dt)
 end
 
 function ssRepairable:update(dt)
+    if self.isEntered and self.isClient then
+        local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssLastRepairOperatingTime)) / 1000 / 60 / 60
+        local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
+
+        if daysSinceLastRepair >= ssVehicle.repairInterval or serviceHours < 0 then
+            g_currentMission:addExtraPrintText(ssLang.getText("SS_REPAIR_REQUIRED"))
+        else
+            g_currentMission:addExtraPrintText(string.format(ssLang.getText("SS_REPAIR_REQUIRED_IN"), serviceHours, ssVehicle.repairInterval - daysSinceLastRepair))
+        end
+    end
+
     -- stupid fix for setting ssLastRepairOperatingTime to operatingTime for a new savegame
     if self.ssLastRepairOperatingTime == 0 then
         self.ssLastRepairOperatingTime = self.operatingTime
