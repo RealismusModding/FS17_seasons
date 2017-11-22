@@ -42,6 +42,9 @@ function ssVehicle:preLoad()
     ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
 
+    ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
+    ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
+
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
     ssUtil.overwrittenConstant(Motorized, "stopMotor", ssMotorFailure.stopMotor)
@@ -59,9 +62,7 @@ function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    if not GS_IS_CONSOLE_VERSION then
-        g_currentMission:setAutomaticMotorStartEnabled(false)
-    end
+    g_currentMission:setAutomaticMotorStartEnabled(false)
 
     ssVehicle.repairFactors = {}
     ssVehicle.allowedInWinter = {}
@@ -131,8 +132,9 @@ end
 function ssVehicle:installVehicleSpecializations()
     for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
         if vehicleType ~= nil then
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
+
             if SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
-                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
             end
 
@@ -633,6 +635,120 @@ function ssVehicle:washableUpdateTick(superFunc, dt)
 end
 
 ---------------------
+-- Repairing at shop
+---------------------
+
+function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
+    log("Set vehicle")
+    function setSellButtonState(disabled, text)
+        log("button", disabled, text)
+
+        if self.sellButton ~= nil then
+            self.sellButton:setText(text)
+            self.sellButton:setDisabled(disabled);
+        end
+
+        if self.sellButtonConsole ~= nil then
+            self.sellButtonConsole:setText(text)
+            self.sellButtonConsole:setVisible(not disabled);
+        end
+    end
+
+    if self.sellButton["onClickCallback"] ~= ssVehicle.directSellDialogOnClickOk then
+        ssUtil.overwrittenConstant(self.sellButton, "onClickCallback", ssVehicle.directSellDialogOnClickOk)
+    end
+
+    if vehicle ~= nil and vehicle.propertyState == Vehicle.PROPERTY_STATE_OWNED then
+        -- If there is something to repair, always give repair option
+        -- If it is not but own workshop, show disabled repair button
+        -- Otherwise do vanilla behaviour (sell button)
+        local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
+
+        if repairCost >= 1 then
+            setSellButtonState(false, ssLang.getText("ui_doRepair"))
+            self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
+        elseif repairCost < 1 and ownWorkshop then
+            setSellButtonState(true, ssLang.getText("ui_doRepair"))
+            self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
+        else
+            self.headerText:setText(g_i18n:getText("ui_sellOrCustomizeVehicleTitle"))
+        end
+    end
+end
+
+function ssVehicle:repairVehicle(vehicle, showDialog, ownWorkshop, sellDialog)
+    local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
+    if repairCost < 1 then return end
+
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+    local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+    function performRepair(self)
+        -- Deduct
+        if g_currentMission:getIsServer() then
+            g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
+            g_currentMission.missionStats:updateStats("expenses", repairCost)
+        else
+            g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
+        end
+
+        -- Repair
+        if ssVehicle:repair(vehicle) then
+            -- Show that it was repaired
+            local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
+
+            g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(vehicle))
+        end
+    end
+
+    -- Callback for the Yes No Dialog
+    function doRepairCallback(self, yesNo)
+        if yesNo then
+            performRepair(vehicle)
+
+            if sellDialog ~= nil then
+                sellDialog:onClickBack();
+                if sellDialog.owner ~= nil then
+                    sellDialog.owner:onActivateObject()
+                end
+            end
+        end
+
+        g_gui:closeDialogByName("YesNoDialog")
+    end
+
+    if showDialog then
+        local dialog = g_gui:showDialog("YesNoDialog")
+        local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n:formatMoney(repairCost, 0))
+
+        dialog.target:setCallback(doRepairCallback, vehicle)
+        dialog.target:setTitle(ssLang.getText("SS_REPAIR_DIALOG_TITLE"))
+        dialog.target:setText(text)
+    else
+        performRepair(vehicle)
+    end
+end
+
+function ssVehicle:directSellDialogOnClickOk(superFunc)
+    if self.inputDelay < self.time and self.vehicle ~= nil then
+        if self.vehicle.propertyState ~= Vehicle.PROPERTY_STATE_OWNED then
+            return superFunc(self)
+        end
+
+        local repairCost = ssVehicle:getRepairShopCost(self.vehicle, nil, not self.ownWorkshop)
+
+        -- Allow selling when no repair cost
+        if repairCost >= 1 then
+            ssVehicle:repairVehicle(self.vehicle, true, self.ownWorkshop, self)
+        else
+            superFunc(self)
+        end
+    end
+end
+
+
+---------------------
 -- Console commands
 ---------------------
 
@@ -653,7 +769,7 @@ function ssVehicle:consoleCommandRepairAllVehicles()
     local n = 0
 
     for _, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+        if SpecializationUtil.hasSpecialization(Washable, vehicle.specializations) then
             self:repair(vehicle)
             n = n + 1
         end

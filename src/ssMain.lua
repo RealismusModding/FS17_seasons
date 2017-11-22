@@ -312,8 +312,6 @@ function ssMain.inj_disableMenuOptions(self)
     self.plantWitheringElement:setDisabled(true)
     self.plantWitheringElement:setIsChecked(true)
 
-    if not GS_IS_CONSOLE_VERSION then
-        self.motorStartElement:setIsChecked(false)
-        self.motorStartElement:setDisabled(true)
-    end
+    self.motorStartElement:setIsChecked(false)
+    self.motorStartElement:setDisabled(true)
 end

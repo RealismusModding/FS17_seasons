@@ -129,7 +129,6 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
 
     <inputBindings>
         <input name="SEASONS_SHOW_WF"           category="ONFOOT"           key1="KEY_lalt KEY_f" button="BUTTON_5 BUTTON_6 BUTTON_3" />
-        <input name="SEASONS_REPAIR_VEHICLE"    category="ONFOOT"           key1="KEY_lalt KEY_r" button="BUTTON_5 BUTTON_6 BUTTON_1" />
         <input name="SEASONS_SHOW_MENU"         category="ONFOOT VEHICLE"   key1="KEY_lalt KEY_s" button="BUTTON_5 BUTTON_10" />
         <input name="SEASONS_SKIP_NIGHT"        category="ONFOOT"           key1="KEY_lalt KEY_n" button="BUTTON_5 BUTTON_6 BUTTON_4" />
     </inputBindings>
