@@ -22,6 +22,7 @@ function ssReplaceVisual:loadMap(name)
         self.loadedPlaceableDefaults = {}
         self.materialHolders = {}
         self.useAlphaBlending = false
+        self.tmpMaterialHolderNodeId = nil
 
         self:loadFromXML()
         self:loadMaterialHolders()
@@ -34,7 +35,7 @@ end
 
 function ssReplaceVisual:deleteMap()
     if g_currentMission:getIsClient() then
-        for _, id in pairs(self.materialHolders) do
+        for _, id in ipairs(self.modReplacements) do
             delete(id)
         end
     end
