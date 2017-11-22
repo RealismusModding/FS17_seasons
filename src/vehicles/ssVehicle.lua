@@ -321,7 +321,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local overdueFactor = self:calculateOverdueFactor(vehicle)
 
-    return (costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2
+    return math.min((costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2, 1.5 * storeItem.price)
 end
 
 -- all (guard)
