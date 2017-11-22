@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="Javítás" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Javítás és felszerelés" />
 
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
 
