@@ -96,7 +96,7 @@ function ssMotorFailure:update(dt)
     if not self.isMotorStarted and self.axisForward ~= 0 then
         self.ssShowEngineStartWarningTimer = self.ssShowEngineStartWarningTimer + dt
 
-        if self.ssShowEngineStartWarningTimer > 600 then
+        if self.ssShowEngineStartWarningTimer > 800 then
             self.ssShowEngineStartWarning = true
             self.ssShowEngineStartWarningTimer = 0
         end
