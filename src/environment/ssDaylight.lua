@@ -216,14 +216,14 @@ function ssDaylight:calculateDay(p, julianDay)
 
     -- Daylight saving between 1 April and 31 October as an approcimation
     if self.dst == ssDaylight.DST_ON then
-        local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        local hasDST = ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        if self.latitude >= 0 then
+            hasDST = not hasDST
+        end
+
         offset = hasDST and 1 or 0
     elseif self.dst == ssDaylight.DST_OFF then
         offset = 0
-    end
-
-    if self.latitude < 0 then
-        offset = offset * -1
     end
 
     timeStart = math.max(12 - D / 2 + offset, 0.01)
