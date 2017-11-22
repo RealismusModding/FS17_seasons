@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Manutenção" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Você está rodando uma versão desatualizada do Seasons. Detectamos que a versão de ModConquest está em sua pasta de mods, e desativada. Por favor retire o arquivo da pasta de mods para apagar esta mensagem." />

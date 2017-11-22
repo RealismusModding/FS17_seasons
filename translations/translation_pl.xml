@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Używasz zaktualizowanej wersji modu Seasons. Gra wykryła wersję konkursową w folderze modów i ją wyłączyła. Usuń starszą wersję z folderu modów, aby ukryć ten komunikat." />

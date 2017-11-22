@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Du verwendest die aktualisierte Version von Seasons. Das Spiel erkannte die Contest-Version in deinem Modordner und wurde deaktiviert. Bitte entferne sie aus deinem Modordner, um diese Nachricht zu verbergen." />

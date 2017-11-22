@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Hemos detectado la presencia de la versión inicial de seasons en su carpeta de mods. Podrá evitar la repetición de este mensaje si la elimina" />

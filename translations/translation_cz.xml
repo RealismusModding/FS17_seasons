@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Spouštíte aktualizovanou verzi Seasons. Hra zjistila starší verzi módu ve složce mods a zakázala ji. Odstraňte ji ze složky modů, abyste tuto zprávu skryli." />
