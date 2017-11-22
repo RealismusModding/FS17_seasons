@@ -148,6 +148,14 @@ function ssMain:deleteMap()
     getfenv(0)["g_seasons"] = nil
 
     ssUtil.unregisterBrand("WOPSTR")
+
+    self.mainMenu:delete()
+    self.measureToolDialog:delete()
+    self.twoOptionDialog:delete()
+
+    g_gui["SeasonsMenu"] = nil
+    g_gui["MeasureToolDialog"] = nil
+    g_gui["TwoOptionDialog"] = nil
 end
 
 function ssMain:loadGameFinished()
