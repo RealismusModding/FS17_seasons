@@ -374,7 +374,6 @@ function ssAnimals:animalScreenUpdateData(superFunc)
 
     if self.transferData.right.numOfAnimals >= self.transferData.right.baseNumOfAnimals then
         local health = 0.8
-        local factor = 1
 
         for _, husbandry in pairs(g_currentMission.husbandries) do
             if husbandry.animalDesc == animalDesc then
@@ -383,12 +382,7 @@ function ssAnimals:animalScreenUpdateData(superFunc)
             end
         end
 
-        if health <= 0.8 then
-            factor = 1.40625 * health ^ 2 + 0.1
-        else
-            factor = 5 * (health - 0.8) ^ 2 + 1
-        end
-
+        local factor = -2 * health ^ 3 + 4 * health ^ 2 - health + 0.2
         animalDesc.price = animalDesc.price * factor
     end
 
