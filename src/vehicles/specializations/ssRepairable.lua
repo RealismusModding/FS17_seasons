@@ -21,6 +21,7 @@ function ssRepairable:load(savegame)
         self.ssLastRepairDay = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
         self.ssLastRepairOperatingTime = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssYesterdayOperatingTime", self.ssLastRepairOperatingTime)
         self.ssCumulativeDirt = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssCumulativeDirt", self.ssCumulativeDirt)
+        self.ssYears = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssYears", self.ssYears)
     end
 end
 
@@ -44,6 +45,7 @@ function ssRepairable:getSaveAttributesAndNodes(nodeIdent)
         attributes = attributes .. "ssLastRepairDay=\"" .. self.ssLastRepairDay ..  "\" "
         attributes = attributes .. "ssYesterdayOperatingTime=\"" .. self.ssLastRepairOperatingTime ..  "\" "
         attributes = attributes .. "ssCumulativeDirt=\"" .. self.ssCumulativeDirt ..  "\" "
+        attributes = attributes .. "ssYears=\"" .. self.ssYears ..  "\" "
     end
 
     return attributes, ""
@@ -53,12 +55,14 @@ function ssRepairable:readStream(streamId, connection)
     self.ssLastRepairDay = streamReadFloat32(streamId)
     self.ssLastRepairOperatingTime = streamReadFloat32(streamId)
     self.ssCumulativeDirt = streamReadFloat32(streamId)
+    self.ssYears = streamReadFloat32(streamId)
 end
 
 function ssRepairable:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.ssLastRepairDay)
     streamWriteFloat32(streamId, self.ssLastRepairOperatingTime)
     streamWriteFloat32(streamId, self.ssCumulativeDirt)
+    streamWriteFloat32(streamId, self.ssYears)
 end
 
 function ssRepairable:draw()
@@ -88,5 +92,10 @@ function ssRepairable:update(dt)
     -- stupid fix for setting ssLastRepairOperatingTime to operatingTime for a new savegame
     if self.ssLastRepairOperatingTime == 0 then
         self.ssLastRepairOperatingTime = self.operatingTime
+    end
+
+    -- another stupid fix for when loading new savegames, savegames from old versions of Seasons or when buying vehicles
+    if self.ssYears == nil then
+        self.ssYears = self.age / (4 * g_seasons.environment.daysInSeason)
     end
 end

@@ -115,9 +115,14 @@ end
 
 function ssVehicle:dayChanged()
     for _, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            self:repair(vehicle)
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+            vehicle.ssYears = vehicle.ssYears + 1 / (4 * g_seasons.environment.daysInSeason)
+
+            if not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
+                self:repair(vehicle)
+            end
         end
+
         if SpecializationUtil.hasSpecialization(ssGrassFillable, vehicle.specializations) then
             ssGrassFillable:ssRotGrass(vehicle)
         end
@@ -368,7 +373,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
     local minSellPrice = price * 0.03
     local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
-    local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR * 4) -- year
+    local age = self.ssYears
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
