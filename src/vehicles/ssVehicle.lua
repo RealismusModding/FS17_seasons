@@ -43,7 +43,6 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
 
     ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
-    ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
 
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
@@ -653,6 +652,7 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
 
     if self.sellButton["onClickCallback"] == DirectSellDialog.onClickOk then
         ssUtil.overwrittenFunction(self.sellButton, "onClickCallback", ssVehicle.directSellDialogOnClickOk)
+        ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
     end
 
     if vehicle ~= nil and vehicle.propertyState == Vehicle.PROPERTY_STATE_OWNED then
