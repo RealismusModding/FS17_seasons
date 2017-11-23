@@ -43,6 +43,7 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
 
     ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
+    ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
 
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
@@ -661,8 +662,8 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
         local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
         local sellPrice = vehicle:getSellPrice()
 
-        if ownWorkshop or (repairCost >= 1 and repairCost < sellPrice * 1.5) then
-            setSellButtonState(repairCost < 1 and (repairCost < sellPrice * 1.5 or ownWorkshop), ssLang.getText("ui_doRepair"))
+        if ownWorkshop or (repairCost >= 1 and repairCost <= sellPrice * 1.5) then
+            setSellButtonState(repairCost < 1 or (repairCost > sellPrice * 1.5 and ownWorkshop), ssLang.getText("ui_doRepair"))
             self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
 
             if self.sellButton ~= nil then
