@@ -23,6 +23,7 @@ function ssReplaceVisual:loadMap(name)
         self.materialHolders = {}
         self.useAlphaBlending = false
         self.tmpMaterialHolderNodeId = nil
+        self.textureMemoryUsage = 0
 
         self:loadFromXML()
         self:loadMaterialHolders()
@@ -30,6 +31,9 @@ function ssReplaceVisual:loadMap(name)
         for _, replacements in ipairs(self.modReplacements) do
             self:loadTextureIdTable(replacements)
         end
+
+        -- Add texture memory usage to the mission (which has the map) in order to limit slots
+        g_currentMission.textureMemoryUsage = g_currentMission.textureMemoryUsage + self.textureMemoryUsage
     end
 end
 
@@ -83,6 +87,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         self.textureReplacements.default = {}
         self.materialHolders = {}
         self.useAlphaBlending = nil
+        self.textureMemoryUsage = 0
     end
 
     local useAlphaBlending = getXMLBool(file, "textures#alphaBlending")
@@ -108,6 +113,15 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             ["default"] = ssUtil.normalizedPath(Utils.getFilename(matHolder, baseDir)),
             ["blending"] = blendingFile
         })
+
+        if GS_IS_CONSOLE_VERSION then
+            local memory = getXMLInt(file, "textures#textureMemoryUsage")
+            if memory == nil then
+                print("Error: The Seasons textures configuration '" + path + "' loads a material holder but is missing 'textureMemoryUsage'")
+            end
+
+            self.textureMemoryUsage = self.textureMemoryUsage + memory
+        end
     end
 
     -- Load seasons replacements
