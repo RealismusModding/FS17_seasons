@@ -240,7 +240,7 @@ function ssDensityMapScanner:run(job)
         widthWorldZ = startWorldZ
 
         heightWorldX = startWorldX
-        heightWorldZ = startWorldZ + height - 2 * pixelSize * 0.5
+        heightWorldZ = startWorldZ + height - pixelSize * 0.5
     end
     -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
