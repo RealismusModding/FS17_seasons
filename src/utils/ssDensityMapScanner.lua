@@ -9,6 +9,9 @@
 
 ssDensityMapScanner = {}
 
+ssDensityMapScanner.BLOCK_WIDTH = 32
+ssDensityMapScanner.BLOCK_HEIGHT = 32
+
 function ssDensityMapScanner:preLoad()
     g_seasons.dms = self
 end
@@ -88,10 +91,10 @@ function ssDensityMapScanner:update(dt)
     if self.currentJob == nil then
         self.currentJob = self.queue:pop()
 
-        log("job start", g_currentMission.time)
-
         -- A new job has started
         if self.currentJob then
+            log("job start", g_currentMission.time)
+
             self.currentJob.x = 0
             self.currentJob.z = 0
 
@@ -118,11 +121,11 @@ function ssDensityMapScanner:update(dt)
     if self.currentJob ~= nil then
         local num = 4 -- do 4x a 16m^2 area, for caching purposes
 
-        -- if 4x map: 4*
-        -- if 16x maoL 16*
+        -- Increase number of blocks when 4x or 16x map.
+        num = num * math.floor(g_currentMission.terrainSize / 2048)
 
         if not GS_IS_CONSOLE_VERSION then
-            num = num * 4
+            num = num * 2
         end
 
         -- When skipping night, do a bit more per frame, the player can't move anyways.
@@ -130,11 +133,11 @@ function ssDensityMapScanner:update(dt)
             num = num * 8
         end
 
-        -- if g_dedicatedServerInfo ~= nil then
-        --     num = width/32
-        -- end
+        if g_dedicatedServerInfo ~= nil then
+            num = g_currentMission.terrainSize / ssDensityMapScanner.BLOCK_WIDTH
+        end
 
-        log("num", num)
+        -- log("num", num)
 
         for i = 1, num do
             if not self:run(self.currentJob) then
@@ -208,8 +211,8 @@ function ssDensityMapScanner:run(job)
     end
 
     -- Row height (64px for caching)
-    local height = 16
-    local width = 16
+    local height = ssDensityMapScanner.BLOCK_HEIGHT
+    local width = ssDensityMapScanner.BLOCK_WIDTH
 
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
