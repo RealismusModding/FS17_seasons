@@ -675,8 +675,6 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
                 self.sellButton:applyProfile("buttonRepair")
             end
         else
-            self.headerText:setText(g_i18n:getText("ui_sellOrCustomizeVehicleTitle"))
-
             if self.sellButton ~= nil then
                 self.sellButton:applyProfile("buttonSell")
             end
@@ -747,7 +745,7 @@ function ssVehicle:directSellDialogOnClickOk(superFunc)
         local repairCost = ssVehicle:getRepairShopCost(self.vehicle, nil, not self.ownWorkshop)
 
         -- Allow selling when no repair cost
-        if repairCost >= 1 and (repairCost < self.vehicle:getSellPrice() * 1.5 or self.ownWorkshop) then
+        if self.ownWorkshop or (repairCost >= 1 and repairCost <= self.vehicle:getSellPrice() * 1.5) then
             ssVehicle:repairVehicle(self.vehicle, true, self.ownWorkshop, self)
         else
             superFunc(self)

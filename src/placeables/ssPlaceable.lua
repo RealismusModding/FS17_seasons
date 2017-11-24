@@ -28,6 +28,7 @@ end
 -- When placing, add listener and update income value
 function ssPlaceable:placeableFinalizePlacement()
     self.ssOriginalIncomePerHour = self.incomePerHour
+    self.ssYears = 0
 
     g_seasons.environment:addSeasonLengthChangeListener(self)
     self:seasonLengthChanged()
