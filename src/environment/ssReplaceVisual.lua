@@ -118,9 +118,9 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             local memory = getXMLInt(file, "textures#textureMemoryUsage")
             if memory == nil then
                 print("Error: The Seasons textures configuration '" + path + "' loads a material holder but is missing 'textureMemoryUsage'")
+            else
+                self.textureMemoryUsage = self.textureMemoryUsage + memory
             end
-
-            self.textureMemoryUsage = self.textureMemoryUsage + memory
         end
     end
 
