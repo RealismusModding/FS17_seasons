@@ -19,6 +19,9 @@ function ssPlaceable:preLoad()
     ssUtil.appendedFunction(Placeable, "delete", ssPlaceable.placeableDelete)
     ssUtil.appendedFunction(Placeable, "dayChanged", ssPlaceable.placeableDayChanged)
 
+    ssUtil.appendedFunction(Placeable, "readStream", ssPlaceable.placeableReadStream)
+    ssUtil.appendedFunction(Placeable, "writeStream", ssPlaceable.placeableWriteStream)
+
     Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
 
@@ -111,4 +114,12 @@ function ssPlaceable:placeableGetSaveAttributesAndNodes(superFunc, nodeIdent)
     end
 
     return attributes, nodes
+end
+
+function ssPlaceable:placeableReadStream(streamId, connection)
+    self.ssYears = streamReadFloat32(streamId)
+end
+
+function ssPlaceable:placeableWriteStream(streamId, connection)
+    streamWriteFloat32(streamId, self.ssYears)
 end

@@ -161,17 +161,22 @@ end
 -- @param target table, contains func and finalizer functions
 -- @param func function to run for each segment of the world
 -- @param finalizer function to run after all segments are run, optional
-function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer)
+function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer, detailHeightId)
     log("[ssDensityMapScanner] Registering callback: " .. callbackId)
 
     if self.callbacks == nil then
         self.callbacks = {}
     end
 
+    if detailHeightId == nil then
+        detailHeightId = false
+    end
+
     self.callbacks[callbackId] = {
         target = target,
         func = func,
-        finalizer = finalizer
+        finalizer = finalizer,
+        detailHeightId = detailHeightId
     }
 end
 
@@ -192,27 +197,35 @@ function ssDensityMapScanner:run(job)
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
 
-    local startWorldX = job.x * width - size / 2 + (pixelSize / 2)
-    local startWorldZ = job.z * height - size / 2 + (pixelSize / 2)
+    local startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ
 
-    local widthWorldX = startWorldX + width - pixelSize
-    local widthWorldZ = startWorldZ
-
-    local heightWorldX = startWorldX
-
-    -- Should be -2* ?!?
-    -- local heightWorldZ = startWorldZ + height + 1 * (pixelSize / 2)
-    local heightWorldZ = startWorldZ + height - 2 * (pixelSize / 2)
-
-    -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
-
-    -- Run the callback
     local callback = self.callbacks[job.callbackId]
     if callback == nil then
         logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
 
         return false
     end
+
+    if callback.detailHeightId then
+        startWorldX = job.x * width - size / 2 + (pixelSize / 2)
+        startWorldZ = job.z * height - size / 2 + (pixelSize / 2)
+
+        widthWorldX = startWorldX + width - pixelSize
+        widthWorldZ = startWorldZ
+
+        heightWorldX = startWorldX
+        heightWorldZ = startWorldZ + height - 2 * (pixelSize / 2)
+    else
+        startWorldX = job.x * width - size / 2
+        startWorldZ = job.z * height - size / 2
+
+        widthWorldX = startWorldX + width - pixelSize
+        widthWorldZ = startWorldZ
+
+        heightWorldX = startWorldX
+        heightWorldZ = startWorldZ + height + pixelSize
+    end
+    -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     callback.func(callback.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
 

@@ -65,8 +65,8 @@ function ssSnow:loadMap(name)
 
         self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
 
-        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
-        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
+        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects, true)
+        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow, nil, true)
 
         addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self)
         addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self)

@@ -20,9 +20,9 @@ function ssSwathManager:loadMap(name)
         g_currentMission.environment:addDayChangeListener(self)
         g_currentMission.environment:addHourChangeListener(self)
 
-        g_seasons.dms:registerCallback("ssReduceGrass", self, self.reduceGrass)
-        g_seasons.dms:registerCallback("ssReduceStrawHay", self, self.reduceStrawHay)
-        g_seasons.dms:registerCallback("ssRemoveSwaths", self, self.removeSwaths)
+        g_seasons.dms:registerCallback("ssReduceGrass", self, self.reduceGrass, nil, true)
+        g_seasons.dms:registerCallback("ssReduceStrawHay", self, self.reduceStrawHay, nil, true)
+        g_seasons.dms:registerCallback("ssRemoveSwaths", self, self.removeSwaths, nil, true)
     end
 end
 
