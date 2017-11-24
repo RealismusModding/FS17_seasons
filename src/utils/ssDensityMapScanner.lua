@@ -88,40 +88,57 @@ function ssDensityMapScanner:update(dt)
     if self.currentJob == nil then
         self.currentJob = self.queue:pop()
 
+        log("job start", g_currentMission.time)
+
         -- A new job has started
         if self.currentJob then
             self.currentJob.x = 0
             self.currentJob.z = 0
 
             -- 64 on 1x, 128 on 2x
-            local width = math.floor(g_currentMission.terrainSize / 2048) * 64
-            if not GS_IS_CONSOLE_VERSION then
-                width = width * 4
-            end
+            -- local width = math.floor(g_currentMission.terrainSize / 2048) * 64
+            -- if not GS_IS_CONSOLE_VERSION then
+            --     width = width * 4
+            -- end
 
-            if g_dedicatedServerInfo ~= nil then
-                width = g_currentMission.terrainSize
-            else
-                -- Limit to 512px, even on 16x maps
-                width = math.min(width, 512)
-            end
+            -- if g_dedicatedServerInfo ~= nil then
+            --     width = g_currentMission.terrainSize
+            -- else
+            --     -- Limit to 512px, even on 16x maps
+            --     width = math.min(width, 512)
+            -- end
 
-            self.currentJob.width = width
+            self.currentJob.width = 0
+            -- self.currentJob.width = width
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
     end
 
     if self.currentJob ~= nil then
-        local num = 1
+        local num = 4 -- do 4x a 16m^2 area, for caching purposes
+
+        -- if 4x map: 4*
+        -- if 16x maoL 16*
+
+        if not GS_IS_CONSOLE_VERSION then
+            num = num * 4
+        end
 
         -- When skipping night, do a bit more per frame, the player can't move anyways.
         if g_seasons.skipNight.skippingNight or g_seasons.catchingUp.showWarning then
-            num = 8
+            num = num * 8
         end
+
+        -- if g_dedicatedServerInfo ~= nil then
+        --     num = width/32
+        -- end
+
+        log("num", num)
 
         for i = 1, num do
             if not self:run(self.currentJob) then
+                log("job done", g_currentMission.time)
                 self.currentJob = nil
 
                 break
@@ -191,8 +208,8 @@ function ssDensityMapScanner:run(job)
     end
 
     -- Row height (64px for caching)
-    local height = 64
-    local width = job.width
+    local height = 16
+    local width = 16
 
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
@@ -207,15 +224,6 @@ function ssDensityMapScanner:run(job)
     end
 
     if callback.detailHeightId then
-        startWorldX = job.x * width - size / 2 + (pixelSize / 2)
-        startWorldZ = job.z * height - size / 2 + (pixelSize / 2)
-
-        widthWorldX = startWorldX + width - pixelSize
-        widthWorldZ = startWorldZ
-
-        heightWorldX = startWorldX
-        heightWorldZ = startWorldZ + height - 2 * (pixelSize / 2)
-    else
         startWorldX = job.x * width - size / 2
         startWorldZ = job.z * height - size / 2
 
@@ -223,7 +231,16 @@ function ssDensityMapScanner:run(job)
         widthWorldZ = startWorldZ
 
         heightWorldX = startWorldX
-        heightWorldZ = startWorldZ + height + pixelSize
+        heightWorldZ = startWorldZ + height - pixelSize
+    else
+        startWorldX = job.x * width - size / 2 + pixelSize * 0.25
+        startWorldZ = job.z * height - size / 2 + pixelSize * 0.25
+
+        widthWorldX = startWorldX + width - pixelSize * 0.5
+        widthWorldZ = startWorldZ
+
+        heightWorldX = startWorldX
+        heightWorldZ = startWorldZ + height - 2 * pixelSize * 0.5
     end
     -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
