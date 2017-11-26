@@ -25,7 +25,6 @@ function ssDensityMapScanner:load(savegame, key)
         job.callbackId = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
         job.parameter = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.parameter")
         job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
-        job.width = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.width", -1)
 
         self.currentJob = job
 
@@ -62,7 +61,6 @@ function ssDensityMapScanner:save(savegame, key)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments or -1)
-        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.width", self.currentJob.width or -1)
     end
 
     -- Save queue
@@ -93,26 +91,8 @@ function ssDensityMapScanner:update(dt)
 
         -- A new job has started
         if self.currentJob then
-            log("job start", g_currentMission.time)
-
             self.currentJob.x = 0
             self.currentJob.z = 0
-
-            -- 64 on 1x, 128 on 2x
-            -- local width = math.floor(g_currentMission.terrainSize / 2048) * 64
-            -- if not GS_IS_CONSOLE_VERSION then
-            --     width = width * 4
-            -- end
-
-            -- if g_dedicatedServerInfo ~= nil then
-            --     width = g_currentMission.terrainSize
-            -- else
-            --     -- Limit to 512px, even on 16x maps
-            --     width = math.min(width, 512)
-            -- end
-
-            self.currentJob.width = 0
-            -- self.currentJob.width = width
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
@@ -141,7 +121,6 @@ function ssDensityMapScanner:update(dt)
 
         for i = 1, num do
             if not self:run(self.currentJob) then
-                log("job done", g_currentMission.time)
                 self.currentJob = nil
 
                 break
