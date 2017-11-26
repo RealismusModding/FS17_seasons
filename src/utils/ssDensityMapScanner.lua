@@ -210,6 +210,14 @@ function ssDensityMapScanner:run(job)
         return self:runLine(job)
     end
 
+    local jobRunnerInfo = self.callbacks[job.callbackId]
+    if jobRunnerInfo == nil then
+        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
+
+        return false
+    end
+
+
     -- Row height (64px for caching)
     local height = ssDensityMapScanner.BLOCK_HEIGHT
     local width = ssDensityMapScanner.BLOCK_WIDTH
@@ -217,16 +225,15 @@ function ssDensityMapScanner:run(job)
     local size = g_currentMission.terrainSize
     local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
 
-    local startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ
-
-    local callback = self.callbacks[job.callbackId]
-    if callback == nil then
-        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
-
-        return false
+    -- TODO: refactor, use actual density ID used.
+    if not jobRunnerInfo.detailHeightId then
+        pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailId)
     end
 
-    if callback.detailHeightId then
+
+    local startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ
+
+    if jobRunnerInfo.detailHeightId then
         startWorldX = job.x * width - size / 2
         startWorldZ = job.z * height - size / 2
 
@@ -237,7 +244,7 @@ function ssDensityMapScanner:run(job)
         heightWorldZ = startWorldZ + height - pixelSize
     else
         startWorldX = job.x * width - size / 2 + pixelSize * 0.25
-        startWorldZ = job.z * height - size / 2 + pixelSize * 0.25
+        startWorldZ = job.z * height - size / 2 + pixelSize * 0.5
 
         widthWorldX = startWorldX + width - pixelSize * 0.5
         widthWorldZ = startWorldZ
@@ -245,9 +252,10 @@ function ssDensityMapScanner:run(job)
         heightWorldX = startWorldX
         heightWorldZ = startWorldZ + height - pixelSize * 0.5
     end
-    -- log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
-    callback.func(callback.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
+    log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+
+    jobRunnerInfo.func(jobRunnerInfo.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
 
     -- Update current job
     if job.x < (g_currentMission.terrainSize / width) - 1 then -- Starting with row 0
@@ -258,8 +266,8 @@ function ssDensityMapScanner:run(job)
         job.x = 0
     else
         -- Done with the loop, call finalizer
-        if callback.finalizer ~= nil then
-            callback.finalizer(callback.target, job.parameter)
+        if jobRunnerInfo.finalizer ~= nil then
+            jobRunnerInfo.finalizer(jobRunnerInfo.target, job.parameter)
         end
 
         return false -- finished
