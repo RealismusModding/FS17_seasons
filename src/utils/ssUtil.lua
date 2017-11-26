@@ -47,7 +47,7 @@ end
 function ssUtil.julianDayToDayNumber(julianDay)
     local season, partInSeason, start
 
-    if ssDaylight >= 0 then
+    if ssDaylight.latitude >= 0 then
         if julianDay < 60 then
             season = 3 -- winter
             start = 335
