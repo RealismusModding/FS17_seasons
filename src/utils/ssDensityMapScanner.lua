@@ -24,7 +24,7 @@ function ssDensityMapScanner:load(savegame, key)
         job.z = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.z", -1)
         job.callbackId = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
         job.parameter = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.parameter")
-        job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
+        job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments")
 
         self.currentJob = job
 
@@ -60,7 +60,10 @@ function ssDensityMapScanner:save(savegame, key)
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
-        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments or -1)
+
+        if self.currentJob.numSegments ~= nil then
+            ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
+        end
     end
 
     -- Save queue
@@ -232,7 +235,7 @@ function ssDensityMapScanner:run(job)
         heightWorldZ = startWorldZ + height - pixelSize * 0.5
     end
 
-    log("run square", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
+    -- log("run block", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     jobRunnerInfo.func(jobRunnerInfo.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
 
