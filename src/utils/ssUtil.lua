@@ -33,6 +33,10 @@ function ssUtil.julianDay(dayNumber)
     local season, partInSeason, dayInSeason
     local starts = {[0] = 60, 152, 244, 335 }
 
+    if ssDaylight.latitude < 0 then
+        starts = {[0] = 244, 335, 60, 152 }
+    end
+
     season = g_seasons.environment:seasonAtDay(dayNumber)
     dayInSeason = (dayNumber - 1) % g_seasons.environment.daysInSeason
     partInSeason = dayInSeason / g_seasons.environment.daysInSeason
@@ -43,18 +47,34 @@ end
 function ssUtil.julianDayToDayNumber(julianDay)
     local season, partInSeason, start
 
-    if julianDay < 60 then
-        season = 3 -- winter
-        start = 335
-    elseif julianDay < 152 then
-        season = 0 -- spring
-        start = 60
-    elseif julianDay < 244 then
-        season = 1 -- summer
-        start = 152
-    elseif julianDay < 335 then
-        season = 2 -- autumn
-        start = 224
+    if ssDaylight >= 0 then
+        if julianDay < 60 then
+            season = 3 -- winter
+            start = 335
+        elseif julianDay < 152 then
+            season = 0 -- spring
+            start = 60
+        elseif julianDay < 244 then
+            season = 1 -- summer
+            start = 152
+        elseif julianDay < 335 then
+            season = 2 -- autumn
+            start = 224
+        end
+    else
+        if julianDay < 60 then
+            season = 1 -- summer
+            start = 335
+        elseif julianDay < 152 then
+            season = 2 -- autumn
+            start = 60
+        elseif julianDay < 244 then
+            season = 3 -- winter
+            start = 152
+        elseif julianDay < 335 then
+            season = 0 -- spring
+            start = 224
+        end
     end
 
     partInSeason = (julianDay - start) / 61.5

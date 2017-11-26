@@ -134,7 +134,9 @@ end
 function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
-    self.pNight = 12 * math.pi / 180 -- Suns inclination below the horizon for complete 'darkness'
+    -- using different values for nightEnd and nightStart as it fits better ingame
+    self.pNightEnd = 5 * math.pi / 180 -- Suns inclination below the horizon when first light appears
+    self.pNightStart = 10 * math.pi / 180 -- Suns inclination below the horizon when last light disappears
     self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for full 'daylight'
 
     -- Update time before game start to prevent sudden change of darkness
@@ -186,7 +188,8 @@ function ssDaylight:calculateStartEndOfDay(julianDay)
     dayStart, dayEnd = self:calculateDay(self.pDay, julianDay)
 
     -- True blackness
-    nightStart, nightEnd = self:calculateDay(self.pNight, julianDay)
+    nightStart, _ = self:calculateDay(self.pNightStart, julianDay)
+    _ , nightEnd = self:calculateDay(self.pNightEnd, julianDay)
 
         -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
@@ -214,9 +217,10 @@ function ssDaylight:calculateDay(p, julianDay)
         D = 24 - 24 / math.pi * math.acos(gamma)
     end
 
-    -- Daylight saving between 1 April and 31 October as an approcimation
+    -- Daylight saving between 30 March and 31 October as an approximation
+    -- julianDay 89 is used so day 4 in spring on a 9 day season will be with DST
     if self.dst == ssDaylight.DST_ON then
-        local hasDST = ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        local hasDST = ((julianDay < 89 or julianDay > 304) or ((julianDay >= 89 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
         if self.latitude >= 0 then
             hasDST = not hasDST
         end
