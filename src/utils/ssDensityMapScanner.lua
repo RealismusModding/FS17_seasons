@@ -226,7 +226,7 @@ function ssDensityMapScanner:run(job)
         heightWorldZ = startWorldZ + height - pixelSize
     else
         startWorldX = job.x * width - size / 2 + pixelSize * 0.25
-        startWorldZ = job.z * height - size / 2 + pixelSize * 0.5
+        startWorldZ = job.z * height - size / 2 + pixelSize * 0.25
 
         widthWorldX = startWorldX + width - pixelSize * 0.5
         widthWorldZ = startWorldZ
