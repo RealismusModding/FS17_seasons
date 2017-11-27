@@ -134,10 +134,11 @@ end
 function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
     self.sunRad = self.latitude * math.pi / 180
-    -- using different values for nightEnd and nightStart as it fits better ingame
+    -- using different values for as it fits better ingame
     self.pNightEnd = 5 * math.pi / 180 -- Suns inclination below the horizon when first light appears
-    self.pNightStart = 10 * math.pi / 180 -- Suns inclination below the horizon when last light disappears
-    self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for full 'daylight'
+    self.pNightStart = 14 * math.pi / 180 -- Suns inclination below the horizon when last light disappears
+    self.pDayStart = -12 * math.pi / 180 -- Suns inclination above the horizon when full 'daylight' appears in morning
+    self.pDayEnd = -5 * math.pi / 180 -- Suns inclination above the horizon when full 'daylight' disappears in evening
 
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()
@@ -185,11 +186,12 @@ function ssDaylight:calculateStartEndOfDay(julianDay)
     local dayStart, dayEnd, theta, eta
 
     -- Calculate the day
-    dayStart, dayEnd = self:calculateDay(self.pDay, julianDay)
+    dayStart = self:calculateDay(self.pDayStart, julianDay, true)
+    dayEnd = self:calculateDay(self.pDayEnd, julianDay, false)
 
     -- True blackness
-    nightStart, _ = self:calculateDay(self.pNightStart, julianDay)
-    _ , nightEnd = self:calculateDay(self.pNightEnd, julianDay)
+    nightStart = self:calculateDay(self.pNightStart, julianDay, true)
+    nightEnd = self:calculateDay(self.pNightEnd, julianDay, false)
 
         -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
@@ -201,8 +203,8 @@ function ssDaylight:calculateStartEndOfDay(julianDay)
     return dayStart, dayEnd, nightStart, nightEnd
 end
 
-function ssDaylight:calculateDay(p, julianDay)
-    local timeStart, timeEnd
+function ssDaylight:calculateDay(p, julianDay, start)
+    local time
     local D, offset, hasDST = 0, 1
     local eta = self:calculateSunDeclination(julianDay)
 
@@ -230,10 +232,13 @@ function ssDaylight:calculateDay(p, julianDay)
         offset = 0
     end
 
-    timeStart = math.max(12 - D / 2 + offset, 0.01)
-    timeEnd = math.min(12 + D / 2 + offset, 23.99)
+    if start then
+        time = math.max(12 - D / 2 + offset, 0.01)
+    else
+        time = math.min(12 + D / 2 + offset, 23.99)
+    end
 
-    return timeStart, timeEnd
+    return time
 end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
@@ -249,7 +254,7 @@ end
 
 function ssDaylight:calculateSunDeclination(julianDay)
     -- Calculate the suns declination
-    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay + 186)))
+    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
     local eta = math.asin(0.4 * math.cos(theta))
 
     return eta
