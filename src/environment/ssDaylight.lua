@@ -133,7 +133,7 @@ end
 
 function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
-    self.sunRad = self.latitude * math.pi / 180
+    self.latRad = self.latitude * math.pi / 180
     -- using different values for as it fits better ingame
     self.pNightEnd = 5 * math.pi / 180 -- Suns inclination below the horizon when first light appears
     self.pNightStart = 14 * math.pi / 180 -- Suns inclination below the horizon when last light disappears
@@ -150,7 +150,6 @@ function ssDaylight:adaptTime()
     julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
 
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
-
     -- GIANTS values:
     -- nightEnd: 4
     --  - nightEnd (sun): 5.5
@@ -183,32 +182,32 @@ end
 
 -- Output in hours
 function ssDaylight:calculateStartEndOfDay(julianDay)
-    local dayStart, dayEnd, theta, eta
+    local dayStart, dayEnd, nightEnd, nightStart
 
     -- Calculate the day
     dayStart = self:calculateDay(self.pDayStart, julianDay, true)
     dayEnd = self:calculateDay(self.pDayEnd, julianDay, false)
 
     -- True blackness
-    nightStart = self:calculateDay(self.pNightStart, julianDay, true)
-    nightEnd = self:calculateDay(self.pNightEnd, julianDay, false)
+    nightStart = self:calculateDay(self.pNightStart, julianDay, false)
+    nightEnd = self:calculateDay(self.pNightEnd, julianDay, true)
 
-        -- Restrict the values to prevent errors
+    -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
     if dayStart == dayEnd then
         dayEnd = dayEnd + 0.01
     end
     nightStart = math.min(nightStart, 22.99) -- nightStart < 23
 
-    return dayStart, dayEnd, nightStart, nightEnd
+    return dayStart, dayEnd, nightEnd, nightStart
 end
 
-function ssDaylight:calculateDay(p, julianDay, start)
+function ssDaylight:calculateDay(p, julianDay, dawn)
     local time
     local D, offset, hasDST = 0, 1
     local eta = self:calculateSunDeclination(julianDay)
 
-    local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta))
+    local gamma = (math.sin(p) + math.sin(self.latRad) * math.sin(eta)) / (math.cos(self.latRad) * math.cos(eta))
 
     -- Account for polar day and night
     if gamma < -1 then
@@ -232,7 +231,7 @@ function ssDaylight:calculateDay(p, julianDay, start)
         offset = 0
     end
 
-    if start then
+    if dawn then
         time = math.max(12 - D / 2 + offset, 0.01)
     else
         time = math.min(12 + D / 2 + offset, 23.99)
@@ -243,18 +242,22 @@ end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local lat = self.latitude * math.pi / 180
     local dec = self:calculateSunDeclination(julianDay)
+    local sunHeightAngle = math.acos( math.sin(dec) * math.sin(self.latRad) + math.cos(dec) * math.cos(self.latRad) ) - math.pi / 2
 
-    return math.acos( math.sin(dec) * math.sin(lat) + math.cos(dec) * math.cos(lat) ) - math.pi / 2
+    -- approximation: sun is in the North in the southern hemisphere
+    if self.latitude >= 0 then
+        return sunHeightAngle
+    else
+        return -1 * (math.pi + sunHeightAngle)
+    end
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
-    -- Calculate the suns declination
+    -- Calculate the suns declination according to the CBM model
     local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
-    local eta = math.asin(0.4 * math.cos(theta))
-
-    return eta
+    
+    return math.asin(0.4 * math.cos(theta))
 end
 
 ----------------------------
