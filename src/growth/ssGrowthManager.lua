@@ -20,8 +20,6 @@ ssGrowthManager.UNKNOWN_FRUIT_COPY_SOURCE = "barley"
 
 function ssGrowthManager:preLoad()
     g_seasons.growthManager = self
-
-    ssUtil.overwrittenFunction(FSBaseMission, "getFoliageGrowthStateTimeMultiplier", ssGrowthManager.missionGrowthStateTimeMultiplier)
 end
 
 function ssGrowthManager:load(savegame, key)
@@ -389,15 +387,3 @@ function ssGrowthManager:updateWillGerminateData(fruitName)
         self.willGerminateData[currentTransition][fruitName] = self.willGerminateData[currentTransition][self.UNKNOWN_FRUIT_COPY_SOURCE]
     end
 end
-
--- With vanilla growth turned off, this value turns 0, breaking missions. Use a value which is ~ once per day.
-function ssGrowthManager:missionGrowthStateTimeMultiplier()
-    local mult = 3
-    local daysInSeason = ssEnvironment.daysInSeason
-    if daysInSeason == 3 then
-        mult = 2
-    end
-
-    return mult / self.missionInfo.timeScale
-end
-

@@ -14,7 +14,7 @@ function ssFieldJobManager:preLoad()
 
     ssUtil.overwrittenFunction(FieldJob, "init", ssFieldJobManager.fieldJobInit)
     ssUtil.overwrittenFunction(FieldJob, "finish", ssFieldJobManager.fieldJobFinish)
-    ssUtil.appendedFunction(FieldJobManager, "update", ssFieldJobManager.fieldJobManagerUpdate)
+    ssUtil.overwrittenFunction(FieldJobManager, "update", ssFieldJobManager.fieldJobManagerUpdate)
 end
 
 function ssFieldJobManager:loadMap(name)
@@ -23,6 +23,15 @@ end
 
 -- Filter what jobs are carried out by the FieldJobManager
 function ssFieldJobManager:fieldJobManagerUpdate(superFunc, dt)
+    -- Used as a multiplier between field actions. We can't change this value globally because
+    -- this directly influences the vanilla growth
+    local oldFunc = FSBaseMission.getFoliageGrowthStateTimeMultiplier
+    FSBaseMission.getFoliageGrowthStateTimeMultiplier = ssFieldJobManager.missionGrowthStateTimeMultiplier
+
+    superFunc(self, dt)
+
+    FSBaseMission.getFoliageGrowthStateTimeMultiplier = oldFunc
+
     -- Check if field job was started by NPC, terminate if not appropriate for current season
     if self.fieldStatusParametersToSet ~= nil and self.currentFieldPartitionIndex == nil then
         local paramFieldNumber      = self.fieldStatusParametersToSet[1].fieldNumber
@@ -170,3 +179,15 @@ function FieldJob:applyFieldSnow(layers)
         setDensityParallelogram(g_currentMission.terrainDetailHeightId, partition.x0, partition.z0, partition.widthX, partition.widthZ, partition.heightX, partition.heightZ, 5, 6, layers)
     end
 end
+
+-- With vanilla growth turned off, this value turns 0, breaking missions. Use a value which is ~ once per day.
+function ssFieldJobManager:missionGrowthStateTimeMultiplier()
+    local mult = 3
+    local daysInSeason = ssEnvironment.daysInSeason
+    if daysInSeason == 3 then
+        mult = 2
+    end
+
+    return mult / self.missionInfo.timeScale
+end
+
