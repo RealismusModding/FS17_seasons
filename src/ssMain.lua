@@ -147,6 +147,8 @@ end
 function ssMain:deleteMap()
     getfenv(0)["g_seasons"] = nil
 
+    g_inGameMenu.motorStartElement:setDisabled(false)
+
     ssUtil.unregisterBrand("WOPSTR")
 
     self.mainMenu:delete()
