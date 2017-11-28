@@ -243,13 +243,10 @@ end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local sunHeightAngle = self:calculateSunDeclination(julianDay - 176) - (90 - self.latitude) * math.pi / 180
+    local lat = self.latitude * math.pi / 180
+    local dec = self:calculateSunDeclination(julianDay)
 
-    if sunHeightAngle < math.pi / 2 then
-        sunHeightAngle = (math.pi + sunHeightAngle) * -1
-    end
-
-    return sunHeightAngle
+    return math.acos( math.sin(dec) * math.sin(lat) + math.cos(dec) * math.cos(lat) ) - math.pi / 2
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
