@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="Réparation" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Réparation et configuration" />
 
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!" />
 
