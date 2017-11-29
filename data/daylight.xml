@@ -8,7 +8,7 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
-<daylight latitude="49.9" dst="yes">
+<daylight latitude="51.9" dst="yes">
     <seasons>
         <spring>
             <ambient>
