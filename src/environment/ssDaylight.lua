@@ -246,7 +246,7 @@ function ssDaylight:calculateSunHeightAngle(julianDay)
     -- universal for both northern and southern hemisphere
     local dec = self:calculateSunDeclination(julianDay)
     
-    return self.latRad - dec - math.pi
+    return self.latRad - dec - math.pi / 2
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
