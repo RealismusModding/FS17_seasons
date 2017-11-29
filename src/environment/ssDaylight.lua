@@ -242,15 +242,11 @@ end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
+    -- gives negative angles due to FS convention of the sun
+    -- universal for both northern and southern hemisphere
     local dec = self:calculateSunDeclination(julianDay)
-    local sunHeightAngle = math.acos( math.sin(dec) * math.sin(self.latRad) + math.cos(dec) * math.cos(self.latRad) ) - math.pi / 2
-
-    -- approximation: sun is in the North in the southern hemisphere
-    if self.latitude >= 0 then
-        return sunHeightAngle
-    else
-        return -1 * (math.pi + sunHeightAngle)
-    end
+    
+    return self.latRad - dec - math.pi
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
