@@ -90,7 +90,6 @@ function ssSeasonsMenu:onOpen(element)
 
     -- settings
     self:updateGameSettings()
-    self:updateApplySettingsButton()
 
     self:updateDebugValues()
 
@@ -118,7 +117,9 @@ end
 function ssSeasonsMenu:onClickBack()
     ssSeasonsMenu:superClass().onClickBack(self)
 
-    g_gui:showGui("")
+    if self:saveSettings() then
+        g_gui:showGui("")
+    end
 end
 
 -- Update the current page when the player clicks the left/right button
@@ -138,11 +139,7 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     self.currentPageMappingIndex = pageMappingIndex
     self:updatePageStates()
 
-    if GS_IS_CONSOLE_VERSION then
-        self.saveButtonConsole:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
-    else
-        self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
-    end
+    self:saveSettings()
 
     if pageId == ssSeasonsMenu.PAGE_CALENDAR then
         self:setNavButtonsFocusChange(FocusManager:getElementById("200"), FocusManager:getElementById("200"))
@@ -588,10 +585,6 @@ function ssSeasonsMenu:onCreatePageSettings(element)
     ssSeasonsMenu.PAGE_SETTINGS = self.pagingElement:getPageIdByElement(element)
 end
 
-function ssSeasonsMenu:onCreateSaveButton(element)
-    element:setText(ssLang.getText("ui_buttonSave"))
-end
-
 function ssSeasonsMenu:updateGameSettings()
     if g_currentMission == nil then
         return
@@ -623,66 +616,49 @@ function ssSeasonsMenu:updateTracksDisablement()
     end
 end
 
-function ssSeasonsMenu:updateApplySettingsButton()
-    local hasChanges = false
-
-    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
+function ssSeasonsMenu:hasSettingsChanged()
+    return self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.controlsTemperature:getIsChecked() ~= ssWeatherForecast.degreeFahrenheit
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode
-        or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled then
-        -- or  then -- snow
-        hasChanges = true
-    end
-
-    self.saveButton:setDisabled(not hasChanges)
-    self.saveButtonConsole:setVisible(hasChanges)
+        or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled
 end
 
-function ssSeasonsMenu:onClickActivate()
-    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason then
-        local text = ssLang.getText("dialog_applySettings")
-        g_gui:showYesNoDialog({text = text, callback = self.onYesNoSaveSettings, target = self})
-    else
-        self:onYesNoSaveSettings(true)
-    end
-end
+function ssSeasonsMenu:saveSettings()
+    if not self:hasSettingsChanged() then return end
 
-function ssSeasonsMenu:onYesNoSaveSettings(yes)
-    if yes then
-        ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
-        g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
-        ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
+    ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
+    g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
+    ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
 
-        if g_currentMission:getIsServer() then
-            local newLength = self.settingElements.seasonLength:getState() * 3
+    if g_currentMission:getIsServer() then
+        local newLength = self.settingElements.seasonLength:getState() * 3
 
-            g_seasons.snow:setMode(self.settingElements.snow:getState())
-            self:updateSnowStatus()
+        g_seasons.snow:setMode(self.settingElements.snow:getState())
+        self:updateSnowStatus()
 
-            g_seasons.environment:changeDaysInSeason(newLength)
+        g_seasons.environment:changeDaysInSeason(newLength)
 
-            g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
-            g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
+        g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
+        g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
 
-            self:updateApplySettingsButton()
-
-            -- Change header numbers
-            if self.economy.graph then
-                self.economy.graph:settingsChanged()
-                self:onEconomyListSelectionChanged(self.economyList.selectedRow)
-            end
-            self.calendarHeader:settingsChanged()
-
-            -- Sync new data to all the clients
-            ssSettingsEvent.sendEvent()
-        elseif g_currentMission.isMasterUser then
-            -- Sync to the server
-            ssSettingsEvent.sendEvent()
+        -- Change header numbers
+        if self.economy.graph then
+            self.economy.graph:settingsChanged()
+            self:onEconomyListSelectionChanged(self.economyList.selectedRow)
         end
+        self.calendarHeader:settingsChanged()
+
+        -- Sync new data to all the clients
+        ssSettingsEvent.sendEvent()
+    elseif g_currentMission.isMasterUser then
+        -- Sync to the server
+        ssSettingsEvent.sendEvent()
     end
+
+    return true
 end
 
 function ssSeasonsMenu:replaceTexts(element)
@@ -734,8 +710,6 @@ end
 
 function ssSeasonsMenu:onClickSnowToggle(state)
     self:updateTracksDisablement()
-
-    self:updateApplySettingsButton()
 end
 
 ------- Snow Tracks on/off -------

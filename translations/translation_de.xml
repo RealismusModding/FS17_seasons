@@ -107,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Ballen" />
 
-        <text name="ui_buttonSave" text="Speichern" />
         <text name="ui_snowOneLayer" text="Einfache Schneeschicht" />
         <text name="ui_days" text="%i Tage" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -135,7 +134,6 @@
         <text name="setting_controlsTemperature" text="Temperatureinheit" />
         <text name="setting_moisture" text="Ernten bei Feuchtigkeit" />
 
-        <text name="dialog_applySettings" text="Möchtest du die Jahreszeiteneinstellungen wirklich ändern? Änderungen an der Länge der Jahreszeiten können zu Feldzuständen führen, die erst nach einem Ingame-Jahr repariert werden." />
         <text name="dialog_resetGrowth" text="Du hast Seasons in einem alten Savegame geladen. Seasons möchte alle Felder auf ihren Urzustand zurücksetzen, um sie mit dem Spieltag zu synchronisieren. Du wirst alle Zustände der Früchte auf den Feldern verlieren. Wenn du das Wachstum aber nicht zurücksetzt, funktioniert Seasons möglicherweise nicht wie erwartet." />
         <text name="dialog_resetGrowth_title" text="Wachstum zurückgesetzt." />
         <text name="dialog_resetGrowth_no" text="Alle Wachstumsstufen beibehalten." />

@@ -110,7 +110,6 @@
         <text name="ui_economy_thousand" text="1000l" />
         <text name="ui_economy_bale" text="Fardos" />
 
-        <text name="ui_buttonSave" text="Aplicar" />
         <text name="ui_snowOneLayer" text="1 camada apenas" />
         <text name="ui_days" text="%i dias" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -138,7 +137,6 @@
         <text name="setting_controlsTemperature" text="Escala de temperatura" />
         <text name="setting_moisture" text="Cultivos molhados" />
 
-        <text name="dialog_applySettings" text="Você tem certeza que quer mudar as preferências? Mudanças na duração podem resultar em campos que somente serão reparados após um ano dentro do jogo." />
         <text name="dialog_resetGrowth" text="Você carregou o Seasons em um jogo antigo. Seasons irá resetar todos os campos para seu estado original para sincronizar o tempo. Você perderá todos seus cultivos. Caso não queira resetar seus cultivos, o Seasons pode não funcionar como esperado." />
         <text name="dialog_resetGrowth_title" text="Resetar cultivos" />
         <text name="dialog_resetGrowth_no" text="Manter cultivos" />

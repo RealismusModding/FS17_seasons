@@ -107,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Baal" />
 
-        <text name="ui_buttonSave" text="Instellingen toepassen" />
         <text name="ui_snowOneLayer" text="Enkel één laag" />
         <text name="ui_days" text="%d dagen" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -135,7 +134,6 @@
         <text name="setting_controlsTemperature" text="Temperatuureenheid" />
         <text name="setting_moisture" text="Gewasvochtigheid" />
 
-        <text name="dialog_applySettings" text="Weet je zeker dat je de seizoensinstellingen wilt veranderen? Het veranderen van de seizoenslengte kan er voor zorgen dat je sommige velden pas na één jaar weer kan gebruiken." />
         <text name="dialog_resetGrowth" text="Je hebt de Seasons-mod in een bestaande savegame geladen. De mod wil alle velden naar hun geoogste staat brengen om synchroon te lopen met het huidige seizoen. Je zal alle gewassen verliezen. Als je de gewasgroei niet herstart, zal de Seasons-mod niet werken zoals verwacht." />
         <text name="dialog_resetGrowth_title" text="Gewasgroei herstarten" />
         <text name="dialog_resetGrowth_no" text="Behoud gewasgroei" />

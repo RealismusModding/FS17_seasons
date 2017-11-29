@@ -107,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Balle" />
 
-        <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -135,7 +134,6 @@
         <text name="setting_controlsTemperature" text="Unité de  température" />
         <text name="setting_moisture" text="Humidité des cultures" />
 
-        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Seasons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
         <text name="dialog_resetGrowth" text="Vous avez chargé Seasons sur une vieille sauvegarde. Seasons veut remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toutes les récoltes. Si vous ne réinitialisez pas la croissance, Seasons pourrait ne pas fonctionner comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise à zéro de la croissance" />
         <text name="dialog_resetGrowth_no" text="Maintenir la croissance" />

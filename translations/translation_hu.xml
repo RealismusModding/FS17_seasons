@@ -107,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Bála" />
 
-        <text name="ui_buttonSave" text="Beállítások mentése" />
         <text name="ui_snowOneLayer" text="1 réteg csak" />
         <text name="ui_days" text="%i nap" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -135,7 +134,6 @@
         <text name="setting_controlsTemperature" text="Hőmérséklet mértékegysége" />
         <text name="setting_moisture" text="Növény nedvesség" />
 
-        <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
         <text name="dialog_resetGrowth" text="A Seasons-t egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe, akkor az a Seasons mod hibás működését eredményezheti." />
         <text name="dialog_resetGrowth_title" text="Növény fejlődés alaphelyzetbe" />
         <text name="dialog_resetGrowth_no" text="Növény fejlődés megtartása" />

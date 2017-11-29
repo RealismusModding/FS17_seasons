@@ -110,7 +110,6 @@
         <text name="ui_economy_thousand" text="1000 L" />
         <text name="ui_economy_bale" text="Paca" />
 
-        <text name="ui_buttonSave" text="Aplicar cambios" />
         <text name="ui_snowOneLayer" text="Solo 1 capa" />
         <text name="ui_days" text="%i días" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -138,7 +137,6 @@
         <text name="setting_controlsTemperature" text="Escala de temperatura" />
         <text name="setting_moisture" text="Cultivo húmedo" />
 
-        <text name="dialog_applySettings" text="¿Está seguro que quiere cambiar la configuración? Cambios en la duración y crecimiento de las cosechas en los campos sólo se restablecerán después de un año de juego." />
         <text name="dialog_resetGrowth" text="Ha cargado una partida antigua. Seasons debe resetear todos sus campos a su estado original y todas sus cosechas se perderán. En caso contrario, Seasons no funcionará como debiera." />
         <text name="dialog_resetGrowth_title" text="Resetear crecimiento" />
         <text name="dialog_resetGrowth_no" text="Mantener crecimiento" />

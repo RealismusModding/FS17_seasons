@@ -109,7 +109,6 @@
         <text name="ui_economy_thousand" text="1000 л" />
         <text name="ui_economy_bale" text="тюк" />
 
-        <text name="ui_buttonSave" text="Применить" />
         <text name="ui_snowOneLayer" text="Только 1 слой" />
         <text name="ui_days" text="%i дн." />
         <text name="ui_temperatureFahrenheit" text="Фаренгейт" />
@@ -137,7 +136,6 @@
         <text name="setting_controlsTemperature" text="Температурная шкала" />
         <text name="setting_moisture" text="Влажный урожай" />
 
-        <text name="dialog_applySettings" text="Вы уверены, что хотите изменить настройки Seasons? Изменения продолжительности сезона можно будет применить к полям, только по прошествии одного игрового года." />
         <text name="dialog_resetGrowth" text="Вы запустили Seasons на уже имеющемся сохранении. Seasons необходимо сбросить состояние роста всех культур на полях в их 'нулевую' стадию для синхронизации с Gameday. Вы потеряете все посаженные культуры. Если вы не сбросите состояние роста, Seasons не сможет работать, должным образом." />
         <text name="dialog_resetGrowth_title" text="Сброс состояния роста культур" />
         <text name="dialog_resetGrowth_no" text="Не сбрасывать" />

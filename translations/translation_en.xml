@@ -108,7 +108,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Bale" />
 
-        <text name="ui_buttonSave" text="Apply Settings" />
         <text name="ui_snowOneLayer" text="1 layer only" />
         <text name="ui_days" text="%i days" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -136,7 +135,6 @@
         <text name="setting_controlsTemperature" text="Temperature Scale" />
         <text name="setting_moisture" text="Crop Moisture" />
 
-        <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />
         <text name="dialog_resetGrowth_title" text="Growth reset" />
         <text name="dialog_resetGrowth_no" text="Keep growth" />
