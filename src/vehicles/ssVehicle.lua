@@ -29,6 +29,7 @@ function ssVehicle:preLoad()
     ssUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
     ssUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     ssUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    ssUtil.registerSpecialization("ss_drivable", "ssDrivable", g_seasons.modDir .. "src/vehicles/specializations/ssDrivable.lua")
 
     ssVehicle:registerWheelTypes()
 
@@ -157,6 +158,10 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
+            end
+
+            if SpecializationUtil.hasSpecialization(Drivable, vehicleType.specializations) then
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("ss_drivable"))
             end
         end
     end
