@@ -120,6 +120,11 @@
         <text name="unit_meterShort" text="м" />
         <text name="unit_feetShort" text="фут" />
 
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
+
         <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Игровой год состоит из четырёх сезонов" />
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона" />
         <text name="tooltip_snow" text="Холодной зимой будет падать снег и перекрывать дороги" />

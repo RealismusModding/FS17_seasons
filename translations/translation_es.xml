@@ -121,6 +121,11 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="pies" />
 
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
+
         <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones" />
         <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación" />
         <text name="tooltip_snow" text="Nevará en el frío invierno y se bloquearán las carreteras" />

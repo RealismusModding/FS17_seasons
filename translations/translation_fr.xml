@@ -118,6 +118,9 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
+        <text name="action_nextHandTool" text="Sélectionner l'outil en main suivante" />
+        <text name="action_chainsaw" text="l'Outil en main" />
+
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons" />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci" />
         <text name="tooltip_snow" text="La neige tombera dans les hivers froids et bloquera des routes" />

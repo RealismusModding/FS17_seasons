@@ -121,6 +121,11 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
+
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
         <text name="tooltip_snow" text="Sníh bude padat během chladné zimy a blokovat silnice" />

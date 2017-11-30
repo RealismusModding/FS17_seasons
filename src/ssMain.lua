@@ -124,6 +124,10 @@ function ssMain:loadMap()
     -- Correct the focus
     FocusManager:setGui("MPLoadingScreen")
 
+    -- Fix translations
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "action_nextHandTool", ssLang.getText("action_nextHandTool"))
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "action_chainsaw", ssLang.getText("action_chainsaw"))
+
     -- Remove the (hacked) store items
     if not GS_IS_CONSOLE_VERSION then
         self:removeStoreItem("resources/fakeStoreItem/item.xml")
