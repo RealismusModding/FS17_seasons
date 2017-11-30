@@ -117,9 +117,8 @@ end
 function ssSeasonsMenu:onClickBack()
     ssSeasonsMenu:superClass().onClickBack(self)
 
-    if self:saveSettings() then
-        g_gui:showGui("")
-    end
+    self:saveSettings()
+    g_gui:showGui("")
 end
 
 -- Update the current page when the player clicks the left/right button
@@ -657,8 +656,6 @@ function ssSeasonsMenu:saveSettings()
         -- Sync to the server
         ssSettingsEvent.sendEvent()
     end
-
-    return true
 end
 
 function ssSeasonsMenu:replaceTexts(element)
