@@ -75,9 +75,9 @@ function createXML(data, language) {
 
     text = text.replace(searchReg, (match, name, value, offset, string) => {
         if (newlines.includes(name)) {
-            return padding + "<text name=\"" + name + "\" text=\"" + xmlescape(value) + "\" />\n\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n\n";
         } else {
-            return padding + "<text name=\"" + name + "\" text=\"" + xmlescape(value) + "\" />\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n";
         }
     });
 
