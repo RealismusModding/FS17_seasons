@@ -118,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Volgende handgereedschap" />
+        <text name="action_chainsaw" text="Handgereedschap" />
 
         <text name="tooltip_seasonLength" text="De lengte van één seizoen in dagen. Een jaar heeft vier seizoenen." />
         <text name="tooltip_seasonIntros" text="Laat een inleiding zien bij de start van elk seizoen." />
