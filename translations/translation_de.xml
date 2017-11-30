@@ -65,7 +65,7 @@
         <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur für %s benötigt." />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s." />
         <text name="SS_REPAIR_REQUIRED" text="Wartung benötigt!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f Motorstunden oder %d Tage bis Wartungsarbeiten erforderlich sind." />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Wartung nötig in: %.1f Motorstunden oder %d Tag(en)" />
         <text name="SS_REPAIR_DIALOG" text="Möchtest du das Fahrzeug %s für %s warten?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
