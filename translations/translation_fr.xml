@@ -205,7 +205,7 @@
         <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le moddeur, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hangar bénéficiant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
-        <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
+        <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 12 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
         <text name="ss_helpText_11_02" text="Vous pouvez réparer vos véhicules soit à la concession, soit dans un garage plaçable. Pour réparer votre véhicule, conduisez le à la concession  ou dans un garage plaçable, et activez la réparation. Notez que ce sera plus coûteux de réparer à la concession." />
         <text name="ss_helpText_11_03" text="L'âge affiché de votre véhicule correspond au nombre de jours depuis la dernière réparation." />
         <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />

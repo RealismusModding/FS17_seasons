@@ -206,7 +206,7 @@
         <text name="ss_helpText_10_04" text="On a mod map that has been prepared with a snow mask by the modder hay and straw bales that have been exposed to the rain or snow will begin to rot, unless the bales are stored in a shed with a snow mask. Bad weather will not affect wrapped bales or bales on a map without a snow mask." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
-        <text name="ss_helpText_11_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
+        <text name="ss_helpText_11_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or every year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
         <text name="ss_helpText_11_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and activate the repair. Note that it will be more expensive to repair at the vehicle shop." />
         <text name="ss_helpText_11_03" text="The age of your vehicle is the days since your last repair." />
         <text name="ss_helpText_11_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
