@@ -71,7 +71,7 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="ui_doRepair" text="Reparatur" />
-        <text name="ui_repairOrCustomizeVehicleTitle" text="Reparatur &amp; Konfiguration" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Reparatur &amp;amp; Konfiguration" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
@@ -227,7 +227,7 @@
         <text name="ss_helpTitle_14" text="Tiere - Einführung" />
         <text name="ss_helpText_14_01" text="Die Tierproduktion wurde mit Seasons an realistischere Parameter angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine benötigen im Winter mehr Stroh. Die maximalen Fütterungskapazitäten wurden von 6 Tage auf 3 Tage reduziert." />
         <text name="ss_helpText_14_02" text="Tiere sorgen nur zu bestimmten Jahreszeiten für Nachwuchs. Schweine bekommen ihren Nachwuchs im Frühjahr und Herbst. Die Lämmerzeit für Schafe ist das Frühjahr, während Kühe nur im Sommer kalben." />
-        <text name="ss_helpText_14_03" text="Tiere sterben, wenn sie kein Futter oder Wasser haben. Dies ist im Schwierigkeitsgrad 'Einfach' deaktiviert." />
+        <text name="ss_helpText_14_03" text="Tiere sterben, wenn sie kein Futter oder Wasser haben. Dies ist im Schwierigkeitsgrad &apos;Einfach&apos; deaktiviert." />
 
         <text name="ss_helpTitle_15" text="Tiere - Produktion" />
         <text name="ss_helpText_15_01" text="Die Milch- und Wollproduktion ist abhängig von der Jahreszeit." />

@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const xml2js = require("xml2js");
 const Promise = require("bluebird");
+const xmlescape = require('xml-escape');
 
 //////////////////////////////////////////
 // Library
@@ -74,9 +75,9 @@ function createXML(data, language) {
 
     text = text.replace(searchReg, (match, name, value, offset, string) => {
         if (newlines.includes(name)) {
-            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + xmlescape(value) + "\" />\n\n";
         } else {
-            return padding + "<text name=\"" + name + "\" text=\"" + value + "\" />\n";
+            return padding + "<text name=\"" + name + "\" text=\"" + xmlescape(value) + "\" />\n";
         }
     });
 
