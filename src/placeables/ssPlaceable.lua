@@ -56,10 +56,12 @@ end
 
 function ssPlaceable:placeableGetDailyUpkeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-    local multiplier = 1 + self.ssYears * 2.5
+
+    local years = Utils.getNoNil(self.ssYears, 0) -- can be nil when placing
+    local multiplier = 1 + years * 2.5
 
     if self.incomePerHour == 0 then
-        multiplier = 1 + self.ssYears * 0.25
+        multiplier = 1 + years * 0.25
     end
 
     return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (12 / g_seasons.environment.daysInSeason )
