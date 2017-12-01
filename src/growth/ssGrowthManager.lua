@@ -127,6 +127,12 @@ function ssGrowthManager:loadGameFinished()
         else
             self:checkAndAddNewFruits(false)
         end
+
+        -- For new savegames, reset at the beginning
+        if self.isNewSavegame and g_seasons.environment:transitionAtDay() == g_seasons.environment.TRANSITION_EARLY_SPRING then
+            logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
+            ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
+        end
     else
         for index, fruit in pairs(g_currentMission.fruits) do
             local fruitName = FruitUtil.fruitIndexToDesc[index].name
@@ -186,11 +192,7 @@ function ssGrowthManager:transitionChanged()
     local transition = g_seasons.environment:transitionAtDay()
     g_seasons.growthDebug:setFakeTransition(transition)
 
-    if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
-        logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
-        self.isNewSavegame = false
-        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
-    else
+    if not self.isNewSavegame or transition ~= g_seasons.environment.TRANSITION_EARLY_SPRING then
         log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
     end

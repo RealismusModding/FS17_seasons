@@ -59,6 +59,7 @@ function ssMain:preLoad()
     -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
     -- is already called.
     ssUtil.overwrittenFunction(TourIcons, "showTourDialog", function () end)
+    ssUtil.overwrittenFunction(TourIcons, "update", function () end)
 end
 
 ----------------------------
