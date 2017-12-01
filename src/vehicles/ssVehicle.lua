@@ -530,7 +530,7 @@ function ssVehicle:isRootCropRelated(vehicle)
     end
 
     local potatoId = FruitUtil.getFruitTypesByNames("potato")[1]
-    local beetId = FruitUtil.getFruitTypesByNames("sugarBeets")[1]
+    local beetId = FruitUtil.getFruitTypesByNames("sugarBeet")[1]
 
     if table.getn(vehicle.ssFillTypes) == 1 and (vehicle.ssFillTypes[1] == potatoId or vehicle.ssFillTypes[1] == beetId) then
         return true
