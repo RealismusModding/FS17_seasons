@@ -71,7 +71,7 @@
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
 
         <text name="ui_doRepair" text="Reparatur" />
-        <text name="ui_repairOrCustomizeVehicleTitle" text="Reparatur &amp;amp; Konfiguration" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Reparatur &amp; Konfiguration" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
