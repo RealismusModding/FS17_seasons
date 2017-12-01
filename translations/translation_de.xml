@@ -118,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Nächste Werkzeug auswählen" />
+        <text name="action_chainsaw" text="Werkzeug" />
 
         <text name="tooltip_seasonLength" text="Die Länge einer Saison in Tagen. Ein Jahr ist in vier Jahreszeiten eingeteilt." />
         <text name="tooltip_seasonIntros" text="Es wird zu Beginn eine Erklärung zu dieser Jahreszeit angezeigt." />
