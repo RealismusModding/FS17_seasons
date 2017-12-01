@@ -95,6 +95,12 @@ function ssSnow:loadMapFinished()
     end
 end
 
+function ssSnow:loadGameFinished()
+    if g_currentMission:getIsServer() then
+        self:applySnow(ssWeatherManager:getSnowHeight())
+    end
+end
+
 function ssSnow:readStream(streamId, connection)
     -- Applied snow depth is not needed
     self.mode = streamReadInt8(streamId)

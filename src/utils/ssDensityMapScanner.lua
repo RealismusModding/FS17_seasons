@@ -86,6 +86,23 @@ function ssDensityMapScanner:loadMap(name)
     end
 end
 
+function ssDensityMapScanner:loadGameFinished()
+    -- Quickly run any job already queued.
+    while self.queue.size > 0 or self.currentJob do
+        if self.currentJob == nil then
+            self.currentJob = self.queue:pop()
+            self.currentJob.x = 0
+            self.currentJob.z = 0
+        end
+
+        while self.currentJob ~= nil do
+            if not self:run(self.currentJob) then
+                self.currentJob = nil
+            end
+        end
+    end
+end
+
 function ssDensityMapScanner:update(dt)
     if not g_currentMission:getIsServer() then return end
 
