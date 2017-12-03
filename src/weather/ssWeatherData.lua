@@ -21,6 +21,8 @@ function ssWeatherData:loadMap(name)
     -- Load data from the mod and from a map
     self.temperatureData = {}
     self.rainData = {}
+    self.cloudData = {}
+    self.hailData = {}
     self.windData = {}
     self.startValues = {}
     self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
@@ -195,72 +197,61 @@ function ssWeatherData:loadFromXML(path)
     self.startValues.snowDepth = ssXMLUtil.getFloat(file, "weather.startValues.snowDepth", self.startValues.snowDepth)
 
     -- Load temperature data
-    local i = 0
-    while true do
-        local key = string.format("weather.temperature.p(%d)", i)
-        if not hasXMLProperty(file, key) then break end
-
-        local period = getXMLInt(file, key .. "#period")
-        if period == nil then
-            logInfo("ssWeatherData:", "Period in weather.xml is invalid")
-            break
-        end
-
-        local min = getXMLFloat(file, key .. ".min#value")
-        local mode = getXMLFloat(file, key .. ".mode#value")
-        local max = getXMLFloat(file, key .. ".max#value")
-
-        if min == nil or mode == nil or max == nil then
-            logInfo("ssWeatherData:", "Temperature data in weather.xml is invalid")
-            break
-        end
-
-        local config = {
-            ["min"] = min,
-            ["mode"] = mode,
-            ["max"] = max
-        }
-
-        self.temperatureData[period] = config
-
-        i = i + 1
+    local key = "weather.temperature.dailyMaximum"
+    if key == nil then
+        logInfo("ssWeatherData:", "Error in weather data: Lacking temperature data")
     end
+    self.temperatureData = self:loadValuesFromXML(file, key)
+
+    -- Load cloud data
+    local key = "weather.clouds.probability"
+    if key == nil then
+        logInfo("ssWeatherData:", "Error in weather data: Lacking cloud probability data")
+    end
+    self.cloudProbData = self:loadValuesFromXML(file, key)
 
     -- Load rain data
-    i = 0
+    local key = "weather.rain.probability"
+    if key == nil then
+        logInfo("ssWeatherData:", "Error in weather data: Lacking rain probability data")
+    end
+    self.rainProbData = self:loadValuesFromXML(file, key)
+
+    local key = "weather.rain.rainfall"
+    if key == nil then
+        logInfo("ssWeatherData:", "Error in weather data: Lacking rainfall data")
+    end
+    self.rainfallData = self:loadValuesFromXML(file, key)
+
+    local key = "weather.wind.speed"
+    if key == nil then
+        logInfo("ssWeatherData:", "Error in weather data: Lacking wind speed data")
+    end
+    self.windSpeed = self:loadValuesFromXML(file, key)
+
+    delete(file)
+end
+
+function ssWeatherData:loadValuesFromXML(file, key)
+    local values = {}
+
+    -- Load for each
+    local i = 0
     while true do
-        local key = string.format("weather.rain.s(%d)", i)
-        if not hasXMLProperty(file, key) then break end
+        local fKey = string.format("%s.value(%d)", key, i)
+        if not hasXMLProperty(file, fKey) then break end
 
-        local season = getXMLInt(file, key .. "#season")
-        if season == nil then
-            logInfo("ssWeatherData:", "Season in weather.xml is invalid")
-            break
-        end
+        local transition = getXMLInt(file, fKey .. "#transition")
+        local value = getXMLFloat(file, fKey)
 
-        local mu = getXMLFloat(file, key .. ".mu#value")
-        local sigma = getXMLFloat(file, key .. ".sigma#value")
-        local probRain = getXMLFloat(file, key .. ".probRain#value")
-        local probClouds = getXMLFloat(file, key .. ".probClouds#value")
-        local probHail = getXMLFloat(file, key .. ".probHail#value")
-
-        if mu == nil or sigma == nil or probRain == nil or probClouds == nil or probHail == nil then
-            logInfo("ssWeatherData:", "Rain data in weather.xml is invalid")
-            break
-        end
-
-        local config = {
-            ["mu"] = mu,
-            ["sigma"] = sigma,
-            ["probRain"] = probRain,
-            ["probClouds"] = probClouds,
-            ["probHail"] = probHail
-        }
-
-        self.rainData[season] = config
+        values[transition] = value
 
         i = i + 1
     end
 
-    delete(file)
+    if table.getn(values) ~= g_seasons.environment.TRANSITIONS_IN_YEAR then
+        logInfo("ssWeatherData:", "Error in weather data: not all transitions are configured in " .. key)
+    end
+
+    return values
 end

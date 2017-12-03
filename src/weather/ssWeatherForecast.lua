@@ -213,19 +213,16 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
     oneRainEvent.startDay = dayForecast.day
     oneRainEvent.endDay = oneRainEvent.startDay
     local season = dayForecast.season
+    local gt = g_seasons.environment:transitionAtDay(day)
+    local season = g_seasons.environment:seasonAtDay(day)
+
+    local pRain = ssWeatherData.rainProbData[growthTransition]
     local wt = dayForecast.weatherType
     local events = dayForecast.numEvents
     local lowTemp = dayForecast.lowTemp
     local highTemp = dayForecast.highTemp
 
     local rainFactors = ssWeatherData.rainData[g_seasons.environment:seasonAtDay(oneDayForecast.day)]
-
-    local mu = rainFactors.mu
-    local sigma = rainFactors.sigma
-    local cov = sigma / mu
-
-    rainFactors.beta = 1 / math.sqrt(math.log(1 + cov * cov))
-    rainFactors.gamma = mu / math.sqrt(1 + cov * cov)
 
     -- shorter, multiple events
     if wt == ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY or
@@ -234,7 +231,8 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
             wt == ssWeatherManager.WEATHERTYPE_SLEET then
 
         oneRainEvent.startRainTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / self.UNITTIME) * self.UNITTIME
-        oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * self.UNITTIME -- capping length of each event
+        --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * self.UNITTIME -- capping length of each event
+        oneRainEvent.duration = 2 -- for now
         oneRainEvent.endRainTime = oneRainEvent.startRainTime + oneRainEvent.duration
 
     -- one longer event
@@ -466,11 +464,13 @@ function ssWeatherForecast:getRainType(day, hour)
 end
 
 function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
-    local season = ssEnvironment:seasonAtDay(day)
-    local rainFactors = ssWeatherData.rainData[season]
+    local growthTransition = g_seasons.environment:transitionAtDay(day)
+    local season = g_seasons.environment:seasonAtDay(day)
 
-    local pRain = rainFactors.probRain
-    local pClouds = rainFactors.probClouds
+    local pRain = ssWeatherData.rainProbData[growthTransition]
+    local pClouds = ssWeatherData.cloudProbData[growthTransition]
+    --local pHail = ssWeatherData.hailProbData[season]
+
     local probPartlyCloudy = math.min(pClouds + 0.2, (1 - pClouds) / 2 + pClouds)
     local probCloudy = math.max(pClouds - 0.1, pClouds - (pClouds - pRain) / 2)
     local probShowers = math.min(pRain + 0.1, probCloudy - 0.15)
@@ -511,11 +511,10 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
 end
 
 function ssWeatherForecast:calculateAverageTransitionTemp(gt, deterministic)
-    local meanMaxTemp = ssWeatherData.temperatureData[gt]
-    local avgTemp = meanMaxTemp.mode
+    local averageDailyMaximum = ssWeatherData.temperatureData[gt]
 
     if not deterministic then
-        avgTemp = ssUtil.triDist(meanMaxTemp.min, meanMaxTemp.mode, meanMaxTemp.max)
+        avgTemp = ssUtil.triDist(averageDailyMaximum - 2, averageDailyMaximum, averageDailyMaximum + 2)
     end
     
     return avgTemp

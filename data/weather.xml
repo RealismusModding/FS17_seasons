@@ -15,110 +15,89 @@
         <snowDepth>0</snowDepth>
     </startValues>
     <temperature>
-        <p period="1">
-            <min value="4.4" />
-            <mode value="8.2" />
-            <max value="10.6" />
-        </p>
-        <p period="2">
-            <min value="11.1" />
-            <mode value="13.2" />
-            <max value="16.9" />
-        </p>
-        <p period="3">
-            <min value="15.5" />
-            <mode value="16.9" />
-            <max value="18.8" />
-        </p>
-        <p period="4">
-            <min value="17.7" />
-            <mode value="20.0" />
-            <max value="21.8" />
-        </p>
-        <p period="5">
-            <min value="19.4" />
-            <mode value="21.7" />
-            <max value="26.0" />
-        </p>
-        <p period="6">
-            <min value="19.6" />
-            <mode value="21.2" />
-            <max value="24.6" />
-        </p>
-        <p period="7">
-            <min value="18.0" />
-            <mode value="19.4" />
-            <max value="21.6" />
-        </p>
-        <p period="8">
-            <min value="13.0" />
-            <mode value="14.6" />
-            <max value="16.3" />
-        </p>
-        <p period="9">
-            <min value="6.6" />
-            <mode value="8.7" />
-            <max value="10.7" />
-        </p>
-        <p period="10">
-            <min value="-1.5" />
-            <mode value="3.0" />
-            <max value="6.5" />
-        </p>
-        <p period="11">
-            <min value="-3.0" />
-            <mode value="0.6" />
-            <max value="2.7" />
-        </p>
-        <p period="12">
-            <min value="-0.2" />
-            <mode value="1.8" />
-            <max value="3.9" />
-        </p>
+        <dailyMaximum>
+            <value transition="11">0.6</value>
+            <value transition="12">1.8</value>
+            <value transition="1">8.2</value>
+            <value transition="2">13.2</value>
+            <value transition="3">16.9</value>
+            <value transition="4">20.0</value>
+            <value transition="5">21.7</value>
+            <value transition="6">21.2</value>
+            <value transition="7">19.4</value>
+            <value transition="8">14.6</value>
+            <value transition="9">8.7</value>
+            <value transition="10">3.0</value>
+        </dailyMaximum>
     </temperature>
+    <clouds>
+        <probability>
+            <value transition="11">0.32</value>
+            <value transition="12">0.36</value>
+            <value transition="1">0.36</value>
+            <value transition="2">0.45</value>
+            <value transition="3">0.48</value>
+            <value transition="4">0.51</value>
+            <value transition="5">0.57</value>
+            <value transition="6">0.54</value>
+            <value transition="7">0.52</value>
+            <value transition="8">0.42</value>
+            <value transition="9">0.34</value>
+            <value transition="10">0.30</value>
+        </probability>
+    </clouds>
     <rain>
-        <s season="0">
-            <mu value="1.1" />
-            <sigma value="0.2" />
-            <probRain value="0.40" />
-            <probClouds value="0.55" />
-            <probHail value="0.05" />
-        </s>
-        <s season="1">
-            <mu value="0.7" />
-            <sigma value="0.1" />
-            <probRain value="0.15" />
-            <probClouds value="0.30" />
-            <probHail value="0.10" />
-        </s>
-        <s season="2">
-            <mu value="1.2" />
-            <sigma value="0.25" />
-            <probRain value="0.50" />
-            <probClouds value="0.65" />
-            <probHail value="0.10" />
-        </s>
-        <s season="3">
-            <mu value="1.6" />
-            <sigma value="0.25" />
-            <probRain value="0.55" />
-            <probClouds value="0.70" />
-            <probHail value="0.01" />
-        </s>
+        <probability>
+            <value transition="11">0.36</value>
+            <value transition="12">0.28</value>
+            <value transition="1">0.27</value>
+            <value transition="2">0.26</value>
+            <value transition="3">0.26</value>
+            <value transition="4">0.25</value>
+            <value transition="5">0.23</value>
+            <value transition="6">0.25</value>
+            <value transition="7">0.26</value>
+            <value transition="8">0.34</value>
+            <value transition="9">0.36</value>
+            <value transition="10">0.35</value>
+        </probability>
+        <rainfall>
+            <value transition="11">65</value>
+            <value transition="12">50</value>
+            <value transition="1">44</value>
+            <value transition="2">41</value>
+            <value transition="3">43</value>
+            <value transition="4">45</value>
+            <value transition="5">42</value>
+            <value transition="6">44</value>
+            <value transition="7">48</value>
+            <value transition="8">68</value>
+            <value transition="9">70</value>
+            <value transition="10">68</value>
+        </rainfall>
     </rain>
-
-    <windSpeeds>
-        <windSpeed period="11">5.0</windSpeed>
-        <windSpeed period="12">4.7</windSpeed>
-        <windSpeed period="1">5.2</windSpeed>
-        <windSpeed period="2">4.6</windSpeed>
-        <windSpeed period="3">4.4</windSpeed>
-        <windSpeed period="4">3.8</windSpeed>
-        <windSpeed period="5">3.7</windSpeed>
-        <windSpeed period="6">3.6</windSpeed>
-        <windSpeed period="7">3.9</windSpeed>
-        <windSpeed period="8">4.0</windSpeed>
-        <windSpeed period="9">4.6</windSpeed>
-        <windSpeed period="10">5.3</windSpeed>
-    </windSpeeds>
+    <wind>
+        <speed>
+            <value transition="11">5.9</value>
+            <value transition="12">5.7</value>
+            <value transition="1">5.4</value>
+            <value transition="2">4.8</value>
+            <value transition="3">4.7</value>
+            <value transition="4">4.5</value>
+            <value transition="5">4.5</value>
+            <value transition="6">4.4</value>
+            <value transition="7">4.7</value>
+            <value transition="8">5.2</value>
+            <value transition="9">5.4</value>
+            <value transition="10">5.7</value>
+        </speed>
+    </wind>
+    <hail>
+        <probability>
+            <value season="0">0.05</value>
+            <value season="1">0.10</value>
+            <value season="2">0.10</value>
+            <value season="3">0.01</value>
+        </probability>
+    </hail>
 </weather>
