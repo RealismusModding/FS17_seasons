@@ -109,6 +109,9 @@ function ssMain:loadMap()
         end
     end
 
+    -- Set 2MB texture usage
+    g_currentMission.textureMemoryUsage = g_currentMission.textureMemoryUsage + 2 * 1024 * 1024
+
     -- Create the GUI
     self.mainMenu = ssSeasonsMenu:new()
     self.measureToolDialog = ssMeasureToolDialog:new()
