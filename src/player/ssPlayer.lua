@@ -59,7 +59,7 @@ function ssPlayer:playerUpdateTick(dt)
     local px, py, pz = getTranslation(self.rootNode)
     local dy, delta = getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, px, py, pz)
     local heightOffset =  0.5 * self.height -- for root node origin to terrain
-    if py - heightOffset < dy - 0.2 then
+    if py - heightOffset < dy - 0.25 then
         py = dy + heightOffset
 
         setTranslation(self.rootNode, px, py, pz)
