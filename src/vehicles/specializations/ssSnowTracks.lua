@@ -10,7 +10,7 @@ ssSnowTracks = {}
 
 ssSnowTracks.SNOW_RGBA = { 0.98, 0.98, 0.98, 1 }
 ssSnowTracks.KEEP_SNOW_ON_WHEELS_THRESHOLD = 750 -- ms
-ssSnowTracks.SNOW_FRICTION = GS_IS_CONSOLE_VERSION and 0.4 or 0.2
+ssSnowTracks.SNOW_FRICTION = GS_IS_CONSOLE_VERSION and 0.4 or 0.3
 
 ssSnowTracks.FRICTION_TIRETYPE_SETTINGS = {
     ["chains"] = 1.0,

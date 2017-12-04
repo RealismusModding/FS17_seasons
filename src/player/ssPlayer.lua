@@ -56,13 +56,16 @@ function ssPlayer:playerUpdateTick(dt)
     end
 
     -- Prevent player from getting stuck in a high level of snow
-    local px, py, pz = getTranslation(self.rootNode)
-    local dy, delta = getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, px, py, pz)
-    local heightOffset =  0.5 * self.height -- for root node origin to terrain
-    if py - heightOffset < dy - 0.25 then
-        py = dy + heightOffset
+    if g_currentMission.controlPlayer then
+        local px, py, pz = getTranslation(self.rootNode)
+        local dy, delta = getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, px, py, pz)
+        local heightOffset =  0.5 * self.height -- for root node origin to terrain
 
-        setTranslation(self.rootNode, px, py, pz)
+        if py - heightOffset < dy - 0.25 then
+            py = dy - 0.2 + heightOffset
+
+            setTranslation(self.rootNode, px, py, pz)
+        end
     end
 end
 
