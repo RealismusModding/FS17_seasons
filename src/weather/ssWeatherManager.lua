@@ -300,7 +300,7 @@ function ssWeatherManager:updateSoilTemp()
     -- empirical snow damping parameter, unit 1/m, typical values -2 - -7
     local facfs = -5
 
-    self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * math.exp(facfs * self.snowDepth)
+    self.soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * math.exp(facfs * math.max(self.snowDepth, 0))
 
     if self.soilTemp > self.soilTempMax then
         self.soilTempMax = self.soilTemp
