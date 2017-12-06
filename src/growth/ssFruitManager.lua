@@ -10,7 +10,6 @@
 ssFruitManager = {}
 
 function ssFruitManager:loadMap(name)
-    self.harvestStatesUpdated = false
     self.fruitsToExclude = {}
 
     self.fruitsToExclude[FruitUtil.FRUITTYPE_POPLAR] = true
