@@ -66,6 +66,7 @@ function templatedLua() {
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=norestart %>/g, buildConfig.get("options.norestart", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=simpleVersion %>/g, packageJson.fs.simpleVersion));
 }
 
