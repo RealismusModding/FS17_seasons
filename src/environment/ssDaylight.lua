@@ -376,7 +376,7 @@ function ssDaylight:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nigh
     curve:addKeyframe({v = Utils.degToRad(  0), time = 1.00 * 60}) -- 15 per hour
     curve:addKeyframe({v = Utils.degToRad( 45), time = nightEnd * 60}) -- 15 per hour
     curve:addKeyframe({v = Utils.degToRad( 45), time = (nightEnd + 0.01) * 60})
-    curve:addKeyframe({v = Utils.degToRad(-70), time = (nightEnd + 0.02) * 60}) -- switch to Sun
+    curve:addKeyframe({v = Utils.degToRad(-55), time = (nightEnd + 0.02) * 60}) -- switch to Sun
 
     if dayStart > 12.0 then
         curve:addKeyframe({v = Utils.degToRad(0), time = dayStart * 60}) -- rotate over the day
@@ -384,7 +384,7 @@ function ssDaylight:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nigh
         curve:addKeyframe({v = Utils.degToRad(0), time = 12.00 * 60}) -- rotate over the day
     end
 
-    curve:addKeyframe({v = Utils.degToRad( 70), time = (nightStart + 0.01) * 60}) -- end rotation of sun
+    curve:addKeyframe({v = Utils.degToRad( 55), time = (nightStart + 0.01) * 60}) -- end rotation of sun
     curve:addKeyframe({v = Utils.degToRad(-35), time = (nightStart + 0.02) * 60}) -- switch to moon light
     curve:addKeyframe({v = Utils.degToRad(-15), time = 24.00 * 60}) -- 10 per hour
 
