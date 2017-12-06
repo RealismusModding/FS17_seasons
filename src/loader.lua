@@ -263,8 +263,6 @@ end
 function ssSeasonsMod.nullFinished()
     if not isSeasonsActive() then return end
 
-    local isServer = g_currentMission:getIsServer()
-
     for _, k in pairs(g_modClasses) do
         if _G[k] ~= nil and _G[k].loadMapFinished ~= nil then
             _G[k]:loadMapFinished()
@@ -276,6 +274,17 @@ function ssSeasonsMod.nullFinished()
             if _G[k] ~= nil and _G[k].loadGameFinished ~= nil then
                 _G[k]:loadGameFinished()
             end
+        end
+    end
+end
+
+function ssSeasonsMod.nullVehiclesFinished()
+    if not isSeasonsActive() then return end
+    if not g_currentMission:getIsServer() then return end
+
+    for _, k in pairs(g_modClasses) do
+        if _G[k] ~= nil and _G[k].loadVehiclesFinished ~= nil then
+            _G[k]:loadVehiclesFinished()
         end
     end
 end
@@ -304,6 +313,7 @@ Mission00.load = Utils.prependedFunction(Mission00.load, ssSeasonsMod.load)
 FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, ssSeasonsMod.loadMapFinished)
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
 Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
+Mission00.loadVehiclesFinish = Utils.appendedFunction(Mission00.loadVehiclesFinish, ssSeasonsMod.nullVehiclesFinished)
 
 FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
 

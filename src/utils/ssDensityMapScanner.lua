@@ -86,7 +86,7 @@ function ssDensityMapScanner:loadMap(name)
     end
 end
 
-function ssDensityMapScanner:loadGameFinished()
+function ssDensityMapScanner:loadVehiclesFinished()
     if not g_currentMission:getIsServer() then return end
 
     -- Quickly run any job already queued.
