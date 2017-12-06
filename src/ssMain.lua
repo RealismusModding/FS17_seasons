@@ -79,7 +79,7 @@ function ssMain:load(savegame, key)
 
 
     self.DEBUG_PRINT = "INSG " .. tostring(self.isNewSavegame) .. " IOSG " .. tostring(self.isOldSavegame) .. " SG " .. tostring(savegame) .. " P "
-        .. tostring(hasXMLProperty(savegame, key)) .. " K " .. tostring(key)
+        .. tostring(hasXMLProperty(savegame, key)) .. " K " .. tostring(key) .. " V " .. ssXMLUtil.getInt(savegame, key .. ".version", -1)
 end
 
 function ssMain:save(savegame, key)
