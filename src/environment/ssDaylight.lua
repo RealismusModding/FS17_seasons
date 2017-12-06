@@ -245,14 +245,14 @@ function ssDaylight:calculateSunHeightAngle(julianDay)
     -- gives negative angles due to FS convention of the sun
     -- universal for both northern and southern hemisphere
     local dec = self:calculateSunDeclination(julianDay)
-    
+
     return self.latRad - dec - math.pi / 2
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
     -- Calculate the suns declination according to the CBM model
     local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
-    
+
     return math.asin(0.4 * math.cos(theta))
 end
 
