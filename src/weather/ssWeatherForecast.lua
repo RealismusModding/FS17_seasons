@@ -468,13 +468,14 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
     local season = g_seasons.environment:seasonAtDay(day)
 
     local pRain = ssWeatherData.rainProbData[growthTransition]
-    local pClouds = ssWeatherData.cloudProbData[growthTransition]
+    local pClouds = 1 - ssWeatherData.cloudProbData[growthTransition]
     --local pHail = ssWeatherData.hailProbData[season]
 
-    local probPartlyCloudy = math.min(pClouds + 0.2, (1 - pClouds) / 2 + pClouds)
-    local probCloudy = math.max(pClouds - 0.1, pClouds - (pClouds - pRain) / 2)
-    local probShowers = math.min(pRain + 0.1, probCloudy - 0.15)
-    local probRain = pRain / 2
+    -- assuming definitions consistent with what is used on weatherspark.com TODO: write manual for weather files
+    local probPartlyCloudy = math.min(pClouds + 0.1, 1.0)
+    local probCloudy = math.max(pClouds - 0.1, 0.1)
+    local probRain = pRain * probCloudy / probPartlyCloudy
+    local probShowers = pRain
 
     local tempLimit = 3
     local wType = ssWeatherManager.WEATHERTYPE_SUN
