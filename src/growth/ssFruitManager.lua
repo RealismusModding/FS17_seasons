@@ -17,8 +17,6 @@ function ssFruitManager:loadMap(name)
     self.fruitsToExclude[FruitUtil.FRUITTYPE_OILSEEDRADISH] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_DRYGRASS] = true
     self.fruitsToExclude[FruitUtil.FRUITTYPE_GRASS] = true
-    self.fruitsToExclude[FruitUtil.FRUITTYPE_SUGARBEET] = true
-    self.fruitsToExclude[FruitUtil.FRUITTYPE_POTATO] = true
 end
 
 function ssFruitManager:loadMapFinished()
@@ -31,13 +29,13 @@ function ssFruitManager:updateHarvestStates()
         local desc = FruitUtil.fruitIndexToDesc[index]
 
         if self:fruitShouldBeUpdated(index) == true then
-            -- Minimize the time a crop can be harvested (1 state, not ~3)
-            desc.minHarvestingGrowthState = desc.maxHarvestingGrowthState
-        end
-
-        -- Sugarcane is a very special fruit
-        if index == FruitUtil.FRUITTYPE_SUGARCANE then
-            desc.minPreparingGrowthState = desc.maxPreparingGrowthState
+            if desc.minPreparingGrowthState == -1 then
+                -- Minimize the time a crop can be harvested (1 state, not ~3)
+                desc.minHarvestingGrowthState = desc.maxHarvestingGrowthState
+            else
+                -- Handle preparingGrowthState properly for sugarcane, sugarbeet and potatoes (and other similar fruits)
+                desc.minPreparingGrowthState = desc.maxPreparingGrowthState
+            end
         end
     end
 end
