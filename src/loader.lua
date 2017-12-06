@@ -229,9 +229,10 @@ function ssSeasonsMod.loadFromXML()
     end
     -- Empty, is solved by ssXMLUtil. Useful for loading defaults
 
+    local ssKey = self.xmlKey .. ".ssSeasons"
     for _, k in pairs(g_modClasses) do
         if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].load ~= nil then
-            _G[k].load(_G[k], xmlFile, "careerSavegame.ssSeasons")
+            _G[k].load(_G[k], xmlFile, ssKey)
         end
     end
 
