@@ -25,10 +25,13 @@ function ssWeatherForecast:loadMap(name)
         end
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
 
-        --self:overwriteRaintable()
+        print_r(self.forecast)
+        self.buildWeather()
+        print_r(ssWeatherManager.weather)
+        self:overwriteRaintable()
         --self:setupStartValues()
     end
-    print_r(self.forecast)
+    
 end
 
 -- Only run this the very first time or if season length changes
@@ -40,7 +43,6 @@ function ssWeatherForecast:buildForecast()
     end
 
     self.forecast = {}
-    ssWeatherManager.weather = {}
 
     for i = 1, self.forecastLength do
         local forecastItem = self:oneDayForecast(i, self.forecast[table.getn(self.forecast)])
@@ -203,18 +205,19 @@ function ssWeatherForecast:_randomRain(ssTmax, season, highTemp)
     return p
 end
 
-function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
+function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
+    local oneRainEvent = {}
 
-    local earlyRainTime = prevEndRainTime + 1 * self.UNITTIME
-    if earlyRainTime > 24 * self.UNITTIME then
-        earlyRainTime = earlyRainTime - 24 * self.UNITTIME
+    local earlyRainTime = prevEndDayTime + 1 * ssWeatherForecast.UNITTIME
+    if earlyRainTime > 24 * ssWeatherForecast.UNITTIME then
+        earlyRainTime = earlyRainTime - 24 * ssWeatherForecast.UNITTIME
     end
 
     oneRainEvent.startDay = dayForecast.day
     oneRainEvent.endDay = oneRainEvent.startDay
     local season = dayForecast.season
-    local gt = g_seasons.environment:transitionAtDay(day)
-    local season = g_seasons.environment:seasonAtDay(day)
+    local gt = g_seasons.environment:transitionAtDay(dayForecast.day)
+    local season = g_seasons.environment:seasonAtDay(dayForecast.day)
 
     local pRain = ssWeatherData.rainProbData[growthTransition]
     local wt = dayForecast.weatherType
@@ -222,18 +225,17 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
     local lowTemp = dayForecast.lowTemp
     local highTemp = dayForecast.highTemp
 
-    local rainFactors = ssWeatherData.rainData[g_seasons.environment:seasonAtDay(oneDayForecast.day)]
-
+    -- setting startTime, endTime and duration
     -- shorter, multiple events
     if wt == ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY or
             wt == ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SLEET then
 
-        oneRainEvent.startRainTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / self.UNITTIME) * self.UNITTIME
-        --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * self.UNITTIME -- capping length of each event
-        oneRainEvent.duration = 2 -- for now
-        oneRainEvent.endRainTime = oneRainEvent.startRainTime + oneRainEvent.duration
+        oneRainEvent.startDayTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / ssWeatherForecast.UNITTIME) * ssWeatherForecast.UNITTIME
+        --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * ssWeatherForecast.UNITTIME -- capping length of each event
+        oneRainEvent.duration = 2 * ssWeatherForecast.UNITTIME -- for now
+        oneRainEvent.endDayTime = oneRainEvent.startDayTime + oneRainEvent.duration
 
     -- one longer event
     elseif wt == ssWeatherManager.WEATHERTYPE_CLOUDY or
@@ -241,34 +243,37 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndRainTime, i)
             wt == ssWeatherManager.WEATHERTYPE_SNOW or
             wt == ssWeatherManager.WEATHERTYPE_FOG then
 
-        oneRainEvent.startRainTime = (math.random() * 10 + 1) * self.UNITTIME
-        oneRainEvent.endRainTime = (math.random() * 5 + 18) * self.UNITTIME
-        oneRainEvent.duration = oneRainEvent.endRainTime - oneRainEvent.startRainTime
+        oneRainEvent.startDayTime = (math.random() * 10 + 1) * ssWeatherForecast.UNITTIME
+        oneRainEvent.endDayTime = (math.random() * 5 + 18) * ssWeatherForecast.UNITTIME
+        oneRainEvent.duration = oneRainEvent.endDayTime - oneRainEvent.startDayTime
     end
 
-    if oneRainEvent.endRainTime > 24 * self.UNITTIME then
-        oneRainEvent.endRainTime = oneRainEvent.endRainTime - 24 * UNITTIME
-        oneRainEvent.endDay = oneRainEvent.endDay + 1
+    -- correcting endTime if event ends next day
+    if oneRainEvent.endDayTime > 24 * ssWeatherForecast.UNITTIME then
+        oneRainEvent.endDayTime = oneRainEvent.endDayTime - 24 * ssWeatherForecast.UNITTIME
+        oneRainEvent.endDay = oneRainEvent.endDay + 1 * ssWeatherForecast.UNITTIME
     end
 
-    local tempIndication = ssWeatherManager:diurnalTemp((startRainTime + endRainTime)/2, highTemp, lowTemp, highTemp, lowTemp)
+    local tempIndication = ssWeatherManager:diurnalTemp((oneRainEvent.startDayTime + oneRainEvent.endDayTime)/2, highTemp, lowTemp, highTemp, lowTemp)
 
-    if weatherType == ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY or weatherType == ssWeatherManager.WEATHERTYPE_CLOUDY then
-        oneRainEvent.rainType = ssWeatherManager.RAINTYPE_CLOUDY
+    -- setting rainTypeId
+    if wt == ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY or wt == ssWeatherManager.WEATHERTYPE_CLOUDY then
+        oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_CLOUDY
 
-    elseif weatherType == ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS or
-            weatherType == ssWeatherManager.WEATHERTYPE_RAIN or
-            weatherType == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
-            weatherType == ssWeatherManager.WEATHERTYPE_SNOW then
+    elseif wt == ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS or
+            wt == ssWeatherManager.WEATHERTYPE_RAIN or
+            wt == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
+            wt == ssWeatherManager.WEATHERTYPE_SNOW or
+            wt == ssWeatherManager.WEATHERTYPE_SLEET then
 
         if tempIndication < 0 then
-            oneRainEvent.rainType = ssWeatherManager.RAINTYPE_SNOW
+            oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_SNOW
         else
-            oneRainEvent.rainType = ssWeatherManager.RAINTYPE_RAIN
+            oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_RAIN
         end
 
-    elseif weatherType == ssWeatherManager.WEATHERTYPE_FOG then
-        oneRainEvent.rainType = ssWeatherManager.RAINTYPE_FOG
+    elseif wt == ssWeatherManager.WEATHERTYPE_FOG then
+        oneRainEvent.rainTypeId = ssWeatherManager.RAINTYPE_FOG
     end
 
     return oneRainEvent
@@ -276,35 +281,35 @@ end
 
 function ssWeatherForecast:buildWeather()
     local weather = {}
-    local prevEndRainTime = 1 * self.UNITTIME
+    local prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
     
     for j = 1, 3 do --make weather for the next three days
-        local events = self.forecast[j].numEvents
+        local events = ssWeatherForecast.forecast[j].numEvents
 
         if events > 0 then
             for i = 1, events do
-                local oneRainEvent = getRainEvent(self.forecast[j], prevEndRainTime, i)
+                local oneRainEvent = ssWeatherForecast:getRainEvent(ssWeatherForecast.forecast[j], prevEndDayTime, i)
                 table.insert(weather, oneRainEvent)
     
-                prevEndRainTime = oneRainEvent.endRainTime
+                prevEndDayTime = oneRainEvent.endDayTime
     
                 -- if last event and events are within the same day reset prevRainTime
                 -- if next day is sunny reset prevRainTime
-                if i == events and (oneRainEvent.endDay == oneRainEvent.startDay or self.forecast[j + 1].weatherType == ssWeatherManager.WEATHERTYPE_SUN) then
-                    prevEndRainTime = 1 * self.UNITTIME
+                if i == events and (oneRainEvent.endDay == oneRainEvent.startDay or ssWeatherForecast.forecast[j + 1].weatherType == ssWeatherManager.WEATHERTYPE_SUN) then
+                    prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
                 end
             end
         end
     end
 
-    self:foggyMorning()
+    --self:foggyMorning()
     ssWeatherManager.weather = weather
 end
 
 -- adding weather events
 -- run after updateForecast
 function ssWeatherForecast:updateWeather()
-    local prevEndRainTime = 1 * self.UNITTIME
+    local prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
     local events = forecast[2].numEvents
 
     if table.getn(self.weather) > 0 then
@@ -315,18 +320,18 @@ function ssWeatherForecast:updateWeather()
 
     if events > 0 then
         for i = 1, events do
-            local oneRainEvent = getRainEvent(self.forecast[j], prevEndRainTime, i)
+            local oneRainEvent = getRainEvent(self.forecast[j], prevEndDayTime, i)
             table.insert(ssWeatherManager.weather, oneRainEvent)
         
-            prevEndRainTime = endRainTime
+            prevEndDayTime = oneRainEvent.endDayTime
     
             if i == events and endDay == startDay then
-                prevEndRainTime = 1 * self.UNITTIME
+                prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
             end
         end
     end
 
-    self:foggyMorning()
+    --self:foggyMorning()
 end
 
 function ssWeatherForecast:removeWeather()
@@ -391,8 +396,8 @@ function ssWeatherForecast:_getFogEvent()
         rhPrev = rh
     end
 
-    oneFogEvent.startRainTime = startFogTime * self.UNITTIME
-    oneFogEvent.endRainTime = endFogTime * self.UNITTIME
+    oneFogEvent.startRainTime = startFogTime * ssWeatherForecast.UNITTIME
+    oneFogEvent.endRainTime = endFogTime * ssWeatherForecast.UNITTIME
     oneFogEvent.duration = oneFogEvent.endRainTime - oneFogEvent.startRainTime
     oneFogEvent.rainType = ssWeatherManager.RAINTYPE_FOG
 
@@ -403,15 +408,15 @@ end
 function ssWeatherForecast:overwriteRaintable()
     local env = g_currentMission.environment
     local tmpWeather = {}
+    env.numRains = table.getn(ssWeatherManager.weather)
 
-    for index = 1, self.forecastLength do
+    for index = 1, env.numRains do
         if ssWeatherManager.weather[index].rainTypeId ~= ssWeatherManager.RAINTYPE_SUN then
             local tmpSingleWeather = deepCopy(ssWeatherManager.weather[index])
             table.insert(tmpWeather, tmpSingleWeather)
         end
     end
-
-    env.numRains = table.getn(tmpWeather)
+    
     env.rains = tmpWeather
 
     if g_seasons.environment.currentDayOffset ~= nil then
@@ -423,7 +428,7 @@ function ssWeatherForecast:overwriteRaintable()
         end
     end
 
-    self:switchRainSnow()
+    --self:switchRainSnow()
 end
 
 -- inserting a hail event
@@ -436,8 +441,8 @@ function ssWeatherForecast:updateHail(day)
         dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 
         ssWeatherManager.weather[1].rainTypeId = ssWeatherManager.RAINTYPE_HAIL
-        ssWeatherManager.weather[1].startDayTime = ssUtil.triDist(dayStart, dayStart + 4, dayEnd - 6) * self.UNITTIME
-        ssWeatherManager.weather[1].duration = ssUtil.triDist(1, 2, 3) * self.UNITTIME
+        ssWeatherManager.weather[1].startDayTime = ssUtil.triDist(dayStart, dayStart + 4, dayEnd - 6) * ssWeatherForecast.UNITTIME
+        ssWeatherManager.weather[1].duration = ssUtil.triDist(1, 2, 3) * ssWeatherForecast.UNITTIME
         ssWeatherManager.weather[1].endDayTime = ssWeatherManager.weather[1].startDayTime + ssWeatherManager.weather[1].duration
         ssWeatherManager.weather[1].startDay = self.forecast[1].day
         ssWeatherManager.weather[1].endDay = self.forecast[1].day

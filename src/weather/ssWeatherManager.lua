@@ -61,82 +61,82 @@ function ssWeatherManager:loadGameFinished()
     end
 end
 
-function ssWeatherManager:readStream(streamId, connection)
-    self.snowDepth = streamReadFloat32(streamId)
-    self.soilTemp = streamReadFloat32(streamId)
-    self.cropMoistureContent = streamReadFloat32(streamId)
-    self.moistureEnabled = streamReadBool(streamId)
-    self.prevHighTemp = streamReadFloat32(streamId)
-    self.soilWaterContent = streamReadFloat32(streamId)
+--function ssWeatherManager:readStream(streamId, connection)
+--    self.snowDepth = streamReadFloat32(streamId)
+--    self.soilTemp = streamReadFloat32(streamId)
+--    self.cropMoistureContent = streamReadFloat32(streamId)
+--    self.moistureEnabled = streamReadBool(streamId)
+--    self.prevHighTemp = streamReadFloat32(streamId)
+--    self.soilWaterContent = streamReadFloat32(streamId)
 
-    self.forecastLength = streamReadUInt8(streamId)
-    local numRains = streamReadUInt8(streamId)
+--    self.forecastLength = streamReadUInt8(streamId)
+--    local numRains = streamReadUInt8(streamId)
 
     -- load forecast
-    self.forecast = {}
+--    self.forecast = {}
 
-    for i = 1, self.forecastLength do
-        local day = {}
+--    for i = 1, self.forecastLength do
+--        local day = {}
 
-        day.day = streamReadInt16(streamId)
-        day.season = streamReadUInt8(streamId)
+--        day.day = streamReadInt16(streamId)
+--        day.season = streamReadUInt8(streamId)
 
-        day.weatherType = streamReadString(streamId)
-        day.highTemp = streamReadFloat32(streamId)
-        day.lowTemp = streamReadFloat32(streamId)
+--        day.weatherType = streamReadString(streamId)
+--        day.highTemp = streamReadFloat32(streamId)
+--        day.lowTemp = streamReadFloat32(streamId)
 
-        table.insert(self.forecast, day)
-    end
+--        table.insert(self.forecast, day)
+--    end
 
     -- load rains
-    self.weather = {}
+--    self.weather = {}
 
-    for i = 1, numRains do
-        local rain = {}
+--    for i = 1, numRains do
+--        local rain = {}
 
-        rain.startDay = streamReadInt16(streamId)
-        rain.endDayTime = streamReadFloat32(streamId)
-        rain.startDayTime = streamReadFloat32(streamId)
-        rain.endDay = streamReadInt16(streamId)
-        rain.rainTypeId = streamReadString(streamId)
-        rain.duration = streamReadFloat32(streamId)
+--        rain.startDay = streamReadInt16(streamId)
+--        rain.endDayTime = streamReadFloat32(streamId)
+--        rain.startDayTime = streamReadFloat32(streamId)
+--        rain.endDay = streamReadInt16(streamId)
+--        rain.rainTypeId = streamReadString(streamId)
+--        rain.duration = streamReadFloat32(streamId)
 
-        table.insert(self.weather, rain)
-    end
+--        table.insert(self.weather, rain)
+--    end
 
-    self:overwriteRaintable()
-    self:setupStartValues()
-end
+--    self:overwriteRaintable()
+--    self:setupStartValues()
+--end
 
-function ssWeatherManager:writeStream(streamId, connection)
-    streamWriteFloat32(streamId, self.snowDepth)
-    streamWriteFloat32(streamId, self.soilTemp)
-    streamWriteFloat32(streamId, self.cropMoistureContent)
-    streamWriteBool(streamId, self.moistureEnabled)
-    streamWriteFloat32(streamId, self.prevHighTemp)
-    streamWriteFloat32(streamId, self.soilWaterContent)
+--function ssWeatherManager:writeStream(streamId, connection)
+--    streamWriteFloat32(streamId, self.snowDepth)
+--    streamWriteFloat32(streamId, self.soilTemp)
+--    streamWriteFloat32(streamId, self.cropMoistureContent)
+--    streamWriteBool(streamId, self.moistureEnabled)
+--    streamWriteFloat32(streamId, self.prevHighTemp)
+--    streamWriteFloat32(streamId, self.soilWaterContent)
 
-    streamWriteUInt8(streamId, table.getn(self.forecast))
-    streamWriteUInt8(streamId, table.getn(self.weather))
+--    streamWriteUInt8(streamId, table.getn(self.forecast))
+--    streamWriteUInt8(streamId, table.getn(self.weather))
 
-    for _, day in pairs(self.forecast) do
-        streamWriteInt16(streamId, day.day)
-        streamWriteUInt8(streamId, day.season)
+--    for _, day in pairs(self.forecast) do
+--        streamWriteInt16(streamId, day.day)
+--        streamWriteUInt8(streamId, day.season)
 
-        streamWriteString(streamId, day.weatherType)
-        streamWriteFloat32(streamId, day.highTemp)
-        streamWriteFloat32(streamId, day.lowTemp)
-    end
+--        streamWriteString(streamId, day.weatherType)
+--        streamWriteFloat32(streamId, day.highTemp)
+--        streamWriteFloat32(streamId, day.lowTemp)
+--    end
 
-    for _, rain in pairs(self.weather) do
-        streamWriteInt16(streamId, rain.startDay)
-        streamWriteFloat32(streamId, rain.endDayTime)
-        streamWriteFloat32(streamId, rain.startDayTime)
-        streamWriteInt16(streamId, rain.endDay)
-        streamWriteString(streamId, rain.rainTypeId)
-        streamWriteFloat32(streamId, rain.duration)
-    end
-end
+--    for _, rain in pairs(self.weather) do
+--        streamWriteInt16(streamId, rain.startDay)
+--        streamWriteFloat32(streamId, rain.endDayTime)
+--        streamWriteFloat32(streamId, rain.startDayTime)
+--        streamWriteInt16(streamId, rain.endDay)
+--        streamWriteString(streamId, rain.rainTypeId)
+--        streamWriteFloat32(streamId, rain.duration)
+--    end
+--end
 
 function ssWeatherManager:update(dt)
     local currentRain = g_currentMission.environment.currentRain
@@ -455,7 +455,7 @@ end
 
 function ssWeatherManager:calculateRainAmount()
     local amount = 0
-    local seasonsLengthFactor = (3.0 * g_seasons.environment.daysInSeason)^0.1
+    local seasonLengthFactor = (3.0 * g_seasons.environment.daysInSeason)^0.1
     local weatherTypeFactor = 1
 
     -- less intensity with "all day" rain
