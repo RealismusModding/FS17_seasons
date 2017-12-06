@@ -315,8 +315,6 @@ FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveT
 Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, ssSeasonsMod.nullFinished)
 Mission00.loadVehiclesFinish = Utils.appendedFunction(Mission00.loadVehiclesFinish, ssSeasonsMod.nullVehiclesFinished)
 
-FSCareerMissionInfo.saveToXML = Utils.appendedFunction(FSCareerMissionInfo.saveToXML, ssSeasonsMod.saveToXML)
-
 FSBaseMission.delete = Utils.prependedFunction(FSBaseMission.delete, ssSeasonsMod.delete)
 FSBaseMission.delete = Utils.appendedFunction(FSBaseMission.delete, ssSeasonsMod.deleteFinished)
 
