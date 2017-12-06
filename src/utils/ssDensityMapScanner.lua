@@ -95,6 +95,8 @@ function ssDensityMapScanner:loadVehiclesFinished()
             self.currentJob = self.queue:pop()
             self.currentJob.x = 0
             self.currentJob.z = 0
+
+            log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
 
         while self.currentJob ~= nil do
