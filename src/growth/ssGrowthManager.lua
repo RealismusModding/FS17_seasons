@@ -150,7 +150,7 @@ function ssGrowthManager:checkAndAddNewFruits(updateGerminationData)
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
-            log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
+            --log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
             self:unknownFruitFound(fruitName, updateGerminationData)
         end
     end
@@ -193,7 +193,7 @@ function ssGrowthManager:transitionChanged()
     g_seasons.growthDebug:setFakeTransition(transition)
 
     if not self.isNewSavegame or transition ~= g_seasons.environment.TRANSITION_EARLY_SPRING then
-        log("GrowthManager enabled - transition changed to: " .. transition)
+        --log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
     end
 end
