@@ -250,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représente un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
         <text name="ss_helpText_18_04" text="Tous les véhicules doivent être démarrés manuellement." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Outil de mesure" />
+        <text name="ss_helpText_19_01" text="Le Wopstr M420 est un outil de mesure qui peut être utilisé pour obtenir plus d’informations sur la terre, les arbres, les bottes, et les palettes. Après avoir acheté cet outil dans le magasin, il peut être activé comme une tronçonneuse. Pointez sur l’objet que vous souhaitez mesurer et activez l’outil afin de mesurer l’objet. Une mesure peut échouer." />
+        <text name="ss_helpText_19_02" text="Pour les arbres plantés vous pouvez connaître l’espèce de l’arbre, sa taille et la distance qui le sépare de l’arbre le plus proche. Pour les bottes vous pouvez connaître leur contenu et pour les bottes d’herbes le stade de fermentation. Mesurer le sol vous informe de la localisation, de l’altitude, du type de culture, de la croissance et de l’humidité de la culture, le niveau de fertilisation et l’humidité du sol. Pour les palettes, vous connaitrez leur contenu." />
+        <text name="ss_helpText_19_03" text="Pour plus d’informations à propos du Wopstr M420 et une explication détaillée des symboles, veuillez jeter un œil au site de Realismus Modding : www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
