@@ -19,6 +19,12 @@ function ssPlayer:preLoad()
     g_seasons.player = self
 
     ssUtil.appendedFunction(Player, "updateTick", ssPlayer.playerUpdateTick)
+
+    if TipUtil.getCollisionHeightAtWorldPos == nil then
+        TipUtil.getCollisionHeightAtWorldPos = function (x,y,z)
+            return getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, x, y, z)
+        end
+    end
 end
 
 function ssPlayer:playerUpdateTick(dt)
