@@ -158,8 +158,6 @@ function ssSnow:applySnow(targetSnowDepth)
             self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
 
             if targetSnowDepth > 0 then
-                -- log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-
                 if self.appliedSnowDepth == 0 then
                     ssDensityMapScanner:queueJob("ssRemoveSwaths")
                 end
@@ -171,8 +169,6 @@ function ssSnow:applySnow(targetSnowDepth)
         elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT then
             self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
             self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-
-            -- log("Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
 
             ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         end

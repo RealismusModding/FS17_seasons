@@ -510,8 +510,7 @@ function ssWeatherManager:calculateSoilTemp(lowTemp, highTemp, days, soilTemp, s
     end
 
     soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
-    --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
-
+    
     if soilTemp > soilTempMax then
         soilTempMax = soilTemp
     end

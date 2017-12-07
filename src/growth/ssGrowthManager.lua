@@ -150,7 +150,7 @@ function ssGrowthManager:checkAndAddNewFruits(updateGerminationData)
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
         --handling new unknown fruits
         if self.defaultFruitsData[fruitName] == nil then
-            --log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
+            log("ssGrowthManager:update: Fruit not found in default table: " .. fruitName)
             self:unknownFruitFound(fruitName, updateGerminationData)
         end
     end
@@ -193,7 +193,6 @@ function ssGrowthManager:transitionChanged()
     g_seasons.growthDebug:setFakeTransition(transition)
 
     if not self.isNewSavegame or transition ~= g_seasons.environment.TRANSITION_EARLY_SPRING then
-        --log("GrowthManager enabled - transition changed to: " .. transition)
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
     end
 end
@@ -221,8 +220,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         if self.growthData[transition][fruitName] ~= nil then
             --set growth state
             if self.growthData[transition][fruitName].setGrowthState ~= nil
-                and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
-                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. transition .. " between growth states " .. self.growthData[transition][fruitName].setGrowthState .. " and " .. self.growthData[transition][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[transition][fruitName].setGrowthState)
+                    and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
                 self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
             --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState

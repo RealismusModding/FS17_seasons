@@ -141,8 +141,6 @@ function ssDensityMapScanner:update(dt)
             num = g_currentMission.terrainSize / ssDensityMapScanner.BLOCK_WIDTH
         end
 
-        -- log("num", num)
-
         for i = 1, num do
             if not self:run(self.currentJob) then
                 self.currentJob = nil
@@ -255,8 +253,6 @@ function ssDensityMapScanner:run(job)
         heightWorldX = startWorldX
         heightWorldZ = startWorldZ + height - pixelSize * 0.5
     end
-
-    -- log("run block", startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
 
     jobRunnerInfo.func(jobRunnerInfo.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
 

@@ -311,7 +311,6 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                 local sourceShapeId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
 
                 if sourceShapeId ~= nil then -- Can be defined in an other I3D file.
-                    -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
                     self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialIds = self:getShapeMaterials(sourceShapeId)
 
                     -- Load the current material
@@ -422,7 +421,6 @@ function ssReplaceVisual:updateTextures(nodeId)
             end
 
             if secondaryNodeTable.materialIds ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
@@ -435,7 +433,6 @@ function ssReplaceVisual:updateTextures(nodeId)
 
             -- MATERIALID is NULL for birch
             if secondaryNodeTable.materialIds ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
@@ -454,7 +451,6 @@ end
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcIds)
     if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == shapeName then
-        -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId))
         self:setShapeMaterials(nodeId, materialSrcIds)
     end
 
