@@ -24,14 +24,8 @@ function ssWeatherForecast:loadMap(name)
             self:buildForecast()
         end
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
-
-        print_r(self.forecast)
-        self.buildWeather()
-        print_r(ssWeatherManager.weather)
-        self:overwriteRaintable()
         --self:setupStartValues()
     end
-    
 end
 
 -- Only run this the very first time or if season length changes
@@ -49,6 +43,11 @@ function ssWeatherForecast:buildForecast()
 
         table.insert(self.forecast, forecastItem)
     end
+
+    print_r(self.forecast)
+    self.buildWeather()
+    print_r(ssWeatherManager.weather)
+    self:overwriteRaintable()
 end
 
 function ssWeatherForecast:updateForecast()
@@ -59,10 +58,12 @@ function ssWeatherForecast:updateForecast()
     table.remove(self.forecast, 1)
     table.insert(self.forecast, forecastItem)
 
+    self.updateWeather()
     --self:updateHail()
-    --self:overwriteRaintable()
+    self:overwriteRaintable()
 
-    g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, ssWeatherManager.prevHighTemp, ssWeatherManager.soilTemp))
+    --TODO: fix event
+    --g_server:broadcastEvent(ssWeatherManagerDailyEvent:new(oneDayForecast, oneDayRain, ssWeatherManager.prevHighTemp, ssWeatherManager.soilTemp))
 end
 
 function ssWeatherForecast:oneDayForecast(i,prevDayForecast)
@@ -184,8 +185,6 @@ function ssWeatherForecast:switchRainSnow()
     end
 end
 
-
-
 function ssWeatherForecast:_randomRain(ssTmax, season, highTemp)
 
     if season == g_seasons.environment.SEASON_WINTER or season == g_seasons.environment.SEASON_AUTUMN then
@@ -234,7 +233,7 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
 
         oneRainEvent.startDayTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / ssWeatherForecast.UNITTIME) * ssWeatherForecast.UNITTIME
         --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * ssWeatherForecast.UNITTIME -- capping length of each event
-        oneRainEvent.duration = 2 * ssWeatherForecast.UNITTIME -- for now
+        oneRainEvent.duration = ssUtil.tridist(1,2,24 / (events + 4)) * ssWeatherForecast.UNITTIME
         oneRainEvent.endDayTime = oneRainEvent.startDayTime + oneRainEvent.duration
 
     -- one longer event
@@ -320,12 +319,12 @@ function ssWeatherForecast:updateWeather()
 
     if events > 0 then
         for i = 1, events do
-            local oneRainEvent = getRainEvent(self.forecast[j], prevEndDayTime, i)
+            local oneRainEvent = ssWeatherForecast:getRainEvent(self.forecast[j], prevEndDayTime, i)
             table.insert(ssWeatherManager.weather, oneRainEvent)
         
             prevEndDayTime = oneRainEvent.endDayTime
     
-            if i == events and endDay == startDay then
+            if i == events and endDay == oneRainEvent.startDay then
                 prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
             end
         end
@@ -520,10 +519,11 @@ function ssWeatherForecast:calculateAverageTransitionTemp(gt, deterministic)
     local averageDailyMaximum = ssWeatherData.temperatureData[gt]
 
     if not deterministic then
-        avgTemp = ssUtil.triDist(averageDailyMaximum - 2, averageDailyMaximum, averageDailyMaximum + 2)
+        local seasonalTempVar = = 0.009 * gt ^ 2 - 0.1 * gt + 1.15
+        return ssUtil.normDist(averageDailyMaximum, seasonalTempVar)
+    else
+        return averageDailyMaximum
     end
-    
-    return avgTemp
 end
 
 function ssWeatherForecast:calculateTemp(meanMaxTemp, deterministic)
@@ -531,8 +531,8 @@ function ssWeatherForecast:calculateTemp(meanMaxTemp, deterministic)
     local lowTemp = 0.75 * meanMaxTemp - 5
 
     if not deterministic then
-        highTemp = ssUtil.normDist(meanMaxTemp, 2.5)
-        lowTemp = ssUtil.normDist(0, 2) + 0.75 * meanMaxTemp - 5
+        highTemp = ssUtil.normDist(meanMaxTemp, 2)
+        lowTemp = ssUtil.normDist(0, 1.5) + 0.75 * meanMaxTemp - 5
     end
     
     return lowTemp, highTemp
