@@ -254,5 +254,14 @@
         <text name="ss_helpText_18_02" text="Si usted decide cambiar la duración de la temporada en medio de una partida existente, se recomienda que primero cambie la duración de la temporada durante el invierno para reducir los efectos no deseados sobre los cultivos existentes y segundo reinicie el juego / servidor después de cambiar la duración de la temporada." />
         <text name="ss_helpText_18_03" text="Es su juego y puede jugar como desee, pero Seasons le sugiere como desafío, jugar con temporadas de 9 días y aceleración de tiempo a 5x. De esta manera , en primavera trabajará los campos y sembrará, cortará hierba y heno en verano, cosechará en otoño y sembrará los cereales de invierno, durante el cual, podrá atender a los animales, las máquinas, los bosques y vender sus cultivos con los mejores precios." />
         <text name="ss_helpText_18_04" text="Todos los vehículos necesitan ser arrancados manualmente, a menos que se estén en Follow-me." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

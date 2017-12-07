@@ -254,5 +254,14 @@
         <text name="ss_helpText_18_02" text="Caso decida mudar a duração da estações no meio de um jogo salvo, é recomendado: 1) mude no inverno para diminuir efeitos não desejados em cultivos e 2) reinicie o jogo/servidor após mudar a duração." />
         <text name="ss_helpText_18_03" text="O jogo é seu e você joga como queira, porém é sugestão para um desafio maior jogar em estações de 9 dias com aceleração de tempo 5x. Deste jeito você passa a primavera cultivando o solo e plantando, fertilizando e colhendo feno no verão, colhendo e arando no outono, e cuidando de animais, máquinas, florestas, e vendendo grãos no inverno." />
         <text name="ss_helpText_18_04" text="Todos os veículos precisam serem ligados manualmente." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

@@ -249,5 +249,14 @@
         <text name="ss_helpText_18_02" text="Si vous souhaitez modifier la durée des saisons pour une partie en cours, il est recommandé de : 1) procéder au changement seulement pendant l'hiver afin de minimiser les effets indésirables sur les cultures en place. 2) redémarrer le jeu ensuite (sur le serveur le cas échéant)." />
         <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représente un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
         <text name="ss_helpText_18_04" text="Tous les véhicules doivent être démarrés manuellement." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

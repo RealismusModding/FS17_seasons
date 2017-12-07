@@ -135,6 +135,13 @@
             <item type="text" value="ss_helpText_17_04" />
         </helpLine>
 
+        <!-- Wopstr -->
+        <helpLine title="ss_helpTitle_19">
+            <item type="text" value="ss_helpText_19_01" />
+            <item type="text" value="ss_helpText_19_02" />
+            <item type="text" value="ss_helpText_19_03" />
+        </helpLine>
+
         <!-- Misc. -->
         <helpLine title="ss_helpTitle_18">
             <item type="text" value="ss_helpText_18_01" />

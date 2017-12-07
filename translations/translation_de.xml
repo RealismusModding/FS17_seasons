@@ -249,5 +249,14 @@
         <text name="ss_helpText_18_02" text="Wenn du dich entscheidest, die Länge der Saison mitten in einem bestehenden Spiel zu ändern, wird empfohlen 1) die Saisonlänge im Winter zu ändern, um unerwünschte Auswirkungen auf bestehende Zustände der Pflanzen zu reduzieren und 2) das Spiel / den Server nach dem Wechsel der Saison neu zu starten." />
         <text name="ss_helpText_18_03" text="Spiele wie du möchtest. Aber es wird als Herausforderung vorgeschlagen, mit einer 9-Tage-Saison und mit 5facher Zeitbeschleunigung zu spielen. Auf diese Weise verbringst du den Frühling nur mit dem Anbau und der Anpflanzung von Feldfrüchten, der Ernte und das Heueinholen im Sommer, der Ernte und dem Pflügen im Herbst und der Pflege der Tiere, Maschinen, Wälder und dem Verkauf von Feldfrüchten im Winter." />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>
