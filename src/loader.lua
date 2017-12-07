@@ -224,9 +224,9 @@ function ssSeasonsMod.loadFromXML()
 
     local xmlFile = nil
     if g_currentMission.missionInfo.isValid then
-        local filename = g_currentMission.missionInfo.savegameDirectory .. "/careerSavegame.xml"
-        xmlFile = loadXMLFile("xml", filename)
+        xmlFile = g_currentMission.missionInfo.xmlFile
     end
+
     -- Empty, is solved by ssXMLUtil. Useful for loading defaults
 
     local ssKey = g_currentMission.missionInfo.xmlKey .. ".ssSeasons"
@@ -234,10 +234,6 @@ function ssSeasonsMod.loadFromXML()
         if _G[k] ~= nil and _G[k].loadMap ~= nil and _G[k].load ~= nil then
             _G[k].load(_G[k], xmlFile, ssKey)
         end
-    end
-
-    if xmlFile ~= nil then
-        delete(xmlFile)
     end
 end
 
