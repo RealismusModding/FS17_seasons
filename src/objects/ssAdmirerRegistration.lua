@@ -9,11 +9,25 @@
 
 ssAdmirerRegistration = {}
 
-function ssAdmirerRegistration:preload()
-    ssUtil.overwrittenConstant(getfenv(0), "ssIcePlane", ssIcePlane)
-    ssUtil.overwrittenConstant(getfenv(0), "ssSeasonAdmirer", ssSeasonAdmirer)
-    ssUtil.overwrittenConstant(getfenv(0), "ssSnowAdmirer", ssSnowAdmirer)
+function ssAdmirerRegistration:preLoad()
+    local sEnv = getfenv(0)
+
+    self.icePlane = sEnv.ssIcePlane
+    self.seasonAdmirer = sEnv.ssSeasonAdmirer
+    self.snowAdmirer = sEnv.ssSnowAdmirer
+
+    sEnv.ssIcePlane = ssIcePlane
+    sEnv.ssSeasonAdmirer = ssSeasonAdmirer
+    sEnv.ssSnowAdmirer = ssSnowAdmirer
 end
 
 function ssAdmirerRegistration:loadMap()
+end
+
+function ssAdmirerRegistration:deleteMap()
+    local sEnv = getfenv(0)
+
+    sEnv.ssIcePlane = self.icePlane
+    sEnv.ssSeasonAdmirer = self.seasonAdmirer
+    sEnv.ssSnowAdmirer = self.snowAdmirer
 end
