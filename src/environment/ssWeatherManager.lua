@@ -155,6 +155,8 @@ function ssWeatherManager:loadMap(name)
         self:overwriteRaintable()
         self:setupStartValues()
     end
+
+    g_currentMission.environment.currentRain = nil
 end
 
 function ssWeatherManager:loadGameFinished()
@@ -208,6 +210,21 @@ function ssWeatherManager:readStream(streamId, connection)
         table.insert(self.weather, rain)
     end
 
+    if streamReadBool(streamId) then
+        local typeIndex = streamReadUInt8(streamId)
+        local startDay = streamReadInt32(streamId)
+        local startDayTime = streamReadFloat32(streamId)
+        local duration = streamReadFloat32(streamId) * (60 * 1000)
+
+        local environment = g_currentMission.environment
+
+        if environment ~= nil then
+            local typeId = environment.rainTypes[typeIndex + 1].typeId
+
+            environment.currentRain = environment:createRainObject(typeId, startDay, startDayTime, duration)
+        end
+    end
+
     self:overwriteRaintable()
     self:setupStartValues()
 end
@@ -239,6 +256,16 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteInt16(streamId, rain.endDay)
         streamWriteString(streamId, rain.rainTypeId)
         streamWriteFloat32(streamId, rain.duration)
+    end
+
+    local environment = g_currentMission.environment
+    if streamWriteBool(streamId, environment.currentRain ~= nil) then
+        local rain = environment.currentRain
+
+        streamWriteUInt8(streamId, environment.rainTypeIdToType[rain.rainTypeId].typeIndex)
+        streamWriteInt32(streamId, rain.startDay)
+        streamWriteFloat32(streamId, rain.startDayTime)
+        streamWriteFloat32(streamId, rain.duration / (60 * 1000))
     end
 end
 
@@ -510,7 +537,7 @@ function ssWeatherManager:calculateSoilTemp(lowTemp, highTemp, days, soilTemp, s
     end
 
     soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
-    
+
     if soilTemp > soilTempMax then
         soilTempMax = soilTemp
     end
