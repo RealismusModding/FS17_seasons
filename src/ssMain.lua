@@ -215,7 +215,7 @@ function ssMain:update(dt)
         end
 
         g_gui:showYesNoDialog({
-            text = ssLang.getText("dialog_resetGrowth")
+            text = ssLang.getText("dialog_resetGrowth"),
             title = ssLang.getText("dialog_resetGrowth_title"),
             dialogType = DialogElement.TYPE_WARNING,
             callback = resetAction,
