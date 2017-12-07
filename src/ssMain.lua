@@ -76,10 +76,6 @@ function ssMain:load(savegame, key)
 
     self.isNewSavegame = savegame == nil
     self.isOldSavegame = savegame ~= nil and not hasXMLProperty(savegame, key) -- old game, no seasons
-
-
-    self.DEBUG_PRINT = "INSG " .. tostring(self.isNewSavegame) .. " IOSG " .. tostring(self.isOldSavegame) .. " SG " .. tostring(savegame) .. " P "
-        .. tostring(savegame ~= nil and hasXMLProperty(savegame, key)) .. " K " .. tostring(key) .. " V " .. ssXMLUtil.getInt(savegame, key .. ".version", -1)
 end
 
 function ssMain:save(savegame, key)
@@ -218,10 +214,8 @@ function ssMain:update(dt)
             g_gui:showGui("")
         end
 
-        self.DEBUG_PRINT = self.DEBUG_PRINT .. " SRW " .. tostring(self.showedResetWarning)
-
         g_gui:showYesNoDialog({
-            text = ssLang.getText("dialog_resetGrowth") .. " " .. self.DEBUG_PRINT,
+            text = ssLang.getText("dialog_resetGrowth")
             title = ssLang.getText("dialog_resetGrowth_title"),
             dialogType = DialogElement.TYPE_WARNING,
             callback = resetAction,
