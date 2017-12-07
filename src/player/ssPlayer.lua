@@ -23,7 +23,7 @@ end
 
 function ssPlayer:playerUpdateTick(dt)
     local snowDepth = g_seasons.weather.snowDepth
-    if g_currentMission:getIsServer() then
+    if self.isServer then
         snowDepth = ssSnow.appliedSnowDepth
     end
 
@@ -56,14 +56,12 @@ function ssPlayer:playerUpdateTick(dt)
     end
 
     -- Prevent player from getting stuck in a high level of snow
-    if g_currentMission.controlPlayer then
+    if self.isControlled then
         local px, py, pz = getTranslation(self.rootNode)
-        local dy, delta = getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, px, py, pz)
+        local dy, delta = TipUtil.getCollisionHeightAtWorldPos(px, py, pz)
         local heightOffset =  0.5 * self.height -- for root node origin to terrain
-
-        if py - heightOffset < dy - 0.25 then
-            py = dy - 0.2 + heightOffset
-
+        if py < dy + heightOffset - 0.1 then
+            py = dy + heightOffset
             setTranslation(self.rootNode, px, py, pz)
         end
     end
