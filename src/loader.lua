@@ -7,7 +7,7 @@
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
-getfenv(0)["g_testConsoleVersion"] = true
+getfenv(0)["g_testConsoleVersion"] = false --<%=norestart %>
 
 ssSeasonsMod = {}
 
