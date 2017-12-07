@@ -186,7 +186,7 @@ function ssVehicle:loadRepairFactors()
 
         local RF1 = getXMLFloat(file, key .. ".RF1#value")
         local RF2 = getXMLFloat(file, key .. ".RF2#value")
-        local lifetime = getXMLFloat(file, key .. ".ssLifeTime#value")
+        local lifetime = getXMLFloat(file, key .. ".lifetime#value")
 
         if RF1 == nil or RF2 == nil or lifetime == nil then
             logInfo("ssVehicle:", "repairFactors.xml is invalid")
