@@ -16,13 +16,23 @@ function ssHelpLines:loadMap()
     self:loadFromXML(g_seasons.modDir .. "resources/gui/helpLine.xml")
 end
 
--- TODO(console): reverse
+function ssHelpLines:deleteMap()
+    for _, index in ipairs(self.categoryIndices) do
+        table.remove(g_inGameMenu.helpLineCategories, index)
+        table.remove(g_inGameMenu.helpLineCategorySelectorElement.texts, index)
+
+        g_inGameMenu.helpLineCategorySelectorElement:updateTextElement();
+    end
+end
+
 function ssHelpLines:loadI18NIntoGlobal(key)
     g_i18n.globalI18N:setText(key, ssLang.getText(key))
 end
 
 function ssHelpLines:loadFromXML(path)
     local xmlFile = loadXMLFile("helpLine", path)
+
+    self.categoryIndices = {}
 
     local categoryIndex = 0
     while true do
@@ -83,6 +93,8 @@ function ssHelpLines:loadFromXML(path)
 
         table.insert(g_inGameMenu.helpLineCategories, category)
         categoryIndex = categoryIndex + 1
+
+        table.insert(self.categoryIndices, table.getn(g_inGameMenu.helpLineCategories))
     end
 
     delete(xmlFile)
