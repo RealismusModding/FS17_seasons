@@ -16,7 +16,6 @@ end
 
 function ssSwathManager:loadMap(name)
     if g_currentMission:getIsServer() then
-        g_seasons.environment:addTransitionChangeListener(self)
         g_currentMission.environment:addDayChangeListener(self)
         g_currentMission.environment:addHourChangeListener(self)
 
@@ -103,8 +102,6 @@ end
 
 function ssSwathManager:dayChanged()
     if g_currentMission:getIsServer() then
-        --local reduceLayers = -1 / 3 * g_seasons.environment.daysInSeason + 5
-        -- removing 1 layer each day
         g_seasons.dms:queueJob("ssReduceGrass", 1)
     end
 end
@@ -112,15 +109,7 @@ end
 function ssSwathManager:hourChanged()
     if g_currentMission:getIsServer() then
         if g_currentMission.environment.timeSinceLastRain < 60 then
-            -- removing 1 layer if has been raining the last hour
             g_seasons.dms:queueJob("ssReduceStrawHay", 1)
         end
-    end
-end
-
-function ssSwathManager:transitionChanged()
-    if g_currentMission:getIsServer() then
-        -- removing some every growth transition as it will rot if left too long on the ground
-        g_seasons.dms:queueJob("ssReduceStrawHay", 1)
     end
 end
