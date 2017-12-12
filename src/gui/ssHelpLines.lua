@@ -17,11 +17,16 @@ function ssHelpLines:loadMap()
 end
 
 function ssHelpLines:deleteMap()
-    for _, index in ipairs(self.categoryIndices) do
-        table.remove(g_inGameMenu.helpLineCategories, index)
-        table.remove(g_inGameMenu.helpLineCategorySelectorElement.texts, index)
+    for _, cat in ipairs(self.categories) do
+        for index, category in ipairs(g_inGameMenu.helpLineCategories) do
+            if category == cat then
+                table.remove(g_inGameMenu.helpLineCategories, index)
+                table.remove(g_inGameMenu.helpLineCategorySelectorElement.texts, index)
 
-        g_inGameMenu.helpLineCategorySelectorElement:updateTextElement();
+                g_inGameMenu.helpLineCategorySelectorElement:updateTextElement();
+                break
+            end
+        end
     end
 end
 
@@ -32,7 +37,7 @@ end
 function ssHelpLines:loadFromXML(path)
     local xmlFile = loadXMLFile("helpLine", path)
 
-    self.categoryIndices = {}
+    self.categories = {}
 
     local categoryIndex = 0
     while true do
@@ -92,9 +97,8 @@ function ssHelpLines:loadFromXML(path)
         end
 
         table.insert(g_inGameMenu.helpLineCategories, category)
+        table.insert(self.categories, category)
         categoryIndex = categoryIndex + 1
-
-        table.insert(self.categoryIndices, table.getn(g_inGameMenu.helpLineCategories))
     end
 
     delete(xmlFile)
