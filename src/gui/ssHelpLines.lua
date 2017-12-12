@@ -17,17 +17,21 @@ function ssHelpLines:loadMap()
 end
 
 function ssHelpLines:deleteMap()
+    local selector = g_inGameMenu.helpLineCategorySelectorElement
+
     for _, cat in ipairs(self.categories) do
         for index, category in ipairs(g_inGameMenu.helpLineCategories) do
             if category == cat then
                 table.remove(g_inGameMenu.helpLineCategories, index)
-                table.remove(g_inGameMenu.helpLineCategorySelectorElement.texts, index)
+                table.remove(selector.texts, index)
 
-                g_inGameMenu.helpLineCategorySelectorElement:updateTextElement();
+                selector:updateTextElement();
                 break
             end
         end
     end
+
+    selector:setState(selector.state, true)
 end
 
 function ssHelpLines:loadI18NIntoGlobal(key)
