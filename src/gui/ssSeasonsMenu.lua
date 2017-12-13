@@ -542,11 +542,26 @@ end
 function ssSeasonsMenu:updateServerSettingsVisibility()
     if g_currentMission ~= nil then
         -- Only needs MP login when this is a MP session, this is not the server and the user is not logged in
-        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser and g_currentMission.connectedToDedicatedServer
+        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser
 
-        self.multiplayerLogin:setVisible(needsMPLogin)
-        self.settingsColumn2:setVisible(not needsMPLogin)
-        self.settingsColumn3:setVisible(not needsMPLogin)
+        -- Only to dedi others can log in
+        if g_currentMission.connectedToDedicatedServer then
+            self.multiplayerLogin:setVisible(needsMPLogin)
+            self.settingsColumn2:setVisible(not needsMPLogin)
+            self.settingsColumn3:setVisible(not needsMPLogin)
+        else
+            -- If not on a dedi, never log in (consoles can't type)
+            self.multiplayerLogin:setVisible(false)
+
+            -- If server, show options, otherwise always hide
+            if g_currentMission:getIsServer() then
+                self.settingsColumn2:setVisible(true)
+                self.settingsColumn3:setVisible(true)
+            else
+                self.settingsColumn2:setVisible(false)
+                self.settingsColumn3:setVisible(false)
+            end
+        end
     end
 end
 
