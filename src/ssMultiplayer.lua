@@ -12,7 +12,7 @@ ssMultiplayer = {}
 source(g_currentModDirectory .. "src/events/ssMultiplayerJoinEvent.lua")
 
 function ssMultiplayer:preLoad()
-    Server.sendObjects = Utils.prependedFunction(Server.sendObjects, ssMultiplayerJoinEvent.sendObjects)
+    ssUtil.prependedFunction(Server, "sendObjects", ssMultiplayerJoinEvent.sendObjects)
 end
 
 function ssMultiplayer:loadMap(name)
