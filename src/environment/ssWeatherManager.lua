@@ -259,7 +259,10 @@ function ssWeatherManager:writeStream(streamId, connection)
     end
 
     local environment = g_currentMission.environment
-    if streamWriteBool(streamId, environment.currentRain ~= nil) then
+    local hasCurrentRain = environment.currentRain ~= nil
+
+    streamWriteBool(streamId, hasCurrentRain)
+    if hasCurrentRain then
         local rain = environment.currentRain
 
         streamWriteUInt8(streamId, environment.rainTypeIdToType[rain.rainTypeId].typeIndex)
