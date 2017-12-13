@@ -659,11 +659,7 @@ function ssSeasonsMenu:saveSettings()
         g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
 
         -- Change header numbers
-        if self.economy.graph then
-            self.economy.graph:settingsChanged()
-            self:onEconomyListSelectionChanged(self.economyList.selectedRow)
-        end
-        self.calendarHeader:settingsChanged()
+        self:updateSeasonLengthGraphs()
 
         -- Sync new data to all the clients
         ssSettingsEvent.sendEvent()
@@ -671,6 +667,14 @@ function ssSeasonsMenu:saveSettings()
         -- Sync to the server
         ssSettingsEvent.sendEvent()
     end
+end
+
+function ssSeasonsMenu:updateSeasonLengthGraphs()
+    if self.economy.graph then
+        self.economy.graph:settingsChanged()
+        self:onEconomyListSelectionChanged(self.economyList.selectedRow)
+    end
+    self.calendarHeader:settingsChanged()
 end
 
 function ssSeasonsMenu:replaceTexts(element)

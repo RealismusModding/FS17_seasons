@@ -69,7 +69,7 @@ function ssSettingsEvent:run(connection)
     g_seasons.weather.moistureEnabled = self.moistureEnabled
 
     g_seasons.mainMenu:updateGameSettings()
-    g_seasons.mainMenu:updateApplySettingsButton()
+    g_seasons.mainMenu:updateSeasonLengthGraphs()
 
     -- If this was sent to the server, broadcast this to all clients
     if not connection:getIsServer() then

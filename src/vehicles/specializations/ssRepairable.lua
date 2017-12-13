@@ -16,6 +16,7 @@ function ssRepairable:load(savegame)
     self.ssLastRepairDay = g_currentMission.environment.currentDay
     self.ssLastRepairOperatingTime = self.operatingTime
     self.ssCumulativeDirt = 0
+    self.ssYears = 0
 
     if savegame ~= nil then
         self.ssLastRepairDay = ssXMLUtil.getFloat(savegame.xmlFile, savegame.key .. "#ssLastRepairDay", self.ssLastRepairDay)
