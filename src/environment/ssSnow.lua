@@ -52,13 +52,14 @@ function ssSnow:loadMap(name)
     if FillUtil.FILLTYPE_SNOW == nil then
         local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
         TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.png", g_seasons.modDir .. "resources/environment/snow_normal.png", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.png")
-        self.snowMaterialHolder = loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
 
         -- Load overlay icon, properly
         local uiScale = g_gameSettings:getValue("uiScale")
         local levelIconWidth, levelIconHeight = getNormalizedScreenValues(20 * uiScale, 20 * uiScale)
         g_currentMission:addFillTypeOverlay(t, FillUtil.fillTypeIndexToDesc[t].hudOverlayFilename, levelIconWidth, levelIconHeight)
     end
+
+    self.snowMaterialHolder = loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addHourChangeListener(self)
