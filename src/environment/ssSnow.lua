@@ -57,6 +57,9 @@ function ssSnow:loadMap(name)
         local uiScale = g_gameSettings:getValue("uiScale")
         local levelIconWidth, levelIconHeight = getNormalizedScreenValues(20 * uiScale, 20 * uiScale)
         g_currentMission:addFillTypeOverlay(t, FillUtil.fillTypeIndexToDesc[t].hudOverlayFilename, levelIconWidth, levelIconHeight)
+    else
+        FillUtil.fillTypeIntToName[FillUtil.FILLTYPE_SNOW] = "snow"
+        FillUtil.addFillTypeToCategory(FillUtil.FILLTYPE_CATEGORY_BULK, FillUtil.FILLTYPE_SNOW)
     end
 
     self.snowMaterialHolder = loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
@@ -76,6 +79,10 @@ function ssSnow:loadMap(name)
 end
 
 function ssSnow:deleteMap()
+    -- Hack: Disable snow by only clearning a mapping, not removing the filltype
+    FillUtil.fillTypeIntToName[FillUtil.FILLTYPE_SNOW] = nil
+    FillUtil.categoryToFillTypes[FillUtil.FILLTYPE_CATEGORY_BULK][FillUtil.FILLTYPE_SNOW] = nil
+
     if g_currentMission:getIsServer() then
         removeConsoleCommand("ssAddSnow")
         removeConsoleCommand("ssRemoveSnow")
