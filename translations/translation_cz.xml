@@ -194,7 +194,7 @@
         <text name="ss_helpTitle_08" text="Plodiny - seno, sláma a tráva" />
         <text name="ss_helpText_08_01" text="V zimě se růst trávy vynuluje na Sklizeno, aby simulovala zimní uvadání trávy, když se ochladí." />
         <text name="ss_helpText_08_02" text="Balíky trávy je třeba použít nebo zabalit do fólie do 2 dnů od balicího procesu. Po 2 dnech začne tráva hnít a balíky postupně zmizí." />
-        <text name="ss_helpText_08_03" text="Řádky sena, trávy a slámy se začnou zmenšovat a nakonec zmizí po několika dnech. Řádek trávy se každý den zmenší o půlnoci. Řádek slámy a sena se zmenší po každém růstovém stádiu a také po vystavení dešti." />
+        <text name="ss_helpText_08_03" text="Řádky a hromady trávy se začnou snižovat, a nakonec zmizí po několika dnech.. Řádeky a hromady trávy se každý den zmenší o půlnoci. Řádky sena a slámy a hromady se sníží poté, co byly vystaveny dešti." />
         <text name="ss_helpText_08_04" text="Sláma a seno musí být baleny do balíků před tím, než mohou být prodány. Sypaná sláma a seno nemohou být prodávány, pouze je můžete odvézt a vysypat zdarma. Tráva, v balících, nebo volná, také nemůže být prodána. Před prodejem balíky trávy obalte folií." />
 
         <text name="ss_helpTitle_09" text="Plodiny - stromy" />
@@ -209,7 +209,7 @@
 
         <text name="ss_helpTitle_11" text="Údržba" />
         <text name="ss_helpText_11_01" text="Vaše traktory a kombajny vyžadují pravidelnou údržbu, aby byly funkční. Perioda údržby je každých 30 hodin nebo půl roku, podle toho, co nastane dříve. Vozidla, která jsou udržována, vydrží déle " />
-        <text name="ss_helpText_11_02" text="Vaše vozidla můžete opravit buď u prodejce, nebo ve vlastní dílně (pokud ji máte). Chcete-li opravit své vozidlo, jeďte s vozidlem k prodejci,nebo zastavte v dílně. Uvědomte si, že oprava u prodejce bude dražší." />
+        <text name="ss_helpText_11_02" text="Můžete opravovat svá vozidla buď v prodejně vozidel nebo umístitelné garáži. Chcete-li opravit váš vůz zavezte svůj vůz do garáže, nebo umístitelné garáži, a aktivujte opravu. Uvědomte si, že oprava u prodejce bude dražší." />
         <text name="ss_helpText_11_03" text="Věk vašeho vozidla je počet dnů od poslední opravy." />
         <text name="ss_helpText_11_04" text="Pouze řiditelná vozidla vyžadují pravidelnou údržbu. Nástroje a nářadí budou v případě potřeby automaticky opravovány." />
 
