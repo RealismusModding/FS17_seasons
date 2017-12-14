@@ -252,7 +252,7 @@
 
         <text name="ss_helpTitle_19" text="Meetapparaat" />
         <text name="ss_helpText_19_01" text="De Wopstr M420 is een meetapparaat dat gebruikt kan worden om meer informatie te verkrijgen over grond, bomen, balen en pallets. Na het kopen van het handgereedschap in de winkel, kan het op dezelfde wijzen worden geactiveerd als een kettingzaag. Wijs naar iets  en activeer om te beginnen met meten. Een meting kan mislukken." />
-        <text name="ss_helpText_19_02" text="Voor geplante bomen kan je de type, boomhoogte en afstand tot dichstbijzinde boom meten. Voor balen kan je de inhoud krijgen, en voor grasbalen ook de fermentatievoortgang. Wanneer je de grond meet krijg je de locatie, hoogte, gewastype, gewashoogte, vochtigheidsgraad van het gewas, XXX en de vochtigheidsgraad van de grond. Voor pallets meet je de inhoud." />
+        <text name="ss_helpText_19_02" text="Voor geplante bomen kan je de type, boomhoogte en afstand tot dichstbijzinde boom meten. Voor balen kan je de inhoud krijgen, en voor grasbalen ook de fermentatievoortgang. Wanneer je de grond meet krijg je de locatie, hoogte, gewastype, gewashoogte, vochtigheidsgraad van het gewas, bemestingsstatus en de vochtigheidsgraad van de grond. Voor pallets meet je de inhoud." />
         <text name="ss_helpText_19_03" text="Meer informatie over de Wopstr M420 en een gedetailleerde beschrijving van de symbolen vind je op de website van Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
