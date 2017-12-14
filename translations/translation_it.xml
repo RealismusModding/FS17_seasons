@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="alla mezzanotte" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="ripara" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Riparazione e personalizzazione" />
 
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
@@ -120,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Seleziona il prossimo utensile a mano" />
+        <text name="action_chainsaw" text="Utensile a mano" />
 
         <text name="tooltip_seasonLength" text="La durata di una stagione in giorni. Un anno è quattro stagioni" />
         <text name="tooltip_seasonIntros" text="Mostra l'introduzione all'inizio della stagione" />
@@ -198,7 +194,7 @@
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
         <text name="ss_helpText_08_01" text="In inverno l'erba viene ripristinata nella sua fase falciata per simulare che l'inverno uccide l'erba con il freddo." />
         <text name="ss_helpText_08_02" text="Le balle di erba gradualmente marciranno e scompariranno dopo due giorni, in qualsiasi posto siano collocate. Per evitare la decomposizione le balle devono essere usate o fasciate. Una volta fasciate diventeranno silato dopo un terzo della stagione." />
-        <text name="ss_helpText_08_03" text="Andane e mucchi di fieno, erba e paglia cominceranno a ridursi di dimensioni ed eventualmente scompariranno dopo diversi giorni. Andane e mucchi d'erba vengono ridotte alla mezzanotte di ogni giorno. Il fieno e la paglia vengono ridotti dopo ogni fase di crescita o dopo essere stati esposti alla pioggia." />
+        <text name="ss_helpText_08_03" text="Andane e mucchi d'erba cominceranno a ridursi di dimensioni ed eventualmente scompariranno dopo diversi giorni. Essi vengono ridotti alla mezzanotte di ogni giorno mentre fieno e paglia vengono ridotti dopo essere stati esposti alla pioggia." />
         <text name="ss_helpText_08_04" text="La paglia e il fieno devono essere compresse in balle prima di poter essere vendute - la paglia e il fieno non imballati non possono essere venduti, solo date gratuitamente. Erba, in balle o non, non può essere venduta." />
 
         <text name="ss_helpTitle_09" text="Colture - Piante" />
@@ -212,7 +208,7 @@
         <text name="ss_helpText_10_04" text="Su una mappa mod che è stata preparata con 'snow mask' da parte del modder, balle di fieno e paglia che sono stati esposti alla pioggia o alla neve cominceranno a decomporsi, a meno che non siano al riparo in un capannone con 'snow mask'. Il cattivo tempo non avrà effetto su balle fasciate o balle su una mappa senza una 'snow mask'." />
 
         <text name="ss_helpTitle_11" text="Manutenzione" />
-        <text name="ss_helpText_11_01" text="I tuoi trattori e raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o metà anno, qualunque arrivi prima. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
+        <text name="ss_helpText_11_01" text="I tuoi trattori e raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o ogni anno, qualunque arrivi prima. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
         <text name="ss_helpText_11_02" text="Puoi riparare i tuoi veicoli presso il concessionario o il garage posizionabile. Per riparare il tuo veicolo avvicinalo al punto di vendita, o al garage posizionabile, e attiva la riparazione. Ricordati che sarà più costoso riparare i veicoli presso il concessionario." />
         <text name="ss_helpText_11_03" text="L'età del tuo veicolo è il giorno dopo l'ultima riparazione." />
         <text name="ss_helpText_11_04" text="Solo i veicoli richiederanno una manutenzione periodica. Strumenti e utensili verranno automaticamente riparati a seconda delle necessità." />
@@ -254,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Sebbene è la tua partita e giochi come vuoi, è suggerita una stagione di 9 giorni con accelerazione a 5x. In questo modo si utilizza la primavera solo coltivando e seminando le colture, tagliando il fieno e curando le colture in estate, raccogliendo e arando in autunno e prendendo cura degli animali, delle macchine, delle foreste e vendendo i raccolti durante l'inverno." />
         <text name="ss_helpText_18_04" text="Tutti i veicoli devono essere avviati manualmente." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Strumento di misurazione" />
+        <text name="ss_helpText_19_01" text="'Wopstr M420' è uno strumento di misurazione che può essere utilizzato per ottenere informazioni riguardo il terreno, alberi, balle e pallet. Dopo l'acquisto nello store, può essere attivato come una motosega. Puntalo su qualcosa e attivalo per iniziare a misurare. Una misurazione potrebbe fallire." />
+        <text name="ss_helpText_19_02" text="Per gli alberi piantati misurerai il tipo di albero, l'altezza e la distanza dall'albero adiacente più vicino. Per le balle visualizzerai il contenuto e per le balle d'erba anche lo stato di fermentazione. La misurazione del terreno restituisce la posizione, l'altitudine, il tipo di coltura, la stato di crescita e l'umidità del raccolto, lo stato di fertilizzazione e l'umidità del suolo. Per i pallet visualizzerai il contenuto." />
+        <text name="ss_helpText_19_03" text="Per maggiori informazioni riguardo il 'Wopstr M420' e una spiegazione dettagliata di ogni simbolo, guarda il sito di Realismus Modding: www.realismusmodding.com/seasons ." />
     </texts>
 </l10n>
