@@ -20,6 +20,8 @@
         <Preset name="colorBlue" value="0.0742 0.4341 0.6939 1" />
 
         <Preset name="colorLightGrey" value="0.0482 0.0482 0.0482 1" />
+
+        <Preset name="colorDescriptionText" value="0.2918 0.2918 0.2918 1" />
     </Presets>
 
     <!-- Settings -->
@@ -96,7 +98,7 @@
         <Value name="size" value="24px 24px" />
         <Value name="position" value="4px 4px" />
 
-        <Value name="imageColor" value="$preset_colorWhite" />
+        <Value name="imageColor" value="$preset_colorDescriptionText" />
         <Value name="imageUVs" value="0 0 1 1" />
     </Profile>
 
