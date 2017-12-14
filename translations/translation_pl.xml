@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Przegląd" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o północy" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="napraw" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Naprawy i modyfikacje" />
 
         <text name="SS_SAVE_FAILED" text="Nie udało się zapisać stanu modu Seasons. Spróbuj ponownie!" />
 
@@ -120,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Wybierz następne urządzenie ręczne" />
+        <text name="action_chainsaw" text="Urządzenie ręczne" />
 
         <text name="tooltip_seasonLength" text="Długość sezonu w dniach. Rok to cztery sezony" />
         <text name="tooltip_seasonIntros" text="Pokaż wstęp na początku sezonu" />
@@ -198,7 +194,7 @@
         <text name="ss_helpTitle_08" text="Uprawy - siano, słoma i trawa" />
         <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do fazy zebranej, aby odwzorować sytuację, w której trawa usycha, gdy robi się zimno." />
         <text name="ss_helpText_08_02" text="Bele z trawy będą stopniowo gnić i znikną po dwóch dniach niezależnie od tego gdzie są przechowywane. Aby temu zapobiec należy je wykorzystać lub owinąć folią. Po owinięciu sfermetują w kiszonką w ciągu 1/3 długości sezonu." />
-        <text name="ss_helpText_08_03" text="Pokosy i sterty siana, trawy i słomy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy i sterty traw zmniejszają się o północy każdego dnia. Pokosy i sterty siana oraz słomy zmniejszają się wraz z każdym etapem wzrostu upraw (przejściem), jak również po wystawieniu na działanie deszczu." />
+        <text name="ss_helpText_08_03" text="Pokosy i sterty siana, trawy i słomy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy i sterty trawy zmniejszają się o północy każdego dnia. Pokosy i sterty siana oraz słomy zmniejszają się wraz z każdym etapem wzrostu upraw (przejściem), jak również po wystawieniu na działanie deszczu." />
         <text name="ss_helpText_08_04" text="Słoma i siano muszą być belowane zanim zostaną sprzedane - luzem słomy i siana nie wolno sprzedawać, jedynie oddać bezpłatnie. Trawa, belowana lub luźna, również nie może być sprzedawana." />
 
         <text name="ss_helpTitle_09" text="Uprawy - drzewa" />
@@ -254,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Choć sposób gry zależy od Ciebie, sugerowane jest wyzwanie polegające na grze tylko z 9-dniowym sezonem i przy skali czasu 5x. W ten sposób spędzisz wiosnę tylko uprawiając ziemię i siejąc zboża, latem pielęgnujesz uprawy i robisz siano, jesienią wykonujesz żniwa i orkę, zimą opiekujesz się zwierzętami, maszynami, lasami i sprzedajesz zboża." />
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Urządzenie pomiarowe" />
+        <text name="ss_helpText_19_01" text="Wopstr M420 jest urządzeniem pomiarowym, które można użyć, aby uzyskać więcej informacji o glebie, drzewach, belach i paletach. Po zakupie urządzenia w sklepie można je aktywować tak, jak piłę łańcuchową. Pomiar rozpoczyna się po aktywowaniu urządzenia skierowanego na coś. Może się zdarzyć, że pomiar się nie uda." />
+        <text name="ss_helpText_19_02" text="Dla zasadzonych drzew sprawdzić można ich rodzaj, zmierzyć wysokość oraz odległość do najbliższego drzewa. Dla bel zwracana jest ich zawartość oraz stan fermentacji. Pomiar gleby wyświetla położenie na mapie, wysokość n.p.m, rodzaj uprawy, stan wzrostu i wilgotność zbóż, poziom nawożenia i wilgotność gleby. Dla palet wyświetlana jest ich zawartość." />
+        <text name="ss_helpText_19_03" text="Więcej informacji na temat Wopstr M420 oraz szczegółowe wyjaśnienie wyświetlanych symboli można znaleźć na stronie Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
