@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Mantenimiento" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="A medianoche" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="reparar" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="reparar y personalizar" />
 
         <text name="SS_SAVE_FAILED" text="Error al guardar configuración. Inténtelo de nuevo!" />
 
@@ -98,7 +96,7 @@
         <text name="measuretool_failed" text="No se puede medir" />
         <text name="measuretool_no_info" text="Medición fallida. falta información" />
 
-        <text name="statistic_health" text="Salud" />
+        <text name="statistic_health" text="Estado de salud" />
 
         <text name="ui_pageCalender" text="Calendario" />
         <text name="ui_pageEconomy" text="Economía" />
@@ -120,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="pies" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Cambiar herramienta" />
+        <text name="action_chainsaw" text="Herramienta de mano" />
 
         <text name="tooltip_seasonLength" text="Duración de la estación en días. El año tiene cuatro estaciones" />
         <text name="tooltip_seasonIntros" text="Mostrar introducción al comienzo de cada estación" />
@@ -254,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Es su juego y puede jugar como desee, pero Seasons le sugiere como desafío, jugar con temporadas de 9 días y aceleración de tiempo a 5x. De esta manera , en primavera trabajará los campos y sembrará, cortará hierba y heno en verano, cosechará en otoño y sembrará los cereales de invierno, durante el cual, podrá atender a los animales, las máquinas, los bosques y vender sus cultivos con los mejores precios." />
         <text name="ss_helpText_18_04" text="Todos los vehículos necesitan ser arrancados manualmente, a menos que se estén en Follow-me." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Sistema medición" />
+        <text name="ss_helpText_19_01" text="El Wopstr M420 es un medidor de mano que se puede utilizar en cualquier momento y conseguir myor información sobre el terreno, los árboles, las pacas y los palets. Después de comprar el medidor en la tienda, se puede activar como una motosierra. Apunte a algo y active para empezar a medir. Alguna medición puede no realizarse." />
+        <text name="ss_helpText_19_02" text="Para árboles plantados se detecta el tipo de árbol, la altura del árbol y la distancia al árbol más cercano. En las pacas podra detectar su contenido y en el caso de pacas de heno, también su estado de fermentación. La medición del terreno nos proporcionará su ubicación, elevación, tipo de cultivo, estado de crecimiento y humedad del cultivo, nivel de fertilización y humedad del suelo. En el caso de palets, se obtiene el contenido" />
+        <text name="ss_helpText_19_03" text="Para más información sobre el Wopstr M420 y una explicación detallada de sus símbolos, vaya a la Página Web de realismus modding: www.realismusmodding.com/Seasons" />
     </texts>
 </l10n>
