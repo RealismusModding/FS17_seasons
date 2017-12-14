@@ -118,8 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-       <text name="action_nextHandTool" text="Vybrat další ruční nástroj" />
-       <text name="action_chainsaw" text="Ruční nástroj" />
+        <text name="action_nextHandTool" text="Vybrat další ruční nástroj" />
+        <text name="action_chainsaw" text="Ruční nástroj" />
 
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
@@ -250,9 +250,9 @@
         <text name="ss_helpText_18_03" text="Samozřejmě se jedná o hru, kterou můžete hrát, jak chcete. Jako doporučená výzva je navrženo hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte čas na jaře pouze přípravou a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a v zimě se věnujete zvířatům, údržbě strojů, práci v lese a prodeji plodin." />
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být nastartována manuálně." />
 
-       <text name="ss_helpTitle_19" text="Měřící nástroje" />
-       <text name="ss_helpText_19_01" text="Wopstr M420 je ruční měřicí nástroj, který lze použít k získání více informací o půdě, stromech, balících a paletách. Po zakoupení nářadí v obchodě se může aktivovat jako motorová pila. Ukaž na něco a aktivujte, aby začal měřit. Měření může selhat." />
-       <text name="ss_helpText_19_02" text="U vysazených stromů měříte typ stromu, výšku stromu a vzdálenost k nejbližšímu stromu. U balíků zjistíte obsah a u balíky trávy i stav fermentace. Měření půdy, výšky, typu plodin, růstu plodin a vlhkosti plodin, úrovně hnojení a vlhkosti půdy. U palet zjistíte obsah." />
-       <text name="ss_helpText_19_03" text="Více informací o modelu Wopstr M420 a podrobné vysvětlení jeho symbolů najdete na webu Realism Modding: www.realismmodding.com/seasons." />
+        <text name="ss_helpTitle_19" text="Měřící nástroje" />
+        <text name="ss_helpText_19_01" text="Wopstr M420 je ruční měřicí nástroj, který lze použít k získání více informací o půdě, stromech, balících a paletách. Po zakoupení nářadí v obchodě se může aktivovat jako motorová pila. Ukaž na něco a aktivujte, aby začal měřit. Měření může selhat." />
+        <text name="ss_helpText_19_02" text="U vysazených stromů měříte typ stromu, výšku stromu a vzdálenost k nejbližšímu stromu. U balíků zjistíte obsah a u balíky trávy i stav fermentace. Měření půdy, výšky, typu plodin, růstu plodin a vlhkosti plodin, úrovně hnojení a vlhkosti půdy. U palet zjistíte obsah." />
+        <text name="ss_helpText_19_03" text="Více informací o modelu Wopstr M420 a podrobné vysvětlení jeho symbolů najdete na webu Realism Modding: www.realismmodding.com/seasons." />
     </texts>
 </l10n>
