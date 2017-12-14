@@ -208,7 +208,7 @@
         <text name="ss_helpText_10_04" text="Na mod-mapie, do której dodano maskę modu Seasons*, bele siana lub słomy wystawione na działanie deszczu lub śniegu, zaczną się gnić, chyba że bele są przechowywane w szopie z maską modu Seasons. Zła pogoda nie wpływa na owinięte bele lub bele na mapie bez maski modu Seasons*. *(obszar odpowiednio oznaczony, nie przyjmujący śniegu)" />
 
         <text name="ss_helpTitle_11" text="Utrzymanie maszyn" />
-        <text name="ss_helpText_11_01" text="Twoje maszyny wymagają regularnych przeglądów, aby były w pełni sprawne. Okres przeglądów to co 30 godzin roboczych lub co pół roku, w zależności co nastąpi wcześniej. Pojazdy, które przekroczą termin przeglądu mogą mieć problem z uruchomieniem." />
+        <text name="ss_helpText_11_01" text="Twoje maszyny wymagają regularnych przeglądów, aby były w pełni sprawne. Przegląd okresowy wymagany jest co 30 roboczogodzin lub co rok, w zależności co nastąpi wcześniej. Pojazdy, które przekroczą termin przeglądu mogą mieć problem z uruchomieniem." />
         <text name="ss_helpText_11_02" text="Przegląd można wykonać w warsztacie sklepu z maszynami lub we własnym postawionym garażu. Aby wykonać przegląd należy wjechać pojazdem do warsztatu lub garażu i wykonać naprawę. Należy pamiętać, że przegląd w warsztacie sklepowym jest droższy." />
         <text name="ss_helpText_11_03" text="Wiek pojazdu podawany jest w dniach od ostatniego przeglądu." />
         <text name="ss_helpText_11_04" text="Tylko pojazdy kierowane wymagają okresowych przeglądów. Pozostałe maszyny będą przechodziły przegląd automatyczny w razie potrzeby." />
