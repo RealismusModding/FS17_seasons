@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="Opravy" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Opravy a přizpůsobení" />
 
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
@@ -98,8 +96,7 @@
         <text name="measuretool_failed" text="Měření selhalo" />
         <text name="measuretool_no_info" text="Měření selhalo: žádné informace" />
 
-        <!-- Missing translation of "Health" -->
-        <text name="statistic_health" text="" />
+        <text name="statistic_health" text="Zdravotní stav" />
 
         <text name="ui_pageCalender" text="Kalendář" />
         <text name="ui_pageEconomy" text="Ekonomika" />
@@ -121,10 +118,8 @@
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+       <text name="action_nextHandTool" text="Vybrat další ruční nástroj" />
+       <text name="action_chainsaw" text="Ruční nástroj" />
 
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
@@ -255,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Samozřejmě se jedná o hru, kterou můžete hrát, jak chcete. Jako doporučená výzva je navrženo hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte čas na jaře pouze přípravou a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a v zimě se věnujete zvířatům, údržbě strojů, práci v lese a prodeji plodin." />
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být nastartována manuálně." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+       <text name="ss_helpTitle_19" text="Měřící nástroje" />
+       <text name="ss_helpText_19_01" text="Wopstr M420 je ruční měřicí nástroj, který lze použít k získání více informací o půdě, stromech, balících a paletách. Po zakoupení nářadí v obchodě se může aktivovat jako motorová pila. Ukaž na něco a aktivujte, aby začal měřit. Měření může selhat." />
+       <text name="ss_helpText_19_02" text="U vysazených stromů měříte typ stromu, výšku stromu a vzdálenost k nejbližšímu stromu. U balíků zjistíte obsah a u balíky trávy i stav fermentace. Měření půdy, výšky, typu plodin, růstu plodin a vlhkosti plodin, úrovně hnojení a vlhkosti půdy. U palet zjistíte obsah." />
+       <text name="ss_helpText_19_03" text="Více informací o modelu Wopstr M420 a podrobné vysvětlení jeho symbolů najdete na webu Realism Modding: www.realismmodding.com/seasons." />
     </texts>
 </l10n>
