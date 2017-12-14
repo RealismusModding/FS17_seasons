@@ -10,11 +10,18 @@
 ssPlaceable = {}
 
 function ssPlaceable:preLoad()
-    Placeable.getDailyUpKeep = Utils.overwrittenFunction(Placeable.getDailyUpKeep, ssPlaceable.placeableGetDailyUpkeep)
-    Placeable.getSellPrice = Utils.overwrittenFunction(Placeable.getSellPrice, ssPlaceable.placeableGetSellPrice)
+    ssUtil.overwrittenFunction(Placeable, "loadFromAttributesAndNodes", ssPlaceable.placeableLoadFromAttributesAndNodes)
+    ssUtil.overwrittenFunction(Placeable, "getSaveAttributesAndNodes", ssPlaceable.placeableGetSaveAttributesAndNodes)
+    ssUtil.overwrittenFunction(Placeable, "getDailyUpKeep", ssPlaceable.placeableGetDailyUpkeep)
+    ssUtil.overwrittenFunction(Placeable, "getSellPrice", ssPlaceable.placeableGetSellPrice)
 
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssPlaceable.placeableFinalizePlacement)
-    Placeable.delete = Utils.overwrittenFunction(Placeable.delete, ssPlaceable.placeableDelete)
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssPlaceable.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "delete", ssPlaceable.placeableDelete)
+    ssUtil.appendedFunction(Placeable, "dayChanged", ssPlaceable.placeableDayChanged)
+
+    ssUtil.appendedFunction(Placeable, "readStream", ssPlaceable.placeableReadStream)
+    ssUtil.appendedFunction(Placeable, "writeStream", ssPlaceable.placeableWriteStream)
+
     Placeable.seasonLengthChanged = ssPlaceable.placeableSeasonLengthChanged
 end
 
@@ -22,17 +29,16 @@ function ssPlaceable:loadMap()
 end
 
 -- When placing, add listener and update income value
-function ssPlaceable:placeableFinalizePlacement(superFunc)
+function ssPlaceable:placeableFinalizePlacement()
     self.ssOriginalIncomePerHour = self.incomePerHour
+    self.ssYears = 0
 
     g_seasons.environment:addSeasonLengthChangeListener(self)
     self:seasonLengthChanged()
 end
 
 -- When deleting, also remove listener
-function ssPlaceable:placeableDelete(superFunc)
-    superFunc(self)
-
+function ssPlaceable:placeableDelete()
     if g_seasons ~= nil and g_seasons.environment ~= nil then
         g_seasons.environment:removeSeasonLengthChangeListener(self)
     end
@@ -44,12 +50,18 @@ function ssPlaceable:placeableSeasonLengthChanged()
     self.incomePerHour = 6 / g_seasons.environment.daysInSeason * self.ssOriginalIncomePerHour * difficultyFac
 end
 
+function ssPlaceable:placeableDayChanged()
+    self.ssYears = self.ssYears + 1 / (4 * g_seasons.environment.daysInSeason)
+end
+
 function ssPlaceable:placeableGetDailyUpkeep(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-    local multiplier = 1 + self.age / ( 4 * g_seasons.environment.daysInSeason ) * 2.5
+
+    local years = Utils.getNoNil(self.ssYears, 0) -- can be nil when placing
+    local multiplier = 1 + years * 2.5
 
     if self.incomePerHour == 0 then
-        multiplier = 1 + self.age / ( 4 * g_seasons.environment.daysInSeason ) * 0.25
+        multiplier = 1 + years * 0.25
     end
 
     return StoreItemsUtil.getDailyUpkeep(storeItem, nil) * multiplier * (12 / g_seasons.environment.daysInSeason )
@@ -60,7 +72,11 @@ function ssPlaceable:placeableGetSellPrice(superFunc)
     local priceMultiplier = 0.5
 
     if self.incomePerHour == 0 then
-        local ageFac = 0.5 - 0.05 * self.age / (4 * g_seasons.environment.daysInSeason)
+        local ageFac = 0.5
+        -- for some reason getSellPrice is loaded very early in load before values are loaded from vehicle.xml
+        if self.ssYears ~= nil then
+            ageFac = 0.5 - 0.05 * self.ssYears
+        end
 
         if ageFac > 0.1 then
             priceMultiplier = ageFac
@@ -81,4 +97,31 @@ function ssPlaceable:placeableGetSellPrice(superFunc)
     end
 
     return math.floor(self.price * priceMultiplier)
+end
+
+-- Store placeable age in years
+function ssPlaceable:placeableLoadFromAttributesAndNodes(superFunc, xmlFile, key, resetVehicles)
+    local state = superFunc(self, xmlFile, key, resetVehicles)
+
+    self.ssYears = Utils.getNoNil(getXMLInt(xmlFile, key .. "#ssYears"), self.age / (4 * g_seasons.environment.daysInSeason))
+
+    return state
+end
+
+function ssPlaceable:placeableGetSaveAttributesAndNodes(superFunc, nodeIdent)
+    local attributes, nodes = superFunc(self, nodeIdent)
+
+    if attributes ~= nil and self.ssYears ~= nil then
+        attributes = attributes .. ' ssYears="' .. self.ssYears .. '"'
+    end
+
+    return attributes, nodes
+end
+
+function ssPlaceable:placeableReadStream(streamId, connection)
+    self.ssYears = streamReadFloat32(streamId)
+end
+
+function ssPlaceable:placeableWriteStream(streamId, connection)
+    streamWriteFloat32(streamId, self.ssYears)
 end

@@ -13,6 +13,20 @@ local ssSeasonsMenu_mt = Class(ssSeasonsMenu, ScreenElement)
 
 source(g_currentModDirectory .. "src/events/ssSettingsEvent.lua")
 
+ssSeasonsMenu.BLOCK_TYPE_PLANTABLE = 1
+ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE = 2
+
+ssSeasonsMenu.BLOCK_COLORS = {}
+ssSeasonsMenu.BLOCK_COLORS[false] = {
+    [ssSeasonsMenu.BLOCK_TYPE_PLANTABLE] = {0.0143, 0.2582, 0.0126, 1},
+    [ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE] = {0.8308, 0.5841, 0.0529, 1}
+}
+
+ssSeasonsMenu.BLOCK_COLORS[true] = {
+    [ssSeasonsMenu.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.1779, 0.0027, 1},
+    [ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE] = {0.3372, 0.4397, 0.9911, 1}
+}
+
 function ssSeasonsMenu:new(target, custom_mt)
     if custom_mt == nil then
         custom_mt = ssSeasonsMenu_mt
@@ -24,35 +38,25 @@ function ssSeasonsMenu:new(target, custom_mt)
 
     self.settingElements = {}
 
-
-    self.overview = {}
-
-    self.BLOCK_TYPE_PLANTABLE = 1
-    self.BLOCK_TYPE_HARVESTABLE = 2
-
-
-    self.overview.blockColors = {}
-
-    -- Colorblind = false
-    self.overview.blockColors[false] = {
-        -- [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.5271, 0.0307, 1},
-        -- [self.BLOCK_TYPE_HARVESTABLE] = {0.9301, 0.6404, 0.0439, 1}
-        [self.BLOCK_TYPE_PLANTABLE] = {0.0143, 0.2582, 0.0126, 1},
-        -- 0.1454, 0.5583, 0.0341
-        [self.BLOCK_TYPE_HARVESTABLE] = {0.8308, 0.5841, 0.0529, 1}
-    }
-
-    -- Colorblind = true
-    self.overview.blockColors[true] = {
-        [self.BLOCK_TYPE_PLANTABLE] = {0.2122, 0.1779, 0.0027, 1},
-        -- 1.0000, 0.9046, 0.0130
-        [self.BLOCK_TYPE_HARVESTABLE] = {0.3372, 0.4397, 0.9911, 1}
-    }
+    ssUtil.overwrittenFunction(InGameMenu, "onAdminLoginSuccess", ssSeasonsMenu.ingameOnAdminLoginSuccess)
 
     return self
 end
 
+function ssSeasonsMenu:delete()
+    self:deleteOverview()
+
+    if self.economy.graph then
+        self.economy.graph:delete()
+    end
+end
+
 function ssSeasonsMenu:onCreate(gui)
+    if GS_IS_CONSOLE_VERSION and gui ~= nil then
+        self:removeNavigationItems(gui.elements, {"1", "2", "100", "101", "102"});
+    else
+        self.backButton = FocusManager:getElementById("100")
+    end
 end
 
 function ssSeasonsMenu:onCreatePageState(element)
@@ -77,15 +81,15 @@ function ssSeasonsMenu:onOpen(element)
 
     self:updateServerSettingsVisibility()
 
-    -- overview
-    self:updateOverview()
+    if not self.createPageContent then
+        self.createPageContent = true
 
-    -- economy
-    self:updateEconomy()
+        self:updateCalendar()
+        self:updateEconomy()
+    end
 
     -- settings
     self:updateGameSettings()
-    self:updateApplySettingsButton()
 
     self:updateDebugValues()
 
@@ -113,6 +117,7 @@ end
 function ssSeasonsMenu:onClickBack()
     ssSeasonsMenu:superClass().onClickBack(self)
 
+    self:saveSettings()
     g_gui:showGui("")
 end
 
@@ -133,10 +138,10 @@ function ssSeasonsMenu:onPageChange(pageId, pageMappingIndex)
     self.currentPageMappingIndex = pageMappingIndex
     self:updatePageStates()
 
-    self.saveButton:setVisible(pageId == ssSeasonsMenu.PAGE_SETTINGS)
+    self:saveSettings()
 
-    if pageId == ssSeasonsMenu.PAGE_OVERVIEW then
-        self:setNavButtonsFocusChange(FocusManager:getElementById("sliderUpCrops"), FocusManager:getElementById("sliderDownCrops"))
+    if pageId == ssSeasonsMenu.PAGE_CALENDAR then
+        self:setNavButtonsFocusChange(FocusManager:getElementById("200"), FocusManager:getElementById("200"))
     elseif pageId == ssSeasonsMenu.PAGE_ECONOMY then
         self:setNavButtonsFocusChange(FocusManager:getElementById("300"), FocusManager:getElementById("300"))
     elseif pageId == ssSeasonsMenu.PAGE_SETTINGS then
@@ -188,17 +193,30 @@ function ssSeasonsMenu:update(dt)
 end
 
 function ssSeasonsMenu:setNavButtonsFocusChange(targetElementTop, targetElementBottom)
-    if targetElementTop ~= nil and targetElementBottom ~= nil then
-        local buttonBack = FocusManager:getElementById("100")
-        local pageSelector = FocusManager:getElementById("1")
-        buttonBack.focusChangeData[FocusManager.TOP] = targetElementBottom.focusId
-        pageSelector.focusChangeData[FocusManager.BOTTOM] = targetElementTop.focusId
+    if not GS_IS_CONSOLE_VERSION then
+        if targetElementTop ~= nil and targetElementBottom ~= nil then
+            local buttonBack = FocusManager:getElementById("100")
+            local pageSelector = FocusManager:getElementById("1")
+            buttonBack.focusChangeData[FocusManager.TOP] = targetElementBottom.focusId
+            pageSelector.focusChangeData[FocusManager.BOTTOM] = targetElementTop.focusId
+        end
+
+        local focusElement = FocusManager:getFocusedElement()
+        if focusElement ~= nil then
+            FocusManager:unsetFocus(focusElement)
+            FocusManager:setFocus(focusElement)
+        end
+    else
+        local focusElement = FocusManager:getFocusedElement()
+
+        if focusElement ~= nil then
+            FocusManager:unsetFocus(focusElement)
+        end
+
+        if targetElementTop ~= nil then
+            FocusManager:setFocus(targetElementTop)
+        end
     end
-
-    local focusElement = FocusManager:getFocusedElement()
-
-    FocusManager:unsetFocus(focusElement)
-    FocusManager:setFocus(focusElement)
 end
 
 ------------------------------------------
@@ -227,76 +245,19 @@ function ssSeasonsMenu:updateToolTipBox(pageId)
 end
 
 ------------------------------------------
--- OVERVIEW PAGE
+-- CALENDAR PAGE
 ------------------------------------------
 
 function ssSeasonsMenu:onCreatePageOverview(element)
-    ssSeasonsMenu.PAGE_OVERVIEW = self.pagingElement:getPageIdByElement(element)
+    ssSeasonsMenu.PAGE_CALENDAR = self.pagingElement:getPageIdByElement(element)
 
-    -- Cache of icons, against leaking when rebuilding
-    self.overview.iconCache = {}
+    local width, height = getNormalizedScreenValues(1, 1)
+    self.pixel = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
+
+    self.lastSoilTemperature = math.floor(Utils.getNoNil(ssWeatherManager.soilTemp, 0), 0)
 end
 
-function ssSeasonsMenu:createOverviewValues(element)
-    local o = self.overview
-    local _ = nil
-
-    -- Pre-compute a lot of values
-    o.rect = ssRectOverlay:new(element)
-
-    local fruitHeightPixels = 32
-
-    o.transitionWidth, o.transitionHeight = getNormalizedScreenValues(45, fruitHeightPixels / 2)
-    _, o.fruitHeight = getNormalizedScreenValues(0, fruitHeightPixels)
-    o.fruitSpacerWidth, o.fruitSpacerHeight = getNormalizedScreenValues(5, 5)
-    o.fruitNameWidth, _ = getNormalizedScreenValues(230, 0)
-    o.germinationWidth, _ = getNormalizedScreenValues(70, 0)
-
-    _, o.headerHeight = getNormalizedScreenValues(0, 50)
-    _, o.footerHeight = getNormalizedScreenValues(0, 80)
-
-    _, o.textSize = getNormalizedScreenValues(0, 14)
-    _, o.smallTextSize = getNormalizedScreenValues(0, 9)
-    o.textSpacingWidth, o.textSpacingHeight = getNormalizedScreenValues(5, 5)
-
-    o.fruitIconWidth, o.fruitIconHeight = getNormalizedScreenValues(fruitHeightPixels - 8, fruitHeightPixels - 8)
-
-    o.guideWidth, _ = getNormalizedScreenValues(2, 0)
-    o.headerSeparatorWidth, _ = getNormalizedScreenValues(1, 0)
-
-    o.seasonIconWidth, o.seasonIconHeight = getNormalizedScreenValues(30, 30)
-
-    o.topLeftX, o.topLeftY = getNormalizedScreenValues(50, 20)
-    o.totalWidth = o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth + 12 * o.transitionWidth
-
-    o.contentHeight = element.size[2] - o.headerHeight - o.topLeftY - o.footerHeight
-    local fruitElementHeight = o.fruitHeight + o.fruitSpacerHeight
-    o.maxContentHeight = math.floor(o.contentHeight / fruitElementHeight) * fruitElementHeight - o.fruitSpacerHeight
-
-    o.seasons = {}
-    o.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_SPRING]:setUVs(getNormalizedUVs({8, 216, 128, 128}))
-    o.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_SUMMER]:setUVs(getNormalizedUVs({144, 216, 128, 128}))
-    o.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_AUTUMN]:setUVs(getNormalizedUVs({280, 216, 128, 128}))
-    o.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", g_seasons.baseUIFilename, 0, 0, o.seasonIconWidth, o.seasonIconHeight)
-    o.seasons[ssEnvironment.SEASON_WINTER]:setUVs(getNormalizedUVs({416, 216, 128, 128}))
-
-    -- Set up the slider
-    local numTotalItems = table.getn(self.overviewData)
-    self.overview.scrollStart = 1
-
-    o.scrollVisible = math.floor(self.overview.contentHeight / (self.overview.fruitHeight + self.overview.fruitSpacerHeight))
-    self.cropsSlider:setMinValue(o.scrollVisible)
-    self.cropsSlider:setMaxValue(numTotalItems + self.overview.scrollVisible - 1)
-    self.cropsSlider:setValue(self.cropsSlider.maxValue)
-    self.cropsSlider:setSliderSize(self.cropsSlider.minValue, self.cropsSlider.maxValue)
-end
-
-function ssSeasonsMenu:updateOverview()
-    self.overviewData = {}
-
+function ssSeasonsMenu:updateCalendar()
     local canPlant = g_seasons.growthGUI:getCanPlantData()
     local canHarvest = g_seasons.growthGUI:getCanHarvestData()
 
@@ -327,222 +288,173 @@ function ssSeasonsMenu:updateOverview()
         if currentBlock ~= nil then table.insert(blocks, currentBlock) end --handle case where there is no false (like poplar)
     end
 
+    self.calendarList:deleteListItems()
+    self.calendarTemps = {}
+
     for index, fruitDesc in ipairs(FruitUtil.fruitIndexToDesc) do
         if fruitDesc.allowsSeeding then -- must be in list
             local item = {}
             local fillTypeDesc = FillUtil.fillTypeIndexToDesc[FruitUtil.fruitTypeToFillType[index]]
 
             item.name = fruitDesc.name
-            item.i18Name = fillTypeDesc.nameI18N
+            item.nameI18N = fillTypeDesc.nameI18N
+            item.fillTypeDesc = fillTypeDesc
 
             item.temperature = g_seasons.weather:germinationTemperature(fruitDesc.name)
 
-            if self.overview.iconCache[index] == nil then
-                self.overview.iconCache[index] = Overlay:new("fruitIcon", fillTypeDesc.hudOverlayFilenameSmall, 0, 0, 40, 40)
-            end
-            item.icon = self.overview.iconCache[index]
-
             item.blocks = {}
-            generateBlocks(item.blocks, fruitDesc.name, canPlant, self.BLOCK_TYPE_PLANTABLE)
-            generateBlocks(item.blocks, fruitDesc.name, canHarvest, self.BLOCK_TYPE_HARVESTABLE)
+            generateBlocks(item.blocks, fruitDesc.name, canPlant, ssSeasonsMenu.BLOCK_TYPE_PLANTABLE)
+            generateBlocks(item.blocks, fruitDesc.name, canHarvest, ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE)
 
-            table.insert(self.overviewData, item)
+            self.currentItem = item
+            -- self.currentItemIsOdd = i % 2 == 0
+
+            local row = self.calendarListItemTemplate:clone(self.calendarList)
+            row:updateAbsolutePosition()
+
         end
     end
 
-    -- Create the headers
-    self.overview.transitionHeaders = ssUtil.getTransitionHeaders()
+    self.currentItem = nil
 end
 
-function ssSeasonsMenu:drawOverview(element)
-    if self.overview.fruitSpacerHeight == nil then
-        self:createOverviewValues(element)
+function ssSeasonsMenu:deleteOverview()
+    self.pixel:delete()
+    self.calendarHeader:delete()
+end
+
+function ssSeasonsMenu:onCreateCalendarListItem(element)
+    if self.currentItem ~= nil then
     end
+end
 
-    local o = self.overview
-    local topLeftX = (element.size[1] - o.totalWidth) / 2
-    local headerLeft = topLeftX + o.fruitNameWidth + o.germinationWidth + 2 * o.fruitSpacerWidth
+function ssSeasonsMenu:onCreateCalendarItemFruitIcon(element)
+    if self.currentItem ~= nil then
+        element:setImageFilename(self.currentItem.fillTypeDesc.hudOverlayFilenameSmall)
+    end
+end
 
+function ssSeasonsMenu:onCreateCalendarItemFruitName(element)
+    if self.currentItem ~= nil then
+        element:setText(self.currentItem.nameI18N)
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemGermination(element)
+    if self.currentItem ~= nil then
+        element:setText(ssLang.formatTemperature(self.currentItem.temperature))
+
+        table.insert(self.calendarTemps, { element, self.currentItem.temperature })
+
+        if math.floor(Utils.getNoNil(ssWeatherManager.soilTemp, 0), 0) < self.currentItem.temperature then
+            element:applyProfile(element.profile .. "Frigid")
+        end
+    end
+end
+
+function ssSeasonsMenu:onCreateCalendarItemData(element)
+    if self.currentItem ~= nil then
+        element.item = self.currentItem
+    end
+end
+
+function ssSeasonsMenu:onDrawCalendarToday(element)
+    local pixel = self.pixel
+    local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
+    local daySize = element.size[1] / (g_seasons.environment.daysInSeason * 4) * (dayInYear - 1)
+    local guideWidth, _ = getNormalizedScreenValues(2, 0)
     local colorBlind = g_gameSettings:getValue("useColorblindMode")
 
-    -- Print header
-    setTextColor(1, 1, 1, 1)
+    pixel:setPosition(element.absPosition[1] + daySize, element.absPosition[2])
+    pixel:setDimension(guideWidth, element.size[2])
+    pixel:setColor(unpack(colorBlind and {1.0000, 0.8632, 0.0232, 1} or {0.8069, 0.0097, 0.0097, 1}))
+    pixel:render()
+end
 
-    -- Background
-    o.rect:render(
-        headerLeft,
-        o.topLeftY,
-        o.transitionWidth * g_seasons.environment.TRANSITIONS_IN_YEAR,
-        o.headerHeight - o.fruitSpacerHeight,
-        {0.013, 0.013, 0.013, 1}
-    )
+function ssSeasonsMenu:onDrawCalendarItemData(element)
+    if not element:getIsVisible() then return end
 
-    -- Season icons
-    for s = 0, 3 do
-        o.rect:renderOverlay(
-            self.overview.seasons[s],
-            headerLeft + s * o.transitionWidth * 3,
-            o.topLeftY,
-            o.seasonIconWidth,
-            o.seasonIconHeight,
-            nil, --headerHeight - fruitSpacerHeight,
-            o.transitionWidth * 3
-        )
+    local transitionWidth, _ = getNormalizedScreenValues(45, 0)
+    local pixel = self.pixel
+    local colorBlind = g_gameSettings:getValue("useColorblindMode")
+
+    local transitionHeight = element.size[2] / 2
+
+    for _, block in pairs(element.item.blocks) do
+        local blockInY = block.type ~= ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE and transitionHeight or 0
+
+        pixel:setPosition(element.absPosition[1] + (block.s - 1) * transitionWidth,
+                          element.absPosition[2] + blockInY)
+
+        pixel:setDimension(transitionWidth * (block.e - block.s + 1), transitionHeight)
+        pixel:setColor(unpack(ssSeasonsMenu.BLOCK_COLORS[colorBlind][block.type]))
+
+        pixel:render()
     end
+end
 
-    -- Draw separator blocks in the header
-    for i = 2, g_seasons.environment.TRANSITIONS_IN_YEAR do
-        if i == 4 or i == 7 or i == 10 then
-            o.rect:render(
-                headerLeft + (i - 1) * o.transitionWidth,
-                o.topLeftY,
-                o.headerSeparatorWidth,
-                o.headerHeight - o.fruitSpacerHeight,
-                {0.0284, 0.0284, 0.0284, 1} -- ????
-            )
-        else
-            o.rect:render(
-                headerLeft + (i - 1) * o.transitionWidth,
-                o.topLeftY + o.seasonIconHeight,
-                o.headerSeparatorWidth,
-                o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
-                {0.0284, 0.0284, 0.0284, 1}
-            )
-        end
-    end
+function ssSeasonsMenu:onCreateCalendarHeader(element)
+    self.calendarHeader = ssGuiSeasonsHeader:new(element)
+    self.calendarHeader:setMargin(getNormalizedScreenValues(0, 50))
+end
 
-    -- Write numbers in headers
-    setTextColor(0.5, 0.5, 0.5, 1)
-    for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
-        --x, y, fontSize, text, boxHeight, boxWidth
-        o.rect:renderText(
-            headerLeft + (i - 1) * o.transitionWidth,
-            o.topLeftY + o.seasonIconHeight,
-            o.smallTextSize,
-            o.transitionHeaders[(i - 1) % 3 + 1],
-            o.headerHeight - o.seasonIconHeight - o.fruitSpacerHeight,
-            o.transitionWidth
-        )
-    end
-    setTextColor(1, 1, 1, 1)
+function ssSeasonsMenu:onDrawCalendarHeader(element)
+    self.calendarHeader:draw(element)
+end
 
-    -- Print all fruits' data
-    local iFruit = 0
-
-    local scrollEnd = math.min(table.getn(self.overviewData), o.scrollStart + o.scrollVisible - 1)
-    for i = o.scrollStart, scrollEnd do
-        local fruitData = self.overviewData[i]
-
-        local fruitY = o.topLeftY + o.headerHeight + iFruit * (o.fruitHeight + o.fruitSpacerHeight)
-        local fruitX = topLeftX
-
-        -- Print name of the fruit
-        setTextAlignment(RenderText.ALIGN_LEFT)
-        o.rect:render(
-            fruitX,
-            fruitY,
-            o.fruitNameWidth,
-            o.fruitHeight,
-            {0.013, 0.013, 0.013, 1}
-        )
-        o.rect:renderOverlay(fruitData.icon, fruitX + o.textSpacingWidth, fruitY, o.fruitIconWidth, o.fruitIconHeight, o.fruitHeight)
-        o.rect:renderText(fruitX + 2 * o.textSpacingWidth + o.fruitIconWidth, fruitY, o.textSize, fruitData.i18Name, o.fruitHeight)
-
-        -- Print germination temperature
-        fruitX = fruitX + o.fruitNameWidth + o.fruitSpacerWidth
-        o.rect:render(
-            fruitX,
-            fruitY,
-            o.germinationWidth,
-            o.fruitHeight,
-            {0.013, 0.013, 0.013, 1}
-        )
-        setTextAlignment(RenderText.ALIGN_CENTER)
-
-        if math.floor(ssWeatherManager.soilTemp, 0) < fruitData.temperature then
-            setTextColor(0.0742, 0.4341, 0.6939, 1)
-        end
-        o.rect:renderText(fruitX + o.germinationWidth / 2, fruitY, o.textSize, ssLang.formatTemperature(fruitData.temperature), o.fruitHeight)
-        setTextColor(1, 1, 1, 1)
-
-        fruitX = fruitX + o.germinationWidth + o.fruitSpacerWidth
-
-        -- Draw all blocks
-        for _, block in pairs(fruitData.blocks) do
-            local blockInY = block.type == self.BLOCK_TYPE_HARVESTABLE and o.transitionHeight or 0
-
-            o.rect:render(
-                fruitX + (block.s - 1) * o.transitionWidth,
-                fruitY + blockInY,
-                o.transitionWidth * (block.e - block.s + 1),
-                o.transitionHeight,
-                self.overview.blockColors[colorBlind][block.type]
-            )
-        end
-
-        iFruit = iFruit + 1
-    end
-
-    -- Print vertical line for our current day
-    local fruitsLeft = topLeftX + o.fruitNameWidth + o.fruitSpacerWidth + o.germinationWidth + o.fruitSpacerWidth
-    local fruitsRight = fruitsLeft + 12 * o.transitionWidth
-    local dayInYear = g_seasons.environment:dayInSeason() + g_seasons.environment:currentSeason() * g_seasons.environment.daysInSeason
-
-    local guideHeight = (scrollEnd - o.scrollStart + 1) * (o.fruitHeight + o.fruitSpacerHeight) - o.fruitSpacerHeight
-    o.rect:render(
-        fruitsLeft + (fruitsRight - fruitsLeft) / (g_seasons.environment.daysInSeason * 4) * (dayInYear - 1),
-        o.topLeftY + o.headerHeight,
-        o.guideWidth,
-        guideHeight,
-        colorBlind and {1.0000, 0.8632, 0.0232, 1} or {0.8069, 0.0097, 0.0097, 1}
-    )
+function ssSeasonsMenu:onDrawCalendarFooter(element)
+    local transitionWidth, transitionHeight = getNormalizedScreenValues(45, 16)
+    local offsetX, offsetY = getNormalizedScreenValues(5, 5)
+    local pixel = self.pixel
+    local colorBlind = g_gameSettings:getValue("useColorblindMode")
+    local x, y = unpack(element.absPosition)
+    local _, textSize = getNormalizedScreenValues(0, 14)
 
     -- Draw legend in the footer
     setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
 
-    local footerY = o.topLeftY + o.headerHeight -- + o.contentHeight
-    footerY = footerY + o.scrollVisible * (o.fruitSpacerHeight + o.fruitHeight)
+    local footerY = 10
 
-    -- Rect for planting
-    o.rect:render(
-        topLeftX,
-        footerY,
-        o.transitionWidth,
-        o.transitionHeight,
-        self.overview.blockColors[colorBlind][self.BLOCK_TYPE_PLANTABLE]
-    )
-    o.rect:renderText(
-        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
-        footerY,
-        o.textSize,
-        ssLang.getText("ui_plantingSeason"),
-        o.transitionHeight
+    -- Planting and harvest icons
+    pixel:setDimension(transitionWidth, transitionHeight)
+
+    pixel:setPosition(x, y + transitionHeight + offsetY)
+    pixel:setColor(unpack(ssSeasonsMenu.BLOCK_COLORS[colorBlind][ssSeasonsMenu.BLOCK_TYPE_PLANTABLE]))
+    pixel:render()
+
+    pixel:setPosition(x, y)
+    pixel:setColor(unpack(ssSeasonsMenu.BLOCK_COLORS[colorBlind][ssSeasonsMenu.BLOCK_TYPE_HARVESTABLE]))
+    pixel:render()
+
+    renderText(
+        x + transitionWidth + offsetX,
+        y + transitionHeight + offsetY,
+        textSize,
+        ssLang.getText("ui_plantingSeason")
     )
 
-    -- Rect for harvesting
-    o.rect:render(
-        topLeftX,
-        footerY + o.transitionHeight + o.textSpacingHeight,
-        o.transitionWidth,
-        o.transitionHeight,
-        self.overview.blockColors[colorBlind][self.BLOCK_TYPE_HARVESTABLE]
-    )
-    o.rect:renderText(
-        topLeftX + o.transitionWidth + o.fruitSpacerWidth,
-        footerY + o.transitionHeight + o.textSpacingHeight,
-        o.textSize,
-        ssLang.getText("ui_harvestSeason"),
-        o.transitionHeight
+    renderText(
+        x + transitionWidth + offsetX,
+        y,
+        textSize,
+        ssLang.getText("ui_harvestSeason")
     )
 end
 
-function ssSeasonsMenu:onCropSliderValueChanged()
-    self.overview.scrollStart = self.cropsSlider.maxValue - math.floor(self.cropsSlider.currentValue) + 1
-end
+function ssSeasonsMenu:onDrawPageCalendar()
+    local curTemp = math.floor(ssWeatherManager.soilTemp, 0)
+    if curTemp ~= self.lastSoilTemperature then
+        self.lastSoilTemperature = curTemp
 
-function ssSeasonsMenu:deleteOverview()
-    self.overview.testOverlay:delete()
+        for i, data in pairs(self.calendarTemps) do
+            if curTemp < data[2] then
+                data[1]:applyProfile("ssCalendarItemGerminationFrigid")
+            else
+                data[1]:applyProfile("ssCalendarItemGermination")
+            end
+        end
+    end
 end
 
 ------------------------------------------
@@ -630,11 +542,26 @@ end
 function ssSeasonsMenu:updateServerSettingsVisibility()
     if g_currentMission ~= nil then
         -- Only needs MP login when this is a MP session, this is not the server and the user is not logged in
-        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser and g_currentMission.connectedToDedicatedServer
+        local needsMPLogin = g_currentMission.missionDynamicInfo.isMultiplayer and not g_currentMission:getIsServer() and not g_currentMission.isMasterUser
 
-        self.multiplayerLogin:setVisible(needsMPLogin)
-        self.settingsColumn2:setVisible(not needsMPLogin)
-        self.settingsColumn3:setVisible(not needsMPLogin)
+        -- Only to dedi others can log in
+        if g_currentMission.connectedToDedicatedServer then
+            self.multiplayerLogin:setVisible(needsMPLogin)
+            self.settingsColumn2:setVisible(not needsMPLogin)
+            self.settingsColumn3:setVisible(not needsMPLogin)
+        else
+            -- If not on a dedi, never log in (consoles can't type)
+            self.multiplayerLogin:setVisible(false)
+
+            -- If server, show options, otherwise always hide
+            if g_currentMission:getIsServer() then
+                self.settingsColumn2:setVisible(true)
+                self.settingsColumn3:setVisible(true)
+            else
+                self.settingsColumn2:setVisible(false)
+                self.settingsColumn3:setVisible(false)
+            end
+        end
     end
 end
 
@@ -664,8 +591,6 @@ function ssSeasonsMenu:ingameOnAdminLoginSuccess(superFunc)
     end
 end
 
-InGameMenu.onAdminLoginSuccess = Utils.overwrittenFunction(InGameMenu.onAdminLoginSuccess, ssSeasonsMenu.ingameOnAdminLoginSuccess)
-
 ------------------------------------------
 -- SETTINGS PAGE
 ------------------------------------------
@@ -673,11 +598,6 @@ InGameMenu.onAdminLoginSuccess = Utils.overwrittenFunction(InGameMenu.onAdminLog
 function ssSeasonsMenu:onCreatePageSettings(element)
     ssSeasonsMenu.PAGE_SETTINGS = self.pagingElement:getPageIdByElement(element)
 end
-
-function ssSeasonsMenu:onCreateSaveButton(element)
-    element:setText(ssLang.getText("ui_buttonSave"))
-end
-
 
 function ssSeasonsMenu:updateGameSettings()
     if g_currentMission == nil then
@@ -710,58 +630,51 @@ function ssSeasonsMenu:updateTracksDisablement()
     end
 end
 
-function ssSeasonsMenu:updateApplySettingsButton()
-    local hasChanges = false
-
-    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
+function ssSeasonsMenu:hasSettingsChanged()
+    return self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason
         or self.settingElements.seasonIntros:getIsChecked() ~= not ssSeasonIntro.hideSeasonIntro
         or self.settingElements.controlsHelp:getIsChecked() ~= g_seasons.showControlsInHelpScreen
         or self.settingElements.controlsTemperature:getIsChecked() ~= ssWeatherForecast.degreeFahrenheit
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode
-        or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled then
-        -- or  then -- snow
-        hasChanges = true
-    end
-
-    self.saveButton:setDisabled(not hasChanges)
+        or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled
 end
 
-function ssSeasonsMenu:onClickSaveSettings()
-    if self.settingElements.seasonLength:getState() * 3 ~= g_seasons.environment.daysInSeason then
-        local text = ssLang.getText("dialog_applySettings")
-        g_gui:showYesNoDialog({text = text, callback = self.onYesNoSaveSettings, target = self})
-    else
-        self:onYesNoSaveSettings(true)
+function ssSeasonsMenu:saveSettings()
+    if not self:hasSettingsChanged() then return end
+
+    ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
+    g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
+    ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
+
+    if g_currentMission:getIsServer() then
+        local newLength = self.settingElements.seasonLength:getState() * 3
+
+        g_seasons.snow:setMode(self.settingElements.snow:getState())
+        self:updateSnowStatus()
+
+        g_seasons.environment:changeDaysInSeason(newLength)
+
+        g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
+        g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
+
+        -- Change header numbers
+        self:updateSeasonLengthGraphs()
+
+        -- Sync new data to all the clients
+        ssSettingsEvent.sendEvent()
+    elseif g_currentMission.isMasterUser then
+        -- Sync to the server
+        ssSettingsEvent.sendEvent()
     end
 end
 
-function ssSeasonsMenu:onYesNoSaveSettings(yes)
-    if yes then
-        ssSeasonIntro.hideSeasonIntro = not self.settingElements.seasonIntros:getIsChecked()
-        g_seasons.showControlsInHelpScreen = self.settingElements.controlsHelp:getIsChecked()
-        ssWeatherForecast.degreeFahrenheit = self.settingElements.controlsTemperature:getIsChecked()
-
-        if g_currentMission:getIsServer() then
-            local newLength = self.settingElements.seasonLength:getState() * 3
-
-            g_seasons.snow:setMode(self.settingElements.snow:getState())
-            self:updateSnowStatus()
-
-            g_seasons.environment:changeDaysInSeason(newLength)
-
-            g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
-            g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
-
-            self:updateApplySettingsButton()
-
-            -- Sync new data to all the clients
-            ssSettingsEvent.sendEvent()
-        elseif g_currentMission.isMasterUser then
-            -- Sync to the server
-            ssSettingsEvent.sendEvent()
-        end
+function ssSeasonsMenu:updateSeasonLengthGraphs()
+    if self.economy.graph then
+        self.economy.graph:settingsChanged()
+        self:onEconomyListSelectionChanged(self.economyList.selectedRow)
     end
+    self.calendarHeader:settingsChanged()
 end
 
 function ssSeasonsMenu:replaceTexts(element)
@@ -813,8 +726,6 @@ end
 
 function ssSeasonsMenu:onClickSnowToggle(state)
     self:updateTracksDisablement()
-
-    self:updateApplySettingsButton()
 end
 
 ------- Snow Tracks on/off -------

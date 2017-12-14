@@ -3,13 +3,12 @@
 ----------------------------------------------------------------------------------------------------
 -- Purpose:  to help debug growth
 -- Authors:  theSeb
--- Credits:  
+-- Credits:
 --
 -- Copyright (c) Realismus Modding, 2017
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthDebug = {}
-g_seasons.growthDebug = ssGrowthDebug
 
 --constants
 ssGrowthDebug.TMP_TRANSITION = 900
@@ -18,7 +17,10 @@ ssGrowthDebug.TMP_TRANSITION = 900
 ssGrowthDebug.debugView = false
 ssGrowthDebug.fakeTransition = 1
 
---functions
+function ssGrowthDebug:preLoad()
+    g_seasons.growthDebug = self
+end
+
 function ssGrowthDebug:loadMap(name)
     if g_currentMission:getIsServer() then
         addConsoleCommand("ssResetGrowth", "Resets growth back to default starting state", "consoleCommandResetGrowth", self)
@@ -27,6 +29,17 @@ function ssGrowthDebug:loadMap(name)
         addConsoleCommand("ssPrintDebugInfo", "Prints debug info", "consoleCommandPrintDebugInfo", self)
         addConsoleCommand("ssChangeFruitGrowthState", "ssChangeFruitGrowthState fruit currentState desiredState", "consoleCommandChangeFruitGrowthState", self)
         addConsoleCommand("ssGrowthDebugView", "Displays growth related debug info", "consoleCommandDebugView", self);
+    end
+end
+
+function ssGrowthDebug:deleteMap()
+    if g_currentMission:getIsServer() then
+        removeConsoleCommand("ssResetGrowth")
+        removeConsoleCommand("ssIncrementGrowth")
+        removeConsoleCommand("ssSetGrowthState")
+        removeConsoleCommand("ssPrintDebugInfo")
+        removeConsoleCommand("ssChangeFruitGrowthState")
+        removeConsoleCommand("ssGrowthDebugView");
     end
 end
 

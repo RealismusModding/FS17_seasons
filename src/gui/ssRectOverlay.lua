@@ -17,19 +17,20 @@ function ssRectOverlay:new(parentElement)
     self.parent = parentElement
 
     -- Cache for performance. If always the same image is used, drawing is much faster
-    if ssRectOverlay.g_overlay == nil then
-        local width, height = getNormalizedScreenValues(1, 1)
-        ssRectOverlay.g_overlay = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
-    end
+    self.overlay = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
 
     return self
 end
 
+function ssRectOverlay:delete()
+    self.overlay:delete()
+end
+
 function ssRectOverlay:render(x, y, width, height, color, boxHeight)
     if color ~= nil then
-        ssRectOverlay.g_overlay:setColor(unpack(color))
+        self.overlay:setColor(unpack(color))
     else
-        ssRectOverlay.g_overlay:setColor(1, 1, 1, 1)
+        self.overlay:setColor(1, 1, 1, 1)
     end
 
     if boxHeight ~= nil then
@@ -40,7 +41,7 @@ function ssRectOverlay:render(x, y, width, height, color, boxHeight)
     x = x + self.parent.absPosition[1]
     y = self.parent.absPosition[2] + self.parent.size[2] - height - y
 
-    renderOverlay(ssRectOverlay.g_overlay.overlayId, x, y, width, height)
+    renderOverlay(self.overlay.overlayId, x, y, width, height)
 end
 
 function ssRectOverlay:renderText(x, y, fontSize, text, boxHeight, boxWidth)

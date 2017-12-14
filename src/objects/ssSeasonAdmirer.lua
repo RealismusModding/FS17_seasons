@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSeasonAdmirer = {}
-getfenv(0)["ssSeasonAdmirer"] = ssSeasonAdmirer
 
 local ssSeasonAdmirer_mt = Class(ssSeasonAdmirer)
 

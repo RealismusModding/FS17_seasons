@@ -8,10 +8,11 @@
 ----------------------------------------------------------------------------------------------------
 
 ssReplaceVisual = {}
-g_seasons.replaceVisual = ssReplaceVisual
 
 function ssReplaceVisual:preLoad()
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssReplaceVisual.placeableUpdatePlacableOnCreation)
+    g_seasons.replaceVisual = self
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssReplaceVisual.placeableUpdatePlacableOnCreation)
 end
 
 function ssReplaceVisual:loadMap(name)
@@ -20,12 +21,26 @@ function ssReplaceVisual:loadMap(name)
 
         self.loadedPlaceableDefaults = {}
         self.materialHolders = {}
+        self.useAlphaBlending = false
+        self.tmpMaterialHolderNodeId = nil
+        self.textureMemoryUsage = 0
 
         self:loadFromXML()
         self:loadMaterialHolders()
 
         for _, replacements in ipairs(self.modReplacements) do
             self:loadTextureIdTable(replacements)
+        end
+
+        -- Add texture memory usage to the mission (which has the map) in order to limit slots
+        g_currentMission.textureMemoryUsage = g_currentMission.textureMemoryUsage + self.textureMemoryUsage
+    end
+end
+
+function ssReplaceVisual:deleteMap()
+    if g_currentMission:getIsClient() then
+        for _, id in ipairs(self.modReplacements) do
+            delete(id)
         end
     end
 end
@@ -47,7 +62,7 @@ function ssReplaceVisual:loadFromXML()
     self.modReplacements = {}
 
     -- Default
-    self:loadTextureReplacementsFromXMLFile(g_seasons.modDir .. "data/textures.xml")
+    self:loadTextureReplacementsFromXMLFile(g_seasons:getDataPath("textures"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("textures")) do
@@ -72,6 +87,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
         self.textureReplacements.default = {}
         self.materialHolders = {}
         self.useAlphaBlending = nil
+        self.textureMemoryUsage = 0
     end
 
     local useAlphaBlending = getXMLBool(file, "textures#alphaBlending")
@@ -97,6 +113,15 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
             ["default"] = ssUtil.normalizedPath(Utils.getFilename(matHolder, baseDir)),
             ["blending"] = blendingFile
         })
+
+        if GS_IS_CONSOLE_VERSION then
+            local memory = getXMLInt(file, "textures#textureMemoryUsage")
+            if memory == nil then
+                print("Error: The Seasons textures configuration '" .. path .. "' loads a material holder but is missing 'textureMemoryUsage'")
+            else
+                self.textureMemoryUsage = self.textureMemoryUsage + memory
+            end
+        end
     end
 
     -- Load seasons replacements
@@ -177,7 +202,7 @@ function ssReplaceVisual:loadMaterialHolders()
         local filePath
 
         -- Only use blending if supplied and enabled
-        if info.blending ~= nil and self.useAlphaBlending then
+        if info.blending ~= nil and self.useAlphaBlending and not GS_IS_CONSOLE_VERSION then
             filePath = info.blending
         else
             filePath = info.default
@@ -286,7 +311,6 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                 local sourceShapeId = self:findNodeByName(searchBase, secondaryNodeTable.replacementName)
 
                 if sourceShapeId ~= nil then -- Can be defined in an other I3D file.
-                    -- log("Loading mapping for texture replacement: Shapename: " .. shapeName .. " secondaryNodeName: " .. secondaryNodeName .. " searchBase: " .. searchBase .. " season: " .. seasonId .. " Value: " .. secondaryNodeTable["replacementName"] .. " materialID: " .. materialSrcId )
                     self.textureReplacements[seasonId][shapeName][secondaryNodeName].materialIds = self:getShapeMaterials(sourceShapeId)
 
                     -- Load the current material
@@ -397,7 +421,6 @@ function ssReplaceVisual:updateTextures(nodeId)
             end
 
             if secondaryNodeTable.materialIds ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
@@ -410,7 +433,6 @@ function ssReplaceVisual:updateTextures(nodeId)
 
             -- MATERIALID is NULL for birch
             if secondaryNodeTable.materialIds ~= nil then
-                -- log("Asking for texture change: " .. getName(nodeId) .. " (" .. nodeId .. ")/" .. secondaryNodeName .. " to " .. secondaryNodeTable["materialId"])
                 self:updateTexturesSubNode(nodeId, secondaryNodeName, secondaryNodeTable.materialIds)
             end
         end
@@ -429,7 +451,6 @@ end
 -- Does a specified replacement on subnodes of nodeId.
 function ssReplaceVisual:updateTexturesSubNode(nodeId, shapeName, materialSrcIds)
     if getHasClassId(nodeId, ClassIds.SHAPE) and getName(nodeId) == shapeName then
-        -- log("Setting texture for " .. getName(nodeId) .. " (" .. tostring(nodeId) .. ") to " .. tostring(materialSrcId))
         self:setShapeMaterials(nodeId, materialSrcIds)
     end
 

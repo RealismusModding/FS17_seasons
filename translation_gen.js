@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const xml2js = require("xml2js");
 const Promise = require("bluebird");
+const xmlescape = require('xml-escape');
 
 //////////////////////////////////////////
 // Library

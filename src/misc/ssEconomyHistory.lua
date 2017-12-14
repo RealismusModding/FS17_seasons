@@ -8,13 +8,16 @@
 ----------------------------------------------------------------------------------------------------
 
 ssEconomyHistory = {}
-g_seasons.economyHistory = ssEconomyHistory
 
 ssEconomyHistory.HISTORY_LENGTH = 1 -- years
 
 ssEconomyHistory.ECONOMY_TYPE_FILL = 1
 ssEconomyHistory.ECONOMY_TYPE_ANIMAL = 2
 ssEconomyHistory.ECONOMY_TYPE_BALE = 3
+
+function ssEconomyHistory:preLoad()
+    g_seasons.economyHistory = self
+end
 
 function ssEconomyHistory:load(savegame, key)
     self.data = {}

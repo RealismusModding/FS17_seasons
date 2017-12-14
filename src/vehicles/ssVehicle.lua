@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssVehicle = {}
-g_seasons.vehicle = ssVehicle
 
 ssVehicle.LIFETIME_FACTOR = 3
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
@@ -16,19 +15,39 @@ ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
 ssVehicle.SERVICE_INTERVAL = 30
 
-ssVehicle.repairFactors = {}
-ssVehicle.allowedInWinter = {}
+-- This must be loaded at once, during source-time.
+source(ssSeasonsMod.directory .. "src/events/ssRepairVehicleEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssVariableTreePlanterEvent.lua")
 
 function ssVehicle:preLoad()
-    SpecializationUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
-    SpecializationUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
-    SpecializationUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
-    SpecializationUtil.registerSpecialization("grassfillable", "ssGrassFillable", g_seasons.modDir .. "src/vehicles/specializations/ssGrassFillable.lua")
-    SpecializationUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
-    SpecializationUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
-    SpecializationUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    g_seasons.vehicle = ssVehicle
+
+    ssUtil.registerSpecialization("repairable", "ssRepairable", g_seasons.modDir .. "src/vehicles/specializations/ssRepairable.lua")
+    ssUtil.registerSpecialization("snowtracks", "ssSnowTracks", g_seasons.modDir .. "src/vehicles/specializations/ssSnowTracks.lua")
+    ssUtil.registerSpecialization("snowfillable", "ssSnowFillable", g_seasons.modDir .. "src/vehicles/specializations/ssSnowFillable.lua")
+    ssUtil.registerSpecialization("grassfillable", "ssGrassFillable", g_seasons.modDir .. "src/vehicles/specializations/ssGrassFillable.lua")
+    ssUtil.registerSpecialization("motorFailure", "ssMotorFailure", g_seasons.modDir .. "src/vehicles/specializations/ssMotorFailure.lua")
+    ssUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
+    ssUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
+    ssUtil.registerSpecialization("ss_drivable", "ssDrivable", g_seasons.modDir .. "src/vehicles/specializations/ssDrivable.lua")
 
     ssVehicle:registerWheelTypes()
+
+    ssUtil.overwrittenFunction(Vehicle, "getDailyUpKeep", ssVehicle.vehicleGetDailyUpKeep)
+    ssUtil.overwrittenFunction(Vehicle, "getSellPrice", ssVehicle.vehicleGetSellPrice)
+    ssUtil.overwrittenFunction(Vehicle, "getSpecValueAge", ssVehicle.vehicleGetSpecValueAge)
+    ssUtil.overwrittenFunction(Vehicle, "getSpeedLimit", ssVehicle.getSpeedLimit)
+    ssUtil.overwrittenFunction(Vehicle, "draw", ssVehicle.vehicleDraw)
+    ssUtil.overwrittenFunction(Combine, "getIsThreshingAllowed", ssVehicle.getIsThreshingAllowed)
+    ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
+    ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
+    ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
+
+    ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
+
+    -- Functions for ssMotorFailure, needs to be reloaded every game
+    ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)
+    ssUtil.overwrittenConstant(Motorized, "stopMotor", ssMotorFailure.stopMotor)
 end
 
 function ssVehicle:load(savegame, key)
@@ -43,18 +62,10 @@ function ssVehicle:loadMap()
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    Vehicle.getDailyUpKeep = Utils.overwrittenFunction(Vehicle.getDailyUpKeep, ssVehicle.vehicleGetDailyUpKeep)
-    Vehicle.getSellPrice = Utils.overwrittenFunction(Vehicle.getSellPrice, ssVehicle.vehicleGetSellPrice)
-    Vehicle.getSpecValueAge = Utils.overwrittenFunction(Vehicle.getSpecValueAge, ssVehicle.vehicleGetSpecValueAge)
-    Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, ssVehicle.getSpeedLimit)
-    Vehicle.draw = Utils.overwrittenFunction(Vehicle.draw, ssVehicle.vehicleDraw)
-    Combine.getIsThreshingAllowed = Utils.overwrittenFunction(Combine.getIsThreshingAllowed, ssVehicle.getIsThreshingAllowed)
-    AIVehicle.update = Utils.appendedFunction(AIVehicle.update, ssVehicle.aiVehicleUpdate)
-    Washable.updateTick = Utils.overwrittenFunction(Washable.updateTick, ssVehicle.washableUpdateTick)
-
-    VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssVehicle.sellAreaTriggerCallback)
-
     g_currentMission:setAutomaticMotorStartEnabled(false)
+
+    ssVehicle.repairFactors = {}
+    ssVehicle.allowedInWinter = {}
 
     if g_currentMission:getIsServer() then
         self:updateRepairInterval()
@@ -71,11 +82,22 @@ function ssVehicle:loadMap()
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
-    getfenv(0)["g_i18n"].texts["warning_doNotThreshDuringRainOrHail"] = ssLang.getText("warning_doNotThreshWithMoisture")
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_doNotThreshDuringRainOrHail", ssLang.getText("warning_doNotThreshWithMoisture"))
 
     self:installVehicleSpecializations()
     self:loadRepairFactors()
     self:loadAllowedInWinter()
+end
+
+function ssVehicle:deleteMap()
+    if g_addCheatCommands then
+        removeConsoleCommand("ssRepairVehicle")
+        removeConsoleCommand("ssRepairAllVehicles")
+    end
+
+    if g_seasons.debug then
+        removeConsoleCommand("ssTestVehicle")
+    end
 end
 
 function ssVehicle:readStream(streamId, connection)
@@ -94,9 +116,14 @@ end
 
 function ssVehicle:dayChanged()
     for _, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) and not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
-            self:repair(vehicle)
+        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+            vehicle.ssYears = vehicle.ssYears + 1 / (4 * g_seasons.environment.daysInSeason)
+
+            if not SpecializationUtil.hasSpecialization(Motorized, vehicle.specializations) then
+                self:repair(vehicle)
+            end
         end
+
         if SpecializationUtil.hasSpecialization(ssGrassFillable, vehicle.specializations) then
             ssGrassFillable:ssRotGrass(vehicle)
         end
@@ -110,8 +137,9 @@ end
 function ssVehicle:installVehicleSpecializations()
     for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
         if vehicleType ~= nil then
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
+
             if SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
-                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
             end
 
@@ -131,13 +159,17 @@ function ssVehicle:installVehicleSpecializations()
             if SpecializationUtil.hasSpecialization(TreePlanter, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("variableTreePlanter"))
             end
+
+            if SpecializationUtil.hasSpecialization(Drivable, vehicleType.specializations) then
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("ss_drivable"))
+            end
         end
     end
 end
 
 function ssVehicle:loadRepairFactors()
     -- Open file
-    local file = loadXMLFile("factors", g_seasons.modDir .. "data/repairFactors.xml")
+    local file = loadXMLFile("factors", g_seasons:getDataPath("repairFactors"))
 
     ssVehicle.repairFactors = {}
 
@@ -154,7 +186,7 @@ function ssVehicle:loadRepairFactors()
 
         local RF1 = getXMLFloat(file, key .. ".RF1#value")
         local RF2 = getXMLFloat(file, key .. ".RF2#value")
-        local lifetime = getXMLFloat(file, key .. ".ssLifeTime#value")
+        local lifetime = getXMLFloat(file, key .. ".lifetime#value")
 
         if RF1 == nil or RF2 == nil or lifetime == nil then
             logInfo("ssVehicle:", "repairFactors.xml is invalid")
@@ -298,7 +330,7 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
 
     local overdueFactor = self:calculateOverdueFactor(vehicle)
 
-    return (costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2
+    return math.min((costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2, 1.5 * storeItem.price)
 end
 
 -- all (guard)
@@ -346,7 +378,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
     local minSellPrice = price * 0.03
     local sellPrice
     local operatingTime = self.operatingTime / (60 * 60 * 1000) -- hours
-    local age = self.age / (g_seasons.environment.daysInSeason * g_seasons.environment.SEASONS_IN_YEAR * 4) -- year
+    local age = self.ssYears
     local power = Utils.getNoNil(storeItem.specs.power, storeItem.dailyUpkeep)
 
     local factors = ssVehicle.repairFactors[storeItem.category]
@@ -496,8 +528,8 @@ function ssVehicle:registerWheelTypes()
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_SOFT_TERRAIN] = 1.05
     snowchainsFrictionCoeffsWet[WheelsUtil.GROUND_FIELD] = 0.95
 
-    WheelsUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
-    WheelsUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
+    ssUtil.registerTireType("studded", studdedFrictionCoeffs, studdedFrictionCoeffsWet)
+    ssUtil.registerTireType("chains", snowchainsFrictionCoeffs, snowchainsFrictionCoeffsWet)
 end
 
 -- Override the threshing for the moisture system
@@ -612,6 +644,122 @@ function ssVehicle:washableUpdateTick(superFunc, dt)
 end
 
 ---------------------
+-- Repairing at shop
+---------------------
+
+function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
+    function setSellButtonState(disabled, text)
+        if self.sellButton ~= nil then
+            self.sellButton:setText(text)
+            self.sellButton:setDisabled(disabled);
+        end
+
+        if self.sellButtonConsole ~= nil then
+            self.sellButtonConsole:setText(text)
+            self.sellButtonConsole:setVisible(not disabled);
+        end
+    end
+
+    if self.sellButton["onClickCallback"] == DirectSellDialog.onClickOk then
+        ssUtil.overwrittenFunction(self.sellButton, "onClickCallback", ssVehicle.directSellDialogOnClickOk)
+        ssUtil.overwrittenFunction(DirectSellDialog, "onClickOk", ssVehicle.directSellDialogOnClickOk)
+    end
+
+    if vehicle ~= nil and vehicle.propertyState == Vehicle.PROPERTY_STATE_OWNED then
+        -- If there is something to repair, always give repair option
+        -- If it is not but own workshop, show disabled repair button
+        -- Otherwise do vanilla behaviour (sell button)
+        local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
+        local sellPrice = vehicle:getSellPrice()
+
+        if ownWorkshop or (repairCost >= 1 and repairCost <= sellPrice * 1.5) then
+            setSellButtonState(repairCost < 1 or (repairCost > sellPrice * 1.5 and ownWorkshop), ssLang.getText("ui_doRepair"))
+            self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
+
+            if self.sellButton ~= nil then
+                self.sellButton:applyProfile("buttonRepair")
+            end
+        else
+            if self.sellButton ~= nil then
+                self.sellButton:applyProfile("buttonSell")
+            end
+        end
+    end
+end
+
+function ssVehicle:repairVehicle(vehicle, showDialog, ownWorkshop, sellDialog)
+    local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
+    if repairCost < 1 then return end
+
+    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
+    local vehicleName = storeItem.brand .. " " .. storeItem.name
+
+    function performRepair(self)
+        -- Deduct
+        if g_currentMission:getIsServer() then
+            g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
+            g_currentMission.missionStats:updateStats("expenses", repairCost)
+        else
+            g_client:getServerConnection():sendEvent(CheatMoneyEvent:new(-repairCost))
+        end
+
+        -- Repair
+        if ssVehicle:repair(vehicle) then
+            -- Show that it was repaired
+            local str = string.format(g_i18n:getText("SS_VEHICLE_REPAIRED"), vehicleName, g_i18n.globalI18N:formatMoney(repairCost, 0))
+            g_currentMission:addIngameNotification(FSBaseMission.INGAME_NOTIFICATION_OK, str)
+
+            g_client:getServerConnection():sendEvent(ssRepairVehicleEvent:new(vehicle))
+        end
+    end
+
+    -- Callback for the Yes No Dialog
+    function doRepairCallback(self, yesNo)
+        if yesNo then
+            performRepair(vehicle)
+
+            if sellDialog ~= nil then
+                sellDialog:onClickBack();
+                if sellDialog.owner ~= nil then
+                    sellDialog.owner:onActivateObject()
+                end
+            end
+        end
+
+        g_gui:closeDialogByName("YesNoDialog")
+    end
+
+    if showDialog then
+        local dialog = g_gui:showDialog("YesNoDialog")
+        local text = string.format(ssLang.getText("SS_REPAIR_DIALOG"), vehicleName, g_i18n.globalI18N:formatMoney(repairCost, 0))
+
+        dialog.target:setCallback(doRepairCallback, vehicle)
+        dialog.target:setTitle(ssLang.getText("SS_REPAIR_DIALOG_TITLE"))
+        dialog.target:setText(text)
+    else
+        performRepair(vehicle)
+    end
+end
+
+function ssVehicle:directSellDialogOnClickOk(superFunc)
+    if self.inputDelay < self.time and self.vehicle ~= nil then
+        if self.vehicle.propertyState ~= Vehicle.PROPERTY_STATE_OWNED then
+            return superFunc(self)
+        end
+
+        local repairCost = ssVehicle:getRepairShopCost(self.vehicle, nil, not self.ownWorkshop)
+
+        -- Allow selling when no repair cost
+        if self.ownWorkshop or (repairCost >= 1 and repairCost <= self.vehicle:getSellPrice() * 1.5) then
+            ssVehicle:repairVehicle(self.vehicle, true, self.ownWorkshop, self)
+        else
+            superFunc(self)
+        end
+    end
+end
+
+
+---------------------
 -- Console commands
 ---------------------
 
@@ -632,7 +780,7 @@ function ssVehicle:consoleCommandRepairAllVehicles()
     local n = 0
 
     for _, vehicle in pairs(g_currentMission.vehicles) do
-        if SpecializationUtil.hasSpecialization(ssRepairable, vehicle.specializations) then
+        if SpecializationUtil.hasSpecialization(Washable, vehicle.specializations) then
             self:repair(vehicle)
             n = n + 1
         end

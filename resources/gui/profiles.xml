@@ -11,7 +11,18 @@
         <Preset name="colorDarkGrey2" value="0.0630 0.0630 0.0630 1"/>
         <Preset name="colorDarkGrey2_50" value="0.0630 0.0630 0.0630 0.5"/>
         <Preset name="colorDarkGrey6" value="0.03 0.03 0.03 1"/>
+
+        <Preset name="colorBlack3" value="0.013 0.013 0.013 1" />
+        <Preset name="colorBlack3_97" value="0.013 0.013 0.013 0.97" />
+        <Preset name="colorBlack3_70" value="0.013 0.013 0.013 0.7" />
+        <Preset name="colorBlack3_0" value="0.013 0.013 0.013 0" />
+
+        <Preset name="colorBlue" value="0.0742 0.4341 0.6939 1" />
+
+        <Preset name="colorLightGrey" value="0.0482 0.0482 0.0482 1" />
     </Presets>
+
+    <!-- Settings -->
 
     <Profile name="ssSettingsText" parent="textDefault">
         <Value name="margin" value="0px 25px 0px 14px" />
@@ -27,15 +38,116 @@
         <Value name="margin" value="0px 25px 0px 14px" />
     </Profile>
 
-    <Profile name="ssCropsSliderVertical" parent="sliderVertical">
+    <!-- Calendar -->
+
+    <Profile name="ssCropsSlider" parent="sliderVertical">
         <Value name="position" value="0px 15px" />
         <Value name="size" value="16px 458px" />
     </Profile>
 
-    <Profile name="ssOverview" parent="baseReference">
-        <Value name="size" value="984px 560px" />
-        <Value name="position" value="0px 0px" />
+    <Profile name="consoles_ssCropsSlider" parent="ssCropsSlider">
+        <Value name="size" value="16px 530px" />
     </Profile>
+
+    <Profile name="ssCalendarHeader" parent="baseReference">
+        <Value name="size" value="540px 50px" />
+        <Value name="position" value="-607px 221px" />
+
+        <Value name="screenAlign" value="middleLeft"/>
+        <Value name="positionOrigin" value="middleLeft"/>
+    </Profile>
+
+    <Profile name="ssCalendarList" parent="list">
+        <Value name="size" value="850px 407px" />
+        <Value name="position" value="-500px 17px" />
+
+        <Value name="listItemHeight" value="37px" />
+        <Value name="listItemWidth" value="850px" />
+        <Value name="isHorizontalList" value="false" />
+        <Value name="visibleItems" value="11" />
+    </Profile>
+
+    <Profile name="consoles_ssCalendarList" parent="ssCalendarList">
+        <Value name="position" value="-500px 53px" />
+    </Profile>
+
+    <Profile name="ssCalendarListItem" parent="listItem">
+        <Value name="size" value="850px 32px" />
+
+        <Value name="position" value="0px 0px" />
+        <Value name="offset" value="0px 0px" />
+
+        <Value name="imageColor" value="$preset_colorBlack3_0" />
+        <Value name="imageFocusedColor" value="$preset_colorBlack3_0" />
+        <Value name="imageSelectedColor" value="$preset_colorBlack3_0" />
+    </Profile>
+
+    <Profile name="ssCalendarBg" parent="baseReference">
+        <Value name="imageColor" value="$preset_colorBlack3" />
+        <Value name="imageFocusedColor" value="$preset_colorDarkGrey2_50" />
+        <Value name="imageSelectedColor" value="$preset_colorDarkGrey2" />
+    </Profile>
+
+    <Profile name="ssCalendarItemFruitBg" parent="ssCalendarBg">
+        <Value name="size" value="230px 32px" />
+    </Profile>
+
+    <Profile name="ssCalendarItemFruitIcon" parent="baseReference">
+        <Value name="size" value="24px 24px" />
+        <Value name="position" value="4px 4px" />
+
+        <Value name="imageColor" value="$preset_colorDescriptionText" />
+        <Value name="imageUVs" value="0 0 1 1" />
+    </Profile>
+
+    <Profile name="ssCalendarItemFruitName" parent="textDefault">
+        <Value name="size" value="230px 32px" />
+        <Value name="position" value="37px 9px" /> <!-- 32 + 5 -->
+
+        <Value name="textSize" value="14px" />
+    </Profile>
+
+    <Profile name="ssCalendarItemGerminationBg" parent="ssCalendarBg">
+        <Value name="size" value="70px 32px" />
+        <Value name="position" value="235px 0px" />
+    </Profile>
+
+    <Profile name="ssCalendarItemGermination" parent="textDefault">
+        <Value name="size" value="70px 32px" />
+        <Value name="position" value="0px 9px" />
+
+        <Value name="textAlignment" value="center" />
+        <Value name="textSize" value="14px" />
+    </Profile>
+
+    <Profile name="ssCalendarItemGerminationFrigid" parent="ssCalendarItemGermination">
+        <Value name="textColor" value="$preset_colorBlue" />
+        <Value name="textSelectedColor" value="$preset_colorBlue" />
+    </Profile>
+
+    <Profile name="ssCalendarItemData" parent="ssCalendarBg">
+        <Value name="size" value="540px 32px" />
+        <Value name="position" value="310px 0px" />
+
+        <Value name="imageColor" value="$preset_colorBlack3_0" />
+    </Profile>
+
+    <Profile name="ssCalendarFooter" parent="baseReference">
+        <Value name="size" value="850px 37px" />
+        <Value name="position" value="-917px -235px" />
+
+        <Value name="screenAlign" value="middleLeft"/>
+        <Value name="positionOrigin" value="middleLeft"/>
+    </Profile>
+
+    <Profile name="ssCalendarToday" parent="baseReference">
+        <Value name="screenAlign" value="middleRight"/>
+        <Value name="positionOrigin" value="middleRight"/>
+        <Value name="size" value="540px 402px" />
+        <Value name="position" value="-83px -11px" />
+    </Profile>
+
+    <!-- Economy -->
 
     <Profile name="ssEconomyGraph" parent="baseReference">
         <Value name="size" value="584px 360px"/>
@@ -47,6 +159,10 @@
     <Profile name="ssEconomySlider" parent="sliderVertical">
         <Value name="size" value="16px 458px"/>
         <Value name="position" value="-634px 15px" />
+    </Profile>
+
+    <Profile name="consoles_ssEconomySlider" parent="ssEconomySlider">
+        <Value name="size" value="16px 530px" />
     </Profile>
 
     <Profile name="ssEconomyList" parent="helpLineList">
@@ -78,6 +194,7 @@
     </Profile>
 
     <!-- Measurement dialog -->
+
     <Profile name="ssMeasureToolDialogBg" parent="dialogBg">
         <Value name="size" value="430px 540px" />
     </Profile>
@@ -97,6 +214,10 @@
     <Profile name="ssMeasureToolDialogSlider" parent="sliderVertical">
         <Value name="size" value="16px 348px" />
         <Value name="position" value="0px 0px" />
+    </Profile>
+
+    <Profile name="consoles_ssMeasureToolDialogSlider" parent="ssMeasureToolDialogSlider">
+        <Value name="size" value="16px 420px" />
     </Profile>
 
     <Profile name="ssMeasureToolDialogContentList" parent="list">
@@ -162,6 +283,11 @@
         <Value name="textColor" value="$preset_colorRed" />
         <Value name="textSelectedColor" value="$preset_colorRed"/>
         <Value name="textPreSelectedColor" value="$preset_colorRed"/>
+    </Profile>
+
+    <Profile name="buttonRepair" parent="buttonSell">
+        <Value name="iconUVs" value="884px 989px 27px 27px"/>
+        <Value name="iconColor" value="$preset_colorGreen"/>
     </Profile>
 
 </GUIProfiles>

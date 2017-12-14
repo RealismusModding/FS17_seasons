@@ -70,6 +70,9 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Réparation" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à minuit" />
 
+        <text name="ui_doRepair" text="Réparation" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Réparation et configuration" />
+
         <text name="SS_SAVE_FAILED" text="Échec de l'enregistrement de votre partie. Veuillez réessayer!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Vous utilisez la version mise à jour de Seasons. Le jeu a detecté la version contest/concours dans votre dossier mod et l'a désactivé. Svp enlevez le de votre dossier mod pour ne plus voir ce message." />
@@ -104,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Balle" />
 
-        <text name="ui_buttonSave" text="Sauvegarder les paramètres" />
         <text name="ui_snowOneLayer" text="Une couche seulement" />
         <text name="ui_days" text="%i jours" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -115,6 +117,9 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <text name="action_nextHandTool" text="Sélectionner outil suivante" />
+        <text name="action_chainsaw" text="Outil" />
 
         <text name="tooltip_seasonLength" text="La longueur d'une saison en jours. Une année a quatre saisons" />
         <text name="tooltip_seasonIntros" text="Montrer une introduction de la saison au début de celle-ci" />
@@ -132,7 +137,6 @@
         <text name="setting_controlsTemperature" text="Unité de  température" />
         <text name="setting_moisture" text="Humidité des cultures" />
 
-        <text name="dialog_applySettings" text="Êtes-vous certain de vouloir changer les paramètres de Seasons? Des changements à la durée et à la croissance peuvent résulter en des champs qui seront réparés après une année (temps de jeu) seulement." />
         <text name="dialog_resetGrowth" text="Vous avez chargé Seasons sur une vieille sauvegarde. Seasons veut remettre tous les champs(domaines) à leur état nu pour synchroniser avec le jour du jeu en cours. Vous perdrez toutes les récoltes. Si vous ne réinitialisez pas la croissance, Seasons pourrait ne pas fonctionner comme attendu." />
         <text name="dialog_resetGrowth_title" text="Remise à zéro de la croissance" />
         <text name="dialog_resetGrowth_no" text="Maintenir la croissance" />
@@ -204,7 +208,7 @@
         <text name="ss_helpText_10_04" text="Sur une carte de type moddé qui a été préparée avec un 'snow mask' par le moddeur, les balles de foin et de paille exposées à la pluie ou à la neige pourront pourrir. A moins qu'elles ne soient mises à l'abri sous un hangar bénéficiant du 'snow mask'. Les balles enrubannées ne seront pas affectées par le mauvais temps." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
-        <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 6 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
+        <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 12 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
         <text name="ss_helpText_11_02" text="Vous pouvez réparer vos véhicules soit à la concession, soit dans un garage plaçable. Pour réparer votre véhicule, conduisez le à la concession  ou dans un garage plaçable, et activez la réparation. Notez que ce sera plus coûteux de réparer à la concession." />
         <text name="ss_helpText_11_03" text="L'âge affiché de votre véhicule correspond au nombre de jours depuis la dernière réparation." />
         <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
@@ -245,5 +249,10 @@
         <text name="ss_helpText_18_02" text="Si vous souhaitez modifier la durée des saisons pour une partie en cours, il est recommandé de : 1) procéder au changement seulement pendant l'hiver afin de minimiser les effets indésirables sur les cultures en place. 2) redémarrer le jeu ensuite (sur le serveur le cas échéant)." />
         <text name="ss_helpText_18_03" text="Vous pouvez jouer comme bon vous semble, mais il est conseillé, afin que le jeu représente un défi intéressant, de jouer avec une durée de saison de 9 jours et une accélération du temps de 5x. De cette manière vous passerez le printemps à cultiver et semer les cultures, l'été à prendre soin de vos cultures et faire le foin, l'automne à récolter et labourer, et enfin, l'hiver à prendre soin des animaux, des machines, de la forêts et vendre vos récoltes." />
         <text name="ss_helpText_18_04" text="Tous les véhicules doivent être démarrés manuellement." />
+
+        <text name="ss_helpTitle_19" text="Outil de mesure" />
+        <text name="ss_helpText_19_01" text="Le Wopstr M420 est un outil de mesure qui peut être utilisé pour obtenir plus d’informations sur la terre, les arbres, les bottes, et les palettes. Après avoir acheté cet outil dans le magasin, il peut être activé comme une tronçonneuse. Pointez sur l’objet que vous souhaitez mesurer et activez l’outil afin de mesurer l’objet. Une mesure peut échouer." />
+        <text name="ss_helpText_19_02" text="Pour les arbres plantés vous pouvez connaître l’espèce de l’arbre, sa taille et la distance qui le sépare de l’arbre le plus proche. Pour les bottes vous pouvez connaître leur contenu et pour les bottes d’herbes le stade de fermentation. Mesurer le sol vous informe de la localisation, de l’altitude, du type de culture, de la croissance et de l’humidité de la culture, le niveau de fertilisation et l’humidité du sol. Pour les palettes, vous connaitrez leur contenu." />
+        <text name="ss_helpText_19_03" text="Pour plus d’informations à propos du Wopstr M420 et une explication détaillée des symboles, veuillez jeter un œil au site de Realismus Modding : www.realismusmodding.com/seasons." />
     </texts>
 </l10n>

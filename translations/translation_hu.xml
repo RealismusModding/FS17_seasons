@@ -70,6 +70,9 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Karbantartás" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="éjjel" />
 
+        <text name="ui_doRepair" text="Javítás" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Javítás és felszerelés" />
+
         <text name="SS_SAVE_FAILED" text="Nem sikerült a Seasons mentése. Próbáld újra!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="A Seasons mod frissített verzióját futtatod. A játék érzékelte a contest verziót a mods könyvtáradban és deaktiválta azt. Kérjük töröld a contest verziót a mods könyvtáradból, hogy ne lásd többé ezt az üzenetet." />
@@ -104,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Bála" />
 
-        <text name="ui_buttonSave" text="Beállítások mentése" />
         <text name="ui_snowOneLayer" text="1 réteg csak" />
         <text name="ui_days" text="%i nap" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -115,6 +117,11 @@
 
         <text name="unit_meterShort" text="méter" />
         <text name="unit_feetShort" text="láb" />
+
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
 
         <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll" />
         <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén" />
@@ -132,7 +139,6 @@
         <text name="setting_controlsTemperature" text="Hőmérséklet mértékegysége" />
         <text name="setting_moisture" text="Növény nedvesség" />
 
-        <text name="dialog_applySettings" text="Biztosan meg akarod változtatni a Seasons beállitásokat? Az évszak-hossz beállitások néha olyan földeket eredményeznek, amik csak 1 játékbeli év után javulnak meg." />
         <text name="dialog_resetGrowth" text="A Seasons-t egy régi játékra töltötted be. A mod alaphelyzetbe állítja az összes földet, hogy szinkronizálni tudja a játéknappal. Az összes növényed elveszted. Ha a növekedést nem állítod alaphelyzetbe, akkor az a Seasons mod hibás működését eredményezheti." />
         <text name="dialog_resetGrowth_title" text="Növény fejlődés alaphelyzetbe" />
         <text name="dialog_resetGrowth_no" text="Növény fejlődés megtartása" />
@@ -245,5 +251,14 @@
         <text name="ss_helpText_18_02" text="Ha úgy döntesz, hogy megváltoztatod a évszak hosszát: 1.) Ezt lehetőleg téli időszakban tedd. 2.) Indítsd újra a játékot / szervert miután megváltoztattad az évszak hosszát, hogy elkerüld az esetleges problémákat." />
         <text name="ss_helpText_18_03" text="Természetesen úgy játszol ahogy szeretnél, de ha kihívásra vágysz, játssz 9 napos szezonnal és 5x időgyorsítással. Tavasszal földművelés és vetés, nyáron gondozás és fűkaszálás, ősszel aratás és földmunkák, télen pedig az állatok ellátása, gépek karbantartása, az erdészet és  a terményeladás vár Rád." />
         <text name="ss_helpText_18_04" text="Minden gépet manuálisan kell elindítanod." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

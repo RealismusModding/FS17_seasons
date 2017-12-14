@@ -8,10 +8,13 @@
 ----------------------------------------------------------------------------------------------------
 
 ssPedestrianSystem = {}
-g_seasons.pedestrianSystem = ssPedestrianSystem
+
+function ssPedestrianSystem:preLoad()
+    g_seasons.pedestrianSystem = self
+end
 
 function ssPedestrianSystem:loadMap(name)
-    PedestrianSystem.update = Utils.overwrittenFunction(PedestrianSystem.update, ssPedestrianSystem.psUpdate)
+    ssUtil.overwrittenFunction(PedestrianSystem, "update", ssPedestrianSystem.psUpdate)
 end
 
 function ssPedestrianSystem:psUpdate(superFunc, dt)

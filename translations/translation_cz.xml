@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Údržba" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="o půlnoci" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Nepodařilo se uložit Seasons do svého savegame. Prosím zkuste to znovu!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Spouštíte aktualizovanou verzi Seasons. Hra zjistila starší verzi módu ve složce mods a zakázala ji. Odstraňte ji ze složky modů, abyste tuto zprávu skryli." />
@@ -105,7 +110,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Balíky" />
 
-        <text name="ui_buttonSave" text="Použít nastavení" />
         <text name="ui_snowOneLayer" text="Pouze jedna vrstva" />
         <text name="ui_days" text="%i dnů" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -116,6 +120,11 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
 
         <text name="tooltip_seasonLength" text="Délka roční doby v herních dnech. Rok trvá čtyři roční období" />
         <text name="tooltip_seasonIntros" text="Ukázat úvod na začátku ročního období" />
@@ -133,7 +142,6 @@
         <text name="setting_controlsTemperature" text="Teplotní stupnice" />
         <text name="setting_moisture" text="Vlhká sklizeň" />
 
-        <text name="dialog_applySettings" text="Jste si jisti, že chcete změnit nastavení Seasons? Změny v délce sezóny a růstu mohou mít osudný dopad na pole, která pak lze opravit pouze po jednom herním roce." />
         <text name="dialog_resetGrowth" text="Vložili jste Seasons na staré savegame. Seasons chce obnovit všechna pole do jejich holého stavu a synchronizovat podle aktuálního dne. Ztratíte všechny plodiny. Pokud neobnovíte růst, možná Seasons nemusí fungovat podle očekávání." />
         <text name="dialog_resetGrowth_title" text="Resetování růstu" />
         <text name="dialog_resetGrowth_no" text="Ponechat" />
@@ -246,5 +254,14 @@
         <text name="ss_helpText_18_02" text="Pokud se rozhodnete změnit délku sezóny uprostřed stávající hry, doporučuje se 1) změnit délku období během zimy, aby se snížily nežádoucí účinky na stávající plodiny a 2) po změně délky období hru uložte a restartujte hru / server." />
         <text name="ss_helpText_18_03" text="Samozřejmě se jedná o hru, kterou můžete hrát, jak chcete. Jako doporučená výzva je navrženo hraní s 9denní sezónou a 5x časovou akcelerací. Tímto způsobem trávíte čas na jaře pouze přípravou a výsadbou plodin, pěstováním plodin a sušením sena v létě, sklizením a oráním na podzim a v zimě se věnujete zvířatům, údržbě strojů, práci v lese a prodeji plodin." />
         <text name="ss_helpText_18_04" text="Všechna vozidla musí být nastartována manuálně." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

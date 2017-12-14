@@ -9,17 +9,6 @@
 
 ssMain = {}
 
-if g_seasons ~= nil then
-    error("Seasons seems to be loaded already, and is trying to be loaded again. Make sure you only have one (1) Seasons mod selected in your mod selection screen.")
-end
-
-getfenv(0)["g_seasons"] = ssMain -- Load in superglobal scope
-
-g_seasons.lang = ssLang
-g_seasons.xmlUtil = ssXMLUtil
-g_seasons.multiplayer = ssMultiplayer
-g_seasons.xml = ssSeasonsXML
-
 ssMain.SAVEGAME_VERSION = 3
 ssMain.CONTEST_SAVEGAME_VERSION = 2
 
@@ -28,10 +17,24 @@ ssMain.CONTEST_SAVEGAME_VERSION = 2
 ----------------------------
 
 function ssMain:preLoad()
-    local modItem = ModsUtil.findModItemByModName(g_currentModName)
-    self.modDir = g_currentModDirectory
+    if g_seasons ~= nil then
+        error("Seasons seems to be loaded already, and is trying to be loaded again. Make sure you only have one (1) Seasons mod selected in your mod selection screen.")
+    end
+
+    -- Load in superglobal scope, so other mods can talk with us
+    getfenv(0)["g_seasons"] = self
+
+    -- These classes are loaded before ssMain and can't put themselves in global scope
+    self.lang = ssLang
+    self.xmlUtil = ssXMLUtil
+    self.multiplayer = ssMultiplayer
+    self.xml = ssSeasonsXML
+    self.util = ssUtil
+
+    self.modDir = ssSeasonsMod.directory
 
     local buildnumber = nil --<%=buildnumber %>
+    local modItem = ModsUtil.findModItemByModName(ssSeasonsMod.name)
     self.descVersion = Utils.getNoNil(modItem.version, "0.0.0.0")
     self.version = self.descVersion .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
 
@@ -50,12 +53,13 @@ function ssMain:preLoad()
     self.baseUIFilename = Utils.getFilename("resources/gui/hud.png", g_seasons.modDir)
 
     -- Do injections
-    InGameMenu.updateGameSettings = Utils.appendedFunction(InGameMenu.updateGameSettings, self.inj_disableMenuOptions)
+    ssUtil.appendedFunction(InGameMenu, "updateGameSettings", self.inj_disableMenuOptions)
 
     -- Disable the tutorial by clearing showTourDialog
     -- This has to be here so it is loaded early before the map is loaded. Otherwise the method
     -- is already called.
-    TourIcons.showTourDialog = function () end
+    ssUtil.overwrittenFunction(TourIcons, "showTourDialog", function () end)
+    ssUtil.overwrittenFunction(TourIcons, "update", function () end)
 end
 
 ----------------------------
@@ -95,12 +99,18 @@ end
 ----------------------------
 
 function ssMain:loadMap()
+    self.hasGeoMod = false
+    self.showedResetWarning = false
+
     -- Call upon all 4th party mod functions
     for modName, isLoaded in pairs(g_modIsLoaded) do
         if isLoaded then
             self:loadMod(modName)
         end
     end
+
+    -- Set 2MB texture usage
+    g_currentMission.textureMemoryUsage = g_currentMission.textureMemoryUsage + 2 * 1024 * 1024
 
     -- Create the GUI
     self.mainMenu = ssSeasonsMenu:new()
@@ -118,9 +128,15 @@ function ssMain:loadMap()
     -- Correct the focus
     FocusManager:setGui("MPLoadingScreen")
 
+    -- Fix translations
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "action_nextHandTool", ssLang.getText("action_nextHandTool"))
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "action_chainsaw", ssLang.getText("action_chainsaw"))
+
     -- Remove the (hacked) store items
-    StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item.xml")].id)
-    StoreItemsUtil.removeStoreItem(StoreItemsUtil.storeItemsByXMLFilename[string.lower(self.modDir .. "resources/fakeStoreItem/item2.xml")].id)
+    if not GS_IS_CONSOLE_VERSION then
+        self:removeStoreItem("resources/fakeStoreItem/item.xml")
+        self:removeStoreItem("resources/fakeStoreItem/item2.xml")
+    end
 
     if self.descVersion == "0.0.0.0" then
         local w, h = getNormalizedScreenValues(384, 128)
@@ -136,6 +152,22 @@ function ssMain:loadMap()
     end
 end
 
+function ssMain:deleteMap()
+    getfenv(0)["g_seasons"] = nil
+
+    g_inGameMenu.motorStartElement:setDisabled(false)
+
+    ssUtil.unregisterBrand("WOPSTR")
+
+    self.mainMenu:delete()
+    self.measureToolDialog:delete()
+    self.twoOptionDialog:delete()
+
+    g_gui["SeasonsMenu"] = nil
+    g_gui["MeasureToolDialog"] = nil
+    g_gui["TwoOptionDialog"] = nil
+end
+
 function ssMain:loadGameFinished()
     self:validateDensityMaps()
 end
@@ -147,6 +179,16 @@ function ssMain:validateDensityMaps()
         if getDensityMapSize(fruit.id) ~= mapSize then
             logInfo("Warning: Density map size of fruit '" .. FruitUtil.fruitIndexToDesc[i].name .. "' is not the same as terrain")
         end
+    end
+end
+
+function ssMain:removeStoreItem(path)
+    path = string.lower(self.modDir .. path)
+
+    local item = StoreItemsUtil.storeItemsByXMLFilename[path]
+
+    if item then
+        StoreItemsUtil.removeStoreItem(item.id)
     end
 end
 
@@ -215,7 +257,7 @@ function ssMain:loadMod(modName)
 
         if modType == "geo" then
             if self.hasGeoMod then
-                logInfo("Error: Multiple Seasons GEO mods are loaded. This is bad practice. Skipping to load", modName)
+                logInfo("Error: Multiple Seasons GEO mods are loaded. This is bad practice. Skipping", modName)
                 return
             else
                 self.hasGeoMod = true
@@ -271,6 +313,10 @@ function ssMain:getModPaths(name)
     end
 
     return ret
+end
+
+function ssMain:getDataPath(name)
+    return string.format("%sdata/%s.xml", self.modDir, name)
 end
 
 ----------------------------

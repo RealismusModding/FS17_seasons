@@ -8,11 +8,14 @@
 ----------------------------------------------------------------------------------------------------
 
 ssDaylight = {}
-g_seasons.daylight = ssDaylight
 
 ssDaylight.DST_OFF = 0
 ssDaylight.DST_ON = 1
 ssDaylight.DST_ALWAYS = 2
+
+function ssDaylight:preLoad()
+    g_seasons.daylight = self
+end
 
 function ssDaylight:loadMap(name)
     -- Add day change listener to handle new dayNight system and new events
@@ -22,7 +25,7 @@ function ssDaylight:loadMap(name)
     self.data = {}
     self.latitude = 51.9
 
-    self:loadFromXML(g_seasons.modDir .. "data/daylight.xml")
+    self:loadFromXML(g_seasons:getDataPath("daylight"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("daylight")) do
@@ -93,6 +96,15 @@ function ssDaylight:loadCurveFromXML(file, key, numDims, numKeys)
         if not hasXMLProperty(file, skey) then break end
 
         local values = Utils.splitString(" ", ssXMLUtil.getString(file, skey .. "#values", nil))
+
+        -- TV adjusted colors
+        if GS_IS_CONSOLE_VERSION then
+            local consoleValues = ssXMLUtil.getString(file, skey .. "#consoleValues", nil)
+            if consoleValues ~= nil then
+                values = Utils.splitString(" ", consoleValues)
+            end
+        end
+
         local result = {}
 
         if numDims == 1 then
@@ -121,9 +133,12 @@ end
 
 function ssDaylight:setupDayNight()
     -- Calculate some constants for the daytime calculator
-    self.sunRad = self.latitude * math.pi / 180
-    self.pNight = 5 * math.pi / 180 -- Suns inclination below the horizon for complete 'darkness'
-    self.pDay = -10 * math.pi / 180 -- Suns inclination above the horizon for full 'daylight'
+    self.latRad = self.latitude * math.pi / 180
+    -- using different values for as it fits better ingame
+    self.pNightEnd = 5 * math.pi / 180 -- Suns inclination below the horizon when first light appears
+    self.pNightStart = 14 * math.pi / 180 -- Suns inclination below the horizon when last light disappears
+    self.pDayStart = -12 * math.pi / 180 -- Suns inclination above the horizon when full 'daylight' appears in morning
+    self.pDayEnd = -5 * math.pi / 180 -- Suns inclination above the horizon when full 'daylight' disappears in evening
 
     -- Update time before game start to prevent sudden change of darkness
     self:adaptTime()
@@ -135,7 +150,6 @@ function ssDaylight:adaptTime()
     julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
 
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
-
     -- GIANTS values:
     -- nightEnd: 4
     --  - nightEnd (sun): 5.5
@@ -168,30 +182,32 @@ end
 
 -- Output in hours
 function ssDaylight:calculateStartEndOfDay(julianDay)
-    local dayStart, dayEnd, theta, eta
+    local dayStart, dayEnd, nightEnd, nightStart
 
     -- Calculate the day
-    dayStart, dayEnd = self:_calculateDay(self.pDay, julianDay)
+    dayStart = self:calculateDay(self.pDayStart, julianDay, true)
+    dayEnd = self:calculateDay(self.pDayEnd, julianDay, false)
 
     -- True blackness
-    nightStart, nightEnd = self:_calculateDay(self.pNight, julianDay)
+    nightStart = self:calculateDay(self.pNightStart, julianDay, false)
+    nightEnd = self:calculateDay(self.pNightEnd, julianDay, true)
 
-        -- Restrict the values to prevent errors
+    -- Restrict the values to prevent errors
     nightEnd = math.max(nightEnd, 1.01) -- nightEnd > 1.0
     if dayStart == dayEnd then
         dayEnd = dayEnd + 0.01
     end
     nightStart = math.min(nightStart, 22.99) -- nightStart < 23
 
-    return dayStart, dayEnd, nightStart, nightEnd
+    return dayStart, dayEnd, nightEnd, nightStart
 end
 
-function ssDaylight:_calculateDay(p, julianDay)
-    local timeStart, timeEnd
+function ssDaylight:calculateDay(p, julianDay, dawn)
+    local time
     local D, offset, hasDST = 0, 1
     local eta = self:calculateSunDeclination(julianDay)
 
-    local gamma = (math.sin(p) + math.sin(self.sunRad) * math.sin(eta)) / (math.cos(self.sunRad) * math.cos(eta))
+    local gamma = (math.sin(p) + math.sin(self.latRad) * math.sin(eta)) / (math.cos(self.latRad) * math.cos(eta))
 
     -- Account for polar day and night
     if gamma < -1 then
@@ -202,41 +218,42 @@ function ssDaylight:_calculateDay(p, julianDay)
         D = 24 - 24 / math.pi * math.acos(gamma)
     end
 
-    -- Daylight saving between 1 April and 31 October as an approcimation
+    -- Daylight saving between 30 March and 31 October as an approximation
+    -- julianDay 89 is used so day 4 in spring on a 9 day season will be with DST
     if self.dst == ssDaylight.DST_ON then
-        local hasDST = not ((julianDay < 91 or julianDay > 304) or ((julianDay >= 91 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        local hasDST = ((julianDay < 89 or julianDay > 304) or ((julianDay >= 89 and julianDay <= 304) and (gamma < -1 or gamma > 1)))
+        if self.latitude >= 0 then
+            hasDST = not hasDST
+        end
+
         offset = hasDST and 1 or 0
     elseif self.dst == ssDaylight.DST_OFF then
         offset = 0
     end
 
-    if self.latitude < 0 then
-        offset = offset * -1
+    if dawn then
+        time = math.max(12 - D / 2 + offset, 0.01)
+    else
+        time = math.min(12 + D / 2 + offset, 23.99)
     end
 
-    timeStart = math.max(12 - D / 2 + offset, 0.01)
-    timeEnd = math.min(12 + D / 2 + offset, 23.99)
-
-    return timeStart, timeEnd
+    return time
 end
 
 function ssDaylight:calculateSunHeightAngle(julianDay)
     -- Calculate the angle between the sun and the horizon
-    local sunHeightAngle = self:calculateSunDeclination(julianDay - 176) - (90 - self.latitude) * math.pi / 180
+    -- gives negative angles due to FS convention of the sun
+    -- universal for both northern and southern hemisphere
+    local dec = self:calculateSunDeclination(julianDay)
 
-    if sunHeightAngle < math.pi / 2 then
-        sunHeightAngle = (math.pi + sunHeightAngle) * -1
-    end
-
-    return sunHeightAngle
+    return self.latRad - dec - math.pi / 2
 end
 
 function ssDaylight:calculateSunDeclination(julianDay)
-    -- Calculate the suns declination
-    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay + 186)))
-    local eta = math.asin(0.4 * math.cos(theta))
+    -- Calculate the suns declination according to the CBM model
+    local theta = 0.216 + 2 * math.atan(0.967 * math.tan(0.0086 * (julianDay - 186)))
 
-    return eta
+    return math.asin(0.4 * math.cos(theta))
 end
 
 ----------------------------
@@ -359,7 +376,7 @@ function ssDaylight:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nigh
     curve:addKeyframe({v = Utils.degToRad(  0), time = 1.00 * 60}) -- 15 per hour
     curve:addKeyframe({v = Utils.degToRad( 45), time = nightEnd * 60}) -- 15 per hour
     curve:addKeyframe({v = Utils.degToRad( 45), time = (nightEnd + 0.01) * 60})
-    curve:addKeyframe({v = Utils.degToRad(-70), time = (nightEnd + 0.02) * 60}) -- switch to Sun
+    curve:addKeyframe({v = Utils.degToRad(-55), time = (nightEnd + 0.02) * 60}) -- switch to Sun
 
     if dayStart > 12.0 then
         curve:addKeyframe({v = Utils.degToRad(0), time = dayStart * 60}) -- rotate over the day
@@ -367,7 +384,7 @@ function ssDaylight:generateSunRotCurve(season, nightEnd, dayStart, dayEnd, nigh
         curve:addKeyframe({v = Utils.degToRad(0), time = 12.00 * 60}) -- rotate over the day
     end
 
-    curve:addKeyframe({v = Utils.degToRad( 70), time = (nightStart + 0.01) * 60}) -- end rotation of sun
+    curve:addKeyframe({v = Utils.degToRad( 55), time = (nightStart + 0.01) * 60}) -- end rotation of sun
     curve:addKeyframe({v = Utils.degToRad(-35), time = (nightStart + 0.02) * 60}) -- switch to moon light
     curve:addKeyframe({v = Utils.degToRad(-15), time = 24.00 * 60}) -- 10 per hour
 

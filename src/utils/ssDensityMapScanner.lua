@@ -8,18 +8,23 @@
 ----------------------------------------------------------------------------------------------------
 
 ssDensityMapScanner = {}
-g_seasons.dms = ssDensityMapScanner
 
-ssDensityMapScanner.TIMESPLIT = 25 -- ms
+ssDensityMapScanner.BLOCK_WIDTH = 32
+ssDensityMapScanner.BLOCK_HEIGHT = 32
+
+function ssDensityMapScanner:preLoad()
+    g_seasons.dms = self
+end
 
 function ssDensityMapScanner:load(savegame, key)
     if ssXMLUtil.hasProperty(savegame, key .. ".densityMapScanner.currentJob") then
         local job = {}
 
         job.x = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.x", 0)
+        job.z = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.z", -1)
         job.callbackId = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.callbackId")
         job.parameter = ssXMLUtil.getString(savegame, key .. ".densityMapScanner.currentJob.parameter")
-        job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", 1)
+        job.numSegments = ssXMLUtil.getInt(savegame, key .. ".densityMapScanner.currentJob.numSegments")
 
         self.currentJob = job
 
@@ -52,9 +57,13 @@ function ssDensityMapScanner:save(savegame, key)
 
     if self.currentJob ~= nil then
         ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.x", self.currentJob.x)
+        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.z", self.currentJob.z)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.callbackId", self.currentJob.callbackId)
         ssXMLUtil.setString(savegame, key .. ".densityMapScanner.currentJob.parameter", tostring(self.currentJob.parameter))
-        ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
+
+        if self.currentJob.numSegments ~= nil then
+            ssXMLUtil.setInt(savegame, key .. ".densityMapScanner.currentJob.numSegments", self.currentJob.numSegments)
+        end
     end
 
     -- Save queue
@@ -74,8 +83,27 @@ function ssDensityMapScanner:loadMap(name)
         if self.queue == nil then
             self.queue = ssQueue:new()
         end
+    end
+end
 
-        self.timeCounter = 0
+function ssDensityMapScanner:loadVehiclesFinished()
+    if not g_currentMission:getIsServer() then return end
+
+    -- Quickly run any job already queued.
+    while self.queue.size > 0 or self.currentJob do
+        if self.currentJob == nil then
+            self.currentJob = self.queue:pop()
+            self.currentJob.x = 0
+            self.currentJob.z = 0
+
+            log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
+        end
+
+        while self.currentJob ~= nil do
+            if not self:run(self.currentJob) then
+                self.currentJob = nil
+            end
+        end
     end
 end
 
@@ -88,32 +116,43 @@ function ssDensityMapScanner:update(dt)
         -- A new job has started
         if self.currentJob then
             self.currentJob.x = 0
-
-            if g_dedicatedServerInfo ~= nil then
-                self.currentJob.numSegments = 1 -- Not enough time to do it section by section.
-            else
-                -- Must be evenly dividable with mapsize.
-                self.currentJob.numSegments = math.min(g_currentMission.terrainSize,16*16)
-            end
+            self.currentJob.z = 0
 
             log("[ssDensityMapScanner] Dequed job:", self.currentJob.callbackId, "(", self.currentJob.parameter, ")")
         end
     end
 
     if self.currentJob ~= nil then
-        self.timeCounter = self.timeCounter + dt
+        local num = 4 -- do 4x a 16m^2 area, for caching purposes
 
-        -- Use a timer to spread updates: only on SP, as it would only lag on MP
-        -- due to density map synchronization
-        if g_dedicatedServerInfo ~= nil or self.timeCounter >= ssDensityMapScanner.TIMESPLIT then
+        -- Increase number of blocks when 4x or 16x map.
+        num = num * math.floor(g_currentMission.terrainSize / 2048)
+
+        if not GS_IS_CONSOLE_VERSION then
+            num = num * 2
+        end
+
+        -- When skipping night, do a bit more per frame, the player can't move anyways.
+        if g_seasons.skipNight.skippingNight or g_seasons.catchingUp.showWarning then
+            num = num * 8
+        end
+
+        if g_dedicatedServerInfo ~= nil then
+            num = g_currentMission.terrainSize / ssDensityMapScanner.BLOCK_WIDTH
+        end
+
+        for i = 1, num do
             if not self:run(self.currentJob) then
                 self.currentJob = nil
-            end
 
-            -- Reset timer
-            self.timeCounter = 0
+                break
+            end
         end
     end
+end
+
+function ssDensityMapScanner:isBusy()
+    return self.queue.size > 0 or self.currentJob ~= nil
 end
 
 function ssDensityMapScanner:queueJob(callbackId, parameter)
@@ -143,22 +182,101 @@ end
 -- @param target table, contains func and finalizer functions
 -- @param func function to run for each segment of the world
 -- @param finalizer function to run after all segments are run, optional
-function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer)
+function ssDensityMapScanner:registerCallback(callbackId, target, func, finalizer, detailHeightId)
     log("[ssDensityMapScanner] Registering callback: " .. callbackId)
 
     if self.callbacks == nil then
         self.callbacks = {}
     end
 
+    if detailHeightId == nil then
+        detailHeightId = false
+    end
+
     self.callbacks[callbackId] = {
         target = target,
         func = func,
-        finalizer = finalizer
+        finalizer = finalizer,
+        detailHeightId = detailHeightId
     }
 end
 
 -- Returns: true when new cycle needed. false when done
 function ssDensityMapScanner:run(job)
+    if job == nil then return end
+
+    -- z is used for the squares since 1.3. If not available in savegame, it defaults to -1
+    -- This means the job started running and should finish. New jobs don't need this.
+    if job.z == -1 then
+        return self:runLine(job)
+    end
+
+    local jobRunnerInfo = self.callbacks[job.callbackId]
+    if jobRunnerInfo == nil then
+        logInfo("[ssDensityMapScanner] Tried to run unknown callback '", job.callbackId, "'")
+
+        return false
+    end
+
+
+    -- Row height (64px for caching)
+    local height = ssDensityMapScanner.BLOCK_HEIGHT
+    local width = ssDensityMapScanner.BLOCK_WIDTH
+
+    local size = g_currentMission.terrainSize
+    local pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailHeightId)
+
+    -- TODO: refactor, use actual density ID used.
+    if not jobRunnerInfo.detailHeightId then
+        pixelSize = size / getDensityMapSize(g_currentMission.terrainDetailId)
+    end
+
+
+    local startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ
+
+    if jobRunnerInfo.detailHeightId then
+        startWorldX = job.x * width - size / 2
+        startWorldZ = job.z * height - size / 2
+
+        widthWorldX = startWorldX + width - pixelSize
+        widthWorldZ = startWorldZ
+
+        heightWorldX = startWorldX
+        heightWorldZ = startWorldZ + height - pixelSize
+    else
+        startWorldX = job.x * width - size / 2 + pixelSize * 0.25
+        startWorldZ = job.z * height - size / 2 + pixelSize * 0.25
+
+        widthWorldX = startWorldX + width - pixelSize * 0.5
+        widthWorldZ = startWorldZ
+
+        heightWorldX = startWorldX
+        heightWorldZ = startWorldZ + height - pixelSize * 0.5
+    end
+
+    jobRunnerInfo.func(jobRunnerInfo.target, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, job.parameter)
+
+    -- Update current job
+    if job.x < (g_currentMission.terrainSize / width) - 1 then -- Starting with row 0
+        -- Next row
+        job.x = job.x + 1
+    elseif job.z < (g_currentMission.terrainSize / height) - 1 then
+        job.z = job.z + 1
+        job.x = 0
+    else
+        -- Done with the loop, call finalizer
+        if jobRunnerInfo.finalizer ~= nil then
+            jobRunnerInfo.finalizer(jobRunnerInfo.target, job.parameter)
+        end
+
+        return false -- finished
+    end
+
+    return true -- not finished
+end
+
+-- Legacy version, for compatibility with existing savegames
+function ssDensityMapScanner:runLine(job)
     if job == nil then return end
 
     local size = g_currentMission.terrainSize

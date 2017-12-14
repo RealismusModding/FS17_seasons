@@ -11,7 +11,6 @@ ssSeasonsXML = {}
 
 -- Returns raw data
 function ssSeasonsXML:loadFile(path, rootKey, elements, parentData, optional)
-
     local file = loadXMLFile("xml", path)
 
     if file == nil then

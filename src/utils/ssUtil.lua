@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssUtil = {}
-g_seasons.util = ssUtil
 
 ssUtil.seasonKeyToId = {
     ["spring"] = 0,
@@ -34,6 +33,10 @@ function ssUtil.julianDay(dayNumber)
     local season, partInSeason, dayInSeason
     local starts = {[0] = 60, 152, 244, 335 }
 
+    if ssDaylight.latitude < 0 then
+        starts = {[0] = 244, 335, 60, 152 }
+    end
+
     season = g_seasons.environment:seasonAtDay(dayNumber)
     dayInSeason = (dayNumber - 1) % g_seasons.environment.daysInSeason
     partInSeason = dayInSeason / g_seasons.environment.daysInSeason
@@ -44,18 +47,34 @@ end
 function ssUtil.julianDayToDayNumber(julianDay)
     local season, partInSeason, start
 
-    if julianDay < 60 then
-        season = 3 -- winter
-        start = 335
-    elseif julianDay < 152 then
-        season = 0 -- spring
-        start = 60
-    elseif julianDay < 244 then
-        season = 1 -- summer
-        start = 152
-    elseif julianDay < 335 then
-        season = 2 -- autumn
-        start = 224
+    if ssDaylight.latitude >= 0 then
+        if julianDay < 60 then
+            season = 3 -- winter
+            start = 335
+        elseif julianDay < 152 then
+            season = 0 -- spring
+            start = 60
+        elseif julianDay < 244 then
+            season = 1 -- summer
+            start = 152
+        elseif julianDay < 335 then
+            season = 2 -- autumn
+            start = 224
+        end
+    else
+        if julianDay < 60 then
+            season = 1 -- summer
+            start = 335
+        elseif julianDay < 152 then
+            season = 2 -- autumn
+            start = 60
+        elseif julianDay < 244 then
+            season = 3 -- winter
+            start = 152
+        elseif julianDay < 335 then
+            season = 0 -- spring
+            start = 224
+        end
     end
 
     partInSeason = (julianDay - start) / 61.5
@@ -243,6 +262,159 @@ function Set(list)
     end
 
     return set
+end
+
+------------- Console compoatibilty -------------
+
+if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
+    -- On the console version, we need to reset all vanilla values we change
+
+    local ssUtil_originalFunctions = {}
+    local ssUtil_originalConstants = {}
+    local ssUtil_specializations = {}
+    local ssUtil_tireTypes = {}
+
+    -- Store the original function, if not done yet (otherwise it was already changed)
+    local function storeOriginalFunction(target, name)
+        if ssUtil_originalFunctions[target] == nil then
+            ssUtil_originalFunctions[target] = {}
+        end
+
+        -- Store the original function
+        if ssUtil_originalFunctions[target][name] == nil then
+            ssUtil_originalFunctions[target][name] = target[name]
+        end
+    end
+
+    function ssUtil.overwrittenFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.overwrittenFunction(target[name], newFunc)
+    end
+
+    function ssUtil.overwrittenStaticFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        -- TODO
+    end
+
+    function ssUtil.appendedFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.appendedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.prependedFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        target[name] = Utils.prependedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.unregisterAdjustedFunctions()
+        for target, functions in pairs(ssUtil_originalFunctions) do
+            for name, func in pairs(functions) do
+                target[name] = func
+            end
+        end
+    end
+
+    function ssUtil.overwrittenConstant(target, name, newVal)
+        if ssUtil_originalConstants[target] == nil then
+            ssUtil_originalConstants[target] = {}
+        end
+
+        if ssUtil_originalConstants[target][name] == nil then
+            ssUtil_originalConstants[target][name] = target[name]
+        end
+
+        target[name] = newVal
+    end
+
+    function ssUtil.unregisterConstants()
+        for target, constants in pairs(ssUtil_originalConstants) do
+            for name, const in pairs(constants) do
+                target[name] = const
+            end
+        end
+    end
+
+    function ssUtil.registerSpecialization(name, class, path)
+        table.insert(ssUtil_specializations, name)
+
+        SpecializationUtil.registerSpecialization(name, class, path)
+    end
+
+    function ssUtil.unregisterSpecialization(name)
+        local spec = SpecializationUtil.getSpecialization(name)
+
+        if spec ~= nil then
+            for _, vehicle in pairs(VehicleTypeUtil.vehicleTypes) do
+                if vehicle ~= nil then
+                    for i, specI in ipairs(vehicle.specializations) do
+                        if specI == spec then
+                            table.remove(vehicle.specializations, i)
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    function ssUtil.unregisterSpecializations()
+        for _, name in ipairs(ssUtil_specializations) do
+            ssUtil.unregisterSpecialization(name)
+        end
+    end
+
+    function ssUtil.registerTireType(name, coeffs, wetCoeffs)
+        table.insert(ssUtil_tireTypes, name)
+
+        WheelsUtil.registerTireType(name, coeffs, wetCoeffs)
+    end
+
+    function ssUtil.unregisterTireTypes()
+        for _, name in ipairs(ssUtil_tireTypes) do
+            for i, type in ipairs(WheelsUtil.tireTypes) do
+                if type.name == name then
+                    table.remove(WheelsUtil.tireTypes, i)
+                    break
+                end
+            end
+        end
+    end
+
+    function ssUtil.unregisterBrand(name)
+        -- TODO: we can't remove the brand num because of the platinum dlc
+        -- BrandUtil.brandIndexToDesc[BrandUtil[name].index] = nil
+        -- BrandUtil[name] = nil
+        -- BrandUtil.brands[name] = nil
+
+        -- -- Assume we are the only one capable of unregistering a brand
+        -- BrandUtil.NUM_BRANDS = BrandUtil.NUM_BRANDS - 1
+    end
+else
+    function ssUtil.overwrittenFunction(target, name, newFunc)
+        target[name] = Utils.overwrittenFunction(target[name], newFunc)
+    end
+
+    function ssUtil.appendedFunction(target, name, newFunc)
+        target[name] = Utils.appendedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.prependedFunction(target, name, newFunc)
+        target[name] = Utils.prependedFunction(target[name], newFunc)
+    end
+
+    function ssUtil.overwrittenConstant(target, name, newVal)
+        target[name] = newVal
+    end
+
+    function ssUtil.unregisterBrand(name)
+    end
+
+    ssUtil.registerSpecialization = SpecializationUtil.registerSpecialization
+    ssUtil.registerTireType = WheelsUtil.registerTireType
 end
 
 ------------- Useful global functions ---------------

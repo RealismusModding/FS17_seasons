@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssIcePlane = {}
-getfenv(0)["ssIcePlane"] = ssIcePlane
 
 local ssIcePlane_mt = Class(ssIcePlane)
 

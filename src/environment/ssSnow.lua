@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSnow = {}
-g_seasons.snow = ssSnow
 
 ssSnow.LAYER_HEIGHT = 0.06
 ssSnow.MAX_HEIGHT = 0.48
@@ -20,8 +19,10 @@ ssSnow.MODE_ONE_LAYER = 2
 ssSnow.MODE_ON = 3
 
 function ssSnow:preLoad()
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssSnow.placeableFinalizePlacement)
-    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssSnow.placeableOnSell)
+    g_seasons.snow = self
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssSnow.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "onSell", ssSnow.placeableOnSell)
 end
 
 function ssSnow:load(savegame, key)
@@ -48,26 +49,44 @@ end
 
 function ssSnow:loadMap(name)
     -- Register Snow as a fill and Tip type
-    local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
-    TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.png", g_seasons.modDir .. "resources/environment/snow_normal.png", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.png")
-    loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
+    if FillUtil.FILLTYPE_SNOW == nil then
+        local t = FillUtil.registerFillType("snow", g_i18n:getText("fillType_snow"), FillUtil.FILLTYPE_CATEGORY_BULK, 0, false, g_seasons.modDir .. "resources/gui/hud_fill_snow.png", g_seasons.modDir .. "resources/gui/hud_fill_snow_sml.png", 0.00016, math.rad(50))
+        TipUtil.registerDensityMapHeightType(FillUtil.FILLTYPE_SNOW, math.rad(35), 0.8, 0.10, 0.10, 1.20, 3, true, g_seasons.modDir .. "resources/environment/snow_diffuse.png", g_seasons.modDir .. "resources/environment/snow_normal.png", g_seasons.modDir .. "resources/environment/snowDistance_diffuse.png")
 
-    -- Load overlay icon, properly
-    local uiScale = g_gameSettings:getValue("uiScale")
-    local levelIconWidth, levelIconHeight = getNormalizedScreenValues(20 * uiScale, 20 * uiScale)
-    g_currentMission:addFillTypeOverlay(t, FillUtil.fillTypeIndexToDesc[t].hudOverlayFilename, levelIconWidth, levelIconHeight)
+        -- Load overlay icon, properly
+        local uiScale = g_gameSettings:getValue("uiScale")
+        local levelIconWidth, levelIconHeight = getNormalizedScreenValues(20 * uiScale, 20 * uiScale)
+        g_currentMission:addFillTypeOverlay(t, FillUtil.fillTypeIndexToDesc[t].hudOverlayFilename, levelIconWidth, levelIconHeight)
+    else
+        FillUtil.fillTypeIntToName[FillUtil.FILLTYPE_SNOW] = "snow"
+        FillUtil.addFillTypeToCategory(FillUtil.FILLTYPE_CATEGORY_BULK, FillUtil.FILLTYPE_SNOW)
+    end
+
+    self.snowMaterialHolder = loadI3DFile(g_seasons.modDir .. "resources/environment/snow_materialHolder.i3d") -- Snow fillplanes and effects.
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addHourChangeListener(self)
 
         self.snowLayersDelta = 0 -- Number of snow layers to add or remove.
 
-        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects)
-        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow)
+        ssDensityMapScanner:registerCallback("ssSnowAddSnow", self, self.addSnow, self.removeSnowUnderObjects, true)
+        ssDensityMapScanner:registerCallback("ssSnowRemoveSnow", self, self.removeSnow, nil, true)
 
         addConsoleCommand("ssAddSnow", "Adds one layer of snow", "consoleCommandAddSnow", self)
         addConsoleCommand("ssRemoveSnow", "Removes one layer of snow", "consoleCommandRemoveSnow", self)
         addConsoleCommand("ssResetSnow", "Removes all snow", "consoleCommandResetSnow", self)
+    end
+end
+
+function ssSnow:deleteMap()
+    -- Hack: Disable snow by only clearning a mapping, not removing the filltype
+    FillUtil.fillTypeIntToName[FillUtil.FILLTYPE_SNOW] = nil
+    FillUtil.categoryToFillTypes[FillUtil.FILLTYPE_CATEGORY_BULK][FillUtil.FILLTYPE_SNOW] = nil
+
+    if g_currentMission:getIsServer() then
+        removeConsoleCommand("ssAddSnow")
+        removeConsoleCommand("ssRemoveSnow")
+        removeConsoleCommand("ssResetSnow")
     end
 end
 
@@ -81,6 +100,12 @@ function ssSnow:loadMapFinished()
     -- When no mask is available, limit to one layer
     if self.snowMaskId == nil and not self.modeIsFromSave then
         self.mode = self.MODE_ONE_LAYER
+    end
+end
+
+function ssSnow:loadGameFinished()
+    if g_currentMission:getIsServer() then
+        self:applySnow(ssWeatherManager:getSnowHeight())
     end
 end
 
@@ -141,8 +166,6 @@ function ssSnow:applySnow(targetSnowDepth)
             self.snowLayersDelta = math.modf((targetSnowDepth - self.appliedSnowDepth) / ssSnow.LAYER_HEIGHT)
 
             if targetSnowDepth > 0 then
-                -- log("Snow, Adding: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
-
                 if self.appliedSnowDepth == 0 then
                     ssDensityMapScanner:queueJob("ssRemoveSwaths")
                 end
@@ -154,8 +177,6 @@ function ssSnow:applySnow(targetSnowDepth)
         elseif self.appliedSnowDepth - targetSnowDepth >= ssSnow.LAYER_HEIGHT then
             self.snowLayersDelta = math.modf((self.appliedSnowDepth - targetSnowDepth) / ssSnow.LAYER_HEIGHT)
             self.appliedSnowDepth = self.appliedSnowDepth - self.snowLayersDelta * ssSnow.LAYER_HEIGHT
-
-            -- log("Snow, Removing: " .. self.snowLayersDelta .. " layers of Snow. Total depth: " .. self.appliedSnowDepth .. " m Requested: " .. targetSnowDepth .. " m" )
 
             ssDensityMapScanner:queueJob("ssSnowRemoveSnow", self.snowLayersDelta)
         end
@@ -175,7 +196,7 @@ function ssSnow:addSnow(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heig
     layers = tonumber(layers)
 
     -- Fix for broken vanilla game: when swath is very near the south border, the game crashes
-    heightWorldZ = math.min(heightWorldZ, (g_currentMission.terrainSize / 2.0) - 18.0)
+    heightWorldZ = math.min(heightWorldZ, g_currentMission.terrainSize / 2.0)
 
     local terrainId = g_currentMission.terrainDetailHeightId
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(terrainId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
@@ -349,12 +370,24 @@ end
 -- Commands
 --
 
-function ssSnow:consoleCommandAddSnow()
-    self:applySnow(self.appliedSnowDepth + ssSnow.LAYER_HEIGHT)
+function ssSnow:consoleCommandAddSnow(layers)
+    if layers == nil then
+        layers = 1
+    else
+        layers = tonumber(layers)
+    end
+
+    self:applySnow(self.appliedSnowDepth + layers * ssSnow.LAYER_HEIGHT)
 end
 
-function ssSnow:consoleCommandRemoveSnow()
-    self:applySnow(self.appliedSnowDepth - ssSnow.LAYER_HEIGHT)
+function ssSnow:consoleCommandRemoveSnow(layers)
+    if layers == nil then
+        layers = 1
+    else
+        layers = tonumber(layers)
+    end
+
+    self:applySnow(self.appliedSnowDepth - layers * ssSnow.LAYER_HEIGHT)
 end
 
 function ssSnow:consoleCommandResetSnow()

@@ -21,6 +21,7 @@ function ssMotorFailure:load(savegame)
     self.ssMotorStartSoundTime = 0
     self.ssMotorStartMustFail = false
     self.ssSmoothLoadPercentage = 0
+    self.ssShowEngineStartWarningTimer = 0
 end
 
 function ssMotorFailure:delete()
@@ -225,6 +226,3 @@ function ssMotorFailure:stopMotor(noEventSend)
 
     Motorized.turnOffImplement(self)
 end
-
-Motorized.startMotor = ssMotorFailure.startMotor
-Motorized.stopMotor = ssMotorFailure.stopMotor

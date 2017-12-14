@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Manutenção" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="à meia-noite" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Falha para salvar o Seasons em seu savegame. Por favor tente novamente!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Você está rodando uma versão desatualizada do Seasons. Detectamos que a versão de ModConquest está em sua pasta de mods, e desativada. Por favor retire o arquivo da pasta de mods para apagar esta mensagem." />
@@ -105,7 +110,6 @@
         <text name="ui_economy_thousand" text="1000l" />
         <text name="ui_economy_bale" text="Fardos" />
 
-        <text name="ui_buttonSave" text="Aplicar" />
         <text name="ui_snowOneLayer" text="1 camada apenas" />
         <text name="ui_days" text="%i dias" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -116,6 +120,11 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
 
         <text name="tooltip_seasonLength" text="A duração de uma estação em dias. Um ano são quatro estações" />
         <text name="tooltip_seasonIntros" text="Mostre uma introdução a cada estação" />
@@ -133,7 +142,6 @@
         <text name="setting_controlsTemperature" text="Escala de temperatura" />
         <text name="setting_moisture" text="Cultivos molhados" />
 
-        <text name="dialog_applySettings" text="Você tem certeza que quer mudar as preferências? Mudanças na duração podem resultar em campos que somente serão reparados após um ano dentro do jogo." />
         <text name="dialog_resetGrowth" text="Você carregou o Seasons em um jogo antigo. Seasons irá resetar todos os campos para seu estado original para sincronizar o tempo. Você perderá todos seus cultivos. Caso não queira resetar seus cultivos, o Seasons pode não funcionar como esperado." />
         <text name="dialog_resetGrowth_title" text="Resetar cultivos" />
         <text name="dialog_resetGrowth_no" text="Manter cultivos" />
@@ -246,5 +254,14 @@
         <text name="ss_helpText_18_02" text="Caso decida mudar a duração da estações no meio de um jogo salvo, é recomendado: 1) mude no inverno para diminuir efeitos não desejados em cultivos e 2) reinicie o jogo/servidor após mudar a duração." />
         <text name="ss_helpText_18_03" text="O jogo é seu e você joga como queira, porém é sugestão para um desafio maior jogar em estações de 9 dias com aceleração de tempo 5x. Deste jeito você passa a primavera cultivando o solo e plantando, fertilizando e colhendo feno no verão, colhendo e arando no outono, e cuidando de animais, máquinas, florestas, e vendendo grãos no inverno." />
         <text name="ss_helpText_18_04" text="Todos os veículos precisam serem ligados manualmente." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>

@@ -8,7 +8,10 @@
 ----------------------------------------------------------------------------------------------------
 
 ssAnimals = {}
-g_seasons.animals = ssAnimals
+
+function ssAnimals:preLoad()
+    g_seasons.animals = self
+end
 
 ssAnimals.PRODUCTIVITY_START = 0.8
 
@@ -60,24 +63,25 @@ function ssAnimals:loadMap(name)
     g_seasons.environment:addSeasonChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
 
-    AnimalHusbandry.getCapacity = Utils.overwrittenFunction(AnimalHusbandry.getCapacity, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.getHasSpaceForTipping = Utils.overwrittenFunction(AnimalHusbandry.getHasSpaceForTipping, ssAnimals.husbandryCapacityWrapper)
-    AnimalHusbandry.addAnimals = Utils.appendedFunction(AnimalHusbandry.addAnimals, ssAnimals.husbandryAddAnimals)
-    AnimalHusbandry.removeAnimals = Utils.appendedFunction(AnimalHusbandry.removeAnimals, ssAnimals.husbandryRemoveAnimals)
-    AnimalHusbandry.getDataAttributes = Utils.overwrittenFunction(AnimalHusbandry.getDataAttributes, ssAnimals.husbandryGetDataAttributes)
-
-    AnimalHusbandry.readStream = Utils.appendedFunction(AnimalHusbandry.readStream, ssAnimals.husbandryReadStream)
-    AnimalHusbandry.writeStream = Utils.appendedFunction(AnimalHusbandry.writeStream, ssAnimals.husbandryWriteStream)
-
-    AnimalScreen.updateData = Utils.overwrittenFunction(AnimalScreen.updateData, ssAnimals.animalScreenUpdateData)
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getCapacity", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.overwrittenFunction(AnimalHusbandry , "getHasSpaceForTipping", ssAnimals.husbandryCapacityWrapper)
+    ssUtil.appendedFunction(AnimalHusbandry,  "addAnimals", ssAnimals.husbandryAddAnimals)
+    ssUtil.appendedFunction(AnimalHusbandry, "removeAnimals", ssAnimals.husbandryRemoveAnimals)
+    ssUtil.overwrittenFunction(AnimalHusbandry, "getDataAttributes", ssAnimals.husbandryGetDataAttributes)
+    ssUtil.appendedFunction(AnimalHusbandry, "readStream", ssAnimals.husbandryReadStream)
+    ssUtil.appendedFunction(AnimalHusbandry, "writeStream", ssAnimals.husbandryWriteStream)
+    ssUtil.overwrittenFunction(AnimalScreen, "updateData", ssAnimals.animalScreenUpdateData)
 
     -- Override the i18n for threshing during rain, as it is now not allowed when moisture is too high
     -- Show the same warning when the moisture system is disabled.
-    getfenv(0)["g_i18n"].texts["warning_inAdvanceFeedingLimitReached"] = ssLang.getText("warning_inAdvanceFeedingLimitReached3")
-    getfenv(0)["g_i18n"].texts["statistic_productivity"] = ssLang.getText("statistic_health")
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_inAdvanceFeedingLimitReached", ssLang.getText("warning_inAdvanceFeedingLimitReached3"))
+    ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "statistic_productivity", ssLang.getText("statistic_health"))
 
     -- Load parameters
     self:loadFromXML()
+
+    -- Backup the animal desc
+    self.origAnimalDesc = deepCopy(AnimalUtil.animals)
 
     if g_currentMission:getIsServer() then
         g_currentMission.environment:addDayChangeListener(self)
@@ -89,6 +93,10 @@ function ssAnimals:loadGameFinished()
     self.seasonLengthfactor = 6 / g_seasons.environment.daysInSeason
 
     self:adjustAnimals()
+end
+
+function ssAnimals:deleteMap()
+    AnimalUtil.animals = self.origAnimalDesc
 end
 
 function ssAnimals:husbandryWriteStream(streamId, connection)
@@ -366,7 +374,6 @@ function ssAnimals:animalScreenUpdateData(superFunc)
 
     if self.transferData.right.numOfAnimals >= self.transferData.right.baseNumOfAnimals then
         local health = 0.8
-        local factor = 1
 
         for _, husbandry in pairs(g_currentMission.husbandries) do
             if husbandry.animalDesc == animalDesc then
@@ -375,12 +382,7 @@ function ssAnimals:animalScreenUpdateData(superFunc)
             end
         end
 
-        if health <= 0.8 then
-            factor = 1.40625 * health ^ 2 + 0.1
-        else
-            factor = 5 * (health - 0.8) ^ 2 + 1
-        end
-
+        local factor = -2 * health ^ 3 + 4 * health ^ 2 - health + 0.2
         animalDesc.price = animalDesc.price * factor
     end
 

@@ -8,10 +8,13 @@
 ----------------------------------------------------------------------------------------------------
 
 ssTrafficSystem = {}
-g_seasons.trafficSystem = ssTrafficSystem
+
+function ssTrafficSystem:preLoad()
+    g_seasons.trafficSystem = self
+end
 
 function ssTrafficSystem:loadMap(name)
-    TrafficSystem.update = Utils.overwrittenFunction(TrafficSystem.update, ssTrafficSystem.tsUpdate)
+    ssUtil.overwrittenFunction(TrafficSystem, "update", ssTrafficSystem.tsUpdate)
 
     self.trafficLightOn = 21.00 * 60
     self.trafficLightOff = 8.00 * 60
