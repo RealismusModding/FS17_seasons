@@ -251,8 +251,8 @@
         <text name="ss_helpText_18_04" text="Wszystkie pojazdy muszą być uruchamiane ręcznie." />
 
         <text name="ss_helpTitle_19" text="Urządzenie pomiarowe" />
-        <text name="ss_helpText_19_01" text="Wopstr M420 jest urządzeniem pomiarowym, które można użyć, aby uzyskać więcej informacji o glebie, drzewach, belach i paletach. Po zakupieniu urządzenia w sklepie możne je aktywować tak jak piłę łańcuchową. Pomiar rozpoczyna się po aktywowaniu urządzenia skierowanego na coś. Pomiar może się nie udać." />
-        <text name="ss_helpText_19_02" text="Dla zasadzonych drzew sprawdzić można ich rodzaj, zmierzyć wysokość oraz odległość do najbliższego drzewa. Dla bel zwracany jest typ zawartości oraz stan fermentacji. Pomiar gleby daje położeniu na mapie, wysokość n.p.m, rodzaj uprawy, stan wzrostu i wilgotność zbóż, poziom nawożenia i wilgotność gleby. Dla palet wyświetlana jest ich zawartość." />
+        <text name="ss_helpText_19_01" text="Wopstr M420 jest urządzeniem pomiarowym, które można użyć, aby uzyskać więcej informacji o glebie, drzewach, belach i paletach. Po zakupie urządzenia w sklepie można je aktywować tak, jak piłę łańcuchową. Pomiar rozpoczyna się po aktywowaniu urządzenia skierowanego na coś. Może się zdarzyć, że pomiar się nie uda." />
+        <text name="ss_helpText_19_02" text="Dla zasadzonych drzew sprawdzić można ich rodzaj, zmierzyć wysokość oraz odległość do najbliższego drzewa. Dla bel zwracana jest ich zawartość oraz stan fermentacji. Pomiar gleby wyświetla położenie na mapie, wysokość n.p.m, rodzaj uprawy, stan wzrostu i wilgotność zbóż, poziom nawożenia i wilgotność gleby. Dla palet wyświetlana jest ich zawartość." />
         <text name="ss_helpText_19_03" text="Więcej informacji na temat Wopstr M420 oraz szczegółowe wyjaśnienie wyświetlanych symboli można znaleźć na stronie Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
