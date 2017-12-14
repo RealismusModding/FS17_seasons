@@ -252,7 +252,7 @@
 
         <text name="ss_helpTitle_19" text="Handmessgerät" />
         <text name="ss_helpText_19_01" text="Das Wopstr M420 Handmessgerät wird dazu genutzt, um mehr Informationen über den Düngezustand der Felder, über Bäume, Ballen oder auch Paletten zu bekommen. Nachdem man das Gerät im Shop gekauft hat, wird es wie eine Kettensäge ausgerüstet. Zeige nun auf etwas, um die Messung zu starten aber warte einen Moment, sonst schlägt die Messung fehl." />
-        <text name="ss_helpText_19_02" text="Bei angepflanzten Bäumen kann man die Baumart, Höhe und die Distanz zum nächsten Baum messen. Bei Ballen kann man den Inhalt und den Gärprozess der Grasballen messen. Wenn man den Boden untersuchen möchten, kann man Informationen über dessen Beschaffenheit, Fruchtart, Wachstumsstufe, der Fruchtfeuchtigkeit, der Düngestufe und der Bodenfeuchtigkeit in Erfahrung bringen. Bei Scannen von Paletten erfährt man deren Inhalt." />
-        <text name="ss_helpText_19_03" text="Mehr Informationen über den Wopstr M420 und eine ausführlichere Symbol-Beschreibung findet Ihr auf unserer Webseite von Realismus Modding: www.realismusmodding.com/seasons." />
+        <text name="ss_helpText_19_02" text="Bei angepflanzten Bäumen kann man die Baumart, Höhe und die Distanz zum nächsten Baum messen. Bei Ballen kann man den Inhalt und den Gärprozess der Grasballen messen. Wenn man den Boden untersuchen möchte, kann man Informationen über dessen Beschaffenheit, Fruchtart, Wachstumsstufe, die Fruchtfeuchtigkeit, die Düngestufe und die Bodenfeuchtigkeit in Erfahrung bringen. Beim Scannen von Paletten erfährt man deren Inhalt." />
+        <text name="ss_helpText_19_03" text="Mehr Informationen über den Wopstr M420 und eine ausführlichere Symbol-Beschreibung findest du auf unserer Webseite von Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
