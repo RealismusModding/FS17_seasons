@@ -96,7 +96,7 @@
         <Value name="size" value="24px 24px" />
         <Value name="position" value="4px 4px" />
 
-        <Value name="imageColor" value="$preset_colorDescriptionText" />
+        <Value name="imageColor" value="$preset_colorWhite" />
         <Value name="imageUVs" value="0 0 1 1" />
     </Profile>
 
