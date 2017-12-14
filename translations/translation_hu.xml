@@ -250,13 +250,9 @@
         <text name="ss_helpText_18_03" text="Természetesen úgy játszol ahogy szeretnél, de ha kihívásra vágysz, játssz 9 napos szezonnal és 5x időgyorsítással. Tavasszal földművelés és vetés, nyáron gondozás és fűkaszálás, ősszel aratás és földmunkák, télen pedig az állatok ellátása, gépek karbantartása, az erdészet és  a terményeladás vár Rád." />
         <text name="ss_helpText_18_04" text="Minden gépet manuálisan kell elindítanod." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Mérő eszköz" />
+        <text name="ss_helpText_19_01" text="A Wopstr M42 egy mérőeszköz, amivel részletes információt kaphatsz a földről, fákról, bálákról és raklapokról. Megvásárlás után a láncfűrészhez hasonlóan lehet aktiválni. Mutass valamire és aktiváld a méréshez. A mérés néha nem sikerül." />
+        <text name="ss_helpText_19_02" text="Ültetett fáknak a fák típusát, magasságát és a legközelebbi fához való távolságát. Báláknak a tartalmát, fű báláknak pedig az erjedését. A földet mérve megadja a helyzetet, magasságot, növény típusát, növény aktuális szakaszát és nedvességét, valamint a talaj trágyázottsági szintjét és a talajnedvességet. Raklapoknak pedig a tartalmát. " />
+        <text name="ss_helpText_19_03" text="További információkért a Wopstr M420-ról és a szimbólumok részletes magyarázatáért látogasd meg a Realismus Modding oldalát : www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
