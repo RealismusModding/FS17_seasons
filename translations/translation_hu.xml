@@ -118,10 +118,8 @@
         <text name="unit_meterShort" text="méter" />
         <text name="unit_feetShort" text="láb" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Következő kézi eszköz" />
+        <text name="action_chainsaw" text="Kézi eszköz" />
 
         <text name="tooltip_seasonLength" text="Egy évszak hossza napokban. 1 év négy évszakból áll" />
         <text name="tooltip_seasonIntros" text="Rövid leírást olvashatsz az aktuális évszakról a szezon kezdetén" />
