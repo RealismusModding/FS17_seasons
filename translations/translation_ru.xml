@@ -70,10 +70,8 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Техническое обслуживание" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="в полночь" />
 
-        <!-- Missing translation of "repair" -->
-        <text name="ui_doRepair" text="" />
-        <!-- Missing translation of "Repair and customization" -->
-        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+        <text name="ui_doRepair" text="Ремонтировать" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Ремонт и настройка" />
 
         <text name="SS_SAVE_FAILED" text="Не удалось сохранить Seasons в ваш savegame-файл. Пожалуйста, попробуйте еще раз!" />
 
@@ -92,7 +90,7 @@
         <text name="warning_inAdvanceFeedingLimitReached3" text="Кормушка полна. Корма достаточно для кормления животных в течение 3 дней" />
         <text name="msg_welcome" text="Добро пожаловать в мод Seasons от Realismus Modding. Пожалуйста, ознакомьтесь со справкой в меню игры, чтобы узнать больше о том, как использовать этот мод." />
 
-        <text name="measuretool_title" text="Измерение" />
+        <text name="measuretool_title" text="Измерения" />
         <text name="measuretool_fermentation_time" text="созреет через %d ч" />
         <text name="measuretool_fermentation_time_low" text="созреет меньше чем за 1 час" />
         <text name="measuretool_failed" text="Ошибка измерения" />
@@ -120,10 +118,8 @@
         <text name="unit_meterShort" text="м" />
         <text name="unit_feetShort" text="фут" />
 
-        <!-- Missing translation of "Select next hand tool" -->
-        <text name="action_nextHandTool" text="" />
-        <!-- Missing translation of "Hand Tool" -->
-        <text name="action_chainsaw" text="" />
+        <text name="action_nextHandTool" text="Выбрать следующий ручной инструмент" />
+        <text name="action_chainsaw" text="Ручной инструмент" />
 
         <text name="tooltip_seasonLength" text="Продолжительность сезона в днях. Игровой год состоит из четырёх сезонов" />
         <text name="tooltip_seasonIntros" text="Показывать напоминание о наступлении нового сезона" />
@@ -233,7 +229,7 @@
 
         <text name="ss_helpTitle_15" text="Животные - Производительность" />
         <text name="ss_helpText_15_01" text="Производство молока и шерсти также зависят от сезона." />
-        <text name="ss_helpText_15_02" text="Шерсть производится лишь в весенне-лентий период." />
+        <text name="ss_helpText_15_02" text="Шерсть производится лишь в весенне-летний период." />
         <text name="ss_helpText_15_03" text="Молоко производится круглый год, но увеличивается зимой и весной. Так как зимой кормить травой нет возможности, это естественно снижает продуктивность коров до 80%. Тем не менее, Seasons увеличивает производство молока зимой и весной, чтобы компенсировать нехватку травы в эти месяцы." />
 
         <text name="ss_helpTitle_16" text="Меню Seasons" />
@@ -254,13 +250,9 @@
         <text name="ss_helpText_18_03" text="В то время как вы можете играть так, как вам хочется, рекомендуется играть с длительностью сезона в 9 дней и с 5-кратным ускорением времени. Таким образом, на протяжении весны вы будете возделывать почву и сеять урожай, летом - ухаживать за урожаем и заниматься сенокосом; сбором урожая и вспашкой земли займётесь осенью, а зимой сосредоточитесь на уходе за животными, техникой, рубкой леса и продажей выращенного урожая." />
         <text name="ss_helpText_18_04" text="Все транспортные средства могут быть запущены лишь вручную." />
 
-        <!-- Missing translation of "Measurement tool" -->
-        <text name="ss_helpTitle_19" text="" />
-        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
-        <text name="ss_helpText_19_01" text="" />
-        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
-        <text name="ss_helpText_19_02" text="" />
-        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
-        <text name="ss_helpText_19_03" text="" />
+        <text name="ss_helpTitle_19" text="Измерительный инструмент" />
+        <text name="ss_helpText_19_01" text="Wopstr M420 - инструмент для измерения параметров, который может использоваться для получения дополнительной информации о почве, деревьях, тюках и поддонах. После покупки инструмента в магазине его можно активировать как бензопилу. Направьте его на что-нибудь и активируйте, чтобы начать измерение. Может случаться сбой измерения." />
+        <text name="ss_helpText_19_02" text="У посаженных деревьев вы узнаете его тип, высоту и расстояние до ближайшего дерева. У тюков - содержимое и степень их ферментации. При измерение грунта получите информацию о местоположении, высоте, типе посевов, росте посевов и урожайности, уровне удобренности и влажности почвы. У поддонов вы узнаете его содержимое." />
+        <text name="ss_helpText_19_03" text="Для получения дополнительной информации о Wopstr M420 и подробном объяснении его символов посетите веб-сайт Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>
