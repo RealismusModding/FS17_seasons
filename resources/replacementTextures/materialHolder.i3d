@@ -224,7 +224,7 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="bushes_mat" materialId="115" ambientColor="1 1 1" customShaderId="801">
+        <Material name="bushes_mat" materialId="115" ambientColor="1 1 1" customShaderId="802">
             <Texture fileId="114" />
             <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2" />
             <CustomParameter name="speed" value="1 0 0 0" />
@@ -316,7 +316,7 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="bushes_mat" materialId="215" ambientColor="1 1 1" customShaderId="801">
+        <Material name="bushes_mat" materialId="215" ambientColor="1 1 1" customShaderId="802">
             <Texture fileId="214" />
             <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2" />
             <CustomParameter name="speed" value="1 0 0 0" />
@@ -408,7 +408,7 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="bushes_mat" materialId="315" ambientColor="1 1 1" customShaderId="801">
+        <Material name="bushes_mat" materialId="315" ambientColor="1 1 1" customShaderId="802">
             <Texture fileId="314" />
             <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2" />
             <CustomParameter name="speed" value="1 0 0 0" />
@@ -508,7 +508,7 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="bushes_mat" materialId="415" ambientColor="1 1 1" customShaderId="801">
+        <Material name="bushes_mat" materialId="415" ambientColor="1 1 1" customShaderId="802">
             <Texture fileId="414" />
             <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2" />
             <CustomParameter name="speed" value="1 0 0 0" />

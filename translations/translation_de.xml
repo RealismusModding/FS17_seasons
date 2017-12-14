@@ -65,10 +65,13 @@
         <text name="SS_NOTHING_TO_REPAIR" text="Keine Reparatur für %s benötigt." />
         <text name="SS_REPAIR_VEHICLE_COST" text="Repariere %s für %s." />
         <text name="SS_REPAIR_REQUIRED" text="Wartung benötigt!" />
-        <text name="SS_REPAIR_REQUIRED_IN" text="%.1f Motorstunden oder %d Tage bis Wartungsarbeiten erforderlich sind." />
+        <text name="SS_REPAIR_REQUIRED_IN" text="Wartung nötig in: %.1f Motorstunden oder %d Tag(en)" />
         <text name="SS_REPAIR_DIALOG" text="Möchtest du das Fahrzeug %s für %s warten?" />
         <text name="SS_REPAIR_DIALOG_TITLE" text="Wartung erforderlich!" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="bei Mitternacht" />
+
+        <text name="ui_doRepair" text="Reparatur" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Reparatur &amp; Konfiguration" />
 
         <text name="SS_SAVE_FAILED" text="Speichern der Jahreszeiten im Savegame fehlgeschlagen. Bitte versuche es erneut!" />
 
@@ -104,7 +107,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Ballen" />
 
-        <text name="ui_buttonSave" text="Speichern" />
         <text name="ui_snowOneLayer" text="Einfache Schneeschicht" />
         <text name="ui_days" text="%i Tage" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -115,6 +117,9 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <text name="action_nextHandTool" text="Nächste Werkzeug auswählen" />
+        <text name="action_chainsaw" text="Werkzeug" />
 
         <text name="tooltip_seasonLength" text="Die Länge einer Saison in Tagen. Ein Jahr ist in vier Jahreszeiten eingeteilt." />
         <text name="tooltip_seasonIntros" text="Es wird zu Beginn eine Erklärung zu dieser Jahreszeit angezeigt." />
@@ -132,7 +137,6 @@
         <text name="setting_controlsTemperature" text="Temperatureinheit" />
         <text name="setting_moisture" text="Ernten bei Feuchtigkeit" />
 
-        <text name="dialog_applySettings" text="Möchtest du die Jahreszeiteneinstellungen wirklich ändern? Änderungen an der Länge der Jahreszeiten können zu Feldzuständen führen, die erst nach einem Ingame-Jahr repariert werden." />
         <text name="dialog_resetGrowth" text="Du hast Seasons in einem alten Savegame geladen. Seasons möchte alle Felder auf ihren Urzustand zurücksetzen, um sie mit dem Spieltag zu synchronisieren. Du wirst alle Zustände der Früchte auf den Feldern verlieren. Wenn du das Wachstum aber nicht zurücksetzt, funktioniert Seasons möglicherweise nicht wie erwartet." />
         <text name="dialog_resetGrowth_title" text="Wachstum zurückgesetzt." />
         <text name="dialog_resetGrowth_no" text="Alle Wachstumsstufen beibehalten." />
@@ -188,7 +192,7 @@
         <text name="ss_helpText_07_03" text="Mais, Sojabohnen, Sonnenblumen, Zuckerrüben und Kartoffeln müssen im Frühjahr ausgesät bzw. gelegt werden. Achte darauf, die Wachstumsübersicht im Jahreszeiten-Menü zu überprüfen, da einige Feldfrüchte im ersten Frühlingsübergang (früher Frühling) nicht gesät bzw. gepflanzt werden können und sterben, auch wenn die Bodentemperatur über der Keimtemperatur liegt." />
 
         <text name="ss_helpTitle_08" text="Kulturen - Heu, Stroh und Gras" />
-        <text name="ss_helpText_08_01" text="Im Winter wird das Gras auf seine abgeerntete Stufe zurückgesetzt. Damit wird simuliert, dass das Gras abtötet wurde wenn es kalt wird." />
+        <text name="ss_helpText_08_01" text="Im Winter wird das Gras auf seine abgeerntete Stufe zurückgesetzt. Damit wird simuliert, dass das Gras abgetötet wurde wenn es kalt ist." />
         <text name="ss_helpText_08_02" text="Grasballen verrotten allmählich und verschwinden nach zwei Tagen, egal wo sie sich befinden. Um den Zerfall zu verhindern, müssen die Ballen verbraucht oder gewickelt werden. Einmal eingewickelt werden sie nach 1/3 einer Saison zu Silageballen fermentiert." />
         <text name="ss_helpText_08_03" text="Schwaden und Haufen von Heu, Gras und Stroh beginnen sich zu verkleinern und verschwinden schließlich nach einigen Tagen. Grasschwaden und Haufen werden jeden Tag um Mitternacht reduziert. Heu- sowie Strohschwaden und -haufen werden nach jeder Wachstumsphase sowie nach Regeneinwirkung reduziert." />
         <text name="ss_helpText_08_04" text="Stroh und Heu müssen gepresst werden, bevor diese verkauft werden können - loses Stroh und Heu können nicht verkauft sondern nur kostenlos abgegeben werden. Gras, gebündelt oder lose, kann dagegen nicht verkauft werden." />
@@ -204,7 +208,7 @@
         <text name="ss_helpText_10_04" text="Auf einer Mod-Map, die vom Modder mit einer Schneemaske vorbereitet wurde, beginnen Heu- und Strohballen, die dem Regen oder Schnee ausgesetzt wurden, zu faulen, es sei denn, die Ballen werden in einem Schuppen mit einer Schneemaske gelagert. Schlechtes Wetter hat auf einer Karte ohne Schneemaske keine Auswirkungen auf Ballen oder gewickelte Ballen." />
 
         <text name="ss_helpTitle_11" text="Instandhaltung" />
-        <text name="ss_helpText_11_01" text="Deine Traktoren und Erntemaschinen müssen regelmäßig gewartet werden, um sie betriebsbereit zu halten. Die Wartungszeit (Wartungsinterval) beträgt alle 30 Stunden oder ein halbes Jahr, je nachdem, was zuerst eintritt. Fahrzeuge, deren Wartungen versäumt wurden, können länger brauchen, um zu starten." />
+        <text name="ss_helpText_11_01" text="Deine Traktoren und Erntemaschinen müssen regelmäßig gewartet werden, um sie betriebsbereit zu halten. Die Wartungszeit (Wartungsinterval) beträgt alle 30 Stunden oder ein Jahr, je nachdem, was zuerst eintritt. Fahrzeuge, deren Wartungen versäumt wurden, können länger brauchen, um zu starten." />
         <text name="ss_helpText_11_02" text="Du kannst deine Fahrzeuge entweder im Kfz-Shop, der Hofwerkstatt oder einer platzierten Garage reparieren. Um dein Fahrzeug zu reparieren, fährst du es in den Kfz-Shop, die Hofwerkstatt oder platzierte Garage und aktivierst den Reparatur-Button. Beachte, dass eine Reparatur im Kfz-Shop teurer ist." />
         <text name="ss_helpText_11_03" text="Das Alter deiner Fahrzeuge entspricht der Angabe zur letzten Reparatur in Tagen." />
         <text name="ss_helpText_11_04" text="Nur Fahrzeuge und fahrbare Geräte benötigen eine Reparatur. Alle anderen Geräte reparieren sich automatisch." />
@@ -245,5 +249,10 @@
         <text name="ss_helpText_18_02" text="Wenn du dich entscheidest, die Länge der Saison mitten in einem bestehenden Spiel zu ändern, wird empfohlen 1) die Saisonlänge im Winter zu ändern, um unerwünschte Auswirkungen auf bestehende Zustände der Pflanzen zu reduzieren und 2) das Spiel / den Server nach dem Wechsel der Saison neu zu starten." />
         <text name="ss_helpText_18_03" text="Spiele wie du möchtest. Aber es wird als Herausforderung vorgeschlagen, mit einer 9-Tage-Saison und mit 5facher Zeitbeschleunigung zu spielen. Auf diese Weise verbringst du den Frühling nur mit dem Anbau und der Anpflanzung von Feldfrüchten, der Ernte und das Heueinholen im Sommer, der Ernte und dem Pflügen im Herbst und der Pflege der Tiere, Maschinen, Wälder und dem Verkauf von Feldfrüchten im Winter." />
         <text name="ss_helpText_18_04" text="Alle Fahrzeuge müssen manuell gestartet werden." />
+
+        <text name="ss_helpTitle_19" text="Handmessgerät" />
+        <text name="ss_helpText_19_01" text="Das Wopstr M420 Handmessgerät wird dazu genutzt, um mehr Informationen über den Düngezustand der Felder, über Bäume, Ballen oder auch Paletten zu bekommen. Nachdem man das Gerät im Shop gekauft hat, wird es wie eine Kettensäge ausgerüstet. Zeige nun auf etwas, um die Messung zu starten aber warte einen Moment, sonst schlägt die Messung fehl." />
+        <text name="ss_helpText_19_02" text="Bei angepflanzten Bäumen kann man die Baumart, Höhe und die Distanz zum nächsten Baum messen. Bei Ballen kann man den Inhalt und den Gärprozess der Grasballen messen. Wenn man den Boden untersuchen möchten, kann man Informationen über dessen Beschaffenheit, Fruchtart, Wachstumsstufe, der Fruchtfeuchtigkeit, der Düngestufe und der Bodenfeuchtigkeit in Erfahrung bringen. Bei Scannen von Paletten erfährt man deren Inhalt." />
+        <text name="ss_helpText_19_03" text="Mehr Informationen über den Wopstr M420 und eine ausführlichere Symbol-Beschreibung findet Ihr auf unserer Webseite von Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>

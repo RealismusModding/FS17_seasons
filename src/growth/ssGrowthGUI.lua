@@ -9,17 +9,17 @@
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthGUI = {}
-g_seasons.growthGUI = ssGrowthGUI
 
 -- constants
 ssGrowthGUI.MAX_ALLOWABLE_GROWTH_PERIOD = 12 * 2 -- max growth for any fruit = 2 years
 
--- data
-ssGrowthGUI.canPlantData = {}
-ssGrowthGUI.canHarvestData = {}
+function ssGrowthGUI:preLoad()
+    g_seasons.growthGUI = self
+end
 
---methods
 function ssGrowthGUI:loadMap(name)
+    self.canPlantData = {}
+    self.canHarvestData = {}
 end
 
 --simulates growth and builds the canPlantData which is based on 'will the fruit grow in the next growth transition?'

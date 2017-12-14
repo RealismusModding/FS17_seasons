@@ -8,7 +8,10 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSeasonIntro = {}
-g_seasons.seasonIntro = ssSeasonIntro
+
+function ssSeasonIntro:preLoad()
+    g_seasons.seasonIntro = self
+end
 
 function ssSeasonIntro:load(savegame, key)
     self.hideSeasonIntro = ssXMLUtil.getBool(savegame, key .. ".settings.hideSeasonIntro", false)

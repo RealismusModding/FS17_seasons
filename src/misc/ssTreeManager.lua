@@ -8,10 +8,13 @@
 ----------------------------------------------------------------------------------------------------
 
 ssTreeManager = {}
-g_seasons.treeManager = ssTreeManager
 
 ssTreeManager.MIN_DISTANCE = 9.5 -- meters
 ssTreeManager.MIN_DISTANCE_SQ = ssTreeManager.MIN_DISTANCE * ssTreeManager.MIN_DISTANCE
+
+function ssTreeManager:preLoad()
+    g_seasons.treeManager = self
+end
 
 function ssTreeManager:loadMap()
     if g_currentMission:getIsServer() then
@@ -20,14 +23,14 @@ function ssTreeManager:loadMap()
         self:adjust()
     end
 
-    TreePlantUtil.plantTree = Utils.overwrittenFunction(TreePlantUtil.plantTree, ssTreeManager.plantTree)
-    ChainsawUtil.cutSplitShapeCallback = Utils.appendedFunction(ChainsawUtil.cutSplitShapeCallback, ssTreeManager.cutSplitShapeCallback)
+    ssUtil.overwrittenFunction(TreePlantUtil, "plantTree", ssTreeManager.plantTree)
+    ssUtil.appendedFunction(ChainsawUtil, "cutSplitShapeCallback", ssTreeManager.cutSplitShapeCallback)
 end
 
 function ssTreeManager:adjust()
     for i, _ in pairs(TreePlantUtil.treeTypes) do
         -- 5 years to fully grown, harvestable after 2 years
-        TreePlantUtil.treeTypes[i].growthTimeHours = g_seasons.environment.daysInSeason * 4 * 24 * 5
+        ssUtil.overwrittenConstant(TreePlantUtil.treeTypes[i], "growthTimeHours", g_seasons.environment.daysInSeason * 4 * 24 * 5)
     end
 end
 

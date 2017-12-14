@@ -10,14 +10,18 @@
 ----------------------------------------------------------------------------------------------------
 
 ssCatchingUp = {}
-g_seasons.catchingUp = ssCatchingUp
 
-ssCatchingUp.LIMIT = 3
+ssCatchingUp.LIMIT = GS_IS_CONSOLE_VERSION and 2 or 3
 ssCatchingUp.FFWD = 300
+
+function ssCatchingUp:preLoad()
+    g_seasons.catchingUp = self
+end
 
 function ssCatchingUp:loadMap()
     self.showWarning = false
     self.didFfwd = false
+    self.dialog = nil
 end
 
 function ssCatchingUp:update(dt)

@@ -8,10 +8,22 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherForecast = {}
-g_seasons.forecast = ssWeatherForecast
 
-local screenAspectRatio = g_screenAspectRatio / (16 / 9)
-ssWeatherForecast.hud = {}
+function ssWeatherForecast:preLoad()
+    g_seasons.forecast = self
+end
+
+function ssWeatherForecast:load(savegame, key)
+    self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
+    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", g_gameSettings.useMiles)
+end
+
+function ssWeatherForecast:save(savegame, key)
+    if g_currentMission:getIsServer() == true then
+        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
+        ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
+    end
+end
 
 function ssWeatherForecast:loadMap(name)
     if not g_currentMission:getIsClient() then return end
@@ -120,29 +132,36 @@ function ssWeatherForecast:loadMap(name)
     self:setForecastVisible(self.visible)
 end
 
-function ssWeatherForecast:load(savegame, key)
-    self.visible = ssXMLUtil.getBool(savegame, key .. ".settings.weatherForecastHudVisible", false)
-    self.degreeFahrenheit = ssXMLUtil.getBool(savegame, key .. ".weather.fahrenheit", false)
-end
+function ssWeatherForecast:deleteMap()
+    self.rect:delete()
 
-function ssWeatherForecast:save(savegame, key)
-    if g_currentMission:getIsServer() == true then
-        ssXMLUtil.setBool(savegame, key .. ".settings.weatherForecastHudVisible", self.visible)
-        ssXMLUtil.setBool(savegame, key .. ".weather.fahrenheit", self.degreeFahrenheit)
+    self.overlays.soilSymbol:delete()
+    self.overlays.airSymbol:delete()
+
+    for _, overlay in pairs(self.overlays.seasons) do
+        overlay:delete()
     end
+
+    self.overlays.frozen:delete()
+    self.overlays.wetcrop:delete()
+
+    -- Do not delete: it is automatically done by the game
+    -- g_currentMission.weatherForecastIconOverlays.snow:delete()
 end
 
 function ssWeatherForecast:update(dt)
-    if g_seasons.showControlsInHelpScreen then
-        if not self.visible then
-            g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
-        else
-            g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+    if g_currentMission.controlledVehicle == nil or not GS_IS_CONSOLE_VERSION then
+        if g_seasons.showControlsInHelpScreen then
+            if not self.visible then
+                g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SHOW_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+            else
+                g_currentMission:addHelpButtonText(g_i18n:getText("SEASONS_HIDE_WF"), InputBinding.SEASONS_SHOW_WF, nil, GS_PRIO_VERY_LOW)
+            end
         end
-    end
 
-    if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
-        self:setForecastVisible(not self.visible)
+        if InputBinding.hasEvent(InputBinding.SEASONS_SHOW_WF) then
+            self:setForecastVisible(not self.visible)
+        end
     end
 end
 

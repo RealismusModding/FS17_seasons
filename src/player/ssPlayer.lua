@@ -9,8 +9,6 @@
 
 ssPlayer = {}
 
-g_seasons.player = ssPlayer
-
 ssPlayer.RUN_TRESHOLD = 0.4
 ssPlayer.PARALLELOGRAM_SIZE = 0.01
 
@@ -18,12 +16,20 @@ local PARAM_GREATER = "greater"
 local PARAM_EQUAL = "equal"
 
 function ssPlayer:preLoad()
-    Player.updateTick = Utils.appendedFunction(Player.updateTick, ssPlayer.playerUpdateTick)
+    g_seasons.player = self
+
+    ssUtil.appendedFunction(Player, "updateTick", ssPlayer.playerUpdateTick)
+
+    if TipUtil.getCollisionHeightAtWorldPos == nil then
+        TipUtil.getCollisionHeightAtWorldPos = function (x,y,z)
+            return getDensityHeightAtWorldPos(g_currentMission.terrainDetailHeightId, x, y, z)
+        end
+    end
 end
 
 function ssPlayer:playerUpdateTick(dt)
     local snowDepth = g_seasons.weather.snowDepth
-    if g_currentMission:getIsServer() then
+    if self.isServer then
         snowDepth = ssSnow.appliedSnowDepth
     end
 
@@ -52,6 +58,17 @@ function ssPlayer:playerUpdateTick(dt)
             end
 
             ssEnvironment:playSurfaceSound(dt, surfaceSound, surfaceSound.impactCount, pitchOffset, not inSnowLayers or not moved or self.deltaWater < 0)
+        end
+    end
+
+    -- Prevent player from getting stuck in a high level of snow
+    if self.isControlled then
+        local px, py, pz = getTranslation(self.rootNode)
+        local dy, delta = TipUtil.getCollisionHeightAtWorldPos(px, py, pz)
+        local heightOffset =  0.5 * self.height -- for root node origin to terrain
+        if py < dy + heightOffset - 0.1 then
+            py = dy + heightOffset
+            setTranslation(self.rootNode, px, py, pz)
         end
     end
 end

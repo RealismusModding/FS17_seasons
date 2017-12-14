@@ -27,29 +27,17 @@ function ssGraph:new(parentElement)
     self.yUnit = ""
     self.data = {}
 
-    self.rect = ssRectOverlay:new(parentElement)
-
     local width, height = getNormalizedScreenValues(1, 1)
     self.pixel = Overlay:new("pixel", Utils.getFilename("resources/gui/pixel.png", g_seasons.modDir), 0, 0, width, height)
-
-    self.seasonIconWidth, self.seasonIconHeight = getNormalizedScreenValues(30, 30)
-
-    self.seasons = {}
-    self.seasons[ssEnvironment.SEASON_SPRING] = Overlay:new("hud_spring", g_seasons.baseUIFilename, 0, 0, self.seasonIconWidth, self.seasonIconHeight)
-    self.seasons[ssEnvironment.SEASON_SPRING]:setUVs(getNormalizedUVs({8, 216, 128, 128}))
-    self.seasons[ssEnvironment.SEASON_SUMMER] = Overlay:new("hud_summer", g_seasons.baseUIFilename, 0, 0, self.seasonIconWidth, self.seasonIconHeight)
-    self.seasons[ssEnvironment.SEASON_SUMMER]:setUVs(getNormalizedUVs({144, 216, 128, 128}))
-    self.seasons[ssEnvironment.SEASON_AUTUMN] = Overlay:new("hud_autumn", g_seasons.baseUIFilename, 0, 0, self.seasonIconWidth, self.seasonIconHeight)
-    self.seasons[ssEnvironment.SEASON_AUTUMN]:setUVs(getNormalizedUVs({280, 216, 128, 128}))
-    self.seasons[ssEnvironment.SEASON_WINTER] = Overlay:new("hud_winter", g_seasons.baseUIFilename, 0, 0, self.seasonIconWidth, self.seasonIconHeight)
-    self.seasons[ssEnvironment.SEASON_WINTER]:setUVs(getNormalizedUVs({416, 216, 128, 128}))
 
     self.maxValue = 0
     self.minValue = 0
     self.title = 0
     self.currentDay = 1
 
-    self.transitionHeaders = ssUtil.getTransitionHeaders()
+    self.footer = ssGuiSeasonsHeader:new(parentElement)
+    self.footer:setIsFooter(true)
+    self.footer:setMargin(getNormalizedScreenValues(20, 20))
 
     _, self.axisTextSize = getNormalizedScreenValues(0, 12)
     _, self.titleTextSize = getNormalizedScreenValues(0, 18)
@@ -59,6 +47,11 @@ end
 
 function ssGraph:delete()
     self.pixel:delete()
+    self.footer:delete()
+end
+
+function ssGraph:settingsChanged()
+    self.footer:settingsChanged()
 end
 
 function ssGraph:draw()
@@ -131,64 +124,11 @@ function ssGraph:draw()
         end
     end
 
-    ------ Draw footer
-
-    local _, footerHeight = getNormalizedScreenValues(0, 50)
-    local footerWidth = self.parent.size[1] - marginX
-    local _, footerTextSize = getNormalizedScreenValues(0, 9)
-
-    local footerX = self.parent.absPosition[1] + marginX
-    local footerY = self.parent.absPosition[2] + marginY - footerHeight
-    local transitionWidth = footerWidth / 12
-
-    local separatorWidth = getNormalizedScreenValues(1, 0)
-
-    pixel:setPosition(footerX, footerY)
-    pixel:setDimension(footerWidth, footerHeight)
-    pixel:setColor(0.017, 0.017, 0.017, 1)
-    pixel:render()
-
-    -- Draw separator blocks in the header
-    pixel:setColor(0.0284, 0.0284, 0.0284, 1)
-    for i = 2, g_seasons.environment.TRANSITIONS_IN_YEAR do
-        if i == 4 or i == 7 or i == 10 then
-            pixel:setPosition(footerX + (i - 1) * transitionWidth,
-                              footerY)
-            pixel:setDimension(separatorWidth, footerHeight)
-        else
-            pixel:setPosition(footerX + (i - 1) * transitionWidth,
-                              footerY + self.seasonIconHeight)
-            pixel:setDimension(separatorWidth, footerHeight - self.seasonIconHeight)
-        end
-
-        pixel:render()
-    end
-
-    -- Season icons
-    for s = 0, 3 do
-        local season = self.seasons[s]
-
-        season:setPosition(footerX + s * (footerWidth / 4) + footerWidth / 8 - self.seasonIconWidth / 2,
-                           footerY)
-        season:render()
-    end
-
-    -- Write numbers in headers
-    setTextColor(0.5, 0.5, 0.5, 1)
-    setTextAlignment(RenderText.ALIGN_CENTER)
-    for i = 1, g_seasons.environment.TRANSITIONS_IN_YEAR do
-        renderText(
-            footerX + (i - 0) * transitionWidth - transitionWidth / 2,
-            footerY + self.seasonIconHeight + footerTextSize / 2,
-            footerTextSize,
-            self.transitionHeaders[(i - 1) % 3 + 1]
-            )
-    end
-
-    setTextColor(1, 1, 1, 1)
-
     -- Reset
+    setTextColor(1, 1, 1, 1)
     setTextAlignment(RenderText.ALIGN_LEFT)
+
+    self.footer:draw()
 end
 
 function ssGraph:setData(data)

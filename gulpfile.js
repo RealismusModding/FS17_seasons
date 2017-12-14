@@ -32,7 +32,7 @@ function toLuaString(value) {
  * Add updated values to the modDesc
  * @return {Vinyl} Stream containing updated modDesc
  */
-function fillModDesc() {
+function fillModDesc(cons) {
     const replacements = [{
         xpath: "/modDesc/version",
         value: packageVersion
@@ -40,6 +40,20 @@ function fillModDesc() {
         xpath: "/modDesc/@descVersion",
         value: packageJson.fs.modDescRev
     }];
+
+    if (cons) {
+        replacements.push({
+            xpath: "/modDesc/storeItems/storeItem",
+            value: (xml) => {
+                if (xml.attributes['0'].nodeValue.startsWith("resources/fakeStoreItem")) {
+                    xml.parentNode.removeChild(xml);
+                    xml.parentNode.removeChild(xml.parentNode.firstChild);
+                } else {
+                    return "";
+                }
+            }
+        });
+    }
 
     return gulp
         .src("modDesc.xml")
@@ -52,6 +66,7 @@ function templatedLua() {
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=debug %>/g, buildConfig.get("options.debug", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=verbose %>/g, buildConfig.get("options.verbose", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=buildnumber %>/g, toLuaString(createVersionName())))
+        .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=norestart %>/g, buildConfig.get("options.norestart", false).toString()))
         .pipe(replace(/([a-zA-Z0-9]+) \-\-<%=simpleVersion %>/g, packageJson.fs.simpleVersion));
 }
 
@@ -188,7 +203,7 @@ gulp.task("clean:mods", () => {
 // Build the mod zipfile
 gulp.task("build", () => {
     const sourceStream = gulp.src(zipSources, { base: "." });
-    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}.zip`;
 
     return merge(sourceStream, fillModDesc(), templatedLua())
         .pipe(size())
@@ -197,9 +212,36 @@ gulp.task("build", () => {
         .pipe(gulp.dest("."));
 });
 
+gulp.task("build:console-data", () => {
+    // Skip fake items
+    zipSources.push("!resources/fakeStoreItem");
+    zipSources.push("!resources/fakeStoreItem/**");
+
+    const sourceStream = gulp.src(zipSources, { base: "." });
+    const outputZipName = `${modZipName}_console.zip`;
+
+    return merge(sourceStream, fillModDesc(true))
+        .pipe(size())
+        .pipe(zip(outputZipName))
+        .pipe(size())
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("build:console-src", () => {
+    const outputZipName = `${modZipName}_internalMod.zip`;
+
+    return merge(templatedLua())
+        .pipe(size())
+        .pipe(zip(outputZipName))
+        .pipe(size())
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("build:console", ["build:console-data", "build:console-src"], () => {});
+
 // Install locally in the mods folder of the developer
 gulp.task("install", ["build", "clean:mods"], () => {
-    const outputZipName = `${modZipName}_${createVersionName()}.zip`;
+    const outputZipName = `${modZipName}.zip`;
 
     return gulp
         .src(outputZipName, { base: "." })

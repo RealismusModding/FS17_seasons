@@ -8,17 +8,31 @@
 ----------------------------------------------------------------------------------------------------
 
 ssEconomy = {}
-g_seasons.economy = ssEconomy
 
 ssEconomy.EQUITY_LOAN_RATIO = 0.8
 ssEconomy.DEFAULT_FACTOR = 1
 ssEconomy.VANILLA_AI_PER_HOUR = 2000
 
 function ssEconomy:preLoad()
+    g_seasons.economy = self
+
+    ssUtil.appendedFunction(AIVehicle, "load", ssEconomy.aiLoad)
+    ssUtil.overwrittenFunction(AIVehicle, "updateTick", ssEconomy.aiUpdateTick)
+    ssUtil.overwrittenFunction(FieldDefinition, "setFieldOwnedByPlayer", ssEconomy.setFieldOwnedByPlayer)
+
+    ssUtil.appendedFunction(Placeable, "finalizePlacement", ssEconomy.placeableFinalizePlacement)
+    ssUtil.appendedFunction(Placeable, "onSell", ssEconomy.placeablenOnSell)
+
+    -- Price changes with seasons
+    ssUtil.overwrittenFunction(EconomyManager, "getPricePerLiter", ssEconomy.emGetPricePerLiter)
+    ssUtil.overwrittenFunction(EconomyManager, "getCostPerLiter", ssEconomy.emGetCostPerLiter)
+    ssUtil.overwrittenFunction(Bale, "getValue", ssEconomy.baleGetValue)
+    ssUtil.overwrittenFunction(TipTrigger, "getEffectiveFillTypePrice", ssEconomy.ttGetEffectiveFillTypePrice)
+
     -- Update leasing costs
-    EconomyManager.DEFAULT_LEASING_DEPOSIT_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.DEFAULT_RUNNING_LEASING_FACTOR = 0.04 -- factor of price (vanilla: 0.05)
-    EconomyManager.PER_DAY_LEASING_FACTOR = 0.008 -- factor of price (vanilla: 0.01)
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_LEASING_DEPOSIT_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "DEFAULT_RUNNING_LEASING_FACTOR", 0.04) -- factor of price (vanilla: 0.05)
+    ssUtil.overwrittenConstant(EconomyManager, "PER_DAY_LEASING_FACTOR", 0.008) -- factor of price (vanilla: 0.01)
 end
 
 function ssEconomy:load(savegame, key)
@@ -40,19 +54,6 @@ function ssEconomy:save(savegame, key)
 end
 
 function ssEconomy:loadMap(name)
-    AIVehicle.load = Utils.appendedFunction(AIVehicle.load, ssEconomy.aiLoad)
-    AIVehicle.updateTick = Utils.overwrittenFunction(AIVehicle.updateTick, ssEconomy.aiUpdateTick)
-    FieldDefinition.setFieldOwnedByPlayer = Utils.overwrittenFunction(FieldDefinition.setFieldOwnedByPlayer, ssEconomy.setFieldOwnedByPlayer)
-
-    Placeable.finalizePlacement = Utils.appendedFunction(Placeable.finalizePlacement, ssEconomy.placeableFinalizePlacement)
-    Placeable.onSell = Utils.appendedFunction(Placeable.onSell, ssEconomy.placeablenOnSell)
-
-    -- Price changes with seasons
-    EconomyManager.getPricePerLiter = Utils.overwrittenFunction(EconomyManager.getPricePerLiter, ssEconomy.emGetPricePerLiter)
-    EconomyManager.getCostPerLiter = Utils.overwrittenFunction(EconomyManager.getCostPerLiter, ssEconomy.emGetCostPerLiter)
-    Bale.getValue = Utils.overwrittenFunction(Bale.getValue, ssEconomy.baleGetValue)
-    TipTrigger.getEffectiveFillTypePrice = Utils.overwrittenFunction(TipTrigger.getEffectiveFillTypePrice, ssEconomy.ttGetEffectiveFillTypePrice)
-
     -- Load economy price changes data
     self.repricing = {}
 
@@ -74,7 +75,7 @@ end
 function ssEconomy:loadAllFromXML()
     self.shifts = {}
 
-    self:loadFromXML(g_seasons.modDir .. "data/economy.xml")
+    self:loadFromXML(g_seasons:getDataPath("economy"))
 
     for _, path in ipairs(g_seasons:getModPaths("economy")) do
         self:loadFromXML(path)
@@ -322,7 +323,8 @@ end
 function ssEconomy:setFieldOwnedByPlayer(superFunc, fieldDef, isOwned)
     local ret = superFunc(self, fieldDef, isOwned)
 
-    g_seasons.economy:updateLoan()
+    -- TODO(console) fix
+    -- g_seasons.economy:updateLoan()
 
     return ret
 end

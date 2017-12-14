@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssGrowthManager = {}
-g_seasons.growthManager = ssGrowthManager
 
 -- constants
 ssGrowthManager.MAX_STATE = 99 -- needs to be set to the fruit's numGrowthStates if you are setting, or numGrowthStates - 1 if you're incrementing
@@ -19,16 +18,12 @@ ssGrowthManager.TMP_TRANSITION = 900
 ssGrowthManager.FIRST_LOAD_TRANSITION = 999
 ssGrowthManager.UNKNOWN_FRUIT_COPY_SOURCE = "barley"
 
--- data
-ssGrowthManager.defaultFruitsData = {}
-ssGrowthManager.growthData = {}
-ssGrowthManager.willGerminateData = {}
-
--- properties
-ssGrowthManager.dayHasChanged = false
-ssGrowthManager.isActivatedOnOldSave = false
+function ssGrowthManager:preLoad()
+    g_seasons.growthManager = self
+end
 
 function ssGrowthManager:load(savegame, key)
+    self.willGerminateData = {}
     self.isNewSavegame = savegame == nil
 
     self.growthManagerEnabled = ssXMLUtil.getBool(savegame, key .. ".settings.growthManagerEnabled", true)
@@ -102,6 +97,9 @@ function ssGrowthManager:loadMap(name)
         return
     end
 
+    self.defaultFruitsData = {}
+    self.growthData = {}
+
     --lock changing the growth speed option and set growth rate to 1 (no growth)
     g_currentMission:setPlantGrowthRate(1, nil)
     g_currentMission:setPlantGrowthRateLocked(true)
@@ -128,6 +126,12 @@ function ssGrowthManager:loadGameFinished()
             self:checkAndAddNewFruits(true)
         else
             self:checkAndAddNewFruits(false)
+        end
+
+        -- For new savegames, reset at the beginning
+        if self.isNewSavegame and g_seasons.environment:transitionAtDay() == g_seasons.environment.TRANSITION_EARLY_SPRING then
+            logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
+            ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
         end
     else
         for index, fruit in pairs(g_currentMission.fruits) do
@@ -188,12 +192,7 @@ function ssGrowthManager:transitionChanged()
     local transition = g_seasons.environment:transitionAtDay()
     g_seasons.growthDebug:setFakeTransition(transition)
 
-    if self.isNewSavegame and transition == g_seasons.environment.TRANSITION_EARLY_SPRING then
-        logInfo("ssGrowthManager:", "First time growth reset - this will only happen once in a new savegame")
-        self.isNewSavegame = false
-        ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", self.FIRST_LOAD_TRANSITION)
-    else
-        log("GrowthManager enabled - transition changed to: " .. transition)
+    if not self.isNewSavegame or transition ~= g_seasons.environment.TRANSITION_EARLY_SPRING then
         ssDensityMapScanner:queueJob("ssGrowthManagerHandleGrowth", transition)
     end
 end
@@ -221,8 +220,7 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
         if self.growthData[transition][fruitName] ~= nil then
             --set growth state
             if self.growthData[transition][fruitName].setGrowthState ~= nil
-                and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
-                    --log("FruitID " .. fruit.id .. " FruitName: " .. fruitName .. " - reset growth at season transition: " .. transition .. " between growth states " .. self.growthData[transition][fruitName].setGrowthState .. " and " .. self.growthData[transition][fruitName].setGrowthMaxState .. " to growth state: " .. self.growthData[transition][fruitName].setGrowthState)
+                    and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
                 self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
             --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState

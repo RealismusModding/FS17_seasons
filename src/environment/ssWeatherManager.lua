@@ -8,16 +8,17 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherManager = {}
-g_seasons.weather = ssWeatherManager
-
-ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
-ssWeatherManager.forecastLength = 8
-ssWeatherManager.weather = {}
 
 -- Load events
-source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerDailyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHourlyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHailEvent.lua")
+
+function ssWeatherManager:preLoad()
+    g_seasons.weather = self
+
+    ssUtil.overwrittenFunction(Environment, "calculateGroundWetness", ssWeatherManager.calculateSoilWetness)
+end
 
 function ssWeatherManager:load(savegame, key)
     -- Load or set default values
@@ -109,12 +110,12 @@ function ssWeatherManager:save(savegame, key)
 end
 
 function ssWeatherManager:loadMap(name)
-    Environment.calculateGroundWetness = Utils.overwrittenFunction(Environment.calculateGroundWetness, ssWeatherManager.calculateSoilWetness)
-
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
     g_seasons.environment:addSeasonLengthChangeListener(self)
     g_seasons.environment:addTransitionChangeListener(self)
+
+    self.forecastLength = 8
 
     g_currentMission.environment.minRainInterval = 1
     g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
@@ -127,7 +128,7 @@ function ssWeatherManager:loadMap(name)
     self.temperatureData = {}
     self.rainData = {}
     self.startValues = {}
-    self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
+    self:loadFromXML(g_seasons:getDataPath("weather"))
 
     -- Modded
     for _, path in ipairs(g_seasons:getModPaths("weather")) do
@@ -139,7 +140,7 @@ function ssWeatherManager:loadMap(name)
 
     -- Load germination temperatures
     self.germinateTemp = {}
-    self:loadGerminateTemperature(g_seasons.modDir .. "data/growth.xml")
+    self:loadGerminateTemperature(g_seasons:getDataPath("growth"))
 
     for _, path in ipairs(g_seasons:getModPaths("growth")) do
         self:loadGerminateTemperature(path)
@@ -154,6 +155,8 @@ function ssWeatherManager:loadMap(name)
         self:overwriteRaintable()
         self:setupStartValues()
     end
+
+    g_currentMission.environment.currentRain = nil
 end
 
 function ssWeatherManager:loadGameFinished()
@@ -207,6 +210,21 @@ function ssWeatherManager:readStream(streamId, connection)
         table.insert(self.weather, rain)
     end
 
+    if streamReadBool(streamId) then
+        local typeIndex = streamReadUInt8(streamId)
+        local startDay = streamReadInt32(streamId)
+        local startDayTime = streamReadFloat32(streamId)
+        local duration = streamReadFloat32(streamId) * (60 * 1000)
+
+        local environment = g_currentMission.environment
+
+        if environment ~= nil then
+            local typeId = environment.rainTypes[typeIndex + 1].typeId
+
+            environment.currentRain = environment:createRainObject(typeId, startDay, startDayTime, duration)
+        end
+    end
+
     self:overwriteRaintable()
     self:setupStartValues()
 end
@@ -238,6 +256,19 @@ function ssWeatherManager:writeStream(streamId, connection)
         streamWriteInt16(streamId, rain.endDay)
         streamWriteString(streamId, rain.rainTypeId)
         streamWriteFloat32(streamId, rain.duration)
+    end
+
+    local environment = g_currentMission.environment
+    local hasCurrentRain = environment.currentRain ~= nil
+
+    streamWriteBool(streamId, hasCurrentRain)
+    if hasCurrentRain then
+        local rain = environment.currentRain
+
+        streamWriteUInt8(streamId, environment.rainTypeIdToType[rain.rainTypeId].typeIndex)
+        streamWriteInt32(streamId, rain.startDay)
+        streamWriteFloat32(streamId, rain.startDayTime)
+        streamWriteFloat32(streamId, rain.duration / (60 * 1000))
     end
 end
 
@@ -375,7 +406,7 @@ function ssWeatherManager:dayChanged()
 
         if isFrozen ~= self:isGroundFrozen() then
             -- Call a weather change
-            for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
+            for _, listener in ipairs(g_currentMission.environment.weatherChangeListeners) do
                 listener:weatherChanged()
             end
         end
@@ -400,7 +431,7 @@ function ssWeatherManager:hourChanged()
 
         if math.abs(oldSnow - self.snowDepth) > 0.01 then
             -- Call a weather change
-            for _, listener in pairs(g_currentMission.environment.weatherChangeListeners) do
+            for _, listener in ipairs(g_currentMission.environment.weatherChangeListeners) do
                 listener:weatherChanged()
             end
         end
@@ -509,7 +540,6 @@ function ssWeatherManager:calculateSoilTemp(lowTemp, highTemp, days, soilTemp, s
     end
 
     soilTemp = soilTemp + math.min(deltaT * facKT / (0.81 * facCA), 0.8) * (avgAirTemp - soilTemp) * snowDamp
-    --log("self.soilTemp=", self.soilTemp, " soilTemp=", soilTemp, " avgAirTemp=", avgAirTemp, " snowDamp=", snowDamp, " snowDepth=", snowDepth)
 
     if soilTemp > soilTempMax then
         soilTempMax = soilTemp

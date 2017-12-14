@@ -71,6 +71,9 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Maintenance" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="at midnight" />
 
+        <text name="ui_doRepair" text="repair" />
+        <text name="ui_repairOrCustomizeVehicleTitle" text="Repair and customization" />
+
         <text name="SS_SAVE_FAILED" text="Failed to save Seasons to your savegame. Please try again!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
@@ -105,7 +108,6 @@
         <text name="ui_economy_thousand" text="1000 l" />
         <text name="ui_economy_bale" text="Bale" />
 
-        <text name="ui_buttonSave" text="Apply Settings" />
         <text name="ui_snowOneLayer" text="1 layer only" />
         <text name="ui_days" text="%i days" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -116,6 +118,9 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <text name="action_nextHandTool" text="Select next hand tool" />
+        <text name="action_chainsaw" text="Hand Tool"/>
 
         <text name="tooltip_seasonLength" text="The length of a season in days. A year is four seasons" />
         <text name="tooltip_seasonIntros" text="Show a season introduction at the start of a season" />
@@ -133,7 +138,6 @@
         <text name="setting_controlsTemperature" text="Temperature Scale" />
         <text name="setting_moisture" text="Crop Moisture" />
 
-        <text name="dialog_applySettings" text="Are you sure you want to change the Seasons settings? Changes to season length can result in fields that will only repair after one game-year." />
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />
         <text name="dialog_resetGrowth_title" text="Growth reset" />
         <text name="dialog_resetGrowth_no" text="Keep growth" />
@@ -191,7 +195,7 @@
         <text name="ss_helpTitle_08" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_08_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
         <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days no matter where they are placed. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
-        <text name="ss_helpText_08_03" text="Swaths and piles of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths and piles are reduced at midnight every day. Hay and straw swaths and piles are reduced after every growth stage as well as after being exposed to rain." />
+        <text name="ss_helpText_08_03" text="Swaths and piles of grass will begin to reduce in size, and will eventually disappear after several days. Grass swaths and piles are reduced at midnight every day. Hay and straw swaths and piles are reduced after being exposed to rain." />
         <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
 
         <text name="ss_helpTitle_09" text="Crops - Trees" />
@@ -205,7 +209,7 @@
         <text name="ss_helpText_10_04" text="On a mod map that has been prepared with a snow mask by the modder hay and straw bales that have been exposed to the rain or snow will begin to rot, unless the bales are stored in a shed with a snow mask. Bad weather will not affect wrapped bales or bales on a map without a snow mask." />
 
         <text name="ss_helpTitle_11" text="Maintenance" />
-        <text name="ss_helpText_11_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or half a year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
+        <text name="ss_helpText_11_01" text="Your tractors and harvesters require periodic maintenance in order to keep them operational. The maintenance period is every 30 hours or every year, whichever comes first. Vehicles that are past due their maintenance may take longer to start." />
         <text name="ss_helpText_11_02" text="You can repair your vehicles either at the vehicle shop or the placeable garage. To repair your vehicle drive your vehicle to the garage, or a placeable garage, and activate the repair. Note that it will be more expensive to repair at the vehicle shop." />
         <text name="ss_helpText_11_03" text="The age of your vehicle is the days since your last repair." />
         <text name="ss_helpText_11_04" text="Only drivable vehicles will require periodic maintenance. Tools and implements will be automatically repaired as needed." />
@@ -246,5 +250,10 @@
         <text name="ss_helpText_18_02" text="If you decide to change the season length in the middle of an existing save game, it is recommended that you 1) change the season length during the winter to reduce undesired effects on existing crops and 2) restart the game/server after changing the season length." />
         <text name="ss_helpText_18_03" text="While it is your game to play as you want, it is suggested as a challenge to only play with a 9-day season and at 5x time acceleration. This way you spend the spring only cultivating and planting crops, tending to crops and cutting hay in the summer, harvesting and plowing in the fall, and tending to the animals, machines, forests, and selling crops during the winter." />
         <text name="ss_helpText_18_04" text="All vehicles need to be started manually." />
+
+        <text name="ss_helpTitle_19" text="Measurement tool" />
+        <text name="ss_helpText_19_01" text="The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." />
+        <text name="ss_helpText_19_02" text="For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." />
+        <text name="ss_helpText_19_03" text="For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." />
     </texts>
 </l10n>

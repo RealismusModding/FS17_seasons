@@ -8,21 +8,25 @@
 ----------------------------------------------------------------------------------------------------
 
 ssSkipNight = {}
-g_seasons.skipNight = ssSkipNight
 
-ssSkipNight.SPEED = 6000
 ssSkipNight.MODE_MORNING = 1
 ssSkipNight.MODE_DAWN = 2
 
-source(g_seasons.modDir .. "src/events/ssSkipNightEvent.lua")
-source(g_seasons.modDir .. "src/events/ssSkipNightFinishedEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssSkipNightEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssSkipNightFinishedEvent.lua")
+
+function ssSkipNight:preLoad()
+    g_seasons.skipNight = self
+
+    ssSkipNight.SPEED = GS_IS_CONSOLE_VERSION and 3000 or 12000
+end
 
 function ssSkipNight:loadMap()
     self.skippingNight = false
     self.mode = ssSkipNight.MODE_MORNING
     self.oldTimeScale = 1
 
-    if g_currentMission.missionDynamicInfo.isMultiplayer then
+    if g_currentMission.missionDynamicInfo.isMultiplayer and not GS_IS_CONSOLE_VERSION then
         ssSkipNight.SPEED = 3000
     end
 end
@@ -91,7 +95,7 @@ function ssSkipNight:update(dt)
     -- The ssCatchingUp code will synchronize
     if self.skippingNight and isMorning then
         -- The server might be behind. To prevent a big jump, make the client stop the time as well
-        g_currentMission:setTimeScale(self.oldTimeScale, not g_currentMission:getIsServer())
+        g_currentMission:setTimeScale(1, not g_currentMission:getIsServer())
 
         -- The rest is only for the server. The client removes the listeners and dialogs
         -- when receiving the finished event, so that clients wait for the server to catch up.
@@ -101,11 +105,7 @@ function ssSkipNight:update(dt)
             g_currentMission.environment:removeMinuteChangeListener(self)
             g_currentMission.environment:removeHourChangeListener(self)
 
-            g_gui:closeDialog(self.dialog)
-            self.dialog = nil
-
-            g_server:broadcastEvent(EnvironmentTimeEvent:new(g_currentMission.environment.currentDay, g_currentMission.environment.dayTime));
-            ssSkipNightFinishedEvent.sendEvent()
+            -- Not closing the gui overlay until the DMS is empty
         end
     end
 
@@ -118,6 +118,18 @@ function ssSkipNight:update(dt)
     -- This can occur when the player just joined
     if self.skippingNight and g_currentMission:getIsClient() and self.dialog == nil then
         self:showSkippingDialog()
+    end
+
+    -- Close dialog only once the DMS is empty. Then send events to the clients to close as well.
+    if g_currentMission:getIsServer() and not self.skippingNight and self.dialog ~= nil and not g_seasons.dms:isBusy() then
+        -- Now reset to the time the player had before
+        g_currentMission:setTimeScale(self.oldTimeScale, not g_currentMission:getIsServer())
+
+        g_gui:closeDialog(self.dialog)
+        self.dialog = nil
+
+        g_server:broadcastEvent(EnvironmentTimeEvent:new(g_currentMission.environment.currentDay, g_currentMission.environment.dayTime));
+        ssSkipNightFinishedEvent.sendEvent()
     end
 end
 
@@ -141,7 +153,8 @@ function ssSkipNight:minuteChanged()
 end
 
 function ssSkipNight:getIsSkipAllowed()
-    return g_currentMission:getIsServer() or g_currentMission.isMasterUser
+    return (g_currentMission:getIsServer() or g_currentMission.isMasterUser)
+        and g_currentMission.controlledVehicle == nil
 end
 
 function ssSkipNight:startSkippingNight(mode)

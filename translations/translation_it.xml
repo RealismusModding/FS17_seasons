@@ -70,6 +70,11 @@
         <text name="SS_REPAIR_DIALOG_TITLE" text="Riparazione" />
         <text name="SS_REPAIR_AT_MIDNIGHT" text="alla mezzanotte" />
 
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
         <text name="SS_SAVE_FAILED" text="Un problema ha impedito di salvare i dati di Seasons nel tuo salvataggio. Riprova!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="Stai utilizzando la versione aggiornata di Season. Il gioco ha rilevato e disattivato la versione del contest presente nella tua cartella mods. Si prega di eliminarla dalla cartella mods per nascondere questo messaggio." />
@@ -104,7 +109,6 @@
         <text name="ui_economy_thousand" text="1000 L" />
         <text name="ui_economy_bale" text="Balle" />
 
-        <text name="ui_buttonSave" text="Applica Impostazioni" />
         <text name="ui_snowOneLayer" text="1 solo layer" />
         <text name="ui_days" text="%i giorni" />
         <text name="ui_temperatureFahrenheit" text="Fahrenheit" />
@@ -115,6 +119,11 @@
 
         <text name="unit_meterShort" text="m" />
         <text name="unit_feetShort" text="ft" />
+
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
 
         <text name="tooltip_seasonLength" text="La durata di una stagione in giorni. Un anno è quattro stagioni" />
         <text name="tooltip_seasonIntros" text="Mostra l'introduzione all'inizio della stagione" />
@@ -132,7 +141,6 @@
         <text name="setting_controlsTemperature" text="Scala termometrica" />
         <text name="setting_moisture" text="Umidità del raccolto" />
 
-        <text name="dialog_applySettings" text="Sei sicuro di voler cambiare ora le impostazioni di Seasons? Cambiamenti nella durata delle stagioni possono avere sui campi conseguenze rimediabili solo dopo un anno/gioco." />
         <text name="dialog_resetGrowth" text="Hai caricato Seasons su un salvataggio esistente. Seasons farà il reset di tutti i campi alla fase coltivata, per la sincronizzazione con il giorno di gioco. Perderai tutti i raccolti. Senza un reset della crescita, Seasons potrebbe non funzionare come previsto." />
         <text name="dialog_resetGrowth_title" text="Reset crescita" />
         <text name="dialog_resetGrowth_no" text="Mantieni la crescita" />
@@ -245,5 +253,14 @@
         <text name="ss_helpText_18_02" text="Se decidi di modificare la lunghezza della stagione nel mezzo di un salvataggio esistente, è raccomandato 1) cambiare la lunghezza della stagione durante l'inverno per ridurre gli effetti indesiderati sulle colture esistenti e 2) riavviare il gioco/server dopo la modifica della lunghezza della stagione." />
         <text name="ss_helpText_18_03" text="Sebbene è la tua partita e giochi come vuoi, è suggerita una stagione di 9 giorni con accelerazione a 5x. In questo modo si utilizza la primavera solo coltivando e seminando le colture, tagliando il fieno e curando le colture in estate, raccogliendo e arando in autunno e prendendo cura degli animali, delle macchine, delle foreste e vendendo i raccolti durante l'inverno." />
         <text name="ss_helpText_18_04" text="Tutti i veicoli devono essere avviati manualmente." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
     </texts>
 </l10n>
