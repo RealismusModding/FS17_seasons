@@ -232,8 +232,6 @@ function ssWeatherForecast:drawForecast(forecast)
         weatherIcon:render()
 
         -- Render Season Days
-        -- setTextAlignment(RenderText.ALIGN_RIGHT)
-        -- renderText(dayOffsetX + self.forecastDayWidth - self.marginX, dayOffsetY + (self.forecastDayHeight - self.textSize * 1.2) / 2, self.textSize * 1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
         setTextAlignment(RenderText.ALIGN_CENTER)
         renderText(dayOffsetX + self.forecastDayWidth - self.marginX - self.iconWidthSmall / 2, dayOffsetY + (self.forecastDayHeight - self.textSize * 1.2) / 2, self.textSize * 1.2, tostring(g_seasons.environment:dayInSeason(forecast[n].day)))
 
