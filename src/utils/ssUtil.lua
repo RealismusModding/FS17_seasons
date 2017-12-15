@@ -225,9 +225,8 @@ end
 
 function ssUtil.isWorkHours()
     local hour = g_currentMission.environment.currentHour
-    local dow = ssUtil.dayOfWeek(g_seasons.environment:currentDay())
 
-    return hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd and dow <= 5
+    return hour >= ssEconomy.aiDayStart and hour <= ssEconomy.aiDayEnd
 end
 
 function ssUtil.getSnowMaskId()

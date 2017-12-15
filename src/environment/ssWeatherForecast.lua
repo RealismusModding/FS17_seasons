@@ -245,7 +245,7 @@ function ssWeatherForecast:drawForecast(forecast)
 
         -- Render Day of The Week
         -- renderText(self.forecastX + posXOffset + dayOffset, self.forecastY + self.height - posYOffset - self.iconHeightSmall / 2, self.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1)))
-        local dayName = ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1))
+        local dayName = ssUtil.dayNameShort(ssUtil.dayOfWeek(g_currentMission.environment.currentDay + n - 1))
         renderText(dayOffsetX + self.marginX, dayOffsetY + self.forecastDayHeight - self.textSize * 1.2 - self.marginY, self.textSize * 1.2, dayName)
     end
 end
