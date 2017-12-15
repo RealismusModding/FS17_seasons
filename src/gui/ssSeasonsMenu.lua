@@ -675,6 +675,7 @@ function ssSeasonsMenu:updateSeasonLengthGraphs()
         self:onEconomyListSelectionChanged(self.economyList.selectedRow)
     end
     self.calendarHeader:settingsChanged()
+    self:updateCalendar()
 end
 
 function ssSeasonsMenu:replaceTexts(element)
