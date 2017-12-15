@@ -194,7 +194,7 @@
         <text name="ss_helpTitle_08" text="Cultures - Foin, Paille et Herbe" />
         <text name="ss_helpText_08_01" text="Durant l'hiver, l'herbe est réinitialisée à son état 'récolté' et ce, afin de simuler l'herbe qui s'affaiblie lorsqu'il gèle." />
         <text name="ss_helpText_08_02" text="Les balles d'herbe humide doivent être utilisées ou enrubannées dans les 2 jours. Sinon après cela, l'herbe pourrira et la balle disparaîtra." />
-        <text name="ss_helpText_08_03" text="Les andains de foin, d'herbe et de paille réduiront de volume et disparaîtront au fil du temps. Les andains d'herbe sont diminués à minuit tous les jours. Le foin et la paille sont diminués après chaque cycle de croissance ainsi que lors d'une pluie." />
+        <text name="ss_helpText_08_03" text="Les andains et les tas d'herbe commenceront à se réduire et finiront par disparaître après plusieurs jours. Les andains et les tas d'herbe sont réduits à minuit tous les jours. Les andains de paille et de foin sont réduits après avoir été exposés à la pluie." />
         <text name="ss_helpText_08_04" text="La paille et le foin doivent être pressés avant de pouvoir être vendus - vendre de la paille ou du foin en vrac ne sera pas rémunéré. L'herbe, pressée ou en vrac ne pourra pas être vendue non plus." />
 
         <text name="ss_helpTitle_09" text="Cultures - Arbres" />
@@ -209,7 +209,7 @@
 
         <text name="ss_helpTitle_11" text="Maintenance" />
         <text name="ss_helpText_11_01" text="Vos tracteurs et machines de récolte nécessitent une maintenance périodique pour rester opérationnels. La période entre chaque maintenance est de 30 heures ou 12 mois (le premier atteint). Si un matériel n'est pas maintenu, il va prendre de plus en plus de temps à démarrer." />
-        <text name="ss_helpText_11_02" text="Vous pouvez réparer vos véhicules soit à la concession, soit dans un garage plaçable. Pour réparer votre véhicule, conduisez le à la concession  ou dans un garage plaçable, et activez la réparation. Notez que ce sera plus coûteux de réparer à la concession." />
+        <text name="ss_helpText_11_02" text="Vous pouvez réparer vos véhicules soit au magasin de véhicules ou dans un garage. Pour réparer votre véhicule, conduisez votre véhicule au garage du magasin ou dans un garage, et activez la réparation. Notez qu'il sera plus coûteux de réparer au magasin de véhicules." />
         <text name="ss_helpText_11_03" text="L'âge affiché de votre véhicule correspond au nombre de jours depuis la dernière réparation." />
         <text name="ss_helpText_11_04" text="Seuls les véhicules que l'on peut conduire nécessitent de la maintenance. Les différents outils et équipements sont automatiquement réparés au besoin." />
 
