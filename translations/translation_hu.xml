@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="A termények árai ingadoznak a szezonnak megfelelően." />
 
         <text name="ss_helpTitle_13" text="Bérmunkás segítők" />
-        <text name="ss_helpText_13_01" text="A bérmunkásoknak esetlegesen túlórapénzt is kell fizetned. Ha reggel 6 előtt, vagy este 6 után, esetleg hétvégén veszel fel bérmunkást, a munkabére 50%-al többe kerül." />
+        <text name="ss_helpText_13_01" text="A bérmunkásoknak ki kell fizetned a túlórát. Reggel 6 előtt és este 6 után a bérmunkásnak 50%-al több munkadíjat kell fizetned." />
 
         <text name="ss_helpTitle_14" text="Állatok - bevezetés" />
         <text name="ss_helpText_14_01" text="Az állatok termelékenységét korrigálja a Seasons. Több vizet fogyasztanak a nyári melegben, mint télen. A teheneknek és disznóknak több szalmára van szükségük a téli időszakban. Az etető kapacitása 6 napról 3-ra csökkent." />
