@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="Los precios de mercado de cultivos fluctúan con los cambios de estación de una forma más realista." />
 
         <text name="ss_helpTitle_13" text="Ayudante Contratado" />
-        <text name="ss_helpText_13_01" text="Los trabajadores contratados requieren pago de horas extras. Si un trabajador contratado es usado antes de las 6AM y después de las 6PM, o los fines de semana, su pago será un 50% más alto." />
+        <text name="ss_helpText_13_01" text="Los trabajadores contratados requieren pago de horas extras. Si un trabajador contratado es usado antes de las 6AM y después de las 6PM su pago será un 50% más alto." />
 
         <text name="ss_helpTitle_14" text="Animales - Introducción" />
         <text name="ss_helpText_14_01" text="La producción animal se ha ajustado con Seasons a parámetros más realistas. Todos los animales consumirán más agua en verano que en invierno. Vacas y cerdos requieren más paja en invierno. Las capacidades máximas de alimentación se han reducido de 6 días a 3 días." />

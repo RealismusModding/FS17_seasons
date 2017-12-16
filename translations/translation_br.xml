@@ -225,7 +225,7 @@
         <text name="ss_helpText_12_04" text="A tabela de preços dos cultivos varia de acordo com as mudanças nas estações para um padrão mais realista." />
 
         <text name="ss_helpTitle_13" text="Ajuda Contratada" />
-        <text name="ss_helpText_13_01" text="Trabalhadores contratados ganharão horas extra. Caso um trabalhador é utilizado antes das 6h ou depois das 18h, ou então no fim de semana, seu pagamento será 50% mais alto." />
+        <text name="ss_helpText_13_01" text="Trabalhadores contratados ganharão horas extra. Caso um trabalhador é utilizado antes das 6h ou depois das 18h seu pagamento será 50% mais alto." />
 
         <text name="ss_helpTitle_14" text="Animais - Introdução" />
         <text name="ss_helpText_14_01" text="Produção animal foi ajustada de acordo com a estação para um padrão realístico. Todos os animais beberão mais água no verão que no inverno. Gado e leitões consumirão mais palha no inverno. A capacidade máxima dos recipientes foi reduzida de 6 dias para 3 dias." />

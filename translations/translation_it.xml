@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="I prezzi delle colture fluttuano con i cambiamenti nelle stagioni in modo più realistico." />
 
         <text name="ss_helpTitle_13" text="Aiutanti" />
-        <text name="ss_helpText_13_01" text="Gli aiutanti richiedono il pagamento degli straordinari. Se un aiutante viene impiegato prima delle ore 6 del mattino o dopo le 6 del pomeriggio, o nei fine settimana, la sua retribuzione sarà superiore del 50%." />
+        <text name="ss_helpText_13_01" text="Gli aiutanti richiedono il pagamento degli straordinari. Se un aiutante viene impiegato prima delle ore 6 del mattino o dopo le 6 del pomeriggio la sua retribuzione sarà superiore del 50%." />
 
         <text name="ss_helpTitle_14" text="Animali" />
         <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le vacche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />

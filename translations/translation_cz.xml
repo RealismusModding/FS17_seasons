@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="Ceny výkupu kolísají realisticky podle ročních období." />
 
         <text name="ss_helpTitle_13" text="Najatá pomoc" />
-        <text name="ss_helpText_13_01" text="Najímaní pracovníci vyžadují odměnu za přesčas. Pokud je zaměstnanec zaměstnán před 6:00 a po 18:00 nebo o víkendech, bude jeho plat 50% vyšší." />
+        <text name="ss_helpText_13_01" text="Najímaní pracovníci vyžadují odměnu za přesčas. Pokud je zaměstnanec zaměstnán před 6:00 a po 18:00 bude jeho plat 50% vyšší." />
 
         <text name="ss_helpTitle_14" text="Zvířata - úvod" />
         <text name="ss_helpText_14_01" text="Živočišná výroba byla upravena se Season modem na realističtější parametry. Všechny druhy zvířat budou v létě konzumovat více vody než v zimě. V zimních měsících budou krávy a prasata vyžadovat více slámy. Maximální kapacita krmení byla snížena ze 6 dnů na 3 dny." />

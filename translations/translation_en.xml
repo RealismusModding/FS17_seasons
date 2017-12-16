@@ -221,7 +221,7 @@
         <text name="ss_helpText_12_04" text="Crop prices fluctuate with the changes in the seasons in a more realistic manner." />
 
         <text name="ss_helpTitle_13" text="Hired Help" />
-        <text name="ss_helpText_13_01" text="Hired workers require overtime pay. If a hired worker is used before 6AM and after 6PM, or on the weekends, his/her pay will be 50% higher." />
+        <text name="ss_helpText_13_01" text="Hired workers require overtime pay. If a hired worker is used before 6AM and after 6PM his/her pay will be 50% higher." />
 
         <text name="ss_helpTitle_14" text="Animals - Intro" />
         <text name="ss_helpText_14_01" text="Animal production has been adjusted with Seasons to more realistic parameters. All animals will consume more water in the summer than in the winter. Cows and pigs will require more straw in the winter. The max feeding capacities have been reduced from 6 days to 3 days." />

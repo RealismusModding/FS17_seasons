@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="Ceny zbóż zmieniają się pomiędzy sezonami w bardziej realistyczny sposób." />
 
         <text name="ss_helpTitle_13" text="Pomocnik" />
-        <text name="ss_helpText_13_01" text="Zatrudnieni pracownicy wymagają wynagrodzenia za nadgodziny. Jeśli pracownik zostanie zatrudniony poza godzinami 6:00 - 18:00 lub w weekendy, jego wynagrodzenie będzie wyższe o 50%." />
+        <text name="ss_helpText_13_01" text="Zatrudnieni pracownicy wymagają wynagrodzenia za nadgodziny. Jeśli pracownik zostanie zatrudniony poza godzinami 6:00 - 18:00 jego wynagrodzenie będzie wyższe o 50%." />
 
         <text name="ss_helpTitle_14" text="Zwierzęta - wprowadzenie" />
         <text name="ss_helpText_14_01" text="Produkcja zwierzęca została zmieniona na bardziej realistyczną. Wszystkie zwierzęta będą piły więcej wody latem niż zimą. Krowy i świnie potrzebują więcej ścielenia słomą w zimie. Maksymalna pojemność koryt została zredukowana z 6 do 3 dni." />

@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="Les prix de vente des cultures changent aussi de manière plus réaliste en tenant compte de la saison." />
 
         <text name="ss_helpTitle_13" text="Ouvrier" />
-        <text name="ss_helpText_13_01" text="On doit maintenant payer les heures supplémentaires de l'ouvrier. Si celui-ci travaille avant 6h du matin ou après 6h du soir, ou encore les week-ends, sa paie sera majorée de 50%." />
+        <text name="ss_helpText_13_01" text="On doit maintenant payer les heures supplémentaires de l'ouvrier. Si celui-ci travaille avant 6h du matin ou après 6h du soir sa paie sera majorée de 50%." />
 
         <text name="ss_helpTitle_14" text="Animaux - Intro" />
         <text name="ss_helpText_14_01" text="La production animale a été ajustée avec le mod Seasons afin d'être plus réaliste. Tous les animaux consomment plus d'eau en été. Les vaches et les cochons nécessitent plus de paille l'hiver. La capacité maximale de nourriture a été réduite de 6 à 3 jours." />

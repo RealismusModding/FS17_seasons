@@ -220,7 +220,7 @@
         <text name="ss_helpText_12_04" text="Erntepreise schwanken mit den Veränderungen der Jahreszeiten auf realistischere Weise." />
 
         <text name="ss_helpTitle_13" text="Helfer" />
-        <text name="ss_helpText_13_01" text="Helfer verlangen einen Überstunden-Zuschuss. Wenn ein Mitarbeiter vor 6 Uhr und nach 18 Uhr oder an Wochenenden arbeitet, ist sein Lohn um 50% höher." />
+        <text name="ss_helpText_13_01" text="Helfer verlangen einen Überstunden-Zuschuss. Wenn ein Mitarbeiter vor 6 Uhr und nach 18 Uhr ist sein Lohn um 50% höher." />
 
         <text name="ss_helpTitle_14" text="Tiere - Einführung" />
         <text name="ss_helpText_14_01" text="Die Tierproduktion wurde mit Seasons an realistischere Parameter angepasst. Alle Tiere verbrauchen im Sommer mehr Wasser als im Winter. Kühe und Schweine benötigen im Winter mehr Stroh. Die maximalen Fütterungskapazitäten wurden von 6 Tage auf 3 Tage reduziert." />
