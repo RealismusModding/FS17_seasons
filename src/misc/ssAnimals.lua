@@ -335,11 +335,13 @@ function ssAnimals:updateAverageProductivity()
         local currentProd = Utils.getNoNil(husbandry.productivity, 0.0)
         local avgProd = husbandry.averageProduction
 
-        if currentProd < 0.75 and currentProd < avgProd then
-            seasonFac = seasonFac * reductionFac
-        end
+        if husbandry.totalNumAnimals > 0 then
+            if currentProd < 0.75 and currentProd < avgProd then
+                seasonFac = seasonFac * reductionFac
+            end
 
-        husbandry.averageProduction = Utils.clamp(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01, 1)
+            husbandry.averageProduction = Utils.clamp(avgProd * (seasonFac - 1) / seasonFac + currentProd / seasonFac, 0.01, 1)
+        end
     end
 end
 
