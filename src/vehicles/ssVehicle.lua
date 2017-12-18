@@ -467,7 +467,8 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
 
     -- only limit it if it works the ground and the ground is not frozen
     if not ssWeatherManager:isGroundFrozen()
-        or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations) then
+        or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations)
+        or SpecializationUtil.hasSpecialization(ManureSpreader, self.specializations) then
         return vanillaSpeed, recalc
     end
 
@@ -475,8 +476,7 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
 
     -- Look at the work areas and if it is active (lowered)
     for _, area in pairs(self.workAreas) do
-        if ssVehicle.allowedInWinter[area.type] == false
-            and self:getIsWorkAreaActive(area) then
+        if ssVehicle.allowedInWinter[area.type] == false and self:getIsWorkAreaActive(area) then
             isLowered = true
         end
     end
