@@ -194,7 +194,7 @@
         <text name="ss_helpTitle_08" text="Uprawy - siano, słoma i trawa" />
         <text name="ss_helpText_08_01" text="W zimie trawa zostaje zresetowana do fazy zebranej, aby odwzorować sytuację, w której trawa usycha, gdy robi się zimno." />
         <text name="ss_helpText_08_02" text="Bele z trawy będą stopniowo gnić i znikną po dwóch dniach niezależnie od tego gdzie są przechowywane. Aby temu zapobiec należy je wykorzystać lub owinąć folią. Po owinięciu sfermetują w kiszonką w ciągu 1/3 długości sezonu." />
-        <text name="ss_helpText_08_03" text="Pokosy i sterty siana, trawy i słomy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy i sterty trawy zmniejszają się o północy każdego dnia. Pokosy i sterty siana oraz słomy zmniejszają się wraz z każdym etapem wzrostu upraw (przejściem), jak również po wystawieniu na działanie deszczu." />
+        <text name="ss_helpText_08_03" text="Pokosy i sterty trawy będą się zmniejszać i w końcu znikną po kilku dniach. Pokosy i sterty trawy zmniejszają się o północy każdego dnia. Pokosy i sterty siana oraz słomy zmniejszają się po wystawieniu na działanie deszczu." />
         <text name="ss_helpText_08_04" text="Słoma i siano muszą być belowane zanim zostaną sprzedane - luzem słomy i siana nie wolno sprzedawać, jedynie oddać bezpłatnie. Trawa, belowana lub luźna, również nie może być sprzedawana." />
 
         <text name="ss_helpTitle_09" text="Uprawy - drzewa" />
