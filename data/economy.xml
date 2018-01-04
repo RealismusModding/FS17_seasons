@@ -214,23 +214,6 @@
             </factors>
         </fill>
 
-        <fill name="sugarCane">
-            <factors>
-                <factor transition="11">1.02</factor>
-                <factor transition="12">1.23</factor>
-                <factor transition="1">1.37</factor>
-                <factor transition="2">1.15</factor>
-                <factor transition="3">0.89</factor>
-                <factor transition="4">0.73</factor>
-                <factor transition="5">0.88</factor>
-                <factor transition="6">0.84</factor>
-                <factor transition="7">1</factor>
-                <factor transition="8">1.06</factor>
-                <factor transition="9">0.91</factor>
-                <factor transition="10">0.97</factor>
-            </factors>
-        </fill>
-
         <fill name="woodChips">
             <factors>
                 <factor transition="11">1.69</factor>
