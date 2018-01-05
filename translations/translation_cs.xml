@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<l10n>
+    <translationContributors>HuntMaxim</translationContributors>
+    <texts>
+        <text name="input_SEASONS_SHOW_WF" text="季节：显示天气预报" />
+        <text name="input_SEASONS_REPAIR_VEHICLE" text="季节：维修车辆" />
+        <text name="input_SEASONS_SHOW_MENU" text="季节：打开菜单" />
+        <text name="input_SEASONS_PLANTING_DISTANCE" text="种植距离 (%d m)" />
+        <text name="input_SEASONS_SKIP_NIGHT" text="跳过夜晚" />
+        <text name="SEASONS_HIDE_WF" text="季节：隐藏天气预报" />
+
+        <text name="SS_WEEKDAY_1" text="星期一" />
+        <text name="SS_WEEKDAY_2" text="星期二" />
+        <text name="SS_WEEKDAY_3" text="星期三" />
+        <text name="SS_WEEKDAY_4" text="星期四" />
+        <text name="SS_WEEKDAY_5" text="星期五" />
+        <text name="SS_WEEKDAY_6" text="星期六" />
+        <text name="SS_WEEKDAY_7" text="星期日" />
+
+        <text name="SS_WEEKDAY_SHORT_1" text="周一" />
+        <text name="SS_WEEKDAY_SHORT_2" text="周二" />
+        <text name="SS_WEEKDAY_SHORT_3" text="周三" />
+        <text name="SS_WEEKDAY_SHORT_4" text="周四" />
+        <text name="SS_WEEKDAY_SHORT_5" text="周五" />
+        <text name="SS_WEEKDAY_SHORT_6" text="周六" />
+        <text name="SS_WEEKDAY_SHORT_7" text="周日" />
+
+        <text name="SS_SEASON_0" text="chun季" />
+        <text name="SS_SEASON_1" text="xia季" />
+        <text name="SS_SEASON_2" text="qiu季" />
+        <text name="SS_SEASON_3" text="dong季" />
+
+        <text name="SS_SEASON_FULL_NAME_1" text="chun季初期" />
+        <text name="SS_SEASON_FULL_NAME_2" text="chun季中期" />
+        <text name="SS_SEASON_FULL_NAME_3" text="chun季后期" />
+        <text name="SS_SEASON_FULL_NAME_4" text="xia季初期" />
+        <text name="SS_SEASON_FULL_NAME_5" text="xia季中期" />
+        <text name="SS_SEASON_FULL_NAME_6" text="xia季后期" />
+        <text name="SS_SEASON_FULL_NAME_7" text="qiu季初期" />
+        <text name="SS_SEASON_FULL_NAME_8" text="qiu季中期" />
+        <text name="SS_SEASON_FULL_NAME_9" text="qiu季后期" />
+        <text name="SS_SEASON_FULL_NAME_10" text="dong季初期" />
+        <text name="SS_SEASON_FULL_NAME_11" text="dong季中期" />
+        <text name="SS_SEASON_FULL_NAME_12" text="dong季后期" />
+
+        <text name="SS_MONTH_SHORT_1" text="一月" />
+        <text name="SS_MONTH_SHORT_2" text="二月" />
+        <text name="SS_MONTH_SHORT_3" text="三月" />
+        <text name="SS_MONTH_SHORT_4" text="四月" />
+        <text name="SS_MONTH_SHORT_5" text="五月" />
+        <text name="SS_MONTH_SHORT_6" text="六月" />
+        <text name="SS_MONTH_SHORT_7" text="七月" />
+        <text name="SS_MONTH_SHORT_8" text="八月" />
+        <text name="SS_MONTH_SHORT_9" text="九月" />
+        <text name="SS_MONTH_SHORT_10" text="十月" />
+        <text name="SS_MONTH_SHORT_11" text="十一月" />
+        <text name="SS_MONTH_SHORT_12" text="十二月" />
+
+        <text name="SS_VEHICLE_TAXES" text="车辆费用" />
+        <text name="SS_VEHICLE_MAINTENANCE" text="车辆保养" />
+        <text name="SS_VEHICLE_REPAIRS" text="车辆维修" />
+
+        <text name="SS_NOT_ENOUGH_MONEY" text="你没有足够的钱维护这辆车" />
+        <text name="SS_VEHICLE_REPAIRED" text="%s 维护成本是 %s" />
+        <text name="SS_NOTHING_TO_REPAIR" text="%s 不需要维修" />
+        <text name="SS_REPAIR_VEHICLE_COST" text="%s 的维修成本是 %s" />
+        <text name="SS_REPAIR_REQUIRED" text="必须保养" />
+        <text name="SS_REPAIR_REQUIRED_IN" text="发动机工作%.1f 小时或 %d 天后必须保养" />
+        <text name="SS_REPAIR_DIALOG" text="%s ：你是否需要对 %s 这辆车进行保养?" />
+        <text name="SS_REPAIR_DIALOG_TITLE" text="保养" />
+        <text name="SS_REPAIR_AT_MIDNIGHT" text="在午夜" />
+
+        <!-- Missing translation of "repair" -->
+        <text name="ui_doRepair" text="" />
+        <!-- Missing translation of "Repair and customization" -->
+        <text name="ui_repairOrCustomizeVehicleTitle" text="" />
+
+        <text name="SS_SAVE_FAILED" text="无法将季节保存到您的游戏存档中. 请再试一次！!" />
+
+        <text name="SS_REMOVE_CONTEST_TEXT" text="您正在运行更新的季节版本. 游戏在mods文件夹中检测到一个旧版本的mods并禁用它。 从mods文件夹中删除它来隐藏这条消息." />
+
+        <text name="SS_SEASON_INTRO_0" text="春季来了.春暖花开.是时候培育和播种你的田地了." />
+        <text name="SS_SEASON_INTRO_1" text="夏季的日子又长又温暖。现在是收割牧草与干草和巡视作物生长的时候了." />
+        <text name="SS_SEASON_INTRO_2" text="叶子越来越黄.天气变得越来越冷 - 秋季已经到来.在冬天到来之前.确保收获完田地里成熟的作物." />
+        <text name="SS_SEASON_INTRO_3" text="冬季已经来到.动物需要更多的照顾.地面将结冰.你不能进行田间作业. 现在是开展林业和铲雪的时候了." />
+        <text name="SS_BUTTON_OK" text="好的" />
+        <text name="SS_BUTTON_DONT_SHOW_AGAIN" text="不要再显示" />
+
+        <text name="warning_soilIsFrozen" text="土壤已被冻结.你不能进行田间作业!" />
+        <text name="warning_doNotThreshWithMoisture" text="作物湿度太大.你不能进行收获作业!" />
+        <text name="warning_animalsKilled" text="由于饥饿死了 %d 只动物" />
+        <text name="warning_inAdvanceFeedingLimitReached3" text="饲料槽的最大容量足够食用3天" />
+        <text name="msg_welcome" text="欢迎使用Realismus Modding制作季节模组. 请查看菜单中的帮助.了解更多关于如何使用这个mod." />
+
+        <text name="measuretool_title" text="测量" />
+        <text name="measuretool_fermentation_time" text="%d 小时过去了" />
+        <text name="measuretool_fermentation_time_low" text="少于1小时" />
+        <text name="measuretool_failed" text="测量失败" />
+        <text name="measuretool_no_info" text="测量失败：没有信息" />
+
+        <!-- Missing translation of "Health" -->
+        <text name="statistic_health" text="" />
+
+        <text name="ui_pageCalender" text="日历" />
+        <text name="ui_pageEconomy" text="经济" />
+        <text name="ui_pageSettings" text="设置" />
+        <text name="ui_pageDebug" text="调试工具" />
+
+        <text name="ui_economy_animal" text="动物" />
+        <text name="ui_economy_thousand" text="1000 l" />
+        <text name="ui_economy_bale" text="包" />
+
+        <text name="ui_snowOneLayer" text="仅一层" />
+        <text name="ui_days" text="%i 天" />
+        <text name="ui_temperatureFahrenheit" text="华氏度" />
+        <text name="ui_temperatureCelsius" text="摄氏度" />
+
+        <text name="ui_plantingSeason" text="种植季节" />
+        <text name="ui_harvestSeason" text="收获季节" />
+
+        <text name="unit_meterShort" text="m" />
+        <text name="unit_feetShort" text="ft" />
+
+        <!-- Missing translation of "Select next hand tool" -->
+        <text name="action_nextHandTool" text="" />
+        <!-- Missing translation of "Hand Tool" -->
+        <text name="action_chainsaw" text="" />
+
+        <text name="tooltip_seasonLength" text="一个季节的长度以天为单位. 一年为四个季节" />
+        <text name="tooltip_seasonIntros" text="在季节开始时.显示季节介绍." />
+        <text name="tooltip_snow" text="在寒冷的冬季.降雪会覆盖道路" />
+        <text name="tooltip_controlsHelp" text="在帮助菜单中显示预报和菜单键" />
+        <text name="tooltip_snowTracks" text="车轮经过雪地将出现车辙" />
+        <text name="tooltip_controlsTemperature" text="设置游戏中使用的温度单位" />
+        <text name="tooltip_moisture" text="农作物湿度大时不要进行打谷" />
+
+        <text name="setting_seasonIntros" text="季节介绍" />
+        <text name="setting_seasonLength" text="季节长度" />
+        <text name="setting_snow" text="雪模式" />
+        <text name="setting_controlsHelp" text="帮助菜单键" />
+        <text name="setting_snowTracks" text="雪地车辙" />
+        <text name="setting_controlsTemperature" text="温标" />
+        <text name="setting_moisture" text="作物湿度" />
+
+        <text name="dialog_resetGrowth" text="你在一个旧的存档中加载了季节模组. 季节模组想要重置所有土地到他们的初始状态并与当前游戏时间同步. 你将失去所有的作物. 如果您不选择重置季节模组可能无法正常运行." />
+        <text name="dialog_resetGrowth_title" text="重置增长" />
+        <text name="dialog_resetGrowth_no" text="保持增长" />
+        <text name="dialog_resetGrowth_yes" text="重置" />
+        <text name="dialog_timeTravel" text="时间加速后游戏正在同步" />
+        <text name="dialog_sleeping" text="在农场休息一天... Zzz ..." />
+
+        <text name="dialog_skipNight_text" text="您想直接至早晨(6:00) 还是黎明  (%s)?" />
+        <text name="dialog_skipNight_morning" text="早晨 (6:00)" />
+        <text name="dialog_skipNight_dawn" text="黎明 (%s)" />
+
+        <text name="fillType_snow" text="雪" />
+
+        <text name="function_measureTool" text="您可以使用测量工具获取有关土地.树木.包和其他物品的相关信息." />
+
+        <text name="ss_helpCategory" text="季节" />
+
+        <text name="ss_helpTitle_01" text="季节" />
+        <text name="ss_helpText_01_01" text="季节是提高农业模拟器现实的一种方法.它将游戏的几乎所有方面都调整为更逼真的参数.更为现实的是 从季节性影响到作物生长.再到畜牧生产的变化" />
+        <text name="ss_helpText_01_02" text="游戏中一年分为四个季节：春季 夏季 秋季和冬季. 每个季节分为三部分：早 中 晚. 这些部分之间的划分被称为季节变换." />
+        <text name="ss_helpText_01_03" text="你的活动和一年中的时间是一样的.就像在现实生活中一样." />
+
+        <text name="ss_helpTitle_02" text="季节性影响 (1)" />
+        <text name="ss_helpText_02_01" text="天气从一天到另一天都是随机的，但从季节到季节都遵循着一种模式。." />
+        <text name="ss_helpText_02_02" text="春天将会下雨 有雾 天气晴朗. 夏天会更温暖更干燥. 冰雹可能任何时候毫无预兆的降下. 秋季多雨天气晴朗. 冬天会下雨 但是非常寒冷. 会下雪 甚至覆盖了地面." />
+        <text name="ss_helpText_02_03" text="车辆如果没有停放在有屋顶（有雪面罩）或防水油布下的车库下.雪将填满车厢和铲车. 雪也会减少摩擦力.使车辆打滑." />
+
+        <text name="ss_helpTitle_03" text="季节性影响 (2)" />
+        <text name="ss_helpText_03_01" text="白天时段也受季节的影响. 冬天有很短的白天（8小时）.而夏天有很长的白天（17小时）." />
+        <text name="ss_helpText_03_02" text="青贮发酵池和青贮包需要时间来发酵. 它需要三分之一的季节（一个过渡期）来充分发酵青贮饲料. 打捆后的干草不会发酵.但他们将不会受天气影响." />
+        <text name="ss_helpText_03_03" text="四季也影响树木和树叶. 树木通过季节性温度变化改变状态. 秋天的树叶将变黄直至落下. 树叶将在冬季完全落下.春季树叶将是浅绿色的." />
+
+        <text name="ss_helpTitle_04" text="天气预报" />
+        <text name="ss_helpText_04_01" text="屏幕右上角可以看到未来7天的天气预报. 可以选择显示或关闭." />
+        <text name="ss_helpText_04_02" text="天气预报显示未来7天的高/低温和天气类型（晴天. 有雾. 雨. 雪. 多云）. 冰雹不会在天气预报中显示，因为现实生活中的并把你往往是突发事件。" />
+        <text name="ss_helpText_04_03" text="每个预测块右侧的数字是本季节的一天." />
+
+        <text name="ss_helpTitle_05" text="土壤" />
+        <text name="ss_helpText_05_01" text="土壤温度是使用热力学方程和历史数据建模.这意味着当气温低于某个特定时间点的某一段时间.土壤会在冬季冻结.当空气温度升高超过一定的阈值一段时间后.土壤就会在春季解冻." />
+        <text name="ss_helpText_05_02" text="“地面冻结时.土壤不能作业.作物将停止生长.”/>" />
+        <text name="ss_helpText_05_03" text="当土壤温度高于发芽温度时.作物会发芽. 季节菜单的第一页中显示发芽温度" />
+
+        <text name="ss_helpTitle_06" text="作物- 介绍" />
+        <text name="ss_helpText_06_01" text="在开始新的游戏时.所有作物将被重置为收获后的阶段.以模拟自秋季以来该土地尚未开始工作的事实.在现有的保存游戏中首次使用季节时您可以选择是否重置庄稼." />
+        <text name="ss_helpText_06_02" text="作物的默认增长模式已被四季取代.现在作物在相应的季节播种和收获季节之后将遵循现实的增长模式.这也意味着冬天会使大部分农作物死亡.在错误的时间种植的农作物不会生长." />
+        <text name="ss_helpText_06_03" text="除了白杨树和白萝卜之.作物只能在最后的生长阶段才能收获.而且会留在这个最后阶段直到冬天直至死亡." />
+        <text name="ss_helpText_06_04" text="一旦谷物根据游戏菜单中的生长菜单（ESC键）达到成熟的第一阶段即可收获.这也是他们成长和准备收获的最后阶段.成熟的第二和第三阶段不被使用." />
+        <text name="ss_helpText_06_05" text="你仍然可以使用不成熟的绿色植物制作青贮饲料." />
+
+        <text name="ss_helpTitle_07" text="作物 - 可耕作物" />
+        <text name="ss_helpText_07_01" text="作物生长周期现在要长得多.作物可能需要六个月才能到达成熟期." />
+        <text name="ss_helpText_07_02" text="冬季会使大部分作物死亡.但冬春作物是可以播种的. 小麦 大麦 杨树 草 白萝卜和油菜可以在秋天种植为冬季作物或在春季种植为春季作物.确保土壤温度足以使作物发芽." />
+        <text name="ss_helpText_07_03" text="春季必须种植玉米 大豆 向日葵 甜菜和土豆. 一定要检查季节菜单中的生长概况 因为即使土壤温度高于发芽温度.一些作物如果不能在春季（早春）的第一过渡期及时播种将会死亡" />
+
+        <text name="ss_helpTitle_08" text="作物 - 干草 秸秆和牧草" />
+        <text name="ss_helpText_08_01" text="在冬天草被重新设置到收割阶段.以模拟冬天在寒冷的时候干枯的草地" />
+        <text name="ss_helpText_08_02" text="无论放在哪里.草捆都会在两天后逐渐腐烂消失. 为了防止这种腐烂需要使用覆膜机对草捆覆膜.一旦包装完毕它们将在三分之一的季节后变成青贮饲料包." />
+        <text name="ss_helpText_08_03" text="堆积的干草.牧草和秸秆将开始萎缩.并在几天后最终消失. 草堆将在每天午夜减少. 秸秆和干草在每个生长阶段和雨后都会减少." />
+        <text name="ss_helpText_08_04" text="秸秆和干草必须打包后才能出售.散装的秸秆和干草不能出售.草包过于松散也不能出售." />
+
+        <text name="ss_helpTitle_09" text="作物 - 树木" />
+        <text name="ss_helpText_09_01" text="树木的生长周期更长.要达到完全成熟从种植到最终成熟需要5年.经过两年的生长树木就可以被砍伐." />
+        <text name="ss_helpText_09_02" text="如果种植的树木太靠近.将会影响树木的生长.要重新使树木生长你需要保持树的间距." />
+
+        <text name="ss_helpTitle_10" text="作物 - 天气影响" />
+        <text name="ss_helpText_10_01" text="雨.冰雹和雪影响作物的水分含量.如果由于天气恶劣 农作物的水分高于某一点 您将无法收获作物.潮湿的夏夜可能会发生没有任何警告." />
+        <text name="ss_helpText_10_02" text="雨后的作物需要一段时间的干燥.这取决于气温和一年的时间.天气转暖意味着农作物的干燥速度要比天气转凉的快." />
+        <text name="ss_helpText_10_03" text="如果草的湿度过大时你使用翻晒机产生的只会是湿草而不是干草.当你要翻晒干草的时候请确认牧草的湿度" />
+        <text name="ss_helpText_10_04" text="在装有季节模组（有雪的）的地图上.有必要将干草和草捆存放在有棚的地方.暴露在雨雪中会腐烂.雨雪不会影响腹膜后的包.也不会影响在地图上没有遮盖的腹膜后的包." />
+
+        <text name="ss_helpTitle_11" text="保养" />
+        <text name="ss_helpText_11_01" text="您的拖拉机和收割机需要定期维护以保持运行.保养期为每30小时或半年以先到者为准.过期维修的车辆可能需要更长时间才能启动." />
+        <text name="ss_helpText_11_02" text="您可以在车辆维修车间或可放置的车辆维修处维修您的车辆.修理您的车辆将您的车辆驶入车间或可放置的维修处并启动维修.请注意在可放置的车辆维修处将会更昂贵！" />
+        <text name="ss_helpText_11_03" text="你的车的车龄是自上次维修以来的到现在的时间." />
+        <text name="ss_helpText_11_04" text="只有可驾驶的车辆需要定期维护.工具和农具将根据需要自动修复." />
+
+        <text name="ss_helpTitle_12" text="经济" />
+        <text name="ss_helpText_12_01" text="贷款上限已经从 $CURRENCY_SYMBOL200,000 到您拥有的土地和建筑物价值的 80% . 最低贷款额度是 $CURRENCY_SYMBOL300,000 而最高的贷款额度是 $CURRENCY_SYMBOL1,500,000." />
+        <text name="ss_helpText_12_02" text="任务收入已经减少.你比在同一个田地工作的雇佣工人多赚五倍." />
+        <text name="ss_helpText_12_03" text="所有车辆的维护（除定期维护之外）包括与其使用量相关的维护和税收. 清洁机器也将降低维护成本. 没有使用的机器也会降低维护成本." />
+        <text name="ss_helpText_12_04" text="作物价格随着季节的变化而更加现实地波动" />
+
+        <text name="ss_helpTitle_13" text="雇佣帮助" />
+        <text name="ss_helpText_13_01" text="雇佣帮手需要支付工资. 如果在 6:00 之前后者 18:00 之后 雇佣帮手, 或者在周末你需要额外支付 50% 的加班费." />
+
+        <text name="ss_helpTitle_14" text="动物 - 介绍" />
+        <text name="ss_helpText_14_01" text="动物生产已经与季节调整到更现实的参数. 所有的动物在夏天都会比冬天消耗更多的水. 牛和猪在冬季需要更多的稻草并且饲食槽最大喂食量从6天减少到3天." />
+        <text name="ss_helpText_14_02" text="动物只在一年的某个时间生产后代繁殖. 猪只会在春季和秋季生产繁殖. 羊只有在春季才能生产繁殖，而牛将会在夏天生产繁殖." />
+        <text name="ss_helpText_14_03" text="如果没有饲料和水动物将会死亡.这不受游戏难易度影响" />
+
+        <text name="ss_helpTitle_15" text="动物 - 生产" />
+        <text name="ss_helpText_15_01" text="牛奶和羊毛的生产取决于季节." />
+        <text name="ss_helpText_15_02" text="羊毛只在春季和夏季生产." />
+        <text name="ss_helpText_15_03" text="牛奶是全年生产的. 但在冬季和春季增加.虽然草在冬天不能喂养.但这通常会使奶牛生产率降至最高 80% . 然而季节增加了冬季和春季的牛奶产量. 以弥补这些月份缺乏的草料带来的影响." />
+
+        <text name="ss_helpTitle_16" text="季节菜单" />
+        <text name="ss_helpText_16_01" text="季节菜单”用作种植和经济的参考指南.并改变季节相关的设置" />
+        <text name="ss_helpText_16_02" text="第一页是种植和收获日历. 所有作物的发芽温度显示在图的左侧. 如果作物旁边的温度是白色的 这意味着它足够温暖可以种植特定作物. 如果温度是蓝色的那就太冷了." />
+        <text name="ss_helpText_16_03" text="在第二页您可以找到去年产品价格的数据. 数据每天更新.未来的价格只是一个估计所以会出现偏差." />
+        <text name="ss_helpText_16_04" text="第三页是设置菜单. 在这个页面上有各种选项可以按照你的意愿调整季节设定." />
+
+        <text name="ss_helpTitle_17" text="HUD" />
+        <text name="ss_helpText_17_01" text="时钟左上方的HUD显示与季节相关的信息. 它显示当前的气温和最低的地面温度. 此HUD的左侧还显示地面状况（湿地/冰冻地面）." />
+        <text name="ss_helpText_17_02" text="时钟正下方显示当前季节的季节和日期." />
+        <text name="ss_helpText_17_03" text="激活时.预测HUD将出现在右下角的时钟下方." />
+        <text name="ss_helpText_17_04" text="当帮助菜单被激活时. 维护计时器显示在底部附近. 这只有当你在车里时才会显示." />
+
+        <text name="ss_helpTitle_18" text="杂项" />
+        <text name="ss_helpText_18_01" text="如果你不想在夜间工作.你可以选择跳到早上. 你只能在车外做这件事." />
+        <text name="ss_helpText_18_02" text="如果您决定在现有游戏存档中改变季节长度.建议您 1）在冬季更改季节长度.以减少对现有作物的不利影响; 2）更改季节后重新启动游戏/服务器." />
+        <text name="ss_helpText_18_03" text="虽然这是你的游戏 只要你想玩 这是一个挑战 只玩9天的季节和5倍的时间加速  这样 你就可以在春天里种植和种植农作物 在夏季收获农作物 收货干草 在秋天收获和耕种 在冬季还可以照顾动物 机器 森林和农作物." />
+        <text name="ss_helpText_18_04" text="所有车辆都需要手动启动." />
+
+        <!-- Missing translation of "Measurement tool" -->
+        <text name="ss_helpTitle_19" text="" />
+        <!-- Missing translation of "The Wopstr M420 is a measurement hand tool that can be used to gain more information about soil, trees, bales and pallets. After buying the tool in the store, it can be activated like a chainsaw. Point at something and activate to start measuring. A measurement may fail." -->
+        <text name="ss_helpText_19_01" text="" />
+        <!-- Missing translation of "For planted trees you measure the tree type, tree height and distance to nearest tree. For bales you get the contents and for grass bales also the fermentation state. Measuring the ground gives the location, elevation, crop type, crop growth and crop moisture, fertilization level and soil moisture. For pallets you get the contents." -->
+        <text name="ss_helpText_19_02" text="" />
+        <!-- Missing translation of "For more information about the Wopstr M420 and a detailed explanation of its symbols, see the website of Realismus Modding: www.realismusmodding.com/seasons." -->
+        <text name="ss_helpText_19_03" text="" />
+    </texts>
+</l10n>

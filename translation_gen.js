@@ -171,7 +171,7 @@ function writeXML(xml, path) {
 //////////////////////////////////////////
 
 function main(args) {
-    const languages = ["cz", "de", "en", "es", "fr", "it", "nl", "pl", "ru", "hu", "br"];
+    const languages = ["cz", "de", "en", "es", "fr", "it", "nl", "pl", "ru", "hu", "br", "cs"];
 
     // Reading XML
     Promise.reduce(languages, (result, language) => {
