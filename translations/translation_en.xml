@@ -128,7 +128,7 @@
         <text name="tooltip_controlsHelp" text="Show the forecast and menu keys in the help menu" />
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
-        <text name="tooltip_moisture" text="Disallow threshing when crops have excessive moisture (20%)" />
+        <text name="tooltip_moisture" text="Disallow threshing when crops have excessive moisture (21%)" />
 
         <text name="setting_seasonIntros" text="Season Introductions" />
         <text name="setting_seasonLength" text="Season Length" />
