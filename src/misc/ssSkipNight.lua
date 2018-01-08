@@ -123,7 +123,7 @@ function ssSkipNight:update(dt)
     -- Close dialog only once the DMS is empty. Then send events to the clients to close as well.
     if g_currentMission:getIsServer() and not self.skippingNight and self.dialog ~= nil and not g_seasons.dms:isBusy() then
         -- Now reset to the time the player had before
-        g_currentMission:setTimeScale(self.oldTimeScale)
+        g_currentMission:setTimeScale(math.min(self.oldTimeScale, 120))
 
         g_gui:closeDialog(self.dialog)
         self.dialog = nil
