@@ -79,7 +79,7 @@ function ssRepairable:updateTick(dt)
 end
 
 function ssRepairable:update(dt)
-    if self.isEntered and self.isClient then
+    if self.isEntered and self.isClient and self.propertyState == Vehicle.PROPERTY_STATE_OWNED then
         local serviceHours = ssVehicle.SERVICE_INTERVAL - math.floor((self.operatingTime - self.ssLastRepairOperatingTime)) / 1000 / 60 / 60
         local daysSinceLastRepair = g_currentMission.environment.currentDay - self.ssLastRepairDay
 

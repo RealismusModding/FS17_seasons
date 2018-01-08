@@ -35,7 +35,7 @@ end
 
 function ssMotorFailure:update(dt)
     -- Run a repetition sound by killing the engine sound before it finishes
-    if self:getIsMotorStarted() then
+    if self:getIsMotorStarted() and self.propertyState == Vehicle.PROPERTY_STATE_OWNED then
         self.ssSmoothLoadPercentage = (self.actualLoadPercentage - self.ssSmoothLoadPercentage) * dt / 5000 + self.ssSmoothLoadPercentage
 
         -- Do the retry sound effects when starting an unmaintained motor
@@ -138,7 +138,7 @@ function ssMotorFailure:startMotor(noEventSend)
             end
         end
 
-        if not self:isa(RailroadVehicle) then
+        if not self:isa(RailroadVehicle) and self.propertyState == Vehicle.PROPERTY_STATE_OWNED then
             local overdueFactor = Utils.clamp(ssVehicle:calculateOverdueFactor(self), 1, ssMotorFailure.BROKEN_OVERDUE_FACTOR)
 
             local p = Utils.clamp((ssMotorFailure.BROKEN_OVERDUE_FACTOR - (overdueFactor - 1)) * (0.9 / ssMotorFailure.BROKEN_OVERDUE_FACTOR) + 0.1, 0.1, 1)
