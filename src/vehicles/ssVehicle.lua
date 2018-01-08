@@ -282,7 +282,7 @@ function ssVehicle:maintenanceRepairCost(vehicle, storeItem, isRepair)
     local maintenanceCost = 0
 
     if daysSinceLastRepair >= ssVehicle.repairInterval or isRepair then
-        maintenanceCost = math.min((newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2), storeItem.price * 1.5)
+        maintenanceCost = (newRepairCost - prevRepairCost) * repairFactor * (0.8 + ssVehicle.DIRT_FACTOR * avgDirtAmount ^ 2)
     end
 
     return maintenanceCost
@@ -324,13 +324,14 @@ function ssVehicle:getRepairShopCost(vehicle, storeItem, atDealer)
         storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
     end
 
+    local originalPrice = ssVehicle:getFullBuyPrice(vehicle, storeItem)
     local costs = ssVehicle:maintenanceRepairCost(vehicle, storeItem, true)
     local dealerMultiplier = atDealer and 1.1 or 1
     local workCosts = atDealer and 45 or 35
-
     local overdueFactor = self:calculateOverdueFactor(vehicle)
 
-    return math.min((costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2, 1.5 * storeItem.price)
+    -- never higher repair costs than 10% of original price
+    return math.min((costs + workCosts + 50 * (overdueFactor - 1)) * dealerMultiplier * EconomyManager.getCostMultiplier() * overdueFactor^2, 0.1 * originalPrice)
 end
 
 -- all (guard)
@@ -346,9 +347,7 @@ function ssVehicle:vehicleGetDailyUpKeep(superFunc)
 
     -- This is for visually in the display
     local costs = ssVehicle:taxInterestCost(self, storeItem)
-    if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
-        costs = (costs + ssVehicle:maintenanceRepairCost(self, storeItem, false))
-    else
+    if not SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
         -- not calling getRepairShopCost since it was unstable. ssLastRepairDay was sometimes equal to currentDay
         costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, true)
     end
@@ -672,8 +671,8 @@ function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
         local repairCost = ssVehicle:getRepairShopCost(vehicle, nil, not ownWorkshop)
         local sellPrice = vehicle:getSellPrice()
 
-        if ownWorkshop or (repairCost >= 1 and repairCost <= sellPrice * 1.5) then
-            setSellButtonState(repairCost < 1 or (repairCost > sellPrice * 1.5 and ownWorkshop), ssLang.getText("ui_doRepair"))
+        if ownWorkshop or repairCost >= 1 then
+            setSellButtonState(repairCost < 1, ssLang.getText("ui_doRepair"))
             self.headerText:setText(g_i18n:getText("ui_repairOrCustomizeVehicleTitle"))
 
             if self.sellButton ~= nil then
@@ -750,7 +749,7 @@ function ssVehicle:directSellDialogOnClickOk(superFunc)
         local repairCost = ssVehicle:getRepairShopCost(self.vehicle, nil, not self.ownWorkshop)
 
         -- Allow selling when no repair cost
-        if self.ownWorkshop or (repairCost >= 1 and repairCost <= self.vehicle:getSellPrice() * 1.5) then
+        if self.ownWorkshop or repairCost >= 1 then
             ssVehicle:repairVehicle(self.vehicle, true, self.ownWorkshop, self)
         else
             superFunc(self)
