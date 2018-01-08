@@ -42,6 +42,7 @@ function ssVehicle:preLoad()
     ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
     ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
+    ssUtil.overwrittenFunction(g_inGameMenu.garageListTemplate.elements[1].elements[3].elements[1], "onCreateCallback", ssVehicle.inGameMenuOnCreateGarageVehicleDailyUpKeep)
 
     ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
 
@@ -371,6 +372,10 @@ function ssVehicle:calculateOverdueFactor(vehicle)
     return overdueFactor
 end
 
+function ssVehicle:isRepairRequired(vehicle)
+    return self:calculateOverdueFactor(vehicle) > 1
+end
+
 function ssVehicle:vehicleGetSellPrice(superFunc)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local price = ssVehicle:getFullBuyPrice(self,storeItem)
@@ -639,6 +644,20 @@ function ssVehicle:washableUpdateTick(superFunc, dt)
         env.lastRainScale = oldScale
     else
         return superFunc(self, dt)
+    end
+end
+
+function ssVehicle:inGameMenuOnCreateGarageVehicleDailyUpKeep(superFunc, element)
+    if self.currentVehicle ~= nil and self.currentVehicle.propertyState == Vehicle.PROPERTY_STATE_OWNED then
+        local originalProfile = element.profile
+
+        superFunc(self, element)
+
+        if ssVehicle:isRepairRequired(self.currentVehicle) then
+            element:applyProfile(originalProfile .. "Negative")
+        else
+            element:applyProfile(originalProfile)
+        end
     end
 end
 
