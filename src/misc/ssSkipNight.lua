@@ -49,7 +49,7 @@ function ssSkipNight:update(dt)
     local isEvening = time >= math.min(g_currentMission.environment.nightStart, 20 * 60)
     local isMorning = false
 
-    if time < (12 * 60) then
+    if time <= (12 * 60) then
         if self.mode == ssSkipNight.MODE_DAWN then
             isMorning = time >= g_currentMission.environment.nightEnd
         else
