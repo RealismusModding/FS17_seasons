@@ -134,8 +134,6 @@ function ssSkipNight:update(dt)
 end
 
 function ssSkipNight:hourChanged()
-    local min = g_currentMission.environment.dayTime / 1000 / 60
-
     if self.minuteCount < 60 then
         -- For every minute not having a minute callback, add an extra callback
         for i = 1, 60 - self.minuteCount, 1 do
