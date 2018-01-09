@@ -127,7 +127,7 @@
         <text name="tooltip_controlsHelp" text="Pokaż prognozę i skróty klawiszowe w oknie pomocy" />
         <text name="tooltip_snowTracks" text="Pojazdy ugniatają śnieg jeżdżąc po nim" />
         <text name="tooltip_controlsTemperature" text="Ustaw skalę temperatury używaną przez grę" />
-        <text name="tooltip_moisture" text="Nie zezwalaj na żniwa, gdy zboża są zbyt wilgotne" />
+        <text name="tooltip_moisture" text="Nie zezwalaj na żniwa, gdy zboża są zbyt wilgotne (20%)" />
 
         <text name="setting_seasonIntros" text="Wstępy do sezonów" />
         <text name="setting_seasonLength" text="Długość sezonów" />
