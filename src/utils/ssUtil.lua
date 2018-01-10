@@ -253,6 +253,12 @@ function ssUtil.trim(str)
     return str:match'^%s*(.*%S)' or ''
 end
 
+function ssUtil.overwrittenStaticFunction(oldFunc, newFunc)
+    return function (...)
+        return newFunc(oldFunc, ...)
+    end
+end
+
 function Set(list)
     local set = {}
 

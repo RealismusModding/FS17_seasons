@@ -105,6 +105,7 @@ local files = {
     "environment/ssWeatherManager",
     "environment/ssWeatherForecast",
     "vehicles/ssVehicle",
+    "misc/ssCompactionManager",
     "misc/ssFieldJobManager",
     "growth/ssFruitManager",
     "growth/ssGrowthManagerData",

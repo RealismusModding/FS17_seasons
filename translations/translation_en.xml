@@ -8,6 +8,8 @@
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
+        <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
+        <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation Depth (%s)" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -74,6 +76,18 @@
         <text name="ui_doRepair" text="repair" />
         <text name="ui_repairOrCustomizeVehicleTitle" text="Repair and customization" />
 
+        <text name="TIRE_PRESSURE_1" text="Low" />
+        <text name="TIRE_PRESSURE_2" text="Normal" />
+        <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
+
+        <text name="CULTIVATION_DEPTH_1" text="Shallow" />
+        <text name="CULTIVATION_DEPTH_2" text="Deep" />
+
+        <text name="COMPACTION_0" text="%s causes heavy compaction" />
+        <text name="COMPACTION_1" text="%s causes medium compaction" />
+        <text name="COMPACTION_2" text="%s causes light compaction" />
+        <text name="COMPACTION_3" text="%s causes no compaction" />
+
         <text name="SS_SAVE_FAILED" text="Failed to save Seasons to your savegame. Please try again!" />
 
         <text name="SS_REMOVE_CONTEST_TEXT" text="You are running the updated version of Seasons. The game detected the contest version in your mods folder, and disabled it. Please remove it from your mods folder to hide this message." />
@@ -129,6 +143,7 @@
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops have excessive moisture (20%)" />
+        <text name="tooltip_soilCompaction" text="Compact soil when driving over it. Compaction affects crop yields" />
 
         <text name="setting_seasonIntros" text="Season Introductions" />
         <text name="setting_seasonLength" text="Season Length" />
@@ -137,6 +152,7 @@
         <text name="setting_snowTracks" text="Snow Tracks" />
         <text name="setting_controlsTemperature" text="Temperature Scale" />
         <text name="setting_moisture" text="Crop Moisture" />
+        <text name="setting_soilCompaction" text="Soil Compaction" />
 
         <text name="dialog_resetGrowth" text="You loaded Seasons on an old savegame. Seasons wants to reset all fields to their bare state to synchronize with the gameday. You will lose all crops. If you do not reset growth, Seasons might not work as expected." />
         <text name="dialog_resetGrowth_title" text="Growth reset" />
@@ -194,6 +210,8 @@
 
         <text name="ss_helpTitle_08" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_08_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
+        <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
+        <text name="ss_helpText_08_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
         <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days no matter where they are placed. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
         <text name="ss_helpText_08_03" text="Swaths and piles of grass will begin to reduce in size, and will eventually disappear after several days. Grass swaths and piles are reduced at midnight every day. Hay and straw swaths and piles are reduced after being exposed to rain." />
         <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />

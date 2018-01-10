@@ -22,7 +22,7 @@ local PARAM_GREATER = "greater"
 local PARAM_EQUAL = "equal"
 
 function ssSnowTracks:prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(Washable, specializations)
+    return true
 end
 
 function ssSnowTracks:load(savegame)

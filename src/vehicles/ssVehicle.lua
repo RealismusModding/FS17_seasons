@@ -30,6 +30,10 @@ function ssVehicle:preLoad()
     ssUtil.registerSpecialization("variableTreePlanter", "ssVariableTreePlanter", g_seasons.modDir .. "src/vehicles/specializations/ssVariableTreePlanter.lua")
     ssUtil.registerSpecialization("ss_tedder", "ssTedder", g_seasons.modDir .. "src/vehicles/specializations/ssTedder.lua")
     ssUtil.registerSpecialization("ss_drivable", "ssDrivable", g_seasons.modDir .. "src/vehicles/specializations/ssDrivable.lua")
+    ssUtil.registerSpecialization("deepCultivator", "ssDeepCultivator", g_seasons.modDir .. "src/vehicles/specializations/ssDeepCultivator.lua")
+    ssUtil.registerSpecialization("soilCompaction", "ssSoilCompaction", g_seasons.modDir .. "src/vehicles/specializations/ssSoilCompaction.lua")
+    ssUtil.registerSpecialization("tirePressure", "ssTirePressure", g_seasons.modDir .. "src/vehicles/specializations/ssTirePressure.lua")
+    ssUtil.registerSpecialization("atWorkshop", "ssAtWorkshop", g_seasons.modDir .. "src/vehicles/specializations/ssAtWorkshop.lua")
 
     ssVehicle:registerWheelTypes()
 
@@ -139,6 +143,8 @@ function ssVehicle:installVehicleSpecializations()
     for _, vehicleType in pairs(VehicleTypeUtil.vehicleTypes) do
         if vehicleType ~= nil then
             table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("repairable"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("soilCompaction"))
+            table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("atWorkshop"))
 
             if SpecializationUtil.hasSpecialization(Washable, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("snowtracks"))
@@ -151,6 +157,7 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(Motorized, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("motorFailure"))
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("tirePressure"))
             end
 
             if SpecializationUtil.hasSpecialization(Tedder, vehicleType.specializations) then
@@ -163,6 +170,10 @@ function ssVehicle:installVehicleSpecializations()
 
             if SpecializationUtil.hasSpecialization(Drivable, vehicleType.specializations) then
                 table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("ss_drivable"))
+            end
+
+            if SpecializationUtil.hasSpecialization(Cultivator, vehicleType.specializations) then
+                table.insert(vehicleType.specializations, SpecializationUtil.getSpecialization("deepCultivator"))
             end
         end
     end
@@ -444,26 +455,6 @@ function ssVehicle.vehicleGetSpecValueAge(superFunc, storeItem, realItem) -- sto
     return nil
 end
 
--- Tell a vehicle when it is in the area of a workshop. This information is
--- then used in ssRepairable to show or hide the repair option
-function ssVehicle:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
-    if otherShapeId ~= nil and (onEnter or onLeave) then
-        if onEnter then
-            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
-
-            if vehicle ~= nil then
-                vehicle.ssInRangeOfWorkshop = self
-            end
-        elseif onLeave then
-            local vehicle = g_currentMission.nodeToVehicle[otherShapeId]
-
-            if vehicle ~= nil then
-                vehicle.ssInRangeOfWorkshop = nil
-            end
-        end
-    end
-end
-
 -- Limit the speed of working implements and machine on land to 4kmh or 0.25 their normal speed.
 -- Only in the winter
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
@@ -503,6 +494,17 @@ function ssVehicle:vehicleDraw(superFunc, dt)
             g_currentMission:showBlinkingWarning(ssLang.getText("warning_soilIsFrozen"), 2000)
         end
     end
+
+    --if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
+    --    for i, wheel in pairs(self.wheels) do
+    --        if wheel.groundPressure ~= nil or wheel.fwdTireCompaction ~= nil or wheel.underTireCompaction ~= nil or wheel.soilBulkDensity ~= nil then
+    --            renderText(0.3, 0.22 - 0.02 * i, 0.01, "Wheel load: " .. mathRound(wheel.load,2))
+    --            renderText(0.4, 0.22 - 0.02 * i, 0.01, "sBD: " .. mathRound(wheel.soilBulkDensity,2))
+    --            renderText(0.45, 0.22 - 0.02 * i, 0.01, "underC: " .. wheel.underTireCompaction)
+    --        end
+    --    end
+    --end
+
 end
 
 -- Add wheel types for special snow wheels that have more friction in snow but less on other surfaces (e.g. chains)

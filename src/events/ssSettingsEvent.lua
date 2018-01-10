@@ -29,6 +29,7 @@ function ssSettingsEvent:new()
     self.seasonLength = g_seasons.mainMenu.settingElements.seasonLength:getState() * 3
     self.snowTracksEnabled = g_seasons.mainMenu.settingElements.snowTracks:getIsChecked()
     self.moistureEnabled = g_seasons.mainMenu.settingElements.moisture:getIsChecked()
+    self.soilCompactionEnabled = g_seasons.mainMenu.settingElements.soilCompaction:getIsChecked()
 
     return self
 end
@@ -39,6 +40,7 @@ function ssSettingsEvent:writeStream(streamId, connection)
     streamWriteInt16(streamId, self.seasonLength)
     streamWriteBool(streamId, self.snowTracksEnabled)
     streamWriteBool(streamId, self.moistureEnabled)
+    streamWriteBool(streamId, self.soilCompactionEnabled)
 
     if not connection:getIsServer() then
         g_seasons.weather:writeStream(streamId, connection)
@@ -51,6 +53,7 @@ function ssSettingsEvent:readStream(streamId, connection)
     self.seasonLength = streamReadInt16(streamId)
     self.snowTracksEnabled = streamReadBool(streamId)
     self.moistureEnabled = streamReadBool(streamId)
+    self.soilCompactionEnabled = streamReadBool(streamId)
 
     if connection:getIsServer() then
         g_seasons.weather:readStream(streamId, connection)
@@ -67,6 +70,7 @@ function ssSettingsEvent:run(connection)
     g_seasons.environment:changeDaysInSeason(self.seasonLength)
     g_seasons.vehicle.snowTracksEnabled = self.snowTracksEnabled
     g_seasons.weather.moistureEnabled = self.moistureEnabled
+    g_seasons.soilCompaction.compactionEnabled = self.soilCompactionEnabled
 
     g_seasons.mainMenu:updateGameSettings()
     g_seasons.mainMenu:updateSeasonLengthGraphs()
