@@ -253,12 +253,6 @@ function ssUtil.trim(str)
     return str:match'^%s*(.*%S)' or ''
 end
 
-function ssUtil.overwrittenStaticFunction(oldFunc, newFunc)
-    return function (...)
-        return newFunc(oldFunc, ...)
-    end
-end
-
 function Set(list)
     local set = {}
 
@@ -306,6 +300,7 @@ if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
     function ssUtil.appendedFunction(target, name, newFunc)
         storeOriginalFunction(target, name)
 
+        log("Set new target", name, newFunc)
         target[name] = Utils.appendedFunction(target[name], newFunc)
     end
 
@@ -333,6 +328,16 @@ if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
         end
 
         target[name] = newVal
+    end
+
+    function ssUtil.overwrittenStaticFunction(target, name, newFunc)
+        storeOriginalFunction(target, name)
+
+        local oldFunc = target[name]
+
+        target[name] = function (...)
+            return newFunc(oldFunc, ...)
+        end
     end
 
     function ssUtil.unregisterConstants()
@@ -413,6 +418,14 @@ else
 
     function ssUtil.overwrittenConstant(target, name, newVal)
         target[name] = newVal
+    end
+
+    function ssUtil.overwrittenStaticFunction(target, name, newFunc)
+        local oldFunc = target[name]
+
+        target[name] = function (...)
+            return newFunc(oldFunc, ...)
+        end
     end
 
     function ssUtil.unregisterBrand(name)

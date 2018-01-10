@@ -44,11 +44,11 @@ function ssVehicle:preLoad()
     ssUtil.overwrittenFunction(Vehicle, "draw", ssVehicle.vehicleDraw)
     ssUtil.overwrittenFunction(Combine, "getIsThreshingAllowed", ssVehicle.getIsThreshingAllowed)
     ssUtil.appendedFunction(AIVehicle, "update", ssVehicle.aiVehicleUpdate)
-    ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssVehicle.sellAreaTriggerCallback)
     ssUtil.overwrittenFunction(Washable, "updateTick", ssVehicle.washableUpdateTick)
     ssUtil.overwrittenFunction(g_inGameMenu.garageListTemplate.elements[1].elements[3].elements[1], "onCreateCallback", ssVehicle.inGameMenuOnCreateGarageVehicleDailyUpKeep)
 
     ssUtil.appendedFunction(DirectSellDialog, "setVehicle", ssVehicle.directSellDialogSetVehicle)
+    ssUtil.appendedFunction(VehicleSellingPoint, "sellAreaTriggerCallback", ssAtWorkshop.sellAreaTriggerCallback)
 
     -- Functions for ssMotorFailure, needs to be reloaded every game
     ssUtil.overwrittenConstant(Motorized, "startMotor", ssMotorFailure.startMotor)

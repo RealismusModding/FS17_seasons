@@ -19,7 +19,7 @@ end
 
 function ssSoilCompaction:preLoad(savegame)
     self.applySoilCompaction = ssSoilCompaction.applySoilCompaction
-    self.getCLayers = ssSoilCompaction.getCLayers
+    self.getCompactionLayers = ssSoilCompaction.getCompactionLayers
     self.getTireMaxLoad = ssSoilCompaction.getTireMaxLoad
 end
 
@@ -83,7 +83,7 @@ function ssSoilCompaction:applySoilCompaction()
             -- reference pressure 100 kPa
             -- reference saturation Sk 50%
             local soilBulkDensityRef = 0.2 * (soilWater - 0.5) + 0.7 * math.log10(wheel.groundPressure / 100)
-            
+
             wheel.possibleCompaction = 3
             if soilBulkDensityRef > ssSoilCompaction.LIGHT_COMPACTION and soilBulkDensityRef <= ssSoilCompaction.MEDIUM_COMPACTION then
                 wheel.possibleCompaction = 2
@@ -111,15 +111,15 @@ function ssSoilCompaction:applySoilCompaction()
             local wantedC = 3
 
             -- TODO: 2 lines below can be local and no need to store CLayers in wheel
-            local x0, z0, x1, z1, x2, z2, fwdLayers = self:getCLayers(wheel, width, length, radius, radius * wheelRotDir * -1, 2 * radius * wheelRotDir)
+            local x0, z0, x1, z1, x2, z2, fwdLayers = self:getCompactionLayers(wheel, width, length, radius, radius * wheelRotDir * -1, 2 * radius * wheelRotDir)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
-            
+
             -- debug print
             --ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 255, 0)
 
-            local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCLayers(wheel, width, length, radius, length, length)
+            local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCompactionLayers(wheel, width, length, radius, length, length)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
-            
+
             -- debug print
             --ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 0, 0)
 
@@ -149,7 +149,7 @@ function ssSoilCompaction:applySoilCompaction()
                 local dx,_,dz = localDirectionToWorld(wheel.node, 0, 0, 1)
                 local angle = Utils.convertToDensityMapAngle(Utils.getYRotationFromDirection(dx, dz), g_currentMission.terrainDetailAngleMaxValue)
 
-                local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCLayers(wheel, math.max(0.1,width-0.15), length, radius, length, length)
+                local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCompactionLayers(wheel, math.max(0.1,width-0.15), length, radius, length, length)
                 local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
                 -- TODO: not working
@@ -173,7 +173,7 @@ function ssSoilCompaction:getTireMaxLoad(wheel, inflationPressure)
     return 44 * math.exp(0.0288 * tireLoadIndex) * inflationFac / 100
 end
 
-function ssSoilCompaction:getCLayers(wheel, width, length, radius, delta0, delta2)
+function ssSoilCompaction:getCompactionLayers(wheel, width, length, radius, delta0, delta2)
     local x0, y0, z0
     local x1, y1, z1
     local x2, y2, z2
@@ -192,18 +192,15 @@ function ssSoilCompaction:getCLayers(wheel, width, length, radius, delta0, delta
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailId, x0, z0, x1, z1, x2, z2)
 
     local density, area, _ = getDensityParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
-    local CLayers = density/area
+    local compactionLayers = density/area
 
-    return x0, z0, x1, z1, x2, z2, CLayers
+    return x0, z0, x1, z1, x2, z2, compactionLayers
 end
 
 function ssSoilCompaction:update(dt)
-    if not g_currentMission:getIsServer() 
-        or not  g_seasons.soilCompaction.compactionEnabled then
-        return 
-    end
+    if not g_seasons.soilCompaction.compactionEnabled then return end
 
-    if self.lastSpeedReal ~= 0 and not ssWeatherManager:isGroundFrozen()
+    if self.lastSpeedReal ~= 0 and g_currentMission:getIsServer() and not ssWeatherManager:isGroundFrozen()
         and not SpecializationUtil.hasSpecialization(Cultivator, self.specializations) then
         self:applySoilCompaction()
     end

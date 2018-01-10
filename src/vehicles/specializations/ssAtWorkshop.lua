@@ -108,6 +108,7 @@ end
 
 -- Tell a vehicle when it is in the area of a workshop. This information is
 -- then used in ssRepairable to show or hide the repair option
+-- This is appended in ssVehicle preLoad.
 function ssAtWorkshop:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLeave, onStay, otherShapeId)
     if otherShapeId ~= nil and (onEnter or onLeave) then
         if onEnter then
@@ -125,5 +126,3 @@ function ssAtWorkshop:sellAreaTriggerCallback(triggerId, otherId, onEnter, onLea
         end
     end
 end
-
-VehicleSellingPoint.sellAreaTriggerCallback = Utils.appendedFunction(VehicleSellingPoint.sellAreaTriggerCallback, ssAtWorkshop.sellAreaTriggerCallback)

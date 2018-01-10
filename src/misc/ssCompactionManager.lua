@@ -8,23 +8,25 @@
 ----------------------------------------------------------------------------------------------------
 
 ssCompactionManager = {}
-g_seasons.soilCompaction = ssCompactionManager
 
 ssCompactionManager.superFunc = {} -- To store function pointers in Utils that we intend to overwrite
 ssCompactionManager.cultivatorDecompactionDelta = 1 -- Cultivators additive effect on the compaction layer
+
 ssCompactionManager.overlayColor = {} -- Additional colors for the compaction overlay (false/true: useColorblindMode)
-ssCompactionManager.overlayColor[false] =  {
-                        {0.6172, 0.0510, 0.0510, 1},
-                        {0.6400, 0.1710, 0.1710, 1},
-                        {0.6672, 0.3333, 0.3333, 1},
-                            }
-ssCompactionManager.overlayColor[true] =   {
-                        {0.6172, 0.0510, 0.0510, 1},
-                        {0.6400, 0.1710, 0.1710, 1},
-                        {0.6672, 0.3333, 0.3333, 1},
-                            }
+ssCompactionManager.overlayColor[false] = {
+    {0.6172, 0.0510, 0.0510, 1},
+    {0.6400, 0.1710, 0.1710, 1},
+    {0.6672, 0.3333, 0.3333, 1},
+}
+
+ssCompactionManager.overlayColor[true] = {
+    {0.6172, 0.0510, 0.0510, 1},
+    {0.6400, 0.1710, 0.1710, 1},
+    {0.6672, 0.3333, 0.3333, 1},
+}
 
 function ssCompactionManager:preLoad()
+    g_seasons.soilCompaction = self
 end
 
 function ssCompactionManager:load(savegame, key)
@@ -37,10 +39,10 @@ end
 
 function ssCompactionManager:loadMap()
     -- Overwritten functions
-    InGameMenu.generateFruitOverlay = Utils.overwrittenFunction(InGameMenu.generateFruitOverlay, ssCompactionManager.generateFruitOverlay)
+    ssUtil.overwrittenFunction(InGameMenu, "generateFruitOverlay", ssCompactionManager.generateFruitOverlay)
 
-    Utils.cutFruitArea = ssUtil.overwrittenStaticFunction(Utils.cutFruitArea, ssCompactionManager.cutFruitArea)
-    Utils.updateCultivatorArea = ssUtil.overwrittenStaticFunction(Utils.updateCultivatorArea, ssCompactionManager.updateCultivatorArea)
+    ssUtil.overwrittenStaticFunction(Utils, "cutFruitArea", ssCompactionManager.cutFruitArea)
+    ssUtil.overwrittenStaticFunction(Utils, "updateCultivatorArea", ssCompactionManager.updateCultivatorArea)
 end
 
 function ssCompactionManager:readStream(streamId, connection)
@@ -60,15 +62,16 @@ function ssCompactionManager.cutFruitArea(superFunc, fruitId, startWorldX, start
 
     local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     local densityC, areaC, _ = getDensityParallelogram(g_currentMission.terrainDetailId, x0, z0, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
-    local CLayers = densityC / areaC
-    ploughFactor = 2 * CLayers - 5
+    local compactionLayers = densityC / areaC
 
+    ploughFactor = 2 * compactionLayers - 5
+
+    -- Special rules for grass
     if fruitId == FruitUtil.FRUITTYPE_GRASS then
       local sprayRatio = g_currentMission.harvestSprayScaleRatio
       local ploughRatio = g_currentMission.harvestPloughScaleRatio
-      local oldPloughFactor = ploughFactor
 
-      ploughFactor = (1 + oldPloughFactor * ploughRatio + sprayFactor * sprayRatio) / (1 + ploughRatio + sprayFactor * sprayRatio)
+      ploughFactor = (1 + ploughFactor * ploughRatio + sprayFactor * sprayRatio) / (1 + ploughRatio + sprayFactor * sprayRatio)
       volume = volume * ploughFactor
     end
 
@@ -82,8 +85,9 @@ function ssCompactionManager.updateCultivatorArea(superFunc, x, z, x1, z1, x2, z
     local x0, z0, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(detailId, x, z, x1, z1, x2, z2)
 
     -- Apply decompaction delta where ground is field but not yet cultivated
-    setDensityMaskParams(detailId, "greater", g_currentMission.cultivatorValue);
+    setDensityMaskParams(detailId, "greater", g_currentMission.cultivatorValue)
     setDensityCompareParams(detailId, "greater", 0)
+
     addDensityMaskedParallelogram(
         detailId,
         x0, z0, widthX, widthZ, heightX, heightZ,
@@ -92,6 +96,7 @@ function ssCompactionManager.updateCultivatorArea(superFunc, x, z, x1, z1, x2, z
         g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
         ssCompactionManager.cultivatorDecompactionDelta
     )
+
     setDensityMaskParams(detailId, "greater", 0)
     setDensityCompareParams(detailId, "greater", -1)
 
@@ -107,16 +112,16 @@ function ssCompactionManager:generateFruitOverlay(superFunc)
             -- Begin draw foliage state overlay
             resetFoliageStateOverlay(self.foliageStateOverlay)
 
-            local colors = ssCompactionManager.overlayColor[g_gameSettings:getValue("useColorblindMode")];
-            local maxCompaction = bitShiftLeft(1, g_currentMission.ploughCounterNumChannels)-1;
-            for level=1,maxCompaction do
-                local color = colors[math.min(level, #colors)];
-                setFoliageStateOverlayGroundStateColor(self.foliageStateOverlay, g_currentMission.terrainDetailId, bitShiftLeft(bitShiftLeft(1, g_currentMission.terrainDetailTypeNumChannels)-1, g_currentMission.terrainDetailTypeFirstChannel), g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels, level-1, color[1], color[2], color[3]);
+            local colors = ssCompactionManager.overlayColor[g_gameSettings:getValue("useColorblindMode")]
+            local maxCompaction = bitShiftLeft(1, g_currentMission.ploughCounterNumChannels) - 1
+            for level = 1, maxCompaction do
+                local color = colors[math.min(level, #colors)]
+                setFoliageStateOverlayGroundStateColor(self.foliageStateOverlay, g_currentMission.terrainDetailId, bitShiftLeft(bitShiftLeft(1, g_currentMission.terrainDetailTypeNumChannels)-1, g_currentMission.terrainDetailTypeFirstChannel), g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels, level-1, color[1], color[2], color[3])
             end
 
             -- End draw foliage state overlay
             generateFoliageStateOverlay(self.foliageStateOverlay)
-            self.foliageStateOverlayIsReady = false;
+            self.foliageStateOverlayIsReady = false
             self.dynamicMapImageLoading:setVisible(true)
             self:checkFoliageStateOverlayReady()
         end

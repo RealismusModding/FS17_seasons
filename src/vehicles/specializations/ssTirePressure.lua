@@ -36,11 +36,10 @@ function ssTirePressure:load(savegame)
     end
 
     self.ssAllWheelsCrawlers = true
+    local tireTypeCrawler = WheelsUtil.getTireType("crawler")
     for _, wheel in pairs(self.wheels) do
-        local tireTypeCrawler = WheelsUtil.getTireType("crawler")
-
         if wheel.tireType ~= tireTypeCrawler then
-            self.ssAllWheelsCrawlers = true
+            self.ssAllWheelsCrawlers = false
         end
     end
 
@@ -68,9 +67,11 @@ function ssTirePressure:getSaveAttributesAndNodes(nodeIdent)
 end
 
 function ssTirePressure:readStream(streamId, connection)
+    self.ssInflationPressure = streamReadInt(streamId)
 end
 
 function ssTirePressure:writeStream(streamId, connection)
+    streamWriteInt(streamId, self.ssInflationPressure)
 end
 
 function ssTirePressure:updateInflationPressure(self)
@@ -83,8 +84,7 @@ function ssTirePressure:updateInflationPressure(self)
     local tireTypeCrawler = WheelsUtil.getTireType("crawler")
 
     for _, wheel in pairs(self.wheels) do
-        if wheel.tireType ~= tireTypeCrawler then  
-        
+        if wheel.tireType ~= tireTypeCrawler then
             if wheel.ssMaxDeformation == nil then
                 wheel.ssMaxDeformation = wheel.maxDeformation
             end
@@ -98,7 +98,7 @@ function ssTirePressure:updateInflationPressure(self)
 end
 
 function ssTirePressure:update(dt)
-    if self.isClient and self:canPlayerInteractInWorkshop() or not self.ssAllWheelsCrawlers then
+    if self.isClient and self:canPlayerInteractInWorkshop() and not self.ssAllWheelsCrawlers then
         local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
         local vehicleName = storeItem.brand .. " " .. storeItem.name
 
