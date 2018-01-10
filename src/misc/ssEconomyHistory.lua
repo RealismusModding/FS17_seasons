@@ -254,8 +254,12 @@ function ssEconomyHistory:getPrice(fillDesc)
 
         for _, tipTrigger in pairs(g_currentMission.tipTriggers) do
             if tipTrigger.isSellingPoint and tipTrigger.acceptedFillTypes[fillType] then
-                sum = sum + tipTrigger:getEffectiveFillTypePrice(fillType)
-                num = num + 1
+                local price = tipTrigger:getEffectiveFillTypePrice(fillType)
+
+                if price ~= 0 then
+                    sum = sum + tipTrigger:getEffectiveFillTypePrice(fillType)
+                    num = num + 1
+                end
             end
         end
 
