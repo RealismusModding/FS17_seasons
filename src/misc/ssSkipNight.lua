@@ -26,7 +26,7 @@ function ssSkipNight:loadMap()
     self.mode = ssSkipNight.MODE_MORNING
     self.oldTimeScale = 1
 
-    if g_currentMission.missionDynamicInfo.isMultiplayer and not GS_IS_CONSOLE_VERSION then
+    if g_currentMission.missionDynamicInfo.isMultiplayer then
         ssSkipNight.SPEED = 3000
     end
 end
@@ -56,6 +56,8 @@ function ssSkipNight:update(dt)
             isMorning = time >= (6 * 60)
         end
     end
+
+    -- log("isSkipping", self.skippingNight, "isEvening", isEvening, "isMorning", isMorning, "speed", g_currentMission.missionInfo.timeScale)
 
     if not self.skippingNight and isEvening and self:getIsSkipAllowed() then
         g_currentMission:addHelpButtonText(g_i18n:getText("input_SEASONS_SKIP_NIGHT"), InputBinding.SEASONS_SKIP_NIGHT)
@@ -118,6 +120,11 @@ function ssSkipNight:update(dt)
     if self.skippingNight and g_currentMission:getIsClient() and self.dialog == nil then
         self:showSkippingDialog()
     end
+
+    -- FIXME: Bandaid: if running faster than DEV speed, but not skipping, something is wrong, so we just set speed to 1
+    -- if GS_IS_CONSOLE_VERSION and not self.skippingNight and g_currentMission:getIsServer() and g_currentMission.missionInfo.timeScale > 2000 then
+    --     g_currentMission:setTimeScale(1)
+    -- end
 
     -- Close dialog only once the DMS is empty. Then send events to the clients to close as well.
     if not self.skippingNight and g_currentMission:getIsServer() and self.dialog ~= nil and not g_seasons.dms:isBusy() then
