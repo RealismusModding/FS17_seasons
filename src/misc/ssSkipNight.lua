@@ -93,32 +93,30 @@ function ssSkipNight:update(dt)
 
     -- When night ends, stop fast forwarding.
     -- The ssCatchingUp code will synchronize
-    if self.skippingNight then
-        if isMorning then
-            -- The server might be behind. To prevent a big jump, make the client stop the time as well
-            g_currentMission:setTimeScale(1, not g_currentMission:getIsServer())
+    if self.skippingNight and isMorning then
+        -- The server might be behind. To prevent a big jump, make the client stop the time as well
+        g_currentMission:setTimeScale(1, not g_currentMission:getIsServer())
 
-            -- The rest is only for the server. The client removes the listeners and dialogs
-            -- when receiving the finished event, so that clients wait for the server to catch up.
-            if g_currentMission:getIsServer() then
-                self.skippingNight = false
+        -- The rest is only for the server. The client removes the listeners and dialogs
+        -- when receiving the finished event, so that clients wait for the server to catch up.
+        if g_currentMission:getIsServer() then
+            self.skippingNight = false
 
-                g_currentMission.environment:removeMinuteChangeListener(self)
-                g_currentMission.environment:removeHourChangeListener(self)
+            g_currentMission.environment:removeMinuteChangeListener(self)
+            g_currentMission.environment:removeHourChangeListener(self)
 
-                -- Not closing the gui overlay until the DMS is empty
-            end
+            -- Not closing the gui overlay until the DMS is empty
         end
+    end
 
-        -- Ignore any change in timescale by the player
-        if g_currentMission:getIsServer() and g_currentMission.missionInfo.timeScale ~= ssSkipNight.SPEED then
-            g_currentMission:setTimeScale(ssSkipNight.SPEED)
-        end
+    -- Ignore any change in timescale by the player
+    if self.skippingNight and g_currentMission:getIsServer() and g_currentMission.missionInfo.timeScale ~= ssSkipNight.SPEED then
+        g_currentMission:setTimeScale(ssSkipNight.SPEED)
+    end
 
-        -- This can occur when the player just joined
-        if g_currentMission:getIsClient() and self.dialog == nil then
-            self:showSkippingDialog()
-        end
+    -- This can occur when the player just joined
+    if self.skippingNight and g_currentMission:getIsClient() and self.dialog == nil then
+        self:showSkippingDialog()
     end
 
     -- Close dialog only once the DMS is empty. Then send events to the clients to close as well.
@@ -197,4 +195,8 @@ function ssSkipNight:finishSkippingNight()
 
     g_gui:closeDialog(self.dialog)
     self.dialog = nil
+end
+
+function ssSkipNight:isShowingDialog()
+    return self.dialog ~= nil
 end

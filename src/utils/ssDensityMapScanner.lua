@@ -128,12 +128,13 @@ function ssDensityMapScanner:update(dt)
         -- Increase number of blocks when 4x or 16x map.
         num = num * math.floor(g_currentMission.terrainSize / 2048)
 
+        -- Run console at half the speed of PC
         if not GS_IS_CONSOLE_VERSION then
             num = num * 2
         end
 
         -- When skipping night, do a bit more per frame, the player can't move anyways.
-        if g_seasons.skipNight.skippingNight or g_seasons.catchingUp.showWarning then
+        if g_seasons.skipNight:isShowingDialog() or g_seasons.catchingUp.showWarning then
             num = num * 8
         end
 
