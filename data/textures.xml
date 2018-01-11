@@ -7,7 +7,7 @@
 ––
 –– Copyright (c) Realismus Modding, 2017
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
-<textures overwrite="true" materialHolder="../resources/replacementTextures/materialHolder.i3d" alphaBlending="false" blendingMaterialHolder="../resources/replacementTextures/materialHolderBlending.i3d" textureMemoryUsage="31457280">
+<textures overwrite="true" materialHolder="../resources/replacementTextures/materialHolder.i3d" alphaBlending="false" blendingMaterialHolder="../resources/replacementTextures/materialHolderBlending.i3d" textureMemoryUsage="44925712">
     <seasons>
         <spring>
             <!-- Bushes and small trees -->
