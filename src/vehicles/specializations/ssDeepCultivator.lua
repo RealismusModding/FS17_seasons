@@ -48,7 +48,7 @@ function ssDeepCultivator:load(savegame)
     end
 
     -- hard coded fix since it does not fit criteria of maxForce / workingWidth > 6
-    if storeItem.name == "CULTIMER L 300" 
+    if storeItem.name == "CULTIMER L 300"
         or self.ssDeepCultivatorMod or maxForce / workingWidth > 6 then
         self.ssValidDeepCultivator = true
     end
@@ -106,8 +106,8 @@ function ssDeepCultivator:updateCultivationDepth(self)
 end
 
 function ssDeepCultivator:update(dt)
-    if not g_currentMission:getIsServer() 
-        or not g_seasons.soilCompaction.compactionEnabled 
+    if not g_currentMission:getIsServer()
+        or not g_seasons.soilCompaction.compactionEnabled
         or not self.ssValidDeepCultivator then
         return end
 
