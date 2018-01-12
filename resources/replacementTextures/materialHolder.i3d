@@ -46,8 +46,6 @@
         <File fileId="213" filename="autumn/poplarBranch_diffuse.png" relativePath="true" />
         <File fileId="214" filename="autumn/treeBranch_diffuse.png" relativePath="true" />
 
-        <File fileId="215" filename="autumn/grass_diffuse.png" relativePath="true" />
-
         <!-- Winter -->
         <File fileId="301" filename="winter/birch1LOD_diffuse.png" relativePath="true" />
         <File fileId="302" filename="winter/birch2LOD_diffuse.png" relativePath="true" />
@@ -324,14 +322,6 @@
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
 
-        <Material name="foliageGrassColor_mat" materialId="216" ambientColor="1 1 1" customShaderId="804" customShaderVariation="COLOR_MASK">
-            <Texture fileId="215" />
-            <CustomParameter name="alphaBlendStartEnd" value="70 75 0 0" />
-            <CustomParameter name="frequencyAndScale" value="0.3 0.1 0 0" />
-            <CustomParameter name="plantRotate" value="0.4363 1.57 0 0" />
-            <CustomParameter name="cellSizeTerrainSizeScaleXZScaleY" value="16 1024 2 255" />
-        </Material>
-
         <!-- Winter -->
         <Material name="birch1LOD_mat" materialId="301" ambientColor="1 1 1" customShaderId="803" customShaderVariation="billboard180">
             <Texture fileId="301" />
@@ -570,8 +560,6 @@
         <Shape shapeId="1" name="poplarBranch_autumn" visibility="false" nodeId="213" materialIds="213" distanceBlending="false" />
         <Shape shapeId="1" name="treeBranch_autumn" visibility="false" nodeId="214" materialIds="214" distanceBlending="false" />
         <Shape shapeId="1" name="bushes_autumn" visibility="false" nodeId="215" materialIds="215" distanceBlending="false" />
-
-        <Shape shapeId="1" name="grass_autumn" visibility="false" nodeId="216" materialIds="216" distanceBlending="false" />
 
         <!-- Winter -->
         <Shape shapeId="1" name="birch1LOD_winter" visibility="false" nodeId="301" materialIds="301" distanceBlending="false" />
