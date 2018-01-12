@@ -18,12 +18,12 @@ function ssSoilCompaction:prerequisitesPresent(specializations)
 end
 
 function ssSoilCompaction:preLoad(savegame)
-    self.applySoilCompaction = ssSoilCompaction.applySoilCompaction
-    self.getCompactionLayers = ssSoilCompaction.getCompactionLayers
-    self.getTireMaxLoad = ssSoilCompaction.getTireMaxLoad
 end
 
 function ssSoilCompaction:load(savegame)
+    self.applySoilCompaction = ssSoilCompaction.applySoilCompaction
+    self.getCompactionLayers = ssSoilCompaction.getCompactionLayers
+    self.getTireMaxLoad = ssSoilCompaction.getTireMaxLoad
 end
 
 function ssSoilCompaction:delete()
@@ -117,7 +117,7 @@ function ssSoilCompaction:applySoilCompaction()
             -- debug print
             --ssDebug:drawDensityParallelogram(x, z, widthX, widthZ, heightX, heightZ, 0.25, 255, 255, 0)
 
-            local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCompactionLayers(wheel, width, length, radius, length, length)
+            local x0, z0, x1, z1, x2, z2, underLayers = self:getCompactionLayers(wheel, width, length, radius, length, length)
             local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
             -- debug print
@@ -138,28 +138,22 @@ function ssSoilCompaction:applySoilCompaction()
             end
 
             if wantedC ~= 3 then
-                local _, _, _ = setDensityParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels, wantedC)
+                setDensityParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels, wantedC)
             end
 
             -- for debug
-            --penetrationResistance = 0
+            -- penetrationResistance = 0
 
             if wheel.groundPressure > penetrationResistance and self:getLastSpeed() > 0 and self.isEntered then
-
-                local dx,_,dz = localDirectionToWorld(wheel.node, 0, 0, 1)
+                local dx, _ ,dz = localDirectionToWorld(self.rootNode, 0, 0, 1)
                 local angle = Utils.convertToDensityMapAngle(Utils.getYRotationFromDirection(dx, dz), g_currentMission.terrainDetailAngleMaxValue)
 
-                local x0, z0, x1, z1, x2, z2, underLayers = ssSoilCompaction:getCompactionLayers(wheel, math.max(0.1,width-0.15), length, radius, length, length)
+                local x0, z0, x1, z1, x2, z2, underLayers = self:getCompactionLayers(wheel, math.max(0.1, width - 0.15), length, radius, length, length)
                 local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
-                -- TODO: not working
-                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
-                    g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels,
-                    g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, g_currentMission.ploughValue)
-                setDensityMaskedParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ,
-                    g_currentMission.terrainDetailAngleFirstChannel, g_currentMission.terrainDetailAngleNumChannels,
-                    g_currentMission.terrainDetailId, g_currentMission.terrainDetailTypeFirstChannel, g_currentMission.terrainDetailTypeNumChannels, angle)
-
+                local cm = g_currentMission
+                setDensityMaskedParallelogram(cm.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, cm.terrainDetailTypeFirstChannel, cm.terrainDetailTypeNumChannels, cm.terrainDetailId, cm.terrainDetailTypeFirstChannel, cm.terrainDetailTypeNumChannels, cm.ploughValue)
+                setDensityMaskedParallelogram(cm.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, cm.terrainDetailAngleFirstChannel, cm.terrainDetailAngleNumChannels, cm.terrainDetailId, cm.terrainDetailTypeFirstChannel, cm.terrainDetailTypeNumChannels, angle)
             end
         end
     end
@@ -198,9 +192,11 @@ function ssSoilCompaction:getCompactionLayers(wheel, width, length, radius, delt
 end
 
 function ssSoilCompaction:update(dt)
-    if not g_seasons.soilCompaction.compactionEnabled then return end
+    if not g_seasons.soilCompaction.enabled then return end
 
-    if self.lastSpeedReal ~= 0 and g_currentMission:getIsServer() and not ssWeatherManager:isGroundFrozen()
+    if self.lastSpeedReal ~= 0
+        and g_currentMission:getIsServer()
+        and not ssWeatherManager:isGroundFrozen()
         and not SpecializationUtil.hasSpecialization(Cultivator, self.specializations) then
         self:applySoilCompaction()
     end
@@ -211,7 +207,7 @@ function ssSoilCompaction:update(dt)
         local worstCompaction = 4
         for _, wheel in pairs(self.wheels) do
             -- fallback to 'no compaction'
-            worstCompaction = math.min(worstCompaction,Utils.getNoNil(wheel.possibleCompaction,4))
+            worstCompaction = math.min(worstCompaction,Utils.getNoNil(wheel.possibleCompaction, 4))
         end
 
         if worstCompaction < 4 then
