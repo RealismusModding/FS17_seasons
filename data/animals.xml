@@ -29,9 +29,9 @@
             </properties>
             <properties type="pig">
                 <straw>15</straw>
-                <food>81</food>
+                <food>20</food>
                 <water>10</water>
-                <birthRate>0.04</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>27</manure>
                 <liquidManure>46</liquidManure>
                 <dailyUpkeep>10</dailyUpkeep>
@@ -60,9 +60,9 @@
 
             <properties type="pig">
                 <straw>5</straw>
-                <food>81</food>
+                <food>20</food>
                 <water>15</water>
-                <birthRate>0</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>23</manure>
                 <liquidManure>40</liquidManure>
                 <dailyUpkeep>5</dailyUpkeep>
@@ -91,9 +91,9 @@
 
             <properties type="pig">
                 <straw>20</straw>
-                <food>90</food>
+                <food>23</food>
                 <water>7.5</water>
-                <birthRate>0.04</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>30</manure>
                 <liquidManure>53</liquidManure>
                 <dailyUpkeep>10</dailyUpkeep>
@@ -122,9 +122,9 @@
 
             <properties type="pig">
                 <straw>40</straw>
-                <food>108</food>
+                <food>27</food>
                 <water>7.5</water>
-                <birthRate>0</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>38</manure>
                 <liquidManure>66</liquidManure>
                 <dailyUpkeep>10</dailyUpkeep>

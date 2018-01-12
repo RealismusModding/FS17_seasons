@@ -16,6 +16,9 @@ end
 ssAnimals.PRODUCTIVITY_START = 0.8
 
 function ssAnimals:load(savegame, key)
+    -- making it more expensive to buy animals directly
+    AnimalScreen.TRANSPORTATION_FEE = 600 * g_currentMission.missionInfo.buyPriceMultiplier
+
     -- Load or set default values
     local averageProduction = {}
     local productivities = {}

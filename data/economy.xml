@@ -330,6 +330,11 @@
         <fill name="silage">
             <factors all="1" />
         </fill>
+
+        <!-- Lowering price of pigfood when bought in bulk -->
+        <fill name="pigFood">
+            <factors all="0.4" />
+        </fill>
     </fills>
 
     <bales>
