@@ -8,7 +8,6 @@
 
 ssSoilCompaction = {}
 
-ssSoilCompaction.MAX_CHARS_TO_DISPLAY = 20
 ssSoilCompaction.LIGHT_COMPACTION = -0.15
 ssSoilCompaction.MEDIUM_COMPACTION = 0.05
 ssSoilCompaction.HEAVY_COMPACTION = 0.2
@@ -214,12 +213,8 @@ function ssSoilCompaction:update(dt)
 
         if worstCompaction < 4 then
             local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-            local storeItemName = storeItem.name
-            if string.len(storeItemName) > ssSoilCompaction.MAX_CHARS_TO_DISPLAY then
-                storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssSoilCompaction.MAX_CHARS_TO_DISPLAY - 5)) .. "..."
-            end
+            local compactionText = string.format(g_i18n:getText("COMPACTION_" .. tostring(worstCompaction)), storeItem.name)
 
-            local compactionText = string.format(g_i18n:getText("COMPACTION_" .. tostring(worstCompaction)), storeItemName)
             g_currentMission:addExtraPrintText(compactionText)
         end
     end
