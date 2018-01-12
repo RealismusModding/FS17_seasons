@@ -210,8 +210,6 @@
 
         <text name="ss_helpTitle_08" text="Crops - Hay, Straw and Grass" />
         <text name="ss_helpText_08_01" text="In winter grass is reset to its harvested stage to simulate the winter killing off the grass when it becomes cold." />
-        <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
-        <text name="ss_helpText_08_03" text="Swaths of hay, grass and straw will begin to reduce in size, and will eventually disappear after several days. Grass swaths are reduced at midnight every day. Hay and straw swath are reduced after every growth stage as well as after being exposed to rain." />
         <text name="ss_helpText_08_02" text="Grass bales will gradually rot and disappears after two days no matter where they are placed. To prevent the decay the bales need to be used or wrapped. Once wrapped they will turn into silage bales after 1/3 of a season." />
         <text name="ss_helpText_08_03" text="Swaths and piles of grass will begin to reduce in size, and will eventually disappear after several days. Grass swaths and piles are reduced at midnight every day. Hay and straw swaths and piles are reduced after being exposed to rain." />
         <text name="ss_helpText_08_04" text="Straw and hay must be baled before it can be sold - loose straw and hay cannot be sold, only given away for free. Grass, baled or loose, cannot be sold either." />
