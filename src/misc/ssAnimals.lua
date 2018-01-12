@@ -17,7 +17,6 @@ ssAnimals.PRODUCTIVITY_START = 0.8
 
 function ssAnimals:load(savegame, key)
     -- making it more expensive to buy animals directly
-    AnimalScreen.TRANSPORTATION_FEE = 600 * g_currentMission.missionInfo.buyPriceMultiplier
 
     -- Load or set default values
     local averageProduction = {}
@@ -79,6 +78,8 @@ function ssAnimals:loadMap(name)
     -- Show the same warning when the moisture system is disabled.
     ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "warning_inAdvanceFeedingLimitReached", ssLang.getText("warning_inAdvanceFeedingLimitReached3"))
     ssUtil.overwrittenConstant(getfenv(0)["g_i18n"].texts, "statistic_productivity", ssLang.getText("statistic_health"))
+
+    ssUtil.overwrittenConstant(AnimalScreen, "TRANSPORTATION_FEE", 600)
 
     -- Load parameters
     self:loadFromXML()
