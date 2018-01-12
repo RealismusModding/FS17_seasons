@@ -24,16 +24,20 @@ function ssTirePressure:prerequisitesPresent(specializations)
 end
 
 function ssTirePressure:preLoad()
-    self.updateInflationPressure = ssTirePressure.updateInflationPressure
-    self.getInflationPressure = ssTirePressure.getInflationPressure
 end
 
 function ssTirePressure:load(savegame)
     self.ssInflationPressure = ssTirePressure.PRESSURE_NORMAL
 
+    self.updateInflationPressure = ssTirePressure.updateInflationPressure
+    self.getInflationPressure = ssTirePressure.getInflationPressure
+    self.doCheckSpeedLimit = Utils.overwrittenFunction(self.doCheckSpeedLimit, ssTirePressure.doCheckSpeedLimit)
+
     if savegame ~= nil then
         self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", self.ssInflationPressure)
     end
+
+    self.ssInCabTirePressureControl = Utils.getNoNil(getXMLBool(self.xmlFile, "vehicle.ssInCabTirePressureControl"), false)
 
     self.ssAllWheelsCrawlers = true
     local tireTypeCrawler = WheelsUtil.getTireType("crawler")
@@ -42,7 +46,6 @@ function ssTirePressure:load(savegame)
             self.ssAllWheelsCrawlers = false
         end
     end
-
 end
 
 function ssTirePressure:delete()
@@ -74,7 +77,7 @@ function ssTirePressure:writeStream(streamId, connection)
     streamWriteInt(streamId, self.ssInflationPressure)
 end
 
-function ssTirePressure:updateInflationPressure(self)
+function ssTirePressure:updateInflationPressure()
     self.ssInflationPressure = self.ssInflationPressure + 1
     if self.ssInflationPressure > ssTirePressure.PRESSURE_MAX then
         self.ssInflationPressure = ssTirePressure.PRESSURE_LOW
@@ -106,30 +109,33 @@ function ssTirePressure:update(dt)
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 
         if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
-            ssTirePressure:updateInflationPressure(self)
-        end
-    end
-
-    self.ssTireLoadExceed = nil
-    for _, wheel in pairs(self.wheels) do
-        if wheel.hasGroundContact and not wheel.mrNotAWheel and wheel.load ~= nil and wheel.ssMaxLoad ~= nil then
-            -- only exceed rated tire load for low tire pressure
-            if wheel.load > wheel.ssMaxLoad and self.ssInflationPressure == ssTirePressure.PRESSURE_LOW then
-                self.ssTireLoadExceed = wheel
-                break -- already a value, no need to look at others
-            end
+            self:updateInflationPressure()
         end
     end
 end
 
 function ssTirePressure:draw()
-    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-
-    if self.isEntered and self.ssTireLoadExceed then
-        g_currentMission:showBlinkingWarning(string.format(g_i18n:getText("warning_tireload"), storeItem.name), 2000)
-    end
 end
 
 function ssTirePressure:getInflationPressure()
     return ssTirePressure.PRESSURES[self.ssInflationPressure]
+end
+
+function ssTirePressure:doCheckSpeedLimit(superFunc)
+    local parent = false
+    if superFunc ~= nil then
+        parent = superFunc(self)
+    end
+
+    return parent or self.ssInflationPressure == ssTirePressure.PRESSURE_LOW
+end
+
+function ssTirePressure:getSpeedLimit()
+    local limit = 1000
+
+    if self.ssInflationPressure == ssTirePressure.PRESSURE_LOW then
+        return 10
+    end
+
+    return limit
 end

@@ -458,13 +458,23 @@ end
 -- Limit the speed of working implements and machine on land to 4kmh or 0.25 their normal speed.
 -- Only in the winter
 function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
-    local vanillaSpeed, recalc = superFunc(self, onlyIfWorking)
+    local speedLimit, recalc = superFunc(self, onlyIfWorking)
 
-    -- only limit it if it works the ground and the ground is not frozen
+    -- See if any specs want to limit the speed
+    if self:doCheckSpeedLimit() then
+        for i = 1, table.getn(self.specializations) do
+            if self.specializations[i].getSpeedLimit ~= nil then
+                local limit = self.specializations[i].getSpeedLimit(self)
+                speedLimit = math.min(limit, speedLimit)
+            end
+        end
+    end
+
+    -- only limit it across the board if it works the ground and the ground is not frozen
     if not ssWeatherManager:isGroundFrozen()
         or not SpecializationUtil.hasSpecialization(WorkArea, self.specializations)
         or SpecializationUtil.hasSpecialization(ManureSpreader, self.specializations) then
-        return vanillaSpeed, recalc
+        return speedLimit, recalc
     end
 
     local isLowered = false
@@ -483,7 +493,7 @@ function ssVehicle:getSpeedLimit(superFunc, onlyIfWorking)
         self.ssNotAllowedSoilFrozen = false
     end
 
-    return vanillaSpeed, recalc
+    return speedLimit, recalc
 end
 
 function ssVehicle:vehicleDraw(superFunc, dt)
