@@ -611,7 +611,7 @@ function ssSeasonsMenu:updateGameSettings()
     self.settingElements.snow:setState(g_seasons.snow.mode)
     self.settingElements.snowTracks:setIsChecked(g_seasons.vehicle.snowTracksEnabled)
     self.settingElements.moisture:setIsChecked(g_seasons.weather.moistureEnabled)
-    self.settingElements.soilCompaction:setIsChecked(g_seasons.soilCompaction.compactionEnabled)
+    self.settingElements.soilCompaction:setIsChecked(g_seasons.soilCompaction.enabled)
 
     -- Make sure the GUI is consistent
     self:updateTracksDisablement()
@@ -639,7 +639,7 @@ function ssSeasonsMenu:hasSettingsChanged()
         or self.settingElements.snowTracks:getIsChecked() ~= ssVehicle.snowTracksEnabled
         or self.settingElements.snow:getState() ~= ssSnow.mode
         or self.settingElements.moisture:getIsChecked() ~= g_seasons.weather.moistureEnabled
-        or self.settingElements.soilCompaction:getIsChecked() ~= g_seasons.soilCompaction.compactionEnabled
+        or self.settingElements.soilCompaction:getIsChecked() ~= g_seasons.soilCompaction.enabled
 end
 
 function ssSeasonsMenu:saveSettings()
@@ -659,7 +659,7 @@ function ssSeasonsMenu:saveSettings()
 
         g_seasons.vehicle.snowTracksEnabled = self.settingElements.snowTracks:getIsChecked()
         g_seasons.weather.moistureEnabled = self.settingElements.moisture:getIsChecked()
-        g_seasons.soilCompaction.compactionEnabled = self.settingElements.soilCompaction:getIsChecked()
+        g_seasons.soilCompaction.enabled = self.settingElements.soilCompaction:getIsChecked()
 
         -- Change header numbers
         self:updateSeasonLengthGraphs()

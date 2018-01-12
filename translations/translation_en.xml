@@ -9,7 +9,7 @@
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
         <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
-        <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation Depth (%s)" />
+        <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation depth (%s)" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -143,7 +143,7 @@
         <text name="tooltip_snowTracks" text="Vehicles compress snow when driving over it" />
         <text name="tooltip_controlsTemperature" text="Set the temperature scale used in the game" />
         <text name="tooltip_moisture" text="Disallow threshing when crops have excessive moisture (20%)" />
-        <text name="tooltip_soilCompaction" text="Compact soil when driving over it. Compaction affects crop yields" />
+        <text name="tooltip_soilCompaction" text="Compact soil when driving over it. Compaction affects crop yields." />
 
         <text name="setting_seasonIntros" text="Season Introductions" />
         <text name="setting_seasonLength" text="Season Length" />

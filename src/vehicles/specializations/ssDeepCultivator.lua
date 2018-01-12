@@ -8,7 +8,7 @@
 
 ssDeepCultivator = {}
 
-ssDeepCultivator.MAX_CHARS_TO_DISPLAY = 20
+ssDeepCultivator.SHALLOW_FORCE_FACTOR = 0.7
 
 ssDeepCultivator.DEPTH_SHALLOW = 1
 ssDeepCultivator.DEPTH_DEEP = 2
@@ -23,18 +23,20 @@ function ssDeepCultivator:preLoad()
 end
 
 function ssDeepCultivator:load(savegame)
+    self.updateCultivationDepth = ssDeepCultivator.updateCultivationDepth
+    self.processCultivatorAreas = Utils.overwrittenFunction(self.processCultivatorAreas, ssDeepCultivator.processCultivatorAreas);
+
     self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
 
     if savegame ~= nil then
         self.ssCultivationDepth = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssCultivationDepth", self.ssCultivationDepth)
     end
 
-   self.ssValidDeepCultivator = false
+    self.ssValidDeepCultivator = false
 
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
     local workingWidth = storeItem.specs.workingWidth
     local maxForce = self.powerConsumer.maxForce
-    self.ssShallowMaxForce = maxForce * 0.7 --70% force required for shallow cultivation
     self.ssOrigMaxForce = maxForce
 
     self.ssDeepCultivatorMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#deep")
@@ -60,7 +62,7 @@ function ssDeepCultivator:load(savegame)
     end
 
     if self.ssCultivationDepth == ssDeepCultivator.DEPTH_SHALLOW then
-        self.powerConsumer.maxForce = self.ssShallowMaxForce
+        self.powerConsumer.maxForce = self.ssOrigMaxForce * ssDeepCultivator.SHALLOW_FORCE_FACTOR
     end
 end
 
@@ -91,44 +93,54 @@ end
 function ssDeepCultivator:writeStream(streamId, connection)
 end
 
-function ssDeepCultivator:updateCultivationDepth(self)
+function ssDeepCultivator:updateCultivationDepth()
     self.ssCultivationDepth = self.ssCultivationDepth + 1
     self.powerConsumer.maxForce = self.ssOrigMaxForce
 
     if self.ssCultivationDepth > ssDeepCultivator.DEPTH_MAX then
         self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
-        self.powerConsumer.maxForce = self.ssShallowMaxForce
+        self.powerConsumer.maxForce = self.ssOrigMaxForce * ssDeepCultivator.SHALLOW_FORCE_FACTOR
     end
-
-    -- TOOD Need to set cultivatorDecompactionDelta for ssSC
 
     -- TODO(Jos) send event with new cultivation depth
 end
 
 function ssDeepCultivator:update(dt)
     if not g_currentMission:getIsServer()
-        or not g_seasons.soilCompaction.compactionEnabled
+        or not g_seasons.soilCompaction.enabled
         or not self.ssValidDeepCultivator then
         return end
 
     if self:getIsActiveForInput(true) then
-        local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-        local vehicleName = storeItem.brand .. " " .. storeItem.name
-
-        -- Show text for changing cultivation depth
-        local storeItemName = storeItem.name
-        if string.len(storeItemName) > ssDeepCultivator.MAX_CHARS_TO_DISPLAY then
-            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssDeepCultivator.MAX_CHARS_TO_DISPLAY - 5)) .. "..."
-        end
-
         local cultivationDepthText = g_i18n:getText("CULTIVATION_DEPTH_" .. tostring(self.ssCultivationDepth))
         -- need to set a new inputBinding
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_CULTIVATION_DEPTH"), cultivationDepthText), InputBinding.IMPLEMENT_EXTRA4, nil, GS_PRIO_HIGH)
 
         if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA4) then
-            ssDeepCultivator:updateCultivationDepth(self)
+            self:updateCultivationDepth()
         end
     end
+end
+
+function ssDeepCultivator:processCultivatorAreas(superFunc, ...)
+    local depth = ssDeepCultivator.DEPTH_SHALLOW
+
+    -- When SC is disabled we should not apply a deeper depth even though it is configured as such
+    if g_seasons.soilCompaction.enabled then
+        depth = self.ssCultivationDepth
+    end
+
+    local oldAreaUpdater = Utils.updateCultivatorArea
+    Utils.updateCultivatorArea = function (startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, forced, commonForced, angle)
+        -- Add depth parameter
+        return oldAreaUpdater(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, forced, commonForced, angle, depth)
+    end
+
+    local sumArea = superFunc(self, ...)
+
+    Utils.updateCultivatorArea = oldAreaUpdater
+
+    return sumArea
 end
 
 function ssDeepCultivator:draw()

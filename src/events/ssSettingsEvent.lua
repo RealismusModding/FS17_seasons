@@ -70,7 +70,7 @@ function ssSettingsEvent:run(connection)
     g_seasons.environment:changeDaysInSeason(self.seasonLength)
     g_seasons.vehicle.snowTracksEnabled = self.snowTracksEnabled
     g_seasons.weather.moistureEnabled = self.moistureEnabled
-    g_seasons.soilCompaction.compactionEnabled = self.soilCompactionEnabled
+    g_seasons.soilCompaction.enabled = self.soilCompactionEnabled
 
     g_seasons.mainMenu:updateGameSettings()
     g_seasons.mainMenu:updateSeasonLengthGraphs()

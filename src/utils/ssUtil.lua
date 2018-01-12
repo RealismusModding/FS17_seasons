@@ -300,7 +300,6 @@ if GS_IS_CONSOLE_VERSION or g_testConsoleVersion then
     function ssUtil.appendedFunction(target, name, newFunc)
         storeOriginalFunction(target, name)
 
-        log("Set new target", name, newFunc)
         target[name] = Utils.appendedFunction(target[name], newFunc)
     end
 
