@@ -11,6 +11,9 @@ ssAnimals = {}
 
 function ssAnimals:preLoad()
     g_seasons.animals = self
+
+    -- making it more expensive to buy animals directly
+    ssUtil.overwrittenConstant(AnimalScreen, "TRANSPORTATION_FEE", 600)
 end
 
 ssAnimals.PRODUCTIVITY_START = 0.8

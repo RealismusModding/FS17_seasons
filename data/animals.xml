@@ -21,7 +21,7 @@
                 <dailyUpkeep>10</dailyUpkeep>
             </properties>
             <properties type="sheep">
-                <food>27</food>
+                <food>20</food>
                 <water>15</water>
                 <birthRate>0.035</birthRate>
                 <wool>22.4</wool>
@@ -29,9 +29,9 @@
             </properties>
             <properties type="pig">
                 <straw>15</straw>
-                <food>81</food>
+                <food>20</food>
                 <water>10</water>
-                <birthRate>0.04</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>27</manure>
                 <liquidManure>46</liquidManure>
                 <dailyUpkeep>10</dailyUpkeep>
@@ -51,7 +51,7 @@
             </properties>
 
             <properties type="sheep">
-                <food>27</food>
+                <food>17</food>
                 <water>22.5</water>
                 <birthRate>0</birthRate>
                 <wool>9.6</wool>
@@ -60,9 +60,9 @@
 
             <properties type="pig">
                 <straw>5</straw>
-                <food>81</food>
+                <food>20</food>
                 <water>15</water>
-                <birthRate>0</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>23</manure>
                 <liquidManure>40</liquidManure>
                 <dailyUpkeep>5</dailyUpkeep>
@@ -82,7 +82,7 @@
             </properties>
 
             <properties type="sheep">
-                <food>30</food>
+                <food>25</food>
                 <water>11.25</water>
                 <birthRate>0</birthRate>
                 <wool>0</wool>
@@ -91,9 +91,9 @@
 
             <properties type="pig">
                 <straw>20</straw>
-                <food>90</food>
+                <food>23</food>
                 <water>7.5</water>
-                <birthRate>0.04</birthRate>
+                <birthRate>0.03</birthRate>
                 <manure>30</manure>
                 <liquidManure>53</liquidManure>
                 <dailyUpkeep>10</dailyUpkeep>
@@ -122,7 +122,7 @@
 
             <properties type="pig">
                 <straw>40</straw>
-                <food>108</food>
+                <food>27</food>
                 <water>7.5</water>
                 <birthRate>0</birthRate>
                 <manure>38</manure>
