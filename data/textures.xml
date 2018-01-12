@@ -181,6 +181,8 @@
             <texture shapeName="poplar_satge5" secondaryNodeName="attachments" to="poplarBranch_autumn" />
             <texture shapeName="poplar_satge5" secondaryNodeName="LOD0" to="oakTrunk_any" />
             <texture shapeName="poplar_satge5" secondaryNodeName="LOD1" to="poplar5LOD_autumn" />
+
+            <foliageLayer name="grass" to="grass_autumn" />
         </autumn>
 
         <winter>
