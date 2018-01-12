@@ -42,8 +42,6 @@ function ssDeepCultivator:load(savegame)
     self.ssDeepCultivatorMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#deep")
     self.ssSubsoilerMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#subsoiler")
 
-    --print(storeItem.name .. " " .. self.ssDeepCultivatorMod .. " " .. self.ssSubsoilerMod)
-
     if self.ssDeepCultivatorMod and self.ssSubsoilerMod then
         logInfo("ssDeepCultivator:", storeItem.name .. " cannot be both a subsoiler and a deep cultivator. Subsoiler applied.")
         self.ssDeepCultivatorMod = false
