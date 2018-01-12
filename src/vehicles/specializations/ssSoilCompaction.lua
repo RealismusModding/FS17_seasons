@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------------------------------
 -- Author:  Rahkiin, reallogger
 --
--- Copyright (c) Realismus Modding, 2017
+-- Copyright (c) Realismus Modding, 2018
 ----------------------------------------------------------------------------------------------------
 
 ssSoilCompaction = {}
@@ -24,6 +24,8 @@ function ssSoilCompaction:load(savegame)
     self.applySoilCompaction = ssSoilCompaction.applySoilCompaction
     self.getCompactionLayers = ssSoilCompaction.getCompactionLayers
     self.getTireMaxLoad = ssSoilCompaction.getTireMaxLoad
+
+    self.ssCompactionIndicatorIsCorrect = false
 end
 
 function ssSoilCompaction:delete()
@@ -94,6 +96,8 @@ function ssSoilCompaction:applySoilCompaction()
             elseif soilBulkDensityRef > ssSoilCompaction.HEAVY_COMPACTION then
                 wheel.possibleCompaction = 0
             end
+            self.ssCompactionIndicatorIsCorrect = true
+
             --below only for debug print. TODO: remove when done
             wheel.soilBulkDensity = soilBulkDensityRef
 
@@ -148,7 +152,7 @@ function ssSoilCompaction:applySoilCompaction()
                 local dx, _ ,dz = localDirectionToWorld(self.rootNode, 0, 0, 1)
                 local angle = Utils.convertToDensityMapAngle(Utils.getYRotationFromDirection(dx, dz), g_currentMission.terrainDetailAngleMaxValue)
 
-                local x0, z0, x1, z1, x2, z2, underLayers = self:getCompactionLayers(wheel, math.max(0.1, width - 0.15), length, radius, length, length)
+                local x0, z0, x1, z1, x2, z2, underLayers = self:getCompactionLayers(wheel, math.max(0.1, width * 0.5 - 0.15), length, radius, length, length)
                 local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, x0, z0, x1, z1, x2, z2)
 
                 local cm = g_currentMission
@@ -186,7 +190,7 @@ function ssSoilCompaction:getCompactionLayers(wheel, width, length, radius, delt
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailId, x0, z0, x1, z1, x2, z2)
 
     local density, area, _ = getDensityParallelogram(g_currentMission.terrainDetailId, x, z, widthX, widthZ, heightX, heightZ, g_currentMission.ploughCounterFirstChannel, g_currentMission.ploughCounterNumChannels)
-    local compactionLayers = density/area
+    local compactionLayers = density / area
 
     return x0, z0, x1, z1, x2, z2, compactionLayers
 end
@@ -201,13 +205,11 @@ function ssSoilCompaction:update(dt)
         self:applySoilCompaction()
     end
 
-    -- text in menu will not be correct before the tractor has driven a few seconds
-    -- TODO: only works for tractors you have been sitting in at the moment
-    if self:isPlayerInRange() then
+    if self.ssCompactionIndicatorIsCorrect and self:isPlayerInRange() then
         local worstCompaction = 4
         for _, wheel in pairs(self.wheels) do
             -- fallback to 'no compaction'
-            worstCompaction = math.min(worstCompaction,Utils.getNoNil(wheel.possibleCompaction, 4))
+            worstCompaction = math.min(worstCompaction, Utils.getNoNil(wheel.possibleCompaction, 4))
         end
 
         if worstCompaction < 4 then

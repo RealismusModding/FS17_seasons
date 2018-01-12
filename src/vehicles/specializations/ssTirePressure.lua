@@ -94,20 +94,14 @@ function ssTirePressure:updateInflationPressure(self)
         end
     end
 
+    -- Update compaction indicator
+    self.ssCompactionIndicatorIsCorrect = false
+
     -- TODO(Jos) send event with new pressure for vehicle
 end
 
 function ssTirePressure:update(dt)
     if self.isClient and self:canPlayerInteractInWorkshop() and not self.ssAllWheelsCrawlers then
-        local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-        local vehicleName = storeItem.brand .. " " .. storeItem.name
-
-        -- Show text for changing inflation pressure
-        local storeItemName = storeItem.name
-        if string.len(storeItemName) > ssTirePressure.MAX_CHARS_TO_DISPLAY then
-            storeItemName = ssUtil.trim(string.sub(storeItemName, 1, ssTirePressure.MAX_CHARS_TO_DISPLAY - 3)) .. "..."
-        end
-
         local pressureText = g_i18n:getText("TIRE_PRESSURE_" .. tostring(self.ssInflationPressure))
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 
