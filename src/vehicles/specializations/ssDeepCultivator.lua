@@ -141,18 +141,16 @@ function ssDeepCultivator:processCultivatorAreas(superFunc, ...)
                 if a > 0 then
                     crop = {
                         desc = fruitDesc,
-                        maxState = fruitDesc.maxHarvestingGrowthState,
-                        id = fruit.id,
                         stage = a / b
                     }
                     break
                 end
             end
         end
-
+        
         -- increasing cultivation depth if cultivating radish that is ready
         if crop ~= nil then
-            if crop.id == FruitUtil.FRUITTYPE_OILSEEDRADISH and crop.stage == crop.maxState then
+            if crop.desc.index == FruitUtil.FRUITTYPE_OILSEEDRADISH and crop.stage == crop.desc.maxHarvestingGrowthState then
                 depth = math.min(depth + 1, 3)
             end
         end
