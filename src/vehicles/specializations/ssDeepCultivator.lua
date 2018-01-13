@@ -147,7 +147,7 @@ function ssDeepCultivator:processCultivatorAreas(superFunc, ...)
                 end
             end
         end
-        
+
         -- increasing cultivation depth if cultivating radish that is ready
         if crop ~= nil then
             if crop.desc.index == FruitUtil.FRUITTYPE_OILSEEDRADISH and crop.stage == crop.desc.maxHarvestingGrowthState then
