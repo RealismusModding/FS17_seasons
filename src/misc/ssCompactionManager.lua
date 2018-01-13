@@ -59,7 +59,7 @@ end
 -- Cutting fruit no longer increases the ploughcounter: only driving over an area does.
 function ssCompactionManager.cutFruitArea(superFunc, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, ...)
     if not ssCompactionManager.enabled then
-        return superFunc(self, fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, ...)
+        return superFunc(fruitId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, ...)
     end
 
     local tmpNumChannels = g_currentMission.ploughCounterNumChannels
