@@ -130,6 +130,33 @@ function ssDeepCultivator:processCultivatorAreas(superFunc, ...)
 
     local oldAreaUpdater = Utils.updateCultivatorArea
     Utils.updateCultivatorArea = function (startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, forced, commonForced, angle)
+
+        -- checking what crop is cultivated and what stage it is
+        local crop = nil
+        for index, fruit in pairs(g_currentMission.fruits) do
+            local fruitDesc = FruitUtil.fruitIndexToDesc[index]
+            local a, b, _ = getDensityParallelogram(fruit.id, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ,  0, g_currentMission.numFruitDensityMapChannels)
+
+            if a ~= nil then
+                if a > 0 then
+                    crop = {
+                        desc = fruitDesc,
+                        maxState = fruitDesc.maxHarvestingGrowthState,
+                        id = fruit.id,
+                        stage = a / b
+                    }
+                    break
+                end
+            end
+        end
+
+        -- increasing cultivation depth if cultivating radish that is ready
+        if crop ~= nil then
+            if crop.id == FruitUtil.FRUITTYPE_OILSEEDRADISH and crop.stage == crop.maxState then
+                depth = math.min(depth + 1, 3)
+            end
+        end
+
         -- Add depth parameter
         return oldAreaUpdater(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, forced, commonForced, angle, depth)
     end
