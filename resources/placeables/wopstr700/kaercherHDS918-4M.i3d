@@ -7,10 +7,9 @@
     <File fileId="2" filename="kaercherHDS918-4M_normal.png" relativePath="true"/>
     <File fileId="4" filename="kaercherHDS918-4M_specular.png" relativePath="true"/>
     <File fileId="6" filename="kaercherHDS918-4MDecals_diffuse.png" relativePath="true"/>
-
-    <File fileId="3" filename="data/shared/rough_cube.dds" relativePath="false"/>
-    <File fileId="7" filename="data/shared/default_normal.png" relativePath="false"/>
-    <File fileId="5" filename="data/shaders/vehicleShader.xml" relativePath="false"/>
+    <File fileId="3" filename="../../../shared/rough_cube.dds" relativePath="true"/>
+    <File fileId="7" filename="../../../shared/default_normal.png" relativePath="true"/>
+    <File fileId="5" filename="../../../shaders/vehicleShader.xml" relativePath="true"/>
   </Files>
 
   <Materials>
@@ -30,6 +29,7 @@
       <Normalmap fileId="7"/>
     </Material>
   </Materials>
+
 
   <Shapes externalShapesFile="kaercherHDS918-4M.i3d.shapes">
   </Shapes>

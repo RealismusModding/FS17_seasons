@@ -13,7 +13,7 @@ ssAirCompressorPlaceable = {}
 
 local ssAirCompressorPlaceable_mt = Class(ssAirCompressorPlaceable, Placeable)
 
-InitStaticObjectClass(ssAirCompressorPlaceable, "ssAirCompressorPlaceable")
+InitObjectClass(ssAirCompressorPlaceable, "ssAirCompressorPlaceable")
 
 function ssAirCompressorPlaceable:new(isServer, isClient, customMt)
     local mt = customMt
@@ -37,9 +37,16 @@ function ssAirCompressorPlaceable:load(xmlFilename, x,y,z, rx,ry,rz, initRandom)
     local xmlFile = loadXMLFile("TempXML", xmlFilename)
 
     self.playerInRangeDistance = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.playerInRangeDistance"), 3)
-    self.actionRadius = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.actionRadius#distance"), 15);
+    self.actionRadius = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.actionRadius#distance"), 15)
     self.airDistance = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.airDistance"), 10)
-    self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.pricePerSecond"), 10) / 1000;
+    self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.pricePerSecond"), 10) / 1000
+
+    self.lanceNode = Utils.indexToObject(self.nodeId, getXMLString(xmlFile, "placeable.airCompressor.lance#index"))
+    self.linkPosition = Utils.getVectorNFromString(Utils.getNoNil(getXMLString(xmlFile, "placeable.airCompressor.lance#position"), "0 0 0"), 3)
+    self.linkRotation = Utils.getRadiansFromString(Utils.getNoNil(getXMLString(xmlFile, "placeable.airCompressor.lance#rotation"), "0 0 0"), 3)
+    self.lanceNodeParent = getParent(self.lanceNode)
+    self.lanceRaycastNode = Utils.indexToObject(self.nodeId, getXMLString(xmlFile, "placeable.airCompressor.lance#raycastNode"))
+
 
     delete(xmlFile)
 
@@ -185,7 +192,7 @@ function ssAirCompressorPlaceable:updateTick(dt)
     end
 end
 
--- function ssAirCompressorPlaceable:setIsWashing(doWashing, force, noEventSend)
+function ssAirCompressorPlaceable:setIsWashing(doWashing, force, noEventSend)
 --     HPWPlaceableStateEvent.sendEvent(self, doWashing, noEventSend)
 --     if self.doWashing ~= doWashing then
 --         if self.isClient then
@@ -216,7 +223,7 @@ end
 --         end
 --         self.doWashing = doWashing
 --     end
--- end
+end
 
 function ssAirCompressorPlaceable:setIsTurnedOn(isTurnedOn, player, noEventSend)
     HPWPlaceableTurnOnEvent.sendEvent(self, isTurnedOn, player, noEventSend)
@@ -351,6 +358,8 @@ function ssAirCompressorPlaceable:washRaycastCallback(hitActorId, x, y, z, dista
     return true
 end
 
+registerPlaceableType("ssAirCompressor", ssAirCompressorPlaceable)
+
 ----------------------
 -- Lance player tool
 ----------------------
@@ -376,7 +385,7 @@ end
 
 function ssAirCompressorPlaceable.updateLance(tool, dt, allowInput)
     if allowInput then
-        -- tool.owner:setIsWashing(InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL), false, false)
+        tool.owner:setIsWashing(InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL), false, false)
     end
 end
 

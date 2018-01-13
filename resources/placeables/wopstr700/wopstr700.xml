@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <placeable>
     <storeData>
-        <name>A700</name>
+        <name>A 700</name>
         <functions>
             <function>$l10n_function_airCompressor</function>
         </functions>
-        <image>store.png</image>
+        <image>resources/placeables/wopstr700/store.png</image>
         <price>4500</price>
         <dailyUpkeep>10</dailyUpkeep>
         <lifetime>400</lifetime>
@@ -20,8 +20,8 @@
         <instanceIndexBufferMemoryUsage>0</instanceIndexBufferMemoryUsage> -->
     </storeData>
 
-    <placeableType>airCompressor</placeableType>
-    <filename>wopster700.i3d</filename>
+    <placeableType>ssAirCompressor</placeableType>
+    <filename>resources/placeables/wopstr700/wopstr700.i3d</filename>
     <placement testSizeX="1" testSizeZ="1" sizeX="1.5" sizeZ="1.5" useRandomYRotation="false" useManualYRotation="true" alignToWorldY="false" pos1Node="0>1" pos2Node="0>2" pos3Node="0>3"/>
 
     <airCompressor>
@@ -30,7 +30,7 @@
         <waterEffect>
             <effectNode effectNode="0>0|0|0|0|0" materialType="WASHER" materialTypeId="1" />
         </waterEffect> -->
-        <pricePerSecond>10</pricePerSecond>
+        <pricePerSecond>1</pricePerSecond>
         <!-- <washMultiplier>3</washMultiplier> -->
 <!--         <compressorSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_run.wav" pitchOffset="1" pitchMin="0.3" volume="1" radius="20" innerRadius="5" />
         <washingSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_washingSound.wav" pitchOffset="1" volume="1" />
