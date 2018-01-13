@@ -132,16 +132,16 @@ Pro více informací o hraní navštívte sekci Seasons pomoc ve hře. Úplný s
         <input name="SEASONS_SHOW_WF"           category="ONFOOT"           key1="KEY_lalt KEY_f" button="BUTTON_5 BUTTON_6 BUTTON_3" />
         <input name="SEASONS_SHOW_MENU"         category="ONFOOT VEHICLE"   key1="KEY_lalt KEY_s" button="BUTTON_5 BUTTON_10" />
         <input name="SEASONS_SKIP_NIGHT"        category="ONFOOT"           key1="KEY_lalt KEY_n" button="BUTTON_5 BUTTON_6 BUTTON_4" />
-        <!-- <input name="SEASONS_TIRE_PRESSURE" category="ONFOOT" key1="KEY_lalt KEY_p" key2="" button="" device="" mouse=""/> -->
     </inputBindings>
 
     <brands>
-        <brand name="WOPSTR" title="Wopstr" image="resources/handtools/wopstr420/brand_wopstr.png" />
+        <brand name="WOPSTR" title="Wopstr" image="resources/brand_wopstr.png" />
     </brands>
 
     <storeItems>
         <storeItem xmlFilename="resources/fakeStoreItem/item.xml" />
         <storeItem xmlFilename="resources/fakeStoreItem/item2.xml" />
         <storeItem rootNode="handTool" xmlFilename="resources/handtools/wopstr420/wopstr420.xml" />
+        <storeItem rootNode="placeable" xmlFilename="resources/handtools/wopstr420/wopstr420.xml" />
     </storeItems>
 </modDesc>

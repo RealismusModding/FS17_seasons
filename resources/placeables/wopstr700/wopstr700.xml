@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<placeable>
+    <storeData>
+        <name>A700</name>
+        <functions>
+            <function>$l10n_function_airCompressor</function>
+        </functions>
+        <image>store.png</image>
+        <price>4500</price>
+        <dailyUpkeep>10</dailyUpkeep>
+        <lifetime>400</lifetime>
+        <rotation>0</rotation>
+        <brand>WOPSTR</brand>
+        <species>placeable</species>
+        <category>placeables</category>
+<!--         <vertexBufferMemoryUsage>434896</vertexBufferMemoryUsage>
+        <indexBufferMemoryUsage>89424</indexBufferMemoryUsage>
+        <textureMemoryUsage>9786840</textureMemoryUsage>
+        <instanceVertexBufferMemoryUsage>0</instanceVertexBufferMemoryUsage>
+        <instanceIndexBufferMemoryUsage>0</instanceIndexBufferMemoryUsage> -->
+    </storeData>
+
+    <placeableType>airCompressor</placeableType>
+    <filename>wopster700.i3d</filename>
+    <placement testSizeX="1" testSizeZ="1" sizeX="1.5" sizeZ="1.5" useRandomYRotation="false" useManualYRotation="true" alignToWorldY="false" pos1Node="0>1" pos2Node="0>2" pos3Node="0>3"/>
+
+    <airCompressor>
+        <lance index="0>0|0|0" position="-0.18 -0.18692198 0.25" rotation="-7 11 10" raycastNode="0>0|0|0|1|1" />
+<!--         <emitterShape node="0>0|0|0|0|1" particleType="WASHER_WATER" emitCountScale="7000"/>
+        <waterEffect>
+            <effectNode effectNode="0>0|0|0|0|0" materialType="WASHER" materialTypeId="1" />
+        </waterEffect> -->
+        <pricePerSecond>10</pricePerSecond>
+        <!-- <washMultiplier>3</washMultiplier> -->
+<!--         <compressorSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_run.wav" pitchOffset="1" pitchMin="0.3" volume="1" radius="20" innerRadius="5" />
+        <washingSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_washingSound.wav" pitchOffset="1" volume="1" />
+        <switchSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_switch.wav" pitchOffset="1" volume="1" /> -->
+        <targets>
+            <target ikChain="leftArm" targetNode="0>0|0|0|1|0" targetOffset="0.04 0.066 0">
+                <rotationNode id="1" rotation="90 -30 -20" />
+                <rotationNode id="2" rotation="0 0 -44" />
+                <rotationNode id="3" rotation="0 0 -10" />
+
+                <rotationNode id="4" rotation="0 0 -40" />
+                <rotationNode id="5" rotation="0 0 -80" />
+                <rotationNode id="6" rotation="0 0 0" />
+
+                <rotationNode id="7" rotation="0 0 -40" />
+                <rotationNode id="8" rotation="0 0 -80" />
+                <rotationNode id="9" rotation="0 0 0" />
+
+                <rotationNode id="10" rotation="0 0 -40" />
+                <rotationNode id="11" rotation="0 0 -80" />
+                <rotationNode id="12" rotation="0 0 0" />
+
+                <rotationNode id="13" rotation="0 0 -40" />
+                <rotationNode id="14" rotation="0 0 -80" />
+                <rotationNode id="15" rotation="0 0 0" />
+            </target>
+        </targets>
+    </airCompressor>
+
+    <tipOcclusionUpdateArea sizeX="2" sizeZ="2" />
+    <clearAreas>
+        <clearArea startIndex="0>5|0" widthIndex="0>5|1" heightIndex="0>5|2"/>
+    </clearAreas>
+</placeable>

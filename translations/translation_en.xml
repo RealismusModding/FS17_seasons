@@ -168,6 +168,7 @@
         <text name="fillType_snow" text="Snow" />
 
         <text name="function_measureTool" text="Using a measurement tool, you can get information on the soil, trees, bales, and other objects." />
+        <text name="function_airCompressor" text="With an air compressor wheels can be inflated or deflated to adjust tire pressure." />
 
         <text name="ss_helpCategory" text="Seasons" />
 

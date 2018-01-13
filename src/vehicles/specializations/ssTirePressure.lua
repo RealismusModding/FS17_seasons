@@ -121,6 +121,9 @@ function ssTirePressure:getInflationPressure()
     return ssTirePressure.PRESSURES[self.ssInflationPressure]
 end
 
+function ssTirePressure:setInflactionPressure(pressure)
+end
+
 function ssTirePressure:doCheckSpeedLimit(superFunc)
     local parent = false
     if superFunc ~= nil then
