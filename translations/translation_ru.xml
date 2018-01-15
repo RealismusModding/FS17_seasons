@@ -127,7 +127,7 @@
         <text name="tooltip_controlsHelp" text="Отображать сочетание клавиш для прогноза погоды и вызова этого меню в меню справки." />
         <text name="tooltip_snowTracks" text="Транспортные средства при движении по снегу будут его уплотнять и оставлять колеи" />
         <text name="tooltip_controlsTemperature" text="Изменение единицы измерения температуры, используемой в игре" />
-        <text name="tooltip_moisture" text="Запрещает обмолот, когда культуры мокрые" />
+        <text name="tooltip_moisture" text="Запрещать обмолот, когда влажность культуры более 20%" />
 
         <text name="setting_seasonIntros" text="Напоминание о сезонах" />
         <text name="setting_seasonLength" text="Продолжительность сезона" />

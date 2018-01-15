@@ -21,7 +21,7 @@
                 <dailyUpkeep>10</dailyUpkeep>
             </properties>
             <properties type="sheep">
-                <food>27</food>
+                <food>20</food>
                 <water>15</water>
                 <birthRate>0.035</birthRate>
                 <wool>22.4</wool>
@@ -51,7 +51,7 @@
             </properties>
 
             <properties type="sheep">
-                <food>27</food>
+                <food>17</food>
                 <water>22.5</water>
                 <birthRate>0</birthRate>
                 <wool>9.6</wool>
@@ -82,7 +82,7 @@
             </properties>
 
             <properties type="sheep">
-                <food>30</food>
+                <food>25</food>
                 <water>11.25</water>
                 <birthRate>0</birthRate>
                 <wool>0</wool>
