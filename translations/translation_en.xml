@@ -10,6 +10,8 @@
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
         <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
         <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation depth (%s)" />
+        <text name="input_COMPRESSOR_INFLATE" text="Increase tire pressure" />
+        <text name="input_COMPRESSOR_DEFLATE" text="Decrease tire pressure" />
         <text name="SEASONS_HIDE_WF" text="Seasons: Hide weather forecast" />
 
         <text name="SS_WEEKDAY_1" text="Monday" />
@@ -75,6 +77,9 @@
 
         <text name="ui_doRepair" text="repair" />
         <text name="ui_repairOrCustomizeVehicleTitle" text="Repair and customization" />
+
+        <text name="warning_compressorRangeRestriction" text="The pressure compressor hose restricts you from going any further." />
+        <text name="typeDesc_airCompressor" text="air compressor" />
 
         <text name="TIRE_PRESSURE_1" text="Low" />
         <text name="TIRE_PRESSURE_2" text="Normal" />

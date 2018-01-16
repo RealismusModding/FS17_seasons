@@ -39,7 +39,7 @@ function ssAirCompressorPlaceable:load(xmlFilename, x,y,z, rx,ry,rz, initRandom)
     self.playerInRangeDistance = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.playerInRangeDistance"), 3)
     self.actionRadius = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.actionRadius#distance"), 15)
     self.airDistance = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.airDistance"), 10)
-    self.pricePerMilliSecond = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.pricePerSecond"), 10) / 1000
+    self.pricePerSecond = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.pricePerSecond"), 10)
 
     self.lanceNode = Utils.indexToObject(self.nodeId, getXMLString(xmlFile, "placeable.airCompressor.lance#index"))
     self.linkPosition = Utils.getVectorNFromString(Utils.getNoNil(getXMLString(xmlFile, "placeable.airCompressor.lance#position"), "0 0 0"), 3)
@@ -51,10 +51,16 @@ function ssAirCompressorPlaceable:load(xmlFilename, x,y,z, rx,ry,rz, initRandom)
     delete(xmlFile)
 
     self.isPlayerInRange = false
-    self.isTurnedOn = false
+    self.isTurnedOn = false -- making sound, holding lance
+    self.isTurningOff = false -- making no sound, not holding lance
+
+    -- The lance that can be activated
     self.activatable = ssAirCompressorPlaceableActivatable:new(self)
+
+    -- To check distance between compressor and player
     self.lastInRangePosition = {0, 0, 0}
-    self.isTurningOff = false
+
+    -- Sound animation for turning off
     self.turnOffTime = 0
     self.turnOffDuration = 500
 
@@ -70,6 +76,7 @@ function ssAirCompressorPlaceable:delete()
 
     unregisterObjectClassName(self)
     g_currentMission:removeActivatableObject(self.activatable)
+
     ssAirCompressorPlaceable:superClass().delete(self)
 end
 
@@ -80,6 +87,7 @@ function ssAirCompressorPlaceable:readStream(streamId, connection)
         local isTurnedOn = streamReadBool(streamId)
         if isTurnedOn then
             local player = readNetworkNodeObject(streamId)
+
             if player ~= nil then
                 self:setIsTurnedOn(isTurnedOn, player, true)
             end
@@ -123,20 +131,22 @@ function ssAirCompressorPlaceable:update(dt)
             self.lastInRangePosition = {x, y, z}
 
             if not self.messageShown and self.currentPlayer == g_currentMission.player then
--- TODO: different text
-                g_currentMission:showBlinkingWarning(g_i18n:getText("warning_hpwRangeRestriction"), 6000)
+                g_currentMission:showBlinkingWarning(g_i18n:getText("warning_compressorRangeRestriction"), 6000)
                 self.messageShown = true
             end
         end
     end
 
     if self.isServer then
-        if self.isTurnedOn and false then --and self.doWashing then
+        if self.isTurnedOn and self.doFlating then
             self.foundVehicle = nil
--- self:cleanVehicle(self.currentPlayer.cameraNode, dt)
+
+            log("camera node")
+            self:flateVehicle(self.currentPlayer.cameraNode, dt)
 
             if self.lanceRaycastNode ~= nil then
--- self:cleanVehicle(self.lanceRaycastNode, dt)
+                log("lance node")
+                self:flateVehicle(self.lanceRaycastNode, dt)
             end
 
             local price = self.pricePerSecond * (dt / 1000)
@@ -162,8 +172,7 @@ function ssAirCompressorPlaceable:update(dt)
     -- end
 end
 
--- TODO: rename
-function ssAirCompressorPlaceable:cleanVehicle(node, dt)
+function ssAirCompressorPlaceable:flateVehicle(node, dt)
     local x,y,z = getWorldTranslation(node)
     local dx, dy, dz = localDirectionToWorld(node, 0, 0, -1)
     local lastFoundVehicle = self.foundVehicle
@@ -171,6 +180,7 @@ function ssAirCompressorPlaceable:cleanVehicle(node, dt)
     raycastAll(x, y, z, dx, dy, dz, "airRaycastCallback", self.airDistance, self, 32 + 64 + 128 + 256 + 4096 + 8194)
 
     if self.foundVehicle ~= nil and lastFoundVehicle ~= self.foundVehicle then
+        log("Found vehicle: do the flating", self.flateDirection)
         -- self.foundVehicle:setDirtAmount(self.foundVehicle:getDirtAmount() - self.washMultiplier*dt/self.foundVehicle.washDuration)
         -- TODO: Do the actual tire air stuff, IF has ssTirePressure spec
     end
@@ -192,7 +202,10 @@ function ssAirCompressorPlaceable:updateTick(dt)
     end
 end
 
-function ssAirCompressorPlaceable:setIsWashing(doWashing, force, noEventSend)
+function ssAirCompressorPlaceable:setIsInflating(doInflating, doDeflating, force, noEventSend)
+    self.doFlating = doInflating or doDeflating
+    self.flateDirection = doInflating and 1 or -1
+
 --     HPWPlaceableStateEvent.sendEvent(self, doWashing, noEventSend)
 --     if self.doWashing ~= doWashing then
 --         if self.isClient then
@@ -226,7 +239,7 @@ function ssAirCompressorPlaceable:setIsWashing(doWashing, force, noEventSend)
 end
 
 function ssAirCompressorPlaceable:setIsTurnedOn(isTurnedOn, player, noEventSend)
-    HPWPlaceableTurnOnEvent.sendEvent(self, isTurnedOn, player, noEventSend)
+    -- HPWPlaceableTurnOnEvent.sendEvent(self, isTurnedOn, player, noEventSend)
 
     if self.isTurnedOn ~= isTurnedOn then
         if isTurnedOn then
@@ -285,7 +298,7 @@ function ssAirCompressorPlaceable:onDeactivate()
 
     self.isTurnedOn = false
     setVisibility(self.lanceNode, true)
-    self:setIsWashing(false, true, true)
+    self:setIsInflating(false, false, true, true)
 
     -- Remove tool from player
     if self.currentPlayer ~= nil then
@@ -314,6 +327,7 @@ function ssAirCompressorPlaceable:getIsActiveForInput()
     if self.isTurnedOn and self.currentPlayer == g_currentMission.player and not g_gui:getIsGuiVisible() then
         return true
     end
+
     return false
 end
 
@@ -332,7 +346,7 @@ function ssAirCompressorPlaceable:canBeSold()
 end
 
 -- Simple raycast to find the vehicle pointed at by the player
-function ssAirCompressorPlaceable:washRaycastCallback(hitActorId, x, y, z, distance, nx, ny, nz, subShapeIndex, hitShapeId)
+function ssAirCompressorPlaceable:airRaycastCallback(hitActorId, x, y, z, distance, nx, ny, nz, subShapeIndex, hitShapeId)
     local vehicle = g_currentMission.nodeToVehicle[hitActorId]
 
     if hitActorId ~= hitShapeId then
@@ -349,10 +363,14 @@ function ssAirCompressorPlaceable:washRaycastCallback(hitActorId, x, y, z, dista
     end
 
     if vehicle ~= nil and vehicle.getInflationPressure ~= nil and vehicle.setInflationPressure ~= nil then
+        log("found vehicle")
+
         self.foundCoords = {x, y, z}
         self.foundVehicle = vehicle
 
         return false
+    else
+        log("no vehicle")
     end
 
     return true
@@ -377,15 +395,23 @@ function ssAirCompressorPlaceable.deleteLance(tool)
 end
 
 function ssAirCompressorPlaceable.drawLance(tool)
-    if tool.owner.currentPlayer == g_currentMission.player then
-        g_currentMission:addHelpButtonText(g_i18n:getText("input_ACTIVATE_HANDTOOL"), InputBinding.ACTIVATE_HANDTOOL)
--- TODO: add second activation: add air, remove add
+    local compressor = tool.owner
+
+    if compressor.currentPlayer == g_currentMission.player then
+        g_currentMission:addHelpButtonText(g_i18n:getText("input_COMPRESSOR_INFLATE"), InputBinding.ACTIVATE_HANDTOOL)
+        g_currentMission:addHelpButtonText(g_i18n:getText("input_COMPRESSOR_DEFLATE"), InputBinding.ACTIVATE_HANDTOOL2)
+
+        if compressor.doFlating and compressor.foundVehicle ~= nil and compressor.foundVehicle.getInflationPressure ~= nil then
+            g_currentMission:addExtraPrintText(string.format(g_i18n:getText("info_TIRE_PRESSURE"), compressor.foundVehicle:getInflationPressure()))
+        end
     end
 end
 
 function ssAirCompressorPlaceable.updateLance(tool, dt, allowInput)
     if allowInput then
-        tool.owner:setIsWashing(InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL), false, false)
+        tool.owner:setIsInflating(InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL),
+                                  InputBinding.isPressed(InputBinding.ACTIVATE_HANDTOOL2),
+                                  false, false)
     end
 end
 
@@ -449,8 +475,8 @@ end
 
 function ssAirCompressorPlaceableActivatable:updateActivateText()
     if self.airCompressor.isTurnedOn then
-        self.activateText = string.format(g_i18n:getText("action_turnOffOBJECT"), g_i18n:getText("typeDesc_highPressureWasher"))
+        self.activateText = string.format(g_i18n:getText("action_turnOffOBJECT"), g_i18n:getText("typeDesc_airCompressor"))
     else
-        self.activateText = string.format(g_i18n:getText("action_turnOnOBJECT"), g_i18n:getText("typeDesc_highPressureWasher"))
+        self.activateText = string.format(g_i18n:getText("action_turnOnOBJECT"), g_i18n:getText("typeDesc_airCompressor"))
     end
 end

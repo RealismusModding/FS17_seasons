@@ -31,6 +31,7 @@ function ssTirePressure:load(savegame)
 
     self.updateInflationPressure = ssTirePressure.updateInflationPressure
     self.getInflationPressure = ssTirePressure.getInflationPressure
+    self.setInflationPressure = ssTirePressure.setInflationPressure
     self.doCheckSpeedLimit = Utils.overwrittenFunction(self.doCheckSpeedLimit, ssTirePressure.doCheckSpeedLimit)
 
     if savegame ~= nil then
@@ -121,7 +122,8 @@ function ssTirePressure:getInflationPressure()
     return ssTirePressure.PRESSURES[self.ssInflationPressure]
 end
 
-function ssTirePressure:setInflactionPressure(pressure)
+function ssTirePressure:setInflationPressure(pressure)
+    self.ssInflationPressure = pressure
 end
 
 function ssTirePressure:doCheckSpeedLimit(superFunc)

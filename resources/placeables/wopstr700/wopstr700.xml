@@ -26,8 +26,8 @@
 
     <airCompressor>
         <lance index="0>0|0|0" position="-0.18 -0.18692198 0.25" rotation="-7 11 10" raycastNode="0>0|0|0|1|1" />
-<!--         <emitterShape node="0>0|0|0|0|1" particleType="WASHER_WATER" emitCountScale="7000"/>
-        <waterEffect>
+        <!-- <emitterShape node="0>0|0|0|0|1" particleType="WASHER_WATER" emitCountScale="7000"/> -->
+        <!-- <waterEffect>
             <effectNode effectNode="0>0|0|0|0|0" materialType="WASHER" materialTypeId="1" />
         </waterEffect> -->
         <pricePerSecond>1</pricePerSecond>
