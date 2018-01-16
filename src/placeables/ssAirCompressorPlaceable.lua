@@ -141,12 +141,10 @@ function ssAirCompressorPlaceable:update(dt)
         if self.isTurnedOn and self.doFlating then
             self.foundVehicle = nil
 
-            log("camera node")
-            self:flateVehicle(self.currentPlayer.cameraNode, dt)
-
             if self.lanceRaycastNode ~= nil then
-                log("lance node")
                 self:flateVehicle(self.lanceRaycastNode, dt)
+            else
+                self:flateVehicle(self.currentPlayer.cameraNode, dt)
             end
 
             local price = self.pricePerSecond * (dt / 1000)
@@ -175,14 +173,14 @@ end
 function ssAirCompressorPlaceable:flateVehicle(node, dt)
     local x,y,z = getWorldTranslation(node)
     local dx, dy, dz = localDirectionToWorld(node, 0, 0, -1)
-    local lastFoundVehicle = self.foundVehicle
+    -- local lastFoundVehicle = self.foundVehicle
 
     raycastAll(x, y, z, dx, dy, dz, "airRaycastCallback", self.airDistance, self, 32 + 64 + 128 + 256 + 4096 + 8194)
 
-    if self.foundVehicle ~= nil and lastFoundVehicle ~= self.foundVehicle then
-        log("Found vehicle: do the flating", self.flateDirection)
-        -- self.foundVehicle:setDirtAmount(self.foundVehicle:getDirtAmount() - self.washMultiplier*dt/self.foundVehicle.washDuration)
-        -- TODO: Do the actual tire air stuff, IF has ssTirePressure spec
+    if self.foundVehicle ~= nil then -- and lastFoundVehicle ~= self.foundVehicle then
+        local change = self.flateDirection * dt * 0.015
+
+        self.foundVehicle:setInflationPressure(self.foundVehicle:getInflationPressure() + change)
     end
 end
 
@@ -363,14 +361,10 @@ function ssAirCompressorPlaceable:airRaycastCallback(hitActorId, x, y, z, distan
     end
 
     if vehicle ~= nil and vehicle.getInflationPressure ~= nil and vehicle.setInflationPressure ~= nil then
-        log("found vehicle")
-
         self.foundCoords = {x, y, z}
         self.foundVehicle = vehicle
 
         return false
-    else
-        log("no vehicle")
     end
 
     return true

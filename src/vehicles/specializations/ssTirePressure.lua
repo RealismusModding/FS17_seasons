@@ -10,12 +10,10 @@ ssTirePressure = {}
 
 ssTirePressure.MAX_CHARS_TO_DISPLAY = 20
 
-ssTirePressure.PRESSURE_LOW = 1
-ssTirePressure.PRESSURE_NORMAL = 2
-ssTirePressure.PRESSURE_MAX = ssTirePressure.PRESSURE_NORMAL
-
-ssTirePressure.PRESSURES = { 80, 180 }
-ssTirePressure.NORMAL_PRESSURE = 180 -- vanilla
+ssTirePressure.PRESSURE_MIN = 80
+ssTirePressure.PRESSURE_LOW = 80
+ssTirePressure.PRESSURE_NORMAL = 180
+ssTirePressure.PRESSURE_MAX = 180
 
 function ssTirePressure:prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Motorized, specializations) and
@@ -79,12 +77,6 @@ function ssTirePressure:writeStream(streamId, connection)
 end
 
 function ssTirePressure:updateInflationPressure()
-    self.ssInflationPressure = self.ssInflationPressure + 1
-    if self.ssInflationPressure > ssTirePressure.PRESSURE_MAX then
-        self.ssInflationPressure = ssTirePressure.PRESSURE_LOW
-    end
-
-    local pressure = ssTirePressure.PRESSURES[self.ssInflationPressure]
     local tireTypeCrawler = WheelsUtil.getTireType("crawler")
 
     for _, wheel in pairs(self.wheels) do
@@ -93,37 +85,45 @@ function ssTirePressure:updateInflationPressure()
                 wheel.ssMaxDeformation = wheel.maxDeformation
             end
 
-            wheel.ssMaxLoad = self:getTireMaxLoad(wheel, pressure)
-            wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.NORMAL_PRESSURE / pressure
+            wheel.ssMaxLoad = self:getTireMaxLoad(wheel, self.ssInflationPressure)
+            wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.PRESSURE_NORMAL / self.ssInflationPressure
+
+            log("max load", wheel.ssMaxLoad, wheel.maxDeformation)
         end
     end
 
     -- Update compaction indicator
     self.ssCompactionIndicatorIsCorrect = false
-
-    -- TODO(Jos) send event with new pressure for vehicle
 end
 
 function ssTirePressure:update(dt)
-    if self.isClient and self:canPlayerInteractInWorkshop() and not self.ssAllWheelsCrawlers then
-        local pressureText = g_i18n:getText("TIRE_PRESSURE_" .. tostring(self.ssInflationPressure))
-        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
+    -- if self.isClient and self:canPlayerInteractInWorkshop() and not self.ssAllWheelsCrawlers then
+    --     local pressureText = g_i18n:getText("TIRE_PRESSURE_" .. tostring(self.ssInflationPressure))
+    --     g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
 
-        if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
-            self:updateInflationPressure()
-        end
-    end
+    --     if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
+    --         self:updateInflationPressure()
+    --     end
+    -- end
 end
 
 function ssTirePressure:draw()
 end
 
 function ssTirePressure:getInflationPressure()
-    return ssTirePressure.PRESSURES[self.ssInflationPressure]
+    return self.ssInflationPressure
 end
 
-function ssTirePressure:setInflationPressure(pressure)
-    self.ssInflationPressure = pressure
+function ssTirePressure:setInflationPressure(pressure, noEventSend)
+    local old = self.ssInflationPressure
+
+    self.ssInflationPressure = Utils.clamp(pressure, ssTirePressure.PRESSURE_MIN, ssTirePressure.PRESSURE_MAX)
+
+    if self.ssInflationPressure ~= old then
+        self:updateInflationPressure()
+
+        -- TODO: Send event
+    end
 end
 
 function ssTirePressure:doCheckSpeedLimit(superFunc)
@@ -132,12 +132,13 @@ function ssTirePressure:doCheckSpeedLimit(superFunc)
         parent = superFunc(self)
     end
 
-    return parent or self.ssInflationPressure == ssTirePressure.PRESSURE_LOW
+    return parent or self.ssInflationPressure < ssTirePressure.PRESSURE_NORMAL
 end
 
 function ssTirePressure:getSpeedLimit()
     local limit = 1000
 
+    -- TODO: linear from normal speed (what is 'normal speed'?)
     if self.ssInflationPressure == ssTirePressure.PRESSURE_LOW then
         return 10
     end

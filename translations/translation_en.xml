@@ -78,12 +78,13 @@
         <text name="ui_doRepair" text="repair" />
         <text name="ui_repairOrCustomizeVehicleTitle" text="Repair and customization" />
 
-        <text name="warning_compressorRangeRestriction" text="The pressure compressor hose restricts you from going any further." />
+        <text name="warning_compressorRangeRestriction" text="The compressor hose restricts you from going any further." />
         <text name="typeDesc_airCompressor" text="air compressor" />
 
         <text name="TIRE_PRESSURE_1" text="Low" />
         <text name="TIRE_PRESSURE_2" text="Normal" />
         <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
+        <text name="info_TIRE_PRESSURE" text="Tire pressure: %d kPa" />
 
         <text name="CULTIVATION_DEPTH_1" text="Shallow" />
         <text name="CULTIVATION_DEPTH_2" text="Deep" />
