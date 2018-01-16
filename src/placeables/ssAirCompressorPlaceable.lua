@@ -201,39 +201,43 @@ function ssAirCompressorPlaceable:updateTick(dt)
 end
 
 function ssAirCompressorPlaceable:setIsInflating(doInflating, doDeflating, force, noEventSend)
-    self.doFlating = doInflating or doDeflating
+    local doFlating = doInflating or doDeflating
     self.flateDirection = doInflating and 1 or -1
 
 --     HPWPlaceableStateEvent.sendEvent(self, doWashing, noEventSend)
---     if self.doWashing ~= doWashing then
---         if self.isClient then
---             if self.washerParticleSystems ~= nil then
---                 for _,ps in pairs(self.washerParticleSystems) do
---                     ParticleUtil.setEmittingState(ps, doWashing and self:getIsActiveForInput())
---                 end
---             end
 
---             if doWashing then
---                 EffectManager:setFillType(self.waterEffects, FillUtil.FILLTYPE_WATER)
---                 EffectManager:startEffects(self.waterEffects)
---                 if self.sampleWashing ~= nil and self.currentPlayer == g_currentMission.player  then
---                     if self:getIsActiveForSound() then
---                         SoundUtil.playSample(self.sampleWashing, 0, 0, 1)
---                     end
---                 end
---             else
---                 if force then
---                     EffectManager:resetEffects(self.waterEffects)
---                 else
---                     EffectManager:stopEffects(self.waterEffects)
---                 end
---                 if self.sampleWashing ~= nil then
---                     SoundUtil.stopSample(self.sampleWashing, true)
---                 end
---             end
---         end
---         self.doWashing = doWashing
---     end
+    if self.doFlating ~= doFlating then
+        if self.isClient then
+            -- if self.washerParticleSystems ~= nil then
+            --     for _,ps in pairs(self.washerParticleSystems) do
+            --         ParticleUtil.setEmittingState(ps, doWashing and self:getIsActiveForInput())
+            --     end
+            -- end
+
+            if doFlating then
+                -- EffectManager:setFillType(self.waterEffects, FillUtil.FILLTYPE_WATER)
+                -- EffectManager:startEffects(self.waterEffects)
+
+                -- if self.sampleWashing ~= nil and self.currentPlayer == g_currentMission.player  then
+                --     if self:getIsActiveForSound() then
+                --         SoundUtil.playSample(self.sampleWashing, 0, 0, 1)
+                --     end
+                -- end
+            else
+                -- if force then
+                --     EffectManager:resetEffects(self.waterEffects)
+                -- else
+                --     EffectManager:stopEffects(self.waterEffects)
+                -- end
+
+                -- if self.sampleWashing ~= nil then
+                --     SoundUtil.stopSample(self.sampleWashing, true)
+                -- end
+            end
+        end
+
+        self.doFlating = doFlating
+    end
 end
 
 function ssAirCompressorPlaceable:setIsTurnedOn(isTurnedOn, player, noEventSend)
