@@ -6,7 +6,7 @@
             <function>$l10n_function_airCompressor</function>
         </functions>
         <image>resources/placeables/wopstr700/store.png</image>
-        <price>4500</price>
+        <price>5000</price>
         <dailyUpkeep>10</dailyUpkeep>
         <lifetime>400</lifetime>
         <rotation>0</rotation>
@@ -26,15 +26,19 @@
 
     <airCompressor>
         <lance index="0>0|0|0" position="-0.18 -0.18692198 0.25" rotation="-7 11 10" raycastNode="0>0|0|0|1|1" />
+
         <!-- <emitterShape node="0>0|0|0|0|1" particleType="WASHER_WATER" emitCountScale="7000"/> -->
         <!-- <waterEffect>
             <effectNode effectNode="0>0|0|0|0|0" materialType="WASHER" materialTypeId="1" />
         </waterEffect> -->
+
         <pricePerSecond>1</pricePerSecond>
-        <!-- <washMultiplier>3</washMultiplier> -->
-<!--         <compressorSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_run.wav" pitchOffset="1" pitchMin="0.3" volume="1" radius="20" innerRadius="5" />
-        <washingSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_washingSound.wav" pitchOffset="1" volume="1" />
-        <switchSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_switch.wav" pitchOffset="1" volume="1" /> -->
+        <inflationMultiplier>0.015</inflationMultiplier>
+
+        <!-- <compressorSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_run.wav" pitchOffset="1" pitchMin="0.3" volume="1" radius="20" innerRadius="5" /> -->
+        <!-- <washingSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_washingSound.wav" pitchOffset="1" volume="1" /> -->
+        <!-- <switchSound file="$data/placeables/highPressureWasher/kaercher/kaercherHDS918-4M_switch.wav" pitchOffset="1" volume="1" /> -->
+
         <targets>
             <target ikChain="leftArm" targetNode="0>0|0|0|1|0" targetOffset="0.04 0.066 0">
                 <rotationNode id="1" rotation="90 -30 -20" />

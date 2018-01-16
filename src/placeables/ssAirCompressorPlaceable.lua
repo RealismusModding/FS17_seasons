@@ -40,6 +40,7 @@ function ssAirCompressorPlaceable:load(xmlFilename, x,y,z, rx,ry,rz, initRandom)
     self.actionRadius = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.actionRadius#distance"), 15)
     self.airDistance = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.airDistance"), 10)
     self.pricePerSecond = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.pricePerSecond"), 10)
+    self.inflationMultiplier = Utils.getNoNil(getXMLFloat(xmlFile, "placeable.airCompressor.inflationMultiplier"), 0.015)
 
     self.lanceNode = Utils.indexToObject(self.nodeId, getXMLString(xmlFile, "placeable.airCompressor.lance#index"))
     self.linkPosition = Utils.getVectorNFromString(Utils.getNoNil(getXMLString(xmlFile, "placeable.airCompressor.lance#position"), "0 0 0"), 3)
@@ -173,12 +174,11 @@ end
 function ssAirCompressorPlaceable:flateVehicle(node, dt)
     local x,y,z = getWorldTranslation(node)
     local dx, dy, dz = localDirectionToWorld(node, 0, 0, -1)
-    -- local lastFoundVehicle = self.foundVehicle
 
     raycastAll(x, y, z, dx, dy, dz, "airRaycastCallback", self.airDistance, self, 32 + 64 + 128 + 256 + 4096 + 8194)
 
-    if self.foundVehicle ~= nil then -- and lastFoundVehicle ~= self.foundVehicle then
-        local change = self.flateDirection * dt * 0.015
+    if self.foundVehicle ~= nil then
+        local change = self.flateDirection * dt * self.inflationMultiplier
 
         self.foundVehicle:setInflationPressure(self.foundVehicle:getInflationPressure() + change)
     end
