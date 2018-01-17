@@ -28,40 +28,55 @@ function ssDeepCultivator:load(savegame)
 
     self.ssCultivationDepth = ssDeepCultivator.DEPTH_SHALLOW
 
-    if savegame ~= nil then
-        self.ssCultivationDepth = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssCultivationDepth", self.ssCultivationDepth)
-    end
-
-    self.ssValidDeepCultivator = false
-
-    local storeItem = StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()]
-    local workingWidth = storeItem.specs.workingWidth
-    local maxForce = self.powerConsumer.maxForce
-    self.ssOrigMaxForce = maxForce
-
+    self.ssOrigMaxForce = self.powerConsumer.maxForce
     self.ssDeepCultivatorMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#deep")
     self.ssSubsoilerMod = getXMLBool(self.xmlFile, "vehicle.ssCultivation#subsoiler")
 
-    if self.ssDeepCultivatorMod and self.ssSubsoilerMod then
-        logInfo("ssDeepCultivator:", storeItem.name .. " cannot be both a subsoiler and a deep cultivator. Subsoiler applied.")
-        self.ssDeepCultivatorMod = false
-    end
-
-    -- hard coded fix since it does not fit criteria of maxForce / workingWidth > 6
-    if storeItem.name == "CULTIMER L 300"
-        or self.ssDeepCultivatorMod or maxForce / workingWidth > 6 then
-        self.ssValidDeepCultivator = true
-    end
-
-    -- subsoilers already act deep
-    if self.typeName == "subsoiler" or self.ssSubsoilerMod then
-        self.ssValidDeepCultivator = false
-        self.ssCultivationDepth = 3
+    local isValid, depth = ssDeepCultivator.isStoreItemDeepCultivator(StoreItemsUtil.storeItemsByXMLFilename[self.configFileName:lower()])
+    self.ssValidDeepCultivator = isValid
+    if depth ~= nil then
+        self.ssCultivationDepth = depth
     end
 
     if self.ssCultivationDepth == ssDeepCultivator.DEPTH_SHALLOW then
         self.powerConsumer.maxForce = self.ssOrigMaxForce * ssDeepCultivator.SHALLOW_FORCE_FACTOR
     end
+
+    if savegame ~= nil then
+        self.ssCultivationDepth = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssCultivationDepth", self.ssCultivationDepth)
+    end
+end
+
+function ssDeepCultivator.isStoreItemDeepCultivator(storeItem)
+    local xmlFile = loadXMLFile("TempConfig", storeItem.xmlFilename)
+    if not xmlFile then return false end
+
+    local typeName = getXMLString(xmlFile, "vehicle#type")
+    local deepCultivatorMod = Utils.getNoNil(getXMLBool(xmlFile, "vehicle.ssCultivation#deep"), false)
+    local subsoilerMod = Utils.getNoNil(getXMLBool(xmlFile, "vehicle.ssCultivation#subsoiler"), false)
+    local workingWidth = storeItem.specs.workingWidth
+    local maxForce = Utils.getNoNil(getXMLFloat(xmlFile, "vehicle.powerConsumer#maxForce"), 0)
+
+    delete(xmlFile)
+
+    if deepCultivatorMod and subsoilerMod then
+        logInfo("ssDeepCultivator:", storeItem.name .. " cannot be both a subsoiler and a deep cultivator. Subsoiler applied.")
+        return false
+    end
+
+    if storeItem.name == "CULTIMER L 300" -- Fails to listen to the algo
+        or deepCultivatorMod -- special designation
+        or maxForce / workingWidth > 6 then -- a lot of force on a small area: assume deep
+        return true
+    end
+
+    -- Subsoilers act always deep (as a plough)
+    if typeName == "subsoiler" -- Platinum DLC
+        or subsoilerMod then
+        return false, 3
+    end
+
+    return false
 end
 
 function ssDeepCultivator:delete()
