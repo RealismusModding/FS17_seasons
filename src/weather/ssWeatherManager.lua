@@ -536,3 +536,43 @@ function ssWeatherManager:calculateWindSpeed()
 
     return scale * (-1 * math.log(1 - pressureGradient)) ^ (1 / shape)
 end
+
+function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
+    local tooColdSoil = {}
+    local lowSoilTemp = {}
+    local soilTemp = {}
+
+    local daysInSeason = 9
+    local tempLimit = germinationTemperature - 1
+
+    for i = 1,12 do
+        lowSoilTemp[i] = -math.huge
+    end
+
+    -- run after loading data from xml so self.soilTemp will be initial value at this point
+    soilTemp[1] = self.startValues.soilTemp
+    -- building table with hard coded 9 day season
+    for i = 2, 4 * daysInSeason do
+        local gt = g_seasons.environment:transitionAtDay(i, daysInSeason)
+        local gtPrevDay = g_seasons.environment:transitionAtDay(i - 1, daysInSeason)
+
+        local ssTmax = self.temperatureData[gt]
+        local highTemp = ssTmax.mode
+        local lowTemp = 0.75 * ssTmax.mode - 5
+
+        soilTemp[i], _ = self:calculateSoilTemp(lowTemp, highTemp, daysInSeason, soilTemp[i - 1], 0, 0)
+        if soilTemp[i] > lowSoilTemp[gt] then
+            lowSoilTemp[gt] = soilTemp[i]
+        end
+
+        if gt > gtPrevDay and soilTemp[i] > soilTemp[i - 1] then
+            lowSoilTemp[gt - 1] = soilTemp[i]
+        end
+    end
+
+    for i = 1, 12 do
+        tooColdSoil[i] = lowSoilTemp[i] < tempLimit
+    end
+
+    return tooColdSoil
+end

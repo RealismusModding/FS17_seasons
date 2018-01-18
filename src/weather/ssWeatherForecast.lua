@@ -45,9 +45,9 @@ function ssWeatherForecast:buildForecast()
         table.insert(self.forecast, forecastItem)
     end
 
-    print_r(self.forecast)
+    --print_r(self.forecast)
     self.buildWeather()
-    print_r(ssWeatherManager.weather)
+    --print_r(ssWeatherManager.weather)
     self:overwriteRaintable()
 end
 
