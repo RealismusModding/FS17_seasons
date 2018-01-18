@@ -17,6 +17,8 @@ end
 function ssWeatherForecast:loadMap(name)
     ssUtil.overwrittenFunction(Environment, "calculateGroundWetness", ssWeatherManager.calculateSoilWetness)
 
+    self.forecastLength = 8
+
     if g_currentMission:getIsServer() then
         if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_seasons.environment:currentDay() then
             self:buildForecast()
@@ -26,7 +28,6 @@ function ssWeatherForecast:loadMap(name)
     end
 -- self.forecast = {} --day of week, low temp, high temp, weather condition
 -- self.weather = {}
-    self.forecastLength = 8
 end
 
 -- Only run this the very first time or if season length changes
@@ -133,7 +134,7 @@ end
 function ssWeatherForecast:buildHourlyForecast()
     self.hourlyForecast = {}
 
-    for i = 1,48 do
+    for i = 1, 48 do
         local forecastItem = self:oneHourForecast(i)
         table.insert(self.hourlyForecast, forecastItem)
     end
@@ -234,7 +235,7 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
 
         oneRainEvent.startDayTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / ssWeatherForecast.UNITTIME) * ssWeatherForecast.UNITTIME
         --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * ssWeatherForecast.UNITTIME -- capping length of each event
-        oneRainEvent.duration = ssUtil.tridist(1,2,24 / (events + 4)) * ssWeatherForecast.UNITTIME
+        oneRainEvent.duration = ssUtil.triDist(1,2,24 / (events + 4)) * ssWeatherForecast.UNITTIME
         oneRainEvent.endDayTime = oneRainEvent.startDayTime + oneRainEvent.duration
 
     -- one longer event
