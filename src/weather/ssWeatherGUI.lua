@@ -10,7 +10,7 @@
 ssWeatherGUI = {}
 local screenAspectRatio = g_screenAspectRatio / (16 / 9)
 
-function ssWeatherForecast:preLoad()
+function ssWeatherGUI:preLoad()
     g_seasons.forecastGUI = self
 end
 
@@ -138,7 +138,7 @@ function ssWeatherGUI:loadMap(name)
     self:setForecastVisible(self.visible)
 end
 
-function ssWeatherForecast:deleteMap()
+function ssWeatherGUI:deleteMap()
     self.rect:delete()
 
     self.overlays.soilSymbol:delete()

@@ -521,7 +521,7 @@ function ssWeatherForecast:calculateAverageTransitionTemp(gt, deterministic)
     local averageDailyMaximum = ssWeatherData.temperatureData[gt]
 
     if not deterministic then
-        local seasonalTempVar = = 0.009 * gt ^ 2 - 0.1 * gt + 1.15
+        local seasonalTempVar = 0.009 * gt ^ 2 - 0.1 * gt + 1.15
         return ssUtil.normDist(averageDailyMaximum, seasonalTempVar)
     else
         return averageDailyMaximum
