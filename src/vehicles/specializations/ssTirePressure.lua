@@ -45,6 +45,8 @@ function ssTirePressure:load(savegame)
             self.ssAllWheelsCrawlers = false
         end
     end
+
+    self:updateInflationPressure()
 end
 
 function ssTirePressure:delete()
@@ -87,8 +89,6 @@ function ssTirePressure:updateInflationPressure()
 
             wheel.ssMaxLoad = self:getTireMaxLoad(wheel, self.ssInflationPressure)
             wheel.maxDeformation = wheel.ssMaxDeformation * ssTirePressure.PRESSURE_NORMAL / self.ssInflationPressure
-
-            log("max load", wheel.ssMaxLoad, wheel.maxDeformation)
         end
     end
 
