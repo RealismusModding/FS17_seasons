@@ -31,6 +31,7 @@ function ssTirePressure:load(savegame)
     self.getInflationPressure = ssTirePressure.getInflationPressure
     self.setInflationPressure = ssTirePressure.setInflationPressure
     self.doCheckSpeedLimit = Utils.overwrittenFunction(self.doCheckSpeedLimit, ssTirePressure.doCheckSpeedLimit)
+    self.toggleTirePressure = ssTirePressure.toggleTirePressure
 
     if savegame ~= nil then
         self.ssInflationPressure = ssXMLUtil.getInt(savegame.xmlFile, savegame.key .. "#ssInflationPressure", self.ssInflationPressure)
@@ -103,9 +104,13 @@ function ssTirePressure:update(dt)
         g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.SEASONS_TIRE_PRESSURE)
 
         if InputBinding.hasEvent(InputBinding.SEASONS_TIRE_PRESSURE) then
-            self:setInflationPressure(self.ssInflationPressure < ssTirePressure.PRESSURE_NORMAL and ssTirePressure.PRESSURE_NORMAL or ssTirePressure.PRESSURE_LOW)
+            self:toggleTirePressure()
         end
     end
+end
+
+function ssTirePressure:toggleTirePressure()
+    self:setInflationPressure(self.ssInflationPressure < ssTirePressure.PRESSURE_NORMAL and ssTirePressure.PRESSURE_NORMAL or ssTirePressure.PRESSURE_LOW)
 end
 
 function ssTirePressure:draw()
