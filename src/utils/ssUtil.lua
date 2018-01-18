@@ -146,19 +146,14 @@ function ssUtil.getTransitionHeaders()
 end
 
 --Outputs a random sample from a triangular distribution
-function ssUtil.triDist(m)
-    local pmode = {}
-    local p = {}
+function ssUtil.triDist(min, mode, max)
+    local pmode = (mode - min) / (max - min)
+    local p = math.random()
 
-    --math.randomseed( g_currentMission.time )
-    math.random()
-
-    pmode = (m.mode - m.min) / (m.max - m.min)
-    p = math.random()
     if p < pmode then
-        return math.sqrt(p * (m.max - m.min) * (m.mode - m.min)) + m.min
+        return math.sqrt(p * (max - min) * (mode - min)) + min
     else
-        return m.max - math.sqrt((1 - p) * (m.max - m.min) * (m.max - m.mode))
+        return max - math.sqrt((1 - p) * (max - min) * (max - mode))
     end
 end
 
@@ -173,9 +168,6 @@ end
 
 -- Outputs a random sample from a normal distribution with mean mu and standard deviation sigma
 function ssUtil.normDist(mu, sigma)
-    --math.randomseed( g_currentMission.time )
-    math.random()
-
     local p = math.random()
 
     if p < 0.5 then
@@ -186,11 +178,7 @@ function ssUtil.normDist(mu, sigma)
 end
 
 -- Outputs a random sample from a lognormal distribution
-function ssUtil.lognormDist(beta, gamma)
-    --math.randomseed( g_currentMission.time )
-    math.random()
-
-    local p = math.random()
+function ssUtil.lognormDist(beta, gamma, p)
     local z
 
     if p < 0.5 then

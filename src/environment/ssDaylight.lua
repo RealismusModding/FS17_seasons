@@ -487,7 +487,7 @@ function ssDaylight:calculateSolarRadiation()
     if g_currentMission.environment.timeSinceLastRain == 0 then
         local tmpSolRad = solarRadiation
 
-        solarRadiation = tmpSolRad * 0.05
+        solarRadiation = tmpSolRad * 0.1
     end
 
     return solarRadiation
