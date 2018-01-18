@@ -47,7 +47,7 @@ function ssWeatherForecast:buildForecast()
     end
 
     --print_r(self.forecast)
-    self.buildWeather()
+    self:buildWeather()
     --print_r(ssWeatherManager.weather)
     self:overwriteRaintable()
 end
@@ -60,7 +60,7 @@ function ssWeatherForecast:updateForecast()
     table.remove(self.forecast, 1)
     table.insert(self.forecast, forecastItem)
 
-    self.updateWeather()
+    self:updateWeather()
     --self:updateHail()
     self:overwriteRaintable()
 
@@ -283,22 +283,22 @@ end
 -- TODO Per: why is this here and not in WM?
 function ssWeatherForecast:buildWeather()
     local weather = {}
-    local prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
+    local prevEndDayTime = 1 * self.UNITTIME
 
     for j = 1, 3 do --make weather for the next three days
-        local events = ssWeatherForecast.forecast[j].numEvents
+        local events = self.forecast[j].numEvents
 
         if events > 0 then
             for i = 1, events do
-                local oneRainEvent = ssWeatherForecast:getRainEvent(ssWeatherForecast.forecast[j], prevEndDayTime, i)
+                local oneRainEvent = self:getRainEvent(self.forecast[j], prevEndDayTime, i)
                 table.insert(weather, oneRainEvent)
 
                 prevEndDayTime = oneRainEvent.endDayTime
 
                 -- if last event and events are within the same day reset prevRainTime
                 -- if next day is sunny reset prevRainTime
-                if i == events and (oneRainEvent.endDay == oneRainEvent.startDay or ssWeatherForecast.forecast[j + 1].weatherType == ssWeatherManager.WEATHERTYPE_SUN) then
-                    prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
+                if i == events and (oneRainEvent.endDay == oneRainEvent.startDay or self.forecast[j + 1].weatherType == ssWeatherManager.WEATHERTYPE_SUN) then
+                    prevEndDayTime = 1 * self.UNITTIME
                 end
             end
         end
@@ -311,24 +311,24 @@ end
 -- adding weather events
 -- run after updateForecast
 function ssWeatherForecast:updateWeather()
-    local prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
-    local events = forecast[2].numEvents
+    local prevEndDayTime = 1 * self.UNITTIME
+    local events = self.forecast[2].numEvents
 
-    if table.getn(self.weather) > 0 then
-        if weather[1].startDay < g_seasons.environment:currentDay() then
+    if table.getn(ssWeatherManager.weather) > 0 then
+        if ssWeatherManager.weather[1].startDay < g_seasons.environment:currentDay() then
             self:removeWeather()
         end
     end
 
     if events > 0 then
         for i = 1, events do
-            local oneRainEvent = ssWeatherForecast:getRainEvent(self.forecast[j], prevEndDayTime, i)
+            local oneRainEvent = self:getRainEvent(self.forecast[2], prevEndDayTime, i)
             table.insert(ssWeatherManager.weather, oneRainEvent)
 
             prevEndDayTime = oneRainEvent.endDayTime
 
             if i == events and endDay == oneRainEvent.startDay then
-                prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
+                prevEndDayTime = 1 * self.UNITTIME
             end
         end
     end
@@ -343,7 +343,7 @@ end
 -- Possible unforcasted morning fog on day 2
 function ssWeatherForecast:foggyMorning()
     local lowTempDay = self.forecast[2].lowTemp
-    local lowTempPrev = forecast[1].lowTemp
+    local lowTempPrev = self.forecast[1].lowTemp
     local rh = ssWeatherManager:calculateRelativeHumidity(lowTempDay, (lowTempDay + lowTempPrev) * 0.5, ssWeatherManager.RAINTYPE_SUN)
     local forecastedWind = self.forecast[2].windSpeed
 
