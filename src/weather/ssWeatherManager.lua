@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherManager = {}
-g_seasons.weather = ssWeatherManager
 
 ssWeatherManager.WEATHERTYPE_SUN = "sun"
 ssWeatherManager.WEATHERTYPE_PARTLY_CLOUDY = "partly_cloudy"
@@ -29,22 +28,24 @@ ssWeatherManager.RAINTYPE_SNOW = "snow"
 ssWeatherManager.RAINTYPE_FOG = "fog"
 ssWeatherManager.RAINTYPE_HAIL = "hail"
 
-ssWeatherManager.forecast = {} --day of week, low temp, high temp, weather condition
-ssWeatherManager.forecastLength = 8
-ssWeatherManager.weather = {}
-ssWeatherManager.weatherData = {}
-
 -- Load events
-source(g_seasons.modDir .. "src/events/ssWeatherManagerDailyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHourlyEvent.lua")
-source(g_seasons.modDir .. "src/events/ssWeatherManagerHailEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerDailyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHourlyEvent.lua")
+source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHailEvent.lua")
+
+function ssWeatherManager:preLoad()
+    g_seasons.weather = self
+end
 
 function ssWeatherManager:load(savegame, key)
-
+    self.forecast = {} --day of week, low temp, high temp, weather condition
+    self.forecastLength = 8
+    self.weather = {}
+    self.weatherData = {}
 end
 
 function ssWeatherManager:loadMap(name)
-    Environment.calculateGroundWetness = Utils.overwrittenFunction(Environment.calculateGroundWetness, ssWeatherManager.calculateSoilWetness)
+    ssUtil.overwrittenFunction(Environment, "calculateGroundWetness", ssWeatherManager.calculateSoilWetness)
 
     g_currentMission.environment:addHourChangeListener(self)
     g_currentMission.environment:addDayChangeListener(self)
@@ -511,9 +512,9 @@ end
 
 function ssWeatherManager:calculateDeltaWindSpeed()
     local speedNow = g_seasons.forecast[1].windSpeed
-    local speedNext = g_seasons.forecast[2].windSpeed 
+    local speedNext = g_seasons.forecast[2].windSpeed
     local deltaTime = 24 - g_seasons.forecast[1].startTimeIndication + g_seasons.forecast[2].startTimeIndication
-    
+
     return (speedNext - speedNow) / deltaTime
 end
 
