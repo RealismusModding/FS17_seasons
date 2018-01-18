@@ -100,7 +100,7 @@ function ssTirePressure:update(dt)
     -- self.ssInCabTirePressureControl = true
 
     if self.isClient and self:getIsActiveForInput(false) and self.ssInCabTirePressureControl and not self.ssAllWheelsCrawlers then
-        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.SEASONS_TIRE_PRESSURE, nil, GS_PRIO_HIGH)
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.SEASONS_TIRE_PRESSURE)
 
         if InputBinding.hasEvent(InputBinding.SEASONS_TIRE_PRESSURE) then
             self:setInflationPressure(self.ssInflationPressure < ssTirePressure.PRESSURE_NORMAL and ssTirePressure.PRESSURE_NORMAL or ssTirePressure.PRESSURE_LOW)
