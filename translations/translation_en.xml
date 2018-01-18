@@ -8,7 +8,7 @@
         <text name="input_SEASONS_SHOW_MENU" text="Seasons: Open menu" />
         <text name="input_SEASONS_PLANTING_DISTANCE" text="Planting distance (%d m)" />
         <text name="input_SEASONS_SKIP_NIGHT" text="Skip night" />
-        <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%s)" />
+        <text name="input_SEASONS_TIRE_PRESSURE" text="Tire inflation pressure (%d kPa)" />
         <text name="input_SEASONS_CULTIVATION_DEPTH" text="Cultivation depth (%s)" />
         <text name="input_COMPRESSOR_INFLATE" text="Increase tire pressure" />
         <text name="input_COMPRESSOR_DEFLATE" text="Decrease tire pressure" />
@@ -81,8 +81,6 @@
         <text name="warning_compressorRangeRestriction" text="The compressor hose restricts you from going any further." />
         <text name="typeDesc_airCompressor" text="air compressor" />
 
-        <text name="TIRE_PRESSURE_1" text="Low" />
-        <text name="TIRE_PRESSURE_2" text="Normal" />
         <text name="warning_tireload" text="Tire load is too high. Increase tire pressure on the %s!" />
         <text name="info_TIRE_PRESSURE" text="Tire pressure: %d kPa" />
 

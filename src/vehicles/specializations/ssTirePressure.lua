@@ -97,14 +97,15 @@ function ssTirePressure:updateInflationPressure()
 end
 
 function ssTirePressure:update(dt)
-    -- if self.isClient and self:canPlayerInteractInWorkshop() and not self.ssAllWheelsCrawlers then
-    --     local pressureText = g_i18n:getText("TIRE_PRESSURE_" .. tostring(self.ssInflationPressure))
-    --     g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), pressureText), InputBinding.IMPLEMENT_EXTRA2, nil, GS_PRIO_HIGH)
+    -- self.ssInCabTirePressureControl = true
 
-    --     if InputBinding.hasEvent(InputBinding.IMPLEMENT_EXTRA2) then
-    --         self:updateInflationPressure()
-    --     end
-    -- end
+    if self.isClient and self:getIsActiveForInput(false) and self.ssInCabTirePressureControl and not self.ssAllWheelsCrawlers then
+        g_currentMission:addHelpButtonText(string.format(g_i18n:getText("input_SEASONS_TIRE_PRESSURE"), self.ssInflationPressure), InputBinding.SEASONS_TIRE_PRESSURE, nil, GS_PRIO_HIGH)
+
+        if InputBinding.hasEvent(InputBinding.SEASONS_TIRE_PRESSURE) then
+            self:setInflationPressure(self.ssInflationPressure < ssTirePressure.PRESSURE_NORMAL and ssTirePressure.PRESSURE_NORMAL or ssTirePressure.PRESSURE_LOW)
+        end
+    end
 end
 
 function ssTirePressure:draw()
