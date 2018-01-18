@@ -8,16 +8,14 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherForecast = {}
-g_seasons.forecast = ssWeatherForecast
-
 ssWeatherForecast.UNITTIME = 60 * 60 * 1000 -- ms to hours
 
-ssWeatherForecast.forecast = {} --day of week, low temp, high temp, weather condition
-ssWeatherForecast.forecastLength = 8
-ssWeatherManager.weather = {}
+function ssWeatherForecast:preLoad()
+    g_seasons.forecast = self
+end
 
 function ssWeatherForecast:loadMap(name)
-    Environment.calculateGroundWetness = Utils.overwrittenFunction(Environment.calculateGroundWetness, ssWeatherManager.calculateSoilWetness)
+    ssUtil.overwrittenFunction(Environment, "calculateGroundWetness", ssWeatherManager.calculateSoilWetness)
 
     if g_currentMission:getIsServer() then
         if table.getn(self.forecast) == 0 or self.forecast[1].day ~= g_seasons.environment:currentDay() then
@@ -26,6 +24,9 @@ function ssWeatherForecast:loadMap(name)
         --self.weather = g_currentMission.environment.rains -- should only be done for a fresh savegame, otherwise read from savegame
         --self:setupStartValues()
     end
+-- self.forecast = {} --day of week, low temp, high temp, weather condition
+-- self.weather = {}
+    self.forecastLength = 8
 end
 
 -- Only run this the very first time or if season length changes
@@ -95,7 +96,7 @@ function ssWeatherForecast:oneDayForecast(i,prevDayForecast)
     if i ~= 1 then
         pPrev = prevDayForecast.p
     end
-    
+
     dayForecast.windSpeed = ssWeatherManager:calculateWindSpeed(dayForecast.p, pPrev, growthTransition)
     dayForecast.weatherType = self:getWeatherType(dayForecast.day, dayForecast.p, startTimeTemp, avgTemp, dayForecast.windSpeed)
     dayForecast.numEvents = self:_getNumEvents(dayForecast.weatherType)
@@ -152,7 +153,7 @@ function ssWeatherForecast:oneHourForecast(i)
     local day = g_seasons.environment:currentDay() + dayIndex
 
     local lowTemp = g_seasons.forecast[dayIndex + 1].lowTemp
-    local highTemp = g_seasons.forecast[dayIndex + 1].highTemp 
+    local highTemp = g_seasons.forecast[dayIndex + 1].highTemp
     local lowTempNext = g_seasons.forecast[dayIndex + 2].lowTemp
 
     oneHourForecast.day = day
@@ -278,10 +279,11 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
     return oneRainEvent
 end
 
+-- TODO Per: why is this here and not in WM?
 function ssWeatherForecast:buildWeather()
     local weather = {}
     local prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
-    
+
     for j = 1, 3 do --make weather for the next three days
         local events = ssWeatherForecast.forecast[j].numEvents
 
@@ -289,9 +291,9 @@ function ssWeatherForecast:buildWeather()
             for i = 1, events do
                 local oneRainEvent = ssWeatherForecast:getRainEvent(ssWeatherForecast.forecast[j], prevEndDayTime, i)
                 table.insert(weather, oneRainEvent)
-    
+
                 prevEndDayTime = oneRainEvent.endDayTime
-    
+
                 -- if last event and events are within the same day reset prevRainTime
                 -- if next day is sunny reset prevRainTime
                 if i == events and (oneRainEvent.endDay == oneRainEvent.startDay or ssWeatherForecast.forecast[j + 1].weatherType == ssWeatherManager.WEATHERTYPE_SUN) then
@@ -321,9 +323,9 @@ function ssWeatherForecast:updateWeather()
         for i = 1, events do
             local oneRainEvent = ssWeatherForecast:getRainEvent(self.forecast[j], prevEndDayTime, i)
             table.insert(ssWeatherManager.weather, oneRainEvent)
-        
+
             prevEndDayTime = oneRainEvent.endDayTime
-    
+
             if i == events and endDay == oneRainEvent.startDay then
                 prevEndDayTime = 1 * ssWeatherForecast.UNITTIME
             end
@@ -415,7 +417,7 @@ function ssWeatherForecast:overwriteRaintable()
             table.insert(tmpWeather, tmpSingleWeather)
         end
     end
-    
+
     env.rains = tmpWeather
 
     if g_seasons.environment.currentDayOffset ~= nil then
@@ -456,14 +458,14 @@ function ssWeatherForecast:getRainType(day, hour)
     for _, rain in ipairs(ssWeatherManager.weather) do
         local startHour = mathRound(rain.startDayTime / 60 / 60 / 1000, 0)
         local endHour = mathRound((rain.endDayTime) / 60 / 60 / 1000 , 0)
-        
+
         if rain.startDay == day and startHour <= hour and endHour > hour then
             rainType = rain.rainTypeId
         elseif rain.startDay + 1 == day and rain.endDay == day and endHour > hour then
             rainType = rain.rainTypeId
         end
     end
-    
+
     return rainType
 end
 
@@ -534,6 +536,6 @@ function ssWeatherForecast:calculateTemp(meanMaxTemp, deterministic)
         highTemp = ssUtil.normDist(meanMaxTemp, 2)
         lowTemp = ssUtil.normDist(0, 1.5) + 0.75 * meanMaxTemp - 5
     end
-    
+
     return lowTemp, highTemp
 end

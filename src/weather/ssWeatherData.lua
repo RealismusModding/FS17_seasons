@@ -8,51 +8,9 @@
 ----------------------------------------------------------------------------------------------------
 
 ssWeatherData = {}
-g_seasons.weatherData = ssWeatherData
 
-function ssWeatherData:loadMap(name)
-    g_currentMission.environment.minRainInterval = 1
-    g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
-    g_currentMission.environment.maxRainInterval = 1
-    g_currentMission.environment.maxRainDuration = 24 * 60 * 60 * 1000
-    g_currentMission.environment.rainForecastDays = self.forecastLength
-    g_currentMission.environment.autoRain = false
-
-    -- Load data from the mod and from a map
-    self.temperatureData = {}
-    self.rainData = {}
-    self.cloudData = {}
-    self.hailData = {}
-    self.windData = {}
-    self.startValues = {}
-    self:loadFromXML(g_seasons.modDir .. "data/weather.xml")
-
-    -- Modded
-    for _, path in ipairs(g_seasons:getModPaths("weather")) do
-        self:loadFromXML(path)
-    end
-
-    -- Set snowDepth (can be more than 0 with custom weather)
-    g_seasons.weather.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
-
-    -- Load germination temperatures
-    self.germinateTemp = {}
-    self:loadGerminateTemperature(g_seasons.modDir .. "data/growth.xml")
-
-    for _, path in ipairs(g_seasons:getModPaths("growth")) do
-        self:loadGerminateTemperature(path)
-    end
-
-    if g_currentMission:getIsServer() then
-        self:setupStartValues()
-    end
-end
-
-function ssWeatherData:setupStartValues()
-    if g_currentMission:getIsClient() then
-        g_seasons.weather.soilTemp = Utils.getNoNil(g_seasons.weather.soilTemp, self.startValues.soilTemp)
-        g_seasons.weather.soilTempMax = g_seasons.weather.soilTemp
-    end
+function ssWeatherData:preLoad()
+    g_seasons.weatherData = self
 end
 
 function ssWeatherData:load(savegame, key)
@@ -155,6 +113,51 @@ function ssWeatherData:save(savegame, key)
         setXMLInt(savegame, rainKey .. "#endDay", rain.endDay)
         setXMLString(savegame, rainKey .. "#rainTypeId", rain.rainTypeId)
         setXMLFloat(savegame, rainKey .. "#duration", rain.duration)
+    end
+end
+
+function ssWeatherData:loadMap(name)
+    g_currentMission.environment.minRainInterval = 1
+    g_currentMission.environment.minRainDuration = 2 * 60 * 60 * 1000 -- 30 hours
+    g_currentMission.environment.maxRainInterval = 1
+    g_currentMission.environment.maxRainDuration = 24 * 60 * 60 * 1000
+    g_currentMission.environment.rainForecastDays = self.forecastLength
+    g_currentMission.environment.autoRain = false
+
+    -- Load data from the mod and from a map
+    self.temperatureData = {}
+    self.rainData = {}
+    self.cloudData = {}
+    self.hailData = {}
+    self.windData = {}
+    self.startValues = {}
+    self:loadFromXML(g_seasons:getDataPath("weather"))
+
+    -- Modded
+    for _, path in ipairs(g_seasons:getModPaths("weather")) do
+        self:loadFromXML(path)
+    end
+
+    -- Set snowDepth (can be more than 0 with custom weather)
+    g_seasons.weather.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
+
+    -- Load germination temperatures
+    self.germinateTemp = {}
+    self:loadGerminateTemperature(g_seasons:getDataPath("growth"))
+
+    for _, path in ipairs(g_seasons:getModPaths("growth")) do
+        self:loadGerminateTemperature(path)
+    end
+
+    if g_currentMission:getIsServer() then
+        self:setupStartValues()
+    end
+end
+
+function ssWeatherData:setupStartValues()
+    if g_currentMission:getIsClient() then
+        g_seasons.weather.soilTemp = Utils.getNoNil(g_seasons.weather.soilTemp, self.startValues.soilTemp)
+        g_seasons.weather.soilTempMax = g_seasons.weather.soilTemp
     end
 end
 

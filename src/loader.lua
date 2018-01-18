@@ -105,6 +105,7 @@ local files = {
     "weather/ssWeatherData",
     "weather/ssWeatherManager",
     "weather/ssWeatherForecast",
+    "weather/ssWeatherGUI",
     "vehicles/ssVehicle",
     "misc/ssCompactionManager",
     "misc/ssFieldJobManager",
@@ -150,7 +151,6 @@ local files = {
     "gui/ssCatchingUp",
     "gui/ssMeasureToolDialog",
     "gui/ssTwoOptionDialog",
-    "gui/ssWeatherGUI",
 
     "handtools/ssMeasureTool",
 
