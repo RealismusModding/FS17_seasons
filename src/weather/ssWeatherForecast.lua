@@ -109,6 +109,7 @@ function ssWeatherForecast:oneDayForecast(i,prevDayForecast)
         highTemp = avgTemp
     end
 
+    --print_r(dayForecast)
     return dayForecast
 end
 
@@ -117,7 +118,7 @@ function ssWeatherForecast:_getNumEvents(wt)
             wt == ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SLEET then
-        return math.floor(ssUtil.triDist(1, 2, 4))
+        return math.floor(ssUtil.triDist(1, 2, 4.99)) -- to return values from 1 to 4
 
     elseif wt == ssWeatherManager.WEATHERTYPE_CLOUDY or
             wt == ssWeatherManager.WEATHERTYPE_RAIN or
@@ -220,7 +221,7 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
     local gt = g_seasons.environment:transitionAtDay(dayForecast.day)
     local season = g_seasons.environment:seasonAtDay(dayForecast.day)
 
-    local pRain = ssWeatherData.rainProbData[growthTransition]
+    local pRain = ssWeatherData.rainProbData[gt]
     local wt = dayForecast.weatherType
     local events = dayForecast.numEvents
     local lowTemp = dayForecast.lowTemp

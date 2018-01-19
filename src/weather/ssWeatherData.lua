@@ -230,7 +230,7 @@ function ssWeatherData:loadFromXML(path)
     if key == nil then
         logInfo("ssWeatherData:", "Error in weather data: Lacking wind speed data")
     end
-    self.windSpeed = self:loadValuesFromXML(file, key)
+    self.windData = self:loadValuesFromXML(file, key)
 
     delete(file)
 end

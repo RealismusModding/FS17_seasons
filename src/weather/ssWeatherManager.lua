@@ -220,7 +220,7 @@ function ssWeatherManager:hourChanged()
         g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth, self.soilWaterContent))
     end
 
-    self:updateWindSpeed()
+    --self:updateWindSpeed()
 end
 
 -- function to output the temperature during the day and night
@@ -519,7 +519,7 @@ function ssWeatherManager:calculateDeltaWindSpeed()
     return (speedNext - speedNow) / deltaTime
 end
 
-function ssWeatherManager:calculateWindSpeed()
+function ssWeatherManager:calculateWindSpeed(p, pPrev, gt)
     -- wind speed is related to changing barometric pressure
     -- simulated as a change in weather
     -- weibull distribution for wind speed for 10 min average wind speed
@@ -527,15 +527,18 @@ function ssWeatherManager:calculateWindSpeed()
     -- if using hourly average multiply all values with 1.5
     local shape = 2.0
 
-    --local scale = self:getMeanWindSpeed(gt)
-    if scale == nil then
-        scale = 4.4 -- mean wind speed for Yeovilton, Somerset (default)
-    end
+    local scale = ssWeatherData.windData[gt]
+    --if scale == nil then
+    --    scale = 4.4 -- mean wind speed for Yeovilton, Somerset (default)
+    --end
 
-    --local pressureGradient = math.abs(pPrev - p)^0.35
-    local pressureGradient = 0.5
+    local pressureGradient = math.abs(pPrev - p)^0.35
 
     return scale * (-1 * math.log(1 - pressureGradient)) ^ (1 / shape)
+end
+
+function ssWeatherManager:getMeanWindSpeed(gt)
+
 end
 
 function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
