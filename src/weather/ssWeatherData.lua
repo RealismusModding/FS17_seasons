@@ -22,7 +22,8 @@ function ssWeatherData:load(savegame, key)
     ssWeatherManager.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     ssWeatherManager.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
     ssWeatherManager.moistureEnabled = ssXMLUtil.getBool(savegame, key .. ".weather.moistureEnabled", true)
-    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeed", 2.0)
+    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeed")
+    ssWeatherManager.windSpeedDelta = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeedDelta", 0.0)
 
     -- load forecast
     ssWeatherForecast.forecast = {}
@@ -84,6 +85,7 @@ function ssWeatherData:save(savegame, key)
     ssXMLUtil.setFloat(savegame, key .. ".weather.soilWaterContent", ssWeatherManager.soilWaterContent)
     ssXMLUtil.setBool(savegame, key .. ".weather.moistureEnabled", ssWeatherManager.moistureEnabled)
     ssXMLUtil.setFloat(savegame, key .. ".weather.windSpeed", ssWeatherManager.windSpeed)
+    ssXMLUtil.setFloat(savegame, key .. ".weather.windSpeedDelta", ssWeatherManager.windSpeedDelta)
 
     for i = 0, table.getn(ssWeatherForecast.forecast) - 1 do
         local dayKey = string.format("%s.weather.forecast.day(%i)", key, i)

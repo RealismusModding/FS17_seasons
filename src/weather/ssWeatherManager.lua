@@ -220,7 +220,7 @@ function ssWeatherManager:hourChanged()
         g_server:broadcastEvent(ssWeatherManagerHourlyEvent:new(self.cropMoistureContent, self.snowDepth, self.soilWaterContent))
     end
 
-    --self:updateWindSpeed()
+    self:updateWindSpeed()
 end
 
 -- function to output the temperature during the day and night
@@ -505,16 +505,23 @@ function ssWeatherManager:calculateSoilWetness()
     end
 end
 
+-- updating wind hourly
 function ssWeatherManager:updateWindSpeed()
-    --local deltaWindSpeed = self:calculateDeltaWindSpeed()
+    if g_currentMission.environment.currentHour < ssWeatherForecast.forecast[1].startTimeIndication and
+            g_currentMission.environment.currentHour + 1 >= ssWeatherForecast.forecast[1].startTimeIndication then
+        g_seasons.weather.windSpeedDelta = self:calculateDeltaWindSpeed()
 
-    self.windSpeed = self:calculateWindSpeed()
+        -- to avoid rounding errors with a long savegame
+        self.windSpeed = ssWeatherForecast.forecast[1].windSpeed
+    else
+        self.windSpeed = self.windSpeed + g_seasons.weather.windSpeedDelta
+    end
 end
 
 function ssWeatherManager:calculateDeltaWindSpeed()
-    local speedNow = g_seasons.forecast[1].windSpeed
-    local speedNext = g_seasons.forecast[2].windSpeed
-    local deltaTime = 24 - g_seasons.forecast[1].startTimeIndication + g_seasons.forecast[2].startTimeIndication
+    local speedNow = ssWeatherForecast.forecast[1].windSpeed
+    local speedNext = ssWeatherForecast.forecast[2].windSpeed
+    local deltaTime = 24 - ssWeatherForecast.forecast[1].startTimeIndication + ssWeatherForecast.forecast[2].startTimeIndication
 
     return (speedNext - speedNow) / deltaTime
 end
@@ -526,19 +533,10 @@ function ssWeatherManager:calculateWindSpeed(p, pPrev, gt)
     -- assumed shape parameter for all locations
     -- if using hourly average multiply all values with 1.5
     local shape = 2.0
-
     local scale = ssWeatherData.windData[gt]
-    --if scale == nil then
-    --    scale = 4.4 -- mean wind speed for Yeovilton, Somerset (default)
-    --end
-
     local pressureGradient = math.abs(pPrev - p)^0.35
 
     return scale * (-1 * math.log(1 - pressureGradient)) ^ (1 / shape)
-end
-
-function ssWeatherManager:getMeanWindSpeed(gt)
-
 end
 
 function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)

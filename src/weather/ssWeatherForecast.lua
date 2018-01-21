@@ -50,6 +50,9 @@ function ssWeatherForecast:buildForecast()
     self:buildWeather()
     --print_r(ssWeatherManager.weather)
     self:overwriteRaintable()
+
+    -- setting windSpeed from forecast when building new forecast
+    g_seasons.weather.windSpeed = self.forecast[1].windSpeed
 end
 
 function ssWeatherForecast:updateForecast()
@@ -162,7 +165,7 @@ function ssWeatherForecast:oneHourForecast(i)
     oneHourForecast.hour = hour
     oneHourForecast.rainType = self.getRainType(day, hour)
     oneHourForecast.temperature = ssWeatherManager:diurnalTemp(hour, highTemp, lowTemp, highTemp, lowTempNext) -- TODO: use highTempPrev
-    oneHourForecast.windSpeed = ssWeatherManager:calculateWindSpeed()
+    oneHourForecast.windSpeed = ssWeatherManager:updateWindSpeed()
 
     return oneHourForecast
 end
