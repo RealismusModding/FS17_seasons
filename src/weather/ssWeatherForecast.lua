@@ -82,7 +82,7 @@ function ssWeatherForecast:oneDayForecast(i,prevDayForecast)
     local transitionLength = g_seasons.environment.daysInSeason / 3
     local dayInTransition = (g_seasons.environment:dayInSeason(dayForecast.day) - 1) % transitionLength + 1
 
-    if dayInTransition == 1 then
+    if dayInTransition == 1 or prevDayForecast == nil then
         dayForecast.ssTmax = self:calculateAverageTransitionTemp(growthTransition)
     else
         dayForecast.ssTmax = prevDayForecast.ssTmax
@@ -256,7 +256,7 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
     -- correcting endTime if event ends next day
     if oneRainEvent.endDayTime > 24 * ssWeatherForecast.UNITTIME then
         oneRainEvent.endDayTime = oneRainEvent.endDayTime - 24 * ssWeatherForecast.UNITTIME
-        oneRainEvent.endDay = oneRainEvent.endDay + 1 * ssWeatherForecast.UNITTIME
+        oneRainEvent.endDay = oneRainEvent.endDay + 1
     end
 
     local tempIndication = ssWeatherManager:diurnalTemp((oneRainEvent.startDayTime + oneRainEvent.endDayTime)/2, highTemp, lowTemp, highTemp, lowTemp)
@@ -316,17 +316,17 @@ end
 -- run after updateForecast
 function ssWeatherForecast:updateWeather()
     local prevEndDayTime = 1 * self.UNITTIME
-    local events = self.forecast[2].numEvents
+    local events = self.forecast[3].numEvents
 
     if table.getn(ssWeatherManager.weather) > 0 then
-        if ssWeatherManager.weather[1].startDay < g_seasons.environment:currentDay() then
-            self:removeWeather()
+        while ssWeatherManager.weather[1].startDay < g_seasons.environment:currentDay() do
+            table.remove(ssWeatherManager.weather, 1)
         end
     end
 
     if events > 0 then
         for i = 1, events do
-            local oneRainEvent = self:getRainEvent(self.forecast[2], prevEndDayTime, i)
+            local oneRainEvent = self:getRainEvent(self.forecast[3], prevEndDayTime, i)
             table.insert(ssWeatherManager.weather, oneRainEvent)
 
             prevEndDayTime = oneRainEvent.endDayTime
@@ -338,10 +338,6 @@ function ssWeatherForecast:updateWeather()
     end
 
     --self:foggyMorning()
-end
-
-function ssWeatherForecast:removeWeather()
-    -- update weather do not return anything
 end
 
 -- Possible unforcasted morning fog on day 2
@@ -414,15 +410,16 @@ end
 function ssWeatherForecast:overwriteRaintable()
     local env = g_currentMission.environment
     local tmpWeather = {}
-    env.numRains = table.getn(ssWeatherManager.weather)
+    local nRains = table.getn(ssWeatherManager.weather)
 
-    for index = 1, env.numRains do
+    for index = 1, nRains do
         if ssWeatherManager.weather[index].rainTypeId ~= ssWeatherManager.RAINTYPE_SUN then
             local tmpSingleWeather = deepCopy(ssWeatherManager.weather[index])
             table.insert(tmpWeather, tmpSingleWeather)
         end
     end
 
+    env.numRains = table.getn(tmpWeather)
     env.rains = tmpWeather
 
     if g_seasons.environment.currentDayOffset ~= nil then

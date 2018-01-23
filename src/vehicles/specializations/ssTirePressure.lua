@@ -85,7 +85,7 @@ function ssTirePressure:updateInflationPressure()
     for _, wheel in pairs(self.wheels) do
         if wheel.tireType ~= tireTypeCrawler then
             if wheel.ssMaxDeformation == nil then
-                wheel.ssMaxDeformation = wheel.maxDeformation
+                wheel.ssMaxDeformation = Utils.getNoNil(wheel.maxDeformation,0)
             end
 
             wheel.ssMaxLoad = self:getTireMaxLoad(wheel, self.ssInflationPressure)

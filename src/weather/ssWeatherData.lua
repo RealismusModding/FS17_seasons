@@ -22,7 +22,7 @@ function ssWeatherData:load(savegame, key)
     ssWeatherManager.cropMoistureContent = ssXMLUtil.getFloat(savegame, key .. ".weather.cropMoistureContent", 15.0)
     ssWeatherManager.soilWaterContent = ssXMLUtil.getFloat(savegame, key .. ".weather.soilWaterContent", 0.1)
     ssWeatherManager.moistureEnabled = ssXMLUtil.getBool(savegame, key .. ".weather.moistureEnabled", true)
-    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeed")
+    ssWeatherManager.windSpeed = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeed", 2.0)
     ssWeatherManager.windSpeedDelta = ssXMLUtil.getFloat(savegame, key .. ".weather.windSpeedDelta", 0.0)
 
     -- load forecast

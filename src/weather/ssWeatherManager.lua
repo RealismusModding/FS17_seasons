@@ -166,7 +166,7 @@ function ssWeatherManager:seasonLengthChanged()
     if g_currentMission:getIsServer() then
         local isFrozen = self:isGroundFrozen()
 
-        self:buildForecast()
+        ssWeatherForecast:buildForecast()
 
         -- The new forecast is sent with the ssSettings event.
     end
