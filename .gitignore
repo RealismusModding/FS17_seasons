@@ -10,9 +10,10 @@ __pycache__
 dist/
 .buildrc
 FS17*.zip
+FS17_RM_Seasons*
 node_modules/
 .cookies
-
+.fsbuild.yml
 package-lock.json
 
 # IDE
