@@ -33,10 +33,9 @@ function ssMain:preLoad()
 
     self.modDir = ssSeasonsMod.directory
 
-    local buildnumber = nil --<%=buildnumber %>
     local modItem = ModsUtil.findModItemByModName(ssSeasonsMod.name)
     self.descVersion = Utils.getNoNil(modItem.version, "0.0.0.0")
-    self.version = self.descVersion .. "-" .. tostring(buildnumber) .. " - " .. tostring(modItem.fileHash)
+    self.version = self.descVersion .. " - " .. tostring(modItem.fileHash)
 
     -- Simple version number for comparing minimum required version of seasons
     self.simpleVersion = 3 --<%=simpleVersion %>
