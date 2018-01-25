@@ -32,6 +32,13 @@ templates:
   norestart: false
   simpleVersion: 4
 
+console:
+  skip_files:
+    - resources/fakeStoreItem
+  del_moddesc:
+    - "/modDesc/storeItems/storeItem[@xmlFilename='resources/fakeStoreItem/item.xml']"
+    - "/modDesc/storeItems/storeItem[@xmlFilename='resources/fakeStoreItem/item2.xml']"
+
 release:
   clean_translations: true
   templates:
