@@ -1,14 +1,8 @@
-<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– HELP MENU
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– Purpose:  Setup of the help menu contents
-–– Authors:  Rahkiin
-––
-–– Copyright (c) Realismus Modding, 2017
-–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 
 <helpLines>
+    <annotation>Copyright (c) Realismus Modding, 2017</annotation>
+
     <helpLineCategory title="ss_helpCategory">
         <!-- Intro -->
         <helpLine title="ss_helpTitle_01">
