@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– VISUAL SEASON DATA
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– Purpose:  Setting visual seasons
-–– Authors:  reallogger
-––
-–– Copyright (c) Realismus Modding, 2017
-–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 
 <!--–––––––––––––––––––––––––––
 –– latCat = 1 ––  0 to 30 deg
@@ -18,6 +10,9 @@
 ––––––––––––––––––––––––––––-->
 
 <visualSeason>
+    <annotation>Copyright (c) Realismus Modding, 2017</annotation>
+    <contributors>reallogger</contributors>
+
     <latitudeCategory type="1">
         <visual transition="1">summer</visual>
         <visual transition="2">summer</visual>
