@@ -121,7 +121,7 @@ function ssWeatherForecast:_getNumEvents(wt)
             wt == ssWeatherManager.WEATHERTYPE_RAIN_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SLEET then
-        return math.floor(ssUtil.triDist(1, 2, 4.99)) -- to return values from 1 to 4
+        return math.floor(ssUtil.triDist(1, 3, 4.99)) -- to return values from 1 to 4
 
     elseif wt == ssWeatherManager.WEATHERTYPE_CLOUDY or
             wt == ssWeatherManager.WEATHERTYPE_RAIN or
@@ -237,7 +237,7 @@ function ssWeatherForecast:getRainEvent(dayForecast, prevEndDayTime, i)
             wt == ssWeatherManager.WEATHERTYPE_SNOW_SHOWERS or
             wt == ssWeatherManager.WEATHERTYPE_SLEET then
 
-        oneRainEvent.startDayTime = (math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / ssWeatherForecast.UNITTIME) * ssWeatherForecast.UNITTIME
+        oneRainEvent.startDayTime = math.max(math.random() * 24 / (events + 1) * (i + 1) + earlyRainTime / ssWeatherForecast.UNITTIME, 23) * ssWeatherForecast.UNITTIME
         --oneRainEvent.duration = (math.min(math.max(math.exp(ssUtil.lognormDist(beta, gamma, math.random())) / events, 2), 24 / (events + 4))) * ssWeatherForecast.UNITTIME -- capping length of each event
         oneRainEvent.duration = ssUtil.triDist(1,2,24 / (events + 4)) * ssWeatherForecast.UNITTIME
         oneRainEvent.endDayTime = oneRainEvent.startDayTime + oneRainEvent.duration
