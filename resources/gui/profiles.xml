@@ -125,6 +125,7 @@
     <Profile name="ssCalendarItemGerminationFrigid" parent="ssCalendarItemGermination">
         <Value name="textColor" value="$preset_colorBlue" />
         <Value name="textSelectedColor" value="$preset_colorBlue" />
+        <Value name="textPreSelectedColor" value="$preset_colorBlue" />
     </Profile>
 
     <Profile name="ssCalendarItemData" parent="ssCalendarBg">

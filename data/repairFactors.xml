@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– REPAIR FACTORS
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– Purpose:  Data for repair factors
-–– Authors:  reallogger
-––
-–– Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter
-–– Life time divided by 20
-––
-–– Copyright (c) Realismus Modding, 2017
-–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <factors>
+    <annotation>Copyright (c) Realismus Modding, 2017. Repair factors from "Costs of Owning and Operating Farm Machinery in the Pacific Northwest: 2011" by Kathleen Painter. Life time divided by 20.</annotation>
+    <contributors>reallogger</contributors>
+
     <factor category="tractors">
         <RF1 value="0.007" />
         <RF2 value="2" />

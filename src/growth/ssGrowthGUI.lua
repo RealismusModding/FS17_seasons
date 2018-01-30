@@ -145,6 +145,19 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
                 end
             end
         end
+
+        --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
+        if data.extraGrowthMinState ~= nil
+                and data.extraGrowthMaxState ~= nil
+                and data.extraGrowthFactor ~= nil then
+            local extraGrowthMinState = data.extraGrowthMinState
+            local extraGrowthMaxState = data.extraGrowthMaxState
+
+            if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
+                newGrowthState = newGrowthState + data.extraGrowthFactor
+            end
+        end
+
         --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
         if data.normalGrowthState ~= nil then
             local normalGrowthState = data.normalGrowthState
@@ -157,17 +170,6 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
                 if currentGrowthState == normalGrowthState then
                     newGrowthState = newGrowthState + 1
                 end
-            end
-        end
-        --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-        if data.extraGrowthMinState ~= nil
-                and data.extraGrowthMaxState ~= nil
-                and data.extraGrowthFactor ~= nil then
-            local extraGrowthMinState = data.extraGrowthMinState
-            local extraGrowthMaxState = data.extraGrowthMaxState
-
-            if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
-                newGrowthState = newGrowthState + data.extraGrowthFactor
             end
         end
     end

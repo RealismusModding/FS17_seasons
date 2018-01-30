@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– DAYLIGHT DATA
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-–– Purpose:  Configures the daylight per season and the latitude
-–– Authors:  Rahkiin
-––
-–– Copyright (c) Realismus Modding, 2017
-–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 <daylight latitude="51.9" dst="yes">
+    <annotation>Copyright (c) Realismus Modding, 2017</annotation>
+    <contributors>Rahkiin</contributors>
+
     <seasons>
         <spring>
             <ambient>

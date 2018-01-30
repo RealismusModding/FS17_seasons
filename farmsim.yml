@@ -1,6 +1,14 @@
 name: Seasons
+author: Realismus Modding
+contributors:
+  - theSeb
+  - Rahkiin
+  - reallogger
+  - mrbear
+  - baron
+  - Wopster
 zip_name: FS17_RM_Seasons
-version: 1.2.1.0
+version: 1.4.0.0
 type: script
 
 code: src/
@@ -24,13 +32,24 @@ translations:
   - ru
   - hu
   - br
+  - cs
 
 templates:
   debug: true
   verbose: true
+  norestart: false
+  simpleVersion: 5
+
+console:
+  skip_files:
+    - resources/fakeStoreItem
+  del_moddesc:
+    - "/modDesc/storeItems/storeItem[@xmlFilename='resources/fakeStoreItem/item.xml']"
+    - "/modDesc/storeItems/storeItem[@xmlFilename='resources/fakeStoreItem/item2.xml']"
 
 release:
   clean_translations: true
   templates:
     debug: false
     verbose: false
+    norestart: false

@@ -94,7 +94,7 @@ local function applyWheelSnowTracks(self)
 
             if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
                 if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
-                    wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
+                    -- wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
                 end
 
                 wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }

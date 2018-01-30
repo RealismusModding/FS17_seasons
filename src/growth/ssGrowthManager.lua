@@ -223,15 +223,15 @@ function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, wid
                     and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
                 self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
-            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-            if self.growthData[transition][fruitName].normalGrowthState ~= nil then
-                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
-            end
             --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
             if self.growthData[transition][fruitName].extraGrowthMinState ~= nil
                     and self.growthData[transition][fruitName].extraGrowthMaxState ~= nil
                     and self.growthData[transition][fruitName].extraGrowthFactor ~= nil then
                 self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+            end
+            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
+            if self.growthData[transition][fruitName].normalGrowthState ~= nil then
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
     end  -- end of for index, fruit in pairs(g_currentMission.fruits) do

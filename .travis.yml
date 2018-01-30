@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '8'
+install:
+- npm install -g farmsim
+script:
+- fs verify
+cache:
+  directories:
+  - node_modules
+notifications:
+  slack:
+    rooms:
+      secure: T6Bakrp0qh5C6PEq3OoTuVO6hlXa4wtLxfsVt8q8i6bgRFz0eMicuq0WigZ4MA8WxdeVI9oPTwEFVZKg3DdUJf4F6Rumtp9whFR97nM+X7KYKuvEsTNu0VeYxhZVULaXVq+AyV8va3aSKF0AdV9wfbr90h5UOujZJ8NXd5ZwZiT6HLUiZEQ6pxl/l1dqRujQDzNLocVQNGRDJ/l6/M/SMbvS4kq+NkLWGBk4TjoIVgG4qCBKNNGer9Eb9L5UkiNJiDtgoROerhbYFuEc//jyA7zCaZTboiGcJInAgn9x7H6Ia8uDkQeQ9XrtdM74vjoZKjymibWNJS3nq4Efd3fWrIMK339McAatzFmjqikNsVilwtiBx3SRsFP+rhIFQHI4QUFvZEujfimiIpFkHDgSLHj3j8l9iiuk3v27CsouiOfNi8NIVTJ0yU8y5EnSAmcizdXYY4jP7NqRSzlluG+g6ELdeL7gOnjb4DNQcmRtcNu2+xI6rvFjLGLGZ/uLQCqRlA1+3QwV4ED4enxGyvlLBXFXvSwnMt06wr/TB3jSM/yE4Wh68tl9nhdahtUIxybRytO5pmrv1Mm8xsl9ip6ztP81CoJAkm23U2Y3HEZrY63Vj5B2IRWW/P2Zhf8Zce3NaUXqnzXCKmOui4GliPcfbkmzhN4ltXvB6B6mzCU25Bk=
+    on_success: change
+    on_failure: always
+  email: false

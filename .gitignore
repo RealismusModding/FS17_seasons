@@ -1,5 +1,4 @@
 # System stuff
-__pycache__
 .DS_STORE
 
 # Editors
@@ -7,13 +6,9 @@ __pycache__
 *.sublime-project
 
 # Build system
-dist/
-.buildrc
+.fsbuild.yml
 FS17*.zip
-node_modules/
-.cookies
-
-package-lock.json
+FS17_RM_Seasons*
 
 # IDE
 .idea/
