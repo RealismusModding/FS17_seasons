@@ -9,7 +9,7 @@
 
 ssVehicle = {}
 
-ssVehicle.LIFETIME_FACTOR = 3
+ssVehicle.LIFETIME_FACTOR = 1
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
