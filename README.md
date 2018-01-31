@@ -1,5 +1,7 @@
 # FS17 Seasons
 
+[![Build Status](https://travis-ci.org/RealismusModding/FS17_seasons.svg?branch=develop)](https://travis-ci.org/RealismusModding/FS17_seasons)
+
 ***WARNING***: You are looking at the DEVELOPMENT VERSION of the Seasons mod. To play Seasons, download at the Giants ModHub: [https://farming-simulator.com/mod.php?mod_id=79288](https://farming-simulator.com/mod.php?mod_id=79288). The code here might break your savegame, and computer, and give a lot of pain.
 
 ***WARNING***: We do not officially support activating the Seasons mod on an existing savegame. Do this at your own risk. Read more about this in the [F.A.Q.](https://github.com/RealismusModding/FS17_seasons/wiki/Frequently-Asked-Questions#q-why-do-you-not-support-adding-the-seasons-mod-to-an-existing-savegame)
