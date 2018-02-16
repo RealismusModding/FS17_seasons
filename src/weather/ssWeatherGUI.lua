@@ -122,16 +122,22 @@ function ssWeatherGUI:loadMap(name)
 
     -- Seasons Weather Icons
     self.overlays.sun = g_currentMission.weatherForecastIconSunOverlay
-    self.overlays.cloudy = g_currentMission.weatherForecastIconOverlays.cloudy
-    self.overlays.fog = g_currentMission.weatherForecastIconOverlays.fog
+    self.overlays.partly_cloudy = g_currentMission.weatherForecastIconOverlays.cloudy
     self.overlays.rain = g_currentMission.weatherForecastIconOverlays.rain
     self.overlays.snow = g_currentMission.weatherForecastIconOverlays.snow
     self.overlays.hail = self.overlays.snow
-    -- replace with proper icons
-    self.overlays.partly_cloudy = self.overlays.cloudy
-    self.overlays.rain_showers = self.overlays.rain
-    self.overlays.snow_showers = self.overlays.snow
-    self.overlays.sleet = self.overlays.rain
+    self.overlays.rain_showers = Overlay:new("hud_rainshowers", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.rain_showers:setUVs(getNormalizedUVs({10, 565, 64, 64}))
+    self.overlays.snow_showers = Overlay:new("hud_snowshowers", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.snow_showers:setUVs(getNormalizedUVs({80, 565, 64, 64}))
+    self.overlays.sleet = Overlay:new("hud_sleet", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.sleet:setUVs(getNormalizedUVs({220, 565, 64, 64}))
+    self.overlays.fog = Overlay:new("hud_fog", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.fog:setUVs(getNormalizedUVs({290, 565, 64, 64}))
+
+    self.overlays.cloudy = Overlay:new("hud_cloudy", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.cloudy:setUVs(getNormalizedUVs({150, 565, 64, 64}))
+    g_currentMission.weatherForecastIconOverlays.cloudy = self.overlays.cloudy
 
     self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
 
