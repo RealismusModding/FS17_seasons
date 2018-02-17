@@ -102,6 +102,7 @@ function ssWeatherForecast:oneDayForecast(i,prevDayForecast)
     end
 
     dayForecast.windSpeed = ssWeatherManager:calculateWindSpeed(dayForecast.p, pPrev, growthTransition)
+    dayForecast.windType = self:getWindType(dayForecast.windSpeed)
     dayForecast.weatherType = self:getWeatherType(dayForecast.day, dayForecast.p, startTimeTemp, avgTemp, dayForecast.windSpeed)
     dayForecast.numEvents = self:_getNumEvents(dayForecast.weatherType)
 
@@ -517,6 +518,18 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
 
     return wType
 
+end
+
+function ssWeatherForecast:getWindType(windSpeed)
+    if windSpeed < 3.5 then
+        return ssWeatherManager.WINDTYPE_CALM
+    elseif windSpeed >= 3.5 and windSpeed < 8 then
+        return ssWeatherManager.WINDTYPE_GENTLE_BREEZE
+    elseif windSpeed >= 8 and windSpeed < 15 then
+        return ssWeatherManager.WINDTYPE_STRONG_BREEZE
+    elseif windSpeed >= 15  then
+        return ssWeatherManager.WINDTYPE_GALE
+    end
 end
 
 function ssWeatherForecast:calculateAverageTransitionTemp(gt, deterministic)

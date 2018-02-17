@@ -45,6 +45,7 @@ function ssWeatherData:load(savegame, key)
         day.highTemp = getXMLFloat(savegame, dayKey .. "#highTemp")
         day.lowTemp = getXMLFloat(savegame, dayKey .. "#lowTemp")
         day.windSpeed = getXMLFloat(savegame, dayKey .. "#windSpeed")
+        day.windType = ssWeatherForecast:getWindType(day.windSpeed)
         day.p = getXMLFloat(savegame, dayKey .. "#p")
         day.numEvents = getXMLInt(savegame, dayKey .. "#numEvents")
 

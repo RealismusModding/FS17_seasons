@@ -28,6 +28,11 @@ ssWeatherManager.RAINTYPE_SNOW = "snow"
 ssWeatherManager.RAINTYPE_FOG = "fog"
 ssWeatherManager.RAINTYPE_HAIL = "hail"
 
+ssWeatherManager.WINDTYPE_CALM = "calm"
+ssWeatherManager.WINDTYPE_GENTLE_BREEZE = "gentle_breeze"
+ssWeatherManager.WINDTYPE_STRONG_BREEZE = "strong_breeze"
+ssWeatherManager.WINDTYPE_GALE = "gale"
+
 -- Load events
 source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerDailyEvent.lua")
 source(ssSeasonsMod.directory .. "src/events/ssWeatherManagerHourlyEvent.lua")

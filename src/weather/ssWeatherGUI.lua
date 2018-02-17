@@ -139,6 +139,17 @@ function ssWeatherGUI:loadMap(name)
     self.overlays.cloudy:setUVs(getNormalizedUVs({150, 565, 64, 64}))
     g_currentMission.weatherForecastIconOverlays.cloudy = self.overlays.cloudy
 
+    -- Seasons wind icons
+    self.overlays.wind = {}
+    self.overlays.wind[ssWeatherManager.WINDTYPE_CALM] = Overlay:new("hud_calm", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.wind[ssWeatherManager.WINDTYPE_CALM]:setUVs(getNormalizedUVs({10, 640, 64, 64}))
+    self.overlays.wind[ssWeatherManager.WINDTYPE_GENTLE_BREEZE] = Overlay:new("hud_gentlebreeze", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.wind[ssWeatherManager.WINDTYPE_GENTLE_BREEZE]:setUVs(getNormalizedUVs({90, 640, 64, 64}))
+    self.overlays.wind[ssWeatherManager.WINDTYPE_STRONG_BREEZE] = Overlay:new("hud_strongbreeze", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.wind[ssWeatherManager.WINDTYPE_STRONG_BREEZE]:setUVs(getNormalizedUVs({170, 640, 64, 64}))
+    self.overlays.wind[ssWeatherManager.WINDTYPE_GALE] = Overlay:new("hud_gale", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
+    self.overlays.wind[ssWeatherManager.WINDTYPE_GALE]:setUVs(getNormalizedUVs({250, 640, 64, 64}))
+
     self.vanillaNotificationOffset = g_currentMission.ingameNotificationOffsetY
 
     self:setForecastVisible(self.visible)
@@ -255,6 +266,13 @@ function ssWeatherGUI:drawForecast(forecast)
         -- renderText(self.forecastX + posXOffset + dayOffset, self.forecastY + self.height - posYOffset - self.iconHeightSmall / 2, self.textSize * 1.2, ssUtil.dayNameShort(ssUtil.dayOfWeek(g_seasons.environment:currentDay() + n - 1)))
         local dayName = ssUtil.dayNameShort(ssUtil.dayOfWeek(g_currentMission.environment.currentDay + n - 1))
         renderText(dayOffsetX + self.marginX, dayOffsetY + self.forecastDayHeight - self.textSize * 1.2 - self.marginY, self.textSize * 1.2, dayName)
+
+        -- Render wind icon
+        local windIcon = self.overlays.wind[forecast[n].windType]
+        windIcon:setDimension(self.iconWidthSmall, self.iconHeightSmall)
+        -- Lower right corner
+        windIcon:setPosition(dayOffsetX + self.forecastDayWidth - self.iconWidthSmall - self.marginX, dayOffsetY)
+        windIcon:render()
     end
 end
 
