@@ -161,6 +161,14 @@ function ssWeatherManager:update(dt)
             currentRain.rainTypeId = self.RAINTYPE_SNOW
             setVisibility(g_currentMission.environment.rainTypeIdToType.snow.rootNode, true)
         end
+
+        if ssWeatherForecast.forecast[1].weatherType == self.WEATHERTYPE_RAIN or ssWeatherForecast.forecast[1].weatherType == self.WEATHERTYPE_SNOW then
+            g_currentMission.environment.globalRainDropFactor = 0.5
+        elseif ssWeatherForecast.forecast[1].weatherType == self.WEATHERTYPE_THUNDER then
+            g_currentMission.environment.globalRainDropFactor = 2
+        else
+            g_currentMission.environment.globalRainDropFactor = 1
+        end
     end
 
     -- updating visual wind
@@ -229,7 +237,7 @@ function ssWeatherManager:hourChanged()
 end
 
 -- function to output the temperature during the day and night
-function ssWeatherManager:diurnalTemp(currentTime, highTempPrev, lowTemp, highTemp, lowTempNext)
+function ssWeatherManager:diurnalTemp(currentHour, highTempPrev, lowTemp, highTemp, lowTempNext)
 
     if highTempPrev == nil or lowTemp == nil or highTemp == nil or lowTempNext == nil then
         lowTemp = ssWeatherForecast.forecast[1].lowTemp
@@ -238,12 +246,12 @@ function ssWeatherManager:diurnalTemp(currentTime, highTempPrev, lowTemp, highTe
         highTempPrev = ssWeatherManager.prevHighTemp
     end
 
-    if currentTime < 7 then
-        currentTemp = (math.cos(((currentTime + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
-    elseif currentTime > 15 then
-        currentTemp = (math.cos(((currentTime - 15) / 16) * math.pi / 2)) ^ 2 * (highTemp - lowTempNext) + lowTempNext
+    if currentHour < 7 then
+        currentTemp = (math.cos(((currentHour + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
+    elseif currentHour > 15 then
+        currentTemp = (math.cos(((currentHour - 15) / 16) * math.pi / 2)) ^ 2 * (highTemp - lowTempNext) + lowTempNext
     else
-        currentTemp = (math.cos((1 - (currentTime -  7) / 8) * math.pi / 2) ^ 2) * (highTemp - lowTemp) + lowTemp
+        currentTemp = (math.cos((1 - (currentHour -  7) / 8) * math.pi / 2) ^ 2) * (highTemp - lowTemp) + lowTemp
     end
 
     return currentTemp
@@ -340,7 +348,7 @@ function ssWeatherManager:currentTemperature()
 
     self.latestCurrentTempHour = curHour
     self.latestCurrentTempMinute = curMin
-    self.latestCurrentTemp = self:diurnalTemp(curHour, curMin)
+    self.latestCurrentTemp = self:diurnalTemp(curHour)
 
     return self.latestCurrentTemp
 end
@@ -463,18 +471,19 @@ end
 function ssWeatherManager:calculateRainAmount()
     local amount = 0
     local seasonLengthFactor = (3.0 * g_seasons.environment.daysInSeason)^0.1
-    local weatherTypeFactor = 1
+    local rainIntensityFactor = 1
+    local currentWeatherType = ssWeatherForecast.forecast[1].weatherType
 
     -- less intensity with "all day" rain
-    if self.currentWeatherType == self.WEATHERTYPE_RAIN then
-        weatherTypeFactor = 0.5
+    if currentWeatherType == self.WEATHERTYPE_RAIN then
+        rainIntensityFactor = 0.5
     -- strong rain when thunder
-    elseif self.currentWeatherType == self.WEATHERTYPE_THUNDER then
-        weatherTypeFactor = 2
+    elseif currentWeatherType == self.WEATHERTYPE_THUNDER then
+        rainIntensityFactor = 2
     end
 
     if g_currentMission.environment.currentRain ~= nil then
-        currentRainId = g_currentMission.environment.currentRain.rainTypeId
+        local currentRainId = g_currentMission.environment.currentRain.rainTypeId
 
         if currentRainId == self.RAINTYPE_RAIN then
             amount = 0.5
@@ -482,7 +491,7 @@ function ssWeatherManager:calculateRainAmount()
             amount = 0.75
         end
 
-        return amount * weatherTypeFactor * seasonLengthFactor
+        return amount * rainIntensityFactor * seasonLengthFactor
     else
         return 0
     end
