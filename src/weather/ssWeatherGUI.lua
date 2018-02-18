@@ -138,6 +138,7 @@ function ssWeatherGUI:loadMap(name)
     self.overlays.cloudy = Overlay:new("hud_cloudy", g_seasons.baseUIFilename, 0, 0, self.stateIconWidth, self.stateIconHeight)
     self.overlays.cloudy:setUVs(getNormalizedUVs({150, 565, 64, 64}))
     g_currentMission.weatherForecastIconOverlays.cloudy = self.overlays.cloudy
+    g_currentMission.weatherForecastIconOverlays.fog = self.overlays.fog
 
     -- Seasons wind icons
     self.overlays.wind = {}

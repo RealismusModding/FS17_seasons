@@ -45,8 +45,6 @@ end
 function ssWeatherManager:load(savegame, key)
     self.forecast = {} --day of week, low temp, high temp, weather condition
     self.forecastLength = 8
-    self.weather = {}
-    self.weatherData = {}
 end
 
 function ssWeatherManager:loadMap(name)

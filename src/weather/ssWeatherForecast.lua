@@ -309,7 +309,7 @@ function ssWeatherForecast:buildWeather()
         end
     end
 
-    --self:foggyMorning()
+    self:foggyMorning()
     ssWeatherManager.weather = weather
 end
 
@@ -322,6 +322,9 @@ function ssWeatherForecast:updateWeather()
     if table.getn(ssWeatherManager.weather) > 0 then
         while ssWeatherManager.weather[1].startDay < g_seasons.environment:currentDay() do
             table.remove(ssWeatherManager.weather, 1)
+            if table.getn(ssWeatherManager.weather) == 0 then
+                break
+            end
         end
     end
 
@@ -338,7 +341,7 @@ function ssWeatherForecast:updateWeather()
         end
     end
 
-    --self:foggyMorning()
+    self:foggyMorning()
 end
 
 -- Possible unforcasted morning fog on day 2
@@ -362,8 +365,15 @@ function ssWeatherForecast:foggyMorning()
 
         if potentialFog then
             oneFogEvent = self:_getFogEvent(forecast)
-            --local pos = -- TODO: find the right place to include the fog event
-            --table.insert(weather, pos, oneFogEvent)
+            local pos = 1
+            for index , nWeather in ipairs(ssWeatherManager.weather) do
+                if nWeather.startDay < oneFogEvent.startDay then
+                    pos = index + 1
+                end
+            end
+
+            table.insert(ssWeatherManager.weather, pos, oneFogEvent)
+            --print_r(ssWeatherManager.weather)
         end
     end
 end
@@ -386,7 +396,7 @@ function ssWeatherForecast:_getFogEvent()
 
 
     for hour = 1, 11 do
-        temp = ssWeatherManager:diurnalTemperature(hour, highTempPrev,lowTemp,highTemp, lowTempNext)
+        temp = ssWeatherManager:diurnalTemp(hour, highTempPrev,lowTemp,highTemp, lowTempNext)
         rh = ssWeatherManager:calculateRelativeHumidity(temp, (lowTemp + lowTempPrev) * 0.5, ssWeatherManager.RAINTYPE_SUN)
 
         -- fog if the relative humidity is above 95%
@@ -399,10 +409,10 @@ function ssWeatherForecast:_getFogEvent()
         rhPrev = rh
     end
 
-    oneFogEvent.startRainTime = startFogTime * ssWeatherForecast.UNITTIME
-    oneFogEvent.endRainTime = endFogTime * ssWeatherForecast.UNITTIME
-    oneFogEvent.duration = oneFogEvent.endRainTime - oneFogEvent.startRainTime
-    oneFogEvent.rainType = ssWeatherManager.RAINTYPE_FOG
+    oneFogEvent.startDayTime = startFogTime * ssWeatherForecast.UNITTIME
+    oneFogEvent.endDayTime = endFogTime * ssWeatherForecast.UNITTIME
+    oneFogEvent.duration = oneFogEvent.endDayTime - oneFogEvent.startDayTime
+    oneFogEvent.rainTypeId = ssWeatherManager.RAINTYPE_FOG
 
     return oneFogEvent
 end
@@ -511,7 +521,7 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
         wType = ssWeatherManager.WEATHERTYPE_SNOW
 
     elseif p > probPartlyCloudy and avgTemp >= -tempLimit and temp < tempLimit and windSpeed < 3.0 then
-        if random.random > 0.3 then
+        if math.random() > 0.3 then
             wType = ssWeatherManager.WEATHERTYPE_FOG
         end
     end
@@ -521,13 +531,13 @@ function ssWeatherForecast:getWeatherType(day, p, temp, avgTemp, windSpeed)
 end
 
 function ssWeatherForecast:getWindType(windSpeed)
-    if windSpeed < 3.5 then
+    if windSpeed < 4 then
         return ssWeatherManager.WINDTYPE_CALM
-    elseif windSpeed >= 3.5 and windSpeed < 8 then
+    elseif windSpeed >= 4 and windSpeed < 8 then
         return ssWeatherManager.WINDTYPE_GENTLE_BREEZE
-    elseif windSpeed >= 8 and windSpeed < 15 then
+    elseif windSpeed >= 8 and windSpeed < 14 then
         return ssWeatherManager.WINDTYPE_STRONG_BREEZE
-    elseif windSpeed >= 15  then
+    elseif windSpeed >= 14  then
         return ssWeatherManager.WINDTYPE_GALE
     end
 end
