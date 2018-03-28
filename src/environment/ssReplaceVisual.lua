@@ -103,7 +103,7 @@ function ssReplaceVisual:loadTextureReplacementsFromXMLFile(path)
 
         -- The default xml file also supplies a blending file that might be used
         local blendingMatHolder = getXMLString(file, "textures#blendingMaterialHolder")
-        local blendingFile = nil
+        local blendingFile
 
         if blendingMatHolder ~= nil then
             blendingFile = ssUtil.normalizedPath(Utils.getFilename(blendingMatHolder, baseDir))
@@ -242,6 +242,16 @@ end
 -- Utilities
 --
 
+-- Clone the amount of needed nodes per material to prevent garbage collect
+local function cloneNodePerMaterial(self, materialIds)
+    for i = 1, #materialIds do
+        local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+
+        link(getRootNode(), nodeId)
+        self:setShapeMaterials(nodeId, { materialIds[i] })
+    end
+end
+
 -- Stefan Geiger - GIANTS Software (https://gdn.giants-software.com/thread.php?categoryId=16&threadId=664)
 function ssReplaceVisual:findNodeByName(nodeId, name, skipCurrent)
     if skipCurrent ~= true and getName(nodeId) == name then
@@ -282,15 +292,8 @@ function ssReplaceVisual:loadMissingPlaceableDefaults(searchBase)
 
             self.textureReplacements.default[shapeName][secondaryNodeName].materialIds = materialIds
 
-            -- Load an object to hold it as well to prevent garbage collect
             if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
-                -- Clone the amount of needed nodes per material
-                for i = 1, #materialIds do
-                    local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
-
-                    link(getRootNode(), nodeId)
-                    self:setShapeMaterials(nodeId, { materialIds[i] })
-                end
+                cloneNodePerMaterial(self, materialIds)
             end
         end
     end)
@@ -329,15 +332,8 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
                         local materialIds = ssReplaceVisual:findOriginalMaterials(getRootNode(), shapeName, secondaryNodeName)
                         self.textureReplacements.default[shapeName][secondaryNodeName].materialIds = materialIds
 
-                        -- Load an object to hold it as well to prevent garbage collect
                         if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
-                            -- Clone the amount of needed nodes per material
-                            for i = 1, #materialIds do
-                                local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
-
-                                link(getRootNode(), nodeId)
-                                self:setShapeMaterials(nodeId, { materialIds[i] })
-                            end
+                            cloneNodePerMaterial(self, materialIds)
                         end
                     end
                 end
@@ -494,12 +490,8 @@ function ssReplaceVisual:updateFoliageLayers()
 
                 self.textureReplacements.default._foliageLayers[layerName] = defaultMaterial
 
-                -- Store in a shape against GC
                 if defaultMaterial ~= nil and self.tmpMaterialHolderNodeId ~= nil then
-                    local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
-
-                    link(getRootNode(), nodeId)
-                    setMaterial(nodeId, defaultMaterial, 0)
+                    cloneNodePerMaterial(self, { defaultMaterial })
                 end
             end
 
