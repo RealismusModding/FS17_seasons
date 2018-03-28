@@ -284,10 +284,13 @@ function ssReplaceVisual:loadMissingPlaceableDefaults(searchBase)
 
             -- Load an object to hold it as well to prevent garbage collect
             if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
-                local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+                -- Clone the amount of needed nodes per material
+                for i = 1, #materialIds do
+                    local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
 
-                link(getRootNode(), nodeId)
-                self:setShapeMaterials(nodeId, materialIds)
+                    link(getRootNode(), nodeId)
+                    self:setShapeMaterials(nodeId, { materialIds[i] })
+                end
             end
         end
     end)
@@ -328,10 +331,13 @@ function ssReplaceVisual:loadTextureIdTable(searchBase)
 
                         -- Load an object to hold it as well to prevent garbage collect
                         if materialIds ~= nil and self.tmpMaterialHolderNodeId ~= nil then
-                            local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
+                            -- Clone the amount of needed nodes per material
+                            for i = 1, #materialIds do
+                                local nodeId = clone(self.tmpMaterialHolderNodeId, false, false, false)
 
-                            link(getRootNode(), nodeId)
-                            self:setShapeMaterials(nodeId, materialIds)
+                                link(getRootNode(), nodeId)
+                                self:setShapeMaterials(nodeId, { materialIds[i] })
+                            end
                         end
                     end
                 end
@@ -372,7 +378,7 @@ end
 function ssReplaceVisual:setShapeMaterials(shape, materialIds)
     local numMats = getNumMaterials(shape)
 
-    for i = 1, math.min(numMats, table.getn(materialIds)) do
+    for i = 1, math.min(numMats, #materialIds) do
         setMaterial(shape, materialIds[i], i - 1)
     end
 end

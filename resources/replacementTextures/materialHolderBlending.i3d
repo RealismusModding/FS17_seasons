@@ -513,6 +513,10 @@
             <CustomParameter name="directionAndFrequency" value="0.06 0 0 1.2" />
             <CustomParameter name="speed" value="1 0 0 0" />
         </Material>
+
+        <!-- Clone-able simple mat for holding vanilla materials -->
+        <Material name="material_holder_mat" materialId="1000" diffuseColor="0 0 0 1" ambientColor="1 1 1">
+        </Material>
     </Materials>
 
     <Shapes externalShapesFile="materialHolder.i3d.shapes">
@@ -598,6 +602,6 @@
         <Shape shapeId="1" name="bushes_summer" visibility="false" nodeId="415" materialIds="415" distanceBlending="false" />
 
         <!-- Clone-able object for holding vanilla materials -->
-        <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="201" distanceBlending="false" />
+        <Shape shapeId="1" name="summer_material_holder" visibility="false" nodeId="1000" materialIds="1000" distanceBlending="false" />
     </Scene>
 </i3D>
