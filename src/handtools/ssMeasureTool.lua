@@ -218,7 +218,7 @@ function ssMeasureTool:raycastCallback(hitObjectId, x, y, z, distance)
                 elseif object:isa(FillablePallet) then
                     self:showFillablePallet(object)
                 elseif object:isa(TreePlaceable) then
-                    local nameI18N = nil
+                    local nameI18N
                     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[object.configFileName:lower()]
                     if storeItem then
                         nameI18N = storeItem.name
@@ -335,7 +335,7 @@ function ssMeasureTool:showTerrainInfo(x, y, z)
     local ploughCounter = a / b
 
     -- Get fruit and fruit height
-    local crop = nil
+    local crop
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitDesc = FruitUtil.fruitIndexToDesc[index]
         local a, b, c = getDensityParallelogram(fruit.id, worldX,worldZ, worldWidthX,worldWidthZ, worldHeightX,worldHeightZ,  0, g_currentMission.numFruitDensityMapChannels)
@@ -440,7 +440,7 @@ end
 function ssMeasureTool:showStaticTreeInfo(tree)
     local data = {}
     local treeTypeDesc = TreePlantUtil.treeTypeIndexToDesc[tree.treeType]
-    local typeName = nil
+    local typeName
 
     if treeTypeDesc then
         typeName = treeTypeDesc.nameI18N

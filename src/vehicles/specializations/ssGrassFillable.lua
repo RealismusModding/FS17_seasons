@@ -96,7 +96,7 @@ end
 
 function ssGrassFillable:updateTick(dt)
     if self.isServer then
-        local fillToReduce = nil
+        local fillToReduce
 
         -- If it rained into the fillable with hay or straw, rot it a bit
         if g_currentMission.environment.timeSinceLastRain < 5

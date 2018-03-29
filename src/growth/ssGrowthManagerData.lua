@@ -49,8 +49,8 @@ end
 
 function ssGrowthManagerData:loadAdditionalData(rootKey, modMapDataPath, defaultFruits, growthData)
     logInfo("ssGrowthManagerData:", "Additional growth data found - loading: " .. modMapDataPath)
-    local optionalDefaultFruits = nil
-    local optionalGrowthData = nil
+    local optionalDefaultFruits
+    local optionalGrowthData
 
     local file = loadXMLFile("xml", modMapDataPath)
     if file ~= nil then
