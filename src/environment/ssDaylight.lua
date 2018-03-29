@@ -147,7 +147,7 @@ end
 -- Change the night/day times according to season
 function ssDaylight:adaptTime()
     local env = g_currentMission.environment
-    julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
+    local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
 
     local dayStart, dayEnd, nightEnd, nightStart = self:calculateStartEndOfDay(julianDay)
     -- GIANTS values:
@@ -204,7 +204,7 @@ end
 
 function ssDaylight:calculateDay(p, julianDay, dawn)
     local time
-    local D, offset, hasDST = 0, 1
+    local D, offset = 0, 1
     local eta = self:calculateSunDeclination(julianDay)
 
     local gamma = (math.sin(p) + math.sin(self.latRad) * math.sin(eta)) / (math.cos(self.latRad) * math.cos(eta))
@@ -466,7 +466,7 @@ function ssDaylight:calculateSolarRadiation()
     local sunHeightAngle = self:calculateSunHeightAngle(julianDay)
     local sunZenithAngle = math.pi / 2 + sunHeightAngle --sunHeightAngle always negative due to FS convention
 
-    dayStart, dayEnd, _, _ = self:calculateStartEndOfDay(julianDay)
+    local dayStart, dayEnd, _, _ = self:calculateStartEndOfDay(julianDay)
 
     local lengthDay = dayEnd - dayStart
     local midDay = dayStart + lengthDay / 2
@@ -477,10 +477,8 @@ function ssDaylight:calculateSolarRadiation()
     if dayTime < dayStart or dayTime > dayEnd then
         -- no radiation before sun rises
         solarRadiation = 0
-
     else
         solarRadiation = Isc * math.cos(sunZenithAngle) * math.cos(( dayTime - midDay ) / ( lengthDay / 2 ))
-
     end
 
     -- lower solar radiation if it is overcast
