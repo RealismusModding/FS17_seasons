@@ -682,7 +682,7 @@ end
 
 function ssWeatherManager:_randomRain(oneDayForecast)
     local ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(oneDayForecast.day)]
-    local p -- Todo: whats default here? Else below can be simplyfied
+    local p
 
     if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
         if oneDayForecast.highTemp > ssTmax.mode then
