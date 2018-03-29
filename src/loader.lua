@@ -19,7 +19,7 @@ ssSeasonsMod.name = g_currentModName
 -- quickly needed utility functions
 ------------------------------------------
 
-function log(.
+function log(...)
     if g_seasons and not g_seasons.verbose then return end
 
     local str = "[Seasons]"
