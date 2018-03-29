@@ -464,6 +464,7 @@ function ssWeatherManager:diurnalTemp(hour, minute, lowTemp, highTemp, lowTempNe
     end
 
     local currentTime = hour + minute / 60
+    local currentTemp
 
     if currentTime < 7 then
         currentTemp = (math.cos(((currentTime + 9) / 16) * math.pi / 2)) ^ 2 * (highTempPrev - lowTemp) + lowTemp
@@ -617,7 +618,7 @@ function ssWeatherManager:updateRain(oneDayForecast, endRainTime)
 
     local oneRainEvent = {}
 
-    p = self:_randomRain(oneDayForecast)
+    local p = self:_randomRain(oneDayForecast)
 
     if p < rainFactors.probRain then
         oneRainEvent = self:_rainStartEnd(p, endRainTime, rainFactors, oneDayForecast)
@@ -680,7 +681,8 @@ function ssWeatherManager:_rainStartEnd(p, endRainTime, rainFactors, oneDayForec
 end
 
 function ssWeatherManager:_randomRain(oneDayForecast)
-    ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(oneDayForecast.day)]
+    local ssTmax = self.temperatureData[g_seasons.environment:transitionAtDay(oneDayForecast.day)]
+    local p -- Todo: whats default here? Else below can be simplyfied
 
     if oneDayForecast.season == g_seasons.environment.SEASON_WINTER or oneDayForecast.season == g_seasons.environment.SEASON_AUTUMN then
         if oneDayForecast.highTemp > ssTmax.mode then
@@ -900,7 +902,7 @@ function ssWeatherManager:updateHail(day)
 
     if p < rainFactors.probHail and self.forecast[1].weatherState == "sun" then
         local julianDay = ssUtil.julianDay(g_seasons.environment:currentDay())
-        dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
+        local dayStart, dayEnd, _, _ = g_seasons.daylight:calculateStartEndOfDay(julianDay)
 
         self.weather[1].rainTypeId = "hail"
         self.weather[1].startDayTime = ssUtil.triDist({["min"] = dayStart, ["mode"] = dayStart + 4, ["max"] = dayEnd - 6}) * 60 * 60 * 1000
@@ -914,6 +916,7 @@ function ssWeatherManager:updateHail(day)
 end
 
 function ssWeatherManager:updateSoilWaterContent()
+    local currentRainId
     if g_currentMission.environment.currentRain ~= nil then
         currentRainId = g_currentMission.environment.currentRain.rainTypeId
     end
@@ -925,7 +928,6 @@ function ssWeatherManager:updateSoilWaterContent()
     -- every hour with rain add 10 mm of waterInfriltation
     -- every hour snow melts: add 30% of melted snowDepth as waterInfriltation
     -- every hour air temperature < 5 deg, or solarRadiation < 1.5, no transpiration
-
 
     -- constants
     local depthRootZone = 20 -- cm
@@ -945,6 +947,8 @@ function ssWeatherManager:updateSoilWaterContent()
     local solarRadiation = g_seasons.daylight:calculateSolarRadiation()
     local prevSoilWaterCont = self.soilWaterContent
     local soilWaterInfiltration = 0
+    local soilWaterEvaporation
+    local soilWaterTranspiration
 
     -- calculate evaporation, if relativeHumidity > 90% or snow on the ground, no evaporation
     if prevSoilWaterCont <= hygroscopicSaturation or relativeHumidity > 90 or self.snowDepth > 0 then
@@ -978,7 +982,7 @@ function ssWeatherManager:updateSoilWaterContent()
         soilWaterInfiltration = 0.3 * self.meltedSnow * 400 / 10
     end
 
-    soilWaterLeakage = math.max(Ksat * (math.exp(beta*(prevSoilWaterCont - Sfc)) - 1) / (math.exp(beta*(1 - Sfc)) - 1),0)
+    local soilWaterLeakage = math.max(Ksat * (math.exp(beta*(prevSoilWaterCont - Sfc)) - 1) / (math.exp(beta*(1 - Sfc)) - 1),0)
     self.soilWaterContent = math.min(prevSoilWaterCont + 1 / (soilPorosity * depthRootZone) * (soilWaterInfiltration - soilWaterLeakage - soilWaterTranspiration - soilWaterEvaporation), 1)
 end
 
@@ -1012,8 +1016,10 @@ function ssWeatherManager:soilTooColdForGrowth(germinationTemperature)
         local ssTmax = self.temperatureData[gt]
         local highTemp = ssTmax.mode
         local lowTemp = 0.75 * ssTmax.mode - 5
+        local calculatedSoilTemp, _ = self:calculateSoilTemp(lowTemp, highTemp, daysInSeason, soilTemp[i - 1], 0, 0)
 
-        soilTemp[i], _ = self:calculateSoilTemp(lowTemp, highTemp, daysInSeason, soilTemp[i - 1], 0, 0)
+        soilTemp[i] = calculatedSoilTemp
+
         if soilTemp[i] > lowSoilTemp[gt] then
             lowSoilTemp[gt] = soilTemp[i]
         end
