@@ -64,7 +64,7 @@ function ssSkipNight:update(dt)
 
         -- When a player wants to skip the night, fast forward, securily
         if InputBinding.hasEvent(InputBinding.SEASONS_SKIP_NIGHT) then
-            function result(confirm, option)
+            local function result(confirm, option)
                 if not confirm then return end
 
                 local mode = option == 1 and ssSkipNight.MODE_MORNING or ssSkipNight.MODE_DAWN

@@ -261,10 +261,10 @@ function ssSeasonsMenu:updateCalendar()
     local canPlant = g_seasons.growthGUI:getCanPlantData()
     local canHarvest = g_seasons.growthGUI:getCanHarvestData()
 
-    function generateBlocks(blocks, fruitName, data, type)
+    local function generateBlocks(blocks, fruitName, data, type)
         if data == nil or data[fruitName] == nil then return end
 
-        local currentBlock = nil
+        local currentBlock
 
         -- Go over the data
         -- When you find a true
