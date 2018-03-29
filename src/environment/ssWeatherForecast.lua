@@ -57,7 +57,8 @@ function ssWeatherForecast:loadMap(name)
     self.todayHeight = g_currentMission.infoBarBgOverlay.height
     self.separatorWidth, self.separatorHeight = getNormalizedScreenValues(1 * uiScale, 1 * uiScale)
 
-    self.todayTextWidth, _ = getNormalizedScreenValues(24 * uiScale, 0)
+    local normalizedTextWidth, _ = getNormalizedScreenValues(24 * uiScale, 0)
+    self.todayTextWidth = normalizedTextWidth
     self.todayWidth = self.borderWidth * 2 + self.marginX * 4 + self.separatorWidth + self.iconWidth + self.iconWidthSmall + self.todayTextWidth
 
     self.todayIconOffsetX = self.borderWidth + self.marginX * 3 + self.iconWidth + self.separatorWidth
@@ -78,7 +79,7 @@ function ssWeatherForecast:loadMap(name)
 
 
     -- Rect for drawing the backgrounds
-    width, height = getNormalizedScreenValues(1, 1)
+    local width, height = getNormalizedScreenValues(1, 1)
     self.rect = Overlay:new("pixel", g_baseUIFilename, 0, 0, width, height)
     self.rect:setUVs(g_colorBgUVs)
 
