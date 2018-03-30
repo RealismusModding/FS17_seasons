@@ -127,7 +127,7 @@
         <text name="tooltip_controlsHelp" text="Mostra i tasti della previsione meteo e del menù nella finestra di aiuto" />
         <text name="tooltip_snowTracks" text="I veicoli comprimono la neve quando ci si guida sopra" />
         <text name="tooltip_controlsTemperature" text="Impostare la scala termometrica utilizzata nel gioco" />
-        <text name="tooltip_moisture" text="Disattivare la trebbiatura quando i raccolti sono bagnati dall'umidità" />
+        <text name="tooltip_moisture" text="Disattivare la trebbiatura quando i raccolti hanno un'umidità eccessiva (20%)" />
 
         <text name="setting_seasonIntros" text="Introduzioni Season" />
         <text name="setting_seasonLength" text="Durata Season" />
@@ -162,7 +162,7 @@
         <text name="ss_helpTitle_02" text="Effetti stagionali (1)" />
         <text name="ss_helpText_02_01" text="Il tempo metereologico è casuale di giorno in giorno, ma segue un modello da stagione a stagione." />
         <text name="ss_helpText_02_02" text="La primavera sarà piovosa e nebbiosa con alcune probabilità di tempo soleggiato. L'estate sarà più calda e più secca. Le tempeste di grandine possono verificarsi senza alcun avvertimento. L'autunno sarà piovoso con alcuni giorni di bel tempo. L'inverno sarà piovoso, ma spesso abbastanza freddo per permettere alla neve di cadere, e forse di rimanere a terra." />
-        <text name="ss_helpText_02_03" text="La neve riempirà rimorchi e pale, a meno che non siano al riparo in un capannone con 'snow mask' o 'collision'. La neve ridurrà anche la trazione, rendendo i veicoli più lenti." />
+        <text name="ss_helpText_02_03" text="La neve riempirà rimorchi e benne, a meno che non siano al riparo in un capannone con 'snow mask'. La neve ridurrà anche la trazione, rendendo i veicoli più lenti." />
 
         <text name="ss_helpTitle_03" text="Effetti stagionali (2)" />
         <text name="ss_helpText_03_01" text="Anche le ore di luce sono influenzate dalle stagioni. Gli inverni hanno giorni più brevi (8 ore) mentre le estati hanno giorni più lunghi (17 ore)." />
@@ -175,20 +175,20 @@
         <text name="ss_helpText_04_03" text="Il numero a destra di ogni riquadro della previsione rappresenta il giorno della stagione." />
 
         <text name="ss_helpTitle_05" text="Terreno" />
-        <text name="ss_helpText_05_01" text="La temperatura del suolo è modellata usando equazioni termodinamiche e dati storici. Ciò significa che il suolo si gelerà in inverno solo quando la temperatura dell'aria scende al di sotto di una certa gradazione per un determinato periodo di tempo. Il terreno si scongelerà in primavera quando la temperatura dell'aria salirà al di sopra una determinata soglia per un certo periodo di tempo." />
+        <text name="ss_helpText_05_01" text="La temperatura del suolo è modellata usando equazioni termodinamiche e dati storici. Ciò significa che il suolo si gelerà in inverno solo quando la temperatura dell'aria scende al di sotto di un certo valore per un determinato periodo di tempo. Il terreno si scongelerà in primavera quando la temperatura dell'aria salirà al di sopra una determinata soglia per un certo periodo di tempo." />
         <text name="ss_helpText_05_02" text="Il suolo non può essere lavorato quando il terreno è ghiacciato. Le colture non crescono nel terreno ghiacciato." />
         <text name="ss_helpText_05_03" text="Le colture germineranno solo quando la temperatura del suolo è al di sopra della loro temperatura di germinazione. Le temperature di germinazione sono incluse nel calendario, visibile nella prima pagina del menù Seasons." />
 
         <text name="ss_helpTitle_06" text="Colture" />
         <text name="ss_helpText_06_01" text="All'avvio di una nuova partita tutte le colture saranno ripristinate alla loro fase mietuta per simulare il fatto che i campi non sono stati lavorati dall'autunno. Quando si utilizza Seasons per la prima volta in un salvataggio esistente avrai la possibilità di ripristinare o meno i campi." />
-        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. Le colture seguiranno ora un modello di crescita realistico seguendo tempististiche stagionali di semina e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
+        <text name="ss_helpText_06_02" text="I modelli di crescita di default sono stati sostituiti da Seasons. Le colture seguiranno ora un modello di crescita realistico seguendo tempistiche stagionali di semina e raccolto. Ciò significa anche che l'inverno ucciderà la maggior parte delle colture e quelle piantate al momento sbagliato non cresceranno." />
         <text name="ss_helpText_06_03" text="Le colture sono trebbiabili solo nel loro stadio di crescita finale, ad eccezione del pioppo e del rafano oleifero che resteranno in questa fase finale finché non verranno uccisi dall'inverno." />
         <text name="ss_helpText_06_04" text="Una volta che una coltura escluso radici raggiunge la prima fase di raccolto secondo la panoramica di crescita nel menù, è pronta per la trebbiatura. Questa è la fase finale di maturazione." />
         <text name="ss_helpText_06_05" text="È ancora possibile trinciare colture verdi." />
 
         <text name="ss_helpTitle_07" text="Colture - Coltivazioni" />
         <text name="ss_helpText_07_01" text="La crescita delle colture ora è molto più lunga. Può essere necessario fino sei mesi per raggiungere la fase di raccolto." />
-        <text name="ss_helpText_07_02" text="L'inverno ucciderà la maggior parte delle colture, ma sono possibili colture invernali e primaverili. Grano, orzo, pioppo, erba, rafano oleifero e colza possono essere piantati in autunno per raccolti invernali o in primavera per raccolti primaverili. Assicurati che il terreno sia abbastanza caldo per la germinazione di queste colture." />
+        <text name="ss_helpText_07_02" text="L'inverno ucciderà la maggior parte delle colture, ma sono possibili colture invernali e primaverili. Grano, orzo, pioppo, erba, rafano oleifero e colza possono essere piantati in autunno per raccolti invernali o in primavera per raccolti estivi. Assicurati che il terreno sia abbastanza caldo per la germinazione di queste colture." />
         <text name="ss_helpText_07_03" text="Mais, soia, girasole, barbabietole da zucchero e patate devono essere piantate in primavera. Assicurati di controllare nel menù Seasons la panoramica di crescita perché alcune colture non possono essere piantate nella prima transizione della primavera e moriranno, anche se la temperatura del suolo è al di sopra della temperatura di germinazione." />
 
         <text name="ss_helpTitle_08" text="Colture - Fieno, Paglia e Erba" />
@@ -202,15 +202,15 @@
         <text name="ss_helpText_09_02" text="Gli alberi inibiscono la crescita di altri alberi se piantati troppo vicini. Per riavviare la crescita dell'albero bisogna tagliare gli altri alberi." />
 
         <text name="ss_helpTitle_10" text="Colture - Effetti climatici" />
-        <text name="ss_helpText_10_01" text="Pioggia, grandine e neve influenzano i livelli di umidità delle colture. Se l'umidità delle colture è al di sopra di un determinato punto a causa del maltempo, non sarai in grado di trebbiare i tuoi raccolti. Umidità nelle notti d'estate può verificarsi senza preavviso." />
+        <text name="ss_helpText_10_01" text="Pioggia, grandine e neve influenzano i livelli di umidità delle colture. Se l'umidità delle colture è al di sopra di un determinato valore a causa del maltempo, non sarai in grado di trebbiare i tuoi raccolti. Umidità nelle notti d'estate può verificarsi senza preavviso." />
         <text name="ss_helpText_10_02" text="Dopo la pioggia i tuoi raccolti avranno bisogno di tempo per asciugare, il quale è dipendente dalla temperatura dell'aria e dal periodo dell'anno. Significa che con tempo più caldo i raccolti asciugheranno più velocemente che con tempo più freddo." />
         <text name="ss_helpText_10_03" text="Utilizzando il voltafieno sul fieno quando è bagnato produrrà erba bagnata. Assicurati di utilizzare il voltafieno solo quando le andane sono abbastanza secche." />
-        <text name="ss_helpText_10_04" text="Su una mappa mod che è stata preparata con 'snow mask' da parte del modder, balle di fieno e paglia che sono stati esposti alla pioggia o alla neve cominceranno a decomporsi, a meno che non siano al riparo in un capannone con 'snow mask'. Il cattivo tempo non avrà effetto su balle fasciate o balle su una mappa senza una 'snow mask'." />
+        <text name="ss_helpText_10_04" text="Su una mappa che è stata preparata con 'snow mask' da parte del modder, balle di fieno e paglia che sono stati esposti alla pioggia o alla neve cominceranno a decomporsi, a meno che non siano al riparo in un capannone con 'snow mask'. Il cattivo tempo non avrà effetto su balle fasciate o balle su una mappa senza una 'snow mask'." />
 
         <text name="ss_helpTitle_11" text="Manutenzione" />
         <text name="ss_helpText_11_01" text="I tuoi trattori e raccoglitrici richiedono una manutenzione periodica per mantenerli in funzione. Il periodo di manutenzione è ogni 30 ore o ogni anno, qualunque arrivi prima. I veicoli senza manutenzione possono richiedere più tempo per avviarsi." />
         <text name="ss_helpText_11_02" text="Puoi riparare i tuoi veicoli presso il concessionario o il garage posizionabile. Per riparare il tuo veicolo avvicinalo al punto di vendita, o al garage posizionabile, e attiva la riparazione. Ricordati che sarà più costoso riparare i veicoli presso il concessionario." />
-        <text name="ss_helpText_11_03" text="L'età del tuo veicolo è il giorno dopo l'ultima riparazione." />
+        <text name="ss_helpText_11_03" text="L'età mostrata del tuo veicolo è dal giorno successivo all'ultima riparazione." />
         <text name="ss_helpText_11_04" text="Solo i veicoli richiederanno una manutenzione periodica. Strumenti e utensili verranno automaticamente riparati a seconda delle necessità." />
 
         <text name="ss_helpTitle_12" text="Economia" />
@@ -225,7 +225,7 @@
         <text name="ss_helpTitle_14" text="Animali" />
         <text name="ss_helpText_14_01" text="La produzione animale è stata adeguata con Seasons a parametri più realistici. Tutti gli animali consumano più acqua in estate che in inverno. Le vacche e i suini richiederanno più paglia in inverno. Le capacità di alimentazione massima sono state ridotte da 6 giorni a 3 giorni." />
         <text name="ss_helpText_14_02" text="Gli animali si moltiplicheranno solo in un certo periodo dell'anno. I suini si riproduranno in primavera e in autunno, le pecore solamente in primavera mentre le vacche solo in estate." />
-        <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata con difficoltà Facile." />
+        <text name="ss_helpText_14_03" text="Gli animali moriranno se non hanno cibo o acqua. Questa impostazione è disattivata con difficoltà facile." />
 
         <text name="ss_helpTitle_15" text="Animali - Produzione" />
         <text name="ss_helpText_15_01" text="La produzione di latte e di lana dipende dalla stagione." />
@@ -241,7 +241,7 @@
         <text name="ss_helpTitle_17" text="HUD" />
         <text name="ss_helpText_17_01" text="A sinistra dell'orologio nell'angolo superiore sinistro vengono visualizzate le informazioni relative a Seasons. Mostra nella parte superiore l'attuale temperatura dell'aria e in quella inferiore la temperatura del terreno. Lo stato del terreno (colture umide/terreno ghiacciato) verrà visualizzato a sinistra di questo HUD." />
         <text name="ss_helpText_17_02" text="Direttamente sotto l'orologio è indicato il periodo stagionale e il giorno della stagione corrente." />
-        <text name="ss_helpText_17_03" text="Quando è attiva, l'indicatore HUD apparirà sotto l'orologio nell'angolo in alto a destra." />
+        <text name="ss_helpText_17_03" text="Quando attivo, l'indicatore delle previsioni meteo apparirà sotto l'orologio nell'angolo in alto a destra." />
         <text name="ss_helpText_17_04" text="Quando il menù di aiuto è attivato, il timer di manutenzione viene visualizzato al fondo del menù. Questo viene visualizzato solo quando sei in un veicolo." />
 
         <text name="ss_helpTitle_18" text="Altre impostazioni" />
