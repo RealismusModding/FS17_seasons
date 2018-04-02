@@ -9,7 +9,6 @@
 
 ssVehicle = {}
 
-ssVehicle.LIFETIME_FACTOR = 1
 ssVehicle.REPAIR_NIGHT_FACTOR = 1
 ssVehicle.REPAIR_SHOP_FACTOR = 0.5
 ssVehicle.DIRT_FACTOR = 0.2
@@ -252,12 +251,13 @@ function ssVehicle:repairCost(vehicle, storeItem, operatingTime)
         powerMultiplier = Utils.clamp(dailyUpkeep / storeItem.specs.power, 0.5, 2.5)
     end
 
-    local endOfLifeRepairCost = 0.025 * storeItem.price * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * powerMultiplier
+    local endOfLifeRepairCost = storeItem.price * (RF1 * (lifetime * 20 / 1000) ^ RF2) * powerMultiplier
+    local afterLifeRepairCostRate = endOfLifeRepairCost - storeItem.price * (RF1 * ((lifetime - 1) * 20 / 1000) ^ RF2) * powerMultiplier
 
-    if operatingTime < lifetime / ssVehicle.LIFETIME_FACTOR then
-        return 0.025 * storeItem.price * (RF1 * (operatingTime / ssVehicle.LIFETIME_FACTOR) ^ RF2) * powerMultiplier
+    if operatingTime < lifetime then
+        return storeItem.price * (RF1 * (operatingTime * 20 / 1000) ^ RF2) * powerMultiplier
     else
-        return 0.025 * storeItem.price  * (RF1 * (lifetime / ssVehicle.LIFETIME_FACTOR^2) ^ RF2) * (1 + (operatingTime - lifetime / ssVehicle.LIFETIME_FACTOR)) / (lifetime / ssVehicle.LIFETIME_FACTOR) * 2 * powerMultiplier + endOfLifeRepairCost
+        return afterLifeRepairCostRate * (operatingTime - lifetime)
     end
 end
 
@@ -421,7 +421,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
         sellPrice = price
     else
         local overdueFactor = ssVehicle:calculateOverdueFactor(self)
-        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / (lifetime / ssVehicle.LIFETIME_FACTOR)) * brandFac / (overdueFactor ^ 0.1), minSellPrice)
+        sellPrice = math.max((depFac * price - (depFac * price) * operatingTime / lifetime) * brandFac / (overdueFactor ^ 0.1), minSellPrice)
     end
 
     return sellPrice
