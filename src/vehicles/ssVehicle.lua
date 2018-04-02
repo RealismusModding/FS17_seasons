@@ -353,6 +353,11 @@ function ssVehicle:vehicleGetDailyUpKeep(superFunc)
         costs = costs + ssVehicle:maintenanceRepairCost(self, storeItem, true)
     end
 
+    -- no cost for equipment that should have no dailyUpkeep
+    if storeItem.dailyUpkeep == 0 then
+        costs = 0
+    end
+
     return costs
 end
 
