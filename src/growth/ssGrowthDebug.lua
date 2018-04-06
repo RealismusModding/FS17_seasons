@@ -53,19 +53,22 @@ function ssGrowthDebug:draw()
         local transition = g_seasons.environment:transitionAtDay()
 
         renderText(0.44, 0.76, 0.01, "Growth Transition: " .. transition .. " " .. ssUtil.fullSeasonName(transition))
-
-        local cropsThatCanGrow = ""
-
-        for fruitName in pairs(g_seasons.growthManager.willGerminateData) do
-            if g_seasons.growthManager.willGerminateData[transition][fruitName] == true then
-                cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-            end
-        end
-
-        renderText(0.44, 0.72, 0.01, "Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+        renderText(0.44, 0.72, 0.01, "Crops that will grow in next transtition if planted now: " .. self:cropsThatCanGrow())
         renderText(0.44, 0.70, 0.01, "Soil temp: " .. tostring(g_seasons.weather.soilTemp))
         renderText(0.44, 0.68, 0.01, "Crop moisture content: " .. tostring(g_seasons.weather.cropMoistureContent))
     end
+end
+
+function ssGrowthDebug:cropsThatCanGrow()
+    local cropsThatCanGrow = ""
+
+    for fruitName in pairs(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()]) do
+        if g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
+            cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
+        end
+    end
+
+    return cropsThatCanGrow
 end
 
 --debug console commands
@@ -106,6 +109,7 @@ function ssGrowthDebug:consoleCommandChangeFruitGrowthState(userInput)
     local fruitName = inputs[1]
     g_seasons.growthManager.growthData[self.TMP_TRANSITION] = {}
     g_seasons.growthManager.growthData[self.TMP_TRANSITION][fruitName] = {}
+    g_seasons.growthManager.growthData[self.TMP_TRANSITION][fruitName].fruitName = fruitName
     g_seasons.growthManager.growthData[self.TMP_TRANSITION][fruitName].setGrowthState = tonumber(inputs[2])
     g_seasons.growthManager.growthData[self.TMP_TRANSITION][fruitName].desiredGrowthState = tonumber(inputs[3])
     g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition(self.TMP_TRANSITION)] = Utils.copyTable(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()])
@@ -123,16 +127,10 @@ function ssGrowthDebug:consoleCommandPrintDebugInfo()
     logInfo("Soil temp: " .. tostring(ssWeatherManager.soilTemp))
     logInfo("Crop moisture content: " .. tostring(ssWeatherManager.cropMoistureContent))
     print("")
-    local cropsThatCanGrow = ""
-
-    for fruitName in pairs(g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()]) do
-        if g_seasons.growthManager.willGerminateData[g_seasons.environment:transitionAtDay()][fruitName] == true then
-            cropsThatCanGrow = cropsThatCanGrow .. fruitName .. " "
-        end
-    end
-
-    logInfo("Crops that will grow in next transtition if planted now: " .. cropsThatCanGrow)
+   
+    logInfo("Crops that will grow in next transtition if planted now: " .. self:cropsThatCanGrow())
     print("")
+    
     logInfo("Previous willGerminateData")
     print_r(g_seasons.growthManager.willGerminateData[g_seasons.environment:previousTransition()])
     print("")
