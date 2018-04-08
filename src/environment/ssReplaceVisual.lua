@@ -228,13 +228,19 @@ end
 
 function ssReplaceVisual.placeableUpdatePlacableOnCreation(self)
     if g_currentMission:getIsClient() then
-        if g_seasons.replaceVisual.loadedPlaceableDefaults[string.lower(self.configFileName)] ~= true then
-            g_seasons.replaceVisual:loadMissingPlaceableDefaults(self.nodeId)
+        local rv = g_seasons.replaceVisual
 
-            g_seasons.replaceVisual.loadedPlaceableDefaults[string.lower(self.configFileName)] = true
+        if rv.loadedPlaceableDefaults ~= nil then
+            local configFileName = self.configFileName:lower()
+
+            if rv.loadedPlaceableDefaults[configFileName] ~= true then
+                rv:loadMissingPlaceableDefaults(self.nodeId)
+
+                rv.loadedPlaceableDefaults[configFileName] = true
+            end
+
+            ssReplaceVisual:updateTextures(self.nodeId)
         end
-
-        ssReplaceVisual:updateTextures(self.nodeId)
     end
 end
 
