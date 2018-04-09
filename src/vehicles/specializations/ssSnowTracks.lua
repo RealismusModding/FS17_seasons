@@ -45,31 +45,22 @@ local function applyWheelSnowTracks(self)
 
     -- partly from Crop destruction mod
     for _, wheel in pairs(self.wheels) do
-        local newSnowDepth
-
         if wheel.hasGroundContact then
             local width = 0.5 * wheel.width
             local length = math.min(0.2, 0.35 * wheel.width)
-
             local radius = wheel.radius
-            local wheelRot = getWheelShapeAxleSpeed(wheel.node, wheel.wheelShape)
-            local wheelRotDir
-
-            if wheelRot ~= 0 then
-                wheelRotDir = wheelRot / math.abs(wheelRot)
-            else
-                wheelRotDir = 1
-            end
-
-            local _, _, _, _, _, _, underTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, length, length)
-            local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
 
             -- If the wheel is in snow, update its traction
             local oldInSnow = wheel.inSnow
-            wheel.inSnow = isNumeric(underTireSnowLayers) and underTireSnowLayers >= 1
+            wheel.inSnow = ssSnowTracks:getIsWheelInSnow(wheel, width, length, length)
 
             if oldInSnow ~= wheel.inSnow then
                 self:updateWheelTireFriction(wheel)
+            end
+
+            if wheel.inSnow or wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit > g_currentMission.time then
+                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
+                wheel.dirtAmount = 1 -- force alpha because Giants based the alpha on the wheel dirtAmount "realistic dirt"
             end
 
             if wheel.inSnow then
@@ -82,7 +73,7 @@ local function applyWheelSnowTracks(self)
                         sound.impactCount = sound.impactCount + 1
                     end
                 end
-            elseif oldInSnow and not wheel.inSnow then
+            elseif oldInSnow and not wheel.inSnow then -- we lost contact with snow
                 local circumference = math.pi * (2 * math.pi * radius)
                 local maxTrackLength = circumference * (1 + g_currentMission.environment.groundWetness)
                 local speedFactor = math.min(self:getLastSpeed(), 20) / 20
@@ -92,13 +83,14 @@ local function applyWheelSnowTracks(self)
                 wheel.dirtAmount = math.max(wheel.dirtAmount - self.lastMovedDistance / maxTrackLength, 0)
             end
 
-            if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
-                if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
-                    -- wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
-                end
+            local wheelRot = getWheelShapeAxleSpeed(wheel.node, wheel.wheelShape)
+            local wheelRotDir = 1
 
-                wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
+            if wheelRot ~= 0 then
+                wheelRotDir = wheelRot / math.abs(wheelRot)
             end
+
+            local x0, z0, x1, z1, x2, z2, fwdTireSnowLayers = ssSnowTracks:getSnowLayers(wheel, width, -0.6 * radius * wheelRotDir, 1.2 * radius * wheelRotDir)
 
             local reduceSnow = snowLayers == fwdTireSnowLayers
             local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100 -- fwdTireSnowDepth in m
@@ -127,14 +119,6 @@ end
 
 local function resetWheelSnowTracks(self)
     for _, wheel in pairs(self.wheels) do
-        if wheel.inSnow or (wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit < g_currentMission.time) then
-            if wheel.contact == Vehicle.WHEEL_GROUND_CONTACT or wheel.contact == Vehicle.WHEEL_GROUND_HEIGHT_CONTACT then
-                wheel.contact = Vehicle.WHEEL_NO_CONTACT -- avoid ground contact for color switches
-            end
-
-            wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
-        end
-
         if wheel.inSnow then
             wheel.inSnow = false
 
@@ -142,6 +126,12 @@ local function resetWheelSnowTracks(self)
             setLinearDamping(wheel.node, 0)
         end
     end
+end
+
+function ssSnowTracks:getIsWheelInSnow(wheel, width, delta0, delta2)
+    local _, _, _, _, _, _, snowLayers = ssSnowTracks:getSnowLayers(wheel, width, delta0, delta2)
+
+    return isNumeric(snowLayers) and snowLayers >= 1
 end
 
 function ssSnowTracks:getSnowLayers(wheel, width, delta0, delta2)
@@ -181,6 +171,7 @@ function ssSnowTracks:update(dt)
 
     local surfaceSound = g_currentMission.surfaceNameToSurfaceSound["snow"]
 
+    -- Todo: would be cleaner to call a "reset" method for surface sounds.
     if surfaceSound ~= nil then
         surfaceSound.impactCount = 0
     end
@@ -202,13 +193,13 @@ end
 
 function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
     local function setFriction(factor)
-        setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness,
-            wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * factor)
+        setWheelShapeTireFriction(wheel.node, wheel.wheelShape, wheel.maxLongStiffness, wheel.maxLatStiffness, wheel.maxLatStiffnessLoad, wheel.frictionScale * wheel.tireGroundFrictionCoeff * factor)
     end
 
     if self.isServer and self.isAddedToPhysics then
         if wheel.inSnow then
-            local friction = ssSnowTracks.FRICTION_TIRETYPE_SETTINGS[WheelsUtil.tireTypes[wheel.tireType].name]
+            local tireType = WheelsUtil.tireTypes[wheel.tireType]
+            local friction = ssSnowTracks.FRICTION_TIRETYPE_SETTINGS[tireType.name]
 
             if friction ~= nil then
                 setFriction(friction)
