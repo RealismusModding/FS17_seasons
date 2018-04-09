@@ -205,7 +205,7 @@ function ssMain:update(dt)
     if g_currentMission:getIsServer() and g_dedicatedServerInfo ~= nil and not self.isNewSaveGame and self.isOldSaveGame then
         ssGrowthManager:resetGrowth()
     elseif not self.isNewSavegame and self.isOldSavegame and not self.showedResetWarning and g_gui.currentGui == nil then
-        function resetAction(self, yesNo)
+        local function resetAction(self, yesNo)
             if yesNo then
                 ssGrowthManager:resetGrowth()
             end

@@ -222,7 +222,7 @@ end
 function ssSeasonsMod.loadFromXML()
     if g_currentMission == nil or not g_currentMission:getIsServer() then return end
 
-    local xmlFile = nil
+    local xmlFile
     if g_currentMission.missionInfo.isValid then
         xmlFile = g_currentMission.missionInfo.xmlFile
     end

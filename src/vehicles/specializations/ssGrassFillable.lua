@@ -68,7 +68,7 @@ end
 -- Fillables with grass will be reduced every midnight
 function ssGrassFillable:ssRotGrass(vehicle)
     if vehicleHasFillType(vehicle, FillUtil.FILLTYPE_GRASS_WINDROW) then
-        fillToReduce = FillUtil.FILLTYPE_GRASS_WINDROW
+        local fillToReduce = FillUtil.FILLTYPE_GRASS_WINDROW
 
         local level = vehicle:getFillLevel(fillType)
         local capacity = vehicle:getCapacity()
@@ -96,7 +96,7 @@ end
 
 function ssGrassFillable:updateTick(dt)
     if self.isServer then
-        local fillToReduce = nil
+        local fillToReduce
 
         -- If it rained into the fillable with hay or straw, rot it a bit
         if g_currentMission.environment.timeSinceLastRain < 5

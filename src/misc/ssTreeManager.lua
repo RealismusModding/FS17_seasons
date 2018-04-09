@@ -128,7 +128,7 @@ end
 
 -- This code is about O(5) (theoretically max O(n) but can't plant trees that close)
 function ssTreeManager:cutSplitShapeCallback(...)
-    local cutTree = nil
+    local cutTree
 
     -- Find the tree that was just cut
     for _, tree in pairs(g_currentMission.plantedTrees.growingTrees) do

@@ -394,7 +394,7 @@ function ssVehicle:vehicleGetSellPrice(superFunc)
     if factors == nil then
         factors = ssVehicle.repairFactors["other"]
     end
-    lifetime = factors.lifetime
+    local lifetime = factors.lifetime
 
     local p1, p2, p3, p4, depFac, brandFac
 
@@ -671,7 +671,7 @@ end
 ---------------------
 
 function ssVehicle:directSellDialogSetVehicle(vehicle, owner, ownWorkshop)
-    function setSellButtonState(disabled, text)
+    local function setSellButtonState(disabled, text)
         if self.sellButton ~= nil then
             self.sellButton:setText(text)
             self.sellButton:setDisabled(disabled);
@@ -717,7 +717,7 @@ function ssVehicle:repairVehicle(vehicle, showDialog, ownWorkshop, sellDialog)
     local storeItem = StoreItemsUtil.storeItemsByXMLFilename[vehicle.configFileName:lower()]
     local vehicleName = storeItem.brand .. " " .. storeItem.name
 
-    function performRepair(self)
+    local function performRepair(self)
         -- Deduct
         if g_currentMission:getIsServer() then
             g_currentMission:addSharedMoney(-repairCost, "vehicleRunningCost")
@@ -737,7 +737,7 @@ function ssVehicle:repairVehicle(vehicle, showDialog, ownWorkshop, sellDialog)
     end
 
     -- Callback for the Yes No Dialog
-    function doRepairCallback(self, yesNo)
+    local function doRepairCallback(self, yesNo)
         if yesNo then
             performRepair(vehicle)
 
