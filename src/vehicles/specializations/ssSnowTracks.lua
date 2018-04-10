@@ -27,6 +27,10 @@ end
 
 function ssSnowTracks:load(savegame)
     self.updateWheelTireFriction = Utils.appendedFunction(self.updateWheelTireFriction, ssSnowTracks.vehicleUpdateWheelTireFriction)
+
+    for _, wheel in pairs(self.wheels) do
+        wheel.keepSnowTracksLimit = 0
+    end
 end
 
 function ssSnowTracks:delete()
@@ -58,7 +62,7 @@ local function applyWheelSnowTracks(self)
                 self:updateWheelTireFriction(wheel)
             end
 
-            if wheel.inSnow or wheel.keepSnowTracksLimit ~= nil and wheel.keepSnowTracksLimit > g_currentMission.time then
+            if wheel.inSnow or wheel.keepSnowTracksLimit > g_currentMission.time then
                 wheel.lastColor = { unpack(ssSnowTracks.SNOW_RGBA) }
                 wheel.dirtAmount = 1 -- force alpha because Giants based the alpha on the wheel dirtAmount "realistic dirt"
             end
@@ -94,6 +98,7 @@ local function applyWheelSnowTracks(self)
 
             local reduceSnow = snowLayers == fwdTireSnowLayers
             local fwdTireSnowDepth = fwdTireSnowLayers / ssSnow.LAYER_HEIGHT / 100 -- fwdTireSnowDepth in m
+            local linearDamping = 0
 
             if fwdTireSnowLayers > 1 and reduceSnow then
                 local sinkage = 0.7 * targetSnowDepth
@@ -102,16 +107,19 @@ local function applyWheelSnowTracks(self)
                 ssSnow:removeSnow(x0, z0, x1, z1, x2, z2, sinkageLayers)
 
                 if fwdTireSnowDepth <= radius then
-                    setLinearDamping(wheel.node, 0.35)
+                    linearDamping = 0.35
                 elseif fwdTireSnowDepth > radius and fwdTireSnowDepth <= 2 * radius then
-                    setLinearDamping(wheel.node, 0.55)
+                    linearDamping = 0.55
                 elseif fwdTireSnowDepth > 2 * radius then
-                    setLinearDamping(wheel.node, 0.95)
+                    linearDamping = 0.95
                 end
             elseif fwdTireSnowDepth > 2 * radius then
-                setLinearDamping(wheel.node, 0.95)
-            else
-                setLinearDamping(wheel.node, 0)
+                linearDamping = 0.95
+            end
+
+            if wheel.linearDamping ~= linearDamping then
+                wheel.linearDamping = linearDamping
+                setLinearDamping(wheel.node, linearDamping)
             end
         end
     end
@@ -201,11 +209,11 @@ function ssSnowTracks:vehicleUpdateWheelTireFriction(wheel)
             local tireType = WheelsUtil.tireTypes[wheel.tireType]
             local friction = ssSnowTracks.FRICTION_TIRETYPE_SETTINGS[tireType.name]
 
-            if friction ~= nil then
-                setFriction(friction)
-            else
-                setFriction(ssSnowTracks.SNOW_FRICTION)
+            if friction == nil then
+                friction = ssSnowTracks.SNOW_FRICTION
             end
+
+            setFriction(friction)
         end
     end
 end
