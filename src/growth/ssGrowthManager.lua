@@ -248,6 +248,10 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     local desiredGrowthState = self.growthData[transition][fruitName].desiredGrowthState
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
+    if minState == self.CUT then
+        minState = FruitUtil.fruitTypes[fruitName].cutState + 1
+    end
+
     if desiredGrowthState == self.WITHERED then
         desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
     elseif desiredGrowthState == self.CUT then
