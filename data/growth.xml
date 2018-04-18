@@ -2,6 +2,7 @@
 <growth>
     <annotation>Copyright (c) Realismus Modding, 2017</annotation>
     <contributors>theSeb</contributors>
+    <version>2</version>
 
     <defaultFruits>
         <defaultFruit fruitName="barley" maxSprayGrowthState="4"/>
@@ -20,133 +21,134 @@
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="poplar" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="maize" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" termi="2"/>
+            <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="poplar" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="maize" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="potato" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="sugarBeet" setFromMin="1" setTo="CUT"/>
         </gt>
         <gt growthTransitionNum="2"> <!--early spring to mid spring-->
-            <fruit fruitName="barley"  normalGrowthState="1"  normalGrowthMaxState="3"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="maize" normalGrowthState="1"/>
-            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="1"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="1"/>
-            <fruit fruitName="poplar" setGrowthState="CUT" desiredGrowthState="1" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="grass" normalGrowthState="1" setGrowthState="2" desiredGrowthState="3"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="1"  incrementByOneMax="3"/>
+            <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="maize" incrementByOneMin="1"/>
+            <fruit fruitName="soybean" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="sunflower" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="potato"    incrementByOneMin="1"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="1"/>
+            <fruit fruitName="poplar" setFromMin="CUT" setTo="1" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="grass" incrementByOneMin="1" setFromMin="2" setTo="3"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="3"> <!--mid spring to late spring-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="maize" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="soybean" normalGrowthState="1"/>
-            <fruit fruitName="sunflower" normalGrowthState="1"/>
-            <fruit fruitName="potato"    normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1" normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="maize" incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="soybean" incrementByOneMin="1"/>
+            <fruit fruitName="sunflower" incrementByOneMin="1"/>
+            <fruit fruitName="potato"    incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="4"> <!--late spring to early summer-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="4"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="4"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="4"/>
-            <fruit fruitName="maize" normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="soybean" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="sunflower" normalGrowthState="1" normalGrowthMaxState="2"/>
-            <fruit fruitName="potato"    normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="poplar" setGrowthState="CUT" desiredGrowthState="1" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" incrementByOneMax="4"/>
+            <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="4"/>
+            <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="4"/>
+            <fruit fruitName="maize" incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="soybean" incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="sunflower" incrementByOneMin="1" incrementByOneMax="2"/>
+            <fruit fruitName="potato"    incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="poplar" setFromMin="CUT" setTo="1" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="grass" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="5"> <!--early summer to mid summer-->
-            <fruit fruitName="barley"  normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="wheat"   normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="rape"    normalGrowthState="2" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="maize" normalGrowthState="1" normalGrowthMaxState="4"/>
-            <fruit fruitName="soybean" normalGrowthState="1" normalGrowthMaxState="3"/>
-            <fruit fruitName="sunflower" normalGrowthState="2" normalGrowthMaxState="3" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="2" normalGrowthMaxState="4" setGrowthState="1" desiredGrowthState="CUT"/>
+            <fruit fruitName="barley"  incrementByOneMin="2" incrementByOneMax="5" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="wheat"   incrementByOneMin="2" incrementByOneMax="5" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="rape"    incrementByOneMin="2" incrementByOneMax="5" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="maize" incrementByOneMin="1" incrementByOneMax="4"/>
+            <fruit fruitName="soybean" incrementByOneMin="1" incrementByOneMax="3"/>
+            <fruit fruitName="sunflower" incrementByOneMin="2" incrementByOneMax="3" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="potato"    incrementByOneMin="2" incrementByOneMax="4" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="2" incrementByOneMax="4" setFromMin="1" setTo="CUT"/>
         </gt>
         <gt growthTransitionNum="6"> <!--mid summer to late summer-->
-            <fruit fruitName="barley"  normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="wheat"   normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="rape"    normalGrowthState="6" extraGrowthMinState="3" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="maize" extraGrowthMinState="2" extraGrowthMaxState="5" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="soybean" extraGrowthMinState="2" extraGrowthMaxState="4" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" extraGrowthMinState="3" extraGrowthMaxState="4" extraGrowthFactor="2" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="3" normalGrowthMaxState="5" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="3" normalGrowthMaxState="5" setGrowthState="1" desiredGrowthState="CUT"/>
-            <fruit fruitName="grass" normalGrowthState="2" normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="6" incrementByMin="3" incrementByMax="5" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="wheat"   incrementByOneMin="6" incrementByMin="3" incrementByMax="5" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="rape"    incrementByOneMin="6" incrementByMin="3" incrementByMax="5" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="maize" incrementByMin="2" incrementByMax="5" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="soybean" incrementByMin="2" incrementByMax="4" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sunflower" incrementByMin="3" incrementByMax="4" incrementBy="2" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="potato"    incrementByOneMin="3" incrementByOneMax="5" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="3" incrementByOneMax="5" setFromMin="1" setTo="CUT"/>
+            <fruit fruitName="grass" incrementByOneMin="2" incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="7"> <!--late summer to early autumn-->
-            <fruit fruitName="barley"  normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="wheat"   normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="rape"    normalGrowthState="5" normalGrowthMaxState="6" />
-            <fruit fruitName="maize" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="soybean" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="4" normalGrowthMaxState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="4" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="poplar" setGrowthState="CUT" desiredGrowthState="1" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="grass" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="wheat"   incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="rape"    incrementByOneMin="5" incrementByOneMax="6" />
+            <fruit fruitName="maize" incrementByOneMin="4" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="soybean" incrementByOneMin="4" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sunflower" incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="potato"    incrementByOneMin="4" incrementByOneMax="5" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="4" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="poplar" setFromMin="CUT" setTo="1" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="grass" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="8"> <!--early autumn to mid autumn-->
-            <fruit fruitName="barley"  normalGrowthState="1" normalGrowthMaxState="6"/>
-            <fruit fruitName="wheat"   normalGrowthState="1" normalGrowthMaxState="6"/>
-            <fruit fruitName="rape"    normalGrowthState="1" normalGrowthMaxState="6"/>
-            <fruit fruitName="maize" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="soybean" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    normalGrowthState="5" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="5" normalGrowthMaxState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" incrementByOneMax="6"/>
+            <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="6"/>
+            <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="6"/>
+            <fruit fruitName="maize" incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="soybean" incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sunflower" incrementByOneMin="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="potato"    incrementByOneMin="5" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="5" incrementByOneMax="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="9"> <!--mid autumn to late autumn-->
-            <fruit fruitName="barley"  normalGrowthState="1" />
-            <fruit fruitName="wheat"   normalGrowthState="1" />
-            <fruit fruitName="rape"    normalGrowthState="1" />
-            <fruit fruitName="maize" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="soybean" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="potato"    setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" normalGrowthState="6" setGrowthState="1"  desiredGrowthState="CUT"/>
-            <fruit fruitName="oilseedRadish" normalGrowthState="1"  normalGrowthMaxState="MAX_STATE"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" />
+            <fruit fruitName="wheat"   incrementByOneMin="1" />
+            <fruit fruitName="rape"    incrementByOneMin="1" />
+            <fruit fruitName="maize" incrementByOneMin="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="soybean" incrementByOneMin="6" setFromMin="1"  setTo="CUT"/>
+
+            <fruit fruitName="sunflower" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="potato"    setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="sugarBeet" incrementByOneMin="6" setFromMin="1"  setTo="CUT"/>
+            <fruit fruitName="oilseedRadish" incrementByOneMin="1"  incrementByOneMax="MAX_STATE"/>
         </gt>
         <gt growthTransitionNum="10"> <!--late autumn to early winter-->
-            <fruit fruitName="barley"  setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
-            <fruit fruitName="wheat"   setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
-            <fruit fruitName="rape"    setGrowthState="4"  setGrowthMaxState="MAX_STATE" desiredGrowthState="WITHERED"/>
-            <fruit fruitName="maize" setGrowthState="1"  desiredGrowthState="CUT" normalGrowthState="7"/>
-            <fruit fruitName="soybean" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
-            <fruit fruitName="sunflower" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
-            <fruit fruitName="potato" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="6"/>
-            <fruit fruitName="sugarBeet" setGrowthState="1" desiredGrowthState="CUT" normalGrowthState="7"/>
-            <fruit fruitName="grass" setGrowthState="1"  setGrowthMaxState="MAX_STATE" desiredGrowthState="2"/>
+            <fruit fruitName="barley"  setFromMin="4"  setFromMax="MAX_STATE" setTo="WITHERED"/>
+            <fruit fruitName="wheat"   setFromMin="4"  setFromMax="MAX_STATE" setTo="WITHERED"/>
+            <fruit fruitName="rape"    setFromMin="4"  setFromMax="MAX_STATE" setTo="WITHERED"/>
+            <fruit fruitName="maize" setFromMin="1"  setTo="CUT" incrementByOneMin="7"/>
+            <fruit fruitName="soybean" setFromMin="1" setTo="CUT" incrementByOneMin="7"/>
+            <fruit fruitName="sunflower" setFromMin="1" setTo="CUT" incrementByOneMin="7"/>
+            <fruit fruitName="potato" setFromMin="1" setTo="CUT" incrementByOneMin="6"/>
+            <fruit fruitName="sugarBeet" setFromMin="1" setTo="CUT" incrementByOneMin="7"/>
+            <fruit fruitName="grass" setFromMin="1"  setFromMax="MAX_STATE" setTo="2"/>
         </gt>
         <gt growthTransitionNum="11"/> <!--early winter to mid winter-->
         <gt growthTransitionNum="12"/> <!--mid winter to late winter-->
         <gt growthTransitionNum="FIRST_LOAD_TRANSITION">
-            <fruit fruitName="barley" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="wheat" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="rape" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="maize" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="soybean" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="sunflower" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="potato" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="sugarBeet" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="poplar" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
-            <fruit fruitName="grass" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="2"/>
-            <fruit fruitName="oilseedRadish" setGrowthState="1" setGrowthMaxState="MAX_STATE" desiredGrowthState="CUT"/>
+            <fruit fruitName="barley" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="wheat" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="rape" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="maize" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="soybean" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="sunflower" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="potato" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="sugarBeet" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="poplar" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
+            <fruit fruitName="grass" setFromMin="1" setFromMax="MAX_STATE" setTo="2"/>
+            <fruit fruitName="oilseedRadish" setFromMin="1" setFromMax="MAX_STATE" setTo="CUT"/>
         </gt>
     </growthTransitions>
     <germination>

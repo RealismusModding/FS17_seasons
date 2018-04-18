@@ -132,42 +132,39 @@ function ssGrowthGUI:simulateGrowth(fruitName, transitionToCheck, currentGrowthS
     local data = growthData[transitionToCheck][fruitName]
 
     if data ~= nil then
-        --setGrowthState
-        if data.setGrowthState ~= nil
-            and data.desiredGrowthState ~= nil then
-            if data.setGrowthMaxState ~= nil then
-                if currentGrowthState >= data.setGrowthState and currentGrowthState <= data.setGrowthMaxState then
-                    newGrowthState = data.desiredGrowthState
+        if data.setFromMin ~= nil
+            and data.setTo ~= nil then
+            if data.setFromMax ~= nil then
+                if currentGrowthState >= data.setFromMin and currentGrowthState <= data.setFromMax then
+                    newGrowthState = data.setTo
                 end
             else
-                if currentGrowthState == data.setGrowthState then
-                    newGrowthState = data.desiredGrowthState
+                if currentGrowthState == data.setFromMin then
+                    newGrowthState = data.setTo
                 end
             end
         end
+        
+        if data.incrementByMin ~= nil
+                and data.incrementByMax ~= nil
+                and data.incrementBy ~= nil then
+            local incrementByMin = data.incrementByMin
+            local incrementByMax = data.incrementByMax
 
-        --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-        if data.extraGrowthMinState ~= nil
-                and data.extraGrowthMaxState ~= nil
-                and data.extraGrowthFactor ~= nil then
-            local extraGrowthMinState = data.extraGrowthMinState
-            local extraGrowthMaxState = data.extraGrowthMaxState
-
-            if currentGrowthState >= extraGrowthMinState and currentGrowthState <= extraGrowthMaxState then
-                newGrowthState = newGrowthState + data.extraGrowthFactor
+            if currentGrowthState >= incrementByMin and currentGrowthState <= incrementByMax then
+                newGrowthState = newGrowthState + data.incrementBy
             end
         end
 
-        --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-        if data.normalGrowthState ~= nil then
-            local normalGrowthState = data.normalGrowthState
-            if data.normalGrowthMaxState ~= nil then
-                local normalGrowthMaxState = data.normalGrowthMaxState
-                if currentGrowthState >= normalGrowthState and currentGrowthState <= normalGrowthMaxState then
+       if data.incrementByOneMin ~= nil then
+            local incrementByOneMin = data.incrementByOneMin
+            if data.incrementByOneMax ~= nil then
+                local incrementByOneMax = data.incrementByOneMax
+                if currentGrowthState >= incrementByOneMin and currentGrowthState <= incrementByOneMax then
                     newGrowthState = newGrowthState + 1
                 end
             else
-                if currentGrowthState == normalGrowthState then
+                if currentGrowthState == incrementByOneMin then
                     newGrowthState = newGrowthState + 1
                 end
             end

@@ -213,25 +213,26 @@ end
 function ssGrowthManager:handleGrowth(startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ, transition)
     local x, z, widthX, widthZ, heightX, heightZ = Utils.getXZWidthAndHeight(g_currentMission.terrainDetailHeightId, startWorldX, startWorldZ, widthWorldX, widthWorldZ, heightWorldX, heightWorldZ)
     transition = tonumber(transition)
-
+     
     for index, fruit in pairs(g_currentMission.fruits) do
         local fruitName = FruitUtil.fruitIndexToDesc[index].name
 
         if self.growthData[transition][fruitName] ~= nil then
+            local currentGrowthData = self.growthData[transition][fruitName]
             --set growth state
-            if self.growthData[transition][fruitName].setGrowthState ~= nil
-                    and self.growthData[transition][fruitName].desiredGrowthState ~= nil then
-                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+            if currentGrowthData.setFromMin ~= nil
+                    and currentGrowthData.setTo ~= nil then
+                self:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, currentGrowthData)
             end
-            --increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-            if self.growthData[transition][fruitName].extraGrowthMinState ~= nil
-                    and self.growthData[transition][fruitName].extraGrowthMaxState ~= nil
-                    and self.growthData[transition][fruitName].extraGrowthFactor ~= nil then
-                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+            --incrementBy between incrementByMin and incrementByMax
+            if currentGrowthData.incrementByMin ~= nil
+                    and currentGrowthData.incrementByMax ~= nil
+                    and currentGrowthData.incrementBy ~= nil then
+                self:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, currentGrowthData)
             end
-            --increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-            if self.growthData[transition][fruitName].normalGrowthState ~= nil then
-                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+            --increment by 1 for crops between incrementByOneMin and incrementByOneMax or for crops at incrementByOneMin
+            if currentGrowthData.incrementByOneMin ~= nil then
+                self:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition, currentGrowthData)
             end
         end  -- end of if self.growthData[transition][fruitName] ~= nil then
     end  -- end of for index, fruit in pairs(g_currentMission.fruits) do
@@ -242,24 +243,24 @@ function ssGrowthManager:finishGrowth(transition)
 end
 
 --set growth state of fruit to a particular state based on transition
-function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, currentGrowthData)
     local useMaxState = false
-    local minState = self.growthData[transition][fruitName].setGrowthState
-    local desiredGrowthState = self.growthData[transition][fruitName].desiredGrowthState
+    local minState = currentGrowthData.setFromMin
+    local setToState = currentGrowthData.setTo
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
     if minState == self.CUT then
         minState = FruitUtil.fruitTypes[fruitName].cutState + 1
     end
 
-    if desiredGrowthState == self.WITHERED then
-        desiredGrowthState = fruitTypeGrowth.witheringNumGrowthStates
-    elseif desiredGrowthState == self.CUT then
-        desiredGrowthState = FruitUtil.fruitTypes[fruitName].cutState + 1
+    if setToState == self.WITHERED then
+        setToState = fruitTypeGrowth.witheringNumGrowthStates
+    elseif setToState == self.CUT then
+        setToState = FruitUtil.fruitTypes[fruitName].cutState + 1
     end
 
-    if self.growthData[transition][fruitName].setGrowthMaxState ~= nil then --if maxState exists
-        local maxState = self.growthData[transition][fruitName].setGrowthMaxState
+    if currentGrowthData.setFromMax ~= nil then --if maxState exists
+        local maxState = currentGrowthData.setFromMax
 
         if maxState == self.MAX_STATE then
             maxState = fruitTypeGrowth.numGrowthStates
@@ -272,7 +273,7 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     end
 
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
-    local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, desiredGrowthState)
+    local growthResult = setDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, setToState)
     if growthResult ~= 0 then
         local terrainDetailId = g_currentMission.terrainDetailId
         if fruitTypeGrowth.resetsSpray and minState <= self.defaultFruitsData[fruitName].maxSprayGrowthState then
@@ -291,14 +292,14 @@ function ssGrowthManager:setGrowthState(fruit, fruitName, x, z, widthX, widthZ, 
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
---increment by 1 for crops between normalGrowthState  normalGrowthMaxState or for crops at normalGrowthState
-function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
+--increment by 1 for crops between incrementByOneMin and incrementByOneMax or for crops at incrementByOneMin
+function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition, currentGrowthData)
     local useMaxState = false
-    local minState = self.growthData[transition][fruitName].normalGrowthState
+    local minState = currentGrowthData.incrementByMin
     local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
 
-    if self.growthData[transition][fruitName].normalGrowthMaxState ~= nil then
-        local maxState = self.growthData[transition][fruitName].normalGrowthMaxState
+    if currentGrowthData.incrementByOneMax ~= nil then
+        local maxState = currentGrowthData.incrementByOneMax
 
         if minState == 1 and self.willGerminateData[g_seasons.environment:previousTransition(transition)][fruitName] == false then
             minState = 2
@@ -337,15 +338,15 @@ function ssGrowthManager:incrementGrowthState(fruit, fruitName, x, z, widthX, wi
     setDensityMaskParams(fruit.id, "greater", 0) -- reset
 end
 
---increment by extraGrowthFactor between extraGrowthMinState and extraGrowthMaxState
-function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, transition)
-    local minState = self.growthData[transition][fruitName].extraGrowthMinState
-    local maxState = self.growthData[transition][fruitName].extraGrowthMaxState
+--incrementBy between incrementByMin and incrementByMax
+function ssGrowthManager:incrementExtraGrowthState(fruit, fruitName, x, z, widthX, widthZ, heightX, heightZ, currentGrowthData)
+    local minState = currentGrowthData.incrementByMin
+    local maxState = currentGrowthData.incrementByMax
     setDensityMaskParams(fruit.id, "between", minState, maxState) --because we always expect min and max with an incrementExtraGrowthState command
 
-    local extraGrowthFactor = self.growthData[transition][fruitName].extraGrowthFactor
+    local incrementBy = currentGrowthData.incrementBy
     local numFruitStateChannels = g_currentMission.numFruitStateChannels
-    local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, extraGrowthFactor)
+    local growthResult = addDensityMaskedParallelogram(fruit.id, x, z, widthX, widthZ, heightX, heightZ, 0, numFruitStateChannels, fruit.id, 0, numFruitStateChannels, incrementBy)
 
     if growthResult ~= 0 then
         local fruitTypeGrowth = FruitUtil.fruitTypeGrowths[fruitName]
