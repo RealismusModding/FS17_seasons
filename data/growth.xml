@@ -21,7 +21,7 @@
     </defaultFruits>
     <growthTransitions>
         <gt growthTransitionNum="1"> <!--late winter to early spring-->
-            <fruit fruitName="barley"  incrementByOneMin="1" termi="2"/>
+            <fruit fruitName="barley"  incrementByOneMin="1" incrementByOneMax="2"/>
             <fruit fruitName="wheat"   incrementByOneMin="1" incrementByOneMax="2"/>
             <fruit fruitName="rape"    incrementByOneMin="1" incrementByOneMax="2"/>
             <fruit fruitName="poplar" incrementByOneMin="1" incrementByOneMax="MAX_STATE"/>
