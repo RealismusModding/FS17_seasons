@@ -145,6 +145,90 @@ function ssGrowthManagerData:getFruitsTransitionStates(transitionKey, file, tran
         growthData[transitionNum][fruitName] = {}
         growthData[transitionNum][fruitName].fruitName = fruitName
 
+        local incrementByOneMin = getXMLInt(file, fruitKey .. "#incrementByOneMin")
+        if incrementByOneMin ~= nil then
+            growthData[transitionNum][fruitName].incrementByOneMin = incrementByOneMin
+        end
+
+        local incrementByOneMax =  getXMLString(file, fruitKey .. "#incrementByOneMax")
+        if incrementByOneMax ~= nil then
+            if incrementByOneMax == "MAX_STATE" then
+                growthData[transitionNum][fruitName].incrementByOneMax = ssGrowthManager.MAX_STATE
+            else
+                growthData[transitionNum][fruitName].incrementByOneMax = tonumber(incrementByOneMax)
+            end
+        end
+
+        local setFromMin =  getXMLInt(file, fruitKey .. "#setFromMin")
+        if setFromMin ~= nil then
+            growthData[transitionNum][fruitName].setFromMin = setFromMin
+        end
+
+        local setFromMax =  getXMLString(file, fruitKey .. "#setFromMax")
+        if setFromMax ~= nil then
+            if setFromMax == "MAX_STATE" then
+                growthData[transitionNum][fruitName].setFromMax = ssGrowthManager.MAX_STATE
+            else
+                growthData[transitionNum][fruitName].setFromMax = tonumber(setFromMax)
+            end
+        end
+
+        local setTo =  getXMLString(file, fruitKey .. "#setTo")
+        if setTo ~= nil then
+            if setTo == "CUT" then
+                growthData[transitionNum][fruitName].setTo = ssGrowthManager.CUT
+            elseif setTo == "WITHERED" then
+                growthData[transitionNum][fruitName].setTo = ssGrowthManager.WITHERED
+            else
+                growthData[transitionNum][fruitName].setTo = tonumber(setTo)
+            end
+        end
+
+        local incrementByMin = getXMLInt(file, fruitKey .. "#incrementByMin")
+        if incrementByMin ~= nil then
+            growthData[transitionNum][fruitName].incrementByMin = incrementByMin
+        end
+
+        local incrementByMax = getXMLInt(file, fruitKey .. "#incrementByMax")
+        if incrementByMax ~= nil then
+            growthData[transitionNum][fruitName].incrementByMax = incrementByMax
+        end
+
+        local incrementBy = getXMLInt(file, fruitKey .. "#incrementBy")
+        if incrementBy ~= nil then
+            growthData[transitionNum][fruitName].incrementBy = incrementBy
+        end
+
+        local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
+        if removeTransition == true then
+            growthData[transitionNum][fruitName] = nil
+        end
+
+        i = i + 1
+    end
+
+    return growthData
+end
+
+function ssGrowthManagerData:getFruitsTransitionStatesLegacyFormat(transitionKey, file, transitionNum, parentData)
+    local growthData = parentData
+
+    --load each fruit
+    local i = 0
+    while true do
+        local fruitKey = string.format("%s.fruit(%i)", transitionKey, i)
+        if not hasXMLProperty(file, fruitKey) then
+            break
+        end
+
+        local fruitName = getXMLString(file, fruitKey .. "#fruitName")
+        if fruitName == nil then
+            logInfo("ssGrowthManagerData:", "getFruitsTransitionStates: XML loading failed fruitKey" .. fruitKey .. " not found")
+        end
+
+        growthData[transitionNum][fruitName] = {}
+        growthData[transitionNum][fruitName].fruitName = fruitName
+
         local incrementByOneMin = getXMLInt(file, fruitKey .. "#normalGrowthState")
         if incrementByOneMin ~= nil then
             growthData[transitionNum][fruitName].incrementByOneMin = incrementByOneMin
