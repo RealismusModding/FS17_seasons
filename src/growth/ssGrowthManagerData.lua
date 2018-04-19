@@ -324,7 +324,7 @@ end
 
 -- Perhaps make this accessible in the actual ssGrowthManager
 local _states = {
-    ["MAX_STATE"] = ssGrowthManager.MAX_STATE,
+    ["MAX"] = ssGrowthManager.MAX_STATE,
     ["CUT"] = ssGrowthManager.CUT,
     ["WITHERED"] = ssGrowthManager.WITHERED
 }
