@@ -144,64 +144,46 @@ function ssGrowthManagerData:getFruitsTransitionStates(transitionKey, file, tran
 
         growthData[transitionNum][fruitName] = {}
         growthData[transitionNum][fruitName].fruitName = fruitName
+        local data = growthData[transitionNum][fruitName]
+        data.incrementByOneMin , data.incrementByOneMax = self:loadRangeFromXML(file, fruitKey .. "#incrementByOneRange")
+        
+        -- local incrementByOneRange = getXMLString(file, fruitKey .. "#incrementByOneRange")
+        -- if incrementByOneRange ~= nil then
+        --     local min, max = self:getMinMax(incrementByOneRange)
+        --     growthData[transitionNum][fruitName].incrementByOneMin = min
+        --     growthData[transitionNum][fruitName].incrementByOneMax = max    
+        -- end
 
-        local incrementByOneMin = getXMLInt(file, fruitKey .. "#incrementByOneMin")
-        if incrementByOneMin ~= nil then
-            growthData[transitionNum][fruitName].incrementByOneMin = incrementByOneMin
-        end
-
-        local incrementByOneMax =  getXMLString(file, fruitKey .. "#incrementByOneMax")
-        if incrementByOneMax ~= nil then
-            if incrementByOneMax == "MAX_STATE" then
-                growthData[transitionNum][fruitName].incrementByOneMax = ssGrowthManager.MAX_STATE
-            else
-                growthData[transitionNum][fruitName].incrementByOneMax = tonumber(incrementByOneMax)
-            end
-        end
-
-        local setFromMin =  getXMLInt(file, fruitKey .. "#setFromMin")
-        if setFromMin ~= nil then
-            growthData[transitionNum][fruitName].setFromMin = setFromMin
-        end
-
-        local setFromMax =  getXMLString(file, fruitKey .. "#setFromMax")
-        if setFromMax ~= nil then
-            if setFromMax == "MAX_STATE" then
-                growthData[transitionNum][fruitName].setFromMax = ssGrowthManager.MAX_STATE
-            else
-                growthData[transitionNum][fruitName].setFromMax = tonumber(setFromMax)
-            end
-        end
-
+        data.setFromMin, data.setFromMax = self:loadRangeFromXML(file, fruitKey .. "#setRange")
+        
+        -- local setRange = getXMLString(file, fruitKey .. "#setRange")
+        -- if setRange ~= nil then
+        --     local min, max = self:getMinMax(setRange)
+        --     growthData[transitionNum][fruitName].setFromMin = min
+        --     growthData[transitionNum][fruitName].setFromMax = max
+        -- end
+        
         local setTo =  getXMLString(file, fruitKey .. "#setTo")
         if setTo ~= nil then
-            if setTo == "CUT" then
-                growthData[transitionNum][fruitName].setTo = ssGrowthManager.CUT
-            elseif setTo == "WITHERED" then
-                growthData[transitionNum][fruitName].setTo = ssGrowthManager.WITHERED
-            else
-                growthData[transitionNum][fruitName].setTo = tonumber(setTo)
-            end
+            data.setTo = self:translateToState(setTo)
         end
-
-        local incrementByMin = getXMLInt(file, fruitKey .. "#incrementByMin")
-        if incrementByMin ~= nil then
-            growthData[transitionNum][fruitName].incrementByMin = incrementByMin
-        end
-
-        local incrementByMax = getXMLInt(file, fruitKey .. "#incrementByMax")
-        if incrementByMax ~= nil then
-            growthData[transitionNum][fruitName].incrementByMax = incrementByMax
-        end
+        
+        data.incrementByMin, data.incrementByMax = self:loadRangeFromXML(file, fruitKey .. "#incrementByRange") 
+        -- local incrementByRange = getXMLString(file, fruitKey .. "#incrementByRange")
+        -- if incrementByRange ~= nil then
+        --     local min, max = self:getMinMax(incrementByRange)
+        --     growthData[transitionNum][fruitName].incrementByMin = min
+        --     growthData[transitionNum][fruitName].incrementByMax = max
+        -- end
 
         local incrementBy = getXMLInt(file, fruitKey .. "#incrementBy")
         if incrementBy ~= nil then
-            growthData[transitionNum][fruitName].incrementBy = incrementBy
+            data.incrementBy = incrementBy
         end
 
         local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
         if removeTransition == true then
-            growthData[transitionNum][fruitName] = nil
+            data = nil
         end
 
         i = i + 1
@@ -228,64 +210,65 @@ function ssGrowthManagerData:getFruitsTransitionStatesLegacyFormat(transitionKey
 
         growthData[transitionNum][fruitName] = {}
         growthData[transitionNum][fruitName].fruitName = fruitName
+        local data = growthData[transitionNum][fruitName]
 
         local incrementByOneMin = getXMLInt(file, fruitKey .. "#normalGrowthState")
         if incrementByOneMin ~= nil then
-            growthData[transitionNum][fruitName].incrementByOneMin = incrementByOneMin
+            data.incrementByOneMin = incrementByOneMin
         end
 
         local incrementByOneMax =  getXMLString(file, fruitKey .. "#normalGrowthMaxState")
         if incrementByOneMax ~= nil then
             if incrementByOneMax == "MAX_STATE" then
-                growthData[transitionNum][fruitName].incrementByOneMax = ssGrowthManager.MAX_STATE
+                data.incrementByOneMax = ssGrowthManager.MAX_STATE
             else
-                growthData[transitionNum][fruitName].incrementByOneMax = tonumber(incrementByOneMax)
+                data.incrementByOneMax = tonumber(incrementByOneMax)
             end
         end
 
         local setFromMin =  getXMLInt(file, fruitKey .. "#setGrowthState")
         if setFromMin ~= nil then
-            growthData[transitionNum][fruitName].setFromMin = setFromMin
+            data.setFromMin = setFromMin
         end
 
         local setFromMax =  getXMLString(file, fruitKey .. "#setGrowthMaxState")
         if setFromMax ~= nil then
             if setFromMax == "MAX_STATE" then
-                growthData[transitionNum][fruitName].setFromMax = ssGrowthManager.MAX_STATE
+                data.setFromMax = ssGrowthManager.MAX_STATE
             else
-                growthData[transitionNum][fruitName].setFromMax = tonumber(setFromMax)
+                data.setFromMax = tonumber(setFromMax)
             end
         end
 
         local setTo =  getXMLString(file, fruitKey .. "#desiredGrowthState")
         if setTo ~= nil then
             if setTo == "CUT" then
-                growthData[transitionNum][fruitName].setTo = ssGrowthManager.CUT
+                data.setTo = ssGrowthManager.CUT
             elseif setTo == "WITHERED" then
-                growthData[transitionNum][fruitName].setTo = ssGrowthManager.WITHERED
+                data.setTo = ssGrowthManager.WITHERED
             else
-                growthData[transitionNum][fruitName].setTo = tonumber(setTo)
+                data.setTo = tonumber(setTo)
             end
         end
 
         local incrementByMin = getXMLInt(file, fruitKey .. "#extraGrowthMinState")
         if incrementByMin ~= nil then
-            growthData[transitionNum][fruitName].incrementByMin = incrementByMin
+            data.incrementByMin = incrementByMin
         end
 
         local incrementByMax = getXMLInt(file, fruitKey .. "#extraGrowthMaxState")
         if incrementByMax ~= nil then
-            growthData[transitionNum][fruitName].incrementByMax = incrementByMax
+            data.incrementByMax = incrementByMax
         end
 
         local incrementBy = getXMLInt(file, fruitKey .. "#extraGrowthFactor")
         if incrementBy ~= nil then
-            growthData[transitionNum][fruitName].incrementBy = incrementBy
+            data.incrementBy = incrementBy
         end
 
         local removeTransition = getXMLBool(file, fruitKey .. "#removeTransition")
         if removeTransition == true then
-            growthData[transitionNum][fruitName] = nil
+            data = nil
         end
 
         i = i + 1
@@ -336,5 +319,54 @@ function ssGrowthManagerData:getGrowthFileVersion(rootKey, file)
         return version
     else 
         return self.LEGACY_GROWTH_FORMAT
+    end
+end
+
+function ssGrowthManager:translateToState(input)
+    local translatedVal = nil
+
+    if input == "MAX" then
+        translatedVal = ssGrowthManager.MAX_STATE
+    elseif input == "CUT" then
+        translatedVal = ssGrowthManager.CUT
+    elseif input == "WITHERED" then
+        translatedVal = ssGrowthManager.WITHERED
+    else 
+        translatedVal = tonumber(input)
+    end
+
+    return translatedVal
+end
+
+function ssGrowthManager:getMinMax(input)
+    local min = nil
+    local max = nil
+    local pos = 1
+
+    for word in input:gmatch("%w+") do 
+        word = self:translateToState(word)
+                
+        if pos == 1 then
+            min = word
+        elseif pos == 2 then
+            max = word
+        else
+            logInfo("ssGrowthManagerData:", "Incorrect format in growth file range: " .. input)
+            return nil, nil
+        end
+        
+        pos = pos + 1
+    end
+
+    return min, max
+end
+
+function loadRangeFromXML(file, rangeKey)
+    local range = getXMLString(file, rangeKey)
+    
+    if range ~= nil then
+        return self:getMinMax(range)
+    else
+        return nil, nil
     end
 end

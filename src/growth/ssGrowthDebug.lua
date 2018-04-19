@@ -140,4 +140,5 @@ function ssGrowthDebug:consoleCommandPrintDebugInfo()
     logInfo("Full germinate Data")
     print_r(g_seasons.growthManager.willGerminateData)
     logInfo("------------------------------------------")
+    print_r(g_season.growthManager.growthData)
 end
