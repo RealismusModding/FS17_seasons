@@ -107,7 +107,7 @@ local files = {
     "weather/ssWeatherForecast",
     "weather/ssWeatherGUI",
     "vehicles/ssVehicle",
-    "misc/ssCompactionManager",
+    --"misc/ssCompactionManager",
     "misc/ssFieldJobManager",
     "growth/ssFruitManager",
     "growth/ssGrowthManagerData",
@@ -132,7 +132,7 @@ local files = {
     "objects/ssBunkerSilo",
     "placeables/ssPlaceable",
     "placeables/ssStorage",
-    "placeables/ssAirCompressorPlaceable",
+    --"placeables/ssAirCompressorPlaceable",
 
     -- New objects
     "objects/ssSnowAdmirer",
