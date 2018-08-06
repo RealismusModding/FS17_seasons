@@ -142,7 +142,7 @@ function ssWeatherData:loadMap(name)
     end
 
     -- Set snowDepth (can be more than 0 with custom weather)
-    g_seasons.weather.snowDepth = Utils.getNoNil(self.snowDepth, self.startValues.snowDepth)
+    g_seasons.weather.snowDepth = Utils.getNoNil(g_seasons.weather.snowDepth, self.startValues.snowDepth)
 
     -- Load germination temperatures
     self.germinateTemp = {}

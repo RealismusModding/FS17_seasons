@@ -188,7 +188,7 @@ function ssWeatherManager:dayChanged()
         local isFrozen = self:isGroundFrozen()
 
         ssWeatherForecast:updateForecast()
-        self:calculateSoilTemp(ssWeatherForecast.forecast[1].lowTemp, ssWeatherForecast.forecast[1].highTemp, g_seasons.environment.daysInSeason, self.soilTemp, false)
+        self.soilTemp = self:calculateSoilTemp(ssWeatherForecast.forecast[1].lowTemp, ssWeatherForecast.forecast[1].highTemp, g_seasons.environment.daysInSeason, self.soilTemp, false)
 
         if isFrozen ~= self:isGroundFrozen() then
             -- Call a weather change
