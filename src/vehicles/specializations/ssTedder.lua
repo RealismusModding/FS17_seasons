@@ -106,7 +106,7 @@ function ssTedder:processTedderAreas(superFunc, workAreas, accumulatedWorkAreaVa
 
         local toDrop = accumulatedWorkAreaValues[i] + liters
 
-        local fillType = g_seasons.weather:isCropWet() and FruitUtil.FRUITTYPE_GRASS or FruitUtil.FRUITTYPE_DRYGRASS
+        local fillType = (g_seasons.weather.moistureEnabled and g_seasons.weather:isCropWet()) and FruitUtil.FRUITTYPE_GRASS or FruitUtil.FRUITTYPE_DRYGRASS
         local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[fillType], sx, sy, sz, ex, ey, ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
 
         --local dropped, lineOffset = TipUtil.tipToGroundAroundLine(self, toDrop, FruitUtil.fruitTypeToWindrowFillType[FruitUtil.FRUITTYPE_DRYGRASS], sx, sy, sz, ex, ey, ez, hLength_2, nil, self.tedderLineOffset, false, nil, false)
